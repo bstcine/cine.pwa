@@ -1,0 +1,368 @@
+/* 
+padding: top, right, bottom, and left
+Header-Colr: #00838F - #317298 - #2B688E
+*/
+
+html {
+    font-size: 75%;
+    width: 100%;
+    height: 100%;
+}
+
+html.mac.f {
+    font-size: 80%;
+}
+
+body {
+    -webkit-font-smoothing: antialiased;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif, "Verdana", "Roboto";
+    color: #555555;
+    font-size: 15px;
+    font-size: 1.25rem;
+    line-height: 22px;
+    background-color: #ffffff;
+}
+
+ul {
+    padding: 0;
+    margin: 0;
+}
+
+li {
+    margin-left: 15px;
+}
+
+li2 {
+    list-style-type: none;
+}
+
+a {
+    text-decoration: none;
+    outline: none;
+    color: #2B688E;
+}
+
+a, *:focus {
+    outline: none;
+    /*for Firefox */
+}
+
+a, a:link {
+    -webkit-transition: all 0.3s 0s;
+    -webkit-transition: all 0.3s 0s ease-out;
+    transition: all 0.3s 0s ease-out;
+}
+
+a:hover {
+    color: #EF5350;
+}
+
+a:active {
+    color: #EF5350;
+}
+
+h1 {
+    margin: 0.67em 0;
+    font-size: 2.2rem;
+    line-height: 30px;
+}
+
+h2 {
+    margin: 0.5em 0;
+    font-size: 1.8rem;
+    line-height: 25px;
+}
+
+h3 {
+    margin: 0.5em 0;
+    font-size: 1.5rem;
+    line-height: 22px;
+}
+
+h4 {
+    margin: 0.5em 0;
+    font-size: 15px;
+    font-size: 1.25rem;
+    line-height: 20px;
+    font-weight: normal;
+}
+
+p {
+    margin-top: 0.2em;
+    margin-bottom: 2.5em;
+    font-size: 15px;
+    font-size: 1.25rem;
+    line-height: 20px;
+}
+
+
+/*----- Above For Common ----------*/
+
+
+/*----- Head Start ----------*/
+
+.header-right {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    align-content: center;
+    height: 38px;
+    padding: 5px;
+    padding-right: 0px;
+}
+
+.header-icon-button-link {
+    display: flex;
+    justify-content: flex-end;
+    padding: 8px 0px 8px 30px;
+    max-width: 60px;
+}
+
+.header-channel {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    align-content: flex-start;
+    background: #317298;
+    height: 38px;
+    padding-top: 44px;
+    padding-bottom: 6px;
+}
+
+.header-channel-hidden {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    align-content: flex-end;
+    margin-top: 44px;
+    padding-bottom: 6px;
+}
+
+.nav-left-header {
+    height: 89px;
+    background: #317298;
+}
+
+
+/*----- Head :end ----------*/
+
+
+/*----- Main Layout Start ----------*/
+
+.root-body {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    max-width: 1366px;
+}
+
+.root-list {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+    align-content: flex-start;
+    max-width: 1024px;
+    min-height: 1166px;
+}
+
+.root-list-flex {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+
+/*----- Main Layout End ----------*/
+
+
+/*----- Float-button Start ----------*/
+
+.float-button {
+    width: 44px;
+    height: 44px;
+    cursor: pointer;
+    border-radius: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    z-index: 2000;
+}
+
+.base-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 8px 15px 8px 15px;
+    min-width: 60px;
+}
+
+.colr-default {
+    background: #616161;
+    border: 1px solid #616161;
+}
+
+.colr-floating {
+    background: white;
+    border: 1px solid #EEEEEE;
+}
+
+.colr-selected {
+    background: white;
+    border: 2px solid #EEEEEE;
+    box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.16);
+}
+
+.colr-dark {
+    background: #616161;
+    border: 0px solid #424242;
+}
+
+
+/*----- Float-button End ----------*/
+
+
+/*----- Position Start ----------*/
+
+.loc-center-box {
+    display: flex;
+    justify-content: center;
+}
+
+.loc-left-box {
+    display: flex;
+    justify-content: flex-start;
+    padding-left: 5px;
+}
+
+.loc-right-box {
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 5px;
+}
+
+.loc-box-content-between {
+    display: flex;
+    justify-content: space-between;
+}
+
+.z-3 {
+    z-index: 1100;
+}
+
+.loc-top-1 {
+    position: fixed;
+    top: 2px;
+}
+
+.loc-top-1-1 {
+    position: fixed;
+    top: 35px;
+}
+
+.loc-top-1-2 {
+    position: fixed;
+    top: 55px;
+}
+
+@media screen and (max-width:1024px) {
+    .loc-top-1-2 {
+        right: 6px;
+    }
+}
+
+.loc-top-2 {
+    position: fixed;
+    top: 70px;
+}
+
+.loc-top-3 {
+    position: fixed;
+    top: 125px;
+}
+
+.loc-top-4 {
+    top: 180px;
+}
+
+.loc-btm-1 {
+    position: fixed;
+    bottom: 15px;
+}
+
+.loc-btm-2 {
+    position: fixed;
+    bottom: 70px;
+}
+
+.loc-btm-3 {
+    position: fixed;
+    bottom: 125px;
+}
+
+.loc-btm-4 {
+    position: fixed;
+    bottom: 180px;
+}
+
+.w-limit-60 {
+    max-width: 60px;
+}
+
+.w-limit-120 {
+    min-width: 50px;
+}
+
+.w-limit-600 {
+    min-width: 600px;
+    padding-left: 20px;
+}
+
+.w-limit-768 {
+    max-width: 768px;
+}
+
+.w-limit-xx8 {
+    max-width: 748px;
+}
+
+.w-limit-808 {
+    max-width: 808px;
+}
+
+.w-limit-808::-webkit-scrollbar {
+    display: none;
+}
+
+.limit-line-0 {
+    max-height: 10px;
+}
+
+.limit-line-1 {
+    min-height: 15px;
+}
+
+.limit-line-2 {
+    min-height: 30px;
+}
+
+.limit-line-3 {
+    min-height: 46px;
+}
+
+
+/*----- Position End ----------*/
+
+.content-line {
+    margin-top: 6px;
+    margin-bottom: 6px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-end;
+    align-content: flex-end;
+}

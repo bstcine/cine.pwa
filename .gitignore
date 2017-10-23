@@ -35,6 +35,7 @@ build/Release
 # Dependency directories
 node_modules/
 jspm_packages/
+www/dll
 
 # Typescript v1 declaration files
 typings/
@@ -57,3 +58,12 @@ typings/
 # dotenv environment variables file
 .env
 
+.DS_Store
+.idea/cine.pwa.iml
+.idea/dbnavigator.xml
+.idea/modules.xml
+.idea/workspace.xml
+
+/www/dll/
+/www/vendor.dll.js
+/www/rea.index.bundle.js

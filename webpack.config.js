@@ -5,8 +5,9 @@ module.exports = {
     cache: true,
     devtool: "eval",
     entry: {
-        "index": './src/webapp/index.js',
+        // "index": './src/webapp/index.js',
         //"admin": './src/webapp/admin.js',
+      "word": './src/webapp/word.js',
     },
     output: {
         path: path.resolve(__dirname, 'www'),

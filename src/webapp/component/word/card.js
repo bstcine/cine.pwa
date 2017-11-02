@@ -7,12 +7,15 @@ import Api from '../../config/api'
 
 
 export default class Card extends React.Component {
+
     constructor(props) {
         super(props)
         this.state = {
             loading: true,
-            wordList: []
+            wordItem: {}
         }
+        this.wordList = []
+        this.cur_index = 0
     }
 
     componentWillMount() {
@@ -24,6 +27,8 @@ export default class Card extends React.Component {
         post(Api.APIURL_Content_Word_List, null)
             .then(result => {
                 console.log(result)
+                this.wordList = result.data;
+                this.wordItem = this.wordList[this.cur_index]
                 this.setState({
                     loading: false
                 })
@@ -39,6 +44,7 @@ export default class Card extends React.Component {
 
     shouldComponentUpdate() {
         console.log('shouldComponentUpdate')
+        return true;
     }
 
     componentWillUpdate() {

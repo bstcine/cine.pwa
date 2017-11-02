@@ -1,30 +1,29 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import {
+  HashRouter as Router,
+  Route,
+} from 'react-router-dom'
 
-class Word extends React.Component{
 
-  componentDidMount() {
-    // $('select').material_select();
+import WordIndex from 'component/word/index';
+import WordCard from 'component/word/card';
+
+
+class Word extends React.Component {
+
+  constructor(props) {
+    super(props);
   }
 
-  componentWillUnmount() {
-    // $('select').material_select('destroy');
-  }
-
-  render(){
+  render() {
     return (
-      <div>
-        <div className="input-field col s12">
-          <select>
-            <option value="" disabled selected>Choose your option</option>
-            <option value="1">Option 1</option>
-            <option value="2">Option 2</option>
-            <option value="3">Option 3</option>
-          </select>
-          <label>Materialize Select</label>
+      <Router>
+        <div>
+        <Route exact path="/" component={WordIndex}/>
+        <Route path="/card" component={WordCard}/>
         </div>
-      </div>
-
+      </Router>
     )
   }
 }

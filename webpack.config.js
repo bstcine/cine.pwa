@@ -3,7 +3,7 @@ var webpack = require('webpack');
 
 module.exports = {
     cache: true,
-    devtool: "eval",
+    // devtool: "eval",
     entry: {
         // "index": './src/webapp/index.js',
         //"admin": './src/webapp/admin.js',
@@ -21,13 +21,18 @@ module.exports = {
         loaders: [{
             test: /\.js$/,
             loader: 'babel-loader',
-            include: path.resolve(__dirname, 'src'),
+            include:path.resolve(__dirname, 'src'),
             query: {
                 cacheDirectory: true,
                 presets: ['es2015', 'react', "stage-0"]
             }
         }]
     },
+      resolve:{
+        alias:{
+            'component':path.resolve(__dirname, 'src/webapp/component'),
+        }
+      },
     stats: {
         colors: true
     },

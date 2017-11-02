@@ -7,7 +7,7 @@ class Index extends React.Component {
     render() {
 
         return (
-            <div>
+            <div className="card-panel teal lighten-2">
                 Hello, Im joe
             </div>
         );

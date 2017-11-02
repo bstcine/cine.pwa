@@ -28,4 +28,5 @@ app.all('*', function (req, res, next) {
 //api.register(app)
 app.listen(app.get('port'), function () {
     console.log('Express server listening on port ' + app.get('port'));
+    console.log('http://localhost:'+ app.get('port'))
 });

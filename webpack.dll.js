@@ -4,7 +4,8 @@ var webpack = require("webpack");
 const vendor_dll = [
     'react',
     'react-dom',
-    'react-router-dom'
+    'react-router-dom',
+    'material-ui'
 ];
 
 

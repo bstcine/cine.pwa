@@ -32,7 +32,7 @@ function requestDemo(obj) {
 function httpBody(bodyData) {
     let _body = {
         "token": "1384595117-ddc161cb-3b93-4809-a54e-07ac49189737-178953",
-        "sitecode": "colr.ios.phone",
+        "sitecode": "cine.ios.h5",
         "channel": "",
         "locale": "zh_CN",
         "appver": 10000,

@@ -1,1 +1,1 @@
-exports.APIURL_Content_Word_List = "http://local.bstcine.com:9000/api/content/word/list" //词汇测验列表
+exports.APIURL_Content_Word_List = "http://192.168.1.194:9000/api/content/word/list" //词汇测验列表

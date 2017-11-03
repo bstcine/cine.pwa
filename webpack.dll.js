@@ -5,7 +5,8 @@ const vendor_dll = [
     'react',
     'react-dom',
     'react-router-dom',
-    'material-ui'
+    'material-ui',
+    'lodash'
 ];
 
 
@@ -24,6 +25,6 @@ module.exports = {
             path: path.join(__dirname, "www/dll", "manifest-[name]-dll.json"),
             name: "[name]_dll",
         }),
-        new webpack.optimize.UglifyJsPlugin()
+        // new webpack.optimize.UglifyJsPlugin()
     ]
 };

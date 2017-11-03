@@ -2,20 +2,22 @@ import React from 'react';
 import Link from 'react-router-dom'
 import Button from 'material-ui/Button'
 import {CircularProgress} from 'material-ui/Progress'
-import {post} from '../../service/request'
-import Api from '../../config/api'
+import * as Service from '../../service/word'
 
+let wordList = []
+let cur_index = 0
 
 export default class Card extends React.Component {
 
     constructor(props) {
         super(props)
         this.state = {
-            loading: true,
-            wordItem: {}
+            loading: false,
+            word: "",
+            options: []
         }
-        this.wordList = []
-        this.cur_index = 0
+
+        this.optionClick = this.optionClick.bind(this)
     }
 
     componentWillMount() {
@@ -24,18 +26,16 @@ export default class Card extends React.Component {
 
     componentDidMount() {
         console.log('componentDidMount')
-        post(Api.APIURL_Content_Word_List, null)
-            .then(result => {
-                console.log(result)
-                this.wordList = result.data;
-                this.wordItem = this.wordList[this.cur_index]
-                this.setState({
-                    loading: false
-                })
+        Service.getWordList().then((result) => {
+            wordList = result
+            console.log(JSON.stringify(wordList))
+            let wordItem = wordList[cur_index]
+            this.setState({
+                loading: false,
+                word: wordItem.word,
+                options: wordItem.options
             })
-            .catch(error => {
-                console.log(error)
-            })
+        })
     }
 
     componentWillReceiveProps() {
@@ -60,19 +60,35 @@ export default class Card extends React.Component {
 
     }
 
+    optionClick(value) {
+        console.log(value)
+        if(cur_index === wordList.length){
+            return alert('end')
+        }
+        cur_index++
+        let wordItem = wordList[cur_index]
+        this.setState({
+            word: wordItem.word,
+            options: wordItem.options
+        })
+    }
 
     render() {
+        let word = this.state.word
+        let options = this.state.options
+        console.log(options)
+        let Options = options.map( (option, i) =>{
+            return <div key={i}><Button raised color="primary"
+                                 onClick={(e)=>this.optionClick(option.value,e)}>{option.zh}</Button></div>
+        })
         return (
             <div>
                 {this.state.loading ?
                     <CircularProgress/> :
                     <div>
-                        <p>happy</p>
-                        <Button raised color="primary" href="#/card/1">开心的1</Button><br/>
-                        <Button raised color="primary" href="#/card/1">开心的2</Button><br/>
-                        <Button raised color="primary" href="#/card/1">开心的3</Button><br/>
-                        <Button raised color="primary" href="#/card/1">开心的4</Button><br/>
-                        <Button raised color="primary" href="#/card/1">开心的5</Button>
+                        <p>{word}</p>
+                        {Options}
+                        <div><Button raised color="primary" href="#/card/1">都不是</Button></div>
                     </div>
                 }
             </div>

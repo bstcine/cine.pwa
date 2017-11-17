@@ -16,3 +16,24 @@ export let isImage = (src) => {
 
     return false;
 }
+
+export let getUrlParam = (name) => {
+    var url = location.href
+    return getParam(url, name)
+}
+
+export let getParam = (url, name) => {
+
+    var i = url.indexOf('?');
+    if (i != -1) {
+        url = '&' + url.substring(i + 1) + '&';
+    }
+    name = '&' + name + '=';
+    var j = url.indexOf(name);
+    if (j != -1) {
+        var k = url.indexOf('&', j + name.length);
+        return url.substring(j + name.length, k);
+    }
+    return "";
+
+}

@@ -30,8 +30,10 @@ function requestDemo(obj) {
 }
 
 function httpBody(bodyData) {
+    var token = bodyData.token
+    delete bodyData.token
     let _body = {
-        "token": "1384595117-ddc161cb-3b93-4809-a54e-07ac49189737-178953",
+        "token": token || "",
         "sitecode": "cine.ios.h5",
         "channel": "",
         "locale": "zh_CN",
@@ -84,6 +86,7 @@ function request(obj) {
 export let demo = (url) => requestDemo({ method: "GET", url });
 export let get = (url, params) => request({ method: "GET", url, params });
 export let post = (url, data) => {
+    console.log(`data===> ${JSON.stringify(data)}`)
     let _httpBody = httpBody(data);
     return request({ method: "POST", contentType: "application/json", url, data: _httpBody })
 };

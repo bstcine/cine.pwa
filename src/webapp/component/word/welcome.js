@@ -4,22 +4,25 @@ import Button from 'material-ui/Button'
 import {CircularProgress, LinearProgress} from 'material-ui/Progress'
 import * as Service from '../../service/word'
 import * as util from '../../util'
-import Welcome from './welcome'
-import LoginDetect from './LoginDetect'
 
 let count = 0
-export default class Index extends React.Component {
+
+export default class Welcome extends React.Component {
 
     constructor(props) {
         super(props)
+        this.startClick = this.startClick.bind(this)
+    }
 
-        console.log(`this.props.history ${JSON.stringify(this.props.history)}`)
-        this.state = {
-            logined: false,
-            user: {}
-        };
-
-        console.log(`this.props.token  ${this.props.token}`)
+    startClick() {
+        let user = this.props.user;
+        if (user.area && user.grade && user.born_at) {
+            this.props.history.push('/card')
+        } else {
+            this.props.history.push({
+                pathname: '/userinfo',
+            })
+        }
     }
 
     componentWillMount() {
@@ -67,19 +70,15 @@ export default class Index extends React.Component {
 
 
     render() {
-        count++;
-        console.log(`render times ${count}`)
-        console.log(`this.state.user ${JSON.stringify(this.state.user)}`)
         return (
             <div>
-                {this.state.logined ? <Welcome {...this.props} user={this.state.user}/> : <LoginDetect {...this.props}/>}
+                <div>测一下，看看你的词汇量有多少？</div>
+                <div>本测试大约需要3-15分钟不等，具体测试时间跟词汇量和答题速度有关</div>
+                <button onClick={this.startClick}>开始词汇量测试</button>
             </div>
         )
     }
 }
-
-
-
 
 
 

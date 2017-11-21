@@ -1,3 +1,5 @@
+import * as util from '../../util'
+
 function requestDemo(obj) {
     return new Promise((resolve, reject) => {
         let xhr = new XMLHttpRequest();
@@ -30,10 +32,8 @@ function requestDemo(obj) {
 }
 
 function httpBody(bodyData) {
-    var token = bodyData.token
-    delete bodyData.token
     let _body = {
-        "token": token || "",
+        "token": util.getToken() || "",
         "sitecode": "cine.ios.h5",
         "channel": "",
         "locale": "zh_CN",
@@ -86,7 +86,6 @@ function request(obj) {
 export let demo = (url) => requestDemo({ method: "GET", url });
 export let get = (url, params) => request({ method: "GET", url, params });
 export let post = (url, data) => {
-    console.log(`data===> ${JSON.stringify(data)}`)
     let _httpBody = httpBody(data);
     return request({ method: "POST", contentType: "application/json", url, data: _httpBody })
 };

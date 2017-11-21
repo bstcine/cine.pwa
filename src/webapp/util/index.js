@@ -1,3 +1,5 @@
+import store from 'store'
+
 export let isSafari = () => {
     let browser = navigator.appName;
     let _version = navigator.appVersion.toLowerCase();
@@ -36,4 +38,12 @@ export let getParam = (url, name) => {
     }
     return "";
 
+}
+
+export let setToken = (token) => {
+    return store.set('token', token)
+}
+
+export let getToken = () => {
+    return store.get('token')
 }

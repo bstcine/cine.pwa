@@ -8,6 +8,8 @@ export default class LoginDetect extends React.Component {
 
     constructor(props) {
         super(props)
+        this.goLoginClick = this.goLoginClick.bind(this)
+        this.startClick = this.startClick.bind(this)
     }
 
     componentWillMount() {
@@ -19,35 +21,23 @@ export default class LoginDetect extends React.Component {
 
     }
 
-    componentWillReceiveProps() {
-        console.log('componentWillReceiveProps')
+    goLoginClick() {
+        let url = encodeURIComponent(location.href);
+        let host = 'local.bstcine.com:9000'
+        location.href = location.protocol + '//' + host + '/login?go=' + url
     }
 
-    shouldComponentUpdate() {
-        console.log('shouldComponentUpdate')
-        return true;
+    startClick() {
+        this.props.history.push('/userinfo')
     }
-
-    componentWillUpdate() {
-        console.log('componentWillUpdate')
-    }
-
-    componentDidUpdate() {
-        console.log('componentDidUpdate')
-    }
-
-    componentWillUnmount() {
-        console.log('componentWillUnmount')
-
-    }
-
 
     render() {
         return (
-            <div>
-                <div>检测到你没有登录，为了记录你的学习成长过程，强烈建议你登录系统后再进行测试</div>
-                <button>登录系统</button>
-                <button>先测一下看看</button>
+            <div className="login_detect">
+                <div className="title">系统检测到你<span className="orange">没有登录</span>，为了记录你的学习成长过程，强烈建议你<span className="blue">登录</span>系统后再进行测试</div>
+                <div className="bg_welcome"></div>
+                <button className="button button_orange margin_bottom_72" onClick={this.goLoginClick}>登录系统</button>
+                <button className="button button_blue" onClick={this.startClick}>先测一下看看</button>
             </div>
         )
     }

@@ -5,8 +5,8 @@ const vendor_dll = [
     'react',
     'react-dom',
     'react-router-dom',
-    'material-ui',
-    'lodash'
+    'lodash',
+    'store'
 ];
 
 

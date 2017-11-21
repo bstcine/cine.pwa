@@ -4,16 +4,27 @@ import Api from '../config/api'
 
 export let getContentWordConfig = (query) => {
     return post(Api.APIURL_Content_Word_Config, query)
+        .then(result => {
+            if (result.code !== '1') {
+                return alert(result.code_desc)
+            }
+            return result
+        })
 }
 
 export let getWordList = (query) => {
     return post(Api.APIURL_Content_Word_List, query)
         .then(result => {
-            console.log('getWordList')
-            console.log(result.result)
+            if (result.code !== '1') {
+                return alert(result.code_desc)
+            }
+            return result
+        })
+        .then(result => {
             let wordLevelList = result.result.wordLevelList;
             let grade = result.result.grade;
             wordLevelList.forEach(function (wordLevel) {
+                console.log(wordLevel)
                 wordLevel.wordList = wordLevel.wordList.map(function (item) {
                     let options = [
                         {zh: item.zh, isCorrect: true, value: 0},
@@ -23,6 +34,7 @@ export let getWordList = (query) => {
                     ];
                     options = _.shuffle(options)
                     return {
+                        id:item.id,
                         word: item.word,
                         options: options
                     }
@@ -39,5 +51,21 @@ export let getWordList = (query) => {
 }
 
 export let saveContentWordResult = (query) => {
-    return post(Api.APIURL_Content_Word_Config, query)
+    return post(Api.APIURL_Content_Word_Result_Save, query)
+        .then(result => {
+            if (result.code !== '1') {
+                return alert(result.code_desc)
+            }
+            return result.result
+        })
+}
+
+export let queryContentWordResult = (query) => {
+    return post(Api.APIURL_Content_Word_Result_Query, query)
+        .then(result => {
+            if (result.code !== '1') {
+                return alert(result.code_desc)
+            }
+            return result.result
+        })
 }

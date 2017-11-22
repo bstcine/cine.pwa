@@ -19,7 +19,7 @@ export default class LoginDetect extends React.Component {
     }
 
     goLoginClick() {
-        let url = encodeURIComponent(location.href);
+        let url = encodeURIComponent('/vocabtest');
         // let host = 'local.bstcine.com:9000'
         let host = location.host
         location.href = location.protocol + '//' + host + '/login?go=' + url

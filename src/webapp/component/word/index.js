@@ -1,11 +1,6 @@
 import React from 'react';
-import Link from 'react-router-dom'
-import Button from 'material-ui/Button'
-import {CircularProgress, LinearProgress} from 'material-ui/Progress'
 import * as Service from '../../service/word'
-import * as util from '../../util'
-import Welcome from './welcome'
-import LoginDetect from './LoginDetect'
+import store from 'store';
 
 export default class Index extends React.Component {
 
@@ -24,7 +19,7 @@ export default class Index extends React.Component {
                 return alert(result.except_case_desc)
             }
             let user = result.result.user
-            if (user && user.area && user.grade && user.born_at) {
+            if (user && user.area_code && user.grade && user.born_at) {
                 store.set('user',user)
                 this.props.history.push(`/welcome`)
             } else {

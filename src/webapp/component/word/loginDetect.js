@@ -1,8 +1,4 @@
 import React from 'react';
-import Link from 'react-router-dom'
-import Button from 'material-ui/Button'
-import {CircularProgress, LinearProgress} from 'material-ui/Progress'
-import * as Service from '../../service/word'
 
 export default class LoginDetect extends React.Component {
 
@@ -23,7 +19,8 @@ export default class LoginDetect extends React.Component {
 
     goLoginClick() {
         let url = encodeURIComponent(location.href);
-        let host = 'local.bstcine.com:9000'
+        // let host = 'local.bstcine.com:9000'
+        let host = location.host
         location.href = location.protocol + '//' + host + '/login?go=' + url
     }
 
@@ -33,11 +30,14 @@ export default class LoginDetect extends React.Component {
 
     render() {
         return (
-            <div className="login_detect">
-                <div className="title">系统检测到你<span className="orange">没有登录</span>，为了记录你的学习成长过程，强烈建议你<span className="blue">登录</span>系统后再进行测试</div>
-                <div className="bg_welcome"></div>
-                <button className="button button_orange margin_bottom_72" onClick={this.goLoginClick}>登录系统</button>
-                <button className="button button_blue" onClick={this.startClick}>先测一下看看</button>
+            <div className="wrapper mini">
+                <div className="login_detect">
+                    <div className="title">系统检测到你<span className="orange">没有登录</span>，为了记录你的学习成长过程，强烈建议你<span className="blue">登录</span>系统后再进行测试</div>
+                    <div className="bg_welcome"></div>
+                    <button className="button button_orange margin_bottom_72" onClick={this.goLoginClick}>登录系统</button>
+                    <button className="button button_blue" onClick={this.startClick}>先测一下看看</button>
+                </div>
+                <div className="footer mini"></div>
             </div>
         )
     }

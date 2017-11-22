@@ -47,3 +47,7 @@ export let setToken = (token) => {
 export let getToken = () => {
     return store.get('token')
 }
+
+export let removeToken = () => {
+    return store.remove('token')
+}

@@ -21,6 +21,8 @@ class Word extends React.Component {
         let token = util.getUrlParam('token');
         if (token) {
             util.setToken(token)
+        }else{
+            util.removeToken()
         }
     }
 

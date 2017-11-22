@@ -1,7 +1,6 @@
 import React from 'react';
 import * as Service from '../../service/word'
 import * as util from '../../util'
-import 'component/word/style/card.less'
 
 export default class Card extends React.Component {
 
@@ -9,10 +8,11 @@ export default class Card extends React.Component {
         super(props)
         this.state = {
             loading: false,
-            wordItem: {id: "", word: "", options: []},
-            completed: 0
+            wordItem: {id: "", word: "", options: []}
         }
+        this.disableClick = false
         this.sandGlassTimer = null
+        this.sandGlassClassTimer = null
         console.log(`Card this.props.token ${this.props.token}`)
         this.optionClick = this.optionClick.bind(this)
         this.renderOptions = this.renderOptions.bind(this)
@@ -23,7 +23,7 @@ export default class Card extends React.Component {
         let query = {
             grade: util.getUrlParam('grade'),
             born_at: util.getUrlParam('born_at'),
-            area: util.getUrlParam('area'),
+            area_code: util.getUrlParam('area_code'),
         };
         Service.getWordList(query).then((result) => {
             this.setState({
@@ -48,8 +48,9 @@ export default class Card extends React.Component {
         let wordLevel = this.wordLevelList[this.level_index]
         this.setState({
             wordItem: Object.assign({}, wordLevel.wordList[0])
+        },function () {
+            this.toggleSandGlass()
         })
-        this.toggleSandGlass()
     }
 
     //下一个单词
@@ -59,25 +60,31 @@ export default class Card extends React.Component {
         if (this.word_index === wordLevel.wordList.length - 1) {
             return this.nextLevel()
         }
+        this.disableClick = false
         this.word_index++;
         this.setState({
             wordItem: Object.assign({}, wordLevel.wordList[this.word_index]),
+        },function () {
+            this.toggleSandGlass()
         })
-        this.toggleSandGlass()
+
     }
 
     //沙漏倒计时
     toggleSandGlass() {
+        console.log(`toggleSandGlass `)
         let progressLineLeft = this.refs.progressLineLeft
         progressLineLeft.classList.remove('active')
-        setTimeout(function () {
-            progressLineLeft.classList.add('active')
-        },10)
 
         if(this.sandGlassTimer) clearTimeout(this.sandGlassTimer)
+        this.sandGlassClassTimer = setTimeout(function () {
+            progressLineLeft.classList.add('active')
+        }.bind(this),10)
+
         this.sandGlassTimer = setTimeout(function () {
             this.saveOneAnswer(99)
             this.nextWord()
+            if(this.sandGlassClassTimer) clearTimeout(this.sandGlassClassTimer)
         }.bind(this),10000)//10秒自动跳转下一题
     }
 
@@ -87,6 +94,7 @@ export default class Card extends React.Component {
         //当 curr_level_score < 3 时，测试不进入下一等级，测试终止
         if (this.calcCurrLevelScore() < 3) return this.theEnd()
         if (this.level_index === this.wordLevelList.length - 1) return this.theEnd()
+        this.disableClick = false
         let curr_vocab = this.calcCurrVocab();
         if (this.calcCurrVocab()) {
             // todo 超出当前年级的平均/优秀水平，友好提示
@@ -103,12 +111,13 @@ export default class Card extends React.Component {
     // 答题结束
     theEnd() {
         console.log('theEnd')
+        this.disableClick = true
         //答题结束时间
         this.end_at = new Date().getTime()
         let query = {
             grade: util.getUrlParam('grade'),
             born_at: util.getUrlParam('born_at'),
-            area: util.getUrlParam('area'),
+            area_code: util.getUrlParam('area_code'),
             vocab:this.calcCurrVocab(),
             answers:this.collectAnswers(),
             duration:this.getDuration()
@@ -180,6 +189,9 @@ export default class Card extends React.Component {
     }
 
     optionClick(answer_index) {
+        console.log(`this.disableClick ${this.disableClick}`)
+        if(this.disableClick) return
+        this.disableClick = true
         this.saveOneAnswer(answer_index)
         setTimeout(function () {
             this.nextWord()
@@ -198,19 +210,19 @@ export default class Card extends React.Component {
     render() {
         return (
             this.state.loading ?
-                <div>loading</div> :
-                <div className="card" >
-                    <div className="word">{this.state.wordItem.word}</div>
-                    <div className="progress_control">
-                        <div className="sand_glass"></div>
-                        <div className="progress_line">
-                            <div className="progress_line_left" ref="progressLineLeft"></div>
-                        </div>
-                    </div>
-                    <div className="options" key={this.state.wordItem.id}>
-                        {this.renderOptions()}
+            <div>loading</div> :
+            <div className="card">
+                <div className="word">{this.state.wordItem.word}</div>
+                <div className="progress_control">
+                    <div className="sand_glass"></div>
+                    <div className="progress_line">
+                        <div className="progress_line_left" ref="progressLineLeft"></div>
                     </div>
                 </div>
+                <div className="options" key={this.state.wordItem.id}>
+                    {this.renderOptions()}
+                </div>
+            </div>
         )
     }
 }

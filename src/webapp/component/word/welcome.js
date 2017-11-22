@@ -6,6 +6,7 @@ export default class Welcome extends React.Component {
 
     constructor(props) {
         super(props)
+        console.log('Welcome constructor')
         this.startClick = this.startClick.bind(this)
     }
 

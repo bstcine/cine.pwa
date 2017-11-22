@@ -5,6 +5,7 @@ import * as Service from '../../service/word'
 export default class Report extends React.Component {
     constructor(props) {
         super(props)
+        console.log('Report constructor')
         this.state = {
             report: {},
             lessons: []

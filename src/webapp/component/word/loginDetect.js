@@ -4,6 +4,7 @@ export default class LoginDetect extends React.Component {
 
     constructor(props) {
         super(props)
+        console.log('LoginDetect constructor')
         this.goLoginClick = this.goLoginClick.bind(this)
         this.startClick = this.startClick.bind(this)
     }

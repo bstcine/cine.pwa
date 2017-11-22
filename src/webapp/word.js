@@ -18,7 +18,9 @@ class Word extends React.Component {
 
     constructor(props) {
         super(props);
+        console.log('Word Main constructor')
         let token = util.getUrlParam('token');
+        console.log(`Word Main constructor token==>${token}`)
         if (token) {
             util.setToken(token)
         }else{

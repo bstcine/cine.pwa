@@ -24,7 +24,6 @@ export let getWordList = (query) => {
             let wordLevelList = result.result.wordLevelList;
             let grade = result.result.grade;
             wordLevelList.forEach(function (wordLevel) {
-                console.log(wordLevel)
                 wordLevel.wordList = wordLevel.wordList.map(function (item) {
                     let options = [
                         {zh: item.zh, isCorrect: true, value: 0},

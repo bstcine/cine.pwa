@@ -1,6 +1,7 @@
 import React from 'react';
 import store from 'store';
 import * as Service from '../../service/word'
+import {CSSTransition, Transition} from 'react-transition-group'
 
 export default class Card extends React.Component {
 
@@ -12,11 +13,12 @@ export default class Card extends React.Component {
             wordItem: {id: "", word: "", options: []},
             currMinVocab: 0,
             currMaxVocab: 0,
-            isShowFriendlyTips: false
+            isShowFriendlyTips: false,
+            progressing: false,
+            pressing: false,
         }
         this.disableClick = false
         this.sandGlassTimer = null
-        this.sandGlassClassTimer = null
         console.log(`Card this.props.token ${this.props.token}`)
         this.optionClick = this.optionClick.bind(this)
         this.renderOptions = this.renderOptions.bind(this)
@@ -49,7 +51,6 @@ export default class Card extends React.Component {
     componentWillUnmount() {
         console.log('componentWillUnmount')
         if (this.sandGlassTimer) clearTimeout(this.sandGlassTimer)
-        if (this.sandGlassClassTimer) clearTimeout(this.sandGlassClassTimer)
     }
 
     //初始化
@@ -61,9 +62,10 @@ export default class Card extends React.Component {
         this.word_index = 0
         let wordLevel = this.wordLevelList[this.level_index]
         this.setState({
-            wordItem: Object.assign({}, wordLevel.wordList[0])
-        }, function () {
-            // this.toggleSandGlass()
+            wordItem: Object.assign({}, wordLevel.wordList[0]),
+            progressing:true
+        }, () => {
+            this.toggleSandGlass()
         })
     }
 
@@ -78,28 +80,28 @@ export default class Card extends React.Component {
         this.word_index++;
         this.setState({
             wordItem: Object.assign({}, wordLevel.wordList[this.word_index]),
-        }, function () {
+            progressing: true,
+            pressing: !this.state.pressing,
+        }, () => {
             this.toggleSandGlass()
         })
-
     }
 
     //沙漏倒计时
     toggleSandGlass() {
         console.log(`toggleSandGlass `)
-        let progressLineLeft = this.refs.progressLineLeft
-        progressLineLeft.classList.remove('active')
-
         if (this.sandGlassTimer) clearTimeout(this.sandGlassTimer)
-        this.sandGlassClassTimer = setTimeout(function () {
-            progressLineLeft.classList.add('active')
-        }.bind(this), 10)
-
-        this.sandGlassTimer = setTimeout(function () {
+        this.sandGlassTimer = setTimeout(() => {
             this.saveOneAnswer(99)
-            this.nextWord()
-            if (this.sandGlassClassTimer) clearTimeout(this.sandGlassClassTimer)
-        }.bind(this), 10000)//10秒自动跳转下一题
+            this.setState({
+                progressing: false,
+                pressing: !this.state.pressing,
+            }, () => {
+                setTimeout(() => {
+                    this.nextWord()
+                }, 300)
+            })
+        }, 10000)//10秒自动跳转下一题
     }
 
     //下个词汇等级
@@ -115,7 +117,8 @@ export default class Card extends React.Component {
         this.word_index = 0;
         let wordLevel = this.wordLevelList[this.level_index]
         this.setState({
-            wordItem: Object.assign({}, wordLevel.wordList[0])
+            wordItem: Object.assign({}, wordLevel.wordList[0]),
+            progressing: true,
         })
     }
 
@@ -225,37 +228,51 @@ export default class Card extends React.Component {
         if (this.disableClick) return
         this.disableClick = true
         this.saveOneAnswer(answer_index)
-        setTimeout(function () {
-            this.nextWord()
-        }.bind(this), 180)
+        // 按钮&进度条动画延迟
+        this.setState({
+            progressing: false,
+            pressing: true,
+        }, () => {
+            setTimeout(() => {
+                this.nextWord()
+            }, 300)
+        })
     }
 
     renderOptions() {
         let options = this.state.wordItem.options
-        let Options = options.map((option) => {
-            return <button className="button button_option"
+        let Options = options.map((option, i) => {
+            return <button key={this.state.wordItem.id + i} className="button button_option"
                            onClick={(e) => this.optionClick(option.value, e)}>{option.zh}</button>
         })
-        Options.push(<button className="button button_option button_no_remember"
+        Options.push(<button key={this.state.wordItem.id + 99} className="button button_option button_no_remember"
                              onClick={(e) => this.optionClick(99, e)}>不认识</button>)
         return Options
     }
 
     render() {
+        console.log(`this.state.progressing ${this.state.progressing}`)
         return (
             this.state.loading ?
                 <div>loading</div> :
-                <div className="card">
+                <div className="card" key={this.state.wordItem.id}>
                     {this.state.isShowFriendlyTips ? <div className="friendly_tips">
                         你已经完成了{this.state.currMinVocab}-{this.state.currMaxVocab}区间的测试</div> : null}
                     <div className="word">{this.state.wordItem.word}</div>
                     <div className="progress_control">
                         <div className="sand_glass"></div>
                         <div className="progress_line">
-                            <div className="progress_line_left" ref="progressLineLeft"></div>
+                            <CSSTransition in={this.state.progressing}
+                                           classNames="progressing"
+                                           appear={true}
+                                           enter={true}
+                                           exit={false}
+                                           timeout={10000}>
+                                <div className="progress_line_left"></div>
+                            </CSSTransition>
                         </div>
                     </div>
-                    <div className="options" key={this.state.wordItem.id}>
+                    <div className="options">
                         {this.renderOptions()}
                     </div>
                 </div>

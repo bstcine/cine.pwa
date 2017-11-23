@@ -9,11 +9,22 @@
   <title>词汇量测试</title>
   <link rel="shortcut icon" href="asset/img/favi6.ico" />
   <script>
-      document.documentElement.style.fontSize = document.documentElement.clientWidth / 750 * 100 + 'px';
+      var responsive = function () {
+          var clientWidth = document.documentElement.clientWidth
+          if(clientWidth <=768){
+              document.documentElement.style.fontSize = clientWidth / 750 * 100 + 'px';
+          }else{
+              document.documentElement.style.fontSize = '50px'
+          }
+      }
+      responsive()
+      window.onresize = function(){
+          responsive()
+      }
   </script>
 
 </head>
-<body>
+<body ontouchstart="">
 <div id="root"></div>
 <script src="vendor.dll.js"></script>
 <script src="rea.word.bundle.js"></script>

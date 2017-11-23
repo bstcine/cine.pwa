@@ -34,7 +34,7 @@ function requestDemo(obj) {
 function httpBody(bodyData) {
     let _body = {
         "token": util.getToken() || "",
-        "sitecode": "cine.ios.h5",
+        "sitecode": "cine.web",
         "channel": "",
         "locale": "zh_CN",
         "appver": 10000,

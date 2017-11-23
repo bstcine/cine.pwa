@@ -33,7 +33,7 @@ export default class Report extends React.Component {
 
     renderRecommendList() {
         return this.state.lessons.map(function (lesson) {
-            return <div className="recommend_item">
+            return <div className="recommend_item" key={lesson.id}>
                 <div className="item_img" style={{
                     background: 'url(http://www.bstcine.com/f/' + lesson.img + ') no-repeat top center',
                     backgroundSize: 'cover'

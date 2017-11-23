@@ -6,6 +6,8 @@
   "scripts": {
     "dll": "webpack -p --progress --colors --config=webpack.dll.js",
     "i": "webpack -p --progress --colors",
+    "dev-dll": "webpack --progress --colors --config=webpack.dev.dll.js",
+    "dev-i": "webpack --progress --colors --config=webpack.dev.config.js",
     "start": "node server.js"
   },
   "repository": {
@@ -24,6 +26,7 @@
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
     "react-router-dom": "^4.2.2",
+    "react-transition-group": "^2.2.1",
     "store": "^2.0.12",
     "webpack": "^3.8.1"
   },

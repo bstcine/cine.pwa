@@ -33,16 +33,18 @@ export default class Report extends React.Component {
 
     renderRecommendList() {
         return this.state.lessons.map(function (lesson) {
-            return <div className="recommend-item" key={lesson.id}>
-                <div className="item-img" style={{
-                    background: 'url(http://www.bstcine.com/f/' + lesson.img + ') no-repeat top center',
-                    backgroundSize: 'cover'
-                }}></div>
-                <div className="item-brief">
-                    <div className="item-title">{lesson.name}</div>
-                    <div className="item-desc">学习课时：{lesson.time_arrange}</div>
-                </div>
-            </div>
+            return <a href={'/lesson/'+ lesson.id}>
+                        <div className="recommend-item" key={lesson.id}>
+                            <div className="item-img" style={{
+                                background: 'url(http://www.bstcine.com/f/' + lesson.img + ') no-repeat top center',
+                                backgroundSize: 'cover'
+                            }}></div>
+                            <div className="item-brief">
+                                <div className="item-title">{lesson.name}</div>
+                                <div className="item-desc">学习课时：{lesson.time_arrange}</div>
+                            </div>
+                        </div>
+                    </a>
         })
     }
 

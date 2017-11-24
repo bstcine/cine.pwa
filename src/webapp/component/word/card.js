@@ -13,12 +13,13 @@ export default class Card extends React.Component {
             wordItem: {id: "", word: "", options: []},
             currMinVocab: 0,
             currMaxVocab: 0,
-            isShowFriendlyTips: false,
+            isShowLevelTip: false,
             progressing: false,
             pressing: false,
         }
         this.disableClick = false
         this.sandGlassTimer = null
+        this.levelTipTimer = null
         console.log(`Card this.props.token ${this.props.token}`)
         this.optionClick = this.optionClick.bind(this)
         this.renderOptions = this.renderOptions.bind(this)
@@ -51,6 +52,7 @@ export default class Card extends React.Component {
     componentWillUnmount() {
         console.log('componentWillUnmount')
         if (this.sandGlassTimer) clearTimeout(this.sandGlassTimer)
+        if(this.levelTipTimer) clearTimeout(this.levelTipTimer)
     }
 
     //初始化
@@ -81,7 +83,7 @@ export default class Card extends React.Component {
         this.setState({
             wordItem: Object.assign({}, wordLevel.wordList[this.word_index]),
             progressing: true,
-            pressing: !this.state.pressing,
+            pressing: !this.state.pressing
         }, () => {
             this.toggleSandGlass()
         })
@@ -111,7 +113,7 @@ export default class Card extends React.Component {
         if (this.calcCurrLevelScore() < 3) return this.theEnd()
         if (this.level_index === this.wordLevelList.length - 1) return this.theEnd()
         this.disableClick = false
-        this.showFriendlyTips()
+        this.showLevelTip()
         //下一级
         this.level_index++;
         this.word_index = 0;
@@ -119,20 +121,22 @@ export default class Card extends React.Component {
         this.setState({
             wordItem: Object.assign({}, wordLevel.wordList[0]),
             progressing: true,
+        }, () => {
+            this.toggleSandGlass()
         })
     }
 
-    showFriendlyTips() {
+    showLevelTip() {
         let wordLevel = this.wordLevelList[this.level_index]
         this.setState({
             currMinVocab: wordLevel.min_vocab,
             currMaxVocab: wordLevel.max_vocab,
-            isShowFriendlyTips: true
+            isShowLevelTip: true
         })
-        console.log(`showFriendlyTips ${this.state.isShowFriendlyTips}`)
-        setTimeout(function () {
+        console.log(`isShowLevelTip ${this.state.isShowLevelTip}`)
+        this.levelTipTimer = setTimeout(function () {
             this.setState({
-                isShowFriendlyTips: false
+                isShowLevelTip: false
             })
         }.bind(this), 3000)
         // let curr_vocab = this.calcCurrVocab();
@@ -256,12 +260,12 @@ export default class Card extends React.Component {
         return (
             this.state.loading ?
                 <div>loading</div> :
-                <div className="card" key={this.state.wordItem.id}>
-                    <CSSTransition in={this.state.isShowFriendlyTips} classNames="fade" appear={true} enter={true} exit={true} timeout={{enter:2700,exit:300}}>
+                <div className="card">
+                    <CSSTransition in={this.state.isShowLevelTip} classNames="fade" appear={true} enter={true} exit={true} timeout={{enter:2700,exit:300}}>
                         <div className="friendly-tips">你已经完成了{this.state.currMinVocab}-{this.state.currMaxVocab}词汇量区间的测试</div>
                     </CSSTransition>
-                    <div className="word">{this.state.wordItem.word}</div>
-                    <div className="progress_control">
+                    <div className="word" key={this.state.wordItem.id+"word"}>{this.state.wordItem.word}</div>
+                    <div className="progress_control" key={this.state.wordItem.id+"progress_control"}>
                         <div className="sand-glass"></div>
                         <div className="progress-line">
                             <CSSTransition in={this.state.progressing} classNames="progressing" appear={true} enter={true} exit={false} timeout={10000}>
@@ -269,7 +273,7 @@ export default class Card extends React.Component {
                             </CSSTransition>
                         </div>
                     </div>
-                    <div className="options">
+                    <div className="options" key={this.state.wordItem.id+"options"}>
                         {this.renderOptions()}
                     </div>
                 </div>

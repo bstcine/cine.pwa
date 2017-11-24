@@ -32,11 +32,11 @@ export default class LoginDetect extends React.Component {
     render() {
         return (
             <div className="wrapper mini">
-                <div className="login_detect">
+                <div className="login-detect">
                     <div className="title">系统检测到你<span className="orange">没有登录</span>，为了记录你的学习成长过程，强烈建议你<span className="blue">登录</span>系统后再进行测试</div>
-                    <div className="bg_welcome"></div>
-                    <button className="button button_orange margin_bottom_72" onClick={this.goLoginClick}>登录系统</button>
-                    <button className="button button_blue" onClick={this.startClick}>先测一下看看</button>
+                    <div className="bg-welcome"></div>
+                    <button className="btn btn_orange margin-bottom-72" onClick={this.goLoginClick}>登录系统</button>
+                    <button className="btn btn_blue" onClick={this.startClick}>先测一下看看</button>
                 </div>
                 <div className="footer mini"></div>
             </div>

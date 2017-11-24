@@ -129,6 +129,7 @@ export default class Card extends React.Component {
             currMaxVocab: wordLevel.max_vocab,
             isShowFriendlyTips: true
         })
+        console.log(`showFriendlyTips ${this.state.isShowFriendlyTips}`)
         setTimeout(function () {
             this.setState({
                 isShowFriendlyTips: false
@@ -242,10 +243,10 @@ export default class Card extends React.Component {
     renderOptions() {
         let options = this.state.wordItem.options
         let Options = options.map((option, i) => {
-            return <button key={this.state.wordItem.id + i} className="button button_option"
+            return <button key={this.state.wordItem.id + i} className="btn btn_option"
                            onClick={(e) => this.optionClick(option.value, e)}>{option.zh}</button>
         })
-        Options.push(<button key={this.state.wordItem.id + 99} className="button button_option button_no_remember"
+        Options.push(<button key={this.state.wordItem.id + 99} className="btn btn_option btn_no_remember"
                              onClick={(e) => this.optionClick(99, e)}>不认识</button>)
         return Options
     }
@@ -256,19 +257,15 @@ export default class Card extends React.Component {
             this.state.loading ?
                 <div>loading</div> :
                 <div className="card" key={this.state.wordItem.id}>
-                    {this.state.isShowFriendlyTips ? <div className="friendly_tips">
-                        你已经完成了{this.state.currMinVocab}-{this.state.currMaxVocab}区间的测试</div> : null}
+                    <CSSTransition in={this.state.isShowFriendlyTips} classNames="fade" appear={true} enter={true} exit={true} timeout={{enter:2700,exit:300}}>
+                        <div className="friendly-tips">你已经完成了{this.state.currMinVocab}-{this.state.currMaxVocab}词汇量区间的测试</div>
+                    </CSSTransition>
                     <div className="word">{this.state.wordItem.word}</div>
                     <div className="progress_control">
-                        <div className="sand_glass"></div>
-                        <div className="progress_line">
-                            <CSSTransition in={this.state.progressing}
-                                           classNames="progressing"
-                                           appear={true}
-                                           enter={true}
-                                           exit={false}
-                                           timeout={10000}>
-                                <div className="progress_line_left"></div>
+                        <div className="sand-glass"></div>
+                        <div className="progress-line">
+                            <CSSTransition in={this.state.progressing} classNames="progressing" appear={true} enter={true} exit={false} timeout={10000}>
+                                <div className="progress-line-left"></div>
                             </CSSTransition>
                         </div>
                     </div>

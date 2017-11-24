@@ -28,19 +28,19 @@ export default class Report extends React.Component {
     }
 
     retryClick() {
-        this.props.history.push(`/card`)
+        this.props.history.push(`/welcome`)
     }
 
     renderRecommendList() {
         return this.state.lessons.map(function (lesson) {
-            return <div className="recommend_item" key={lesson.id}>
-                <div className="item_img" style={{
+            return <div className="recommend-item" key={lesson.id}>
+                <div className="item-img" style={{
                     background: 'url(http://www.bstcine.com/f/' + lesson.img + ') no-repeat top center',
                     backgroundSize: 'cover'
                 }}></div>
-                <div className="item_brief">
-                    <div className="item_title">{lesson.name}</div>
-                    <div className="item_desc">学习课时：{lesson.time_arrange}</div>
+                <div className="item-brief">
+                    <div className="item-title">{lesson.name}</div>
+                    <div className="item-desc">学习课时：{lesson.time_arrange}</div>
                 </div>
             </div>
         })
@@ -53,14 +53,14 @@ export default class Report extends React.Component {
                     <div className="title">你当前的词汇量约为</div>
                     <div className="vocab">{this.state.report.vocab}</div>
                     <div className="line"></div>
-                    <div className="recommend_title">根据你的词汇量，推荐适合你阅读的书单</div>
-                    <div className="recommend_list">
+                    <div className="recommend-title">根据你的词汇量，推荐适合你阅读的书单</div>
+                    <div className="recommend-list">
                         {this.renderRecommendList()}
                     </div>
                 </div>
                 <div className="footer">
-                    <button onClick={this.retryClick} className="button button_sm button_blue button_try">再测一次</button>
-                    <button onClick={this.shareClick} className="button button_sm button_orange button_share">分享
+                    <button onClick={this.retryClick} className="btn btn_sm btn_blue btn_try">再测一次</button>
+                    <button onClick={this.shareClick} className="btn btn_sm btn_orange btn_share">分享
                     </button>
                 </div>
             </div>

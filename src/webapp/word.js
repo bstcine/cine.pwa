@@ -35,8 +35,8 @@ class Word extends React.Component {
     render() {
         return (
             <Router>
-                <div className="word_main">
-                    <div className="map_bg"></div>
+                <div className="word-main">
+                    <div className="map-bg"></div>
                     <Route exact path="/" component={Index}/>
                     <Route path="/welcome" component={Welcome}/>
                     <Route path="/logindetect" component={LoginDetect}/>

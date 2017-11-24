@@ -20,7 +20,7 @@ export default class Card extends React.Component {
         this.disableClick = false
         this.sandGlassTimer = null
         this.levelTipTimer = null
-        this.duration = 15
+        this.duration = 15000
         console.log(`Card this.props.token ${this.props.token}`)
         this.optionClick = this.optionClick.bind(this)
         this.renderOptions = this.renderOptions.bind(this)
@@ -269,7 +269,7 @@ export default class Card extends React.Component {
                     <div className="progress_control" key={this.state.wordItem.id+"progress_control"}>
                         <div className="sand-glass"></div>
                         <div className="progress-line">
-                            <CSSTransition in={this.state.progressing} classNames="progressing" appear={true} enter={true} exit={false} timeout={10000}>
+                            <CSSTransition in={this.state.progressing} classNames="progressing" appear={true} enter={true} exit={false} timeout={this.duration}>
                                 <div className="progress-line-left"></div>
                             </CSSTransition>
                         </div>

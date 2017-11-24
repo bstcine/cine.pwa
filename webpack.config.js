@@ -72,7 +72,6 @@ module.exports = {
         new webpack.DllReferencePlugin({
             context: __dirname,
             manifest: require('./www/dll/manifest-vendor-dll.json')
-        }),
-        new webpack.optimize.UglifyJsPlugin()
+        })
     ]
 };

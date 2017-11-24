@@ -20,6 +20,7 @@ export default class Card extends React.Component {
         this.disableClick = false
         this.sandGlassTimer = null
         this.levelTipTimer = null
+        this.duration = 15
         console.log(`Card this.props.token ${this.props.token}`)
         this.optionClick = this.optionClick.bind(this)
         this.renderOptions = this.renderOptions.bind(this)
@@ -103,7 +104,7 @@ export default class Card extends React.Component {
                     this.nextWord()
                 }, 300)
             })
-        }, 10000)//10秒自动跳转下一题
+        }, this.duration)//15秒自动跳转下一题
     }
 
     //下个词汇等级

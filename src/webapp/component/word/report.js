@@ -33,16 +33,18 @@ export default class Report extends React.Component {
 
     renderRecommendList() {
         return this.state.lessons.map(function (lesson) {
-            return <div className="recommend-item" key={lesson.id}>
-                <div className="item-img" style={{
-                    background: 'url(http://www.bstcine.com/f/' + lesson.img + ') no-repeat top center',
-                    backgroundSize: 'cover'
-                }}></div>
-                <div className="item-brief">
-                    <div className="item-title">{lesson.name}</div>
-                    <div className="item-desc">学习课时：{lesson.time_arrange}</div>
-                </div>
-            </div>
+            return <a href={'/lesson/'+ lesson.id}>
+                        <div className="recommend-item" key={lesson.id}>
+                            <div className="item-img" style={{
+                                background: 'url(http://www.bstcine.com/f/' + lesson.img + ') no-repeat top center',
+                                backgroundSize: 'cover'
+                            }}></div>
+                            <div className="item-brief">
+                                <div className="item-title">{lesson.name}</div>
+                                <div className="item-desc">学习课时：{lesson.time_arrange}</div>
+                            </div>
+                        </div>
+                    </a>
         })
     }
 
@@ -60,8 +62,7 @@ export default class Report extends React.Component {
                 </div>
                 <div className="footer">
                     <button onClick={this.retryClick} className="btn btn_sm btn_blue btn_try">再测一次</button>
-                    <button onClick={this.shareClick} className="btn btn_sm btn_orange btn_share">分享
-                    </button>
+                    <button onClick={this.shareClick} className="btn btn_sm btn_orange btn_share">分享</button>
                 </div>
             </div>
         )

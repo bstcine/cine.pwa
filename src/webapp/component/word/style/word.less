@@ -179,6 +179,14 @@ body {
         opacity: 1;
         transform: translateY(0);
       }
+      &.fade-enter {
+        opacity: 0;
+        transform: translateY(-50%);
+      }
+      &.fade-enter-active {
+        opacity: 1;
+        transform: translateY(0);
+      }
       &.fade-exit {
         opacity: 1;
       }
@@ -223,8 +231,8 @@ body {
 
         .progressing-appear.progressing-appear-active {
           width: 0;
-          transition: width 10s linear;
-          animation: progressing-color 10s;
+          transition: width 15s linear;
+          animation: progressing-color 15s;
         }
 
         @keyframes progressing-color {

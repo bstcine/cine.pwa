@@ -62,8 +62,7 @@ export default class Report extends React.Component {
                 </div>
                 <div className="footer">
                     <button onClick={this.retryClick} className="btn btn_sm btn_blue btn_try">再测一次</button>
-                    <button onClick={this.shareClick} className="btn btn_sm btn_orange btn_share">分享
-                    </button>
+                    <button onClick={this.shareClick} className="btn btn_sm btn_orange btn_share">分享</button>
                 </div>
             </div>
         )

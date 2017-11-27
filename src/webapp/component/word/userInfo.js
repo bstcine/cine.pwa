@@ -32,12 +32,22 @@ export default class UserInfo extends React.Component {
         this.props.history.push(`/card`)
     }
 
-    gradeConfirm(){
-        if(this.state.grade >= this.curr_year - this.state.born_at - 8 && this.state.grade <= this.curr_year - this.state.born_at - 3){
-            return true
-        }else{
-            return confirm('确定出生年份和年级填写正确？')
+    gradeConfirm() {
+        const msg = '确定出生年份和年级填写正确？'
+        if (this.state.grade <= 0) {// 学龄前
+            if (this.curr_year - this.state.born_at >= 9) {
+                return confirm(msg)
+            }
+        } else if (this.state.grade >=1 && this.state.grade <= 12) {// 校内年龄段
+            if (this.state.grade < this.curr_year - this.state.born_at - 8 || this.state.grade > this.curr_year - this.state.born_at - 3) {
+                return confirm(msg)
+            }
+        } else {// 成人段
+            if (this.curr_year - this.state.born_at <= 15) {
+                return confirm(msg)
+            }
         }
+        return true
     }
 
     componentWillMount() {

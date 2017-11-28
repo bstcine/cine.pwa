@@ -13,7 +13,7 @@ export default class UserInfo extends React.Component {
         this.state = {
             born_at: 2004,
             grade: "6",
-            area_code: "310000"
+            area_code: "310000",
         }
         this.startClick = this.startClick.bind(this)
         this.bornAtChange = this.bornAtChange.bind(this)
@@ -29,7 +29,7 @@ export default class UserInfo extends React.Component {
         }
         if(!this.gradeConfirm()) return
         store.set('user', user)
-        this.props.history.push(`/card`)
+        this.props.history.push(`/welcome`)
     }
 
     gradeConfirm() {
@@ -119,7 +119,7 @@ export default class UserInfo extends React.Component {
 
 
 
-                    <button className="btn btn_blue" onClick={this.startClick}>开始词汇量测试</button>
+                    <button className="btn btn_blue" onClick={this.startClick}>下一步</button>
                 </div>
                 <div className="footer mini"></div>
             </div>

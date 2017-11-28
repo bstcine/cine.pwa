@@ -5,21 +5,36 @@
   <meta name="viewport"
         content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-
   <title>词汇量测试</title>
-  <link rel="shortcut icon" href="asset/img/favi6.ico" />
   <script>
       var responsive = function () {
           var clientWidth = document.documentElement.clientWidth
-          if(clientWidth <=768){
+          if(clientWidth <= 575){
               document.documentElement.style.fontSize = clientWidth / 750 * 100 + 'px';
           }else{
               document.documentElement.style.fontSize = '50px'
           }
       }
       responsive()
-      window.onresize = function(){
+      window.onresize = function () {
           responsive()
+      }
+
+      if (window.addEventListener) {
+          window.addEventListener('error', function (e) {
+              var error = e.error;
+              error && alert(JSON.stringify(error));
+          });
+      } else if (window.attachEvent) {
+          window.attachEvent('onerror', function (e) {
+              var error = e.error;
+              error && alert(JSON.stringify(error));
+          });
+      } else {
+          window.onerror = function (e) {
+              var error = e.error;
+              error && alert(JSON.stringify(error));
+          }
       }
   </script>
 

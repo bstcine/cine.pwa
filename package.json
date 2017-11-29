@@ -17,6 +17,7 @@
   "author": "Joe L",
   "dependencies": {
     "axios": "^0.17.1",
+    "babel-polyfill": "^6.26.0",
     "compression": "^1.7.1",
     "express": "^4.16.2",
     "immutable": "^3.8.2",

@@ -3,9 +3,9 @@ var webpack = require('webpack');
 
 module.exports = {
     cache: true,
-    // devtool: "eval",
+    devtool: 'cheap-module-source-map',
     entry: {
-        "word": './src/webapp/word.js',
+        "word": ['babel-polyfill','./src/webapp/word.js'],
     },
     output: {
         path: path.resolve(__dirname, 'www'),
@@ -65,9 +65,6 @@ module.exports = {
     stats: {
         colors: true
     },
-    //devtool: 'eval',
-    devtool: 'cheap-module-source-map',
-
     plugins: [
         new webpack.DllReferencePlugin({
             context: __dirname,

@@ -29,7 +29,7 @@ export default class Report extends React.Component {
         let sitecode = util.getUrlParam('sitecode');
         if (sitecode === 'cine.android') {
             try {
-                Android.share('《动物农庄》全新上线，积分双倍，快来！！！', '《动物农庄》分享描述分享描述分享描述', 'http://www.bstcine.com/lesson/42', 'http://www.bstcine.com/f/2017/11/12/084144524SvPCm7W.jpg',)
+                Android.share('《动物农庄》全新上线，积分双倍，快来！！！', '《动物农庄》分享描述分享描述分享描述', 'http://www.bstcine.com/lesson/42', 'http://www.bstcine.com/f/2017/11/12/084144524SvPCm7W.jpg','Js.alert')
             } catch (err) {
                 alert(JSON.stringify(err))
             }

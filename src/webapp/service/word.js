@@ -55,7 +55,7 @@ export let saveContentWordResult = (query) => {
             if (result.code !== '1') {
                 return alert(result.code_desc)
             }
-            return result.result
+            return result
         })
 }
 
@@ -65,6 +65,6 @@ export let queryContentWordResult = (query) => {
             if (result.code !== '1') {
                 return alert(result.code_desc)
             }
-            return result.result
+            return result
         })
 }

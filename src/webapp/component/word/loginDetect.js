@@ -1,4 +1,5 @@
 import React from 'react';
+import * as util from '../../util'
 
 export default class LoginDetect extends React.Component {
 
@@ -19,10 +20,19 @@ export default class LoginDetect extends React.Component {
     }
 
     goLoginClick() {
-        let url = encodeURIComponent('/vocabtest');
-        // let host = 'local.bstcine.com:9000'
-        let host = location.host
-        location.href = location.protocol + '//' + host + '/login?go=' + url
+        let sitecode = util.getUrlParam('sitecode');
+        if(sitecode === 'cine.android'){
+            try{
+                Android.login()
+            }catch (err){
+                alert(JSON.stringify(err))
+            }
+        }else{
+            let url = encodeURIComponent('/vocabtest');
+            // let host = 'local.bstcine.com:9000'
+            let host = location.host
+            location.href = location.protocol + '//' + host + '/login?go=' + url
+        }
     }
 
     startClick() {

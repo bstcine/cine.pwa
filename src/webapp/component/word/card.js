@@ -92,7 +92,6 @@ export default class Card extends React.Component {
 
     //沙漏倒计时
     toggleSandGlass() {
-        console.log(`toggleSandGlass `)
         if (this.sandGlassTimer) clearTimeout(this.sandGlassTimer)
         this.sandGlassTimer = setTimeout(() => {
             this.saveOneAnswer(99)
@@ -109,7 +108,7 @@ export default class Card extends React.Component {
 
     //下个词汇等级
     nextLevel() {
-        console.log(`nextLevel --> level_index: ${this.level_index} -- word_index: ${this.word_index}`)
+        console.log(`nextLevel --> level_index: ${this.level_index}`)
         //当 curr_level_score < 3 时，测试不进入下一等级，测试终止
         if (this.calcCurrLevelScore() < 3) return this.theEnd()
         if (this.level_index === this.wordLevelList.length - 1) return this.theEnd()
@@ -140,12 +139,6 @@ export default class Card extends React.Component {
                 isShowLevelTip: false
             })
         }.bind(this), 3000)
-        // let curr_vocab = this.calcCurrVocab();
-        // if (curr_vocab >= this.grade.min_vocab && curr_vocab < this.grade.max_vocab) {
-        //     // todo 超出当前年级的平均/优秀水平，友好提示
-        // } else if(curr_vocab > this.grade.max_vocab) {
-        //
-        // }
     }
 
     // 答题结束
@@ -165,7 +158,10 @@ export default class Card extends React.Component {
         };
         if (this.props.token) query.token = this.props.token
         Service.saveContentWordResult(query).then((result) => {
-            this.props.history.push(`/report?id=${result.statsContentWord.id}`)
+            if (result.except_case_desc) {
+                return alert(result.except_case_desc)
+            }
+            this.props.history.push(`/report?id=${result.result.statsContentWord.id}`)
         })
     }
 
@@ -212,7 +208,8 @@ export default class Card extends React.Component {
             }
         })
         let curr_score = right_count - wrong_count / 3
-        wordLevel.curr_score = curr_score >= 0 ? curr_score : 0
+        curr_score = curr_score >= 0 ? curr_score : 0
+        wordLevel.curr_score = curr_score
         console.log(`calcCurrLevelScore ${curr_score}`)
         return curr_score
     }
@@ -230,7 +227,6 @@ export default class Card extends React.Component {
     }
 
     optionClick(answer_index) {
-        console.log(`this.disableClick ${this.disableClick}`)
         if (this.disableClick) return
         this.disableClick = true
         this.saveOneAnswer(answer_index)
@@ -257,7 +253,6 @@ export default class Card extends React.Component {
     }
 
     render() {
-        console.log(`this.state.progressing ${this.state.progressing}`)
         return (
             this.state.loading ?
                 <div>loading</div> :

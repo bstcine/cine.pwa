@@ -12,39 +12,65 @@ export default class Report extends React.Component {
         }
         this.shareClick = this.shareClick.bind(this)
         this.retryClick = this.retryClick.bind(this)
+        this.courseClick = this.courseClick.bind(this)
     }
 
     componentDidMount() {
-        Service.queryContentWordResult({id: util.getUrlParam('id')}).then((result) => {
+        let id = util.getSearchParam(this.props.location.search).id
+        Service.queryContentWordResult({id}).then((res) => {
             this.setState({
-                report: result.statsContentWord,
-                lessons: result.recommendLessons
+                report: res.result.statsContentWord,
+                lessons: res.result.recommendLessons
             })
         })
     }
 
     shareClick() {
-        alert('TODO share')
+        let sitecode = util.getUrlParam('sitecode');
+        if (sitecode === 'cine.android') {
+            try {
+                Android.share('《动物农庄》全新上线，积分双倍，快来！！！', '《动物农庄》分享描述分享描述分享描述', 'http://www.bstcine.com/lesson/42', 'http://www.bstcine.com/f/2017/11/12/084144524SvPCm7W.jpg',)
+            } catch (err) {
+                alert(JSON.stringify(err))
+            }
+        } else {
+            alert('TODO share')
+        }
     }
 
     retryClick() {
-        this.props.history.push(`/welcome`)
+        this.props.history.push(`/`)
+    }
+
+    courseClick(lesson_id) {
+        let sitecode = util.getUrlParam('sitecode');
+        if (sitecode === 'cine.android') {
+            try {
+                Android.course(lesson_id)
+            } catch (err) {
+                alert(JSON.stringify(err))
+            }
+        } else {
+            location.href = '/lesson/' + lesson_id
+        }
     }
 
     renderRecommendList() {
-        return this.state.lessons.map(function (lesson) {
-            return <a href={'/lesson/'+ lesson.id}>
-                        <div className="recommend-item" key={lesson.id}>
-                            <div className="item-img" style={{
-                                background: 'url(http://www.bstcine.com/f/' + lesson.img + ') no-repeat top center',
-                                backgroundSize: 'cover'
-                            }}></div>
-                            <div className="item-brief">
-                                <div className="item-title">{lesson.name}</div>
-                                <div className="item-desc">学习课时：{lesson.time_arrange}</div>
-                            </div>
-                        </div>
-                    </a>
+        return this.state.lessons.map((lesson) => {
+            return (
+                <div className="recommend-item" onClick={(e) => this.courseClick(lesson.id, e)} key={lesson.id}>
+                    <div className="item-img" style={{
+                        background: 'url(http://www.bstcine.com/f/' + lesson.img + ') no-repeat top center',
+                        backgroundSize: 'cover'
+                    }}></div>
+                    <div className="item-brief">
+                        <div className="item-title">{lesson.name}</div>
+                        <div className="item-desc">学习课时：{lesson.time_arrange}</div>
+                    </div>
+                </div>
+            )
+
+
         })
     }
 

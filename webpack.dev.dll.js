@@ -6,7 +6,8 @@ const vendor_dll = [
     'react-dom',
     'react-router-dom',
     'lodash',
-    'store'
+    'store',
+    'url'
 ];
 
 

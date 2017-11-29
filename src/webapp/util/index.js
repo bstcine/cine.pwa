@@ -27,8 +27,17 @@ export let getUrlParam = (name) => {
 
 export let getParam = (url, name) => {
     let URLObj = URL.parse(url,true);
-    console.log(`URLObj ${JSON.stringify(URLObj)}`)
     return URLObj.query[name]
+}
+
+export let getSearchParam = (search) => {
+    let parsedObj ={}
+    search.replace('?','').split('&').forEach(function (item) {
+        let key = item.split('=')[0]
+        let value = item.split('=')[1]
+        parsedObj[key]= value
+    })
+    return parsedObj
 }
 
 export let setToken = (token) => {

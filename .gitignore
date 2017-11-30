@@ -64,6 +64,6 @@ typings/
 .idea/modules.xml
 .idea/workspace.xml
 
-/www/dll/
-/www/vendor.dll.js
-/www/rea.index.bundle.js
+build
+src/dll
+

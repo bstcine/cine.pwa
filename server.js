@@ -8,7 +8,7 @@ app.set('port', process.env.PORT || 5002);
 
 app.use(compression());
 
-app.use('/', express.static(__dirname + '/www'));
+app.use('/', express.static(__dirname + '/build'));
 
 // Adding CORS support
 app.all('*', function (req, res, next) {

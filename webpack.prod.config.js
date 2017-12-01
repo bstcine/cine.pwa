@@ -1,21 +1,33 @@
-const path = require('path');
-const webpack = require('webpack');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin');
+const path = require('path')
+const webpack = require('webpack')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin')
+const CleanWebpackPlugin = require('clean-webpack-plugin')
 
 const pages = ['vocabtest']
 
 let entry = {}
 let plugins = []
-pages.forEach((page)=>{
+pages.forEach((page) => {
     entry[page] = ['babel-polyfill', `./src/page/${page}/entry.js`]
     plugins.push(new HtmlWebpackPlugin({
-        filename:`${page}/page.html`,
-        template:`src/page/${page}/page.html`,
+        filename: `${page}/index.html`,
+        template: `src/page/${page}/index.html`,
         inject: true,
+        minify: {
+            removeComments: true,
+            collapseWhitespace: true,
+            removeRedundantAttributes: true,
+            useShortDoctype: true,
+            removeEmptyAttributes: true,
+            removeStyleLinkTypeAttributes: true,
+            keepClosingSlash: true,
+            minifyJS: true,
+            minifyCSS: true,
+            minifyURLs: true,
+        },
     }))
 })
-
 
 module.exports = {
     cache: true,
@@ -64,8 +76,8 @@ module.exports = {
                 test: /\.(png|jpg|jpeg|gif|svg)$/i,
                 loader: 'url-loader',
                 options: {
-                    limit: 20000,
-                    name: 'assets/[name]-[hash:5].[ext]'
+                    limit: 10000,
+                    name: 'asset/image/[name]-[hash:5].[ext]'
                 }
             }]
     },
@@ -78,18 +90,17 @@ module.exports = {
         colors: true
     },
     plugins: [
-        // new CopyWebpackPlugin([
-        //     {from: 'src/dll', to: 'dll'}
-        // ]),
+        new CleanWebpackPlugin(['build/*'], {dry: false, verbose: true, watch: true}),
         new webpack.DllReferencePlugin({
             context: __dirname,
             manifest: 'src/dll/manifest-dll.json'
         }),
         ...plugins,
         new AddAssetHtmlPlugin({
-            filepath: path.resolve(__dirname,'src/dll/dll.js'),
+            filepath: path.resolve(__dirname, 'src/dll/dll.js'),
+            publicPath:'/dll/',
             includeSourcemap: false,
-            outputPath:'dll'
+            outputPath: 'dll'
         }),
     ]
-};
+}

@@ -1,20 +1,32 @@
-var path = require('path');
-var webpack = require('webpack');
+const path = require('path')
+const webpack = require('webpack')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin')
+const CleanWebpackPlugin = require('clean-webpack-plugin')
+
+const pages = ['vocabtest']
+
+let entry = {}
+let plugins = []
+pages.forEach((page) => {
+    entry[page] = ['babel-polyfill', `./src/page/${page}/entry.js`]
+    plugins.push(new HtmlWebpackPlugin({
+        filename: `${page}/index.html`,
+        template: `src/page/${page}/index.html`,
+        inject: true,
+    }))
+})
 
 module.exports = {
     cache: true,
-    // devtool: "eval",
-    entry: {
-        "word": './src/webapp/word.js',
-    },
+    devtool: 'cheap-module-source-map',
+    entry: entry,
     output: {
-        path: path.resolve(__dirname, 'www'),
-        filename: 'rea.[name].bundle.js'
+        path: path.resolve(__dirname, 'build'),
+        publicPath: '/',
+        filename: '[name]/entry.js'
     },
-    externals: {
-        //'react': 'React',
-        //'react-dom': 'ReactDOM'
-    },
+    externals: {},
     module: {
         loaders: [{
             test: /\.js$/,
@@ -25,53 +37,58 @@ module.exports = {
                 presets: ['es2015', 'react', "stage-0"]
             },
         },
-        {
-            test: /\.less$/,
-            use: [
-                'style-loader',
-                'css-loader',
-                {
-                    loader: 'postcss-loader',
-                    options: {
-                        plugins: [
-                            require('postcss-import'),
-                            require('autoprefixer')
-                        ],
-                        browsers: [
-                            '>1%',
-                            'last 4 versions',
-                            'Firefox ESR',
-                            'not ie < 9', // React doesn't support IE8 anyway
-                        ]
-                    }
-                },
-                'less-loader'
-            ]
-        },
-        {
-            test:/\.(png|jpg|jpeg|gif|svg)$/i,
-            loader:'url-loader',
-            options:{
-                limit:20000,
-                name:'assets/[name]-[hash:5].[ext]'
-            }
-        }]
+            {
+                test: /\.less$/,
+                use: [
+                    'style-loader',
+                    'css-loader',
+                    {
+                        loader: 'postcss-loader',
+                        options: {
+                            plugins: [
+                                require('postcss-import'),
+                                require('autoprefixer')
+                            ],
+                            browsers: [
+                                '>1%',
+                                'last 4 versions',
+                                'Firefox ESR',
+                                'not ie < 9', // React doesn't support IE8 anyway
+                            ]
+                        }
+                    },
+                    'less-loader'
+                ]
+            },
+            {
+                test: /\.(png|jpg|jpeg|gif|svg)$/i,
+                loader: 'url-loader',
+                options: {
+                    limit: 10000,
+                    name: 'asset/[name]-[hash:5].[ext]'
+                }
+            }]
     },
     resolve: {
         alias: {
-            'component': path.resolve(__dirname, 'src/webapp/component'),
+            'common': path.resolve(__dirname, 'src/common'),
         }
     },
     stats: {
         colors: true
     },
-    //devtool: 'eval',
-    devtool: 'cheap-module-source-map',
-
     plugins: [
+        new CleanWebpackPlugin(['build/*'], {dry: false, verbose: true, watch: true}),
         new webpack.DllReferencePlugin({
             context: __dirname,
-            manifest: require('./www/dll/manifest-vendor-dll.json')
-        })
+            manifest: 'src/dll/manifest-dll.json'
+        }),
+        ...plugins,
+        new AddAssetHtmlPlugin({
+            filepath: path.resolve(__dirname, 'src/dll/dll.js'),
+            publicPath:'/dll/',
+            includeSourcemap: false,
+            outputPath: 'dll'
+        }),
     ]
-};
+}

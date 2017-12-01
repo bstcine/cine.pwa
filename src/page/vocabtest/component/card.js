@@ -161,6 +161,7 @@ export default class Card extends React.Component {
             if (result.except_case_desc) {
                 return alert(result.except_case_desc)
             }
+            console.log(`result ${JSON.stringify(result)}`)
             this.props.history.push(`/report?id=${result.result.statsContentWord.id}`)
         })
     }

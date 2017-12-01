@@ -3,9 +3,9 @@ const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
+const WebpackConfigCommon = require('./webpack.config.common')
 
-const pages = ['vocabtest']
-
+const pages = WebpackConfigCommon.pages
 let entry = {}
 let plugins = []
 pages.forEach((page) => {
@@ -14,6 +14,18 @@ pages.forEach((page) => {
         filename: `${page}/index.html`,
         template: `src/page/${page}/index.html`,
         inject: true,
+        minify: {
+            removeComments: true,
+            collapseWhitespace: true,
+            removeRedundantAttributes: true,
+            useShortDoctype: true,
+            removeEmptyAttributes: true,
+            removeStyleLinkTypeAttributes: true,
+            keepClosingSlash: true,
+            minifyJS: true,
+            minifyCSS: true,
+            minifyURLs: true,
+        },
     }))
 })
 
@@ -65,7 +77,7 @@ module.exports = {
                 loader: 'url-loader',
                 options: {
                     limit: 10000,
-                    name: 'asset/[name]-[hash:5].[ext]'
+                    name: 'asset/image/[name]-[hash:5].[ext]'
                 }
             }]
     },
@@ -89,6 +101,26 @@ module.exports = {
             publicPath:'/dll/',
             includeSourcemap: false,
             outputPath: 'dll'
+        }),
+        new webpack.optimize.UglifyJsPlugin({
+            compress: {
+                warnings: false,
+                // Disabled because of an issue with Uglify breaking seemingly valid code:
+                // https://github.com/facebookincubator/create-react-app/issues/2376
+                // Pending further investigation:
+                // https://github.com/mishoo/UglifyJS2/issues/2011
+                comparisons: false,
+            },
+            mangle: {
+                safari10: true,
+            },
+            output: {
+                comments: false,
+                // Turned on because emoji and regex is not minified properly using default
+                // https://github.com/facebookincubator/create-react-app/issues/2488
+                ascii_only: true,
+            },
+            sourceMap: true,
         }),
     ]
 }

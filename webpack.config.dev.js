@@ -3,9 +3,9 @@ const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
+const WebpackConfigCommon = require('./webpack.config.common')
 
-const pages = ['vocabtest']
-
+const pages = WebpackConfigCommon.pages
 let entry = {}
 let plugins = []
 pages.forEach((page) => {
@@ -14,18 +14,6 @@ pages.forEach((page) => {
         filename: `${page}/index.html`,
         template: `src/page/${page}/index.html`,
         inject: true,
-        minify: {
-            removeComments: true,
-            collapseWhitespace: true,
-            removeRedundantAttributes: true,
-            useShortDoctype: true,
-            removeEmptyAttributes: true,
-            removeStyleLinkTypeAttributes: true,
-            keepClosingSlash: true,
-            minifyJS: true,
-            minifyCSS: true,
-            minifyURLs: true,
-        },
     }))
 })
 
@@ -77,7 +65,7 @@ module.exports = {
                 loader: 'url-loader',
                 options: {
                     limit: 10000,
-                    name: 'asset/image/[name]-[hash:5].[ext]'
+                    name: 'asset/[name]-[hash:5].[ext]'
                 }
             }]
     },

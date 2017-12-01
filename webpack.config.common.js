@@ -1,4 +1,7 @@
 module.exports = {
+
+    pages: ['vocabtest'],
+
     vendor_dll: [
         'react',
         'react-dom',

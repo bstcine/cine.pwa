@@ -27,10 +27,6 @@ class Word extends React.Component {
         }
     }
 
-    componentWillMount() {
-        console.log('componentWillMount')
-    }
-
     render() {
         return (
             <Router>

@@ -5,6 +5,8 @@ const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 const WebpackConfigCommon = require('./webpack.config.common')
 
+const debug = false
+
 const pages = WebpackConfigCommon.pages
 let entry = {}
 let plugins = []
@@ -57,6 +59,7 @@ module.exports = {
                 // Pending further investigation:
                 // https://github.com/mishoo/UglifyJS2/issues/2011
                 comparisons: false,
+                drop_console: !debug,
             },
             mangle: {
                 safari10: true,

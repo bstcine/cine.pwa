@@ -11,7 +11,7 @@ let plugins = []
 pages.forEach((page) => {
     entry[page] = ['babel-polyfill', `./src/page/${page}/entry.js`]
     plugins.push(new HtmlWebpackPlugin({
-        filename: `${page}/index.html`,
+        filename: `${page}/index.html`,//入口文件不设置hash，禁止长期缓存
         template: `src/page/${page}/index.html`,
         inject: true,
     }))
@@ -21,62 +21,9 @@ module.exports = {
     cache: true,
     devtool: 'cheap-module-source-map',
     entry: entry,
-    output: {
-        path: path.resolve(__dirname, 'build'),
-        publicPath: '/',
-        filename: '[name]/entry.js'
-    },
-    externals: {},
-    module: {
-        loaders: [{
-            test: /\.js$/,
-            loader: 'babel-loader',
-            include: path.resolve(__dirname, 'src'),
-            query: {
-                cacheDirectory: true,
-                presets: ['es2015', 'react', "stage-0"]
-            },
-        },
-            {
-                test: /\.less$/,
-                use: [
-                    'style-loader',
-                    'css-loader',
-                    {
-                        loader: 'postcss-loader',
-                        options: {
-                            plugins: [
-                                require('postcss-import'),
-                                require('autoprefixer')
-                            ],
-                            browsers: [
-                                '>1%',
-                                'last 4 versions',
-                                'Firefox ESR',
-                                'not ie < 9', // React doesn't support IE8 anyway
-                            ]
-                        }
-                    },
-                    'less-loader'
-                ]
-            },
-            {
-                test: /\.(png|jpg|jpeg|gif|svg)$/i,
-                loader: 'url-loader',
-                options: {
-                    limit: 10000,
-                    name: 'asset/[name]-[hash:5].[ext]'
-                }
-            }]
-    },
-    resolve: {
-        alias: {
-            'common': path.resolve(__dirname, 'src/common'),
-        }
-    },
-    stats: {
-        colors: true
-    },
+    output: WebpackConfigCommon.output,
+    module: WebpackConfigCommon.module,
+    resolve: WebpackConfigCommon.resolve,
     plugins: [
         new CleanWebpackPlugin(['build/*'], {dry: false, verbose: true, watch: true}),
         new webpack.DllReferencePlugin({
@@ -85,8 +32,8 @@ module.exports = {
         }),
         ...plugins,
         new AddAssetHtmlPlugin({
-            filepath: path.resolve(__dirname, 'src/dll/dll.js'),
-            publicPath:'/dll/',
+            filepath: path.resolve(__dirname, 'src/dll/dll.*.js'),
+            publicPath: '/dll/',
             includeSourcemap: false,
             outputPath: 'dll'
         }),

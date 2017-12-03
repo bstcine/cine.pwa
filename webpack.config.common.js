@@ -1,3 +1,5 @@
+const path = require('path')
+
 module.exports = {
 
     pages: ['vocabtest'],
@@ -9,5 +11,60 @@ module.exports = {
         'react-transition-group',
         'lodash',
         'store'
-    ]
+    ],
+
+    output: {
+        path: path.resolve(__dirname, 'build'),
+        publicPath: '/',
+        filename: '[name]/entry.[chunkhash:8].js'
+    },
+
+    module: {
+        loaders: [{
+            test: /\.js$/,
+            loader: 'babel-loader',
+            include: path.resolve(__dirname, 'src'),
+            query: {
+                cacheDirectory: true,
+                presets: ['es2015', 'react', "stage-0"]
+            },
+        },
+            {
+                test: /\.less$/,
+                use: [
+                    'style-loader',
+                    'css-loader',
+                    {
+                        loader: 'postcss-loader',
+                        options: {
+                            plugins: [
+                                require('postcss-import'),
+                                require('autoprefixer')
+                            ],
+                            browsers: [
+                                '>1%',
+                                'last 4 versions',
+                                'Firefox ESR',
+                                'not ie < 9', // React doesn't support IE8 anyway
+                            ]
+                        }
+                    },
+                    'less-loader'
+                ]
+            },
+            {
+                test: /\.(png|jpg|jpeg|gif|svg)$/i,
+                loader: 'url-loader',
+                options: {
+                    limit: 10000,
+                    name: 'asset/image/[name].[hash:8].[ext]'
+                }
+            }]
+    },
+
+    resolve:{
+        alias: {
+            'common': path.resolve(__dirname, 'src/common'),
+        }
+    }
 }

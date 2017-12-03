@@ -33,7 +33,7 @@ export default class Welcome extends React.Component {
             <div className="wrapper mini">
                 <div className="welcome">
                     <div className="start-bg"></div>
-                    <div className="tips">本测试大约需要3-15分钟不等，具体测试时间跟词汇量和答题速度有关</div>
+                    <div className="tips">本测试是严谨的学术型词汇量测试，耗时比一般的词汇量测试更长，大约需要5-10分钟。在本测试中，您将得不到任何“对错”的提示。在测试结束后，您将获得详细的词汇量报告</div>
                     <button className="btn btn_blue" onClick={this.startClick}>开始测试</button>
                 </div>
                 <div className="footer mini"></div>

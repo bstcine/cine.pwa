@@ -20,7 +20,7 @@ export default class LoginDetect extends React.Component {
     }
 
     goLoginClick() {
-        let sitecode = util.getUrlParam('sitecode');
+        let sitecode = util.getParam().sitecode;
         if(sitecode === 'cine.android'){
             try{
                 Android.login()

@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {
-    HashRouter as Router,
+    BrowserRouter as Router,
     Route,
 } from 'react-router-dom'
 import LoginDetect from './component/loginDetect';
@@ -18,18 +18,11 @@ class Word extends React.Component {
     constructor(props) {
         super(props);
         console.log('Word Main constructor')
-        let token = util.getUrlParam('token');
-        console.log(`Word Main constructor token ==> ${token}`)
-        if (token) {
-            util.setToken(token)
-        }else{
-            util.removeToken()
-        }
     }
 
     render() {
         return (
-            <Router>
+            <Router basename="/vocabtest" >
                 <div className="word-main">
                     <div className="map-bg"></div>
                     <Route exact path="/" component={Index}/>

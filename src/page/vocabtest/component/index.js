@@ -8,8 +8,8 @@ export default class Index extends React.Component {
     constructor(props) {
         super(props)
         console.log('Index constructor')
-        let token = util.getUrlParam('token');
-        console.log(`Index constructor token==>${token}`)
+        let token = util.getParam().token;
+        console.log(`Index constructor token ==> ${token}`)
         if (token) {
             util.setToken(token)
         }

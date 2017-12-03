@@ -16,7 +16,7 @@ export default class Report extends React.Component {
     }
 
     componentDidMount() {
-        let id = util.getSearchParam(this.props.location.search).id
+        let id = util.getParam().id
         Service.queryContentWordResult({id}).then((res) => {
             this.setState({
                 report: res.result.statsContentWord,
@@ -26,7 +26,7 @@ export default class Report extends React.Component {
     }
 
     shareClick() {
-        let sitecode = util.getUrlParam('sitecode');
+        let sitecode = util.getParam().sitecode;
         if (sitecode === 'cine.android') {
             try {
                 Android.share('12312313123','《动物农庄》全新上线，积分双倍，快来！！！', '《动物农庄》分享描述分享描述分享描述', 'http://www.bstcine.com/lesson/42', 'http://www.bstcine.com/f/2017/11/12/084144524SvPCm7W.jpg')
@@ -43,7 +43,7 @@ export default class Report extends React.Component {
     }
 
     courseClick(lesson_id) {
-        let sitecode = util.getUrlParam('sitecode');
+        let sitecode = util.getParam().sitecode;
         if (sitecode === 'cine.android') {
             try {
                 Android.course(lesson_id)

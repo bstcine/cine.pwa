@@ -20,22 +20,18 @@ export let isImage = (src) => {
     return false;
 }
 
-export let getUrlParam = (name) => {
-    let url = location.href
-    return getParam(url, name)
-}
-
-export let getParam = (url, name) => {
-    let URLObj = URL.parse(url,true);
-    return URLObj.query[name]
+export let getParam = (href) => {
+    let url = href || location.href
+    let URLObj = URL.parse(url, true);
+    return URLObj.query
 }
 
 export let getSearchParam = (search) => {
-    let parsedObj ={}
-    search.replace('?','').split('&').forEach(function (item) {
+    let parsedObj = {}
+    search.replace('?', '').split('&').forEach(function (item) {
         let key = item.split('=')[0]
         let value = item.split('=')[1]
-        parsedObj[key]= value
+        parsedObj[key] = value
     })
     return parsedObj
 }

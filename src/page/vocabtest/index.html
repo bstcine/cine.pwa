@@ -22,18 +22,15 @@
 
       if (window.addEventListener) {
           window.addEventListener('error', function (e) {
-              var error = e.error;
-              error && alert(JSON.stringify(error));
+              alert(JSON.stringify(e));
           });
       } else if (window.attachEvent) {
           window.attachEvent('onerror', function (e) {
-              var error = e.error;
-              error && alert(JSON.stringify(error));
+              alert(JSON.stringify(e));
           });
       } else {
           window.onerror = function (e) {
-              var error = e.error;
-              error && alert(JSON.stringify(error));
+              alert(JSON.stringify(e));
           }
       }
   </script>

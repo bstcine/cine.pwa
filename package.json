@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "prod-dll": "webpack -p --progress --colors --config=webpack.dll.js",
-    "prod-build": "webpack -p --progress --colors --config=webpack.config.prod.js",
+    "prod-build": "webpack -p --progress --colors --config=webpack.config.prod.js && node ./nodescript/generate-build-manifest.js",
     "dev-dll": "webpack --progress --colors --config=webpack.dll.js",
     "dev-build": "webpack --progress --colors --config=webpack.config.dev.js",
     "start": "node server.js"

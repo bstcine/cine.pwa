@@ -5,6 +5,7 @@ const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 const WebpackConfigCommon = require('./webpack.config.common')
 
+// 生产模式 关闭 debug，用来移除 console 日志输出
 const debug = false
 
 const pages = WebpackConfigCommon.pages
@@ -47,7 +48,7 @@ module.exports = {
         ...plugins,
         new AddAssetHtmlPlugin({
             filepath: path.resolve(__dirname, 'src/dll/dll.*.js'),
-            publicPath: '/dll/',
+            publicPath: WebpackConfigCommon.static_host + 'dll/',
             includeSourcemap: false,
             outputPath: 'dll'
         }),

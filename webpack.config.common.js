@@ -1,6 +1,10 @@
 const path = require('path')
+// cdn 预留
+const static_host = process.env.NODE_ENV === 'production' ? '/' : '/'
 
 module.exports = {
+
+    static_host,
 
     pages: ['vocabtest'],
 
@@ -15,7 +19,7 @@ module.exports = {
 
     output: {
         path: path.resolve(__dirname, 'build'),
-        publicPath: '/',
+        publicPath: static_host,
         filename: '[name]/entry.[chunkhash:8].js'
     },
 

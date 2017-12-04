@@ -66,7 +66,7 @@ module.exports = {
             }]
     },
 
-    resolve:{
+    resolve: {
         alias: {
             'common': path.resolve(__dirname, 'src/common'),
         }

@@ -8,13 +8,15 @@ const WebpackConfigCommon = require('./webpack.config.common')
 const pages = WebpackConfigCommon.pages
 let entry = {}
 let plugins = []
+let rewrites = []
 pages.forEach((page) => {
     entry[page] = ['babel-polyfill', `./src/page/${page}/entry.js`]
     plugins.push(new HtmlWebpackPlugin({
-        filename: `${page}/index.html`,//入口文件不设置hash，禁止长期缓存
+        filename: `${page}/index.html`,
         template: `src/page/${page}/index.html`,
         inject: true,
     }))
+    rewrites.push({from: new RegExp(`^/${page}.*`), to: `/${page}/index.html`})
 })
 
 module.exports = {
@@ -25,7 +27,7 @@ module.exports = {
     module: WebpackConfigCommon.module,
     resolve: WebpackConfigCommon.resolve,
     plugins: [
-        new CleanWebpackPlugin(['build/*'], {dry: false, verbose: true, watch: true}),
+        new CleanWebpackPlugin(['build/*']),
         new webpack.DllReferencePlugin({
             context: __dirname,
             manifest: 'src/dll/manifest-dll.json'
@@ -37,5 +39,17 @@ module.exports = {
             includeSourcemap: false,
             outputPath: 'dll'
         }),
-    ]
+    ],
+    devServer: {
+        contentBase: path.join(__dirname, "build"),
+        compress: true,
+        historyApiFallback:{
+            rewrites: rewrites
+        },
+        inline:true,
+        port: 5000,
+        proxy: {
+            "/api": "http://localhost:9000"
+        }
+    }
 }

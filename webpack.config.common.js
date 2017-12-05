@@ -1,5 +1,5 @@
 const path = require('path')
-// cdn 预留
+// 生产模式配置好 CDN 后切换到 CDN
 const static_host = process.env.NODE_ENV === 'production' ? '/' : '/'
 
 module.exports = {

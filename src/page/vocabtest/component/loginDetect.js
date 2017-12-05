@@ -1,5 +1,5 @@
 import React from 'react';
-import * as util from 'common/util'
+import * as storeUtil from 'common/util/storeUtil'
 
 export default class LoginDetect extends React.Component {
 
@@ -20,16 +20,15 @@ export default class LoginDetect extends React.Component {
     }
 
     goLoginClick() {
-        let sitecode = util.getParam().sitecode;
-        if(sitecode === 'cine.android'){
+        let sitecode = storeUtil.get('sitecode');
+        if(sitecode === 'cine.android') {
             try{
-                Android.login()
+                Android.login('testcallback')
             }catch (err){
                 alert(JSON.stringify(err))
             }
         }else{
             let url = encodeURIComponent('/vocabtest');
-            // let host = 'local.bstcine.com:9000'
             let host = location.host
             location.href = location.protocol + '//' + host + '/login?go=' + url
         }

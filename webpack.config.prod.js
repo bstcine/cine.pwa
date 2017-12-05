@@ -6,7 +6,7 @@ const CleanWebpackPlugin = require('clean-webpack-plugin')
 const WebpackConfigCommon = require('./webpack.config.common')
 
 // 生产模式 关闭 debug，用来移除 console 日志输出
-const debug = false
+const debug = true
 
 const pages = WebpackConfigCommon.pages
 let entry = {}
@@ -14,7 +14,7 @@ let plugins = []
 pages.forEach((page) => {
     entry[page] = ['babel-polyfill', `./src/page/${page}/entry.js`]
     plugins.push(new HtmlWebpackPlugin({
-        filename: `${page}/index.html`,//入口文件不设置hash，禁止长期缓存
+        filename: `${page}/index.html`,
         template: `src/page/${page}/index.html`,
         inject: true,
         minify: {

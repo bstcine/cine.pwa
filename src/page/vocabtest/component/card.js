@@ -1,5 +1,5 @@
 import React from 'react';
-import store from 'store';
+import * as storeUtil from 'common/util/storeUtil'
 import * as Service from '../service/index'
 import {CSSTransition} from 'react-transition-group'
 
@@ -28,7 +28,7 @@ export default class Card extends React.Component {
 
     componentWillMount() {
         console.log('componentWillMount')
-        let user = store.get('user')
+        let user = storeUtil.get('user')
         if (!user) {
             return this.props.history.replace('/userinfo')
         }
@@ -147,7 +147,7 @@ export default class Card extends React.Component {
         this.disableClick = true
         //答题结束时间
         this.end_at = new Date().getTime()
-        let user = store.get('user')
+        let user = storeUtil.get('user')
         let query = {
             grade: user.grade,
             born_at: user.born_at,

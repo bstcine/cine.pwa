@@ -1,5 +1,5 @@
 import React from 'react';
-import store from 'store'
+import * as storeUtil from 'common/util/storeUtil'
 
 export default class UserInfo extends React.Component {
 
@@ -28,7 +28,7 @@ export default class UserInfo extends React.Component {
             area_code:this.state.area_code,
         }
         if(!this.gradeConfirm()) return
-        store.set('user', user)
+        storeUtil.set('user', user)
         this.props.history.push(`/welcome`)
     }
 

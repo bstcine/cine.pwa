@@ -1,5 +1,5 @@
 import React from 'react';
-import store from 'store';
+import * as storeUtil from 'common/util/storeUtil'
 
 
 export default class Welcome extends React.Component {
@@ -11,7 +11,7 @@ export default class Welcome extends React.Component {
     }
 
     startClick() {
-        let user = store.get('user');
+        let user = storeUtil.get('user');
         if (user && user.area_code && user.grade && user.born_at) {
             this.props.history.push(`/card`)
         } else {

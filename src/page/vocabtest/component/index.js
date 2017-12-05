@@ -1,18 +1,12 @@
 import React from 'react';
 import * as Service from '../service/index'
-import store from 'store';
-import * as util from 'common/util'
+import * as storeUtil from 'common/util/storeUtil'
 
 export default class Index extends React.Component {
 
     constructor(props) {
         super(props)
         console.log('Index constructor')
-        let token = util.getParam().token;
-        console.log(`Index constructor token ==> ${token}`)
-        if (token) {
-            util.setToken(token)
-        }
     }
 
     componentWillMount() {
@@ -27,7 +21,7 @@ export default class Index extends React.Component {
             }
             let user = result.result.user
             if (user && user.area_code && user.grade && user.born_at) {
-                store.set('user',user)
+                storeUtil.set('user',user)
                 this.props.history.push(`/welcome`)
             } else {
                 this.props.history.push(`/userinfo`)

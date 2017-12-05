@@ -11,13 +11,22 @@ import UserInfo from './component/userInfo';
 import Card from './component/card';
 import Report from './component/report';
 import * as util from 'common/util'
+import * as storeUtil from 'common/util/storeUtil'
 import './asset/style/word.less'
 
 class Word extends React.Component {
 
     constructor(props) {
-        super(props);
+        super(props)
         console.log('Word Main constructor')
+        let urlParam = util.getParam()
+        console.log(`Index constructor util.getParam ==> ${urlParam}`)
+        let token = urlParam.token
+        let sitecode = urlParam.sitecode
+        storeUtil.remove('token')
+        storeUtil.remove('sitecode')
+        token && storeUtil.set('token', token)
+        sitecode && storeUtil.set('sitecode', sitecode)
     }
 
     render() {

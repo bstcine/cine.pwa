@@ -14,7 +14,6 @@ module.exports = {
         'react-router-dom',
         'react-transition-group',
         'babel-polyfill',
-        'lodash',
         'store'
     ],
 
@@ -31,6 +30,7 @@ module.exports = {
             include: path.resolve(__dirname, 'src'),
             query: {
                 cacheDirectory: true,
+                plugins: ['lodash'],
                 presets: ['es2015', 'react', "stage-0"]
             },
         },

@@ -3,15 +3,17 @@ const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
+const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 const WebpackConfigCommon = require('./webpack.config.common')
 
 const pages = WebpackConfigCommon.pages
 let entry = {}
-let plugins = []
+let HtmlWebpackPlugins = []
 let rewrites = []
 pages.forEach((page) => {
     entry[page] = ['babel-polyfill', `./src/page/${page}/entry.js`]
-    plugins.push(new HtmlWebpackPlugin({
+    HtmlWebpackPlugins.push(new HtmlWebpackPlugin({
         filename: `${page}/index.html`,
         template: `src/page/${page}/index.html`,
         inject: true,
@@ -32,13 +34,15 @@ module.exports = {
             context: __dirname,
             manifest: 'src/dll/manifest-dll.json'
         }),
-        ...plugins,
+        ...HtmlWebpackPlugins,
         new AddAssetHtmlPlugin({
             filepath: path.resolve(__dirname, 'src/dll/dll.*.js'),
             publicPath: '/dll/',
             includeSourcemap: false,
             outputPath: 'dll'
         }),
+        new LodashModuleReplacementPlugin(),
+        new BundleAnalyzerPlugin()
     ],
     devServer: {
         contentBase: path.join(__dirname, "build"),

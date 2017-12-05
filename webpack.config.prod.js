@@ -3,6 +3,10 @@ const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
+const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
+
+
 const WebpackConfigCommon = require('./webpack.config.common')
 
 // 生产模式 关闭 debug，用来移除 console 日志输出
@@ -52,6 +56,7 @@ module.exports = {
             includeSourcemap: false,
             outputPath: 'dll'
         }),
+        new LodashModuleReplacementPlugin(),
         new webpack.optimize.UglifyJsPlugin({
             compress: {
                 warnings: false,
@@ -73,5 +78,6 @@ module.exports = {
             },
             sourceMap: true,
         }),
+        new BundleAnalyzerPlugin()
     ]
 }

@@ -4,7 +4,6 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 const WebpackConfigCommon = require('./webpack.config.common')
 
 const pages = WebpackConfigCommon.pages
@@ -42,7 +41,6 @@ module.exports = {
             outputPath: 'dll'
         }),
         new LodashModuleReplacementPlugin(),
-        new BundleAnalyzerPlugin()
     ],
     devServer: {
         contentBase: path.join(__dirname, "build"),

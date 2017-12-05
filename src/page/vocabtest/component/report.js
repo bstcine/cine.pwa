@@ -1,6 +1,7 @@
 import React from 'react';
 import * as util from 'common/util'
 import * as Service from '../service/index'
+import * as storeUtil from 'common/util/storeUtil'
 
 export default class Report extends React.Component {
     constructor(props) {
@@ -26,7 +27,7 @@ export default class Report extends React.Component {
     }
 
     shareClick() {
-        let sitecode = util.getParam().sitecode;
+        let sitecode = storeUtil.get('sitecode');
         if (sitecode === 'cine.android') {
             try {
                 Android.share('12312313123','《动物农庄》全新上线，积分双倍，快来！！！', '《动物农庄》分享描述分享描述分享描述', 'http://www.bstcine.com/lesson/42', 'http://www.bstcine.com/f/2017/11/12/084144524SvPCm7W.jpg')

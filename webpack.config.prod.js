@@ -14,10 +14,10 @@ const debug = true
 
 const pages = WebpackConfigCommon.pages
 let entry = {}
-let plugins = []
+let HtmlWebpackPlugins = []
 pages.forEach((page) => {
     entry[page] = ['babel-polyfill', `./src/page/${page}/entry.js`]
-    plugins.push(new HtmlWebpackPlugin({
+    HtmlWebpackPlugins.push(new HtmlWebpackPlugin({
         filename: `${page}/index.html`,
         template: `src/page/${page}/index.html`,
         inject: true,
@@ -49,7 +49,7 @@ module.exports = {
             context: __dirname,
             manifest: 'src/dll/manifest-dll.json'
         }),
-        ...plugins,
+        ...HtmlWebpackPlugins,
         new AddAssetHtmlPlugin({
             filepath: path.resolve(__dirname, 'src/dll/dll.*.js'),
             publicPath: WebpackConfigCommon.static_host + 'dll/',

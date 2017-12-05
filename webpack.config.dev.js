@@ -20,7 +20,7 @@ pages.forEach((page) => {
 })
 
 module.exports = {
-    cache: true,
+    cache: false,
     devtool: 'cheap-module-source-map',
     entry: entry,
     output: WebpackConfigCommon.output,

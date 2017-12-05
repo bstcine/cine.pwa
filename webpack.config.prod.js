@@ -33,14 +33,14 @@ pages.forEach((page) => {
 })
 
 module.exports = {
-    cache: true,
+    cache: false,
     devtool: 'cheap-module-source-map',
     entry: entry,
     output: WebpackConfigCommon.output,
     module: WebpackConfigCommon.module,
     resolve: WebpackConfigCommon.resolve,
     plugins: [
-        new CleanWebpackPlugin(['build/*'], {dry: false, verbose: true, watch: true}),
+        new CleanWebpackPlugin(['build/*']),
         new webpack.DllReferencePlugin({
             context: __dirname,
             manifest: 'src/dll/manifest-dll.json'

@@ -20,7 +20,7 @@ class Word extends React.Component {
         super(props)
         console.log('Word Main constructor')
         let urlParam = util.getParam()
-        console.log(`Index constructor util.getParam ==> ${urlParam}`)
+        console.log(`Index constructor util.getParam ==> ${JSON.stringify(urlParam)}`)
         let token = urlParam.token
         let sitecode = urlParam.sitecode
         storeUtil.remove('token')

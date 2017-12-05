@@ -13,6 +13,7 @@ module.exports = {
         'react-dom',
         'react-router-dom',
         'react-transition-group',
+        'babel-polyfill',
         'lodash',
         'store'
     ],

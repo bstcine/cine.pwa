@@ -10,8 +10,9 @@ import Welcome from './component/welcome';
 import UserInfo from './component/userInfo';
 import Card from './component/card';
 import Report from './component/report';
-import * as util from 'common/util'
+import {getParam,getPureUrl} from 'common/util/urlUtil'
 import * as storeUtil from 'common/util/storeUtil'
+
 import './asset/style/word.less'
 
 class Word extends React.Component {
@@ -19,19 +20,28 @@ class Word extends React.Component {
     constructor(props) {
         super(props)
         console.log('Word Main constructor')
-        let urlParam = util.getParam()
-        console.log(`Index constructor util.getParam ==> ${JSON.stringify(urlParam)}`)
+        let urlParam = getParam()
+        console.log(`Index constructor urlUtil.getParam ==> ${JSON.stringify(urlParam)}`)
         let token = urlParam.token
         let sitecode = urlParam.sitecode
+        let firstLocation = getPureUrl()
+        console.log(`firstLocation ${firstLocation}`)
         storeUtil.remove('token')
         storeUtil.remove('sitecode')
+        storeUtil.remove('firstLocation')
+        storeUtil.remove('wechatConfig')
         token && storeUtil.set('token', token)
         sitecode && storeUtil.set('sitecode', sitecode)
+        firstLocation && storeUtil.set('firstLocation', firstLocation)
+    }
+
+    componentDidMount() {
+        // initWechat()
     }
 
     render() {
         return (
-            <Router basename="/vocabtest" >
+            <Router basename="/vocabtest">
                 <div className="word-main">
                     <div className="map-bg"></div>
                     <Route exact path="/" component={Index}/>
@@ -42,6 +52,7 @@ class Word extends React.Component {
                     <Route path="/report" component={Report}/>
                 </div>
             </Router>
+
         )
     }
 }

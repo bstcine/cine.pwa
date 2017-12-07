@@ -6,7 +6,7 @@ import {
 } from 'react-router-dom'
 import LoginDetect from './component/loginDetect';
 import * as Service from './service/index'
-import * as util from 'common/util'
+import {getParam} from 'common/util/urlUtil'
 import './asset/style/index.less'
 
 class Course extends React.Component {
@@ -22,7 +22,7 @@ class Course extends React.Component {
 
     componentDidMount() {
         console.log('componentDidMount')
-        const cid = util.getParam().cid
+        const cid = getParam().cid
         Service.getContentCourseDetail({cid}).then((res)=>{
             this.setState({
                 lesson:res.result.detail

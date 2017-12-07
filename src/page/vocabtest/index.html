@@ -33,15 +33,37 @@
               alert(JSON.stringify(e));
           }
       }
-      function testcallback(token) {
-          console.log('testcallback---->'+token)
-          alert(token)
+
+      function EventEmitter() {
+          this._events = {}
+          this.on = function (event, callback) {
+              var callbacks = this._events[event] || [];
+              callbacks.push(callback);
+              this._events[event] = callbacks;
+          }
+          this.off = function (event) {
+              delete this._events[event]
+          }
+          this.emit = function (event) {
+              var callbacks = this._events[event]
+              if(!callbacks || callbacks.length === 0) {
+                  throw new Error('no event listener found')
+              }
+              var args = [].slice.call(arguments, 1)
+              var this_ = this
+              callbacks.forEach(function (callback) {
+                  callback.apply(this_, args)
+              })
+              this.off[event]
+          }
       }
+      window.ee = new EventEmitter()
   </script>
 
 </head>
 <body ontouchstart="">
 <div id="root"></div>
 
+<script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
 </body>
 </html>

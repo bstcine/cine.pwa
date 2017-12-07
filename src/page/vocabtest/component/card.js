@@ -2,6 +2,7 @@ import React from 'react';
 import * as storeUtil from 'common/util/storeUtil'
 import * as Service from '../service/index'
 import {CSSTransition} from 'react-transition-group'
+import {initWechat, setShareParam} from 'common/util/wechatUtil'
 
 export default class Card extends React.Component {
 
@@ -48,12 +49,22 @@ export default class Card extends React.Component {
 
     componentDidMount() {
         console.log('componentDidMount')
+        initWechat().then((err)=>{
+            if(!err){
+                setShareParam({
+                    title: "title11111  Card",
+                    link: "http://www.bstcine.com/lesson/42",
+                    imgUrl: "http://www.bstcine.com/f/2017/08/21/160423502SrRRfn8.jpg",
+                    desc: "descdesc"
+                })
+            }
+        })
     }
 
     componentWillUnmount() {
         console.log('componentWillUnmount')
         if (this.sandGlassTimer) clearTimeout(this.sandGlassTimer)
-        if(this.levelTipTimer) clearTimeout(this.levelTipTimer)
+        if (this.levelTipTimer) clearTimeout(this.levelTipTimer)
     }
 
     //初始化
@@ -66,7 +77,7 @@ export default class Card extends React.Component {
         let wordLevel = this.wordLevelList[this.level_index]
         this.setState({
             wordItem: Object.assign({}, wordLevel.wordList[0]),
-            progressing:true
+            progressing: true
         }, () => {
             this.toggleSandGlass()
         })
@@ -258,19 +269,23 @@ export default class Card extends React.Component {
             this.state.loading ?
                 <div>loading</div> :
                 <div className="card">
-                    <CSSTransition in={this.state.isShowLevelTip} classNames="fade" appear={true} enter={true} exit={true} timeout={{enter:2700,exit:300}}>
-                        <div className="friendly-tips">你已经完成了{this.state.currMinVocab}-{this.state.currMaxVocab}词汇量区间的测试</div>
+                    <CSSTransition in={this.state.isShowLevelTip} classNames="fade" appear={true} enter={true}
+                                   exit={true} timeout={{enter: 2700, exit: 300}}>
+                        <div className="friendly-tips">
+                            你已经完成了{this.state.currMinVocab}-{this.state.currMaxVocab}词汇量区间的测试
+                        </div>
                     </CSSTransition>
-                    <div className="word" key={this.state.wordItem.id+"word"}>{this.state.wordItem.word}</div>
-                    <div className="progress_control" key={this.state.wordItem.id+"progress_control"}>
+                    <div className="word" key={this.state.wordItem.id + "word"}>{this.state.wordItem.word}</div>
+                    <div className="progress_control" key={this.state.wordItem.id + "progress_control"}>
                         <div className="sand-glass"></div>
                         <div className="progress-line">
-                            <CSSTransition in={this.state.progressing} classNames="progressing" appear={true} enter={true} exit={false} timeout={this.duration}>
+                            <CSSTransition in={this.state.progressing} classNames="progressing" appear={true}
+                                           enter={true} exit={false} timeout={this.duration}>
                                 <div className="progress-line-left"></div>
                             </CSSTransition>
                         </div>
                     </div>
-                    <div className="options" key={this.state.wordItem.id+"options"}>
+                    <div className="options" key={this.state.wordItem.id + "options"}>
                         {this.renderOptions()}
                     </div>
                 </div>

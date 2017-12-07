@@ -78,6 +78,6 @@ module.exports = {
             },
             sourceMap: true,
         }),
-        new BundleAnalyzerPlugin({analyzerMode:'static'})
+        // new BundleAnalyzerPlugin({analyzerMode:'static'})
     ]
 }

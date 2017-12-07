@@ -35,15 +35,3 @@ export let getSearchParam = (search) => {
     })
     return parsedObj
 }
-
-export let setToken = (token) => {
-    return store.set('token', token)
-}
-
-export let getToken = () => {
-    return store.get('token')
-}
-
-export let removeToken = () => {
-    return store.remove('token')
-}

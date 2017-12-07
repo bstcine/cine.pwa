@@ -1,8 +1,8 @@
-import * as util from '../../util'
+import {getToken} from 'common/util/storeUtil'
 
 function httpBody(bodyData) {
     return {
-        "token": util.getToken() || "",
+        "token": getToken() || "",
         "sitecode": "cine.web",
         "channel": "",
         "locale": "zh_CN",

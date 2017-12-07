@@ -1,7 +1,8 @@
 import React from 'react';
-import * as util from 'common/util'
+import {getParam} from 'common/util/urlUtil'
 import * as Service from '../service/index'
 import * as storeUtil from 'common/util/storeUtil'
+import {initWechat, setShareParam} from 'common/util/wechatUtil'
 
 export default class Report extends React.Component {
     constructor(props) {
@@ -17,25 +18,41 @@ export default class Report extends React.Component {
     }
 
     componentDidMount() {
-        let id = util.getParam().id
+        let id = getParam().id
         Service.queryContentWordResult({id}).then((res) => {
             this.setState({
                 report: res.result.statsContentWord,
                 lessons: res.result.recommendLessons
             })
         })
+        initWechat().then((err)=>{
+            if(!err){
+                setShareParam({
+                    title: "title11111  Report",
+                    link: "http://www.bstcine.com/lesson/42",
+                    imgUrl: "http://www.bstcine.com/f/2017/08/21/160423502SrRRfn8.jpg",
+                    desc: "descdesc"
+                })
+            }
+        })
     }
 
     shareClick() {
         let sitecode = storeUtil.get('sitecode');
+        console.log(`sitecode ==>> ${sitecode}`)
         if (sitecode === 'cine.android') {
             try {
-                Android.share('12312313123','《动物农庄》全新上线，积分双倍，快来！！！', '《动物农庄》分享描述分享描述分享描述', 'http://www.bstcine.com/lesson/42', 'http://www.bstcine.com/f/2017/11/12/084144524SvPCm7W.jpg')
+                Android.share('12312313123', '《动物农庄》全新上线，积分双倍，快来！！！', '《动物农庄》分享描述分享描述分享描述', 'http://www.bstcine.com/lesson/42', 'http://www.bstcine.com/f/2017/11/12/084144524SvPCm7W.jpg')
             } catch (err) {
                 alert(JSON.stringify(err))
             }
         } else {
-            alert('TODO share')
+            setShareParam({
+                title: "title11111   Report123132",
+                link: "http://www.bstcine.com/lesson/42",
+                imgUrl: "http://www.bstcine.com/f/2017/08/21/160423502SrRRfn8.jpg",
+                desc: "descdesc"
+            })
         }
     }
 
@@ -44,7 +61,7 @@ export default class Report extends React.Component {
     }
 
     courseClick(lesson_id) {
-        let sitecode = util.getParam().sitecode;
+        let sitecode = storeUtil.get('sitecode');
         if (sitecode === 'cine.android') {
             try {
                 Android.course(lesson_id)
@@ -57,7 +74,7 @@ export default class Report extends React.Component {
     }
 
     renderRecommendList() {
-        return this.state.lessons.map((lesson) => {
+        return this.state.lessons.map(lesson => {
             return (
                 <div className="recommend-item" onClick={(e) => this.courseClick(lesson.id, e)} key={lesson.id}>
                     <div className="item-img" style={{
@@ -70,8 +87,6 @@ export default class Report extends React.Component {
                     </div>
                 </div>
             )
-
-
         })
     }
 

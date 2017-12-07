@@ -1,6 +1,6 @@
 import React from 'react';
 import * as storeUtil from 'common/util/storeUtil'
-
+import {initWechat, setShareParam} from 'common/util/wechatUtil'
 
 export default class Welcome extends React.Component {
 
@@ -19,13 +19,17 @@ export default class Welcome extends React.Component {
         }
     }
 
-    componentWillMount() {
-        console.log('componentWillMount')
-    }
-
-    componentDidMount() {
-        console.log('componentDidMount')
-
+    componentDidMount(){
+        initWechat().then((err)=>{
+            if(!err){
+                setShareParam({
+                    title: "title11111  Welcome",
+                    link: "http://www.bstcine.com/lesson/42",
+                    imgUrl: "http://www.bstcine.com/f/2017/08/21/160423502SrRRfn8.jpg",
+                    desc: "descdesc"
+                })
+            }
+        })
     }
 
     render() {

@@ -21,7 +21,7 @@ export default class Index extends React.Component {
             }
             let user = result.result.user
             if (user && user.area_code && user.grade && user.born_at) {
-                storeUtil.set('user',user)
+                storeUtil.set('user', user)
                 this.props.history.push(`/welcome`)
             } else {
                 this.props.history.push(`/userinfo`)
@@ -33,7 +33,8 @@ export default class Index extends React.Component {
         console.log('componentDidMount')
     }
 
-    render(){
+
+    render() {
         return (
             <div></div>
         )

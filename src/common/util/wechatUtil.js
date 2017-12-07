@@ -20,11 +20,11 @@ export let configWechat = async (config) => {
         })
         window.wx.ready(function () {
             window.wx.hideAllNonBaseMenuItem()
-            alert('configWechat ready')
+            // alert('configWechat ready')
             resolve(null, 'ready')
         })
         window.wx.error( (err) =>{
-            alert(`configWechat  err => ${JSON.stringify(err)}`)
+            // alert(`configWechat  err => ${JSON.stringify(err)}`)
             resolve(err)
         })
     })

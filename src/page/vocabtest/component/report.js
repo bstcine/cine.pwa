@@ -94,10 +94,19 @@ export default class Report extends React.Component {
         return (
             <div className="wrapper">
                 <div className="report">
-                    <div className="title">你当前的词汇量约为</div>
+                    <div className="title">你的词汇量为</div>
                     <div className="vocab">{this.state.report.vocab}</div>
                     <div className="line"></div>
-                    <div className="recommend-title">根据你的词汇量，推荐适合你阅读的书单</div>
+                    <div className="recommend-title">各类考试所需词汇量参考数据：</div>
+                    <ul className="recommend-detail">
+                        <li>中考：1500</li>
+                        <li>高考：3500</li>
+                        <li>大学4级：4500</li>
+                        <li>大学6级：6000</li>
+                        <li>托福：8000</li>
+                        <li>SAT：10000以上</li>
+                    </ul>
+                    <div className="recommend-title">基于你的词汇量和年龄段，向你推荐以下英文学习课程：</div>
                     <div className="recommend-list">
                         {this.renderRecommendList()}
                     </div>

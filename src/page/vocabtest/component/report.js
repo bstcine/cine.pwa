@@ -41,9 +41,7 @@ export default class Report extends React.Component {
             imgUrl: data.share_imgUrl,
             desc: data.share_desc
         }
-        share({share_params}).then(res => {
-            alert(`share final ${JSON.stringify(res)}`)
-        })
+        share({share_params})
     }
 
     retryClick() {

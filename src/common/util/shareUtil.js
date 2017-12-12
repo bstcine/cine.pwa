@@ -25,7 +25,6 @@ export let createShare = ({type, share_link}) => {
 
 export let updateShare = (sharelog_id) => {
     return get(Api.APIURL_Share_Update, {sharelog_id}).then(res => {
-        alert(JSON.stringify(res))
         if (res.code !== '1') {
             return alert(res.code_desc)
         }
@@ -108,7 +107,6 @@ export let share = async ({share_params}) => {
     if (sitecode === SITECODE.CINE_ANDROID_PHONE) {
         await Bridge.android('share', share_params, true)
         await updateShare(share_params.sharelog_id)
-        alert('share success')
     } else if (sitecode === SITECODE.CINE_IOS) {
         alert('TODO')
     } else {

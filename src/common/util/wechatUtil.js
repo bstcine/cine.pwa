@@ -10,17 +10,15 @@ export let setShareParam = (params) => {
 
 export let setShareTimeline = ({title, link, imgUrl, desc}) => {
     return new Promise(resolve => {
-        alert('onMenuShareTimeline init')
         window.wx.onMenuShareTimeline({
             title: title,
             link: link,
             imgUrl: imgUrl,
             success: function () {
-                alert('onMenuShareTimeline shared')
+                console.log('onMenuShareTimeline shared')
                 resolve()
             },
             cancel: function () {
-                //resolve()
             }
         });
         window.wx.onMenuShareAppMessage({
@@ -29,11 +27,10 @@ export let setShareTimeline = ({title, link, imgUrl, desc}) => {
             imgUrl: imgUrl,
             desc: desc,
             success: function () {
-                alert('onMenuShareAppMessage shared')
-                resolve()
+                console.log('onMenuShareAppMessage shared')
+                // resolve()
             },
             cancel: function () {
-                //resolve()
             }
         });
     })
@@ -50,7 +47,7 @@ export let initWechat = async () => {
         if (res.status) {
             let data = res.data;
             await setShareParam({
-                title: 'new init title',
+                title: data.share_title,
                 link: ignoreParams(['token','show_mask']),
                 imgUrl: data.share_imgUrl,
                 desc: data.share_desc
@@ -73,11 +70,11 @@ export let configWechat = (config) => {
             jsApiList: ['chooseWXPay', 'onMenuShareTimeline', 'onMenuShareAppMessage']
         })
         window.wx.ready(() => {
-            alert('ready11')
+            console.log('wechat config ready')
             resolve(null, 'ready')
         })
         window.wx.error((err) => {
-            alert(`err ${err}`)
+            // alert(`err ${err}`)
             resolve(err)
         })
     })

@@ -1,9 +1,9 @@
 import React from 'react';
-import {getParam, updateUrl, ignoreParams} from 'common/util/urlUtil'
+import {getParam, updateUrl, ignoreParams} from '../../../common/util/urlUtil'
 import * as Service from '../service/index'
-import * as storeUtil from 'common/util/storeUtil'
-import {initWechat, setShareParam} from 'common/util/wechatUtil'
-import {createShare, share, showShareMask, checkShareMask} from 'common/util/shareUtil'
+import * as storeUtil from '../../../common/util/storeUtil'
+import {initWechat} from '../../../common/util/wechatUtil'
+import {createShare, share} from '../../../common/util/shareUtil'
 
 export default class Report extends React.Component {
     constructor(props) {

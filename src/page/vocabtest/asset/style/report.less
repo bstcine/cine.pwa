@@ -1,0 +1,85 @@
+.report {
+  padding-top: .97rem;
+  padding-bottom: .40rem;
+  text-align: center;
+  .title {
+    font-size: .32rem;
+    color: #2f2f2f;
+    margin-bottom: .37rem;
+  }
+  .vocab {
+    font-size: .48rem;
+    color: #f95015;
+    margin-bottom: .50rem;
+  }
+  .line {
+    width: 6.40rem;
+    height: .02rem;
+    margin: 0 auto .60rem;
+    background-color: #d2e0f3;
+  }
+  .recommend-title {
+    font-size: .28rem;
+    color: #5792d6;
+    margin-bottom: .27rem;
+  }
+  .recommend-detail{
+    list-style: none;
+    font-size: 0;
+    margin-bottom: .70rem;
+    li{
+      font-size: .28rem;
+      line-height: .48rem;
+      color: #2f2f2f;
+      width: 29.9%;
+      display: inline-block;
+      text-align: left;
+    }
+  }
+  .recommend-list {
+    width: 6.50rem;
+    margin: 0 auto 1.34rem;
+    background-color: #fff;
+    border: solid .01rem #C6D8E4;
+    border-radius: .06rem;
+    padding: .20rem .15rem;
+    .recommend-item {
+      font-size: 0;
+      padding-bottom: .20rem;
+      .item-img {
+        display: inline-block;
+        width: 1.86rem;
+        height: 1.26rem;
+        margin-right: .22rem;
+        vertical-align: top;
+        border: solid .01rem #c3c4c5;
+      }
+      .item-brief {
+        display: inline-block;
+        vertical-align: top;
+        padding-top: .05rem;
+        text-align: left;
+        & * {
+          width: 4.00rem;
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          word-break: break-all;
+        }
+        .item-title {
+          font-size: .32rem;
+          color: #2b2c2c;
+          margin-bottom: .18rem;
+        }
+        .item-desc {
+          font-size: .28rem;
+          color: #a1a3a6;
+        }
+
+      }
+    }
+    .recommend-item:last-child {
+      padding-bottom: 0;
+    }
+  }
+}

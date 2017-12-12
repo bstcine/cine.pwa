@@ -14,10 +14,14 @@ let Bridge = {
     },
     ios: function (fn, params, needCallback) {
         return new Promise(resolve => {
-            console.log(`Native.${fn} params${params}`)
-            Native[fn](JSON.stringify(params))
-            needCallback && eventListener.on(`Native.${fn}`, (res) => {
-                alert(`Native.${fn} callback`)
+            console.log(`iOS.${fn} params${params}`)
+            webkit.messageHandlers.native.postMessage(JSON.stringify({
+                method:fn,
+                data:params,
+                callback:`iOS.${fn}`
+            }));
+            needCallback && eventListener.on(`iOS.${fn}`, (res) => {
+                alert(`iOS.${fn} callback`)
                 if (res) res = JSON.parse(res)
                 resolve(res)
             })

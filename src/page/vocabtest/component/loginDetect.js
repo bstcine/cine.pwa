@@ -1,7 +1,8 @@
 import React from 'react';
-import * as storeUtil from 'common/util/storeUtil'
-import {initWechat, setShareParam} from 'common/util/wechatUtil'
-import Bridge from 'common/util/bridge'
+import * as storeUtil from '../../../common/util/storeUtil'
+import {initWechat} from '../../../common/util/wechatUtil'
+import Bridge from '../../../common/util/bridge'
+import * as SITECODE from '../../../common/config/sitecode'
 
 export default class LoginDetect extends React.Component {
 
@@ -22,10 +23,11 @@ export default class LoginDetect extends React.Component {
 
     goLoginClick() {
         let sitecode = storeUtil.get('sitecode');
+        console.log(`sitecode ${sitecode}`)
         if (sitecode === SITECODE.CINE_ANDROID_PHONE || sitecode === SITECODE.CINE_ANDROID_PAD || sitecode === SITECODE.CINE_ANDROID) {
             Bridge.android('login')
         } else if (sitecode === SITECODE.CINE_IOS || sitecode === SITECODE.CINE_IOS_IPHONE || sitecode === SITECODE.CINE_IOS_IPAD) {
-            Bridge.ios('login','123')
+            Bridge.ios('login',{id:'test123'})
         }else {
             let url = encodeURIComponent('/vocabtest');
             let host = location.host

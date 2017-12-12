@@ -1,0 +1,57 @@
+.user-info {
+  text-align: center;
+  padding-top: .96rem;
+  padding-bottom: .40rem;
+  font-size: 0;
+  .title {
+    font-size: .36rem;
+    color: #2f2f2f;
+    margin-bottom: .38rem;
+  }
+  .tips {
+    font-size: .28rem;
+    color: #959699;
+    margin-bottom: .80rem;
+  }
+  .form {
+    padding: 0 .44rem;
+    .form-item {
+      .form-label {
+        font-size: .30rem;
+        color: #225fb2;
+        text-align: left;
+      }
+      .form-control {
+        border-bottom: .02rem solid #C4DCF5;
+        position: relative;
+        text-align: left;
+        margin-bottom: .58rem;
+        select {
+          border: none;
+          appearance: none;
+          font-size: .32rem;
+          background-color: transparent;
+          color: #222222;
+          width: 100%;
+          padding: .30rem .16rem;
+          &:focus {
+            outline: none;
+          }
+        }
+
+        &:after {
+          content: '';
+          position: absolute;
+          top: .36rem;
+          right: 0;
+          background: url(../image/test_arr_down@2x.png) no-repeat center;
+          background-size: contain;
+          width: .40rem;
+          height: .21rem;
+          z-index: -1;
+        }
+      }
+
+    }
+  }
+}

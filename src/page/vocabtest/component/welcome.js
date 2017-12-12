@@ -1,6 +1,6 @@
 import React from 'react';
-import * as storeUtil from 'common/util/storeUtil'
-import {initWechat, setShareParam} from 'common/util/wechatUtil'
+import * as storeUtil from '../../../common/util/storeUtil'
+import {initWechat, setShareParam} from '../../../common/util/wechatUtil'
 
 export default class Welcome extends React.Component {
 

@@ -1,9 +1,5 @@
 import React from 'react';
-import {getParam, updateUrl, ignoreParams} from 'common/util/urlUtil'
 import * as Service from '../service/index'
-import * as storeUtil from 'common/util/storeUtil'
-import {initWechat, setShareParam} from 'common/util/wechatUtil'
-import {createShare, share, showShareMask, checkShareMask} from 'common/util/shareUtil'
 
 export default class ReportList extends React.Component {
     constructor(props) {
@@ -20,9 +16,11 @@ export default class ReportList extends React.Component {
             if (res.except_case_desc) {
                 alert(res.except_case_desc)
             }
-            this.setState({
-                list: res.result,
-            })
+            if (res.result && res.result.length) {
+                this.setState({
+                    list: res.result,
+                })
+            }
         })
     }
 
@@ -30,10 +28,12 @@ export default class ReportList extends React.Component {
         this.props.history.push(`/report?id=${id}`)
     }
 
-    renderRecommendList() {
+    renderList() {
         return this.state.list.map((item, i) => {
             return (
-                <tr key={item.id} onClick={(e)=>{this.itemClick(item.id,e)}}>
+                <tr key={item.id} onClick={(e) => {
+                    this.itemClick(item.id, e)
+                }}>
                     <td>{i + 1}</td>
                     <td>{item.create_at.substring(0, 10)}</td>
                     <td>{item.duration}</td>
@@ -57,7 +57,7 @@ export default class ReportList extends React.Component {
                         </tr>
                         </thead>
                         <tbody>
-                        {this.renderRecommendList()}
+                        {this.renderList()}
                         </tbody>
                     </table>
                 </div>

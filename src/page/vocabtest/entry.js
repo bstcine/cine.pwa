@@ -14,7 +14,7 @@ import ReportList from './component/reportList';
 import {getParam, getPureUrl} from 'common/util/urlUtil'
 import * as storeUtil from 'common/util/storeUtil'
 
-import './asset/style/word.less'
+import './asset/style/index.less'
 
 class Word extends React.Component {
 

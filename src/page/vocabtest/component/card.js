@@ -25,11 +25,13 @@ export default class Card extends React.Component {
         console.log(`Card this.props.token ${this.props.token}`)
         this.optionClick = this.optionClick.bind(this)
         this.renderOptions = this.renderOptions.bind(this)
+
     }
 
     componentWillMount() {
         console.log('componentWillMount')
         let user = storeUtil.get('user')
+
         if (!user) {
             return this.props.history.replace('/userinfo')
         }
@@ -43,22 +45,13 @@ export default class Card extends React.Component {
                 loading: false
             })
             this.init(result.wordLevelList)
-            this.grade = result.grade
+            this.config = result.config
         })
     }
 
     componentDidMount() {
         console.log('componentDidMount')
-        initWechat().then((err)=>{
-            if(!err){
-                setShareParam({
-                    title: "title11111  Card",
-                    link: "http://www.bstcine.com/lesson/42",
-                    imgUrl: "http://www.bstcine.com/f/2017/08/21/160423502SrRRfn8.jpg",
-                    desc: "descdesc"
-                })
-            }
-        })
+        initWechat()
     }
 
     componentWillUnmount() {
@@ -87,7 +80,7 @@ export default class Card extends React.Component {
     nextWord() {
         console.log(`nextWord --> level_index: ${this.level_index} -- word_index: ${this.word_index}`)
         let wordLevel = this.wordLevelList[this.level_index]
-        if (this.word_index === wordLevel.wordList.length - 1) {
+        if (this.isSkipLevel() || this.word_index === wordLevel.wordList.length - 1) {
             return this.nextLevel()
         }
         this.disableClick = false
@@ -99,6 +92,20 @@ export default class Card extends React.Component {
         }, () => {
             this.toggleSandGlass()
         })
+    }
+
+    //连续
+    isSkipLevel() {
+        let wordLevel = this.wordLevelList[this.level_index]
+        let rightCount = 0
+        for (let i = 0; i < this.config.min_right_count && i < wordLevel.wordList.length; i++) {
+            let item = wordLevel.wordList[i]
+            if (item.answer_index === 0) {
+                rightCount++
+            }
+        }
+        console.log(`isSkipLevel ==> ${rightCount}`)
+        return rightCount >= this.config.min_right_count
     }
 
     //沙漏倒计时
@@ -121,7 +128,7 @@ export default class Card extends React.Component {
     nextLevel() {
         console.log(`nextLevel --> level_index: ${this.level_index}`)
         //当 curr_level_score < 3 时，测试不进入下一等级，测试终止
-        if (this.calcCurrLevelScore() < 3) return this.theEnd()
+        if (this.calcCurrLevelScore() < this.config.min_per_score) return this.theEnd()
         if (this.level_index === this.wordLevelList.length - 1) return this.theEnd()
         this.disableClick = false
         this.showLevelTip()
@@ -210,17 +217,22 @@ export default class Card extends React.Component {
     //计算当前词汇等级得分
     calcCurrLevelScore() {
         let wordLevel = this.wordLevelList[this.level_index]
-        let right_count = 0
-        let wrong_count = 0
-        wordLevel.wordList.forEach(function (item) {
-            if (item.answer_index === 0) {
-                right_count++
-            } else {
-                wrong_count++
-            }
-        })
-        let curr_score = right_count - wrong_count / 3
-        curr_score = curr_score >= 0 ? curr_score : 0
+        let curr_score = 0
+        if (this.isSkipLevel()) {
+            curr_score = this.config.per_count
+        } else {
+            let right_count = 0
+            let wrong_count = 0
+            wordLevel.wordList.forEach(function (item) {
+                if (item.answer_index === 0) {
+                    right_count++
+                } else {
+                    wrong_count++
+                }
+            })
+            curr_score = right_count - wrong_count / 3
+            curr_score = curr_score >= 0 ? curr_score : 0
+        }
         wordLevel.curr_score = curr_score
         console.log(`calcCurrLevelScore ${curr_score}`)
         return curr_score

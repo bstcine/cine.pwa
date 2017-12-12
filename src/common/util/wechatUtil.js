@@ -1,68 +1,84 @@
 import {getWechatJsSignature} from 'common/service/base'
-import * as storeUtil from 'common/util/storeUtil'
+import {checkShareMask, updateShare, hideShareMask} from '../util/shareUtil'
+import {queryShare} from "./shareUtil";
+import {getParam, updateUrl, ignoreParams} from "./urlUtil";
 
-export let initWechat = async () => {
-    console.log(`initWechat`)
-    let wechatConfig = await getWechatJsSignature()
-    return await configWechat(wechatConfig)
+export let setShareParam = (params) => {
+    if (typeof window.wx === 'undefined' || !window.wx) return console.log('window.wx not found, ensure include jweixin in your html')
+    return setShareTimeline(params)
 }
 
-export let configWechat = async (config) => {
+export let setShareTimeline = ({title, link, imgUrl, desc}) => {
+    return new Promise(resolve => {
+        alert('onMenuShareTimeline init')
+        window.wx.onMenuShareTimeline({
+            title: title,
+            link: link,
+            imgUrl: imgUrl,
+            success: function () {
+                alert('onMenuShareTimeline shared')
+                resolve()
+            },
+            cancel: function () {
+                //resolve()
+            }
+        });
+        window.wx.onMenuShareAppMessage({
+            title: title,
+            link: link,
+            imgUrl: imgUrl,
+            desc: desc,
+            success: function () {
+                alert('onMenuShareAppMessage shared')
+                resolve()
+            },
+            cancel: function () {
+                //resolve()
+            }
+        });
+    })
+}
+
+export let initWechat = async () => {
+    let wechatConfig = await getWechatJsSignature()
+    await configWechat(wechatConfig)
+    checkShareMask()
+    let param = getParam()
+    let sharelog_id = param.sharelog_id
+    if (sharelog_id) {
+        let res = await queryShare(sharelog_id)
+        if (res.status) {
+            let data = res.data;
+            await setShareParam({
+                title: 'new init title',
+                link: ignoreParams(['token','show_mask']),
+                imgUrl: data.share_imgUrl,
+                desc: data.share_desc
+            })
+            await updateShare(sharelog_id)
+            hideShareMask()
+        }
+    }
+}
+
+export let configWechat = (config) => {
     return new Promise((resolve, reject) => {
         if (typeof window.wx === 'undefined' || !window.wx) return reject(new Error('window.wx not found, ensure include jweixin in your html'))
         window.wx.config({
-            debug: false,
+            debug: true,
             appId: config.appId,
             timestamp: config.timestamp,
             nonceStr: config.nonceStr,
             signature: config.signature,
-            jsApiList: ['chooseWXPay', 'onMenuShareTimeline', 'onMenuShareAppMessage', 'showAllNonBaseMenuItem', 'hideAllNonBaseMenuItem']
+            jsApiList: ['chooseWXPay', 'onMenuShareTimeline', 'onMenuShareAppMessage']
         })
-        window.wx.ready(function () {
-            window.wx.hideAllNonBaseMenuItem()
-            // alert('configWechat ready')
+        window.wx.ready(() => {
+            alert('ready11')
             resolve(null, 'ready')
         })
-        window.wx.error( (err) =>{
-            // alert(`configWechat  err => ${JSON.stringify(err)}`)
+        window.wx.error((err) => {
+            alert(`err ${err}`)
             resolve(err)
         })
     })
-}
-
-export let setShareParam = (params) => {
-    if (typeof window.wx === 'undefined' || !window.wx) return console.log('window.wx not found, ensure include jweixin in your html')
-    setShareTimeline(params)
-    setShareAppMessage(params)
-    window.wx.showAllNonBaseMenuItem()
-}
-
-export let setShareTimeline = ({title, link, imgUrl}) => {
-    window.wx.onMenuShareTimeline({
-        title: title,
-        link: link,
-        imgUrl: imgUrl,
-        success: function () {
-            // alert('setShareTimeline success')
-        },
-        cancel: function () {
-            // alert('setShareTimeline cancel')
-        }
-    });
-}
-
-export let setShareAppMessage = ({title, link, imgUrl, desc}) => {
-    window.wx.onMenuShareAppMessage({
-        title: title,
-        link: link,
-        imgUrl: imgUrl,
-        desc: desc,
-        success: function () {
-            // alert('setShareAppMessage success')
-        },
-        cancel: function () {
-            // alert('setShareAppMessage cancel')
-        }
-    });
-
 }

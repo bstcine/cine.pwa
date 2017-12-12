@@ -22,7 +22,7 @@ export let getWordList = (query) => {
         })
         .then(result => {
             let wordLevelList = result.result.wordLevelList;
-            let grade = result.result.grade;
+            let config = result.result.config;
             wordLevelList.forEach(function (wordLevel) {
                 wordLevel.wordList = wordLevel.wordList.map(function (item) {
                     let options = [
@@ -41,7 +41,7 @@ export let getWordList = (query) => {
             });
             return {
                 wordLevelList: wordLevelList,
-                grade: grade
+                config: config
             }
         })
         .catch(error => {
@@ -61,6 +61,16 @@ export let saveContentWordResult = (query) => {
 
 export let queryContentWordResult = (query) => {
     return post(Api.APIURL_Content_Word_Result_Query, query)
+        .then(result => {
+            if (result.code !== '1') {
+                return alert(result.code_desc)
+            }
+            return result
+        })
+}
+
+export let queryContentWordResultList = (query) => {
+    return post(Api.APIURL_Content_Word_Result_List, query)
         .then(result => {
             if (result.code !== '1') {
                 return alert(result.code_desc)

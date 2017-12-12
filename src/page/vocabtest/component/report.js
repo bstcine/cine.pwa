@@ -1,8 +1,9 @@
 import React from 'react';
-import {getParam} from 'common/util/urlUtil'
+import {getParam, updateUrl, ignoreParams} from 'common/util/urlUtil'
 import * as Service from '../service/index'
 import * as storeUtil from 'common/util/storeUtil'
 import {initWechat, setShareParam} from 'common/util/wechatUtil'
+import {createShare, share, showShareMask, checkShareMask} from 'common/util/shareUtil'
 
 export default class Report extends React.Component {
     constructor(props) {
@@ -10,7 +11,8 @@ export default class Report extends React.Component {
         console.log('Report constructor')
         this.state = {
             report: {},
-            lessons: []
+            lessons: [],
+            from_share: false
         }
         this.shareClick = this.shareClick.bind(this)
         this.retryClick = this.retryClick.bind(this)
@@ -22,38 +24,26 @@ export default class Report extends React.Component {
         Service.queryContentWordResult({id}).then((res) => {
             this.setState({
                 report: res.result.statsContentWord,
-                lessons: res.result.recommendLessons
+                lessons: res.result.recommendLessons,
+                from_share: getParam().from_share === '1'
             })
         })
-        initWechat().then((err)=>{
-            if(!err){
-                setShareParam({
-                    title: "title11111  Report",
-                    link: "http://www.bstcine.com/lesson/42",
-                    imgUrl: "http://www.bstcine.com/f/2017/08/21/160423502SrRRfn8.jpg",
-                    desc: "descdesc"
-                })
-            }
-        })
+        initWechat()
     }
 
-    shareClick() {
-        let sitecode = storeUtil.get('sitecode');
-        console.log(`sitecode ==>> ${sitecode}`)
-        if (sitecode === 'cine.android') {
-            try {
-                Android.share('12312313123', '《动物农庄》全新上线，积分双倍，快来！！！', '《动物农庄》分享描述分享描述分享描述', 'http://www.bstcine.com/lesson/42', 'http://www.bstcine.com/f/2017/11/12/084144524SvPCm7W.jpg')
-            } catch (err) {
-                alert(JSON.stringify(err))
-            }
-        } else {
-            setShareParam({
-                title: "title11111   Report123132",
-                link: "http://www.bstcine.com/lesson/42",
-                imgUrl: "http://www.bstcine.com/f/2017/08/21/160423502SrRRfn8.jpg",
-                desc: "descdesc"
-            })
+    async shareClick() {
+        let res = await createShare({type: 7, share_link: updateUrl({from_share: 1}, ignoreParams(['token']))})
+        let data = res.result
+        let share_params = {
+            sharelog_id: data.sharelog_id,
+            title: data.share_title,
+            link: data.share_link,
+            imgUrl: data.share_imgUrl,
+            desc: data.share_desc
         }
+        share({share_params}).then(res => {
+            alert(`share final ${JSON.stringify(res)}`)
+        })
     }
 
     retryClick() {
@@ -94,7 +84,7 @@ export default class Report extends React.Component {
         return (
             <div className="wrapper">
                 <div className="report">
-                    <div className="title">你的词汇量为</div>
+                    <div className="title">{this.state.from_share ? '词汇量为' : '你的词汇量为'}</div>
                     <div className="vocab">{this.state.report.vocab}</div>
                     <div className="line"></div>
                     <div className="recommend-title">各类考试所需词汇量参考数据：</div>
@@ -106,15 +96,23 @@ export default class Report extends React.Component {
                         <li>托福：8000</li>
                         <li>SAT：10000以上</li>
                     </ul>
-                    <div className="recommend-title">基于你的词汇量和年龄段，向你推荐以下英文学习课程：</div>
+                    <div
+                        className="recommend-title">{this.state.from_share ? '基于词汇量和年龄段，推荐以下英文学习课程：' : '基于你的词汇量和年龄段，向你推荐以下英文学习课程：'}</div>
                     <div className="recommend-list">
                         {this.renderRecommendList()}
                     </div>
                 </div>
-                <div className="footer">
-                    <button onClick={this.retryClick} className="btn btn_sm btn_blue btn_try">再测一次</button>
-                    <button onClick={this.shareClick} className="btn btn_sm btn_orange btn_share">分享</button>
-                </div>
+                {
+                    this.state.from_share ?
+                        <div className="footer">
+                            <button onClick={this.retryClick} className="btn btn_sm btn_blue btn_try">我也测一下</button>
+                        </div>
+                        :
+                        <div className="footer">
+                            <button onClick={this.retryClick} className="btn btn_sm btn_blue btn_try">再测一次</button>
+                            <button onClick={this.shareClick} className="btn btn_sm btn_orange btn_share">分享</button>
+                        </div>
+                }
             </div>
         )
     }

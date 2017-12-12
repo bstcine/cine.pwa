@@ -40,7 +40,6 @@ function request(obj) {
                 }
             }
         };
-
         xhr.open(obj.method, obj.url, true);
         xhr.setRequestHeader("Accept", "application/json");
         if (obj.contentType) {

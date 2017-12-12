@@ -10,7 +10,8 @@ import Welcome from './component/welcome';
 import UserInfo from './component/userInfo';
 import Card from './component/card';
 import Report from './component/report';
-import {getParam,getPureUrl} from 'common/util/urlUtil'
+import ReportList from './component/reportList';
+import {getParam, getPureUrl} from 'common/util/urlUtil'
 import * as storeUtil from 'common/util/storeUtil'
 
 import './asset/style/word.less'
@@ -43,13 +44,14 @@ class Word extends React.Component {
         return (
             <Router basename="/vocabtest">
                 <div className="word-main">
-                    <div className="map-bg"></div>
+                    <div className="map-bg"> </div>
                     <Route exact path="/" component={Index}/>
                     <Route path="/welcome" component={Welcome}/>
                     <Route path="/logindetect" component={LoginDetect}/>
                     <Route path="/userinfo" component={UserInfo}/>
                     <Route path="/card" component={Card}/>
                     <Route path="/report" component={Report}/>
+                    <Route path="/reportlist" component={ReportList}/>
                 </div>
             </Router>
 

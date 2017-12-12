@@ -1,6 +1,8 @@
 import React from 'react';
 import * as storeUtil from 'common/util/storeUtil'
 import {initWechat, setShareParam} from 'common/util/wechatUtil'
+import Bridge from 'common/util/bridge'
+
 export default class LoginDetect extends React.Component {
 
     constructor(props) {
@@ -15,32 +17,16 @@ export default class LoginDetect extends React.Component {
     }
 
     componentDidMount() {
-        initWechat().then((err)=>{
-            if(!err){
-                setShareParam({
-                    title: "title11111  Card",
-                    link: "http://www.bstcine.com/lesson/42",
-                    imgUrl: "http://www.bstcine.com/f/2017/08/21/160423502SrRRfn8.jpg",
-                    desc: "descdesc"
-                })
-            }
-        })
+        initWechat()
     }
 
     goLoginClick() {
         let sitecode = storeUtil.get('sitecode');
-        if (sitecode === 'cine.android') {
-            try {
-                console.log(`ee register 'testcallback'`)
-                ee.on('testcallback', (res) => {
-                    console.log(`js的一小步，cine的一大步！===> token ====>>>> ${res}`)
-                })
-                console.log(`call android`)
-                Android.login('testcallback')
-            } catch (err) {
-                alert(JSON.stringify(err))
-            }
-        } else {
+        if (sitecode === SITECODE.CINE_ANDROID_PHONE || sitecode === SITECODE.CINE_ANDROID_PAD || sitecode === SITECODE.CINE_ANDROID) {
+            Bridge.android('login')
+        } else if (sitecode === SITECODE.CINE_IOS || sitecode === SITECODE.CINE_IOS_IPHONE || sitecode === SITECODE.CINE_IOS_IPAD) {
+            Bridge.ios('login','123')
+        }else {
             let url = encodeURIComponent('/vocabtest');
             let host = location.host
             location.href = location.protocol + '//' + host + '/login?go=' + url

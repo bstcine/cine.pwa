@@ -1,4 +1,4 @@
-import URL from 'url'
+import URLParse from 'url-parse'
 
 export let getPureUrl = () => {
     let url = location.href;
@@ -11,7 +11,7 @@ export let getPureUrl = () => {
 
 export let getParam = (href) => {
     let url = href || location.href
-    let URLObj = URL.parse(url, true);
+    let URLObj = URLParse(url, true);
     return URLObj.query
 }
 
@@ -22,4 +22,24 @@ export let getSearchParam = (search) => {
         parsedObj[key] = item.split('=')[1]
     })
     return parsedObj
+}
+
+export let updateUrl = (params, url) => {
+    url = url || location.href
+    let URLObj = URLParse(url,true)
+    URLObj.set('query',Object.assign(URLObj.query,params))
+    console.log(`URLObj.toString() ${URLObj.toString()}`)
+    return URLObj.toString()
+}
+
+export let ignoreParams = (params_arr,url)=>{
+    url = url || location.href
+    let URLObj = URLParse(url,true)
+    params_arr.forEach((param)=>{
+        if(URLObj.query[param])
+            delete URLObj.query[param]
+    })
+    URLObj.set('query',URLObj.query)
+    console.log(`URLObj.toString() ${URLObj.toString()}`)
+    return URLObj.toString()
 }

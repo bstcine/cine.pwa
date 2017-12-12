@@ -4,6 +4,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
+const WebpackMildCompile = require('webpack-mild-compile').Plugin;
 const WebpackConfigCommon = require('./webpack.config.common')
 
 const pages = WebpackConfigCommon.pages
@@ -28,6 +29,7 @@ module.exports = {
     module: WebpackConfigCommon.module,
     resolve: WebpackConfigCommon.resolve,
     plugins: [
+        new WebpackMildCompile(),
         new CleanWebpackPlugin(['build/*']),
         new webpack.DllReferencePlugin({
             context: __dirname,

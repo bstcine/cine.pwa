@@ -4,6 +4,8 @@ import * as Service from '../service/index'
 import * as storeUtil from '../../../common/util/storeUtil'
 import {initWechat} from '../../../common/util/wechatUtil'
 import {createShare, share} from '../../../common/util/shareUtil'
+import * as SITECODE from '../../../common/config/sitecode'
+import Bridge from "../../../common/util/bridge";
 
 export default class Report extends React.Component {
     constructor(props) {
@@ -48,16 +50,18 @@ export default class Report extends React.Component {
         this.props.history.push(`/`)
     }
 
-    courseClick(lesson_id) {
+    courseClick(course_id) {
         let sitecode = storeUtil.get('sitecode');
-        if (sitecode === 'cine.android') {
-            try {
-                Android.course(lesson_id)
-            } catch (err) {
-                alert(JSON.stringify(err))
-            }
+        if (sitecode === SITECODE.CINE_IOS
+            || sitecode === SITECODE.CINE_IOS_IPHONE
+            || sitecode === SITECODE.CINE_IOS_IPAD) {
+            Bridge.ios('course',{course_id})
+        } else if (sitecode === SITECODE.CINE_ANDROID
+            || sitecode === SITECODE.CINE_ANDROID_PHONE
+            || sitecode === SITECODE.CINE_ANDROID_PAD) {
+            Bridge.android('course',{course_id})
         } else {
-            location.href = '/lesson/' + lesson_id
+            location.href = '/lesson/' + course_id
         }
     }
 

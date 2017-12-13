@@ -1,0 +1,138 @@
+@import "_mixin";
+
+.course-container {
+  .course-showcase {
+    .video-container {
+      .aspect-ratio(16, 9);
+      video {
+        width: 100%;
+      }
+    }
+    .brief {
+      padding: .25rem 0;
+      text-align: left;
+      .title, .slogan, .metas, .prices {
+        padding: 0 .30rem;
+      }
+      .title {
+        font-size: .36rem;
+        color: #222222;
+        margin-bottom: .21rem;
+        .text-one-line();
+      }
+      .slogan {
+        font-size: .28rem;
+        color: #6a6a6a;
+        margin-bottom: .24rem;
+        .text-one-line();
+      }
+      .metas {
+        font-size: .24rem;
+        color: #a7a8a9;
+        margin-bottom: .27rem;
+        .meta {
+          margin-right: .56rem;
+        }
+      }
+      .prices {
+        padding-bottom: .20rem;
+        .bottom-grey-line(3);
+        .price {
+          vertical-align: text-bottom;
+          display: table-cell;
+          font-size: .48rem;
+          color: #fc4514;
+          margin-right: .26rem;
+        }
+        .old-price {
+          vertical-align: text-bottom;
+          display: table-cell;
+          padding-left: .26rem;
+          font-size: .24rem;
+          color: #a7a8a9;
+        }
+      }
+      .promotes {
+        font-size: .24rem;
+        padding: .22rem .35rem .22rem;
+        color: #fc4514;
+        .bottom-grey-line(11);
+        .promote {
+          display: table;
+          margin-bottom: .24rem;
+          .promote-label {
+            display: table-cell;
+            padding: 0 .08rem;
+          }
+          .promote-list {
+            display: table-cell;
+            padding: 0 .08rem;
+            .promote-title {
+              margin-bottom: .16rem;
+              .text-one-line();
+              &.share {
+                text-decoration: underline;
+              }
+              &:last-child {
+                margin-bottom: 0
+              }
+            }
+          }
+          &:last-child {
+            margin-bottom: 0
+          }
+        }
+      }
+      .notice {
+        padding: .26rem .33rem;
+        font-size: 0;
+        .bottom-grey-line(11);
+        .label, .detail-container {
+          display: inline-block;
+          vertical-align: middle;
+        }
+        .label {
+          .text-one-line();
+          padding-right: .19rem;
+          font-size: .30rem;
+          color: #3c3c3c;
+        }
+        .detail-container {
+          width: 5.80rem;
+          height: .30rem;
+          line-height: .30rem;
+          font-size: .28rem;
+          color: #7c7c7d;
+          overflow: hidden;
+          .detail {
+            white-space: pre-wrap;
+          }
+        }
+      }
+    }
+  }
+  .course-detail{
+    .nav-tabs{
+
+    }
+  }
+}
+
+span.del {
+  text-decoration: line-through;
+}
+
+span.blue {
+  color: #1a5fbd;
+}
+
+span.grey {
+  color: #7a7b7d;
+}
+
+.bord-label {
+  display: inline-block;
+  padding: .03rem .06rem;
+  border: .02rem solid #fe8464;
+  border-radius: .02rem;
+}

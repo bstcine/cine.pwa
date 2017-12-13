@@ -25,11 +25,8 @@ export let createShare = ({type, share_link}) => {
 
 export let updateShare = (sharelog_id) => {
     return get(Api.APIURL_Share_Update, {sharelog_id}).then(res => {
-        if (res.code !== '1') {
-            return alert(res.code_desc)
-        }
-        if (res.except_case_desc) {
-            return alert(res.except_case_desc)
+        if (!res.status) {
+            return alert(res.msg)
         }
         return res
     })
@@ -106,9 +103,10 @@ export let share = async ({share_params}) => {
     let sitecode = storeUtil.get('sitecode');
     if (sitecode === SITECODE.CINE_ANDROID_PHONE) {
         await Bridge.android('share', share_params, true)
-        await updateShare(share_params.sharelog_id)
-    } else if (sitecode === SITECODE.CINE_IOS) {
-        alert('TODO')
+        return updateShare(share_params.sharelog_id)
+    } else if (sitecode === SITECODE.CINE_IOS_IPHONE) {
+        await Bridge.ios('share', share_params, true)
+        return updateShare(share_params.sharelog_id)
     } else {
         if (uaUtil.mobile()) {
             if (uaUtil.wechat()) {

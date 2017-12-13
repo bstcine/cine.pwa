@@ -22,18 +22,14 @@ class Word extends React.Component {
         super(props)
         console.log('Word Main constructor')
         let urlParam = getParam()
-        console.log(`Index constructor urlUtil.getParam ==> ${JSON.stringify(urlParam)}`)
+        console.log(`Word constructor urlUtil.getParam ==> ${JSON.stringify(urlParam)}`)
         let token = urlParam.token
         let sitecode = urlParam.sitecode
-        let firstLocation = getPureUrl()
-        console.log(`firstLocation ${firstLocation}`)
         storeUtil.remove('token')
         storeUtil.remove('sitecode')
-        storeUtil.remove('firstLocation')
         storeUtil.remove('wechatConfig')
         token && storeUtil.set('token', token)
         sitecode && storeUtil.set('sitecode', sitecode)
-        firstLocation && storeUtil.set('firstLocation', firstLocation)
     }
 
     componentDidMount() {

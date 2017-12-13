@@ -4,9 +4,10 @@ let Bridge = {
     android: function (fn, params, needCallback) {
         return new Promise(resolve => {
             console.log(`Android.${fn} params${params}`)
+            if (!params) params = {}
             Android[fn](JSON.stringify(params))
             needCallback && eventListener.on(`Android.${fn}`, (res) => {
-                alert(`Android.${fn} callback`)
+                // alert(`Android.${fn} callback`)
                 if (res) res = JSON.parse(res)
                 resolve(res)
             })
@@ -15,13 +16,14 @@ let Bridge = {
     ios: function (fn, params, needCallback) {
         return new Promise(resolve => {
             console.log(`iOS.${fn} params${params}`)
+            if (!params) params = {}
             webkit.messageHandlers.native.postMessage(JSON.stringify({
-                method:fn,
-                data:params,
-                callback:`iOS.${fn}`
-            }));
+                method: fn,
+                data: params,
+                callback: `iOS.${fn}`
+            }))
             needCallback && eventListener.on(`iOS.${fn}`, (res) => {
-                alert(`iOS.${fn} callback`)
+                // alert(`iOS.${fn} callback`)
                 if (res) res = JSON.parse(res)
                 resolve(res)
             })

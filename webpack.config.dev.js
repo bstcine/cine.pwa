@@ -17,6 +17,7 @@ pages.forEach((page) => {
         filename: `${page}/index.html`,
         template: `src/page/${page}/index.html`,
         inject: true,
+        chunks: [page]
     }))
     rewrites.push({from: new RegExp(`^/${page}.*`), to: `/${page}/index.html`})
 })
@@ -48,6 +49,7 @@ module.exports = {
         contentBase: path.join(__dirname, "build"),
         compress: true,
         historyApiFallback:{
+            disableDotRule: true,
             rewrites: rewrites
         },
         inline:true,

@@ -20,16 +20,7 @@ export default class Welcome extends React.Component {
     }
 
     componentDidMount(){
-        initWechat().then((err)=>{
-            if(!err){
-                setShareParam({
-                    title: "title11111  Welcome",
-                    link: "http://www.bstcine.com/lesson/42",
-                    imgUrl: "http://www.bstcine.com/f/2017/08/21/160423502SrRRfn8.jpg",
-                    desc: "descdesc"
-                })
-            }
-        })
+        initWechat()
     }
 
     render() {

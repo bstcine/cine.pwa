@@ -1,12 +1,25 @@
 import React from 'react';
 import * as Service from '../service/index'
 import * as storeUtil from '../../../common/util/storeUtil'
+import {getParam} from '../../../common/util/urlUtil'
 
 export default class Index extends React.Component {
 
     constructor(props) {
         super(props)
         console.log('Index constructor')
+        let urlParam = getParam()
+        console.log(`Index constructor urlUtil.getParam ==> ${JSON.stringify(urlParam)}`)
+        let token = urlParam.token
+        let sitecode = urlParam.sitecode
+        if (token) {
+            storeUtil.remove('token')
+            storeUtil.set('token', token)
+        }
+        if (sitecode) {
+            storeUtil.remove('sitecode')
+            storeUtil.set('sitecode', sitecode)
+        }
     }
 
     componentWillMount() {

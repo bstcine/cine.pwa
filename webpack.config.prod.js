@@ -21,6 +21,7 @@ pages.forEach((page) => {
         filename: `${page}/index.html`,
         template: `src/page/${page}/index.html`,
         inject: true,
+        chunks: [page],
         minify: {
             removeComments: true,
             collapseWhitespace: true,

@@ -33,8 +33,8 @@ export default class Index extends React.Component {
                 return alert(result.except_case_desc)
             }
             let user = result.result.user
-            if (user && user.area_code && user.grade && user.born_at) {
-                storeUtil.set('user', user)
+            storeUtil.set('user', user)
+            if (user.area_code && user.grade && user.born_at) {
                 this.props.history.push(`/welcome`)
             } else {
                 this.props.history.push(`/userinfo`)

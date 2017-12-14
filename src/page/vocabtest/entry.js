@@ -25,9 +25,9 @@ class Word extends React.Component {
         console.log(`Word constructor urlUtil.getParam ==> ${JSON.stringify(urlParam)}`)
         let token = urlParam.token
         let sitecode = urlParam.sitecode
+        storeUtil.remove('user')
         storeUtil.remove('token')
         storeUtil.remove('sitecode')
-        storeUtil.remove('wechatConfig')
         token && storeUtil.set('token', token)
         sitecode && storeUtil.set('sitecode', sitecode)
     }

@@ -55,7 +55,11 @@ module.exports = {
         inline:true,
         port: 5000,
         proxy: {
-            "/api": "http://localhost:9000"
+            "/api": {
+                target: "http://apptest.bstcine.com",
+                secure: false,
+                changeOrigin:true
+            }
         }
     }
 }

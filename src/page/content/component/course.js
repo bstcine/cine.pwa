@@ -12,35 +12,42 @@ export default class Course extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            course: {}
+            course: {},
+            user: null
         }
     }
 
-    async componentDidMount() {
+    componentDidMount() {
         let param = getParam()
         let cid = param.cid
         let token = param.token
-        let course = await Service.getContentCourseDetail({cid})
-        let user = await BaseService.userInfo({token})
-        Promise.all([])
+        Service.getContentCourseDetail({cid}).then(course => {
+            this.setState({
+                course: course
+            })
+        })
+        BaseService.userInfo({token}).then(user => {
+            this.setState({
+                user: user
+            })
+        })
         initWechat()
     }
 
     render() {
         let lesson = this.state.course
+        let user = this.state.user
         return (
             <div className="course-container">
                 <div className="video-container">
                     <video className="content" src="http://www.bstcine.com/f/2017/07/06/141540516S48yNNt.mp4"
                            poster={require('../asset/image/pic_gatsby@2x.png')} controls></video>
                 </div>
-                <Brief lesson={lesson}/>
+                <Brief lesson={lesson} user={user}/>
                 <Tab feature={lesson.remark}/>
 
                 <div className="go-buy">立即购买</div>
             </div>
-
-
         )
     }
 }
@@ -48,16 +55,18 @@ export default class Course extends React.Component {
 class Brief extends React.Component {
     constructor(props) {
         super(props)
-        this.state={
-            lesson:{},
-            shared:false
+        this.state = {
+            lesson: {},
+            user: null,
+            shared: false
         }
+        this.shareWithDiscount = this.shareWithDiscount.bind(this)
     }
-
 
     componentWillReceiveProps(nextProps) {
         this.setState({
-            lesson:nextProps.lesson
+            lesson: nextProps.lesson,
+            user: nextProps.user,
         })
     }
 
@@ -71,21 +80,27 @@ class Brief extends React.Component {
             imgUrl: data.share_imgUrl,
             desc: data.share_desc
         }
-        share({share_params}).then(res => {
+        share({share_params}).then(() => {
             this.setState({
-                shared:true
+                shared: true
             })
         })
     }
 
-    login() {
+    async login() {
         let sitecode = storeUtil.get('sitecode');
         if (sitecode === SITECODE.CINE_ANDROID_PHONE || sitecode === SITECODE.CINE_ANDROID_PAD || sitecode === SITECODE.CINE_ANDROID) {
             let token = Bridge.android('login')
-            let user = BaseService.userInfo(token)
+            let user = await BaseService.userInfo(token)
+            this.setState({
+                user: user
+            })
         } else if (sitecode === SITECODE.CINE_IOS || sitecode === SITECODE.CINE_IOS_IPHONE || sitecode === SITECODE.CINE_IOS_IPAD) {
             let token = Bridge.ios('login')
-            let user = BaseService.userInfo(token)
+            let user = await BaseService.userInfo(token)
+            this.setState({
+                user: user
+            })
         } else {
             let url = encodeURIComponent(`/content/course?cid=${getParam().cid}`);
             let host = location.host
@@ -96,6 +111,7 @@ class Brief extends React.Component {
     render() {
         let lesson = this.state.lesson
         let user = this.state.user
+        console.log(`user ${user}`)
         return (
             <div className="brief">
                 <div className="title">{lesson.name}</div>
@@ -114,8 +130,11 @@ class Brief extends React.Component {
                         <div className="promote-list">
                             {
                                 this.state.shared ?
-                                    <div className="promote-title share" onClick={this.shareWithDiscount}>点此分享到朋友圈立减30元>></div>
-                                    :<div className="promote-title after-share">成功分享，已分享30元优惠</div>
+                                    <div className="promote-title after-share">成功分享，已分享30元优惠</div>
+                                    :
+                                    <div className="promote-title share"
+                                         onClick={this.shareWithDiscount}>点此分享到朋友圈立减30元>></div>
+
                             }
                             <div className="promote-title">购买课程即可获得200元学习机专享优惠券</div>
                         </div>
@@ -126,10 +145,11 @@ class Brief extends React.Component {
                         <div className="promote-list">
                             {
                                 user ?
-                                    <div className="promote-title" onClick={this.login}>1积分抵扣1元钱，<span className="blue">登录</span><span
-                                        className="grey">查看可抵扣金额</span></div>
-                                    :
                                     <div className="promote-title">当前积分{user.point}，可抵扣{user.point}元</div>
+                                    :
+                                    <div className="promote-title" onClick={this.login}>1积分抵扣1元钱，<span
+                                        className="blue">登录</span><span
+                                        className="grey">查看可抵扣金额</span></div>
                             }
                         </div>
                     </div>
@@ -174,7 +194,7 @@ class Tab extends React.Component {
             {nickname: 'CC****w', date: '08/31 10:13', detail: '语法视频真的超级棒！为你们打Call!为你们打Call为你们打Call为你们打Call!'},
         ]
         let commentItems = () => {
-            return comments.map((item,index) => {
+            return comments.map((item, index) => {
                 return (
                     <div key={index} className="comment-item">
                         <div className="comment-meta">

@@ -22,18 +22,18 @@ pages.forEach((page) => {
         template: `src/page/${page}/index.html`,
         inject: true,
         chunks: [page],
-        minify: {
-            removeComments: true,
-            collapseWhitespace: true,
-            removeRedundantAttributes: true,
-            useShortDoctype: true,
-            removeEmptyAttributes: true,
-            removeStyleLinkTypeAttributes: true,
-            keepClosingSlash: true,
-            minifyJS: true,
-            minifyCSS: true,
-            minifyURLs: true,
-        },
+        // minify: {
+        //     removeComments: true,
+        //     collapseWhitespace: true,
+        //     removeRedundantAttributes: true,
+        //     useShortDoctype: true,
+        //     removeEmptyAttributes: true,
+        //     removeStyleLinkTypeAttributes: true,
+        //     keepClosingSlash: true,
+        //     minifyJS: true,
+        //     minifyCSS: true,
+        //     minifyURLs: true,
+        // },
     }))
 })
 

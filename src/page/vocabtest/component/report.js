@@ -102,14 +102,19 @@ export default class Report extends React.Component {
                     <div className="recommend-list">
                         {this.renderRecommendList()}
                     </div>
+                    <div className="recommend-title">
+                        本结果为简版测试结果。<br/>
+                        我们将在2周后提供更加详细的测试报告。
+                    </div>
+
                 </div>
                 {
                     this.state.from_share ?
-                        <div className="footer">
+                        <div className="footer fixed">
                             <button onClick={this.retryClick} className="btn btn_sm btn_blue btn_try">我也测一下</button>
                         </div>
                         :
-                        <div className="footer">
+                        <div className="footer fixed">
                             <button onClick={this.retryClick} className="btn btn_sm btn_blue btn_try">再测一次</button>
                             <button onClick={this.shareClick} className="btn btn_sm btn_orange btn_share">分享</button>
                         </div>

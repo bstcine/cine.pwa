@@ -34,7 +34,7 @@ class Word extends React.Component {
     }
 
     componentDidMount() {
-        Bridge.ios('timeline', {type: 'loaded'}, true)
+       // Bridge.ios('timeline', {type: 'loaded'}, true)
     }
 
     render() {

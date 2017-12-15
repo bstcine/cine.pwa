@@ -1,7 +1,7 @@
 /**
  * Created by david on 2017/12/6.
  */
-import {get} from './request'
+import {get,post} from './request'
 import {getPureUrl} from 'common/util/urlUtil'
 import Api from 'common/config/api'
 
@@ -11,5 +11,14 @@ export let getWechatJsSignature = () => {
 }
 
 export let userInfo = (token)=>{
-    return get(Api.APIURL_User_Info,{token})
+    return post(Api.APIURL_User_Info,{token}).then(res=>{
+        if (res.code !== '1') {
+            return alert(res.code_desc)
+        }
+        if (res.except_case_desc) {
+            console.log(res.except_case_desc)
+            return null
+        }
+        return res.result
+    })
 }

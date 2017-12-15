@@ -19,21 +19,6 @@
       window.onresize = function () {
           responsive()
       }
-
-      if (window.addEventListener) {
-          window.addEventListener('error', function (e) {
-              alert(JSON.stringify(e));
-          });
-      } else if (window.attachEvent) {
-          window.attachEvent('onerror', function (e) {
-              alert(JSON.stringify(e));
-          });
-      } else {
-          window.onerror = function (e) {
-              alert(JSON.stringify(e));
-          }
-      }
-
   </script>
 
 </head>

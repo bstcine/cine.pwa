@@ -14,7 +14,7 @@ export default class ReportList extends React.Component {
     componentDidMount() {
         Service.queryContentWordResultList().then((res) => {
             if (res.except_case_desc) {
-                alert(res.except_case_desc)
+                return alert(res.except_case_desc)
             }
             if (res.result && res.result.length) {
                 this.setState({

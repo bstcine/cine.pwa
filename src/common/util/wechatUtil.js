@@ -37,24 +37,28 @@ export let setShareTimeline = ({title, link, imgUrl, desc}) => {
 }
 
 export let initWechat = async () => {
-    let wechatConfig = await getWechatJsSignature()
-    await configWechat(wechatConfig)
-    checkShareMask()
-    let param = getParam()
-    let sharelog_id = param.sharelog_id
-    if (sharelog_id) {
-        let res = await queryShare(sharelog_id)
-        if (res.status) {
-            let data = res.data;
-            await setShareParam({
-                title: data.share_title,
-                link: ignoreParams(['token','show_mask']),
-                imgUrl: data.share_imgUrl,
-                desc: data.share_desc
-            })
-            await updateShare(sharelog_id)
-            hideShareMask()
+    try {
+        let wechatConfig = await getWechatJsSignature()
+        await configWechat(wechatConfig)
+        checkShareMask()
+        let param = getParam()
+        let sharelog_id = param.sharelog_id
+        if (sharelog_id) {
+            let res = await queryShare(sharelog_id)
+            if (res.status) {
+                let data = res.data;
+                await setShareParam({
+                    title: data.share_title,
+                    link: ignoreParams(['token', 'show_mask']),
+                    imgUrl: data.share_imgUrl,
+                    desc: data.share_desc
+                })
+                await updateShare(sharelog_id)
+                hideShareMask()
+            }
         }
+    } catch (err) {
+        console.log(err)
     }
 }
 

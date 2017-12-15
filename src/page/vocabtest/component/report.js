@@ -55,11 +55,11 @@ export default class Report extends React.Component {
         if (sitecode === SITECODE.CINE_IOS
             || sitecode === SITECODE.CINE_IOS_IPHONE
             || sitecode === SITECODE.CINE_IOS_IPAD) {
-            Bridge.ios('course',{course_id})
+            Bridge.ios('course',{course_id},false)
         } else if (sitecode === SITECODE.CINE_ANDROID
             || sitecode === SITECODE.CINE_ANDROID_PHONE
             || sitecode === SITECODE.CINE_ANDROID_PAD) {
-            Bridge.android('course',{course_id})
+            Bridge.android('course',{course_id},false)
         } else {
             location.href = '/lesson/' + course_id
         }
@@ -98,8 +98,7 @@ export default class Report extends React.Component {
                         <li>托福：8000</li>
                         <li>SAT：10000以上</li>
                     </ul>
-                    <div
-                        className="recommend-title">{this.state.from_share ? '基于词汇量和年龄段，推荐以下英文学习课程：' : '基于你的词汇量和年龄段，向你推荐以下英文学习课程：'}</div>
+                    <div className="recommend-title">{this.state.from_share ? '基于词汇量和年龄段，推荐以下课程：' : '基于你的词汇量和年龄段，推荐以下课程：'}</div>
                     <div className="recommend-list">
                         {this.renderRecommendList()}
                     </div>

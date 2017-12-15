@@ -9,3 +9,7 @@ export let getWechatJsSignature = () => {
     let signatureUrl= getPureUrl()
     return get(Api.APIURL_Wechat_Js_Signature,{url:signatureUrl })
 }
+
+export let userInfo = (token)=>{
+    return get(Api.APIURL_User_Info,{token})
+}

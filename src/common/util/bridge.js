@@ -6,11 +6,13 @@ let Bridge = {
             console.log(`Android.${fn} params${params}`)
             if (!params) params = {}
             Android[fn](JSON.stringify(params))
-            needCallback && eventListener.on(`Android.${fn}`, (res) => {
-                // alert(`Android.${fn} callback`)
-                if (res) res = JSON.parse(res)
-                resolve(res)
-            })
+            if (needCallback !== false) {
+                eventListener.on(`Android.${fn}`, (res) => {
+                    // alert(`Android.${fn} callback`)
+                    if (res) res = JSON.parse(res)
+                    resolve(res)
+                })
+            }
         })
     },
     ios: function (fn, params, needCallback) {
@@ -22,11 +24,13 @@ let Bridge = {
                 data: params,
                 callback: `iOS.${fn}`
             }))
-            needCallback && eventListener.on(`iOS.${fn}`, (res) => {
-                // alert(`iOS.${fn} callback`)
-                if (res) res = JSON.parse(res)
-                resolve(res)
-            })
+            if (needCallback !== false) {
+                eventListener.on(`iOS.${fn}`, (res) => {
+                    // alert(`iOS.${fn} callback`)
+                    if (res) res = JSON.parse(res)
+                    resolve(res)
+                })
+            }
         })
     }
 }

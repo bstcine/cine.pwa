@@ -11,16 +11,22 @@ import Api from '../config/api'
 const imgUrl = require('../asset/image/pic_share_arr@2x.png')
 let inter = null;
 
-export let createShare = ({type, share_link}) => {
-    return post(Api.APIURL_Share_Common, {type, share_link}).then(res => {
-        if (res.code !== '1') {
-            return alert(res.code_desc)
-        }
-        if (res.except_case_desc) {
-            return alert(res.except_case_desc)
-        }
-        return res
-    })
+export let createShare = async ({type, share_link,cid}) => {
+    let res = null
+    if (type === 7) {
+        res = await post(Api.APIURL_Share_Common, {type, share_link})
+    } else if (type === 4) {
+        res = await post(Api.APIURL_Share_CoursePackage, {type, cid})
+    }else {
+        return alert('invalid_type')
+    }
+    if (res.code !== '1') {
+        return alert(res.code_desc)
+    }
+    if (res.except_case_desc) {
+        return alert(res.except_case_desc)
+    }
+    return res
 }
 
 export let updateShare = (sharelog_id) => {
@@ -102,10 +108,10 @@ let checkShareStatus = (sharelog_id) => {
 export let share = async ({share_params}) => {
     let sitecode = storeUtil.get('sitecode');
     if (sitecode === SITECODE.CINE_ANDROID_PHONE) {
-        await Bridge.android('share', share_params, true)
+        await Bridge.android('share', share_params)
         return updateShare(share_params.sharelog_id)
     } else if (sitecode === SITECODE.CINE_IOS_IPHONE) {
-        await Bridge.ios('share', share_params, true)
+        await Bridge.ios('share', share_params)
         return updateShare(share_params.sharelog_id)
     } else {
         if (uaUtil.mobile()) {

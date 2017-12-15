@@ -1,119 +1,194 @@
 @import "_mixin";
 
 .course-container {
-  .course-showcase {
-    .video-container {
-      .aspect-ratio(16, 9);
-      video {
-        width: 100%;
+  padding-bottom: 1.20rem;
+  .video-container {
+    .aspect-ratio(16, 9);
+    video {
+      width: 100%;
+    }
+  }
+  .brief {
+    padding-top: .25rem;
+    text-align: left;
+    .title, .slogan, .metas, .prices {
+      padding: 0 .30rem;
+    }
+    .title {
+      font-size: .36rem;
+      color: #222222;
+      margin-bottom: .21rem;
+      .text-one-line();
+    }
+    .slogan {
+      font-size: .28rem;
+      color: #6a6a6a;
+      margin-bottom: .24rem;
+      .text-one-line();
+    }
+    .metas {
+      font-size: .24rem;
+      color: #a7a8a9;
+      margin-bottom: .27rem;
+      .meta {
+        margin-right: .56rem;
       }
     }
-    .brief {
-      padding: .25rem 0;
-      text-align: left;
-      .title, .slogan, .metas, .prices {
-        padding: 0 .30rem;
+    .prices {
+      padding-bottom: .20rem;
+      .bottom-grey-line(3);
+      .price {
+        vertical-align: text-bottom;
+        display: table-cell;
+        font-size: .48rem;
+        color: #fc4514;
+        margin-right: .26rem;
       }
-      .title {
-        font-size: .36rem;
-        color: #222222;
-        margin-bottom: .21rem;
-        .text-one-line();
-      }
-      .slogan {
-        font-size: .28rem;
-        color: #6a6a6a;
-        margin-bottom: .24rem;
-        .text-one-line();
-      }
-      .metas {
+      .old-price {
+        vertical-align: text-bottom;
+        display: table-cell;
+        padding-left: .26rem;
         font-size: .24rem;
         color: #a7a8a9;
-        margin-bottom: .27rem;
-        .meta {
-          margin-right: .56rem;
-        }
       }
-      .prices {
-        padding-bottom: .20rem;
-        .bottom-grey-line(3);
-        .price {
-          vertical-align: text-bottom;
+    }
+    .promotes {
+      font-size: .24rem;
+      padding: .22rem .35rem .22rem;
+      color: #fc4514;
+      .bottom-grey-line(11);
+      .promote {
+        display: table;
+        margin-bottom: .24rem;
+        .promote-label {
           display: table-cell;
-          font-size: .48rem;
-          color: #fc4514;
-          margin-right: .26rem;
+          padding: 0 .08rem;
         }
-        .old-price {
-          vertical-align: text-bottom;
+        .promote-list {
           display: table-cell;
-          padding-left: .26rem;
-          font-size: .24rem;
-          color: #a7a8a9;
-        }
-      }
-      .promotes {
-        font-size: .24rem;
-        padding: .22rem .35rem .22rem;
-        color: #fc4514;
-        .bottom-grey-line(11);
-        .promote {
-          display: table;
-          margin-bottom: .24rem;
-          .promote-label {
-            display: table-cell;
-            padding: 0 .08rem;
-          }
-          .promote-list {
-            display: table-cell;
-            padding: 0 .08rem;
-            .promote-title {
-              margin-bottom: .16rem;
-              .text-one-line();
-              &.share {
-                text-decoration: underline;
-              }
-              &:last-child {
-                margin-bottom: 0
-              }
+          padding: 0 .08rem;
+          .promote-title {
+            margin-bottom: .16rem;
+            .text-one-line();
+            &.share {
+              text-decoration: underline;
+            }
+            &:last-child {
+              margin-bottom: 0
+            }
+            &.after-share{
+              color: #7a7b7d;
             }
           }
-          &:last-child {
-            margin-bottom: 0
-          }
+        }
+        &:last-child {
+          margin-bottom: 0
         }
       }
-      .notice {
-        padding: .26rem .33rem;
-        font-size: 0;
-        .bottom-grey-line(11);
-        .label, .detail-container {
-          display: inline-block;
-          vertical-align: middle;
-        }
-        .label {
-          .text-one-line();
-          padding-right: .19rem;
-          font-size: .30rem;
-          color: #3c3c3c;
-        }
-        .detail-container {
-          width: 5.80rem;
-          height: .30rem;
-          line-height: .30rem;
-          font-size: .28rem;
-          color: #7c7c7d;
-          overflow: hidden;
-          .detail {
-            white-space: pre-wrap;
-          }
+    }
+    .notice {
+      padding: .26rem .33rem;
+      font-size: 0;
+      .bottom-grey-line(11);
+      .label, .detail-container {
+        display: inline-block;
+        vertical-align: middle;
+      }
+      .label {
+        .text-one-line();
+        padding-right: .19rem;
+        font-size: .30rem;
+        color: #3c3c3c;
+      }
+      .detail-container {
+        width: 5.80rem;
+        height: .30rem;
+        line-height: .30rem;
+        font-size: .28rem;
+        color: #7c7c7d;
+        overflow: hidden;
+        .detail {
+          white-space: pre-wrap;
         }
       }
     }
   }
-  .course-detail{
-    .nav-tabs{
 
+  .nav-tabs {
+    display: flex;
+    align-items: center;
+    .bottom-grey-line(11);
+    .tab-item {
+      flex: 1;
+      font-size: .30rem;
+      text-align: center;
+      & a {
+        min-width: 1.40rem;
+        display: inline-block;
+        padding: .28rem .09rem .16rem;
+        text-decoration: none;
+        color: #6a6a6a;
+        position: relative;
+      }
+      &.active a {
+        color: #014292;
+        &:after {
+          content: '';
+          position: absolute;
+          bottom: -.07rem;
+          left: 0;
+          width: 100%;
+          border-bottom: .07rem solid #014292;
+        }
+      }
+
+    }
+  }
+  .tab-content {
+    .tab-pane {
+      display: none;
+      &.active {
+        display: block;
+      }
+    }
+  }
+
+  .go-buy {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 1.07rem;
+    background-color: #ff6c00;
+    color: #fff;
+    font-size: .42rem;
+    line-height: 1.07rem;
+    text-align: center;
+    box-shadow: 0px -3px 7px 0px rgba(0, 79, 147, 0.1);
+  }
+}
+
+.comments {
+  .comment-item {
+    padding: .45rem .30rem .30rem .35rem;
+    border-bottom: .02rem solid #e9eaec;
+    .comment-meta {
+      margin-bottom: .25rem;
+      color: #a2a4a8;
+      font-size: 0;
+      .nickname {
+        font-size: .28rem;
+      }
+      .date {
+        float: right;
+        font-size: .24rem;
+        line-height: .28rem;
+      }
+    }
+    .comment-detail {
+      font-size: .30rem;
+      line-height: .44rem;
+      color: #545454;
     }
   }
 }

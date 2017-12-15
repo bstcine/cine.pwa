@@ -23,13 +23,13 @@ export default class LoginDetect extends React.Component {
 
     goLoginClick() {
         let sitecode = storeUtil.get('sitecode');
-        console.log(`sitecode ${sitecode}`)
+        // alert(`sitecode ${sitecode}`)
         if (sitecode === SITECODE.CINE_ANDROID_PHONE || sitecode === SITECODE.CINE_ANDROID_PAD || sitecode === SITECODE.CINE_ANDROID) {
-            Bridge.android('login', null, true).then(res => {
+            Bridge.android('login').then(res => {
                 this.props.history.push(`/?token=${res.token}`)
             })
         } else if (sitecode === SITECODE.CINE_IOS || sitecode === SITECODE.CINE_IOS_IPHONE || sitecode === SITECODE.CINE_IOS_IPAD) {
-            Bridge.ios('login', null, true).then(res => {
+            Bridge.ios('login').then(res => {
                 this.props.history.push(`/?token=${res.token}`)
             })
         } else {

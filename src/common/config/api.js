@@ -12,3 +12,6 @@ exports.APIURL_Wechat_Js_Signature = "/api/wechat/jssignature"
 exports.APIURL_Web_Share_Log = "/api/web/sharelog"                                    //查询通用分享
 exports.APIURL_Share_Common = "/api/share/common"                                     //创建通用分享
 exports.APIURL_Share_Update = "/api/web/updatesharelog"                               //更新分享状态
+exports.APIURL_Share_CoursePackage = "/api/share/coursePackage"                 //课程详情分享(购买后订单分享)
+
+exports.APIURL_User_Info = "/api/user/info"                                     //用户信息

@@ -15,6 +15,7 @@ import {getParam, getPureUrl} from 'common/util/urlUtil'
 import * as storeUtil from 'common/util/storeUtil'
 
 import './asset/style/index.less'
+import Bridge from "../../common/util/bridge";
 
 class Word extends React.Component {
 
@@ -33,14 +34,14 @@ class Word extends React.Component {
     }
 
     componentDidMount() {
-        // initWechat()
+        Bridge.ios('timeline', {type: 'loaded'}, true)
     }
 
     render() {
         return (
             <Router basename="/vocabtest">
                 <div className="word-main">
-                    <div className="map-bg"> </div>
+                    <div className="map-bg"></div>
                     <Route exact path="/" component={Index}/>
                     <Route path="/welcome" component={Welcome}/>
                     <Route path="/logindetect" component={LoginDetect}/>

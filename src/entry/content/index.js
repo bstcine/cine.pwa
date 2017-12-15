@@ -6,6 +6,8 @@ import {
 } from 'react-router-dom'
 import Course from './component/course'
 import Home from './component/home'
+import {getParam, getPureUrl} from 'common/util/urlUtil'
+import * as storeUtil from 'common/util/storeUtil'
 
 import './asset/style/index.less'
 
@@ -13,7 +15,17 @@ class Content extends React.Component {
 
     constructor(props) {
         super(props)
-
+        console.log('Content Main constructor')
+        // alert(`location ${location.href}`)
+        let urlParam = getParam()
+        // alert(`Content constructor urlUtil.getParam ==> ${JSON.stringify(urlParam)}`)
+        let token = urlParam.token
+        let sitecode = urlParam.sitecode
+        storeUtil.remove('user')
+        storeUtil.remove('token')
+        storeUtil.remove('sitecode')
+        token && storeUtil.set('token', token)
+        sitecode && storeUtil.set('sitecode', sitecode)
     }
 
     componentDidMount() {

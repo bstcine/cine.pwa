@@ -112,6 +112,7 @@ export let share = async ({share_params}) => {
         return updateShare(share_params.sharelog_id)
     } else if (sitecode === SITECODE.CINE_IOS_IPHONE) {
         await Bridge.ios('share', share_params)
+        alert('await Bridge.ios(\'share\', share_params)')
         return updateShare(share_params.sharelog_id)
     } else {
         if (uaUtil.mobile()) {

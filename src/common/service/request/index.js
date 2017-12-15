@@ -1,9 +1,12 @@
-import {getToken} from 'common/util/storeUtil'
+import * as storeUtil from 'common/util/storeUtil'
 
 function httpBody(bodyData) {
+    let token = bodyData.token
+    if (!token) token = storeUtil.getToken() || ""
+    let sitecode = storeUtil.get('sitecode') || "cine.web"
     return {
-        "token": getToken() || "",
-        "sitecode": "cine.web",
+        "token": token,
+        "sitecode": sitecode,
         "channel": "",
         "locale": "zh_CN",
         "appver": 10000,
@@ -40,6 +43,7 @@ function request(obj) {
                 }
             }
         };
+        // alert(`request url ${obj.url}`)
         xhr.open(obj.method, obj.url, true);
         xhr.setRequestHeader("Accept", "application/json");
         if (obj.contentType) {

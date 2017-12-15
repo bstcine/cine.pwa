@@ -16,6 +16,7 @@ import * as storeUtil from 'common/util/storeUtil'
 
 import './asset/style/index.less'
 import Bridge from "../../common/util/bridge";
+import * as SITECODE from "../../common/config/sitecode";
 
 class Word extends React.Component {
 
@@ -34,7 +35,11 @@ class Word extends React.Component {
     }
 
     componentDidMount() {
-       // Bridge.ios('timeline', {type: 'loaded'}, true)
+        let sitecode = storeUtil.get('sitecode');
+        if (sitecode === SITECODE.CINE_IOS || sitecode === SITECODE.CINE_IOS_IPHONE || sitecode === SITECODE.CINE_IOS_IPAD) {
+            Bridge.ios('timeline', {type: 'loaded'}, true)
+        }
+
     }
 
     render() {

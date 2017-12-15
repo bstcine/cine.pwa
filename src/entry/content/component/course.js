@@ -20,13 +20,13 @@ export default class Course extends React.Component {
     componentDidMount() {
         let param = getParam()
         let cid = param.cid
-        let token = param.token
+        let token = storeUtil.getToken()
         Service.getContentCourseDetail({cid}).then(course => {
             this.setState({
                 course: course
             })
         })
-        BaseService.userInfo({token}).then(user => {
+        BaseService.userInfo(token).then(user => {
             this.setState({
                 user: user
             })
@@ -35,7 +35,7 @@ export default class Course extends React.Component {
     }
 
     render() {
-        let lesson = this.state.course
+        let course = this.state.course
         let user = this.state.user
         return (
             <div className="course-container">
@@ -43,8 +43,8 @@ export default class Course extends React.Component {
                     <video className="content" src="http://www.bstcine.com/f/2017/07/06/141540516S48yNNt.mp4"
                            poster={require('../asset/image/pic_gatsby@2x.png')} controls></video>
                 </div>
-                <Brief lesson={lesson} user={user}/>
-                <Tab feature={lesson.remark}/>
+                <Brief course={course} user={user}/>
+                <Tab feature={course.h5remark}/>
 
                 <div className="go-buy">立即购买</div>
             </div>
@@ -56,21 +56,27 @@ class Brief extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            lesson: {},
+            course: {},
             user: null,
             shared: false
         }
         this.shareWithDiscount = this.shareWithDiscount.bind(this)
+        this.login = this.login.bind(this)
     }
 
     componentWillReceiveProps(nextProps) {
         this.setState({
-            lesson: nextProps.lesson,
+            course: nextProps.course,
             user: nextProps.user,
         })
     }
 
     async shareWithDiscount() {
+        if (!this.state.user) {
+            this.login()
+            //this.shareWithDiscount()
+            return
+        }
         let res = await createShare({type: 4, cid: getParam().cid})
         let data = res.result
         let share_params = {
@@ -80,7 +86,8 @@ class Brief extends React.Component {
             imgUrl: data.share_imgUrl,
             desc: data.share_desc
         }
-        share({share_params}).then(() => {
+        share({share_params}).then((res) => {
+            alert(JSON.stringify(res))
             this.setState({
                 shared: true
             })
@@ -88,41 +95,49 @@ class Brief extends React.Component {
     }
 
     async login() {
-        let sitecode = storeUtil.get('sitecode');
-        if (sitecode === SITECODE.CINE_ANDROID_PHONE || sitecode === SITECODE.CINE_ANDROID_PAD || sitecode === SITECODE.CINE_ANDROID) {
-            let token = Bridge.android('login')
-            let user = await BaseService.userInfo(token)
-            this.setState({
-                user: user
-            })
-        } else if (sitecode === SITECODE.CINE_IOS || sitecode === SITECODE.CINE_IOS_IPHONE || sitecode === SITECODE.CINE_IOS_IPAD) {
-            let token = Bridge.ios('login')
-            let user = await BaseService.userInfo(token)
-            this.setState({
-                user: user
-            })
-        } else {
-            let url = encodeURIComponent(`/content/course?cid=${getParam().cid}`);
-            let host = location.host
-            location.href = location.protocol + '//' + host + '/login?go=' + url
+        try {
+            let sitecode = storeUtil.get('sitecode');
+            if (sitecode === SITECODE.CINE_ANDROID_PHONE || sitecode === SITECODE.CINE_ANDROID_PAD || sitecode === SITECODE.CINE_ANDROID) {
+                let {token} = await Bridge.android('login')
+                storeUtil.setToken(token)
+                let user = await BaseService.userInfo(token)
+                this.setState({
+                    user: user
+                })
+            } else if (sitecode === SITECODE.CINE_IOS || sitecode === SITECODE.CINE_IOS_IPHONE || sitecode === SITECODE.CINE_IOS_IPAD) {
+                let {token} = await Bridge.ios('login')
+                alert(`login--token ${token}`)
+                storeUtil.setToken(token)
+                alert(`token ${token}`)
+                let user = await BaseService.userInfo(token)
+                this.setState({
+                    user: user
+                })
+            } else {
+                let url = encodeURIComponent(`/content/course?cid=${getParam().cid}`);
+                let host = location.host
+                location.href = location.protocol + '//' + host + '/login?go=' + url
+            }
+        } catch (err) {
+            alert(err.message)
         }
     }
 
     render() {
-        let lesson = this.state.lesson
+        let course = this.state.course
         let user = this.state.user
         console.log(`user ${user}`)
         return (
             <div className="brief">
-                <div className="title">{lesson.name}</div>
+                <div className="title">{course.name}</div>
                 <div className="slogan">泛读十本，不如精读一本</div>
                 <div className="metas">
-                    <span className="meta">授课老师：{lesson.author}</span>
-                    <span className="meta">授课时长：{lesson.time_arrange}</span>
+                    <span className="meta">授课老师：{course.author}</span>
+                    <span className="meta">授课时长：{course.time_arrange}</span>
                 </div>
                 <div className="prices">
-                    <span className="price">￥{lesson.price}</span>
-                    <span className="old-price">原价：<span className="del">￥{lesson.price}</span></span>
+                    <span className="price">￥{course.price}</span>
+                    <span className="old-price">原价：<span className="del">￥{course.price}</span></span>
                 </div>
                 <div className="promotes">
                     <div className="promote">
@@ -232,7 +247,7 @@ class Tab extends React.Component {
                     {this.renderTabItem()}
                 </div>
                 <div className="tab-content">
-                    <div className={`tab-pane${this.state.tabIndex === 0 ? ' active' : ''}`}
+                    <div className={`tab-pane course-feature${this.state.tabIndex === 0 ? ' active' : ''}`}
                          dangerouslySetInnerHTML={this.renderFeature()}></div>
                     <div className={`tab-pane${this.state.tabIndex === 1 ? ' active' : ''}`}>123</div>
                     <div className={`tab-pane${this.state.tabIndex === 2 ? ' active' : ''}`}>

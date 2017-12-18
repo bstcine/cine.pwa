@@ -56,7 +56,7 @@ module.exports = {
         port: 5000,
         proxy: {
             "/api": {
-                target: "http://apptest.bstcine.com",
+                target: "http://localhost:9000",
                 secure: false,
                 changeOrigin:true
             }

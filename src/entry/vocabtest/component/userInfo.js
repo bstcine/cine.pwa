@@ -1,6 +1,6 @@
 import React from 'react';
-import * as storeUtil from '../../../common/util/storeUtil'
-import {initWechat} from '../../../common/util/wechatUtil'
+import * as storeUtil from '@/util/storeUtil'
+import {initWechat} from '@/util/wechatUtil'
 
 export default class UserInfo extends React.Component {
 

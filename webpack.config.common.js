@@ -58,7 +58,29 @@ module.exports = {
                 ]
             },
             {
-                test: /\.(png|jpg|jpeg|gif|svg)$/i,
+                test: /\.css$/,
+                use: [
+                    'style-loader',
+                    'css-loader',
+                    {
+                        loader: 'postcss-loader',
+                        options: {
+                            plugins: [
+                                require('postcss-import'),
+                                require('autoprefixer')
+                            ],
+                            browsers: [
+                                '>1%',
+                                'last 4 versions',
+                                'Firefox ESR',
+                                'not ie < 9', // React doesn't support IE8 anyway
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                test: /\.(eot|woff|woff2|ttf|png|jpg|jpeg|gif|svg)$/i,
                 loader: 'url-loader',
                 options: {
                     limit: 10000,
@@ -68,8 +90,9 @@ module.exports = {
     },
 
     resolve: {
+        modules: [path.resolve(__dirname, 'src'), "node_modules"],
         alias: {
-            'common': path.resolve(__dirname, 'src/common'),
+            '@': path.resolve(__dirname, 'src'),
         }
     }
 }

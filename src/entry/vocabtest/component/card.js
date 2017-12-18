@@ -1,8 +1,8 @@
 import React from 'react';
-import * as storeUtil from '../../../common/util/storeUtil'
+import * as storeUtil from '@/util/storeUtil'
 import * as Service from '../service/index'
 import {CSSTransition} from 'react-transition-group'
-import {initWechat} from '../../../common/util/wechatUtil'
+import {initWechat} from '@/util/wechatUtil'
 
 export default class Card extends React.Component {
 

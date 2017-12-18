@@ -1,12 +1,12 @@
 import React from 'react'
 import * as Service from '../service'
-import {getParam, ignoreParams, updateUrl} from "../../../common/util/urlUtil";
-import Bridge from '../../../common/util/bridge'
-import * as SITECODE from '../../../common/config/sitecode'
-import {createShare, share} from "../../../common/util/shareUtil";
-import {initWechat} from "../../../common/util/wechatUtil";
-import * as storeUtil from "../../../common/util/storeUtil";
-import * as BaseService from '../../../common/service/base'
+import {getParam, ignoreParams, updateUrl} from "../../../util/urlUtil";
+import Bridge from '../../../util/bridge'
+import * as SITECODE from '../../../config/sitecode'
+import {createShare, share} from "../../../util/shareUtil";
+import {initWechat} from "../../../util/wechatUtil";
+import * as storeUtil from "../../../util/storeUtil";
+import * as BaseService from '../../../service/base'
 
 export default class Course extends React.Component {
     constructor(props) {
@@ -45,7 +45,6 @@ export default class Course extends React.Component {
                 </div>
                 <Brief course={course} user={user}/>
                 <Tab feature={course.h5remark}/>
-
                 <div className="go-buy">立即购买</div>
             </div>
         )
@@ -72,9 +71,9 @@ class Brief extends React.Component {
     }
 
     async shareWithDiscount() {
+        // todo: ios分享回调
         if (!this.state.user) {
             this.login()
-            //this.shareWithDiscount()
             return
         }
         let res = await createShare({type: 4, cid: getParam().cid})

@@ -1,6 +1,6 @@
 import _ from 'lodash'
-import {post} from '../../../common/service/request'
-import Api from '../../../common/config/api'
+import {post} from '@/service/request'
+import Api from '@/config/api'
 
 export let getContentWordConfig = (query) => {
     return post(Api.APIURL_Content_Word_Config, query)

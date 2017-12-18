@@ -1,11 +1,11 @@
 import React from 'react';
-import {getParam, updateUrl, ignoreParams} from '../../../common/util/urlUtil'
+import {getParam, updateUrl, ignoreParams} from '@/util/urlUtil'
 import * as Service from '../service/index'
-import * as storeUtil from '../../../common/util/storeUtil'
-import {initWechat} from '../../../common/util/wechatUtil'
-import {createShare, share} from '../../../common/util/shareUtil'
-import * as SITECODE from '../../../common/config/sitecode'
-import Bridge from "../../../common/util/bridge";
+import * as storeUtil from '@/util/storeUtil'
+import {initWechat} from '@/util/wechatUtil'
+import {createShare, share} from '../../../util/shareUtil'
+import * as SITECODE from '../../../config/sitecode'
+import Bridge from "../../../util/bridge";
 
 export default class Report extends React.Component {
     constructor(props) {

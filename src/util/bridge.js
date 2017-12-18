@@ -19,10 +19,10 @@ let Bridge = {
         return new Promise(resolve => {
             console.log(`iOS.${fn} params${params}`)
             if (!params) params = {}
-            alert(`needCallback !== false ===> ${needCallback !== false}`)
+            // alert(`needCallback !== false ===> ${needCallback !== false}`)
             if (needCallback !== false) {
                 eventListener.on(`iOS.${fn}`, (res) => {
-                    alert(`iOS.${JSON.stringify(res)} callback`)
+                    // alert(`iOS.${JSON.stringify(res)} callback`)
                     if (res) res = JSON.parse(res)
                     resolve(res)
                 })
@@ -32,7 +32,7 @@ let Bridge = {
                 data: params,
                 callback: `iOS.${fn}`
             })
-            alert(`msg ${JSON.stringify(msg)}`)
+            // alert(`msg ${JSON.stringify(msg)}`)
             webkit.messageHandlers.native.postMessage(msg)
         })
     }

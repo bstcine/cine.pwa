@@ -5,6 +5,7 @@ exports.APIURL_Content_Word_Result_Save = "/api/content/word/result/save" //词�
 exports.APIURL_Content_Word_Result_Query = "/api/content/word/result/query" //查看词汇量测验的报告 & 推荐课程
 exports.APIURL_Content_Word_Result_List = "/api/content/word/result/list"                       //查看词汇量测验列表
 
+exports.APIURL_Content_Home = "/api/content/home"                                               //app首页
 exports.APIURL_Content_Course_Detail = "/api/content/course/detail" //课程详情
 
 exports.APIURL_Wechat_Js_Signature = "/api/wechat/jssignature"

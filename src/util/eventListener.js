@@ -9,8 +9,8 @@ function EventListener() {
         delete this._events[event]
     }
     this.emit = function (event) {
-        alert(`event ${event}`)
-        alert(`arguments ${JSON.stringify(arguments)}`)
+        // alert(`event ${event}`)
+        // alert(`arguments ${JSON.stringify(arguments)}`)
         let callbacks = this._events[event]
         if (!callbacks || callbacks.length === 0) {
 

@@ -6,8 +6,8 @@ import {
 } from 'react-router-dom'
 import Course from './component/course'
 import Home from './component/home'
-import {getParam, getPureUrl} from 'common/util/urlUtil'
-import * as storeUtil from 'common/util/storeUtil'
+import {getParam, getPureUrl} from '@/util/urlUtil'
+import * as storeUtil from '@/util/storeUtil'
 
 import './asset/style/index.less'
 

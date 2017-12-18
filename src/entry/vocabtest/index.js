@@ -11,12 +11,12 @@ import UserInfo from './component/userInfo';
 import Card from './component/card';
 import Report from './component/report';
 import ReportList from './component/reportList';
-import {getParam, getPureUrl} from 'common/util/urlUtil'
-import * as storeUtil from 'common/util/storeUtil'
+import {getParam, getPureUrl} from '@/util/urlUtil'
+import * as storeUtil from '@/util/storeUtil'
 
 import './asset/style/index.less'
-import Bridge from "../../common/util/bridge";
-import * as SITECODE from "../../common/config/sitecode";
+import Bridge from "../../util/bridge";
+import * as SITECODE from "../../config/sitecode";
 
 class Word extends React.Component {
 

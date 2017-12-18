@@ -1,9 +1,9 @@
 /**
  * Created by david on 2017/12/6.
  */
-import {get,post} from './request'
-import {getPureUrl} from 'common/util/urlUtil'
-import Api from 'common/config/api'
+import {get,post} from './request/index'
+import {getPureUrl} from '@/util/urlUtil'
+import Api from '@/config/api'
 
 export let getWechatJsSignature = () => {
     let signatureUrl= getPureUrl()

@@ -1,8 +1,8 @@
 import React from 'react';
-import * as storeUtil from '../../../common/util/storeUtil'
-import {initWechat} from '../../../common/util/wechatUtil'
-import Bridge from '../../../common/util/bridge'
-import * as SITECODE from '../../../common/config/sitecode'
+import * as storeUtil from '@/util/storeUtil'
+import {initWechat} from '@/util/wechatUtil'
+import Bridge from '@/util/bridge'
+import * as SITECODE from '@/config/sitecode'
 
 export default class LoginDetect extends React.Component {
 

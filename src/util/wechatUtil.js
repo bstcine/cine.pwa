@@ -1,5 +1,5 @@
-import {getWechatJsSignature} from 'common/service/base'
-import {checkShareMask, updateShare, hideShareMask} from '../util/shareUtil'
+import {getWechatJsSignature} from '@/service/base'
+import {checkShareMask, updateShare, hideShareMask} from './shareUtil'
 import {queryShare} from "./shareUtil";
 import {getParam, updateUrl, ignoreParams} from "./urlUtil";
 

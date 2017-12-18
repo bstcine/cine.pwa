@@ -1,7 +1,7 @@
-import * as storeUtil from 'common/util/storeUtil'
+import * as storeUtil from '@/util/storeUtil'
 
 function httpBody(bodyData) {
-    let token = bodyData.token
+    let token = bodyData ? bodyData.token:null
     if (!token) token = storeUtil.getToken() || ""
     let sitecode = storeUtil.get('sitecode') || "cine.web"
     return {

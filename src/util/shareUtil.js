@@ -1,10 +1,10 @@
 import '../asset/style/share.less'
-import uaUtil from '../util/uaUtil'
-import * as storeUtil from '../util/storeUtil'
+import uaUtil from './uaUtil'
+import * as storeUtil from './storeUtil'
 import * as SITECODE from '../config/sitecode'
-import {setShareParam} from '../util/wechatUtil'
-import {getParam, updateUrl} from '../util/urlUtil'
-import Bridge from '../util/bridge'
+import {setShareParam} from './wechatUtil'
+import {getParam, updateUrl} from './urlUtil'
+import Bridge from './bridge'
 import {get, post} from '../service/request'
 import Api from '../config/api'
 
@@ -112,7 +112,7 @@ export let share = async ({share_params}) => {
         return updateShare(share_params.sharelog_id)
     } else if (sitecode === SITECODE.CINE_IOS_IPHONE) {
         await Bridge.ios('share', share_params)
-        alert('await Bridge.ios(\'share\', share_params)')
+        // alert('await Bridge.ios(\'share\', share_params)')
         return updateShare(share_params.sharelog_id)
     } else {
         if (uaUtil.mobile()) {

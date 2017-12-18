@@ -1,7 +1,7 @@
 import React from 'react';
 import * as Service from '../service/index'
-import * as storeUtil from '../../../common/util/storeUtil'
-import {getParam} from '../../../common/util/urlUtil'
+import * as storeUtil from '@/util/storeUtil'
+import {getParam} from '@/util/urlUtil'
 
 export default class Index extends React.Component {
 

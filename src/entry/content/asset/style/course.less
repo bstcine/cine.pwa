@@ -1,4 +1,4 @@
-@import "_mixin";
+@import "~asset/style/_mixin";
 
 .course-container {
   padding-bottom: 1.20rem;
@@ -140,44 +140,7 @@
     }
   }
 
-  .nav-tabs {
-    display: flex;
-    align-items: center;
-    .bottom-grey-line(11);
-    .tab-item {
-      flex: 1;
-      font-size: .30rem;
-      text-align: center;
-      & a {
-        min-width: 1.40rem;
-        display: inline-block;
-        padding: .28rem .09rem .16rem;
-        text-decoration: none;
-        color: #6a6a6a;
-        position: relative;
-      }
-      &.active a {
-        color: #014292;
-        &:after {
-          content: '';
-          position: absolute;
-          bottom: -.07rem;
-          left: 0;
-          width: 100%;
-          border-bottom: .07rem solid #014292;
-        }
-      }
 
-    }
-  }
-  .tab-content {
-    .tab-pane {
-      display: none;
-      &.active {
-        display: block;
-      }
-    }
-  }
 
   .go-buy {
     position: fixed;

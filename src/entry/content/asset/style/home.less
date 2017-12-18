@@ -2,14 +2,45 @@
 @import "~slick-carousel/slick/slick-theme.less";
 
 .home-container {
-  .slider-item {
-    height: 2.60rem;
-    width: 100%;
-    img{
-      display: block;
-      max-width: 100%;
+  .slick-slider{
+    overflow: hidden;
+    .slider-item {
+      height: 2.60rem;
+      width: 100%;
+      img{
+        display: block;
+        max-width: 100%;
+      }
+    }
+    .slick-dots {
+      bottom: 0;
+      li {
+        height: 20px;
+        width: 20px;
+        margin: 0 5px;
+        padding: 0;
+        cursor: pointer;
+        button {
+          &:before {
+            width: 20px;
+            height: 20px;
+            font-size: 16px;
+            line-height: 20px;
+            color: #e1a923;
+            opacity: 0.25;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+          }
+        }
+        &.slick-active button:before {
+          color: #e1a923;
+          opacity: 0.75;
+        }
+      }
     }
   }
+
+
   .tag-filter{
     font-size: 0;
     .p1-tags{

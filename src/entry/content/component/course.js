@@ -242,14 +242,14 @@ class Tab extends React.Component {
     render() {
         return (
             <div className="course-detail">
-                <div className="nav-tabs">
+                <div className="tab-items">
                     {this.renderTabItem()}
                 </div>
-                <div className="tab-content">
-                    <div className={`tab-pane course-feature${this.state.tabIndex === 0 ? ' active' : ''}`}
+                <div className="tab-panels">
+                    <div className={`tab-panel course-feature${this.state.tabIndex === 0 ? ' active' : ''}`}
                          dangerouslySetInnerHTML={this.renderFeature()}></div>
-                    <div className={`tab-pane${this.state.tabIndex === 1 ? ' active' : ''}`}>123</div>
-                    <div className={`tab-pane${this.state.tabIndex === 2 ? ' active' : ''}`}>
+                    <div className={`tab-panel${this.state.tabIndex === 1 ? ' active' : ''}`}>123</div>
+                    <div className={`tab-panel${this.state.tabIndex === 2 ? ' active' : ''}`}>
                         {this.renderComments()}
                     </div>
                 </div>

@@ -1,12 +1,12 @@
 import React from 'react'
-import * as Service from '../service'
-import {getParam, ignoreParams, updateUrl} from "../../../util/urlUtil";
-import Bridge from '../../../util/bridge'
-import * as SITECODE from '../../../config/sitecode'
-import {createShare, share} from "../../../util/shareUtil";
-import {initWechat} from "../../../util/wechatUtil";
-import * as storeUtil from "../../../util/storeUtil";
-import * as BaseService from '../../../service/base'
+import * as Service from '@/service/content'
+import {getParam, ignoreParams, updateUrl} from "@/util/urlUtil";
+import Bridge from '@/util/bridge'
+import * as SITECODE from '@/config/sitecode'
+import {createShare, share} from "@/util/shareUtil";
+import {initWechat} from "@/util/wechatUtil";
+import * as storeUtil from "@/util/storeUtil";
+import * as BaseService from '@/service/base'
 
 export default class Course extends React.Component {
     constructor(props) {

@@ -1,6 +1,6 @@
 import React from 'react'
 import Slider from 'react-slick'
-import * as Service from '../service'
+import * as Service from '@/service/content'
 
 export default class Home extends React.Component {
     constructor(props) {

@@ -9,9 +9,14 @@
     <script>
         var responsive = function () {
             var clientWidth = document.documentElement.clientWidth
-            if(clientWidth <= 575){
+            if (clientWidth < 576) {
+                console.log('576 clientWidth' +clientWidth)
                 document.documentElement.style.fontSize = clientWidth / 750 * 100 + 'px';
-            }else{
+            } else if (clientWidth < 1024) {
+                console.log('1024 clientWidth' +clientWidth)
+                document.documentElement.style.fontSize = clientWidth / 1536 * 100 + 'px';
+            } else {
+                console.log('clientWidth' +clientWidth)
                 document.documentElement.style.fontSize = '50px'
             }
         }

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {Component} from 'react'
 import * as Service from '@/service/content'
 import {getParam, ignoreParams, updateUrl} from "@/util/urlUtil";
 import Bridge from '@/util/bridge'
@@ -7,8 +7,9 @@ import {createShare, share} from "@/util/shareUtil";
 import {initWechat} from "@/util/wechatUtil";
 import * as storeUtil from "@/util/storeUtil";
 import * as BaseService from '@/service/base'
+import {Tabs, TabItems, TabItem, TabPanels, TabPanel} from '@/component/tabs'
 
-export default class Course extends React.Component {
+export default class Course extends Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -44,14 +45,33 @@ export default class Course extends React.Component {
                            poster={require('../asset/image/pic_gatsby@2x.png')} controls></video>
                 </div>
                 <Brief course={course} user={user}/>
-                <Tab feature={course.h5remark}/>
+                <div className="course-detail">
+                    <Tabs>
+                        <TabItems>
+                            <TabItem>课程特色</TabItem>
+                            <TabItem>课程大纲</TabItem>
+                            <TabItem>评价</TabItem>
+                        </TabItems>
+                        <TabPanels>
+                            <TabPanel>
+                                <div className="course-feature"
+                                     dangerouslySetInnerHTML={{__html: course.h5remark}}></div>
+                            </TabPanel>
+                            <TabPanel>222</TabPanel>
+                            <TabPanel>
+                                <Comments/>
+                            </TabPanel>
+                        </TabPanels>
+                    </Tabs>
+                </div>
+
                 <div className="go-buy">立即购买</div>
             </div>
         )
     }
 }
 
-class Brief extends React.Component {
+class Brief extends Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -180,24 +200,12 @@ class Brief extends React.Component {
     }
 }
 
-class Tab extends React.Component {
+class Comments extends Component {
     constructor(props) {
-        super(props)
-        this.state = {
-            tabIndex: 0
-        }
+        super(props);
+        this.renderComments = this.renderComments.bind(this);
     }
 
-    renderTabItem() {
-        let arr = ['课程特色', '课程大纲', '评价']
-        return arr.map((item, index) => {
-            return (
-                <div key={index} className={this.state.tabIndex === index ? 'tab-item active' : 'tab-item'}>
-                    <a href="javascript:" onClick={(e) => this.tabClick(index, e)}>{item}</a>
-                </div>
-            )
-        })
-    }
 
     renderComments() {
         let comments = [
@@ -207,52 +215,25 @@ class Tab extends React.Component {
             {nickname: 'BB****w', date: '08/31 10:13', detail: '真的超级棒!!!语法视频真的超级棒！为你们打Call!'},
             {nickname: 'CC****w', date: '08/31 10:13', detail: '语法视频真的超级棒！为你们打Call!为你们打Call为你们打Call为你们打Call!'},
         ]
-        let commentItems = () => {
-            return comments.map((item, index) => {
-                return (
-                    <div key={index} className="comment-item">
-                        <div className="comment-meta">
-                            <span className="nickname">{item.nickname}</span>
-                            <span className="date">{item.date}</span>
-                        </div>
-                        <div className="comment-detail">
-                            {item.detail}
-                        </div>
+        return comments.map((item, index) => {
+            return (
+                <div key={index} className="comment-item">
+                    <div className="comment-meta">
+                        <span className="nickname">{item.nickname}</span>
+                        <span className="date">{item.date}</span>
                     </div>
-                )
-            })
-        }
-        return (
-            <div className="comments">
-                {commentItems()}
-            </div>
-        )
-    }
-
-    tabClick(index) {
-        this.setState({
-            tabIndex: index
+                    <div className="comment-detail">
+                        {item.detail}
+                    </div>
+                </div>
+            )
         })
-    }
-
-    renderFeature() {
-        return {__html: this.props.feature}
     }
 
     render() {
         return (
-            <div className="course-detail">
-                <div className="tab-items">
-                    {this.renderTabItem()}
-                </div>
-                <div className="tab-panels">
-                    <div className={`tab-panel course-feature${this.state.tabIndex === 0 ? ' active' : ''}`}
-                         dangerouslySetInnerHTML={this.renderFeature()}></div>
-                    <div className={`tab-panel${this.state.tabIndex === 1 ? ' active' : ''}`}>123</div>
-                    <div className={`tab-panel${this.state.tabIndex === 2 ? ' active' : ''}`}>
-                        {this.renderComments()}
-                    </div>
-                </div>
+            <div className="comments">
+                {this.renderComments()}
             </div>
         )
     }

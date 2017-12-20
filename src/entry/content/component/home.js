@@ -1,6 +1,7 @@
 import React from 'react'
 import Slider from 'react-slick'
 import * as Service from '@/service/content'
+import {Tabs, TabItems, TabItem, TabPanels, TabPanel} from '@/component/tabs'
 
 export default class Home extends React.Component {
     constructor(props) {
@@ -23,8 +24,18 @@ export default class Home extends React.Component {
         return (
             <div className="home-container">
                 <BannerSlider banners={this.state.banners}/>
-                <Tab/>
-                <TagFilter tags={this.state.tags}/>
+                <Tabs>
+                    <TabItems>
+                        <TabItem>视频课程</TabItem>
+                        <TabItem>教材教辅</TabItem>
+                    </TabItems>
+                    <TabPanels>
+                        <TabPanel>
+                            <TagFilter tags={this.state.tags}/>
+                        </TabPanel>
+                        <TabPanel>222</TabPanel>
+                    </TabPanels>
+                </Tabs>
             </div>
         )
     }
@@ -38,7 +49,8 @@ class BannerSlider extends React.Component {
             infinite: true,
             speed: 500,
             slidesToShow: 1,
-            slidesToScroll: 1
+            slidesToScroll: 1,
+            dotsClass: 'slick-dots-orange'
         };
     }
 
@@ -94,43 +106,5 @@ class TagFilter extends React.Component {
             </div>
         );
     }
-
-}
-
-class Tab extends React.Component{
-    constructor(props) {
-        super(props);
-
-    }
-
-    renderTabItem() {
-        let arr = ['视频课程', '教材教辅']
-        return arr.map((item, index) => {
-            return (
-                <div key={index} className={this.state.tabIndex === index ? 'tab-item active' : 'tab-item'}>
-                    <a href="javascript:" onClick={(e) => this.tabClick(index, e)}>{item}</a>
-                </div>
-            )
-        })
-    }
-
-    render() {
-        return (
-            <div className="">
-                <div className="tab-items">
-                    {this.renderTabItem()}
-                </div>
-                <div className="tab-panels">
-                    <div className={`tab-panel ${this.state.tabIndex === 0 ? ' active' : ''}`}>
-
-                    </div>
-                    <div className={`tab-panel${this.state.tabIndex === 1 ? ' active' : ''}`}>
-
-                    </div>
-                </div>
-            </div>
-        );
-    }
-
 
 }

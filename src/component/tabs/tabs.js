@@ -2,6 +2,9 @@ import React, {Component, Children, cloneElement} from 'react';
 
 export default class Tabs extends Component {
 
+    static defaultProps = {
+        className: 'tabs'
+    }
 
     constructor(props) {
         super(props);
@@ -76,8 +79,9 @@ export default class Tabs extends Component {
     }
 
     render() {
+        const {className} = this.props
         return (
-            <div className="tabs" role="tabs">
+            <div className={className} role="tabs">
                 {this.getChildren()}
             </div>
         );

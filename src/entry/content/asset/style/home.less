@@ -1,19 +1,134 @@
 @import "~slick-carousel/slick/slick.less";
 @import "~slick-carousel/slick/slick-theme.less";
+@import "~asset/style/_mixin";
 
 .home-container {
+  position: relative;
   .tag-filter {
     font-size: 0;
+    margin: 0 .45rem;
     .p1-tags {
+      list-style: none;
+      padding-top: .10rem;
       .p1-tag {
-        font-size: .48rem;
-        color: #1a5fbd;
+        padding: .17rem .07rem;
+        font-size: .32rem;
+        line-height: .40rem;
+        color: #023d87;
+        .bottom-grey-line(3);
         .p2-tags {
           display: inline-block;
+          padding-left: .10rem;
           .p2-tag {
+            position: relative;
             display: inline-block;
-            font-size: .32rem;
+            margin: 0 .26rem;
+            padding: 0 .06rem;
+            border: .02rem solid transparent;
+            border-radius: .04rem;
+            line-height: .36rem;
+            font-size: .28rem;
             color: #3c3c3c;
+            &.active {
+              border: .02rem solid #3c3c3c;
+            }
+            .label {
+              position: absolute;
+              top: -.06rem;
+              right: -.48rem;
+              width: .50rem;
+              padding: .02rem 0;
+              text-align: center;
+              line-height: .20rem;
+              font-size: .18rem;
+              color: #fff;
+              background-color: #ff0000;
+              border-radius: .10rem;
+            }
+          }
+        }
+      }
+    }
+  }
+  .global-notice {
+    position: absolute;
+    left: 50%;
+    top: 5.77rem;
+    font-size: .24rem;
+    color: #87888a;
+    .notice-text {
+      display: inline-block;
+      height: .30rem;
+      line-height: .30rem;
+      vertical-align: top;
+    }
+    .notice-list {
+      display: inline-block;
+      width: 6.00rem;
+      height: .30rem;
+      line-height: .30rem;
+      vertical-align: top;
+      overflow: hidden;
+      .notice-item {
+        display: inline-block;
+        a {
+          color: #87888a;
+          text-decoration: none;
+        }
+      }
+    }
+  }
+  .category-list {
+    .category {
+      margin: 0 .36rem;
+      .bottom-grey-line(16);
+      .category-text {
+        padding: .36rem .06rem .28rem;
+        font-size: .36rem;
+        color: #0f0f0f;
+      }
+      .product-list {
+        font-size: 0;
+        margin: 0 -.10rem;
+        a {
+          text-decoration: none;
+        }
+        .product-wrap {
+          display: inline-block;
+          width: 1/3 * 100%;
+          .product-item {
+            margin: 0 .20rem;
+            .product-img {
+              height: 2.70rem;
+              border-radius: .08rem;
+            }
+            .product-desc {
+              .product-title {
+                padding-top: .16rem;
+                font-size: .30rem;
+                color: #222;
+                .text-one-line();
+              }
+              .product-author {
+
+              }
+              .product-arrange {
+
+              }
+              .product-price {
+                font-size: .42rem;
+                color: #f22010;
+                .old-price-text {
+                  color: #c2c3c5;
+                  font-size: .28rem;
+                }
+                .old-price {
+                  color: #c2c3c5;
+                  text-decoration: line-through;
+                  font-size: .28rem;
+                }
+              }
+            }
           }
         }
       }
@@ -24,6 +139,8 @@
 // 轮播图
 .slick-slider {
   overflow: hidden;
+  height: 5.40rem;
+  .bottom-grey-line(16);
   .slider-item {
     height: 5.24rem;
     width: 100%;
@@ -71,6 +188,51 @@
         background-clip: border-box;
         box-shadow: -.02rem 0 .03rem 0 rgba(208, 165, 0, 0.48);
         opacity: 1
+      }
+    }
+  }
+}
+
+.home-tabs {
+  .tab-items {
+    display: flex;
+    align-items: center;
+    margin: 0 .40rem;
+    .bottom-grey-line(3);
+    .tab-item {
+      margin-right: .77rem;
+      font-size: .36rem;
+      text-align: left;
+      & a {
+        min-width: 1.40rem;
+        display: inline-block;
+        padding: .32rem .29rem .23rem;
+        text-decoration: none;
+        color: #222222;
+        position: relative;
+      }
+      &.active a {
+        color: #014292;
+        &:after {
+          content: '';
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 100%;
+          border-bottom: .07rem solid #014292;
+        }
+      }
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+
+  .tab-panels {
+    .tab-panel {
+      display: none;
+      &.active {
+        display: block;
       }
     }
   }

@@ -1,4 +1,8 @@
 import React, {Component, Children, cloneElement} from 'react';
+import TabItem from './TabItem'
+import TabItems from './TabItems'
+import TabPanel from './TabPanel'
+import TabPanels from './TabPanels'
 
 export default class Tabs extends Component {
 
@@ -54,20 +58,20 @@ export default class Tabs extends Component {
         })
     }
 
-    static isTabItem(ele) {
-        return ele.type && ele.type.name === 'TabItem'
+    static isTabItem(ele) {// 此处比较类型不可用type.name来比较，压缩后的代码会将name也一并压缩，不能根据字符串正常比较
+        return ele.type === TabItem
     }
 
     static isTabItems(ele) {
-        return ele.type && ele.type.name === 'TabItems'
+        return ele.type === TabItems
     }
 
     static isTabPanel(ele) {
-        return ele.type && ele.type.name === 'TabPanel'
+        return ele.type === TabPanel
     }
 
     static isTabPanels(ele) {
-        return ele.type && ele.type.name === 'TabPanels'
+        return ele.type === TabPanels
     }
 
     onTabItemClick(index) {

@@ -3,7 +3,7 @@ import * as storeUtil from '@/util/storeUtil'
 import {initWechat} from '@/util/wechatUtil'
 import areaCodes from '@/constant/areaCodes'
 import grades from '@/constant/grades'
-import born_ats from '@/constant/born_ats'
+import bornAts from '@/constant/bornAts'
 
 export default class UserInfo extends Component {
 
@@ -11,7 +11,7 @@ export default class UserInfo extends Component {
         super(props)
         console.log('UserInfo constructor')
         this.curr_year = new Date().getFullYear()
-        this.born_ats = born_ats
+        this.born_ats = bornAts
         this.grades = grades
         this.area_codes = areaCodes
         this.state = {

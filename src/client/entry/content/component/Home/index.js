@@ -28,7 +28,6 @@ export default class Home extends Component {
         let header = ReactDOM.findDOMNode(this.refs.header)
         let home = ReactDOM.findDOMNode(this.refs.homeContainer)
         let homeOffset = home.getBoundingClientRect()
-        console.log(new Date().getTime() / 1000)
         if (homeOffset.y < 0) {
             if (!header.classList.contains('white-header'))
                 header.classList.add('white-header')

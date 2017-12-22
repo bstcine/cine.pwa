@@ -1,0 +1,46 @@
+@import "~asset/style/_mixin";
+
+.home-tabs {
+  .tab-items {
+    display: flex;
+    align-items: center;
+    margin: 0 .40rem;
+    .bottom-grey-line(3);
+    .tab-item {
+      margin-right: .77rem;
+      font-size: .36rem;
+      text-align: left;
+      & a {
+        min-width: 1.40rem;
+        display: inline-block;
+        padding: .32rem .29rem .23rem;
+        text-decoration: none;
+        color: #222222;
+        position: relative;
+      }
+      &.active a {
+        color: #014292;
+        &:after {
+          content: '';
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 100%;
+          border-bottom: .07rem solid #014292;
+        }
+      }
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+
+  .tab-panels {
+    .tab-panel {
+      display: none;
+      &.active {
+        display: block;
+      }
+    }
+  }
+}

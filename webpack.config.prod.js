@@ -18,22 +18,22 @@ let HtmlWebpackPlugins = []
 pages.forEach((page) => {
     entry[page] = ['babel-polyfill', `./src/client/entry/${page}/index.js`]
     HtmlWebpackPlugins.push(new HtmlWebpackPlugin({
-        filename: `${page}/index.html`,
+        filename: `entry/${page}/index.html`,
         template: `src/client/entry/${page}/index.html`,
         inject: true,
         chunks: [page],
-        // minify: {
-        //     removeComments: true,
-        //     collapseWhitespace: true,
-        //     removeRedundantAttributes: true,
-        //     useShortDoctype: true,
-        //     removeEmptyAttributes: true,
-        //     removeStyleLinkTypeAttributes: true,
-        //     keepClosingSlash: true,
-        //     minifyJS: true,
-        //     minifyCSS: true,
-        //     minifyURLs: true,
-        // },
+        minify: {
+            removeComments: true,
+            collapseWhitespace: true,
+            removeRedundantAttributes: true,
+            useShortDoctype: true,
+            removeEmptyAttributes: true,
+            removeStyleLinkTypeAttributes: true,
+            keepClosingSlash: true,
+            minifyJS: true,
+            minifyCSS: true,
+            minifyURLs: true,
+        },
     }))
 })
 
@@ -45,14 +45,14 @@ module.exports = {
     module: WebpackConfigCommon.module,
     resolve: WebpackConfigCommon.resolve,
     plugins: [
-        new CleanWebpackPlugin(['build/*']),
+        new CleanWebpackPlugin(['build/*.*', 'build/entry', 'build/asset'], {verbose: false}),
         new webpack.DllReferencePlugin({
             context: __dirname,
-            manifest: 'src/dll/manifest-dll.json'
+            manifest: 'build/dll/manifest-dll.json'
         }),
         ...HtmlWebpackPlugins,
         new AddAssetHtmlPlugin({
-            filepath: path.resolve(__dirname, 'src/dll/dll.*.js'),
+            filepath: path.resolve(__dirname, 'build/dll/dll.*.js'),
             publicPath: WebpackConfigCommon.static_host + 'dll/',
             includeSourcemap: false,
             outputPath: 'dll'

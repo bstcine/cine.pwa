@@ -20,7 +20,7 @@ module.exports = {
     output: {
         path: path.resolve(__dirname, 'build'),
         publicPath: static_host,
-        filename: '[name]/entry.[chunkhash:8].js'
+        filename: 'entry/[name]/index.[chunkhash:8].js'
     },
 
     module: {

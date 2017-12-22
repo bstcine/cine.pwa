@@ -12,10 +12,10 @@ let entry = {}
 let HtmlWebpackPlugins = []
 let rewrites = []
 pages.forEach((page) => {
-    entry[page] = ['babel-polyfill', `./src/entry/${page}/index.js`]
+    entry[page] = ['babel-polyfill', `./src/client/entry/${page}/index.js`]
     HtmlWebpackPlugins.push(new HtmlWebpackPlugin({
         filename: `${page}/index.html`,
-        template: `src/entry/${page}/index.html`,
+        template: `src/client/entry/${page}/index.html`,
         inject: true,
         chunks: [page]
     }))
@@ -34,11 +34,11 @@ module.exports = {
         new CleanWebpackPlugin(['build/*']),
         new webpack.DllReferencePlugin({
             context: __dirname,
-            manifest: 'src/dll/manifest-dll.json'
+            manifest: 'src/client/dll/manifest-dll.json'
         }),
         ...HtmlWebpackPlugins,
         new AddAssetHtmlPlugin({
-            filepath: path.resolve(__dirname, 'src/dll/dll.*.js'),
+            filepath: path.resolve(__dirname, 'src/client/dll/dll.*.js'),
             publicPath: '/dll/',
             includeSourcemap: false,
             outputPath: 'dll'
@@ -57,6 +57,7 @@ module.exports = {
         proxy: {
             "/api": {
                 target: "http://localhost:9000",
+                // target: "http://apptest.bstcine.com",
                 secure: false,
                 changeOrigin:true
             }

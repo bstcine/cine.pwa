@@ -16,10 +16,10 @@ const pages = WebpackConfigCommon.pages
 let entry = {}
 let HtmlWebpackPlugins = []
 pages.forEach((page) => {
-    entry[page] = ['babel-polyfill', `./src/entry/${page}/index.js`]
+    entry[page] = ['babel-polyfill', `./src/client/entry/${page}/index.js`]
     HtmlWebpackPlugins.push(new HtmlWebpackPlugin({
         filename: `${page}/index.html`,
-        template: `src/entry/${page}/index.html`,
+        template: `src/client/entry/${page}/index.html`,
         inject: true,
         chunks: [page],
         // minify: {

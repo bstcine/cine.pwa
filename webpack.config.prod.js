@@ -1,22 +1,22 @@
-const path = require('path')
-const webpack = require('webpack')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
-const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin')
-const CleanWebpackPlugin = require('clean-webpack-plugin')
+const path = require('path');
+const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 
-const WebpackConfigCommon = require('./webpack.config.common')
+const WebpackConfigCommon = require('./webpack.config.common');
 
 // 生产模式 关闭 debug，用来移除 console 日志输出
-const debug = true
+const debug = true;
 
-const pages = WebpackConfigCommon.pages
-let entry = {}
-let HtmlWebpackPlugins = []
+const pages = WebpackConfigCommon.pages;
+let entry = {};
+let HtmlWebpackPlugins = [];
 pages.forEach((page) => {
-    entry[page] = ['babel-polyfill', `./src/client/entry/${page}/index.js`]
+    entry[page] = ['babel-polyfill', `./src/client/entry/${page}/index.js`];
     HtmlWebpackPlugins.push(new HtmlWebpackPlugin({
         filename: `entry/${page}/index.html`,
         template: `src/client/entry/${page}/index.html`,
@@ -35,7 +35,7 @@ pages.forEach((page) => {
             minifyURLs: true,
         },
     }))
-})
+});
 
 module.exports = {
     cache: false,
@@ -81,4 +81,4 @@ module.exports = {
         }),
         // new BundleAnalyzerPlugin({analyzerMode:'static'})
     ]
-}
+};

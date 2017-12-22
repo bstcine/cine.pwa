@@ -4,10 +4,10 @@
   "description": "React-PWA",
   "main": "server.js",
   "scripts": {
-    "prod-dll": "webpack -p --colors --config=webpack.dll.js",
-    "prod-build": "webpack -p --colors --config=webpack.config.prod.js && node ./nodescript/generate-build-manifest.js",
-    "dev-dll": "webpack --colors --config=webpack.dll.js",
-    "dev-build": "webpack --colors --config=webpack.config.dev.js && node ./nodescript/generate-build-manifest.js",
+    "prod-dll": "webpack -p --progress --colors --config=webpack.dll.js",
+    "prod-build": "webpack -p --progress --colors --config=webpack.config.prod.js && node ./nodescript/generate-build-manifest.js",
+    "dev-dll": "webpack --progress --colors --config=webpack.dll.js",
+    "dev-build": "webpack --progress --colors --config=webpack.config.dev.js && node ./nodescript/generate-build-manifest.js",
     "start": "webpack-dev-server --config=webpack.config.dev.js"
   },
   "repository": {
@@ -24,7 +24,6 @@
     "query-string": "^5.0.1",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
-    "react-lazyload": "^2.3.0",
     "react-redux": "^5.0.6",
     "react-router-dom": "^4.2.2",
     "react-slick": "^0.16.0",
@@ -40,7 +39,7 @@
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
     "babel-plugin-lodash": "^3.3.2",
-    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
     "clean-webpack-plugin": "^0.1.17",

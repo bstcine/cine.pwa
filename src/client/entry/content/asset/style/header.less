@@ -1,3 +1,6 @@
+@import "~asset/style/_mixin.less";
+@import "~asset/style/_media.less";
+
 .header {
   position: fixed;
   z-index: 1;
@@ -44,6 +47,17 @@
       width: .51rem;
       height: .37rem;
       background: url(~asset/image/ico_choose.png) no-repeat 50%;
+      background-size: contain;
+    }
+  }
+}
+
+@media @pc {
+  .header,.header.white-header {
+    background: #ffffff;
+    box-shadow: 0 .10rem .11rem .01rem rgba(173, 173, 174, 0.16);
+    .logo {
+      background: url(~asset/image/pad_logo_blue.png) no-repeat;
       background-size: contain;
     }
   }

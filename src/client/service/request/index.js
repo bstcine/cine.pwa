@@ -1,9 +1,22 @@
 import * as storeUtil from '@/util/storeUtil'
+import axios from 'axios'
+
+function httpUrl(url) {
+
+    let baseURL = typeof app_API_Host_URL === "undefined" ? "" : app_API_Host_URL
+    if (url.indexOf('http') >= 0) {
+        baseURL = ""
+    }
+
+    return baseURL + url;
+}
 
 function httpBody(bodyData) {
-    let token = bodyData ? bodyData.token:null
+
+    let token = bodyData ? bodyData.token : null
     if (!token) token = storeUtil.getToken() || ""
     let sitecode = storeUtil.get('sitecode') || "cine.web"
+
     return {
         "token": token,
         "sitecode": sitecode,
@@ -14,48 +27,19 @@ function httpBody(bodyData) {
     };
 }
 
-function toQueryString(obj) {
-    let parts = [],
-        i;
-    for (i in obj) {
-        if (obj.hasOwnProperty(i) && obj[i]) {
-            parts.push(encodeURIComponent(i) + "=" + encodeURIComponent(obj[i]));
-        }
-    }
-    return parts.join("&");
-}
+export let post = (url, data) => {
 
-function request(obj) {
+    let _apiURL = httpUrl(url);
+    let _httpBody = httpBody(data);
 
-    return new Promise((resolve, reject) => {
+    //alert(_apiURL)
+    return axios.post(_apiURL, _httpBody)
+        .then(response => response.data)
 
-        if (obj.params) {
-            obj.url += '?' + toQueryString(obj.params);
-        }
+};
 
-        let xhr = new XMLHttpRequest();
-        xhr.onreadystatechange = function () {
-            if (xhr.readyState === 4) {
-                if (xhr.status >= 200 && xhr.status < 300) {
-                    resolve(xhr.responseText ? JSON.parse(xhr.responseText) : undefined);
-                } else {
-                    reject(xhr.responseText);
-                }
-            }
-        };
-        // alert(`request url ${obj.url}`)
-        xhr.open(obj.method, obj.url, true);
-        xhr.setRequestHeader("Accept", "application/json");
-        if (obj.contentType) {
-            xhr.setRequestHeader("Content-Type", obj.contentType);
-        }
-        xhr.send(obj.data ? JSON.stringify(obj.data) : undefined);
-    });
+export let get = (url) => {
 
-}
-
-export let get = (url, params) => request({method: "GET", url, params});
-export let post = (url, _data) => {
-    let data = httpBody(_data);
-    return request({method: "POST", contentType: "application/json", url, data})
+    let _apiURL = httpUrl(url);
+    return axios.get(_apiURL).then(response => response.data)
 };

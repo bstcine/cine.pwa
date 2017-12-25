@@ -1,9 +1,8 @@
 import React, {Component} from 'react';
 import * as storeUtil from '@/util/storeUtil'
 import {initWechat} from '@/util/wechatUtil'
-import areaCodes from '@/constant/areaCodes'
-import grades from '@/constant/grades'
-import bornAts from '@/constant/bornAts'
+import * as area from '@/service/data/response_area.json'
+import * as account from '@/service/data/response_account.json'
 
 export default class UserInfo extends Component {
 
@@ -11,9 +10,9 @@ export default class UserInfo extends Component {
         super(props)
         console.log('UserInfo constructor')
         this.curr_year = new Date().getFullYear()
-        this.born_ats = bornAts
-        this.grades = grades
-        this.area_codes = areaCodes
+        this.born_ats = account.born_ats
+        this.grades = account.grades
+        this.area_codes = area.areaCodes
         this.state = {
             born_at: 2004,
             grade: 6,

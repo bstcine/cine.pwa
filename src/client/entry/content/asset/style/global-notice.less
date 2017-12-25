@@ -1,0 +1,37 @@
+.global-notice {
+  position: absolute;
+  left: 50%;
+  top: 5.77rem;
+  font-size: .24rem;
+  color: #87888a;
+  .notice-text {
+    display: inline-block;
+    height: .30rem;
+    line-height: .30rem;
+    vertical-align: top;
+  }
+  .notice-list {
+    display: inline-block;
+    width: 6.00rem;
+    height: .30rem;
+    line-height: .30rem;
+    vertical-align: top;
+    overflow: hidden;
+    .notice-item {
+      display: inline-block;
+      a {
+        color: #87888a;
+        text-decoration: none;
+      }
+    }
+  }
+}
+
+@media @pc {
+  .global-notice{
+    position: fixed;
+    top: .75rem;
+    left:50%;
+    z-index: 3;
+  }
+}

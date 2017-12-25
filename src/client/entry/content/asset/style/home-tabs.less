@@ -1,10 +1,6 @@
-@import "~asset/style/_mixin";
-@import "~asset/style/_media";
-
 .home-tabs {
   .tab-items {
     display: flex;
-    align-items: center;
     margin: 0 .40rem;
     .bottom-grey-line(3);
     .tab-item {
@@ -51,15 +47,19 @@
     .tab-items{
       position: fixed;
       margin: 0;
+      padding-left: 2.80rem;
       z-index: 2;
       left: 0;
       top: 0;
       width: 100%;
       border-bottom: solid .01rem rgba(228, 228, 228, 0.3);
       .tab-item{
-        flex: 1;
-        text-align: right;
+        margin-right: .77rem;
+        font-size: .36rem;
+        text-align: left;
         & a {
+          min-width: 1.40rem;
+          display: inline-block;
           padding-top: .68rem;
         }
       }

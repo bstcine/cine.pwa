@@ -6,6 +6,8 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
 const WebpackMildCompile = require('webpack-mild-compile').Plugin;
 const WebpackConfigCommon = require('./webpack.config.common');
+var OfflinePlugin = require('offline-plugin');
+
 
 const pages = WebpackConfigCommon.pages;
 let entry = {};
@@ -44,6 +46,7 @@ module.exports = {
             outputPath: 'dll'
         }),
         new LodashModuleReplacementPlugin(),
+        // new OfflinePlugin()
     ],
     devServer: {
         contentBase: path.join(__dirname, "build"),

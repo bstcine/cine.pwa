@@ -12,30 +12,30 @@ export default class TagFilter extends Component {
         return this.props.tags.map((item, i) => {
             return (
                 <li key={i} className="p1-tag">
-                    {item.name}
+                    {item.text}
                     <ul className="p2-tags">
-                        {this.renderP2Tags(i, item.children.slice())}
+                        {this.renderP2Tags(item.id, item.children.slice())}
                     </ul>
                 </li>
             )
         })
     }
 
-    renderP2Tags(p1_level, items) {
-        items.unshift({"id": "", "name": "全部"})
+    renderP2Tags(parent_id, items) {
+        items.unshift({"id": "", "text": "全部",attributes:{parent_id}})
         return items.map((item, i) => {
-            const label = item.label ? (<span className="label">{item.label}</span>) : ""
-            const className = this.props.tagids.includes(item.id) ? "p2-tag active" : "p2-tag"
+            const label = item.attributes && item.attributes.label ? (<span className="label">{item.attributes.label}</span>) : ""
+            const className = this.props.tagids.includes(item.id + '') ? "p2-tag active" : "p2-tag"
             return (
                 <li key={i} className={className}
-                    onClick={(e) => this.tagClick(p1_level, item.id, e)}>{item.name} {label}</li>
+                    onClick={(e) => this.tagClick(item, e)}>{item.text} {label}</li>
             )
         })
     }
 
-    tagClick(p1_level, tag_id) {
+    tagClick(item) {
         let obj = {}
-        obj[`tag_${p1_level}`] = tag_id
+        obj[`tag_${item.attributes.parent_id}`] = item.id
         let paramsObj = Object.assign(getParam(), obj)
         let arr = []
         for (let [key, value] of Object.entries(paramsObj)) {

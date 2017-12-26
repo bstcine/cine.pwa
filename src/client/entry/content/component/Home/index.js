@@ -13,21 +13,23 @@ import CategoryList from './CategoryList'
 
 export default class Home extends Component {
     constructor(props) {
-        super(props)
+        super(props);
         this.state = {
             banners: [],
-            tags: [],
-            categorys: [],
+            tagTree0: [],
+            tagTree1: [],
+            categorys0: [],
+            categorys1: [],
             tagids: []
-        }
+        };
         this.handlerScroll = this.handlerScroll.bind(this);
         this.debounceHandlerScroll = _.debounce(this.handlerScroll, 50);
     }
 
     handlerScroll() {
-        let header = ReactDOM.findDOMNode(this.refs.header)
-        let home = ReactDOM.findDOMNode(this.refs.homeContainer)
-        let homeOffset = home.getBoundingClientRect()
+        let header = ReactDOM.findDOMNode(this.refs.header);
+        let home = ReactDOM.findDOMNode(this.refs.homeContainer);
+        let homeOffset = home.getBoundingClientRect();
         if (homeOffset.y < 0) {
             if (!header.classList.contains('white-header'))
                 header.classList.add('white-header')
@@ -38,40 +40,106 @@ export default class Home extends Component {
     }
 
     async componentDidMount() {
-        console.log(`componentDidMount`)
-        window.addEventListener('scroll', this.debounceHandlerScroll)
-        let params = getParam()
-        let tagids = []
+        console.log(`componentDidMount`);
+        window.addEventListener('scroll', this.debounceHandlerScroll);
+        let params = getParam();
+        let tagids = [];
         for (let [key, value] of Object.entries(params)) {
             if (/^tag_/i.test(key)) {
                 tagids.push(value)
             }
         }
-        let homeRes = await Service.getContentHome({tagids})
+        let homeRes = await Service.getContentHome();
+
+        this.tagsCache = {};
+        _.flatten([...homeRes.tags.tagTree0.map(item => item.children), ...homeRes.tags.tagTree1.map(item => item.children)]).forEach(item => {
+            if (item.attributes && item.attributes.course_ids && item.attributes.course_ids.length) {
+                item.attributes.course_ids = item.attributes.course_ids.split(',').map(obj => obj.replace(/\$/g, ''))
+            }
+            this.tagsCache[item.id] = item
+        });
+
+        this.categorys = homeRes.categorys.slice()
+
+        let {courseIds0, courseIds1} = this.matchCourseIds(tagids)
+        const {categorys0, categorys1} = Home.categoryConvertor(this.categorys, courseIds0, courseIds1);
+
         this.setState({
             banners: homeRes.banners,
-            tags: homeRes.tags,
-            categorys: homeRes.categorys,
+            tagTree0: homeRes.tags.tagTree0,
+            tagTree1: homeRes.tags.tagTree1,
+            categorys0: categorys0,
+            categorys1: categorys1,
             tagids
         })
-
-
     }
 
+    matchCourseIds(tagids) {
+        let courseIds0 = null;
+        let courseIds1 = null;
+        tagids.forEach(tag_id => {
+            const tag = this.tagsCache[tag_id]
+            if (tag.attributes && tag.attributes.course_ids && tag.attributes.course_ids.length) {
+                if (tag.attributes.type === '1') {
+                    courseIds0 = courseIds0 ?
+                        _.intersection(tag.attributes.course_ids, courseIds0)
+                        : tag.attributes.course_ids
+                } else {
+                    courseIds1 = courseIds1 ?
+                        _.intersection(tag.attributes.course_ids, courseIds1)
+                        : tag.attributes.course_ids
+                }
+            }
+        })
+        return {courseIds0, courseIds1}
+    }
+
+    static categoryConvertor(categorys, filterIds0, filterIds1) {
+        //视频课程
+        let categorys0 = [];
+        //教材教辅
+        let categorys1 = [];
+        categorys.forEach(category => {
+            if (category.children && category.children.length) {
+                let children0 = [];
+                let children1 = [];
+                category.children.forEach(course => {
+                    if (course.object_type === '1' || course.object_type === '4') {
+                        if (filterIds0 && !filterIds0.includes(course.id)) return
+                        children0.push(course)
+                    } else {
+                        if (filterIds1 && !filterIds1.includes(course.id)) return
+                        children1.push(course)
+                    }
+                });
+                if (children0.length) {
+                    let category0 = Object.assign({}, category);
+                    category0.children = children0;
+                    categorys0.push(category0)
+                }
+                if (children1.length) {
+                    let category1 = Object.assign({}, category);
+                    category1.children = children1;
+                    categorys1.push(category1)
+                }
+            }
+        });
+        return {categorys0, categorys1}
+    }
+
+
     async componentWillReceiveProps(nextProps) {
-        let params = getParam()
-        let tagids = []
+        let params = getParam();
+        let tagids = [];
         for (let [key, value] of Object.entries(params)) {
             if (/^tag_/i.test(key)) {
                 tagids.push(value)
             }
         }
+        let {courseIds0, courseIds1} = this.matchCourseIds(tagids)
+        const {categorys0, categorys1} = Home.categoryConvertor(this.categorys, courseIds0, courseIds1);
         this.setState({
-            tagids
-        })
-        let homeRes = await Service.getContentHome({tagids})
-        this.setState({
-            categorys: homeRes.categorys,
+            tagids, categorys0, categorys1
         })
     }
 
@@ -80,7 +148,7 @@ export default class Home extends Component {
     }
 
     render() {
-        console.log(`Home`)
+        console.log(`Home`);
         return (
             <div className="home-container" ref="homeContainer">
                 <Header ref="header"/>
@@ -93,10 +161,15 @@ export default class Home extends Component {
                     </TabItems>
                     <TabPanels>
                         <TabPanel>
-                            <TagFilter tags={this.state.tags} history={this.props.history} tagids={this.state.tagids}/>
-                            <CategoryList categorys={this.state.categorys} history={this.props.history}/>
+                            <TagFilter tags={this.state.tagTree0} history={this.props.history}
+                                       tagids={this.state.tagids}/>
+                            <CategoryList categorys={this.state.categorys0} history={this.props.history}/>
                         </TabPanel>
-                        <TabPanel>222</TabPanel>
+                        <TabPanel>
+                            <TagFilter tags={this.state.tagTree1} history={this.props.history}
+                                       tagids={this.state.tagids}/>
+                            <CategoryList categorys={this.state.categorys1} history={this.props.history}/>
+                        </TabPanel>
                     </TabPanels>
                 </Tabs>
             </div>

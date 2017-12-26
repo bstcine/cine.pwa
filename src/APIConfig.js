@@ -8,6 +8,7 @@ exports.APIURL_Content_Word_Result_List = "/api/content/word/result/list"       
 exports.APIURL_Content_Home = "/api/content/home"                                               //app首页
 exports.APIURL_Content_Tag_Tree = "/api/content/tag/tree"                                       //标签树
 exports.APIURL_Content_Course_Detail = "/api/content/course/detail" //课程详情
+exports.APIURL_Content_Quiz = "/api/web/quiz/" //小节测试
 
 exports.APIURL_Wechat_Js_Signature = "/api/wechat/jssignature"
 

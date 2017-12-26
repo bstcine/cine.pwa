@@ -1,7 +1,7 @@
 import {getWechatJsSignature} from '@/service/base'
 import {checkShareMask, updateShare, hideShareMask} from './shareUtil'
 import {queryShare} from "./shareUtil";
-import {getParam, updateUrl, ignoreParams} from "./urlUtil";
+import {getParam, ignoreParams} from "./urlUtil";
 
 export let setShareParam = (params) => {
     if (typeof window.wx === 'undefined' || !window.wx) return console.log('window.wx not found, ensure include jweixin in your html')

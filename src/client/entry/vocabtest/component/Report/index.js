@@ -1,4 +1,4 @@
-import React,{Component} from 'react';
+import React, {Component} from 'react';
 import {getParam, updateUrl, ignoreParams} from '@/util/urlUtil'
 import * as Service from '@/service/vocabtest'
 import * as storeUtil from '@/util/storeUtil'
@@ -6,6 +6,7 @@ import {initWechat} from '@/util/wechatUtil'
 import {createShare, share} from '@/util/shareUtil'
 import SITECODE from '@/constant/sitecode'
 import Bridge from "@/util/bridge";
+import BRIDGE_EVENT from "@/constant/bridgeEvent";
 
 export default class Report extends Component {
     constructor(props) {
@@ -55,11 +56,11 @@ export default class Report extends Component {
         if (sitecode === SITECODE.CINE_IOS
             || sitecode === SITECODE.CINE_IOS_IPHONE
             || sitecode === SITECODE.CINE_IOS_IPAD) {
-            Bridge.ios('course',{course_id},false)
+            Bridge.ios(BRIDGE_EVENT.IOS_COURSE, {course_id}, false)
         } else if (sitecode === SITECODE.CINE_ANDROID
             || sitecode === SITECODE.CINE_ANDROID_PHONE
             || sitecode === SITECODE.CINE_ANDROID_PAD) {
-            Bridge.android('course',{course_id},false)
+            Bridge.android(BRIDGE_EVENT.ANDROID_COURSE, {course_id}, false)
         } else {
             location.href = '/lesson/' + course_id
         }
@@ -98,7 +99,8 @@ export default class Report extends Component {
                         <li>托福：8000</li>
                         <li>SAT：10000以上</li>
                     </ul>
-                    <div className="recommend-title">{this.state.from_share ? '基于词汇量和年龄段，推荐以下课程：' : '基于你的词汇量和年龄段，推荐以下课程：'}</div>
+                    <div
+                        className="recommend-title">{this.state.from_share ? '基于词汇量和年龄段，推荐以下课程：' : '基于你的词汇量和年龄段，推荐以下课程：'}</div>
                     <div className="recommend-list">
                         {this.renderRecommendList()}
                     </div>

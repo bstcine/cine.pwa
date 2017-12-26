@@ -7,17 +7,18 @@ import {getParam, updateUrl} from './urlUtil'
 import Bridge from './bridge'
 import {get, post} from '../service/request'
 import Api from '../../APIConfig'
+import BRIDGE_EVENT from "@/constant/bridgeEvent";
 
 const imgUrl = require('../asset/image/pic_share_arr@2x.png');
 let inter = null;
 
-export let createShare = async ({type, share_link,cid}) => {
+export let createShare = async ({type, share_link, cid}) => {
     let res = null;
     if (type === 7) {
         res = await post(Api.APIURL_Share_Common, {type, share_link})
     } else if (type === 4) {
         res = await post(Api.APIURL_Share_CoursePackage, {type, cid})
-    }else {
+    } else {
         return alert('invalid_type')
     }
     if (res.code !== '1') {
@@ -108,10 +109,10 @@ let checkShareStatus = (sharelog_id) => {
 export let share = async ({share_params}) => {
     let sitecode = storeUtil.get('sitecode');
     if (sitecode === SITECODE.CINE_ANDROID_PHONE) {
-        await Bridge.android('share', share_params);
+        await Bridge.android(BRIDGE_EVENT.ANDROID_SHARE, share_params);
         return updateShare(share_params.sharelog_id)
     } else if (sitecode === SITECODE.CINE_IOS_IPHONE) {
-        await Bridge.ios('share', share_params);
+        await Bridge.ios(BRIDGE_EVENT.IOS_SHARE, share_params);
         // alert('await Bridge.ios(\'share\', share_params)')
         return updateShare(share_params.sharelog_id)
     } else {

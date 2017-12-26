@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import * as storeUtil from "@/util/storeUtil";
 import Bridge from "@/util/bridge";
 import SITECODE from "@/constant/sitecode";
+import BRIDGE_EVENT from '@/constant/bridgeEvent'
 
 export default class CourseLink extends Component {
 
@@ -17,11 +18,11 @@ export default class CourseLink extends Component {
         if (sitecode === SITECODE.CINE_IOS
             || sitecode === SITECODE.CINE_IOS_IPHONE
             || sitecode === SITECODE.CINE_IOS_IPAD) {
-            Bridge.ios('course', {course_id}, false)
+            Bridge.ios(BRIDGE_EVENT.IOS_COURSE, {course_id}, false)
         } else if (sitecode === SITECODE.CINE_ANDROID
             || sitecode === SITECODE.CINE_ANDROID_PHONE
             || sitecode === SITECODE.CINE_ANDROID_PAD) {
-            Bridge.android('course', {course_id}, false)
+            Bridge.android(BRIDGE_EVENT.ANDROID_COURSE, {course_id}, false)
         } else {
             if (/^\/content\//i.test(location.pathname)) {
                 history.push(`/course?cid=${course_id}`)

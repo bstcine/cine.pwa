@@ -7,7 +7,9 @@ export default class BannerSlider extends Component {
         this.settings = {
             dots: true,
             infinite: true,
-            speed: 500,
+            speed: 800,
+            touchThreshold: 10,
+            autoplay: true,
             slidesToShow: 1,
             slidesToScroll: 1,
             dotsClass: 'slick-dots-orange'

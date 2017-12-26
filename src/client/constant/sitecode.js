@@ -5,6 +5,6 @@ const SITECODE = {
     CINE_ANDROID : 'cine.android',
     CINE_ANDROID_PHONE : 'cine.android.phone',
     CINE_ANDROID_PAD : 'cine.android.pad',
-}
+};
 
 export default SITECODE

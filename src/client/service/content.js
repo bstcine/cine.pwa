@@ -67,3 +67,10 @@ export let getContentHome = (query) => {
             return homeRes
         })
 }
+
+export let getTagTree = ()=>{
+    return post(Api.APIURL_Content_Home, {})
+        .then(res=>{
+
+        })
+}

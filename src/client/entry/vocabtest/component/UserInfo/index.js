@@ -16,7 +16,7 @@ export default class UserInfo extends Component {
         this.state = {
             born_at: 2004,
             grade: 6,
-            area_code: "310000",
+            area_code: 310000,
         }
         this.startClick = this.startClick.bind(this)
         this.bornAtChange = this.bornAtChange.bind(this)

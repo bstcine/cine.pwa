@@ -1,8 +1,9 @@
-import React,{Component} from 'react';
+import React, {Component} from 'react';
 import * as storeUtil from '@/util/storeUtil'
 import {initWechat} from '@/util/wechatUtil'
 import Bridge from '@/util/bridge'
 import SITECODE from '@/constant/sitecode'
+import BRIDGE_EVENT from "@/constant/bridgeEvent";
 
 export default class LoginDetect extends Component {
 
@@ -25,11 +26,11 @@ export default class LoginDetect extends Component {
         let sitecode = storeUtil.get('sitecode');
         // alert(`sitecode ${sitecode}`)
         if (sitecode === SITECODE.CINE_ANDROID_PHONE || sitecode === SITECODE.CINE_ANDROID_PAD || sitecode === SITECODE.CINE_ANDROID) {
-            Bridge.android('login').then(res => {
+            Bridge.android(BRIDGE_EVENT.ANDROID_LOGIN).then(res => {
                 this.props.history.push(`/?token=${res.token}`)
             })
         } else if (sitecode === SITECODE.CINE_IOS || sitecode === SITECODE.CINE_IOS_IPHONE || sitecode === SITECODE.CINE_IOS_IPAD) {
-            Bridge.ios('login').then(res => {
+            Bridge.ios(BRIDGE_EVENT.IOS_LOGIN).then(res => {
                 this.props.history.push(`/?token=${res.token}`)
             })
         } else {

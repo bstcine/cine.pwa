@@ -10,6 +10,8 @@ import {getParam} from '@/util/urlUtil'
 import * as storeUtil from '@/util/storeUtil'
 
 import './asset/style/index.less'
+// import * as OfflinePluginRuntime from 'offline-plugin/runtime';
+// OfflinePluginRuntime.install();
 
 class Content extends React.Component {
 

@@ -51,6 +51,7 @@
     "less": "^2.7.3",
     "less-loader": "^4.0.5",
     "lodash-webpack-plugin": "^0.11.4",
+    "offline-plugin": "^4.9.0",
     "postcss-import": "^11.0.0",
     "postcss-loader": "^2.0.8",
     "react-addons-test-utils": "^15.6.2",

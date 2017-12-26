@@ -5,6 +5,7 @@ import {getParam} from "@/util/urlUtil";
 import Bridge from "@/util/bridge";
 import * as BaseService from "@/service/base";
 import SITECODE from "@/constant/sitecode";
+import BRIDGE_EVENT from "@/constant/bridgeEvent";
 
 export default class Brief extends Component {
     constructor(props) {
@@ -52,14 +53,14 @@ export default class Brief extends Component {
         try {
             let sitecode = storeUtil.get('sitecode');
             if (sitecode === SITECODE.CINE_ANDROID_PHONE || sitecode === SITECODE.CINE_ANDROID_PAD || sitecode === SITECODE.CINE_ANDROID) {
-                let {token} = await Bridge.android('login')
+                let {token} = await Bridge.android(BRIDGE_EVENT.ANDROID_LOGIN)
                 storeUtil.setToken(token)
                 let user = await BaseService.userInfo(token)
                 this.setState({
                     user: user
                 })
             } else if (sitecode === SITECODE.CINE_IOS || sitecode === SITECODE.CINE_IOS_IPHONE || sitecode === SITECODE.CINE_IOS_IPAD) {
-                let {token} = await Bridge.ios('login')
+                let {token} = await Bridge.ios(BRIDGE_EVENT.IOS_LOGIN)
                 alert(`login--token ${token}`)
                 storeUtil.setToken(token)
                 alert(`token ${token}`)
@@ -127,7 +128,7 @@ export default class Brief extends Component {
                 <div className="notice">
                     <div className="label">公告</div>
                     <div className="detail-container">
-                        <div className="detail">1、现货10套，先到先得 2、中国大陆地区顺丰包邮</div>
+                        <div className="detail">{course.notice}</div>
                     </div>
                 </div>
             </div>

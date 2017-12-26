@@ -1,31 +1,39 @@
-function EventListener() {
-    this._events = {};
-    this.on = function (event, callback) {
+class EventEmmiter {
+
+    _events = {};
+
+    on(event, callback) {
         let callbacks = this._events[event] || [];
         callbacks.push(callback);
         this._events[event] = callbacks;
-    };
-    this.off = function (event) {
+    }
+
+    once(event, callback) {
+        this.on(event, () => {
+            this.off(event);
+            callback()
+        })
+    }
+
+    off(event) {
         delete this._events[event]
-    };
-    this.emit = function (event) {
-        // alert(`event ${event}`)
-        // alert(`arguments ${JSON.stringify(arguments)}`)
+    }
+
+    emit(event) {
         let callbacks = this._events[event];
         if (!callbacks || callbacks.length === 0) {
-
             throw new Error('no event listener found')
         }
         let args = [].slice.call(arguments, 1);
         callbacks.forEach(callback => {
             callback.apply(this, args)
         });
-        this.off[event]
     }
+
 }
 
-if (typeof eventListener === 'undefined' || !window.eventListener) {
-    window._cine_listener = new EventListener()
+if (typeof _cine_listener === 'undefined' || !window._cine_listener) {
+    window._cine_listener = new EventEmmiter()
 }
 
-export const eventListener = window._cine_listener;
+export const eventEmmiter = window._cine_listener;

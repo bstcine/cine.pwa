@@ -6,7 +6,7 @@ module.exports = {
 
     static_host,
 
-    pages: ['content','quiz','vocabtest'],
+    pages: ['content','quiz','address','vocabtest'],
 
     vendor_dll: [
         'react',

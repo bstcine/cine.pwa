@@ -18,3 +18,4 @@ exports.APIURL_Share_Update = "/api/web/updatesharelog"                         
 exports.APIURL_Share_CoursePackage = "/api/share/coursePackage"                 //课程详情分享(购买后订单分享)
 
 exports.APIURL_User_Info = "/api/user/info"                                     //用户信息
+exports.APIURL_User_Address_Add = "/api/user/address/add"                        //新增收货地址

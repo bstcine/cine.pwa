@@ -10,14 +10,14 @@ import './asset/style/index.less'
 import {getParam} from '@/util/urlUtil'
 import * as storeUtil from '@/util/storeUtil'
 
-class Quiz extends React.Component {
+class Address extends React.Component {
 
     constructor(props) {
         super(props)
         console.log('constructor');
 
         let urlParam = getParam();
-        console.log(`Quiz getParam ==> ${JSON.stringify(urlParam)}`);
+        console.log(`Address getParam ==> ${JSON.stringify(urlParam)}`);
         let token = urlParam.token;
         let sitecode = urlParam.sitecode;
         storeUtil.remove('user');
@@ -41,4 +41,4 @@ class Quiz extends React.Component {
     }
 }
 
-ReactDOM.render(<Quiz/>, document.getElementById('root'))
+ReactDOM.render(<Address/>, document.getElementById('root'))

@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {getParam} from '@/util/urlUtil'
 import * as area from '@/service/data/response_pca_code.json'
+import * as Service from '@/service/user'
 
 export default class Index extends Component {
 
@@ -24,7 +25,7 @@ export default class Index extends Component {
     }
 
     componentDidMount() {
-
+        //todo 加载收货地址
     }
 
     selectProvince(event) {
@@ -66,8 +67,30 @@ export default class Index extends Component {
     }
 
     handleSubmit(event) {
-        console.log(this.state);
         event.preventDefault();
+
+        let name = event.target.name.value;
+        let phone = event.target.phone.value;
+        let address = event.target.address.value;
+        let remark = event.target.remark.value;
+
+        let param = getParam();
+        param.name = name;
+        param.phone = phone;
+        param.address = address;
+        param.remark = remark;
+        param.province = this.state.province;
+        param.city = this.state.city;
+        param.county = this.state.county;
+
+        Service.addAddress(param).then(result => {
+            console.log(result);
+            if(result.code==1 && !result.except_case_desc){
+                alert('保存成功')
+            }else {
+                alert('保存失败')
+            }
+        });
     }
 
     render() {
@@ -102,16 +125,20 @@ export default class Index extends Component {
                     <label>区／县</label>
                 </div>
                 <div className="mui-textfield">
-                    <input type="text" required/>
+                    <input type="text" id="name" name="name" required/>
                     <label>收货人：</label>
                 </div>
                 <div className="mui-textfield">
-                    <input type="tel" required/>
+                    <input type="tel" id="phone" name="phone" required/>
                     <label>联系方式:</label>
                 </div>
                 <div className="mui-textfield">
-                    <textarea required/>
+                    <textarea id="address" name="address" required/>
                     <label>详细地址</label>
+                </div>
+                <div className="mui-textfield">
+                    <textarea id="remark" name="remark" required/>
+                    <label>备注</label>
                 </div>
                 <button type="submit" className="mui-btn mui-btn--raised">保存</button>
             </form>

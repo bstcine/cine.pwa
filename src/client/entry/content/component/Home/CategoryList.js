@@ -7,12 +7,20 @@ export default class CategoryList extends Component {
 
     }
 
+    renderCategorys(categorys,...props){
+        if(categorys && categorys.length){
+            return categorys.map((category, i) => <Category key={i} category={category} {...props}/>)
+        }else{
+            return <div className="category-not-found"> 暂无匹配的课程（文案+图片待提供）</div>
+        }
+    }
+
     render() {
         let {categorys, ...props} = this.props
         return (
             <div className="category-list">
                 {
-                    categorys.map((category, i) => <Category key={i} category={category} {...props}/>)
+                    this.renderCategorys(categorys,...props)
                 }
             </div>
         );

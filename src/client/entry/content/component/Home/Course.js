@@ -37,8 +37,7 @@ export default class Course extends Component {
                     <div className="course-item">
                         <div className="course-img"
                              style={{
-                                 background: `url(http://www.bstcine.com/f/${course.img}) no-repeat center`,
-                                 backgroundSize: 'cover'
+                                 background: `url(http://www.bstcine.com/f/${course.img}) center center / cover no-repeat`
                              }}>
                         </div>
 

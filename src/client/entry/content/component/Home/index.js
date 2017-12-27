@@ -50,7 +50,6 @@ export default class Home extends Component {
             }
         }
         let homeRes = await Service.getContentHome();
-
         this.tagsCache = {};
         _.flatten([...homeRes.tags.tagTree0.map(item => item.children), ...homeRes.tags.tagTree1.map(item => item.children)]).forEach(item => {
             if (item.attributes && item.attributes.course_ids && item.attributes.course_ids.length) {
@@ -63,7 +62,6 @@ export default class Home extends Component {
 
         let {courseIds0, courseIds1} = this.matchCourseIds(tagids)
         const {categorys0, categorys1} = Home.categoryConvertor(this.categorys, courseIds0, courseIds1);
-
         this.setState({
             banners: homeRes.banners,
             tagTree0: homeRes.tags.tagTree0,

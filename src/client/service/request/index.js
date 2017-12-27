@@ -35,11 +35,29 @@ export let post = (url, data) => {
     //alert(_apiURL)
     return axios.post(_apiURL, _httpBody)
         .then(response => response.data)
+        .then(res => {
+            if (res.code !== '1') {
+                return alert(res.code_desc)
+            }
+            return res
+        })
 
 };
 
-export let get = (url) => {
+export let get = (url, params) => {
 
     let _apiURL = httpUrl(url);
-    return axios.get(_apiURL).then(response => response.data)
+    return axios.get(_apiURL, {params}).then(response => response.data)
+};
+
+
+export let postv1 = (url, data) => {
+
+    let _apiURL = httpUrl(url);
+    let _httpBody = httpBody(data);
+
+    //alert(_apiURL)
+    return axios.post(_apiURL, _httpBody)
+        .then(response => response.data)
+
 };

@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import ReactDOM from 'react-dom'
 import * as Service from '@/service/content'
 import {getParam} from "@/util/urlUtil";
 import {initWechat} from "@/util/wechatUtil";
@@ -19,9 +20,25 @@ export default class Course extends Component {
             user: null
         };
         this.clickBuy = this.clickBuy.bind(this);
+        this.handlerScroll = this.handlerScroll.bind(this);
+    }
+
+    handlerScroll() {
+        let tabItems = ReactDOM.findDOMNode(this.refs.tabItems);
+        let courseDetail = ReactDOM.findDOMNode(this.refs.courseDetail);
+        let courseDetailOffset = courseDetail.getBoundingClientRect();
+        let clazz = 'tab-items-fixed'
+        if (courseDetailOffset.y < 0) {
+            if (!tabItems.classList.contains(clazz))
+                tabItems.classList.add(clazz)
+        } else {
+            if (tabItems.classList.contains(clazz))
+                tabItems.classList.remove(clazz)
+        }
     }
 
     componentDidMount() {
+        window.addEventListener('scroll', this.handlerScroll);
         let param = getParam();
         let cid = param.cid;
         let token = storeUtil.getToken();
@@ -36,16 +53,24 @@ export default class Course extends Component {
             })
         });
         initWechat()
+
+
     }
+
+
+    componentWillUnmount() {
+        window.removeEventListener('scroll', this.handlerScroll);
+    }
+
 
     clickBuy() {
         let param = getParam();
         let cid = param.cid;
         let sitecode = storeUtil.get('sitecode');
         if (sitecode === SITECODE.CINE_ANDROID_PHONE || sitecode === SITECODE.CINE_ANDROID_PAD || sitecode === SITECODE.CINE_ANDROID) {
-            Bridge.android(BRIDGE_EVENT.ANDROID_PRECONFIRM, {course_id: cid})
+            Bridge.android(BRIDGE_EVENT.ANDROID_PRE_CONFIRM, {course_id: cid})
         } else if (sitecode === SITECODE.CINE_IOS || sitecode === SITECODE.CINE_IOS_IPHONE || sitecode === SITECODE.CINE_IOS_IPAD) {
-            Bridge.ios(BRIDGE_EVENT.IOS_PRECONFIRM, {course_id: cid})
+            Bridge.ios(BRIDGE_EVENT.IOS_PRE_CONFIRM, {course_id: cid})
         } else {
             location.href = `/confirmorder?lesson_id=${cid}`
         }
@@ -58,12 +83,12 @@ export default class Course extends Component {
             <div className="course-container">
                 <div className="video-container">
                     <video className="content" src="http://www.bstcine.com/f/2017/07/06/141540516S48yNNt.mp4"
-                           poster={require('../../asset/image/pic_gatsby@2x.png')} controls></video>
+                           poster={'http://www.bstcine.com/f/'+course.img} controls></video>
                 </div>
                 <Brief course={course} user={user}/>
-                <div className="course-detail">
+                <div className="course-detail" ref="courseDetail">
                     <Tabs>
-                        <TabItems>
+                        <TabItems ref="tabItems">
                             <TabItem>课程特色</TabItem>
                             <TabItem>课程大纲</TabItem>
                             <TabItem>评价</TabItem>

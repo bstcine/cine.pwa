@@ -21,9 +21,6 @@ export let createShare = async ({type, share_link, cid}) => {
     } else {
         return alert('invalid_type')
     }
-    if (res.code !== '1') {
-        return alert(res.code_desc)
-    }
     if (res.except_case_desc) {
         return alert(res.except_case_desc)
     }
@@ -111,10 +108,15 @@ export let share = async ({share_params}) => {
     if (sitecode === SITECODE.CINE_ANDROID_PHONE) {
         await Bridge.android(BRIDGE_EVENT.ANDROID_SHARE, share_params);
         return updateShare(share_params.sharelog_id)
-    } else if (sitecode === SITECODE.CINE_IOS_IPHONE) {
-        await Bridge.ios(BRIDGE_EVENT.IOS_SHARE, share_params);
-        // alert('await Bridge.ios(\'share\', share_params)')
-        return updateShare(share_params.sharelog_id)
+    } else if (sitecode === SITECODE.CINE_IOS_IPHONE || sitecode === SITECODE.CINE_IOS_IPAD || sitecode === SITECODE.CINE_IOS) {
+        let list = await Bridge.ios(BRIDGE_EVENT.IOS_INSTALLED_APP_LIST)
+        if(list && list.wechat===1){
+            await Bridge.ios(BRIDGE_EVENT.IOS_SHARE, share_params);
+            // alert('await Bridge.ios(\'share\', share_params)')
+            return updateShare(share_params.sharelog_id)
+        }else{
+
+        }
     } else {
         if (uaUtil.mobile()) {
             if (uaUtil.wechat()) {

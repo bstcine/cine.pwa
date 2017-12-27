@@ -3,7 +3,7 @@ import {eventEmmiter} from "./eventEmmiter";
 let Bridge = {
     android: function (fn, params, needCallback) {
         return new Promise(resolve => {
-            console.log(`Android.${fn} params${params}`);
+            console.log(`Android.${fn} params ${params}`);
             if (!params) params = {};
             if (needCallback !== false) {
                 eventEmmiter.once(`Android.${fn}`, (res) => {
@@ -17,7 +17,7 @@ let Bridge = {
     },
     ios: function (fn, params, needCallback) {
         return new Promise(resolve => {
-            console.log(`iOS.${fn} params${params}`);
+            console.log(`iOS.${fn} params ${params}`);
             if (!params) params = {};
             // alert(`needCallback !== false ===> ${needCallback !== false}`)
             if (needCallback !== false) {

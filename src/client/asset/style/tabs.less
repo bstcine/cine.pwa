@@ -1,6 +1,6 @@
 @import "_mixin";
 
-.tabs{
+.tabs {
   .tab-items {
     display: flex;
     align-items: center;
@@ -29,11 +29,19 @@
         }
       }
     }
+    &.tab-items-fixed {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: #fff;
+    }
   }
 
   .tab-panels {
     .tab-panel {
       display: none;
+      min-height: 100%;
       &.active {
         display: block;
       }

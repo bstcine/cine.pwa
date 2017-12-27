@@ -12,9 +12,6 @@ export let getWechatJsSignature = () => {
 
 export let userInfo = (token)=>{
     return post(Api.APIURL_User_Info,{token}).then(res=>{
-        if (res.code !== '1') {
-            return alert(res.code_desc)
-        }
         if (res.except_case_desc) {
             console.log(res.except_case_desc)
             return null

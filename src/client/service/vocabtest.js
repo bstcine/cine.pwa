@@ -51,30 +51,12 @@ export let getWordList = (query) => {
 
 export let saveContentWordResult = (query) => {
     return post(Api.APIURL_Content_Word_Result_Save, query)
-        .then(result => {
-            if (result.code !== '1') {
-                return alert(result.code_desc)
-            }
-            return result
-        })
 }
 
 export let queryContentWordResult = (query) => {
     return post(Api.APIURL_Content_Word_Result_Query, query)
-        .then(result => {
-            if (result.code !== '1') {
-                return alert(result.code_desc)
-            }
-            return result
-        })
 }
 
 export let queryContentWordResultList = (query) => {
     return post(Api.APIURL_Content_Word_Result_List, query)
-        .then(result => {
-            if (result.code !== '1') {
-                return alert(result.code_desc)
-            }
-            return result
-        })
 }

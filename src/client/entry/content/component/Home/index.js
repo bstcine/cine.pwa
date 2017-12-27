@@ -23,7 +23,6 @@ export default class Home extends Component {
             tagids: []
         };
         this.handlerScroll = this.handlerScroll.bind(this);
-        this.debounceHandlerScroll = _.debounce(this.handlerScroll, 50);
     }
 
     handlerScroll() {
@@ -41,7 +40,7 @@ export default class Home extends Component {
 
     async componentDidMount() {
         console.log(`componentDidMount`);
-        window.addEventListener('scroll', this.debounceHandlerScroll);
+        window.addEventListener('scroll', this.handlerScroll);
         let params = getParam();
         let tagids = [];
         for (let [key, value] of Object.entries(params)) {
@@ -51,7 +50,7 @@ export default class Home extends Component {
         }
         let homeRes = await Service.getContentHome();
         this.tagsCache = {};
-        _.flatten([...homeRes.tags.tagTree0.map(item => item.children), ...homeRes.tags.tagTree1.map(item => item.children)]).forEach(item => {
+        _.compact(_.flatten([...homeRes.tags.tagTree0.map(item => item.children), ...homeRes.tags.tagTree1.map(item => item.children)])).forEach(item => {
             if (item.attributes && item.attributes.course_ids && item.attributes.course_ids.length) {
                 item.attributes.course_ids = item.attributes.course_ids.split(',').map(obj => obj.replace(/\$/g, ''))
             }
@@ -61,7 +60,7 @@ export default class Home extends Component {
         this.categorys = homeRes.categorys.slice()
 
         let {courseIds0, courseIds1} = this.matchCourseIds(tagids)
-        const {categorys0, categorys1} = Home.categoryConvertor(this.categorys, courseIds0, courseIds1);
+        const {categorys0, categorys1} = Home.categoryConverter(this.categorys, courseIds0, courseIds1);
         this.setState({
             banners: homeRes.banners,
             tagTree0: homeRes.tags.tagTree0,
@@ -92,7 +91,7 @@ export default class Home extends Component {
         return {courseIds0, courseIds1}
     }
 
-    static categoryConvertor(categorys, filterIds0, filterIds1) {
+    static categoryConverter(categorys, filterIds0, filterIds1) {
         //视频课程
         let categorys0 = [];
         //教材教辅
@@ -135,14 +134,14 @@ export default class Home extends Component {
             }
         }
         let {courseIds0, courseIds1} = this.matchCourseIds(tagids)
-        const {categorys0, categorys1} = Home.categoryConvertor(this.categorys, courseIds0, courseIds1);
+        const {categorys0, categorys1} = Home.categoryConverter(this.categorys, courseIds0, courseIds1);
         this.setState({
             tagids, categorys0, categorys1
         })
     }
 
     componentWillUnmount() {
-        window.removeEventListener('scroll', this.debounceHandlerScroll)
+        window.removeEventListener('scroll', this.handlerScroll)
     }
 
     render() {

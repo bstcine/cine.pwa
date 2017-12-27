@@ -78,6 +78,35 @@ export default class Brief extends Component {
         }
     }
 
+    //优惠列表
+    renderPromoteList(course) {
+        if (course && course.activitys && course.activitys.length) {
+            let list = course.activitys.map((activity, i) => {
+                if (activity.filter === '1') {
+                    return (
+                        course.is_shared ?
+                            <div key={i} className="promote-title after-share">{activity.share_before_desc}</div>
+                            :
+                            <div key={i} className="promote-title share"
+                                 onClick={this.shareWithDiscount}>{activity.share_before_desc}</div>
+                    )
+                } else {
+                    return (
+                        <div key={i} className="promote-title">{activity.share_before_desc}</div>
+                    )
+                }
+            })
+            return (
+                <div className="promote">
+                    <div className="promote-label"><span className="bord-label">优惠</span></div>
+                    <div className="promote-list">
+                        {list}
+                    </div>
+                </div>
+            )
+        }
+    }
+
     render() {
         let course = this.state.course
         let user = this.state.user
@@ -95,34 +124,29 @@ export default class Brief extends Component {
                     <span className="old-price">原价：<span className="del">￥{course.price}</span></span>
                 </div>
                 <div className="promotes">
-                    <div className="promote">
-                        <div className="promote-label"><span className="bord-label">优惠</span></div>
-                        <div className="promote-list">
-                            {
-                                this.state.shared ?
-                                    <div className="promote-title after-share">成功分享，已分享30元优惠</div>
-                                    :
-                                    <div className="promote-title share"
-                                         onClick={this.shareWithDiscount}>点此分享到朋友圈立减30元>></div>
 
-                            }
-                            <div className="promote-title">购买课程即可获得200元学习机专享优惠券</div>
-                        </div>
-                    </div>
+                    {this.renderPromoteList(course)}
 
-                    <div className="promote">
-                        <div className="promote-label"><span className="bord-label">积分</span></div>
-                        <div className="promote-list">
-                            {
-                                user ?
-                                    <div className="promote-title">当前积分{user.point}，可抵扣{user.point}元</div>
-                                    :
-                                    <div className="promote-title" onClick={this.login}>1积分抵扣1元钱，<span
-                                        className="blue">登录</span><span
-                                        className="grey">查看可抵扣金额</span></div>
-                            }
-                        </div>
-                    </div>
+
+                    {
+                        course.is_allow_point === '1' ?
+                            (
+                                <div className="promote">
+                                    <div className="promote-label"><span className="bord-label">积分</span></div>
+                                    <div className="promote-list">
+                                        {
+                                            user ?
+                                                <div className="promote-title">当前积分{user.point}，可抵扣{user.point}元</div>
+                                                :
+                                                <div className="promote-title" onClick={this.login}>1积分抵扣1元钱，<span
+                                                    className="blue">登录</span><span
+                                                    className="grey">查看可抵扣金额</span></div>
+                                        }
+                                    </div>
+                                </div>
+                            ) : null
+                    }
+
 
                 </div>
                 <div className="notice">

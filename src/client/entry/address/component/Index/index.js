@@ -8,10 +8,17 @@ export default class Index extends Component {
     constructor(props) {
         super(props);
 
+        let param = getParam();
         this.state = {
-            province: '-1',
-            city: '-1',
-            county: '-1',
+            token: param.token,
+            id: param.id,
+            province: '',
+            city: '',
+            county: '',
+            name: '',
+            phone: '',
+            address: '',
+            remark: ''
         };
 
         this.provinceArr = area.addressCodes;
@@ -21,24 +28,64 @@ export default class Index extends Component {
         this.selectProvince = this.selectProvince.bind(this);
         this.selectCity = this.selectCity.bind(this);
         this.selectCounty = this.selectCounty.bind(this);
+        this.inputOnChange = this.inputOnChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     componentDidMount() {
-        //todo 加载收货地址
+        if (!this.state.id) return;
+
+        Service.queryAddress(this.state)
+            .then(result => {
+                if(!result.msg) {
+                    this.init(result.data);
+                }else {
+                    console.log(result.msg);
+                    this.setState({id:''});
+                }
+            });
+    }
+
+    init(item) {
+        console.log(item);
+
+        let province = item.province;
+        let city = item.city;
+
+        this.provinceArr.forEach((item) => {
+            if (item.code == province) {
+                this.cityArr = item.childs;
+            }
+        });
+
+        this.cityArr.forEach((item) => {
+            if (item.code == city) {
+                this.countyArr = item.childs;
+            }
+        });
+
+        this.setState({
+            id:item.id,
+            province: province,
+            city: city,
+            county: item.county,
+            name: item.name,
+            phone: item.phone,
+            address: item.address,
+            remark: item.remark
+        });
     }
 
     selectProvince(event) {
         let province = event.target.value;
         this.setState({
             province: province,
-            city: '-1',
-            county: '-1'
+            city: '',
+            county: ''
         });
 
         this.provinceArr.forEach((item) => {
             if (item.code == province) {
-                console.log(item);
                 this.cityArr = item.childs;
             }
         })
@@ -48,12 +95,11 @@ export default class Index extends Component {
         let city = event.target.value;
         this.setState({
             city: city,
-            county: '-1'
+            county: ''
         });
 
         this.cityArr.forEach((item) => {
             if (item.code == city) {
-                console.log(item);
                 this.countyArr = item.childs;
             }
         })
@@ -66,31 +112,25 @@ export default class Index extends Component {
         });
     }
 
+    inputOnChange(event) {
+        let name = event.target.name;
+        let value = event.target.value;
+
+        this.setState({
+            [name]: value,
+        });
+    }
+
     handleSubmit(event) {
         event.preventDefault();
 
-        let name = event.target.name.value;
-        let phone = event.target.phone.value;
-        let address = event.target.address.value;
-        let remark = event.target.remark.value;
+        console.log(this.state);
+        Service.addAddress(this.state)
+            .then(result => {
+                if(!result.msg) return alert('保存成功');
 
-        let param = getParam();
-        param.name = name;
-        param.phone = phone;
-        param.address = address;
-        param.remark = remark;
-        param.province = this.state.province;
-        param.city = this.state.city;
-        param.county = this.state.county;
-
-        Service.addAddress(param).then(result => {
-            console.log(result);
-            if(result.code==1 && !result.except_case_desc){
-                alert('保存成功')
-            }else {
-                alert('保存失败')
-            }
-        });
+                alert('保存失败('+result.msg+')')
+            });
     }
 
     render() {
@@ -99,7 +139,7 @@ export default class Index extends Component {
                 <legend>地址管理</legend>
                 <div className="mui-select">
                     <select id="province" onChange={this.selectProvince} value={this.state.province} required>
-                        <option key={-1}>请选择</option>
+                        <option key="">请选择</option>
                         {this.provinceArr.map(function (item) {
                             return <option key={item.code} value={item.code}>{item.name}</option>
                         })}
@@ -108,7 +148,7 @@ export default class Index extends Component {
                 </div>
                 <div className="mui-select">
                     <select id="city" onChange={this.selectCity} value={this.state.city} required>
-                        <option key={-1}>请选择</option>
+                        <option key="">请选择</option>
                         {this.cityArr.map(function (item) {
                             return <option key={item.code} value={item.code}>{item.name}</option>
                         })}
@@ -117,7 +157,7 @@ export default class Index extends Component {
                 </div>
                 <div className="mui-select">
                     <select id="county" onChange={this.selectCounty} value={this.state.county} required>
-                        <option key={-1}>请选择</option>
+                        <option key="">请选择</option>
                         {this.countyArr.map(function (item) {
                             return <option key={item.code} value={item.code}>{item.name}</option>
                         })}
@@ -125,19 +165,23 @@ export default class Index extends Component {
                     <label>区／县</label>
                 </div>
                 <div className="mui-textfield">
-                    <input type="text" id="name" name="name" required/>
+                    <input type="text" id="name" name="name" onChange={this.inputOnChange} value={this.state.name}
+                           required/>
                     <label>收货人：</label>
                 </div>
                 <div className="mui-textfield">
-                    <input type="tel" id="phone" name="phone" required/>
+                    <input type="tel" id="phone" name="phone" onChange={this.inputOnChange} value={this.state.phone}
+                           required/>
                     <label>联系方式:</label>
                 </div>
                 <div className="mui-textfield">
-                    <textarea id="address" name="address" required/>
+                    <textarea id="address" name="address" onChange={this.inputOnChange} value={this.state.address}
+                              required/>
                     <label>详细地址</label>
                 </div>
                 <div className="mui-textfield">
-                    <textarea id="remark" name="remark" required/>
+                    <textarea id="remark" name="remark" onChange={this.inputOnChange} value={this.state.remark}
+                              required/>
                     <label>备注</label>
                 </div>
                 <button type="submit" className="mui-btn mui-btn--raised">保存</button>

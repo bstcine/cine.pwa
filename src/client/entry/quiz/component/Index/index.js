@@ -78,7 +78,10 @@ export default class Index extends Component {
             });
 
             return <div key={itemId} className="mui-panel">
-                <span className="mui--text-title">{(index + 1) + "." + item.title}</span>
+                <div>
+                    <span className="quiz-title">{(index + 1) + "."}</span>
+                    <div dangerouslySetInnerHTML={{__html: item.title}}/>
+                </div>
                 {options}
             </div>
         });

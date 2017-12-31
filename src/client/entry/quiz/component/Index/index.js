@@ -15,7 +15,9 @@ export default class Index extends Component {
             quiz: [],
         };
 
-        this.renderCards = this.renderCards.bind(this);
+        this.optionName = ["A", "B", "C", "D", "E", "F", "G", "H", "I"];
+
+        this.submitClick = this.submitClick.bind(this);
     }
 
     componentDidMount() {
@@ -23,18 +25,36 @@ export default class Index extends Component {
         console.log(param.id);
         Service.getQuiz({id: param.id}).then(result => {
             console.log(result.data);
-            this.setState({
-                loading: false,
-                quiz: result.data.data
-            })
+            this.init(result.data.data)
         })
     }
 
-    static submitClick() {
-        let answerSure = document.getElementsByName('answerSure');
-        for (let i = 0; i < answerSure.length; i++)  {
-            answerSure[i].style.background = "#32CD32";
-        }
+    init(data) {
+        this.setState({
+            loading: false,
+            quiz: data
+        })
+    }
+
+    submitClick() {
+        this.state.quiz.forEach((item) => {
+            let itemId = item.id;
+            let quiz_answer = document.getElementById(itemId);
+            let quiz_input = document.getElementsByName(itemId);
+
+            quiz_answer.hidden = false;
+            quiz_input.forEach((input) => {
+                let quiz_option = document.getElementById(itemId + input.id);
+
+                if (input.checked) {
+                    quiz_option.style.visibility = "visible";
+                } else {
+                    quiz_option.style.visibility = "hidden";
+                }
+            });
+        });
+
+        window.scroll(0, 0);
     }
 
     static closeClick() {
@@ -50,51 +70,50 @@ export default class Index extends Component {
         }
     }
 
-    renderCards() {
-        let quiz = this.state.quiz.map((item, index) => {
-            let itemId = item.id;
-            let options = item.answers.map((option, key) => {
-                let content;
-                if (option.type == '2') {
-                    let imgUrl = "http://www.bstcine.com" + option.content;
-                    content = <img src={imgUrl} height={100}/>
-                } else {
-                    content = <span className="mui--text-body1">{option.content}</span>
-                }
-
-                let answerHint;
-                if(option.isCorrect){
-                    answerHint = "answerSure";
-                }else {
-                    answerHint = "answerError";
-                }
-
-                return <div key={key} className="mui-radio" name={answerHint}>
-                    <label>
-                        <input type="radio" name={itemId} id={itemId + key} value={option.isCorrect}/>
-                        {content}
-                    </label>
-                </div>
-            });
-
-            return <div key={itemId} className="mui-panel">
-                <span className="mui--text-title">{(index + 1) + "." + item.title}</span>
-                {options}
-            </div>
-        });
-        return quiz;
-    }
-
 
     render() {
         return (
             this.state.loading ?
                 <div>loading</div> :
                 <div>
-                    {this.renderCards()}
                     <div>
-                        <button className="mui-btn mui-btn--primary" onClick={(e) => Index.submitClick(e)}>答案</button>
-                        <button className="mui-btn mui-btn--danger" onClick={(e) => Index.closeClick(e)}>关闭</button>
+                        <h2>小节测试</h2>
+                        <hr/>
+                    </div>
+                    {this.state.quiz.map((item, index) => {
+                        let itemId = item.id;
+                        let sureKey = 0;
+
+                        return <div key={itemId} className="mui-panel">
+                            <div>
+                                <span className="card-title">{(index + 1) + ". "}</span>
+                                <div dangerouslySetInnerHTML={{__html: item.title}}/>
+                            </div>
+                            {item.answers.map((option, key) => {
+                                let content;
+                                if (option.type == '2') {
+                                    let imgUrl = "http://www.bstcine.com" + option.content;
+                                    content = <img src={imgUrl} height={100}/>
+                                } else {
+                                    content = <span className="mui--text-body1">{option.content}</span>
+                                }
+
+                                if (option.isCorrect) sureKey = key;
+
+                                return <label key={key} className="mui-radio card-option">
+                                    <span id={itemId + key}
+                                          style={{visibility: 'hidden'}}>{option.isCorrect ? "正确 " : "错误 "}</span>
+                                    <input id={key} name={itemId} value={option.isCorrect} type="radio"/>
+                                    {this.optionName[key]+". "}
+                                    {content}
+                                </label>
+                            })}
+                            <span id={itemId} hidden><hr/>正确答案：{this.optionName[sureKey]}</span>
+                        </div>
+                    })}
+                    <div>
+                        <button className="mui-btn mui-btn--primary" onClick={(e) => this.submitClick(e)}>提交</button>
+                        <button className="mui-btn mui-btn--danger" onClick={(e) => Index.closeClick(e)}>退出</button>
                     </div>
                 </div>
         )

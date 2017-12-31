@@ -1,7 +1,12 @@
 @import "../../../../asset/style/mui.min.css";
 
+html,body{
+  background: #d7efff;
+}
+
 #root {
   max-width: 575px;
+  padding: 0rem 0.5rem 0rem 0.5rem;
   margin: 0 auto;
 }
 
@@ -9,10 +14,50 @@
   position: relative;
   height: 100%;
 
-  span.orange {
-    color: #e1a923;
+  .card-title{
+    float:left;
   }
-  span.blue {
-    color: #1a519b;
+
+  .card-option{
+    padding: 0.2rem;
+    //border: 1px solid #f4f4f4;//darken(#f4f4f4, 25%)
+    img{
+      vertical-align:middle;
+    }
+    input[type="radio"]{
+      margin-right: 0.15rem;
+    }
   }
+
 }
+
+/**
+input[type="radio"] {
+    margin-right: 0.2rem;
+    &:checked {
+      + .radio-label {
+        &:before {
+          background-color: #3197EE;
+          box-shadow: inset 0 0 0 4px #f4f4f4;
+        }
+      }
+    }
+    &:focus {
+      + .radio-label {
+        &:before {
+          outline: none;
+          border-color: #3197EE;
+        }
+      }
+    }
+    &:disabled {
+      + .radio-label {
+        &:before {
+          box-shadow: inset 0 0 0 4px #f4f4f4;
+          border-color: darken(#f4f4f4, 25%);
+          background: darken(#f4f4f4, 25%);
+        }
+      }
+    }
+  }
+ */

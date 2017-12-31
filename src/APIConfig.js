@@ -4,6 +4,7 @@ exports.APIURL_Content_Word_List = "/api/content/word/list" //词汇量测验开
 exports.APIURL_Content_Word_Result_Save = "/api/content/word/result/save" //词汇量测验结束，保存答题记录
 exports.APIURL_Content_Word_Result_Query = "/api/content/word/result/query" //查看词汇量测验的报告 & 推荐课程
 exports.APIURL_Content_Word_Result_List = "/api/content/word/result/list"                       //查看词汇量测验列表
+exports.APIURL_Content_Course_Comment = "/api/content/course/comment"                           //课程评论
 
 exports.APIURL_Content_Home = "/api/content/home"                                               //app首页
 exports.APIURL_Content_Tag_Tree = "/api/content/tag/tree"                                       //标签树

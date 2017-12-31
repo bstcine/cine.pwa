@@ -25,12 +25,12 @@ export default class LoginDetect extends Component {
     goLoginClick() {
         let sitecode = storeUtil.get('sitecode');
         // alert(`sitecode ${sitecode}`)
-        if (sitecode === SITECODE.CINE_ANDROID_PHONE || sitecode === SITECODE.CINE_ANDROID_PAD || sitecode === SITECODE.CINE_ANDROID) {
-            Bridge.android(BRIDGE_EVENT.ANDROID_LOGIN).then(res => {
+        if (sitecode === SITECODE.ANDROID_PHONE || sitecode === SITECODE.ANDROID_PAD || sitecode === SITECODE.ANDROID) {
+            Bridge.android(BRIDGE_EVENT.LOGIN).then(res => {
                 this.props.history.push(`/?token=${res.token}`)
             })
-        } else if (sitecode === SITECODE.CINE_IOS || sitecode === SITECODE.CINE_IOS_IPHONE || sitecode === SITECODE.CINE_IOS_IPAD) {
-            Bridge.ios(BRIDGE_EVENT.IOS_LOGIN).then(res => {
+        } else if (sitecode === SITECODE.IOS || sitecode === SITECODE.IOS_IPHONE || sitecode === SITECODE.IOS_IPAD) {
+            Bridge.ios(BRIDGE_EVENT.LOGIN).then(res => {
                 this.props.history.push(`/?token=${res.token}`)
             })
         } else {

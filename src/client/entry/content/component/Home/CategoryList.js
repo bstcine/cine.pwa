@@ -8,7 +8,6 @@ export default class CategoryList extends Component {
 
     renderCategorys() {
         let {categorys,   ...props} = this.props
-        console.log(props)
         if (categorys && categorys.length) {
             return categorys.map((category, i) => {
                 return <Category key={i} category={category}  {...props}/>

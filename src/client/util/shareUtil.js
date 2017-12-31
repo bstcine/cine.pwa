@@ -105,18 +105,23 @@ let checkShareStatus = (sharelog_id) => {
 
 export let share = async ({share_params}) => {
     let sitecode = storeUtil.get('sitecode');
-    if (sitecode === SITECODE.CINE_ANDROID_PHONE) {
-        await Bridge.android(BRIDGE_EVENT.ANDROID_SHARE, share_params);
+    if (sitecode === SITECODE.ANDROID_PHONE) {
+        await Bridge.android(BRIDGE_EVENT.SHARE, share_params);
         return updateShare(share_params.sharelog_id)
-    } else if (sitecode === SITECODE.CINE_IOS_IPHONE || sitecode === SITECODE.CINE_IOS_IPAD || sitecode === SITECODE.CINE_IOS) {
-        let list = await Bridge.ios(BRIDGE_EVENT.IOS_INSTALLED_APP_LIST)
-        if(list && list.wechat===1){
-            await Bridge.ios(BRIDGE_EVENT.IOS_SHARE, share_params);
-            // alert('await Bridge.ios(\'share\', share_params)')
-            return updateShare(share_params.sharelog_id)
-        }else{
+    } else if (sitecode === SITECODE.IOS_IPHONE || sitecode === SITECODE.IOS_IPAD || sitecode === SITECODE.IOS) {
+        // todo ios 侧提供已安装软件列表
+        // let list = await Bridge.ios(BRIDGE_EVENT.INSTALLED_APP_LIST)
+        // if(list && list.wechat===1){
+        //     await Bridge.ios(BRIDGE_EVENT.SHARE, share_params);
+        //     // alert('await Bridge.ios(\'share\', share_params)')
+        //     return updateShare(share_params.sharelog_id)
+        // }else{
+        //
+        // }
 
-        }
+        await Bridge.ios(BRIDGE_EVENT.SHARE, share_params);
+        alert('await Bridge.ios(\'share\', share_params)')
+        return updateShare(share_params.sharelog_id)
     } else {
         if (uaUtil.mobile()) {
             if (uaUtil.wechat()) {

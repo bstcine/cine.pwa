@@ -17,7 +17,7 @@ import * as storeUtil from '@/util/storeUtil'
 import './asset/style/index.less'
 import Bridge from "@/util/bridge";
 import SITECODE from "@/constant/sitecode";
-import BRIDGE_ACTION from '@/constant/bridgeEvent'
+import BRIDGE_EVENT from '@/constant/bridgeEvent'
 
 class Word extends React.Component {
 
@@ -37,8 +37,8 @@ class Word extends React.Component {
 
     componentDidMount() {
         let sitecode = storeUtil.get('sitecode');
-        if (sitecode === SITECODE.CINE_IOS || sitecode === SITECODE.CINE_IOS_IPHONE || sitecode === SITECODE.CINE_IOS_IPAD) {
-            Bridge.ios(BRIDGE_ACTION.IOS_TIMELINE, {type: 'loaded'}, true)
+        if (sitecode === SITECODE.IOS || sitecode === SITECODE.IOS_IPHONE || sitecode === SITECODE.IOS_IPAD) {
+            Bridge.ios(BRIDGE_EVENT.TIMELINE, {type: 'loaded'}, true)
         }
 
     }
@@ -47,7 +47,7 @@ class Word extends React.Component {
         return (
             <Router basename="/vocabtest">
                 <div className="word-main">
-                    <div className="map-bg"></div>
+                    <div className="map-bg"/>
                     <Route exact path="/" component={Index}/>
                     <Route path="/welcome" component={Welcome}/>
                     <Route path="/logindetect" component={LoginDetect}/>

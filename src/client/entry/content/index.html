@@ -10,13 +10,13 @@
         var responsive = function () {
             var clientWidth = document.documentElement.clientWidth
             if (clientWidth < 576) {
-                console.log('576 clientWidth' +clientWidth)
+                console.log('576 clientWidth' + clientWidth)
                 document.documentElement.style.fontSize = clientWidth / 750 * 100 + 'px';
             } else if (clientWidth < 1024) {
-                console.log('1024 clientWidth' +clientWidth)
+                console.log('1024 clientWidth' + clientWidth)
                 document.documentElement.style.fontSize = clientWidth / 1536 * 100 + 'px';
             } else {
-                console.log('clientWidth' +clientWidth)
+                console.log('clientWidth' + clientWidth)
                 document.documentElement.style.fontSize = '50px'
             }
         }
@@ -24,6 +24,16 @@
         window.onresize = function () {
             responsive()
         }
+        if (window.addEventListener) {
+            window.addEventListener('error', function (e) {
+                var error = e.error;
+                if (error) {
+                    alert('g')
+                    alert(JSON.stringify(error));
+                }
+            });
+        }
+        alert(4626)
     </script>
 
 </head>

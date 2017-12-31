@@ -32,3 +32,14 @@ export let getContentHome = (query) => {
     }
 
 }
+
+export let getContentCourseComment = (query) => {
+    return post(Api.APIURL_Content_Course_Comment, query)
+        .then(res => {
+            if (res.except_case_desc) {
+                return alert(res.except_case_desc)
+            }
+            return res.result
+        })
+}
+

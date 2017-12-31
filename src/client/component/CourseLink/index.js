@@ -13,16 +13,17 @@ export default class CourseLink extends Component {
 
     clickCourseLink() {
         const {course, history} = this.props;
+        if(course.status!=='1') return
         const course_id = course.id;
         let sitecode = storeUtil.get('sitecode');
-        if (sitecode === SITECODE.CINE_IOS
-            || sitecode === SITECODE.CINE_IOS_IPHONE
-            || sitecode === SITECODE.CINE_IOS_IPAD) {
-            Bridge.ios(BRIDGE_EVENT.IOS_COURSE, {course_id}, false)
-        } else if (sitecode === SITECODE.CINE_ANDROID
-            || sitecode === SITECODE.CINE_ANDROID_PHONE
-            || sitecode === SITECODE.CINE_ANDROID_PAD) {
-            Bridge.android(BRIDGE_EVENT.ANDROID_COURSE, {course_id}, false)
+        if (sitecode === SITECODE.IOS
+            || sitecode === SITECODE.IOS_IPHONE
+            || sitecode === SITECODE.IOS_IPAD) {
+            Bridge.ios(BRIDGE_EVENT.COURSE, {course_id}, false)
+        } else if (sitecode === SITECODE.ANDROID
+            || sitecode === SITECODE.ANDROID_PHONE
+            || sitecode === SITECODE.ANDROID_PAD) {
+            Bridge.android(BRIDGE_EVENT.COURSE, {course_id}, false)
         } else {
             if (/^\/content\//i.test(location.pathname)) {
                 history.push(`/course?cid=${course_id}`)

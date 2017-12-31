@@ -40,9 +40,9 @@ export default class Index extends Component {
     static closeClick() {
         let sitecode = storeUtil.get('sitecode');
         // alert(`sitecode ${sitecode}`)
-        if (sitecode === SITECODE.CINE_ANDROID_PHONE || sitecode === SITECODE.CINE_ANDROID_PAD || sitecode === SITECODE.CINE_ANDROID) {
+        if (sitecode === SITECODE.ANDROID_PHONE || sitecode === SITECODE.ANDROID_PAD || sitecode === SITECODE.ANDROID) {
             Bridge.android('exit_quiz');
-        } else if (sitecode === SITECODE.CINE_IOS || sitecode === SITECODE.CINE_IOS_IPHONE || sitecode === SITECODE.CINE_IOS_IPAD) {
+        } else if (sitecode === SITECODE.IOS || sitecode === SITECODE.IOS_IPHONE || sitecode === SITECODE.IOS_IPAD) {
             Bridge.ios('exit_quiz');
         } else {
             console.log('exit_quiz');

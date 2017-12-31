@@ -17,7 +17,7 @@ module.exports = {
         filename: '[name].[chunkhash:8].js',
         library: '[name]'// 当前Dll的所有内容都会存放在这个参数指定变量名的一个全局变量下，注意与DllPlugin的name参数保持一致
     },
-    //todo 单独打包第三方css/less
+    // todo 单独打包第三方css/less
     plugins: [
         new CleanWebpackPlugin('build/dll/*', {verbose: false}),
         new webpack.DllPlugin({

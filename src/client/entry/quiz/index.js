@@ -4,7 +4,8 @@ import {
     BrowserRouter as Router,
     Route,
 } from 'react-router-dom'
-import Index from './component/Index';
+import Index from './component/index.js';
+import Card from './component/card.js';
 
 import './asset/style/index.less'
 import {getParam} from '@/util/urlUtil'
@@ -18,13 +19,16 @@ class Quiz extends React.Component {
 
         let urlParam = getParam();
         console.log(`Quiz getParam ==> ${JSON.stringify(urlParam)}`);
+
         let token = urlParam.token;
         let sitecode = urlParam.sitecode;
-        storeUtil.remove('user');
         storeUtil.remove('token');
         storeUtil.remove('sitecode');
         token && storeUtil.set('token', token);
         sitecode && storeUtil.set('sitecode', sitecode);
+
+        let quiz_id = urlParam.id;
+        storeUtil.set('quiz_id', quiz_id);
     }
 
     componentDidMount() {
@@ -35,6 +39,7 @@ class Quiz extends React.Component {
             <Router basename="/quiz">
                 <div className="quiz-main">
                     <Route exact path="/" component={Index}/>
+                    <Route exact path="/card" component={Card}/>
                 </div>
             </Router>
         )

@@ -40,10 +40,10 @@ export default class Index extends Component {
 
     render() {
         return (
-            <div className="index-container">
+            <div className="quiz-start">
                 <div className="title">《神奇树屋》精读课程 - Lesson 2 - 小节测试</div>
                 <div className="hint">学得怎么样了？来测一下吧！</div>
-                <button className="mui-btn mui-btn--primary" onClick={this.toCard}>开始答题</button>
+                <button onClick={this.toCard}>开始答题</button>
             </div>
         )
     }

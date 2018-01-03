@@ -37,7 +37,7 @@ class Quiz extends React.Component {
     render() {
         return (
             <Router basename="/quiz">
-                <div className="quiz-main">
+                <div>
                     <Route exact path="/" component={Index}/>
                     <Route exact path="/card" component={Card}/>
                 </div>

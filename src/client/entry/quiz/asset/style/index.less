@@ -1,41 +1,142 @@
 @import "../../../../asset/style/mui.min.css";
 
-html,body{
+html, body {
   background: #FFFFFF;
 }
 
 #root {
   max-width: 575px;
-  padding: 0rem 0.5rem 0rem 0.5rem;
   margin: 0 auto;
 }
 
-.index-container{
+.quiz-start {
   text-align: center;
-  .title{
-    padding: 0.5rem 0rem 0.5rem 0rem;
+  padding-top: 1.15rem;
+  .title {
+    font-size: 0.4rem;
+    font-weight: normal;
+    font-stretch: normal;
+    line-height: 0.6rem;
+    letter-spacing: 0rem;
+    color: #222222;
   }
-  .hint{
-    padding: 0.5rem 0rem 0.5rem 0rem;
+  .hint {
+    margin-top: 0.64rem;
+    font-size: 0.30rem;
+    font-weight: normal;
+    font-stretch: normal;
+    line-height: 0.72rem;
+    letter-spacing: 0rem;
+    color: #5d5d5d;
+  }
+  button{
+    margin-top: 0.8rem;
+    width: 3.60rem;
+    height: 0.96rem;
+    background: #FFFFFF;
+    border-radius: 0.48rem;
+    border: 0.02rem solid #052356;
+    font-size: 0.36rem;
+    font-weight: normal;
+    font-stretch: normal;
+    line-height: 0rem;
+    letter-spacing: 0rem;
+    color: #12336b;
   }
 }
 
 .quiz-main {
-  position: relative;
-  height: 100%;
+  margin: auto 0.7rem;
 
-  .card-title{
-    float:left;
+  .card-title {
+    margin-top: 0.75rem;
+    font-size: 0.36rem;
+    font-weight: normal;
+    font-stretch: normal;
+    line-height: 0.56rem;
+    letter-spacing: 0rem;
+    color: #343333;
   }
 
-  .card-option{
-    padding: 0.2rem;
-    //border: 1px solid #f4f4f4;//darken(#f4f4f4, 25%)
-    img{
-      vertical-align:middle;
+  .card-option {
+    padding-top: 0.4rem;
+    padding-bottom: 0.4rem;
+    font-size: 0.36rem;
+    font-weight: normal;
+    font-stretch: normal;
+    line-height: 0px;
+    letter-spacing: 0px;
+    color: #2f2f2f;
+
+    .hint{
+      width: 0.37rem;
+      height: 0.37rem;
+      margin-right: 0.2rem;
+      vertical-align: middle;
     }
-    input[type="radio"]{
+
+    .content{
+      width: 1.80rem;
+      height: 1.80rem;
+      vertical-align: middle;
+    }
+
+    input[type="radio"] {
       margin-right: 0.15rem;
+    }
+  }
+
+  .card-todo {
+    display: inline-block;
+    padding-bottom: 0.4rem;
+
+    .card-answer {
+      display: inline-block;
+      visibility: hidden;
+      font-size: 0.32rem;
+      font-weight: normal;
+      font-stretch: normal;
+      line-height: 0.68rem;
+      letter-spacing: 0px;
+    }
+
+    .card-answer-err {
+      display: inline-block;
+      visibility: visible;
+      font-size: 0.32rem;
+      font-weight: normal;
+      font-stretch: normal;
+      line-height: 0.68rem;
+      letter-spacing: 0px;
+      color: #f22010;
+    }
+
+    .card-answer-correct {
+      display: inline-block;
+      visibility: visible;
+      font-size: 0.32rem;
+      font-weight: normal;
+      font-stretch: normal;
+      line-height: 0.68rem;
+      letter-spacing: 0px;
+      color: #1ab23a;
+    }
+
+    button{
+      position: absolute;
+      right: 0.68rem;
+
+      width: 2.80rem;
+      height: 0.84rem;
+      background: #FFFFFF;
+      border-radius: 0.48rem;
+      border: 0.02rem solid #052356;
+      font-size: 0.36rem;
+      font-weight: normal;
+      font-stretch: normal;
+      line-height: 0rem;
+      letter-spacing: 0rem;
+      color: #12336b;
     }
   }
 

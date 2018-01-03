@@ -59,19 +59,19 @@ export default class Tabs extends Component {
     }
 
     static isTabItem(ele) {// 此处比较类型不可用type.name来比较，压缩后的代码会将name也一并压缩，不能根据字符串正常比较
-        return ele.type === TabItem
+        return ele && ele.type === TabItem
     }
 
     static isTabItems(ele) {
-        return ele.type === TabItems
+        return ele && ele.type === TabItems
     }
 
     static isTabPanel(ele) {
-        return ele.type === TabPanel
+        return ele && ele.type === TabPanel
     }
 
     static isTabPanels(ele) {
-        return ele.type === TabPanels
+        return ele && ele.type === TabPanels
     }
 
     onTabItemClick(index) {

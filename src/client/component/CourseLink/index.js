@@ -25,7 +25,7 @@ export default class CourseLink extends Component {
             || sitecode === SITECODE.ANDROID_PAD) {
             Bridge.android(BRIDGE_EVENT.COURSE, {course_id}, false)
         } else {
-            if (/^\/content\//i.test(location.pathname)) {
+            if (/^\/content/i.test(location.pathname)) {
                 history.push(`/course?cid=${course_id}`)
             } else {
                 location.href = `/content/course?cid=${course_id}`

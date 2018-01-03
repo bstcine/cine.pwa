@@ -54,10 +54,9 @@ export let get = (url, params) => {
 export let postv1 = (url, data) => {
 
     let _apiURL = httpUrl(url);
-    let _httpBody = httpBody(data);
 
     //alert(_apiURL)
-    return axios.post(_apiURL, _httpBody)
+    return axios.post(_apiURL, data)
         .then(response => response.data)
 
 };

@@ -1,4 +1,7 @@
 import React, {Component} from 'react'
+import {getParam} from "@/util/urlUtil";
+import * as storeUtil from "@/util/storeUtil";
+import SITECODE from "@/constant/sitecode";
 
 export default class Brief extends Component {
 
@@ -9,6 +12,9 @@ export default class Brief extends Component {
 
     constructor(props) {
         super(props);
+        let sitecode = storeUtil.get('sitecode');
+        this.isInAPP = sitecode === SITECODE.IOS || sitecode === SITECODE.IOS_IPHONE || sitecode === SITECODE.IOS_IPAD
+            || sitecode === SITECODE.ANDROID || sitecode === SITECODE.ANDROID_PAD || sitecode === SITECODE.ANDROID_PHONE
     }
 
     //优惠列表
@@ -20,7 +26,7 @@ export default class Brief extends Component {
                         course.is_shared ?
                             <div key={i} className="promote-title after-share">{activity.share_after_desc}</div>
                             :
-                            <div key={i} className="promote-title share"
+                            <div key={i} className="promote-title share pointer"
                                  onClick={this.props.clickShare}>{activity.share_before_desc}</div>
                     )
                 } else {
@@ -50,7 +56,7 @@ export default class Brief extends Component {
                             user ?
                                 <div className="promote-title">当前积分{user.point}，可抵扣{user.point}元</div>
                                 :
-                                <div className="promote-title" onClick={this.props.login}>1积分抵扣1元钱，<span
+                                <div className="promote-title pointer" onClick={this.props.login}>1积分抵扣1元钱，<span
                                     className="blue">登录</span><span
                                     className="grey">查看可抵扣金额</span></div>
                         }
@@ -68,7 +74,7 @@ export default class Brief extends Component {
             if (course.object_type === '1' || course.object_type === '2' || course.object_type === '3') {
                 return <div className="btn-action btn-buy" onClick={goBuy}>立即购买</div>
             } else if (course.object_type === '4') {
-                return <div className="btn-action btn-share" onClick={clickShare}>分享开通</div>
+                return <div className="btn-action btn-share" onClick={e => clickShare(true,5)}>分享开通</div>
             }
         }
     }
@@ -114,13 +120,37 @@ export default class Brief extends Component {
     }
 
     render() {
-        let {course, user, relatedCourse} = this.props;
+        let {course, user, relatedCourse, showRecommendModal, showCouponModal} = this.props;
+        const {goLearn, goBuy, clickShare} = this.props;
+        let source_user_id = getParam().source_user_id
         return course ? (
             <div className="brief-container">
-                <div className="video-container">
-                    <video className="content" src="http://www.bstcine.com/f/2017/07/06/141540516S48yNNt.mp4"
-                           poster={course.img ? ('http://www.bstcine.com/f/' + course.img) : null} controls></video>
+                <div className="left-container">
+                    <div className="video-container">
+                        {course.video ?
+                            <video className="content" src={'http://www.bstcine.com/f/' + course.video}
+                                   poster={course.img ? ('http://www.bstcine.com/f/' + course.img) : null}
+                                   controls></video>
+                            :
+                            <div className="content" style={{
+                                background: `url(http://www.bstcine.com/f/${course.img}) center center / cover no-repeat`
+                            }}/>
+                        }
+                    </div>
+                    {
+                        !this.isInAPP ?
+                            <div className="share-tool">
+                                分享
+                                <ul className="share-icons">
+                                    <li style={{
+                                        background: `url(${require('../../asset/image/ico_wechat.png')}) center center / contain no-repeat`
+                                    }} onClick={e => clickShare(false)}/>
+                                </ul>
+                            </div>
+                            : null
+                    }
                 </div>
+
                 <div className="desc-container">
                     <div className="title">{course.name}</div>
                     <div className="slogan">{course.subtitle}</div>
@@ -149,6 +179,17 @@ export default class Brief extends Component {
                     }
 
                     {this.renderBottomButton(course)}
+                    <div className="right-desc">
+                        {
+                            source_user_id ?
+                                <div className="get-coupon" onClick={showCouponModal}/>
+                                :
+                                <div className="recommend" onClick={showRecommendModal}>
+                                    <div className="red-bag"/>
+                                    <div className="desc">推荐课程得积分</div>
+                                </div>
+                        }
+                    </div>
                 </div>
             </div>
 

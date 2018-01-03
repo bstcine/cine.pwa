@@ -10,7 +10,7 @@ export default class Comments extends Component {
     renderComments() {
         let {comments} = this.props;
         if (comments && comments.length) {
-            return comments.map((item, index) => {
+            let comentsArr =  comments.map((item, index) => {
                 return (
                     <div key={index} className="comment-item">
                         <div className="comment-meta">
@@ -23,11 +23,20 @@ export default class Comments extends Component {
                     </div>
                 )
             })
+            return (
+                <div className="comment-none">
+                    {comentsArr}
+                    <div className="comment-none-text">
+                        暂无本课程评价，可点击“<a className="blue" href="/comments">用户口碑</a>”查看其他课程好评
+                    </div>
+                </div>
+            )
         } else {
             return (
-                <div className="comment-item">
-                    <div className="comment-detail">
-                        暂无评价
+                <div className="comment-none">
+                    <img className="comment-none-img" src={require('../../asset/image/ico_comment.png')} alt=""/>
+                    <div className="comment-none-text">
+                        暂无本课程评价，可点击“<a className="blue" href="/comments">用户口碑</a>”查看其他课程好评
                     </div>
                 </div>
             )

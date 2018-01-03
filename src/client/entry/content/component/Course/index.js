@@ -6,8 +6,11 @@ import {initWechat} from "@/util/wechatUtil";
 import * as storeUtil from "@/util/storeUtil";
 import * as BaseService from '@/service/base'
 import {Tabs, TabItems, TabItem, TabPanels, TabPanel} from '@/component/Tabs'
+import LoginModal from '@/component/LoginModal'
 import Brief from './Brief'
 import Comments from './Comments'
+import CouponModal from './CouponModal'
+import RecommendModal from './RecommendModal'
 import SITECODE from "@/constant/sitecode";
 import Bridge from "@/util/bridge";
 import BRIDGE_EVENT from "@/constant/bridgeEvent";
@@ -18,17 +21,27 @@ export default class Course extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            showLoginModal: false,
+            showCouponModal: false,
+            showRecommendModal: false,
             course: {},
             comments: [],
             user: null
         };
         this.goBuy = this.goBuy.bind(this);
         this.clickShare = this.clickShare.bind(this);
+        this.loginSuccess = this.loginSuccess.bind(this);
         this.initData = this.initData.bind(this);
         this.goLearn = this.goLearn.bind(this);
         this.login = this.login.bind(this);
         this.relatedCourse = this.relatedCourse.bind(this);
         this.handlerScroll = this.handlerScroll.bind(this);
+        this.toggleLoginModal = this.toggleLoginModal.bind(this);
+        this.toggleRecommendModal = this.toggleRecommendModal.bind(this);
+        this.toggleCouponModal = this.toggleCouponModal.bind(this);
+        let sitecode = storeUtil.get('sitecode');
+        this.isInIOSAPP = sitecode === SITECODE.IOS || sitecode === SITECODE.IOS_IPHONE || sitecode === SITECODE.IOS_IPAD
+        this.isInAPP = !!sitecode
     }
 
     handlerScroll() {
@@ -105,42 +118,40 @@ export default class Course extends Component {
     }
 
     async login() {
-
         let sitecode = storeUtil.get('sitecode');
-        alert(`sitecode ${sitecode}`);
+        // alert(`sitecode ${sitecode}`);
         if (sitecode === SITECODE.ANDROID_PHONE || sitecode === SITECODE.ANDROID_PAD || sitecode === SITECODE.ANDROID) {
             let {token} = await Bridge.android(BRIDGE_EVENT.LOGIN);
             storeUtil.setToken(token);
-            let user = await BaseService.userInfo(token);
-            this.setState({
-                user: user
-            })
+            this.loginSuccess(token)
         } else if (sitecode === SITECODE.IOS || sitecode === SITECODE.IOS_IPHONE || sitecode === SITECODE.IOS_IPAD) {
             let {token} = await Bridge.ios(BRIDGE_EVENT.LOGIN);
-            alert(`login--token ${token}`);
+            // alert(`login--token ${token}`);
             storeUtil.setToken(token);
-            alert(`token ${token}`);
-            let user = await BaseService.userInfo(token);
-            alert(user)
-            this.setState({
-                user: user
-            })
+            this.loginSuccess(token)
         } else {
-            let url = encodeURIComponent(`/content/course?cid=${getParam().cid}`);
-            let host = location.host;
-            location.href = location.protocol + '//' + host + '/login?go=' + url
+            this.toggleLoginModal()
         }
-
     }
 
-    async clickShare(need_login = true) {
-        // todo: ios分享回调
+    async loginSuccess(token) {
+        // alert(`token ${token}`);
+        this.setState({
+            showLoginModal: false
+        })
+        let user = await BaseService.userInfo(token);
+        this.setState({
+            user: user,
+        })
+    }
+
+    async clickShare(need_login = true, type = 4) {
         if (need_login && !this.state.user) {
             this.login();
             return
         }
-        let res = await createShare({type: 4, cid: getParam().cid});
-        alert(JSON.stringify(res))
+        let res = await createShare({type, cid: getParam().cid});
+        // alert(JSON.stringify(res))
         let data = res.result;
         let share_params = {
             sharelog_id: data.sharelog_id,
@@ -151,8 +162,28 @@ export default class Course extends Component {
         };
         share({share_params}).then((res) => {
             alert(JSON.stringify(res));
-            this.initData()
+            if (res.status) {
+                this.initData()
+            }
         })
+    }
+
+    toggleLoginModal() {
+        this.setState(prevState => ({
+            showLoginModal: !prevState.showLoginModal
+        }))
+    }
+
+    toggleRecommendModal() {
+        this.setState(prevState => ({
+            showRecommendModal: !prevState.showRecommendModal
+        }))
+    }
+
+    toggleCouponModal() {
+        this.setState(prevState => ({
+            showCouponModal: !prevState.showCouponModal
+        }))
     }
 
     relatedCourse(related_lesson_id) {
@@ -176,6 +207,18 @@ export default class Course extends Component {
         }
     }
 
+    durationFormat(duration) {
+        var sec_num = parseInt(duration, 10);
+        var hours   = Math.floor(sec_num / 3600);
+        var minutes = Math.floor((sec_num - (hours * 3600)) / 60);
+        var seconds = sec_num - (hours * 3600) - (minutes * 60);
+
+        if (hours   < 10) {hours   = "0"+hours;}
+        if (minutes < 10) {minutes = "0"+minutes;}
+        if (seconds < 10) {seconds = "0"+seconds;}
+        return hours+':'+minutes+':'+seconds;
+    }
+
 
     componentWillReceiveProps(nextProps) {
         const locationChanged = nextProps.location !== this.props.location;
@@ -183,19 +226,31 @@ export default class Course extends Component {
     }
 
     render() {
-        let course = this.state.course;
-        let user = this.state.user;
+        let {course, user, comments, showLoginModal, showRecommendModal, showCouponModal} = this.state
+
         return (
             <div className="course-container">
-                <Brief course={course} user={user} relatedCourse={this.relatedCourse} login={this.login}
-                       goLearn={this.goLearn} goBuy={this.goBuy} clickShare={this.clickShare}/>
+                <LoginModal isOpen={showLoginModal} toggleModal={this.toggleLoginModal}
+                            loginSuccess={this.loginSuccess}/>
+                <Brief course={course} user={user}
+                       relatedCourse={this.relatedCourse}
+                       login={this.login}
+                       goLearn={this.goLearn}
+                       goBuy={this.goBuy}
+                       clickShare={this.clickShare}
+                       showCouponModal={this.showCouponModal}
+                       showRecommendModal={this.showRecommendModal}
+                />
+                <RecommendModal isOpen={showRecommendModal} toggleModal={this.toggleRecommendModal}/>
+                <CouponModal isOpen={showCouponModal} toggleModal={this.toggleCouponModal}/>
+
                 <div className="course-detail" ref="courseDetail">
                     <Tabs ref="tabs">
                         <TabItems>
                             <TabItem>
                                 {course.object_type === '1' ? '课程概要' : '详情'}
                             </TabItem>
-                            {course.object_type === '1' ? <TabItem>课程目录</TabItem> : ""}
+                            {course.object_type === '1' && !this.isInIOSAPP ? <TabItem>课程目录</TabItem> : null}
                             <TabItem>{course.object_type === '1' ? '学员评价' : '评价'}</TabItem>
                         </TabItems>
                         <TabPanels>
@@ -204,12 +259,60 @@ export default class Course extends Component {
                                      dangerouslySetInnerHTML={{__html: course.h5remark}}/>
 
                             </TabPanel>
-                            {course.object_type === '1' ? <TabPanel>
-                                <div className="course-feature"
-                                     dangerouslySetInnerHTML={{__html: course.catalog}}/>
-                            </TabPanel> : ""}
+                            {
+                                course.object_type === '1' && !this.isInIOSAPP ?
+                                    <TabPanel>
+                                        {course.catalog ?
+                                            <div className="course-feature"
+                                                 dangerouslySetInnerHTML={{__html: course.catalog}}/>
+                                            : null
+                                        }
+
+                                        <div className="course-category">
+                                            <ul className="course-list">
+                                                {
+                                                    course.contents.map((course, i) => {
+                                                        return (
+                                                            <li key={i}>
+                                                                {course.name}
+                                                                <ul className="chapter-list">
+                                                                    {
+                                                                        course.children.map((chapter, i) => {
+                                                                            return (
+                                                                                <li key={i}>
+                                                                                    {chapter.name}
+                                                                                    <ul className="lesson-list">
+                                                                                        {
+                                                                                            chapter.children.map((lesson, i) => {
+                                                                                                return (
+                                                                                                    <li key={i}>
+                                                                                                        {lesson.name}
+                                                                                                        {
+                                                                                                            lesson.duration ?
+                                                                                                            <span className="meta">{this.durationFormat(lesson.duration)}</span>
+                                                                                                                : null
+                                                                                                        }
+                                                                                                    </li>
+                                                                                                )
+                                                                                            })
+                                                                                        }
+                                                                                    </ul>
+                                                                                </li>
+                                                                            )
+                                                                        })
+                                                                    }
+                                                                </ul>
+                                                            </li>
+                                                        )
+                                                    })
+                                                }
+                                            </ul>
+                                        </div>
+                                    </TabPanel>
+                                    : null
+                            }
                             <TabPanel>
-                                <Comments comments={this.state.comments}/>
+                                <Comments comments={comments}/>
                             </TabPanel>
                         </TabPanels>
                     </Tabs>

@@ -21,3 +21,5 @@ exports.APIURL_Share_CoursePackage = "/api/share/coursePackage"                 
 exports.APIURL_User_Info = "/api/user/info"                                     //用户信息
 exports.APIURL_User_Address_Add = "/api/user/address/add"                        //新增收货地址
 exports.APIURL_User_Address = "/api/user/address"                        //查询收货地址
+
+exports.APIURL_LoginV1 = "/api/web/login" //登录

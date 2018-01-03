@@ -24,7 +24,7 @@ let Bridge = {
     },
     ios: function (event, params, needCallback = true) {
         return new Promise(resolve => {
-            console.log(`iOS.${event} params ${params}`);
+            alert(`iOS.${event} params ${params}`);
             if (!params) params = {};
             // alert(`needCallback !== false ===> ${needCallback !== false}`)
             const callbackEvent = this.getCallbackEvent(event)
@@ -40,7 +40,7 @@ let Bridge = {
                 data: params,
                 callback: callbackEvent
             });
-            // alert(`msg ${JSON.stringify(msg)}`)
+            alert(`msg ${JSON.stringify(msg)}`)
             webkit.messageHandlers.native.postMessage(msg)
         })
     },

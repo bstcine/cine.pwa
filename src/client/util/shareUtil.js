@@ -16,7 +16,7 @@ export let createShare = async ({type, share_link, cid}) => {
     let res = null;
     if (type === 7) {
         res = await post(Api.APIURL_Share_Common, {type, share_link})
-    } else if (type === 4) {
+    } else if (type === 4 || type === 5) {
         res = await post(Api.APIURL_Share_CoursePackage, {type, cid})
     } else {
         return alert('invalid_type')
@@ -29,9 +29,11 @@ export let createShare = async ({type, share_link, cid}) => {
 
 export let updateShare = (sharelog_id) => {
     return get(Api.APIURL_Share_Update, {sharelog_id}).then(res => {
+        alert(`updateShare ${JSON.stringify(res)}`)
         if (!res.status) {
             return alert(res.msg)
         }
+        hideShareMask()
         return res
     })
 };
@@ -54,7 +56,7 @@ export let showShareMask = () => {
 };
 
 export let hideShareMask = () => {
-    document.querySelector('.share-mask').remove()
+    document.querySelector('.share-mask') && document.querySelector('.share-mask').remove()
 };
 
 export let checkShareMask = () => {
@@ -96,7 +98,8 @@ let checkShareStatus = (sharelog_id) => {
             queryShare(sharelog_id).then(res => {
                 if (res.status && res.data.status === '1') {
                     inter && clearInterval(inter);
-                    resolve()
+                    hideShareQRCode()
+                    resolve({status: true})
                 }
             })
         }, 3000)
@@ -109,38 +112,40 @@ export let share = async ({share_params}) => {
         await Bridge.android(BRIDGE_EVENT.SHARE, share_params);
         return updateShare(share_params.sharelog_id)
     } else if (sitecode === SITECODE.IOS_IPHONE || sitecode === SITECODE.IOS_IPAD || sitecode === SITECODE.IOS) {
-        // todo ios 侧提供已安装软件列表
-        // let list = await Bridge.ios(BRIDGE_EVENT.INSTALLED_APP_LIST)
-        // if(list && list.wechat===1){
-        //     await Bridge.ios(BRIDGE_EVENT.SHARE, share_params);
-        //     // alert('await Bridge.ios(\'share\', share_params)')
-        //     return updateShare(share_params.sharelog_id)
-        // }else{
-        //
-        // }
-
-        await Bridge.ios(BRIDGE_EVENT.SHARE, share_params);
-        alert('await Bridge.ios(\'share\', share_params)')
-        return updateShare(share_params.sharelog_id)
+        let list = await Bridge.ios(BRIDGE_EVENT.INSTALLED_APP_LIST)
+        if (list && list.wechat === 1) {
+            let res = await Bridge.ios(BRIDGE_EVENT.SHARE, share_params);
+            if (res && res.shareSuccess === 1) {
+                return updateShare(share_params.sharelog_id)
+            } else {
+                alert('分享已取消')
+            }
+        } else {
+            return qrShare(share_params)
+        }
     } else {
         if (uaUtil.mobile()) {
             if (uaUtil.wechat()) {
-                showShareMask();
-                await setShareParam(share_params);
-                await updateShare(share_params.sharelog_id);
-                return hideShareMask()
+                return jsShare(share_params)
             } else {
-                showShareQRCode({url: share_params.link, sharelog_id: share_params.sharelog_id});
-                await checkShareStatus(share_params.sharelog_id);
-                return hideShareQRCode()
+                return qrShare(share_params)
             }
         } else {
-            showShareQRCode({url: share_params.link, sharelog_id: share_params.sharelog_id});
-            await checkShareStatus(share_params.sharelog_id);
-            return hideShareQRCode()
+            return qrShare(share_params)
         }
     }
 };
+
+function qrShare(share_params) {
+    showShareQRCode({url: share_params.link, sharelog_id: share_params.sharelog_id});
+    return checkShareStatus(share_params.sharelog_id);
+}
+
+async function jsShare(share_params) {
+    showShareMask();
+    await setShareParam(share_params);
+    return updateShare(share_params.sharelog_id);
+}
 
 
 

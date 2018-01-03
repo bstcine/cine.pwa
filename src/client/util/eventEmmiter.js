@@ -12,7 +12,7 @@ class EventEmmiter {
 
     emit(event, ...args) {
         if (!event) throw new Error('event cannot be null');
-        alert(`emit event[${event}]`)
+        // alert(`emit event[${event}]`)
         let listenerObjs = this._events[event];
         if (!listenerObjs || listenerObjs.length === 0) {
             throw new Error(`no event[${event}] listener found`)
@@ -26,7 +26,7 @@ class EventEmmiter {
 
     addListener(event, listener, once = false) {
         if (!event) return;
-        alert(`add event[${event}]`)
+        // alert(`add event[${event}]`)
         let listenerObjs = this._events[event] || [];
         listenerObjs.push({
             listener,

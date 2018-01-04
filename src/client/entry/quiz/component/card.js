@@ -120,7 +120,7 @@ export default class Card extends Component {
         });
 
         let isCorrect = selectOption == correctIndex;
-        let answerHintStyle = "card-answer" + (selectOption == -1 ? "" : (isCorrect ? "-correct" : "-err"));
+        let answerHintStyle = selectOption == -1 ? "" : (isCorrect ? "green" : "red");
 
         return <div className="quiz-main">
             <div className="card-title">
@@ -130,8 +130,10 @@ export default class Card extends Component {
             {OptionUI}
             <hr/>
             <div className="card-todo">
-                <div className={answerHintStyle}>{isCorrect ? '回答正确! ' : '正确答案：' + this.optionName[correctIndex]}</div>
-                <button onClick={this.nextCard}>下一题</button>
+                <div className="card-answer">
+                    <span className={answerHintStyle}>{isCorrect ? '回答正确! ' : '正确答案：' + this.optionName[correctIndex]}</span>
+                </div>
+                <button className="card-next" onClick={this.nextCard}>下一题</button>
             </div>
         </div>
     }

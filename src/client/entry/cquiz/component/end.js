@@ -6,7 +6,7 @@ import SITECODE from "@/constant/sitecode";
 export default class End extends React.Component {
     constructor(props) {
         super(props);
-
+        console.log('constructor');
 
         let score = props.score ? props.score : 0;
 

@@ -8,16 +8,21 @@ export default class Index extends Component {
 
     constructor(props) {
         super(props);
-        this.toCard = this.toCard.bind(this);
+        console.log('constructor');
 
-        let quiz_id = storeUtil.get('quiz_id');
-        if(quiz_id){
-            console.log(quiz_id);
-            Service.getQuiz({id: quiz_id}).then(result => {
+        this.quiz_id = storeUtil.get('quiz_id');
+        this.quiz_title = storeUtil.get('quiz_title');
+
+        this.toCard = this.toCard.bind(this);
+    }
+
+    componentDidMount() {
+        if (this.quiz_id) {
+            Service.getQuiz({id: this.quiz_id}).then(result => {
                 console.log(result.data);
                 this.quizList = result.data.data;
             })
-        }else {
+        } else {
             eventEmmiter.once('set_quiz_data', (res) => {
                 console.log(res);
                 if (res) {
@@ -28,23 +33,19 @@ export default class Index extends Component {
         }
     }
 
-    componentDidMount() {
-
-    }
-
-    toCard(){
-        if(this.quizList){
-            storeUtil.set('quiz_list',this.quizList);
+    toCard() {
+        if (this.quizList) {
+            storeUtil.set('quiz_list', this.quizList);
             this.props.history.push('/card')
-        }else {
-            alert('quiz data is null');
+        } else {
+            alert('no data!');
         }
     }
 
     render() {
         return (
             <div className="quiz-start">
-                <div className="title">《神奇树屋》精读课程 - Lesson 2 - 小节测试</div>
+                <div className="title">{this.quiz_title ? this.quiz_title : '小节测试'}</div>
                 <div className="hint">学得怎么样了？来测一下吧！</div>
                 <button onClick={this.toCard}>开始答题</button>
             </div>

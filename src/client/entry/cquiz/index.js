@@ -18,8 +18,7 @@ class Quiz extends React.Component {
         console.log('constructor');
 
         let urlParam = getParam();
-        console.log(`Quiz getParam ==> ${JSON.stringify(urlParam)}`);
-
+        console.log(`getParam ==> ${JSON.stringify(urlParam)}`);
         let token = urlParam.token;
         let sitecode = urlParam.sitecode;
         storeUtil.remove('token');
@@ -28,7 +27,9 @@ class Quiz extends React.Component {
         sitecode && storeUtil.set('sitecode', sitecode);
 
         let quiz_id = urlParam.id;
+        let quiz_title = urlParam.title;
         storeUtil.set('quiz_id', quiz_id);
+        storeUtil.set('quiz_title', quiz_title);
     }
 
     componentDidMount() {

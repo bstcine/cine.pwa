@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {getParam, updateUrl, ignoreParams} from '@/util/urlUtil'
+import {getParam, addParam, removeParam} from '@/util/urlUtil'
 import * as Service from '@/service/vocabtest'
 import * as storeUtil from '@/util/storeUtil'
 import {initWechat} from '@/util/wechatUtil'
@@ -35,7 +35,7 @@ export default class Report extends Component {
     }
 
     async shareClick() {
-        let res = await createShare({type: 7, share_link: updateUrl({from_share: 1}, ignoreParams(['token']))})
+        let res = await createShare({type: 7, share_link: addParam(removeParam(['token']), {from_share: 1})})
         let data = res.result
         let share_params = {
             sharelog_id: data.sharelog_id,

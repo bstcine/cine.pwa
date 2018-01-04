@@ -15,6 +15,7 @@ export default class Brief extends Component {
         let sitecode = storeUtil.get('sitecode');
         this.isInAPP = sitecode === SITECODE.IOS || sitecode === SITECODE.IOS_IPHONE || sitecode === SITECODE.IOS_IPAD
             || sitecode === SITECODE.ANDROID || sitecode === SITECODE.ANDROID_PAD || sitecode === SITECODE.ANDROID_PHONE
+        this.isInIOSAPP = sitecode === SITECODE.IOS || sitecode === SITECODE.IOS_IPHONE || sitecode === SITECODE.IOS_IPAD
     }
 
     //优惠列表
@@ -69,12 +70,14 @@ export default class Brief extends Component {
     renderBottomButton(course) {
         const {goLearn, goBuy, clickShare} = this.props;
         if (course.is_paid) {
-            return <div className="btn-action btn-learn" onClick={goLearn}>立即学习</div>
+            if (!this.isInIOSAPP) {
+                return <div className="btn-action btn-learn" onClick={goLearn}>立即学习</div>
+            }
         } else {
             if (course.object_type === '1' || course.object_type === '2' || course.object_type === '3') {
                 return <div className="btn-action btn-buy" onClick={goBuy}>立即购买</div>
             } else if (course.object_type === '4') {
-                return <div className="btn-action btn-share" onClick={e => clickShare(true,5)}>分享开通</div>
+                return <div className="btn-action btn-share" onClick={e => clickShare(true, 5)}>分享开通</div>
             }
         }
     }
@@ -123,19 +126,19 @@ export default class Brief extends Component {
         let {course, user, relatedCourse, toggleRecommendModal, getCoupon} = this.props;
         const {clickShare} = this.props;
         let source_user_id = getParam().source_user_id
-        return  (
+        return (
             <div className="brief-container">
                 <div className="left-container">
                     <div className="video-container">
                         {
                             course.video ?
-                            <video className="content" src={course.video}
-                                   poster={course.img ? ('http://www.bstcine.com/f/' + course.img) : null}
-                                   controls></video>
-                            :
-                            <div className="content" style={{
-                                background: `url(${course.img?'http://www.bstcine.com/f/'+course.img:''}) center center / cover no-repeat`
-                            }}/>
+                                <video className="content" src={course.video}
+                                       poster={course.img ? ('http://www.bstcine.com/f/' + course.img) : null}
+                                       controls></video>
+                                :
+                                <div className="content" style={{
+                                    background: `url(${course.img ? 'http://www.bstcine.com/f/' + course.img : ''}) center center / cover no-repeat`
+                                }}/>
                         }
                     </div>
                     {
@@ -154,7 +157,8 @@ export default class Brief extends Component {
 
                 <div className="desc-container">
                     <div className="title">{course.name}</div>
-                    <div className="slogan">{course.subtitle}</div>
+                    {course.subtitle? <div className="slogan">{course.subtitle}</div>:null}
+
                     {
                         course.related_lesson_id ?
                             <div className="related-course"><span
@@ -165,17 +169,21 @@ export default class Brief extends Component {
                     {this.renderMeta(course)}
                     {this.renderPrices(course)}
 
-                    <div className="promotes">
-                        {this.renderActivityPromoteList(course)}
-                        {this.renderPointPromoteList(course, user)}
-                    </div>
+                    {
+                        course && ((course.activitys && course.activitys.length) || course.is_allow_point === '1')
+                        ? (
+                            <div className="promotes">
+                                {this.renderActivityPromoteList(course)}
+                                {this.renderPointPromoteList(course, user)}
+                            </div>
+                        ) : null
+                    }
+
                     {
                         course.notice ?
                             <div className="notice">
                                 <div className="label">公告</div>
-                                <div className="notice-details">
-                                    <div className="detail">{course.notice}</div>
-                                </div>
+                                <div className="notice-details" dangerouslySetInnerHTML={{__html: course.notice}}/>
                             </div> : null
                     }
 

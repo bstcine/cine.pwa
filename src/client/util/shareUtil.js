@@ -3,7 +3,7 @@ import uaUtil from './uaUtil'
 import * as storeUtil from './storeUtil'
 import SITECODE from '../constant/sitecode'
 import {setShareParam} from './wechatUtil'
-import {getParam, updateUrl} from './urlUtil'
+import {getParam, addParam} from './urlUtil'
 import Bridge from './bridge'
 import {get, post} from '../service/request'
 import Api from '../../APIConfig'
@@ -60,14 +60,14 @@ export let hideShareMask = () => {
 };
 
 export let checkShareMask = () => {
-    if (getParam().share_mask == 1) {
+    if (getParam().share_mask === '1') {
         showShareMask()
     }
 };
 
 export let showShareQRCode = ({url, sharelog_id}) => {
     console.log(`sharelog_id ${sharelog_id}`);
-    let updatedUrl = updateUrl({share_mask: 1, sharelog_id}, url);
+    let updatedUrl = addParam(url ,{share_mask: 1, sharelog_id});
     let qrcode = `http://www.bstcine.com/qrcode?text=${encodeURIComponent(updatedUrl)}`;
     let maskNode = document.createElement('div');
     maskNode.className = 'share-mask';

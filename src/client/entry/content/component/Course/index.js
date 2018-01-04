@@ -99,13 +99,14 @@ export default class Course extends Component {
     goBuy() {
         let param = getParam();
         let cid = param.cid;
+        let source_user_id = param.source_user_id;
         let sitecode = storeUtil.get('sitecode');
         if (sitecode === SITECODE.ANDROID_PHONE || sitecode === SITECODE.ANDROID_PAD || sitecode === SITECODE.ANDROID) {
             Bridge.android(BRIDGE_EVENT.PRE_CONFIRM, {course_id: cid})
         } else if (sitecode === SITECODE.IOS || sitecode === SITECODE.IOS_IPHONE || sitecode === SITECODE.IOS_IPAD) {
             Bridge.ios(BRIDGE_EVENT.PRE_CONFIRM, {course_id: cid})
         } else {
-            location.href = `/confirmorder?lesson_id=${cid}`
+            location.href = `/confirmorder?lesson_id=${cid}&source_user_id=${source_user_id}`
         }
     }
 

@@ -1,7 +1,7 @@
 import {getWechatJsSignature} from '@/service/base'
 import {checkShareMask, updateShare, hideShareMask} from './shareUtil'
 import {queryShare} from "./shareUtil";
-import {getParam, ignoreParams} from "./urlUtil";
+import {getParam, removeParam} from "./urlUtil";
 
 export let setShareParam = (params) => {
     if (typeof window.wx === 'undefined' || !window.wx) return console.log('window.wx not found, ensure include jweixin in your html')
@@ -10,6 +10,7 @@ export let setShareParam = (params) => {
 
 export let setShareTimeline = ({title, link, imgUrl, desc}) => {
     return new Promise(resolve => {
+        const link = removeParam(link,['token','share_mask'])
         window.wx.onMenuShareTimeline({
             title: title,
             link: link,
@@ -49,7 +50,7 @@ export let initWechat = async () => {
                 let data = res.data;
                 await setShareParam({
                     title: data.share_title,
-                    link: ignoreParams(['token', 'show_mask']),
+                    link: removeParam(null, ['token', 'share_mask']),
                     imgUrl: data.share_imgUrl,
                     desc: data.share_desc
                 })

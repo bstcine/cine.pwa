@@ -79,7 +79,7 @@
   background-size: cover;
   border-radius: .12rem;
   padding: .48rem .80rem;
-  h2 {
+  .h2 {
     font-size: .36rem;
     color: #fff;
     text-align: center;
@@ -87,10 +87,12 @@
   }
   .desc {
     font-size: .30rem;
-    line-height: .58rem;
+    line-height: .50rem;
     color: #3d3e3f;
-    word-break: keep-all;
     text-align: center;
+    span {
+      color: #fc4514;
+    }
   }
   .btn {
     display: block;
@@ -124,58 +126,59 @@
     width: 100%;
 
   }
-  .desc-wrap{
+  .desc-wrap {
     .tip {
       margin-top: .60rem;
       font-size: .28rem;
       line-height: .44rem;
       text-align: center;
       color: #2b2b2c;
-      span{
-        color:#f54500
+      span {
+        color: #f54500
       }
     }
 
-    .coupon-ticket{
+    .coupon-ticket {
       position: relative;
       margin: .34rem auto 0;
       width: 5.00rem;
       height: 2.10rem;
-      background: url(../image/bg_coupon.png) no-repeat center;
+      background: #fff url(../image/bg_coupon.png) no-repeat center;
       background-size: contain;
       border-radius: .12rem .12rem 0 0;
-      .coupon-value{
+      box-shadow: 0 .08rem .10rem 0 rgba(199, 194, 188, 0.12);
+      .coupon-value {
         position: absolute;
         top: .58rem;
-        left:.34rem;
+        left: .34rem;
         font-size: 0;
-        .value,.unit{
+        .value, .unit {
           vertical-align: bottom;
           color: #f56e00;
         }
-        .value{
+        .value {
           font-size: .60rem;
         }
-        .unit{
+        .unit {
           font-size: .30rem;
         }
       }
-      .coupon-desc{
+      .coupon-desc {
         position: absolute;
         top: .46rem;
         left: 1.98rem;
         font-size: 0;
-        .coupon-name{
+        .coupon-name {
           font-size: .32rem;
           color: #2b2b2c;
         }
-        .coupon-no{
+        .coupon-no {
           margin-top: .16rem;
           font-size: .22rem;
           color: #7a7b7d;
         }
       }
-      .effective-date{
+      .effective-date {
         position: absolute;
         top: 1.68rem;
         left: .25rem;
@@ -183,7 +186,7 @@
         color: #222;
       }
     }
-    .visit-at{
+    .visit-at {
       margin-top: .38rem;
       word-break: keep-all;
       font-size: .24rem;

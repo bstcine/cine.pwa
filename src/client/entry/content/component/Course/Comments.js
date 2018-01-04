@@ -22,12 +22,12 @@ export default class Comments extends Component {
                         </div>
                     </div>
                 )
-            })
+            });
             return (
                 <div className="comment-none">
                     {comentsArr}
                     <div className="comment-none-text">
-                        暂无本课程评价，可点击“<a className="blue" href="/comments">用户口碑</a>”查看其他课程好评
+                        更多课程评价，请点击“<a className="blue" href="/comments">用户口碑</a>”。
                     </div>
                 </div>
             )
@@ -36,7 +36,8 @@ export default class Comments extends Component {
                 <div className="comment-none">
                     <img className="comment-none-img" src={require('../../asset/image/ico_comment.png')} alt=""/>
                     <div className="comment-none-text">
-                        暂无本课程评价，可点击“<a className="blue" href="/comments">用户口碑</a>”查看其他课程好评
+                        暂无用户评价~
+                        想看其它课程评价，请点击“<a className="blue" href="/comments">用户口碑</a>”。
                     </div>
                 </div>
             )

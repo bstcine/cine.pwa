@@ -4,6 +4,9 @@ const static_host = process.env.NODE_ENV === 'production' ? '/' : '/'
 
 module.exports = {
 
+    // 用来加载 vConsole 调试插件，生产模式 关闭 debug
+    debug : true,
+
     static_host,
 
     pages: ['content','quiz','address','vocabtest'],
@@ -14,7 +17,8 @@ module.exports = {
         'react-router-dom',
         'react-transition-group',
         'babel-polyfill',
-        'store'
+        'store',
+        'react-modal'
     ],
 
     output: {

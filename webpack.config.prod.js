@@ -6,11 +6,7 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
-
 const WebpackConfigCommon = require('./webpack.config.common');
-
-// 生产模式 关闭 debug，用来移除 console 日志输出
-const debug = true;
 
 const pages = WebpackConfigCommon.pages;
 let entry = {};
@@ -45,6 +41,9 @@ module.exports = {
     module: WebpackConfigCommon.module,
     resolve: WebpackConfigCommon.resolve,
     plugins: [
+        new webpack.DefinePlugin({
+            'debug': JSON.stringify(WebpackConfigCommon.debug)
+        }),
         new CleanWebpackPlugin(['build/*.*', 'build/entry', 'build/asset'], {verbose: false}),
         new webpack.DllReferencePlugin({
             context: __dirname,
@@ -66,7 +65,7 @@ module.exports = {
                 // Pending further investigation:
                 // https://github.com/mishoo/UglifyJS2/issues/2011
                 comparisons: false,
-                drop_console: !debug,
+                drop_console: false,
             },
             mangle: {
                 safari10: true,

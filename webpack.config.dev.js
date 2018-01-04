@@ -32,6 +32,9 @@ module.exports = {
     module: WebpackConfigCommon.module,
     resolve: WebpackConfigCommon.resolve,
     plugins: [
+        new webpack.DefinePlugin({
+            'debug': JSON.stringify(WebpackConfigCommon.debug)
+        }),
         new WebpackMildCompile(),
         new CleanWebpackPlugin(['build/*.*', 'build/entry', 'build/asset'], {verbose: false}),
         new webpack.DllReferencePlugin({
@@ -59,8 +62,8 @@ module.exports = {
         port: 5000,
         proxy: {
             "/api": {
-                target: "http://localhost:9000",
-                // target: "http://apptest.bstcine.com",
+                // target: "http://localhost:9000",
+                target: "http://apptest.bstcine.com",
                 secure: false,
                 changeOrigin: true
             }

@@ -18,9 +18,12 @@ export default class Index extends Component {
                 this.quizList = result.data.data;
             })
         }else {
-            eventEmmiter.once('load_quiz_list', (res) => {
-                if (res) res = JSON.parse(res);
-                console.log(res)
+            eventEmmiter.once('set_quiz_data', (res) => {
+                console.log(res);
+                if (res) {
+                    res = JSON.parse(res);
+                    this.quizList = res.data;
+                }
             })
         }
     }

@@ -6,7 +6,7 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
 const WebpackMildCompile = require('webpack-mild-compile').Plugin;
 const WebpackConfigCommon = require('./webpack.config.common');
-var OfflinePlugin = require('offline-plugin');
+const OfflinePlugin = require('offline-plugin');
 
 
 const pages = WebpackConfigCommon.pages;
@@ -32,8 +32,8 @@ module.exports = {
     module: WebpackConfigCommon.module,
     resolve: WebpackConfigCommon.resolve,
     plugins: [
-        new webpack.DefinePlugin({
-            'debug': JSON.stringify(WebpackConfigCommon.debug)
+        new webpack.EnvironmentPlugin({
+            DEBUG: WebpackConfigCommon.debug
         }),
         new WebpackMildCompile(),
         new CleanWebpackPlugin(['build/*.*', 'build/entry', 'build/asset'], {verbose: false}),

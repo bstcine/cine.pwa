@@ -41,8 +41,8 @@ module.exports = {
     module: WebpackConfigCommon.module,
     resolve: WebpackConfigCommon.resolve,
     plugins: [
-        new webpack.DefinePlugin({
-            'debug': JSON.stringify(WebpackConfigCommon.debug)
+        new webpack.EnvironmentPlugin({
+            DEBUG: WebpackConfigCommon.debug
         }),
         new CleanWebpackPlugin(['build/*.*', 'build/entry', 'build/asset'], {verbose: false}),
         new webpack.DllReferencePlugin({

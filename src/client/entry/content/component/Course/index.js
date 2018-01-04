@@ -26,6 +26,7 @@ export default class Course extends Component {
             showRecommendModal: false,
             course: {},
             comments: [],
+            coupon: null,
             user: null
         };
         this.goBuy = this.goBuy.bind(this);
@@ -39,6 +40,8 @@ export default class Course extends Component {
         this.toggleLoginModal = this.toggleLoginModal.bind(this);
         this.toggleRecommendModal = this.toggleRecommendModal.bind(this);
         this.toggleCouponModal = this.toggleCouponModal.bind(this);
+        this.getUserName = this.getUserName.bind(this);
+        this.getCoupon = this.getCoupon.bind(this);
         let sitecode = storeUtil.get('sitecode');
         this.isInIOSAPP = sitecode === SITECODE.IOS || sitecode === SITECODE.IOS_IPHONE || sitecode === SITECODE.IOS_IPAD
         this.isInAPP = !!sitecode
@@ -161,7 +164,7 @@ export default class Course extends Component {
             desc: data.share_desc
         };
         share({share_params}).then((res) => {
-            alert(JSON.stringify(res));
+            console.log(JSON.stringify(res));
             if (res.status) {
                 this.initData()
             }
@@ -184,6 +187,20 @@ export default class Course extends Component {
         this.setState(prevState => ({
             showCouponModal: !prevState.showCouponModal
         }))
+    }
+    getUserName(user){
+        if(!user) return ""
+        return user.phone || user.email || user.login
+    }
+
+    async getCoupon() {
+        let source_user_id = getParam().source_user_id
+        if (!source_user_id) return alert('source_user_id is null')
+        let coupon = await Service.createCoupon(source_user_id)
+        this.setState({
+            coupon,
+            showCouponModal:true
+        })
     }
 
     relatedCourse(related_lesson_id) {
@@ -219,7 +236,6 @@ export default class Course extends Component {
         return hours+':'+minutes+':'+seconds;
     }
 
-
     componentWillReceiveProps(nextProps) {
         const locationChanged = nextProps.location !== this.props.location;
         if (locationChanged) this.initData()
@@ -238,11 +254,11 @@ export default class Course extends Component {
                        goLearn={this.goLearn}
                        goBuy={this.goBuy}
                        clickShare={this.clickShare}
-                       showCouponModal={this.showCouponModal}
-                       showRecommendModal={this.showRecommendModal}
+                       getCoupon={this.getCoupon}
+                       toggleRecommendModal={this.toggleRecommendModal}
                 />
-                <RecommendModal isOpen={showRecommendModal} toggleModal={this.toggleRecommendModal}/>
-                <CouponModal isOpen={showCouponModal} toggleModal={this.toggleCouponModal}/>
+                <RecommendModal isOpen={showRecommendModal} toggleModal={this.toggleRecommendModal} clickShare={this.clickShare}/>
+                <CouponModal isOpen={showCouponModal} toggleModal={this.toggleCouponModal} username={this.getUserName(user)} coupon={this.state.coupon}/>
 
                 <div className="course-detail" ref="courseDetail">
                     <Tabs ref="tabs">

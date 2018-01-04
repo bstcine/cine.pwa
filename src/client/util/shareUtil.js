@@ -29,7 +29,7 @@ export let createShare = async ({type, share_link, cid}) => {
 
 export let updateShare = (sharelog_id) => {
     return get(Api.APIURL_Share_Update, {sharelog_id}).then(res => {
-        alert(`updateShare ${JSON.stringify(res)}`)
+        console.log(`updateShare ${JSON.stringify(res)}`)
         if (!res.status) {
             return alert(res.msg)
         }

@@ -24,13 +24,13 @@ let Bridge = {
     },
     ios: function (event, params, needCallback = true) {
         return new Promise(resolve => {
-            alert(`iOS.${event} params ${params}`);
+            console.log(`iOS.${event} params ${params}`);
             if (!params) params = {};
             // alert(`needCallback !== false ===> ${needCallback !== false}`)
             const callbackEvent = this.getCallbackEvent(event)
             if (needCallback) {
                 eventEmmiter.once(callbackEvent, (res) => {
-                    alert(`iOS.${res} callback`)
+                    console.log(`iOS.${res} callback`)
                     if (res) res = JSON.parse(res);
                     resolve(res)
                 })
@@ -40,7 +40,7 @@ let Bridge = {
                 data: params,
                 callback: callbackEvent
             });
-            alert(`msg ${JSON.stringify(msg)}`)
+            console.log(`msg ${JSON.stringify(msg)}`)
             webkit.messageHandlers.native.postMessage(msg)
         })
     },

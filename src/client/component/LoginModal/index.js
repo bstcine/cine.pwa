@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import ReactModal from 'react-modal'
-import '@/asset/style/loginModal.less'
+import '@/asset/style/modal.less'
 import * as Service from '@/service/base'
 import errorMsg from '@/util/errorMsg'
 
@@ -12,8 +12,8 @@ export default class LoginModal extends Component {
         this.handleUsername = this.handleUsername.bind(this);
         this.handlePassword = this.handlePassword.bind(this);
         this.state = {
-            username: null,
-            password: null,
+            username: "",
+            password: "",
             loginBtn: '登录'
         }
     }
@@ -54,14 +54,13 @@ export default class LoginModal extends Component {
                         className="login-modal"
                         overlayClassName="modal-overlay"
                         shouldCloseOnOverlayClick={true}
-                        shouldCloseOnEsc={true}
-                        closeTimeoutMS={300}>
+                        shouldCloseOnEsc={true}>
                 <div className="login-top">登录
                     <span className="register-tip">没有账号？<a href="/register">立即注册</a></span>
                 </div>
                 <form className="login-form" onSubmit={this.loginAction}>
-                    <input type="text" className="username" placeholder="用户名或手机号或邮箱" onChange={this.handleUsername}/>
-                    <input type="password" className="password" placeholder="密码" onChange={this.handlePassword}/>
+                    <input type="text" className="username" value={this.state.username} placeholder="用户名或手机号或邮箱" onInput={this.handleUsername}/>
+                    <input type="password" className="password" value={this.state.password} placeholder="密码" onInput={this.handlePassword}/>
                     <button type="submit" className="login-btn">{this.state.loginBtn}</button>
                 </form>
                 <div className="login-bottom">

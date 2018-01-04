@@ -1,8 +1,6 @@
 import React, {Component} from 'react';
 import ReactModal from 'react-modal'
-import '@/asset/style/loginModal.less'
-import * as Service from '@/service/base'
-import errorMsg from '@/util/errorMsg'
+import '@/asset/style/modal.less'
 
 export default class CouponModal extends Component {
     constructor(props) {
@@ -19,16 +17,34 @@ export default class CouponModal extends Component {
     }
 
     render() {
+        let {isOpen, username, coupon} = this.props;
+        if(!coupon) return null
         return (
-            <ReactModal isOpen={this.props.isOpen}
+            <ReactModal isOpen={isOpen}
                         onRequestClose={this.handleCloseModal}
                         ariaHideApp={false}
-                        className="login-modal"
+                        className="coupon-modal"
                         overlayClassName="modal-overlay"
                         shouldCloseOnOverlayClick={true}
-                        shouldCloseOnEsc={true}
-                        closeTimeoutMS={300}>
-                优惠券框
+                        shouldCloseOnEsc={true}>
+                <h2/>
+                <div className="desc-wrap">
+                    <div className="tip">优惠券已成功发放至账户<span>{username}</span></div>
+                    <div className="coupon-ticket">
+                        <div className="coupon-value"><span className="value">{100 - Number(coupon.value) * 100}</span><span className="unit">折</span></div>
+                        <div className="coupon-desc">
+                            <div className="coupon-name">{coupon.name}</div>
+                            <div className="coupon-no">优惠券码：{coupon.no}</div>
+                        </div>
+                        <div className="effective-date">有效期：{coupon.effective_at.substring(0,10).replace(/-/g,'.')} - {coupon.expire_at.substring(0,10).replace(/-/g,'.')}</div>
+
+                    </div>
+                    <div className="visit-at">
+                        去官网 (www.bstcine.com) 或
+                        下载善恩英语APP 了解更多善恩课程
+                    </div>
+
+                </div>
 
             </ReactModal>
         );

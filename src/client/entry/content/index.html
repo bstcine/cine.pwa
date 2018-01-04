@@ -28,8 +28,8 @@
             window.addEventListener('error', function (e) {
                 var error = e.error;
                 if (error) {
-                    alert('global error')
-                    alert(JSON.stringify(error));
+                    console.log('global error')
+                    console.log(error);
                 }
             });
         }
@@ -41,4 +41,5 @@
 <div id="root"></div>
 
 </body>
+
 </html>

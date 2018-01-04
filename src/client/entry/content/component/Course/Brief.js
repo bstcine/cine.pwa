@@ -120,20 +120,21 @@ export default class Brief extends Component {
     }
 
     render() {
-        let {course, user, relatedCourse, showRecommendModal, showCouponModal} = this.props;
-        const {goLearn, goBuy, clickShare} = this.props;
+        let {course, user, relatedCourse, toggleRecommendModal, getCoupon} = this.props;
+        const {clickShare} = this.props;
         let source_user_id = getParam().source_user_id
-        return course ? (
+        return  (
             <div className="brief-container">
                 <div className="left-container">
                     <div className="video-container">
-                        {course.video ?
-                            <video className="content" src={'http://www.bstcine.com/f/' + course.video}
+                        {
+                            course.video ?
+                            <video className="content" src={course.video}
                                    poster={course.img ? ('http://www.bstcine.com/f/' + course.img) : null}
                                    controls></video>
                             :
                             <div className="content" style={{
-                                background: `url(http://www.bstcine.com/f/${course.img}) center center / cover no-repeat`
+                                background: `url(${course.img?'http://www.bstcine.com/f/'+course.img:''}) center center / cover no-repeat`
                             }}/>
                         }
                     </div>
@@ -182,9 +183,9 @@ export default class Brief extends Component {
                     <div className="right-desc">
                         {
                             source_user_id ?
-                                <div className="get-coupon" onClick={showCouponModal}/>
+                                <div className="get-coupon" onClick={getCoupon}/>
                                 :
-                                <div className="recommend" onClick={showRecommendModal}>
+                                <div className="recommend" onClick={toggleRecommendModal}>
                                     <div className="red-bag"/>
                                     <div className="desc">推荐课程得积分</div>
                                 </div>
@@ -192,7 +193,7 @@ export default class Brief extends Component {
                     </div>
                 </div>
             </div>
+        )
 
-        ) : null
     }
 }

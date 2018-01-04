@@ -1,6 +1,8 @@
-import {post} from '@/service/request'
+import {post, postv1} from '@/service/request'
 import Api from '@/../APIConfig'
 import * as storeUtl from '@/util/storeUtil'
+import errorCode from "@/constant/errorCode";
+import errorMsg from "@/util/errorMsg";
 
 export let getContentCourseDetail = (query) => {
     return post(Api.APIURL_Content_Course_Detail, query)
@@ -41,5 +43,14 @@ export let getContentCourseComment = (query) => {
             }
             return res.result
         })
+}
+
+export let createCoupon = (source_user_id)=>{
+    return postv1(Api.APIURL_Create_Coupon,{source_user_id}).then(res=>{
+        if(!res.status){
+            return alert(errorMsg(res.msg))
+        }
+        return res.coupon
+    })
 }
 

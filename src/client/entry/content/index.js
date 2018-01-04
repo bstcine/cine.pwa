@@ -1,3 +1,5 @@
+import '@/util/debug'
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {
@@ -12,7 +14,6 @@ import * as storeUtil from '@/util/storeUtil'
 import './asset/style/index.less'
 // import * as OfflinePluginRuntime from 'offline-plugin/runtime';
 // OfflinePluginRuntime.install();
-import '@/util/debug'
 
 class Content extends React.Component {
 

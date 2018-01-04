@@ -59,8 +59,8 @@ export default class LoginModal extends Component {
                     <span className="register-tip">没有账号？<a href="/register">立即注册</a></span>
                 </div>
                 <form className="login-form" onSubmit={this.loginAction}>
-                    <input type="text" className="username" value={this.state.username} placeholder="用户名或手机号或邮箱" onInput={this.handleUsername}/>
-                    <input type="password" className="password" value={this.state.password} placeholder="密码" onInput={this.handlePassword}/>
+                    <input type="text" className="username" value={this.state.username} placeholder="用户名或手机号或邮箱" onChange={this.handleUsername}/>
+                    <input type="password" className="password" value={this.state.password} placeholder="密码" onChange={this.handlePassword}/>
                     <button type="submit" className="login-btn">{this.state.loginBtn}</button>
                 </form>
                 <div className="login-bottom">

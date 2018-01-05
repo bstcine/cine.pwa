@@ -18,6 +18,12 @@ export default class LoginModal extends Component {
         }
     }
 
+
+    componentWillUpdate(nextProps, nextState) {
+
+    }
+
+
     handleCloseModal() {
         this.props.toggleModal()
     }
@@ -53,14 +59,22 @@ export default class LoginModal extends Component {
                         ariaHideApp={false}
                         className="login-modal"
                         overlayClassName="modal-overlay"
+                        bodyOpenClassName="body-modal-open"
                         shouldCloseOnOverlayClick={true}
                         shouldCloseOnEsc={true}>
                 <div className="login-top">登录
                     <span className="register-tip">没有账号？<a href="/register">立即注册</a></span>
                 </div>
                 <form className="login-form" onSubmit={this.loginAction}>
-                    <input type="text" className="username" value={this.state.username} placeholder="用户名或手机号或邮箱" onChange={this.handleUsername}/>
-                    <input type="password" className="password" value={this.state.password} placeholder="密码" onChange={this.handlePassword}/>
+                    <div className="form-control">
+                        <i className="material-icons">person_outline</i>
+                        <input type="text" className="username" value={this.state.username} placeholder="用户名或手机号或邮箱" onChange={this.handleUsername}/>
+                    </div>
+                    <div className="form-control">
+                        <i className="material-icons">lock_outline</i>
+                        <input type="password" className="password" value={this.state.password} placeholder="密码" onChange={this.handlePassword}/>
+                    </div>
+
                     <button type="submit" className="login-btn">{this.state.loginBtn}</button>
                 </form>
                 <div className="login-bottom">

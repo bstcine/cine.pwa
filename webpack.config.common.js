@@ -5,7 +5,7 @@ const static_host = process.env.NODE_ENV === 'production' ? '/' : '/'
 module.exports = {
 
     // 用来加载 vConsole 调试插件，生产模式 关闭 debug
-    debug: true,
+    debug: false,
 
     static_host,
 
@@ -95,7 +95,7 @@ module.exports = {
             },
             {
                 test: /\.(woff|woff2|eot|otf|webp|ttf)$/i,
-                loader: "url-loader",
+                loader: 'url-loader',
                 options: {
                     limit: 10000,
                     name: 'asset/font/[name].[hash:8].[ext]'

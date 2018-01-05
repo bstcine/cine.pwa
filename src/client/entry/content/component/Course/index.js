@@ -45,7 +45,7 @@ export default class Course extends Component {
         this.getUserName = this.getUserName.bind(this);
         this.getCoupon = this.getCoupon.bind(this);
         let sitecode = storeUtil.get('sitecode');
-        this.isInIOSAPP = sitecode === SITECODE.IOS || sitecode === SITECODE.IOS_IPHONE || sitecode === SITECODE.IOS_IPAD
+        this.isInIOSAPP = sitecode === SITECODE.IOS || sitecode === SITECODE.IOS_IPHONE || sitecode === SITECODE.IOS_IPAD;
         this.isInAPP = !!sitecode
     }
 
@@ -67,7 +67,7 @@ export default class Course extends Component {
         window.addEventListener('scroll', this.handlerScroll);
         eventEmmiter.on(BRIDGE_EVENT.OUTER_SHARE, () => {
             this.clickShare(false)
-        })
+        });
 
         this.initData()
     }
@@ -99,6 +99,10 @@ export default class Course extends Component {
     }
 
     goBuy() {
+        if (!this.state.user) {
+            this.login();
+            return
+        }
         let param = getParam();
         let cid = param.cid;
         let source_user_id = param.source_user_id;
@@ -108,7 +112,7 @@ export default class Course extends Component {
         } else if (sitecode === SITECODE.IOS || sitecode === SITECODE.IOS_IPHONE || sitecode === SITECODE.IOS_IPAD) {
             Bridge.ios(BRIDGE_EVENT.PRE_CONFIRM, {course_id: cid})
         } else {
-            let url = `/confirmorder?lesson_id=${cid}`
+            let url = `/confirmorder?lesson_id=${cid}`;
             if (source_user_id) {
                 url += `&source_user_id=${source_user_id}`
             }
@@ -144,15 +148,12 @@ export default class Course extends Component {
         }
     }
 
-    async loginSuccess(token) {
+    async loginSuccess() {
         // alert(`token ${token}`);
         this.setState({
             showLoginModal: false
-        })
-        let user = await BaseService.userInfo(token);
-        this.setState({
-            user: user,
-        })
+        });
+        this.initData()
     }
 
     async clickShare(need_login = true, type = 4) {
@@ -197,14 +198,14 @@ export default class Course extends Component {
     }
 
     getUserName(user) {
-        if (!user) return ""
+        if (!user) return "";
         return user.phone || user.email || user.login
     }
 
     async getCoupon() {
-        let source_user_id = getParam().source_user_id
-        if (!source_user_id) return alert('source_user_id is null')
-        let coupon = await Service.createCoupon(source_user_id)
+        let source_user_id = getParam().source_user_id;
+        if (!source_user_id) return alert('source_user_id is null');
+        let coupon = await Service.createCoupon(source_user_id);
         this.setState({
             coupon,
             showCouponModal: true
@@ -256,11 +257,10 @@ export default class Course extends Component {
     }
 
     render() {
-        let {course, user, comments, showLoginModal, showRecommendModal, showCouponModal} = this.state
+        let {course, user, comments, showLoginModal, showRecommendModal, showCouponModal} = this.state;
 
         return (
             <div className="course-container">
-                <i className="material-icons">announcement</i>
                 <LoginModal isOpen={showLoginModal} toggleModal={this.toggleLoginModal}
                             loginSuccess={this.loginSuccess}/>
                 <Brief course={course} user={user}

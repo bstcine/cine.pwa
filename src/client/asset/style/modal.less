@@ -8,7 +8,12 @@
   background-color: rgba(0, 0, 0, .85);
   background-size: cover;
 }
-
+.body-modal-open{
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+}
 .login-modal {
   width: 7.20rem;
   margin: 2.00rem auto 0;
@@ -29,27 +34,38 @@
     }
   }
   .login-form {
-    .username, .password, .login-btn {
+    .form-control{
       margin-top: .30rem;
-      border-radius: .08rem;
-    }
-    .username, .password {
-      padding: .32rem;
-      border: solid .02rem #E5E5E5;
-      width: 100%;
-      font-size: .28rem;
-      &::placeholder {
+      position: relative;
+      font-size: 0;
+      i.material-icons{
+        position: absolute;
+        top: 0.26rem;
+        left: .20rem;
+        font-size: .48rem;
+        color: #103e99;
+      }
+      .username, .password {
+        border-radius: .08rem;
+        padding: .32rem .32rem .32rem .80rem;
+        border: solid .02rem #E5E5E5;
+        width: 100%;
         font-size: .28rem;
-        color: rgba(168, 173, 182, 0.60);
-      }
-      &:focus {
         &::placeholder {
-          color: #a8adb6;
+          font-size: .28rem;
+          color: rgba(168, 173, 182, 0.60);
         }
-        border: solid .02rem #91add8;
+        &:focus {
+          &::placeholder {
+            color: #a8adb6;
+          }
+          border: solid .02rem #91add8;
+        }
       }
     }
+
     .login-btn {
+      border-radius: .08rem;
       padding: .32rem;
       line-height: 1;
       width: 100%;

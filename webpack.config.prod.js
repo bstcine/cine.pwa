@@ -44,7 +44,7 @@ module.exports = {
         new webpack.EnvironmentPlugin({
             DEBUG: WebpackConfigCommon.debug
         }),
-        new CleanWebpackPlugin(['build/*.*', 'build/entry', 'build/asset'], {verbose: false}),
+        new CleanWebpackPlugin(['build/*.*', 'build/entry'], {verbose: false}),
         new webpack.DllReferencePlugin({
             context: __dirname,
             manifest: 'build/dll/manifest-dll.json'

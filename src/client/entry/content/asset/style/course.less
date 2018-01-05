@@ -31,7 +31,7 @@
       .slogan {
         font-size: .28rem;
         color: #6a6a6a;
-        margin-bottom: .24rem;
+        margin-bottom: .20rem;
         .text-one-line();
       }
       .related-course {
@@ -51,13 +51,14 @@
       .metas {
         font-size: 0;
         color: #a7a8a9;
-        margin-bottom: .27rem;
+        margin-bottom: .20rem;
         overflow: hidden;
         white-space: nowrap;
         width: 100%;
         .meta {
           font-size: .24rem;
-          display: inline-block;
+          line-height: .40rem;
+          display: block;
           margin-right: .36rem;
         }
         .meta:last-child {
@@ -375,6 +376,7 @@ span.grey {
           margin-bottom: .60rem;
           .meta {
             font-size: .28rem;
+            display: inline-block;
           }
         }
         .prices {
@@ -516,6 +518,9 @@ span.grey {
         .metas {
           width: 10.00rem;
           margin-bottom: .30rem;
+          .meta{
+            display: inline-block;
+          }
         }
         .prices, .promotes {
           background-color: rgba(255, 247, 242, 0.5);

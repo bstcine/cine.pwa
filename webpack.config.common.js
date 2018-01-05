@@ -18,7 +18,8 @@ module.exports = {
         'react-transition-group',
         'babel-polyfill',
         'store',
-        'react-modal'
+        'react-modal',
+        'material-icons',
     ],
 
     output: {
@@ -84,19 +85,31 @@ module.exports = {
                 ]
             },
             {
-                test: /\.(eot|woff|woff2|ttf|png|jpg|jpeg|gif|svg)$/i,
+                test: /\.(png|jpg|jpeg|gif|svg)$/i,
                 loader: 'url-loader',
                 options: {
-                    limit: 10000,
+                    limit: 10,
                     name: 'asset/image/[name].[hash:8].[ext]'
                 }
-            }]
+            },
+            {
+                test: /\.(woff|woff2|eot|otf|webp|ttf)$/i,
+                loader: "url-loader",
+                options: {
+                    limit: 10000,
+                    name: 'asset/font/[name].[hash:8].[ext]'
+                },
+            }
+            ],
+
+
     },
 
     resolve: {
         modules: [path.resolve(__dirname, 'src/client'), "node_modules"],
         alias: {
             '@': path.resolve(__dirname, 'src/client'),
+            'material-icons': 'material-design-icons/iconfont/material-icons.css',
         }
     }
 }

@@ -16,6 +16,8 @@ import Bridge from "@/util/bridge";
 import BRIDGE_EVENT from "@/constant/bridgeEvent";
 import {createShare, share} from "@/util/shareUtil";
 import {eventEmmiter} from "@/util/eventEmmiter";
+import 'material-icons'
+
 
 export default class Course extends Component {
     constructor(props) {
@@ -106,7 +108,11 @@ export default class Course extends Component {
         } else if (sitecode === SITECODE.IOS || sitecode === SITECODE.IOS_IPHONE || sitecode === SITECODE.IOS_IPAD) {
             Bridge.ios(BRIDGE_EVENT.PRE_CONFIRM, {course_id: cid})
         } else {
-            location.href = `/confirmorder?lesson_id=${cid}&source_user_id=${source_user_id}`
+            let url = `/confirmorder?lesson_id=${cid}`
+            if (source_user_id) {
+                url += `&source_user_id=${source_user_id}`
+            }
+            location.href = url
         }
     }
 
@@ -189,8 +195,9 @@ export default class Course extends Component {
             showCouponModal: !prevState.showCouponModal
         }))
     }
-    getUserName(user){
-        if(!user) return ""
+
+    getUserName(user) {
+        if (!user) return ""
         return user.phone || user.email || user.login
     }
 
@@ -200,7 +207,7 @@ export default class Course extends Component {
         let coupon = await Service.createCoupon(source_user_id)
         this.setState({
             coupon,
-            showCouponModal:true
+            showCouponModal: true
         })
     }
 
@@ -227,14 +234,20 @@ export default class Course extends Component {
 
     durationFormat(duration) {
         var sec_num = parseInt(duration, 10);
-        var hours   = Math.floor(sec_num / 3600);
+        var hours = Math.floor(sec_num / 3600);
         var minutes = Math.floor((sec_num - (hours * 3600)) / 60);
         var seconds = sec_num - (hours * 3600) - (minutes * 60);
 
-        if (hours   < 10) {hours   = "0"+hours;}
-        if (minutes < 10) {minutes = "0"+minutes;}
-        if (seconds < 10) {seconds = "0"+seconds;}
-        return hours+':'+minutes+':'+seconds;
+        if (hours < 10) {
+            hours = "0" + hours;
+        }
+        if (minutes < 10) {
+            minutes = "0" + minutes;
+        }
+        if (seconds < 10) {
+            seconds = "0" + seconds;
+        }
+        return hours + ':' + minutes + ':' + seconds;
     }
 
     componentWillReceiveProps(nextProps) {
@@ -247,6 +260,7 @@ export default class Course extends Component {
 
         return (
             <div className="course-container">
+                <i className="material-icons">announcement</i>
                 <LoginModal isOpen={showLoginModal} toggleModal={this.toggleLoginModal}
                             loginSuccess={this.loginSuccess}/>
                 <Brief course={course} user={user}
@@ -258,8 +272,10 @@ export default class Course extends Component {
                        getCoupon={this.getCoupon}
                        toggleRecommendModal={this.toggleRecommendModal}
                 />
-                <RecommendModal isOpen={showRecommendModal} toggleModal={this.toggleRecommendModal} clickShare={this.clickShare}/>
-                <CouponModal isOpen={showCouponModal} toggleModal={this.toggleCouponModal} username={this.getUserName(user)} coupon={this.state.coupon}/>
+                <RecommendModal isOpen={showRecommendModal} toggleModal={this.toggleRecommendModal}
+                                clickShare={this.clickShare}/>
+                <CouponModal isOpen={showCouponModal} toggleModal={this.toggleCouponModal}
+                             username={this.getUserName(user)} coupon={this.state.coupon}/>
 
                 <div className="course-detail" ref="courseDetail">
                     <Tabs ref="tabs">
@@ -306,7 +322,8 @@ export default class Course extends Component {
                                                                                                         {lesson.name}
                                                                                                         {
                                                                                                             lesson.duration ?
-                                                                                                            <span className="meta">{this.durationFormat(lesson.duration)}</span>
+                                                                                                                <span
+                                                                                                                    className="meta">{this.durationFormat(lesson.duration)}</span>
                                                                                                                 : null
                                                                                                         }
                                                                                                     </li>

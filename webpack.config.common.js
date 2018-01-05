@@ -89,7 +89,7 @@ module.exports = {
                 test: /\.(png|jpg|jpeg|gif|svg)$/i,
                 loader: 'url-loader',
                 options: {
-                    limit: 10,
+                    limit: 10000,
                     name: 'asset/image/[name].[hash:8].[ext]'
                 }
             },

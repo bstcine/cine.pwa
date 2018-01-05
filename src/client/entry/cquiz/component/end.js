@@ -40,8 +40,8 @@ export default class End extends React.Component {
         } else if (sitecode === SITECODE.IOS || sitecode === SITECODE.IOS_IPHONE || sitecode === SITECODE.IOS_IPAD) {
             Bridge.ios(Bridge.QUIZ_EXIT);
         } else {
-            alert('exit');
-            console.log(Bridge.QUIZ_EXIT);
+            console.log(window.parent);
+            if(window.parent.cineExitQuiz) window.parent.cineExitQuiz();
         }
     }
 

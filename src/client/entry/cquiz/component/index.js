@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import * as Service from '@/service/quiz'
 import {getParam} from '@/util/urlUtil'
 import * as storeUtil from '@/util/storeUtil'
-import {eventEmmiter} from "@/util/eventEmmiter";
+import SITECODE from "@/constant/sitecode";
 
 export default class Index extends Component {
 
@@ -23,12 +23,20 @@ export default class Index extends Component {
                 this.quizList = result.data.data;
             })
         } else {
-            eventEmmiter.once('set_quiz_data', (res) => {
-                console.log(res);
-                if (res) {
-                    this.quizList = JSON.parse(res);
-                }
-            })
+            let sitecode = storeUtil.get('sitecode');
+            if (sitecode === SITECODE.ANDROID_PHONE || sitecode === SITECODE.ANDROID_PAD || sitecode === SITECODE.ANDROID) {
+                Bridge.android(Bridge.INIT_QUIZ_DATA).then(res => {
+                    if (res) this.quizList = JSON.parse(res);
+                });
+            } else if (sitecode === SITECODE.IOS || sitecode === SITECODE.IOS_IPHONE || sitecode === SITECODE.IOS_IPAD) {
+                Bridge.ios(Bridge.INIT_QUIZ_DATA).then(res => {
+                    if (res) this.quizList = JSON.parse(res);
+                });
+            } else {
+                console.log(window.parent);
+                let quizData = window.parent.cineQuizData;
+                if (quizData) this.quizList = JSON.parse(quizData);
+            }
         }
     }
 

@@ -5,11 +5,11 @@ const static_host = process.env.NODE_ENV === 'production' ? '/' : '/'
 module.exports = {
 
     // 用来加载 vConsole 调试插件，生产模式 关闭 debug
-    debug : true,
+    debug: true,
 
     static_host,
 
-    pages: ['content','cquiz','address','vocabtest'],
+    pages: ['content', 'cquiz', 'address', 'vocabtest'],
 
     vendor_dll: [
         'react',
@@ -29,16 +29,17 @@ module.exports = {
     },
 
     module: {
-        loaders: [{
-            test: /\.js$/,
-            loader: 'babel-loader',
-            include: path.resolve(__dirname, 'src'),
-            query: {
-                cacheDirectory: true,
-                plugins: ['lodash'],
-                presets: ["env", "stage-0", "react"]
+        loaders: [
+            {
+                test: /\.js$/,
+                loader: 'babel-loader',
+                include: path.resolve(__dirname, 'src'),
+                query: {
+                    cacheDirectory: true,
+                    plugins: ['lodash'],
+                    presets: ["env", "stage-0", "react"]
+                },
             },
-        },
             {
                 test: /\.less$/,
                 use: [
@@ -100,9 +101,7 @@ module.exports = {
                     name: 'asset/font/[name].[hash:8].[ext]'
                 },
             }
-            ],
-
-
+        ]
     },
 
     resolve: {

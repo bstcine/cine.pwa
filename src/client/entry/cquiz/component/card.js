@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import * as storeUtil from '@/util/storeUtil';
+import Bridge from "@/util/bridge";
+import SITECODE from "@/constant/sitecode";
 import End from './end.js';
 
 export default class Card extends Component {
@@ -17,6 +19,7 @@ export default class Card extends Component {
 
         this.dataList = [];
         this.optionName = ["A", "B", "C", "D", "E", "F", "G", "H", "I"];
+        this.quizIsOver = storeUtil.get('quiz_isOver');
 
         this.onChangRadio = this.onChangRadio.bind(this);
         this.nextCard = this.nextCard.bind(this);
@@ -44,6 +47,19 @@ export default class Card extends Component {
         this.inputRadioDisabled(true);
     }
 
+    //退出答题
+    onExitQuiz() {
+        let sitecode = storeUtil.get('sitecode');
+        if (sitecode === SITECODE.ANDROID_PHONE || sitecode === SITECODE.ANDROID_PAD || sitecode === SITECODE.ANDROID) {
+            Bridge.android(Bridge.QUIZ_EXIT);
+        } else if (sitecode === SITECODE.IOS || sitecode === SITECODE.IOS_IPHONE || sitecode === SITECODE.IOS_IPAD) {
+            Bridge.ios(Bridge.QUIZ_EXIT);
+        } else {
+            console.log(window.parent);
+            if(window.parent.cineExitQuiz) window.parent.cineExitQuiz();
+        }
+    }
+
     loadCardByIndex(index) {
         if (this.dataList && this.dataList.length > index) {
             let data = this.dataList[index];
@@ -56,7 +72,11 @@ export default class Card extends Component {
                 selectOption: -1
             })
         } else {
-            this.toEnd();
+            if (this.quizIsOver) {
+                this.toEnd();
+            } else {
+                this.onExitQuiz();
+            }
         }
     }
 
@@ -96,7 +116,7 @@ export default class Card extends Component {
     }
 
     render() {
-        if (this.state.isEnd) return <End score={this.state.score}/>;
+        if (this.state.isEnd) return <End score={this.state.score} exit={this.onExitQuiz}/>;
 
         if (!this.state.data) return <div>not data</div>;
 
@@ -107,15 +127,18 @@ export default class Card extends Component {
             if (option.isCorrect) correctIndex = index;
 
             let isCurIndex = selectOption == index;
-            let content = option.type == '2' ? <img className="content" src={"http://www.bstcine.com" + option.content}/> : option.content;
+            let content = option.type == '2' ?
+                <img className="content" src={"http://www.bstcine.com" + option.content}/> : option.content;
 
             let optionHintStyle = isCurIndex ? {visibility: 'visible'} : {visibility: 'hidden'};
 
             return <label key={index} className="mui-radio card-option">
                 <span style={optionHintStyle}>
-                    <img className="hint" src={require(option.isCorrect ? './../asset/image/ico_right.png' : './../asset/image/ico_wrong.png')}/>
+                    <img className="hint"
+                         src={require(option.isCorrect ? './../asset/image/ico_right.png' : './../asset/image/ico_wrong.png')}/>
                 </span>
-                <input id={index} name="options" value={option.isCorrect} type="radio" onChange={this.onChangRadio} checked={isCurIndex}/>
+                <input id={index} name="options" value={option.isCorrect} type="radio" onChange={this.onChangRadio}
+                       checked={isCurIndex}/>
                 <span className="content">{this.optionName[index] + ". "}{content}</span>
             </label>
         });
@@ -132,7 +155,8 @@ export default class Card extends Component {
             <hr/>
             <div className="card-todo">
                 <div className="card-answer">
-                    <span className={answerHintStyle}>{isCorrect ? '回答正确! ' : '正确答案：' + this.optionName[correctIndex]}</span>
+                    <span
+                        className={answerHintStyle}>{isCorrect ? '回答正确! ' : '正确答案：' + this.optionName[correctIndex]}</span>
                 </div>
                 <button className="card-next" onClick={this.nextCard}>下一题</button>
             </div>

@@ -1,7 +1,4 @@
 import React from 'react';
-import * as storeUtil from '@/util/storeUtil';
-import Bridge from "@/util/bridge";
-import SITECODE from "@/constant/sitecode";
 
 export default class End extends React.Component {
     constructor(props) {
@@ -24,25 +21,11 @@ export default class End extends React.Component {
         }
 
         this.state = {score: score, hint: hint,hintStyle:hintStyle};
-
-        this.exitQuiz = this.exitQuiz.bind(this);
         this.againLoad = this.againLoad.bind(this);
     }
 
     againLoad(){
         window.location.reload();
-    }
-
-    exitQuiz() {
-        let sitecode = storeUtil.get('sitecode');
-        if (sitecode === SITECODE.ANDROID_PHONE || sitecode === SITECODE.ANDROID_PAD || sitecode === SITECODE.ANDROID) {
-            Bridge.android(Bridge.QUIZ_EXIT);
-        } else if (sitecode === SITECODE.IOS || sitecode === SITECODE.IOS_IPHONE || sitecode === SITECODE.IOS_IPAD) {
-            Bridge.ios(Bridge.QUIZ_EXIT);
-        } else {
-            console.log(window.parent);
-            if(window.parent.cineExitQuiz) window.parent.cineExitQuiz();
-        }
     }
 
     render() {
@@ -51,8 +34,8 @@ export default class End extends React.Component {
                 <div className="hint">本次测试得分：<span className={this.state.hintStyle}>{this.state.score}</span> 分，{this.state.hint}</div>
 
                 <div className="todo">
-                    <button className="again" onClick={this.againLoad}>再次一次</button>
-                    <button className="exit" onClick={this.exitQuiz}>答题结束</button>
+                    <button className="again" onClick={this.againLoad}>再测一次</button>
+                    <button className="exit" onClick={this.props.exitQuiz}>答题结束</button>
                 </div>
             </div>
         );

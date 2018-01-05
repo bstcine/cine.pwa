@@ -26,8 +26,7 @@ export default class Index extends Component {
             eventEmmiter.once('set_quiz_data', (res) => {
                 console.log(res);
                 if (res) {
-                    res = JSON.parse(res);
-                    this.quizList = res.data;
+                    this.quizList = JSON.parse(res);
                 }
             })
         }

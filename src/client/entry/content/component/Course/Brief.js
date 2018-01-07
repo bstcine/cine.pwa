@@ -123,7 +123,7 @@ export default class Brief extends Component {
     }
 
     render() {
-        let {course, user, relatedCourse, toggleRecommendModal, getCoupon} = this.props;
+        let {course, user, relatedCourse, openRecommend, getCoupon} = this.props;
         const {clickShare} = this.props;
         let source_user_id = getParam().source_user_id
         return (
@@ -193,7 +193,7 @@ export default class Brief extends Component {
                             source_user_id ?
                                 <div className="get-coupon" onClick={getCoupon}/>
                                 :
-                                <div className="recommend" onClick={toggleRecommendModal}>
+                                <div className="recommend" onClick={openRecommend}>
                                     <div className="red-bag"/>
                                     <div className="desc">推荐课程得积分</div>
                                 </div>

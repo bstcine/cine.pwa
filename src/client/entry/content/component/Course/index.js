@@ -44,6 +44,7 @@ export default class Course extends Component {
         this.toggleCouponModal = this.toggleCouponModal.bind(this);
         this.getUserName = this.getUserName.bind(this);
         this.getCoupon = this.getCoupon.bind(this);
+        this.openRecommend = this.openRecommend.bind(this);
         let sitecode = storeUtil.get('sitecode');
         this.isInIOSAPP = sitecode === SITECODE.IOS || sitecode === SITECODE.IOS_IPHONE || sitecode === SITECODE.IOS_IPAD;
         this.isInAPP = !!sitecode
@@ -68,9 +69,7 @@ export default class Course extends Component {
         eventEmmiter.on(BRIDGE_EVENT.OUTER_SHARE, () => {
             this.clickShare(false)
         });
-
         this.initCurrentPageWechat()
-
         this.initData()
     }
 
@@ -236,6 +235,14 @@ export default class Course extends Component {
         }))
     }
 
+    openRecommend(){
+        if (!this.state.user) {
+            this.login();
+            return
+        }
+        this.toggleRecommendModal()
+    }
+
     toggleRecommendModal() {
         this.setState(prevState => ({
             showRecommendModal: !prevState.showRecommendModal
@@ -322,7 +329,7 @@ export default class Course extends Component {
                        goBuy={this.goBuy}
                        clickShare={this.clickShare}
                        getCoupon={this.getCoupon}
-                       toggleRecommendModal={this.toggleRecommendModal}
+                       openRecommend={this.openRecommend}
                 />
                 <RecommendModal isOpen={showRecommendModal} toggleModal={this.toggleRecommendModal}
                                 clickShare={this.clickShare}/>

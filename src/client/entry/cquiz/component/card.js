@@ -22,7 +22,8 @@ export default class Card extends Component {
         this.quizIsOver = storeUtil.get('quiz_isOver');
 
         this.onChangRadio = this.onChangRadio.bind(this);
-        this.nextCard = this.nextCard.bind(this);
+        this.onNextCard = this.onNextCard.bind(this);
+        this.onAgainLoad = this.onAgainLoad.bind(this);
     }
 
     componentDidMount() {
@@ -47,8 +48,19 @@ export default class Card extends Component {
         this.inputRadioDisabled(true);
     }
 
+    //下一题
+    onNextCard() {
+        this.loadCardByIndex(this.state.index + 1);
+    }
+
+    //重新加载
+    onAgainLoad(){
+        this.loadCardByIndex(0);
+        this.props.history.push('/card');
+    }
+
     //退出答题
-    onExitQuiz() {
+    exitQuiz() {
         let sitecode = storeUtil.get('sitecode');
         if (sitecode === SITECODE.ANDROID_PHONE || sitecode === SITECODE.ANDROID_PAD || sitecode === SITECODE.ANDROID) {
             Bridge.android(Bridge.QUIZ_EXIT);
@@ -67,6 +79,7 @@ export default class Card extends Component {
             this.inputRadioDisabled(false);
 
             this.setState({
+                isEnd: false,
                 data: data,
                 index: index,
                 selectOption: -1
@@ -75,7 +88,7 @@ export default class Card extends Component {
             if (this.quizIsOver) {
                 this.toEnd();
             } else {
-                this.onExitQuiz();
+                this.exitQuiz();
             }
         }
     }
@@ -86,11 +99,6 @@ export default class Card extends Component {
         quiz_options.forEach((option) => {
             option.disabled = disabled;
         });
-    }
-
-    //下一题
-    nextCard() {
-        this.loadCardByIndex(this.state.index + 1);
     }
 
     //结束页
@@ -116,7 +124,7 @@ export default class Card extends Component {
     }
 
     render() {
-        if (this.state.isEnd) return <End score={this.state.score} exit={this.onExitQuiz}/>;
+        if (this.state.isEnd) return <End score={this.state.score} exit={this.exitQuiz} again={this.onAgainLoad}/>;
 
         if (!this.state.data) return <div>not data</div>;
 
@@ -158,7 +166,7 @@ export default class Card extends Component {
                     <span
                         className={answerHintStyle}>{isCorrect ? '回答正确! ' : '正确答案：' + this.optionName[correctIndex]}</span>
                 </div>
-                <button className="card-next" onClick={this.nextCard}>下一题</button>
+                <button className="card-next" onClick={this.onNextCard}>下一题</button>
             </div>
         </div>
     }

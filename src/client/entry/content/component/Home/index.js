@@ -48,7 +48,7 @@ export default class Home extends Component {
                 tagids.push(value)
             }
         }
-        let homeRes = await Service.getContentHome();
+        let homeRes = await Service.getContentHome({token:null});
         this.tagsCache = {};
         _.compact(_.flatten([...homeRes.tags.tagTree0.map(item => item.children), ...homeRes.tags.tagTree1.map(item => item.children)])).forEach(item => {
             if (item.attributes && item.attributes.course_ids && item.attributes.course_ids.length) {

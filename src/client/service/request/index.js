@@ -12,11 +12,15 @@ function httpUrl(url) {
 }
 
 function httpBody(bodyData) {
-
-    let token = bodyData ? bodyData.token : null
-    if (!token) token = storeUtil.getToken() || ""
+    let token;
+    if (typeof bodyData.token !== 'undefined') {
+        token = bodyData.token
+    } else {
+        token = storeUtil.getToken()
+    }
     let sitecode = storeUtil.get('sitecode') || "cine.web"
 
+    console.log(`token --->>> ${token}`)
     return {
         "token": token,
         "sitecode": sitecode,

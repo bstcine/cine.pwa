@@ -15,7 +15,6 @@ export default class Comments extends Component {
                     <div key={index} className="comment-item">
                         <div className="comment-meta">
                             <span className="nickname">{item.user_nickname}</span>
-                            <span className="date">{item.create_at}</span>
                         </div>
                         <div className="comment-detail">
                             {item.comment_desc}

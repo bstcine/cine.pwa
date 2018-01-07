@@ -76,26 +76,46 @@ export default class Course extends Component {
         window.removeEventListener('scroll', this.handlerScroll);
     }
 
-    initData() {
+    async initData() {
+        initWechat();
+
         let param = getParam();
         let cid = param.cid;
-        let token = storeUtil.getToken();
-        Service.getContentCourseDetail({cid}).then(course => {
-            this.setState({
-                course: course
-            })
-        });
         Service.getContentCourseComment({cid}).then(comments => {
             this.setState({
                 comments: comments
             })
         });
-        BaseService.userInfo(token).then(user => {
-            this.setState({
-                user: user
-            })
-        });
-        initWechat()
+
+        const token = storeUtil.getToken();
+        if (token) {
+            try {
+                let user = await BaseService.userInfo(token);
+                this.setState({
+                    user: user
+                });
+            } catch (err) {
+                if (err.message === 'no_login') {
+                    if (confirm('该账号已在其他设备登录\n是否重新登录？')) {
+                        this.login()
+                    } else {
+                        storeUtil.removeToken();
+                        let course = await Service.getContentCourseDetail({cid});
+                        this.setState({
+                            course: course
+                        })
+                    }
+                } else {
+                    console.error(err)
+                }
+                return
+            }
+        }
+
+        let course = await Service.getContentCourseDetail({cid});
+        this.setState({
+            course: course
+        })
     }
 
     goBuy() {
@@ -162,7 +182,7 @@ export default class Course extends Component {
             return
         }
         let res = await createShare({type, cid: getParam().cid});
-        // alert(JSON.stringify(res))
+        console.log(res);
         let data = res.result;
         let share_params = {
             sharelog_id: data.sharelog_id,
@@ -189,6 +209,7 @@ export default class Course extends Component {
         this.setState(prevState => ({
             showRecommendModal: !prevState.showRecommendModal
         }))
+
     }
 
     toggleCouponModal() {
@@ -203,6 +224,10 @@ export default class Course extends Component {
     }
 
     async getCoupon() {
+        if (!this.state.user) {
+            this.login();
+            return
+        }
         let source_user_id = getParam().source_user_id;
         if (!source_user_id) return alert('source_user_id is null');
         let coupon = await Service.createCoupon(source_user_id);

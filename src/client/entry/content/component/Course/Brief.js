@@ -71,13 +71,13 @@ export default class Brief extends Component {
         const {goLearn, goBuy, clickShare} = this.props;
         if (course.is_paid) {
             if (!this.isInIOSAPP) {
-                return <div className="btn-action btn-learn" onClick={goLearn}>立即学习</div>
+                return <button className="btn-action btn-learn" onClick={goLearn}>立即学习</button>
             }
         } else {
             if (course.object_type === '1' || course.object_type === '2' || course.object_type === '3') {
-                return <div className="btn-action btn-buy" onClick={goBuy}>立即购买</div>
+                return <button className="btn-action btn-buy" onClick={goBuy}>立即购买</button>
             } else if (course.object_type === '4') {
-                return <div className="btn-action btn-share" onClick={e => clickShare(true, 5)}>分享开通</div>
+                return <button className="btn-action btn-share" onClick={e => clickShare(true, 5)}>分享开通</button>
             }
         }
     }

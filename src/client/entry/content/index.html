@@ -6,36 +6,34 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>课程详情</title>
-    <!--<link href="https://fonts.googleapis.com/icon?family=Material+Icons"-->
-          <!--rel="stylesheet">-->
     <script>
         var responsive = function () {
-            var clientWidth = document.documentElement.clientWidth
+            var clientWidth = document.documentElement.clientWidth;
             if (clientWidth < 576) {
-                console.log('576 clientWidth' + clientWidth)
+                console.log('576 clientWidth' + clientWidth);
                 document.documentElement.style.fontSize = clientWidth / 750 * 100 + 'px';
             } else if (clientWidth < 1024) {
-                console.log('1024 clientWidth' + clientWidth)
+                console.log('1024 clientWidth' + clientWidth);
                 document.documentElement.style.fontSize = clientWidth / 1536 * 100 + 'px';
             } else {
-                console.log('clientWidth' + clientWidth)
+                console.log('clientWidth' + clientWidth);
                 document.documentElement.style.fontSize = '50px'
             }
-        }
-        responsive()
+        };
+        responsive();
         window.onresize = function () {
             responsive()
-        }
+        };
         if (window.addEventListener) {
             window.addEventListener('error', function (e) {
                 var error = e.error;
                 if (error) {
-                    console.log('global error')
+                    console.log('global error');
                     console.log(error);
                 }
             });
         }
-        console.log('20180104 - 15:47')
+        console.log('20180105 - 5:50')
     </script>
 
 </head>

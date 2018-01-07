@@ -14,7 +14,7 @@ export let userInfo = (token) => {
     return post(Api.APIURL_User_Info, {token}).then(res => {
         if (res.except_case_desc) {
             console.log(res.except_case_desc)
-            return null
+            return Promise.reject(new Error(res.except_case_desc))
         }
         return res.result
     })

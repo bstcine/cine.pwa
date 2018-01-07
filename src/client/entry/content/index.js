@@ -18,17 +18,16 @@ import './asset/style/index.less'
 class Content extends React.Component {
 
     constructor(props) {
-        super(props)
-        console.log('Content Main constructor')
+        super(props);
+        console.log('Content Main constructor');
         // alert(`location ${location.href}`)
-        let urlParam = getParam()
+        let urlParam = getParam();
         // alert(`Content constructor urlUtil.getParam ==> ${JSON.stringify(urlParam)}`)
-        let token = urlParam.token
-        let sitecode = urlParam.sitecode
-        storeUtil.remove('user')
-        storeUtil.remove('token')
-        storeUtil.remove('sitecode')
-        token && storeUtil.set('token', token)
+        let token = urlParam.token;
+        let sitecode = urlParam.sitecode;
+        storeUtil.remove('user');
+        storeUtil.remove('sitecode');
+        token && storeUtil.set('token', token);
         sitecode && storeUtil.set('sitecode', sitecode)
     }
 
@@ -49,4 +48,4 @@ class Content extends React.Component {
     }
 }
 
-ReactDOM.render(<Content/>, document.getElementById('root'))
+ReactDOM.render(<Content/>, document.getElementById('root'));

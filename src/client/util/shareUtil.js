@@ -73,7 +73,7 @@ export let showShareQRCode = ({url, sharelog_id}) => {
     maskNode.className = 'share-mask';
     maskNode.innerHTML = `
         <div class="share-container">
-            <div class="share-close">x</div>
+            <div class="share-close"><i class="material-icons">close</i></div>
             <div class="share-qrcode"><img src=${qrcode} alt=""></div>
         </div>
     `;

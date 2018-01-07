@@ -5,7 +5,7 @@ const static_host = process.env.NODE_ENV === 'production' ? '/' : '/'
 module.exports = {
 
     // 用来加载 vConsole 调试插件，生产模式 关闭 debug
-    debug: false,
+    debug: true,
 
     static_host,
 

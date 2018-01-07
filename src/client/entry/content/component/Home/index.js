@@ -9,6 +9,7 @@ import BannerSlider from './BannerSlider'
 import GlobalNotice from './GlobalNotice'
 import TagFilter from './TagFilter'
 import CategoryList from './CategoryList'
+import {initWechat} from "@/util/wechatUtil";
 
 
 export default class Home extends Component {
@@ -40,6 +41,7 @@ export default class Home extends Component {
 
     async componentDidMount() {
         console.log(`componentDidMount`);
+        initWechat()
         window.addEventListener('scroll', this.handlerScroll);
         let params = getParam();
         let tagids = [];

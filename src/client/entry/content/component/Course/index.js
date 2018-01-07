@@ -1,8 +1,8 @@
 import React, {Component} from 'react'
 import ReactDOM from 'react-dom'
 import * as Service from '@/service/content'
-import {getParam} from "@/util/urlUtil";
-import {initWechat} from "@/util/wechatUtil";
+import {getParam, removeParam} from "@/util/urlUtil";
+import {initWechat, setShareParam} from "@/util/wechatUtil";
 import storeUtil from "@/util/storeUtil";
 import * as BaseService from '@/service/base'
 import {Tabs, TabItems, TabItem, TabPanels, TabPanel} from '@/component/Tabs'
@@ -63,14 +63,35 @@ export default class Course extends Component {
         }
     }
 
-    componentDidMount() {
+    async componentDidMount() {
         window.addEventListener('scroll', this.handlerScroll);
         eventEmmiter.on(BRIDGE_EVENT.OUTER_SHARE, () => {
             this.clickShare(false)
         });
 
-        initWechat();
+        this.initCurrentPageWechat()
+
         this.initData()
+    }
+
+    initCurrentPageWechat(){
+        initWechat().then(async status=>{
+            if (status) {
+                let res = await createShare({type: 4, cid: getParam().cid});
+                if (res.except_case_desc) {
+                    console.log(res)
+                    return
+                }
+                let data = res.result;
+                console.log('initWechat', data)
+                setShareParam({
+                    title: data.share_title,
+                    link: removeParam(data.share_link, ['token', 'share_mask']),
+                    imgUrl: data.share_imgUrl,
+                    desc: data.share_desc
+                });
+            }
+        })
     }
 
     componentWillUnmount() {
@@ -80,7 +101,7 @@ export default class Course extends Component {
     componentWillReceiveProps(nextProps) {
         const locationChanged = nextProps.location !== this.props.location;
         if (locationChanged) {
-            initWechat();
+            this.initCurrentPageWechat()
             this.initData()
         }
     }
@@ -283,7 +304,6 @@ export default class Course extends Component {
         }
         return hours + ':' + minutes + ':' + seconds;
     }
-
 
 
     render() {

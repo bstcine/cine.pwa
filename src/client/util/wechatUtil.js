@@ -2,6 +2,7 @@ import {getWechatJsSignature} from '@/service/base'
 import {checkShareMask, updateShare, hideShareMask} from './shareUtil'
 import {queryShare} from "./shareUtil";
 import {getParam, removeParam} from "./urlUtil";
+import uaUtil from "@/util/uaUtil";
 
 export let setShareParam = (params) => {
     if (typeof window.wx === 'undefined' || !window.wx) return console.log('window.wx not found, ensure include jweixin in your html');
@@ -37,6 +38,7 @@ export let setShareTimeline = ({title, link, imgUrl, desc}) => {
 };
 
 export let initWechat = async () => {
+    if (!uaUtil.wechat()) return
     try {
         let wechatConfig = await getWechatJsSignature();
         await configWechat(wechatConfig);
@@ -55,10 +57,13 @@ export let initWechat = async () => {
                 });
                 await updateShare(sharelog_id);
                 hideShareMask()
+            } else {
+                console.log(res)
             }
         }
+        return true
     } catch (err) {
-        console.log(err)
+        console.error(err)
     }
 };
 

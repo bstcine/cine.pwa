@@ -7,7 +7,8 @@ const BRIDGE_EVENT = {
     PRE_CONFIRM:'pre_confirm',
     LEARN:'learn',
     INSTALLED_APP_LIST:'installed_app_list',
-    QUIZ_EXIT:'quiz_exit'
+    QUIZ_EXIT:'quiz_exit',
+    INIT_QUIZ_DATA:'init_quiz_data',
 };
 
 export default BRIDGE_EVENT

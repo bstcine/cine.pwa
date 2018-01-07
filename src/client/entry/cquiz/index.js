@@ -27,8 +27,10 @@ class Quiz extends React.Component {
         sitecode && storeUtil.set('sitecode', sitecode);
 
         let quiz_id = urlParam.id;
+        let quiz_type = urlParam.type;
         let quiz_title = urlParam.title;
         storeUtil.set('quiz_id', quiz_id);
+        storeUtil.set('quiz_isOver', (quiz_type && quiz_type == '-1'));//是否本章测试
         storeUtil.set('quiz_title', quiz_title);
     }
 

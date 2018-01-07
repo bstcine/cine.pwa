@@ -1,8 +1,7 @@
 import React, {Component} from 'react';
 import * as Service from '@/service/quiz'
-import {getParam} from '@/util/urlUtil'
 import storeUtil from '@/util/storeUtil'
-import {eventEmmiter} from "@/util/eventEmmiter";
+import SITECODE from "@/constant/sitecode";
 
 export default class Index extends Component {
 
@@ -10,26 +9,40 @@ export default class Index extends Component {
         super(props);
         console.log('constructor');
 
-        this.quiz_id = storeUtil.get('quiz_id');
-        this.quiz_title = storeUtil.get('quiz_title');
+        this.quizId = storeUtil.get('quiz_id');
+        this.quizIsOver = storeUtil.get('quiz_isOver');
+        this.quizTitle = storeUtil.get('quiz_title');
 
         this.toCard = this.toCard.bind(this);
     }
 
     componentDidMount() {
-        if (this.quiz_id) {
-            Service.getQuiz({id: this.quiz_id}).then(result => {
+        if (this.quizId) {
+            Service.getQuiz({id: this.quizId}).then(result => {
                 console.log(result.data);
                 this.quizList = result.data.data;
+                if (!this.quizIsOver) this.toCard();
             })
         } else {
-            eventEmmiter.once('set_quiz_data', (res) => {
-                console.log(res);
-                if (res) {
-                    res = JSON.parse(res);
-                    this.quizList = res.data;
+            let sitecode = storeUtil.get('sitecode');
+            if (sitecode === SITECODE.ANDROID_PHONE || sitecode === SITECODE.ANDROID_PAD || sitecode === SITECODE.ANDROID) {
+                Bridge.android(Bridge.INIT_QUIZ_DATA).then(res => {
+                    if (res) this.quizList = JSON.parse(res);
+                    if (!this.quizIsOver) this.toCard();
+                });
+            } else if (sitecode === SITECODE.IOS || sitecode === SITECODE.IOS_IPHONE || sitecode === SITECODE.IOS_IPAD) {
+                Bridge.ios(Bridge.INIT_QUIZ_DATA).then(res => {
+                    if (res) this.quizList = JSON.parse(res);
+                    if (!this.quizIsOver) this.toCard();
+                });
+            } else {
+                console.log(window.parent);
+                let quizData = window.parent.cineQuizData;
+                if (quizData) {
+                    this.quizList = JSON.parse(quizData);
+                    if (!this.quizIsOver) this.toCard();
                 }
-            })
+            }
         }
     }
 
@@ -43,13 +56,11 @@ export default class Index extends Component {
     }
 
     render() {
-        return (
-            <div className="quiz-start">
-                <div className="title">{this.quiz_title ? this.quiz_title : '小节测试'}</div>
-                <div className="hint">学得怎么样了？来测一下吧！</div>
-                <button onClick={this.toCard}>开始答题</button>
-            </div>
-        )
+        return (this.quizIsOver) ? <div className="quiz-start">
+            <div className="title">{this.quizTitle ? this.quizTitle : '本章测试'}</div>
+            <div className="hint">学得怎么样了？来测一下吧！</div>
+            <button onClick={this.toCard}>开始答题</button>
+        </div> : <div/>
     }
 
 }

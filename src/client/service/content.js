@@ -1,6 +1,6 @@
 import {post, postv1} from '@/service/request'
 import Api from '@/../APIConfig'
-import * as storeUtl from '@/util/storeUtil'
+import storeUtl from '@/util/storeUtil'
 import errorCode from "@/constant/errorCode";
 import errorMsg from "@/util/errorMsg";
 

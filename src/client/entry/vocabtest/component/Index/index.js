@@ -1,6 +1,6 @@
 import React,{Component} from 'react';
 import * as Service from '@/service/vocabtest'
-import * as storeUtil from '@/util/storeUtil'
+import storeUtil from '@/util/storeUtil'
 import {getParam} from '@/util/urlUtil'
 
 export default class Index extends Component {

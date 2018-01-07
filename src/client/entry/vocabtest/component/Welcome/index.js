@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import * as storeUtil from '@/util/storeUtil'
+import storeUtil from '@/util/storeUtil'
 import {initWechat} from '@/util/wechatUtil'
 
 export default class Welcome extends Component {

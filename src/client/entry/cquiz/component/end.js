@@ -1,5 +1,5 @@
 import React from 'react';
-import * as storeUtil from '@/util/storeUtil';
+import storeUtil from '@/util/storeUtil';
 import Bridge from "@/util/bridge";
 import SITECODE from "@/constant/sitecode";
 

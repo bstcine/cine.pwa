@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import * as storeUtil from '@/util/storeUtil';
+import storeUtil from '@/util/storeUtil';
 import End from './end.js';
 
 export default class Card extends Component {

@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {getParam} from "@/util/urlUtil";
-import * as storeUtil from "@/util/storeUtil";
+import storeUtil from "@/util/storeUtil";
 import SITECODE from "@/constant/sitecode";
 
 export default class Brief extends Component {

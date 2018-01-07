@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import * as Service from '@/service/quiz'
 import {getParam} from '@/util/urlUtil'
-import * as storeUtil from '@/util/storeUtil'
+import storeUtil from '@/util/storeUtil'
 import {eventEmmiter} from "@/util/eventEmmiter";
 
 export default class Index extends Component {

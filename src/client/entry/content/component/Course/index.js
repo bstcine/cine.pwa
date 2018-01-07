@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom'
 import * as Service from '@/service/content'
 import {getParam} from "@/util/urlUtil";
 import {initWechat} from "@/util/wechatUtil";
-import * as storeUtil from "@/util/storeUtil";
+import storeUtil from "@/util/storeUtil";
 import * as BaseService from '@/service/base'
 import {Tabs, TabItems, TabItem, TabPanels, TabPanel} from '@/component/Tabs'
 import LoginModal from '@/component/LoginModal'
@@ -69,6 +69,7 @@ export default class Course extends Component {
             this.clickShare(false)
         });
 
+        initWechat();
         this.initData()
     }
 
@@ -76,8 +77,15 @@ export default class Course extends Component {
         window.removeEventListener('scroll', this.handlerScroll);
     }
 
+    componentWillReceiveProps(nextProps) {
+        const locationChanged = nextProps.location !== this.props.location;
+        if (locationChanged) {
+            initWechat();
+            this.initData()
+        }
+    }
+
     async initData() {
-        initWechat();
 
         let param = getParam();
         let cid = param.cid;
@@ -276,10 +284,7 @@ export default class Course extends Component {
         return hours + ':' + minutes + ':' + seconds;
     }
 
-    componentWillReceiveProps(nextProps) {
-        const locationChanged = nextProps.location !== this.props.location;
-        if (locationChanged) this.initData()
-    }
+
 
     render() {
         let {course, user, comments, showLoginModal, showRecommendModal, showCouponModal} = this.state;

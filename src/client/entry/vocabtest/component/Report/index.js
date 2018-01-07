@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {getParam, addParam, removeParam} from '@/util/urlUtil'
 import * as Service from '@/service/vocabtest'
-import * as storeUtil from '@/util/storeUtil'
+import storeUtil from '@/util/storeUtil'
 import {initWechat} from '@/util/wechatUtil'
 import {createShare, share} from '@/util/shareUtil'
 import SITECODE from '@/constant/sitecode'

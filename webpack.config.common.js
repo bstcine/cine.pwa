@@ -109,6 +109,7 @@ module.exports = {
         alias: {
             '@': path.resolve(__dirname, 'src/client'),
             'material-icons': 'material-design-icons/iconfont/material-icons.css',
+            'store': 'store/dist/store.modern',
         }
     }
 }

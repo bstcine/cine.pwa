@@ -1,5 +1,5 @@
 import React,{Component} from 'react';
-import * as storeUtil from '@/util/storeUtil'
+import storeUtil from '@/util/storeUtil'
 import * as Service from '@/service/vocabtest'
 import {CSSTransition} from 'react-transition-group'
 import {initWechat} from '@/util/wechatUtil'

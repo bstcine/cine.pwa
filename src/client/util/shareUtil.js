@@ -1,6 +1,6 @@
 import '../asset/style/share.less'
 import uaUtil from './uaUtil'
-import * as storeUtil from './storeUtil'
+import storeUtil from './storeUtil'
 import SITECODE from '../constant/sitecode'
 import {setShareParam} from './wechatUtil'
 import {getParam, addParam} from './urlUtil'

@@ -9,7 +9,7 @@ import Card from './component/card.js';
 
 import './asset/style/index.less'
 import {getParam} from '@/util/urlUtil'
-import * as storeUtil from '@/util/storeUtil'
+import storeUtil from '@/util/storeUtil'
 
 class Quiz extends React.Component {
 

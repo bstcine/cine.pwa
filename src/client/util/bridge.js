@@ -3,12 +3,12 @@ import {eventEmmiter} from "./eventEmmiter";
 let Bridge = {
     android: function (event, params, needCallback = true) {
         return new Promise(resolve => {
-            console.log(`Android.${fn} params ${params}`);
+            console.log(`invoke Android.event[${event}] with params: ${JSON.stringify(params)}`);
             if (!params) params = {};
-            const callbackEvent = this.getCallbackEvent(event)
+            const callbackEvent = this.getCallbackEvent(event);
             if (needCallback) {
                 eventEmmiter.once(callbackEvent, (res) => {
-                    // alert(`Android.${fn} callback`)
+                    console.log(`callback Android.event[${callbackEvent}] with data: ${res}`);
                     if (res) res = JSON.parse(res);
                     resolve(res)
                 })
@@ -18,19 +18,19 @@ let Bridge = {
                 data: params,
                 callback: callbackEvent
             });
-            // alert(`msg ${JSON.stringify(msg)}`)
+            console.log(`msg ${JSON.stringify(msg)}`);
             Android[event](msg);
         })
     },
     ios: function (event, params, needCallback = true) {
         return new Promise(resolve => {
-            console.log(`iOS.${event} params ${params}`);
+            console.log(`invoke iOS.event[${event}] with params: ${JSON.stringify(params)}`);
             if (!params) params = {};
             // alert(`needCallback !== false ===> ${needCallback !== false}`)
-            const callbackEvent = this.getCallbackEvent(event)
+            const callbackEvent = this.getCallbackEvent(event);
             if (needCallback) {
                 eventEmmiter.once(callbackEvent, (res) => {
-                    console.log(`iOS.${res} callback`)
+                    console.log(`callback iOS.event[${callbackEvent}] with data: ${res}`);
                     if (res) res = JSON.parse(res);
                     resolve(res)
                 })
@@ -40,7 +40,7 @@ let Bridge = {
                 data: params,
                 callback: callbackEvent
             });
-            console.log(`msg ${JSON.stringify(msg)}`)
+            console.log(`msg ${JSON.stringify(msg)}`);
             webkit.messageHandlers.native.postMessage(msg)
         })
     },

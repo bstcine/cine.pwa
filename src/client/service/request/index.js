@@ -1,4 +1,4 @@
-import * as storeUtil from '@/util/storeUtil'
+import storeUtil from '@/util/storeUtil'
 import axios from 'axios'
 
 function httpUrl(url) {

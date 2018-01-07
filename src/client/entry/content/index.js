@@ -9,7 +9,7 @@ import {
 import Course from './component/Course'
 import Home from './component/Home'
 import {getParam} from '@/util/urlUtil'
-import * as storeUtil from '@/util/storeUtil'
+import storeUtil from '@/util/storeUtil'
 
 import './asset/style/index.less'
 // import * as OfflinePluginRuntime from 'offline-plugin/runtime';

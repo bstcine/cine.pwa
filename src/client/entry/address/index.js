@@ -8,7 +8,7 @@ import Index from './component/Index';
 
 import './asset/style/index.less'
 import {getParam} from '@/util/urlUtil'
-import * as storeUtil from '@/util/storeUtil'
+import storeUtil from '@/util/storeUtil'
 
 class Address extends React.Component {
 

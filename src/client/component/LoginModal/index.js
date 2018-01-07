@@ -3,6 +3,8 @@ import ReactModal from 'react-modal'
 import '@/asset/style/modal.less'
 import * as Service from '@/service/base'
 import errorMsg from '@/util/errorMsg'
+import storeUtil from "@/util/storeUtil";
+
 
 export default class LoginModal extends Component {
     constructor(props) {
@@ -49,6 +51,7 @@ export default class LoginModal extends Component {
         if (!res.status) {
             return alert(errorMsg(res.msg))
         }
+        storeUtil.setToken(res.token);
         this.props.loginSuccess()
     }
 

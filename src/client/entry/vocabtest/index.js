@@ -12,7 +12,7 @@ import Card from './component/Card';
 import Report from './component/Report';
 import ReportList from './component/ReportList';
 import {getParam} from '@/util/urlUtil'
-import * as storeUtil from '@/util/storeUtil'
+import storeUtil from '@/util/storeUtil'
 
 import './asset/style/index.less'
 import Bridge from "@/util/bridge";

@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import * as storeUtil from '@/util/storeUtil'
+import storeUtil from '@/util/storeUtil'
 import {initWechat} from '@/util/wechatUtil'
 import * as area from '@/service/data/response_area.json'
 import * as account from '@/service/data/response_account.json'

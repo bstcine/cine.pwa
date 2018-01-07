@@ -24,3 +24,5 @@ exports.APIURL_User_Address_Add = "/api/user/address/add"                       
 exports.APIURL_User_Address = "/api/user/address"                        //查询收货地址
 
 exports.APIURL_LoginV1 = "/api/web/login" //登录
+
+exports.APIURL_Auth_Signin = "/api/auth/signin"                                 //登录

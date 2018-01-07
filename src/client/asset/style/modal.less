@@ -16,7 +16,9 @@
 }
 .login-modal {
   width: 7.20rem;
-  margin: 2.00rem auto 0;
+  margin: 0 auto;
+  top: 50%;
+  transform: translateY(-60%);
   padding: .72rem .48rem .56rem;
   background: #fff;
   border-radius: .16rem;
@@ -88,13 +90,24 @@
 }
 
 .recommend-modal {
+  position: relative;
+  top: 50%;
+  transform: translateY(-60%);
   width: 6.20rem;
   height: 7.00rem;
-  margin: 2.00rem auto 0;
+  margin: 0 auto;
   background: #f1ede9 url(../image/bg_packet.png) no-repeat center;
   background-size: cover;
   border-radius: .12rem;
   padding: .48rem .80rem;
+  .close{
+    position: absolute;
+    cursor: pointer;
+    top: .20rem;
+    right: .20rem;
+    font-size: .50rem;
+    color: #fff;
+  }
   .h2 {
     font-size: .36rem;
     color: #fff;
@@ -128,13 +141,24 @@
 }
 
 .coupon-modal {
+  position: relative;
+  top: 50%;
+  transform: translateY(-60%);
   width: 6.20rem;
   height: 7.00rem;
-  margin: 2.00rem auto 0;
+  margin: 0 auto ;
   background: #f1ede9 url(../image/bg_packet.png) no-repeat center;
   background-size: cover;
   border-radius: .12rem;
   padding: .36rem .60rem;
+  .close{
+    position: absolute;
+    cursor: pointer;
+    top: .20rem;
+    right: .20rem;
+    font-size: .50rem;
+    color: #fff;
+  }
   h2 {
     background: url(../image/txt-95.png) no-repeat center;
     background-size: contain;

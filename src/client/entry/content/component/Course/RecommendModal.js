@@ -31,6 +31,10 @@ export default class RecommendModal extends Component {
                         overlayClassName="modal-overlay"
                         shouldCloseOnOverlayClick={true}
                         shouldCloseOnEsc={true}>
+                <div className="close" onClick={this.handleCloseModal}>
+                    <i className="material-icons">close</i>
+                </div>
+
                 <div className="h2">推荐课程得积分</div>
                 <div className="desc">
                     快将善恩的课程通过微信朋友圈推荐给好友！好友可获得：<br/>

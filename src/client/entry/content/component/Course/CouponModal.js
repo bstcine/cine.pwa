@@ -29,6 +29,9 @@ export default class CouponModal extends Component {
                         shouldCloseOnEsc={true}>
                 <h2/>
                 <div className="desc-wrap">
+                    <div className="close" onClick={this.handleCloseModal}>
+                        <i className="material-icons">close</i>
+                    </div>
                     <div className="tip">优惠券已成功发放至账户<span>{username}</span></div>
                     <div className="coupon-ticket">
                         <div className="coupon-value"><span className="value">{100 - Number(coupon.value) * 100}</span><span className="unit">折</span></div>

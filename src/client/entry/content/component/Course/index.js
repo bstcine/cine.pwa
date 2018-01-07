@@ -77,6 +77,8 @@ export default class Course extends Component {
     initCurrentPageWechat(){
         initWechat().then(async status=>{
             if (status) {
+                let sharelog_id = getParam().sharelog_id;
+                if(sharelog_id) return
                 let res = await createShare({type: 4, cid: getParam().cid});
                 if (res.except_case_desc) {
                     console.log(res)

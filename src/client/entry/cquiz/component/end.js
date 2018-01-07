@@ -35,7 +35,7 @@ export default class End extends React.Component {
 
                 <div className="todo">
                     <button className="again" onClick={this.againLoad}>再测一次</button>
-                    <button className="exit" onClick={this.props.exitQuiz}>答题结束</button>
+                    <button className="exit" onClick={this.props.exit}>答题结束</button>
                 </div>
             </div>
         );

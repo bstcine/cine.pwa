@@ -78,7 +78,7 @@ export default class Card extends Component {
             let data = this.dataList[index];
             let btnHint = '下一题';
             if(this.dataList.length -1 == index){
-                btnHint = this.quizIsOver?'查看得分':'关闭'
+                btnHint = this.quizIsOver?'查看得分':'继续学习'
             }
 
             this.inputRadioDisabled(false);
@@ -89,7 +89,9 @@ export default class Card extends Component {
                 index: index,
                 selectOption: -1,
                 btnHint:btnHint
-            })
+            });
+
+            window.scroll(0,0);
         } else {
             if (this.quizIsOver) {
                 this.toEnd();
@@ -172,7 +174,7 @@ export default class Card extends Component {
                     <span
                         className={answerHintStyle}>{isCorrect ? '回答正确! ' : '正确答案：' + this.optionName[correctIndex]}</span>
                 </div>
-                <button className="card-next" onClick={this.onNextCard}>{this.state.btnHint}</button>
+                <button className="card-next" onClick={this.onNextCard} disabled={(this.state.selectOption == -1) ? true : false}>{this.state.btnHint}</button>
             </div>
         </div>
     }

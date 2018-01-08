@@ -5,6 +5,7 @@ const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const BuildManifestPlugin = require('build-manifest-webpack-plugin');
 
 const WebpackConfigCommon = require('./webpack.config.common');
 
@@ -78,6 +79,11 @@ module.exports = {
             },
             sourceMap: true,
         }),
+        new BuildManifestPlugin({
+            name:"build-manifest.json",
+            buildPath:path.join(__dirname, "build"),
+            ignore:['.DS_Store']
+        })
         // new BundleAnalyzerPlugin({analyzerMode:'static'})
     ]
 };

@@ -7,7 +7,7 @@ const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
 const WebpackMildCompile = require('webpack-mild-compile').Plugin;
 const WebpackConfigCommon = require('./webpack.config.common');
 const OfflinePlugin = require('offline-plugin');
-
+const BuildManifestPlugin = require('build-manifest-webpack-plugin');
 
 const pages = WebpackConfigCommon.pages;
 let entry = {};
@@ -49,6 +49,11 @@ module.exports = {
             outputPath: 'dll'
         }),
         new LodashModuleReplacementPlugin(),
+        new BuildManifestPlugin({
+            name:"build-manifest.json",
+            buildPath:path.join(__dirname, "build"),
+            ignore:['.DS_Store']
+        })
         // new OfflinePlugin()
     ],
     devServer: {

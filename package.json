@@ -5,9 +5,9 @@
   "main": "server.js",
   "scripts": {
     "prod-dll": "webpack -p --progress --colors --config=webpack.dll.js",
-    "prod-build": "webpack -p --progress --colors --config=webpack.config.prod.js && node ./nodescript/generate-build-manifest.js",
+    "prod-build": "webpack -p --progress --colors --config=webpack.config.prod.js",
     "dev-dll": "webpack --progress --colors --config=webpack.dll.js",
-    "dev-build": "webpack --progress --colors --config=webpack.config.dev.js && node ./nodescript/generate-build-manifest.js",
+    "dev-build": "webpack --progress --colors --config=webpack.config.dev.js",
     "start": "webpack-dev-server --config=webpack.config.dev.js"
   },
   "repository": {
@@ -44,6 +44,7 @@
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
+    "build-manifest-webpack-plugin": "^0.1.0",
     "clean-webpack-plugin": "^0.1.17",
     "css-loader": "^0.28.7",
     "extract-text-webpack-plugin": "^3.0.2",

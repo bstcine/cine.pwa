@@ -1,39 +1,33 @@
 const uaUtil = {
-    getUserAgent: () => {
+    getUserAgent: function () {
         return navigator.userAgent;
     },
-    Android: function() {
-        return /Android/i.test(uaUtil.getUserAgent()) && !uaUtil.Windows();
+    Android: function () {
+        return /Android/i.test(uaUtil.getUserAgent());
     },
-    BlackBerry: function() {
-        return /BlackBerry|BB10|PlayBook/i.test(uaUtil.getUserAgent());;
+    AndroidMobile: function () {
+        return (/Android/i.test(uaUtil.getUserAgent()) && /Mobile/i.test(uaUtil.getUserAgent()));
     },
-    iPhone: function() {
-        return /iPhone/i.test(uaUtil.getUserAgent()) && !uaUtil.iPad() && !uaUtil.Windows();
+    AndroidTablet: function () {
+        return (uaUtil.AndroidMobile() && !uaUtil.AndroidMobile());
     },
-    iPod: function() {
-        return /iPod/i.test(uaUtil.getUserAgent());
+    iPhone: function () {
+        return /iPhone/i.test(uaUtil.getUserAgent()) && !uaUtil.iPad();
     },
-    iPad: function() {
+    iPad: function () {
         return /iPad/i.test(uaUtil.getUserAgent());
     },
-    iOS: function() {
-        return (uaUtil.iPad() || uaUtil.iPod() || uaUtil.iPhone());
+    iOS: function () {
+        return (uaUtil.iPad() || uaUtil.iPhone());
     },
-    Opera: function() {
-        return /Opera Mini/i.test(uaUtil.getUserAgent());
+    mobile: function () {
+        return (uaUtil.Android() || uaUtil.iOS());
     },
-    Windows: function() {
-        return /Windows Phone|IEMobile|WPDesktop/i.test(uaUtil.getUserAgent());
-    },
-    KindleFire: function() {
-        return /Kindle Fire|Silk|KFAPWA|KFSOWI|KFJWA|KFJWI|KFAPWI|KFAPWI|KFOT|KFTT|KFTHWI|KFTHWA|KFASWI|KFTBWI|KFMEWI|KFFOWI|KFSAWA|KFSAWI|KFARWI/i.test(uaUtil.getUserAgent());
-    },
-    mobile: function() {
-        return (uaUtil.Android() || uaUtil.BlackBerry() || uaUtil.iOS() || uaUtil.Opera() || uaUtil.Windows());
-    },
-    wechat:function () {
+    wechat: function () {
         return /micromessenger/i.test(uaUtil.getUserAgent())
+    },
+    PC: function () {
+        return !/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
     }
 };
 

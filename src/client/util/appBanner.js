@@ -35,7 +35,6 @@ var appBanner = {
         var $body = document.querySelector('body');
         var offset = $body.getBoundingClientRect();
         var appBannerDisplay = document.querySelector('.appBanner').style.display
-        console.log(offset)
         if (offset.top !== 0) {
             if (appBannerDisplay === 'block') {
                 appBanner.hide()

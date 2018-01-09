@@ -1,5 +1,6 @@
 import storeUtil from '@/util/storeUtil'
 import axios from 'axios'
+import siteCodeUtil from "@/util/sitecodeUtil";
 
 function httpUrl(url) {
 
@@ -18,7 +19,7 @@ function httpBody(bodyData) {
     } else {
         token = storeUtil.getToken()
     }
-    let sitecode = storeUtil.get('sitecode') || "cine.web";
+    let sitecode = siteCodeUtil.getSiteCode();
 
     return {
         "token": token,

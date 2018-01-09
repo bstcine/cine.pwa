@@ -1,11 +1,27 @@
 import SITECODE from "@/constant/sitecode";
 import storeUtil from "@/util/storeUtil";
+import uaUtil from "@/util/uaUtil";
 
 let siteCodeUtil = {
 
     getSiteCode: () => {
         const sitecode = storeUtil.get('sitecode');
-        return sitecode ? sitecode.toLowerCase() : ""
+        if (sitecode) {
+            return sitecode
+        }
+        if (uaUtil.PC()) {
+            return SITECODE.WEB_PC
+        } else if (uaUtil.iPhone()) {
+            return SITECODE.WEB_IPHONE
+        } else if (uaUtil.iPad()) {
+            return SITECODE.WEB_IPAD
+        } else if (uaUtil.AndroidMobile()) {
+            return SITECODE.WEB_ANDROID_PHONE
+        } else if (uaUtil.AndroidTablet()) {
+            return SITECODE.WEB_ANDROID_PAD
+        } else {
+            return SITECODE.WEB_OTHER
+        }
     },
 
     /**

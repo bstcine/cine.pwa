@@ -38,7 +38,11 @@ export let setShareTimeline = ({title, link, imgUrl, desc}) => {
 };
 
 export let initWechat = async () => {
-    if (!uaUtil.wechat()) return
+    console.log('initWechat')
+    if (!uaUtil.wechat()) {
+        console.log('not in wechat skip init')
+        return
+    }
     try {
         let wechatConfig = await getWechatJsSignature();
         await configWechat(wechatConfig);
@@ -71,7 +75,7 @@ export let configWechat = (config) => {
     return new Promise((resolve, reject) => {
         if (typeof window.wx === 'undefined' || !window.wx) return reject(new Error('window.wx not found, ensure include jweixin in your html'));
         window.wx.config({
-            debug: true,
+            debug: false,
             appId: config.appId,
             timestamp: config.timestamp,
             nonceStr: config.nonceStr,
@@ -84,6 +88,7 @@ export let configWechat = (config) => {
         });
         window.wx.error((err) => {
             // alert(`err ${err}`)
+            console.log('wechat config err', err);
             resolve(err)
         })
     })

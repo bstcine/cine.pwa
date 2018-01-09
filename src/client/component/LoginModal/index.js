@@ -20,12 +20,6 @@ export default class LoginModal extends Component {
         }
     }
 
-
-    componentWillUpdate(nextProps, nextState) {
-
-    }
-
-
     handleCloseModal() {
         this.props.toggleModal()
     }

@@ -71,7 +71,7 @@ export let configWechat = (config) => {
     return new Promise((resolve, reject) => {
         if (typeof window.wx === 'undefined' || !window.wx) return reject(new Error('window.wx not found, ensure include jweixin in your html'));
         window.wx.config({
-            debug: false,
+            debug: true,
             appId: config.appId,
             timestamp: config.timestamp,
             nonceStr: config.nonceStr,

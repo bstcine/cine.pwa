@@ -18,6 +18,7 @@ import {createShare, share} from "@/util/shareUtil";
 import {eventEmmiter} from "@/util/eventEmmiter";
 
 import siteCodeUtil from "@/util/sitecodeUtil";
+import uaUtil from "@/util/uaUtil";
 
 
 export default class Course extends Component {
@@ -124,14 +125,22 @@ export default class Course extends Component {
                 });
             } catch (err) {
                 if (err.message === 'no_login') {
-                    if (confirm('该账号已在其他设备登录\n是否重新登录？')) {
-                        this.login()
-                    } else {
+                    if (uaUtil.wechat()) {
                         storeUtil.removeToken();
                         let course = await Service.getContentCourseDetail({cid});
                         this.setState({
                             course: course
                         })
+                    } else {
+                        if (confirm('该账号已在其他设备登录\n是否重新登录？')) {
+                            this.login()
+                        } else {
+                            storeUtil.removeToken();
+                            let course = await Service.getContentCourseDetail({cid});
+                            this.setState({
+                                course: course
+                            })
+                        }
                     }
                 } else {
                     console.error(err)
@@ -234,10 +243,6 @@ export default class Course extends Component {
     }
 
     openRecommend(){
-        if (!this.state.user) {
-            this.login();
-            return
-        }
         this.toggleRecommendModal()
     }
 

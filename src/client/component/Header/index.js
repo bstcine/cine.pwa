@@ -40,7 +40,7 @@ export default class Header extends Component {
     }
 
     logout() {
-        logoutV1.then(() => {
+        logoutV1().then(() => {
             storeUtil.remove('token');
             storeUtil.remove('user');
             location.href = "/"

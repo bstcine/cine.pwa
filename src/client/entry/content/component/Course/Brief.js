@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import {getParam} from "@/util/urlUtil";
 import storeUtil from "@/util/storeUtil";
 import SITECODE from "@/constant/sitecode";
+import siteCodeUtil from "@/util/sitecodeUtil";
 
 export default class Brief extends Component {
 
@@ -13,9 +14,6 @@ export default class Brief extends Component {
     constructor(props) {
         super(props);
         let sitecode = storeUtil.get('sitecode');
-        this.isInAPP = sitecode === SITECODE.IOS || sitecode === SITECODE.IOS_IPHONE || sitecode === SITECODE.IOS_IPAD
-            || sitecode === SITECODE.ANDROID || sitecode === SITECODE.ANDROID_PAD || sitecode === SITECODE.ANDROID_PHONE
-        this.isInIOSAPP = sitecode === SITECODE.IOS || sitecode === SITECODE.IOS_IPHONE || sitecode === SITECODE.IOS_IPAD
     }
 
     //优惠列表
@@ -70,7 +68,7 @@ export default class Brief extends Component {
     renderBottomButton(course) {
         const {goLearn, goBuy, clickShare} = this.props;
         if (course.is_paid) {
-            if (!this.isInIOSAPP) {
+            if (!siteCodeUtil.inIOSAPP()) {
                 return <button className="btn-action btn-learn" onClick={goLearn}>立即学习</button>
             }
         } else {
@@ -142,7 +140,7 @@ export default class Brief extends Component {
                         }
                     </div>
                     {
-                        !this.isInAPP ?
+                        !siteCodeUtil.inAPP() ?
                             <div className="share-tool">
                                 分享
                                 <ul className="share-icons">

@@ -17,7 +17,6 @@ module.exports = {
         'react-router-dom',
         'react-transition-group',
         'babel-polyfill',
-        'store',
         'react-modal',
         'material-icons',
     ],
@@ -34,7 +33,8 @@ module.exports = {
                 test: /\.js$/,
                 loader: 'babel-loader',
                 include: path.resolve(__dirname, 'src'),
-                query: {
+                exclude: path.resolve(__dirname, 'node_modules'),
+                options: {
                     cacheDirectory: true,
                     plugins: ['lodash'],
                     presets: ["env", "stage-0", "react"]
@@ -109,7 +109,6 @@ module.exports = {
         alias: {
             '@': path.resolve(__dirname, 'src/client'),
             'material-icons': 'material-design-icons/iconfont/material-icons.css',
-            'store': 'store/dist/store.modern',
         }
     }
 }

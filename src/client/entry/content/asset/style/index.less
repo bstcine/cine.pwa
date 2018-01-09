@@ -1,6 +1,5 @@
 @import "~asset/style/common";
-@import "~asset/style/_mixin.less";
-@import "~asset/style/_media.less";
+@import "~asset/style/_cine.less";
 
 html, body, #root {
 
@@ -19,10 +18,20 @@ body {
     background-color: #f2f4f6;
   }
 
-  .container {
-    margin: 0 auto;
-    width: 18.80rem;
-    overflow: hidden;
-    background-color: #f2f4f6;
+  .root-container {
+    .header-container {
+
+      background-color: #021a52;
+    }
+    .content-container {
+      margin: 0 auto;
+      width: 18.80rem;
+      overflow: hidden;
+      background-color: #f2f4f6;
+    }
+    .footer-container {
+
+    }
   }
+
 }

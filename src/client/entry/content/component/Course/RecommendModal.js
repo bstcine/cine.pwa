@@ -1,8 +1,6 @@
 import React, {Component} from 'react';
 import ReactModal from 'react-modal'
 import '@/asset/style/modal.less'
-import * as Service from '@/service/base'
-import errorMsg from '@/util/errorMsg'
 
 export default class RecommendModal extends Component {
     constructor(props) {

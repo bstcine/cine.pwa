@@ -1,6 +1,8 @@
+@import "_cine.less";
+
 .modal-overlay {
   position: fixed;
-  z-index: 1000;
+  z-index: @index_modal;
   top: 0;
   left: 0;
   width: 100%;
@@ -88,6 +90,12 @@
       color: #818487;
     }
   }
+}
+@media @phone {
+  .login-modal{
+    width: 6.40rem;
+  }
+
 }
 
 .recommend-modal {

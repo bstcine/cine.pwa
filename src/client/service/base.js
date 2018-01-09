@@ -1,7 +1,7 @@
 /**
  * Created by david on 2017/12/6.
  */
-import {get, post,postv1} from './request/index'
+import {get, post, postv1} from './request/index'
 import {getPureUrl} from '@/util/urlUtil'
 import Api from '@/../APIConfig'
 
@@ -25,5 +25,9 @@ export let loginV1 = ({username, password}) => {
 }
 
 export let login = ({username, password}) => {
-    return post(Api.APIURL_Auth_Signin, {phone:username, password})
+    return post(Api.APIURL_Auth_Signin, {phone: username, password})
+}
+
+export let logoutV1 = () => {
+    return get(Api.APIURL_LogoutV1, {type: 'json'})
 }

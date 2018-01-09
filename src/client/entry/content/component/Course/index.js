@@ -16,7 +16,8 @@ import Bridge from "@/util/bridge";
 import BRIDGE_EVENT from "@/constant/bridgeEvent";
 import {createShare, share} from "@/util/shareUtil";
 import {eventEmmiter} from "@/util/eventEmmiter";
-import 'material-icons'
+
+import siteCodeUtil from "@/util/sitecodeUtil";
 
 
 export default class Course extends Component {
@@ -45,9 +46,6 @@ export default class Course extends Component {
         this.getUserName = this.getUserName.bind(this);
         this.getCoupon = this.getCoupon.bind(this);
         this.openRecommend = this.openRecommend.bind(this);
-        let sitecode = storeUtil.get('sitecode');
-        this.isInIOSAPP = sitecode === SITECODE.IOS || sitecode === SITECODE.IOS_IPHONE || sitecode === SITECODE.IOS_IPAD;
-        this.isInAPP = !!sitecode
     }
 
     handlerScroll() {
@@ -342,7 +340,7 @@ export default class Course extends Component {
                             <TabItem>
                                 {course.object_type === '1' ? '课程概要' : '详情'}
                             </TabItem>
-                            {course.object_type === '1' && !this.isInIOSAPP ? <TabItem>课程目录</TabItem> : null}
+                            {course.object_type === '1' && !siteCodeUtil.inIOSAPP() ? <TabItem>课程目录</TabItem> : null}
                             <TabItem>{course.object_type === '1' ? '学员评价' : '评价'}</TabItem>
                         </TabItems>
                         <TabPanels>
@@ -352,7 +350,7 @@ export default class Course extends Component {
 
                             </TabPanel>
                             {
-                                course.object_type === '1' && !this.isInIOSAPP ?
+                                course.object_type === '1' && !siteCodeUtil.inIOSAPP() ?
                                     <TabPanel>
                                         {course.catalog ?
                                             <div className="course-feature"

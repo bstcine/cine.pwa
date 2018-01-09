@@ -12,6 +12,10 @@ import {getParam} from '@/util/urlUtil'
 import storeUtil from '@/util/storeUtil'
 
 import './asset/style/index.less'
+import siteCodeUtil from "@/util/sitecodeUtil";
+import appBanner from "@/util/appBanner";
+import 'material-icons'
+import Header from "@/component/Header";
 // import * as OfflinePluginRuntime from 'offline-plugin/runtime';
 // OfflinePluginRuntime.install();
 
@@ -20,30 +24,41 @@ class Content extends React.Component {
     constructor(props) {
         super(props);
         console.log('Content Main constructor');
-        // alert(`location ${location.href}`)
+
         let urlParam = getParam();
-        // alert(`Content constructor urlUtil.getParam ==> ${JSON.stringify(urlParam)}`)
         let token = urlParam.token;
         let sitecode = urlParam.sitecode;
-        storeUtil.remove('user');
-        storeUtil.remove('sitecode');
+        storeUtil.set('sitecode', sitecode);
+        // app 内以 url 上的 token 为准，不传则直接视为登出，清除缓存 token
+        siteCodeUtil.inAPP() && storeUtil.removeToken();
         token && storeUtil.set('token', token);
         sitecode && storeUtil.set('sitecode', sitecode)
+        this.handleLoad = this.handleLoad.bind(this);
     }
 
     componentDidMount() {
+        window.addEventListener('load', this.handleLoad);
+    }
 
+    componentWillUnmount() {
+        window.removeEventListener('load', this.handleLoad);
+    }
+
+    handleLoad() {
+        appBanner.init()
     }
 
     render() {
         return (
-            <Router basename="/content">
-                <div className="container">
-                    <Route exact path="/" component={Home}/>
-                    <Route path="/course" component={Course}/>
-                </div>
-            </Router>
-
+            <div className="root-container">
+                <Header/>
+                <Router basename="/content">
+                    <div className="content-container">
+                        <Route exact path="/" component={Home}/>
+                        <Route path="/course" component={Course}/>
+                    </div>
+                </Router>
+            </div>
         )
     }
 }

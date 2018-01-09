@@ -3,7 +3,7 @@ import axios from 'axios'
 
 function httpUrl(url) {
 
-    let baseURL = typeof app_API_Host_URL === "undefined" ? "" : app_API_Host_URL
+    let baseURL = typeof app_API_Host_URL === "undefined" ? "" : app_API_Host_URL;
     if (url.indexOf('http') >= 0) {
         baseURL = ""
     }
@@ -13,20 +13,19 @@ function httpUrl(url) {
 
 function httpBody(bodyData) {
     let token;
-    if (typeof bodyData.token !== 'undefined') {
+    if (bodyData && typeof bodyData.token !== 'undefined') {
         token = bodyData.token
     } else {
         token = storeUtil.getToken()
     }
-    let sitecode = storeUtil.get('sitecode') || "cine.web"
+    let sitecode = storeUtil.get('sitecode') || "cine.web";
 
-    console.log(`token --->>> ${token}`)
     return {
         "token": token,
         "sitecode": sitecode,
         "channel": "",
         "locale": "zh_CN",
-        "appver": 10000,
+        "appver": "2.0.2",
         "data": bodyData
     };
 }

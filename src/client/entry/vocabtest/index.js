@@ -18,20 +18,23 @@ import './asset/style/index.less'
 import Bridge from "@/util/bridge";
 import SITECODE from "@/constant/sitecode";
 import BRIDGE_EVENT from '@/constant/bridgeEvent'
+import siteCodeUtil from "@/util/sitecodeUtil";
+import 'material-icons'
 
 class Word extends React.Component {
 
     constructor(props) {
         super(props)
         console.log('Word Main constructor')
-        let urlParam = getParam()
-        console.log(`Word constructor urlUtil.getParam ==> ${JSON.stringify(urlParam)}`)
-        let token = urlParam.token
-        let sitecode = urlParam.sitecode
-        storeUtil.remove('user')
-        storeUtil.remove('token')
-        storeUtil.remove('sitecode')
-        token && storeUtil.set('token', token)
+        storeUtil.remove('user');
+
+        let urlParam = getParam();
+        let token = urlParam.token;
+        let sitecode = urlParam.sitecode;
+        storeUtil.set('sitecode', sitecode);
+        // app 内以 url 上的 token 为准，不传则直接视为登出，清除缓存 token
+        siteCodeUtil.inAPP() && storeUtil.removeToken();
+        token && storeUtil.set('token', token);
         sitecode && storeUtil.set('sitecode', sitecode)
     }
 

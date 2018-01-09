@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom'
 import * as Service from '@/service/content'
 import {Tabs, TabItems, TabItem, TabPanels, TabPanel} from '@/component/Tabs'
 import {getParam} from "@/util/urlUtil";
-import Header from '@/component/Header'
+import HomeHeader from './HomeHeader'
 import _ from 'lodash'
 import BannerSlider from './BannerSlider'
 import GlobalNotice from './GlobalNotice'
@@ -150,7 +150,7 @@ export default class Home extends Component {
         console.log(`Home`);
         return (
             <div className="home-container" ref="homeContainer">
-                <Header ref="header"/>
+                <HomeHeader ref="header"/>
                 <BannerSlider banners={this.state.banners}/>
                 <GlobalNotice/>
                 <Tabs className="home-tabs">

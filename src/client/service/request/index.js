@@ -19,7 +19,7 @@ function httpBody(bodyData) {
     } else {
         token = storeUtil.getToken()
     }
-    let sitecode = siteCodeUtil.getSiteCode();
+    let sitecode = storeUtil.getSiteCode();
 
     return {
         "token": token,

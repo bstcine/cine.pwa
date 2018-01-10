@@ -1,25 +1,11 @@
 import React,{Component} from 'react';
 import * as Service from '@/service/vocabtest'
 import storeUtil from '@/util/storeUtil'
-import {getParam} from '@/util/urlUtil'
 
 export default class Index extends Component {
 
     constructor(props) {
         super(props)
-        console.log('Index constructor')
-        let urlParam = getParam()
-        console.log(`Index constructor urlUtil.getParam ==> ${JSON.stringify(urlParam)}`)
-        let token = urlParam.token
-        let sitecode = urlParam.sitecode
-        if (token) {
-            storeUtil.remove('token')
-            storeUtil.set('token', token)
-        }
-        if (sitecode) {
-            storeUtil.remove('sitecode')
-            storeUtil.set('sitecode', sitecode)
-        }
     }
 
     componentWillMount() {

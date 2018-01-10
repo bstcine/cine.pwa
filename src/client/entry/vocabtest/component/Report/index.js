@@ -1,12 +1,11 @@
 import React, {Component} from 'react';
 import {getParam, addParam, removeParam} from '@/util/urlUtil'
 import * as Service from '@/service/vocabtest'
-import storeUtil from '@/util/storeUtil'
 import {initWechat} from '@/util/wechatUtil'
 import {createShare, share} from '@/util/shareUtil'
-import SITECODE from '@/constant/sitecode'
 import Bridge from "@/util/bridge";
 import BRIDGE_EVENT from "@/constant/bridgeEvent";
+import siteCodeUtil from "@/util/sitecodeUtil";
 
 const echarts = require('echarts');
 
@@ -68,14 +67,9 @@ export default class Report extends Component {
     }
 
     courseClick(course_id) {
-        let sitecode = storeUtil.get('sitecode');
-        if (sitecode === SITECODE.IOS
-            || sitecode === SITECODE.IOS_IPHONE
-            || sitecode === SITECODE.IOS_IPAD) {
+        if (siteCodeUtil.inIOSAPP()) {
             Bridge.ios(BRIDGE_EVENT.COURSE, {course_id}, false)
-        } else if (sitecode === SITECODE.ANDROID
-            || sitecode === SITECODE.ANDROID_PHONE
-            || sitecode === SITECODE.ANDROID_PAD) {
+        } else if (siteCodeUtil.inAndroidAPP()) {
             Bridge.android(BRIDGE_EVENT.COURSE, {course_id}, false)
         } else {
             location.href = '/lesson/' + course_id
@@ -100,51 +94,73 @@ export default class Report extends Component {
     }
 
     initPieChart() {
-        const { data } = this.props
+        const {data} = this.props
         let myChart = echarts.init(this.refs.pieChart)
-        let options = this.setOption([7, 18, 20, 35, 15, 5])
+        let options = this.setOption([{value: 7, name: '词汇量0-1500'}, {value: 18, name: '词汇量1500-3000'}, {
+            value: 20,
+            name: '词汇量3000-4500'
+        }, {value: 35, name: '词汇量4500-6000'}, {value: 15, name: '词汇量6000-7500'}, {value: 5, name: '词汇量7500-9000'}])
         myChart.setOption(options)
     }
 
 //这是一个最简单的饼图~
     setOption(data) {
         return {
-            itemStyle: {
-                normal: {
-                    // 阴影的大小
-                    shadowBlur: 8,
-                    // 阴影水平方向上的偏移
-                    shadowOffsetX: 6,
-                    // 阴影垂直方向上的偏移
-                    shadowOffsetY: 0,
-                    // 阴影颜色
-                    shadowColor: 'rgba(67, 67, 67, .2)',
+            animation: false,
+            title: {
+                show: false
+            },
 
-                    borderWidth: 2,
-                    borderColor: '#fff'
-                }
-            },
-            color:['#ffd941','#ffb138','#fe7f41','#34bcd9','#2d7be6','#65ce18'],
+            color: ['#ffd941', '#ffb138', '#fe7f41', '#34bcd9', '#2d7be6', '#65ce18'],
             legend: {
-                // orient: 'vertical',
-                // top: 'middle',
-                bottom: 10,
+                show: true,
                 left: 'center',
-                data: ['词汇量0-1500', '词汇量1500-3000','词汇量3000-4500','词汇量4500-6000','词汇量6000-7500','词汇量7500-9000']
+                selectedMode: false,
+                bottom: 0,
+                data: ['词汇量0-1500', '词汇量1500-3000', '\n', '词汇量3000-4500', '词汇量4500-6000', '\n', '词汇量6000-7500', '词汇量7500-9000'],
+                icon: 'circle',
+                textStyle: {
+                    color: '#9ba5ac',
+                    fontSize: '12px',
+                },
+                shadowOffsetX: 0,
+                shadowOffsetY: 2,
+                shadowBlur: 5,
+                shadowColor: 'rgba(141, 117, 19, 0.2)',
+                itemGap:20
+
             },
-            series : [
+            series: [
                 {
                     name: '比例',
                     type: 'pie',
                     data: data,
+                    center: ['50%', '40%'],
+                    radius: [0, '65%'],
                     label: {
                         normal: {
                             position: 'inner',
-                            formatter: "{d}% \n{b}",
-                            color:'#fefefe',
+                            formatter: "{d}%",
+                            color: '#fefefe',
                             fontSize: 12
                         }
-                    }
+                    },
+                    itemStyle: {
+                        normal: {
+                            // 阴影的大小
+                            shadowBlur: 8,
+                            // 阴影水平方向上的偏移
+                            shadowOffsetX: 6,
+                            // 阴影垂直方向上的偏移
+                            shadowOffsetY: 6,
+                            // 阴影颜色
+                            shadowColor: 'rgba(67, 67, 67, .2)',
+
+                            // borderWidth: 2,
+
+                            borderColor: '#fff'
+                        }
+                    },
                 }
             ]
         }
@@ -153,7 +169,7 @@ export default class Report extends Component {
     renderPieChart() {
         return (
             <div className="pie-react">
-                <div ref="pieChart" style={{width: "100%", height: "400px",margin:"auto"}}>
+                <div ref="pieChart" style={{width: "100%", height: "300px", margin: "auto"}}>
                 </div>
             </div>
         )
@@ -165,7 +181,7 @@ export default class Report extends Component {
                 <div className="report">
                     <div className="title">{this.state.from_share ? '词汇量为' : '你的词汇量为'}</div>
                     <div className="vocab">{this.state.report.vocab}</div>
-                    <div className="line"></div>
+                    <div className="line"/>
                     <div className="recommend-title">各类考试所需词汇量参考数据：</div>
                     <ul className="recommend-detail">
                         <li>中考：1500</li>
@@ -175,9 +191,14 @@ export default class Report extends Component {
                         <li>托福：8000</li>
                         <li>SAT：10000以上</li>
                     </ul>
+                    <div className="rank">
+                        全国5年级词汇量均值：<span>800</span><br/>
+                        在全国5年级中的词汇量排位：<span>超过了7%的小伙伴</span>
+                    </div>
+
                     {this.renderPieChart()}
 
-
+                    <div className="line"/>
                     <div
                         className="recommend-title">{this.state.from_share ? '基于词汇量和年龄段，推荐以下课程：' : '基于你的词汇量和年龄段，推荐以下课程：'}</div>
                     <div className="recommend-list">

@@ -11,7 +11,6 @@ import Brief from './Brief'
 import Comments from './Comments'
 import CouponModal from './CouponModal'
 import RecommendModal from './RecommendModal'
-import SITECODE from "@/constant/sitecode";
 import Bridge from "@/util/bridge";
 import BRIDGE_EVENT from "@/constant/bridgeEvent";
 import {createShare, share} from "@/util/shareUtil";
@@ -72,11 +71,11 @@ export default class Course extends Component {
         this.initData()
     }
 
-    initCurrentPageWechat(){
-        initWechat().then(async status=>{
+    initCurrentPageWechat() {
+        initWechat().then(async status => {
             if (status) {
                 let sharelog_id = getParam().sharelog_id;
-                if(sharelog_id) return
+                if (sharelog_id) return
                 let res = await createShare({type: 4, cid: getParam().cid});
                 if (res.except_case_desc) {
                     console.log(res)
@@ -163,11 +162,10 @@ export default class Course extends Component {
         let param = getParam();
         let cid = param.cid;
         let source_user_id = param.source_user_id;
-        let sitecode = storeUtil.get('sitecode');
-        if (sitecode === SITECODE.ANDROID_PHONE || sitecode === SITECODE.ANDROID_PAD || sitecode === SITECODE.ANDROID) {
-            Bridge.android(BRIDGE_EVENT.PRE_CONFIRM, {course_id: cid})
-        } else if (sitecode === SITECODE.IOS || sitecode === SITECODE.IOS_IPHONE || sitecode === SITECODE.IOS_IPAD) {
+        if (siteCodeUtil.inIOSAPP()) {
             Bridge.ios(BRIDGE_EVENT.PRE_CONFIRM, {course_id: cid})
+        } else if (siteCodeUtil.inAndroidAPP()) {
+            Bridge.android(BRIDGE_EVENT.PRE_CONFIRM, {course_id: cid})
         } else {
             let url = `/confirmorder?lesson_id=${cid}`;
             if (source_user_id) {
@@ -178,27 +176,31 @@ export default class Course extends Component {
     }
 
     goLearn() {
-        let sitecode = storeUtil.get('sitecode');
         let {course} = this.state
-        if (sitecode === SITECODE.ANDROID_PHONE || sitecode === SITECODE.ANDROID_PAD || sitecode === SITECODE.ANDROID) {
-            Bridge.android(BRIDGE_EVENT.LEARN,{course_id:course.id,last_lesson_id:course.last_content_id,course_name:course.name})
-        } else if (sitecode === SITECODE.IOS || sitecode === SITECODE.IOS_IPHONE || sitecode === SITECODE.IOS_IPAD) {
-            Bridge.ios(BRIDGE_EVENT.LEARN,{course_id:course.id,last_lesson_id:course.last_content_id,course_name:course.name})
+        if (siteCodeUtil.inIOSAPP()) {
+            Bridge.ios(BRIDGE_EVENT.LEARN, {
+                course_id: course.id,
+                last_lesson_id: course.last_content_id,
+                course_name: course.name
+            })
+        } else if (siteCodeUtil.inAndroidAPP()) {
+            Bridge.android(BRIDGE_EVENT.LEARN, {
+                course_id: course.id,
+                last_lesson_id: course.last_content_id,
+                course_name: course.name
+            })
         } else {
             location.href = `/learn`
         }
     }
 
     async login() {
-        let sitecode = storeUtil.get('sitecode');
-        // alert(`sitecode ${sitecode}`);
-        if (sitecode === SITECODE.ANDROID_PHONE || sitecode === SITECODE.ANDROID_PAD || sitecode === SITECODE.ANDROID) {
-            let {token} = await Bridge.android(BRIDGE_EVENT.LOGIN);
+        if (siteCodeUtil.inIOSAPP()) {
+            let {token} = await Bridge.ios(BRIDGE_EVENT.LOGIN);
             storeUtil.setToken(token);
             this.loginSuccess(token)
-        } else if (sitecode === SITECODE.IOS || sitecode === SITECODE.IOS_IPHONE || sitecode === SITECODE.IOS_IPAD) {
-            let {token} = await Bridge.ios(BRIDGE_EVENT.LOGIN);
-            // alert(`login--token ${token}`);
+        } else if (siteCodeUtil.inAndroidAPP()) {
+            let {token} = await Bridge.android(BRIDGE_EVENT.LOGIN);
             storeUtil.setToken(token);
             this.loginSuccess(token)
         } else {
@@ -243,7 +245,7 @@ export default class Course extends Component {
         }))
     }
 
-    openRecommend(){
+    openRecommend() {
         this.toggleRecommendModal()
     }
 
@@ -282,15 +284,10 @@ export default class Course extends Component {
     relatedCourse(related_lesson_id) {
         const {history} = this.props;
         const course_id = related_lesson_id;
-        let sitecode = storeUtil.get('sitecode');
-        if (sitecode === SITECODE.IOS
-            || sitecode === SITECODE.IOS_IPHONE
-            || sitecode === SITECODE.IOS_IPAD) {
-            Bridge.ios(BRIDGE_EVENT.COURSE, {course_id}, false)
-        } else if (sitecode === SITECODE.ANDROID
-            || sitecode === SITECODE.ANDROID_PHONE
-            || sitecode === SITECODE.ANDROID_PAD) {
-            Bridge.android(BRIDGE_EVENT.COURSE, {course_id}, false)
+        if (siteCodeUtil.inIOSAPP()) {
+            Bridge.ios(BRIDGE_EVENT.COURSE, {course_id})
+        } else if (siteCodeUtil.inAndroidAPP()) {
+            Bridge.android(BRIDGE_EVENT.COURSE, {course_id})
         } else {
             if (/^\/content\//i.test(location.pathname)) {
                 history.push(`/course?cid=${course_id}`)

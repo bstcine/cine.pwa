@@ -8,23 +8,14 @@ import Index from './component/index.js';
 import Card from './component/card.js';
 
 import './asset/style/index.less'
-import {getParam} from '@/util/urlUtil'
 import storeUtil from '@/util/storeUtil'
+import EntryComponent from "@/component/EntryComponent";
 
-class Quiz extends React.Component {
+class Quiz extends EntryComponent {
 
     constructor(props) {
         super(props)
         console.log('constructor');
-
-        let urlParam = getParam();
-        console.log(`getParam ==> ${JSON.stringify(urlParam)}`);
-        let token = urlParam.token;
-        let sitecode = urlParam.sitecode;
-        storeUtil.remove('token');
-        storeUtil.remove('sitecode');
-        token && storeUtil.set('token', token);
-        sitecode && storeUtil.set('sitecode', sitecode);
 
         let quiz_id = urlParam.id;
         let quiz_type = urlParam.type;

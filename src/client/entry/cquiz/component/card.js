@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import storeUtil from '@/util/storeUtil';
 import Bridge from "@/util/bridge";
-import SITECODE from "@/constant/sitecode";
 import End from './end.js';
+import siteCodeUtil from "@/util/sitecodeUtil";
 
 export default class Card extends Component {
 
@@ -62,11 +62,10 @@ export default class Card extends Component {
 
     //退出答题
     exitQuiz() {
-        let sitecode = storeUtil.get('sitecode');
-        if (sitecode === SITECODE.ANDROID_PHONE || sitecode === SITECODE.ANDROID_PAD || sitecode === SITECODE.ANDROID) {
-            Bridge.android(Bridge.QUIZ_EXIT);
-        } else if (sitecode === SITECODE.IOS || sitecode === SITECODE.IOS_IPHONE || sitecode === SITECODE.IOS_IPAD) {
+        if (siteCodeUtil.inIOSAPP()) {
             Bridge.ios(Bridge.QUIZ_EXIT);
+        } else if (siteCodeUtil.inAndroidAPP()) {
+            Bridge.android(Bridge.QUIZ_EXIT);
         } else {
             console.log(window.parent);
             if(window.parent.cineExitQuiz) window.parent.cineExitQuiz();

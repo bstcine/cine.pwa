@@ -8,9 +8,9 @@ import Index from './component/Index';
 
 import './asset/style/index.less'
 import {getParam} from '@/util/urlUtil'
-import storeUtil from '@/util/storeUtil'
+import EntryComponent from "@/component/EntryComponent";
 
-class Address extends React.Component {
+class Address extends EntryComponent {
 
     constructor(props) {
         super(props)
@@ -18,13 +18,6 @@ class Address extends React.Component {
 
         let urlParam = getParam();
         console.log(`Address getParam ==> ${JSON.stringify(urlParam)}`);
-        let token = urlParam.token;
-        let sitecode = urlParam.sitecode;
-        storeUtil.remove('user');
-        storeUtil.remove('token');
-        storeUtil.remove('sitecode');
-        token && storeUtil.set('token', token);
-        sitecode && storeUtil.set('sitecode', sitecode);
     }
 
     componentDidMount() {

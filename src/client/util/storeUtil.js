@@ -27,6 +27,15 @@ let storeUtil = {
     },
     removeToken: () => {
         return storeUtil.remove('token')
+    },
+    setSiteCode: (sitecode) => {
+        return storeUtil.set('sitecode', sitecode)
+    },
+    getSiteCode: () => {
+        return storeUtil.get('sitecode')
+    },
+    removeSiteCode: () => {
+        return storeUtil.remove('sitecode')
     }
 };
 

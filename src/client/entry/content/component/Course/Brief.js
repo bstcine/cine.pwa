@@ -1,7 +1,5 @@
 import React, {Component} from 'react'
 import {getParam} from "@/util/urlUtil";
-import storeUtil from "@/util/storeUtil";
-import SITECODE from "@/constant/sitecode";
 import siteCodeUtil from "@/util/sitecodeUtil";
 
 export default class Brief extends Component {
@@ -13,7 +11,6 @@ export default class Brief extends Component {
 
     constructor(props) {
         super(props);
-        let sitecode = storeUtil.get('sitecode');
     }
 
     //优惠列表

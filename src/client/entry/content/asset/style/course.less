@@ -567,50 +567,70 @@ span.grey {
   }
 }
 
-.course-feature {
-  * {
-    font-family: "PingFangSC-Thin, sans-serif";
-  }
-  a {
-    color: #014292;
-  }
-  .tip {
-    color: #FF5600;
-  }
-  .fontWeight {
-    font-weight: bold;
-  }
-  .question-group {
-    margin: 7.5px 0;
-  }
-  p.title {
-    font-weight: bolder;
-    color: #6b6c56;
-  }
-  h2 {
-    margin: 24px 0 9px 0;
-    font-size: 17px;
-    font-weight: bolder;
-    color: #444;
-  }
-  p {
-    margin: 0;
-    color: #AAA;
-    font-size: 13px;
-    line-height: 1.55;
-  }
+.course-feature *{
+  font-family:"PingFangSC-Thin, sans-serif";
 }
-@media (min-width:576px) {
-  .course-feature {
-    h2 {
-      margin: 34px 0 10px 0;
-      font-size: 19px;
-    }
-    p {
-      font-size: 15px;
-      line-height: 1.5;
-    }
-  }
+.course-feature a{
+  color: #014292;
+  text-decoration: none;
+}
+.course-feature a.ios{
+  font-size: inherit;
+  text-decoration: none;
+  /*color: #FF5600;*/
+  padding: 8px 0;
+}
+.course-feature .center{
+  text-align: center;
+}
+.course-feature .padding-15{
+  padding:10px 0 15px 0;
+}
+.course-feature .tip{
+  color: #FF5600;
+}
+.course-feature .fontWeight{
+  font-weight:bold
 }
 
+.course-feature p.title{
+  font-weight: bolder;
+  color:#6b6c56;
+}
+.course-feature h2{
+  margin: 24px 0 9px 0;
+  /*font-size: 0.35rem;*/
+  font-size: 17px;
+  font-weight: bolder;
+  color:#444;
+}
+.course-feature p{
+  margin:0;
+  color: #AAA;
+  /*font-size: 0.28rem;*/
+  font-size: 13px;
+  line-height: 1.55;
+}
+.course-feature .questions .question-group{
+  padding-bottom: 15px;
+}
+.course-feature .questions .question-group p{
+  font-weight:bolder;
+  color:#777777;
+}
+.course-feature .questions .question-group p span{
+  font-weight:normal;
+  color: #AAA;
+}
+
+@media (min-width:557px) {
+  .course-feature h2{
+    margin: 34px 0 10px 0;
+    font-size: 19px;
+  }
+  .course-feature p{
+    font-size: 15px;
+    line-height: 1.5;
+  }
+}
 

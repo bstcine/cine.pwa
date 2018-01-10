@@ -11,36 +11,24 @@ import UserInfo from './component/UserInfo';
 import Card from './component/Card';
 import Report from './component/Report';
 import ReportList from './component/ReportList';
-import {getParam} from '@/util/urlUtil'
 import storeUtil from '@/util/storeUtil'
-
 import './asset/style/index.less'
 import Bridge from "@/util/bridge";
-import SITECODE from "@/constant/sitecode";
 import BRIDGE_EVENT from '@/constant/bridgeEvent'
 import siteCodeUtil from "@/util/sitecodeUtil";
 import 'material-icons'
+import EntryComponent from "@/component/EntryComponent";
 
-class Word extends React.Component {
+class Word extends EntryComponent {
 
     constructor(props) {
         super(props)
         console.log('Word Main constructor')
         storeUtil.remove('user');
-
-        let urlParam = getParam();
-        let token = urlParam.token;
-        let sitecode = urlParam.sitecode;
-        storeUtil.set('sitecode', sitecode);
-        // app 内以 url 上的 token 为准，不传则直接视为登出，清除缓存 token
-        siteCodeUtil.inAPP() && storeUtil.removeToken();
-        token && storeUtil.set('token', token);
-        sitecode && storeUtil.set('sitecode', sitecode)
     }
 
     componentDidMount() {
-        let sitecode = storeUtil.get('sitecode');
-        if (sitecode === SITECODE.IOS || sitecode === SITECODE.IOS_IPHONE || sitecode === SITECODE.IOS_IPAD) {
+        if (siteCodeUtil.inIOSAPP()) {
             Bridge.ios(BRIDGE_EVENT.TIMELINE, {type: 'loaded'}, true)
         }
 

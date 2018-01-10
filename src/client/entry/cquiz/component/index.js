@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import * as Service from '@/service/quiz'
 import storeUtil from '@/util/storeUtil'
-import SITECODE from "@/constant/sitecode";
+import siteCodeUtil from "@/util/sitecodeUtil";
+import Bridge from "@/util/bridge";
 
 export default class Index extends Component {
 
@@ -24,14 +25,13 @@ export default class Index extends Component {
                 if (!this.quizIsOver) this.toCard();
             })
         } else {
-            let sitecode = storeUtil.get('sitecode');
-            if (sitecode === SITECODE.ANDROID_PHONE || sitecode === SITECODE.ANDROID_PAD || sitecode === SITECODE.ANDROID) {
-                Bridge.android(Bridge.INIT_QUIZ_DATA).then(res => {
+            if (siteCodeUtil.inIOSAPP()) {
+                Bridge.ios(Bridge.INIT_QUIZ_DATA).then(res => {
                     if (res) this.quizList = JSON.parse(res);
                     if (!this.quizIsOver) this.toCard();
                 });
-            } else if (sitecode === SITECODE.IOS || sitecode === SITECODE.IOS_IPHONE || sitecode === SITECODE.IOS_IPAD) {
-                Bridge.ios(Bridge.INIT_QUIZ_DATA).then(res => {
+            } else if (siteCodeUtil.inAndroidAPP()) {
+                Bridge.android(Bridge.INIT_QUIZ_DATA).then(res => {
                     if (res) this.quizList = JSON.parse(res);
                     if (!this.quizIsOver) this.toCard();
                 });

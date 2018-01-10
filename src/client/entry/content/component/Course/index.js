@@ -179,10 +179,11 @@ export default class Course extends Component {
 
     goLearn() {
         let sitecode = storeUtil.get('sitecode');
+        let {course} = this.state
         if (sitecode === SITECODE.ANDROID_PHONE || sitecode === SITECODE.ANDROID_PAD || sitecode === SITECODE.ANDROID) {
-            Bridge.android(BRIDGE_EVENT.LEARN)
+            Bridge.android(BRIDGE_EVENT.LEARN,{course_id:course.id,last_lesson_id:course.last_content_id,course_name:course.name})
         } else if (sitecode === SITECODE.IOS || sitecode === SITECODE.IOS_IPHONE || sitecode === SITECODE.IOS_IPAD) {
-            Bridge.ios(BRIDGE_EVENT.LEARN)
+            Bridge.ios(BRIDGE_EVENT.LEARN,{course_id:course.id,last_lesson_id:course.last_content_id,course_name:course.name})
         } else {
             location.href = `/learn`
         }

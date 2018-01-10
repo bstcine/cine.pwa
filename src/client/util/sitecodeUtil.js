@@ -9,7 +9,9 @@ let siteCodeUtil = {
         if (sitecode) {
             return sitecode
         }
-        if (uaUtil.PC()) {
+        if (uaUtil.wechat()) {
+            return SITECODE.WEB_WECHAT
+        } else if (uaUtil.PC()) {
             return SITECODE.WEB_PC
         } else if (uaUtil.iPhone()) {
             return SITECODE.WEB_IPHONE

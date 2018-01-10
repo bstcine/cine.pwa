@@ -8,6 +8,9 @@ import SITECODE from '@/constant/sitecode'
 import Bridge from "@/util/bridge";
 import BRIDGE_EVENT from "@/constant/bridgeEvent";
 
+const echarts = require('echarts');
+
+
 export default class Report extends Component {
     constructor(props) {
         super(props)
@@ -20,6 +23,8 @@ export default class Report extends Component {
         this.shareClick = this.shareClick.bind(this)
         this.retryClick = this.retryClick.bind(this)
         this.courseClick = this.courseClick.bind(this)
+        this.initPieChart = this.initPieChart.bind(this)
+        this.setOption = this.setOption.bind(this)
     }
 
     componentDidMount() {
@@ -30,12 +35,23 @@ export default class Report extends Component {
                 lessons: res.result.recommendLessons,
                 from_share: getParam().from_share === '1'
             })
+
         })
         initWechat()
+        this.initPieChart()
     }
 
+
+    componentDidUpdate(prevProps, prevState) {
+        this.initPieChart();
+    }
+
+
     async shareClick() {
-        let res = await createShare({type: 7, share_link: addParam(null,removeParam(null,['token']), {from_share: 1})})
+        let res = await createShare({
+            type: 7,
+            share_link: addParam(null, removeParam(null, ['token']), {from_share: 1})
+        })
         let data = res.result
         let share_params = {
             sharelog_id: data.sharelog_id,
@@ -83,6 +99,66 @@ export default class Report extends Component {
         })
     }
 
+    initPieChart() {
+        const { data } = this.props
+        let myChart = echarts.init(this.refs.pieChart)
+        let options = this.setOption([7, 18, 20, 35, 15, 5])
+        myChart.setOption(options)
+    }
+
+//这是一个最简单的饼图~
+    setOption(data) {
+        return {
+            itemStyle: {
+                normal: {
+                    // 阴影的大小
+                    shadowBlur: 8,
+                    // 阴影水平方向上的偏移
+                    shadowOffsetX: 6,
+                    // 阴影垂直方向上的偏移
+                    shadowOffsetY: 0,
+                    // 阴影颜色
+                    shadowColor: 'rgba(67, 67, 67, .2)',
+
+                    borderWidth: 2,
+                    borderColor: '#fff'
+                }
+            },
+            color:['#ffd941','#ffb138','#fe7f41','#34bcd9','#2d7be6','#65ce18'],
+            legend: {
+                // orient: 'vertical',
+                // top: 'middle',
+                bottom: 10,
+                left: 'center',
+                data: ['词汇量0-1500', '词汇量1500-3000','词汇量3000-4500','词汇量4500-6000','词汇量6000-7500','词汇量7500-9000']
+            },
+            series : [
+                {
+                    name: '比例',
+                    type: 'pie',
+                    data: data,
+                    label: {
+                        normal: {
+                            position: 'inner',
+                            formatter: "{d}% \n{b}",
+                            color:'#fefefe',
+                            fontSize: 12
+                        }
+                    }
+                }
+            ]
+        }
+    }
+
+    renderPieChart() {
+        return (
+            <div className="pie-react">
+                <div ref="pieChart" style={{width: "100%", height: "400px",margin:"auto"}}>
+                </div>
+            </div>
+        )
+    }
+
     render() {
         return (
             <div className="wrapper">
@@ -99,6 +175,9 @@ export default class Report extends Component {
                         <li>托福：8000</li>
                         <li>SAT：10000以上</li>
                     </ul>
+                    {this.renderPieChart()}
+
+
                     <div
                         className="recommend-title">{this.state.from_share ? '基于词汇量和年龄段，推荐以下课程：' : '基于你的词汇量和年龄段，推荐以下课程：'}</div>
                     <div className="recommend-list">

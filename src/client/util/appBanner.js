@@ -27,7 +27,7 @@ var appBanner = {
         document.querySelector('.appBanner').style.display = 'none';
     },
     remove: function () {
-        storeUtil.set('appBannerHide', 1, 48*3600*1000);
+        storeUtil.set('appBannerHide', 1, 2*3600*1000);
         window.removeEventListener('scroll', appBanner.handlerScroll);
         this.hide();
     },

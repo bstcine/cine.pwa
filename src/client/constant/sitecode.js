@@ -5,6 +5,7 @@ const SITECODE = {
     ANDROID : 'cine.android',
     ANDROID_PHONE : 'cine.android.phone',
     ANDROID_PAD : 'cine.android.pad',
+    WEB_WECHAT : 'cine.web.wechat',
     WEB_PC : 'cine.web.pc',
     WEB_IPHONE : 'cine.web.iphone',
     WEB_IPAD : 'cine.web.ipad',

@@ -109,8 +109,17 @@ let checkShareStatus = (sharelog_id) => {
 export let share = async ({share_params}) => {
     let sitecode = storeUtil.get('sitecode');
     if (sitecode === SITECODE.ANDROID_PHONE) {
-        await Bridge.android(BRIDGE_EVENT.SHARE, share_params);
-        return updateShare(share_params.sharelog_id)
+        let list = await Bridge.android(BRIDGE_EVENT.INSTALLED_APP_LIST);
+        if (list && list.wechat === 1) {
+            let res = await Bridge.android(BRIDGE_EVENT.SHARE, share_params);
+            if (res && res.shareSuccess === 1) {
+                return updateShare(share_params.sharelog_id)
+            } else {
+                alert('分享已取消')
+            }
+        } else {
+            return qrShare(share_params)
+        }
     } else if (sitecode === SITECODE.IOS_IPHONE || sitecode === SITECODE.IOS_IPAD || sitecode === SITECODE.IOS) {
         let list = await Bridge.ios(BRIDGE_EVENT.INSTALLED_APP_LIST)
         if (list && list.wechat === 1) {

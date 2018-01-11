@@ -29,7 +29,7 @@ class Word extends EntryComponent {
 
     componentDidMount() {
         if (siteCodeUtil.inIOSAPP()) {
-            Bridge.ios(BRIDGE_EVENT.TIMELINE, {type: 'loaded'}, true)
+            Bridge.ios(BRIDGE_EVENT.TIMELINE, {type: 'loaded'})
         }
 
     }

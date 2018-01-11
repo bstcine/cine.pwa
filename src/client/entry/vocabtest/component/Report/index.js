@@ -68,9 +68,9 @@ export default class Report extends Component {
 
     courseClick(course_id) {
         if (siteCodeUtil.inIOSAPP()) {
-            Bridge.ios(BRIDGE_EVENT.COURSE, {course_id}, false)
+            Bridge.ios(BRIDGE_EVENT.COURSE, {course_id})
         } else if (siteCodeUtil.inAndroidAPP()) {
-            Bridge.android(BRIDGE_EVENT.COURSE, {course_id}, false)
+            Bridge.android(BRIDGE_EVENT.COURSE, {course_id})
         } else {
             location.href = '/lesson/' + course_id
         }
@@ -127,8 +127,6 @@ export default class Report extends Component {
                 shadowOffsetY: 2,
                 shadowBlur: 5,
                 shadowColor: 'rgba(141, 117, 19, 0.2)',
-                itemGap:20
-
             },
             series: [
                 {

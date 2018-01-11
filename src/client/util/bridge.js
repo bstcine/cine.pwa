@@ -6,7 +6,6 @@ let Bridge = {
         return new Promise(resolve => {
             console.log(`invoke iOS.event[${event}] with params: ${JSON.stringify(params)}`);
             if (!params) params = {};
-            // alert(`needCallback !== false ===> ${needCallback !== false}`)
             const callbackEvent = this.getCallbackEvent(event);
             if (needCallback) {
                 eventEmmiter.once(callbackEvent, (res) => {

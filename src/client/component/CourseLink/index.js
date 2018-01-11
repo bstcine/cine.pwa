@@ -15,9 +15,9 @@ export default class CourseLink extends Component {
         if(course.status!=='1') return
         const course_id = course.id;
         if (siteCodeUtil.inIOSAPP()) {
-            Bridge.ios(BRIDGE_EVENT.COURSE, {course_id}, false)
+            Bridge.ios(BRIDGE_EVENT.COURSE, {course_id})
         } else if (siteCodeUtil.inAndroidAPP()) {
-            Bridge.android(BRIDGE_EVENT.COURSE, {course_id}, false)
+            Bridge.android(BRIDGE_EVENT.COURSE, {course_id})
         } else {
             if (/^\/content/i.test(location.pathname)) {
                 history.push(`/course?cid=${course_id}`)

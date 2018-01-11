@@ -44,7 +44,7 @@ export default class CouponModal extends Component {
                     </div>
                     <div className="visit-at">
                         去官网 (www.bstcine.com) 或
-                        下载善恩英语APP 了解更多善恩课程
+                        下载"善恩英语APP"了解更多善恩课程
                     </div>
 
                 </div>

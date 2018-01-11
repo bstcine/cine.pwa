@@ -35,12 +35,7 @@ export default class Card extends Component {
         if (!user) {
             return this.props.history.replace('/userinfo')
         }
-        let query = {
-            grade: user.grade,
-            born_at: user.born_at,
-            area_code: user.area_code
-        }
-        Service.getWordList(query).then((result) => {
+        Service.getWordList().then((result) => {
             this.setState({
                 loading: false
             })

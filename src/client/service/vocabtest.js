@@ -10,10 +10,10 @@ export let getContentWordConfig = (query) => {
             }
             return result
         })
-}
+};
 
-export let getWordList = (query) => {
-    return post(Api.APIURL_Content_Word_List, query)
+export let getWordList = () => {
+    return post(Api.APIURL_Content_Word_List)
         .then(result => {
             if (result.code !== '1') {
                 return alert(result.code_desc)
@@ -21,8 +21,7 @@ export let getWordList = (query) => {
             return result
         })
         .then(result => {
-            let wordLevelList = result.result.wordLevelList;
-            let config = result.result.config;
+            let {wordLevelList, config} = result.result;
             wordLevelList.forEach(function (wordLevel) {
                 wordLevel.wordList = wordLevel.wordList.map(function (item) {
                     let options = [
@@ -31,9 +30,9 @@ export let getWordList = (query) => {
                         {zh: item.zh_similar2, isCorrect: false, value: 2},
                         {zh: item.zh_similar3, isCorrect: false, value: 3},
                     ];
-                    options = _.shuffle(options)
+                    options = _.shuffle(options);
                     return {
-                        id:item.id,
+                        id: item.id,
                         word: item.word,
                         options: options
                     }
@@ -47,16 +46,16 @@ export let getWordList = (query) => {
         .catch(error => {
             console.log(error)
         })
-}
+};
 
 export let saveContentWordResult = (query) => {
     return post(Api.APIURL_Content_Word_Result_Save, query)
-}
+};
 
 export let queryContentWordResult = (query) => {
     return post(Api.APIURL_Content_Word_Result_Query, query)
-}
+};
 
 export let queryContentWordResultList = (query) => {
     return post(Api.APIURL_Content_Word_Result_List, query)
-}
+};

@@ -1,7 +1,4 @@
 import React from 'react';
-import storeUtil from '@/util/storeUtil';
-import Bridge from "@/util/bridge";
-import SITECODE from "@/constant/sitecode";
 
 export default class End extends React.Component {
     constructor(props) {

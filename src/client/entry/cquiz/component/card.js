@@ -3,6 +3,7 @@ import storeUtil from '@/util/storeUtil';
 import Bridge from "@/util/bridge";
 import End from './end.js';
 import siteCodeUtil from "@/util/sitecodeUtil";
+import BRIDGE_EVENT from "@/constant/bridgeEvent";
 
 export default class Card extends Component {
 
@@ -63,9 +64,9 @@ export default class Card extends Component {
     //退出答题
     exitQuiz() {
         if (siteCodeUtil.inIOSAPP()) {
-            Bridge.ios(Bridge.QUIZ_EXIT);
+            Bridge.ios(BRIDGE_EVENT.QUIZ_EXIT);
         } else if (siteCodeUtil.inAndroidAPP()) {
-            Bridge.android(Bridge.QUIZ_EXIT);
+            Bridge.android(BRIDGE_EVENT.QUIZ_EXIT);
         } else {
             console.log(window.parent);
             if(window.parent.cineExitQuiz) window.parent.cineExitQuiz();

@@ -28,12 +28,18 @@ export default class Index extends Component {
         } else {
             if (siteCodeUtil.inIOSAPP()) {
                 Bridge.ios(BRIDGE_EVENT.INIT_QUIZ_DATA).then(res => {
-                    if (res) this.quizList = JSON.parse(res);
+                    if (res && res.data) {
+                        console.log(res.data);
+                        this.quizList = res.data;
+                    }
                     if (!this.quizIsOver) this.toCard();
                 });
             } else if (siteCodeUtil.inAndroidAPP()) {
                 Bridge.android(BRIDGE_EVENT.INIT_QUIZ_DATA).then(res => {
-                    if (res) this.quizList = JSON.parse(res);
+                    if (res && res.data) {
+                        console.log(res.data);
+                        this.quizList = res.data;
+                    }
                     if (!this.quizIsOver) this.toCard();
                 });
             } else {

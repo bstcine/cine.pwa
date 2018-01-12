@@ -4,6 +4,7 @@
 import {get, post, postv1} from './request/index'
 import {getPureUrl} from '@/util/urlUtil'
 import Api from '@/../APIConfig'
+import storeUtil from "@/util/storeUtil";
 
 export let getWechatJsSignature = () => {
     let signatureUrl = getPureUrl()
@@ -21,7 +22,7 @@ export let userInfo = (token) => {
 }
 
 export let loginV1 = ({username, password}) => {
-    return postv1(Api.APIURL_LoginV1, {username, password})
+    return postv1(Api.APIURL_LoginV1, {username, password,sitecode:storeUtil.getSiteCode()})
 }
 
 export let login = ({username, password}) => {

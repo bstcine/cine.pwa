@@ -47,16 +47,18 @@ module.exports = {
         new webpack.EnvironmentPlugin({
             DEBUG: Config.debug
         }),
-        new CleanWebpackPlugin(['build'], {verbose: false}),
-        new webpack.optimize.CommonsChunkPlugin({
-            name: 'vendor',
-            minChunks: Infinity,
-        }),
-        new webpack.optimize.CommonsChunkPlugin({
-            name: "manifest",
-            minChunks: Infinity
+        new CleanWebpackPlugin(['build/*.*', 'build/entry'], {verbose: false}),
+        new webpack.DllReferencePlugin({
+            context: __dirname,
+            manifest: 'build/dll/manifest-dll.json'
         }),
         ...HtmlWebpackPlugins,
+        new AddAssetHtmlPlugin({
+            filepath: path.resolve(__dirname, 'build/dll/dll.*.js'),
+            publicPath: WebpackConfigCommon.static_host + 'dll/',
+            includeSourcemap: false,
+            outputPath: 'dll'
+        }),
         new LodashModuleReplacementPlugin(),
         new webpack.optimize.UglifyJsPlugin({
             compress: {
@@ -83,6 +85,6 @@ module.exports = {
             name:"build-manifest.json",
             buildPath:path.join(__dirname, "build"),
         }),
-        new BundleAnalyzerPlugin({analyzerMode:'static'})
+        // new BundleAnalyzerPlugin({analyzerMode:'static'})
     ]
 };

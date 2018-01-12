@@ -3,6 +3,7 @@ import * as Service from '@/service/quiz'
 import storeUtil from '@/util/storeUtil'
 import siteCodeUtil from "@/util/sitecodeUtil";
 import Bridge from "@/util/bridge";
+import BRIDGE_EVENT from "@/constant/bridgeEvent";
 
 export default class Index extends Component {
 
@@ -26,12 +27,12 @@ export default class Index extends Component {
             })
         } else {
             if (siteCodeUtil.inIOSAPP()) {
-                Bridge.ios(Bridge.INIT_QUIZ_DATA).then(res => {
+                Bridge.ios(BRIDGE_EVENT.INIT_QUIZ_DATA).then(res => {
                     if (res) this.quizList = JSON.parse(res);
                     if (!this.quizIsOver) this.toCard();
                 });
             } else if (siteCodeUtil.inAndroidAPP()) {
-                Bridge.android(Bridge.INIT_QUIZ_DATA).then(res => {
+                Bridge.android(BRIDGE_EVENT.INIT_QUIZ_DATA).then(res => {
                     if (res) this.quizList = JSON.parse(res);
                     if (!this.quizIsOver) this.toCard();
                 });

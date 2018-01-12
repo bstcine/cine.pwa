@@ -83,7 +83,7 @@ module.exports = {
             name:"build-manifest.json",
             buildPath:path.join(__dirname, "build"),
             ignore:['.DS_Store']
-        })
-        // new BundleAnalyzerPlugin({analyzerMode:'static'})
+        }),
+        new BundleAnalyzerPlugin({analyzerMode:'static'})
     ]
 };

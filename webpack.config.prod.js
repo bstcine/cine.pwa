@@ -55,7 +55,7 @@ module.exports = {
         ...HtmlWebpackPlugins,
         new AddAssetHtmlPlugin({
             filepath: path.resolve(__dirname, 'build/dll/dll.*.js'),
-            publicPath: WebpackConfigCommon.static_host + 'dll/',
+            publicPath: Config.static_host + 'dll/',
             includeSourcemap: false,
             outputPath: 'dll'
         }),

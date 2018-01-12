@@ -10,13 +10,14 @@ import Card from './component/card.js';
 import './asset/style/index.less'
 import storeUtil from '@/util/storeUtil'
 import EntryComponent from "@/component/EntryComponent";
+import {getParam} from "@/util/urlUtil";
 
 class Quiz extends EntryComponent {
 
     constructor(props) {
         super(props)
         console.log('constructor');
-
+        let urlParam = getParam();
         let quiz_id = urlParam.id;
         let quiz_type = urlParam.type;
         let quiz_title = urlParam.title;

@@ -1,6 +1,6 @@
-const path = require('path')
+const path = require('path');
 // 生产模式配置好 CDN 后切换到 CDN
-const static_host = process.env.NODE_ENV === 'production' ? '/' : '/'
+const static_host = process.env.NODE_ENV === 'production' ? '/' : '/';
 
 module.exports = {
 
@@ -11,7 +11,7 @@ module.exports = {
 
     pages: ['content', 'cquiz', 'address', 'vocabtest'],
 
-    vendor_dll: [
+    vendors: [
         'react',
         'react-dom',
         'react-router-dom',
@@ -111,4 +111,4 @@ module.exports = {
             'material-icons': 'material-design-icons/iconfont/material-icons.css',
         }
     }
-}
+};

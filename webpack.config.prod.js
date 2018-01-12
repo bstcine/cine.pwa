@@ -7,9 +7,9 @@ const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const BuildManifestPlugin = require('build-manifest-webpack-plugin');
 
-const WebpackConfigCommon = require('./webpack.config.common');
+const Config = require('./config');
 
-const pages = WebpackConfigCommon.pages;
+const pages = Config.pages;
 let entry = {};
 let HtmlWebpackPlugins = [];
 pages.forEach((page) => {
@@ -34,29 +34,29 @@ pages.forEach((page) => {
     }))
 });
 
+entry['vendor'] = Config.vendors
+
 module.exports = {
     cache: false,
     devtool: 'cheap-module-source-map',
     entry: entry,
-    output: WebpackConfigCommon.output,
-    module: WebpackConfigCommon.module,
-    resolve: WebpackConfigCommon.resolve,
+    output: Config.output,
+    module: Config.module,
+    resolve: Config.resolve,
     plugins: [
         new webpack.EnvironmentPlugin({
-            DEBUG: WebpackConfigCommon.debug
+            DEBUG: Config.debug
         }),
-        new CleanWebpackPlugin(['build/*.*', 'build/entry'], {verbose: false}),
-        new webpack.DllReferencePlugin({
-            context: __dirname,
-            manifest: 'build/dll/manifest-dll.json'
+        new CleanWebpackPlugin(['build'], {verbose: false}),
+        new webpack.optimize.CommonsChunkPlugin({
+            name: 'vendor',
+            minChunks: Infinity,
+        }),
+        new webpack.optimize.CommonsChunkPlugin({
+            name: "manifest",
+            minChunks: Infinity
         }),
         ...HtmlWebpackPlugins,
-        new AddAssetHtmlPlugin({
-            filepath: path.resolve(__dirname, 'build/dll/dll.*.js'),
-            publicPath: WebpackConfigCommon.static_host + 'dll/',
-            includeSourcemap: false,
-            outputPath: 'dll'
-        }),
         new LodashModuleReplacementPlugin(),
         new webpack.optimize.UglifyJsPlugin({
             compress: {

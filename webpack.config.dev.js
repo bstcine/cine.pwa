@@ -5,11 +5,11 @@ const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
 const WebpackMildCompile = require('webpack-mild-compile').Plugin;
-const WebpackConfigCommon = require('./webpack.config.common');
+const Config = require('./config');
 const OfflinePlugin = require('offline-plugin');
 const BuildManifestPlugin = require('build-manifest-webpack-plugin');
 
-const pages = WebpackConfigCommon.pages;
+const pages = Config.pages;
 let entry = {};
 let HtmlWebpackPlugins = [];
 let rewrites = [];
@@ -28,12 +28,12 @@ module.exports = {
     cache: false,
     devtool: 'cheap-module-source-map',
     entry: entry,
-    output: WebpackConfigCommon.output,
-    module: WebpackConfigCommon.module,
-    resolve: WebpackConfigCommon.resolve,
+    output: Config.output,
+    module: Config.module,
+    resolve: Config.resolve,
     plugins: [
         new webpack.EnvironmentPlugin({
-            DEBUG: WebpackConfigCommon.debug
+            DEBUG: Config.debug
         }),
         new WebpackMildCompile(),
         new CleanWebpackPlugin(['build/*.*', 'build/entry'], {verbose: false}),

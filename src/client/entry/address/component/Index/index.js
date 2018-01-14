@@ -69,6 +69,7 @@ export default class Index extends Component {
 
     init(item) {
         console.log(item);
+        if(!item)return;
 
         let province = item.province;
         let city = item.city;
@@ -109,7 +110,7 @@ export default class Index extends Component {
 
         this.setState({
             province: province,
-            provinceVal:provinceVal,
+            provinceVal: provinceVal,
             city: '',
             county: ''
         });
@@ -145,7 +146,7 @@ export default class Index extends Component {
 
         this.setState({
             county: county,
-            countyVal:countyVal
+            countyVal: countyVal
         });
     }
 

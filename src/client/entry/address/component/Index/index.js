@@ -15,10 +15,12 @@ export default class Index extends Component {
         this.state = {
             token: param.token,
             id: param.id,
-            type: param.type,
             province: '',
             city: '',
             county: '',
+            provinceVal: '',
+            cityVal: '',
+            countyVal: '',
             name: '',
             phone: '',
             address: ''
@@ -36,17 +38,33 @@ export default class Index extends Component {
     }
 
     componentDidMount() {
-        if (!this.state.id) return;
-
-        Service.queryAddress(this.state)
-            .then(result => {
-                if (!result.msg) {
-                    this.init(result.data);
-                } else {
-                    console.log(result.msg);
-                    this.setState({id: ''});
-                }
-            });
+        if (!this.state.id) {
+            if (siteCodeUtil.inIOSAPP()) {
+                Bridge.ios(BRIDGE_EVENT.ADDRESS_INIT_DATA).then(res => {
+                    if (res && res.data) {
+                        console.log(res.data);
+                        this.init(res.data);
+                    }
+                });
+            } else if (siteCodeUtil.inAndroidAPP()) {
+                Bridge.android(BRIDGE_EVENT.ADDRESS_INIT_DATA).then(res => {
+                    if (res && res.data) {
+                        console.log(res.data);
+                        this.init(res.data);
+                    }
+                });
+            }
+        } else {
+            Service.queryAddress(this.state)
+                .then(result => {
+                    if (!result.msg) {
+                        this.init(result.data);
+                    } else {
+                        console.log(result.msg);
+                        this.setState({id: ''});
+                    }
+                });
+        }
     }
 
     init(item) {
@@ -80,37 +98,54 @@ export default class Index extends Component {
 
     selectProvince(event) {
         let province = event.target.value;
-        this.setState({
-            province: province,
-            city: '',
-            county: ''
-        });
 
+        let provinceVal = "";
         this.provinceArr.forEach((item) => {
             if (item.code == province) {
                 this.cityArr = item.childs;
+                provinceVal = item.name;
             }
-        })
+        });
+
+        this.setState({
+            province: province,
+            provinceVal:provinceVal,
+            city: '',
+            county: ''
+        });
     }
 
     selectCity(event) {
         let city = event.target.value;
-        this.setState({
-            city: city,
-            county: ''
-        });
 
+        let cityVal = "";
         this.cityArr.forEach((item) => {
             if (item.code == city) {
                 this.countyArr = item.childs;
+                cityVal = item.name;
             }
-        })
+        });
+
+        this.setState({
+            city: city,
+            cityVal: cityVal,
+            county: ''
+        });
     }
 
     selectCounty(event) {
         let county = event.target.value;
+
+        let countyVal = "";
+        this.countyArr.forEach((item) => {
+            if (item.code == county) {
+                countyVal = item.name;
+            }
+        });
+
         this.setState({
-            county: county
+            county: county,
+            countyVal:countyVal
         });
     }
 
@@ -127,21 +162,19 @@ export default class Index extends Component {
         event.preventDefault();
         console.log(this.state);
 
-        //个人设置
-        let isSet = this.state.type && this.state.type == "1";
-
-        if (siteCodeUtil.inIOSAPP()) {
-            Bridge.ios(BRIDGE_EVENT.ADDRESS_SAVE, this.state);
-        } else if (siteCodeUtil.inAndroidAPP()) {
-            Bridge.android(BRIDGE_EVENT.ADDRESS_SAVE, this.state);
+        if (!this.state.id) {
+            if (siteCodeUtil.inIOSAPP()) {
+                Bridge.ios(BRIDGE_EVENT.ADDRESS_SAVE, this.state);
+            } else if (siteCodeUtil.inAndroidAPP()) {
+                Bridge.android(BRIDGE_EVENT.ADDRESS_SAVE, this.state);
+            }
+            return
         }
 
         Service.addAddress(this.state)
             .then(result => {
-                if (isSet) {
-                    if (!result.msg) return alert('保存成功');
-                    alert('保存失败(' + result.msg + ')')
-                }
+                if (!result.msg) return alert('保存成功');
+                alert('保存失败(' + result.msg + ')')
             });
     }
 

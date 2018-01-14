@@ -38,7 +38,8 @@ export default class Index extends Component {
     }
 
     componentDidMount() {
-        if (!this.state.id) {
+        console.log(1, this.state);
+        if (!this.state.id && this.state.id != "") {
             if (siteCodeUtil.inIOSAPP()) {
                 Bridge.ios(BRIDGE_EVENT.ADDRESS_INIT_DATA).then(res => {
                     if (res && res.data) {
@@ -54,7 +55,7 @@ export default class Index extends Component {
                     }
                 });
             }
-        } else {
+        } else if (this.state.id && this.state.id != "") {
             Service.queryAddress(this.state)
                 .then(result => {
                     if (!result.msg) {
@@ -69,7 +70,7 @@ export default class Index extends Component {
 
     init(item) {
         console.log(item);
-        if(!item)return;
+        if (!item) return;
 
         let province = item.province;
         let city = item.city;
@@ -163,7 +164,7 @@ export default class Index extends Component {
         event.preventDefault();
         console.log(this.state);
 
-        if (!this.state.id) {
+        if (!this.state.id && this.state.id != "") {
             if (siteCodeUtil.inIOSAPP()) {
                 Bridge.ios(BRIDGE_EVENT.ADDRESS_SAVE, this.state);
             } else if (siteCodeUtil.inAndroidAPP()) {

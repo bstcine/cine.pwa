@@ -2,6 +2,9 @@ import React, {Component} from 'react';
 import {getParam} from '@/util/urlUtil'
 import * as area from '@/service/data/response_pca_code.json'
 import * as Service from '@/service/user'
+import Bridge from "@/util/bridge";
+import siteCodeUtil from "@/util/sitecodeUtil";
+import BRIDGE_EVENT from "@/constant/bridgeEvent";
 
 export default class Index extends Component {
 
@@ -12,13 +15,13 @@ export default class Index extends Component {
         this.state = {
             token: param.token,
             id: param.id,
+            type: param.type,
             province: '',
             city: '',
             county: '',
             name: '',
             phone: '',
-            address: '',
-            remark: ''
+            address: ''
         };
 
         this.provinceArr = area.addressCodes;
@@ -37,11 +40,11 @@ export default class Index extends Component {
 
         Service.queryAddress(this.state)
             .then(result => {
-                if(!result.msg) {
+                if (!result.msg) {
                     this.init(result.data);
-                }else {
+                } else {
                     console.log(result.msg);
-                    this.setState({id:''});
+                    this.setState({id: ''});
                 }
             });
     }
@@ -65,14 +68,13 @@ export default class Index extends Component {
         });
 
         this.setState({
-            id:item.id,
+            id: item.id,
             province: province,
             city: city,
             county: item.county,
             name: item.name,
             phone: item.phone,
-            address: item.address,
-            remark: item.remark
+            address: item.address
         });
     }
 
@@ -123,13 +125,23 @@ export default class Index extends Component {
 
     handleSubmit(event) {
         event.preventDefault();
-
         console.log(this.state);
+
+        //个人设置
+        let isSet = this.state.type && this.state.type == "1";
+
+        if (siteCodeUtil.inIOSAPP()) {
+            Bridge.ios(BRIDGE_EVENT.ADDRESS_SAVE, this.state);
+        } else if (siteCodeUtil.inAndroidAPP()) {
+            Bridge.android(BRIDGE_EVENT.ADDRESS_SAVE, this.state);
+        }
+
         Service.addAddress(this.state)
             .then(result => {
-                if(!result.msg) return alert('保存成功');
-
-                alert('保存失败('+result.msg+')')
+                if (isSet) {
+                    if (!result.msg) return alert('保存成功');
+                    alert('保存失败(' + result.msg + ')')
+                }
             });
     }
 
@@ -178,11 +190,6 @@ export default class Index extends Component {
                     <textarea id="address" name="address" onChange={this.inputOnChange} value={this.state.address}
                               required/>
                     <label>详细地址</label>
-                </div>
-                <div className="mui-textfield">
-                    <textarea id="remark" name="remark" onChange={this.inputOnChange} value={this.state.remark}
-                              required/>
-                    <label>备注</label>
                 </div>
                 <button type="submit" className="mui-btn mui-btn--raised">保存</button>
             </form>

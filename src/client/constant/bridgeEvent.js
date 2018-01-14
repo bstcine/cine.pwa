@@ -9,6 +9,7 @@ const BRIDGE_EVENT = {
     INSTALLED_APP_LIST:'installed_app_list',
     QUIZ_EXIT:'quiz_exit',
     INIT_QUIZ_DATA:'init_quiz_data',
+    ADDRESS_SAVE:'address_save',
 };
 
 export default BRIDGE_EVENT

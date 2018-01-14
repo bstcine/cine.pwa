@@ -9,7 +9,7 @@ module.exports = {
 
     static_host,
 
-    pages: ['content', 'cquiz', 'address', 'vocabtest'],
+    pages: ['content', 'cquiz', 'address', 'vocabtest','preconfirm'],
 
     vendors: [
         'react',

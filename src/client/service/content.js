@@ -39,18 +39,48 @@ export let getContentCourseComment = (query) => {
     return post(Api.APIURL_Content_Course_Comment, query)
         .then(res => {
             if (res.except_case_desc) {
-                return alert(res.except_case_desc)
+                return alert(errorMsg(res.except_case_desc))
             }
             return res.result
         })
 }
 
-export let createCoupon = (source_user_id)=>{
-    return postv1(Api.APIURL_Create_Coupon,{source_user_id}).then(res=>{
-        if(!res.status){
+export let createCoupon = (source_user_id) => {
+    return postv1(Api.APIURL_Create_Coupon, {source_user_id, token: storeUtl.getToken()}).then(res => {
+        if (!res.status) {
             return alert(errorMsg(res.msg))
         }
         return res.coupon
     })
 }
 
+export let prepareOrder = ({cid}) => {
+    return post(Api.APIURL_Order_Prepare, {cid})
+        .then(res => {
+            if (res.except_case_desc) {
+                return alert(errorMsg(res.except_case_desc))
+            }
+            return res.result
+        })
+
+}
+
+export let createOrder = ({cid, point, coupon_no, remark}) => {
+    return post(Api.APIURL_Order_Create, {cid, point, coupon_no, remark})
+        .then(res => {
+            if (res.except_case_desc) {
+                return alert(errorMsg(res.except_case_desc))
+            }
+            return res.result
+        })
+}
+
+export let preCalculatePrice = ({cid, point, coupon_no}) => {
+    return post(Api.APIURL_Order_PreCalculatePrice, {cid, point, coupon_no})
+        .then(res => {
+            if (res.except_case_desc) {
+                return alert(errorMsg(res.except_case_desc))
+            }
+            return res.result
+        })
+}

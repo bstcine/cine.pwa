@@ -6,6 +6,9 @@ exports.APIURL_Content_Word_Result_Query = "/api/content/word/result/query" //�
 exports.APIURL_Content_Word_Result_List = "/api/content/word/result/list"                       //查看词汇量测验列表
 exports.APIURL_Content_Course_Comment = "/api/content/course/comment"                           //课程评论
 exports.APIURL_Create_Coupon = "/api/web/createCoupon"                           //创建优惠券
+exports.APIURL_Order_PreCalculatePrice = "/api/order/preCalculatePrice"         //订单预计算
+exports.APIURL_Order_Prepare = "/api/order/prepare"                             //预先准备订单
+exports.APIURL_Order_Create = "/api/order/create"                               //创建订单
 
 exports.APIURL_Content_Home = "/api/content/home"                                               //app首页
 exports.APIURL_Content_Tag_Tree = "/api/content/tag/tree"                                       //标签树

@@ -190,7 +190,7 @@ export default class Brief extends Component {
                                 :
                                 <div className="recommend" onClick={openRecommend}>
                                     <div className="red-bag"/>
-                                    <div className="desc">推荐课程得积分</div>
+                                    <div className="desc">推荐得积分</div>
                                 </div>
                         }
                     </div>

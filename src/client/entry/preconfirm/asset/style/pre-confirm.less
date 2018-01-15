@@ -49,30 +49,29 @@
     background-color: #f8fafb;
     .item {
       font-size: 0;
-      .title,.price{
+      .title, .price {
         line-height: .52rem;
         font-size: .28rem;
         color: #7a7b7d;
       }
-      .price{
+      .price {
         float: right;
       }
     }
   }
 
-  .ordered-package{
+  .ordered-package {
     padding: .20rem .30rem .20rem .50rem;
     background-color: #f8fafb;
     .item {
       font-size: 0;
-      .title,.price{
+      .title, .price {
         line-height: .52rem;
         font-size: .28rem;
         color: #7a7b7d;
       }
     }
   }
-
 
   .order-control {
     padding: 0 .30rem;
@@ -131,12 +130,12 @@
   .pay-price {
     .grey-line-top(12)
   }
-  .order-control.remark{
+  .order-control.remark {
     .grey-line-top(12);
     border-bottom: none;
-    .my-remark{
+    .my-remark {
       width: 100%;
-      textarea{
+      textarea {
         width: 100%;
         padding: .20rem .30rem;
         font-size: .28rem;
@@ -145,7 +144,7 @@
         border-radius: .08rem;
         box-shadow: inset 0 .04rem .06rem 0 rgba(252, 254, 255, 0.15);
         border: solid .02rem #E5E6E6;
-        &::placeholder{
+        &::placeholder {
           font-size: .28rem;
           line-height: .42rem;
           color: #babcbe;
@@ -153,7 +152,6 @@
       }
     }
   }
-
 
   .btn-action {
     position: fixed;
@@ -171,7 +169,12 @@
       background-color: #ff6c00;
       color: #fff;
     }
-
   }
 
+}
+
+@media @pad,@pc {
+  .pre-confirm .brief .right {
+    max-width: 10.00rem;
+  }
 }

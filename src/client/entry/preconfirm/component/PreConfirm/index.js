@@ -53,9 +53,16 @@ export default class PreConfirm extends Component {
 
     inputChange(e) {
         let {name, value} = e.target;
-        if(name === 'point' && value && !/^\d+(\.\d{1,2})?$/.test(value)) return;
+        if (name === 'point' && value && !/^(\d|\.)+$/.test(value)) return;
         this.setState({
             [name]: value
+        }, () => {
+            if (name === 'coupon_no' && value && value.length >= 8) {
+                if (this.timer) clearTimeout(this.timer)
+                this.timer = setTimeout(() => {
+                    this.preCalculatePrice()
+                }, 300);
+            }
         })
     }
 
@@ -164,8 +171,7 @@ export default class PreConfirm extends Component {
                             <span className="label">优惠券</span>
                             <div className="input">
                                 <span className="normal">输入优惠券</span><input name="coupon_no" value={coupon_no}
-                                                                            onChange={this.inputChange}
-                                                                            onBlur={this.preCalculatePrice}/>
+                                                                            onChange={this.inputChange}/>
                                 <span className="red">抵扣：-￥{calPrice.coupon_discount}</span>
                             </div>
                         </div> : null

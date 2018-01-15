@@ -38,19 +38,16 @@ export default class Index extends Component {
     }
 
     componentDidMount() {
-        console.log(1, this.state);
         if (!this.state.id && this.state.id != "") {
             if (siteCodeUtil.inIOSAPP()) {
                 Bridge.ios(BRIDGE_EVENT.ADDRESS_INIT_DATA).then(res => {
                     if (res && res.data) {
-                        console.log(res.data);
                         this.init(res.data);
                     }
                 });
             } else if (siteCodeUtil.inAndroidAPP()) {
                 Bridge.android(BRIDGE_EVENT.ADDRESS_INIT_DATA).then(res => {
                     if (res && res.data) {
-                        console.log(res.data);
                         this.init(res.data);
                     }
                 });
@@ -175,8 +172,17 @@ export default class Index extends Component {
 
         Service.addAddress(this.state)
             .then(result => {
-                if (!result.msg) return alert('保存成功');
-                alert('保存失败(' + result.msg + ')')
+                if (!result.msg) {
+                    if (siteCodeUtil.inIOSAPP()) {
+                        Bridge.ios(BRIDGE_EVENT.ADDRESS_SAVE, this.state);
+                    } else if (siteCodeUtil.inAndroidAPP()) {
+                        Bridge.android(BRIDGE_EVENT.ADDRESS_SAVE, this.state);
+                    } else {
+                        alert('保存成功')
+                    }
+                } else {
+                    alert('保存失败(' + result.msg + ')')
+                }
             });
     }
 

@@ -22,8 +22,8 @@ import EntryComponent from "@/component/EntryComponent";
 class Word extends EntryComponent {
 
     constructor(props) {
-        super(props)
-        console.log('Word Main constructor')
+        super(props);
+        console.log('Word Main constructor');
         storeUtil.remove('user');
     }
 
@@ -53,4 +53,4 @@ class Word extends EntryComponent {
     }
 }
 
-ReactDOM.render(<Word/>, document.getElementById('root'))
+ReactDOM.render(<Word/>, document.getElementById('root'));

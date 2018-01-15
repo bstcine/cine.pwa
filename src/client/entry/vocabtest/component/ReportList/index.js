@@ -1,14 +1,15 @@
-import React,{Component} from 'react';
+import React, {Component} from 'react';
 import * as Service from '@/service/vocabtest'
 
 export default class ReportList extends Component {
     constructor(props) {
-        super(props)
-        console.log('ReportList constructor')
+        super(props);
+        console.log('ReportList constructor');
         this.state = {
             list: [],
-        }
+        };
         this.itemClick = this.itemClick.bind(this)
+        this.goStart = this.goStart.bind(this)
     }
 
     componentDidMount() {
@@ -28,19 +29,32 @@ export default class ReportList extends Component {
         this.props.history.push(`/report?id=${id}`)
     }
 
+    goStart() {
+        this.props.history.push(`/welcome`)
+    }
+
     renderList() {
-        return this.state.list.map((item, i) => {
+        let {list} = this.state;
+        if (!list.length) {
             return (
-                <tr key={item.id} onClick={(e) => {
-                    this.itemClick(item.id, e)
-                }}>
-                    <td>{i + 1}</td>
-                    <td>{item.create_at.substring(0, 10)}</td>
-                    <td>{item.duration}</td>
-                    <td>{item.vocab}</td>
+                <tr>
+                    <td colSpan="4">没有数据，赶快测试吧</td>
                 </tr>
             )
-        })
+        } else {
+            return list.map((item, i) => {
+                return (
+                    <tr key={item.id} onClick={(e) => {
+                        this.itemClick(item.id, e)
+                    }}>
+                        <td>{i + 1}</td>
+                        <td>{item.create_at.substring(0, 10)}</td>
+                        <td>{item.duration}</td>
+                        <td>{item.vocab}</td>
+                    </tr>
+                )
+            })
+        }
     }
 
     render() {
@@ -60,6 +74,7 @@ export default class ReportList extends Component {
                         {this.renderList()}
                         </tbody>
                     </table>
+                    <button onClick={this.goStart} className="btn btn_sm btn_blue btn_try">测试</button>
                 </div>
             </div>
         )

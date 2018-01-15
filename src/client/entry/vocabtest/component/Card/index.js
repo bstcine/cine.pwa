@@ -7,8 +7,8 @@ import {initWechat} from '@/util/wechatUtil'
 export default class Card extends Component {
 
     constructor(props) {
-        super(props)
-        console.log('Card constructor')
+        super(props);
+        console.log('Card constructor');
         this.state = {
             loading: false,
             wordItem: {id: "", word: "", options: []},
@@ -17,20 +17,20 @@ export default class Card extends Component {
             isShowLevelTip: false,
             progressing: false,
             pressing: false,
-        }
-        this.disableClick = false
-        this.sandGlassTimer = null
-        this.levelTipTimer = null
-        this.duration = 15000
-        console.log(`Card this.props.token ${this.props.token}`)
-        this.optionClick = this.optionClick.bind(this)
+        };
+        this.disableClick = false;
+        this.sandGlassTimer = null;
+        this.levelTipTimer = null;
+        this.duration = 15000;
+        console.log(`Card this.props.token ${this.props.token}`);
+        this.optionClick = this.optionClick.bind(this);
         this.renderOptions = this.renderOptions.bind(this)
 
     }
 
     componentWillMount() {
-        console.log('componentWillMount')
-        let user = storeUtil.get('user')
+        console.log('componentWillMount');
+        let user = storeUtil.get('user');
 
         if (!user) {
             return this.props.history.replace('/userinfo')
@@ -38,31 +38,31 @@ export default class Card extends Component {
         Service.getWordList().then((result) => {
             this.setState({
                 loading: false
-            })
-            this.init(result.wordLevelList)
+            });
+            this.init(result.wordLevelList);
             this.config = result.config
         })
     }
 
     componentDidMount() {
-        console.log('componentDidMount')
+        console.log('componentDidMount');
         initWechat()
     }
 
     componentWillUnmount() {
-        console.log('componentWillUnmount')
-        if (this.sandGlassTimer) clearTimeout(this.sandGlassTimer)
+        console.log('componentWillUnmount');
+        if (this.sandGlassTimer) clearTimeout(this.sandGlassTimer);
         if (this.levelTipTimer) clearTimeout(this.levelTipTimer)
     }
 
     //初始化
     init(wordLevelList) {
         //答题开始时间
-        this.begin_at = new Date().getTime()
-        this.wordLevelList = wordLevelList
-        this.level_index = 0
-        this.word_index = 0
-        let wordLevel = this.wordLevelList[this.level_index]
+        this.begin_at = new Date().getTime();
+        this.wordLevelList = wordLevelList;
+        this.level_index = 0;
+        this.word_index = 0;
+        let wordLevel = this.wordLevelList[this.level_index];
         this.setState({
             wordItem: Object.assign({}, wordLevel.wordList[0]),
             progressing: true
@@ -73,12 +73,12 @@ export default class Card extends Component {
 
     //下一个单词
     nextWord() {
-        console.log(`nextWord --> level_index: ${this.level_index} -- word_index: ${this.word_index}`)
-        let wordLevel = this.wordLevelList[this.level_index]
+        console.log(`nextWord --> level_index: ${this.level_index} -- word_index: ${this.word_index}`);
+        let wordLevel = this.wordLevelList[this.level_index];
         if (this.isSkipLevel() || this.word_index === wordLevel.wordList.length - 1) {
             return this.nextLevel()
         }
-        this.disableClick = false
+        this.disableClick = false;
         this.word_index++;
         this.setState({
             wordItem: Object.assign({}, wordLevel.wordList[this.word_index]),
@@ -91,23 +91,23 @@ export default class Card extends Component {
 
     //连续
     isSkipLevel() {
-        let wordLevel = this.wordLevelList[this.level_index]
-        let rightCount = 0
+        let wordLevel = this.wordLevelList[this.level_index];
+        let rightCount = 0;
         for (let i = 0; i < this.config.min_right_count && i < wordLevel.wordList.length; i++) {
-            let item = wordLevel.wordList[i]
+            let item = wordLevel.wordList[i];
             if (item.answer_index === 0) {
                 rightCount++
             }
         }
-        console.log(`isSkipLevel ==> ${rightCount}`)
+        console.log(`isSkipLevel ==> ${rightCount}`);
         return rightCount >= this.config.min_right_count
     }
 
     //沙漏倒计时
     toggleSandGlass() {
-        if (this.sandGlassTimer) clearTimeout(this.sandGlassTimer)
+        if (this.sandGlassTimer) clearTimeout(this.sandGlassTimer);
         this.sandGlassTimer = setTimeout(() => {
-            this.saveOneAnswer(99)
+            this.saveOneAnswer(99);
             this.setState({
                 progressing: false,
                 pressing: !this.state.pressing,
@@ -121,16 +121,16 @@ export default class Card extends Component {
 
     //下个词汇等级
     nextLevel() {
-        console.log(`nextLevel --> level_index: ${this.level_index}`)
+        console.log(`nextLevel --> level_index: ${this.level_index}`);
         //当 curr_level_score < 3 时，测试不进入下一等级，测试终止
-        if (this.calcCurrLevelScore() < this.config.min_per_score) return this.theEnd()
-        if (this.level_index === this.wordLevelList.length - 1) return this.theEnd()
-        this.disableClick = false
-        this.showLevelTip()
+        if (this.calcCurrLevelScore() < this.config.min_per_score) return this.theEnd();
+        if (this.level_index === this.wordLevelList.length - 1) return this.theEnd();
+        this.disableClick = false;
+        this.showLevelTip();
         //下一级
         this.level_index++;
         this.word_index = 0;
-        let wordLevel = this.wordLevelList[this.level_index]
+        let wordLevel = this.wordLevelList[this.level_index];
         this.setState({
             wordItem: Object.assign({}, wordLevel.wordList[0]),
             progressing: true,
@@ -140,13 +140,13 @@ export default class Card extends Component {
     }
 
     showLevelTip() {
-        let wordLevel = this.wordLevelList[this.level_index]
+        let wordLevel = this.wordLevelList[this.level_index];
         this.setState({
             currMinVocab: wordLevel.min_vocab,
             currMaxVocab: wordLevel.max_vocab,
             isShowLevelTip: true
-        })
-        console.log(`isShowLevelTip ${this.state.isShowLevelTip}`)
+        });
+        console.log(`isShowLevelTip ${this.state.isShowLevelTip}`);
         this.levelTipTimer = setTimeout(function () {
             this.setState({
                 isShowLevelTip: false
@@ -156,11 +156,11 @@ export default class Card extends Component {
 
     // 答题结束
     theEnd() {
-        console.log('theEnd')
-        this.disableClick = true
+        console.log('theEnd');
+        this.disableClick = true;
         //答题结束时间
-        this.end_at = new Date().getTime()
-        let user = storeUtil.get('user')
+        this.end_at = new Date().getTime();
+        let user = storeUtil.get('user');
         let query = {
             grade: user.grade,
             born_at: user.born_at,
@@ -169,26 +169,26 @@ export default class Card extends Component {
             answers: this.collectAnswers(),
             duration: this.getDuration()
         };
-        if (this.props.token) query.token = this.props.token
+        if (this.props.token) query.token = this.props.token;
         Service.saveContentWordResult(query).then((result) => {
             if (result.except_case_desc) {
                 return alert(result.except_case_desc)
             }
-            console.log(`result ${JSON.stringify(result)}`)
+            console.log(`result ${JSON.stringify(result)}`);
             this.props.history.push(`/report?id=${result.result.statsContentWord.id}`)
         })
     }
 
     //保存单个单词的答题信息
     saveOneAnswer(answer_index) {
-        console.log(`answer_index ${answer_index}`)
-        let word = this.wordLevelList[this.level_index].wordList[this.word_index]
+        console.log(`answer_index ${answer_index}`);
+        let word = this.wordLevelList[this.level_index].wordList[this.word_index];
         word.answer_index = answer_index
     }
 
     //收集全部答题信息
     collectAnswers() {
-        let answers = []
+        let answers = [];
         this.wordLevelList.forEach(function (wordLevel) {
             wordLevel.wordList.forEach(function (item) {
                 if (item.answer_index) {
@@ -198,57 +198,57 @@ export default class Card extends Component {
                     })
                 }
             })
-        })
+        });
         return answers;
     }
 
     //耗时(秒)
     getDuration() {
         let duration = parseInt((this.end_at - this.begin_at) / 1000);
-        console.log(`getDuration ${duration}`)
+        console.log(`getDuration ${duration}`);
         return duration
     }
 
     //计算当前词汇等级得分
     calcCurrLevelScore() {
-        let wordLevel = this.wordLevelList[this.level_index]
-        let curr_score = 0
+        let wordLevel = this.wordLevelList[this.level_index];
+        let curr_score = 0;
         if (this.isSkipLevel()) {
             curr_score = this.config.per_count
         } else {
-            let right_count = 0
-            let wrong_count = 0
+            let right_count = 0;
+            let wrong_count = 0;
             wordLevel.wordList.forEach(function (item) {
                 if (item.answer_index === 0) {
                     right_count++
                 } else {
                     wrong_count++
                 }
-            })
-            curr_score = right_count - wrong_count / 3
+            });
+            curr_score = right_count - wrong_count / 3;
             curr_score = curr_score >= 0 ? curr_score : 0
         }
-        wordLevel.curr_score = curr_score
-        console.log(`calcCurrLevelScore ${curr_score}`)
+        wordLevel.curr_score = curr_score;
+        console.log(`calcCurrLevelScore ${curr_score}`);
         return curr_score
     }
 
     //计算当前词汇量
     calcCurrVocab() {
-        let curr_vocab = 0
+        let curr_vocab = 0;
         this.wordLevelList.forEach(function (wordLevel) {
             if (wordLevel.curr_score) {
                 curr_vocab += parseInt(wordLevel.curr_score * (wordLevel.max_vocab - wordLevel.min_vocab) / wordLevel.wordList.length)
             }
-        })
-        console.log(`calcCurrVocab ${curr_vocab}`)
+        });
+        console.log(`calcCurrVocab ${curr_vocab}`);
         return curr_vocab
     }
 
     optionClick(answer_index) {
-        if (this.disableClick) return
-        this.disableClick = true
-        this.saveOneAnswer(answer_index)
+        if (this.disableClick) return;
+        this.disableClick = true;
+        this.saveOneAnswer(answer_index);
         // 按钮&进度条动画延迟
         this.setState({
             progressing: false,
@@ -261,13 +261,13 @@ export default class Card extends Component {
     }
 
     renderOptions() {
-        let options = this.state.wordItem.options
+        let options = this.state.wordItem.options;
         let Options = options.map((option, i) => {
             return <button key={this.state.wordItem.id + i} className="btn btn_option"
                            onClick={(e) => this.optionClick(option.value, e)}>{option.zh}</button>
-        })
+        });
         Options.push(<button key={this.state.wordItem.id + 99} className="btn btn_option btn_no_remember"
-                             onClick={(e) => this.optionClick(99, e)}>不认识</button>)
+                             onClick={(e) => this.optionClick(99, e)}>不认识</button>);
         return Options
     }
 

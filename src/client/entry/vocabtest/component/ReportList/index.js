@@ -48,7 +48,7 @@ export default class ReportList extends Component {
                         this.itemClick(item.id, e)
                     }}>
                         <td>{i + 1}</td>
-                        <td>{item.create_at.substring(0, 10)}</td>
+                        <td>{item.create_at?item.create_at.substring(0, 10):"-"}</td>
                         <td>{item.duration}</td>
                         <td>{item.vocab}</td>
                     </tr>
@@ -74,7 +74,10 @@ export default class ReportList extends Component {
                         {this.renderList()}
                         </tbody>
                     </table>
-                    <button onClick={this.goStart} className="btn btn_sm btn_blue btn_try">测试</button>
+                    <div className="list-footer">
+                        <button onClick={this.goStart} className="btn btn_sm btn_blue btn_try">测试</button>
+                    </div>
+
                 </div>
             </div>
         )

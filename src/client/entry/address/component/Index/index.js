@@ -18,12 +18,13 @@ export default class Index extends Component {
             province: '',
             city: '',
             county: '',
-            provinceVal: '',
-            cityVal: '',
-            countyVal: '',
+            area: '',
             name: '',
             phone: '',
-            address: ''
+            address: '',
+            provinceVal: '',
+            cityVal: '',
+            countyVal: ''
         };
 
         //是否编辑
@@ -74,16 +75,28 @@ export default class Index extends Component {
 
         let province = item.province;
         let city = item.city;
+        let county = item.county;
+        let provinceVal = "";
+        let cityVal = "";
+        let countyVal = "";
 
         this.provinceArr.forEach((item) => {
             if (item.code == province) {
                 this.cityArr = item.childs;
+                provinceVal = item.name;
             }
         });
 
         this.cityArr.forEach((item) => {
             if (item.code == city) {
                 this.countyArr = item.childs;
+                cityVal = item.name;
+            }
+        });
+
+        this.countyArr.forEach((item) => {
+            if (item.code == county) {
+                countyVal = item.name;
             }
         });
 
@@ -94,7 +107,10 @@ export default class Index extends Component {
             county: item.county,
             name: item.name,
             phone: item.phone,
-            address: item.address
+            address: item.address,
+            provinceVal: provinceVal,
+            cityVal: cityVal,
+            countyVal: countyVal
         });
     }
 
@@ -111,9 +127,9 @@ export default class Index extends Component {
 
         this.setState({
             province: province,
-            provinceVal: provinceVal,
             city: '',
-            county: ''
+            county: '',
+            provinceVal: provinceVal
         });
     }
 
@@ -130,8 +146,8 @@ export default class Index extends Component {
 
         this.setState({
             city: city,
-            cityVal: cityVal,
-            county: ''
+            county: '',
+            cityVal: cityVal
         });
     }
 
@@ -163,12 +179,9 @@ export default class Index extends Component {
     handleSubmit(event) {
         event.preventDefault();
 
-        let area = this.state.provinceVal + "-" + this.state.cityVal + "-" + this.state.countyVal;
-        this.setState({
-            area : area
-        });
+        this.state.area = this.state.provinceVal + "-" + this.state.cityVal + "-" + this.state.countyVal;
 
-        console.log(this.state);
+        console.log(1,this.state);
 
         if (this.isEdit) {
             Service.addAddress(this.state)

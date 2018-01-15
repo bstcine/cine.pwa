@@ -162,6 +162,12 @@ export default class Index extends Component {
 
     handleSubmit(event) {
         event.preventDefault();
+
+        let area = this.state.provinceVal + "-" + this.state.cityVal + "-" + this.state.countyVal;
+        this.setState({
+            area : area
+        });
+
         console.log(this.state);
 
         if (this.isEdit) {

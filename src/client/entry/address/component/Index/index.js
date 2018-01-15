@@ -14,7 +14,7 @@ export default class Index extends Component {
         let param = getParam();
         this.state = {
             token: param.token,
-            id: param.id,
+            id: '',
             province: '',
             city: '',
             county: '',
@@ -25,6 +25,9 @@ export default class Index extends Component {
             phone: '',
             address: ''
         };
+
+        //是否编辑
+        this.isEdit = param.case && param.case == '1';
 
         this.provinceArr = area.addressCodes;
         this.cityArr = [];
@@ -38,7 +41,17 @@ export default class Index extends Component {
     }
 
     componentDidMount() {
-        if (!this.state.id && this.state.id != "") {
+        if (this.isEdit) {
+            Service.queryAddress(this.state)
+                .then(result => {
+                    if (!result.msg) {
+                        this.init(result.data);
+                    } else {
+                        console.log(result.msg);
+                        this.setState({id: ''});
+                    }
+                });
+        } else {
             if (siteCodeUtil.inIOSAPP()) {
                 Bridge.ios(BRIDGE_EVENT.ADDRESS_INIT_DATA).then(res => {
                     if (res && res.data) {
@@ -52,16 +65,6 @@ export default class Index extends Component {
                     }
                 });
             }
-        } else if (this.state.id && this.state.id != "") {
-            Service.queryAddress(this.state)
-                .then(result => {
-                    if (!result.msg) {
-                        this.init(result.data);
-                    } else {
-                        console.log(result.msg);
-                        this.setState({id: ''});
-                    }
-                });
         }
     }
 
@@ -161,29 +164,28 @@ export default class Index extends Component {
         event.preventDefault();
         console.log(this.state);
 
-        if (!this.state.id && this.state.id != "") {
+        if (this.isEdit) {
+            Service.addAddress(this.state)
+                .then(result => {
+                    if (!result.msg) {
+                        if (siteCodeUtil.inIOSAPP()) {
+                            Bridge.ios(BRIDGE_EVENT.ADDRESS_SAVE, this.state);
+                        } else if (siteCodeUtil.inAndroidAPP()) {
+                            Bridge.android(BRIDGE_EVENT.ADDRESS_SAVE, this.state);
+                        } else {
+                            alert('保存成功')
+                        }
+                    } else {
+                        alert('保存失败(' + result.msg + ')')
+                    }
+                });
+        }else {
             if (siteCodeUtil.inIOSAPP()) {
                 Bridge.ios(BRIDGE_EVENT.ADDRESS_SAVE, this.state);
             } else if (siteCodeUtil.inAndroidAPP()) {
                 Bridge.android(BRIDGE_EVENT.ADDRESS_SAVE, this.state);
             }
-            return
         }
-
-        Service.addAddress(this.state)
-            .then(result => {
-                if (!result.msg) {
-                    if (siteCodeUtil.inIOSAPP()) {
-                        Bridge.ios(BRIDGE_EVENT.ADDRESS_SAVE, this.state);
-                    } else if (siteCodeUtil.inAndroidAPP()) {
-                        Bridge.android(BRIDGE_EVENT.ADDRESS_SAVE, this.state);
-                    } else {
-                        alert('保存成功')
-                    }
-                } else {
-                    alert('保存失败(' + result.msg + ')')
-                }
-            });
     }
 
     render() {

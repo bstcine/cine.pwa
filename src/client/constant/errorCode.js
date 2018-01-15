@@ -11,7 +11,7 @@ const errorCode = {
     "token_is_null": "token为空",
     "param_not_null": "lesson为空",
     "lesson_not_exist": "lesson错误",
-    "invalid_point": "积分参数类型错误",
+    "invalid_point": "非法积分值",
     "not_allow_point": "不允许使用积分",
     "point_not_enough": "积分不足",
     "not_allow_coupon": "不允许使用优惠券",

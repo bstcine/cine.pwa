@@ -6,6 +6,7 @@ import {
 } from 'react-router-dom'
 import './asset/style/index2.less'
 import 'material-icons'
+import Header from "@/component/Header";
 import EntryComponent from "@/component/EntryComponent";
 import PreConfirm from "./component/PreConfirm"
 
@@ -19,6 +20,7 @@ class Entry extends EntryComponent {
     render() {
         return (
             <div className="root-container">
+                <Header/>
                 <Router basename="/preconfirm">
                     <div className="content-container">
                         <Route exact path="/" component={PreConfirm}/>

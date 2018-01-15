@@ -6,10 +6,9 @@ export default class PreConfirm extends Component {
 
     constructor(props) {
         super(props);
-        this.couponChange = this.couponChange.bind(this);
-        this.pointChange = this.pointChange.bind(this);
-        this.remarkChange = this.remarkChange.bind(this);
+        this.inputChange = this.inputChange.bind(this);
         this.confirmOrder = this.confirmOrder.bind(this);
+        this.preCalculatePrice = this.preCalculatePrice.bind(this);
         this.state = {
             is_show_point: false,
             is_show_coupon: false,
@@ -51,43 +50,32 @@ export default class PreConfirm extends Component {
         })
     }
 
-    couponChange(e) {
-        this.setState({
-            coupon_no: e.target.value
-        });
-        this.preCalculatePrice()
 
-    }
-
-    pointChange(e) {
+    inputChange(e) {
+        let {name, value} = e.target;
+        if(name === 'point' && value && !/^\d+(\.\d{1,2})?$/.test(value)) return;
         this.setState({
-            point: e.target.value
-        })
-        this.preCalculatePrice()
-    }
-
-    remarkChange(e) {
-        this.setState({
-            remark: e.target.value
+            [name]: value
         })
     }
 
     preCalculatePrice() {
-        if (this.timer) clearTimeout(this.timer)
-        this.timer = setTimeout(() => {
-            let {point, coupon_no} = this.state;
-            Service.preCalculatePrice({cid: getParam().cid, point, coupon_no}).then(res => {
-                if (!res) return;
-                this.setState(prevState => ({
-                    calPrice: Object.assign(prevState.calPrice,res)
-                }))
-            })
-        }, 300)
+        let {point, coupon_no} = this.state;
+        Service.preCalculatePrice({cid: getParam().cid, point, coupon_no}).then(res => {
+            if (!res) return;
+            this.setState(prevState => ({
+                calPrice: Object.assign(prevState.calPrice, res)
+            }))
+        })
     }
 
     confirmOrder() {
         let cid = getParam().cid;
-        let {coupon_no, point, remark} = this.state;
+        let {coupon_no, point, remark, course} = this.state;
+        if (course.is_need_remark === '1' && !remark.trim()) {
+            alert("请填写备注");
+            return
+        }
         Service.createOrder({cid, coupon_no, point, remark}).then(res => {
             if (!res) return
             let {order_id} = res;
@@ -101,7 +89,7 @@ export default class PreConfirm extends Component {
         return (
             <div className="package">
                 {
-                    course.packages.map((item,i)=>{
+                    course.packages.map((item, i) => {
                         return (
                             <div className="item" key={i}>
                                 <span className="title">{item.name}</span>
@@ -175,8 +163,9 @@ export default class PreConfirm extends Component {
                         <div className="order-control coupon">
                             <span className="label">优惠券</span>
                             <div className="input">
-                                <span className="normal">输入优惠券</span><input value={coupon_no}
-                                                                            onChange={this.couponChange}/>
+                                <span className="normal">输入优惠券</span><input name="coupon_no" value={coupon_no}
+                                                                            onChange={this.inputChange}
+                                                                            onBlur={this.preCalculatePrice}/>
                                 <span className="red">抵扣：-￥{calPrice.coupon_discount}</span>
                             </div>
                         </div> : null
@@ -187,8 +176,9 @@ export default class PreConfirm extends Component {
                         <div className="order-control point">
                             <span className="label">积分</span><span className="red">{user.point}</span>
                             <div className="input">
-                                <span className="normal">本次使用</span><input value={point}
-                                                                           onChange={this.pointChange}/><span
+                                <span className="normal">本次使用</span><input name="point" value={point}
+                                                                           onChange={this.inputChange}
+                                                                           onBlur={this.preCalculatePrice}/><span
                                 className="normal">积分</span>
                                 <span className="red">抵扣：-￥{calPrice.point_discount}</span>
                             </div>
@@ -196,20 +186,24 @@ export default class PreConfirm extends Component {
                 }
 
                 <div className="order-control pay-price">
-                    <span className="label">应付金额</span>
+                    <span className="label">实付金额</span>
                     {
                         calPrice && calPrice.pay_price ? <span className="price">￥{calPrice.pay_price}</span> : null
                     }
                 </div>
 
-                <div className="order-control remark">
-                    <span className="label">备注</span>
-                    <div className="my-remark">
-                        <textarea value={this.state.remark} onChange={this.remarkChange} rows="5" placeholder="收货地址/收件人/联系电话，&#10;例如：上海市XX区XX路XX号，&#10;张三，139XXXXXXXX">
+                {
+                    course && course.is_need_remark === '1' ?
+                        <div className="order-control remark">
+                            <span className="label">备注</span>
+                            <div className="my-remark">
+                                <textarea name="remark" value={this.state.remark} onChange={this.inputChange} rows="5"
+                                          placeholder="收货地址/收件人/联系电话，&#10;例如：上海市XX区XX路XX号，&#10;张三，139XXXXXXXX">
+                                </textarea>
+                            </div>
+                        </div> : null
+                }
 
-                        </textarea>
-                    </div>
-                </div>
                 <button className="btn-action btn-confirm" onClick={this.confirmOrder}>提交订单</button>
 
             </div>

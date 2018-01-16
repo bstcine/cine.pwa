@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import * as Service from '@/service/vocabtest'
+import storeUtil from "@/util/storeUtil";
 
 export default class ReportList extends Component {
     constructor(props) {
@@ -30,7 +31,11 @@ export default class ReportList extends Component {
     }
 
     goStart() {
-        this.props.history.push(`/welcome`)
+        let url = '/';
+        if(storeUtil.getToken()) {
+            url = '/?token='+storeUtil.getToken()
+        }
+        this.props.history.push(url)
     }
 
     renderList() {

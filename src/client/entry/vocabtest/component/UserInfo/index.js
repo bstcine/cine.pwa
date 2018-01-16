@@ -139,7 +139,6 @@ export default class UserInfo extends Component {
 
                     <button className="btn btn_blue" onClick={this.startClick}>下一步</button>
                 </div>
-                <div className="footer mini"></div>
             </div>
         )
     }

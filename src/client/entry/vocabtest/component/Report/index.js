@@ -129,11 +129,11 @@ export default class Report extends Component {
                 </div>
                 {
                     from_share ?
-                        <div className="footer fixed">
+                        <div className="footer mini fixed">
                             <button onClick={this.retryClick} className="btn btn_sm btn_blue btn_try">我也测一下</button>
                         </div>
                         :
-                        <div className="footer fixed">
+                        <div className="footer mini fixed">
                             <button onClick={this.retryClick} className="btn btn_sm btn_blue btn_try">再测一次</button>
                             <button onClick={this.shareClick} className="btn btn_sm btn_orange btn_share">分享</button>
                         </div>

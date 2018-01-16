@@ -70,6 +70,7 @@ export let showShareQRCode = ({url, sharelog_id}) => {
     console.log(`sharelog_id ${sharelog_id}`);
     let updatedUrl = addParam(url ,{share_mask: 1, sharelog_id});
     let qrcode = `http://www.bstcine.com/qrcode?text=${encodeURIComponent(updatedUrl)}`;
+    hideShareMask()
     let maskNode = document.createElement('div');
     maskNode.className = 'share-mask';
     maskNode.innerHTML = `

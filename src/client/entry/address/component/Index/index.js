@@ -210,7 +210,16 @@ export default class Index extends Component {
     render() {
         return (
             <form className="mui-form mui-container-fluid" onSubmit={this.handleSubmit}>
-                <legend>地址管理</legend>
+                <div className="mui-textfield">
+                    <input type="text" id="name" name="name" onChange={this.inputOnChange} value={this.state.name}
+                           required/>
+                    <label>收货人：</label>
+                </div>
+                <div className="mui-textfield">
+                    <input type="tel" id="phone" name="phone" maxLength="11" onChange={this.inputOnChange} value={this.state.phone}
+                           required/>
+                    <label>联系方式:</label>
+                </div>
                 <div className="mui-select">
                     <select id="province" onChange={this.selectProvince} value={this.state.province} required>
                         <option key="">请选择</option>
@@ -239,21 +248,11 @@ export default class Index extends Component {
                     <label>区／县</label>
                 </div>
                 <div className="mui-textfield">
-                    <input type="text" id="name" name="name" onChange={this.inputOnChange} value={this.state.name}
-                           required/>
-                    <label>收货人：</label>
-                </div>
-                <div className="mui-textfield">
-                    <input type="tel" id="phone" name="phone" onChange={this.inputOnChange} value={this.state.phone}
-                           required/>
-                    <label>联系方式:</label>
-                </div>
-                <div className="mui-textfield">
                     <textarea id="address" name="address" onChange={this.inputOnChange} value={this.state.address}
                               required/>
                     <label>详细地址</label>
                 </div>
-                <button type="submit" className="mui-btn mui-btn--raised">保存</button>
+                <button type="submit" className="btn-action btn-save">保存</button>
             </form>
         )
     }

@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import * as Service from '@/service/content'
 import {getParam} from "@/util/urlUtil";
 import errorMsg from "@/util/errorMsg";
+import uaUtil from "@/util/uaUtil";
 
 export default class PreConfirm extends Component {
 
@@ -90,7 +91,13 @@ export default class PreConfirm extends Component {
         Service.createOrder({cid, coupon_no, point, remark}).then(res => {
             if (this.hasError(res.except_case_desc)) return;
             let {order_id} = res.result;
-            location.href = `/payCenter/${order_id}`
+            let url = `/payCenter/${order_id}`
+            if (uaUtil.wechat()) {
+                url = "http://" + location.host + url
+                location.href = 'http://www.bstcine.com/wechat/authorize?redirect=' + encodeURIComponent(url);
+            } else {
+                location.href = url;
+            }
         })
     }
 

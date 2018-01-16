@@ -95,6 +95,7 @@
       line-height: .80rem;
     }
     .input {
+      position: relative;
       margin: 0 -.30rem;
       padding: 0 .30rem 0 .50rem;
       font-size: 0;
@@ -118,9 +119,16 @@
         box-shadow: inset 0 .04rem .06rem 0 rgba(252, 254, 255, 0.15);
         border: solid .02rem #E5E6E6;
       }
+      .error-tips {
+        display: block;
+        line-height: .44rem;
+        font-size: .24rem;
+        color: #f22010;
+      }
       span.red {
-        vertical-align: middle;
-        float: right;
+        position: absolute;
+        top: 0;
+        right: .30rem;
         font-size: .26rem;
         color: #f22010;
       }
@@ -173,16 +181,28 @@
 
 }
 
+@media @phone {
+  .pre-confirm .package .item .title {
+    display: inline-block;
+    max-width: 4.80rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: keep-all;
+  }
+}
+
 @media @pad,@pc {
   .pre-confirm .brief .right {
     max-width: 10.00rem;
-    .title {
-      display: inline-block;
-      width: 4.80rem;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      word-break: keep-all;
+  }
+
+  .pre-confirm .order-control .input{
+    .error-tips {
+      display: inline;
+      line-height: inherit;
+      font-size: .24rem;
+      vertical-align: middle;
     }
   }
 }

@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import * as Service from '@/service/content'
 import {getParam} from "@/util/urlUtil";
+import errorMsg from "@/util/errorMsg";
 
 export default class PreConfirm extends Component {
 
@@ -16,7 +17,9 @@ export default class PreConfirm extends Component {
             user: null,
             calPrice: null,
             coupon_no: "",
+            coupon_msg: "",
             point: "",
+            point_msg: "",
             remark: "",
             orderedLessonsOrders: []
         }
@@ -57,21 +60,22 @@ export default class PreConfirm extends Component {
         this.setState({
             [name]: value
         }, () => {
-            if (name === 'coupon_no' && value && value.length >= 8) {
-                if (this.timer) clearTimeout(this.timer)
-                this.timer = setTimeout(() => {
-                    this.preCalculatePrice()
-                }, 300);
+            if (this.timer) {
+                console.log(`clearTimeout(${this.timer})`)
+                clearTimeout(this.timer)
             }
+            this.timer = setTimeout(() => {
+                this.preCalculatePrice()
+            }, 300);
         })
     }
 
     preCalculatePrice() {
         let {point, coupon_no} = this.state;
         Service.preCalculatePrice({cid: getParam().cid, point, coupon_no}).then(res => {
-            if (!res) return;
+            if (this.hasError(res.except_case_desc)) return;
             this.setState(prevState => ({
-                calPrice: Object.assign(prevState.calPrice, res)
+                calPrice: Object.assign(prevState.calPrice, res.result)
             }))
         })
     }
@@ -84,10 +88,43 @@ export default class PreConfirm extends Component {
             return
         }
         Service.createOrder({cid, coupon_no, point, remark}).then(res => {
-            if (!res) return
-            let {order_id} = res;
+            if (this.hasError(res.except_case_desc)) return;
+            let {order_id} = res.result;
             location.href = `/payCenter/${order_id}`
         })
+    }
+
+    hasError(msg) {
+        if (msg) {
+            if (msg.indexOf('point') !== -1) {
+                this.setState({
+                    point_msg: errorMsg(msg)
+                })
+            } else {
+                this.setState({
+                    point_msg: ""
+                })
+            }
+            if (msg.indexOf('coupon') !== -1) {
+                this.setState({
+                    coupon_msg: errorMsg(msg)
+                })
+            } else {
+                this.setState({
+                    coupon_msg: ""
+                })
+            }
+            if (msg.indexOf('coupon') === -1 && msg.indexOf('point') === -1) {
+                return alert(errorMsg(msg))
+            }
+            return true
+        }else{
+            this.setState({
+                point_msg: "",
+                coupon_msg: ""
+            })
+            return false
+        }
     }
 
     renderPackageLesson() {
@@ -127,7 +164,7 @@ export default class PreConfirm extends Component {
     }
 
     render() {
-        let {is_show_point, is_show_coupon, course, user, calPrice, coupon_no, point} = this.state;
+        let {is_show_point, is_show_coupon, course, user, calPrice, coupon_no, coupon_msg, point, point_msg} = this.state;
         return (
             <div className="pre-confirm">
                 <div className="brief">
@@ -172,6 +209,7 @@ export default class PreConfirm extends Component {
                             <div className="input">
                                 <span className="normal">输入优惠券</span><input name="coupon_no" value={coupon_no}
                                                                             onChange={this.inputChange}/>
+                                <span className="error-tips">{coupon_msg}</span>
                                 <span className="red">抵扣：-￥{calPrice.coupon_discount}</span>
                             </div>
                         </div> : null
@@ -183,9 +221,9 @@ export default class PreConfirm extends Component {
                             <span className="label">积分</span><span className="red">{user.point}</span>
                             <div className="input">
                                 <span className="normal">本次使用</span><input name="point" value={point}
-                                                                           onChange={this.inputChange}
-                                                                           onBlur={this.preCalculatePrice}/><span
+                                                                           onChange={this.inputChange}/><span
                                 className="normal">积分</span>
+                                <span className="error-tips">{point_msg}</span>
                                 <span className="red">抵扣：-￥{calPrice.point_discount}</span>
                             </div>
                         </div> : null

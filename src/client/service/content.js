@@ -67,20 +67,8 @@ export let prepareOrder = ({cid}) => {
 
 export let createOrder = ({cid, point, coupon_no, remark}) => {
     return post(Api.APIURL_Order_Create, {cid, point, coupon_no, remark})
-        .then(res => {
-            if (res.except_case_desc) {
-                return alert(errorMsg(res.except_case_desc))
-            }
-            return res.result
-        })
 }
 
 export let preCalculatePrice = ({cid, point, coupon_no}) => {
     return post(Api.APIURL_Order_PreCalculatePrice, {cid, point, coupon_no})
-        .then(res => {
-            if (res.except_case_desc) {
-                return alert(errorMsg(res.except_case_desc))
-            }
-            return res.result
-        })
 }

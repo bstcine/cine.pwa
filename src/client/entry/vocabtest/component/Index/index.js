@@ -21,9 +21,9 @@ export default class Index extends Component {
             let user = result.result.user
             storeUtil.set('user', user)
             if (user.area_code && user.grade && user.born_at) {
-                this.props.history.push(`/welcome`)
+                this.props.history.replace(`/welcome`)
             } else {
-                this.props.history.push(`/userinfo`)
+                this.props.history.replace(`/userinfo`)
             }
         })
     }

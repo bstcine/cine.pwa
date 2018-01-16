@@ -30,3 +30,4 @@ exports.APIURL_LoginV1 = "/api/web/login" //登录
 exports.APIURL_LogoutV1 = "/api/web/logout" //登出
 
 exports.APIURL_Auth_Signin = "/api/auth/signin"                                 //登录
+exports.APIURL_System_AccessLog_Create = "/api/system/accesslog/create"         //创建访问日志

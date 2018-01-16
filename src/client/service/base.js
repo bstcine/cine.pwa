@@ -32,3 +32,7 @@ export let login = ({username, password}) => {
 export let logoutV1 = () => {
     return get(Api.APIURL_LogoutV1, {type: 'json'})
 }
+
+export let accessLog = () => {
+    return post(Api.APIURL_System_AccessLog_Create)
+}

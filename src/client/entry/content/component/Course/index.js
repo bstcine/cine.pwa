@@ -69,6 +69,7 @@ export default class Course extends Component {
         });
         this.initCurrentPageWechat()
         this.initData()
+        BaseService.accessLog()
     }
 
     initCurrentPageWechat() {

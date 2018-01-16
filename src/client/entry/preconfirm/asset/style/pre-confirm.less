@@ -118,6 +118,9 @@
         border-radius: .08rem;
         box-shadow: inset 0 .04rem .06rem 0 rgba(252, 254, 255, 0.15);
         border: solid .02rem #E5E6E6;
+        &.err {
+          border: solid .02rem rgba(242, 32, 16, 0.8);
+        }
       }
       .error-tips {
         display: block;
@@ -203,6 +206,16 @@
       line-height: inherit;
       font-size: .24rem;
       vertical-align: middle;
+      margin-left: .20rem;
     }
+  }
+}
+
+@media @pc{
+  .pre-confirm .btn-action.btn-confirm{
+    position: static;
+    margin-top: .40rem;
+    border-radius: .08rem;
+    display: inline-block;
   }
 }

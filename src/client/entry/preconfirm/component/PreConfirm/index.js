@@ -207,7 +207,7 @@ export default class PreConfirm extends Component {
                         <div className="order-control coupon">
                             <span className="label">优惠券</span>
                             <div className="input">
-                                <span className="normal">输入优惠券</span><input name="coupon_no" value={coupon_no}
+                                <span className="normal">输入优惠券</span><input name="coupon_no" value={coupon_no} className={coupon_msg?"err":""}
                                                                             onChange={this.inputChange}/>
                                 <span className="error-tips">{coupon_msg}</span>
                                 <span className="red">抵扣：-￥{calPrice.coupon_discount}</span>
@@ -220,7 +220,7 @@ export default class PreConfirm extends Component {
                         <div className="order-control point">
                             <span className="label">积分</span><span className="red">{user.point}</span>
                             <div className="input">
-                                <span className="normal">本次使用</span><input name="point" value={point}
+                                <span className="normal">本次使用</span><input name="point" value={point} className={point_msg?"err":""}
                                                                            onChange={this.inputChange}/><span
                                 className="normal">积分</span>
                                 <span className="error-tips">{point_msg}</span>

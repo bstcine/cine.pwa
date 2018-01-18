@@ -96,7 +96,7 @@ export default class Brief extends Component {
                 }
             }
         } else {
-            return <button className="btn-action btn-share">已下架</button>;
+            return <button className="btn-action btn-down-sale">已下架</button>;
         }
     }
 

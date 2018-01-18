@@ -175,7 +175,7 @@ export default class Index extends Component {
         let name = event.target.name;
         let value = event.target.value;
 
-        if(name == 'phone' && isNaN(value)) return;
+        if (name == 'phone' && isNaN(value)) return;
 
         this.setState({
             [name]: value,
@@ -185,13 +185,19 @@ export default class Index extends Component {
     handleSubmit(event) {
         event.preventDefault();
 
-        if(isNaN(this.state.phone)){
+        let phone = this.state.phone;
+        if (!(/^[0-9]+$/.test(phone) && /^1[0-9]{10}$/.test(phone))) {
             alert("请输入有效的联系方式");
+            return;
+        }
+
+        if (!(this.state.province && this.state.city && this.state.county)) {
+            alert("请选择所在地区");
             return
         }
 
-        if(!(this.state.name && this.state.phone && this.state.province && this.state.city && this.state.county && this.state.address)){
-            alert("请填写完整的地址信息");
+        if (this.state.address.length > 35) {
+            alert("详细地址不能超过 35 个字符");
             return
         }
 

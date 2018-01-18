@@ -6,6 +6,10 @@ import Bridge from "@/util/bridge";
 import siteCodeUtil from "@/util/sitecodeUtil";
 import BRIDGE_EVENT from "@/constant/bridgeEvent";
 
+import TextField from 'material-ui/TextField';
+import SelectField from 'material-ui/SelectField';
+import MenuItem from 'material-ui/MenuItem';
+
 export default class Index extends Component {
 
     constructor(props) {
@@ -114,8 +118,8 @@ export default class Index extends Component {
         });
     }
 
-    selectProvince(event) {
-        let province = event.target.value;
+    selectProvince(event, index, value) {
+        let province = value;
 
         let provinceVal = "";
         this.provinceArr.forEach((item) => {
@@ -133,8 +137,8 @@ export default class Index extends Component {
         });
     }
 
-    selectCity(event) {
-        let city = event.target.value;
+    selectCity(event, index, value) {
+        let city = value;
 
         let cityVal = "";
         this.cityArr.forEach((item) => {
@@ -151,8 +155,8 @@ export default class Index extends Component {
         });
     }
 
-    selectCounty(event) {
-        let county = event.target.value;
+    selectCounty(event, index, value) {
+        let county = value;
 
         let countyVal = "";
         this.countyArr.forEach((item) => {
@@ -171,6 +175,8 @@ export default class Index extends Component {
         let name = event.target.name;
         let value = event.target.value;
 
+        if (name == 'phone' && isNaN(value)) return;
+
         this.setState({
             [name]: value,
         });
@@ -179,9 +185,24 @@ export default class Index extends Component {
     handleSubmit(event) {
         event.preventDefault();
 
-        this.state.area = this.state.provinceVal + "-" + this.state.cityVal + "-" + this.state.countyVal;
+        let phone = this.state.phone;
+        if (!(/^[0-9]+$/.test(phone) && /^1[0-9]{10}$/.test(phone))) {
+            alert("请输入有效的联系方式");
+            return;
+        }
 
-        console.log(1,this.state);
+        if (!(this.state.province && this.state.city && this.state.county)) {
+            alert("请选择所在地区");
+            return
+        }
+
+        if (this.state.address.length > 35) {
+            alert("详细地址不能超过 35 个字符");
+            return
+        }
+
+        this.state.area = this.state.provinceVal + "-" + this.state.cityVal + "-" + this.state.countyVal;
+        console.log(1, this.state);
 
         if (this.isEdit) {
             Service.addAddress(this.state)
@@ -198,7 +219,7 @@ export default class Index extends Component {
                         alert('保存失败(' + result.msg + ')')
                     }
                 });
-        }else {
+        } else {
             if (siteCodeUtil.inIOSAPP()) {
                 Bridge.ios(BRIDGE_EVENT.ADDRESS_SAVE, this.state);
             } else if (siteCodeUtil.inAndroidAPP()) {
@@ -210,48 +231,76 @@ export default class Index extends Component {
     render() {
         return (
             <form className="mui-form mui-container-fluid" onSubmit={this.handleSubmit}>
-                <div className="mui-textfield">
-                    <input type="text" id="name" name="name" onChange={this.inputOnChange} value={this.state.name}
-                           required/>
-                    <label>收货人：</label>
-                </div>
-                <div className="mui-textfield">
-                    <input type="tel" id="phone" name="phone" maxLength="11" onChange={this.inputOnChange} value={this.state.phone}
-                           required/>
-                    <label>联系方式:</label>
-                </div>
-                <div className="mui-select">
-                    <select id="province" onChange={this.selectProvince} value={this.state.province} required>
-                        <option key="">请选择</option>
-                        {this.provinceArr.map(function (item) {
-                            return <option key={item.code} value={item.code}>{item.name}</option>
-                        })}
-                    </select>
-                    <label>省份</label>
-                </div>
-                <div className="mui-select">
-                    <select id="city" onChange={this.selectCity} value={this.state.city} required>
-                        <option key="">请选择</option>
-                        {this.cityArr.map(function (item) {
-                            return <option key={item.code} value={item.code}>{item.name}</option>
-                        })}
-                    </select>
-                    <label>城市</label>
-                </div>
-                <div className="mui-select">
-                    <select id="county" onChange={this.selectCounty} value={this.state.county} required>
-                        <option key="">请选择</option>
-                        {this.countyArr.map(function (item) {
-                            return <option key={item.code} value={item.code}>{item.name}</option>
-                        })}
-                    </select>
-                    <label>区／县</label>
-                </div>
-                <div className="mui-textfield">
-                    <textarea id="address" name="address" onChange={this.inputOnChange} value={this.state.address}
-                              required/>
-                    <label>详细地址</label>
-                </div>
+                <TextField
+                    id="name"
+                    name="name"
+                    floatingLabelText="收货人："
+                    fullWidth={true}
+                    onChange={this.inputOnChange}
+                    value={this.state.name}
+                    required
+                />
+                <br/>
+                <TextField
+                    id="phone"
+                    name="phone"
+                    floatingLabelText="联系方式："
+                    fullWidth={true}
+                    maxLength="11"
+                    type="tel"
+                    onChange={this.inputOnChange}
+                    value={this.state.phone}
+                    required
+                />
+                <br/>
+                <SelectField
+                    id="province"
+                    floatingLabelText="省份："
+                    fullWidth={true}
+                    onChange={this.selectProvince}
+                    value={this.state.province}
+                    required>
+                    {this.provinceArr.map(function (item) {
+                        return <MenuItem key={item.code} value={item.code} primaryText={item.name}/>
+                    })}
+                </SelectField>
+                <br/>
+                <SelectField
+                    id="city"
+                    floatingLabelText="城市："
+                    fullWidth={true}
+                    onChange={this.selectCity}
+                    value={this.state.city}
+                    required>
+                    {this.cityArr.map(function (item) {
+                        return <MenuItem key={item.code} value={item.code} primaryText={item.name}/>
+                    })}
+                </SelectField>
+                <br/>
+                <SelectField
+                    id="county"
+                    floatingLabelText="区／县："
+                    fullWidth={true}
+                    onChange={this.selectCounty}
+                    value={this.state.county}
+                    required>
+                    {this.countyArr.map(function (item) {
+                        return <MenuItem key={item.code} value={item.code} primaryText={item.name}/>
+                    })}
+                </SelectField>
+                <br/>
+                <TextField
+                    id="address"
+                    name="address"
+                    floatingLabelText="详细地址："
+                    fullWidth={true}
+                    multiLine={true}
+                    rows={2}
+                    rowsMax={3}
+                    onChange={this.inputOnChange}
+                    value={this.state.address}
+                    required
+                />
                 <button type="submit" className="btn-action btn-save">保存</button>
             </form>
         )

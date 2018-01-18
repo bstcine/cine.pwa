@@ -32,7 +32,7 @@ export default class PieChart extends Component {
             let {percent,min_vocab,max_vocab} = item
             return {
                 value: percent,
-                name: `${percent}% 词汇量${min_vocab}${max_vocab?'-'+max_vocab:''}`
+                name: `${percent}% 词汇量${min_vocab}${max_vocab?'-'+max_vocab:'以上'}`
             }
         });
 

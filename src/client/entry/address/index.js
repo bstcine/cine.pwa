@@ -4,11 +4,14 @@ import {
     BrowserRouter as Router,
     Route,
 } from 'react-router-dom'
+import {getParam} from '@/util/urlUtil'
+
+import EntryComponent from "@/component/EntryComponent";
 import Index from './component/Index';
 
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+
 import './asset/style/index.less'
-import {getParam} from '@/util/urlUtil'
-import EntryComponent from "@/component/EntryComponent";
 
 class Address extends EntryComponent {
 
@@ -26,9 +29,11 @@ class Address extends EntryComponent {
     render() {
         return (
             <Router basename="/address">
-                <div className="address-main">
-                    <Route exact path="/" component={Index}/>
-                </div>
+                <MuiThemeProvider>
+                    <div className="address-main">
+                        <Route exact path="/" component={Index}/>
+                    </div>
+                </MuiThemeProvider>
             </Router>
         )
     }

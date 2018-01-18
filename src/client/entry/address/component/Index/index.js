@@ -131,10 +131,15 @@ export default class Index extends Component {
 
         this.setState({
             province: province,
+            provinceVal: provinceVal,
             city: '',
             county: '',
-            provinceVal: provinceVal
         });
+
+        //如果只有一个二级选择，则默认选择
+        if (this.cityArr.length == 1) {
+            this.selectCity(null, 0, this.cityArr[0].code)
+        }
     }
 
     selectCity(event, index, value) {
@@ -150,8 +155,8 @@ export default class Index extends Component {
 
         this.setState({
             city: city,
+            cityVal: cityVal,
             county: '',
-            cityVal: cityVal
         });
     }
 
@@ -185,10 +190,14 @@ export default class Index extends Component {
     handleSubmit(event) {
         event.preventDefault();
 
-        let phone = this.state.phone;
-        if (!(/^[0-9]+$/.test(phone) && /^1[0-9]{10}$/.test(phone))) {
-            alert("请输入有效的联系方式");
-            return;
+        if (!this.state.name || this.state.name.length < 2) {
+            alert("收货人姓名至少2个字符");
+            return
+        }
+
+        if (!this.state.phone || this.state.phone.length <= 0) {
+            alert("请填写联系电话");
+            return
         }
 
         if (!(this.state.province && this.state.city && this.state.county)) {
@@ -196,9 +205,24 @@ export default class Index extends Component {
             return
         }
 
-        if (this.state.address.length > 35) {
-            alert("详细地址不能超过 35 个字符");
+        if (!this.state.address || this.state.address.length <= 0) {
+            alert("请填写详细地址");
             return
+        }
+
+        if (this.state.address.length < 5) {
+            alert("详细地址不得少于5个字符");
+            return
+        }
+
+        if (this.state.address.length > 60) {
+            alert("详细地址不能超过 60 个字符");
+            return
+        }
+
+        if (!/^1[0-9]{10}$/.test(this.state.phone)) {
+            alert("请输入有效的手机号码");
+            return;
         }
 
         this.state.area = this.state.provinceVal + "-" + this.state.cityVal + "-" + this.state.countyVal;
@@ -236,70 +260,63 @@ export default class Index extends Component {
                     name="name"
                     floatingLabelText="收货人："
                     fullWidth={true}
+                    maxLength="30"
                     onChange={this.inputOnChange}
                     value={this.state.name}
-                    required
                 />
-                <br/>
                 <TextField
                     id="phone"
                     name="phone"
-                    floatingLabelText="联系方式："
+                    floatingLabelText="联系电话："
                     fullWidth={true}
                     maxLength="11"
                     type="tel"
                     onChange={this.inputOnChange}
                     value={this.state.phone}
-                    required
                 />
-                <br/>
                 <SelectField
                     id="province"
                     floatingLabelText="省份："
                     fullWidth={true}
                     onChange={this.selectProvince}
-                    value={this.state.province}
-                    required>
+                    value={this.state.province}>
                     {this.provinceArr.map(function (item) {
                         return <MenuItem key={item.code} value={item.code} primaryText={item.name}/>
                     })}
                 </SelectField>
-                <br/>
                 <SelectField
                     id="city"
                     floatingLabelText="城市："
                     fullWidth={true}
                     onChange={this.selectCity}
                     value={this.state.city}
-                    required>
+                    disabled={!this.state.province || this.state.province.length <= 0}>
                     {this.cityArr.map(function (item) {
                         return <MenuItem key={item.code} value={item.code} primaryText={item.name}/>
                     })}
                 </SelectField>
-                <br/>
                 <SelectField
                     id="county"
                     floatingLabelText="区／县："
                     fullWidth={true}
                     onChange={this.selectCounty}
                     value={this.state.county}
-                    required>
+                    disabled={!this.state.city || this.state.city.length <= 0}>
                     {this.countyArr.map(function (item) {
                         return <MenuItem key={item.code} value={item.code} primaryText={item.name}/>
                     })}
                 </SelectField>
-                <br/>
                 <TextField
                     id="address"
                     name="address"
                     floatingLabelText="详细地址："
                     fullWidth={true}
                     multiLine={true}
+                    maxLength="60"
                     rows={2}
                     rowsMax={3}
                     onChange={this.inputOnChange}
                     value={this.state.address}
-                    required
                 />
                 <button type="submit" className="btn-action btn-save">保存</button>
             </form>

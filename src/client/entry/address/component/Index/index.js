@@ -185,6 +185,11 @@ export default class Index extends Component {
     handleSubmit(event) {
         event.preventDefault();
 
+        if(isNaN(this.state.phone)){
+            alert("请输入有效的联系方式");
+            return
+        }
+
         if(!(this.state.name && this.state.phone && this.state.province && this.state.city && this.state.county && this.state.address)){
             alert("请填写完整的地址信息");
             return
@@ -236,7 +241,7 @@ export default class Index extends Component {
                     floatingLabelText="联系方式："
                     fullWidth={true}
                     maxLength="11"
-                    type="phone"
+                    type="tel"
                     onChange={this.inputOnChange}
                     value={this.state.phone}
                     required

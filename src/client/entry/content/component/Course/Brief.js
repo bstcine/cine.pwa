@@ -95,7 +95,7 @@ export default class Brief extends Component {
                     );
                 }
             }
-        } else {
+        } else if (course.status === '0' || course.status === '3') {
             return <button className="btn-action btn-down-sale">已下架</button>;
         }
     }

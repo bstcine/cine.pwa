@@ -1,12 +1,10 @@
-import storeUtil from '@/util/storeUtil'
-import axios from 'axios'
-import siteCodeUtil from "@/util/sitecodeUtil";
+import storeUtil from '@/util/storeUtil';
+import axios from 'axios';
 
 function httpUrl(url) {
-
-    let baseURL = typeof app_API_Host_URL === "undefined" ? "" : app_API_Host_URL;
+    let baseURL = typeof app_API_Host_URL === 'undefined' ? '' : app_API_Host_URL;
     if (url.indexOf('http') >= 0) {
-        baseURL = ""
+        baseURL = '';
     }
 
     return baseURL + url;
@@ -15,52 +13,46 @@ function httpUrl(url) {
 function httpBody(bodyData) {
     let token;
     if (bodyData && typeof bodyData.token !== 'undefined') {
-        token = bodyData.token
+        token = bodyData.token;
     } else {
-        token = storeUtil.getToken()
+        token = storeUtil.getToken();
     }
     let sitecode = storeUtil.getSiteCode();
 
     return {
-        "token": token,
-        "sitecode": sitecode,
-        "channel": "",
-        "locale": "zh_CN",
-        "appver": "2.0.2",
-        "data": bodyData
+        token: token,
+        sitecode: sitecode,
+        channel: '',
+        locale: 'zh_CN',
+        appver: '2.0.2',
+        data: bodyData
     };
 }
 
 export let post = (url, data) => {
-
     let _apiURL = httpUrl(url);
     let _httpBody = httpBody(data);
 
     //alert(_apiURL)
-    return axios.post(_apiURL, _httpBody)
+    return axios
+        .post(_apiURL, _httpBody)
         .then(response => response.data)
         .then(res => {
             if (res.code !== '1') {
-                return alert(res.code_desc)
+                return alert(res.code_desc);
             }
-            return res
-        })
-
+            return res;
+        });
 };
 
 export let get = (url, params) => {
-
     let _apiURL = httpUrl(url);
-    return axios.get(_apiURL, {params}).then(response => response.data)
+    return axios.get(_apiURL, {params}).then(response => response.data);
 };
 
-
 export let postv1 = (url, data) => {
-
     let _apiURL = httpUrl(url);
 
     //alert(_apiURL)
-    return axios.post(_apiURL, data)
-        .then(response => response.data)
-
+    return axios.post(_apiURL, data).then(response => response.data);
 };

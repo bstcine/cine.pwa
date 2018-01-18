@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React, {Component} from 'react';
 
 export default class HomeHeader extends Component {
     constructor(props) {
@@ -11,6 +11,6 @@ export default class HomeHeader extends Component {
                 <div className="logo"> </div>
                 <div className="choose-tool">帮我选课</div>
             </div>
-        )
+        );
     }
 }

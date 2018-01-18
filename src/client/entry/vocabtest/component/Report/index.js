@@ -1,97 +1,99 @@
 import React, {Component} from 'react';
-import {getParam, addParam, removeParam} from '@/util/urlUtil'
-import * as Service from '@/service/vocabtest'
-import {initWechat} from '@/util/wechatUtil'
-import {createShare, share} from '@/util/shareUtil'
-import Bridge from "@/util/bridge";
-import BRIDGE_EVENT from "@/constant/bridgeEvent";
-import siteCodeUtil from "@/util/sitecodeUtil";
-import PieChart from "./PieChart"
+import {getParam, addParam, removeParam} from '@/util/urlUtil';
+import * as Service from '@/service/vocabtest';
+import {initWechat} from '@/util/wechatUtil';
+import {createShare, share} from '@/util/shareUtil';
+import Bridge from '@/util/bridge';
+import BRIDGE_EVENT from '@/constant/bridgeEvent';
+import siteCodeUtil from '@/util/sitecodeUtil';
+import PieChart from './PieChart';
 
 export default class Report extends Component {
     constructor(props) {
-        super(props)
-        console.log('Report constructor')
+        super(props);
+        console.log('Report constructor');
         this.state = {
             report: {},
             lessons: [],
-            from_share: false,
-        }
-        this.shareClick = this.shareClick.bind(this)
-        this.retryClick = this.retryClick.bind(this)
-        this.courseClick = this.courseClick.bind(this)
+            from_share: false
+        };
+        this.shareClick = this.shareClick.bind(this);
+        this.retryClick = this.retryClick.bind(this);
+        this.courseClick = this.courseClick.bind(this);
     }
 
     componentDidMount() {
-        let id = getParam().id
-        Service.queryContentWordResult({id}).then((res) => {
-            let {statsContentWord,recommendLessons, stat} = res.result
+        let id = getParam().id;
+        Service.queryContentWordResult({id}).then(res => {
+            let {statsContentWord, recommendLessons, stat} = res.result;
             this.setState({
                 report: statsContentWord,
                 lessons: recommendLessons,
                 from_share: getParam().from_share === '1',
-                stat:stat
-            })
-        })
-        initWechat()
+                stat: stat
+            });
+        });
+        initWechat();
     }
-
 
     async shareClick() {
         let res = await createShare({
             type: 7,
             share_link: addParam(null, removeParam(null, ['token']), {from_share: 1})
-        })
-        let data = res.result
+        });
+        let data = res.result;
         let share_params = {
             sharelog_id: data.sharelog_id,
             title: data.share_title,
             link: data.share_link,
             imgUrl: data.share_imgUrl,
             desc: data.share_desc
-        }
-        share({share_params})
+        };
+        share({share_params});
     }
 
     retryClick() {
-        this.props.history.push(`/`)
+        this.props.history.push(`/`);
     }
 
     courseClick(course_id) {
         if (siteCodeUtil.inIOSAPP()) {
-            Bridge.ios(BRIDGE_EVENT.COURSE, {course_id})
+            Bridge.ios(BRIDGE_EVENT.COURSE, {course_id});
         } else if (siteCodeUtil.inAndroidAPP()) {
-            Bridge.android(BRIDGE_EVENT.COURSE, {course_id})
+            Bridge.android(BRIDGE_EVENT.COURSE, {course_id});
         } else {
-            location.href = '/lesson/' + course_id
+            location.href = '/lesson/' + course_id;
         }
     }
 
     renderRecommendList() {
         return this.state.lessons.map(lesson => {
             return (
-                <div className="recommend-item" onClick={(e) => this.courseClick(lesson.id, e)} key={lesson.id}>
-                    <div className="item-img" style={{
-                        background: 'url(http://www.bstcine.com/f/' + lesson.img + ') no-repeat top center',
-                        backgroundSize: 'cover'
-                    }}></div>
+                <div className="recommend-item" onClick={e => this.courseClick(lesson.id, e)} key={lesson.id}>
+                    <div
+                        className="item-img"
+                        style={{
+                            background: 'url(http://www.bstcine.com/f/' + lesson.img + ') no-repeat top center',
+                            backgroundSize: 'cover'
+                        }}
+                    />
                     <div className="item-brief">
                         <div className="item-title">{lesson.name}</div>
                         <div className="item-desc">学习课时：{lesson.time_arrange}</div>
                     </div>
                 </div>
-            )
-        })
+            );
+        });
     }
 
     render() {
-        let {from_share,report,stat} = this.state
+        let {from_share, report, stat} = this.state;
         return (
             <div className="wrapper">
                 <div className="report">
                     <div className="title">{from_share ? '词汇量为' : '你的词汇量为'}</div>
                     <div className="vocab">{report.vocab}</div>
-                    <div className="line"/>
+                    <div className="line" />
                     <div className="recommend-title">各类考试所需词汇量参考数据：</div>
                     <ul className="recommend-detail">
                         <li>中考：1500</li>
@@ -101,45 +103,43 @@ export default class Report extends Component {
                         <li>托福：8000</li>
                         <li>SAT：10000以上</li>
                     </ul>
-                    {
-                        stat?(
-                            <div className="rank">
-                                全国5年级词汇量均值：<span>{stat.avg_vocab}</span><br/>
-                                在全国5年级中的词汇量排位：<span>超过了{stat.my_rank}%的小伙伴</span>
-                            </div>
-                        ):null
-                    }
+                    {stat ? (
+                        <div className="rank">
+                            全国5年级词汇量均值：<span>{stat.avg_vocab}</span>
+                            <br />
+                            在全国5年级中的词汇量排位：<span>超过了{stat.my_rank}%的小伙伴</span>
+                        </div>
+                    ) : null}
 
-                    {
-                        stat?<PieChart data={stat.divides}/>:null
-                    }
+                    {stat ? <PieChart data={stat.divides} /> : null}
 
-
-                    <div className="line"/>
-                    <div
-                        className="recommend-title">{from_share ? '基于词汇量和年龄段，推荐以下课程：' : '基于你的词汇量和年龄段，推荐以下课程：'}</div>
-                    <div className="recommend-list">
-                        {this.renderRecommendList()}
-                    </div>
+                    <div className="line" />
                     <div className="recommend-title">
-                        本结果为简版测试结果。<br/>
+                        {from_share ? '基于词汇量和年龄段，推荐以下课程：' : '基于你的词汇量和年龄段，推荐以下课程：'}
+                    </div>
+                    <div className="recommend-list">{this.renderRecommendList()}</div>
+                    <div className="recommend-title">
+                        本结果为简版测试结果。<br />
                         我们将在2周后提供更加详细的测试报告。
                     </div>
-
                 </div>
-                {
-                    from_share ?
-                        <div className="footer mini fixed">
-                            <button onClick={this.retryClick} className="btn btn_sm btn_blue btn_try">我也测一下</button>
-                        </div>
-                        :
-                        <div className="footer mini fixed">
-                            <button onClick={this.retryClick} className="btn btn_sm btn_blue btn_try">再测一次</button>
-                            <button onClick={this.shareClick} className="btn btn_sm btn_orange btn_share">分享</button>
-                        </div>
-                }
+                {from_share ? (
+                    <div className="footer mini fixed">
+                        <button onClick={this.retryClick} className="btn btn_sm btn_blue btn_try">
+                            我也测一下
+                        </button>
+                    </div>
+                ) : (
+                    <div className="footer mini fixed">
+                        <button onClick={this.retryClick} className="btn btn_sm btn_blue btn_try">
+                            再测一次
+                        </button>
+                        <button onClick={this.shareClick} className="btn btn_sm btn_orange btn_share">
+                            分享
+                        </button>
+                    </div>
+                )}
             </div>
-        )
+        );
     }
 }
-

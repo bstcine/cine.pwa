@@ -1,33 +1,33 @@
 const uaUtil = {
-    getUserAgent: function () {
+    getUserAgent: function() {
         return navigator.userAgent;
     },
-    Android: function () {
+    Android: function() {
         return /Android/i.test(uaUtil.getUserAgent());
     },
-    AndroidMobile: function () {
-        return (/Android/i.test(uaUtil.getUserAgent()) && /Mobile/i.test(uaUtil.getUserAgent()));
+    AndroidMobile: function() {
+        return /Android/i.test(uaUtil.getUserAgent()) && /Mobile/i.test(uaUtil.getUserAgent());
     },
-    AndroidTablet: function () {
-        return (uaUtil.AndroidMobile() && !uaUtil.AndroidMobile());
+    AndroidTablet: function() {
+        return uaUtil.AndroidMobile() && !uaUtil.AndroidMobile();
     },
-    iPhone: function () {
+    iPhone: function() {
         return /iPhone/i.test(uaUtil.getUserAgent()) && !uaUtil.iPad();
     },
-    iPad: function () {
+    iPad: function() {
         return /iPad/i.test(uaUtil.getUserAgent());
     },
-    iOS: function () {
-        return (uaUtil.iPad() || uaUtil.iPhone());
+    iOS: function() {
+        return uaUtil.iPad() || uaUtil.iPhone();
     },
-    mobile: function () {
-        return (uaUtil.Android() || uaUtil.iOS());
+    mobile: function() {
+        return uaUtil.Android() || uaUtil.iOS();
     },
-    wechat: function () {
-        return /micromessenger/i.test(uaUtil.getUserAgent())
+    wechat: function() {
+        return /micromessenger/i.test(uaUtil.getUserAgent());
     },
-    PC: function () {
-        return !/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
+    PC: function() {
+        return !/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
     }
 };
 

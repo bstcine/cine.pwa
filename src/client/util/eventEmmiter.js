@@ -1,5 +1,4 @@
 class EventEmmiter {
-
     _events = {};
 
     on(event, listener) {
@@ -7,7 +6,7 @@ class EventEmmiter {
     }
 
     once(event, listener) {
-        this.addListener(event, listener, true)
+        this.addListener(event, listener, true);
     }
 
     emit(event, ...args) {
@@ -15,10 +14,10 @@ class EventEmmiter {
         // alert(`emit event[${event}]`)
         let listenerObjs = this._events[event];
         if (!listenerObjs || listenerObjs.length === 0) {
-            throw new Error(`no event[${event}] listener found`)
+            throw new Error(`no event[${event}] listener found`);
         }
         listenerObjs.forEach(listenerObj => {
-            const {listener, once} = listenerObj;
+            const { listener, once } = listenerObj;
             if (once) this.removeListener(event, listener);
             listener(...args);
         });
@@ -32,7 +31,7 @@ class EventEmmiter {
             listener,
             once
         });
-        this._events[event] = listenerObjs
+        this._events[event] = listenerObjs;
     }
 
     removeListener(event, listener) {
@@ -41,23 +40,23 @@ class EventEmmiter {
         for (let i = 0; i < listener.length; i++) {
             if (listenerObjs[i].listener === listener) {
                 index = i;
-                break
+                break;
             }
         }
         if (index === null) {
-            throw new Error('no match listener found')
+            throw new Error('no match listener found');
         }
         listenerObjs.splice(index, 1);
-        if (!listenerObjs.length) delete this._events[event]
+        if (!listenerObjs.length) delete this._events[event];
     }
 
     remveAllListener(event) {
-        delete this._events[event]
+        delete this._events[event];
     }
 }
 
 if (typeof _cine_listener === 'undefined' || !window._cine_listener) {
-    window._cine_listener = new EventEmmiter()
+    window._cine_listener = new EventEmmiter();
 }
 
 export const eventEmmiter = window._cine_listener;

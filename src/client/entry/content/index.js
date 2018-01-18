@@ -1,21 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {
-    BrowserRouter as Router,
-    Route,
-} from 'react-router-dom'
-import Course from './component/Course'
-import Home from './component/Home'
-import './asset/style/index.less'
-import appBanner from "@/util/appBanner";
-import 'material-icons'
-import Header from "@/component/Header";
-import EntryComponent from "@/component/EntryComponent";
+import {BrowserRouter as Router, Route} from 'react-router-dom';
+import Course from './component/Course';
+import Home from './component/Home';
+import './asset/style/index.less';
+import appBanner from '@/util/appBanner';
+import 'material-icons';
+import Header from '@/component/Header';
+import EntryComponent from '@/component/EntryComponent';
 // import * as OfflinePluginRuntime from 'offline-plugin/runtime';
 // OfflinePluginRuntime.install();
 
 class Content extends EntryComponent {
-
     constructor(props) {
         super(props);
         console.log('Content Main constructor');
@@ -31,22 +27,22 @@ class Content extends EntryComponent {
     }
 
     handleLoad() {
-        appBanner.init()
+        appBanner.init();
     }
 
     render() {
         return (
             <div className="root-container">
-                <Header/>
+                <Header />
                 <Router basename="/content">
                     <div className="content-container">
-                        <Route exact path="/" component={Home}/>
-                        <Route path="/course" component={Course}/>
+                        <Route exact path="/" component={Home} />
+                        <Route path="/course" component={Course} />
                     </div>
                 </Router>
             </div>
-        )
+        );
     }
 }
 
-ReactDOM.render(<Content/>, document.getElementById('root'));
+ReactDOM.render(<Content />, document.getElementById('root'));

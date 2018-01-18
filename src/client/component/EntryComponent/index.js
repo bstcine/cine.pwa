@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
-import {getParam} from "@/util/urlUtil";
-import siteCodeUtil from "@/util/sitecodeUtil";
-import storeUtil from "@/util/storeUtil";
-import SITECODE from "@/constant/sitecode";
-import uaUtil from "@/util/uaUtil";
+import {getParam} from '@/util/urlUtil';
+import siteCodeUtil from '@/util/sitecodeUtil';
+import storeUtil from '@/util/storeUtil';
+import SITECODE from '@/constant/sitecode';
+import uaUtil from '@/util/uaUtil';
 
 class EntryComponent extends Component {
     constructor(props) {
@@ -15,19 +15,19 @@ class EntryComponent extends Component {
         // sitecode 以 URL 上的为最高优先级，不传的时候以当前浏览器 user-agent 设置
         if (!sitecode) {
             if (uaUtil.wechat()) {
-                sitecode = SITECODE.WEB_WECHAT
+                sitecode = SITECODE.WEB_WECHAT;
             } else if (uaUtil.PC()) {
-                sitecode = SITECODE.WEB_PC
+                sitecode = SITECODE.WEB_PC;
             } else if (uaUtil.iPhone()) {
-                sitecode = SITECODE.WEB_IPHONE
+                sitecode = SITECODE.WEB_IPHONE;
             } else if (uaUtil.iPad()) {
-                sitecode = SITECODE.WEB_IPAD
+                sitecode = SITECODE.WEB_IPAD;
             } else if (uaUtil.AndroidMobile()) {
-                sitecode = SITECODE.WEB_ANDROID_PHONE
+                sitecode = SITECODE.WEB_ANDROID_PHONE;
             } else if (uaUtil.AndroidTablet()) {
-                sitecode = SITECODE.WEB_ANDROID_PAD
+                sitecode = SITECODE.WEB_ANDROID_PAD;
             } else {
-                sitecode = SITECODE.WEB_OTHER
+                sitecode = SITECODE.WEB_OTHER;
             }
         }
         storeUtil.setSiteCode(sitecode);

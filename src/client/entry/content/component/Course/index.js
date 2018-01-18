@@ -1,24 +1,23 @@
-import React, {Component} from 'react'
-import ReactDOM from 'react-dom'
-import * as Service from '@/service/content'
-import {getParam, removeParam} from "@/util/urlUtil";
-import {initWechat, setShareParam} from "@/util/wechatUtil";
-import storeUtil from "@/util/storeUtil";
-import * as BaseService from '@/service/base'
-import {Tabs, TabItems, TabItem, TabPanels, TabPanel} from '@/component/Tabs'
-import LoginModal from '@/component/LoginModal'
-import Brief from './Brief'
-import Comments from './Comments'
-import CouponModal from './CouponModal'
-import RecommendModal from './RecommendModal'
-import Bridge from "@/util/bridge";
-import BRIDGE_EVENT from "@/constant/bridgeEvent";
-import {createShare, share} from "@/util/shareUtil";
-import {eventEmmiter} from "@/util/eventEmmiter";
+import React, {Component} from 'react';
+import ReactDOM from 'react-dom';
+import * as Service from '@/service/content';
+import {getParam, removeParam} from '@/util/urlUtil';
+import {initWechat, setShareParam} from '@/util/wechatUtil';
+import storeUtil from '@/util/storeUtil';
+import * as BaseService from '@/service/base';
+import {Tabs, TabItems, TabItem, TabPanels, TabPanel} from '@/component/Tabs';
+import LoginModal from '@/component/LoginModal';
+import Brief from './Brief';
+import Comments from './Comments';
+import CouponModal from './CouponModal';
+import RecommendModal from './RecommendModal';
+import Bridge from '@/util/bridge';
+import BRIDGE_EVENT from '@/constant/bridgeEvent';
+import {createShare, share} from '@/util/shareUtil';
+import {eventEmmiter} from '@/util/eventEmmiter';
 
-import siteCodeUtil from "@/util/sitecodeUtil";
-import uaUtil from "@/util/uaUtil";
-
+import siteCodeUtil from '@/util/sitecodeUtil';
+import uaUtil from '@/util/uaUtil';
 
 export default class Course extends Component {
     constructor(props) {
@@ -54,36 +53,34 @@ export default class Course extends Component {
         let courseDetailOffset = courseDetail.getBoundingClientRect();
         let clazz = 'tab-fixed';
         if (courseDetailOffset.top < 0) {
-            if (!tabs.classList.contains(clazz))
-                tabs.classList.add(clazz)
+            if (!tabs.classList.contains(clazz)) tabs.classList.add(clazz);
         } else {
-            if (tabs.classList.contains(clazz))
-                tabs.classList.remove(clazz)
+            if (tabs.classList.contains(clazz)) tabs.classList.remove(clazz);
         }
     }
 
     async componentDidMount() {
         window.addEventListener('scroll', this.handlerScroll);
         eventEmmiter.on(BRIDGE_EVENT.OUTER_SHARE, () => {
-            this.clickShare(false)
+            this.clickShare(false);
         });
-        this.initCurrentPageWechat()
-        this.initData()
-        BaseService.accessLog()
+        this.initCurrentPageWechat();
+        this.initData();
+        BaseService.accessLog();
     }
 
     initCurrentPageWechat() {
         initWechat().then(async status => {
             if (status) {
                 let sharelog_id = getParam().sharelog_id;
-                if (sharelog_id) return
+                if (sharelog_id) return;
                 let res = await createShare({type: 4, cid: getParam().cid});
                 if (res.except_case_desc) {
-                    console.log(res)
-                    return
+                    console.log(res);
+                    return;
                 }
                 let data = res.result;
-                console.log('initWechat', data)
+                console.log('initWechat', data);
                 setShareParam({
                     title: data.share_title,
                     link: removeParam(data.share_link, ['token', 'share_mask']),
@@ -91,7 +88,7 @@ export default class Course extends Component {
                     desc: data.share_desc
                 });
             }
-        })
+        });
     }
 
     componentWillUnmount() {
@@ -101,19 +98,18 @@ export default class Course extends Component {
     componentWillReceiveProps(nextProps) {
         const locationChanged = nextProps.location !== this.props.location;
         if (locationChanged) {
-            this.initCurrentPageWechat()
-            this.initData()
+            this.initCurrentPageWechat();
+            this.initData();
         }
     }
 
     async initData() {
-
         let param = getParam();
         let cid = param.cid;
         Service.getContentCourseComment({cid}).then(comments => {
             this.setState({
                 comments: comments
-            })
+            });
         });
 
         const token = storeUtil.getToken();
@@ -130,68 +126,68 @@ export default class Course extends Component {
                         let course = await Service.getContentCourseDetail({cid});
                         this.setState({
                             course: course
-                        })
+                        });
                     } else {
                         if (confirm('该账号已在其他设备登录\n是否重新登录？')) {
-                            this.login()
+                            this.login();
                         } else {
                             storeUtil.removeToken();
                             let course = await Service.getContentCourseDetail({cid});
                             this.setState({
                                 course: course
-                            })
+                            });
                         }
                     }
                 } else {
-                    console.error(err)
+                    console.error(err);
                 }
-                return
+                return;
             }
         }
 
         let course = await Service.getContentCourseDetail({cid});
         this.setState({
             course: course
-        })
+        });
     }
 
     goBuy() {
         if (!this.state.user) {
             this.login();
-            return
+            return;
         }
         let param = getParam();
         let cid = param.cid;
         let source_user_id = param.source_user_id;
         if (siteCodeUtil.inIOSAPP()) {
-            Bridge.ios(BRIDGE_EVENT.PRE_CONFIRM, {course_id: cid})
+            Bridge.ios(BRIDGE_EVENT.PRE_CONFIRM, {course_id: cid});
         } else if (siteCodeUtil.inAndroidAPP()) {
-            Bridge.android(BRIDGE_EVENT.PRE_CONFIRM, {course_id: cid})
+            Bridge.android(BRIDGE_EVENT.PRE_CONFIRM, {course_id: cid});
         } else {
             let url = `/preconfirm?cid=${cid}`;
             if (source_user_id) {
-                url += `&source_user_id=${source_user_id}`
+                url += `&source_user_id=${source_user_id}`;
             }
-            location.href = url
+            location.href = url;
         }
     }
 
     goLearn() {
-        let {course} = this.state
+        let {course} = this.state;
         if (siteCodeUtil.inIOSAPP()) {
             Bridge.ios(BRIDGE_EVENT.LEARN, {
                 course_id: course.id,
                 last_lesson_id: course.last_content_id,
                 course_name: course.name
-            })
+            });
         } else if (siteCodeUtil.inAndroidAPP()) {
             Bridge.android(BRIDGE_EVENT.LEARN, {
                 course_id: course.id,
                 last_lesson_id: course.last_content_id,
                 course_name: course.name
-            })
+            });
         } else {
-            location.href = `/learn`
+            location.href = `/learn`;
         }
     }
 
@@ -199,13 +195,13 @@ export default class Course extends Component {
         if (siteCodeUtil.inIOSAPP()) {
             let {token} = await Bridge.ios(BRIDGE_EVENT.LOGIN);
             storeUtil.setToken(token);
-            this.loginSuccess(token)
+            this.loginSuccess(token);
         } else if (siteCodeUtil.inAndroidAPP()) {
             let {token} = await Bridge.android(BRIDGE_EVENT.LOGIN);
             storeUtil.setToken(token);
-            this.loginSuccess(token)
+            this.loginSuccess(token);
         } else {
-            this.toggleLoginModal()
+            this.toggleLoginModal();
         }
     }
 
@@ -214,13 +210,13 @@ export default class Course extends Component {
         this.setState({
             showLoginModal: false
         });
-        this.initData()
+        this.initData();
     }
 
     async clickShare(need_login = true, type = 4) {
         if (need_login && !this.state.user) {
             this.login();
-            return
+            return;
         }
         let res = await createShare({type, cid: getParam().cid});
         console.log(res);
@@ -232,46 +228,45 @@ export default class Course extends Component {
             imgUrl: data.share_imgUrl,
             desc: data.share_desc
         };
-        share({share_params}).then((res) => {
+        share({share_params}).then(res => {
             console.log(JSON.stringify(res));
             if (res.status) {
-                this.initData()
+                this.initData();
             }
-        })
+        });
     }
 
     toggleLoginModal() {
         this.setState(prevState => ({
             showLoginModal: !prevState.showLoginModal
-        }))
+        }));
     }
 
     openRecommend() {
-        this.toggleRecommendModal()
+        this.toggleRecommendModal();
     }
 
     toggleRecommendModal() {
         this.setState(prevState => ({
             showRecommendModal: !prevState.showRecommendModal
-        }))
-
+        }));
     }
 
     toggleCouponModal() {
         this.setState(prevState => ({
             showCouponModal: !prevState.showCouponModal
-        }))
+        }));
     }
 
     getUserName(user) {
-        if (!user) return "";
-        return user.phone || user.email || user.login
+        if (!user) return '';
+        return user.phone || user.email || user.login;
     }
 
     async getCoupon() {
         if (!this.state.user) {
             this.login();
-            return
+            return;
         }
         let source_user_id = getParam().source_user_id;
         if (!source_user_id) return alert('source_user_id is null');
@@ -279,21 +274,21 @@ export default class Course extends Component {
         this.setState({
             coupon,
             showCouponModal: true
-        })
+        });
     }
 
     relatedCourse(related_lesson_id) {
         const {history} = this.props;
         const course_id = related_lesson_id;
         if (siteCodeUtil.inIOSAPP()) {
-            Bridge.ios(BRIDGE_EVENT.COURSE, {course_id})
+            Bridge.ios(BRIDGE_EVENT.COURSE, {course_id});
         } else if (siteCodeUtil.inAndroidAPP()) {
-            Bridge.android(BRIDGE_EVENT.COURSE, {course_id})
+            Bridge.android(BRIDGE_EVENT.COURSE, {course_id});
         } else {
             if (/^\/content\//i.test(location.pathname)) {
-                history.push(`/course?cid=${course_id}`)
+                history.push(`/course?cid=${course_id}`);
             } else {
-                location.href = `/content/course?cid=${course_id}`
+                location.href = `/content/course?cid=${course_id}`;
             }
         }
     }
@@ -301,118 +296,121 @@ export default class Course extends Component {
     durationFormat(duration) {
         var sec_num = parseInt(duration, 10);
         var hours = Math.floor(sec_num / 3600);
-        var minutes = Math.floor((sec_num - (hours * 3600)) / 60);
-        var seconds = sec_num - (hours * 3600) - (minutes * 60);
+        var minutes = Math.floor((sec_num - hours * 3600) / 60);
+        var seconds = sec_num - hours * 3600 - minutes * 60;
 
         if (hours < 10) {
-            hours = "0" + hours;
+            hours = '0' + hours;
         }
         if (minutes < 10) {
-            minutes = "0" + minutes;
+            minutes = '0' + minutes;
         }
         if (seconds < 10) {
-            seconds = "0" + seconds;
+            seconds = '0' + seconds;
         }
         return hours + ':' + minutes + ':' + seconds;
     }
-
 
     render() {
         let {course, user, comments, showLoginModal, showRecommendModal, showCouponModal} = this.state;
 
         return (
             <div className="course-container">
-                <LoginModal isOpen={showLoginModal} toggleModal={this.toggleLoginModal}
-                            loginSuccess={this.loginSuccess}/>
-                <Brief course={course} user={user}
-                       relatedCourse={this.relatedCourse}
-                       login={this.login}
-                       goLearn={this.goLearn}
-                       goBuy={this.goBuy}
-                       clickShare={this.clickShare}
-                       getCoupon={this.getCoupon}
-                       openRecommend={this.openRecommend}
+                <LoginModal
+                    isOpen={showLoginModal}
+                    toggleModal={this.toggleLoginModal}
+                    loginSuccess={this.loginSuccess}
                 />
-                <RecommendModal isOpen={showRecommendModal} toggleModal={this.toggleRecommendModal}
-                                clickShare={this.clickShare}/>
-                <CouponModal isOpen={showCouponModal} toggleModal={this.toggleCouponModal}
-                             username={this.getUserName(user)} coupon={this.state.coupon}/>
+                <Brief
+                    course={course}
+                    user={user}
+                    relatedCourse={this.relatedCourse}
+                    login={this.login}
+                    goLearn={this.goLearn}
+                    goBuy={this.goBuy}
+                    clickShare={this.clickShare}
+                    getCoupon={this.getCoupon}
+                    openRecommend={this.openRecommend}
+                />
+                <RecommendModal
+                    isOpen={showRecommendModal}
+                    toggleModal={this.toggleRecommendModal}
+                    clickShare={this.clickShare}
+                />
+                <CouponModal
+                    isOpen={showCouponModal}
+                    toggleModal={this.toggleCouponModal}
+                    username={this.getUserName(user)}
+                    coupon={this.state.coupon}
+                />
 
                 <div className="course-detail" ref="courseDetail">
                     <Tabs ref="tabs">
                         <TabItems>
-                            <TabItem>
-                                {course.object_type === '1' ? '课程概要' : '详情'}
-                            </TabItem>
-                            {course.object_type === '1' && !siteCodeUtil.inIOSAPP() ? <TabItem>课程目录</TabItem> : null}
+                            <TabItem>{course.object_type === '1' ? '课程概要' : '详情'}</TabItem>
+                            {course.object_type === '1' && !siteCodeUtil.inIOSAPP() ? (
+                                <TabItem>课程目录</TabItem>
+                            ) : null}
                             <TabItem>{course.object_type === '1' ? '学员评价' : '评价'}</TabItem>
                         </TabItems>
                         <TabPanels>
                             <TabPanel>
-                                <div className="course-feature"
-                                     dangerouslySetInnerHTML={{__html: course.h5remark}}/>
-
+                                <div className="course-feature" dangerouslySetInnerHTML={{__html: course.h5remark}} />
                             </TabPanel>
-                            {
-                                course.object_type === '1' && !siteCodeUtil.inIOSAPP() ?
-                                    <TabPanel>
-                                        {course.catalog ?
-                                            <div className="course-feature"
-                                                 dangerouslySetInnerHTML={{__html: course.catalog}}/>
-                                            : null
-                                        }
+                            {course.object_type === '1' && !siteCodeUtil.inIOSAPP() ? (
+                                <TabPanel>
+                                    {course.catalog ? (
+                                        <div
+                                            className="course-feature"
+                                            dangerouslySetInnerHTML={{__html: course.catalog}}
+                                        />
+                                    ) : null}
 
-                                        <div className="course-category">
-                                            <ul className="course-list">
-                                                {
-                                                    course.contents.map((course, i) => {
-                                                        return (
-                                                            <li key={i}>
-                                                                {course.name}
-                                                                <ul className="chapter-list">
-                                                                    {
-                                                                        course.children.map((chapter, i) => {
-                                                                            return (
-                                                                                <li key={i}>
-                                                                                    {chapter.name}
-                                                                                    <ul className="lesson-list">
-                                                                                        {
-                                                                                            chapter.children.map((lesson, i) => {
-                                                                                                return (
-                                                                                                    <li key={i}>
-                                                                                                        {lesson.name}
-                                                                                                        {
-                                                                                                            lesson.duration ?
-                                                                                                                <span
-                                                                                                                    className="meta">{this.durationFormat(lesson.duration)}</span>
-                                                                                                                : null
-                                                                                                        }
-                                                                                                    </li>
-                                                                                                )
-                                                                                            })
-                                                                                        }
-                                                                                    </ul>
-                                                                                </li>
-                                                                            )
-                                                                        })
-                                                                    }
-                                                                </ul>
-                                                            </li>
-                                                        )
-                                                    })
-                                                }
-                                            </ul>
-                                        </div>
-                                    </TabPanel>
-                                    : null
-                            }
+                                    <div className="course-category">
+                                        <ul className="course-list">
+                                            {course.contents.map((course, i) => {
+                                                return (
+                                                    <li key={i}>
+                                                        {course.name}
+                                                        <ul className="chapter-list">
+                                                            {course.children.map((chapter, i) => {
+                                                                return (
+                                                                    <li key={i}>
+                                                                        {chapter.name}
+                                                                        <ul className="lesson-list">
+                                                                            {chapter.children.map((lesson, i) => {
+                                                                                return (
+                                                                                    <li key={i}>
+                                                                                        {lesson.name}
+                                                                                        {lesson.duration ? (
+                                                                                            <span className="meta">
+                                                                                                {this.durationFormat(
+                                                                                                    lesson.duration
+                                                                                                )}
+                                                                                            </span>
+                                                                                        ) : null}
+                                                                                    </li>
+                                                                                );
+                                                                            })}
+                                                                        </ul>
+                                                                    </li>
+                                                                );
+                                                            })}
+                                                        </ul>
+                                                    </li>
+                                                );
+                                            })}
+                                        </ul>
+                                    </div>
+                                </TabPanel>
+                            ) : null}
                             <TabPanel>
-                                <Comments comments={comments}/>
+                                <Comments comments={comments} />
                             </TabPanel>
                         </TabPanels>
                     </Tabs>
                 </div>
             </div>
-        )
+        );
     }
 }

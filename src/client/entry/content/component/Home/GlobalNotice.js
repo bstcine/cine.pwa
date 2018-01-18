@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React, {Component} from 'react';
 
 export default class GlobalNotice extends Component {
     constructor(props) {
@@ -6,12 +6,11 @@ export default class GlobalNotice extends Component {
     }
 
     render() {
-        console.log(`GlobalNotice`)
+        console.log(`GlobalNotice`);
         return (
             <div className="global-notice">
                 <div className="notice-text">公告：</div>
                 <ul className="notice-list">
-
                     <li className="notice-item">
                         <a href="/readingguide">
                             <span className="notice-tag">【阅读指引】</span>
@@ -43,6 +42,4 @@ export default class GlobalNotice extends Component {
             </div>
         );
     }
-
-
 }

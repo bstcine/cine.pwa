@@ -1,4 +1,4 @@
-import URLParse from 'url-parse'
+import URLParse from 'url-parse';
 
 export let getPureUrl = () => {
     let url = location.href;
@@ -9,29 +9,27 @@ export let getPureUrl = () => {
     return url;
 };
 
-export let getParam = (href) => {
+export let getParam = href => {
     let url = href || location.href;
     let URLObj = URLParse(url, true);
-    return URLObj.query
+    return URLObj.query;
 };
 
 export let addParam = (url = location.href, params) => {
     let URLObj = URLParse(url, true);
     URLObj.set('query', Object.assign(URLObj.query, params));
-    return URLObj.toString()
+    return URLObj.toString();
 };
 
 export let removeParam = (url = location.href, params_arr) => {
     let URLObj = URLParse(url, true);
     if (typeof params_arr === 'string') {
-        if (URLObj.query[params_arr])
-            delete URLObj.query[params_arr]
+        if (URLObj.query[params_arr]) delete URLObj.query[params_arr];
     } else {
-        params_arr.forEach((param) => {
-            if (URLObj.query[param])
-                delete URLObj.query[param]
+        params_arr.forEach(param => {
+            if (URLObj.query[param]) delete URLObj.query[param];
         });
     }
     URLObj.set('query', URLObj.query);
-    return URLObj.toString()
+    return URLObj.toString();
 };

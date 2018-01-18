@@ -105,9 +105,9 @@ export default class Report extends Component {
                     </ul>
                     {stat ? (
                         <div className="rank">
-                            全国5年级词汇量均值：<span>{stat.avg_vocab}</span>
+                            全国{report.grade}年级词汇量均值：<span>{stat.avg_vocab}</span>
                             <br />
-                            在全国5年级中的词汇量排位：<span>超过了{stat.my_rank}%的小伙伴</span>
+                            在全国{report.grade}年级中的词汇量排位：<span>超过了{stat.my_rank}%的小伙伴</span>
                         </div>
                     ) : null}
 

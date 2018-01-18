@@ -114,7 +114,7 @@ export let share = async ({ share_params }) => {
             if (res && res.shareSuccess === 1) {
                 return updateShare(share_params.sharelog_id);
             } else {
-                alert('分享已取消');
+                console.log('分享已取消');
             }
         } else {
             return qrShare(share_params);
@@ -126,7 +126,7 @@ export let share = async ({ share_params }) => {
             if (res && res.shareSuccess === 1) {
                 return updateShare(share_params.sharelog_id);
             } else {
-                alert('分享已取消');
+                console.log('分享已取消');
             }
         } else {
             return qrShare(share_params);

@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {getParam} from '@/util/urlUtil';
 import siteCodeUtil from '@/util/sitecodeUtil';
+import Video from "@/component/Video";
 
 export default class Brief extends Component {
     static defaultProps = {
@@ -160,12 +161,7 @@ export default class Brief extends Component {
                 <div className="left-container">
                     <div className="video-container">
                         {course.video ? (
-                            <video
-                                className="content"
-                                src={course.video}
-                                poster={course.img ? 'http://www.bstcine.com/f/' + course.img : null}
-                                controls
-                            />
+                            <Video src={course.video} poster={course.img ? 'http://www.bstcine.com/f/' + course.img : null}/>
                         ) : (
                             <div
                                 className="content"

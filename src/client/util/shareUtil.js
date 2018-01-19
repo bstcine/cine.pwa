@@ -11,12 +11,12 @@ import siteCodeUtil from '@/util/sitecodeUtil';
 const imgUrl = require('../asset/image/pic_share_arr@2x.png');
 let inter = null;
 
-export let createShare = async ({ type, share_link, cid }) => {
+export let createShare = async ({ type, share_link, cid, source_user_id}) => {
     let res = null;
     if (type === 7) {
-        res = await post(Api.APIURL_Share_Common, { type, share_link });
+        res = await post(Api.APIURL_Share_Common, { type, share_link, source_user_id });
     } else if (type === 4 || type === 5) {
-        res = await post(Api.APIURL_Share_CoursePackage, { type, cid });
+        res = await post(Api.APIURL_Share_CoursePackage, { type, cid, source_user_id });
     } else {
         return alert('invalid_type');
     }

@@ -74,7 +74,7 @@ export default class Course extends Component {
             if (status) {
                 let sharelog_id = getParam().sharelog_id;
                 if (sharelog_id) return;
-                let res = await createShare({type: 4, cid: getParam().cid});
+                let res = await createShare({type: 4, cid: getParam().cid, source_user_id:getParam().source_user_id});
                 if (res.except_case_desc) {
                     console.log(res);
                     return;
@@ -218,7 +218,7 @@ export default class Course extends Component {
             this.login();
             return;
         }
-        let res = await createShare({type, cid: getParam().cid});
+        let res = await createShare({type, cid: getParam().cid, source_user_id:getParam().source_user_id});
         console.log(res);
         let data = res.result;
         let share_params = {

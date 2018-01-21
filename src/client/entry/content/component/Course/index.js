@@ -15,9 +15,7 @@ import Bridge from '@/util/bridge';
 import BRIDGE_EVENT from '@/constant/bridgeEvent';
 import {createShare, share} from '@/util/shareUtil';
 import {eventEmmiter} from '@/util/eventEmmiter';
-
 import siteCodeUtil from '@/util/sitecodeUtil';
-import uaUtil from '@/util/uaUtil';
 
 export default class Course extends Component {
     constructor(props) {
@@ -107,9 +105,7 @@ export default class Course extends Component {
         let param = getParam();
         let cid = param.cid;
         Service.getContentCourseComment({cid}).then(comments => {
-            this.setState({
-                comments: comments
-            });
+            this.setState({comments});
         });
 
         const token = storeUtil.getToken();
@@ -121,23 +117,9 @@ export default class Course extends Component {
                 });
             } catch (err) {
                 if (err.message === 'no_login') {
-                    if (uaUtil.wechat()) {
-                        storeUtil.removeToken();
-                        let course = await Service.getContentCourseDetail({cid});
-                        this.setState({
-                            course: course
-                        });
-                    } else {
-                        if (confirm('该账号已在其他设备登录\n是否重新登录？')) {
-                            this.login();
-                        } else {
-                            storeUtil.removeToken();
-                            let course = await Service.getContentCourseDetail({cid});
-                            this.setState({
-                                course: course
-                            });
-                        }
-                    }
+                    storeUtil.removeToken();
+                    let course = await Service.getContentCourseDetail({cid});
+                    this.setState({course});
                 } else {
                     console.error(err);
                 }
@@ -146,9 +128,7 @@ export default class Course extends Component {
         }
 
         let course = await Service.getContentCourseDetail({cid});
-        this.setState({
-            course: course
-        });
+        this.setState({course});
     }
 
     goBuy() {

@@ -45,11 +45,6 @@ export default class PreConfirm extends Component {
                 is_show_point,
                 is_show_coupon,
                 course,
-                addressInfo: {
-                    name: addressInfo.name,
-                    phone: addressInfo.phone,
-                    address: addressInfo.area.replace(/-/g, '').replace(/-市辖区-/, '') + addressInfo.address
-                },
                 user,
                 calPrice,
                 orderedLessonsOrders
@@ -59,6 +54,13 @@ export default class PreConfirm extends Component {
             }
             if (calPrice.coupon_no) {
                 updateStater.coupon_no = calPrice.coupon_no;
+            }
+            if (addressInfo) {
+                updateStater.addressInfo = {
+                    name: addressInfo.name,
+                    phone: addressInfo.phone,
+                    address: addressInfo.area.replace(/-/g, '').replace(/-市辖区-/, '') + addressInfo.address
+                };
             }
             this.setState(updateStater, () => {
                 if (calPrice.point_discount || calPrice.coupon_no) {
@@ -104,14 +106,14 @@ export default class PreConfirm extends Component {
 
     confirmOrder() {
         let cid = getParam().cid;
-        let {coupon_no, point, remark, course,addressInfo} = this.state;
+        let {coupon_no, point, remark, course, addressInfo} = this.state;
         let orderBody = {cid, coupon_no, point, remark};
         if (course.is_need_remark === '1') {
-            if(!addressInfo) {
+            if (!addressInfo) {
                 alert('请填写详细地址');
                 return;
             } else {
-                orderBody.addressInfo = addressInfo
+                orderBody.addressInfo = addressInfo;
             }
         }
 
@@ -299,9 +301,7 @@ export default class PreConfirm extends Component {
                                 </div>
                                 <div className="my-area">
                                     <span>地址：</span>
-                                    <span>
-                                        {addressInfo.address}
-                                    </span>
+                                    <span>{addressInfo.address}</span>
                                 </div>
                             </div>
                         ) : null}
@@ -312,12 +312,7 @@ export default class PreConfirm extends Component {
                     <div className="order-control remark">
                         <span className="label">备注</span>
                         <div className="my-remark">
-                            <textarea
-                                name="remark"
-                                value={this.state.remark}
-                                onChange={this.inputChange}
-                                rows="4"
-                            />
+                            <textarea name="remark" value={this.state.remark} onChange={this.inputChange} rows="4" />
                         </div>
                     </div>
                 ) : null}

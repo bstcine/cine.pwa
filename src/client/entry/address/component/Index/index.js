@@ -237,7 +237,7 @@ export default class Index extends Component {
                         } else if (siteCodeUtil.inAndroidAPP()) {
                             Bridge.android(BRIDGE_EVENT.ADDRESS_SAVE, this.state);
                         } else {
-                            alert('保存成功')
+                            location.href = decodeURIComponent(getParam().redirect)
                         }
                     } else {
                         alert('保存失败(' + result.msg + ')')

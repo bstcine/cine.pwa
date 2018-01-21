@@ -81,19 +81,19 @@
     .label {
       font-size: .32rem;
       color: #222;
-      line-height: .80rem;
+      line-height: .90rem;
     }
     .price {
       float: right;
       color: #f22010;
       font-size: .36rem;
-      line-height: .80rem;
+      line-height: .90rem;
     }
     > .red {
       margin-left: .24rem;
       font-size: .30rem;
       color: #f22010;
-      line-height: .80rem;
+      line-height: .90rem;
     }
     .input {
       position: relative;
@@ -172,6 +172,34 @@
     }
   }
 
+  .order-control.address {
+    position: relative;
+    .btn-outline {
+      position: absolute;
+      top: .13rem;
+      right: .30rem;
+    }
+
+    .my-address {
+      padding: .20rem .30rem;
+      margin: 0 -.30rem;
+      .grey-line-top(2);
+      .my-address-contact, .my-area {
+        font-size: .28rem;
+        line-height: .42rem;
+        color: #c2c3c5;
+        span:first-child {
+          display: inline-block;
+          width: 1.12rem;
+        }
+        span.my-name{
+          margin-right: .30rem;
+        }
+
+      }
+    }
+  }
+
   .btn-action {
     position: fixed;
     z-index: @index_btn_action;
@@ -188,6 +216,17 @@
       background-color: #ff6c00;
       color: #fff;
     }
+  }
+
+  .btn-outline{
+    padding: .16rem .20rem;
+    box-shadow: 0 .03rem .05rem 0 rgba(255, 255, 255, 0.12);
+    border-radius: .06rem;
+    border: solid .02rem #fe682d;
+    background: #fff;
+    font-size: .28rem;
+    line-height: 1;
+    color: #fe682d;
   }
 
 }

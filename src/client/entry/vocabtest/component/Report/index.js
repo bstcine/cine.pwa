@@ -24,7 +24,10 @@ export default class Report extends Component {
 
     componentDidMount() {
         let id = getParam().id;
-        Service.queryContentWordResult({id}).then(res => {
+        Service.queryContentWordResult({id, token: null}).then(res => {
+            if (res.except_case_desc) {
+                return alert(res.except_case_desc);
+            }
             let {statsContentWord, recommendLessons, stat} = res.result;
             this.setState({
                 report: statsContentWord,

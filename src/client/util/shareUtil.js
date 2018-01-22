@@ -16,7 +16,7 @@ export let createShare = async ({ type, share_link, cid, source_user_id}) => {
     if (type === 7) {
         res = await post(Api.APIURL_Share_Common, { type, share_link, source_user_id });
     } else if (type === 4 || type === 5) {
-        res = await post(Api.APIURL_Share_CoursePackage, { type, cid, source_user_id });
+        res = await post(Api.APIURL_Share_CoursePackage, { type, cid, source_user_id,is_new:1 });
     } else {
         return alert('invalid_type');
     }

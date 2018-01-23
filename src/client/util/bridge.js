@@ -9,7 +9,7 @@ let Bridge = {
             if (needCallback) {
                 eventEmmiter.once(callbackEvent, res => {
                     console.log(`callback iOS.event[${callbackEvent}] with data: ${res}`);
-                    if (res) res = JSON.parse(res);
+                    if (res && typeof res === 'string') res = JSON.parse(res);
                     resolve(res);
                 });
             }
@@ -31,7 +31,7 @@ let Bridge = {
             if (needCallback) {
                 eventEmmiter.once(callbackEvent, res => {
                     console.log(`callback Android.event[${callbackEvent}] with data: ${res}`);
-                    if (res) res = JSON.parse(res);
+                    if (res && typeof res === 'string') res = JSON.parse(res);
                     resolve(res);
                 });
             }

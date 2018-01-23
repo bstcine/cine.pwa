@@ -164,11 +164,11 @@ export default class Card extends Component {
 
         return <div className="quiz-main">
             <div className="card-title">
-                <span style={{float: "left"}}>{(this.state.index + 1) + ". "}</span>
+                <span style={{float: "left"}}>{(this.state.index + 1) + "."}&nbsp;</span>
                 <div dangerouslySetInnerHTML={{__html: this.state.data.title}}/>
             </div>
             {OptionUI}
-            <hr/>
+            <div className="card-line"/>
             <div className="card-todo">
                 <div className="card-answer">
                     <span

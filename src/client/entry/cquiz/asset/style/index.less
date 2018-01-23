@@ -54,10 +54,11 @@ button{
 }
 
 .quiz-main {
-  margin: auto 0.7rem;
+  position: relative;
+  padding-left: 0.1rem;
+  padding-right: 0.1rem;
 
   .card-title {
-    margin-top: 0.75rem;
     font-size: 0.36rem;
     font-weight: normal;
     font-stretch: normal;
@@ -67,6 +68,8 @@ button{
   }
 
   .card-option {
+    display: inline-block;
+    width: 5rem;
     padding-top: 0.25rem;
     padding-bottom: 0.25rem;
     font-size: 0.36rem;
@@ -90,6 +93,12 @@ button{
     input[type="radio"] {
       margin-right: 0.15rem;
     }
+  }
+
+  .card-line {
+    height: 0.02rem;
+    margin: 0.5rem auto;
+    background-color: #eef4f8;
   }
 
   .card-todo {
@@ -181,16 +190,11 @@ button{
   }
 }
 
-.mui-radio,
-.mui-checkbox {
+.mui-radio {
   position: relative;
-  display: block;
-  margin-top: 10px;
-  margin-bottom: 10px;
 }
 
-.mui-radio > label,
-.mui-checkbox > label {
+.mui-radio > label {
   min-height: 20px;
   padding-left: 20px;
   margin-bottom: 0;
@@ -198,34 +202,28 @@ button{
   cursor: pointer;
 }
 
-.mui-radio input:disabled,
-.mui-checkbox input:disabled {
+.mui-radio input:disabled {
   cursor: not-allowed;
 }
 
-.mui-radio input:focus,
-.mui-checkbox input:focus {
+.mui-radio input:focus {
   outline: thin dotted;
   outline: 5px auto -webkit-focus-ring-color;
   outline-offset: -2px;
 }
 
 .mui-radio > label > input[type="radio"],
-.mui-radio--inline > label > input[type="radio"],
-.mui-checkbox > label > input[type="checkbox"],
-.mui-checkbox--inline > label > input[type="checkbox"] {
+.mui-radio--inline > label > input[type="radio"] {
   position: absolute;
   margin-left: -20px;
   margin-top: 4px;
 }
 
-.mui-radio + .mui-radio,
-.mui-checkbox + .mui-checkbox {
+.mui-radio + .mui-radio {
   margin-top: -5px;
 }
 
-.mui-radio--inline,
-.mui-checkbox--inline {
+.mui-radio--inline {
   display: inline-block;
   padding-left: 20px;
   margin-bottom: 0;
@@ -235,50 +233,14 @@ button{
 }
 
 .mui-radio--inline > input[type="radio"],
-.mui-radio--inline > input[type="checkbox"],
 .mui-radio--inline > label > input[type="radio"],
-.mui-radio--inline > label > input[type="checkbox"],
 .mui-checkbox--inline > input[type="radio"],
-.mui-checkbox--inline > input[type="checkbox"],
-.mui-checkbox--inline > label > input[type="radio"],
-.mui-checkbox--inline > label > input[type="checkbox"] {
+.mui-checkbox--inline > label > input[type="radio"] {
   margin: 4px 0 0;
   line-height: normal;
 }
 
-.mui-radio--inline + .mui-radio--inline,
-.mui-checkbox--inline + .mui-checkbox--inline {
+.mui-radio--inline + .mui-radio--inline {
   margin-top: 0;
   margin-left: 10px;
 }
-
-/**
-input[type="radio"] {
-    margin-right: 0.2rem;
-    &:checked {
-      + .radio-label {
-        &:before {
-          background-color: #3197EE;
-          box-shadow: inset 0 0 0 4px #f4f4f4;
-        }
-      }
-    }
-    &:focus {
-      + .radio-label {
-        &:before {
-          outline: none;
-          border-color: #3197EE;
-        }
-      }
-    }
-    &:disabled {
-      + .radio-label {
-        &:before {
-          box-shadow: inset 0 0 0 4px #f4f4f4;
-          border-color: darken(#f4f4f4, 25%);
-          background: darken(#f4f4f4, 25%);
-        }
-      }
-    }
-  }
- */

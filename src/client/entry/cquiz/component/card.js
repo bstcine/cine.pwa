@@ -21,7 +21,7 @@ export default class Card extends Component {
 
         this.dataList = [];
         this.optionName = ["A", "B", "C", "D", "E", "F", "G", "H", "I"];
-        this.quizIsOver = storeUtil.get('quiz_isOver');
+        this.quizBar = storeUtil.get('quiz_bar');
 
         this.onChangRadio = this.onChangRadio.bind(this);
         this.onNextCard = this.onNextCard.bind(this);
@@ -78,7 +78,7 @@ export default class Card extends Component {
             let data = this.dataList[index];
             let btnHint = '下一题';
             if (this.dataList.length - 1 == index) {
-                btnHint = this.quizIsOver ? '查看得分' : '继续学习'
+                btnHint = this.quizBar ? '继续学习' : '查看得分'
             }
 
             this.inputRadioDisabled(false);
@@ -93,10 +93,10 @@ export default class Card extends Component {
 
             window.scroll(0, 0);
         } else {
-            if (this.quizIsOver) {
-                this.toEnd();
-            } else {
+            if (this.quizBar) {
                 this.exitQuiz();
+            } else {
+                this.toEnd();
             }
         }
     }

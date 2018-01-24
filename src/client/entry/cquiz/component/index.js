@@ -15,6 +15,7 @@ export default class Index extends Component {
         this.quizTitle = storeUtil.get('quiz_title');
 
         this.toCard = this.toCard.bind(this);
+        if(this.quizBar) this.toCard();
     }
 
     toCard() {

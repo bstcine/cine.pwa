@@ -9,7 +9,8 @@ export default class Card extends Component {
         super(props);
         console.log('Card constructor');
         this.state = {
-            loading: false,
+            loading: true,
+            uploading: false,
             wordItem: {id: '', word: '', options: []},
             currMinVocab: 0,
             currMaxVocab: 0,
@@ -183,10 +184,16 @@ export default class Card extends Component {
             duration: this.getDuration()
         };
         if (this.props.token) query.token = this.props.token;
+        this.setState({
+            uploading: true
+        });
         Service.saveContentWordResult(query).then(result => {
             if (result.except_case_desc) {
                 return alert(result.except_case_desc);
             }
+            this.setState({
+                uploading: false
+            });
             console.log(`result ${JSON.stringify(result)}`);
             this.props.history.push(`/report?id=${result.result.statsContentWord.id}`);
         });
@@ -304,9 +311,20 @@ export default class Card extends Component {
     }
 
     render() {
-        return this.state.loading ? (
-            <div>loading</div>
-        ) : (
+        let {loading, uploading} = this.state;
+        if (loading)
+            return (
+                <div className="card">
+                    <div className="loading">词汇加载中...</div>
+                </div>
+            );
+        if (uploading)
+            return (
+                <div className="card">
+                    <div className="uploading">正在计算排名...</div>
+                </div>
+            );
+        return (
             <div className="card">
                 <CSSTransition
                     in={this.state.isShowLevelTip}

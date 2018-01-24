@@ -121,10 +121,6 @@ export default class Report extends Component {
                         {from_share ? '基于词汇量和年龄段，推荐以下课程：' : '基于你的词汇量和年龄段，推荐以下课程：'}
                     </div>
                     <div className="recommend-list">{this.renderRecommendList()}</div>
-                    <div className="recommend-title">
-                        本结果为简版测试结果。<br />
-                        我们将在2周后提供更加详细的测试报告。
-                    </div>
                 </div>
                 {from_share ? (
                     <div className="footer mini fixed">

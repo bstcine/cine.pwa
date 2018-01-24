@@ -29,11 +29,7 @@ export default class Card extends Component {
 
     componentWillMount() {
         console.log('componentWillMount');
-        let user = storeUtil.get('user');
 
-        if (!user) {
-            return this.props.history.replace('/userinfo');
-        }
         Service.getWordList().then(result => {
             this.setState({
                 loading: false

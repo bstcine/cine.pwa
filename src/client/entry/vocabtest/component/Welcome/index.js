@@ -41,6 +41,7 @@ export default class Welcome extends Component {
     }
 
     toggleLoginModal() {
+        console.log('toggleLoginModal')
         this.setState(prevState => ({
             showLoginModal: !prevState.showLoginModal,
             loginModalOpened: true
@@ -48,9 +49,6 @@ export default class Welcome extends Component {
     }
 
     async loginSuccess() {
-        this.setState({
-            showLoginModal: false
-        });
         let {error, data: user} = await BaseService.userInfo();
         if (error) {
             if (error.message === 'no_login') {
@@ -60,10 +58,12 @@ export default class Welcome extends Component {
             }
             return;
         }
-
+        storeUtil.set('user', user);
         this.setState({
-            user: user
+            user,
+            showLoginModal: false
         });
+        this.startClick();
     }
 
     async componentDidMount() {
@@ -78,10 +78,8 @@ export default class Welcome extends Component {
             }
             return;
         }
-
-        this.setState({
-            user: user
-        });
+        storeUtil.set('user', user);
+        this.setState({user});
     }
 
     render() {

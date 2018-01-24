@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {getParam, addParam, removeParam} from '@/util/urlUtil';
 import * as Service from '@/service/vocabtest';
-import {initWechat} from '@/util/wechatUtil';
+import {initWechat, setShareParam} from '@/util/wechatUtil';
 import {createShare, share} from '@/util/shareUtil';
 import Bridge from '@/util/bridge';
 import BRIDGE_EVENT from '@/constant/bridgeEvent';
@@ -22,7 +22,7 @@ export default class Report extends Component {
         this.courseClick = this.courseClick.bind(this);
     }
 
-    componentDidMount() {
+    async componentDidMount() {
         let id = getParam().id;
         Service.queryContentWordResult({id, token: null}).then(res => {
             if (res.except_case_desc) {
@@ -36,7 +36,20 @@ export default class Report extends Component {
                 stat: stat
             });
         });
-        initWechat();
+        await initWechat();
+        let res = await createShare({
+            type: 7,
+            share_link: addParam(removeParam(undefined, 'token'), {from_share: 1})
+        });
+        let data = res.result;
+        let share_params = {
+            sharelog_id: data.sharelog_id,
+            title: data.share_title,
+            link: data.share_link,
+            imgUrl: data.share_imgUrl,
+            desc: data.share_desc
+        };
+        await setShareParam(share_params);
     }
 
     async shareClick() {

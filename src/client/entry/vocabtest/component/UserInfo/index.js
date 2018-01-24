@@ -15,7 +15,7 @@ export default class UserInfo extends Component {
         this.area_codes = area.areaCodes;
         this.state = {
             born_at: 2004,
-            grade: 6,
+            grade: 7,
             area_code: 310000
         };
         this.startClick = this.startClick.bind(this);

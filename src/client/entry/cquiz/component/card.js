@@ -4,6 +4,7 @@ import Bridge from "@/util/bridge";
 import End from './end.js';
 import siteCodeUtil from "@/util/sitecodeUtil";
 import BRIDGE_EVENT from "@/constant/bridgeEvent";
+import * as Service from "@/service/quiz";
 
 export default class Card extends Component {
 
@@ -15,24 +16,89 @@ export default class Card extends Component {
             selectLog: [],
             index: 0,
             selectOption: -1,
+            inputDisabled: false,
             isEnd: false,
             btnHint: '下一题'
         };
 
         this.dataList = [];
         this.optionName = ["A", "B", "C", "D", "E", "F", "G", "H", "I"];
+
+        this.quizId = storeUtil.get('quiz_id');
         this.quizBar = storeUtil.get('quiz_bar');
 
+        this.init = this.init.bind(this);
         this.onChangRadio = this.onChangRadio.bind(this);
         this.onNextCard = this.onNextCard.bind(this);
         this.onAgainLoad = this.onAgainLoad.bind(this);
     }
 
     componentDidMount() {
-        let quizList = storeUtil.get('quiz_list');
-        if (quizList && quizList.length > 0) {
-            this.dataList = quizList;
+        if (this.quizId) {
+            Service.getQuiz({id: this.quizId}).then(result => {
+                console.log(result.data);
+                this.dataList = result.data.data;
+                this.init();
+            })
+        } else {
+            if (siteCodeUtil.inIOSAPP()) {
+                Bridge.ios(BRIDGE_EVENT.INIT_QUIZ_DATA).then(res => {
+                    if (res && res.data) {
+                        console.log(res.data);
+                        this.dataList = res.data;
+                        this.init();
+                    }
+                });
+            } else if (siteCodeUtil.inAndroidAPP()) {
+                Bridge.android(BRIDGE_EVENT.INIT_QUIZ_DATA).then(res => {
+                    if (res && res.data) {
+                        console.log(res.data);
+                        this.dataList = res.data;
+                        this.init();
+                    }
+                });
+            } else {
+                console.log(window.parent);
+                let quizData = window.parent.cineQuizData;
+                if (quizData) {
+                    this.dataList = JSON.parse(quizData);
+                    this.init();
+                }
+            }
+        }
+    }
+
+    init() {
+        if (this.dataList && this.dataList.length > 0) {
             this.loadCardByIndex(0);
+        }
+    }
+
+    loadCardByIndex(index) {
+        if (this.dataList && this.dataList.length > index) {
+            let data = this.dataList[index];
+
+            let btnHint = '下一题';
+            if (this.dataList.length - 1 == index) {
+                btnHint = this.quizBar ? '继续学习' : '查看得分'
+            }
+
+            this.setState({
+                isEnd: false,
+                data: data,
+                index: index,
+                selectOption: -1,
+                inputDisabled: false,
+                btnHint: btnHint
+            });
+
+            window.scroll(0, 0);
+        } else {
+            if (this.quizBar) {
+                this.exitQuiz();
+            } else {
+                this.toEnd();
+            }
         }
     }
 
@@ -43,11 +109,10 @@ export default class Card extends Component {
             selectLog[this.state.index] = input.value;
             this.setState({
                 selectLog: selectLog,
-                selectOption: input.id
+                selectOption: input.id,
+                inputDisabled: true
             });
         }
-
-        this.inputRadioDisabled(true);
     }
 
     //下一题
@@ -71,42 +136,6 @@ export default class Card extends Component {
             console.log(window.parent);
             if (window.parent.cineExitQuiz) window.parent.cineExitQuiz();
         }
-    }
-
-    loadCardByIndex(index) {
-        if (this.dataList && this.dataList.length > index) {
-            let data = this.dataList[index];
-            let btnHint = '下一题';
-            if (this.dataList.length - 1 == index) {
-                btnHint = this.quizBar ? '继续学习' : '查看得分'
-            }
-
-            this.inputRadioDisabled(false);
-
-            this.setState({
-                isEnd: false,
-                data: data,
-                index: index,
-                selectOption: -1,
-                btnHint: btnHint
-            });
-
-            window.scroll(0, 0);
-        } else {
-            if (this.quizBar) {
-                this.exitQuiz();
-            } else {
-                this.toEnd();
-            }
-        }
-    }
-
-    //设置按钮状态
-    inputRadioDisabled(disabled) {
-        let quiz_options = document.getElementsByName('options');
-        quiz_options.forEach((option) => {
-            option.disabled = disabled;
-        });
     }
 
     //结束页
@@ -134,7 +163,7 @@ export default class Card extends Component {
     render() {
         if (this.state.isEnd) return <End score={this.state.score} exit={this.exitQuiz} again={this.onAgainLoad}/>;
 
-        if (!this.state.data) return <div>not data</div>;
+        if (!this.state.data) return <div/>;
 
         let correctIndex = 0;
         let selectOption = this.state.selectOption;
@@ -150,11 +179,12 @@ export default class Card extends Component {
 
             return <div key={index} className="card-option">
                 <label className="mui-radio">
-                <span style={optionHintStyle}>
-                    <img className="hint"
-                         src={require(option.isCorrect ? './../asset/image/ico_right.png' : './../asset/image/ico_wrong.png')}/>
-                </span>
-                    <input id={index} name="options" value={option.isCorrect} type="radio" onChange={this.onChangRadio}
+                    <span style={optionHintStyle}>
+                        <img className="hint"
+                             src={require(option.isCorrect ? './../asset/image/ico_right.png' : './../asset/image/ico_wrong.png')}/>
+                    </span>
+                    <input id={index} disabled={this.state.inputDisabled} value={option.isCorrect} type="radio"
+                           onChange={this.onChangRadio}
                            checked={isCurIndex}/>
                     <span className="content">{this.optionName[index] + ". "}{content}</span>
                 </label>
@@ -162,8 +192,6 @@ export default class Card extends Component {
         });
 
         let isCorrect = selectOption == correctIndex;
-        let answerHintStyle = selectOption == -1 ? "" : (isCorrect ? "green" : "red");
-
         return <div className="quiz-main">
             <div className="card-title">
                 <span style={{float: "left"}}>{(this.state.index + 1) + "."}&nbsp;</span>
@@ -174,10 +202,15 @@ export default class Card extends Component {
             <div className="card-todo">
                 <div className="card-answer">
                     <span
-                        className={answerHintStyle}>{isCorrect ? '回答正确! ' : '正确答案：' + this.optionName[correctIndex]}</span>
+                        className={selectOption == -1 ? "" : (isCorrect ? "green" : "red")}>
+                        {isCorrect ? '回答正确! ' : '正确答案：' + this.optionName[correctIndex]}
+                    </span>
                 </div>
-                <button className="card-next" onClick={this.onNextCard}
-                        disabled={(this.state.selectOption == -1) ? true : false}>{this.state.btnHint}</button>
+                <button className="card-next"
+                        onClick={this.onNextCard}
+                        disabled={(this.state.selectOption == -1) ? true : false}>
+                    {this.state.btnHint}
+                </button>
             </div>
         </div>
     }

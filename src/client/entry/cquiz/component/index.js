@@ -11,55 +11,14 @@ export default class Index extends Component {
         super(props);
         console.log('constructor');
 
-        this.quizId = storeUtil.get('quiz_id');
         this.quizBar = storeUtil.get('quiz_bar');
         this.quizTitle = storeUtil.get('quiz_title');
 
         this.toCard = this.toCard.bind(this);
     }
 
-    componentDidMount() {
-        if (this.quizId) {
-            Service.getQuiz({id: this.quizId}).then(result => {
-                console.log(result.data);
-                this.quizList = result.data.data;
-                if (this.quizBar) this.toCard();
-            })
-        } else {
-            if (siteCodeUtil.inIOSAPP()) {
-                Bridge.ios(BRIDGE_EVENT.INIT_QUIZ_DATA).then(res => {
-                    if (res && res.data) {
-                        console.log(res.data);
-                        this.quizList = res.data;
-                    }
-                    if (this.quizBar) this.toCard();
-                });
-            } else if (siteCodeUtil.inAndroidAPP()) {
-                Bridge.android(BRIDGE_EVENT.INIT_QUIZ_DATA).then(res => {
-                    if (res && res.data) {
-                        console.log(res.data);
-                        this.quizList = res.data;
-                    }
-                    if (this.quizBar) this.toCard();
-                });
-            } else {
-                console.log(window.parent);
-                let quizData = window.parent.cineQuizData;
-                if (quizData) {
-                    this.quizList = JSON.parse(quizData);
-                    if (this.quizBar) this.toCard();
-                }
-            }
-        }
-    }
-
     toCard() {
-        if (this.quizList) {
-            storeUtil.set('quiz_list', this.quizList);
-            this.props.history.push('/card')
-        } else {
-            alert('no data!');
-        }
+        this.props.history.push('/card')
     }
 
     render() {

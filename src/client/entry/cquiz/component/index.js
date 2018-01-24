@@ -12,7 +12,7 @@ export default class Index extends Component {
         console.log('constructor');
 
         this.quizId = storeUtil.get('quiz_id');
-        this.quizIsOver = storeUtil.get('quiz_isOver');
+        this.quizBar = storeUtil.get('quiz_bar');
         this.quizTitle = storeUtil.get('quiz_title');
 
         this.toCard = this.toCard.bind(this);
@@ -23,7 +23,7 @@ export default class Index extends Component {
             Service.getQuiz({id: this.quizId}).then(result => {
                 console.log(result.data);
                 this.quizList = result.data.data;
-                if (!this.quizIsOver) this.toCard();
+                if (this.quizBar) this.toCard();
             })
         } else {
             if (siteCodeUtil.inIOSAPP()) {
@@ -32,7 +32,7 @@ export default class Index extends Component {
                         console.log(res.data);
                         this.quizList = res.data;
                     }
-                    if (!this.quizIsOver) this.toCard();
+                    if (this.quizBar) this.toCard();
                 });
             } else if (siteCodeUtil.inAndroidAPP()) {
                 Bridge.android(BRIDGE_EVENT.INIT_QUIZ_DATA).then(res => {
@@ -40,14 +40,14 @@ export default class Index extends Component {
                         console.log(res.data);
                         this.quizList = res.data;
                     }
-                    if (!this.quizIsOver) this.toCard();
+                    if (this.quizBar) this.toCard();
                 });
             } else {
                 console.log(window.parent);
                 let quizData = window.parent.cineQuizData;
                 if (quizData) {
                     this.quizList = JSON.parse(quizData);
-                    if (!this.quizIsOver) this.toCard();
+                    if (this.quizBar) this.toCard();
                 }
             }
         }
@@ -63,7 +63,7 @@ export default class Index extends Component {
     }
 
     render() {
-        return (this.quizIsOver) ? <div className="quiz-start">
+        return (!this.quizBar) ? <div className="quiz-start">
             <div className="title">{this.quizTitle ? this.quizTitle : '本章测试'}</div>
             <div className="hint">学得怎么样了？来测一下吧！</div>
             <button onClick={this.toCard}>开始答题</button>

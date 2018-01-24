@@ -16,7 +16,7 @@ export default class Card extends Component {
             index: 0,
             selectOption: -1,
             isEnd: false,
-            btnHint:'下一题'
+            btnHint: '下一题'
         };
 
         this.dataList = [];
@@ -56,7 +56,7 @@ export default class Card extends Component {
     }
 
     //重新加载
-    onAgainLoad(){
+    onAgainLoad() {
         this.loadCardByIndex(0);
         this.props.history.push('/card');
     }
@@ -69,7 +69,7 @@ export default class Card extends Component {
             Bridge.android(BRIDGE_EVENT.QUIZ_EXIT);
         } else {
             console.log(window.parent);
-            if(window.parent.cineExitQuiz) window.parent.cineExitQuiz();
+            if (window.parent.cineExitQuiz) window.parent.cineExitQuiz();
         }
     }
 
@@ -77,8 +77,8 @@ export default class Card extends Component {
         if (this.dataList && this.dataList.length > index) {
             let data = this.dataList[index];
             let btnHint = '下一题';
-            if(this.dataList.length -1 == index){
-                btnHint = this.quizIsOver?'查看得分':'继续学习'
+            if (this.dataList.length - 1 == index) {
+                btnHint = this.quizIsOver ? '查看得分' : '继续学习'
             }
 
             this.inputRadioDisabled(false);
@@ -88,10 +88,10 @@ export default class Card extends Component {
                 data: data,
                 index: index,
                 selectOption: -1,
-                btnHint:btnHint
+                btnHint: btnHint
             });
 
-            window.scroll(0,0);
+            window.scroll(0, 0);
         } else {
             if (this.quizIsOver) {
                 this.toEnd();
@@ -148,15 +148,17 @@ export default class Card extends Component {
 
             let optionHintStyle = isCurIndex ? {visibility: 'visible'} : {visibility: 'hidden'};
 
-            return <label key={index} className="mui-radio card-option">
+            return <div key={index} className="card-option">
+                <label className="mui-radio">
                 <span style={optionHintStyle}>
                     <img className="hint"
                          src={require(option.isCorrect ? './../asset/image/ico_right.png' : './../asset/image/ico_wrong.png')}/>
                 </span>
-                <input id={index} name="options" value={option.isCorrect} type="radio" onChange={this.onChangRadio}
-                       checked={isCurIndex}/>
-                <span className="content">{this.optionName[index] + ". "}{content}</span>
-            </label>
+                    <input id={index} name="options" value={option.isCorrect} type="radio" onChange={this.onChangRadio}
+                           checked={isCurIndex}/>
+                    <span className="content">{this.optionName[index] + ". "}{content}</span>
+                </label>
+            </div>
         });
 
         let isCorrect = selectOption == correctIndex;
@@ -174,7 +176,8 @@ export default class Card extends Component {
                     <span
                         className={answerHintStyle}>{isCorrect ? '回答正确! ' : '正确答案：' + this.optionName[correctIndex]}</span>
                 </div>
-                <button className="card-next" onClick={this.onNextCard} disabled={(this.state.selectOption == -1) ? true : false}>{this.state.btnHint}</button>
+                <button className="card-next" onClick={this.onNextCard}
+                        disabled={(this.state.selectOption == -1) ? true : false}>{this.state.btnHint}</button>
             </div>
         </div>
     }

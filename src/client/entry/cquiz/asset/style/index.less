@@ -7,12 +7,11 @@ html, body {
   margin: 0 auto;
 }
 
-
-button{
+button {
   &:focus {
-    outline:none;
+    outline: none;
   }
-  &:disabled{
+  &:disabled {
     background-color: #dddddd;
   }
 }
@@ -72,19 +71,24 @@ button{
     width: 5rem;
     padding-top: 0.25rem;
     padding-bottom: 0.25rem;
-    font-size: 0.36rem;
     font-weight: normal;
     font-stretch: normal;
     color: #2f2f2f;
+    font-size: 0 !important;
+
+    * {
+      font-size: 0.36rem;
+      vertical-align: middle;
+    }
 
     .hint {
-      width: 0.37rem;
-      height: 0.37rem;
+      width: 0.5rem;
+      height: 0.5rem;
       margin-right: 0.2rem;
       vertical-align: middle;
     }
 
-    .option{
+    .option {
       width: 0.5rem;
       vertical-align: middle;
     }
@@ -94,7 +98,7 @@ button{
       width: 3rem;
       height: auto;
       vertical-align: middle;
-      img{
+      img {
         width: 1.8rem;
         height: 1.8rem;
       }
@@ -102,6 +106,7 @@ button{
 
     input[type="radio"] {
       margin-right: 0.15rem;
+      height: 0.5rem;
     }
   }
 
@@ -198,59 +203,4 @@ button{
       margin-right: 0.34rem;
     }
   }
-}
-
-.mui-radio {
-  position: relative;
-}
-
-.mui-radio > label {
-  min-height: 20px;
-  padding-left: 20px;
-  margin-bottom: 0;
-  font-weight: normal;
-  cursor: pointer;
-}
-
-.mui-radio input:disabled {
-  cursor: not-allowed;
-}
-
-.mui-radio input:focus {
-  outline: thin dotted;
-  outline: 5px auto -webkit-focus-ring-color;
-  outline-offset: -2px;
-}
-
-.mui-radio > label > input[type="radio"],
-.mui-radio--inline > label > input[type="radio"] {
-  position: absolute;
-  margin-left: -20px;
-  margin-top: 4px;
-}
-
-.mui-radio + .mui-radio {
-  margin-top: -5px;
-}
-
-.mui-radio--inline {
-  display: inline-block;
-  padding-left: 20px;
-  margin-bottom: 0;
-  vertical-align: middle;
-  font-weight: normal;
-  cursor: pointer;
-}
-
-.mui-radio--inline > input[type="radio"],
-.mui-radio--inline > label > input[type="radio"],
-.mui-checkbox--inline > input[type="radio"],
-.mui-checkbox--inline > label > input[type="radio"] {
-  margin: 4px 0 0;
-  line-height: normal;
-}
-
-.mui-radio--inline + .mui-radio--inline {
-  margin-top: 0;
-  margin-left: 10px;
 }

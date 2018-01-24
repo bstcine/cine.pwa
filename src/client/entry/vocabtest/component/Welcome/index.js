@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import {initWechat} from '@/util/wechatUtil';
 import LoginModal from '@/component/LoginModal';
-import * as BaseService from '@/service/base'
-import storeUtil from "@/util/storeUtil";
+import * as BaseService from '@/service/base';
+import storeUtil from '@/util/storeUtil';
 
 export default class Welcome extends Component {
     constructor(props) {
@@ -14,24 +14,27 @@ export default class Welcome extends Component {
         this.state = {
             showLoginModal: false,
             logined: false,
-            user: null
-        }
+            user: null,
+            loginModalOpened: false
+        };
     }
 
     startClick() {
-        let {user} = this.state;
-        if (!user) {
-            this.toggleLoginModal()
+        let {user, loginModalOpened} = this.state;
+        if (!user && !loginModalOpened) {
+            this.toggleLoginModal();
         } else {
             if (user && user.area_code && user.grade && user.born_at) {
-                this.props.history.push(`/card`);
+                this.props.history.push('/card');
             } else {
                 let url = '/userinfo';
-                var params = []
-                if (user.area_code) params.push(`area_code=${encodeURIComponent(user.area_code)}`)
-                if (user.grade) params.push(`grade=${encodeURIComponent(user.grade)}`)
-                if (user.born_at) params.push(`born_at=${encodeURIComponent(user.born_at)}`)
-                url += "?" + params.join('&')
+                if (user) {
+                    let params = [];
+                    if (user.area_code) params.push(`area_code=${encodeURIComponent(user.area_code)}`);
+                    if (user.grade) params.push(`grade=${encodeURIComponent(user.grade)}`);
+                    if (user.born_at) params.push(`born_at=${encodeURIComponent(user.born_at)}`);
+                    url += '?' + params.join('&');
+                }
                 this.props.history.push(url);
             }
         }
@@ -39,7 +42,8 @@ export default class Welcome extends Component {
 
     toggleLoginModal() {
         this.setState(prevState => ({
-            showLoginModal: !prevState.showLoginModal
+            showLoginModal: !prevState.showLoginModal,
+            loginModalOpened: true
         }));
     }
 
@@ -48,13 +52,13 @@ export default class Welcome extends Component {
             showLoginModal: false
         });
         let {error, data: user} = await BaseService.userInfo();
-        if(error) {
+        if (error) {
             if (error.message === 'no_login') {
                 storeUtil.removeToken();
             } else {
                 console.error(error.message);
             }
-            return
+            return;
         }
 
         this.setState({
@@ -66,13 +70,13 @@ export default class Welcome extends Component {
         initWechat();
 
         let {error, data: user} = await BaseService.userInfo();
-        if(error) {
+        if (error) {
             if (error.message === 'no_login') {
                 storeUtil.removeToken();
             } else {
                 console.error(error.message);
             }
-            return
+            return;
         }
 
         this.setState({
@@ -90,7 +94,7 @@ export default class Welcome extends Component {
                     loginSuccess={this.loginSuccess}
                 />
                 <div className="welcome">
-                    <div className="start-bg"/>
+                    <div className="start-bg" />
                     <div className="tips">
                         本测试是严谨的学术型词汇量测试，耗时比一般的词汇量测试更长，大约需要5-10分钟。在本测试中，您将得不到任何“对错”的提示。在测试结束后，您将获得详细的词汇量报告
                     </div>

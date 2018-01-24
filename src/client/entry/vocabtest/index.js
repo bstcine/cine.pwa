@@ -1,8 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {BrowserRouter as Router, Route} from 'react-router-dom';
-import LoginDetect from './component/LoginDetect';
-import Index from './component/Index';
 import Welcome from './component/Welcome';
 import UserInfo from './component/UserInfo';
 import Card from './component/Card';

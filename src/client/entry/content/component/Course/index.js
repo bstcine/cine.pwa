@@ -311,6 +311,7 @@ export default class Course extends Component {
                     clickShare={this.clickShare}
                     getCoupon={this.getCoupon}
                     openRecommend={this.openRecommend}
+                    isShowRecommend={!!getParam().channel}
                 />
                 <RecommendModal
                     isOpen={showRecommendModal}

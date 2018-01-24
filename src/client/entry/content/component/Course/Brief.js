@@ -1,12 +1,13 @@
 import React, {Component} from 'react';
 import {getParam} from '@/util/urlUtil';
 import siteCodeUtil from '@/util/sitecodeUtil';
-import Video from "@/component/Video";
+import Video from '@/component/Video';
 
 export default class Brief extends Component {
     static defaultProps = {
         course: null,
-        user: null
+        user: null,
+        isShowRecommend: false
     };
 
     constructor(props) {
@@ -153,7 +154,7 @@ export default class Brief extends Component {
     }
 
     render() {
-        let {course, user, relatedCourse, openRecommend, getCoupon} = this.props;
+        let {course, user, relatedCourse, openRecommend, getCoupon, isShowRecommend} = this.props;
         const {clickShare} = this.props;
         let source_user_id = getParam().source_user_id;
         return (
@@ -161,7 +162,10 @@ export default class Brief extends Component {
                 <div className="left-container">
                     <div className="video-container">
                         {course.video ? (
-                            <Video src={course.video} poster={course.img ? 'http://www.bstcine.com/f/' + course.img : null}/>
+                            <Video
+                                src={course.video}
+                                poster={course.img ? 'http://www.bstcine.com/f/' + course.img : null}
+                            />
                         ) : (
                             <div
                                 className="content"
@@ -216,16 +220,19 @@ export default class Brief extends Component {
                     ) : null}
 
                     {this.renderBottomButton(course)}
-                    <div className="right-desc">
-                        {source_user_id ? (
-                            <div className="get-coupon" onClick={getCoupon} />
-                        ) : (
-                            <div className="recommend" onClick={openRecommend}>
-                                <div className="red-bag" />
-                                <div className="desc">推荐得积分</div>
-                            </div>
-                        )}
-                    </div>
+
+                    {isShowRecommend ? (
+                        <div className="right-desc">
+                            {source_user_id ? (
+                                <div className="get-coupon" onClick={getCoupon} />
+                            ) : (
+                                <div className="recommend" onClick={openRecommend}>
+                                    <div className="red-bag" />
+                                    <div className="desc">推荐得积分</div>
+                                </div>
+                            )}
+                        </div>
+                    ) : null}
                 </div>
             </div>
         );

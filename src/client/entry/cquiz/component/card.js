@@ -177,18 +177,17 @@ export default class Card extends Component {
 
             let optionHintStyle = isCurIndex ? {visibility: 'visible'} : {visibility: 'hidden'};
 
-            return <div key={index} className="card-option">
-                <label className="mui-radio">
+            return <label key={index} className="card-option mui-radio">
                     <span style={optionHintStyle}>
                         <img className="hint"
                              src={require(option.isCorrect ? './../asset/image/ico_right.png' : './../asset/image/ico_wrong.png')}/>
                     </span>
-                    <input id={index} disabled={this.state.inputDisabled} value={option.isCorrect} type="radio"
-                           onChange={this.onChangRadio}
-                           checked={isCurIndex}/>
-                    <span className="content">{this.optionName[index] + ". "}{content}</span>
-                </label>
-            </div>
+                <input id={index} disabled={this.state.inputDisabled} value={option.isCorrect} type="radio"
+                       onChange={this.onChangRadio}
+                       checked={isCurIndex}/>
+                <span className="option">{this.optionName[index] + ". "}</span>
+                <span className="content">{content}</span>
+            </label>
         });
 
         let isCorrect = selectOption == correctIndex;

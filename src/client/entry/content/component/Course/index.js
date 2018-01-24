@@ -110,23 +110,22 @@ export default class Course extends Component {
 
         const token = storeUtil.getToken();
         if (token) {
-            try {
-                let user = await BaseService.userInfo(token);
-                this.setState({
-                    user: user
-                });
-            } catch (err) {
-                if (err.message === 'no_login') {
+            let {error, data: user} = await BaseService.userInfo(token);
+            if(error) {
+                if (error.message === 'no_login') {
                     storeUtil.removeToken();
                     let course = await Service.getContentCourseDetail({cid});
                     this.setState({course});
                 } else {
-                    console.error(err);
+                    console.error(error.message);
                 }
-                return;
+                return
             }
-        }
 
+            this.setState({
+                user: user
+            });
+        }
         let course = await Service.getContentCourseDetail({cid});
         this.setState({course});
     }

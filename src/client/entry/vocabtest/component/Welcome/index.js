@@ -1,32 +1,96 @@
 import React, {Component} from 'react';
-import storeUtil from '@/util/storeUtil';
 import {initWechat} from '@/util/wechatUtil';
+import LoginModal from '@/component/LoginModal';
+import * as BaseService from '@/service/base'
+import storeUtil from "@/util/storeUtil";
 
 export default class Welcome extends Component {
     constructor(props) {
         super(props);
         console.log('Welcome constructor');
         this.startClick = this.startClick.bind(this);
-    }
-
-    startClick() {
-        let user = storeUtil.get('user');
-        if (user && user.area_code && user.grade && user.born_at) {
-            this.props.history.push(`/card`);
-        } else {
-            this.props.history.push('/userinfo');
+        this.loginSuccess = this.loginSuccess.bind(this);
+        this.toggleLoginModal = this.toggleLoginModal.bind(this);
+        this.state = {
+            showLoginModal: false,
+            logined: false,
+            user: null
         }
     }
 
-    componentDidMount() {
+    startClick() {
+        let {user} = this.state;
+        if (!user) {
+            this.toggleLoginModal()
+        } else {
+            if (user && user.area_code && user.grade && user.born_at) {
+                this.props.history.push(`/card`);
+            } else {
+                let url = '/userinfo';
+                var params = []
+                if (user.area_code) params.push(`area_code=${encodeURIComponent(user.area_code)}`)
+                if (user.grade) params.push(`grade=${encodeURIComponent(user.grade)}`)
+                if (user.born_at) params.push(`born_at=${encodeURIComponent(user.born_at)}`)
+                url += "?" + params.join('&')
+                this.props.history.push(url);
+            }
+        }
+    }
+
+    toggleLoginModal() {
+        this.setState(prevState => ({
+            showLoginModal: !prevState.showLoginModal
+        }));
+    }
+
+    async loginSuccess() {
+        this.setState({
+            showLoginModal: false
+        });
+        let {error, data: user} = await BaseService.userInfo();
+        if(error) {
+            if (error.message === 'no_login') {
+                storeUtil.removeToken();
+            } else {
+                console.error(error.message);
+            }
+            return
+        }
+
+        this.setState({
+            user: user
+        });
+    }
+
+    async componentDidMount() {
         initWechat();
+
+        let {error, data: user} = await BaseService.userInfo();
+        if(error) {
+            if (error.message === 'no_login') {
+                storeUtil.removeToken();
+            } else {
+                console.error(error.message);
+            }
+            return
+        }
+
+        this.setState({
+            user: user
+        });
     }
 
     render() {
+        let {showLoginModal} = this.state;
         return (
             <div className="wrapper mini">
+                <LoginModal
+                    isOpen={showLoginModal}
+                    toggleModal={this.toggleLoginModal}
+                    loginSuccess={this.loginSuccess}
+                />
                 <div className="welcome">
-                    <div className="start-bg" />
+                    <div className="start-bg"/>
                     <div className="tips">
                         本测试是严谨的学术型词汇量测试，耗时比一般的词汇量测试更长，大约需要5-10分钟。在本测试中，您将得不到任何“对错”的提示。在测试结束后，您将获得详细的词汇量报告
                     </div>

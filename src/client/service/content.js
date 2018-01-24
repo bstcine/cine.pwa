@@ -42,7 +42,10 @@ export let getContentCourseComment = query => {
 };
 
 export let createCoupon = source_user_id => {
-    return postv1(Api.APIURL_Create_Coupon, {create_by: source_user_id, token: storeUtl.getToken()}).then(res => {
+    return postv1(Api.APIURL_Create_Coupon, {
+        create_by: source_user_id,
+        token: storeUtl.getToken()
+    }).then(res => {
         if (!res.status) {
             return alert(errorMsg(res.msg));
         }
@@ -60,7 +63,13 @@ export let prepareOrder = ({cid}) => {
 };
 
 export let createOrder = ({cid, point, coupon_no, remark, addressInfo}) => {
-    return post(Api.APIURL_Order_Create, {cid, point, coupon_no, remark, addressInfo});
+    return post(Api.APIURL_Order_Create, {
+        cid,
+        point,
+        coupon_no,
+        remark,
+        addressInfo
+    });
 };
 
 export let preCalculatePrice = ({cid, point, coupon_no}) => {

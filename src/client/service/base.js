@@ -14,15 +14,18 @@ export let getWechatJsSignature = () => {
 export let userInfo = token => {
     return post(Api.APIURL_User_Info, {token}).then(res => {
         if (res.except_case_desc) {
-            console.log(res.except_case_desc);
-            return Promise.reject(new Error(res.except_case_desc));
+            return {error: new Error(res.except_case_desc)};
         }
-        return res.result;
+        return {data: res.result};
     });
 };
 
 export let loginV1 = ({username, password}) => {
-    return postv1(Api.APIURL_LoginV1, {username, password, sitecode: storeUtil.getSiteCode()});
+    return postv1(Api.APIURL_LoginV1, {
+        username,
+        password,
+        sitecode: storeUtil.getSiteCode()
+    });
 };
 
 export let login = ({username, password}) => {

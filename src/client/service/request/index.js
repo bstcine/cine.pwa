@@ -2,7 +2,8 @@ import storeUtil from '@/util/storeUtil';
 import axios from 'axios';
 
 function httpUrl(url) {
-    let baseURL = typeof app_API_Host_URL === 'undefined' ? '' : app_API_Host_URL;
+    let baseURL =
+        typeof app_API_Host_URL === 'undefined' ? '' : app_API_Host_URL;
     if (url.indexOf('http') >= 0) {
         baseURL = '';
     }

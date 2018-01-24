@@ -3,6 +3,7 @@ import storeUtil from '@/util/storeUtil';
 import {initWechat} from '@/util/wechatUtil';
 import * as area from '@/service/data/response_area.json';
 import * as account from '@/service/data/response_account.json';
+import {getParam} from "@/util/urlUtil";
 
 export default class UserInfo extends Component {
     constructor(props) {
@@ -31,7 +32,7 @@ export default class UserInfo extends Component {
         };
         if (!this.gradeConfirm()) return;
         storeUtil.set('user', user);
-        this.props.history.push(`/welcome`);
+        this.props.history.push(`/card`);
     }
 
     gradeConfirm() {
@@ -64,22 +65,22 @@ export default class UserInfo extends Component {
 
     componentDidMount() {
         console.log('componentDidMount');
-        let user = storeUtil.get('user');
-        if (user) {
-            console.log(user);
-            if (user.born_at && this.born_ats.includes(user.born_at)) {
-                console.log(`born_at ${user.born_at}`);
-                this.setState({born_at: user.born_at});
-            }
-            if (user.area_code && this.area_codes.some(item => item.value === user.area_code)) {
-                console.log(`area_code ${user.area_code}`);
-                this.setState({area_code: user.area_code});
-            }
-            if (user.grade && this.grades.some(item => item.value === user.grade)) {
-                console.log(`grade ${user.grade}`);
-                this.setState({grade: user.grade});
-            }
+        let {born_at, area_code, grade} = getParam()
+        console.log({born_at, area_code, grade})
+
+        if (born_at && this.born_ats.includes(born_at)) {
+            console.log(`born_at ${born_at}`);
+            this.setState({born_at: born_at});
         }
+        if (area_code && this.area_codes.some(item => item.value == area_code)) {
+            console.log(`area_code ${area_code}`);
+            this.setState({area_code: area_code});
+        }
+        if (grade && this.grades.some(item => item.value == grade)) {
+            console.log(`grade ${grade}`);
+            this.setState({grade: grade});
+        }
+
         initWechat();
     }
 
@@ -106,7 +107,7 @@ export default class UserInfo extends Component {
                             <div className="form-label">你的出生年份</div>
                             <div className="form-control">
                                 <select value={this.state.born_at} onChange={this.bornAtChange}>
-                                    {this.born_ats.map(function(item) {
+                                    {this.born_ats.map(function (item) {
                                         return (
                                             <option key={item} value={item}>
                                                 {item + '年'}
@@ -120,7 +121,7 @@ export default class UserInfo extends Component {
                             <div className="form-label">你的年级</div>
                             <div className="form-control">
                                 <select value={this.state.grade} onChange={this.gradeChange}>
-                                    {this.grades.map(function(item) {
+                                    {this.grades.map(function (item) {
                                         return (
                                             <option key={item.value} value={item.value}>
                                                 {item.label}
@@ -135,7 +136,7 @@ export default class UserInfo extends Component {
                             <div className="form-label">你所在的地区</div>
                             <div className="form-control">
                                 <select value={this.state.area_code} onChange={this.areaCodeChange}>
-                                    {this.area_codes.map(function(item) {
+                                    {this.area_codes.map(function (item) {
                                         return (
                                             <option key={item.value} value={item.value}>
                                                 {item.label}

@@ -22,18 +22,17 @@ export default class Header extends Component {
         this.needRender = !siteCodeUtil.inAPP() && !uaUtil.wechat();
     }
 
-    componentDidMount() {
+    async componentDidMount() {
         if (storeUtil.getToken()) {
             if (storeUtil.get('user')) {
                 this.setState({
                     user: storeUtil.get('user')
                 });
             } else {
-                userInfo().then(user => {
-                    storeUtil.set('user', user);
-                    this.setState({
-                        user: user
-                    });
+                let {success, data: user} = userInfo()
+                storeUtil.set('user', user);
+                this.setState({
+                    user: user
                 });
             }
         }

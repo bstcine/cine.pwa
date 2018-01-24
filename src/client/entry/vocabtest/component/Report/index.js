@@ -42,7 +42,7 @@ export default class Report extends Component {
     async shareClick() {
         let res = await createShare({
             type: 7,
-            share_link: addParam(null, removeParam(null, ['token']), {from_share: 1})
+            share_link: addParam(removeParam(undefined, 'token'), {from_share: 1})
         });
         let data = res.result;
         let share_params = {

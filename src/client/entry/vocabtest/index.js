@@ -34,9 +34,7 @@ class Word extends EntryComponent {
             <Router basename="/vocabtest">
                 <div className="word-main">
                     <div className="map-bg" />
-                    <Route exact path="/" component={Index} />
-                    <Route path="/welcome" component={Welcome} />
-                    <Route path="/logindetect" component={LoginDetect} />
+                    <Route exact path="/" component={Welcome} />
                     <Route path="/userinfo" component={UserInfo} />
                     <Route path="/card" component={Card} />
                     <Route path="/report" component={Report} />

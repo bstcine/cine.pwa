@@ -193,31 +193,34 @@ export default class Brief extends Component {
                 </div>
 
                 <div className="desc-container">
-                    <div className="title">{course.name}</div>
-                    {course.subtitle ? <div className="slogan">{course.subtitle}</div> : null}
+                    <div className="desc-main">
+                        <div className="title">{course.name}</div>
+                        {course.subtitle ? <div className="slogan">{course.subtitle}</div> : null}
 
-                    {course.related_lesson_id ? (
-                        <div className="related-course">
-                            <span onClick={e => relatedCourse(course.related_lesson_id, e)}>学习精读课程 >></span>
-                        </div>
-                    ) : null}
+                        {course.related_lesson_id ? (
+                            <div className="related-course">
+                                <span onClick={e => relatedCourse(course.related_lesson_id, e)}>学习精读课程 >></span>
+                            </div>
+                        ) : null}
 
-                    {this.renderMeta(course)}
-                    {this.renderPrices(course)}
+                        {this.renderMeta(course)}
+                        {this.renderPrices(course)}
 
-                    {course && ((course.activitys && course.activitys.length) || course.is_allow_point === '1') ? (
-                        <div className="promotes">
-                            {this.renderActivityPromoteList(course)}
-                            {this.renderPointPromoteList(course, user)}
-                        </div>
-                    ) : null}
+                        {course && ((course.activitys && course.activitys.length) || course.is_allow_point === '1') ? (
+                            <div className="promotes">
+                                {this.renderActivityPromoteList(course)}
+                                {this.renderPointPromoteList(course, user)}
+                            </div>
+                        ) : null}
 
-                    {course.notice ? (
-                        <div className="notice">
-                            <div className="label">公告</div>
-                            <div className="notice-details" dangerouslySetInnerHTML={{__html: course.notice}} />
-                        </div>
-                    ) : null}
+                        {course.notice ? (
+                            <div className="notice">
+                                <div className="label">公告</div>
+                                <div className="notice-details" dangerouslySetInnerHTML={{__html: course.notice}} />
+                            </div>
+                        ) : null}
+                    </div>
+
 
                     {this.renderBottomButton(course)}
 

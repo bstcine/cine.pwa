@@ -190,7 +190,7 @@ export default class Card extends Component {
         });
 
         let isCorrect = selectOption == correctIndex;
-        return <div className="quiz-main">
+        return <div className="quiz-card">
             <div className="card-title">
                 <span style={{float: "left"}}>{(this.state.index + 1) + "."}&nbsp;</span>
                 <div dangerouslySetInnerHTML={{__html: this.state.data.title}}/>

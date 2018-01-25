@@ -34,7 +34,7 @@ class Quiz extends EntryComponent {
     render() {
         return (
             <Router basename="/cquiz">
-                <div>
+                <div className="quiz-main">
                     <Route exact path="/" component={Index}/>
                     <Route exact path="/card" component={Card}/>
                 </div>

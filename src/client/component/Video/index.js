@@ -39,6 +39,6 @@ export default class Video extends Component {
 
     render() {
         let {src, poster, className} = this.props;
-        return <video ref="video" className={className} src={src} poster={poster} controls webkit-playsinline playsinline/>;
+        return <video ref="video" className={className} src={src} poster={poster} controls playsinline="" webkit-playsinline=""/>;
     }
 }

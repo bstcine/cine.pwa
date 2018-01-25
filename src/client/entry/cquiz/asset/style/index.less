@@ -1,4 +1,20 @@
-@import "~asset/style/common.less";
+@import "~asset/style/_media.less";
+
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  touch-action: manipulation;
+}
+
+*:focus {
+  outline: none;
+}
+
 
 html, body {
   height: 100%;
@@ -58,9 +74,9 @@ button {
 
 .quiz-main {
   position: relative;
-  padding-left: 0.1rem;
-  padding-right: 0.1rem;
-  padding-top: .40rem;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  padding-top: .5rem;
 
   .card-title {
     font-size: 0.36rem;
@@ -112,8 +128,6 @@ button {
     input[type="radio"] {
       margin-right: 0.15rem;
       height: 0.5rem;
-      appearance: radio;
-      webkit-appearance: radio;
     }
   }
 
@@ -211,16 +225,9 @@ button {
     }
   }
 }
-@media @pad, @pc {
-  .quiz-main{
-    padding-top: 5rem;
-  }
-}
 
-@media @phone {
-  .quiz-main{
-    padding-top: .5rem;
-    padding-left: .5rem;
-    padding-right: .5rem;
+@media @pad {
+  .quiz-main {
+    padding-top: 1.8rem;
   }
 }

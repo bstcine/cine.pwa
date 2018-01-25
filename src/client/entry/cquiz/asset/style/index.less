@@ -15,7 +15,6 @@
   outline: none;
 }
 
-
 html, body {
   width: 100%;
   height: 100%;
@@ -25,6 +24,7 @@ html, body {
   width: 100%;
   height: 100%;
   margin: 0 auto;
+  padding-top: 1rem;
 }
 
 button {
@@ -36,7 +36,7 @@ button {
   }
 }
 
-.quiz-main{
+.quiz-main {
   width: 100%;
 }
 
@@ -79,8 +79,6 @@ button {
 .quiz-card {
   width: 100%;
   position: relative;
-  padding-left: 0.5rem;
-  padding-right: 0.5rem;
 
   .card-title {
     font-size: 0.36rem;
@@ -138,7 +136,7 @@ button {
   .card-line {
     height: 0.02rem;
     margin: 0.5rem auto;
-    background-color: #eef4f8;
+    background-color: #eeeeee;
   }
 
   .card-todo {
@@ -230,38 +228,64 @@ button {
   }
 }
 
-@media @pc {
-  #root{
-    padding-left: 5rem;
-    padding-right: 5rem;
+//Phone 竖屏
+@media only screen
+and (max-width: 575px)
+and (orientation: portrait) {
+  #root {
     padding-top: 1rem;
-  }
-}
-
-@media @pad {
-  #root{
-    padding-left: 2rem;
-    padding-right: 2rem;
-    padding-top: 1rem;
-  }
-}
-
-@media @phone {
-  #root{
     padding-left: .5rem;
     padding-right: .5rem;
-    padding-top: .5rem;
   }
 }
 
-@media  screen and (max-height: 575px){
-  #root{
+//Phone 横屏
+@media only screen
+and (max-height: 575px)
+and (orientation: landscape) {
+  #root {
     padding-top: .2rem;
+    padding-left: .5rem;
+    padding-right: .5rem;
   }
 }
 
-@media  screen and (min-height: 575px){
-  #root{
-    padding-top: 2rem;
+//iPad 横屏
+@media only screen
+and (min-device-width: 768px)
+and (max-device-width: 1024px)
+and (orientation: landscape) {
+  #root {
+    padding-left: 1.8rem;
+    padding-right: 1.8rem;
+    padding-top: 1.8rem;
+  }
+
+  .quiz-card{
+    .card-title{
+      margin-bottom: .7rem;
+    }
+    .card-option{
+      width: 50%;
+      padding-top: .6rem;
+      padding-bottom: .6rem;
+      .content{
+        width: 80%;
+      }
+    }
+    .card-line{
+      margin-top: 1.4rem;
+      margin-bottom: .5rem;
+    }
+  }
+}
+
+//PC
+@media only screen
+and (min-height: 440px)
+and (max-height: 460px)
+and (orientation: landscape) {
+  #root {
+    padding-top: 0.8rem;
   }
 }

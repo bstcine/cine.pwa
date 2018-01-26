@@ -295,6 +295,41 @@ and (orientation: landscape) {
   }
 }
 
+//Pad 横屏
+@media only screen
+and (min-height:576px)
+and (max-height:1023px)
+and (orientation: landscape) {
+  #root {
+    padding-left: 1.8rem;
+    padding-right: 1.8rem;
+    padding-top: 1.8rem;
+  }
+
+  .quiz-card{
+    .card-title{
+      margin-bottom: .7rem;
+    }
+    .card-option{
+      width: 50%;
+      padding-top: .6rem;
+      padding-bottom: .6rem;
+      .content{
+        min-width: 50%;
+        max-width: 80%;
+        img {
+          max-width: 3rem;
+          max-height: 3rem;
+        }
+      }
+    }
+    .card-line{
+      margin-top: 1.4rem;
+      margin-bottom: .5rem;
+    }
+  }
+}
+
 //iPad 横屏
 @media only screen
 and (min-device-width: 768px)

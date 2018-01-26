@@ -154,7 +154,7 @@ export default class Brief extends Component {
     }
 
     render() {
-        let {course, user, relatedCourse, openRecommend, getCoupon, isShowRecommend} = this.props;
+        let {course, user, relatedCourse, openRecommend, getCoupon, isShowRecommend,pauseVideo} = this.props;
         const {clickShare} = this.props;
         let source_user_id = getParam().source_user_id;
         return (
@@ -165,6 +165,7 @@ export default class Brief extends Component {
                             <Video
                                 src={course.video}
                                 poster={course.img ? 'http://www.bstcine.com/f/' + course.img : null}
+                                pauseVideo={pauseVideo}
                             />
                         ) : (
                             <div

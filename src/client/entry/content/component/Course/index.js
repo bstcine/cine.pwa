@@ -135,6 +135,9 @@ export default class Course extends Component {
             this.login();
             return;
         }
+        this.setState({
+            pauseVideo:true
+        })
         let param = getParam();
         let cid = param.cid;
         let source_user_id = param.source_user_id;
@@ -152,6 +155,9 @@ export default class Course extends Component {
     }
 
     goLearn() {
+        this.setState({
+            pauseVideo:true
+        })
         let {course} = this.state;
         if (siteCodeUtil.inIOSAPP()) {
             Bridge.ios(BRIDGE_EVENT.LEARN, {
@@ -291,7 +297,7 @@ export default class Course extends Component {
     }
 
     render() {
-        let {course, user, comments, showLoginModal, showRecommendModal, showCouponModal} = this.state;
+        let {course, user, comments, showLoginModal, showRecommendModal, showCouponModal,pauseVideo} = this.state;
 
         return (
             <div className="course-container">
@@ -311,6 +317,7 @@ export default class Course extends Component {
                     getCoupon={this.getCoupon}
                     openRecommend={this.openRecommend}
                     isShowRecommend={true}
+                    pauseVideo={pauseVideo}
                 />
                 <RecommendModal
                     isOpen={showRecommendModal}

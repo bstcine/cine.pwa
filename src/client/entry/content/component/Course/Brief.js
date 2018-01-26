@@ -154,20 +154,21 @@ export default class Brief extends Component {
     }
 
     render() {
-        let {course, user, relatedCourse, openRecommend, getCoupon, isShowRecommend,pauseVideo} = this.props;
+        let {course, user, relatedCourse, openRecommend, getCoupon, isShowRecommend, pauseVideo} = this.props;
         const {clickShare} = this.props;
         let source_user_id = getParam().source_user_id;
         return (
             <div className="brief-container">
                 <div className="left-container">
                     <div className="video-container">
-                        {course.video ? (
+                        {course && course.video ? (
                             <Video
                                 src={course.video}
                                 poster={course.img ? 'http://www.bstcine.com/f/' + course.img : null}
                                 pauseVideo={pauseVideo}
                             />
-                        ) : (
+                        ) : null}
+                        {course && !course.video ? (
                             <div
                                 className="content"
                                 style={{
@@ -176,7 +177,7 @@ export default class Brief extends Component {
                                     }) center center / cover no-repeat`
                                 }}
                             />
-                        )}
+                        ) : null}
                     </div>
                     {!siteCodeUtil.inAPP() ? (
                         <div className="share-tool">
@@ -195,10 +196,11 @@ export default class Brief extends Component {
 
                 <div className="desc-container">
                     <div className="desc-main">
-                        <div className="title">{course.name}</div>
-                        {course.subtitle ? <div className="slogan">{course.subtitle}</div> : null}
+                        {course?<div className="title">{course.name}</div>:null}
 
-                        {course.related_lesson_id ? (
+                        {course && course.subtitle ? <div className="slogan">{course.subtitle}</div> : null}
+
+                        {course && course.related_lesson_id ? (
                             <div className="related-course">
                                 <span onClick={e => relatedCourse(course.related_lesson_id, e)}>学习精读课程 >></span>
                             </div>
@@ -214,7 +216,7 @@ export default class Brief extends Component {
                             </div>
                         ) : null}
 
-                        {course.notice ? (
+                        {course && course.notice ? (
                             <div className="notice">
                                 <div className="label">公告</div>
                                 <div className="notice-details" dangerouslySetInnerHTML={{__html: course.notice}} />
@@ -222,8 +224,7 @@ export default class Brief extends Component {
                         ) : null}
                     </div>
 
-
-                    {this.renderBottomButton(course)}
+                    {course && this.renderBottomButton(course)}
 
                     {isShowRecommend ? (
                         <div className="right-desc">

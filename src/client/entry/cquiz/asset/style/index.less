@@ -25,6 +25,8 @@ html, body {
   height: 100%;
   margin: 0 auto;
   padding-top: 1rem;
+  padding-left: .5rem;
+  padding-right: .5rem;
 }
 
 button {
@@ -79,8 +81,6 @@ button {
 .quiz-card {
   width: 100%;
   position: relative;
-  padding-left: .5rem;
-  padding-right: .5rem;
 
   .card-title {
     font-size: 0.36rem;
@@ -124,8 +124,8 @@ button {
       height: auto;
       vertical-align: middle;
       img {
-        width: 1.8rem;
-        height: 1.8rem;
+        max-width: 2rem;
+        max-height: 2rem;
       }
     }
 
@@ -235,9 +235,29 @@ button {
 and (max-width: 575px)
 and (orientation: portrait) {
   #root {
-    padding-top: 1rem;
+    padding-top: .5rem;
     padding-left: .5rem;
     padding-right: .5rem;
+  }
+
+  .quiz-card{
+    padding-left: 0;
+    padding-right: 0;
+    .card-title{
+      margin-bottom: .3rem;
+    }
+    .card-option{
+      width: 100%;
+      padding-top: .3rem;
+      padding-bottom: .3rem;
+      .content{
+        width: 70%;
+      }
+    }
+    .card-line{
+      margin-top: 1rem;
+      margin-bottom: .5rem;
+    }
   }
 }
 
@@ -246,9 +266,32 @@ and (orientation: portrait) {
 and (max-height: 575px)
 and (orientation: landscape) {
   #root {
-    padding-top: .2rem;
     padding-left: .5rem;
     padding-right: .5rem;
+    padding-top: .5rem;
+  }
+
+  .quiz-card{
+    .card-title{
+      margin-bottom: .3rem;
+    }
+    .card-option{
+      width: 50%;
+      padding-top: .3rem;
+      padding-bottom: .3rem;
+      .content{
+        min-width: 60%;
+        max-width: 80%;
+        img {
+          max-width: 3rem;
+          max-height: 3rem;
+        }
+      }
+    }
+    .card-line{
+      margin-top: .7rem;
+      margin-bottom: .5rem;
+    }
   }
 }
 
@@ -274,6 +317,10 @@ and (orientation: landscape) {
       .content{
         min-width: 50%;
         max-width: 80%;
+        img {
+          max-width: 3rem;
+          max-height: 3rem;
+        }
       }
     }
     .card-line{

@@ -29,7 +29,7 @@ export default class Header extends Component {
                     user: storeUtil.get('user')
                 });
             } else {
-                let {success, data: user} = userInfo()
+                let {success, data: user} = await userInfo()
                 storeUtil.set('user', user);
                 this.setState({
                     user: user

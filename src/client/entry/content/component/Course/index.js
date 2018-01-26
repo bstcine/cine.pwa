@@ -311,7 +311,7 @@ export default class Course extends Component {
                     clickShare={this.clickShare}
                     getCoupon={this.getCoupon}
                     openRecommend={this.openRecommend}
-                    isShowRecommend={true}
+                    isShowRecommend={getParam().channel}
                     pauseVideo={pauseVideo}
                 />
 

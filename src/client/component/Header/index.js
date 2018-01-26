@@ -24,8 +24,8 @@ export default class Header extends Component {
 
     async componentDidMount() {
         if (storeUtil.getToken()) {
-            let {success, data: user} = await userInfo();
-            if (success) {
+            let {error, data: user} = await userInfo();
+            if (!error) {
                 storeUtil.set('user', user);
                 this.setState({
                     user: user

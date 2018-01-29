@@ -24,7 +24,7 @@ export default class Index extends Component {
 
     render() {
         return (!this.quizBar) ? <div className="quiz-start">
-            <div className="title">{this.quizTitle ? this.quizTitle : '本课测试'}</div>
+            <div className="title">{this.quizTitle ? this.quizTitle : '本课测验'}</div>
             <div className="hint">学得怎么样了？来测一下吧！</div>
             <button onClick={this.toCard}>开始答题</button>
         </div> : <div/>

@@ -19,10 +19,12 @@
       window.onresize = function () {
           responsive()
       }
+
+      document.addEventListener('contextmenu', event => event.preventDefault());
   </script>
 
 </head>
-<body ontouchstart="">
+<body ontouchstart="" oncontextmenu="return false;">
 <div id="root"></div>
 </body>
 </html>

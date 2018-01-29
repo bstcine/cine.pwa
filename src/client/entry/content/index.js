@@ -8,6 +8,7 @@ import appBanner from '@/util/appBanner';
 import 'material-icons';
 import Header from '@/component/Header';
 import EntryComponent from '@/component/EntryComponent';
+import Footer from "@/component/Footer";
 // import * as OfflinePluginRuntime from 'offline-plugin/runtime';
 // OfflinePluginRuntime.install();
 
@@ -40,6 +41,7 @@ class Content extends EntryComponent {
                         <Route path="/course" component={Course} />
                     </div>
                 </Router>
+                <Footer/>
             </div>
         );
     }

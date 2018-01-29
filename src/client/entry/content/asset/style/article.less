@@ -1,0 +1,110 @@
+.article-wrap {
+  padding-top: 0.04rem;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin-bottom: 0.3rem;
+  line-height: 1;
+  .title {
+    margin-bottom: 0.28rem;
+    font-size: 0.4rem;
+    color: #ffca00;
+  }
+  .article-category-wrap {
+    background-color: #fff;
+    font-size: 0;
+    .article-category {
+      display: inline-block;
+
+      border-bottom: 1px solid #ddd;
+      font-size: 0;
+
+      padding: .24rem .24rem .26rem;
+      width: 100%;
+
+      .article-category-title {
+        font-size: 0.36rem;
+        color: #115eb4;
+        vertical-align: bottom;
+        margin-bottom: 0.16rem;
+        .more {
+          float: right;
+          font-size: 0.28rem;
+          color: #78acdc;
+          line-height: 0.36rem;
+          &:hover {
+            color: #0b4da7;
+          }
+        }
+      }
+      .article-img {
+        display: inline-block;
+        width: 1.70rem;
+        height: 1.60rem;
+
+        vertical-align: top;
+      }
+
+      .article-list {
+        display: inline-block;
+        width: 5.04rem;
+        padding-left: 0.24rem;
+        vertical-align: top;
+        .article {
+
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          word-break: keep-all;
+
+          font-size: .24rem;
+          line-height: .40rem;
+          &:last-child {
+            margin-bottom: 0;
+          }
+          &:hover a {
+            color: #0b4da7;
+          }
+          a {
+            color: #555;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media @media-up-sm {
+  .article-wrap {
+    margin-bottom: 0.5rem;
+
+    .article-category-wrap {
+      .article-category {
+        display: inline-block;
+        padding: 0.48rem 0.3rem 0.4rem;
+        width: 49.99%;
+        &:nth-of-type(odd) {
+          border-right: 1px solid #ddd;
+        }
+        &:nth-last-child(1),
+        &:nth-last-child(2) {
+          border-bottom: none;
+        }
+
+        .article-img {
+          display: inline-block;
+          width: 3.1rem;
+          height: 1.92rem;
+        }
+        .article-list {
+          display: inline-block;
+          width: 5.50rem;
+          .article {
+            font-size: 0.28rem;
+            line-height: 0.48rem;
+          }
+        }
+      }
+
+    }
+  }
+}

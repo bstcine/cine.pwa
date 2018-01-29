@@ -1,19 +1,33 @@
 @import "~asset/style/common";
 @import "~asset/style/_cine.less";
 
-html, body, #root {
-
-}
-
-body {
-
+body{
+  .container{
+    width: 100%;
+  }
+  .container-fluid{
+    width: 100%;
+  }
 }
 
 @import "~asset/style/tabs.less";
 @import "home.less";
 @import "course.less";
 
-@media @pc {
+@media @media-up-sm{
+  body {
+    background-color: #f2f4f6;
+    .container {
+      width: 18.80rem;
+      background-color: #021a52;
+    }
+    .content-container{
+
+    }
+  }
+}
+
+@media @media-up-sm {
   body {
     background-color: #f2f4f6;
   }

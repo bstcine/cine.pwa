@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 
-export default class GlobalNotice extends Component {
+export default class Notice extends Component {
     constructor(props) {
         super(props);
     }
@@ -8,8 +8,8 @@ export default class GlobalNotice extends Component {
     render() {
         console.log(`GlobalNotice`);
         return (
-            <div className="global-notice">
-                <div className="notice-text">公告：</div>
+            <div className="notice-container">
+                <div className="notice-text"/>
                 <ul className="notice-list">
                     <li className="notice-item">
                         <a href="/readingguide">

@@ -127,8 +127,8 @@ export default class Header extends Component {
         if (!this.needRender) return null;
         let {isOpen} = this.state;
         return (
-            <div className="header-container">
-                <div className={isOpen ? 'nav-wrap open' : 'nav-wrap'} onClick={this.closeNav}>
+            <div className="container">
+                <div className={isOpen ? 'header open' : 'header'} onClick={this.closeNav}>
                     <div className="nav-toggle-open" onClick={this.openNav} />
                     <div className="brand-logo">
                         <div className="brand-logo-lg">

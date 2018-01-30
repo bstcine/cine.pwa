@@ -1,6 +1,7 @@
 .tag-filter {
   font-size: 0;
   margin: 0 .45rem;
+  display: none;
   .p1-tags {
     list-style: none;
     padding-top: .10rem;
@@ -26,6 +27,7 @@
           line-height: .36rem;
           font-size: .28rem;
           color: #3c3c3c;
+          cursor: pointer;
           &.active {
             border: .02rem solid #3c3c3c;
           }
@@ -45,6 +47,12 @@
         }
       }
     }
+  }
+}
+
+@media @media-up-xs {
+  .tag-filter {
+    display: block;
   }
 }
 

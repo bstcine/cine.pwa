@@ -19,14 +19,14 @@ class Entry extends EntryComponent {
 
     render() {
         return (
-            <div className="root-container">
+            <React.Fragment>
                 <Header/>
                 <Router basename="/preconfirm">
-                    <div className="content-container">
+                    <React.Fragment>
                         <Route exact path="/" component={PreConfirm}/>
-                    </div>
+                    </React.Fragment>
                 </Router>
-            </div>
+            </React.Fragment>
         )
     }
 }

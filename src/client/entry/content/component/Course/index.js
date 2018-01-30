@@ -58,6 +58,10 @@ export default class Course extends Component {
     }
 
     async componentDidMount() {
+        if (siteCodeUtil.inIOSAPP()) {
+            Bridge.ios(BRIDGE_EVENT.TIMELINE, {type: 'loaded'});
+        }
+        window.scroll(0, 0);
         window.addEventListener('scroll', this.handlerScroll);
         eventEmmiter.on(BRIDGE_EVENT.OUTER_SHARE, () => {
             this.clickShare(false);
@@ -146,11 +150,13 @@ export default class Course extends Component {
         } else if (siteCodeUtil.inAndroidAPP()) {
             Bridge.android(BRIDGE_EVENT.PRE_CONFIRM, {course_id: cid});
         } else {
-            let url = `/preconfirm?cid=${cid}`;
+            let url = `/prepare?cid=${cid}`;
             if (source_user_id) {
                 url += `&source_user_id=${source_user_id}`;
             }
-            location.href = url;
+            // location.href = url;
+
+            this.props.history.push(url)
         }
     }
 
@@ -300,111 +306,114 @@ export default class Course extends Component {
         let {course, user, comments, showLoginModal, showRecommendModal, showCouponModal, pauseVideo} = this.state;
 
         return (
-            <div className="course-container">
-                <Brief
-                    course={course}
-                    user={user}
-                    relatedCourse={this.relatedCourse}
-                    login={this.login}
-                    goLearn={this.goLearn}
-                    goBuy={this.goBuy}
-                    clickShare={this.clickShare}
-                    getCoupon={this.getCoupon}
-                    openRecommend={this.openRecommend}
-                    isShowRecommend={getParam().channel}
-                    pauseVideo={pauseVideo}
-                />
+            <div className="container-fluid course-container-bg">
+                <div className="course-container">
+                    <Brief
+                        course={course}
+                        user={user}
+                        relatedCourse={this.relatedCourse}
+                        login={this.login}
+                        goLearn={this.goLearn}
+                        goBuy={this.goBuy}
+                        clickShare={this.clickShare}
+                        getCoupon={this.getCoupon}
+                        openRecommend={this.openRecommend}
+                        isShowRecommend={getParam().channel}
+                        pauseVideo={pauseVideo}
+                    />
 
-                <div className="course-detail" ref="courseDetail">
-                    {course ? (
-                        <Tabs ref="tabs">
-                            <TabItems>
-                                <TabItem>{course.object_type === '1' ? '课程概要' : '详情'}</TabItem>
-                                {course.object_type === '1' && !siteCodeUtil.inIOSAPP() ? (
-                                    <TabItem>课程目录</TabItem>
-                                ) : null}
-                                <TabItem>{course.object_type === '1' ? '学员评价' : '评价'}</TabItem>
-                            </TabItems>
-                            <TabPanels>
-                                <TabPanel>
-                                    <div
-                                        className="course-feature"
-                                        dangerouslySetInnerHTML={{__html: course.h5remark}}
-                                    />
-                                </TabPanel>
-                                {course.object_type === '1' && !siteCodeUtil.inIOSAPP() ? (
+                    <div className="course-detail" ref="courseDetail">
+                        {course ? (
+                            <Tabs ref="tabs">
+                                <TabItems>
+                                    <TabItem>{course.object_type === '1' ? '课程概要' : '详情'}</TabItem>
+                                    {course.object_type === '1' && !siteCodeUtil.inIOSAPP() ? (
+                                        <TabItem>课程目录</TabItem>
+                                    ) : null}
+                                    <TabItem>{course.object_type === '1' ? '学员评价' : '评价'}</TabItem>
+                                </TabItems>
+                                <TabPanels>
                                     <TabPanel>
-                                        {course.catalog ? (
-                                            <div
-                                                className="course-feature"
-                                                dangerouslySetInnerHTML={{__html: course.catalog}}
-                                            />
-                                        ) : null}
+                                        <div
+                                            className="course-feature"
+                                            dangerouslySetInnerHTML={{__html: course.h5remark}}
+                                        />
+                                    </TabPanel>
+                                    {course.object_type === '1' && !siteCodeUtil.inIOSAPP() ? (
+                                        <TabPanel>
+                                            {course.catalog ? (
+                                                <div
+                                                    className="course-feature"
+                                                    dangerouslySetInnerHTML={{__html: course.catalog}}
+                                                />
+                                            ) : null}
 
-                                        <div className="course-category">
-                                            <ul className="course-list">
-                                                {course.contents.map((course, i) => {
-                                                    return (
-                                                        <li key={i}>
-                                                            {course.name}
-                                                            <ul className="chapter-list">
-                                                                {course.children.map((chapter, i) => {
-                                                                    return (
-                                                                        <li key={i}>
-                                                                            {chapter.name}
-                                                                            <ul className="lesson-list">
-                                                                                {chapter.children.map((lesson, i) => {
-                                                                                    return (
-                                                                                        <li key={i}>
-                                                                                            {lesson.name}
-                                                                                            {lesson.duration ? (
-                                                                                                <span className="meta">
+                                            <div className="course-category">
+                                                <ul className="course-list">
+                                                    {course.contents.map((course, i) => {
+                                                        return (
+                                                            <li key={i}>
+                                                                {course.name}
+                                                                <ul className="chapter-list">
+                                                                    {course.children.map((chapter, i) => {
+                                                                        return (
+                                                                            <li key={i}>
+                                                                                {chapter.name}
+                                                                                <ul className="lesson-list">
+                                                                                    {chapter.children.map((lesson, i) => {
+                                                                                        return (
+                                                                                            <li key={i}>
+                                                                                                {lesson.name}
+                                                                                                {lesson.duration ? (
+                                                                                                    <span className="meta">
                                                                                                     {this.durationFormat(
                                                                                                         lesson.duration
                                                                                                     )}
                                                                                                 </span>
-                                                                                            ) : null}
-                                                                                        </li>
-                                                                                    );
-                                                                                })}
-                                                                            </ul>
-                                                                        </li>
-                                                                    );
-                                                                })}
-                                                            </ul>
-                                                        </li>
-                                                    );
-                                                })}
-                                            </ul>
-                                        </div>
+                                                                                                ) : null}
+                                                                                            </li>
+                                                                                        );
+                                                                                    })}
+                                                                                </ul>
+                                                                            </li>
+                                                                        );
+                                                                    })}
+                                                                </ul>
+                                                            </li>
+                                                        );
+                                                    })}
+                                                </ul>
+                                            </div>
+                                        </TabPanel>
+                                    ) : null}
+                                    <TabPanel>
+                                        <Comments comments={comments} />
                                     </TabPanel>
-                                ) : null}
-                                <TabPanel>
-                                    <Comments comments={comments} />
-                                </TabPanel>
-                            </TabPanels>
-                        </Tabs>
-                    ) : null}
+                                </TabPanels>
+                            </Tabs>
+                        ) : null}
+                    </div>
+
+                    <LoginModal
+                        isOpen={showLoginModal}
+                        toggleModal={this.toggleLoginModal}
+                        loginSuccess={this.loginSuccess}
+                    />
+                    <RecommendModal
+                        isOpen={showRecommendModal}
+                        toggleModal={this.toggleRecommendModal}
+                        clickShare={this.clickShare}
+                    />
+                    <CouponModal
+                        isOpen={showCouponModal}
+                        toggleModal={this.toggleCouponModal}
+                        username={this.getUserName(user)}
+                        coupon={this.state.coupon}
+                    />
+
                 </div>
-
-                <LoginModal
-                    isOpen={showLoginModal}
-                    toggleModal={this.toggleLoginModal}
-                    loginSuccess={this.loginSuccess}
-                />
-                <RecommendModal
-                    isOpen={showRecommendModal}
-                    toggleModal={this.toggleRecommendModal}
-                    clickShare={this.clickShare}
-                />
-                <CouponModal
-                    isOpen={showCouponModal}
-                    toggleModal={this.toggleCouponModal}
-                    username={this.getUserName(user)}
-                    coupon={this.state.coupon}
-                />
-
             </div>
+
         );
     }
 }

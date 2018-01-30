@@ -4,6 +4,9 @@ import BRIDGE_EVENT from '@/constant/bridgeEvent';
 import siteCodeUtil from '@/util/sitecodeUtil';
 
 export default class CourseLink extends Component {
+    static defaultProps = {
+        className:""
+    }
     constructor(props) {
         super(props);
         this.clickCourseLink = this.clickCourseLink.bind(this);
@@ -27,6 +30,7 @@ export default class CourseLink extends Component {
     }
 
     render() {
-        return <div onClick={this.clickCourseLink}>{this.props.children}</div>;
+        let {className} = this.props
+        return <div className={className} onClick={this.clickCourseLink}>{this.props.children}</div>;
     }
 }

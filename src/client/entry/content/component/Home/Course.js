@@ -33,29 +33,29 @@ export default class Course extends Component {
 
         return (
             <div className="course-wrap">
-                <CourseLink course={course} {...props}>
-                    <div className="course-item">
-                        <div
-                            className="course-img"
-                            style={{
-                                background: `url(http://www.bstcine.com/f/${
-                                    course.img
+                <CourseLink course={course} className="course-item" {...props}>
+
+                    <div
+                        className="course-img"
+                        style={{
+                            background: `url(http://www.bstcine.com/f/${
+                                course.img
                                 }) center center / cover no-repeat`
-                            }}
-                        />
+                        }}
+                    />
 
-                        <div className="course-desc">
-                            <div className="course-title">{course.name}</div>
-                            {/*<div className="course-author">*/}
-                            {/*{course.author ? `录课老师：${course.author}` : ""}*/}
-                            {/*</div>*/}
-                            {/*<div className="course-arrange">*/}
-                            {/*{course.time_arrange ? `学习课时：${course.time_arrange}` : ""}*/}
-                            {/*</div>*/}
+                    <div className="course-desc">
+                        <div className="course-title">{course.name}</div>
+                        {/*<div className="course-author">*/}
+                        {/*{course.author ? `录课老师：${course.author}` : ""}*/}
+                        {/*</div>*/}
+                        {/*<div className="course-arrange">*/}
+                        {/*{course.time_arrange ? `学习课时：${course.time_arrange}` : ""}*/}
+                        {/*</div>*/}
 
-                            {this.displayPrice(course)}
-                        </div>
+                        {this.displayPrice(course)}
                     </div>
+
                 </CourseLink>
             </div>
         );

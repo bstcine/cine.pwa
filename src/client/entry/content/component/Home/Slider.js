@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
-import Slider from 'react-slick';
+import ReactSlider from 'react-slick';
 
-export default class BannerSlider extends Component {
+export default class Slider extends Component {
     constructor(props) {
         super(props);
         this.settings = {
@@ -19,8 +19,12 @@ export default class BannerSlider extends Component {
     renderItems() {
         return this.props.banners.map((item, i) => {
             return (
-                <div className="slider-item" key={i}>
-                    <img src={item.img} alt={item.name} />
+                <div className="slider-item" key={i} style={{
+                    background: `url(${
+                        item.img
+                        }) center center / cover no-repeat`
+                }}>
+
                 </div>
             );
         });
@@ -28,6 +32,6 @@ export default class BannerSlider extends Component {
 
     render() {
         console.log(`BannerSlider`);
-        return <Slider {...this.settings}>{this.renderItems()}</Slider>;
+        return <ReactSlider {...this.settings}>{this.renderItems()}</ReactSlider>;
     }
 }

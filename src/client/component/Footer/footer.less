@@ -1,88 +1,103 @@
 @import '~asset/style/_cine.less';
 
-.footer-container {
+.footer {
   background-color: #021a52;
+  padding: 0.8rem 0;
+  width: 100%;
+  margin: 0 auto;
+  line-height: 1;
+  font-size: 0;
+  color: #fff;
+  text-align: center;
 
-  .footer-wrap {
-    width: 18.8rem;
-    margin: 0 auto;
-    padding: 0.8rem 0.4rem;
-    line-height: 1;
-    font-size: 0;
-    color: #fff;
+  .contact{
 
     .about-cine {
-      display: inline-block;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      padding-bottom: 0.48rem;
       font-size: 0.36rem;
-      margin-right: 1.6rem;
       vertical-align: top;
-    }
+      border-bottom: 0.02rem solid #011238;
 
-    .about-cine a {
-      color: #fff;
-    }
+      .title {
+        padding-bottom: 0.3rem;
+      }
+      a {
+        color: #fff;
+      }
+      a:hover {
+        color: #78acdc;
+      }
 
-    .about-cine a:hover {
-      color: #78acdc;
-    }
+      .about-list {
+        font-size: 0;
+        li {
+          display: inline-block;
+          padding-right: 0.5rem;
 
-    .about-cine .title {
-      padding-bottom: 0.3rem;
-    }
+          a {
+            font-size: 0.28rem;
+            color: #fff;
+            line-height: 0.56rem;
+          }
+          a:hover {
+            color: #78acdc;
+          }
 
-    .about-list a {
-      font-size: 0.28rem;
-      color: #fff;
-      line-height: 0.56rem;
-    }
+        }
+        li:last-child {
+          padding-right: 0;
+        }
 
-    .about-list a:hover {
-      color: #78acdc;
+      }
     }
 
     .qrcode {
-      display: inline-block;
-      margin: 0 0.87rem;
-    }
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      padding-top: 0.48rem;
 
-    .qrcode .qrcode-img {
-      width: 1.9rem;
-      height: 1.9rem;
-      margin: 0 auto 0.22rem;
-    }
+      .qrcode-img {
+        width: 1.9rem;
+        height: 1.9rem;
+        margin: 0 auto 0.22rem;
+        img {
+          width: 100%;
+          height: 100%;
+        }
+      }
 
-    .qrcode .qrcode-img img {
-      width: 100%;
-      height: 100%;
-    }
+      .qrcode-title {
+        font-size: 0.32rem;
+        text-align: center;
+        margin-bottom: 0.14rem;
+      }
 
-    .qrcode .qrcode-title {
-      font-size: 0.32rem;
-      text-align: center;
-      margin-bottom: 0.14rem;
-    }
-
-    .qrcode .qrcode-name {
-      font-size: 0.28rem;
-      text-align: center;
+      .qrcode-name {
+        font-size: 0.28rem;
+        text-align: center;
+      }
     }
   }
 
+
   .copyright {
     margin: 0 auto;
-    padding: 0.5rem 0 0.64rem;
-    border-top: solid 2px #021b41;
+    padding: 0.5rem 0 0;
     text-align: center;
     color: #fff;
-    font-size: 0.28rem;
-    line-height: 0.56rem;
+    font-size: 0.24rem;
+    line-height: 0.48rem;
     .co-desc {
       font-size: 0;
-
+      word-break: keep-all;
       .co-desc-year,
       .co-desc-code {
         display: inline;
-        font-size: 0.28rem;
+        font-size: 0.24rem;
       }
 
       a {
@@ -90,69 +105,78 @@
       }
     }
   }
+
 }
 
-@media @media-xs {
-  .footer-container {
-    .footer-wrap {
-      text-align: center;
-      padding: 0.8rem 0;
-      width: 100%;
 
-      .about-cine .title {
-        padding-bottom: 0.35rem;
-      }
-
-      .about-list {
-        font-size: 0;
-      }
-
-      .about-list li {
-        display: inline-block;
-        padding-right: 0.5rem;
-      }
-
-      .about-list a {
-        line-height: 1;
-      }
-
-      .about-list li:last-child {
-        padding-right: 0;
-      }
-
-      .bottom-banner {
-        margin-bottom: 0.42rem;
-        width: 100%;
-        height: 1.88rem;
-      }
+@media @media-up-sm {
+  .footer {
+    padding: .60rem 0 1rem;
+    width: 18.8rem;
+    text-align: left;
+    .contact{
+      padding: 0 1rem .60rem;
+      overflow: hidden;
+      zoom: 1;
+      border-bottom: solid 2px #021b41;
 
       .about-cine {
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
-        padding-bottom: 0.48rem;
-        border-bottom: 0.02rem solid #011238;
+        display: inline-block;
+        padding-bottom: 0;
+        vertical-align: top;
+        border-bottom:none;
+
+        .about-list {
+          li {
+            display: block;
+          }
+        }
       }
 
-      .qrcode {
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
-        padding-top: 0.48rem;
+      .qrcodes{
+        float: right;
+        display: inline-block;
+        vertical-align: top;
+        .qrcode {
+          display: inline-block;
+          vertical-align: top;
+          margin-right: 1.60rem;
+          padding-top: 0;
+
+          .qrcode-img {
+            width: 1.9rem;
+            height: 1.9rem;
+            margin: 0 auto 0.22rem;
+            img {
+              width: 100%;
+              height: 100%;
+            }
+          }
+
+          .qrcode-title {
+            font-size: 0.32rem;
+            text-align: center;
+            margin-bottom: 0.14rem;
+          }
+
+          .qrcode-name {
+            font-size: 0.28rem;
+            text-align: center;
+          }
+
+          &:last-child {
+            margin-right: 0;
+          }
+        }
       }
     }
 
-    .copyright {
-      .co-desc {
-        .co-desc-year,
-        .co-desc-code {
-          display: block;
-          font-size: 0.24rem;
-        }
-        .co-name {
-          font-size: 0.24rem;
-        }
-      }
+    .copyright{
+      font-size: .28rem;
+      line-height: 0.56rem;
     }
+
   }
+
+
 }

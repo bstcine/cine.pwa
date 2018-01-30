@@ -3,15 +3,11 @@
 // 轮播图
 .slick-slider {
   overflow: hidden;
-  height: 5.40rem;
-  .grey-line-bottom(16);
+  height: 4.2rem;
+  //.grey-line-bottom(16);
   .slider-item {
-    height: 5.24rem;
+    height: 4.2rem;
     width: 100%;
-    img {
-      display: block;
-      max-width: 100%;
-    }
   }
   .slick-dots-orange {
     position: absolute;
@@ -58,7 +54,10 @@
 }
 
 @media @media-up-sm {
-  .slick-slider{
-    display: none;
+  .slick-slider {
+    height: 4.80rem;
+    .slider-item {
+      height: 4.80rem;
+    }
   }
 }

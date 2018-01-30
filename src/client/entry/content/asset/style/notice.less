@@ -1,58 +1,100 @@
-.notice-wrap {
+.notice-container {
   position: relative;
-  background-color: #0d2763;
-  padding: .28rem .54rem;
-  margin: .64rem auto 0;
-  line-height: 1;
-  -webkit-border-radius: 4px;
-  border-radius: 4px;
-}
-
-.notice-wrap i.i-speaker {
-  display: none;
-}
-
-.notice-text {
-  position: absolute;
-  width: .36rem;
-  top: .5rem;
-  font-size: 18px;
-  line-height: .40rem;
-  color: #4a6db1;
-  font-style: italic;
-}
-
-.notice-list {
-  padding-left: .76rem;
+  padding-left: 0.3rem;
   font-size: 0;
+  line-height: 1;
+  background-color: #0d2763;
+
+  .notice-text {
+    display: block;
+    position: absolute;
+    font-size: 0.28rem;
+    line-height: 0.7rem;
+    color: #e2ecff;
+    font-style: italic;
+    &:after {
+      position: absolute;
+      top: 0.2rem;
+      display: block;
+      content: ' ';
+      background: url(../image/ico_speaker.png) no-repeat;
+      background-size: contain;
+      width: 0.36rem;
+      height: 0.3rem;
+    }
+  }
+  .notice-list {
+    padding-left: 0.6rem;
+    .notice-item {
+      display: inline-block;
+      width: auto;
+      padding-right: 0;
+      font-size: 0.24rem;
+      line-height: 0.7rem;
+      white-space: nowrap;
+      word-break: keep-all;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      vertical-align: top;
+      .notice-tag {
+        padding-right: 0.1rem;
+        color: #e2ecff;
+      }
+      .notice-title {
+        display: none;
+      }
+    }
+  }
 }
 
-.notice-item {
-  display: inline-block;
-  width: 49.99%;
-  padding-right: .5rem;
-  font-size: .28rem;
-  white-space: nowrap;
-  word-break: keep-all;
-  overflow: hidden;
-  -o-text-overflow: ellipsis;
-  text-overflow: ellipsis;
-  line-height: .60rem;
-  color: #5d89db;
-}
+@media @media-up-xs {
+  .notice-container {
+    padding: 0.28rem 0.54rem;
+    margin: 0.64rem auto 0.5rem;
+    border-radius: 0.08rem;
 
-.notice-item a {
-  color: #5d89db;
-}
+    .notice-text {
+      display: block;
+      position: absolute;
+      width: 0.36rem;
+      top: 0.5rem;
+      font-size: 0.36rem;
+      line-height: 0.4rem;
+      color: #4a6db1;
+      font-style: italic;
+      &:after {
+        position: static;
+        content: '公告';
+        background: none;
+      }
+    }
 
-.notice-item a:hover {
-  color: #fff;
-}
+    .notice-list {
+      padding-left: 0.76rem;
+      font-size: 0;
+      .notice-item {
+        display: inline-block;
+        width: 49.99%;
+        padding-right: 0.5rem;
+        font-size: 0.28rem;
+        line-height: 0.6rem;
+        color: #5d89db;
 
-.notice-tag {
-  color: #e2ecff;
-}
+        .notice-title{
+          display: inline;
+        }
+        a {
+          color: #5d89db;
+        }
 
-a:hover .notice-tag {
-  color: #fff;
+        a:hover {
+          color: #fff;
+        }
+
+        a:hover .notice-tag {
+          color: #fff;
+        }
+      }
+    }
+  }
 }

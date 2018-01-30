@@ -1,30 +1,37 @@
-.home-container {
-  position: relative;
-  background-color: #fff;
-  @import "tag-filter.less";
-  @import "global-notice.less";
-  @import "category-list.less";
-}
-
-@import "home-header.less";
-@import "slick-slider.less";
-@import "home-tabs.less";
+@import "slider.less";
+@import "notice.less";
 @import "article.less";
+@import "slogan.less";
 
-.bottom-banner {
-  width: 100%;
-  height: 3.2rem;
-  background: url("../image/bottom.jpg") no-repeat center;
-  background-size: cover;
+body .container.courses-container {
+  background-color: #fff;
+  min-height: 12rem;
+  margin-bottom: .40rem;
+  @import "tag-filter.less";
+  @import "category-list.less";
+  @import "home-tabs.less";
 }
 
-@media @media-xs {
-  .bottom-banner {
-    margin-bottom: .42rem;
-    width: 100%;
-    height: 1.88rem;
+
+@media @media-up-xs {
+  body .container.courses-container {
+    border-radius: .08rem;
   }
 }
 
-@import "notice.less";
+@media @media-up-sm {
+}
+
+@media @media-md {
+  .courses-container-bg{
+    background-color: #f2f4f6;
+  }
+}
+
+//@import "home-header.less";
+
+
+
+
+
 

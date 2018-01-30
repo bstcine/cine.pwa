@@ -2,6 +2,7 @@
 @import "~asset/style/_cine.less";
 
 body{
+  background-color: #021a52;
   .container{
     width: 100%;
   }
@@ -10,42 +11,18 @@ body{
   }
 }
 
+@media @media-up-sm{
+  body {
+    .container {
+      width: 18.80rem;
+      margin:0 auto;
+    }
+  }
+}
+
+
 @import "~asset/style/tabs.less";
 @import "home.less";
 @import "course.less";
+@import "prepare.less";
 
-@media @media-up-sm{
-  body {
-    background-color: #f2f4f6;
-    .container {
-      width: 18.80rem;
-      background-color: #021a52;
-    }
-    .content-container{
-
-    }
-  }
-}
-
-@media @media-up-sm {
-  body {
-    background-color: #f2f4f6;
-  }
-
-  .root-container {
-    .header-container {
-
-      background-color: #021a52;
-    }
-    .content-container {
-      margin: 0 auto;
-      width: 18.80rem;
-      overflow: hidden;
-      background-color: #f2f4f6;
-    }
-    .footer-container {
-
-    }
-  }
-
-}

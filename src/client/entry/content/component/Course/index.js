@@ -58,6 +58,9 @@ export default class Course extends Component {
     }
 
     async componentDidMount() {
+        if (siteCodeUtil.inIOSAPP()) {
+            Bridge.ios(BRIDGE_EVENT.TIMELINE, {type: 'loaded'});
+        }
         window.addEventListener('scroll', this.handlerScroll);
         eventEmmiter.on(BRIDGE_EVENT.OUTER_SHARE, () => {
             this.clickShare(false);

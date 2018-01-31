@@ -15,11 +15,20 @@ export default class Report extends Component {
         this.state = {
             report: {},
             lessons: [],
-            from_share: false
         };
         this.shareClick = this.shareClick.bind(this);
         this.retryClick = this.retryClick.bind(this);
         this.courseClick = this.courseClick.bind(this);
+    }
+
+    static convGrade(grade) {
+        if (grade === 0) {
+            return "学龄前"
+        } else if (grade === 13) {
+            return "成人"
+        } else {
+            return `${grade}年级`
+        }
     }
 
     async componentDidMount() {
@@ -32,7 +41,6 @@ export default class Report extends Component {
             this.setState({
                 report: statsContentWord,
                 lessons: recommendLessons,
-                from_share: getParam().from_share === '1',
                 stat: stat
             });
         });
@@ -103,7 +111,8 @@ export default class Report extends Component {
     }
 
     render() {
-        let {from_share, report, stat} = this.state;
+        let {report, stat} = this.state;
+        let from_share = getParam().from_share === '1';
         return (
             <div className="wrapper">
                 <div className="report">
@@ -121,9 +130,9 @@ export default class Report extends Component {
                     </ul>
                     {stat ? (
                         <div className="rank">
-                            全国{report.grade}年级词汇量均值：<span>{stat.avg_vocab}</span>
+                            全国{Report.convGrade(report.grade)}词汇量均值：<span>{stat.avg_vocab}</span>
                             <br />
-                            在全国{report.grade}年级中的词汇量排位：<span>超过了{stat.my_rank}%的小伙伴</span>
+                            在全国{Report.convGrade(report.grade)}中的词汇量排位：<span>超过了{stat.my_rank}%的小伙伴</span>
                         </div>
                     ) : null}
 

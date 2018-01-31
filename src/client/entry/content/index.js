@@ -1,16 +1,27 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {BrowserRouter as Router, Route} from 'react-router-dom';
-import Course from './component/Course';
-import Prepare from './component/Prepare';
-import Home from './component/Home';
 import './asset/style/index.less';
 import appBanner from '@/util/appBanner';
 import 'material-icons';
 import Header from '@/component/Header';
+import Footer from '@/component/Footer';
 import EntryComponent from '@/component/EntryComponent';
-import Footer from "@/component/Footer";
+// import Home from './component/Home';
+// import Course from './component/Course';
+// import Prepare from './component/Prepare';
+import Home from 'bundle-loader?lazy!./component/Home';
+import Course from 'bundle-loader?lazy!./component/Course';
+import Prepare from 'bundle-loader?lazy!./component/Prepare';
+import Bundle from '@/component/Bundle';
 
+const Loading = () => {
+    return <div style={{background:'#fff',width:'400px',height:'300px',fontSize:'40px',color:'#000'}}>Loading...</div>;
+}
+
+const createComponent = (component, props) => (
+    <Bundle load={component}>{Component => (Component ? <Component {...props} /> : <Loading />)}</Bundle>
+);
 
 class Content extends EntryComponent {
     constructor(props) {
@@ -37,12 +48,15 @@ class Content extends EntryComponent {
                 <Header />
                 <Router basename="/content">
                     <React.Fragment>
-                        <Route exact path="/" component={Home} />
-                        <Route path="/course" component={Course} />
-                        <Route path="/prepare" component={Prepare} />
+                        <Route exact path="/" component={props => createComponent(Home, props)} />
+                        <Route path="/course" component={props => createComponent(Course, props)} />
+                        <Route path="/prepare" component={props => createComponent(Prepare, props)} />
+                        {/*<Route exact path="/" component={Home} />*/}
+                        {/*<Route path="/course" component={Course} />*/}
+                        {/*<Route path="/prepare" component={Prepare} />*/}
                     </React.Fragment>
                 </Router>
-                <Footer/>
+                <Footer />
             </React.Fragment>
         );
     }

@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import ReactSlider from 'react-slick';
+import uaUtil from '@/util/uaUtil';
 
 export default class Slider extends Component {
     constructor(props) {
@@ -14,18 +15,27 @@ export default class Slider extends Component {
             slidesToScroll: 1,
             dotsClass: 'slick-dots-orange'
         };
+        this.wideImg = uaUtil.iPad() || uaUtil.AndroidTablet() || uaUtil.PC();
+    }
+
+    getImg(item) {
+        if (this.wideImg) {
+            return item.img_pad || item.img;
+        } else {
+            return item.img;
+        }
     }
 
     renderItems() {
         return this.props.banners.map((item, i) => {
             return (
-                <div className="slider-item" key={i} style={{
-                    background: `url(${
-                        item.img
-                        }) center center / cover no-repeat`
-                }}>
-
-                </div>
+                <div
+                    className="slider-item"
+                    key={i}
+                    style={{
+                        background: `url(${this.getImg(item)}) center center / cover no-repeat`
+                    }}
+                />
             );
         });
     }

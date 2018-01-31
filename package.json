@@ -47,6 +47,7 @@
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
     "build-manifest-webpack-plugin": "^0.1.0",
+    "bundle-loader": "^0.5.5",
     "clean-webpack-plugin": "^0.1.17",
     "css-loader": "^0.28.7",
     "extract-text-webpack-plugin": "^3.0.2",

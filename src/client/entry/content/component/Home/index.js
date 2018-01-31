@@ -12,6 +12,7 @@ import CategoryList from './CategoryList';
 import {initWechat} from '@/util/wechatUtil';
 import siteCodeUtil from '@/util/sitecodeUtil';
 import uaUtil from '@/util/uaUtil';
+import Article from "@/entry/content/component/Home/Article";
 
 export default class Home extends Component {
     constructor(props) {
@@ -22,7 +23,9 @@ export default class Home extends Component {
             tagTree1: [],
             categorys0: [],
             categorys1: [],
-            tagids: []
+            tagids: [],
+            notices:[],
+            newsCategorys:[]
         };
         this.handlerScroll = this.handlerScroll.bind(this);
     }
@@ -73,7 +76,9 @@ export default class Home extends Component {
             tagTree1: homeRes.tags.tagTree1,
             categorys0: categorys0,
             categorys1: categorys1,
-            tagids
+            tagids,
+            notices:homeRes.notices,
+            newsCategorys:homeRes.newsCategorys,
         });
     }
 
@@ -157,7 +162,7 @@ export default class Home extends Component {
             <React.Fragment>
                 <div className="container" ref="homeContainer">
                     <Slider banners={this.state.banners} />
-                    <Notice />
+                    <Notice notices={this.state.notices}/>
                 </div>
                 <div className="container-fluid courses-container-bg">
                     <div className="container courses-container">
@@ -188,212 +193,7 @@ export default class Home extends Component {
                     </div>
                 </div>
                 <div className="container">
-                    <div className="article-container">
-                        <div className="title">
-                            <span>•</span> 善恩精彩文章
-                        </div>
-                        <div className="article-category-wrap">
-                            <div className="article-category">
-                                <div className="article-category-title">
-                                    善恩态度
-                                    <a className="more" href="/news-17">
-                                        更多 &gt;
-                                    </a>
-                                </div>
-                                <div
-                                    className="article-img"
-                                    style={{
-                                        background:
-                                            'url(http://www.bstcine.com/f/2016/06/24/165403303SrFpFVF.jpg) no-repeat center',
-                                        backgroundSize: 'cover'
-                                    }}
-                                />
-                                <ul className="article-list">
-                                    <li className="article">
-                                        <a href="/news/302">英文比中文好，所以我骄傲？</a>
-                                    </li>
-
-                                    <li className="article">
-                                        <a href="/news/292">话题 | 寒门再难出贵子，是公平还是不幸？</a>
-                                    </li>
-
-                                    <li className="article">
-                                        <a href="/news/177">深度分析：哈佛向功利主义开炮背后的原因</a>
-                                    </li>
-
-                                    <li className="article">
-                                        <a href="/news/207">
-                                            致那位毕业了却还没融入的伯克利学生的妈妈 —让我来告诉你问题出在哪里
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-
-                            <div className="article-category">
-                                <div className="article-category-title">
-                                    留学专辑
-                                    <a className="more" href="/news-25">
-                                        更多 &gt;
-                                    </a>
-                                </div>
-                                <div
-                                    className="article-img"
-                                    style={{
-                                        background:
-                                            'url(http://www.bstcine.com/f/2016/06/24/165403303SrFpFVF.jpg) no-repeat center',
-                                        backgroundSize: 'cover'
-                                    }}
-                                />
-                                <ul className="article-list">
-                                    <li className="article">
-                                        <a href="/news/301">善恩留学之旅：波士顿大学</a>
-                                    </li>
-
-                                    <li className="article">
-                                        <a href="/news/175">
-                                            CAAS（联盟）真的要颠覆美国大学申请的游戏规则吗？看CA和CAAS怎么互掐
-                                        </a>
-                                    </li>
-
-                                    <li className="article">
-                                        <a href="/news/300">善恩留学之旅 | 爱默生学院</a>
-                                    </li>
-
-                                    <li className="article">
-                                        <a href="/news/176">诚信，和善良一样，也是一种选择</a>
-                                    </li>
-                                </ul>
-                            </div>
-
-                            <div className="article-category">
-                                <div className="article-category-title">
-                                    英语学习
-                                    <a className="more" href="/news-13">
-                                        更多 &gt;
-                                    </a>
-                                </div>
-                                <div
-                                    className="article-img"
-                                    style={{
-                                        background:
-                                            'url(http://www.bstcine.com/f/2016/06/24/165403303SrFpFVF.jpg) no-repeat center',
-                                        backgroundSize: 'cover'
-                                    }}
-                                />
-                                <ul className="article-list">
-                                    <li className="article">
-                                        <a href="/news/294">从没上过听力课，托福听力满分 | 我家孩子的“磨耳朵”秘诀</a>
-                                    </li>
-
-                                    <li className="article">
-                                        <a href="/news/289">这一本书，我们已经读了两年</a>
-                                    </li>
-
-                                    <li className="article">
-                                        <a href="/news/90">从小学到高中，这么阅读，孩子们的英文可以接近母语水平。</a>
-                                    </li>
-
-                                    <li className="article">
-                                        <a href="/news/296">哈佛耶鲁太远，不如效仿隔壁女孩的英语开挂之路</a>
-                                    </li>
-                                </ul>
-                            </div>
-
-                            <div className="article-category">
-                                <div className="article-category-title">
-                                    线上课程
-                                    <a className="more" href="/news-15">
-                                        更多 &gt;
-                                    </a>
-                                </div>
-                                <div
-                                    className="article-img"
-                                    style={{
-                                        background:
-                                            'url(http://www.bstcine.com/f/2016/06/24/165403303SrFpFVF.jpg) no-repeat center',
-                                        backgroundSize: 'cover'
-                                    }}
-                                />
-                                <ul className="article-list">
-                                    <li className="article">
-                                        <a href="/news/191">七步阅读法—善恩视频课程的使用方法</a>
-                                    </li>
-
-                                    <li className="article">
-                                        <a href="/news/192">在线视频课程那些事儿</a>
-                                    </li>
-
-                                    <li className="article">
-                                        <a href="/news/213">
-                                            查理和巧克力工厂，了不起的盖茨比，血字的研究
-                                            视频课程发布，在线视频学习系统全面升级
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-
-                            <div className="article-category">
-                                <div className="article-category-title">
-                                    名著精读
-                                    <a className="more" href="/news-26">
-                                        更多 &gt;
-                                    </a>
-                                </div>
-                                <div
-                                    className="article-img"
-                                    style={{
-                                        background:
-                                            'url(http://www.bstcine.com/f/2016/06/24/165403303SrFpFVF.jpg) no-repeat center',
-                                        backgroundSize: 'cover'
-                                    }}
-                                />
-                                <ul className="article-list">
-                                    <li className="article">
-                                        <a href="/news/304">速读的秘诀在哪里？</a>
-                                    </li>
-
-                                    <li className="article">
-                                        <a href="/news/303">
-                                            善恩精读 | 畅销百万册的普利策奖得主：Guns, Germs and Steel枪炮、病菌与钢铁
-                                        </a>
-                                    </li>
-
-                                    <li className="article">
-                                        <a href="/news/297">善恩精读 | Lord of the Flies 蝇王 ——又见反乌托</a>
-                                    </li>
-
-                                    <li className="article">
-                                        <a href="/news/299">精读赏析 | 神探福尔摩斯不知道日心说？</a>
-                                    </li>
-                                </ul>
-                            </div>
-
-                            <div className="article-category">
-                                <div className="article-category-title">
-                                    应试攻略
-                                    <a className="more" href="/news-27">
-                                        更多 &gt;
-                                    </a>
-                                </div>
-                                <div
-                                    className="article-img"
-                                    style={{
-                                        background:
-                                            'url(http://www.bstcine.com/f/2016/06/24/165403303SrFpFVF.jpg) no-repeat center',
-                                        backgroundSize: 'cover'
-                                    }}
-                                />
-                                <ul className="article-list">
-                                    <li className="article">
-                                        <a href="/news/298">
-                                            江苏高考英语，你就这样把学生和老师带歪 |
-                                            善恩专家团逐一评点江苏省2017年英语高考试题
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
+                    <Article newsCategorys={this.state.newsCategorys}/>
                 </div>
 
                 {!siteCodeUtil.inAPP() && !uaUtil.wechat() ? (

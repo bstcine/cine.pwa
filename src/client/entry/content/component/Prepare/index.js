@@ -211,117 +211,122 @@ export default class Prepare extends Component {
         } = this.state;
         return (
             <div className="container-fluid course-container-bg">
-            <div className="prepare-container">
-                <div className="brief">
-                    <div className="image">
-                        <div
-                            className="content"
-                            style={
-                                course && course.img
-                                    ? {
-                                          background: `url(${
-                                              course.img ? 'http://www.bstcine.com/f/' + course.img : ''
-                                          }) center center / cover no-repeat`
-                                      }
-                                    : null
-                            }
-                        />
+                <div className="prepare-container">
+                    <div className="brief">
+                        <div className="image">
+                            <div
+                                className="content"
+                                style={
+                                    course && course.img
+                                        ? {
+                                              background: `url(${
+                                                  course.img ? 'http://www.bstcine.com/f/' + course.img : ''
+                                              }) center center / cover no-repeat`
+                                          }
+                                        : null
+                                }
+                            />
+                        </div>
+                        <div className="right">
+                            <div className="title">{course && course.name ? course.name : ''}</div>
+                            <div className="prices">
+                                {course && course.price ? <span className="price">￥{course.price}</span> : null}
+                                {course && course.original_price ? (
+                                    <span className="old-price">
+                                        原价：<span className="del">￥{course.original_price}</span>
+                                    </span>
+                                ) : null}
+                            </div>
+                        </div>
                     </div>
-                    <div className="right">
-                        <div className="title">{course && course.name ? course.name : ''}</div>
-                        <div className="prices">
-                            {course && course.price ? <span className="price">￥{course.price}</span> : null}
-                            {course && course.original_price ? (
-                                <span className="old-price">
-                                    原价：<span className="del">￥{course.original_price}</span>
-                                </span>
+                    {this.renderPackageLesson()}
+
+                    <div className="order-control total-price">
+                        <span className="label">应付金额</span>
+                        {calPrice && calPrice.price ? <span className="price">￥{calPrice.price}</span> : null}
+                    </div>
+                    {this.renderOrderedLessons()}
+
+                    {is_show_coupon ? (
+                        <div className="order-control coupon">
+                            <span className="label">优惠券</span>
+                            <div className="input">
+                                <span className="normal">输入优惠券</span>
+                                <input
+                                    name="coupon_no"
+                                    value={coupon_no}
+                                    className={coupon_msg ? 'err' : ''}
+                                    onChange={this.inputChange}
+                                />
+                                <span className="error-tips">{coupon_msg}</span>
+                                <span className="red">抵扣：-￥{calPrice.coupon_discount}</span>
+                            </div>
+                        </div>
+                    ) : null}
+
+                    {is_show_point && user && calPrice ? (
+                        <div className="order-control point">
+                            <span className="label">积分</span>
+                            <span className="red">{user.point}</span>
+                            <div className="input">
+                                <span className="normal">本次使用</span>
+                                <input
+                                    name="point"
+                                    value={point}
+                                    className={point_msg ? 'err' : ''}
+                                    onChange={this.inputChange}
+                                />
+                                <span className="normal">积分</span>
+                                <span className="error-tips">{point_msg}</span>
+                                <span className="red">抵扣：-￥{calPrice.point_discount}</span>
+                            </div>
+                        </div>
+                    ) : null}
+
+                    <div className="order-control pay-price">
+                        <span className="label">实付金额</span>
+                        {calPrice && calPrice.pay_price ? <span className="price">￥{calPrice.pay_price}</span> : null}
+                    </div>
+                    {course && course.is_need_remark === '1' ? (
+                        <div className="order-control address">
+                            <span className="label">收货地址</span>
+                            <button className="btn-outline" onClick={this.goAddress}>
+                                {addressInfo ? '修改地址' : '添加地址'}
+                            </button>
+                            {addressInfo ? (
+                                <div className="my-address">
+                                    <div className="my-address-contact">
+                                        <span>收货人：</span>
+                                        <span className="my-name">{addressInfo.name}</span>
+                                        <span>{addressInfo.phone}</span>
+                                    </div>
+                                    <div className="my-area">
+                                        <span>地址：</span>
+                                        <span>{addressInfo.address}</span>
+                                    </div>
+                                </div>
                             ) : null}
                         </div>
-                    </div>
-                </div>
-                {this.renderPackageLesson()}
+                    ) : null}
 
-                <div className="order-control total-price">
-                    <span className="label">应付金额</span>
-                    {calPrice && calPrice.price ? <span className="price">￥{calPrice.price}</span> : null}
-                </div>
-                {this.renderOrderedLessons()}
-
-                {is_show_coupon ? (
-                    <div className="order-control coupon">
-                        <span className="label">优惠券</span>
-                        <div className="input">
-                            <span className="normal">输入优惠券</span>
-                            <input
-                                name="coupon_no"
-                                value={coupon_no}
-                                className={coupon_msg ? 'err' : ''}
-                                onChange={this.inputChange}
-                            />
-                            <span className="error-tips">{coupon_msg}</span>
-                            <span className="red">抵扣：-￥{calPrice.coupon_discount}</span>
-                        </div>
-                    </div>
-                ) : null}
-
-                {is_show_point && user && calPrice ? (
-                    <div className="order-control point">
-                        <span className="label">积分</span>
-                        <span className="red">{user.point}</span>
-                        <div className="input">
-                            <span className="normal">本次使用</span>
-                            <input
-                                name="point"
-                                value={point}
-                                className={point_msg ? 'err' : ''}
-                                onChange={this.inputChange}
-                            />
-                            <span className="normal">积分</span>
-                            <span className="error-tips">{point_msg}</span>
-                            <span className="red">抵扣：-￥{calPrice.point_discount}</span>
-                        </div>
-                    </div>
-                ) : null}
-
-                <div className="order-control pay-price">
-                    <span className="label">实付金额</span>
-                    {calPrice && calPrice.pay_price ? <span className="price">￥{calPrice.pay_price}</span> : null}
-                </div>
-                {course && course.is_need_remark === '1' ? (
-                    <div className="order-control address">
-                        <span className="label">收货地址</span>
-                        <button className="btn-outline" onClick={this.goAddress}>
-                            {addressInfo ? '修改地址' : '添加地址'}
-                        </button>
-                        {addressInfo ? (
-                            <div className="my-address">
-                                <div className="my-address-contact">
-                                    <span>收货人：</span>
-                                    <span className="my-name">{addressInfo.name}</span>
-                                    <span>{addressInfo.phone}</span>
-                                </div>
-                                <div className="my-area">
-                                    <span>地址：</span>
-                                    <span>{addressInfo.address}</span>
-                                </div>
+                    {course && course.is_need_remark === '1' ? (
+                        <div className="order-control remark">
+                            <span className="label">备注</span>
+                            <div className="my-remark">
+                                <textarea
+                                    name="remark"
+                                    value={this.state.remark}
+                                    onChange={this.inputChange}
+                                    rows="4"
+                                />
                             </div>
-                        ) : null}
-                    </div>
-                ) : null}
-
-                {course && course.is_need_remark === '1' ? (
-                    <div className="order-control remark">
-                        <span className="label">备注</span>
-                        <div className="my-remark">
-                            <textarea name="remark" value={this.state.remark} onChange={this.inputChange} rows="4" />
                         </div>
-                    </div>
-                ) : null}
+                    ) : null}
 
-                <button className="btn-action btn-confirm" onClick={this.confirmOrder}>
-                    提交订单
-                </button>
-            </div>
+                    <button className="btn-action btn-confirm" onClick={this.confirmOrder}>
+                        提交订单
+                    </button>
+                </div>
             </div>
         );
     }

@@ -75,7 +75,7 @@ export default class Brief extends Component {
         const {goLearn, goBuy, clickShare} = this.props;
         if (course.status === '1') {
             if (course.is_paid) {
-                if (!siteCodeUtil.inIOSAPP()) {
+                if (!siteCodeUtil.inIOSAPP() && course.product_type === '1' && (course.object_type === '1' ||course.object_type === '4')) {
                     return (
                         <button className="btn-action btn-learn" onClick={goLearn}>
                             立即学习

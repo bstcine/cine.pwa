@@ -46,13 +46,12 @@ export default class Course extends Component {
 
                     <div className="course-desc">
                         <div className="course-title">{course.name}</div>
-                        {/*<div className="course-author">*/}
-                        {/*{course.author ? `录课老师：${course.author}` : ""}*/}
-                        {/*</div>*/}
-                        {/*<div className="course-arrange">*/}
-                        {/*{course.time_arrange ? `学习课时：${course.time_arrange}` : ""}*/}
-                        {/*</div>*/}
-
+                        <div className="course-author">
+                        {course.author ? `授课老师：${course.author}` : ""}
+                        </div>
+                        <div className="course-arrange">
+                        {course.time_arrange ? `学习课时：${course.time_arrange}` : ""}
+                        </div>
                         {this.displayPrice(course)}
                     </div>
 

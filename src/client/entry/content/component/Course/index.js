@@ -62,12 +62,12 @@ export default class Course extends Component {
             Bridge.ios(BRIDGE_EVENT.TIMELINE, {type: 'loaded'});
         }
         window.scroll(0, 0);
-        // window.addEventListener('scroll', this.handlerScroll);
         eventEmmiter.on(BRIDGE_EVENT.OUTER_SHARE, () => {
             this.clickShare(false);
         });
         this.initCurrentPageWechat();
-        this.initData();
+        await this.initData();
+        window.addEventListener('scroll', this.handlerScroll);
         BaseService.accessLog();
     }
 
@@ -94,7 +94,7 @@ export default class Course extends Component {
     }
 
     componentWillUnmount() {
-       // window.removeEventListener('scroll', this.handlerScroll);
+       window.removeEventListener('scroll', this.handlerScroll);
     }
 
     componentWillReceiveProps(nextProps) {

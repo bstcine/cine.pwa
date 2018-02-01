@@ -8,7 +8,7 @@
     .grey-line-bottom(16);
     .category-text {
       padding: .36rem .06rem .28rem;
-      font-size: .36rem;
+      font-size: .32rem;
       color: #0f0f0f;
     }
     .course-list {
@@ -16,7 +16,7 @@
 
       .course-wrap {
         display: inline-block;
-        margin-bottom: .26rem;
+        margin-bottom: .10rem;
         width: 1/2 * 100%;
 
         .course-item {
@@ -32,21 +32,24 @@
             border-radius: .06rem;
           }
           .course-desc {
+            padding: 0 .10rem;
+            > * {
+              .text-one-line();
+            }
             .course-title {
               font-size: .28rem;
               line-height: .50rem;
               color: #222;
-              .text-one-line();
             }
-            .course-author {
+            .course-author,.course-arrange {
+              font-size: .22rem;
+              line-height: .32rem;
+              color: #a0a4a7;
+            }
 
-            }
-            .course-arrange {
-
-            }
             .course-price {
               font-size: .30rem;
-              line-height: .38rem;
+              line-height: .60rem;
               color: #f22010;
               .old-price-text {
                 padding-left: .22rem;
@@ -81,7 +84,7 @@
     .category {
       padding: 0 .37rem;
       .category-text {
-
+        font-size: .40rem;
       }
       .course-list {
         margin: 0 -.10rem;
@@ -89,22 +92,16 @@
           width: 1/3 * 100%;
           .course-item {
             margin: 0 .20rem;
-
             .course-desc {
               .course-title {
-                font-size: .30rem;
-                color: #222;
                 line-height: .60rem;
-                .text-one-line();
               }
-              .course-author {
-
-              }
-              .course-arrange {
-
+              .course-author,.course-arrange {
+                font-size: .24rem;
               }
               .course-price {
                 font-size: .42rem;
+                line-height: .76rem;
               }
             }
           }

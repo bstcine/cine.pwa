@@ -68,6 +68,9 @@ export default class Course extends Component {
         this.initCurrentPageWechat();
         await this.initData();
         window.addEventListener('scroll', this.handlerScroll);
+        if (siteCodeUtil.inIOSAPP()) {
+            Bridge.ios(BRIDGE_EVENT.TIMELINE, {type: 'visible'});
+        }
         BaseService.accessLog();
     }
 

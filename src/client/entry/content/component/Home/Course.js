@@ -28,6 +28,46 @@ export default class Course extends Component {
         }
     }
 
+    renderAuthor(course){
+        if(course.object_type === '1'){
+            return (
+                <div className="course-author">
+                    {course.author ? `授课老师：${course.author}` : ""}
+                </div>
+            )
+        }else{
+            if(course.author){
+                return (
+                    <div className="course-author">
+                        {`授课老师：${course.author}`}
+                    </div>
+                )
+            }else{
+                return null
+            }
+        }
+    }
+
+    renderTimeArrange(course) {
+        if(course.object_type === '1'){
+            return (
+                <div className="course-arrange">
+                    {course.time_arrange ? `学习课时：${course.time_arrange}` : ""}
+                </div>
+            )
+        }else{
+            if(course.time_arrange){
+                return (
+                    <div className="course-arrange">
+                        {`学习课时：${course.time_arrange}`}
+                    </div>
+                )
+            }else{
+                return null
+            }
+        }
+    }
+
     render() {
         const {course, ...props} = this.props;
 
@@ -46,12 +86,8 @@ export default class Course extends Component {
 
                     <div className="course-desc">
                         <div className="course-title">{course.name}</div>
-                        <div className="course-author">
-                        {course.author ? `授课老师：${course.author}` : ""}
-                        </div>
-                        <div className="course-arrange">
-                        {course.time_arrange ? `学习课时：${course.time_arrange}` : ""}
-                        </div>
+                        {this.renderAuthor(course)}
+                        {this.renderTimeArrange(course)}
                         {this.displayPrice(course)}
                     </div>
 

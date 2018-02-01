@@ -160,11 +160,13 @@ export default class Home extends Component {
         console.log(`Home`);
         return (
             <React.Fragment>
-                <div className="container" ref="homeContainer">
+                <div className="container-fluid">
                     <Slider banners={this.state.banners} />
+                </div>
+                <div className="container">
                     <Notice notices={this.state.notices}/>
                 </div>
-                <div className="container-fluid courses-container-bg">
+                <div className="container-fluid courses-container-bg" ref="homeContainer">
                     <div className="container courses-container">
                         <Tabs className="home-tabs">
                             <TabItems>

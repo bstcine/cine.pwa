@@ -16,7 +16,7 @@
 
       .course-wrap {
         display: inline-block;
-        margin-bottom: .10rem;
+        margin-bottom: .20rem;
         width: 1/2 * 100%;
 
         .course-item {
@@ -24,12 +24,14 @@
           margin: 0 .04rem;
           transition: all 0.3s cubic-bezier(.25, .8, .25, 1);
           border-radius: .06rem;
+          box-shadow: 0 0 .04rem rgba(0, 0, 0, .2);
           &:hover {
-            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.15)
+            box-shadow: 0 .08rem .16rem 0 rgba(0, 0, 0, 0.15)
           }
           .course-img {
             padding-top: (9/16 )*100%;
-            border-radius: .06rem;
+            border-top-left-radius: .06rem;
+            border-top-right-radius: .06rem;
           }
           .course-desc {
             padding: 0 .10rem;
@@ -43,6 +45,7 @@
             }
             .course-author,.course-arrange {
               font-size: .22rem;
+              height: .32rem;
               line-height: .32rem;
               color: #a0a4a7;
             }
@@ -65,6 +68,7 @@
             .coming-soon {
               color: #8d8c8c;
               font-size: .32rem;
+              line-height: .60rem;
             }
           }
         }
@@ -101,6 +105,9 @@
               }
               .course-price {
                 font-size: .42rem;
+                line-height: .76rem;
+              }
+              .coming-soon {
                 line-height: .76rem;
               }
             }

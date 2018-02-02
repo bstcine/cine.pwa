@@ -1,11 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {BrowserRouter as Router, Route} from 'react-router-dom';
+import {Route} from 'react-router-dom';
 import './asset/style/index.less';
 import appBanner from '@/util/appBanner';
 import 'material-icons';
 import Header from '@/component/Header';
 import Footer from '@/component/Footer';
+import Router from '@/component/Router';
 import EntryComponent from '@/component/EntryComponent';
 // import Home from './component/Home';
 // import Course from './component/Course';
@@ -15,9 +16,10 @@ import Course from 'bundle-loader?lazy!./component/Course';
 import Prepare from 'bundle-loader?lazy!./component/Prepare';
 import Bundle from '@/component/Bundle';
 
-const Loading = () => {
-    return <div style={{background:'#fff',width:'400px',height:'300px',fontSize:'40px',color:'#000'}}>Loading...</div>;
-}
+const Loading = () =>  <div style={{background: '#fff', width: '400px', height: '300px', fontSize: '40px', color: '#000'}}>
+            Loading...
+        </div>
+
 
 const createComponent = (component, props) => (
     <Bundle load={component}>{Component => (Component ? <Component {...props} /> : <Loading />)}</Bundle>
@@ -51,9 +53,6 @@ class Content extends EntryComponent {
                         <Route exact path="/" component={props => createComponent(Home, props)} />
                         <Route path="/course" component={props => createComponent(Course, props)} />
                         <Route path="/prepare" component={props => createComponent(Prepare, props)} />
-                        {/*<Route exact path="/" component={Home} />*/}
-                        {/*<Route path="/course" component={Course} />*/}
-                        {/*<Route path="/prepare" component={Prepare} />*/}
                     </React.Fragment>
                 </Router>
                 <Footer />

@@ -2,12 +2,14 @@ import storeUtil from '@/util/storeUtil';
 import axios from 'axios';
 
 function httpUrl(url) {
-    let baseURL =
-        typeof app_API_Host_URL === 'undefined' ? '' : app_API_Host_URL;
+    let baseURL = '';
     if (url.indexOf('http') >= 0) {
         baseURL = '';
+    } else {
+        if (process.env.API_Host_URL) {
+            baseURL = process.env.API_Host_URL;
+        }
     }
-
     return baseURL + url;
 }
 
@@ -35,6 +37,7 @@ export let post = (url, data) => {
     let _httpBody = httpBody(data);
 
     //alert(_apiURL)
+    console.log(_httpBody);
     return axios
         .post(_apiURL, _httpBody)
         .then(response => response.data)

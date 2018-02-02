@@ -24,14 +24,14 @@ export default class Welcome extends Component {
         if (!user && !loginModalOpened) {
             this.toggleLoginModal();
         } else {
-            if (user && user.area_code && user.grade && user.born_at) {
+            if (user && user.area_code && user.grade !== null && user.born_at) {
                 this.props.history.push('/card');
             } else {
                 let url = '/userinfo';
                 if (user) {
                     let params = [];
                     if (user.area_code) params.push(`area_code=${encodeURIComponent(user.area_code)}`);
-                    if (user.grade) params.push(`grade=${encodeURIComponent(user.grade)}`);
+                    if (user.grade !== null) params.push(`grade=${encodeURIComponent(user.grade)}`);
                     if (user.born_at) params.push(`born_at=${encodeURIComponent(user.born_at)}`);
                     url += '?' + params.join('&');
                 }

@@ -12,7 +12,21 @@ export let getPureUrl = () => {
 export let getParam = href => {
     let url = href || location.href;
     let URLObj = URLParse(url, true);
-    return URLObj.query;
+    let queryObj = URLObj.query
+    let hashObj = {};
+    if (process.env.MODE === 'static') {
+        let index1 = url.indexOf('#');
+        let index2 = url.indexOf('?');
+        if (index1 !== -1 && index2 !== -1 && index2 > index1) {
+            let hash = url.substring(index2 + 1, url.length);
+            hash.split('&').forEach(item => {
+                let arr = item.split('=');
+                hashObj[arr[0]] = arr[1]
+            })
+        }
+    }
+    let obj = Object.assign(hashObj, queryObj);
+    return obj;
 };
 
 export let addParam = (url = location.href, params) => {

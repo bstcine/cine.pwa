@@ -19,7 +19,7 @@ export default class Index extends Component {
             }
             let user = result.result.user;
             storeUtil.set('user', user);
-            if (user.area_code && user.grade && user.born_at) {
+            if (user.area_code && user.grade !== null && user.born_at) {
                 this.props.history.replace(`/welcome`);
             } else {
                 this.props.history.replace(`/userinfo`);

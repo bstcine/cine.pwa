@@ -1,13 +1,24 @@
 const path = require('path');
-// 生产模式配置好 CDN 后切换到 CDN
-const static_host = process.env.NODE_ENV === 'production' ? '/' : '/';
+
+// 本地静态文件模式 begin
+// const MODE = 'static';
+// const API_Host_URL = 'http://www.bstcine.com';
+// 本地静态文件模式 end
+
+const MODE = '';
+const API_Host_URL = '';
+
+let publicPath = MODE === 'static' ? '../../' : '/';
 
 module.exports = {
-
     // 用来加载 vConsole 调试插件，生产模式 关闭 debug
     debug: true,
 
-    static_host,
+    MODE,
+
+    API_Host_URL,
+
+    publicPath,
 
     pages: ['content', 'cquiz', 'address', 'vocabtest'],
 
@@ -18,12 +29,12 @@ module.exports = {
         'react-transition-group',
         'babel-polyfill',
         'react-modal',
-        'material-icons',
+        'material-icons'
     ],
 
     output: {
         path: path.resolve(__dirname, 'build'),
-        publicPath: static_host,
+        publicPath: publicPath,
         filename: 'entry/[name]/index.[chunkhash:8].js'
     },
 
@@ -37,8 +48,8 @@ module.exports = {
                 options: {
                     cacheDirectory: true,
                     plugins: ['lodash'],
-                    presets: ["env", "stage-0", "react"]
-                },
+                    presets: ['env', 'stage-0', 'react']
+                }
             },
             {
                 test: /\.less$/,
@@ -48,15 +59,12 @@ module.exports = {
                     {
                         loader: 'postcss-loader',
                         options: {
-                            plugins: [
-                                require('postcss-import'),
-                                require('autoprefixer')
-                            ],
+                            plugins: [require('postcss-import'), require('autoprefixer')],
                             browsers: [
                                 '>1%',
                                 'last 4 versions',
                                 'Firefox ESR',
-                                'not ie < 9', // React doesn't support IE8 anyway
+                                'not ie < 9' // React doesn't support IE8 anyway
                             ]
                         }
                     },
@@ -71,15 +79,12 @@ module.exports = {
                     {
                         loader: 'postcss-loader',
                         options: {
-                            plugins: [
-                                require('postcss-import'),
-                                require('autoprefixer')
-                            ],
+                            plugins: [require('postcss-import'), require('autoprefixer')],
                             browsers: [
                                 '>1%',
                                 'last 4 versions',
                                 'Firefox ESR',
-                                'not ie < 9', // React doesn't support IE8 anyway
+                                'not ie < 9' // React doesn't support IE8 anyway
                             ]
                         }
                     }
@@ -90,25 +95,26 @@ module.exports = {
                 loader: 'url-loader',
                 options: {
                     limit: 10000,
-                    name: 'asset/image/[name].[hash:8].[ext]'
+                    name: 'asset/image/[name].[hash:8].[ext]',
+                    publicPath
                 }
             },
             {
                 test: /\.(woff|woff2|eot|otf|webp|ttf)$/i,
-                loader: 'url-loader',
+                loader: 'file-loader',
                 options: {
-                    limit: 10000,
-                    name: 'asset/font/[name].[hash:8].[ext]'
-                },
+                    name: 'asset/font/[name].[hash:8].[ext]',
+                    publicPath
+                }
             }
         ]
     },
 
     resolve: {
-        modules: [path.resolve(__dirname, 'src/client'), "node_modules"],
+        modules: [path.resolve(__dirname, 'src/client'), 'node_modules'],
         alias: {
             '@': path.resolve(__dirname, 'src/client'),
-            'material-icons': 'material-design-icons/iconfont/material-icons.css',
+            'material-icons': 'material-design-icons/iconfont/material-icons.css'
         }
     }
 };

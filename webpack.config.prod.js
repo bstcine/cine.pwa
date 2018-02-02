@@ -12,29 +12,31 @@ const Config = require('./config');
 const pages = Config.pages;
 let entry = {};
 let HtmlWebpackPlugins = [];
-pages.forEach((page) => {
+pages.forEach(page => {
     entry[page] = ['babel-polyfill', `./src/client/entry/${page}/index.js`];
-    HtmlWebpackPlugins.push(new HtmlWebpackPlugin({
-        filename: `entry/${page}/index.html`,
-        template: `src/client/entry/${page}/index.html`,
-        inject: true,
-        chunks: [page],
-        minify: {
-            removeComments: true,
-            collapseWhitespace: true,
-            removeRedundantAttributes: true,
-            useShortDoctype: true,
-            removeEmptyAttributes: true,
-            removeStyleLinkTypeAttributes: true,
-            keepClosingSlash: true,
-            minifyJS: true,
-            minifyCSS: true,
-            minifyURLs: true,
-        },
-    }))
+    HtmlWebpackPlugins.push(
+        new HtmlWebpackPlugin({
+            filename: `entry/${page}/index.html`,
+            template: `src/client/entry/${page}/index.html`,
+            inject: true,
+            chunks: [page],
+            minify: {
+                removeComments: true,
+                collapseWhitespace: true,
+                removeRedundantAttributes: true,
+                useShortDoctype: true,
+                removeEmptyAttributes: true,
+                removeStyleLinkTypeAttributes: true,
+                keepClosingSlash: true,
+                minifyJS: true,
+                minifyCSS: true,
+                minifyURLs: true
+            }
+        })
+    );
 });
 
-entry['vendor'] = Config.vendors
+entry['vendor'] = Config.vendors;
 
 module.exports = {
     cache: false,
@@ -45,7 +47,9 @@ module.exports = {
     resolve: Config.resolve,
     plugins: [
         new webpack.EnvironmentPlugin({
-            DEBUG: Config.debug
+            DEBUG: Config.debug,
+            MODE: Config.MODE,
+            API_Host_URL: Config.API_Host_URL
         }),
         new CleanWebpackPlugin(['build/*.*', 'build/entry'], {verbose: false}),
         new webpack.DllReferencePlugin({
@@ -55,7 +59,7 @@ module.exports = {
         ...HtmlWebpackPlugins,
         new AddAssetHtmlPlugin({
             filepath: path.resolve(__dirname, 'build/dll/dll.*.js'),
-            publicPath: Config.static_host + 'dll/',
+            publicPath: Config.publicPath + 'dll/',
             includeSourcemap: false,
             outputPath: 'dll'
         }),
@@ -68,23 +72,23 @@ module.exports = {
                 // Pending further investigation:
                 // https://github.com/mishoo/UglifyJS2/issues/2011
                 comparisons: false,
-                drop_console: false,
+                drop_console: false
             },
             mangle: {
-                safari10: true,
+                safari10: true
             },
             output: {
                 comments: false,
                 // Turned on because emoji and regex is not minified properly using default
                 // https://github.com/facebookincubator/create-react-app/issues/2488
-                ascii_only: true,
+                ascii_only: true
             },
-            sourceMap: true,
+            sourceMap: true
         }),
         new BuildManifestPlugin({
-            name:"build-manifest.json",
-            buildPath:path.join(__dirname, "build"),
-        }),
+            name: 'build-manifest.json',
+            buildPath: path.join(__dirname, 'build')
+        })
         // new BundleAnalyzerPlugin({analyzerMode:'static'})
     ]
 };

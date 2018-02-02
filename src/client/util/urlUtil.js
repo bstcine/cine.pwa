@@ -12,7 +12,7 @@ export let getPureUrl = () => {
 export let getParam = href => {
     let url = href || location.href;
     let URLObj = URLParse(url, true);
-    let queryObj = URLObj.query
+    let queryObj = URLObj.query;
     let hashObj = {};
     if (process.env.MODE === 'static') {
         let index1 = url.indexOf('#');
@@ -21,8 +21,8 @@ export let getParam = href => {
             let hash = url.substring(index2 + 1, url.length);
             hash.split('&').forEach(item => {
                 let arr = item.split('=');
-                hashObj[arr[0]] = arr[1]
-            })
+                hashObj[arr[0]] = arr[1];
+            });
         }
     }
     let obj = Object.assign(hashObj, queryObj);

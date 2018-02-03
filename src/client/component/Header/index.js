@@ -113,10 +113,10 @@ export default class Header extends Component {
             return (
                 <ul className="nav-list-right guest-user">
                     <li className="nav-item login-btn">
-                        <a href="/learn">登入学习系统</a>
+                        <a href="/learn">登入学习</a>
                     </li>
                     <li className="nav-item register-btn">
-                        <a href="/register">免费注册</a>
+                        <a href="/register">注册</a>
                     </li>
                 </ul>
             );
@@ -131,16 +131,9 @@ export default class Header extends Component {
                 <div className={isOpen ? 'header open' : 'header'} onClick={this.closeNav}>
                     <div className="nav-toggle-open" onClick={this.openNav} />
                     <div className="brand-logo">
-                        <div className="brand-logo-lg">
-                            <a href="/">
-                                <img src={require('@/asset/image/logo_bstcine.png')} alt="logo-lg" />
-                            </a>
-                        </div>
-                        <div className="brand-logo-mini">
-                            <a href="/">
-                                <img src={require('@/asset/image/logo_bstcine_mini.png')} alt="logo-mini" />
-                            </a>
-                        </div>
+                        <a href="/">
+                            <img src={require('@/asset/image/logo_bstcine.png')} alt="brand-logo" />
+                        </a>
                     </div>
                     <div
                         className="nav-list"

@@ -1,20 +1,21 @@
 .notice-container {
   position: relative;
-  padding-left: 0.3rem;
   font-size: 0;
   line-height: 1;
-  background-color: #0d2763;
+  background-color: #fff;
+  .grey-line-bottom(12);
 
   .notice-text {
     display: block;
     position: absolute;
+    padding-left: 0.2rem;
+    line-height: 0.80rem;
     font-size: 0.28rem;
-    line-height: 0.7rem;
     color: #e2ecff;
     font-style: italic;
     &:after {
       position: absolute;
-      top: 0.2rem;
+      top: 0.24rem;
       display: block;
       content: ' ';
       background: url(../image/ico_speaker.png) no-repeat;
@@ -24,13 +25,13 @@
     }
   }
   .notice-list {
-    padding-left: 0.6rem;
+    text-align: center;
     .notice-item {
       display: inline-block;
       width: auto;
       padding-right: 0;
       font-size: 0.24rem;
-      line-height: 0.7rem;
+      line-height: 0.80rem;
       white-space: nowrap;
       word-break: keep-all;
       overflow: hidden;
@@ -38,7 +39,7 @@
       vertical-align: top;
       .notice-tag {
         padding-right: 0.1rem;
-        color: #e2ecff;
+        color: #2c2d2e;
       }
       .notice-title {
         display: none;

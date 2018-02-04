@@ -6,21 +6,24 @@
 body .container.courses-container {
   background-color: #fff;
   min-height: 12rem;
-  margin-bottom: .40rem;
   @import "tag-filter.less";
   @import "category-list.less";
   @import "home-tabs.less";
 }
 
-@media @media-up-md {
+@media @media-up-sm{
   body .container.courses-container {
     border-radius: .08rem;
+    box-shadow: 0 .08rem .10rem 0 rgba(143, 143, 143, 0.12);
   }
 }
 
+.courses-container-bg{
+  overflow: hidden;
+}
 @media @media-md {
   .courses-container-bg{
-    background-color: #f2f4f6;
+    background-color: #f8f9fa;
   }
 }
 

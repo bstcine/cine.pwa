@@ -19,11 +19,27 @@ export default class TagFilter extends Component {
     }
 
     renderP2Tags(parent_id, items) {
+        let ids = []
+        this.props.tagids.forEach(item => {
+            if (item.pid == parent_id) {
+                ids.push(item.id)
+            }
+        });
         items.unshift({id: '', text: '全部', attributes: {parent_id}});
+
         return items.map((item, i) => {
             const label =
                 item.attributes && item.attributes.label ? <span className="label">{item.attributes.label}</span> : '';
-            const className = this.props.tagids.includes(item.id + '') ? 'p2-tag active' : 'p2-tag';
+            let className = 'p2-tag';
+            if (ids.length) {
+                if (ids.includes(item.id+'')) {
+                    className += ' active'
+                }
+            } else {
+                if (item.id === '') {
+                    className += ' active'
+                }
+            }
             return (
                 <li key={i} className={className} onClick={e => this.tagClick(item, e)}>
                     {item.text} {label}

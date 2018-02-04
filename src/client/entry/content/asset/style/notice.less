@@ -39,7 +39,8 @@
       vertical-align: top;
       .notice-tag {
         padding-right: 0.1rem;
-        color: #2c2d2e;
+        color: #0852af;
+
       }
       .notice-title {
         display: none;
@@ -50,18 +51,22 @@
 
 @media @media-up-xs {
   .notice-container {
-    padding: 0.28rem 0.54rem;
-    margin: 0.64rem auto 0.5rem;
+    padding: 0.28rem 0.20rem;
+    margin: 0 auto;
     border-radius: 0.08rem;
+    border-bottom: none;
+    box-shadow: 0 .08rem .10rem 0 rgba(143, 143, 143, 0.12);
 
     .notice-text {
       display: block;
       position: absolute;
-      width: 0.36rem;
+      padding-left: 0;
+      left: .52rem;
+      //width: 0.36rem;
       top: 0.5rem;
       font-size: 0.36rem;
       line-height: 0.4rem;
-      color: #4a6db1;
+      color: #023d87;
       font-style: italic;
       &:after {
         position: static;
@@ -71,9 +76,10 @@
     }
 
     .notice-list {
-      padding-left: 0.76rem;
+      padding-left: 1rem;
       font-size: 0;
       min-height: 1.20rem;
+      text-align: left;
       .notice-item {
         display: inline-block;
         width: 49.99%;
@@ -82,18 +88,46 @@
         line-height: 0.6rem;
         color: #5d89db;
 
+        .notice-tag{
+          color: #2c2d2e;
+        }
         .notice-title{
           display: inline;
+
         }
+        a {
+          display: inline-block;
+          color: #0852af;
+        }
+      }
+    }
+  }
+}
+
+@media @media-up-sm {
+  .notice-container {
+    margin: 0.60rem auto 0.36rem;
+  }
+}
+
+@media @media-up-md {
+  .notice-container {
+    background-color: #0d2763;
+    .notice-text{
+      color: #4a6db1;
+    }
+
+    .notice-list {
+      .notice-item {
+        .notice-tag {
+          color: #fff;
+        }
+
         a {
           color: #5d89db;
         }
 
         a:hover {
-          color: #fff;
-        }
-
-        a:hover .notice-tag {
           color: #fff;
         }
       }

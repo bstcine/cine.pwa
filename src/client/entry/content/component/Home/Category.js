@@ -12,7 +12,7 @@ export default class Category extends Component {
             <div className="category">
                 <div className="category-text">
                     <div id={`cat${category.id}`} className="category-anchor" />
-                    <span>•</span> {category.name}
+                    <span className="text-blue">•</span> {category.name}
                     <span className="category-intro">{category.remark}</span>
                 </div>
                 <CourseList courses={category.children} {...props} />

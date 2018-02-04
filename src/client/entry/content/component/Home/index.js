@@ -49,7 +49,10 @@ export default class Home extends Component {
         let tagids = [];
         for (let [key, value] of Object.entries(params)) {
             if (/^tag_/i.test(key)) {
-                tagids.push(value);
+                tagids.push({
+                    pid:key.substring(4),
+                    id:value
+                });
             }
         }
         let homeRes = await Service.getContentHome({token: null});
@@ -85,8 +88,8 @@ export default class Home extends Component {
     matchCourseIds(tagids) {
         let courseIds0 = null;
         let courseIds1 = null;
-        tagids.forEach(tag_id => {
-            const tag = this.tagsCache[tag_id];
+        tagids.forEach(item => {
+            const tag = this.tagsCache[item.id];
             if (tag.attributes && tag.attributes.course_ids && tag.attributes.course_ids.length) {
                 if (tag.attributes.type === '1') {
                     courseIds0 = courseIds0
@@ -140,7 +143,10 @@ export default class Home extends Component {
         let tagids = [];
         for (let [key, value] of Object.entries(params)) {
             if (/^tag_/i.test(key)) {
-                tagids.push(value);
+                tagids.push({
+                    pid:key.substring(4),
+                    id:value
+                });
             }
         }
         let {courseIds0, courseIds1} = this.matchCourseIds(tagids);
@@ -160,13 +166,14 @@ export default class Home extends Component {
         console.log(`Home`);
         return (
             <React.Fragment>
-                <div className="container-fluid">
-                    <Slider banners={this.state.banners} />
-                </div>
-                <div className="container">
-                    <Notice notices={this.state.notices}/>
-                </div>
                 <div className="container-fluid courses-container-bg" ref="homeContainer">
+
+                    <Slider banners={this.state.banners} />
+
+                    <div className="container">
+                        <Notice notices={this.state.notices}/>
+                    </div>
+
                     <div className="container courses-container">
                         <Tabs className="home-tabs">
                             <TabItems>
@@ -193,10 +200,12 @@ export default class Home extends Component {
                             </TabPanels>
                         </Tabs>
                     </div>
+
+                    <div className="container">
+                        <Article newsCategorys={this.state.newsCategorys}/>
+                    </div>
                 </div>
-                <div className="container">
-                    <Article newsCategorys={this.state.newsCategorys}/>
-                </div>
+
 
                 {!siteCodeUtil.inAPP() && !uaUtil.wechat() ? (
                     <div className="container-fluid">

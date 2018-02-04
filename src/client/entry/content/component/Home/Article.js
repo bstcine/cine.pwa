@@ -15,7 +15,7 @@ export default class Article extends Component {
         return (
             <div className="article-container">
                 <div className="title">
-                    <span>•</span> 善恩精彩文章
+                    <span className="text-blue">•</span> 善恩精彩文章
                 </div>
                 <div className="article-category-wrap">
                     {newsCategorys.map((newsCategory, i) => {

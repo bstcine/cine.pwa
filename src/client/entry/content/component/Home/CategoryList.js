@@ -12,8 +12,6 @@ export default class CategoryList extends Component {
             return categorys.map((category, i) => {
                 return <Category key={i} category={category} {...props} />;
             });
-        } else {
-            return <div className="category-not-found"> 暂无匹配的课程（文案+图片待提供）</div>;
         }
     }
 

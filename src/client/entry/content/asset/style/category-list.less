@@ -43,7 +43,7 @@
               line-height: .50rem;
               color: #222;
             }
-            .course-author,.course-arrange {
+            .course-author, .course-arrange {
               font-size: .22rem;
               height: .32rem;
               line-height: .32rem;
@@ -75,9 +75,6 @@
       }
     }
   }
-  .category:last-child {
-    border-bottom: none;
-  }
 }
 
 @media @media-up-xs {
@@ -100,7 +97,7 @@
               .course-title {
                 line-height: .60rem;
               }
-              .course-author,.course-arrange {
+              .course-author, .course-arrange {
                 font-size: .24rem;
               }
               .course-price {
@@ -121,7 +118,8 @@
 @media @media-up-sm {
   .category-list {
     .category {
-      .grey-line-bottom(16);
+      border-bottom: none;
+
       .category-text {
         padding: .36rem .06rem .28rem;
         font-size: .36rem;
@@ -132,7 +130,13 @@
         margin: 0 -.10rem;
         .course-wrap {
           width: 1/4 * 100%;
+          margin-bottom: .40rem;
         }
+        .grey-line-bottom(12);
+      }
+
+      &:last-child .course-list {
+        border-bottom: none;
       }
     }
   }

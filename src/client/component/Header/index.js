@@ -76,8 +76,8 @@ export default class Header extends Component {
         if (user) {
             return (
                 <ul className="nav-list-right">
-                    <li className="nav-item mypoint-btn">
-                        <a href="/user/mypoint">我的积分</a>
+                    <li className="nav-item login-btn">
+                        <a href="/learn">学习系统</a>
                     </li>
                     <li
                         onMouseEnter={this.openUserCenterList}
@@ -85,14 +85,11 @@ export default class Header extends Component {
                         className={isUserCenterListOpen ? 'nav-item user-center open' : 'nav-item user-center'}
                     >
                         <a href="javascript:">
-                            我的 <i className="material-icons">arrow_drop_down</i>
+                            我的<i className="material-icons">arrow_drop_down</i>
                         </a>
                         <ul className="nav-list-inner">
                             <li className="nav-item">
-                                <a href="/learn">学习首页</a>
-                            </li>
-                            <li className="nav-item">
-                                <a href="/user/mypoint">个人中心</a>
+                                <a href="/user/mypoint">我的积分</a>
                             </li>
                             <li className="nav-item">
                                 <a href="/resetPassword">修改密码</a>
@@ -142,9 +139,6 @@ export default class Header extends Component {
                         }}
                     >
                         <div className="nav-toggle-close" onClick={this.closeNav} />
-
-                        {this.renderNavRight()}
-
                         <ul className="nav-list-left">
                             <li className="nav-item">
                                 <a href="/">首页</a>
@@ -163,6 +157,8 @@ export default class Header extends Component {
                             </li>
                         </ul>
                     </div>
+
+                    {this.renderNavRight()}
                 </div>
             </div>
         );

@@ -13,6 +13,7 @@ import {initWechat} from '@/util/wechatUtil';
 import siteCodeUtil from '@/util/sitecodeUtil';
 import uaUtil from '@/util/uaUtil';
 import Article from "@/entry/content/component/Home/Article";
+import Header from "@/component/Header";
 
 export default class Home extends Component {
     constructor(props) {
@@ -43,6 +44,7 @@ export default class Home extends Component {
 
     async componentDidMount() {
         console.log(`componentDidMount`);
+        document.title = '善恩英文名著精读'
         initWechat();
         //window.addEventListener('scroll', this.handlerScroll);
         let params = getParam();
@@ -83,6 +85,7 @@ export default class Home extends Component {
             notices:homeRes.notices,
             newsCategorys:homeRes.newsCategorys,
         });
+
     }
 
     matchCourseIds(tagids) {
@@ -166,6 +169,7 @@ export default class Home extends Component {
         console.log(`Home`);
         return (
             <React.Fragment>
+                <Header isShow={!siteCodeUtil.inAPP()}/>
                 <div className="container-fluid courses-container-bg" ref="homeContainer">
 
                     <Slider banners={this.state.banners} />

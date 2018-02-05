@@ -47,7 +47,6 @@ class Content extends EntryComponent {
     render() {
         return (
             <React.Fragment>
-                <Header />
                 <Router basename="/content">
                     <React.Fragment>
                         <Route exact path="/" component={Home} />

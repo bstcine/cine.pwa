@@ -19,7 +19,6 @@ export default class Header extends Component {
             isOpen: false,
             isUserCenterListOpen: false
         };
-        this.needRender = !siteCodeUtil.inAPP() && !uaUtil.wechat();
     }
 
     async componentDidMount() {
@@ -121,7 +120,8 @@ export default class Header extends Component {
     }
 
     render() {
-        if (!this.needRender) return null;
+        let {isShow} = this.props;
+        if(!isShow) return null;
         let {isOpen} = this.state;
         return (
             <div className="container">

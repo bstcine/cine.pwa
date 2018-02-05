@@ -4,6 +4,8 @@ import {getParam} from '@/util/urlUtil';
 import errorMsg from '@/util/errorMsg';
 import uaUtil from '@/util/uaUtil';
 import storeUtil from '@/util/storeUtil';
+import Header from "@/component/Header";
+import siteCodeUtil from "@/util/sitecodeUtil";
 
 export default class Prepare extends Component {
     constructor(props) {
@@ -210,6 +212,8 @@ export default class Prepare extends Component {
             point_msg
         } = this.state;
         return (
+            <React.Fragment>
+            <Header  isShow={!siteCodeUtil.inAPP()}/>
             <div className="container-fluid course-container-bg">
                 <div className="prepare-container">
                     <div className="brief">
@@ -328,6 +332,7 @@ export default class Prepare extends Component {
                     </button>
                 </div>
             </div>
+            </React.Fragment>
         );
     }
 }

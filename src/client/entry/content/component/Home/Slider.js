@@ -26,9 +26,9 @@ export default class Slider extends Component {
 
     getImg(item) {
         if (this.wideImg) {
-            return item.img_pad || item.img;
+            return item.img_pc || item.img_pad;
         } else {
-            return item.img;
+            return item.img_pad;
         }
     }
 

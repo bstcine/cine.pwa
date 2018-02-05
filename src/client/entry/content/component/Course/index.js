@@ -16,6 +16,8 @@ import BRIDGE_EVENT from '@/constant/bridgeEvent';
 import {createShare, share} from '@/util/shareUtil';
 import {eventEmmiter} from '@/util/eventEmmiter';
 import siteCodeUtil from '@/util/sitecodeUtil';
+import Header from "@/component/Header";
+import uaUtil from "@/util/uaUtil";
 
 export default class Course extends Component {
     constructor(props) {
@@ -62,6 +64,7 @@ export default class Course extends Component {
             Bridge.ios(BRIDGE_EVENT.TIMELINE, {type: 'loaded'});
         }
         window.scroll(0, 0);
+        document.title = '课程详情 - 善恩英文名著精读'
         eventEmmiter.on(BRIDGE_EVENT.OUTER_SHARE, () => {
             this.clickShare(false);
         });
@@ -309,6 +312,8 @@ export default class Course extends Component {
         let {course, user, comments, showLoginModal, showRecommendModal, showCouponModal, pauseVideo} = this.state;
 
         return (
+            <React.Fragment>
+            <Header isShow={!siteCodeUtil.inAPP() && !uaUtil.wechat()}/>
             <div className="container-fluid course-container-bg">
                 <div className="course-container">
                     <Brief
@@ -416,6 +421,7 @@ export default class Course extends Component {
 
                 </div>
             </div>
+            </React.Fragment>
 
         );
     }

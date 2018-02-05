@@ -64,7 +64,7 @@ export default class Course extends Component {
             Bridge.ios(BRIDGE_EVENT.TIMELINE, {type: 'loaded'});
         }
         window.scroll(0, 0);
-        document.title = '课程详情 - 善恩英文名著精读'
+        document.title = '课程详情'
         eventEmmiter.on(BRIDGE_EVENT.OUTER_SHARE, () => {
             this.clickShare(false);
         });

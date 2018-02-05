@@ -44,7 +44,7 @@ export default class Home extends Component {
 
     async componentDidMount() {
         console.log(`componentDidMount`);
-        document.title = '善恩英文名著精读'
+        document.title = '善恩英语'
         initWechat();
         //window.addEventListener('scroll', this.handlerScroll);
         let params = getParam();

@@ -2,8 +2,6 @@ import React, {Component} from 'react';
 import storeUtil from '@/util/storeUtil';
 import {logoutV1, userInfo} from '@/service/base';
 import './header.less';
-import siteCodeUtil from '@/util/sitecodeUtil';
-import uaUtil from '@/util/uaUtil';
 
 export default class Header extends Component {
     constructor(props) {
@@ -12,12 +10,11 @@ export default class Header extends Component {
         this.logout = this.logout.bind(this);
         this.openNav = this.openNav.bind(this);
         this.closeNav = this.closeNav.bind(this);
-        this.openUserCenterList = this.openUserCenterList.bind(this);
-        this.closeUserCenterList = this.closeUserCenterList.bind(this);
+        this.toggleUserCenter = this.toggleUserCenter.bind(this);
         this.state = {
             user: null,
             isOpen: false,
-            isUserCenterListOpen: false
+            isUserCenterOpen: false
         };
     }
 
@@ -54,24 +51,15 @@ export default class Header extends Component {
             });
         }
     }
-
-    openUserCenterList() {
-        if (this.timer) clearTimeout(this.timer);
-        this.setState({
-            isUserCenterListOpen: true
-        });
-    }
-
-    closeUserCenterList() {
-        this.timer = setTimeout(() => {
-            this.setState({
-                isUserCenterListOpen: false
-            });
-        }, 300);
+    
+    toggleUserCenter(){
+        this.setState(prevState => ({
+            isUserCenterOpen: !prevState.isUserCenterOpen
+        }));
     }
 
     renderNavRight() {
-        let {user, isUserCenterListOpen} = this.state;
+        let {user, isUserCenterOpen} = this.state;
         if (user) {
             return (
                 <ul className="nav-list-right">
@@ -79,9 +67,8 @@ export default class Header extends Component {
                         <a href="/learn">学习系统</a>
                     </li>
                     <li
-                        onMouseEnter={this.openUserCenterList}
-                        onMouseLeave={this.closeUserCenterList}
-                        className={isUserCenterListOpen ? 'nav-item user-center open' : 'nav-item user-center'}
+                        onClick={this.toggleUserCenter}
+                        className={isUserCenterOpen ? 'nav-item user-center open' : 'nav-item user-center'}
                     >
                         <a href="javascript:">
                             我的<i className="material-icons">arrow_drop_down</i>

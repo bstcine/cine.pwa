@@ -11,7 +11,7 @@ export default class TagFilter extends Component {
         return this.props.tags.map((item, i) => {
             return (
                 <li key={i} className="p1-tag">
-                    {item.text}
+                    <span>{item.text}</span>
                     <ul className="p2-tags">{this.renderP2Tags(item.id, item.children.slice())}</ul>
                 </li>
             );

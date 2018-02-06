@@ -16,6 +16,8 @@ import Course from './component/Course';
 import Prepare from 'bundle-loader?lazy!./component/Prepare';
 import Bundle from '@/component/Bundle';
 
+// import '@/util/debug'
+
 const Loading = () =>  <div style={{background: '#fff', width: '400px', height: '300px', fontSize: '40px', color: '#000'}}>
             Loading...
         </div>

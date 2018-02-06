@@ -12,8 +12,8 @@ import CategoryList from './CategoryList';
 import {initWechat} from '@/util/wechatUtil';
 import siteCodeUtil from '@/util/sitecodeUtil';
 import uaUtil from '@/util/uaUtil';
-import Article from "@/entry/content/component/Home/Article";
-import Header from "@/component/Header";
+import Article from '@/entry/content/component/Home/Article';
+import Header from '@/component/Header';
 
 export default class Home extends Component {
     constructor(props) {
@@ -25,8 +25,8 @@ export default class Home extends Component {
             categorys0: [],
             categorys1: [],
             tagids: [],
-            notices:[],
-            newsCategorys:[]
+            notices: [],
+            newsCategorys: []
         };
         this.handlerScroll = this.handlerScroll.bind(this);
     }
@@ -44,7 +44,7 @@ export default class Home extends Component {
 
     async componentDidMount() {
         console.log(`componentDidMount`);
-        document.title = '善恩英语'
+        document.title = '善恩英语';
         initWechat();
         //window.addEventListener('scroll', this.handlerScroll);
         let params = getParam();
@@ -52,8 +52,8 @@ export default class Home extends Component {
         for (let [key, value] of Object.entries(params)) {
             if (/^tag_/i.test(key)) {
                 tagids.push({
-                    pid:key.substring(4),
-                    id:value
+                    pid: key.substring(4),
+                    id: value
                 });
             }
         }
@@ -82,10 +82,9 @@ export default class Home extends Component {
             categorys0: categorys0,
             categorys1: categorys1,
             tagids,
-            notices:homeRes.notices,
-            newsCategorys:homeRes.newsCategorys,
+            notices: homeRes.notices,
+            newsCategorys: homeRes.newsCategorys
         });
-
     }
 
     matchCourseIds(tagids) {
@@ -147,8 +146,8 @@ export default class Home extends Component {
         for (let [key, value] of Object.entries(params)) {
             if (/^tag_/i.test(key)) {
                 tagids.push({
-                    pid:key.substring(4),
-                    id:value
+                    pid: key.substring(4),
+                    id: value
                 });
             }
         }
@@ -169,13 +168,12 @@ export default class Home extends Component {
         console.log(`Home`);
         return (
             <React.Fragment>
-                <Header isShow={!siteCodeUtil.inAPP()}/>
+                <Header isShow={!siteCodeUtil.inAPP()} />
                 <div className="container-fluid courses-container-bg" ref="homeContainer">
-
                     <Slider banners={this.state.banners} />
 
                     <div className="container">
-                        <Notice notices={this.state.notices}/>
+                        <Notice notices={this.state.notices} />
                     </div>
 
                     <div className="container courses-container">
@@ -206,10 +204,9 @@ export default class Home extends Component {
                     </div>
 
                     <div className="container">
-                        <Article newsCategorys={this.state.newsCategorys}/>
+                        <Article newsCategorys={this.state.newsCategorys} />
                     </div>
                 </div>
-
 
                 {!siteCodeUtil.inAPP() && !uaUtil.wechat() ? (
                     <div className="container-fluid">

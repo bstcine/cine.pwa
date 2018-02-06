@@ -358,17 +358,17 @@ export default class Course extends Component {
 
                                                 <div className="course-category">
                                                     <ul className="course-list">
-                                                        {course.contents.map((course, i) => {
+                                                        {course.contents && course.contents.length && course.contents.map((course, i) => {
                                                             return (
                                                                 <li key={i}>
                                                                     {course.name}
                                                                     <ul className="chapter-list">
-                                                                        {course.children.map((chapter, i) => {
+                                                                        {course.children && course.children.length && course.children.map((chapter, i) => {
                                                                             return (
                                                                                 <li key={i}>
                                                                                     {chapter.name}
                                                                                     <ul className="lesson-list">
-                                                                                        {chapter.children.map(
+                                                                                        {chapter.children && chapter.children.length && chapter.children.map(
                                                                                             (lesson, i) => {
                                                                                                 return (
                                                                                                     <li key={i}>

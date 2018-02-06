@@ -5,8 +5,8 @@ import siteCodeUtil from '@/util/sitecodeUtil';
 
 export default class CourseLink extends Component {
     static defaultProps = {
-        className:""
-    }
+        className: ''
+    };
     constructor(props) {
         super(props);
         this.clickCourseLink = this.clickCourseLink.bind(this);
@@ -30,7 +30,19 @@ export default class CourseLink extends Component {
     }
 
     render() {
-        let {className} = this.props
-        return <div className={className} onClick={this.clickCourseLink}>{this.props.children}</div>;
+        let {className, course, children} = this.props;
+        if (!siteCodeUtil.inAPP()) {
+            return (
+                <div className={className}>
+                    <a href={`/content/course?cid=${course.id}`}>{children}</a>
+                </div>
+            );
+        } else {
+            return (
+                <div className={className} onClick={this.clickCourseLink}>
+                    {children}
+                </div>
+            );
+        }
     }
 }

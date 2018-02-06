@@ -7,6 +7,7 @@ import Bridge from '@/util/bridge';
 import BRIDGE_EVENT from '@/constant/bridgeEvent';
 import siteCodeUtil from '@/util/sitecodeUtil';
 import PieChart from './PieChart';
+import CourseLink from "@/component/CourseLink";
 
 export default class Report extends Component {
     constructor(props) {
@@ -93,7 +94,7 @@ export default class Report extends Component {
     renderRecommendList() {
         return this.state.lessons.map(lesson => {
             return (
-                <div className="recommend-item" onClick={e => this.courseClick(lesson.id, e)} key={lesson.id}>
+                <CourseLink className="recommend-item" course={lesson} key={lesson.id}>
                     <div
                         className="item-img"
                         style={{
@@ -105,7 +106,7 @@ export default class Report extends Component {
                         <div className="item-title">{lesson.name}</div>
                         <div className="item-desc">学习课时：{lesson.time_arrange}</div>
                     </div>
-                </div>
+                </CourseLink>
             );
         });
     }

@@ -94,7 +94,7 @@ export default class Brief extends Component {
                     }
                 }
             } else {
-                if (course.object_type === '1' || course.object_type === '2' || course.object_type === '3') {
+                if (course.object_type === '1' || course.object_type === '2' || course.object_type === '3' || course.object_type === '5') {
                     return (
                         <button className="btn-action btn-buy" onClick={goBuy}>
                             立即购买

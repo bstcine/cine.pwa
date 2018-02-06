@@ -6,7 +6,6 @@ import UserInfo from './component/UserInfo';
 import Card from './component/Card';
 import Report from './component/Report';
 import ReportList from './component/ReportList';
-import storeUtil from '@/util/storeUtil';
 import './asset/style/index.less';
 import Bridge from '@/util/bridge';
 import BRIDGE_EVENT from '@/constant/bridgeEvent';
@@ -18,7 +17,6 @@ class Word extends EntryComponent {
     constructor(props) {
         super(props);
         console.log('Word Main constructor');
-        storeUtil.remove('user');
     }
 
     componentDidMount() {

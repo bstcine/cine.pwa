@@ -69,6 +69,8 @@ module.exports = {
         inline: true,
         port: 5000,
         disableHostCheck: true,
+        // host: "0.0.0.0",
+        // useLocalIp:true,
         proxy: {
             '/api': {
                 // target: "http://localhost:9000",

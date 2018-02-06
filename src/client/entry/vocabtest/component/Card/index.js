@@ -207,7 +207,7 @@ export default class Card extends Component {
         let answers = [];
         this.wordLevelList.forEach(function(wordLevel) {
             wordLevel.wordList.forEach(function(item) {
-                if (item.answer_index) {
+                if (!isNaN(item.answer_index)) {
                     answers.push({
                         id: item.id,
                         index: item.answer_index

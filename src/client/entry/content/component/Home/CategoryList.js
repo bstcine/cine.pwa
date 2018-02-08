@@ -12,6 +12,13 @@ export default class CategoryList extends Component {
             return categorys.map((category, i) => {
                 return <Category key={i} category={category} {...props} />;
             });
+        } else {
+            return (
+                <div className="category-not-found">
+                    <img src={require('../../asset/image/ico_search_content.png')} alt="not-found"/>
+                    当前分类没有对应的课程，请更换其他条件查找
+                </div>
+            );
         }
     }
 

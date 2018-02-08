@@ -13,7 +13,9 @@ export let getParam = href => {
     let url = href || location.href;
     let URLObj = URLParse(url, true);
     let queryObj = URLObj.query;
+    console.log('queryObj',queryObj)
     let hashObj = {};
+
     if (process.env.MODE === 'static') {
         let index1 = url.indexOf('#');
         let index2 = url.indexOf('?');
@@ -25,6 +27,7 @@ export let getParam = href => {
             });
         }
     }
+    console.log('hashObj',hashObj)
     let obj = Object.assign(hashObj, queryObj);
     return obj;
 };

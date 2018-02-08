@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import * as Service from '@/service/vocabtest';
 import storeUtil from '@/util/storeUtil';
+import timeUtil from "@/util/timeUtil";
 
 export default class ReportList extends Component {
     constructor(props) {
@@ -57,7 +58,7 @@ export default class ReportList extends Component {
                     >
                         <td>{i + 1}</td>
                         <td>{item.create_at ? item.create_at.substring(0, 10) : '-'}</td>
-                        <td>{item.duration}</td>
+                        <td>{timeUtil.durationFormat(item.duration,2)}</td>
                         <td>{item.vocab}</td>
                     </tr>
                 );

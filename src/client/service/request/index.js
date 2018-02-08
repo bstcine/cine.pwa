@@ -6,8 +6,8 @@ function httpUrl(url) {
     if (url.indexOf('http') >= 0) {
         baseURL = '';
     } else {
-        if (process.env.API_Host_URL) {
-            baseURL = process.env.API_Host_URL;
+        if (window.API_Host_URL) {
+            baseURL = window.API_Host_URL;
         }
     }
     return baseURL + url;

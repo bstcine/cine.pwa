@@ -44,6 +44,6 @@ export default class Comments extends Component {
     }
 
     render() {
-        return <div className="comments">{this.renderComments()}</div>;
+        return <div className="course-comments">{this.renderComments()}</div>;
     }
 }

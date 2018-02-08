@@ -49,11 +49,11 @@ class Content extends EntryComponent {
     render() {
         return (
             <React.Fragment>
-                <Router basename="/content">
+                <Router>
                     <React.Fragment>
                         <Route exact path="/" component={Home} />
-                        <Route path="/course" component={Course} />
-                        <Route path="/prepare" component={props => createComponent(Prepare, props)} />
+                        <Route path="/content/course" component={Course} />
+                        <Route path="/content/prepare" component={props => createComponent(Prepare, props)} />
                     </React.Fragment>
                 </Router>
                 <Footer />

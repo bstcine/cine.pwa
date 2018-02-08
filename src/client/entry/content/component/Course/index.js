@@ -18,6 +18,8 @@ import {eventEmmiter} from '@/util/eventEmmiter';
 import siteCodeUtil from '@/util/sitecodeUtil';
 import Header from '@/component/Header';
 import uaUtil from '@/util/uaUtil';
+import timeUtil from '@/util/timeUtil';
+import routeUtil from "@/util/routeUtil";
 
 export default class Course extends Component {
     constructor(props) {
@@ -156,7 +158,7 @@ export default class Course extends Component {
         } else if (siteCodeUtil.inAndroidAPP()) {
             Bridge.android(BRIDGE_EVENT.PRE_CONFIRM, {course_id: cid});
         } else {
-            let url = `/prepare?cid=${cid}`;
+            let url = `/content/prepare?cid=${cid}`;
             if (source_user_id) {
                 url += `&source_user_id=${source_user_id}`;
             }
@@ -276,36 +278,7 @@ export default class Course extends Component {
 
     relatedCourse(related_lesson_id) {
         const {history} = this.props;
-        const course_id = related_lesson_id;
-        if (siteCodeUtil.inIOSAPP()) {
-            Bridge.ios(BRIDGE_EVENT.COURSE, {course_id});
-        } else if (siteCodeUtil.inAndroidAPP()) {
-            Bridge.android(BRIDGE_EVENT.COURSE, {course_id});
-        } else {
-            if (/^\/content\//i.test(location.pathname)) {
-                history.push(`/course?cid=${course_id}`);
-            } else {
-                location.href = `/content/course?cid=${course_id}`;
-            }
-        }
-    }
-
-    durationFormat(duration) {
-        var sec_num = parseInt(duration, 10);
-        var hours = Math.floor(sec_num / 3600);
-        var minutes = Math.floor((sec_num - hours * 3600) / 60);
-        var seconds = sec_num - hours * 3600 - minutes * 60;
-
-        if (hours < 10) {
-            hours = '0' + hours;
-        }
-        if (minutes < 10) {
-            minutes = '0' + minutes;
-        }
-        if (seconds < 10) {
-            seconds = '0' + seconds;
-        }
-        return hours + ':' + minutes + ':' + seconds;
+        routeUtil.goCourse({id:related_lesson_id},history)
     }
 
     render() {
@@ -358,40 +331,53 @@ export default class Course extends Component {
 
                                                 <div className="course-category">
                                                     <ul className="course-list">
-                                                        {course.contents && course.contents.length && course.contents.map((course, i) => {
-                                                            return (
-                                                                <li key={i}>
-                                                                    {course.name}
-                                                                    <ul className="chapter-list">
-                                                                        {course.children && course.children.length && course.children.map((chapter, i) => {
-                                                                            return (
-                                                                                <li key={i}>
-                                                                                    {chapter.name}
-                                                                                    <ul className="lesson-list">
-                                                                                        {chapter.children && chapter.children.length && chapter.children.map(
-                                                                                            (lesson, i) => {
-                                                                                                return (
-                                                                                                    <li key={i}>
-                                                                                                        {lesson.name}
-                                                                                                        {lesson.duration ? (
-                                                                                                            <span className="meta">
-                                                                                                                {this.durationFormat(
-                                                                                                                    lesson.duration
-                                                                                                                )}
-                                                                                                            </span>
-                                                                                                        ) : null}
-                                                                                                    </li>
-                                                                                                );
-                                                                                            }
-                                                                                        )}
-                                                                                    </ul>
-                                                                                </li>
-                                                                            );
-                                                                        })}
-                                                                    </ul>
-                                                                </li>
-                                                            );
-                                                        })}
+                                                        {course.contents &&
+                                                            course.contents.length &&
+                                                            course.contents.map((course, i) => {
+                                                                return (
+                                                                    <li key={i}>
+                                                                        {course.name}
+                                                                        <ul className="chapter-list">
+                                                                            {course.children &&
+                                                                                course.children.length &&
+                                                                                course.children.map((chapter, i) => {
+                                                                                    return (
+                                                                                        <li key={i}>
+                                                                                            {chapter.name}
+                                                                                            <ul className="lesson-list">
+                                                                                                {chapter.children &&
+                                                                                                    chapter.children
+                                                                                                        .length &&
+                                                                                                    chapter.children.map(
+                                                                                                        (lesson, i) => {
+                                                                                                            return (
+                                                                                                                <li
+                                                                                                                    key={
+                                                                                                                        i
+                                                                                                                    }
+                                                                                                                >
+                                                                                                                    {
+                                                                                                                        lesson.name
+                                                                                                                    }
+                                                                                                                    {lesson.duration ? (
+                                                                                                                        <span className="meta">
+                                                                                                                            {timeUtil.durationFormat(
+                                                                                                                                lesson.duration
+                                                                                                                            )}
+                                                                                                                        </span>
+                                                                                                                    ) : null}
+                                                                                                                </li>
+                                                                                                            );
+                                                                                                        }
+                                                                                                    )}
+                                                                                            </ul>
+                                                                                        </li>
+                                                                                    );
+                                                                                })}
+                                                                        </ul>
+                                                                    </li>
+                                                                );
+                                                            })}
                                                     </ul>
                                                 </div>
                                             </TabPanel>

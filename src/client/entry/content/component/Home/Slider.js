@@ -6,6 +6,7 @@ import siteCodeUtil from "@/util/sitecodeUtil";
 import Bridge from "@/util/bridge";
 import {addParam} from "@/util/urlUtil";
 import storeUtil from "@/util/storeUtil";
+import routeUtil from "@/util/routeUtil";
 
 export default class Slider extends Component {
     constructor(props) {
@@ -50,17 +51,7 @@ export default class Slider extends Component {
     handlerClick({type, course_id, href}) {
         let {history} = this.props;
         if (type === '1') {
-            if (siteCodeUtil.inIOSAPP()) {
-                Bridge.ios(BRIDGE_EVENT.COURSE, {course_id});
-            } else if (siteCodeUtil.inAndroidAPP()) {
-                Bridge.android(BRIDGE_EVENT.COURSE, {course_id});
-            } else {
-                if (/^\/content/i.test(location.pathname) && history) {
-                    history.push(`/course?cid=${course_id}`);
-                } else {
-                    location.href = `/content/course?cid=${course_id}`;
-                }
-            }
+            routeUtil.goCourse({id:course_id},history)
         } else if (type === '2') {
             let url = href;
             if (siteCodeUtil.inAPP()) {

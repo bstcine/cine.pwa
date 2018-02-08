@@ -9,7 +9,7 @@ class EntryComponent extends Component {
     constructor(props) {
         super(props);
         console.log(`EntryComponent constructor`);
-        let {token, sitecode} = getParam();
+        let {token, sitecode, baseurl} = getParam();
         console.log(`From current url: token[${token}] sitecode[${sitecode}] `);
 
         // sitecode 以 URL 上的为最高优先级，不传的时候以当前浏览器 user-agent 设置
@@ -35,6 +35,15 @@ class EntryComponent extends Component {
         // H5 在 app 内的时候，直接拿 URL 上的 token，不传则直接视为登出，清除缓存 token
         siteCodeUtil.inAPP() && storeUtil.removeToken();
         token && storeUtil.set('token', token);
+
+        // host 前缀以 URL 上的优先级最高，不传的时候取构建时传的
+        if (baseurl) {
+            window.API_Host_URL = decodeURIComponent(baseurl)
+        } else {
+            if (process.env.API_Host_URL) {
+                window.API_Host_URL = process.env.API_Host_URL;
+            }
+        }
     }
 }
 

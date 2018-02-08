@@ -7,13 +7,13 @@ export default class Router extends Component {
     }
 
     render() {
-        let props = this.props
+        let {basename, children} = this.props;
         return (
             <React.Fragment>
                 {process.env.MODE === 'static' ? (
-                    <HashRouter {...props}>{this.props.children}</HashRouter>
+                    <HashRouter>{children}</HashRouter>
                 ) : (
-                    <BrowserRouter {...props}>{this.props.children}</BrowserRouter>
+                    <BrowserRouter basename={basename}>{children}</BrowserRouter>
                 )}
             </React.Fragment>
         );

@@ -7,10 +7,11 @@ export default class TabPanel extends Component {
 
     render() {
         const {children, className, selected} = this.props;
-        return (
+
+        return selected ? (
             <div className={`${className}${selected ? ' active' : ''}`} role="tab-panel">
                 {children}
             </div>
-        );
+        ) : null;
     }
 }

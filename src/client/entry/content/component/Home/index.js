@@ -43,10 +43,12 @@ export default class Home extends Component {
     }
 
     async componentDidMount() {
-        console.log(`componentDidMount`);
+        console.log('componentDidMount')
         document.title = '善恩英语';
         initWechat();
         //window.addEventListener('scroll', this.handlerScroll);
+
+        console.log('componentDidMount 2')
         let params = getParam();
         let tagids = [];
         for (let [key, value] of Object.entries(params)) {
@@ -84,6 +86,30 @@ export default class Home extends Component {
             tagids,
             notices: homeRes.notices,
             newsCategorys: homeRes.newsCategorys
+        },()=>{
+            console.log('componentDidMount setState done')
+        });
+        console.log('componentDidMount done')
+    }
+
+    async componentWillReceiveProps(nextProps) {
+        console.log('componentWillReceiveProps')
+        let params = getParam();
+        let tagids = [];
+        for (let [key, value] of Object.entries(params)) {
+            if (/^tag_/i.test(key)) {
+                tagids.push({
+                    pid: key.substring(4),
+                    id: value
+                });
+            }
+        }
+        let {courseIds0, courseIds1} = this.matchCourseIds(tagids);
+        const {categorys0, categorys1} = Home.categoryConverter(this.categorys, courseIds0, courseIds1);
+        this.setState({
+            tagids,
+            categorys0,
+            categorys1
         });
     }
 
@@ -140,25 +166,7 @@ export default class Home extends Component {
         return {categorys0, categorys1};
     }
 
-    async componentWillReceiveProps(nextProps) {
-        let params = getParam();
-        let tagids = [];
-        for (let [key, value] of Object.entries(params)) {
-            if (/^tag_/i.test(key)) {
-                tagids.push({
-                    pid: key.substring(4),
-                    id: value
-                });
-            }
-        }
-        let {courseIds0, courseIds1} = this.matchCourseIds(tagids);
-        const {categorys0, categorys1} = Home.categoryConverter(this.categorys, courseIds0, courseIds1);
-        this.setState({
-            tagids,
-            categorys0,
-            categorys1
-        });
-    }
+
 
     componentWillUnmount() {
         //window.removeEventListener('scroll', this.handlerScroll);
@@ -166,6 +174,7 @@ export default class Home extends Component {
 
     render() {
         console.log(`Home`);
+        console.log(`this.state.banners ${this.state.banners.length}`)
         return (
             <React.Fragment>
                 <Header isShow={!siteCodeUtil.inAPP()} />

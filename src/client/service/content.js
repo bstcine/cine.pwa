@@ -1,4 +1,4 @@
-import {post, postv1} from '@/service/request';
+import {post,get, postv1} from '@/service/request';
 import Api from '@/../APIConfig';
 import storeUtl from '@/util/storeUtil';
 import errorCode from '@/constant/errorCode';
@@ -15,13 +15,14 @@ export let getContentCourseDetail = query => {
 
 export let getContentHome = query => {
     if (window.navigator.onLine) {
-        return post(Api.APIURL_Content_Home, query).then(res => {
+        return get(Api.APIURL_Content_Home, query).then(res => {
             if (res.except_case_desc) {
                 return alert(res.except_case_desc);
             }
             let homeRes = res.result;
             storeUtl.set(Api.APIURL_Content_Home, homeRes);
             return storeUtl.get(Api.APIURL_Content_Home);
+            // return res.result
         });
     } else {
         let homeRes = storeUtl.get(Api.APIURL_Content_Home);

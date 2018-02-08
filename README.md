@@ -11,5 +11,5 @@ web app
 
 3. 运行 `run prod-build`，构建完成后，清空 cine.web/webapp 目录，将 build 文件夹下的所有文件粘贴到 cine.web/webapp 目录下，commit & push
 
-4. 登录服务器进行部署(see at)[https://github.com/bstcine/help/wiki/Server-%E9%83%A8%E7%BD%B2%E4%B8%8E%E9%85%8D%E7%BD%AE]
+4. 登录服务器进行部署[see at](https://github.com/bstcine/help/wiki/Server-%E9%83%A8%E7%BD%B2%E4%B8%8E%E9%85%8D%E7%BD%AE)
 

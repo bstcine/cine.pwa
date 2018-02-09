@@ -24,6 +24,7 @@ export default class Home extends Component {
             tagTree1: [],
             categorys0: [],
             categorys1: [],
+            categorys2: [],
             tagids: [],
             notices: [],
             newsCategorys: []
@@ -76,13 +77,14 @@ export default class Home extends Component {
         this.categorys = homeRes.categorys.slice();
 
         let {courseIds0, courseIds1} = this.matchCourseIds(tagids);
-        const {categorys0, categorys1} = Home.categoryConverter(this.categorys, courseIds0, courseIds1);
+        const {categorys0, categorys1, categorys2} = Home.categoryConverter(this.categorys, courseIds0, courseIds1);
         this.setState({
             banners: homeRes.banners,
             tagTree0: homeRes.tags.tagTree0,
             tagTree1: homeRes.tags.tagTree1,
-            categorys0: categorys0,
-            categorys1: categorys1,
+            categorys0,
+            categorys1,
+            categorys2,
             tagids,
             notices: homeRes.notices,
             newsCategorys: homeRes.newsCategorys
@@ -105,11 +107,12 @@ export default class Home extends Component {
             }
         }
         let {courseIds0, courseIds1} = this.matchCourseIds(tagids);
-        const {categorys0, categorys1} = Home.categoryConverter(this.categorys, courseIds0, courseIds1);
+        const {categorys0, categorys1, categorys2} = Home.categoryConverter(this.categorys, courseIds0, courseIds1);
         this.setState({
             tagids,
             categorys0,
-            categorys1
+            categorys1,
+            categorys2
         });
     }
 
@@ -138,14 +141,20 @@ export default class Home extends Component {
         let categorys0 = [];
         //教材教辅
         let categorys1 = [];
+        //在线小班
+        let categorys2 = [];
         categorys.forEach(category => {
             if (category.children && category.children.length) {
                 let children0 = [];
                 let children1 = [];
+                let children2 = [];
                 category.children.forEach(course => {
                     if (course.object_type === '1' || course.object_type === '4') {
                         if (filterIds0 && !filterIds0.includes(course.id)) return;
                         children0.push(course);
+                    } else if(course.object_type === '5'){
+                        if (filterIds1 && !filterIds1.includes(course.id)) return;
+                        children2.push(course);
                     } else {
                         if (filterIds1 && !filterIds1.includes(course.id)) return;
                         children1.push(course);
@@ -161,9 +170,14 @@ export default class Home extends Component {
                     category1.children = children1;
                     categorys1.push(category1);
                 }
+                if (children2.length) {
+                    let category2 = Object.assign({}, category);
+                    category2.children = children2;
+                    categorys2.push(category2);
+                }
             }
         });
-        return {categorys0, categorys1};
+        return {categorys0, categorys1, categorys2};
     }
 
 
@@ -190,6 +204,7 @@ export default class Home extends Component {
                             <TabItems>
                                 <TabItem>视频课程</TabItem>
                                 <TabItem>教材教辅</TabItem>
+                                <TabItem>在线小班</TabItem>
                             </TabItems>
                             <TabPanels>
                                 <TabPanel>
@@ -207,6 +222,9 @@ export default class Home extends Component {
                                         tagids={this.state.tagids}
                                     />
                                     <CategoryList categorys={this.state.categorys1} history={this.props.history} />
+                                </TabPanel>
+                                <TabPanel>
+                                    <CategoryList categorys={this.state.categorys2} history={this.props.history} />
                                 </TabPanel>
                             </TabPanels>
                         </Tabs>

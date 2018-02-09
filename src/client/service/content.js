@@ -19,10 +19,10 @@ export let getContentHome = query => {
             if (res.except_case_desc) {
                 return alert(res.except_case_desc);
             }
-            let homeRes = res.result;
-            storeUtl.set(Api.APIURL_Content_Home, homeRes);
-            return storeUtl.get(Api.APIURL_Content_Home);
-            // return res.result
+            // let homeRes = res.result;
+            // storeUtl.set(Api.APIURL_Content_Home, homeRes);
+            // return storeUtl.get(Api.APIURL_Content_Home);
+            return res.result
         });
     } else {
         let homeRes = storeUtl.get(Api.APIURL_Content_Home);

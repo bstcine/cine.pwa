@@ -1,12 +1,12 @@
 const path = require('path');
 
 // 本地静态文件模式 begin
-const MODE = 'static';
-const API_Host_URL = 'http://apptest.bstcine.com';
+// const MODE = 'static';
+// const API_Host_URL = 'http://apptest.bstcine.com';
 // 本地静态文件模式 end
 
-// const MODE = '';
-// const API_Host_URL = '';
+const MODE = '';
+const API_Host_URL = '';
 
 let publicPath = MODE === 'static' ? '../../' : '/';
 

@@ -25,6 +25,7 @@ pages.forEach(page => {
     );
     rewrites.push({from: new RegExp(`^/${page}.*`), to: `/entry/${page}/index.html`});
 });
+rewrites.push({from: /^\/$/, to: `/entry/content/index.html`});
 
 module.exports = {
     cache: false,

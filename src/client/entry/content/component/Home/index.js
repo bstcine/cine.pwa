@@ -153,7 +153,6 @@ export default class Home extends Component {
                         if (filterIds0 && !filterIds0.includes(course.id)) return;
                         children0.push(course);
                     } else if(course.object_type === '5'){
-                        if (filterIds1 && !filterIds1.includes(course.id)) return;
                         children2.push(course);
                     } else {
                         if (filterIds1 && !filterIds1.includes(course.id)) return;

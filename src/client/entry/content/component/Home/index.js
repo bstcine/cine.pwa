@@ -199,12 +199,12 @@ export default class Home extends Component {
                     <div className="container courses-container">
                         <Tabs className="home-tabs" selectedId={getParam().tab}>
                             <TabItems>
-                                <TabItem id={'1'}>视频课程</TabItem>
-                                <TabItem id={'2'}>教材教辅</TabItem>
-                                <TabItem id={'3'}>在线小班</TabItem>
+                                <TabItem id={'spkc'}>视频课程</TabItem>
+                                <TabItem id={'jcjf'}>教材教辅</TabItem>
+                                <TabItem id={'zxxb'}>在线小班</TabItem>
                             </TabItems>
                             <TabPanels>
-                                <TabPanel id={'1'}>
+                                <TabPanel id={'spkc'}>
                                     <TagFilter
                                         tags={this.state.tagTree0}
                                         history={this.props.history}
@@ -212,7 +212,7 @@ export default class Home extends Component {
                                     />
                                     <CategoryList categorys={this.state.categorys0} history={this.props.history} />
                                 </TabPanel>
-                                <TabPanel id={'2'}>
+                                <TabPanel id={'jcjf'}>
                                     <TagFilter
                                         tags={this.state.tagTree1}
                                         history={this.props.history}
@@ -220,7 +220,7 @@ export default class Home extends Component {
                                     />
                                     <CategoryList categorys={this.state.categorys1} history={this.props.history} />
                                 </TabPanel>
-                                <TabPanel id={'3'}>
+                                <TabPanel id={'zxxb'}>
                                     <CategoryList categorys={this.state.categorys2} history={this.props.history} />
                                 </TabPanel>
                             </TabPanels>

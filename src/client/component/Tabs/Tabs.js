@@ -12,42 +12,49 @@ export default class Tabs extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            selectedIndex: 0
+            selectedIndex: props.selectedIndex || 0,
+            selectedId: props.selectedId || null
         };
         this.onTabItemClick = this.onTabItemClick.bind(this);
     }
 
     getChildren() {
-        let selectedIndex = this.state.selectedIndex;
+        let {selectedIndex, selectedId} = this.state;
         let children = this.props.children;
         return Children.map(children, child => {
             if (Tabs.isTabItems(child)) {
                 let tabItems = child.props.children;
-                let index = 0;
                 return cloneElement(child, {
-                    children: Children.map(tabItems, tabItem => {
+                    children: Children.map(tabItems, (tabItem, index) => {
                         if (Tabs.isTabItem(tabItem)) {
-                            const props = {
+                            let props = {
                                 index,
+                                id: tabItem.props.id,
                                 onTabItemClick: this.onTabItemClick,
-                                selected: index === selectedIndex
                             };
-                            index++;
+                            if (selectedId) {
+                                props.selected = props.id === selectedId
+                            } else {
+                                props.selected = index === selectedIndex
+                            }
                             return cloneElement(tabItem, props);
                         }
                     })
                 });
             } else if (Tabs.isTabPanels(child)) {
                 let tabPanels = child.props.children;
-                let index = 0;
                 return cloneElement(child, {
-                    children: Children.map(tabPanels, tabPanel => {
+                    children: Children.map(tabPanels, (tabPanel, index) => {
                         if (Tabs.isTabPanel(tabPanel)) {
-                            const props = {
+                            let props = {
                                 index,
-                                selected: index === selectedIndex
+                                id: tabPanel.props.id,
                             };
-                            index++;
+                            if (selectedId) {
+                                props.selected = props.id === selectedId
+                            } else {
+                                props.selected = index === selectedIndex
+                            }
                             return cloneElement(tabPanel, props);
                         }
                     })
@@ -73,11 +80,19 @@ export default class Tabs extends Component {
         return ele && ele.type === TabPanels;
     }
 
-    onTabItemClick(index) {
-        if (index === this.state.selectedIndex) return;
-        this.setState({
-            selectedIndex: index
-        });
+    onTabItemClick(index, id) {
+        let {selectedId} = this.props;
+        if(selectedId) {
+            if (id === this.state.selectedId) return;
+            this.setState({
+                selectedId: id
+            });
+        }else{
+            if (index === this.state.selectedIndex) return;
+            this.setState({
+                selectedIndex: index
+            });
+        }
     }
 
     render() {

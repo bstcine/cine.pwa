@@ -199,14 +199,14 @@ export default class Home extends Component {
                     </div>
 
                     <div className="container courses-container">
-                        <Tabs className="home-tabs">
+                        <Tabs className="home-tabs" selectedId={getParam().tab}>
                             <TabItems>
-                                <TabItem>视频课程</TabItem>
-                                <TabItem>教材教辅</TabItem>
-                                <TabItem>在线小班</TabItem>
+                                <TabItem id={'1'}>视频课程</TabItem>
+                                <TabItem id={'2'}>教材教辅</TabItem>
+                                <TabItem id={'3'}>在线小班</TabItem>
                             </TabItems>
                             <TabPanels>
-                                <TabPanel>
+                                <TabPanel id={'1'}>
                                     <TagFilter
                                         tags={this.state.tagTree0}
                                         history={this.props.history}
@@ -214,7 +214,7 @@ export default class Home extends Component {
                                     />
                                     <CategoryList categorys={this.state.categorys0} history={this.props.history} />
                                 </TabPanel>
-                                <TabPanel>
+                                <TabPanel id={'2'}>
                                     <TagFilter
                                         tags={this.state.tagTree1}
                                         history={this.props.history}
@@ -222,7 +222,7 @@ export default class Home extends Component {
                                     />
                                     <CategoryList categorys={this.state.categorys1} history={this.props.history} />
                                 </TabPanel>
-                                <TabPanel>
+                                <TabPanel id={'3'}>
                                     <CategoryList categorys={this.state.categorys2} history={this.props.history} />
                                 </TabPanel>
                             </TabPanels>

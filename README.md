@@ -30,8 +30,25 @@
 
 2. 浏览器打开 `http://localhost:5000/content/course?cid=d011516184489344HHgJNDQDez` 验证是否修改成功
 
+#### Step 4. Static Mode
 
-#### Step 4. Production Mode
+1. 修改 `config.js`，Line 3 ~ 9
+
+    ```git
+    // 本地静态文件模式 begin
+    const MODE = 'static';
+    const API_Host_URL = 'http://apptest.bstcine.com';
+    // 本地静态文件模式 end 
+       
+    // const MODE = '';
+    // const API_Host_URL = '';
+    ```
+2. 选择开发构建 `$ npm run dev-dll && npm run dev-build` 或生产构建 `$ npm run prod-dll && npm run prod-build`
+
+3. 浏览器打开 `build/entry/content/index.html` 并在 url 上添加 `#/content/course?cid=d011516184489344HHgJNDQDez`
+    > file:///Users/cine/work/project/cine.pwa/build/entry/content/index.html#/content/course?cid=d011516184489344HHgJNDQDez
+
+#### Step 5. Production Mode
 
 1. 构建生产模式
 

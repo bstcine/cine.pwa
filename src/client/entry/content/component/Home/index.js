@@ -44,12 +44,15 @@ export default class Home extends Component {
     }
 
     async componentDidMount() {
-        console.log('componentDidMount')
-        document.title = '善恩英语';
+        console.log('componentDidMount');
+        if (uaUtil.wechat()) {
+            document.title = '善恩英语';
+        } else {
+            document.title = '善恩英语 - 卓越的在线英语课程、英文原版‎阅读、托福SAT备考';
+        }
+
         initWechat();
         //window.addEventListener('scroll', this.handlerScroll);
-
-        console.log('componentDidMount 2')
         let params = getParam();
         let tagids = [];
         for (let [key, value] of Object.entries(params)) {
@@ -88,14 +91,11 @@ export default class Home extends Component {
             tagids,
             notices: homeRes.notices,
             newsCategorys: homeRes.newsCategorys
-        },()=>{
-            console.log('componentDidMount setState done')
         });
-        console.log('componentDidMount done')
     }
 
     async componentWillReceiveProps(nextProps) {
-        console.log('componentWillReceiveProps')
+        console.log('componentWillReceiveProps');
         let params = getParam();
         let tagids = [];
         for (let [key, value] of Object.entries(params)) {
@@ -152,7 +152,7 @@ export default class Home extends Component {
                     if (course.object_type === '1' || course.object_type === '4') {
                         if (filterIds0 && !filterIds0.includes(course.id)) return;
                         children0.push(course);
-                    } else if(course.object_type === '5'){
+                    } else if (course.object_type === '5') {
                         children2.push(course);
                     } else {
                         if (filterIds1 && !filterIds1.includes(course.id)) return;
@@ -179,15 +179,13 @@ export default class Home extends Component {
         return {categorys0, categorys1, categorys2};
     }
 
-
-
     componentWillUnmount() {
         //window.removeEventListener('scroll', this.handlerScroll);
     }
 
     render() {
         console.log(`Home`);
-        console.log(`this.state.banners ${this.state.banners.length}`)
+        console.log(`this.state.banners ${this.state.banners.length}`);
         return (
             <React.Fragment>
                 <Header isShow={!siteCodeUtil.inAPP()} />

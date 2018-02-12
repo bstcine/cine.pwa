@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import * as Service from '@/service/content';
 import {Tabs, TabItems, TabItem, TabPanels, TabPanel} from '@/component/Tabs';
 import {getParam} from '@/util/urlUtil';
-import HomeHeader from './HomeHeader';
 import _ from 'lodash';
 import Slider from './Slider';
 import Notice from './Notice';
@@ -14,6 +13,9 @@ import siteCodeUtil from '@/util/sitecodeUtil';
 import uaUtil from '@/util/uaUtil';
 import Article from '@/entry/content/component/Home/Article';
 import Header from '@/component/Header';
+const bottomImg1 = require('../../asset/image/book.jpg');
+const bottomImg2 = require('../../asset/image/moon.jpg');
+let bottomImg = Math.round(Math.random()*10) % 2 ? bottomImg2: bottomImg1;
 
 export default class Home extends Component {
     constructor(props) {
@@ -234,7 +236,10 @@ export default class Home extends Component {
 
                 {!siteCodeUtil.inAPP() && !uaUtil.wechat() ? (
                     <div className="container-fluid">
-                        <div className="cine-slogan" />
+                        <div
+                            className="cine-slogan"
+                            style={{background: `url(${bottomImg}) center center / cover no-repeat`}}
+                        />
                     </div>
                 ) : null}
             </React.Fragment>

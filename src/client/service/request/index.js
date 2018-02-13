@@ -14,16 +14,16 @@ function httpUrl(url) {
 }
 
 function httpBody(bodyData) {
-    let token;
-    if (bodyData && typeof bodyData.token !== 'undefined') {
-        token = bodyData.token;
-    } else {
-        token = storeUtil.getToken();
-    }
+    // let token;
+    // if (bodyData && typeof bodyData.token !== 'undefined') {
+    //     token = bodyData.token;
+    // } else {
+    //     token = storeUtil.getToken();
+    // }
     let sitecode = storeUtil.getSiteCode();
 
     return {
-        token: token,
+        // token: token,
         sitecode: sitecode,
         channel: '',
         locale: 'zh_CN',

@@ -30,7 +30,7 @@ export default class CouponModal extends Component {
                 <h2 />
                 <div className="desc-wrap">
                     <div className="close" onClick={this.handleCloseModal}>
-                        <i className="material-icons">close</i>
+                        <i className="material-icons">&#xE5CD;</i>
                     </div>
                     <div className="tip">
                         优惠券已成功发放至账户<span>{username}</span>

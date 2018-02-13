@@ -32,7 +32,7 @@ export default class RecommendModal extends Component {
                 shouldCloseOnEsc={true}
             >
                 <div className="close" onClick={this.handleCloseModal}>
-                    <i className="material-icons">close</i>
+                    <i className="material-icons">&#xE5CD;</i>
                 </div>
 
                 <div className="h2">推荐课程得积分</div>

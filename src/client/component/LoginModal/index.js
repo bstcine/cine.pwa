@@ -44,7 +44,7 @@ export default class LoginModal extends Component {
         if (!res.status) {
             return alert(errorMsg(res.msg));
         }
-        storeUtil.setToken(res.token);
+        // storeUtil.setToken(res.token);
         this.props.loginSuccess();
     }
 
@@ -68,7 +68,7 @@ export default class LoginModal extends Component {
                 </div>
                 <form className="login-form" onSubmit={this.loginAction}>
                     <div className="form-control">
-                        <i className="material-icons">person_outline</i>
+                        <i className="material-icons">&#xE7FF;</i>
                         <input
                             type="text"
                             className="username"
@@ -78,7 +78,7 @@ export default class LoginModal extends Component {
                         />
                     </div>
                     <div className="form-control">
-                        <i className="material-icons">lock_outline</i>
+                        <i className="material-icons">&#xE899;</i>
                         <input
                             type="password"
                             className="password"

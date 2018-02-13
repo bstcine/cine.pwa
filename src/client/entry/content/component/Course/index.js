@@ -120,26 +120,32 @@ export default class Course extends Component {
             this.setState({comments});
         });
 
-        const token = storeUtil.getToken();
-        if (token) {
-            let {error, data: user} = await BaseService.userInfo(token);
-            if (error) {
-                if (error.message === 'no_login') {
-                    storeUtil.removeToken();
-                    let course = await Service.getContentCourseDetail({cid});
-                    this.setState({course});
-                } else {
-                    console.error(error.message);
-                }
-                return;
-            }
-
-            this.setState({
-                user: user
-            });
-        }
+        // const token = storeUtil.getToken();
+        // if (token) {
+        //     let {error, data: user} = await BaseService.userInfo(token);
+        //     if (error) {
+        //         if (error.message === 'no_login') {
+        //             storeUtil.removeToken();
+        //             let course = await Service.getContentCourseDetail({cid});
+        //             this.setState({course});
+        //         } else {
+        //             console.error(error.message);
+        //         }
+        //         return;
+        //     }
+        //
+        //     this.setState({
+        //         user: user
+        //     });
+        // }
         let course = await Service.getContentCourseDetail({cid});
         this.setState({course});
+        if(storeUtil.getToken()){
+            let {error, data: user} = await BaseService.userInfo();
+            if (!error) {
+                this.setState({user});
+            }
+        }
     }
 
     goBuy() {
@@ -193,11 +199,11 @@ export default class Course extends Component {
     async login() {
         if (siteCodeUtil.inIOSAPP()) {
             let {token} = await Bridge.ios(BRIDGE_EVENT.LOGIN);
-            storeUtil.setToken(token);
+            // storeUtil.setToken(token);
             this.loginSuccess(token);
         } else if (siteCodeUtil.inAndroidAPP()) {
             let {token} = await Bridge.android(BRIDGE_EVENT.LOGIN);
-            storeUtil.setToken(token);
+            // storeUtil.setToken(token);
             this.loginSuccess(token);
         } else {
             this.toggleLoginModal();

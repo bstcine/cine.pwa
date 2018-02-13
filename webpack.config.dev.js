@@ -74,8 +74,8 @@ module.exports = {
         // useLocalIp:true,
         proxy: {
             '/api': {
-                // target: "http://localhost:9000",
-                target: 'http://apptest.bstcine.com',
+                target: "http://localhost:9000",
+                // target: 'http://apptest.bstcine.com',
                 secure: false,
                 changeOrigin: true
             }

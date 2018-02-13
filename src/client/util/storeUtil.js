@@ -1,3 +1,5 @@
+import cookieUtil from '@/util/cookieUtil';
+
 const engine = require('store/src/store-engine');
 const storages = [require('store/storages/localStorage'), require('store/storages/cookieStorage')];
 const plugins = [require('store/plugins/defaults'), require('store/plugins/expire')];
@@ -13,14 +15,15 @@ let storeUtil = {
     remove: key => {
         return store.remove(key);
     },
+    // cookie 保存 token 与服务端保持同步
     setToken: token => {
-        return storeUtil.set('token', token);
+        return cookieUtil.set('token', token);
     },
     getToken: () => {
-        return storeUtil.get('token');
+        return cookieUtil.get('token');
     },
     removeToken: () => {
-        return storeUtil.remove('token');
+        return cookieUtil.remove('token');
     },
     setSiteCode: sitecode => {
         return storeUtil.set('sitecode', sitecode);

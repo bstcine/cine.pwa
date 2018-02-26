@@ -61,10 +61,10 @@ export default class Footer extends Component {
                             </div>
                             <div className="qrcode">
                                 <div className="qrcode-img">
-                                    <img src={require("@/asset/image/qrcode_Nancy.jpg")} alt="邱老师Nancy" />
+                                    <img src={require("@/asset/image/qrcode_Nancy.jpg")} alt="Nancy老师" />
                                 </div>
                                 <div className="qrcode-title">课程咨询</div>
-                                <div className="qrcode-name">邱老师Nancy</div>
+                                <div className="qrcode-name">Nancy老师</div>
                             </div>
                         </div>
                     </div>

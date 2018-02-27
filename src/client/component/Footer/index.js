@@ -72,7 +72,7 @@ export default class Footer extends Component {
                     <div className="copyright">
                         <div className="co-name">善严教育科技(上海)有限公司</div>
                         <div className="co-desc">
-                            <div className="co-desc-year">Copyright © 2014 - 2017 <a href="http://www.bstcine.com">BSTCINE</a>. All Rights Reserved. </div>
+                            <div className="co-desc-year">Copyright © 2014 - 2018 <a href="http://www.bstcine.com">BSTCINE</a>. All Rights Reserved. </div>
                             <div className="co-desc-code">沪ICP备14053596号-1</div>
                         </div>
                     </div>

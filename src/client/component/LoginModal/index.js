@@ -40,11 +40,11 @@ export default class LoginModal extends Component {
         let username = this.state.username;
         let password = this.state.password;
 
-        let res = await Service.loginV1({username, password});
-        if (!res.status) {
-            return alert(errorMsg(res.msg));
+        let res = await Service.login({username, password});
+        if (res.except_case_desc) {
+            return alert(errorMsg(res.except_case_desc));
         }
-        storeUtil.setToken(res.token);
+        storeUtil.setToken(res.result.token);
         this.props.loginSuccess();
     }
 

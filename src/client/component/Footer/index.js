@@ -61,10 +61,10 @@ export default class Footer extends Component {
                             </div>
                             <div className="qrcode">
                                 <div className="qrcode-img">
-                                    <img src={require("@/asset/image/qrcode_Nancy.jpg")} alt="邱老师Nancy" />
+                                    <img src={require("@/asset/image/qrcode_Nancy.jpg")} alt="Nancy老师" />
                                 </div>
                                 <div className="qrcode-title">课程咨询</div>
-                                <div className="qrcode-name">邱老师Nancy</div>
+                                <div className="qrcode-name">Nancy老师</div>
                             </div>
                         </div>
                     </div>
@@ -72,7 +72,7 @@ export default class Footer extends Component {
                     <div className="copyright">
                         <div className="co-name">善严教育科技(上海)有限公司</div>
                         <div className="co-desc">
-                            <div className="co-desc-year">Copyright © 2014 - 2017 <a href="http://www.bstcine.com">BSTCINE</a>. All Rights Reserved. </div>
+                            <div className="co-desc-year">Copyright © 2014 - 2018 <a href="http://www.bstcine.com">BSTCINE</a>. All Rights Reserved. </div>
                             <div className="co-desc-code">沪ICP备14053596号-1</div>
                         </div>
                     </div>

@@ -3,7 +3,6 @@ import ReactModal from 'react-modal';
 import '@/asset/style/modal.less';
 import * as Service from '@/service/base';
 import errorMsg from '@/util/errorMsg';
-import storeUtil from '@/util/storeUtil';
 
 export default class LoginModal extends Component {
     constructor(props) {
@@ -40,9 +39,9 @@ export default class LoginModal extends Component {
         let username = this.state.username;
         let password = this.state.password;
 
-        let res = await Service.loginV1({username, password});
-        if (!res.status) {
-            return alert(errorMsg(res.msg));
+        let res = await Service.login({username, password});
+        if (res.except_case_desc) {
+            return alert(errorMsg(res.except_case_desc));
         }
         // storeUtil.setToken(res.token);
         this.props.loginSuccess();

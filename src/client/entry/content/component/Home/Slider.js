@@ -1,12 +1,10 @@
 import React, {Component} from 'react';
 import ReactSlider from 'react-slick';
 import uaUtil from '@/util/uaUtil';
-import BRIDGE_EVENT from "@/constant/bridgeEvent";
-import siteCodeUtil from "@/util/sitecodeUtil";
-import Bridge from "@/util/bridge";
-import {addParam} from "@/util/urlUtil";
-import storeUtil from "@/util/storeUtil";
-import routeUtil from "@/util/routeUtil";
+import siteCodeUtil from '@/util/sitecodeUtil';
+import {addParam} from '@/util/urlUtil';
+import storeUtil from '@/util/storeUtil';
+import routeUtil from '@/util/routeUtil';
 
 export default class Slider extends Component {
     constructor(props) {
@@ -14,7 +12,8 @@ export default class Slider extends Component {
         this.settings = {
             dots: true,
             infinite: true,
-            speed: 800,
+            speed: 1000,
+            autoplaySpeed: 5000,
             touchThreshold: 10,
             autoplay: true,
             slidesToShow: 1,
@@ -52,19 +51,19 @@ export default class Slider extends Component {
     handlerClick({type, course_id, href}) {
         let {history} = this.props;
         if (type === '1') {
-            routeUtil.goCourse({id:course_id},history)
+            routeUtil.goCourse({id: course_id}, history);
         } else if (type === '2') {
             let url = href;
             if (siteCodeUtil.inAPP()) {
-                url = addParam(url, {token: storeUtil.getToken()})
+                url = addParam(url, {token: storeUtil.getToken()});
             }
-            location.href = url
+            location.href = url;
         } else if (type === '3') {
             let url = href;
             if (siteCodeUtil.inAPP()) {
-                url = addParam(url, {token: storeUtil.getToken()})
+                url = addParam(url, {token: storeUtil.getToken()});
             }
-            location.href = url
+            location.href = url;
         }
     }
 

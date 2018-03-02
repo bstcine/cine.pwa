@@ -1,7 +1,7 @@
 let cookieUtil = {
     set: (key, value, exp = 48 * 3600 * 1000) => {
         let expires = '; max-age=' + exp;
-        document.cookie = encodeURIComponent(key) + '=' + encodeURIComponent(value) + expires;
+        document.cookie = encodeURIComponent(key) + '=' + encodeURIComponent(value) + expires+'; path=/';
     },
     get: key => {
         return (
@@ -23,7 +23,7 @@ let cookieUtil = {
                 document.cookie
             )
         ) {
-            document.cookie = encodeURIComponent(key) + '=; expires=Thu, 01 Jan 1970 00:00:00 GMT';
+            document.cookie = encodeURIComponent(key) + '=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/';;
         }
     }
 };

@@ -23,7 +23,7 @@ function httpBody(bodyData) {
     let sitecode = storeUtil.getSiteCode();
 
     return {
-        // token: token,
+        token: storeUtil.getToken(),
         sitecode: sitecode,
         channel: '',
         locale: 'zh_CN',

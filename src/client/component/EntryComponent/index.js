@@ -34,7 +34,8 @@ class EntryComponent extends Component {
 
         // H5 在 app 内的时候，直接拿 URL 上的 token，不传则直接视为登出，清除缓存 token
         siteCodeUtil.inAPP() && storeUtil.removeToken();
-        token && storeUtil.set('token', token);
+
+        token && storeUtil.setToken(token);
 
         // host 前缀以 URL 上的优先级最高，不传的时候取构建时传的
         if (baseurl) {

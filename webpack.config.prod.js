@@ -7,7 +7,7 @@ const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const BuildManifestPlugin = require('build-manifest-webpack-plugin');
 
-const Config = require('./config');
+const Config = require('./webpack.config');
 
 const pages = Config.pages;
 let entry = {};

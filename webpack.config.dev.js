@@ -5,7 +5,7 @@ const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
 const WebpackMildCompile = require('webpack-mild-compile').Plugin;
-const Config = require('./config');
+const Config = require('./webpack.config');
 const OfflinePlugin = require('offline-plugin');
 const BuildManifestPlugin = require('build-manifest-webpack-plugin');
 
@@ -68,7 +68,7 @@ module.exports = {
             rewrites: rewrites
         },
         inline: true,
-        port: 5000,
+        port: 5001,
         disableHostCheck: true,
         // host: "0.0.0.0",
         // useLocalIp:true,

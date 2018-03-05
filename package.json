@@ -4,9 +4,9 @@
   "description": "React-PWA",
   "main": "server.js",
   "scripts": {
-    "prod-dll": "webpack -p --progress --colors --config=webpack.dll.js",
+    "prod-dll": "webpack -p --progress --colors --config=webpack.vendor.js",
     "prod-build": "webpack -p --progress --colors --config=webpack.config.prod.js",
-    "dev-dll": "webpack --progress --colors --config=webpack.dll.js",
+    "dev-dll": "webpack --progress --colors --config=webpack.vendor.js",
     "dev-build": "webpack --progress --colors --config=webpack.config.dev.js",
     "start": "webpack-dev-server --config=webpack.config.dev.js"
   },
@@ -16,7 +16,7 @@
   },
   "author": "Joe L",
   "dependencies": {
-    "axios": "^0.17.1",
+    "axios": "^0.18.0",
     "babel-polyfill": "^6.26.0",
     "echarts": "^3.8.5",
     "immutable": "^3.8.2",
@@ -64,9 +64,9 @@
     "react-addons-test-utils": "^15.6.2",
     "style-loader": "^0.19.0",
     "url-loader": "^0.6.2",
-    "webpack": "^3.8.1",
-    "webpack-bundle-analyzer": "^2.9.1",
-    "webpack-dev-server": "^2.9.5",
+    "webpack": "^4.0.1",
+    "webpack-bundle-analyzer": "^2.11.1",
+    "webpack-dev-server": "^3.1.0",
     "webpack-mild-compile": "^2.0.0"
   }
 }

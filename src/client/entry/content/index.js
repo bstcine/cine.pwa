@@ -2,21 +2,18 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {Route} from 'react-router-dom';
 import './asset/style/index.less';
+import Bundle    from '@/component/Bundle';
 import appBanner from '@/util/appBanner';
-import 'material-icons';
-import Header from '@/component/Header';
-import Footer from '@/component/Footer';
-import Router from '@/component/Router';
+import Footer    from '@/component/Footer';
+import Router    from '@/component/Router';
 import EntryComponent from '@/component/EntryComponent';
 import Home from './component/Home';
 import Course from './component/Course';
+import Prepare from 'bundle-loader?lazy!./component/Prepare';
 // import Prepare from './component/Prepare';
 // import Home from 'bundle-loader?lazy!./component/Home';
 // import Course from 'bundle-loader?lazy!./component/Course';
-import Prepare from 'bundle-loader?lazy!./component/Prepare';
-import Bundle from '@/component/Bundle';
 
-// import '@/util/debug'
 
 const Loading = () =>  <div style={{background: '#fff', width: '400px', height: '300px', fontSize: '40px', color: '#000'}}>
             Loading...

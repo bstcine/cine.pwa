@@ -25,7 +25,7 @@ pages.forEach(page => {
     );
     rewrites.push({from: new RegExp(`^/${page}.*`), to: `/entry/${page}/index.html`});
 });
-rewrites.push({from: /^\/$/, to: `/entry/content/index.html`});
+rewrites.push({from: /.*/, to: `/entry/content/index.html`});
 
 module.exports = {
     cache: false,
@@ -68,7 +68,7 @@ module.exports = {
             rewrites: rewrites
         },
         inline: true,
-        port: 5001,
+        port: 5000,
         disableHostCheck: true,
         // host: "0.0.0.0",
         // useLocalIp:true,

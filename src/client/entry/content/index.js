@@ -13,7 +13,8 @@ import Course from './component/Course';
 // import Prepare from './component/Prepare';
 // import Home from 'bundle-loader?lazy!./component/Home';
 // import Course from 'bundle-loader?lazy!./component/Course';
-import Prepare from 'bundle-loader?lazy!./component/Prepare';
+import PayPrepare from 'bundle-loader?lazy!./component/PayPrepare';
+import PayCenter from 'bundle-loader?lazy!./component/PayCenter';
 import Bundle from '@/component/Bundle';
 
 // import '@/util/debug'
@@ -53,7 +54,8 @@ class Content extends EntryComponent {
                     <React.Fragment>
                         <Route exact path="/" component={Home} />
                         <Route path="/content/course" component={Course} />
-                        <Route path="/content/prepare" component={props => createComponent(Prepare, props)} />
+                        <Route path="/pay/prepare" component={props => createComponent(PayPrepare, props)} />
+                        <Route path="/pay/center" component={props => createComponent(PayCenter, props)} />
                     </React.Fragment>
                 </Router>
                 <Footer />

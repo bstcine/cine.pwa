@@ -1,0 +1,295 @@
+import React, {Component} from 'react';
+import QRCode from 'qrcode';
+import uaUtil from '@/util/uaUtil';
+import siteCodeUtil from '@/util/sitecodeUtil';
+import Header from '@/component/Header';
+import PayingModal from '@/entry/content/component/PayCenter/PayingModal';
+import QRModal from '@/entry/content/component/PayCenter/QRModal';
+import {getOrderDetail, getOrderPayStatus} from '@/service/content';
+import {addParam, getParam} from '@/util/urlUtil';
+import HelpModal from '@/entry/content/component/PayCenter/HelpModal';
+import {fetchData} from '@/service/base';
+import {APIURL_Pay_Wechat_Jsapi, APIURL_Pay_Wechat_Mweb, APIURL_Pay_Wechat_Qrcode} from '../../../../../APIConfig';
+import errorMsg from '@/util/errorMsg';
+import {initWechat} from '@/util/wechatUtil';
+
+export default class PayCenter extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            showPayingModal: false,
+            showQRModal: false,
+            showHelpModal: false,
+            order: null,
+            code_url: '',
+            pay_btn: {
+                text: '立即支付',
+                disabled: false
+            },
+            pay_type: 1
+        };
+        this.closePayingModal = this.closePayingModal.bind(this);
+        this.closeQRModal = this.closeQRModal.bind(this);
+        this.closeHelpModal = this.closeHelpModal.bind(this);
+        this.choosePayType = this.choosePayType.bind(this);
+        this.submitPay = this.submitPay.bind(this);
+    }
+
+    async componentWillMount() {
+        let cid = getParam().cid;
+        let {detail} = await getOrderDetail({cid});
+        this.setState({
+            order: detail.order
+        });
+    }
+
+    componentDidMount() {
+        document.title = '善恩英语 - 收银台';
+        PayCenter.getWechatOpenId();
+        initWechat();
+    }
+
+    static getWechatOpenId() {
+        if (uaUtil.wechat() && getParam().redirected !== '1') {
+            let url = addParam(location.href, {redirected: 1});
+            location.href = 'http://www.bstcine.com/wechat/authorize?redirect=' + encodeURIComponent(url);
+        }
+    }
+
+    closePayingModal() {
+        this.setState({
+            showPayingModal: false
+        });
+    }
+
+    openPayingModal() {
+        this.setState({
+            showPayingModal: true
+        });
+    }
+
+    closeQRModal() {
+        this.setState({
+            showQRModal: false
+        });
+    }
+
+    openQRModal(code_url) {
+        this.setState({
+            showQRModal: true,
+            code_url
+        });
+    }
+
+    closeHelpModal() {
+        this.setState({
+            showHelpModal: false
+        });
+    }
+
+    openHelpModal() {
+        this.setState({
+            showHelpModal: true
+        });
+    }
+
+    choosePayType(pay_type) {
+        this.setState({
+            pay_type
+        });
+    }
+
+    checkingOrderStatus() {
+        if (this.timer) {
+            clearInterval(this.timer);
+        }
+        let {order} = this.state;
+        this.timer = setInterval(() => {
+            getOrderPayStatus({cid: order.id}).then(([err, {pay_status}]) => {
+                if (pay_status === '1') {
+                    clearInterval(this.timer);
+                    location.href = `/user/orderview?order_id=${order.id}`;
+                }
+            });
+        }, 3000);
+    }
+
+    goPayRedirect() {
+        let {pay_type, order} = this.state;
+        this.gopayEle.href = `/payRedirect?order_id=${order.id}&pay_type=${pay_type}`;
+        this.gopayEle.click();
+    }
+
+    doPayWechatJsapi() {
+        const {openid} = getParam();
+        let {order} = this.state;
+        let _this = this;
+        _this.setState({
+            pay_btn: {text: '支付中...', disabled: true}
+        });
+        fetchData(APIURL_Pay_Wechat_Jsapi, {order_id: order.id, openid}).then(([err, config]) => {
+            wx.chooseWXPay({
+                timestamp: config.timeStamp,
+                nonceStr: config.nonceStr,
+                package: config.package,
+                signType: config.signType,
+                paySign: config.paySign,
+                success: function (res) {
+                    _this.setState({
+                        pay_btn: {text: '立即支付', disabled: false}
+                    });
+                },
+                cancel: function (res) {
+                    _this.setState({
+                        pay_btn: {text: '重新支付', disabled: false}
+                    });
+                },
+                fail: function (res) {
+                    _this.setState({
+                        pay_btn: {text: '重新支付', disabled: false}
+                    });
+                }
+            });
+        });
+    }
+
+    doPayWechatQrcode() {
+        let {order} = this.state;
+        this.setState({
+            pay_btn: {text: '支付中...', disabled: true}
+        });
+        fetchData(APIURL_Pay_Wechat_Qrcode, {order_id: order.id}).then(([err, {code_url}]) => {
+            if (err) return alert(errorMsg(err));
+            this.setState({
+                pay_btn: {text: '重新支付', disabled: false}
+            });
+            QRCode.toDataURL(code_url, {width: 200})
+                .then(url => {
+                    this.openQRModal(url);
+                })
+                .catch(err => {
+                    alert(err);
+                });
+        });
+    }
+
+    submitPay() {
+        let {pay_type} = this.state;
+        if (pay_type === 1) {
+            if (uaUtil.wechat()) {
+                this.openHelpModal();
+            } else {
+                // 支付宝pc支付 && 支付宝mweb支付
+                this.openPayingModal();
+                this.checkingOrderStatus();
+                this.goPayRedirect();
+            }
+        } else if (pay_type === 3) {
+            if (uaUtil.wechat()) {
+                const {openid} = getParam();
+                if (openid) {
+                    // 微信jsapi支付
+                    this.doPayWechatJsapi();
+                } else {
+                    // 微信QRcode支付
+                    this.doPayWechatQrcode();
+                }
+            } else if (uaUtil.mobile()) {
+                // 微信mweb支付
+                this.openPayingModal();
+                this.checkingOrderStatus();
+                this.goPayRedirect();
+            } else {
+                // 微信QRcode支付
+                this.doPayWechatQrcode();
+            }
+        }
+    }
+
+    render() {
+        let {showPayingModal, showQRModal, showHelpModal, order, pay_type, pay_btn, code_url} = this.state;
+        return (
+            <React.Fragment>
+                <Header isShow={!siteCodeUtil.inAPP() && !uaUtil.wechat()}/>
+                <div className="container-fluid course-container-bg">
+                    <div className="paycenter-container">
+                        <div className="pay-header">
+                            <div className="pay-title">善恩-收银台</div>
+                        </div>
+                        <div className="pay-content">
+                            <div className="orderno-title">
+                                订单号 <span className="orderid">{order ? order.id : ''}</span>
+                            </div>
+                            <div className="order-content">
+                                <div className="order-name">{order ? order.subject : ''}</div>
+                                <div className="order-price">{order ? order.pay_price : ''}</div>
+                            </div>
+                            <div className="pay-method">
+                                <div className="pay-method-title">
+                                    选择支付方式<span className="pay-method-tip">（支付宝、微信）</span>
+                                </div>
+                                <div className="pay-method-choose clearfix">
+                                    <div
+                                        className={
+                                            pay_type === 1
+                                                ? 'pay-method-item pay-method-alipay active'
+                                                : 'pay-method-item pay-method-alipay'
+                                        }
+                                        onClick={() => this.choosePayType(1)}
+                                    >
+                                        <img src={require('../../asset/image/pic_alipay.png')} alt="支付宝支付"/>
+                                    </div>
+                                    <div
+                                        className={
+                                            pay_type === 3
+                                                ? 'pay-method-item pay-method-wechatpay active'
+                                                : 'pay-method-item pay-method-wechatpay'
+                                        }
+                                        onClick={() => this.choosePayType(3)}
+                                    >
+                                        <img src={require('../../asset/image/pic_wechat.png')} alt="微信支付"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="pay-footer clearfix">
+                                <a
+                                    ref={ele => (this.gopayEle = ele)}
+                                    href=""
+                                    style={{display: 'none'}}
+                                    target="payWindow"
+                                />
+
+                                <button
+                                    id="payBtn"
+                                    className="btn btn-danger btn-confirm"
+                                    onClick={this.submitPay}
+                                    disabled={pay_btn.disabled}
+                                >
+                                    {pay_btn.text}
+                                </button>
+                            </div>
+                            <div className="pay-qa">
+                                <div className="pay-qa-title">
+                                    <span>支付遇到问题</span>
+                                </div>
+                                <div className="pay-qa-desc">
+                                    请立即联系我们的客服，微信号：BSTCINE01
+                                    进行咨询，我们将为您提供基于微信的技术支持服务。
+                                </div>
+                            </div>
+
+                            <PayingModal isOpen={showPayingModal} onRequestClose={this.closePayingModal}/>
+                            <QRModal
+                                isOpen={showQRModal}
+                                onRequestClose={this.closeQRModal}
+                                code_url={code_url}
+                                pay_price={order ? order.pay_price : ''}
+                            />
+                            <HelpModal isOpen={showHelpModal} onRequestClose={this.closeHelpModal}/>
+                        </div>
+                    </div>
+                </div>
+            </React.Fragment>
+        );
+    }
+}

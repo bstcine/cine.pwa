@@ -7,7 +7,7 @@ import storeUtil from '@/util/storeUtil';
 import Header from '@/component/Header';
 import siteCodeUtil from '@/util/sitecodeUtil';
 
-export default class Prepare extends Component {
+export default class PayPrepare extends Component {
     constructor(props) {
         super(props);
         this.inputChange = this.inputChange.bind(this);
@@ -123,13 +123,13 @@ export default class Prepare extends Component {
         Service.createOrder(orderBody).then(res => {
             if (this.hasError(res.except_case_desc)) return;
             let {order_id} = res.result;
-            let url = `/payCenter/${order_id}`;
-            if (uaUtil.wechat()) {
-                url = 'http://' + location.host + url;
-                location.href = 'http://www.bstcine.com/wechat/authorize?redirect=' + encodeURIComponent(url);
-            } else {
-                location.href = url;
-            }
+            // let url = ;
+            // if (uaUtil.wechat()) {
+            //     url = 'http://' + location.host + url;
+            //     location.href = 'http://www.bstcine.com/wechat/authorize?redirect=' + encodeURIComponent(url);
+            // } else {
+                location.href = `/pay/center?cid=${order_id}`;
+            // }
         });
     }
 

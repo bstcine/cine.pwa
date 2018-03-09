@@ -1,4 +1,4 @@
-import {post,get, postv1} from '@/service/request';
+import {post, get, postv1} from '@/service/request';
 import Api from '@/../APIConfig';
 import storeUtl from '@/util/storeUtil';
 import errorCode from '@/constant/errorCode';
@@ -14,23 +14,23 @@ export let getContentCourseDetail = query => {
 };
 
 export let getContentHome = query => {
-    if (window.navigator.onLine) {
-        return get(Api.APIURL_Content_Home, query).then(res => {
-            if (res.except_case_desc) {
-                return alert(res.except_case_desc);
-            }
-            // let homeRes = res.result;
-            // storeUtl.set(Api.APIURL_Content_Home, homeRes);
-            // return storeUtl.get(Api.APIURL_Content_Home);
-            return res.result
-        });
-    } else {
-        let homeRes = storeUtl.get(Api.APIURL_Content_Home);
-        if (!homeRes) {
-            return alert('网络异常，无缓存数据');
+    // if (window.navigator.onLine) {
+    return post(Api.APIURL_Content_Home, query).then(res => {
+        if (res.except_case_desc) {
+            return alert(res.except_case_desc);
         }
-        return homeRes;
-    }
+        // let homeRes = res.result;
+        // storeUtl.set(Api.APIURL_Content_Home, homeRes);
+        // return storeUtl.get(Api.APIURL_Content_Home);
+        return res.result
+    });
+    // } else {
+    //     let homeRes = storeUtl.get(Api.APIURL_Content_Home);
+    //     if (!homeRes) {
+    //         return alert('网络异常，无缓存数据');
+    //     }
+    //     return homeRes;
+    // }
 };
 
 export let getContentCourseComment = query => {
@@ -76,3 +76,18 @@ export let createOrder = ({cid, point, coupon_no, remark, addressInfo}) => {
 export let preCalculatePrice = ({cid, point, coupon_no}) => {
     return post(Api.APIURL_Order_PreCalculatePrice, {cid, point, coupon_no});
 };
+
+export let getOrderDetail = ({cid}) => {
+    return post(Api.APIURL_Order_Detail, {cid}).then(res => {
+        if (res.except_case_desc) {
+            return alert(res.except_case_desc);
+        }
+        return res.result
+    });
+}
+
+export let getOrderPayStatus = (({cid}) => {
+    return post(Api.APIURL_Order_Pay_Status, {cid}).then(res => {
+        return [res.except_case_desc, res.result]
+    });
+})

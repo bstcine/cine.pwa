@@ -164,7 +164,7 @@ export default class Course extends Component {
         } else if (siteCodeUtil.inAndroidAPP()) {
             Bridge.android(BRIDGE_EVENT.PRE_CONFIRM, {course_id: cid});
         } else {
-            let url = `/content/prepare?cid=${cid}`;
+            let url = `/pay/prepare?cid=${cid}`;
             if (source_user_id) {
                 url += `&source_user_id=${source_user_id}`;
             }

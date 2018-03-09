@@ -134,6 +134,9 @@ export default class Header extends Component {
                             <li className="nav-item">
                                 <a href="/appDownload">APP下载</a>
                             </li>
+                            <li className="nav-item">
+                                <a href="/studyabroad">善恩留学</a>
+                            </li>
                         </ul>
                     </div>
 

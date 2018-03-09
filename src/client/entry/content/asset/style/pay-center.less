@@ -1,0 +1,184 @@
+.paycenter-container {
+  min-height: 12.00rem;
+  background-color: #fff;
+  margin: auto;
+  padding: 28px 27px 90px;
+  .pay-header {
+    border-bottom: 3px solid #03377d;
+    margin-bottom: 30px;
+    .pay-title {
+      font-size: 28px;
+      color: #03357f;
+      display: inline-block;
+    }
+  }
+
+  .pay-content {
+    .orderno-title {
+      font-size: 16px;
+      color: #3c3c3c;
+      margin-bottom: 18px;
+      padding-left: 10px;
+      padding-right: 26px;
+      padding-bottom: 10px;
+      line-height: 1;
+      border-bottom: 1px solid #eaebec;
+    }
+
+    span.orderid {
+      color: #848587;
+    }
+
+    .order-content {
+      padding-left: 5px;
+      padding-right: 15px;
+      padding-bottom: 56px;
+
+      .order-name {
+        display: inline-block;
+        font-size: 18px;
+        color: #3c3c3c;
+        line-height: 24px;
+      }
+
+      .order-price {
+        font-size: 24px;
+        color: #ff2400;
+        float: right;
+        line-height: 1;
+        height: 24px;
+      }
+
+    }
+
+    .pay-method {
+      padding-bottom: 12px;
+
+      .pay-method-title {
+        font-size: 16px;
+        color: #222;
+        line-height: 1;
+        margin-bottom: 12px;
+        padding-left: 10px;
+      }
+
+      .pay-method-choose {
+        border-top: 1px solid #eaebec;
+        background-color: #fbfcfe;
+        padding: 30px 0 22px 22px;
+
+        img {
+          width: 160px;
+          cursor: pointer;
+        }
+        .pay-method-alipay {
+          margin-right: 17px;
+        }
+
+        .pay-method-alipay,
+        .pay-method-wechatpay {
+          position: relative;
+          display: inline-block;
+          width: 162px;
+          border: 1px solid #d8d9da;
+          box-shadow: 0 2px 1px #eeeff1;
+          height: 62px;
+          border-radius: 4px;
+          line-height: 62px;
+          margin-bottom: 10px;
+        }
+
+        .pay-method-alipay:hover,
+        .pay-method-wechatpay:hover,
+        .pay-method-alipay.active,
+        .pay-method-wechatpay.active {
+          box-shadow: 1px 2px 2px #ddb990;
+          transition: all 0.3s;
+          border-color: #fc5f20;
+        }
+
+        .pay-method-alipay:before,
+        .pay-method-wechatpay:before {
+          display: none;
+          position: absolute;
+          top: 38px;
+          right: 2px;
+          content: '';
+          background: url(../image/ico_pay_checked.png) no-repeat;
+          background-size: contain;
+          width: 20px;
+          height: 20px;
+        }
+
+        .pay-method-alipay.active:before,
+        .pay-method-wechatpay.active:before {
+          display: block;
+        }
+      }
+    }
+
+    .pay-footer {
+      vertical-align: middle;
+      margin-top: 10px;
+      > * {
+        line-height: 52px;
+        height: 52px;
+      }
+      .back {
+        display: inline-block;
+      }
+
+      .back a {
+        color: #cbcfd6;
+      }
+
+      button.btn.btn-confirm {
+        float: right;
+        padding: 13px 66px;
+        font-size: 24px;
+        color: #fff;
+        background-color: #FC5F20;
+        border-color: #FC5F20;
+        border-radius: 6px;
+        line-height: 1;
+
+      }
+
+      button.btn.btn-confirm:hover {
+        background-color: #db541c;
+        border-color: #D0521C;
+      }
+
+    }
+
+    .pay-qa {
+      margin-top: 80px;
+      margin-left: 45px;
+
+      .pay-qa-title span {
+        display: inline-block;
+        border-top: 2px solid #d4d4d4;
+        padding-top: 12px;
+        line-height: 1;
+        font-size: 16px;
+        color: #434444;
+        padding-bottom: 10px;
+      }
+
+      .pay-qa-desc {
+        font-size: 14px;
+        color: #97989a;
+
+      }
+    }
+
+  }
+}
+
+@media @media-up-sm {
+  .paycenter-container {
+    margin: 0.55rem auto;
+    background-color: #fff;
+    width: 18.8rem;
+  }
+}

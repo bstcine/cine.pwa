@@ -39,3 +39,9 @@ export let logoutV1 = () => {
 export let accessLog = () => {
     return post(Api.APIURL_System_AccessLog_Create);
 };
+
+export let fetchData = (APIURL , query) => {
+    return post(APIURL, query).then(response => {
+        return [response.except_case_desc, response.result]
+    })
+}

@@ -1,4 +1,4 @@
-### 部署
+### 部署&开发
 
 ### Step 1. Install
 
@@ -68,4 +68,17 @@ Step1:  修改 `webpack.config.js`，Line 4~5
             const API_Dev_URL = 'http://www.bstcine.com';
 
 Step2.  运行 `$ npm run prod-build`
+```
+
+<br>
+<br>
+
+## 项目遗留问题
+- 不同的Build模式，应该只需要运行不同的scripts
+```
+目前情况：需要修改*.config.*.js的配置
+```
+- Static模式，无法保存Coockie
+```
+目前情况：Static模式, 用户无法登入成功
 ```

@@ -38,7 +38,6 @@ exports.APIURL_User_Info = '/api/user/info'; //用户信息
 exports.APIURL_User_Address_Add = '/api/user/address/add'; //新增收货地址
 exports.APIURL_User_Address = '/api/user/address'; //查询收货地址
 
-exports.APIURL_LoginV1 = '/api/web/login'; //登录
 exports.APIURL_LogoutV1 = '/api/web/logout'; //登出
 
 exports.APIURL_Auth_Signin = '/api/auth/signin'; //登录

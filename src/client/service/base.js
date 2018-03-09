@@ -20,13 +20,6 @@ export let userInfo = token => {
     });
 };
 
-export let loginV1 = ({username, password}) => {
-    return postv1(Api.APIURL_LoginV1, {
-        username,
-        password,
-        sitecode: storeUtil.getSiteCode()
-    });
-};
 
 export let login = ({username, password}) => {
     return post(Api.APIURL_Auth_Signin, {phone: username, password});

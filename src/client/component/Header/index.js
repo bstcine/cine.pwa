@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import storeUtil from '@/util/storeUtil';
-import {logoutV1, userInfo} from '@/service/base';
+import {logoutV1} from '@/service/base';
 import './header.less';
 
 export default class Header extends Component {

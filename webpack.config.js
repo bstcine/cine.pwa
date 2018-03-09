@@ -1,10 +1,10 @@
 const path = require('path');
 
 // 本地静态文件模式: MODE = 'static', Http模式: MODE = ''
-const MODE = '';
-const API_Dev_URL = 'http://apptest.bstcine.com';
+const MODE = 'static';
+const API_Host_URL = 'http://apptest.bstcine.com';
 
-let API_Host_URL = MODE === 'static' ? API_Dev_URL : '';
+
 let publicPath = MODE === 'static' ? '../../' : '/';
 
 module.exports = {
@@ -12,8 +12,9 @@ module.exports = {
     debug: true,
 
     MODE,
-    API_Dev_URL,
+
     API_Host_URL,
+
     publicPath,
 
     pages: ['content', 'cquiz', 'address', 'vocabtest'],

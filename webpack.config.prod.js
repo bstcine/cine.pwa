@@ -49,7 +49,7 @@ module.exports = {
         new webpack.EnvironmentPlugin({
             DEBUG: Config.debug,
             MODE: Config.MODE,
-            API_Host_URL: Config.API_Host_URL
+            API_Host_URL: Config.MODE === '' ? '' : Config.API_Host_URL
         }),
         new CleanWebpackPlugin(['build/*.*', 'build/entry'], {verbose: false}),
         new webpack.DllReferencePlugin({

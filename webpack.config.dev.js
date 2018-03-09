@@ -38,7 +38,7 @@ module.exports = {
         new webpack.EnvironmentPlugin({
             DEBUG: Config.debug,
             MODE: Config.MODE,
-            API_Host_URL: Config.API_Host_URL
+            API_Host_URL: Config.MODE === '' ? '' : Config.API_Host_URL
         }),
         new WebpackMildCompile(),
         new CleanWebpackPlugin(['build/*.*', 'build/entry'], {verbose: false}),
@@ -75,7 +75,7 @@ module.exports = {
         proxy: {
             '/api': {
                 //target: "http://localhost:9000",
-                target: Config.API_Dev_URL,
+                target: Config.API_Host_URL,
                 secure: false,
                 changeOrigin: true
             }

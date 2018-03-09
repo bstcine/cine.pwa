@@ -9,7 +9,7 @@ export default class PayingModal extends Component {
 
 
     render() {
-        let {isOpen, onRequestClose} = this.props;
+        let {isOpen, onRequestClose, order_id} = this.props;
         return (
             <ReactModal
                 isOpen={isOpen}
@@ -32,7 +32,7 @@ export default class PayingModal extends Component {
                     <div className="tips">
                         <div className="tip">
                             <div className="success-tip-title">支付成功</div>
-                            <a href="/user/orderview?order_id=order.id">立即查看订单详情></a>
+                            <a href={`/user/orderview?order_id=${order_id}`}>立即查看订单详情></a>
                         </div>
                         <div className="tip">
                             <div className="failed-tip-title">支付失败</div>

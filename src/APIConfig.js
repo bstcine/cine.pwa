@@ -12,13 +12,15 @@ exports.APIURL_User_Order_List = "/api/user/order/list"                         
 exports.APIURL_Order_Detail = "/api/order/detail"                               //订单详情
 exports.APIURL_Order_Pay_Status = "/api/order/pay/status"                       //获取支付状态
 
+
 exports.APIURL_Pay_Wechat_App = "/api/pay/wechat"                               //微信app支付
 exports.APIURL_Pay_Wechat_Qrcode = "/api/pay/wechat/QRcode"                     //微信QRcode支付
 exports.APIURL_Pay_Wechat_Jsapi = "/api/pay/wechat/jsapi"                       //微信jsapi支付
-exports.APIURL_Pay_Wechat_Mweb = "/api/pay/wechat/mweb"                         //微信mweb支付
+exports.APIURL_Pay_Wechat_Notify = "/api/pay/wechat/notify/:wechat_trade_type"  //微信支付 [回调]
+exports.APIURL_Pay_Wechat_Mweb = "/pay/wechat/mweb"                             //微信mweb支付 页面路由。非标准2.0接口
 exports.APIURL_Pay_Ali_App = "/api/pay/ali"                                     //支付宝app支付
-exports.APIURL_Pay_Ali_Pc = "/api/pay/ali/pc"                                   //支付宝pc支付
-exports.APIURL_Pay_Ali_Mweb = "/api/pay/ali/mweb"                               //支付宝mweb支付
+exports.APIURL_Pay_Ali_Pc = "/pay/ali/pc"                                       //支付宝pc支付 页面路由。非标准2.0接口
+exports.APIURL_Pay_Ali_Mweb = "/pay/ali/mweb"                                   //支付宝mweb支付 页面路由。非标准2.0接口
 
 exports.APIURL_Content_Home = '/api/content/home'; //app首页
 exports.APIURL_Content_Tag_Tree = '/api/content/tag/tree'; //标签树

@@ -3,30 +3,29 @@ import ReactDOM from 'react-dom';
 import {Route} from 'react-router-dom';
 import './asset/style/index.less';
 import appBanner from '@/util/appBanner';
-import 'material-icons';
-import Header from '@/component/Header';
 import Footer from '@/component/Footer';
 import Router from '@/component/Router';
 import EntryComponent from '@/component/EntryComponent';
 import Home from './component/Home';
 import Course from './component/Course';
-// import Prepare from './component/Prepare';
-// import Home from 'bundle-loader?lazy!./component/Home';
-// import Course from 'bundle-loader?lazy!./component/Course';
 import PayPrepare from 'bundle-loader?lazy!./component/PayPrepare';
 import PayCenter from 'bundle-loader?lazy!./component/PayCenter';
 import Bundle from '@/component/Bundle';
+import storeUtil from "@/util/storeUtil";
 
-// import '@/util/debug'
 
 const Loading = () =>  <div style={{background: '#fff', width: '400px', height: '300px', fontSize: '40px', color: '#000'}}>
             Loading...
         </div>
 
 
-const createComponent = (component, props) => (
-    <Bundle load={component}>{Component => (Component ? <Component {...props} /> : <Loading />)}</Bundle>
-);
+const createComponent = (component, userRequired, props) => {
+    if(userRequired && !storeUtil.getToken()) {
+        location.href = "/login?go=" + encodeURIComponent(location.href);
+        return
+    }
+    return <Bundle load={component}>{Component => (Component ? <Component {...props} /> : <Loading />)}</Bundle>
+};
 
 class Content extends EntryComponent {
     constructor(props) {
@@ -54,8 +53,8 @@ class Content extends EntryComponent {
                     <React.Fragment>
                         <Route exact path="/" component={Home} />
                         <Route path="/content/course" component={Course} />
-                        <Route path="/pay/prepare" component={props => createComponent(PayPrepare, props)} />
-                        <Route path="/pay/center" component={props => createComponent(PayCenter, props)} />
+                        <Route path="/pay/prepare" component={props => createComponent(PayPrepare, true, props)} />
+                        <Route path="/pay/center" component={props => createComponent(PayCenter, true, props)} />
                     </React.Fragment>
                 </Router>
                 <Footer />

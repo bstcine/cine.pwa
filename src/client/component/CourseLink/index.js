@@ -11,6 +11,9 @@ export default class CourseLink extends Component {
     constructor(props) {
         super(props);
         this.clickCourseLink = this.clickCourseLink.bind(this);
+
+        let _href = window.location.href;
+        this.baseURL = _href.toLowerCase().indexOf("e://") > 0 ? _href : '/'
     }
 
     clickCourseLink() {
@@ -23,7 +26,7 @@ export default class CourseLink extends Component {
         if (!siteCodeUtil.inAPP()) {
             return (
                 <div className={className}>
-                    <a href={`/content/course?cid=${course.id}`}>{children}</a>
+                    <a href={`${this.baseURL}content/course?cid=${course.id}`}>{children}</a>
                 </div>
             );
         } else {

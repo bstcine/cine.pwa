@@ -74,11 +74,13 @@ Step2.  运行 `$ npm run prod-build`
 <br>
 
 ## 项目遗留问题
-- 不同的Build模式，应该只需要运行不同的scripts
+- 不同的Build模式，需要修改不同的config.配置，有点麻烦
 ```
 目前情况：需要修改*.config.*.js的配置
+目标：不同的Build模式，只需要运行不同的scripts
 ```
-- Static模式，无法保存Coockie
+- Static模式，用户无法登入成功
 ```
-目前情况：Static模式, 用户无法登入成功
+原因：Static模式，服务器触发保存Browser的Coockie， 但无法保存成功
+目标：可以正常使用登入功能
 ```

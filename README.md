@@ -65,7 +65,7 @@ Step2.  运行 `$ npm run prod-build`
 ```shell
 Step1:  修改 `webpack.config.js`，Line 4~5
             const MODE = 'static';
-            const API_Dev_URL = 'http://www.bstcine.com';
+            const API_Host_URL = 'http://www.bstcine.com';
 
 Step2.  运行 `$ npm run prod-build`
 ```
@@ -74,13 +74,19 @@ Step2.  运行 `$ npm run prod-build`
 <br>
 
 ## 项目遗留问题
-- 不同的Build模式，需要修改不同的config.配置，有点麻烦
+- 1, 不同的Build模式，需要修改不同的config.配置，有点麻烦
 ```
 目前情况：需要修改*.config.*.js的配置
 目标：不同的Build模式，只需要运行不同的scripts
 ```
-- Static模式，用户无法登入成功
+- 2, Static模式，用户无法登入成功
 ```
 原因：Static模式，服务器触发保存Browser的Coockie， 但无法保存成功
 目标：可以正常使用登入功能
+```
+- 3, build结果的目录结构，与源码src/client/entry下面目录结构不是完全一致
+```
+原因：bundle-loader生成的文件夹路径不应该与该H5的Folder平级， 而是应该下一级
+目标：build结果，应该与源码src/client/entry下面的目录结构完全一致的
+     当只修改某个H5页面时，只需Copy该页面的Build结果到cine.web项目
 ```

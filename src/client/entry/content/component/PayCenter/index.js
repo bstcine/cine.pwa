@@ -40,7 +40,7 @@ export default class PayCenter extends Component {
             if (err) return alert(errorMsg(err));
             let {order} = result.detail;
             if (order.pay_status === '1') {
-                location.href = `/user/orderview?order_id=${order.id}`;
+                location.href = `/pay/status?cid=${order.id}`;
             }
             this.setState({order});
         });
@@ -113,7 +113,7 @@ export default class PayCenter extends Component {
                 let {pay_status} = result;
                 if (pay_status === '1') {
                     clearInterval(this.timer);
-                    location.href = `/user/orderview?order_id=${order.id}`;
+                    location.href = `/pay/status?cid=${order.id}`;
                 }
             });
         }, 3000);

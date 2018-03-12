@@ -1,0 +1,77 @@
+.paystatus-container {
+    min-height: 12rem;
+    background-color: #fff;
+    margin: auto;
+    padding: 0.3rem;
+
+    .order-panel {
+        border-radius: 0.08rem;
+        text-align: center;
+        padding-top: 0.92rem;
+        padding-bottom: 0.72rem;
+    }
+
+    .order-waiting {
+        background-color: #fff7f1;
+    }
+    .order-success {
+        background-color: #edfeee;
+    }
+    .order-cancel {
+        background-color: #fdfcf6;
+    }
+    .order-panel-title {
+        font-size: 0.72rem;
+        color: #252525;
+        margin-bottom: 0.3rem;
+    }
+    .order-panel-desc {
+        font: 0.32rem 'Microsoft YaHei';
+        color: #222222;
+        line-height: 0.6rem;
+    }
+
+    .order-panel-desc > p > a {
+        color: #05357d;
+        text-decoration: underline;
+    }
+    .order-panel-desc > p.tips {
+        color: #97989a;
+        font-size: 0.28rem;
+    }
+    .order-panel-desc > p.tips .wechat-name {
+        color: #05357d;
+    }
+    .order-icon {
+        height: 1.1rem;
+        width: auto;
+        margin-right: 0.56rem;
+        vertical-align: middle;
+    }
+
+    .pay-header {
+        border-bottom: 0.06rem solid #03377d;
+        margin-bottom: 0.6rem;
+    }
+
+    .pay-header .pay-title {
+        font-size: 0.56rem;
+        color: #03357f;
+        display: inline-block;
+    }
+
+    .red {
+        color: #ff2400;
+    }
+}
+
+@media @media-up-sm {
+    .paystatus-container {
+        margin: 0.55rem auto;
+        background-color: #fff;
+        width: 18.8rem;
+    }
+    .order-panel {
+        margin: 0.72rem 0.9rem;
+    }
+}

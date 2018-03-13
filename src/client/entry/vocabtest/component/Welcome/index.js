@@ -3,6 +3,10 @@ import {initWechat} from '@/util/wechatUtil';
 import LoginModal from '@/component/LoginModal';
 import * as BaseService from '@/service/base';
 import storeUtil from '@/util/storeUtil';
+import {fetchData} from "@/service/base";
+import errorMsg from "@/util/errorMsg";
+
+const Api = require("../../../../../APIConfig");
 
 export default class Welcome extends Component {
     constructor(props) {
@@ -49,18 +53,11 @@ export default class Welcome extends Component {
     }
 
     async loginSuccess() {
-        let {error, data: user} = await BaseService.userInfo();
-        if (error) {
-            if (error.message === 'no_login') {
-                storeUtil.removeToken();
-            } else {
-                console.error(error.message);
-            }
-            return;
-        }
-        storeUtil.set('user', user);
+        let [err, result] = await fetchData(Api.APIURL_User_Info, {});
+        if (err) return alert(errorMsg(err));
+        storeUtil.set('user', result);
         this.setState({
-            user,
+            user:result,
             showLoginModal: false
         });
         this.startClick();
@@ -68,18 +65,10 @@ export default class Welcome extends Component {
 
     async componentDidMount() {
         initWechat();
-
-        let {error, data: user} = await BaseService.userInfo();
-        if (error) {
-            if (error.message === 'no_login') {
-                storeUtil.removeToken();
-            } else {
-                console.error(error.message);
-            }
-            return;
-        }
-        storeUtil.set('user', user);
-        this.setState({user});
+        let [err, result] = await fetchData(Api.APIURL_User_Info, {});
+        if (err) return alert(errorMsg(err));
+        storeUtil.set('user', result);
+        this.setState({user:result});
     }
 
     render() {

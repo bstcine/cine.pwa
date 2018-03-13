@@ -6,6 +6,8 @@ import uaUtil from '@/util/uaUtil';
 import storeUtil from '@/util/storeUtil';
 import Header from '@/component/Header';
 import siteCodeUtil from '@/util/sitecodeUtil';
+import Api from "../../../../../APIConfig";
+import {fetchData} from "@/service/base";
 
 export default class PayPrepare extends Component {
     constructor(props) {
@@ -33,8 +35,9 @@ export default class PayPrepare extends Component {
     componentDidMount() {
         document.title = '结算中心';
         let cid = getParam().cid;
-        Service.prepareOrder({cid}).then(res => {
-            if (!res) return;
+
+        fetchData(Api.APIURL_Order_Prepare, {cid}).then(([err, result]) => {
+            if (err) return alert(errorMsg(err));
             let {
                 is_show_point,
                 is_show_coupon,
@@ -43,7 +46,7 @@ export default class PayPrepare extends Component {
                 calPrice,
                 orderedLessonsOrders,
                 addressInfo
-            } = res;
+            } = result;
             let updateStater = {
                 is_show_point,
                 is_show_coupon,
@@ -94,10 +97,10 @@ export default class PayPrepare extends Component {
 
     preCalculatePrice() {
         let {point, coupon_no} = this.state;
-        Service.preCalculatePrice({cid: getParam().cid, point, coupon_no}).then(res => {
-            if (this.hasError(res.except_case_desc)) return;
+        fetchData(Api.APIURL_Order_PreCalculatePrice, {cid:getParam().cid, point, coupon_no}).then(([err, result]) => {
+            if (err) return alert(errorMsg(err));
             this.setState(prevState => ({
-                calPrice: Object.assign(prevState.calPrice, res.result)
+                calPrice: Object.assign(prevState.calPrice, result)
             }));
         });
     }
@@ -120,16 +123,10 @@ export default class PayPrepare extends Component {
             }
         }
 
-        Service.createOrder(orderBody).then(res => {
-            if (this.hasError(res.except_case_desc)) return;
-            let {order_id} = res.result;
-            // let url = ;
-            // if (uaUtil.wechat()) {
-            //     url = 'http://' + location.host + url;
-            //     location.href = 'http://www.bstcine.com/wechat/authorize?redirect=' + encodeURIComponent(url);
-            // } else {
-                location.href = `/pay/center?cid=${order_id}`;
-            // }
+        fetchData(Api.APIURL_Order_Create, orderBody).then(([err, result]) => {
+            if (this.hasError(err)) return;
+            let {order_id} = result
+            location.href = `/pay/center?cid=${order_id}`;
         });
     }
 

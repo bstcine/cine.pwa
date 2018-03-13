@@ -8,6 +8,7 @@ import BRIDGE_EVENT from '@/constant/bridgeEvent';
 import siteCodeUtil from '@/util/sitecodeUtil';
 import PieChart from './PieChart';
 import CourseLink from "@/component/CourseLink";
+import errorMsg from "@/util/errorMsg";
 
 export default class Report extends Component {
     constructor(props) {
@@ -46,33 +47,29 @@ export default class Report extends Component {
             });
         });
         await initWechat();
-        let res = await createShare({
-            type: 7,
-            share_link: addParam(removeParam(undefined, 'token'), {from_share: 1})
-        });
-        let data = res.result;
+        let [err, result] = await createShare({type: 7, share_link: addParam(removeParam(undefined, 'token'), {from_share: 1})});
+        if (err) return alert(errorMsg(err));
+        let {sharelog_id, share_title, share_link, share_imgUrl, share_desc} = result;
         let share_params = {
-            sharelog_id: data.sharelog_id,
-            title: data.share_title,
-            link: data.share_link,
-            imgUrl: data.share_imgUrl,
-            desc: data.share_desc
+            sharelog_id,
+            title: share_title,
+            link: share_link,
+            imgUrl: share_imgUrl,
+            desc: share_desc
         };
         await setShareParam(share_params);
     }
 
     async shareClick() {
-        let res = await createShare({
-            type: 7,
-            share_link: addParam(removeParam(undefined, 'token'), {from_share: 1})
-        });
-        let data = res.result;
+        let [err, result] = await createShare({type: 7, share_link: addParam(removeParam(undefined, 'token'), {from_share: 1})});
+        if (err) return alert(errorMsg(err));
+        let {sharelog_id, share_title, share_link, share_imgUrl, share_desc} = result;
         let share_params = {
-            sharelog_id: data.sharelog_id,
-            title: data.share_title,
-            link: data.share_link,
-            imgUrl: data.share_imgUrl,
-            desc: data.share_desc
+            sharelog_id,
+            title: share_title,
+            link: share_link,
+            imgUrl: share_imgUrl,
+            desc: share_desc
         };
         share({share_params});
     }

@@ -13,9 +13,12 @@ import siteCodeUtil from '@/util/sitecodeUtil';
 import uaUtil from '@/util/uaUtil';
 import Article from '@/entry/content/component/Home/Article';
 import Header from '@/component/Header';
+import {fetchData} from '@/service/base';
+import errorMsg from '@/util/errorMsg';
 const bottomImg1 = require('../../asset/image/book.jpg');
+const Api = require('../../../../../APIConfig');
 const bottomImg2 = require('../../asset/image/moon.jpg');
-let bottomImg = Math.round(Math.random()*10) % 2 ? bottomImg2: bottomImg1;
+let bottomImg = Math.round(Math.random() * 10) % 2 ? bottomImg2 : bottomImg1;
 
 export default class Home extends Component {
     constructor(props) {
@@ -65,13 +68,12 @@ export default class Home extends Component {
                 });
             }
         }
-        let homeRes = await Service.getContentHome({token: null});
+        let [err, result] = await fetchData(Api.APIURL_Content_Home, {});
+        if (err) return alert(errorMsg(err));
+        let {banners, notices, newsCategorys, tags, categorys} = result;
         this.tagsCache = {};
         _.compact(
-            _.flatten([
-                ...homeRes.tags.tagTree0.map(item => item.children),
-                ...homeRes.tags.tagTree1.map(item => item.children)
-            ])
+            _.flatten([...tags.tagTree0.map(item => item.children), ...tags.tagTree1.map(item => item.children)])
         ).forEach(item => {
             if (item.attributes && item.attributes.course_ids && item.attributes.course_ids.length) {
                 item.attributes.course_ids = item.attributes.course_ids.split(',').map(obj => obj.replace(/\$/g, ''));
@@ -79,20 +81,20 @@ export default class Home extends Component {
             this.tagsCache[item.id] = item;
         });
 
-        this.categorys = homeRes.categorys.slice();
+        this.categorys = categorys.slice();
 
         let {courseIds0, courseIds1} = this.matchCourseIds(tagids);
         const {categorys0, categorys1, categorys2} = Home.categoryConverter(this.categorys, courseIds0, courseIds1);
         this.setState({
-            banners: homeRes.banners,
-            tagTree0: homeRes.tags.tagTree0,
-            tagTree1: homeRes.tags.tagTree1,
+            banners,
+            tagTree0: tags.tagTree0,
+            tagTree1: tags.tagTree1,
             categorys0,
             categorys1,
             categorys2,
             tagids,
-            notices: homeRes.notices,
-            newsCategorys: homeRes.newsCategorys
+            notices,
+            newsCategorys
         });
     }
 
@@ -187,7 +189,6 @@ export default class Home extends Component {
 
     render() {
         console.log(`Home`);
-        console.log(`this.state.banners ${this.state.banners.length}`);
         return (
             <React.Fragment>
                 <Header isShow={!siteCodeUtil.inAPP()} />

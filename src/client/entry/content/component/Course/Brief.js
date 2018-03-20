@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {getParam} from '@/util/urlUtil';
 import siteCodeUtil from '@/util/sitecodeUtil';
 import Video from '@/component/Video';
+import MediaPlayer from '../../../../component/MediaPlayer';
 
 export default class Brief extends Component {
     static defaultProps = {
@@ -165,6 +166,7 @@ export default class Brief extends Component {
     }
 
     render() {
+        let src = [{"id":"d0115166031413037ub5X8HMXD","type":"html","url":"http://oss.bstcine.com/kj/2017/02/14/104640445Smy5N2f.mp3","duration":293,"size":9387,"images":[{"time":"0","url":"http://oss.bstcine.com/img/A011481599400893DAhTPx3J6z/2017/02/09/160254520SYEnA9u.jpg?x-oss-process=image/watermark,text_YWRtaW4=,g_south,y_10,x_10"}]},{"id":"d011516603141305Ypcpgdz5s8","type":"html","url":"http://oss.bstcine.com/kj/2016/12/13/152333665StBPdBJ.mp3","duration":282,"size":8829,"images":[{"time":"0","url":"http://oss.bstcine.com/img/A011481599400893DAhTPx3J6z/2017/02/09/160357352SVknNwY.jpg?x-oss-process=image/watermark,text_YWRtaW4=,g_south,y_10,x_10"}]},{"id":"d011516603141307U9TesUTmCW","type":"html","url":"http://oss.bstcine.com/kj/2016/12/13/152336940SWCZepN.mp3","duration":75,"size":2375,"images":[{"time":"0","url":"http://oss.bstcine.com/img/A011481599400893DAhTPx3J6z/2017/02/09/160444628SzGP4GP.jpg?x-oss-process=image/watermark,text_YWRtaW4=,g_south,y_10,x_10"}]},{"id":"d011516603141309ypSzj60w6w","type":"html","url":"http://oss.bstcine.com/kj/2016/12/13/152343670S1xpcJS.mp3","duration":121,"size":3814,"images":[{"time":"0","url":"http://oss.bstcine.com/img/A011481599400893DAhTPx3J6z/2017/02/09/160518250SQPE5h6.jpg?x-oss-process=image/watermark,text_YWRtaW4=,g_south,y_10,x_10"}]},{"id":"d011516603141311T2Jb22vJad","type":"html","url":"http://oss.bstcine.com/kj/2016/12/13/152350423StdgRP8.mp3","duration":72,"size":2282,"images":[{"time":"0","url":"http://oss.bstcine.com/img/A011481599400893DAhTPx3J6z/2017/02/09/160608210SyQc869.jpg?x-oss-process=image/watermark,text_YWRtaW4=,g_south,y_10,x_10"}]},{"id":"d011516603141313Y2XjZahGAq","type":"html","url":"http://oss.bstcine.com/kj/2016/12/13/152401619SF9Ngn7.mp3","duration":96,"size":3024,"images":[{"time":"0","url":"http://oss.bstcine.com/img/A011481599400893DAhTPx3J6z/2017/02/09/160701431Sy1vNaC.jpg?x-oss-process=image/watermark,text_YWRtaW4=,g_south,y_10,x_10"}]},{"id":"d011516603141314agvwbNRxvJ","type":"html","url":"http://oss.bstcine.com/kj/2016/12/13/152410630S0hN8Zy.mp3","duration":114,"size":3582,"images":[{"time":"0","url":"http://oss.bstcine.com/img/A011481599400893DAhTPx3J6z/2017/02/09/160746284SKHtry0.jpg?x-oss-process=image/watermark,text_YWRtaW4=,g_south,y_10,x_10"}]},{"id":"d011516603141317F9d4raVfPY","type":"html","url":"http://oss.bstcine.com/kj/2016/12/13/152419121SbG5YPn.mp3","duration":90,"size":2839,"images":[{"time":"0","url":"http://oss.bstcine.com/img/A011481599400893DAhTPx3J6z/2017/02/09/160823882Sg0M4k8.jpg?x-oss-process=image/watermark,text_YWRtaW4=,g_south,y_10,x_10"}]},{"id":"d011516603141319ZSJrjuPgG8","type":"html","url":"http://oss.bstcine.com/kj/2016/12/13/152436187SbbtSpx.mp3","duration":110,"size":3442,"images":[{"time":"0","url":"http://oss.bstcine.com/img/A011481599400893DAhTPx3J6z/2017/02/09/16135943SVSkUKF.jpg?x-oss-process=image/watermark,text_YWRtaW4=,g_south,y_10,x_10"}]},{"id":"d011516603141321n9XQDV3fR8","type":"html","url":"http://oss.bstcine.com/kj/2016/12/13/152443516SVBHFZM.mp3","duration":38,"size":1213,"images":[{"time":"0","url":"http://oss.bstcine.com/img/A011481599400893DAhTPx3J6z/2017/02/09/161423968SJsXXxr.jpg?x-oss-process=image/watermark,text_YWRtaW4=,g_south,y_10,x_10"}]},{"id":"d011516603141323C0uDjjbr2d","type":"html","url":"http://oss.bstcine.com/kj/2016/12/13/152501426SRHw7fW.mp3","duration":83,"size":2606,"images":[{"time":"0","url":"http://oss.bstcine.com/img/A011481599400893DAhTPx3J6z/2017/02/09/161451133S4wC3Va.jpg?x-oss-process=image/watermark,text_YWRtaW4=,g_south,y_10,x_10"}]},{"id":"d011516603141325YjjdnZJ4BE","type":"html","url":"http://oss.bstcine.com/kj/2017/01/19/171246728SX62FQU.mp3","duration":92,"size":2885,"images":[{"time":"0","url":"http://oss.bstcine.com/img/A011481599400893DAhTPx3J6z/2017/02/09/161525182SpNU3Ez.jpg?x-oss-process=image/watermark,text_YWRtaW4=,g_south,y_10,x_10"}]}]
         let {course, user, relatedCourse, openRecommend, getCoupon, isShowRecommend, pauseVideo} = this.props;
         const {clickShare} = this.props;
         let source_user_id = getParam().source_user_id;
@@ -173,11 +175,12 @@ export default class Brief extends Component {
                 <div className="left-container">
                     <div className="video-container">
                         {course && course.video ? (
-                            <Video
-                                src={course.video}
-                                poster={course.img ? 'http://www.bstcine.com/f/' + course.img : null}
-                                pauseVideo={pauseVideo}
-                            />
+                            // <Video
+                            //     src={course.video}
+                            //     poster={course.img ? 'http://www.bstcine.com/f/' + course.img : null}
+                            //     pauseVideo={pauseVideo}
+                            // />
+                            <MediaPlayer src={src} poster={course.img ? 'http://www.bstcine.com/f/' + course.img : null}/>
                         ) : null}
                         {course && !course.video ? (
                             <div

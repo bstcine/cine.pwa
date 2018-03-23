@@ -10,7 +10,8 @@ const BRIDGE_EVENT = {
     QUIZ_EXIT: 'quiz_exit',
     INIT_QUIZ_DATA: 'init_quiz_data',
     ADDRESS_SAVE: 'address_save',
-    ADDRESS_INIT_DATA: 'address_init_data'
+    ADDRESS_INIT_DATA: 'address_init_data',
+    Window: 'window',
 };
 
 export default BRIDGE_EVENT;

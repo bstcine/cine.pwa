@@ -45,7 +45,7 @@ class MediaPlayer extends Component {
             imageUrl: null,
             fullsize: false,
             fullscreen: false,
-            hover: false,
+            active: false,
             loading: false,
             paused: true,
             playProgress: 0,
@@ -58,10 +58,13 @@ class MediaPlayer extends Component {
         this.totalDuration = 0;
         this.play = this.play.bind(this);
         this.onPlayerMouseMove = this.onPlayerMouseMove.bind(this);
-        this.onPlayerMouseOut = this.onPlayerMouseOut.bind(this);
         this.togglePlayer = this.togglePlayer.bind(this);
         this.toggleFullscreen = this.toggleFullscreen.bind(this);
         this.onFullscreenChangeEvent = this.onFullscreenChangeEvent.bind(this);
+        this.onSeekerMouseDown = this.onSeekerMouseDown.bind(this);
+        this.onSeekerTouchStart = this.onSeekerTouchStart.bind(this);
+        this.onProgessClick = this.onProgessClick.bind(this);
+        this.onAudioTimeUpdate = this.onAudioTimeUpdate.bind(this);
     }
 
     componentDidMount() {
@@ -78,7 +81,120 @@ class MediaPlayer extends Component {
         audio.load();
     }
 
+    onSeekerMouseDown(e) {
+        console.log('onSeekerMouseDown');
+        this.audio.removeEventListener('timeupdate', this.onAudioTimeUpdate);
+        let dragStartX = e.clientX;
+        let seekerLeft = document.querySelector('.seeker').offsetLeft;
+        let playProgress;
+        let mousemove = e => {
+            let width = String.prototype.replace.call(
+                getComputedStyle(document.querySelector('.progress-list')).width,
+                'px',
+                ''
+            );
+            let dragOffset = Math.min(Math.max(seekerLeft + e.clientX - dragStartX, 0), width);
+            playProgress = dragOffset / width * 100;
+            this.onProgressChanging(playProgress);
+        };
+
+        document.addEventListener('mousemove', mousemove);
+
+        document.addEventListener(
+            'mouseup',
+            e => {
+                document.removeEventListener('mousemove', mousemove);
+                // todo seeking duration
+                this.onProgressChanged(playProgress);
+            },
+            {once: true}
+        );
+    }
+
+    onSeekerTouchStart(e) {
+        console.log('onSeekerTouchStart');
+        this.audio.removeEventListener('timeupdate', this.onAudioTimeUpdate);
+        let dragStartX = e.touches[0].clientX;
+        let seekerLeft = document.querySelector('.seeker').offsetLeft;
+        let playProgress;
+        let touchmove = e => {
+            let width = String.prototype.replace.call(
+                getComputedStyle(document.querySelector('.progress-list')).width,
+                'px',
+                ''
+            );
+            let dragOffset = Math.min(Math.max(seekerLeft + e.touches[0].clientX - dragStartX, 0), width);
+            playProgress = dragOffset / width * 100;
+            this.setState({playProgress});
+        };
+
+        document.addEventListener('touchmove', touchmove);
+
+        document.addEventListener(
+            'touchend',
+            e => {
+                document.removeEventListener('touchmove', touchmove);
+                // todo seeking duration
+                this.onProgressChanged(playProgress);
+            },
+            {once: true}
+        );
+    }
+
+    onProgressChanging(playProgress) {
+        console.log('onProgressChanging playProgress', playProgress);
+        let seekTime = playProgress / 100 * this.totalDuration;
+        let totalCurrentTimeFormated = MediaPlayer.timeFormat(seekTime);
+        this.setState({totalCurrentTimeFormated, playProgress});
+    }
+
+    onProgressChanged(playProgress) {
+        let seekTime = playProgress / 100 * this.totalDuration;
+        let seekIndex = 0;
+        let mediaTime = 0;
+        let seekCurrentTime = 0;
+        for (let i = 0; i < this.medias.length; i++) {
+            mediaTime += this.medias[i].duration;
+            if (mediaTime > seekTime) {
+                seekIndex = i;
+                seekCurrentTime = seekTime - (mediaTime - this.medias[i].duration);
+                break;
+            }
+        }
+        console.log('seekCurrentTime', seekCurrentTime);
+        console.log('seekIndex', seekIndex);
+        this.index = seekIndex;
+        let media = this.medias[this.index];
+        let imageUrl = this.currentImage(media.images, seekCurrentTime);
+        if (this.state.imageUrl !== imageUrl) {
+            this.setState({imageUrl});
+        }
+        console.log(media);
+        this.audio.pause();
+        this.audio.src = media.url;
+        this.audio.currentTime = seekCurrentTime;
+        this.audio.play();
+        this.audio.addEventListener('timeupdate', this.onAudioTimeUpdate);
+    }
+
+    onProgessClick(e) {
+        console.log('onProgessClick');
+        this.audio.removeEventListener('timeupdate', this.onAudioTimeUpdate);
+        let left = document.querySelector('.progress-list').getBoundingClientRect().left;
+        let width = String.prototype.replace.call(
+            getComputedStyle(document.querySelector('.progress-list')).width,
+            'px',
+            ''
+        );
+        let dragOffset = e.clientX - left;
+        let playProgress = dragOffset / width * 100;
+        this.setState({playProgress});
+        this.onProgressChanged(playProgress);
+    }
+
     addKeyEventListener() {
+        document.addEventListener('mousemove', this.onPlayerMouseMove);
+        document.addEventListener('touchmove', this.onPlayerMouseMove);
         this.playerElement.addEventListener('webkitfullscreenchange', this.onFullscreenChangeEvent);
         this.playerElement.addEventListener('mozfullscreenchange', this.onFullscreenChangeEvent);
         this.playerElement.addEventListener('fullscreenchange', this.onFullscreenChangeEvent);
@@ -88,6 +204,8 @@ class MediaPlayer extends Component {
         this.playerElement.removeEventListener('webkitfullscreenchange', this.onFullscreenChangeEvent);
         this.playerElement.removeEventListener('mozfullscreenchange', this.onFullscreenChangeEvent);
         this.playerElement.removeEventListener('fullscreenchange', this.onFullscreenChangeEvent);
+        document.removeEventListener('mousemove', this.onPlayerMouseMove);
+        document.removeEventListener('touchmove', this.onPlayerMouseMove);
     }
 
     onFullscreenChangeEvent(e) {
@@ -129,10 +247,7 @@ class MediaPlayer extends Component {
             console.log('ended');
             this.nextMedia();
         });
-        audio.addEventListener('timeupdate', () => {
-            console.log('ontimeupdate');
-            this.onAudioTimeUpdate(audio.currentTime);
-        });
+        audio.addEventListener('timeupdate', this.onAudioTimeUpdate);
         audio.addEventListener('durationchange', () => {
             console.log('ondurationchange', audio.duration);
             this.onAudioLoading();
@@ -141,7 +256,6 @@ class MediaPlayer extends Component {
             console.log('onprogress');
             this.onAudioLoading();
         });
-
         audio.addEventListener('abort', () => {
             console.log('onabort');
         });
@@ -150,6 +264,9 @@ class MediaPlayer extends Component {
         });
         audio.addEventListener('canplaythrough', () => {
             console.log('oncanplaythrough');
+            this.setState(prevState => {
+                if (prevState.loading) return {loading: false};
+            });
         });
         audio.addEventListener('emptied', () => {
             console.log('onemptied');
@@ -162,9 +279,15 @@ class MediaPlayer extends Component {
         });
         audio.addEventListener('loadedmetadata', () => {
             console.log('onloadedmetadata');
+            this.setState(prevState => {
+                if (!prevState.loading) return {loading: true};
+            });
         });
         audio.addEventListener('loadstart', () => {
             console.log('onloadstart');
+            this.setState(prevState => {
+                if (!prevState.loading) return {loading: true};
+            });
         });
         audio.addEventListener('play', () => {
             console.log('onplay');
@@ -192,6 +315,9 @@ class MediaPlayer extends Component {
         });
         audio.addEventListener('waiting', () => {
             console.log('onwaiting');
+            this.setState(prevState => {
+                if (!prevState.loading) return {loading: true};
+            });
         });
 
         audio.src = media.url;
@@ -199,7 +325,8 @@ class MediaPlayer extends Component {
         this.setState({imageUrl: image});
     }
 
-    onAudioTimeUpdate(currentTime) {
+    onAudioTimeUpdate() {
+        let currentTime = this.audio.currentTime;
         let media = this.medias[this.index];
         let totalCurrentTime = currentTime;
         for (let i = 0; i < this.medias.length; i++) {
@@ -210,9 +337,9 @@ class MediaPlayer extends Component {
         let totalCurrentTimeFormated = MediaPlayer.timeFormat(totalCurrentTime);
         const playProgress = totalCurrentTime / this.totalDuration * 100;
         this.setState({totalCurrentTimeFormated, playProgress});
-        let image = this.currentImage(media.images, currentTime);
-        if (this.state.imageUrl !== image) {
-            this.setState({imageUrl: image});
+        let imageUrl = this.currentImage(media.images, currentTime);
+        if (this.state.imageUrl !== imageUrl) {
+            this.setState({imageUrl});
         }
     }
 
@@ -229,6 +356,7 @@ class MediaPlayer extends Component {
                     }
                 }
                 let loadProgress = totalBufferedDuration / this.totalDuration * 100;
+                console.log('loadProgress', loadProgress);
                 this.setState({loadProgress});
             }
         }
@@ -253,11 +381,13 @@ class MediaPlayer extends Component {
             console.log('nextmedia');
             this.index++;
             let media = this.medias[this.index];
+            let imageUrl = this.currentImage(media.images, 0);
+            if (this.state.imageUrl !== imageUrl) {
+                this.setState({imageUrl});
+            }
             this.audio.pause();
             this.audio.src = media.url;
             this.audio.play();
-            let imageObj = this.currentImage(media.images, 0, 0);
-            imageObj && this.setState({imageUrl: imageObj.url});
         } else {
             this.endMedia();
         }
@@ -280,6 +410,7 @@ class MediaPlayer extends Component {
         this.index = 0;
         let media = this.medias[this.index];
         this.audio.src = media.url;
+        this.audio.load();
     }
 
     play() {
@@ -291,17 +422,19 @@ class MediaPlayer extends Component {
         audio.play();
     }
 
-    onPlayerMouseMove() {
-        this.setState({hover: true});
-        this.hoverTimer && clearTimeout(this.hoverTimer);
-        this.hoverTimer = setTimeout(() => {
-            this.setState({hover: false});
-        }, 3000);
-    }
-
-    onPlayerMouseOut() {
-        this.hoverTimer && clearTimeout(this.hoverTimer);
-        this.setState({hover: false});
+    onPlayerMouseMove(e) {
+        // console.log('onPlayerMouseMove');
+        let target = e.target || e.touches[0].target;
+        if (target === this.playerElement || this.playerElement.contains(target)) {
+            this.setState({active: true});
+            this.activeTimer && clearTimeout(this.activeTimer);
+            this.activeTimer = setTimeout(() => {
+                this.setState({active: false});
+            }, 3000);
+        } else {
+            this.activeTimer && clearTimeout(this.activeTimer);
+            this.setState({active: false});
+        }
     }
 
     togglePlayer() {
@@ -380,21 +513,23 @@ class MediaPlayer extends Component {
             fullsize,
             loading,
             paused,
-            hover,
+            active,
             playProgress,
             loadProgress,
             totalCurrentTimeFormated,
             totalDurationFormated
         } = this.state;
         let mpClazzName = 'media-player';
-        if (hover) mpClazzName += ' hover';
+        if (active) mpClazzName += ' active';
         if (fullsize) mpClazzName += ' fullsize';
         return (
             <div
                 className={mpClazzName}
-                onMouseMove={this.onPlayerMouseMove}
-                onMouseOut={this.onPlayerMouseOut}
-                ref={ele => { this.playerElement = ele }}
+                // onMouseMove={this.onPlayerMouseMove}
+                // onMouseOut={this.onPlayerMouseOut}
+                ref={ele => {
+                    this.playerElement = ele;
+                }}
             >
                 <div className="overlay">
                     <div className="visual-container">
@@ -405,7 +540,7 @@ class MediaPlayer extends Component {
                             }}
                         />
                         <div className="cover">
-                            {paused ? <div className="cover-play" onClick={this.play} /> : null}
+                            {!loading && paused ? <div className="cover-play" onClick={this.play} /> : null}
                             {loading ? <div className="cover-loading" /> : null}
                         </div>
                         {fullscreen || fullsize ? (
@@ -422,9 +557,13 @@ class MediaPlayer extends Component {
 
                         <div className="bottom">
                             <div className="progress">
-                                <div className="progress-list">
+                                <div className="progress-list" onClick={this.onProgessClick}>
                                     <div className="play-progress" style={{width: `${playProgress}%`}}>
-                                        <div className="seeker" />
+                                        <div
+                                            className="seeker"
+                                            onMouseDown={this.onSeekerMouseDown}
+                                            onTouchStart={this.onSeekerTouchStart}
+                                        />
                                     </div>
                                     <div className="load-progress" style={{width: `${loadProgress}%`}} />
                                 </div>
@@ -447,7 +586,7 @@ class MediaPlayer extends Component {
                                     <div className="fullscreen">
                                         <i
                                             className={
-                                                fullscreen
+                                                fullscreen || fullsize
                                                     ? 'mpj-btn mpj-btn-fullscreen-exit'
                                                     : 'mpj-btn mpj-btn-fullscreen'
                                             }

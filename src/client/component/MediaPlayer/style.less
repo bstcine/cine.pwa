@@ -70,7 +70,7 @@
             height: 100%;
             width: 100%;
             margin: auto;
-            background-color: rgba(0, 0, 0, 0.2);
+            // background-color: rgba(0, 0, 0, 0.2);
             &:before {
                 position: absolute;
                 top: 0;
@@ -93,6 +93,7 @@
         position: absolute;
         opacity: 0;
         bottom: 0;
+        transform: scaleY(0);
         height: 40px;
         width: 100%;
         text-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
@@ -162,17 +163,18 @@
         position: absolute;
         opacity: 0;
         top: 0;
+        transform: scaleY(0);
         height: 40px;
         width: 100%;
         text-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
         transition: opacity 0.1s cubic-bezier(0.4, 0, 1, 1);
         background-position: bottom;
-        background-color: rgb(70, 70, 70,.5) ;
-       
+        background-color: rgb(70, 70, 70, 0.5);
     }
-    &.hover .bottom,
-    &.hover .top {
+    &.active .bottom,
+    &.active .top {
         opacity: 1;
+        transform: none;
         transition: opacity 0.25s cubic-bezier(0, 0, 0.2, 1);
     }
 
@@ -210,8 +212,8 @@
                 transform: scale(12/14);
                 line-height: 35px;
             }
-            .close{
-                opacity: .9;
+            .close {
+                opacity: 0.9;
             }
             .fullscreen {
                 width: 36px;

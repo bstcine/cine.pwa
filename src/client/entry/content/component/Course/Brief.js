@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { getParam } from '@/util/urlUtil';
+import React, {Component} from 'react';
+import {getParam} from '@/util/urlUtil';
 import siteCodeUtil from '@/util/sitecodeUtil';
 import Video from '@/component/Video';
 import MediaPlayer from '../../../../component/MediaPlayer';
@@ -69,7 +69,7 @@ export default class Brief extends Component {
     }
 
     renderBottomButton(course) {
-        const { goLearn, goBuy, clickShare } = this.props;
+        const {goLearn, goBuy, clickShare} = this.props;
         if (course.status === '1') {
             if (course.is_paid) {
                 if (siteCodeUtil.inIOSAPP()) return;
@@ -169,8 +169,8 @@ export default class Brief extends Component {
     }
 
     render() {
-        let { course, user, relatedCourse, openRecommend, getCoupon, isShowRecommend, pauseVideo } = this.props;
-        const { clickShare } = this.props;
+        let {course, user, relatedCourse, openRecommend, getCoupon, isShowRecommend, pauseVideo} = this.props;
+        const {clickShare} = this.props;
         let source_user_id = getParam().source_user_id;
         return (
             <div className="brief-container">
@@ -238,7 +238,7 @@ export default class Brief extends Component {
                         {course && course.notice ? (
                             <div className="notice">
                                 <div className="label">公告</div>
-                                <div className="notice-details" dangerouslySetInnerHTML={{ __html: course.notice }} />
+                                <div className="notice-details" dangerouslySetInnerHTML={{__html: course.notice}} />
                             </div>
                         ) : null}
                     </div>

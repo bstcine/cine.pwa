@@ -7,8 +7,8 @@ import Bridge from '@/util/bridge';
 import BRIDGE_EVENT from '@/constant/bridgeEvent';
 import siteCodeUtil from '@/util/sitecodeUtil';
 import PieChart from './PieChart';
-import CourseLink from "@/component/CourseLink";
-import errorMsg from "@/util/errorMsg";
+import CourseLink from '@/component/CourseLink';
+import errorMsg from '@/util/errorMsg';
 
 export default class Report extends Component {
     constructor(props) {
@@ -16,7 +16,7 @@ export default class Report extends Component {
         console.log('Report constructor');
         this.state = {
             report: {},
-            lessons: [],
+            lessons: []
         };
         this.shareClick = this.shareClick.bind(this);
         this.retryClick = this.retryClick.bind(this);
@@ -25,11 +25,11 @@ export default class Report extends Component {
 
     static convGrade(grade) {
         if (grade === 0) {
-            return "学龄前"
+            return '学龄前';
         } else if (grade === 13) {
-            return "成人"
+            return '成人';
         } else {
-            return `${grade}年级`
+            return `${grade}年级`;
         }
     }
 
@@ -47,7 +47,10 @@ export default class Report extends Component {
             });
         });
         await initWechat();
-        let [err, result] = await createShare({type: 7, share_link: addParam(removeParam(undefined, 'token'), {from_share: 1})});
+        let [err, result] = await createShare({
+            type: 7,
+            share_link: addParam(removeParam(undefined, 'token'), {from_share: 1})
+        });
         if (err) return alert(errorMsg(err));
         let {sharelog_id, share_title, share_link, share_imgUrl, share_desc} = result;
         let share_params = {
@@ -61,7 +64,10 @@ export default class Report extends Component {
     }
 
     async shareClick() {
-        let [err, result] = await createShare({type: 7, share_link: addParam(removeParam(undefined, 'token'), {from_share: 1})});
+        let [err, result] = await createShare({
+            type: 7,
+            share_link: addParam(removeParam(undefined, 'token'), {from_share: 1})
+        });
         if (err) return alert(errorMsg(err));
         let {sharelog_id, share_title, share_link, share_imgUrl, share_desc} = result;
         let share_params = {
@@ -130,7 +136,9 @@ export default class Report extends Component {
                         <div className="rank">
                             全国{Report.convGrade(report.grade)}词汇量均值：<span>{stat.avg_vocab}</span>
                             <br />
-                            在全国{Report.convGrade(report.grade)}中的词汇量排位：<span>超过了{stat.my_rank}%的小伙伴</span>
+                            在全国{Report.convGrade(report.grade)}中的词汇量排位：<span>
+                                超过了{stat.my_rank}%的小伙伴
+                            </span>
                         </div>
                     ) : null}
 

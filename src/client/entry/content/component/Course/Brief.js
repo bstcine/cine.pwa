@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {getParam} from '@/util/urlUtil';
 import siteCodeUtil from '@/util/sitecodeUtil';
-import Video from '@/component/Video';
+// import Video from '@/component/Video';
 import MediaPlayer from '../../../../component/MediaPlayer';
 
 export default class Brief extends Component {
@@ -167,6 +167,35 @@ export default class Brief extends Component {
             return <div className="coming-soon">待推出</div>;
         }
     }
+    renderVideoContainer(course) {
+        if (!course) return null;
+        return (
+            <div className="video-container">
+                {course.try_contents && course.try_contents.length ? (
+                    // <Video
+                    //     src={course.video}
+                    //     poster={course.img ? 'http://www.bstcine.com/f/' + course.img : null}
+                    //     pauseVideo={pauseVideo}
+                    // />
+                    <div className="content">
+                        <MediaPlayer
+                            src={course.try_contents}
+                            poster={course.img ? 'http://www.bstcine.com/f/' + course.img : null}
+                        />
+                    </div>
+                ) : (
+                    <div
+                        className="content"
+                        style={{
+                            background: `url(${
+                                course.img ? 'http://www.bstcine.com/f/' + course.img : ''
+                            }) center center / cover no-repeat`
+                        }}
+                    />
+                )}
+            </div>
+        );
+    }
 
     render() {
         let {course, user, relatedCourse, openRecommend, getCoupon, isShowRecommend, pauseVideo} = this.props;
@@ -175,29 +204,7 @@ export default class Brief extends Component {
         return (
             <div className="brief-container">
                 <div className="left-container">
-                    <div className="video-container">
-                        {course && course.video ? (
-                            // <Video
-                            //     src={course.video}
-                            //     poster={course.img ? 'http://www.bstcine.com/f/' + course.img : null}
-                            //     pauseVideo={pauseVideo}
-                            // />
-                            <MediaPlayer
-                                src={JSON.parse(course.try_contents)}
-                                poster={course.img ? 'http://www.bstcine.com/f/' + course.img : null}
-                            />
-                        ) : null}
-                        {course && !course.video ? (
-                            <div
-                                className="content"
-                                style={{
-                                    background: `url(${
-                                        course.img ? 'http://www.bstcine.com/f/' + course.img : ''
-                                    }) center center / cover no-repeat`
-                                }}
-                            />
-                        ) : null}
-                    </div>
+                    {this.renderVideoContainer(course)}
                     {!siteCodeUtil.inAPP() ? (
                         <div className="share-tool">
                             分享

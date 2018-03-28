@@ -273,7 +273,7 @@ export default class Course extends Component {
 
         return (
             <React.Fragment>
-                <Header isShow={!siteCodeUtil.inAPP() && !uaUtil.wechat()}/>
+                <Header isShow={!siteCodeUtil.inAPP() && !uaUtil.wechat()} />
                 <div className="container-fluid course-container-bg">
                     <div className="course-container">
                         <Brief
@@ -349,10 +349,10 @@ export default class Course extends Component {
                                                                                                         {lesson.duration ? (
                                                                                                             <span
                                                                                                                 className="meta">
-                                                                                                                            {timeUtil.durationFormat(
-                                                                                                                                lesson.duration
-                                                                                                                            )}
-                                                                                                                        </span>
+                                                                                                                {timeUtil.durationFormat(
+                                                                                                                    lesson.duration
+                                                                                                                )}
+                                                                                                            </span>
                                                                                                         ) : null}
                                                                                                     </li>
                                                                                                 );
@@ -371,7 +371,7 @@ export default class Course extends Component {
                                             </TabPanel>
                                         ) : null}
                                         <TabPanel>
-                                            <Comments comments={comments}/>
+                                            <Comments comments={comments} />
                                         </TabPanel>
                                     </TabPanels>
                                 </Tabs>

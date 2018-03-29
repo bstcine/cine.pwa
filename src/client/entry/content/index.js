@@ -8,25 +8,27 @@ import Router from '@/component/Router';
 import EntryComponent from '@/component/EntryComponent';
 import Bundle from '@/component/Bundle';
 import storeUtil from "@/util/storeUtil";
-import Home from './component/Home';
-import Course from './component/Course';
-import PayPrepare from 'bundle-loader?lazy!./component/PayPrepare';
-import PayCenter from 'bundle-loader?lazy!./component/PayCenter';
-import PayStatus from 'bundle-loader?lazy!./component/PayStatus';
+import {asyncComponent} from "@/util/chunkComponent";
 
+const Home = asyncComponent(() => import(/* webpackChunkName: "content/chunk/index.h" */ "./component/Home"))
+const Course = asyncComponent(() => import(/* webpackChunkName: "content/chunk/index.cc" */ "./component/Course"))
+const PayPrepare = asyncComponent(() => import(/* webpackChunkName: "content/chunk/index.pp" */ "./component/PayPrepare"))
+const PayCenter = asyncComponent(() => import(/* webpackChunkName: "content/chunk/index.pc" */ "./component/PayCenter"))
+const PayStatus = asyncComponent(() => import(/* webpackChunkName: "content/chunk/index.ps" */ "./component/PayStatus"))
 
-const Loading = () =>  <div style={{background: '#fff', width: '400px', height: '300px', fontSize: '40px', color: '#000'}}>
-            Loading...
-        </div>
-
+const Loading = () => <div
+    style={{background: '#fff', width: '400px', height: '300px', fontSize: '40px', color: '#000'}}>
+    Loading...
+</div>
 
 const createComponent = (component, userRequired, props) => {
-    if(userRequired && !storeUtil.getToken()) {
+    if (userRequired && !storeUtil.getToken()) {
         location.href = "/login?go=" + encodeURIComponent(location.href);
         return
     }
     return <Bundle load={component}>{Component => (Component ? <Component {...props} /> : <Loading />)}</Bundle>
 };
+
 
 class Content extends EntryComponent {
     constructor(props) {
@@ -48,15 +50,16 @@ class Content extends EntryComponent {
     }
 
     render() {
+
         return (
             <React.Fragment>
                 <Router>
                     <React.Fragment>
-                        <Route exact path="/" component={Home} />
-                        <Route path="/content/course" component={Course} />
-                        <Route path="/pay/prepare" component={props => createComponent(PayPrepare, true, props)} />
-                        <Route path="/pay/center" component={props => createComponent(PayCenter, true, props)} />
-                        <Route path="/pay/status" component={props => createComponent(PayStatus, true, props)} />
+                        <Route exact path="/" component={Home}/>
+                        <Route path="/content/course" component={Course}/>
+                        <Route path="/pay/prepare" component={props => createComponent(PayPrepare, true, props)}/>
+                        <Route path="/pay/center" component={props => createComponent(PayCenter, true, props)}/>
+                        <Route path="/pay/status" component={props => createComponent(PayStatus, true, props)}/>
                     </React.Fragment>
                 </Router>
                 <Footer />

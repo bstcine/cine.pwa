@@ -3,7 +3,7 @@
  */
 import React from 'react';
 
-export const asyncComponent = loadComponent => (
+export const chunkComponent = loadComponent => (
     class AsyncComponent extends React.Component {
         state = {
             Component: null,

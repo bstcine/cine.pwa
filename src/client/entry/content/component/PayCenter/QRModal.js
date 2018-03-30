@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import ReactModal from 'react-modal';
+import '@/asset/style/modal.less';
 
 export default class QRModal extends Component {
     constructor(props) {

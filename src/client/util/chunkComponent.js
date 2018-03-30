@@ -36,8 +36,3 @@ export const asyncComponent = loadComponent => (
     }
 );
 
-export const chunkComponent = (filename, path) => {
-    "use strict";
-    const _loadComponent = () => import(/* webpackChunkName: "content/chunk/index.h" */ {path})
-    return asyncComponent(_loadComponent)
-}

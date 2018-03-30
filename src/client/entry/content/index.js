@@ -9,12 +9,13 @@ import EntryComponent from '@/component/EntryComponent';
 import Bundle from '@/component/Bundle';
 import storeUtil from "@/util/storeUtil";
 import {asyncComponent} from "@/util/chunkComponent";
+import PayPrepare from 'bundle-loader?lazy!./component/PayPrepare';
+import PayCenter from 'bundle-loader?lazy!./component/PayCenter';
+import PayStatus from 'bundle-loader?lazy!./component/PayStatus';
 
 const Home = asyncComponent(() => import(/* webpackChunkName: "content/chunk/index.h" */ "./component/Home"))
 const Course = asyncComponent(() => import(/* webpackChunkName: "content/chunk/index.cc" */ "./component/Course"))
-const PayPrepare = asyncComponent(() => import(/* webpackChunkName: "content/chunk/index.pp" */ "./component/PayPrepare"))
-const PayCenter = asyncComponent(() => import(/* webpackChunkName: "content/chunk/index.pc" */ "./component/PayCenter"))
-const PayStatus = asyncComponent(() => import(/* webpackChunkName: "content/chunk/index.ps" */ "./component/PayStatus"))
+
 
 const Loading = () => <div
     style={{background: '#fff', width: '400px', height: '300px', fontSize: '40px', color: '#000'}}>

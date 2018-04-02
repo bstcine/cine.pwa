@@ -65,9 +65,6 @@ export default class Course extends Component {
     }
 
     async componentDidMount() {
-        if (siteCodeUtil.inIOSAPP()) {
-            Bridge.ios(BRIDGE_EVENT.TIMELINE, {type: 'loaded'});
-        }
         window.scroll(0, 0);
         document.title = '课程详情';
         eventEmmiter.on(BRIDGE_EVENT.OUTER_SHARE, () => {
@@ -80,6 +77,9 @@ export default class Course extends Component {
             Bridge.ios(BRIDGE_EVENT.TIMELINE, {type: 'visible'});
         }
         BaseService.accessLog();
+        if (siteCodeUtil.inIOSAPP()) {
+            Bridge.ios(BRIDGE_EVENT.TIMELINE, {type: 'loaded'});
+        }
     }
 
     initCurrentPageWechat() {

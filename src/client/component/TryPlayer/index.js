@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import './style.less';
 import MediaPlayer from '../MediaPlayer';
+import classNames from 'classnames';
 
 class TryPlayer extends Component {
     static defaultProps = {
@@ -10,11 +11,13 @@ class TryPlayer extends Component {
 
     constructor(props) {
         super(props);
-        let {playList} = this.playerDataInit();
+        let {playList, isShowPlayList, isShowCategory} = this.playerDataInit();
         this.playList = playList;
         this.state = {
             medias: this.playList[this.playListIndex].medias,
-            active: false
+            active: false,
+            isShowPlayList,
+            isShowCategory
         };
         this.changePlayList = this.changePlayList.bind(this);
         this.renderBottom = this.renderBottom.bind(this);
@@ -24,11 +27,18 @@ class TryPlayer extends Component {
     }
 
     playerDataInit() {
-        let playList = this.props.playList.filter(item => item.type === 'media').map(item => {
+        let categoryCount = 0;
+        let playList = this.props.playList.filter(item => {
+            if (item.type !== 'media') {
+                categoryCount++
+            }
+            return item.type === 'media'
+        }).map((item, i) => {
+            item.index = i;
             item.totalDuration = 0;
             item.medias = item.medias.map(media => {
                 media.duration = parseInt(media.duration, 10);
-                item.totalDuration += item.duration;
+                item.totalDuration += media.duration;
                 media.images = media.images
                     .map(img => {
                         img.time = parseInt(img.time, 10);
@@ -40,7 +50,7 @@ class TryPlayer extends Component {
             return item;
         });
         this.playListIndex = 0;
-        return {playList};
+        return {playList, isShowPlayList: playList.length > 1, isShowCategory: categoryCount > 1};
     }
 
     changePlayList(i) {
@@ -64,7 +74,8 @@ class TryPlayer extends Component {
 
     renderBottom() {
         let {playList} = this.props;
-        if (!playList) return;
+        let {isShowPlayList, isShowCategory} = this.state;
+        if (!playList || !isShowPlayList) return;
         return (
             <div
                 className="playlist"
@@ -75,21 +86,24 @@ class TryPlayer extends Component {
                 <div className="playlist-cover" onClick={this.togglePlayList}>
                     <div className="playitems">
                         <div className="playitem playtitle">
-                        试听选集
+                            试听选集
                         </div>
                         {playList.map((item, i) => {
                             if (item.type === 'media') {
                                 return (
                                     <div
-                                        className={i === this.playListIndex ? 'playitem active' : 'playitem'}
+                                        className={item.index === this.playListIndex ? 'playitem active' : 'playitem'}
                                         key={i}
-                                        onClick={e => this.changePlayList(i)}
+                                        onClick={e => this.changePlayList(item.index)}
                                     >
                                         {item.name}
                                     </div>
                                 );
                             } else {
-                                return <div key={i} className="playitem playcategory">{item.name}</div>;
+                                if (isShowCategory) {
+                                    return <div key={i}
+                                                className={classNames("playitem playcategory", {'first-child': i === 0})}>{item.name}</div>;
+                                }
                             }
                         })}
                     </div>
@@ -99,6 +113,8 @@ class TryPlayer extends Component {
     }
 
     renderTogglePlayListButton() {
+        let {isShowPlayList} = this.state;
+        if (!isShowPlayList) return;
         return (
             <div className="control-item chooseplaylist">
                 <span onClick={this.togglePlayList}>选集</span>

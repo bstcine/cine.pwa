@@ -42,7 +42,7 @@ class MediaPlayer extends Component {
         this.onFullscreenChangeEvent = this.onFullscreenChangeEvent.bind(this);
         this.onSeekerMouseDown = this.onSeekerMouseDown.bind(this);
         this.onSeekerTouchStart = this.onSeekerTouchStart.bind(this);
-        this.onProgessClick = this.onProgessClick.bind(this);
+        this.onProgressClick = this.onProgressClick.bind(this);
         this.onAudioTimeUpdate = this.onAudioTimeUpdate.bind(this);
     }
 
@@ -192,8 +192,8 @@ class MediaPlayer extends Component {
         this.audio.addEventListener('timeupdate', this.onAudioTimeUpdate);
     }
 
-    onProgessClick(e) {
-        console.log('onProgessClick');
+    onProgressClick(e) {
+        console.log('onProgressClick');
         this.audio.removeEventListener('timeupdate', this.onAudioTimeUpdate);
         let left = document.querySelector('.progress-list').getBoundingClientRect().left;
         let width = String.prototype.replace.call(
@@ -509,16 +509,15 @@ class MediaPlayer extends Component {
             >
                 <div className="mpj-overlay">
                     <div className="mpj-visual-container">
-                        {/* <div
+                        <div
                             className="visual-image"
                             style={{
                                 background: `url(${imageUrl}) center center / contain no-repeat`
                             }}
-                        /> */}
-                        <img src={`${imageUrl}`} alt="" />
+                        />
                         <div className="mpj-bottom">
                             <div className="progress">
-                                <div className="progress-list" onClick={this.onProgessClick}>
+                                <div className="progress-list" onClick={this.onProgressClick}>
                                     <div className="play-progress" style={{width: `${playProgress}%`}}>
                                         <div
                                             className="seeker"

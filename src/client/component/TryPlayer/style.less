@@ -1,8 +1,13 @@
 .media-player {
     .playlist {
+        position: absolute;
         width: 0;
         height: 0;
-        position: relative;
+        top: 0;
+        right: 0;
+        left: 0;
+        bottom: 0;
+        z-index: 5;
         .playlist-cover {
             position: absolute;
             top: 0;
@@ -33,17 +38,25 @@
 
                     &.active,
                     &:hover {
-                        color: #e9e6e6;
+                        color: #00c6ff;
                     }
 
                     &.playtitle{
                         color: #00c6ff;
-                        cursor: none;
+                        cursor: default;
                     }
-                    
+
                     &.playcategory{
                         color: #ffffff;
-                        cursor: none;
+                        cursor: default;
+                        border-top: 2px solid #2c2c2c;
+                        padding-top: 8px;
+                        margin-bottom: 8px;
+                    }
+                    &.playcategory.first-child{
+                        border-top: none;
+                        padding-top: 0;
+                        margin-bottom: 0;
                     }
                 }
             }
@@ -58,26 +71,4 @@
             padding: 5px 10px;
         }
     }
-    
 }
-// .media-player.fullsize {
-//     .playlist {
-//         display: block;
-//     }
-// }
-// .media-player:fullscreen {
-//     .playlist {
-//         display: block;
-//     }
-// }
-
-// @media (min-width: 576px) {
-//     .media-player {
-//         .playlist {
-//             .playitem {
-//                 width: 200px;
-//                 display: inline-block;
-//             }
-//         }
-//     }
-// }

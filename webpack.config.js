@@ -25,7 +25,7 @@ module.exports = {
         'react-router-dom',
         'react-transition-group',
         'react-modal',
-        //'material-icons',
+        // 'material-icons',
         'babel-polyfill'
     ],
 

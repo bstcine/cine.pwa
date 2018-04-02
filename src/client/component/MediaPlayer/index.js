@@ -1,15 +1,27 @@
 import React, {Component} from 'react';
 import './style.less';
 import * as helper from './helper';
+import Bridge from '@/util/bridge';
+import BRIDGE_EVENT from '@/constant/bridgeEvent';
+import siteCodeUtil from '@/util/sitecodeUtil';
+import classNames from 'classnames';
 
 class MediaPlayer extends Component {
     static defaultProps = {
-        src: null,
-        poster: null
+        medias: null,
+        poster: null,
+        renderBottomPlugin: null,
+        renderTogglePlayListButton: null,
+        onPlayerEnded: null
     };
 
     constructor(props) {
         super(props);
+
+        this.ended = false;
+        this.index = 0;
+        this.totalDuration = 0;
+        this.initMedias(this.props.medias);
         this.state = {
             imageUrl: null,
             fullsize: false,
@@ -20,11 +32,9 @@ class MediaPlayer extends Component {
             playProgress: 0,
             loadProgress: 0,
             totalCurrentTimeFormated: '00:00',
-            totalDurationFormated: '00:00'
+            totalDurationFormated: helper.timeFormat(this.totalDuration)
         };
-        this.ended = false;
-        this.index = 0;
-        this.totalDuration = 0;
+
         this.play = this.play.bind(this);
         this.onPlayerMouseMove = this.onPlayerMouseMove.bind(this);
         this.togglePlayer = this.togglePlayer.bind(this);
@@ -37,17 +47,51 @@ class MediaPlayer extends Component {
     }
 
     componentDidMount() {
-        this.mediasDataFix();
+        console.log('componentDidMount');
+
         this.initAudioPlayer();
         this.addEventListener();
     }
 
+    componentWillReceiveProps(nextProps) {
+        console.log('componentWillReceiveProps');
+        this.setState({
+            imageUrl: null,
+            loading: false,
+            paused: true,
+            playProgress: 0,
+            loadProgress: 0,
+            totalCurrentTimeFormated: '00:00',
+            totalDurationFormated: '00:00'
+        });
+        this.ended = false;
+        this.index = 0;
+        this.totalDuration = 0;
+        this.initMedias(nextProps.medias);
+        this.setState({totalDurationFormated: helper.timeFormat(this.totalDuration)});
+        let media = this.medias[this.index];
+        this.audio.src = media.url;
+        this.audio.play();
+    }
+
     componentWillUnmount() {
+        console.log('componentWillUnmount');
         this.removeEventListener();
         let audio = this.audio;
-        audio.pause();
-        audio.src = '';
-        audio.load();
+        if (audio) {
+            audio.pause();
+            audio.src = '';
+            audio.load();
+        }
+    }
+
+    initMedias(medias) {
+        this.medias = [];
+        for (let index = 0; index < Object.keys(medias).length; index++) {
+            const item = medias[index];
+            this.totalDuration += item.duration;
+            this.medias.push(item);
+        }
     }
 
     onSeekerMouseDown(e) {
@@ -57,6 +101,7 @@ class MediaPlayer extends Component {
         let seekerLeft = document.querySelector('.seeker').offsetLeft;
         let playProgress;
         let mousemove = e => {
+            console.log('mousemove');
             let width = String.prototype.replace.call(
                 getComputedStyle(document.querySelector('.progress-list')).width,
                 'px',
@@ -72,6 +117,7 @@ class MediaPlayer extends Component {
         document.addEventListener(
             'mouseup',
             e => {
+                console.log('mouseup');
                 document.removeEventListener('mousemove', mousemove);
                 this.onProgressChanged(playProgress);
             },
@@ -93,7 +139,7 @@ class MediaPlayer extends Component {
             );
             let dragOffset = Math.min(Math.max(seekerLeft + e.touches[0].clientX - dragStartX, 0), width);
             playProgress = dragOffset / width * 100;
-            this.setState({playProgress});
+            this.onProgressChanging(playProgress);
         };
 
         document.addEventListener('touchmove', touchmove);
@@ -109,14 +155,15 @@ class MediaPlayer extends Component {
     }
 
     onProgressChanging(playProgress) {
-        console.log('onProgressChanging playProgress', playProgress);
         let seekTime = playProgress / 100 * this.totalDuration;
         let totalCurrentTimeFormated = helper.timeFormat(seekTime);
-        document.querySelector('.play-progress').style.width = `${playProgress}%`;
         this.setState({totalCurrentTimeFormated, playProgress});
     }
 
     onProgressChanged(playProgress) {
+        this.audio.pause();
+        this.audio.src = '';
+        this.audio.load();
         let seekTime = playProgress / 100 * this.totalDuration;
         let seekIndex = 0;
         let mediaTime = 0;
@@ -137,7 +184,6 @@ class MediaPlayer extends Component {
         if (this.state.imageUrl !== imageUrl) {
             this.setState({imageUrl});
         }
-        console.log(media);
         this.setState({playProgress});
         this.audio.pause();
         this.audio.src = media.url;
@@ -157,12 +203,12 @@ class MediaPlayer extends Component {
         );
         let dragOffset = e.clientX - left;
         let playProgress = dragOffset / width * 100;
-        // this.setState({playProgress});
         this.onProgressChanged(playProgress);
     }
 
     addEventListener() {
         document.addEventListener('mousemove', this.onPlayerMouseMove);
+        document.addEventListener('touchmove', this.onPlayerMouseMove);
         document.addEventListener('touchend', this.onPlayerMouseMove);
         this.playerElement.addEventListener('webkitfullscreenchange', this.onFullscreenChangeEvent);
         this.playerElement.addEventListener('mozfullscreenchange', this.onFullscreenChangeEvent);
@@ -174,6 +220,7 @@ class MediaPlayer extends Component {
         this.playerElement.removeEventListener('mozfullscreenchange', this.onFullscreenChangeEvent);
         this.playerElement.removeEventListener('fullscreenchange', this.onFullscreenChangeEvent);
         document.removeEventListener('mousemove', this.onPlayerMouseMove);
+        document.removeEventListener('touchmove', this.onPlayerMouseMove);
         document.removeEventListener('touchend', this.onPlayerMouseMove);
     }
 
@@ -185,28 +232,14 @@ class MediaPlayer extends Component {
         }
     }
 
-    mediasDataFix() {
-        this.medias = this.props.src.map(item => {
-            item.duration = parseInt(item.duration, 10);
-            this.totalDuration += item.duration;
-            item.images = item.images
-                .map(img => {
-                    img.time = parseInt(img.time, 10);
-                    return img;
-                })
-                .sort((a, b) => a.time - a.time);
-            return item;
-        });
-        let totalDurationFormated = helper.timeFormat(this.totalDuration);
-        this.setState({totalDurationFormated});
-    }
-
     initAudioPlayer() {
-        console.log(this.props.poster);
         let media = this.medias[this.index];
         let audio = (this.audio = new Audio());
         audio.addEventListener('playing', () => {
             console.log('playing');
+            this.setState(prevState => {
+                if (prevState.loading) return {loading: false};
+            });
         });
         audio.addEventListener('pause', () => {
             console.log('pause');
@@ -229,6 +262,9 @@ class MediaPlayer extends Component {
         });
         audio.addEventListener('canplay', () => {
             console.log('oncanplay');
+            this.setState(prevState => {
+                if (!prevState.loading) return {loading: true};
+            });
         });
         audio.addEventListener('canplaythrough', () => {
             console.log('oncanplaythrough');
@@ -247,15 +283,9 @@ class MediaPlayer extends Component {
         });
         audio.addEventListener('loadedmetadata', () => {
             console.log('onloadedmetadata');
-            // this.setState(prevState => {
-            //     if (!prevState.loading) return {loading: true};
-            // });
         });
         audio.addEventListener('loadstart', () => {
             console.log('onloadstart');
-            this.setState(prevState => {
-                if (!prevState.loading) return {loading: true};
-            });
         });
         audio.addEventListener('play', () => {
             console.log('onplay');
@@ -317,7 +347,6 @@ class MediaPlayer extends Component {
         if (audio.buffered && audio.buffered.length) {
             if (audio.buffered.end(audio.buffered.length - 1) !== this.bufferedDuration) {
                 let currentBufferedDuration = audio.buffered.end(audio.buffered.length - 1);
-                console.info('currentBufferedDuration', currentBufferedDuration);
                 let totalBufferedDuration = currentBufferedDuration;
                 for (let i = 0; i < this.medias.length; i++) {
                     if (i < this.index) {
@@ -325,7 +354,6 @@ class MediaPlayer extends Component {
                     }
                 }
                 let loadProgress = totalBufferedDuration / this.totalDuration * 100;
-                console.log('loadProgress', loadProgress);
                 this.setState({loadProgress});
             }
         }
@@ -346,7 +374,7 @@ class MediaPlayer extends Component {
 
     nextMedia() {
         console.log('nextmedia');
-        if (this.index < this.props.src.length - 1) {
+        if (this.index < this.medias.length - 1) {
             console.log('nextmedia');
             this.index++;
             let media = this.medias[this.index];
@@ -366,6 +394,7 @@ class MediaPlayer extends Component {
         console.log('endMedia');
         this.setState({paused: true});
         this.ended = true;
+        this.props.onPlayerEnded && this.props.onPlayerEnded();
         return null;
     }
 
@@ -392,16 +421,23 @@ class MediaPlayer extends Component {
     }
 
     onPlayerMouseMove(e) {
+        console.log('onPlayerMouseMove');
         let target = e.target || e.touches[0].target;
         if (target === this.playerElement || this.playerElement.contains(target)) {
+            console.log('active');
             this.setState({active: true});
             this.activeTimer && clearTimeout(this.activeTimer);
             this.activeTimer = setTimeout(() => {
                 this.setState({active: false});
-            }, 3000);
+            }, 5000);
         } else {
-            this.activeTimer && clearTimeout(this.activeTimer);
-            this.setState({active: false});
+            console.log('inactive');
+            this.setState(prevState => {
+                if (prevState.active) {
+                    this.activeTimer && clearTimeout(this.activeTimer);
+                    return {active: false};
+                }
+            });
         }
     }
 
@@ -428,7 +464,22 @@ class MediaPlayer extends Component {
                 }
             );
         } else {
-            this.setState(prevState => ({fullsize: !prevState.fullsize}));
+            this.setState(prevState => {
+                if (prevState.fullsize) {
+                    if (siteCodeUtil.inIOSAPP()) {
+                        Bridge.ios(BRIDGE_EVENT.Window, {event: 'exitFullscreen'});
+                    } else if (siteCodeUtil.inAndroidAPP()) {
+                        Bridge.android(BRIDGE_EVENT.Window, {event: 'exitFullscreen'});
+                    }
+                } else {
+                    if (siteCodeUtil.inIOSAPP()) {
+                        Bridge.ios(BRIDGE_EVENT.Window, {event: 'requestFullscreen'});
+                    } else if (siteCodeUtil.inAndroidAPP()) {
+                        Bridge.android(BRIDGE_EVENT.Window, {event: 'requestFullscreen'});
+                    }
+                }
+                return {fullsize: !prevState.fullsize};
+            });
         }
     }
 
@@ -445,24 +496,69 @@ class MediaPlayer extends Component {
             totalCurrentTimeFormated,
             totalDurationFormated
         } = this.state;
-        let mpClazzName = 'media-player';
-        if (active) mpClazzName += ' mpj-active';
-        if (fullsize) mpClazzName += ' fullsize';
+        let {renderBottomPlugin, renderTogglePlayListButton} = this.props;
         return (
             <div
-                className={mpClazzName}
+                className={classNames('media-player', {
+                    'mpj-active': active,
+                    'mpj-fullsize': fullsize
+                })}
                 ref={ele => {
                     this.playerElement = ele;
                 }}
             >
                 <div className="mpj-overlay">
                     <div className="mpj-visual-container">
-                        <div
+                        {/* <div
                             className="visual-image"
                             style={{
                                 background: `url(${imageUrl}) center center / contain no-repeat`
                             }}
-                        />
+                        /> */}
+                        <img src={`${imageUrl}`} alt="" />
+                        <div className="mpj-bottom">
+                            <div className="progress">
+                                <div className="progress-list" onClick={this.onProgessClick}>
+                                    <div className="play-progress" style={{width: `${playProgress}%`}}>
+                                        <div
+                                            className="seeker"
+                                            onMouseDown={this.onSeekerMouseDown}
+                                            onTouchStart={this.onSeekerTouchStart}
+                                        />
+                                    </div>
+                                    <div className="load-progress" style={{width: `${loadProgress}%`}} />
+                                </div>
+                            </div>
+                            <div className="controls">
+                                <div className="right-controls">
+                                    {renderTogglePlayListButton && renderTogglePlayListButton()}
+                                    <div className="control-item fullscreen">
+                                        <i
+                                            className={classNames(
+                                                'mpj-btn',
+                                                fullscreen || fullsize
+                                                    ? 'mpj-btn mpj-btn-fullscreen-exit'
+                                                    : 'mpj-btn mpj-btn-fullscreen'
+                                            )}
+                                            onClick={this.toggleFullscreen}
+                                        />
+                                    </div>
+                                </div>
+                                <div className="left-controls">
+                                    <div className="control-item play">
+                                        <i
+                                            className={classNames('mpj-btn', paused ? 'mpj-btn-play' : 'mpj-btn-pause')}
+                                            onClick={this.togglePlayer}
+                                        />
+                                    </div>
+                                    <div className="control-item time">
+                                        <span className="current">{totalCurrentTimeFormated}</span>/<span className="total">
+                                            {totalDurationFormated}
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div className="mpj-cover">
                         {!loading && paused ? <div className="cover-play" onClick={this.play} /> : null}
@@ -472,58 +568,14 @@ class MediaPlayer extends Component {
                         <div className="mpj-top">
                             <div className="controls">
                                 <div className="left-controls">
-                                    <div className="close">
+                                    <div className="control-item close">
                                         <i className="mpj-btn mpj-btn-close" onClick={this.toggleFullscreen} />
                                     </div>
                                 </div>
                             </div>
                         </div>
                     ) : null}
-
-                    <div className="mpj-bottom">
-                        <div className="controls">
-
-                            <div className="right-controls">
-                                <div className="fullscreen">
-                                    <i
-                                        className={
-                                            fullscreen || fullsize
-                                                ? 'mpj-btn mpj-btn-fullscreen-exit'
-                                                : 'mpj-btn mpj-btn-fullscreen'
-                                        }
-                                        onClick={this.toggleFullscreen}
-                                    />
-                                </div>
-                            </div>
-                            <div className="left-controls">
-                                <div className="play">
-                                    <i
-                                        className={paused ? 'mpj-btn mpj-btn-play' : 'mpj-btn mpj-btn-pause'}
-                                        onClick={this.togglePlayer}
-                                    />
-                                </div>
-                                <div className="time">
-                                    <span className="current">{totalCurrentTimeFormated}</span>/<span className="total">
-                                        {totalDurationFormated}
-                                    </span>
-                                </div>
-                            </div>
-                            <div className="center-controls">
-                                <div className="progress">
-                                    <div className="progress-list" onClick={this.onProgessClick}>
-                                        <div className="play-progress" style={{width: `${playProgress}%`}}>
-                                            <div
-                                                className="seeker"
-                                                onMouseDown={this.onSeekerMouseDown}
-                                                onTouchStart={this.onSeekerTouchStart}
-                                            />
-                                        </div>
-                                        <div className="load-progress" style={{width: `${loadProgress}%`}} />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    {renderBottomPlugin && renderBottomPlugin()}
                 </div>
             </div>
         );

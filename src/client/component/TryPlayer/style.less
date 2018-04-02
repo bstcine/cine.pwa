@@ -1,0 +1,83 @@
+.media-player {
+    .playlist {
+        width: 0;
+        height: 0;
+        position: relative;
+        .playlist-cover {
+            position: absolute;
+            top: 0;
+            right: 0;
+            left: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.8);
+            .playitems {
+                position: absolute;
+                width: 0;
+                right: 0;
+                transition: width 0.3s ease-in-out;
+                height: 100%;
+                background-color: #1e1e1e;
+                font-size: 0;
+                overflow: auto;
+
+                .playitem {
+                    font-size: 14px !important;
+                    padding: 0 5px;
+                    color: #7c7c7c;
+                    line-height: 30px;
+                    overflow: hidden;
+                    word-break: keep-all;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                    cursor: pointer;
+
+                    &.active,
+                    &:hover {
+                        color: #e9e6e6;
+                    }
+
+                    &.playtitle{
+                        color: #00c6ff;
+                        cursor: none;
+                    }
+                    
+                    &.playcategory{
+                        color: #ffffff;
+                        cursor: none;
+                    }
+                }
+            }
+        }
+    }
+    .playlist.active{
+        display: block;
+        width: 100%;
+        height: 100%;
+        .playlist-cover .playitems {
+            width: 40%;
+            padding: 5px 10px;
+        }
+    }
+    
+}
+// .media-player.fullsize {
+//     .playlist {
+//         display: block;
+//     }
+// }
+// .media-player:fullscreen {
+//     .playlist {
+//         display: block;
+//     }
+// }
+
+// @media (min-width: 576px) {
+//     .media-player {
+//         .playlist {
+//             .playitem {
+//                 width: 200px;
+//                 display: inline-block;
+//             }
+//         }
+//     }
+// }

@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {getParam} from '@/util/urlUtil';
 import siteCodeUtil from '@/util/sitecodeUtil';
 // import Video from '@/component/Video';
-import MediaPlayer from '../../../../component/MediaPlayer';
+import TryPlayer from '../../../../component/TryPlayer';
 
 export default class Brief extends Component {
     static defaultProps = {
@@ -178,8 +178,8 @@ export default class Brief extends Component {
                     //     pauseVideo={pauseVideo}
                     // />
                     <div className="content">
-                        <MediaPlayer
-                            src={course.try_contents}
+                        <TryPlayer
+                            playList={course.try_contents}
                             poster={course.img ? 'http://www.bstcine.com/f/' + course.img : null}
                         />
                     </div>

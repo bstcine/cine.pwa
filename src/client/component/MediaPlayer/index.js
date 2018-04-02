@@ -23,7 +23,7 @@ class MediaPlayer extends Component {
         this.totalDuration = 0;
         this.initMedias(this.props.medias);
         this.state = {
-            imageUrl: null,
+            imageUrl: this.props.poster || null,
             fullsize: false,
             fullscreen: false,
             active: false,
@@ -56,7 +56,7 @@ class MediaPlayer extends Component {
     componentWillReceiveProps(nextProps) {
         console.log('componentWillReceiveProps');
         this.setState({
-            imageUrl: null,
+            imageUrl: this.props.poster || null,
             loading: false,
             paused: true,
             playProgress: 0,
@@ -101,7 +101,6 @@ class MediaPlayer extends Component {
         let seekerLeft = document.querySelector('.seeker').offsetLeft;
         let playProgress;
         let mousemove = e => {
-            console.log('mousemove');
             let width = String.prototype.replace.call(
                 getComputedStyle(document.querySelector('.progress-list')).width,
                 'px',
@@ -176,15 +175,14 @@ class MediaPlayer extends Component {
                 break;
             }
         }
-        console.log('seekCurrentTime', seekCurrentTime);
-        console.log('seekIndex', seekIndex);
         this.index = seekIndex;
         let media = this.medias[this.index];
         let imageUrl = this.currentImage(media.images, seekCurrentTime);
         if (this.state.imageUrl !== imageUrl) {
             this.setState({imageUrl});
         }
-        this.setState({playProgress});
+        let totalCurrentTimeFormated = helper.timeFormat(seekTime);
+        this.setState({totalCurrentTimeFormated, playProgress});
         this.audio.pause();
         this.audio.src = media.url;
         this.audio.currentTime = seekCurrentTime;
@@ -193,7 +191,6 @@ class MediaPlayer extends Component {
     }
 
     onProgressClick(e) {
-        console.log('onProgressClick');
         this.audio.removeEventListener('timeupdate', this.onAudioTimeUpdate);
         let left = document.querySelector('.progress-list').getBoundingClientRect().left;
         let width = String.prototype.replace.call(
@@ -235,6 +232,7 @@ class MediaPlayer extends Component {
     initAudioPlayer() {
         let media = this.medias[this.index];
         let audio = (this.audio = new Audio());
+        audio.autoplay = false;
         audio.addEventListener('playing', () => {
             console.log('playing');
             this.setState(prevState => {
@@ -320,8 +318,10 @@ class MediaPlayer extends Component {
         });
 
         audio.src = media.url;
-        let image = this.props.poster || this.currentImage(media.images, 0);
-        this.setState({imageUrl: image});
+        if (!this.props.poster) {
+            let image = this.currentImage(media.images, 0);
+            this.setState({imageUrl: image});
+        }
     }
 
     onAudioTimeUpdate() {
@@ -421,7 +421,6 @@ class MediaPlayer extends Component {
     }
 
     onPlayerMouseMove(e) {
-        console.log('onPlayerMouseMove');
         let target = e.target || e.touches[0].target;
         if (target === this.playerElement || this.playerElement.contains(target)) {
             console.log('active');
@@ -429,9 +428,8 @@ class MediaPlayer extends Component {
             this.activeTimer && clearTimeout(this.activeTimer);
             this.activeTimer = setTimeout(() => {
                 this.setState({active: false});
-            }, 5000);
+            }, 3000);
         } else {
-            console.log('inactive');
             this.setState(prevState => {
                 if (prevState.active) {
                     this.activeTimer && clearTimeout(this.activeTimer);
@@ -525,7 +523,7 @@ class MediaPlayer extends Component {
                                             onTouchStart={this.onSeekerTouchStart}
                                         />
                                     </div>
-                                    <div className="load-progress" style={{width: `${loadProgress}%`}} />
+                                    <div className="load-progress" style={{width: `${loadProgress}%`}}/>
                                 </div>
                             </div>
                             <div className="controls">
@@ -551,7 +549,8 @@ class MediaPlayer extends Component {
                                         />
                                     </div>
                                     <div className="control-item time">
-                                        <span className="current">{totalCurrentTimeFormated}</span>/<span className="total">
+                                        <span className="current">{totalCurrentTimeFormated}</span>/<span
+                                        className="total">
                                             {totalDurationFormated}
                                         </span>
                                     </div>
@@ -560,15 +559,15 @@ class MediaPlayer extends Component {
                         </div>
                     </div>
                     <div className="mpj-cover">
-                        {!loading && paused ? <div className="cover-play" onClick={this.play} /> : null}
-                        {loading ? <div className="cover-loading" /> : null}
+                        {!loading && paused ? <div className="cover-play" onClick={this.play}/> : null}
+                        {loading ? <div className="cover-loading"/> : null}
                     </div>
                     {fullscreen || fullsize ? (
                         <div className="mpj-top">
                             <div className="controls">
                                 <div className="left-controls">
                                     <div className="control-item close">
-                                        <i className="mpj-btn mpj-btn-close" onClick={this.toggleFullscreen} />
+                                        <i className="mpj-btn mpj-btn-close" onClick={this.toggleFullscreen}/>
                                     </div>
                                 </div>
                             </div>

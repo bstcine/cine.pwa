@@ -26,6 +26,16 @@ class TryPlayer extends Component {
         this.togglePlayList = this.togglePlayList.bind(this);
     }
 
+    shouldComponentUpdate(nextProps) {
+        if (this.props.playList !== nextProps.playList) {
+            return true;
+        }
+        if (this.props.poster !== nextProps.poster) {
+            return true;
+        }
+        return false;
+    }
+
     playerDataInit() {
         let categoryCount = 0;
         let playList = this.props.playList.filter(item => {
@@ -116,8 +126,8 @@ class TryPlayer extends Component {
         let {isShowPlayList} = this.state;
         if (!isShowPlayList) return;
         return (
-            <div className="control-item chooseplaylist">
-                <span onClick={this.togglePlayList}>选集</span>
+            <div className="control-item chooseplaylist" onClick={this.togglePlayList}>
+                <span>选集</span>
             </div>
         );
     }

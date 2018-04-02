@@ -1,13 +1,15 @@
 const path = require('path');
 const webpack = require('webpack');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
-const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
-const WebpackMildCompile = require('webpack-mild-compile').Plugin;
-const Config = require('./webpack.config');
-const OfflinePlugin = require('offline-plugin');
 const BuildManifestPlugin = require('build-manifest-webpack-plugin');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const CleanWebpackPlugin = require('clean-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
+const Config = require('./webpack.config');
+
+const WebpackMildCompile = require('webpack-mild-compile').Plugin;
+const OfflinePlugin = require('offline-plugin');
 
 const pages = Config.pages;
 let entry = {};
@@ -26,6 +28,7 @@ pages.forEach(page => {
     rewrites.push({from: new RegExp(`^/${page}.*`), to: `/entry/${page}/index.html`});
 });
 rewrites.push({from: /.*/, to: `/entry/content/index.html`});
+
 
 module.exports = {
     cache: false,

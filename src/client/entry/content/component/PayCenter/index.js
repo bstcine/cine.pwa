@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import QRCode from 'qrcode';
 import uaUtil from '@/util/uaUtil';
 import siteCodeUtil from '@/util/sitecodeUtil';
+import storeUtil from "@/util/storeUtil";
 import Header from '@/component/Header';
 import PayingModal from '@/entry/content/component/PayCenter/PayingModal';
 import QRModal from '@/entry/content/component/PayCenter/QRModal';
@@ -231,6 +232,12 @@ export default class PayCenter extends Component {
     }
 
     render() {
+
+        if (!storeUtil.getToken()) {
+            location.href = "/login?go=" + encodeURIComponent(location.href);
+            return
+        }
+
         let {showPayingModal, showQRModal, showHelpModal, order, pay_type, pay_btn, code_url} = this.state;
         return (
             <React.Fragment>

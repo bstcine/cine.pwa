@@ -65,10 +65,12 @@ export default class Welcome extends Component {
 
     async componentDidMount() {
         initWechat();
-        let [err, result] = await fetchData(Api.APIURL_User_Info, {});
-        if (err) return alert(errorMsg(err));
-        storeUtil.set('user', result);
-        this.setState({user:result});
+        if(storeUtil.getToken()) {
+            let [err, result] = await fetchData(Api.APIURL_User_Info, {});
+            if (err) return alert(errorMsg(err));
+            storeUtil.set('user', result);
+            this.setState({user:result});
+        }
     }
 
     render() {

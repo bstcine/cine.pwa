@@ -138,9 +138,6 @@ export default class Course extends Component {
             this.login();
             return;
         }
-        this.setState({
-            pauseVideo: true
-        });
         let {cid, source_user_id} = getParam();
         if (siteCodeUtil.inIOSAPP()) {
             Bridge.ios(BRIDGE_EVENT.PRE_CONFIRM, {course_id: cid});
@@ -156,9 +153,6 @@ export default class Course extends Component {
     }
 
     goLearn() {
-        this.setState({
-            pauseVideo: true
-        });
         let {course} = this.state;
         if (siteCodeUtil.inIOSAPP()) {
             Bridge.ios(BRIDGE_EVENT.LEARN, {
@@ -269,7 +263,7 @@ export default class Course extends Component {
     }
 
     render() {
-        let {course, user, comments, showLoginModal, showRecommendModal, showCouponModal, pauseVideo} = this.state;
+        let {course, user, comments, showLoginModal, showRecommendModal, showCouponModal} = this.state;
 
         return (
             <React.Fragment>
@@ -287,7 +281,6 @@ export default class Course extends Component {
                             getCoupon={this.getCoupon}
                             openRecommend={this.openRecommend}
                             isShowRecommend={true}
-                            pauseVideo={pauseVideo}
                         />
 
                         <div className="course-detail" ref="courseDetail">

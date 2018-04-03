@@ -5,6 +5,7 @@ import Bridge from '@/util/bridge';
 import BRIDGE_EVENT from '@/constant/bridgeEvent';
 import siteCodeUtil from '@/util/sitecodeUtil';
 import classNames from 'classnames';
+import {eventEmmiter} from '@/util/eventEmmiter';
 
 class MediaPlayer extends Component {
     static defaultProps = {
@@ -36,7 +37,10 @@ class MediaPlayer extends Component {
         };
 
         this.play = this.play.bind(this);
+        this.pause = this.pause.bind(this);
+        this.handelPageHide = this.handelPageHide.bind(this);
         this.onPlayerMouseMove = this.onPlayerMouseMove.bind(this);
+        this.handleDoubleTouch = this.handleDoubleTouch.bind(this);
         this.togglePlayer = this.togglePlayer.bind(this);
         this.toggleFullscreen = this.toggleFullscreen.bind(this);
         this.onFullscreenChangeEvent = this.onFullscreenChangeEvent.bind(this);
@@ -48,7 +52,6 @@ class MediaPlayer extends Component {
 
     componentDidMount() {
         console.log('componentDidMount');
-
         this.initAudioPlayer();
         this.addEventListener();
     }
@@ -207,6 +210,7 @@ class MediaPlayer extends Component {
         document.addEventListener('mousemove', this.onPlayerMouseMove);
         document.addEventListener('touchmove', this.onPlayerMouseMove);
         document.addEventListener('touchend', this.onPlayerMouseMove);
+        eventEmmiter.on(BRIDGE_EVENT.Pagehide, this.handelPageHide);
         this.playerElement.addEventListener('webkitfullscreenchange', this.onFullscreenChangeEvent);
         this.playerElement.addEventListener('mozfullscreenchange', this.onFullscreenChangeEvent);
         this.playerElement.addEventListener('fullscreenchange', this.onFullscreenChangeEvent);
@@ -216,9 +220,15 @@ class MediaPlayer extends Component {
         this.playerElement.removeEventListener('webkitfullscreenchange', this.onFullscreenChangeEvent);
         this.playerElement.removeEventListener('mozfullscreenchange', this.onFullscreenChangeEvent);
         this.playerElement.removeEventListener('fullscreenchange', this.onFullscreenChangeEvent);
+        eventEmmiter.removeListener(BRIDGE_EVENT.Pagehide, this.handelPageHide);
         document.removeEventListener('mousemove', this.onPlayerMouseMove);
         document.removeEventListener('touchmove', this.onPlayerMouseMove);
         document.removeEventListener('touchend', this.onPlayerMouseMove);
+    }
+
+    handelPageHide() {
+        this.exitFullscreen()
+        this.pause();
     }
 
     onFullscreenChangeEvent(e) {
@@ -449,18 +459,21 @@ class MediaPlayer extends Component {
         }
     }
 
+    pause() {
+        this.setState({paused: true});
+        this.audio.pause();
+    }
+
     toggleFullscreen() {
         if (helper.isFullscreenEnabled()) {
-            this.setState(
-                prevState => ({fullscreen: !prevState.fullscreen}),
-                () => {
-                    if (this.state.fullscreen) {
-                        helper.requestFullscreen(this.playerElement);
-                    } else {
-                        helper.exitFullscreen();
-                    }
+            this.setState(prevState => {
+                if (this.state.fullscreen) {
+                    helper.exitFullscreen();
+                } else {
+                    helper.requestFullscreen(this.playerElement);
                 }
-            );
+                return {fullscreen: !prevState.fullscreen};
+            });
         } else {
             this.setState(prevState => {
                 if (prevState.fullsize) {
@@ -479,6 +492,42 @@ class MediaPlayer extends Component {
                 return {fullsize: !prevState.fullsize};
             });
         }
+    }
+
+    exitFullscreen() {
+        if (helper.isFullscreenEnabled()) {
+            this.setState(prevState => {
+                if (prevState.fullscreen) {
+                    helper.exitFullscreen();
+                    return {fullscreen: false};
+                }
+            });
+        } else {
+            this.setState(prevState => {
+                if (prevState.fullsize) {
+                    if (siteCodeUtil.inIOSAPP()) {
+                        Bridge.ios(BRIDGE_EVENT.Window, {event: 'exitFullscreen'});
+                    } else if (siteCodeUtil.inAndroidAPP()) {
+                        Bridge.android(BRIDGE_EVENT.Window, {event: 'exitFullscreen'});
+                    }
+                    return {fullsize: false};
+                }
+            });
+        }
+    }
+
+    handleDoubleTouch(e) {
+        if (!this.isDoubleTouch) {
+            this.isDoubleTouch = true;
+            setTimeout(() => {
+                this.isDoubleTouch = false;
+            }, 300);
+            e.preventDefault();
+            e.stopPropagation();
+            return false;
+        }
+        e.preventDefault();
+        this.pause();
     }
 
     render() {
@@ -512,6 +561,8 @@ class MediaPlayer extends Component {
                             style={{
                                 background: `url(${imageUrl}) center center / contain no-repeat`
                             }}
+                            onDoubleClick={this.pause}
+                            onTouchStart={this.handleDoubleTouch}
                         />
                         <div className="mpj-bottom">
                             <div className="progress">
@@ -523,7 +574,7 @@ class MediaPlayer extends Component {
                                             onTouchStart={this.onSeekerTouchStart}
                                         />
                                     </div>
-                                    <div className="load-progress" style={{width: `${loadProgress}%`}}/>
+                                    <div className="load-progress" style={{width: `${loadProgress}%`}} />
                                 </div>
                             </div>
                             <div className="controls">
@@ -549,8 +600,7 @@ class MediaPlayer extends Component {
                                         />
                                     </div>
                                     <div className="control-item time">
-                                        <span className="current">{totalCurrentTimeFormated}</span>/<span
-                                        className="total">
+                                        <span className="current">{totalCurrentTimeFormated}</span>/<span className="total">
                                             {totalDurationFormated}
                                         </span>
                                     </div>
@@ -559,15 +609,15 @@ class MediaPlayer extends Component {
                         </div>
                     </div>
                     <div className="mpj-cover">
-                        {!loading && paused ? <div className="cover-play" onClick={this.play}/> : null}
-                        {loading ? <div className="cover-loading"/> : null}
+                        {!loading && paused ? <div className="cover-play" onClick={this.play} >试听</div> : null}
+                        {loading ? <div className="cover-loading" /> : null}
                     </div>
                     {fullscreen || fullsize ? (
                         <div className="mpj-top">
                             <div className="controls">
                                 <div className="left-controls">
                                     <div className="control-item close">
-                                        <i className="mpj-btn mpj-btn-close" onClick={this.toggleFullscreen}/>
+                                        <i className="mpj-btn mpj-btn-close" onClick={this.toggleFullscreen} />
                                     </div>
                                 </div>
                             </div>

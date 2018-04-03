@@ -167,7 +167,7 @@ export default class Brief extends Component {
             return <div className="coming-soon">待推出</div>;
         }
     }
-    renderVideoContainer(course) {
+    renderVideoContainer(course, pauseVideo) {
         if (!course) return null;
         return (
             <div className="video-container">
@@ -181,6 +181,7 @@ export default class Brief extends Component {
                         <TryPlayer
                             playList={course.try_contents}
                             poster={course.img ? 'http://www.bstcine.com/f/' + course.img : null}
+                            pause={pauseVideo}
                         />
                     </div>
                 ) : (
@@ -204,7 +205,7 @@ export default class Brief extends Component {
         return (
             <div className="brief-container">
                 <div className="left-container">
-                    {this.renderVideoContainer(course)}
+                    {this.renderVideoContainer(course,pauseVideo)}
                     {!siteCodeUtil.inAPP() ? (
                         <div className="share-tool">
                             分享

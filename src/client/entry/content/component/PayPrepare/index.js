@@ -107,7 +107,7 @@ export default class PayPrepare extends Component {
 
     goAddress() {
         const localUrl = encodeURIComponent(location.href);
-        location.href = `/address?case=1&token=${storeUtil.getToken()}&redirect=${localUrl}`;
+        location.href = `/address?case=1&redirect=${localUrl}`;
     }
 
     confirmOrder() {

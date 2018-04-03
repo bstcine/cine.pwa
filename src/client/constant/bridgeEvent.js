@@ -12,6 +12,8 @@ const BRIDGE_EVENT = {
     ADDRESS_SAVE: 'address_save',
     ADDRESS_INIT_DATA: 'address_init_data',
     Window: 'window',
+    Pagehide: 'pagehide',
+    Pageshow: 'pageshow',
 };
 
 export default BRIDGE_EVENT;

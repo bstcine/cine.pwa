@@ -8,8 +8,10 @@ import Router from '@/component/Router';
 import EntryComponent from '@/component/EntryComponent';
 import {chunkComponent} from "@/util/chunkComponent";
 
-const Home = chunkComponent(() => import(/* webpackChunkName: "content/chunk/index.h" */ "./component/Home"))
-const Course = chunkComponent(() => import(/* webpackChunkName: "content/chunk/index.cc" */ "./component/Course"))
+// const Home = chunkComponent(() => import(/* webpackChunkName: "content/chunk/index.h" */ "./component/Home"))
+import Home from  "./component/Home"
+// const Course = chunkComponent(() => import(/* webpackChunkName: "content/chunk/index.cc" */ "./component/Course"))
+import Course from  "./component/Course"
 const PayPrepare = chunkComponent(() => import(/* webpackChunkName: "content/chunk/index.pp" */ "./component/PayPrepare"))
 const PayCenter = chunkComponent(() => import(/* webpackChunkName: "content/chunk/index.pc" */ "./component/PayCenter"))
 const PayStatus = chunkComponent(() => import(/* webpackChunkName: "content/chunk/index.ps" */ "./component/PayStatus"))

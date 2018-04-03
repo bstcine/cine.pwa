@@ -26,12 +26,15 @@ class TryPlayer extends Component {
         this.togglePlayList = this.togglePlayList.bind(this);
     }
 
-    shouldComponentUpdate(nextProps) {
+    shouldComponentUpdate(nextProps, nextState) {
         if (this.props.playList !== nextProps.playList) {
             return true;
         }
         if (this.props.poster !== nextProps.poster) {
             return true;
+        }
+        if (this.state.medias !== nextState.medias) {
+            return true
         }
         return false;
     }

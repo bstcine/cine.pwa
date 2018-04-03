@@ -48,7 +48,7 @@ export default class Slider extends Component {
         });
     }
 
-    handlerClick({type, course_id, href}) {
+    handlerClick({type, course_id, href, tab_id}) {
         let {history} = this.props;
         if (type === '1') {
             routeUtil.goCourse({id: course_id}, history);
@@ -60,6 +60,12 @@ export default class Slider extends Component {
             location.href = url;
         } else if (type === '3') {
             let url = href;
+            if (siteCodeUtil.inAPP()) {
+                url = addParam(url, {token: storeUtil.getToken()});
+            }
+            location.href = url;
+        } else if (type === '4') {
+            let url = addParam(location.href,{tab:tab_id});
             if (siteCodeUtil.inAPP()) {
                 url = addParam(url, {token: storeUtil.getToken()});
             }

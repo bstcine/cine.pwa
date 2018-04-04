@@ -167,21 +167,15 @@ export default class Brief extends Component {
             return <div className="coming-soon">待推出</div>;
         }
     }
-    renderVideoContainer(course, pauseVideo) {
-        if (!course) return null;
+    renderVideoContainer(course) {
+        if (!course) return <div className="video-container"/>;
         return (
             <div className="video-container">
                 {course.try_contents && course.try_contents.length ? (
-                    // <Video
-                    //     src={course.video}
-                    //     poster={course.img ? 'http://www.bstcine.com/f/' + course.img : null}
-                    //     pauseVideo={pauseVideo}
-                    // />
                     <div className="content">
                         <TryPlayer
                             playList={course.try_contents}
                             poster={course.img ? 'http://www.bstcine.com/f/' + course.img : null}
-                            pause={pauseVideo}
                         />
                     </div>
                 ) : (
@@ -199,13 +193,13 @@ export default class Brief extends Component {
     }
 
     render() {
-        let {course, user, relatedCourse, openRecommend, getCoupon, isShowRecommend, pauseVideo} = this.props;
+        let {course, user, relatedCourse, openRecommend, getCoupon, isShowRecommend,} = this.props;
         const {clickShare} = this.props;
         let source_user_id = getParam().source_user_id;
         return (
             <div className="brief-container">
                 <div className="left-container">
-                    {this.renderVideoContainer(course,pauseVideo)}
+                    {this.renderVideoContainer(course)}
                     {!siteCodeUtil.inAPP() ? (
                         <div className="share-tool">
                             分享

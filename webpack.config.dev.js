@@ -1,7 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin');
-const BuildManifestPlugin = require('build-manifest-webpack-plugin');
+// const BuildManifestPlugin = require('build-manifest-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -57,10 +57,10 @@ module.exports = {
             outputPath: 'dll'
         }),
         new LodashModuleReplacementPlugin(),
-        new BuildManifestPlugin({
-            name: 'build-manifest.json',
-            buildPath: path.join(__dirname, 'build')
-        })
+        // new BuildManifestPlugin({
+        //     name: 'build-manifest.json',
+        //     buildPath: path.join(__dirname, 'build')
+        // })
         // new OfflinePlugin()
     ],
     devServer: {

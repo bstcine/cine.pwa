@@ -517,17 +517,20 @@ class MediaPlayer extends Component {
     }
 
     handleDoubleTouch(e) {
+        e.target.addEventListener('touchend', (eve) => {
+            eve.preventDefault()
+        }, {once: true});
+
         if (!this.isDoubleTouch) {
             this.isDoubleTouch = true;
             setTimeout(() => {
                 this.isDoubleTouch = false;
             }, 300);
-            e.preventDefault();
-            e.stopPropagation();
             return false;
         }
-        e.preventDefault();
+
         this.pause();
+        return false;
     }
 
     render() {

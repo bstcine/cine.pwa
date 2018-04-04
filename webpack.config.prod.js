@@ -1,7 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin');
-const BuildManifestPlugin = require('build-manifest-webpack-plugin');
+// const BuildManifestPlugin = require('build-manifest-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -70,7 +70,7 @@ module.exports = {
                 // Pending further investigation:
                 // https://github.com/mishoo/UglifyJS2/issues/2011
                 comparisons: false,
-                drop_console: false
+                drop_console: true
             },
             mangle: {
                 safari10: true
@@ -83,10 +83,10 @@ module.exports = {
             },
             sourceMap: true
         }),
-        new BuildManifestPlugin({
-            name: 'build-manifest.json',
-            buildPath: path.join(__dirname, 'build')
-        })
+        // new BuildManifestPlugin({
+        //     name: 'build-manifest.json',
+        //     buildPath: path.join(__dirname, 'build')
+        // })
         // new BundleAnalyzerPlugin({analyzerMode:'static'})
     ]
 };

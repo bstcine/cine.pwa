@@ -115,22 +115,24 @@ export default class Course extends Component {
 
     async initData() {
         let {cid} = getParam();
-
-        fetchData(Api.APIURL_Content_Course_Detail, {cid}).then(([err, result]) => {
-            if (err) return alert(errorMsg(err));
-            let {detail: course} = result;
-            this.setState({course});
-        });
-
-        fetchData(Api.APIURL_Content_Course_Comment, {cid}).then(([err, result]) => {
-            if (err) return alert(errorMsg(err));
-            this.setState({comments: result});
-        });
-
-        fetchData(Api.APIURL_User_Info, {}).then(([err, result]) => {
-            if (err) return;
-            this.setState({user: result});
-        });
+        let courseProm = fetchData(Api.APIURL_Content_Course_Detail, {cid})
+            .then(([err, result]) => {
+                if (err) return Promise.reject(err);
+                return Promise.resolve(result.detail)
+            });
+        let commentsProm = fetchData(Api.APIURL_Content_Course_Comment, {cid})
+            .then(([err, result]) => {
+                if (err) return Promise.reject(err);
+                return Promise.resolve(result)
+            });
+        let userProm = fetchData(Api.APIURL_User_Info, {})
+            .then(([err, result]) => {
+                if (err) return Promise.resolve();
+                return Promise.resolve(result)
+            });
+        return Promise.all([courseProm, commentsProm, userProm]).then(([course, comments, user]) => {
+            this.setState({course, comments, user});
+        })
     }
 
     goBuy() {

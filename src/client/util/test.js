@@ -15,22 +15,22 @@
 let query1 = function () {
     return new Promise((resolve, reject) => {
         setTimeout(() => {
-            console.log('query1', new Date().getTime())
-            resolve()
-        }, 1000)
+            resolve('query1')
+        }, 10000)
     })
 }
 
 let query2 = function () {
     return new Promise((resolve, reject) => {
-        console.log('query2', new Date().getTime())
-        resolve()
+        resolve('query2')
     })
 }
 
 let batchQuery = async function () {
-    await query1();
-    await query2();
+    let q1 = await query1();
+    let q2 = await query2();
+    console.log(q1)
+    console.log(q2)
 }
 
 batchQuery()

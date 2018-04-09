@@ -7,7 +7,7 @@
 	```shell
 	$ git clone https://github.com/bstcine/cine.pwa.git
 	$ cd cine.pwa
-	$ cnpm install
+	$ npm install
 
 	```
 

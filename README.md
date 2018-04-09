@@ -7,7 +7,7 @@
 	```shell
 	$ git clone https://github.com/bstcine/cine.pwa.git
 	$ cd cine.pwa
-	$ cnpm install
+	$ npm install
 
 	```
 
@@ -84,9 +84,8 @@ Step2.  运行 `$ npm run prod-build`
 原因：Static模式，服务器触发保存Browser的Coockie， 但无法保存成功
 目标：可以正常使用登入功能
 ```
-- 3, build结果的目录结构，与源码src/client/entry下面目录结构不是完全一致
+- 3, Static模式，课程详情页-课程概要的链接异常
 ```
-原因：bundle-loader生成的文件夹路径不应该与该H5的Folder平级， 而是应该下一级
-目标：build结果，应该与源码src/client/entry下面的目录结构完全一致的
-     当只修改某个H5页面时，只需Copy该页面的Build结果到cine.web项目
+目前情况：iPad使用预先加载本地JS，点击“课程详情页-课程概要”链接，显示空白
+目标：iPad可以正常使用
 ```

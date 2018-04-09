@@ -1,11 +1,13 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {fetchData} from '../action';
-import QuestionFormat1 from './QuestionFormat1';
+import QuestionItems from './QuestionItems';
 import Title from './Title';
+import '../asset/style/index.less';
 
 const mapStateToProps = state => {
-    const {name, count, questionItems, isFetching = false} = state;
+    const {getData} = state;
+    let {name, count, questionItems, isFetching = true} = getData;
 
     return {
         name,
@@ -24,22 +26,10 @@ class App extends Component {
     render() {
         const {name, count, questionItems, isFetching} = this.props;
         return (
-            <div>
-                {!isFetching && <Title title={name} date={new Date().getDate} limit={75} count={count} />}
-                {!isFetching &&
-                    questionItems.map(questionItem => {
-                        if (questionItem.format === 1) {
-                            return (
-                                <QuestionFormat1
-                                    id={questionItem.id}
-                                    title={questionItem.title}
-                                    options={questionItem.answers}
-                                />
-                            );
-                        }
-                        return null;
-                    })}
+            <div className="tgrammar">
                 {isFetching && <div className="loading">loading</div>}
+                {!isFetching && <Title title={name} limit={75} count={count} />}
+                {!isFetching && <QuestionItems items={questionItems} />}
             </div>
         );
     }

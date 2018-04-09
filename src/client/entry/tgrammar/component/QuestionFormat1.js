@@ -1,15 +1,18 @@
 import React from 'react';
-
-const QuestionFormat1 = ({id, title, options}) => {
+/**
+ * 1:单选题
+ */
+const QuestionFormat1 = ({no, id, title, options}) => {
     return (
-        <div>
-            <div className="title">{title}</div>
+        <div className="questionformat questionformat1">
+            <span className="questionno">{no}. </span>
+            <div className="title" dangerouslySetInnerHTML={{ __html: title}} />
             <ul className="options">
                 {options.map((option, i) => {
                     return (
-                        <li key={i} className="option">
-                            <radio id={`q${id}o${i}`} name={`q${id}`} />
-                            <lable htmlFor={`q${id}o${i}`}>{option.content}</lable>
+                        <li key={id + i} className="option">
+                            <input id={`q${id}o${i}`} type="radio" name={`q_${id}`} />
+                            <label htmlFor={`q${id}o${i}`}><span /> {option.content}</label>
                         </li>
                     );
                 })}

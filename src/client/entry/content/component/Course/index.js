@@ -118,21 +118,21 @@ export default class Course extends Component {
         let courseProm = fetchData(Api.APIURL_Content_Course_Detail, {cid})
             .then(([err, result]) => {
                 if (err) return Promise.reject(err);
-                return Promise.resolve(result.detail)
+                return Promise.resolve(result.detail);
             });
         let commentsProm = fetchData(Api.APIURL_Content_Course_Comment, {cid})
             .then(([err, result]) => {
                 if (err) return Promise.reject(err);
-                return Promise.resolve(result)
+                return Promise.resolve(result);
             });
         let userProm = fetchData(Api.APIURL_User_Info, {})
             .then(([err, result]) => {
                 if (err) return Promise.resolve();
-                return Promise.resolve(result)
+                return Promise.resolve(result);
             });
         return Promise.all([courseProm, commentsProm, userProm]).then(([course, comments, user]) => {
             this.setState({course, comments, user});
-        })
+        });
     }
 
     goBuy() {
@@ -150,7 +150,8 @@ export default class Course extends Component {
             if (source_user_id) {
                 url += `&source_user_id=${source_user_id}`;
             }
-            this.props.history.push(url);
+            // this.props.history.push(url);
+            location.href = url;
         }
     }
 

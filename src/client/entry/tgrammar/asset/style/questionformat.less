@@ -1,0 +1,112 @@
+// "cssrem.rootFontSize" = 50
+@blue: #093d8a;
+@whiteblue: #f9fcff;
+@black: #2b2c2d;
+
+.title {
+    h1 {
+        margin-bottom: 17px;
+        font-size: 0.52rem;
+        line-height: 1.2rem;
+        color: @blue;
+        text-align: center;
+    }
+    .metas {
+        padding: 0 0.4rem;
+        border-top: 0.08rem solid @blue;
+        color: #7a7a7a;
+        font-size: 0.28rem;
+        line-height: 0.66rem;
+        background-color: @whiteblue;
+        margin-bottom: 38px;
+        .right {
+            float: right;
+        }
+    }
+}
+
+.questionformat10 {
+    position: relative;
+    text-align: center;
+    margin-bottom: 44px;
+    h2 {
+        display: inline-block;
+        font-size: 24px;
+        line-height: 64px;
+        padding: 0 42px;
+        border: solid 3px @blue;
+        color: @blue;
+    }
+    p {
+        color: @black;
+        text-align: left;
+        background-color: @whiteblue;
+        font-size: 14px;
+        line-height: 28px;
+        padding: 20px 28px;
+        white-space: pre-wrap;
+    }
+}
+
+.questionformat11 {
+    position: relative;
+}
+
+.questionformat {
+    white-space: pre-wrap;
+
+    .options {
+        .option {
+            font-size: 14px;
+            color: @black;
+            line-height: 20px;
+            cursor: pointer;
+            * {
+                cursor: pointer;
+            }
+            &:hover {
+                background-color: @whiteblue;
+            }
+            input[type='radio'] {
+                display: none;
+            }
+            label{
+                display: block;
+            }
+            input[type='radio'] + label span {
+                display: inline-block;
+                width: 20px;
+                height: 20px;
+                border: solid 1px #dadcdd;
+                border-radius: 50%;
+                box-sizing: border-box;
+            }
+        }
+        input[type='radio']:checked + label span {
+            background: url(../image/ico_choose.png) center no-repeat;
+            background-size: contain;
+            border: none;
+        }
+    }
+}
+
+.questionformat1 {
+    position: relative;
+}
+
+.questionformat3 {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    .titlewrap {
+        display: flex;
+        flex-direction: row;
+        font-size: 18px;
+        line-height: 24px;
+        color: @black;
+    }
+}
+
+.questionno {
+    // position: absolute;
+}

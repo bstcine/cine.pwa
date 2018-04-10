@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import QRCode from 'qrcode';
 import uaUtil from '@/util/uaUtil';
 import siteCodeUtil from '@/util/sitecodeUtil';
-import storeUtil from "@/util/storeUtil";
 import Header from '@/component/Header';
 import PayingModal from '@/entry/content/component/PayCenter/PayingModal';
 import QRModal from '@/entry/content/component/PayCenter/QRModal';
@@ -14,6 +13,14 @@ import {initWechat} from '@/util/wechatUtil';
 import Api from '@/../APIConfig';
 
 export default class PayCenter extends Component {
+
+    static getWechatOpenId() {
+        if (uaUtil.wechat() && getParam().redirected !== '1') {
+            let url = addParam(location.href, {redirected: 1});
+            location.href = 'http://www.bstcine.com/wechat/authorize?redirect=' + encodeURIComponent(url);
+        }
+    }
+
     constructor(props) {
         super(props);
         this.state = {
@@ -53,12 +60,7 @@ export default class PayCenter extends Component {
         initWechat();
     }
 
-    static getWechatOpenId() {
-        if (uaUtil.wechat() && getParam().redirected !== '1') {
-            let url = addParam(location.href, {redirected: 1});
-            location.href = 'http://www.bstcine.com/wechat/authorize?redirect=' + encodeURIComponent(url);
-        }
-    }
+
 
     closePayingModal() {
         this.setState({
@@ -205,7 +207,7 @@ export default class PayCenter extends Component {
             if (uaUtil.wechat()) {
                 this.openHelpModal();
             } else if (uaUtil.mobile()) {
-                //支付宝mweb支付
+                // 支付宝mweb支付
                 this.doPayAliMweb();
             } else {
                 // 支付宝pc支付
@@ -232,12 +234,6 @@ export default class PayCenter extends Component {
     }
 
     render() {
-
-        if (!storeUtil.getToken()) {
-            location.href = "/login?go=" + encodeURIComponent(location.href);
-            return
-        }
-
         let {showPayingModal, showQRModal, showHelpModal, order, pay_type, pay_btn, code_url} = this.state;
         return (
             <React.Fragment>

@@ -6,16 +6,27 @@ import appBanner from '@/util/appBanner';
 import Footer from '@/component/Footer';
 import Router from '@/component/Router';
 import EntryComponent from '@/component/EntryComponent';
-import {chunkComponent} from "@/util/chunkComponent";
+import {chunkComponent} from '@/util/chunkComponent';
+import storeUtil from '@/util/storeUtil';
+import Home from './component/Home';
+import Course from './component/Course';
+const PayPrepare = chunkComponent(() =>
+    import(/* webpackChunkName: "content/chunk/index.pp" */ './component/PayPrepare')
+);
+const PayCenter = chunkComponent(() =>
+    import(/* webpackChunkName: "content/chunk/index.pc" */ './component/PayCenter')
+);
+const PayStatus = chunkComponent(() =>
+    import(/* webpackChunkName: "content/chunk/index.ps" */ './component/PayStatus')
+);
 
-// const Home = chunkComponent(() => import(/* webpackChunkName: "content/chunk/index.h" */ "./component/Home"))
-import Home from  "./component/Home"
-// const Course = chunkComponent(() => import(/* webpackChunkName: "content/chunk/index.cc" */ "./component/Course"))
-import Course from  "./component/Course"
-const PayPrepare = chunkComponent(() => import(/* webpackChunkName: "content/chunk/index.pp" */ "./component/PayPrepare"))
-const PayCenter = chunkComponent(() => import(/* webpackChunkName: "content/chunk/index.pc" */ "./component/PayCenter"))
-const PayStatus = chunkComponent(() => import(/* webpackChunkName: "content/chunk/index.ps" */ "./component/PayStatus"))
-
+const createComponent = (Component, userRequired, props) => {
+    if (userRequired && !storeUtil.getToken()) {
+        location.href = '/login?go=' + encodeURIComponent(location.href);
+        return;
+    }
+    return <Component {...props} />;
+};
 
 class Content extends EntryComponent {
     constructor(props) {
@@ -37,16 +48,24 @@ class Content extends EntryComponent {
     }
 
     render() {
-
         return (
             <React.Fragment>
                 <Router>
                     <React.Fragment>
-                        <Route exact path="/" component={Home}/>
-                        <Route path="/content/course" component={Course}/>
-                        <Route path="/pay/prepare" component={PayPrepare}/>
-                        <Route path="/pay/center" component={PayCenter}/>
-                        <Route path="/pay/status" component={PayStatus}/>
+                        <Route exact path="/" component={Home} />
+                        <Route path="/content/course" component={Course} />
+                        <Route
+                            path="/pay/prepare"
+                            component={props => createComponent(PayPrepare, /* userRequired */ true, props)}
+                        />
+                        <Route
+                            path="/pay/center"
+                            component={props => createComponent(PayCenter, /* userRequired */ true, props)}
+                        />
+                        <Route
+                            path="/pay/status"
+                            component={props => createComponent(PayStatus, /* userRequired */ true, props)}
+                        />
                     </React.Fragment>
                 </Router>
                 <Footer />

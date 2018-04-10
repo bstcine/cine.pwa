@@ -55,12 +55,14 @@ export default class Course extends Component {
     handlerScroll() {
         let tabs = ReactDOM.findDOMNode(this.refs.tabs);
         let courseDetail = ReactDOM.findDOMNode(this.refs.courseDetail);
-        let courseDetailOffset = courseDetail.getBoundingClientRect();
-        let clazz = 'tab-fixed';
-        if (courseDetailOffset.top < 0) {
-            if (!tabs.classList.contains(clazz)) tabs.classList.add(clazz);
-        } else {
-            if (tabs.classList.contains(clazz)) tabs.classList.remove(clazz);
+        if(tabs && courseDetail){
+            let courseDetailOffset = courseDetail.getBoundingClientRect();
+            let clazz = 'tab-fixed';
+            if (courseDetailOffset.top < 0) {
+                if (!tabs.classList.contains(clazz)) tabs.classList.add(clazz);
+            } else {
+                if (tabs.classList.contains(clazz)) tabs.classList.remove(clazz);
+            }
         }
     }
 

@@ -23,7 +23,7 @@ const getData = (state = {}, action) => {
 };
 
 const rootReducer = combineReducers({
-    getData
+    quiz: getData
 });
 
 export default rootReducer;

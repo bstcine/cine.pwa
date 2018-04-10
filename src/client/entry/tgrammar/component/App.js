@@ -6,8 +6,8 @@ import Title from './Title';
 import '../asset/style/index.less';
 
 const mapStateToProps = state => {
-    const {getData} = state;
-    let {name, count, questionItems, isFetching = true} = getData;
+    const {quiz} = state;
+    let {name, count, questionItems, isFetching = true} = quiz;
 
     return {
         name,

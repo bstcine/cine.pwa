@@ -2,11 +2,13 @@ import React from 'react';
 /**
  * 1:单选题
  */
-const QuestionFormat1 = ({no, id, title, options}) => {
+const Question1ChooseOne = ({no, id, title, options}) => {
     return (
         <div className="questionformat questionformat1">
-            <span className="questionno">{no}. </span>
-            <div className="title" dangerouslySetInnerHTML={{ __html: title}} />
+            <div className="titlewrap">
+                <span className="questionno">{no}.</span>
+                <div className="title" dangerouslySetInnerHTML={{ __html: title}} />
+            </div>
             <ul className="options">
                 {options.map((option, i) => {
                     return (
@@ -21,4 +23,4 @@ const QuestionFormat1 = ({no, id, title, options}) => {
     );
 };
 
-export default QuestionFormat1;
+export default Question1ChooseOne;

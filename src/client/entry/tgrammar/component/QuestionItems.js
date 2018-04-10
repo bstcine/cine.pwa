@@ -1,8 +1,8 @@
 import React from 'react';
-import QuestionFormat1 from './QuestionFormat1';
-import QuestionFormat3 from './QuestionFormat3';
-import QuestionFormat10 from './QuestionFormat10';
-import QuestionFormat11 from './QuestionFormat11';
+import Question1ChooseOne from './Question1ChooseOne';
+import Question3Correct from './Question3Correct';
+import Question10Desc from './Question10Desc';
+import Question11ReadDesc from './Question11ReadDesc';
 
 const QuestionItems = ({items}) => {
     let no = 0;
@@ -13,7 +13,7 @@ const QuestionItems = ({items}) => {
                 switch (item.format) {
                     case 1:
                         return (
-                            <QuestionFormat1
+                            <Question1ChooseOne
                                 no={no}
                                 key={item.id}
                                 id={item.id}
@@ -23,7 +23,7 @@ const QuestionItems = ({items}) => {
                         );
                     case 3:
                         return (
-                            <QuestionFormat3
+                            <Question3Correct
                                 no={no}
                                 key={item.id}
                                 id={item.id}
@@ -32,11 +32,11 @@ const QuestionItems = ({items}) => {
                         );
                     case 10:
                         return (
-                            <QuestionFormat10 no={no} key={item.id} title={item.title} />
+                            <Question10Desc no={no} key={item.id} title={item.title} />
                         );
                     case 11:
                         return (
-                            <QuestionFormat11 no={no} key={item.id} title={item.title} />
+                            <Question11ReadDesc no={no} key={item.id} title={item.title} />
                         );
                     default:
                         return null;

@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import {fetchData} from '../action';
 import QuestionItems from './QuestionItems';
 import Title from './Title';
+import Submit from './Submit';
 import '../asset/style/index.less';
 
 const mapStateToProps = state => {
@@ -30,6 +31,7 @@ class App extends Component {
                 {isFetching && <div className="loading">loading</div>}
                 {!isFetching && <Title title={name} limit={75} count={count} />}
                 {!isFetching && <QuestionItems items={questionItems} />}
+                {!isFetching && <Submit />}
             </div>
         );
     }

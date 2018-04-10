@@ -49,17 +49,51 @@
 }
 
 .questionformat11 {
-    position: relative;
+    margin-bottom: 44px;
+    padding: 46px 40px;
+    border: solid 2px #373738;
+    font-family: Times, Times New Roman, serif;
+    box-shadow: -2px 16px 0 -10px #b3b4b4;
+    p {
+        font-style: italic;
+        color: @black;
+        font-size: 18px;
+        line-height: 30px;
+        white-space: pre-wrap;
+    }
+
+    blockquote {
+        margin-top: 28px;
+        text-align: right;
+        font-size: 16px;
+        line-height: 28px;
+    }
 }
 
 .questionformat {
-    white-space: pre-wrap;
+    margin-bottom: 30px;
+    padding-bottom: 30px;
+    display: flex;
+    flex-direction: column;
+    .titlewrap {
+        display: flex;
+        margin-bottom: 18px;
+        flex-direction: row;
+        font-size: 18px;
+        line-height: 24px;
+        color: @black;
+        white-space: pre-wrap;
+        .title {
+            padding-left: 10px;
+        }
+    }
 
     .options {
         .option {
             font-size: 14px;
             color: @black;
             line-height: 20px;
+            margin-bottom: 16px;
             cursor: pointer;
             * {
                 cursor: pointer;
@@ -70,43 +104,71 @@
             input[type='radio'] {
                 display: none;
             }
-            label{
-                display: block;
+            label {
+                display: flex;
             }
             input[type='radio'] + label span {
                 display: inline-block;
                 width: 20px;
                 height: 20px;
+                margin-right: 14px;
                 border: solid 1px #dadcdd;
                 border-radius: 50%;
                 box-sizing: border-box;
+                background-color: #fff;
+            }
+            input[type='radio']:checked + label span {
+                background: url(../image/ico_choose.png) center no-repeat;
+                background-size: contain;
+                border: none;
+                border-radius: 0;
             }
         }
-        input[type='radio']:checked + label span {
-            background: url(../image/ico_choose.png) center no-repeat;
-            background-size: contain;
-            border: none;
+    }
+
+    .answer {
+        .tips {
+            color: @blue;
+            font-size: 14px;
+            line-height: 34px;
+            font-weight: bold;
+        }
+        .answerarea {
+            width: 100%;
+            height: 100px;
+            border: solid 1px #dadcdd;
+            padding: 18px 20px;
+            font-size: 16px;
+            line-height: 24px;
+            color: @black;
+            resize: vertical;
+
+            &:focus {
+                box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(102, 175, 233, 0.6);
+                border: 1px solid #66afe9;
+            }
         }
     }
 }
 
 .questionformat1 {
-    position: relative;
+    border-bottom: 1px solid #f6f7f9;
 }
 
-.questionformat3 {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    .titlewrap {
-        display: flex;
-        flex-direction: row;
-        font-size: 18px;
-        line-height: 24px;
-        color: @black;
+.submit {
+    padding-top: 56px;
+    padding-bottom: 100px;
+    border-top: 4px solid @blue;
+    text-align: center;
+    button.btn-blue {
+        width: 300px;
+        height: 64px;
+        background-color: #0a3069;
+        box-shadow: 2px 3px 7px 0px rgba(9, 61, 138, 0.16);
+        color: #fff;
+        font-size: 24px;
+        text-align: center;
+        border: 1px solid #0a3069;
+        
     }
-}
-
-.questionno {
-    // position: absolute;
 }

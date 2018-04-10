@@ -1,9 +1,9 @@
 import React from 'react';
 /**
- * 阅读理解描述文本(富文本)
+ * 描述文本（富文本）
  */
-const QuestionFormat11 = ({title}) => {
+const Question10Desc = ({title}) => {
     return <div className="questionformat10" dangerouslySetInnerHTML={{__html: title}} />;
 };
 
-export default QuestionFormat11;
+export default Question10Desc;

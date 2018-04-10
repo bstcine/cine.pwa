@@ -17,7 +17,7 @@ class EventEmmiter {
             throw new Error(`no event[${event}] listener found`);
         }
         listenerObjs.forEach(listenerObj => {
-            const { listener, once } = listenerObj;
+            const {listener, once} = listenerObj;
             if (once) this.removeListener(event, listener);
             listener(...args);
         });
@@ -37,14 +37,14 @@ class EventEmmiter {
     removeListener(event, listener) {
         let listenerObjs = this._events[event];
         let index = null;
-        for (let i = 0; i < listener.length; i++) {
+        for (let i = 0; i < listenerObjs.length; i++) {
             if (listenerObjs[i].listener === listener) {
                 index = i;
                 break;
             }
         }
         if (index === null) {
-            return
+            return;
         }
         listenerObjs.splice(index, 1);
         if (!listenerObjs.length) delete this._events[event];

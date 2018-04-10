@@ -83,8 +83,7 @@ class MediaPlayer extends Component {
         let audio = this.audio;
         if (audio) {
             audio.pause();
-            audio.src = '';
-            audio.load();
+            this.audio = null;
         }
     }
 
@@ -432,7 +431,7 @@ class MediaPlayer extends Component {
 
     onPlayerMouseMove(e) {
         let target = e.target || e.touches[0].target;
-        if (target === this.playerElement || this.playerElement.contains(target)) {
+        if (target === this.playerElement || (this.playerElement && this.playerElement.contains(target))) {
             console.log('active');
             this.setState({active: true});
             this.activeTimer && clearTimeout(this.activeTimer);

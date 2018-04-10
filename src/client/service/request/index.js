@@ -37,7 +37,7 @@ export let post = (url, data) => {
     let _httpBody = httpBody(data);
 
     //alert(_apiURL)
-    console.log(_httpBody);
+    // console.log(_httpBody);
     return axios
         .post(_apiURL, _httpBody)
         .then(response => response.data)

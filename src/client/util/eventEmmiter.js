@@ -44,7 +44,7 @@ class EventEmmiter {
             }
         }
         if (index === null) {
-            throw new Error('no match listener found');
+            return
         }
         listenerObjs.splice(index, 1);
         if (!listenerObjs.length) delete this._events[event];

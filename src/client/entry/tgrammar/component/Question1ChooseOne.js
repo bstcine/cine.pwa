@@ -3,6 +3,7 @@ import React from 'react';
  * 1:单选题
  */
 const Question1ChooseOne = ({no, id, title, options}) => {
+    console.log('Question1ChooseOne render');
     return (
         <div className="questionformat questionformat1">
             <div className="titlewrap">

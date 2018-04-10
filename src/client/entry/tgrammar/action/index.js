@@ -1,13 +1,17 @@
 export const REQUEST_DATA = 'REQUEST_DATA';
 export const RECEIVE_DATA = 'RECEIVE_DATA';
+export const ON_QUESTION3_SELECT_CHANGE = 'ON_QUESTION3_SELECT_CHANGE';
 
 export const requestData = () => ({
     type: REQUEST_DATA
 });
 
-export const receiveData = ({id, name, count, data: questionItems}) => ({
+export const receiveData = ({id, name, count, data: questions}) => ({
     type: RECEIVE_DATA,
-    id, name, count, questionItems
+    id,
+    name,
+    count,
+    questions
 });
 
 export const fetchData = () => dispatch => {
@@ -24,3 +28,9 @@ export const fetchData = () => dispatch => {
         });
     });
 };
+
+export const onQuestion3SelectChange = ({questionId, selectValue}) => ({
+    type: ON_QUESTION3_SELECT_CHANGE,
+    questionId,
+    selectValue
+});

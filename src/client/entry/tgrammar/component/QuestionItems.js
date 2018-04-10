@@ -1,14 +1,15 @@
 import React from 'react';
 import Question1ChooseOne from './Question1ChooseOne';
-import Question3Correct from './Question3Correct';
 import Question10Desc from './Question10Desc';
 import Question11ReadDesc from './Question11ReadDesc';
+import Question3CorrectContainer from '../container/Question3CorrectContainer';
 
-const QuestionItems = ({items}) => {
+const QuestionItems = ({questions, answersById}) => {
+    console.log('QuestionItems render');
     let no = 0;
     return (
-        <div className="questionitems" >
-            {items.map((item, i) => {
+        <div className="questionitems">
+            {questions.map((item, i) => {
                 if (item.format === 1 || item.format === 3) no++;
                 switch (item.format) {
                     case 1:
@@ -21,23 +22,26 @@ const QuestionItems = ({items}) => {
                                 options={item.answers}
                             />
                         );
-                    case 3:
+                    case 3: {
+                        let answer = answersById[item.id];
+                        let selectValue;
+                        if (answer) {
+                            selectValue = answer.selectValue;
+                        }
                         return (
-                            <Question3Correct
+                            <Question3CorrectContainer
                                 no={no}
                                 key={item.id}
                                 id={item.id}
                                 title={item.title}
+                                selectValue={selectValue}
                             />
                         );
+                    }
                     case 10:
-                        return (
-                            <Question10Desc no={no} key={item.id} title={item.title} />
-                        );
+                        return <Question10Desc no={no} key={item.id} title={item.title} />;
                     case 11:
-                        return (
-                            <Question11ReadDesc no={no} key={item.id} title={item.title} />
-                        );
+                        return <Question11ReadDesc no={no} key={item.id} title={item.title} />;
                     default:
                         return null;
                 }

@@ -1,6 +1,7 @@
 import React from 'react';
 
 const Title = ({title, date, limit, count}) => {
+    console.log('Title render');
     return (
         <div className="title">
             <h1>{title}</h1>

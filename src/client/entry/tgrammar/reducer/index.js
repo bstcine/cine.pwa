@@ -1,8 +1,8 @@
 import {combineReducers} from 'redux';
 
-import {REQUEST_DATA, RECEIVE_DATA} from '../action';
+import {REQUEST_DATA, RECEIVE_DATA, ON_QUESTION3_SELECT_CHANGE} from '../action';
 
-const getData = (state = {}, action) => {
+const quiz = (state = {}, action) => {
     switch (action.type) {
         case REQUEST_DATA:
             return {
@@ -14,7 +14,7 @@ const getData = (state = {}, action) => {
                 ...state,
                 name: action.name,
                 count: action.count,
-                questionItems: action.questionItems,
+                questions: action.questions,
                 isFetching: false
             };
         default:
@@ -22,8 +22,23 @@ const getData = (state = {}, action) => {
     }
 };
 
+/**
+ *  questionId 为 key 的 answers 对象
+ * @param {*} state
+ * @param {*} action
+ */
+const answersById = (state = {}, action) => {
+    switch (action.type) {
+        case ON_QUESTION3_SELECT_CHANGE:
+            return {...state, [action.questionId]: {selectValue: action.selectValue}};
+        default:
+            return state;
+    }
+};
+
 const rootReducer = combineReducers({
-    quiz: getData
+    quiz,
+    answersById
 });
 
 export default rootReducer;

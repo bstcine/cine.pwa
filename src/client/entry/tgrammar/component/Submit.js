@@ -1,6 +1,7 @@
 import React from 'react';
 
 const Submit = () => {
+    console.log('Submit render');
     return (
         <div className="submit">
             <button className="btn-blue">

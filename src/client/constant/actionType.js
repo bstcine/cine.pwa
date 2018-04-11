@@ -15,3 +15,19 @@ export const Action_Handle_Save = 'Action_Handle_Save';
 export const Action_Handle_SaveAndNew = 'Action_Handle_SaveAndNew';
 export const Action_Handle_Publish = 'Action_Handle_Publish';
 export const Action_Handle_Refresh = 'Action_Handle_Refresh';
+
+//entry/content/course
+export const Action_CC_ = 'Action_CC_';
+
+//entry/user/order
+export const Action_UO_ = 'Action_UO_';
+
+//entry/user/coupon
+export const Action_UC_ = 'Action_UC_';
+
+//entry/test/grammar
+export const Action_TG_ = 'Action_TG_';
+
+//entry/test/vocab
+export const Action_TV_ = 'Action_TV_';
+

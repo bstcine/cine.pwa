@@ -19,11 +19,11 @@ class TryPlayer extends Component {
             isShowPlayList,
             isShowCategory
         };
-        this.changePlayList = this.changePlayList.bind(this);
-        this.renderBottom = this.renderBottom.bind(this);
-        this.renderTogglePlayListButton = this.renderTogglePlayListButton.bind(this);
+        this.choosePlayButton = this.choosePlayButton.bind(this);
+        this.playListDrawer = this.playListDrawer.bind(this);
+        this.togglePlayListDrawer = this.togglePlayListDrawer.bind(this);
+        this.changePlay = this.changePlay.bind(this);
         this.onPlayerEnded = this.onPlayerEnded.bind(this);
-        this.togglePlayList = this.togglePlayList.bind(this);
     }
 
     shouldComponentUpdate(nextProps, nextState) {
@@ -69,18 +69,18 @@ class TryPlayer extends Component {
         return {playList, isShowPlayList: playList.length > 1, isShowCategory: categoryCount > 1};
     }
 
-    changePlayList(i) {
+    changePlay(i) {
         this.playListIndex = i;
         this.setState({medias: this.playList[this.playListIndex].medias});
     }
 
     onPlayerEnded() {
         if (this.playListIndex < this.playList.length - 1) {
-            this.changePlayList(this.playListIndex + 1);
+            this.changePlay(this.playListIndex + 1);
         }
     }
 
-    togglePlayList() {
+    togglePlayListDrawer() {
         if (this.playlistEle.classList.contains('active')) {
             this.playlistEle.classList.remove('active');
         } else {
@@ -88,7 +88,8 @@ class TryPlayer extends Component {
         }
     }
 
-    renderBottom() {
+    playListDrawer() {
+
         let {playList} = this.props;
         let {isShowPlayList, isShowCategory} = this.state;
         if (!playList || !isShowPlayList) return;
@@ -99,10 +100,10 @@ class TryPlayer extends Component {
                     this.playlistEle = ele;
                 }}
             >
-                <div className="playlist-cover" onClick={this.togglePlayList}>
+                <div className="playlist-cover" onClick={this.togglePlayListDrawer}>
                     <div className="playitems">
                         <div className="playitem playtitle">
-                            试听选集
+                            选集
                         </div>
                         {playList.map((item, i) => {
                             if (item.type === 'media') {
@@ -110,7 +111,7 @@ class TryPlayer extends Component {
                                     <div
                                         className={item.index === this.playListIndex ? 'playitem active' : 'playitem'}
                                         key={i}
-                                        onClick={e => this.changePlayList(item.index)}
+                                        onClick={e => this.changePlay(item.index)}
                                     >
                                         {item.name}
                                     </div>
@@ -128,25 +129,29 @@ class TryPlayer extends Component {
         );
     }
 
-    renderTogglePlayListButton() {
+    choosePlayButton() {
         let {isShowPlayList} = this.state;
         if (!isShowPlayList) return;
         return (
-            <div className="control-item chooseplaylist" onClick={this.togglePlayList}>
+            <div className="control-item chooseplaylist" onClick={this.togglePlayListDrawer}>
                 <span>选集</span>
             </div>
         );
     }
 
     render() {
+
         let {medias} = this.state;
         let {poster} = this.props;
+        let choosePlayButton = this.choosePlayButton;
+        let playListDrawer = this.playListDrawer;
+
         return (
             <MediaPlayer
                 medias={medias}
                 poster={poster}
-                renderBottomPlugin={this.renderBottom}
-                renderTogglePlayListButton={this.renderTogglePlayListButton}
+                choosePlayButton={choosePlayButton}
+                playListDrawer={playListDrawer}
                 onPlayerEnded={this.onPlayerEnded}
             />
         );

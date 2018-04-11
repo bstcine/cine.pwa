@@ -11,8 +11,8 @@ class MediaPlayer extends Component {
     static defaultProps = {
         medias: null,
         poster: null,
-        renderBottomPlugin: null,
-        renderTogglePlayListButton: null,
+        choosePlayButton: null,
+        playListDrawer: null,
         onPlayerEnded: null
     };
 
@@ -533,6 +533,7 @@ class MediaPlayer extends Component {
     }
 
     render() {
+
         let {
             imageUrl,
             fullscreen,
@@ -545,7 +546,8 @@ class MediaPlayer extends Component {
             totalCurrentTimeFormated,
             totalDurationFormated
         } = this.state;
-        let {renderBottomPlugin, renderTogglePlayListButton} = this.props;
+        let {choosePlayButton, playListDrawer} = this.props;
+
         return (
             <div
                 className={classNames('media-player', {
@@ -581,7 +583,7 @@ class MediaPlayer extends Component {
                             </div>
                             <div className="controls">
                                 <div className="right-controls">
-                                    {renderTogglePlayListButton && renderTogglePlayListButton()}
+                                    {choosePlayButton && choosePlayButton()}
                                     <div className="control-item fullscreen">
                                         <i
                                             className={classNames(
@@ -625,7 +627,7 @@ class MediaPlayer extends Component {
                             </div>
                         </div>
                     ) : null}
-                    {renderBottomPlugin && renderBottomPlugin()}
+                    {playListDrawer && playListDrawer()}
                 </div>
             </div>
         );

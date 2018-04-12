@@ -1,40 +1,48 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {fetchData} from '../action';
+import {fetchQuizData} from '../action';
 import QuestionItems from '../component/QuestionItems';
 import Title from '../component/Title';
-import Submit from '../component/Submit';
+import Submit from '../container/Submit';
+import Spinner from '../container/Spinner';
+import {getParam} from '@/util/urlUtil';
 import '../asset/style/index.less';
 
 
 const mapStateToProps = state => {
-    const {quiz, answersById} = state;
-    let {name, count, questions, isFetching = true} = quiz;
+    const {quiz, answersById, network} = state;
+    let {name, count, questions} = quiz;
+    let {pending} = network;
 
     return {
         name,
         count,
         questions,
-        isFetching,
+        pending,
         answersById
     };
 };
 
 class App extends Component {
     componentDidMount() {
+        let {stats_quiz_id} = getParam();
         const {dispatch} = this.props;
-        dispatch(fetchData());
+        dispatch(fetchQuizData({stats_quiz_id}));
+    }
+
+    shouldComponentUpdate(nextProps) {
+        return this.props.name !== nextProps.name;
     }
 
     render() {
         console.log('App render');
-        const {name, count, questions, isFetching, answersById} = this.props;
+        const {name, count, questions, pending, answersById} = this.props;
         return (
             <div className="tgrammar">
-                {isFetching && <div className="loading">loading</div>}
-                {!isFetching && <Title title={name} limit={75} count={count} />}
-                {!isFetching && <QuestionItems questions={questions} answersById={answersById} />}
-                {!isFetching && <Submit />}
+                <Spinner />
+                {!pending && <Title title={name} limit={75} count={count} />}
+                {!pending && <QuestionItems questions={questions} answersById={answersById} />}
+                {!pending && <Submit />}
             </div>
         );
     }

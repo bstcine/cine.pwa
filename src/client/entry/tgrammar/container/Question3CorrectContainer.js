@@ -1,23 +1,25 @@
 import {connect} from 'react-redux';
 import Question3Correct from '../component/Question3Correct';
-import {onQuestion3SelectChange} from '../action';
+import {saveQuestion3SelectAnswer, saveQuestion3TextAnswer} from '../action';
 
 const mapStateToProps = (state, ownProps) => {
-    let selectValue;
-    let answer = state.answersById[ownProps.id];
+    let answer = state.answersById[ownProps.question_id];
     if (answer) {
-        selectValue = answer.selectValue;
-        console.log('selectValue', selectValue);
+        let select_value = answer.select_value;
+        let text_value = answer.text_value || '';
         return {
-            selectValue
+            select_value, text_value
         };
     }
     return {};
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-    onChange: (e) => {
-        dispatch(onQuestion3SelectChange({questionId: ownProps.id, selectValue: e.target.value}));
+    onSelectChange: e => {
+        dispatch(saveQuestion3SelectAnswer({question_id: ownProps.question_id, select_value: e.target.value}));
+    },
+    onTextChange: e => {
+        dispatch(saveQuestion3TextAnswer({question_id: ownProps.question_id, text_value: e.target.value}));
     }
 });
 

@@ -1,22 +1,40 @@
 import {combineReducers} from 'redux';
 
-import {REQUEST_DATA, RECEIVE_DATA, ON_QUESTION3_SELECT_CHANGE} from '../action';
+import {
+    REQUEST_QUIZ_DATA,
+    RECEIVE_QUIZ_DATA,
+    REQUEST_STATS_QUIZ_DATA,
+    RECEIVE_STATS_QUIZ_DATA,
+    SAVE_QUESTION1_SELECT_ANSWER,
+    SAVE_QUESTION3_SELECT_ANSWER,
+    SAVE_QUESTION3_TEXT_ANSWER,
+    UPLOADING_QUESTIONS,
+    UPLOADED_QUESTIONS
+} from '../action';
 
-const quiz = (state = {}, action) => {
-    switch (action.type) {
-        case REQUEST_DATA:
+const quiz = (state = {}, {type, payload}) => {
+    switch (type) {
+        case RECEIVE_QUIZ_DATA:
             return {
                 ...state,
-                isFetching: true
+                name: payload.name,
+                count: payload.count,
+                questions: payload.questions
             };
-        case RECEIVE_DATA:
-            return {
-                ...state,
-                name: action.name,
-                count: action.count,
-                questions: action.questions,
-                isFetching: false
-            };
+        default:
+            return state;
+    }
+};
+
+const questionsById = (state = {}, {type, payload}) => {
+    switch (type) {
+        case RECEIVE_QUIZ_DATA: {
+            let newState = {...state};
+            payload.questions.forEach((question) => {
+                newState[question.id] = question;
+            });
+            return newState;
+        }
         default:
             return state;
     }
@@ -27,10 +45,59 @@ const quiz = (state = {}, action) => {
  * @param {*} state
  * @param {*} action
  */
-const answersById = (state = {}, action) => {
-    switch (action.type) {
-        case ON_QUESTION3_SELECT_CHANGE:
-            return {...state, [action.questionId]: {selectValue: action.selectValue}};
+const answersById = (state = {}, {type, payload}) => {
+    switch (type) {
+        case SAVE_QUESTION1_SELECT_ANSWER: {
+            let newState = {...state};
+            if (!newState[payload.question_id]) newState[payload.question_id] = {question_id: payload.question_id};
+            let answer = newState[payload.question_id];
+            answer.select_value = payload.select_value;
+            return newState;
+        }
+        case SAVE_QUESTION3_SELECT_ANSWER: {
+            let newState = {...state};
+            if (!newState[payload.question_id]) newState[payload.question_id] = {question_id: payload.question_id};
+            let answer = newState[payload.question_id];
+            answer.select_value = payload.select_value;
+            return newState;
+        }
+        case SAVE_QUESTION3_TEXT_ANSWER: {
+            let newState = {...state};
+            if (!newState[payload.question_id]) newState[payload.question_id] = {question_id: payload.question_id};
+            let answer = newState[payload.question_id];
+            answer.text_value = payload.text_value;
+            return newState;
+        }
+        case RECEIVE_STATS_QUIZ_DATA: {
+            let newState = {};
+            let answers = payload.statsQuizDetail;
+            answers.forEach(answer => {
+                newState[answer.question_id] = answer;
+            });
+            console.log('newState', newState);
+            return newState;
+        }
+        default:
+            return state;
+    }
+};
+
+const network = (state = {pending: true}, {type, payload}) => {
+    switch (type) {
+        case UPLOADING_QUESTIONS:
+        case REQUEST_QUIZ_DATA:
+        case REQUEST_STATS_QUIZ_DATA:
+            return {
+                ...state,
+                pending: true
+            };
+        case UPLOADED_QUESTIONS:
+        case RECEIVE_QUIZ_DATA:
+        case RECEIVE_STATS_QUIZ_DATA:
+            return {
+                ...state,
+                pending: false
+            };
         default:
             return state;
     }
@@ -38,7 +105,9 @@ const answersById = (state = {}, action) => {
 
 const rootReducer = combineReducers({
     quiz,
-    answersById
+    questionsById,
+    answersById,
+    network
 });
 
 export default rootReducer;

@@ -103,7 +103,7 @@ class TryPlayer extends Component {
                 <div className="playlist-cover" onClick={this.togglePlayListDrawer}>
                     <div className="playitems">
                         <div className="playitem playtitle">
-                            选集
+                            试听列表
                         </div>
                         {playList.map((item, i) => {
                             if (item.type === 'media') {

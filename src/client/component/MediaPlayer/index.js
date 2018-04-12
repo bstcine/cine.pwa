@@ -241,6 +241,7 @@ class MediaPlayer extends Component {
     initAudioPlayer() {
         let media = this.medias[this.index];
         let audio = (this.audio = new Audio());
+        audio.preload = false;
         audio.autoplay = false;
         audio.addEventListener('playing', () => {
             console.log('playing');

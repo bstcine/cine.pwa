@@ -37,6 +37,7 @@ exports.APIURL_Share_CoursePackage = '/api/share/coursePackage'; //课程详情�
 exports.APIURL_User_Info = '/api/user/info'; //用户信息
 exports.APIURL_User_Address_Add = '/api/user/address/add'; //新增收货地址
 exports.APIURL_User_Address = '/api/user/address'; //查询收货地址
+exports.APIURL_User_Coupon = '/api/user/coupon/list'; //查询优惠券
 
 exports.APIURL_LogoutV1 = '/api/web/logout'; //登出
 

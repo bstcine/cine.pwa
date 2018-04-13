@@ -1,0 +1,145 @@
+.user-tabs {
+  .tab-items {
+    background-color: #FFFFFF;
+    display: flex;
+    padding-left: 0.85rem;
+    .grey-line-bottom(2);
+    .tab-item {
+      font-family: PingFangSC-Regular;
+      font-size: 14px;
+      margin-right: .5rem;
+      display: flex;
+
+      & a {
+        min-width: 1.40rem;
+        display: inline-block;
+        padding: .57rem .0rem .57rem .56rem;
+        text-decoration: none;
+        color: #3d3e3f;
+        position: relative;
+      }
+      &.active a {
+        color: #014292;
+        &:after {
+          content: '';
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 100%;
+          border-bottom: .07rem solid #014292;
+        }
+      }
+      &:last-child {
+        margin-right: 0;
+      }
+
+      .tab-indicator{
+        width: 0.33rem;
+        height: 0.33rem;
+        background-color: #fe682d;
+        -moz-border-radius: 50px;
+        -webkit-border-radius: 50px;
+        border-radius: 50px;
+
+        margin-top: .4rem;
+        margin-left: .1rem;
+
+        font-family: Helvetica;
+        font-size: 11px;
+        color: #ffffff;
+        text-align: center;
+        line-height: .33rem;
+      }
+    }
+  }
+
+  .tab-panels {
+    .tab-panel {
+      display: none;
+      min-height: 10rem;
+
+      padding-left: .84rem;
+      padding-top: .6rem;
+      padding-right: .84rem;
+
+      &.active {
+        display: block;
+      }
+    }
+  }
+
+  .tab-order{
+    background: url(../image/ico_order.png) no-repeat left;
+    background-size: 0.49rem 0.47rem;
+  }
+
+  .tab-study{
+    background: url(../image/ico_my_study.png) no-repeat left;
+    background-size: 0.49rem 0.47rem;
+  }
+
+  .tab-integral{
+    background: url(../image/ico_integral.png) no-repeat left;
+    background-size: 0.49rem 0.47rem;
+  }
+
+  .tab-coupon{
+    background: url(../image/ico_coupon.png) no-repeat left;
+    background-size: 0.49rem 0.47rem;
+  }
+
+  .tab-wordtest{
+    background: url(../image/ico_wordtest.png) no-repeat left;
+    background-size: 0.49rem 0.47rem;
+  }
+
+  .tab-grammar{
+    background: url(../image/ico_grammar.png) no-repeat left;
+    background-size: 0.49rem 0.47rem;
+  }
+
+  .tab-password{
+    background: url(../image/ico_edit1.png) no-repeat left;
+    background-size: 0.49rem 0.47rem;
+  }
+
+  .tab-quit{
+    background: url(../image/ico_quit.png) no-repeat left;
+    background-size: 0.49rem 0.47rem;
+  }
+
+}
+
+@media @media-up-xs {
+  .home-tabs {
+    .tab-items {
+      margin: 0 .40rem;
+
+      .tab-item {
+        margin-right: .70rem;
+        font-size: .36rem;
+        & a {
+          padding: .32rem .29rem .23rem;
+        }
+        &.active a {
+
+          &:after {
+
+          }
+        }
+        &:last-child {
+          margin-right: 0;
+        }
+      }
+    }
+
+    .tab-panels {
+      .tab-panel {
+
+        &.active {
+
+        }
+      }
+    }
+  }
+}

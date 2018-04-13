@@ -1,0 +1,123 @@
+@import '~asset/style/_cine.less';
+
+.user-header {
+  background-color: #014292;
+  height: 2.04rem;
+  position: relative;
+  width: 100%;
+
+  .user-logo {
+    height: 1.21rem;
+    width: 1.21rem;
+    margin-left: 0.85rem;
+    margin-top: 0.38rem;
+    float: left;
+    line-height: 0;
+
+    img {
+      width: 1.21rem;
+      height: 1.21rem;
+    }
+  }
+
+  .user-info {
+    height: 0.75rem;
+    width: 3.24rem;
+    margin-top: 0.63rem;
+    margin-left: 0.28rem;
+    float: left;
+    display: -webkit-flex;
+    display: flex;
+    flex-direction: column;
+
+    .user-flex-a{
+      display: -webkit-flex;
+      display: flex;
+      align-items: center;
+
+      .user-name {
+        font-family: PingFangSC-Medium;
+        font-size: 15px;
+        color: #ffffff;
+        height: 0.3rem;
+      }
+
+      .user-edit {
+        width: 0.24rem;
+        height: 0.24rem;
+        margin-left: 0.17rem;
+      }
+    }
+
+    .user-flex-b{
+      display: -webkit-flex;
+      display: flex;
+      align-items: center;
+      margin-top: 0.14rem;
+
+      .user-type {
+        width: 0.86rem;
+      }
+
+      .user-phone{
+        font-family: PingFangSC-Regular;
+        font-size: 12px;
+        color: #ececed;
+        margin-bottom: 0.05rem;
+        margin-left: 0.11rem;
+      }
+    }
+
+  }
+
+  .user-font-hint {
+    font-family: PingFangSC-Regular;
+    font-size: 15px;
+    color: #ffffff;
+  }
+
+  .user-font-val{
+    font-family: PingFangSC-Regular;
+    font-size: 15px;
+    color: #ff9630;
+    margin-left: 0.19rem;
+  }
+
+  .user-point {
+    margin-top: 0.99rem;
+    margin-left: 1.76rem;
+    float: left;
+    display: -webkit-flex;
+    display: flex;
+  }
+
+  .user-coupon {
+    margin-top: 0.99rem;
+    margin-left: 1.51rem;
+    float: left;
+    display: -webkit-flex;
+    display: flex;
+  }
+
+  .user-home{
+    float: right;
+    margin-top: 0.87rem;
+    line-height: 0;
+    margin-right: 0.88rem;
+
+    img{
+      width: 0.39rem;
+      height: 0.39rem;
+    }
+  }
+}
+
+@media @media-up-sm {
+  .header {
+    width: 18.8rem;
+    margin: 0 auto;
+    height: 1.82rem;
+    line-height: 1;
+    font-size: 0;
+  }
+}

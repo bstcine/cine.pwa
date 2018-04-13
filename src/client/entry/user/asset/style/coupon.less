@@ -1,0 +1,88 @@
+.coupon-tabs {
+  .tab-items {
+    background-color: #FFFFFF;
+    display: flex;
+    padding-left: 0.85rem;
+    .grey-line-bottom(2);
+    .tab-item {
+      font-family: PingFangSC-Regular;
+      font-size: 14px;
+      margin-right: .5rem;
+      display: flex;
+
+      & a {
+        min-width: 1.40rem;
+        display: inline-block;
+        padding: .57rem .32rem .57rem .32rem;
+        text-decoration: none;
+        color: #3d3e3f;
+        position: relative;
+      }
+      &.active a {
+        color: #014292;
+        &:after {
+          content: '';
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 100%;
+          border-bottom: .07rem solid #014292;
+        }
+      }
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+
+  .tab-panels {
+    .tab-panel {
+      display: none;
+      min-height: 10rem;
+      background-color: #FFFFFF;
+
+      padding-left: .84rem;
+      padding-top: .6rem;
+      padding-right: .84rem;
+
+      &.active {
+        display: block;
+      }
+    }
+  }
+
+}
+
+@media @media-up-xs {
+  .home-tabs {
+    .tab-items {
+      margin: 0 .40rem;
+
+      .tab-item {
+        margin-right: .70rem;
+        font-size: .36rem;
+        & a {
+          padding: .32rem .29rem .23rem;
+        }
+        &.active a {
+
+          &:after {
+
+          }
+        }
+        &:last-child {
+          margin-right: 0;
+        }
+      }
+    }
+
+    .tab-panels {
+      .tab-panel {
+
+        &.active {
+
+        }
+      }
+    }
+  }
+}

@@ -13,7 +13,7 @@ export default class TabItem extends Component {
                 <a href="javascript:" onClick={e => onTabItemClick(index, id, e)}>
                     {children}
                 </a>
-                {indicator && <span className="tab-indicator">{indicator}</span>}
+                {(Number(indicator) > 0) && <span className="tab-indicator">{indicator+''}</span>}
             </div>
         );
     }

@@ -7,7 +7,7 @@ export default class CouponPanel extends Component {
         super(props);
         console.log("Coupon constructor");
 
-        this.status = {
+        this.state = {
             coupon_use_list: [{
                 id: "d0115234148149288MQE1aTSgh",
                 no: "74450734",
@@ -100,7 +100,7 @@ export default class CouponPanel extends Component {
     }
 
     render() {
-        let {coupon_use_list,coupon_used_list,coupon_expired_list} = this.status
+        let {coupon_use_list,coupon_used_list,coupon_expired_list} = this.state;
         return (
             <React.Fragment>
                 <Tabs className={'coupon-tabs'}>

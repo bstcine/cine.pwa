@@ -16,8 +16,15 @@ export const Action_Handle_SaveAndNew = 'Action_Handle_SaveAndNew';
 export const Action_Handle_Publish = 'Action_Handle_Publish';
 export const Action_Handle_Refresh = 'Action_Handle_Refresh';
 
-//entry/content/course
+//entry/content/course :2种命名2选一
 export const Action_CC_ = 'Action_CC_';
+
+const Action_CC = {
+    INIT: 'init',
+};
+export default Action_CC;
+
+
 
 //entry/user/order
 export const Action_UO_ = 'Action_UO_';

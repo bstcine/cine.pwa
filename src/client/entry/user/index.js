@@ -38,11 +38,11 @@ class UserPanel extends EntryComponent {
         if (!storeUtil.getToken()) {
             location.href = '/login?go=' + encodeURIComponent(location.href);
         } else {
-            this.handleInitData()
+            this.initData()
         }
     }
 
-    handleInitData = async () => {
+    initData () {
         let userProm = fetchData(Api.APIURL_User_Info, {})
             .then(([err, result]) => {
                 if (err) return Promise.resolve();

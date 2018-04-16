@@ -11,23 +11,56 @@ import EntryComponent from '@/component/EntryComponent';
 import CouponPanel from './component/Coupon/index'
 
 import './asset/style/index.less';
+import storeUtil from "@/util/storeUtil";
+import Api from "../../../APIConfig";
+import {fetchData, logoutV1} from "@/service/base";
 
 class UserPanel extends EntryComponent {
     constructor(props) {
         super(props);
         console.log("Coupon constructor")
 
-        this.status = {
-            nick: '云朵一片片',
-            phone: '13879205568',
-            point: '290',
-            coupon: '3',
-            role_id: '1'
+        this.state = {
+            user: {
+                nickname: '',
+                role_id: '1',
+                phone: '',
+                point: 0,
+                unuseCouponsCount: 0,
+                unpayOrdersCount: 0
+            }
+        };
+    }
+
+    componentDidMount() {
+        console.log('componentDidMount');
+
+        if (!storeUtil.getToken()) {
+            location.href = '/login?go=' + encodeURIComponent(location.href);
+        } else {
+            this.initData()
         }
     }
 
+    initData () {
+        let userProm = fetchData(Api.APIURL_User_Info, {})
+            .then(([err, result]) => {
+                if (err) return Promise.resolve();
+                return Promise.resolve(result);
+            });
+        return Promise.all([userProm]).then(([user]) => {
+            this.setState({user});
+        });
+    };
+
+    handleLogout = () => {
+        logoutV1().then(() => {
+            location.href = '/';
+        });
+    };
+
     render() {
-        const {nick, phone, point, coupon, role_id} = this.status;
+        const {user} = this.state;
         return (
             <Router basename="/user">
                 <React.Fragment>
@@ -37,50 +70,50 @@ class UserPanel extends EntryComponent {
                         </div>
                         <div className="user-info">
                             <div className="user-flex-a">
-                                <span className="user-name">{nick}</span>
+                                <span className="user-name">{user.nickname}</span>
                                 <img className="user-edit" src={require('./asset/image/ico_edit.png')}
                                      alt="user-type"/>
                             </div>
                             <div className="user-flex-b">
                                 <img className="user-type"
-                                     src={require(role_id === "2" ? './asset/image/ico_teacher.png' : './asset/image/ico_student.png')}
+                                     src={require(user.role_id === "2" ? './asset/image/ico_teacher.png' : './asset/image/ico_student.png')}
                                      alt="user-type"/>
-                                <span className="user-phone">{phone}</span>
+                                <span className="user-phone">{user.phone}</span>
                             </div>
                         </div>
                         <div className="user-point">
                             <span className="user-font-hint">积分：</span>
-                            <span className="user-font-val">{point}</span>
+                            <span className="user-font-val">{user.point}</span>
                         </div>
 
                         <div className="user-coupon">
                             <span className="user-font-hint">优惠券：</span>
-                            <span className="user-font-val">{coupon}</span>
+                            <span className="user-font-val">{user.unuseCouponsCount}</span>
                         </div>
 
                         <div className="user-home">
-                            <img src={require('./asset/image/ico_bst_home.png')} alt="user-home"/>
+                            <a href={'/'}><img src={require('./asset/image/ico_bst_home.png')} alt="user-home"/></a>
                         </div>
                     </div>
                     <Tabs className="user-tabs" selectedId={'coupon'}>
                         <TabItems>
-                            <TabItem className="tab-item tab-order" indicator="2">我的订单</TabItem>
+                            <TabItem id={'order'} className="tab-item tab-order" indicator={user.unpayOrdersCount}>我的订单</TabItem>
                             <TabItem className="tab-item tab-study">我的学习</TabItem>
-                            <TabItem id={'point'} className="tab-item tab-integral">我的积分</TabItem>
+                            <TabItem className="tab-item tab-integral">我的积分</TabItem>
                             <TabItem id={'coupon'} className="tab-item tab-coupon">我的优惠券</TabItem>
                             <TabItem className="tab-item tab-wordtest">词汇测试</TabItem>
                             <TabItem className="tab-item tab-grammar">核心语法测试</TabItem>
                             <TabItem className="tab-item tab-password">修改密码</TabItem>
-                            <TabItem className="tab-item tab-quit">退出</TabItem>
+                            <TabItem className="tab-item tab-quit" onClick={this.handleLogout}>退出</TabItem>
                         </TabItems>
                         <TabPanels>
-                            <TabPanel>
+                            <TabPanel id={'order'}>
                                 <span>hello order</span>
                             </TabPanel>
                             <TabPanel>
                                 <span>hello study</span>
                             </TabPanel>
-                            <TabPanel id={'point'}>
+                            <TabPanel>
                                 <span>hello point</span>
                             </TabPanel>
                             <TabPanel id={'coupon'}>

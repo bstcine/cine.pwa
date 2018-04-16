@@ -37,6 +37,9 @@ export default class Tabs extends Component {
                             } else {
                                 props.selected = index === selectedIndex
                             }
+                            if(tabItem.props.onClick) {
+                                props.onClick = tabItem.props.onClick
+                            }
                             return cloneElement(tabItem, props);
                         }
                     })

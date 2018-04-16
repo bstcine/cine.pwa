@@ -3,6 +3,12 @@ import siteCodeUtil from '@/util/sitecodeUtil';
 import BRIDGE_EVENT from '@/constant/bridgeEvent';
 
 let routeUtil = {
+    openInNewTab: (url) => {
+        let a = document.createElement("a");
+        a.target = "_blank";
+        a.href = url;
+        a.click();
+    },
     goCourse: ({id,status}, history) => {
         if (status && status !== '1') return;
         const course_id = id;

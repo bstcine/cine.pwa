@@ -7,7 +7,7 @@ let uCouponAction = {
         return function (dispatch, getState) {
 
             let id = getState().id
-            couponAction.initWithParam(id)
+            uCouponAction.initWithParam(id)
         }
     },
 

@@ -4,25 +4,25 @@ import * as Service from '@/service/content';
 import {getParam, removeParam} from '@/util/urlUtil';
 import {initWechat, setShareParam} from '@/util/wechatUtil';
 import storeUtil from '@/util/storeUtil';
-import * as BaseService from '@/service/base';
-import {Tabs, TabItems, TabItem, TabPanels, TabPanel} from '@/component/Tabs';
-import LoginModal from '@/component/LoginModal';
-import Brief from './Brief';
-import Comments from './Comments';
-import CouponModal from './CouponModal';
-import RecommendModal from './RecommendModal';
 import Bridge from '@/util/bridge';
 import BRIDGE_EVENT from '@/constant/bridgeEvent';
 import {createShare, share} from '@/util/shareUtil';
 import {eventEmmiter} from '@/util/eventEmmiter';
 import siteCodeUtil from '@/util/sitecodeUtil';
-import Header from '@/component/Header';
 import uaUtil from '@/util/uaUtil';
-import timeUtil from '@/util/timeUtil';
 import routeUtil from '@/util/routeUtil';
-import Api from '../../../../../APIConfig';
-import {fetchData} from '@/service/base';
 import errorMsg from '@/util/errorMsg';
+
+import LoginModal from '@/component/LoginModal';
+import Header from '@/component/Header';
+import Brief from './Brief';
+import DetailDesc from './DetailDesc';
+import CouponModal from './CouponModal';
+import RecommendModal from './RecommendModal';
+import Api from '../../../../../APIConfig';
+import * as BaseService from '@/service/base';
+import {fetchData} from '@/service/base';
+
 
 export default class Course extends Component {
     constructor(props) {
@@ -36,11 +36,13 @@ export default class Course extends Component {
             coupon: null,
             user: null
         };
-        this.goBuy = this.goBuy.bind(this);
-        this.clickShare = this.clickShare.bind(this);
+        this.handleBuy = this.handleBuy.bind(this);
+        this.handleLearn = this.handleLearn.bind(this);
+        this.handleShare = this.handleShare.bind(this);
+        this.handleGetCoupon = this.handleGetCoupon.bind(this);
+        this.handleOpenRecommend = this.handleOpenRecommend.bind(this);
         this.loginSuccess = this.loginSuccess.bind(this);
         this.initData = this.initData.bind(this);
-        this.goLearn = this.goLearn.bind(this);
         this.login = this.login.bind(this);
         this.relatedCourse = this.relatedCourse.bind(this);
         this.handlerScroll = this.handlerScroll.bind(this);
@@ -48,8 +50,6 @@ export default class Course extends Component {
         this.toggleRecommendModal = this.toggleRecommendModal.bind(this);
         this.toggleCouponModal = this.toggleCouponModal.bind(this);
         this.getUserName = this.getUserName.bind(this);
-        this.getCoupon = this.getCoupon.bind(this);
-        this.openRecommend = this.openRecommend.bind(this);
     }
 
     handlerScroll() {
@@ -72,11 +72,14 @@ export default class Course extends Component {
         }
         window.scroll(0, 0);
         document.title = '课程详情';
+
         eventEmmiter.on(BRIDGE_EVENT.OUTER_SHARE, () => {
-            this.clickShare(false);
+            this.handleShare(false);
         });
+
         this.initCurrentPageWechat();
         await this.initData();
+
         window.addEventListener('scroll', this.handlerScroll);
         if (siteCodeUtil.inIOSAPP()) {
             Bridge.ios(BRIDGE_EVENT.TIMELINE, {type: 'visible'});
@@ -137,7 +140,7 @@ export default class Course extends Component {
         });
     }
 
-    goBuy() {
+    handleBuy() {
         if (!this.state.user) {
             this.login();
             return;
@@ -157,7 +160,7 @@ export default class Course extends Component {
         }
     }
 
-    goLearn() {
+    handleLearn() {
         let {course} = this.state;
         if (siteCodeUtil.inIOSAPP()) {
             Bridge.ios(BRIDGE_EVENT.LEARN, {
@@ -196,7 +199,7 @@ export default class Course extends Component {
         this.initData();
     }
 
-    async clickShare(need_login = true, type = 4) {
+    async handleShare(need_login = true, type = 4) {
         if (need_login && !this.state.user) {
             this.login();
             return;
@@ -226,7 +229,7 @@ export default class Course extends Component {
         }));
     }
 
-    openRecommend() {
+    handleOpenRecommend() {
         this.toggleRecommendModal();
     }
 
@@ -247,7 +250,7 @@ export default class Course extends Component {
         return user.phone || user.email || user.login;
     }
 
-    async getCoupon() {
+    async handleGetCoupon() {
         if (!this.state.user) {
             this.login();
             return;
@@ -280,101 +283,22 @@ export default class Course extends Component {
                             user={user}
                             relatedCourse={this.relatedCourse}
                             login={this.login}
-                            goLearn={this.goLearn}
-                            goBuy={this.goBuy}
-                            clickShare={this.clickShare}
-                            getCoupon={this.getCoupon}
-                            openRecommend={this.openRecommend}
+                            onClickLearn={this.handleLearn}
+                            onClickBuy={this.handleBuy}
+                            onClickShare={this.handleShare}
+                            onClickRecommend={this.handleOpenRecommend}
                             isShowRecommend={true}
+                            onClickCoupon={this.handleGetCoupon}
                         />
 
-                        <div className="course-detail" ref="courseDetail">
-                            {course ? (
-                                <Tabs ref="tabs">
-                                    <TabItems>
-                                        <TabItem>{course.object_type === '1' ? '课程概要' : '详情'}</TabItem>
-                                        {course.object_type === '1' && !siteCodeUtil.inIOSAPP() ? (
-                                            <TabItem>课程目录</TabItem>
-                                        ) : null}
-                                        <TabItem>{course.object_type === '1' ? '学员评价' : '评价'}</TabItem>
-                                    </TabItems>
-                                    <TabPanels>
-                                        <TabPanel>
-                                            <div
-                                                className="course-feature"
-                                                dangerouslySetInnerHTML={{__html: course.h5remark}}
-                                            />
-                                        </TabPanel>
-                                        {course.object_type === '1' && !siteCodeUtil.inIOSAPP() ? (
-                                            <TabPanel>
-                                                {course.catalog ? (
-                                                    <div
-                                                        className="course-feature"
-                                                        dangerouslySetInnerHTML={{__html: course.catalog}}
-                                                    />
-                                                ) : null}
-
-                                                <div className="course-category">
-                                                    <ul className="course-list">
-                                                        {course.contents &&
-                                                        course.contents.length &&
-                                                        course.contents.map((course, i) => {
-                                                            return (
-                                                                <li key={i}>
-                                                                    {course.name}
-                                                                    <ul className="chapter-list">
-                                                                        {course.children &&
-                                                                        course.children.length &&
-                                                                        course.children.map((chapter, i) => {
-                                                                            return (
-                                                                                <li key={i}>
-                                                                                    {chapter.name}
-                                                                                    <ul className="lesson-list">
-                                                                                        {chapter.children &&
-                                                                                        chapter.children
-                                                                                            .length &&
-                                                                                        chapter.children.map(
-                                                                                            (lesson, i) => {
-                                                                                                return (
-                                                                                                    <li
-                                                                                                        key={
-                                                                                                            i
-                                                                                                        }
-                                                                                                    >
-                                                                                                        {
-                                                                                                            lesson.name
-                                                                                                        }
-                                                                                                        {lesson.duration ? (
-                                                                                                            <span
-                                                                                                                className="meta">
-                                                                                                                {timeUtil.durationFormat(
-                                                                                                                    lesson.duration
-                                                                                                                )}
-                                                                                                            </span>
-                                                                                                        ) : null}
-                                                                                                    </li>
-                                                                                                );
-                                                                                            }
-                                                                                        )}
-                                                                                    </ul>
-                                                                                </li>
-                                                                            );
-                                                                        })}
-                                                                    </ul>
-                                                                </li>
-                                                            );
-                                                        })}
-                                                    </ul>
-                                                </div>
-                                            </TabPanel>
-                                        ) : null}
-                                        <TabPanel>
-                                            <Comments comments={comments} />
-                                        </TabPanel>
-                                    </TabPanels>
-                                </Tabs>
-                            ) : null}
-                        </div>
+                        {course ?
+                            <DetailDesc
+                                course={course}
+                                courseSet={this.relatedCourse}
+                                courseComments={comments}
+                                isIOSAPP={siteCodeUtil.inIOSAPP()}
+                            />
+                            : null }
 
                         <LoginModal
                             isOpen={showLoginModal}
@@ -384,7 +308,7 @@ export default class Course extends Component {
                         <RecommendModal
                             isOpen={showRecommendModal}
                             toggleModal={this.toggleRecommendModal}
-                            clickShare={this.clickShare}
+                            onClickShare={this.handleShare}
                         />
                         <CouponModal
                             isOpen={showCouponModal}

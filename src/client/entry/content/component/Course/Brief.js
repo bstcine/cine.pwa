@@ -21,7 +21,7 @@ export default class Brief extends Component {
                             {activity.share_after_desc}
                         </div>
                     ) : (
-                        <div key={i} className="promote-title share pointer" onClick={this.props.clickShare}>
+                        <div key={i} className="promote-title share pointer" onClick={this.props.onClickShare}>
                             {activity.share_before_desc}
                         </div>
                     );
@@ -69,14 +69,15 @@ export default class Brief extends Component {
     }
 
     renderBottomButton(course) {
-        const {goLearn, goBuy, clickShare} = this.props;
+
+        const {onClickLearn, onClickBuy, onClickShare} = this.props;
         if (course.status === '1') {
             if (course.is_paid) {
                 if (siteCodeUtil.inIOSAPP()) return;
                 if (siteCodeUtil.inAndroidAPP()) {
                     if (course.product_type === '1' && (course.object_type === '1' || course.object_type === '4')) {
                         return (
-                            <button className="btn-action btn-learn" onClick={goLearn}>
+                            <button className="btn-action btn-learn" onClick={onClickLearn}>
                                 立即学习
                             </button>
                         );
@@ -84,7 +85,7 @@ export default class Brief extends Component {
                 } else {
                     if (course.object_type === '1' || course.object_type === '4') {
                         return (
-                            <button className="btn-action btn-learn" onClick={goLearn}>
+                            <button className="btn-action btn-learn" onClick={onClickLearn}>
                                 立即学习
                             </button>
                         );
@@ -98,13 +99,13 @@ export default class Brief extends Component {
                     course.object_type === '5'
                 ) {
                     return (
-                        <button className="btn-action btn-buy" onClick={goBuy}>
+                        <button className="btn-action btn-buy" onClick={onClickBuy}>
                             立即购买
                         </button>
                     );
                 } else if (course.object_type === '4') {
                     return (
-                        <button className="btn-action btn-share" onClick={e => clickShare(true, 5)}>
+                        <button className="btn-action btn-share" onClick={e => onClickShare(true, 5)}>
                             分享开通
                         </button>
                     );
@@ -193,8 +194,8 @@ export default class Brief extends Component {
     }
 
     render() {
-        let {course, user, relatedCourse, openRecommend, getCoupon, isShowRecommend,} = this.props;
-        const {clickShare} = this.props;
+        let {course, user, relatedCourse, onClickRecommend, isShowRecommend, onClickCoupon,} = this.props;
+        const {onClickShare} = this.props;
         let source_user_id = getParam().source_user_id;
         return (
             <div className="brief-container">
@@ -208,7 +209,7 @@ export default class Brief extends Component {
                                     style={{
                                         background: `url(${require('../../asset/image/ico_wechat.png')}) center center / contain no-repeat`
                                     }}
-                                    onClick={e => clickShare(false)}
+                                    onClick={e => onClickShare(false)}
                                 />
                             </ul>
                         </div>
@@ -250,9 +251,9 @@ export default class Brief extends Component {
                     {isShowRecommend ? (
                         <div className="right-desc">
                             {source_user_id ? (
-                                <div className="get-coupon" onClick={getCoupon} />
+                                <div className="get-coupon" onClick={onClickCoupon} />
                             ) : (
-                                <div className="recommend" onClick={openRecommend}>
+                                <div className="recommend" onClick={onClickRecommend}>
                                     <div className="red-bag" />
                                     <div className="desc">推荐得积分</div>
                                 </div>

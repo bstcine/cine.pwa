@@ -6,7 +6,7 @@ export default class RecommendModal extends Component {
     constructor(props) {
         super(props);
         this.handleCloseModal = this.handleCloseModal.bind(this);
-        this.beforeShare = this.beforeShare.bind(this);
+        this.handleStartShare = this.handleStartShare.bind(this);
 
         this.state = {};
     }
@@ -15,9 +15,9 @@ export default class RecommendModal extends Component {
         this.props.toggleModal();
     }
 
-    beforeShare() {
+    handleStartShare() {
         this.props.toggleModal();
-        this.props.clickShare();
+        this.props.onClickShare();
     }
 
     render() {
@@ -44,7 +44,7 @@ export default class RecommendModal extends Component {
                     <span>10%</span>的积分奖励<br />
                     传播知识，让优惠翻倍！
                 </div>
-                <button className="btn" onClick={this.beforeShare}>
+                <button className="btn" onClick={this.handleStartShare}>
                     立即分享
                 </button>
             </ReactModal>

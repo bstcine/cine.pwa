@@ -17,7 +17,7 @@ module.exports = {
 
     publicPath,
 
-    pages: ['tgrammar'],
+    pages: ['tgrammar', 'content'],
 
     vendors: [
         'react',

@@ -2,8 +2,16 @@ import React from 'react';
 import {connect} from 'react-redux';
 import '../asset/style/spinner.less';
 
-const Spinner = ({pending}) => {
-    if (pending) {
+const mapStateToProps = (state, ownProps) => {
+    const {network} = state;
+    return {
+        init: network.init,
+        pending: network.pending
+    };
+};
+
+const Spinner = ({init, pending}) => {
+    if (init || pending) {
         return (
             <div className="spinner">
                 <div className="lds-roller">
@@ -21,13 +29,6 @@ const Spinner = ({pending}) => {
     } else {
         return null;
     }
-};
-
-const mapStateToProps = (state, ownProps) => {
-    const {network} = state;
-    return {
-        pending: network.pending
-    };
 };
 
 export default connect(mapStateToProps)(Spinner);

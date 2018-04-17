@@ -28,6 +28,7 @@ exports.APIURL_Content_Quiz = '/api/web/quiz/'; // 小节测试
 
 exports.APIURL_Content_Quiz_Grammar = '/api/content/quiz/grammar';             // 阅读理解测试题目
 exports.APIURL_Stats_Quiz_Save = '/api/stats/quiz/save';                       // 保存阅读理解测试答案
+exports.APIURL_Stats_Quiz_Update = '/api/stats/quiz/update';                   // 更新阅读理解测试批改结果
 exports.APIURL_Stats_Quiz_List = '/api/stats/quiz/list';                       // 阅读理解测试学生答题列表
 exports.APIURL_Stats_Quiz_Detail = '/api/stats/quiz/detail';                   // 阅读理解测试答题明细
 

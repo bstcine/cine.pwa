@@ -1,4 +1,10 @@
 import React from 'react';
+import {connect} from 'react-redux';
+
+const mapStateToProps = (state, ownProps) => {
+    let {quiz} = state;
+    return {title: quiz.name, limit: 75, count: quiz.count};
+};
 
 const Title = ({title, date, limit, count}) => {
     console.log('Title render');
@@ -14,4 +20,4 @@ const Title = ({title, date, limit, count}) => {
     );
 };
 
-export default Title;
+export default connect(mapStateToProps)(Title);

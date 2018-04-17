@@ -1,22 +1,44 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {saveQuestions} from '../action';
+import {submitAnswer, submitCheckAnswer} from '../action';
 
-const Submit = ({onClick}) => {
-    console.log('Submit render');
-    return (
-        <div className="submit">
-            <button className="btn-blue" onClick={onClick}>
-                 提交答案
-            </button>
-        </div>
-    );
+const mapStateToProps = state => {
+    let {operation} = state;
+    return {
+        operation
+    };
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-    onClick: e => {
-        dispatch(saveQuestions());
+    onSubmitAnswer: e => {
+        dispatch(submitAnswer());
+    },
+    onSubmitCheckAnswer: e => {
+        dispatch(submitCheckAnswer());
     }
 });
 
-export default connect(null, mapDispatchToProps)(Submit);
+const Submit = ({operation, onSubmitAnswer, onSubmitCheckAnswer}) => {
+    console.log('Submit render');
+    if (operation.is_stu_operation_editable) {
+        return (
+            <div className="submit">
+                <button className="btn-blue" onClick={onSubmitAnswer}>
+                    提交答案
+                </button>
+            </div>
+        );
+    }
+    if (operation.is_tea_operation_editable) {
+        return (
+            <div className="submit">
+                <button className="btn-red" onClick={onSubmitCheckAnswer}>
+                    提交答案
+                </button>
+            </div>
+        );
+    }
+    return null;
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Submit);

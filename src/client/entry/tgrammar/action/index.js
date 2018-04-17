@@ -20,6 +20,8 @@ export const CLOSE_TIP_MODAL = 'CLOSE_TIP_MODAL';
 export const OPEN_TIP_MODAL = 'OPEN_TIP_MODAL';
 export const REQUEST_STATS_QUIZ_LIST = 'REQUEST_STATS_QUIZ_LIST';
 export const RECEIVE_STATS_QUIZ_LIST = 'RECEIVE_STATS_QUIZ_LIST';
+export const NETWORK_ERROR = 'NETWORK_ERROR';
+export const NETWORK_ERROR_TIMEOUT = 'NETWORK_ERROR_TIMEOUT';
 
 export const saveUser = user => ({
     type: SAVE_USER,
@@ -49,7 +51,7 @@ export const receiveQuizData = ({id, name, count, data: questions}) => {
 export const fetchQuizData = ({stats_quiz_id}) => async dispatch => {
     dispatch(requestQuizData());
     let [err, result] = await fetchData(Api.APIURL_Content_Quiz_Grammar);
-    if (err) console.log(err);
+    if (err) return dispatch(networkError(err));
     let {user, quiz} = result;
     dispatch(saveUser(user));
     let no = 0;
@@ -74,7 +76,7 @@ export const fetchQuizData = ({stats_quiz_id}) => async dispatch => {
     if (stats_quiz_id) {
         dispatch(requestStatsQuizData());
         let [err_detail, result_detail] = await fetchData(Api.APIURL_Stats_Quiz_Detail, {cid: stats_quiz_id});
-        if (err_detail) console.log(err_detail);
+        if (err_detail) return dispatch(networkError(err_detail));
         let {statsQuiz, statsQuizDetail} = result_detail;
         dispatch(receiveStatsQuizData({statsQuiz, statsQuizDetail}));
         dispatch(updateOperation({user, statsQuiz}));
@@ -97,7 +99,7 @@ export const submitAnswer = () => (dispatch, getState) => {
     }
     dispatch({type: UPLOADING_QUESTIONS});
     return fetchData(Api.APIURL_Stats_Quiz_Save, {quiz_id: quiz.id, answers}).then(([err, result]) => {
-        if (err) console.log(err);
+        if (err) return dispatch(networkError(err));
         dispatch({type: UPLOADED_QUESTIONS});
     });
 };
@@ -105,7 +107,7 @@ export const submitAnswer = () => (dispatch, getState) => {
 /**
  * 提交批改记录
  */
-export const submitCheckAnswer = () => (dispatch, getState) => {
+export const submitCheckAnswer = () => async (dispatch, getState) => {
     let {statsQuiz, questionsById, answersById} = getState();
     if (!_hasCompleteCheckQuiz(questionsById, answersById)) return alert('请批改完全部试题后再提交');
     let answers = [];
@@ -115,16 +117,15 @@ export const submitCheckAnswer = () => (dispatch, getState) => {
         }
     }
     dispatch({type: UPLOADING_QUESTIONS});
-    return fetchData(Api.APIURL_Stats_Quiz_Update, {stats_quiz_id: statsQuiz.id, answers}).then(([err, result]) => {
-        if (err) console.log(err);
-        dispatch({type: UPLOADED_QUESTIONS});
-    });
+    let [err] = await fetchData(Api.APIURL_Stats_Quiz_Update, {stats_quiz_id: statsQuiz.id, answers});
+    if (err) return dispatch(networkError(err));
+    dispatch({type: UPLOADED_QUESTIONS});
 };
 
-export const fetchStatsQuizList = () => async (dispatch) => {
+export const fetchStatsQuizList = () => async dispatch => {
     dispatch({type: REQUEST_STATS_QUIZ_LIST});
     let [err, result] = await fetchData(Api.APIURL_Stats_Quiz_List);
-    if (err) console.log(err);
+    if (err) return dispatch(networkError(err));
     dispatch({type: RECEIVE_STATS_QUIZ_LIST, payload: result});
 };
 
@@ -187,6 +188,21 @@ export const saveQuestion3FeedbackSelectAnswer = ({id, is_correct}) => ({
         is_correct
     }
 });
+
+export const networkError = err => (dispatch) => {
+    let text = err instanceof Error ? err.message : err;
+    dispatch({
+        type: NETWORK_ERROR,
+        payload: {text}
+    });
+    setTimeout(() => {
+        dispatch({
+            type: NETWORK_ERROR_TIMEOUT,
+            payload: {text}
+        });
+    }, 1500);
+
+};
 
 /**
  * 更新当前操作状态

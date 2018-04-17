@@ -3,7 +3,7 @@ import React from 'react';
 import {TransparentMask} from '../Mask';
 import ToastSuccessComponent from './ToastSuccess';
 import ToastLoadingComponent from './ToastLoading';
-import ToastFailComponent from './ToastFail';
+import ToastErrorComponent from './ToastError';
 
 const ToastSuccess = ({show, text}) => {
     if (!show) return null;
@@ -25,14 +25,14 @@ const ToastLoading = ({show, text}) => {
     );
 };
 
-const ToastFail = ({show, text}) => {
+const ToastError = ({show, text}) => {
     if (!show) return null;
     return (
         <React.Fragment>
             <TransparentMask />
-            <ToastFailComponent text={text} />
+            <ToastErrorComponent text={text} />
         </React.Fragment>
     );
 };
 
-export {ToastSuccess, ToastLoading, ToastFail};
+export {ToastSuccess, ToastLoading, ToastError};

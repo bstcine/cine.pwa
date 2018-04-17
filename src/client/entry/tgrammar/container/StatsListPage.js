@@ -7,6 +7,7 @@ import Header from '@/component/Header';
 import Footer from '@/component/Footer';
 import StatsTableContainer from '../container/StatsTableContainer';
 import ToastLoading from './ToastLoading';
+import ToastError from './ToastError';
 
 const mapStateToProps = state => {
     const {network} = state;
@@ -29,6 +30,7 @@ class StatsListPage extends Component {
                 <div className="container-fluid course-container-bg">
                     <div className="tgrammar-stats-list">
                         <ToastLoading />
+                        <ToastError />
                         <h1>善恩K12学生英语文法和阅读基础能力测试试题</h1>
                         {!init && <StatsTableContainer />}
                     </div>

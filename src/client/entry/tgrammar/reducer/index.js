@@ -19,6 +19,8 @@ import {
     OPEN_TIP_MODAL,
     REQUEST_STATS_QUIZ_LIST,
     RECEIVE_STATS_QUIZ_LIST,
+    NETWORK_ERROR,
+    NETWORK_ERROR_TIMEOUT,
 } from '../action';
 
 /**
@@ -140,7 +142,7 @@ const statsQuiz = (state = {}, {type, payload}) => {
  * init:初始化状态
  * pending:api请求中
  */
-const network = (state = {init: true, pending: true}, {type, payload}) => {
+const network = (state = {init: true, pending: true, error: false}, {type, payload}) => {
     switch (type) {
         case REQUEST_QUIZ_DATA:
         case UPLOADING_QUESTIONS:
@@ -154,14 +156,29 @@ const network = (state = {init: true, pending: true}, {type, payload}) => {
         case RECEIVE_STATS_QUIZ_DATA:
             return {
                 ...state,
-                pending: false
+                pending: false,
+                text: payload.text
             };
         case RECEIVE_QUIZ_DATA:
         case RECEIVE_STATS_QUIZ_LIST:
             return {
                 ...state,
                 init: false,
-                pending: false
+                pending: false,
+                text: payload.text
+            };
+        case NETWORK_ERROR:
+            return {
+                ...state,
+                init: false,
+                pending: false,
+                error: true,
+                text: payload.text
+            };
+        case NETWORK_ERROR_TIMEOUT:
+            return {
+                ...state,
+                error: false
             };
         default:
             return state;

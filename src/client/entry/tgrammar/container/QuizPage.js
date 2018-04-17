@@ -10,6 +10,7 @@ import QuestionItems from '../container/QuestionItems';
 import Submit from '../container/Submit';
 import {getParam} from '@/util/urlUtil';
 import ToastLoading from './ToastLoading';
+import ToastError from './ToastError';
 import TipModal from './TipModal';
 
 const mapStateToProps = state => {
@@ -17,8 +18,6 @@ const mapStateToProps = state => {
     let {init} = network;
     return {init};
 };
-
-const loadData = () => {};
 
 class QuizPage extends Component {
     componentDidMount() {
@@ -41,6 +40,7 @@ class QuizPage extends Component {
                 <div className="container-fluid course-container-bg">
                     <div className="tgrammar">
                         <ToastLoading />
+                        <ToastError />
                         <TipModal />
                         {!init && <Title />}
                         {!init && <QuestionItems />}

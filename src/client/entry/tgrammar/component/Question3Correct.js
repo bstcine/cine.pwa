@@ -3,7 +3,6 @@ import QuestionTitle from './QuestionTitle';
 import SelectOption from './SelectOption';
 import FeedbackSelect from './FeedbackSelect';
 import FeedbackText from './FeedbackText';
-const optionMap = {0: 'A', 1: 'B', 2: 'C', 3: 'D', 4: 'E', 5: 'F', 6: 'G'};
 const options = [
     {
         content: '正确',

@@ -106,12 +106,31 @@ CC: entry对应的模块简写
 
 - Action
 ```
-代码路径
+代码路径:
 src/client/action/userAction.js
-user: entry对应的模块
 
+命名规范：
+userAction: entry的User Page
+uCouponAction: entry的User Page对应的Coupon模块
+- 如果代码比较多，某个模块的Action也可单独写一个js文件
+
+
+dispatch格式规范：
 {
   type: ActionType定义的Action,
   payload: 需要传递的数据
 }
+```
+
+- Container
+```
+代码路径1:
+src/client/entry/page/**Container.js
+
+代码路径2:
+src/client/entry/page/container/****.js
+
+对象命名规范：
+***Cont
+***Container
 ```

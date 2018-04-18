@@ -89,3 +89,24 @@ Step2.  运行 `$ npm run prod-build`
 目前情况：iPad使用预先加载本地JS，点击“课程详情页-课程概要”链接，显示空白
 目标：iPad可以正常使用
 ```
+
+
+## 代码基本规范
+- ActionType定义路径
+```
+src/client/constant/actionType.js
+
+Action_CC...
+CC: entry对应的模块简写
+```
+
+- Action
+```
+代码路径
+src/client/action/userAction.js
+
+{
+  type: ActionType定义的Action,
+  payload: 需要传递的数据
+}
+```

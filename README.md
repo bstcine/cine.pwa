@@ -90,6 +90,8 @@ Step2.  运行 `$ npm run prod-build`
 目标：iPad可以正常使用
 ```
 
+<br>
+<br>
 
 ## 代码基本规范
 - ActionType定义路径
@@ -104,6 +106,7 @@ CC: entry对应的模块简写
 ```
 代码路径
 src/client/action/userAction.js
+user: entry对应的模块
 
 {
   type: ActionType定义的Action,

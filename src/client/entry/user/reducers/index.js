@@ -1,5 +1,5 @@
 import {combineReducers} from 'redux'
-import {Action_UI_RECEIVE, Action_UC_RECEIVE, Action_UC_EXPAND} from "@/constant/actionType";
+import {Action_UI, Action_UC} from "@/constant/actionType";
 import CommonUtil from "@/util/common";
 
 const user = (state = {
@@ -11,25 +11,25 @@ const user = (state = {
     unpayOrdersCount: 0
 }, action) => {
     switch (action.type) {
-        case Action_UI_RECEIVE:
+        case Action_UI.RECEIVE:
             return action.payload
         default:
             return state
     }
 }
 
-const expandCoupon = (couponsState,action) => {
+const expandCoupon = (couponsState, action) => {
     return CommonUtil.updateItemInArray(couponsState, action.id, coupon => {
-        return CommonUtil.updateObject(coupon, {expand : !coupon.expand});
+        return CommonUtil.updateObject(coupon, {expand: !coupon.expand});
     });
 }
 
 const coupons = (state = [], action) => {
     switch (action.type) {
-        case Action_UC_RECEIVE:
+        case Action_UC.RECEIVE:
             return action.payload
-        case Action_UC_EXPAND:
-            return expandCoupon(state,action)
+        case Action_UC.EXPAND:
+            return expandCoupon(state, action)
         default:
             return state
     }

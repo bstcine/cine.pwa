@@ -94,7 +94,7 @@ Step2.  运行 `$ npm run prod-build`
 <br>
 
 ## 代码规范 （Redux）
-### ActionType定义路径
+- ActionType定义路径
 ```
 src/client/constant/actionType.js
 
@@ -102,7 +102,9 @@ Action_CC...
 CC: entry对应的模块简写
 ```
 
-### Action
+<br>
+
+- Action
 ```
 代码路径
 src/client/action/userAction.js

@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Tabs, TabItems, TabItem, TabPanels, TabPanel} from '@/component/Tabs/index';
-import CouponList from '../component/Coupon/CouponList'
+import CouponList from '../component/CouponList'
 import {connect} from "react-redux";
 import * as UserActions from '@/action/userAction'
 import {bindActionCreators} from 'redux'

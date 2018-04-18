@@ -32,7 +32,7 @@ export default class Coupon extends Component {
                     有效期：{coupon.effective_at.substring(0, 10).replace(/-/g, '.')} -{' '}
                     {coupon.expire_at.substring(0, 10).replace(/-/g, '.')}
                 </div>
-                {coupon.status === "1" && <img src={require("../../asset/image/ic_coupon_used.png")}/>}
+                {coupon.status === "1" && <img src={require("../asset/image/ic_coupon_used.png")}/>}
             </div>
         );
     }

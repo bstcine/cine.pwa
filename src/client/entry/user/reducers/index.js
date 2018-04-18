@@ -1,42 +1,26 @@
 import {combineReducers} from 'redux'
-import {REQUEST_USER, RECEIVE_USER, REQUEST_COUPON, RECEIVE_COUPON} from "@/entry/user/action";
+import {RECEIVE_USER, RECEIVE_COUPON} from "@/entry/user/action";
 
 const postsByUser = (state = {
-    user: {
-        nickname: '',
-        role_id: '1',
-        phone: '',
-        point: 0,
-        unuseCouponsCount: 0,
-        unpayOrdersCount: 0
-    }
+    nickname: '',
+    role_id: '1',
+    phone: '',
+    point: 0,
+    unuseCouponsCount: 0,
+    unpayOrdersCount: 0
 }, action) => {
     switch (action.type) {
-        case REQUEST_USER:
         case RECEIVE_USER:
-            return {
-                ...state,
-                user: action.result
-            }
+            return action.payload
         default:
             return state
     }
 }
 
-const postByCoupon = (state = {
-    use: [],
-    used: [],
-    expired: []
-},action) => {
+const postsByCoupon = (state = [], action) => {
     switch (action.type) {
-        case REQUEST_COUPON:
         case RECEIVE_COUPON:
-            return {
-                ...state,
-                use: action.use,
-                used: action.used,
-                expired: action.expired,
-            }
+            return action.payload
         default:
             return state
     }
@@ -44,7 +28,7 @@ const postByCoupon = (state = {
 
 const rootReducer = combineReducers({
     postsByUser,
-    postByCoupon
+    postsByCoupon
 })
 
 export default rootReducer

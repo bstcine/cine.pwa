@@ -7,18 +7,23 @@ import {bindActionCreators} from 'redux'
 
 class CouponPanel extends Component {
 
-    componentDidMount(){
+    componentDidMount() {
         this.props.actions.postCoupon()
     }
 
     componentWillReceiveProps(nextProps) {
-        if (nextProps.postByCoupon !== this.props.postByCoupon) {
+        if (nextProps.coupon !== this.props.coupon) {
             nextProps.actions.postCoupon()
         }
     }
 
     render() {
-        let {use,used,expired} = this.props;
+        let {coupons} = this.props;
+
+        let use = coupons && coupons.filter(item => item.status === '0');
+        let used = coupons && coupons.filter(item => item.status === '1');
+        let expired = coupons && coupons.filter(item => item.status === '2');
+
         return (
             <React.Fragment>
                 <Tabs className={'coupon-tabs'}>
@@ -45,9 +50,7 @@ class CouponPanel extends Component {
 }
 
 const mapStateToProps = state => ({
-    use: state.postByCoupon.use ? state.postByCoupon.use : [],
-    used: state.postByCoupon.used ? state.postByCoupon.used : [],
-    expired: state.postByCoupon.expired ? state.postByCoupon.expired : [],
+    coupons: state.postsByCoupon
 })
 
 const mapDispatchToProps = dispatch => ({

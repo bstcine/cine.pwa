@@ -30,7 +30,7 @@ class App extends Component {
 }
 
 const mapStateToProps = state => ({
-    user: state.postsByUser.user ? state.postsByUser.user : {}
+    user: state.postsByUser
 })
 
 const mapDispatchToProps = dispatch => ({

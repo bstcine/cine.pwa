@@ -11,13 +11,13 @@ class App extends Component {
         if (!storeUtil.getToken()) {
             location.href = '/login?go=' + encodeURIComponent(location.href);
         } else {
-            this.props.actions.postUserInfo()
+            this.props.actions.loadUserInfo()
         }
     }
 
     componentWillReceiveProps(nextProps) {
         if (nextProps.postsByUser !== this.props.postsByUser) {
-            nextProps.actions.postUserInfo()
+            nextProps.actions.loadUserInfo()
         }
     }
 

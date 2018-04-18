@@ -1,5 +1,5 @@
 import {combineReducers} from 'redux'
-import {RECEIVE_USER, RECEIVE_COUPON} from "@/entry/user/action";
+import {USER_RECEIVE, COUPON_RECEIVE} from "@/entry/user/action";
 
 const postsByUser = (state = {
     nickname: '',
@@ -10,7 +10,7 @@ const postsByUser = (state = {
     unpayOrdersCount: 0
 }, action) => {
     switch (action.type) {
-        case RECEIVE_USER:
+        case USER_RECEIVE:
             return action.payload
         default:
             return state
@@ -19,7 +19,7 @@ const postsByUser = (state = {
 
 const postsByCoupon = (state = [], action) => {
     switch (action.type) {
-        case RECEIVE_COUPON:
+        case COUPON_RECEIVE:
             return action.payload
         default:
             return state

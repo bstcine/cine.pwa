@@ -1,19 +1,17 @@
 import Api from "../../../../APIConfig";
 import {fetchData} from "@/service/base";
 
-export const REQUEST_USER = 'REQUEST_USER';
-export const RECEIVE_USER = 'RECEIVE_USER';
-export const REQUEST_COUPON = 'REQUEST_COUPON';
-export const RECEIVE_COUPON = 'RECEIVE_COUPON';
+export const USER_REQUEST = 'USER_REQUEST';
+export const USER_RECEIVE = 'USER_RECEIVE';
 
 const requestUser = () => ({
-    type: REQUEST_USER,
+    type: USER_REQUEST,
 })
 const receiveUser = (result) => ({
-    type: RECEIVE_USER,
+    type: USER_RECEIVE,
     payload: result,
 })
-export const postUserInfo = () => dispatch => {
+export const loadUserInfo = () => dispatch => {
     dispatch(requestUser())
     return fetchData(Api.APIURL_User_Info, {})
         .then(([err, result]) => {
@@ -22,11 +20,14 @@ export const postUserInfo = () => dispatch => {
         })
 }
 
+export const COUPON_REQUEST = 'COUPON_REQUEST';
+export const COUPON_RECEIVE = 'COUPON_RECEIVE';
+
 const requestCoupon = () => ({
-    type: REQUEST_COUPON,
+    type: COUPON_REQUEST,
 })
 const receiveCoupon = (result) => ({
-    type: RECEIVE_COUPON,
+    type: COUPON_RECEIVE,
     payload: result.rows
 })
 export const postCoupon = () => dispatch => {

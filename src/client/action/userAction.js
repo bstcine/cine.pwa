@@ -1,25 +1,38 @@
 /**
  * Created by joe on 4/16/18.
  */
-let uCouponAction = {
-    init: function () {
-        "use strict";
-        return function (dispatch, getState) {
+import Api from "../../APIConfig";
+import {fetchData} from "@/service/base";
+import {Action_UI_RECEIVE, Action_UI_REQUEST, Action_UC_RECEIVE, Action_UC_REQUEST} from "@/constant/actionType";
 
-            let id = getState().id
-            uCouponAction.initWithParam(id)
-        }
-    },
-
-    initWithParam: param => (dispatch, getState) => {
-
-        dispatch({
-            type: "type.Action_UC_initWithParam",
-            payload: param
+const requestUser = () => ({
+    type: Action_UI_REQUEST,
+})
+const receiveUser = (result) => ({
+    type: Action_UI_RECEIVE,
+    payload: result,
+})
+export const loadUserInfo = () => dispatch => {
+    dispatch(requestUser())
+    return fetchData(Api.APIURL_User_Info, {})
+        .then(([err, result]) => {
+            if (err) return Promise.resolve();
+            return dispatch(receiveUser(result));
         })
-    }
+}
 
-
-};
-
-export default uCouponAction;
+const requestCoupon = () => ({
+    type: Action_UC_REQUEST,
+})
+const receiveCoupon = (result) => ({
+    type: Action_UC_RECEIVE,
+    payload: result.rows
+})
+export const loadUserCoupon = () => dispatch => {
+    dispatch(requestCoupon())
+    return fetchData(Api.APIURL_User_Coupon, {page: 1, pageSize: 1000000, orderBy: 'create_at', orderValue: 'desc'})
+        .then(([err, result]) => {
+            if (err) return Promise.resolve();
+            return dispatch(receiveCoupon(result));
+        })
+}

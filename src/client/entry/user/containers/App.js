@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
-import * as UserActions from '../action'
+import * as UserActions from '@/action/userAction'
 import UserPanel from "@/entry/user/component/UserPanel";
 import storeUtil from "@/util/storeUtil";
 
@@ -12,12 +12,6 @@ class App extends Component {
             location.href = '/login?go=' + encodeURIComponent(location.href);
         } else {
             this.props.actions.loadUserInfo()
-        }
-    }
-
-    componentWillReceiveProps(nextProps) {
-        if (nextProps.postsByUser !== this.props.postsByUser) {
-            nextProps.actions.loadUserInfo()
         }
     }
 

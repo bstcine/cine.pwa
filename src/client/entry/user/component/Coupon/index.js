@@ -2,19 +2,13 @@ import React, {Component} from 'react';
 import {Tabs, TabItems, TabItem, TabPanels, TabPanel} from '@/component/Tabs/index';
 import CouponList from './CouponList'
 import {connect} from "react-redux";
-import * as UserActions from "@/entry/user/action";
+import * as UserActions from '@/action/userAction'
 import {bindActionCreators} from 'redux'
 
 class CouponPanel extends Component {
 
     componentDidMount() {
-        this.props.actions.postCoupon()
-    }
-
-    componentWillReceiveProps(nextProps) {
-        if (nextProps.coupon !== this.props.coupon) {
-            nextProps.actions.postCoupon()
-        }
+        this.props.actions.loadUserCoupon()
     }
 
     render() {

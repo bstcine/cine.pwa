@@ -25,12 +25,17 @@ const Action_CC = {
 export default Action_CC;
 
 
+//entry/user/info
+export const Action_UI_REQUEST = 'Action_UI_REQUEST';
+export const Action_UI_RECEIVE = 'Action_UI_RECEIVE';
+
+//entry/user/coupon
+export const Action_UC_REQUEST = 'Action_UC_REQUEST';
+export const Action_UC_RECEIVE = 'Action_UC_RECEIVE';
 
 //entry/user/order
 export const Action_UO_ = 'Action_UO_';
 
-//entry/user/coupon
-export const Action_UC_ = 'Action_UC_';
 
 //entry/test/grammar
 export const Action_TG_ = 'Action_TG_';

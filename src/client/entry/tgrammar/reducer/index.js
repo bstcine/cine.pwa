@@ -20,7 +20,7 @@ import {
     REQUEST_STATS_QUIZ_LIST,
     RECEIVE_STATS_QUIZ_LIST,
     NETWORK_ERROR,
-    NETWORK_ERROR_TIMEOUT,
+    NETWORK_ERROR_TIMEOUT
 } from '../action';
 
 /**
@@ -33,7 +33,7 @@ const quiz = (state = {}, {type, payload}) => {
                 ...state,
                 id: payload.id,
                 name: payload.name,
-                count: payload.question_count
+                question_count: payload.question_count
             };
         default:
             return state;
@@ -126,7 +126,7 @@ const answersById = (state = {}, {type, payload}) => {
 /**
  * 学生答题记录-主表记录
  */
-const statsQuiz = (state = {}, {type, payload}) => {
+const statsQuiz = (state = null, {type, payload}) => {
     switch (type) {
         case RECEIVE_STATS_QUIZ_DATA: {
             let statsQuiz = payload.statsQuiz;
@@ -157,7 +157,7 @@ const network = (state = {init: true, pending: true, error: false}, {type, paylo
             return {
                 ...state,
                 pending: false,
-                text: payload.text
+                text: payload ? payload.text : null
             };
         case RECEIVE_QUIZ_DATA:
         case RECEIVE_STATS_QUIZ_LIST:
@@ -165,7 +165,7 @@ const network = (state = {init: true, pending: true, error: false}, {type, paylo
                 ...state,
                 init: false,
                 pending: false,
-                text: payload.text
+                text: payload ? payload.text : null
             };
         case NETWORK_ERROR:
             return {
@@ -173,7 +173,7 @@ const network = (state = {init: true, pending: true, error: false}, {type, paylo
                 init: false,
                 pending: false,
                 error: true,
-                text: payload.text
+                text: payload ? payload.text : null
             };
         case NETWORK_ERROR_TIMEOUT:
             return {

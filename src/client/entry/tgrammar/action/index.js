@@ -32,14 +32,13 @@ export const requestQuizData = () => ({
     type: REQUEST_QUIZ_DATA
 });
 
-// todo 服务端添加count字段
-export const receiveQuizData = ({id, name, count, data: questions}) => {
+export const receiveQuizData = ({id, name, question_count, data: questions}) => {
     return {
         type: RECEIVE_QUIZ_DATA,
         payload: {
             id,
             name,
-            count,
+            question_count,
             questions
         }
     };
@@ -101,6 +100,7 @@ export const submitAnswer = () => (dispatch, getState) => {
     return fetchData(Api.APIURL_Stats_Quiz_Save, {quiz_id: quiz.id, answers}).then(([err, result]) => {
         if (err) return dispatch(networkError(err));
         dispatch({type: UPLOADED_QUESTIONS});
+        location.href = `/tgrammar/quiz?stats_quiz_id=${result.statsQuiz.id}`;
     });
 };
 
@@ -120,6 +120,7 @@ export const submitCheckAnswer = () => async (dispatch, getState) => {
     let [err] = await fetchData(Api.APIURL_Stats_Quiz_Update, {stats_quiz_id: statsQuiz.id, answers});
     if (err) return dispatch(networkError(err));
     dispatch({type: UPLOADED_QUESTIONS});
+    location.href = '/tgrammar/stats/list';
 };
 
 export const fetchStatsQuizList = () => async dispatch => {
@@ -200,8 +201,7 @@ export const networkError = err => (dispatch) => {
             type: NETWORK_ERROR_TIMEOUT,
             payload: {text}
         });
-    }, 1500);
-
+    }, 3000);
 };
 
 /**

@@ -136,3 +136,18 @@ src/client/entry/page/container/****.js
 ***Cont
 ***Container
 ```
+
+<br>
+
+- conponent
+```
+  - 尽量不要写额外的Action，触发的Action来源于this.props.action
+    Action代码应该都在：src/client/action/***Action.js
+
+  - 不要写Container
+```
+
+- reducer
+``` 
+  - 建议使用 immutable
+```

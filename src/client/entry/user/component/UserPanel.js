@@ -7,7 +7,7 @@ import {
 } from 'react-router-dom'
 import {Tabs, TabItems, TabItem, TabPanels, TabPanel} from '@/component/Tabs';
 import EntryComponent from '@/component/EntryComponent';
-import CouponPanel from './Coupon/index'
+import CouponPanel from '../containers/Coupon'
 import {logoutV1} from "@/service/base";
 import '../asset/style/index.less';
 

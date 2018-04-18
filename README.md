@@ -117,7 +117,7 @@ uCouponAction: entry的User Page对应的Coupon模块
 
 dispatch格式规范：
 {
-  type: ActionType定义的Action,
+  type: ActionType定义的,   //与reducer需要的ActionType有1：1的对应关系
   payload: 需要传递的数据
 }
 ```

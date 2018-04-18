@@ -1,26 +1,267 @@
-export const REQUEST_DATA = 'REQUEST_DATA';
-export const RECEIVE_DATA = 'RECEIVE_DATA';
+import {fetchData} from '@/service/base';
+import Api from '@/../APIConfig';
 
-export const requestData = () => ({
-    type: REQUEST_DATA
+export const REQUEST_QUIZ_DATA = 'REQUEST_QUIZ_DATA';
+export const RECEIVE_QUIZ_DATA = 'RECEIVE_QUIZ_DATA';
+export const REQUEST_STATS_QUIZ_DATA = 'REQUEST_STATS_QUIZ_DATA';
+export const RECEIVE_STATS_QUIZ_DATA = 'RECEIVE_STATS_QUIZ_DATA';
+export const SAVE_QUESTION1_SELECT_ANSWER = 'SAVE_QUESTION1_SELECT_ANSWER';
+export const SAVE_QUESTION1_FEEDBACK_SELECT_ANSWER = 'SAVE_QUESTION1_FEEDBACK_SELECT_ANSWER';
+export const SAVE_QUESTION3_SELECT_ANSWER = 'SAVE_QUESTION3_SELECT_ANSWER';
+export const SAVE_QUESTION3_TEXT_ANSWER = 'SAVE_QUESTION3_TEXT_ANSWER';
+export const SAVE_QUESTION3_FEEDBACK_TEXT_ANSWER = 'SAVE_QUESTION3_FEEDBACK_TEXT_ANSWER';
+export const SAVE_QUESTION3_FEEDBACK_SELECT_ANSWER = 'SAVE_QUESTION3_FEEDBACK_SELECT_ANSWER';
+export const SAVE_QUESTIONS = 'SAVE_QUESTIONS';
+export const SAVE_USER = 'SAVE_USER';
+export const UPDATE_OPERATION = 'UPDATE_OPERATION';
+export const UPLOADING_QUESTIONS = 'UPLOADING_QUESTIONS';
+export const UPLOADED_QUESTIONS = 'UPLOADED_QUESTIONS';
+export const CLOSE_TIP_MODAL = 'CLOSE_TIP_MODAL';
+export const OPEN_TIP_MODAL = 'OPEN_TIP_MODAL';
+export const REQUEST_STATS_QUIZ_LIST = 'REQUEST_STATS_QUIZ_LIST';
+export const RECEIVE_STATS_QUIZ_LIST = 'RECEIVE_STATS_QUIZ_LIST';
+export const NETWORK_ERROR = 'NETWORK_ERROR';
+export const NETWORK_ERROR_TIMEOUT = 'NETWORK_ERROR_TIMEOUT';
+
+export const saveUser = user => ({
+    type: SAVE_USER,
+    payload: {user}
 });
 
-export const receiveData = ({id, name, count, data: questionItems}) => ({
-    type: RECEIVE_DATA,
-    id, name, count, questionItems
+export const requestQuizData = () => ({
+    type: REQUEST_QUIZ_DATA
 });
 
-export const fetchData = () => dispatch => {
-    dispatch(requestData());
-    return new Promise(resolve => {
-        setTimeout(() => {
-            dispatch(receiveData({
-                id: '1230',
-                name: '善恩K12学生英语文法和阅读基础能力测试试题',
-                count: 30,
-                data: [{'id': '1', 'title': '<h2>第一部分：句子改错</h2>', 'format': 10}, {'id': '1.1', 'title': '<p>下面的句子，有可能会有错误，也有可能没有错。请判断是否有错，如果认为有错。请指出错误并修改；如果认为正确，请翻译句子。每一题分值1分。如果学生认为句子错误，必须要能正确修改才能得1分；如果认为正确，则必需要能正确翻译才能得1分。\n请注意：本部分考察的是学生对句子结构的理解。因此并不涉及用词的准确性问题。</p>', 'format': 10}, {'id': '2', 'title': 'Inside the house is very hot.', 'format': 3, 'isCorrect': false, 'feedback': ''}, {'id': '3', 'title': 'There are many urgent issues need to be solved in today’s world. ', 'format': 3, 'isCorrect': false, 'feedback': ''}, {'id': '4', 'title': 'Drink more than 6 cup of water is very important to our health. ', 'format': 3, 'isCorrect': false, 'feedback': ''}, {'id': '5', 'title': 'While many of his peers thought the earth is flat, but Pythagoras discovered that the earth is round. ', 'format': 3, 'isCorrect': true, 'feedback': ''}, {'id': '6', 'title': 'Jacky was allowed 10 minutes of game time because his homework finally finished. ', 'format': 3, 'isCorrect': true, 'feedback': ''}, {'id': '7', 'title': 'Due to many people drive carelessly, more than 200,000 people died in car accidents every year in China. ', 'format': 3, 'isCorrect': true, 'feedback': ''}, {'id': '8', 'title': 'Jonathan’s mother have been missing her son a lot since his left. ', 'format': 3, 'isCorrect': true, 'feedback': ''}, {'id': '9', 'title': 'While a child, Catherine’s parents would bring their daughter to the zoo once every month. ', 'format': 3, 'isCorrect': true, 'feedback': ''}, {'id': '10', 'title': 'You must obey the laws in the United States, otherwise you will get into trouble. ', 'format': 3, 'isCorrect': true, 'feedback': ''}, {'id': '11', 'title': 'This is the very type of pen I like to write. ', 'format': 3, 'isCorrect': false, 'feedback': ''}, {'id': '12', 'title': 'I didn’t know what is he talking about. ', 'format': 3, 'isCorrect': true, 'feedback': ''}, {'id': '13', 'title': 'What interested me doesn’t interest me anymore. ', 'format': 3, 'isCorrect': true, 'feedback': ''}, {'id': '14', 'title': 'I am not interested in learning what he is interested. ', 'format': 3, 'isCorrect': true, 'feedback': ''}, {'id': '15', 'title': 'Only with the help of Sherlock Holmes could this little miserable boy returned home safe and sound.  ', 'format': 3, 'isCorrect': true, 'feedback': ''}, {'id': '16', 'title': 'Let’s meet where we met last time. ', 'format': 3, 'isCorrect': true, 'feedback': ''}, {'id': '17', 'title': 'I’d like to meet you at the restaurant where we met last time. ', 'format': 3, 'isCorrect': true, 'feedback': ''}, {'id': '18', 'title': 'All I want is faithful treatment. ', 'format': 3, 'isCorrect': true, 'feedback': ''}, {'id': '19', 'title': 'After discussing all those relevant issues, the final conclusion seems very obvious to everyone. ', 'format': 3, 'isCorrect': true, 'feedback': ''}, {'id': '20', 'title': 'I am not a big fan of the way Michael deals with opinions different from his own’s. ', 'format': 3, 'isCorrect': true, 'feedback': ''}, {'id': '21', 'title': 'That the globe is warming because of human activities is questioned by many scientists. ', 'format': 3, 'isCorrect': true, 'feedback': ''}, {'id': '22', 'title': 'I like any book that, although boring for a few pages, overall gives me enlightenment and pleasure while reading. ', 'format': 3, 'isCorrect': true, 'feedback': ''}, {'id': '23', 'title': 'Widely recognized as the most important progress in modern physics, Albert Einstein discovered and developed the theory of relativity, thus greatly broadening mankind’s perspective of the world. ', 'format': 3, 'isCorrect': true, 'feedback': ''}, {'id': '24', 'title': 'Finding the alternative energy sources that can effectively replace the currently widely used fossil fuel turned out to be much more challenging than most of us expected. ', 'format': 3, 'isCorrect': true, 'feedback': ''}, {'id': '25', 'title': 'His easy handling of what could otherwise have evolved into a serious crisis showed his superior political skills. ', 'format': 3, 'isCorrect': true, 'feedback': ''}, {'id': '26', 'title': 'Decisive measures have been adopted immediately to put under control the rampant wild fire that had been storming many counties in Southern California. ', 'format': 3, 'isCorrect': true, 'feedback': ''}, {'id': '27', 'title': 'In a world that everything is changing at an increasing pace, we must educate our students to become comfortable with changes. ', 'format': 3, 'isCorrect': true, 'feedback': ''}, {'id': '28', 'title': 'It is now really hard to tell whom will the selection committee pick as the next CEO. ', 'format': 3, 'isCorrect': true, 'feedback': ''}, {'id': '29', 'title': 'I wish our human society can go back to the prehistoric time when there was no such inequality of wealth as we have today. ', 'format': 3, 'isCorrect': true, 'feedback': ''}, {'id': '30', 'title': 'Having a balanced intake of various types of nutrition is one of the key factors that will keep us healthy.', 'format': 3, 'isCorrect': true, 'feedback': ''}, {'id': '31', 'title': 'I cannot agree with his suggestion he made in our last internal meeting that we make it mandatory for our students to learn a second foreign language. ', 'format': 3, 'isCorrect': true, 'feedback': ''}, {'id': '32', 'title': '<h2>第一部分：句子改错</h2>', 'format': 10}, {'id': '32.1', 'title': '<p>下面有4篇短段落，在每篇段落后有2-3个题目，请依据文章内容为每一个题目选择最好的答案。\n请注意，本部分每做对一题得1分，错一题将倒扣1/3分，但留空将不得分，也不扣分。</p>', 'format': 10}, {'id': '33', 'title': '<p>Buck did not read the newspapers, or he would have known that trouble was brewing, not alone for himself, but for every tide-water dog, strong of muscle and with warm, long hair, from Puget Sound to San Diego. Because men, groping in the Arctic darkness, had found a yellow metal, and because steamship and transportation companies were booming the find, thousands of men were rushing into the Northland. These men wanted dogs, and the dogs they wanted were heavy dogs, with strong muscles by which to toil, and furry coats to protect them from the frost.</p><p>—— 摘自The Call of The Wild-野性的呼唤</p>', 'format': 11}, {'id': '34', 'title': '<p>What can be inferred from the following sentence?</p><p>“Buck did not read the newspapers, or he would have known that trouble was brewing…”</p>', 'format': 1, 'feedback': null, 'answers': [{'content': 'Buck was already aware of the trouble although he did not read the newspapers.', 'type': 1, 'isCorrect': false}, {'content': 'There would be no trouble if Buck read the newspapers.', 'type': 1, 'isCorrect': false}, {'content': 'If Buck did not read newspapers, he would be in trouble.', 'type': 1, 'isCorrect': false}, {'content': 'Buck was not then aware of the trouble mentioned in the newspapers.', 'type': 1, 'isCorrect': true}]}, {'id': '35', 'title': '<p>Why was there going to be trouble for strong dogs like Buck?</p>', 'format': 1, 'feedback': null, 'answers': [{'content': 'Because a new brewery industry was in bad need of strong dogs. ', 'type': 1, 'isCorrect': false}, {'content': 'Because the weather in the Northland was extremely cold. ', 'type': 1, 'isCorrect': true}, {'content': 'Because men need strong dogs in a remote area to help them with mining. ', 'type': 1, 'isCorrect': false}, {'content': 'Because the demand for the long and flurry dog hair boomed. ', 'type': 1, 'isCorrect': false}]}, {'id': '36', 'title': '<p>The following adjectives can be used to describe the “men” in this short paragraph EXCEPT</p>', 'format': 1, 'feedback': null, 'answers': [{'content': 'greedy', 'type': 1, 'isCorrect': false}, {'content': 'excited', 'type': 1, 'isCorrect': true}, {'content': 'compassionate', 'type': 1, 'isCorrect': false}, {'content': 'practical', 'type': 1, 'isCorrect': false}]}, {'id': '37', 'title': '<p>“Comrades, you have heard already about the strange dream that I had last night. But I will come to the dream later. I have something else to say first. I do not think, comrades, that I shall be with you for many months longer, and before I die, I feel it my duty to pass on to you such wisdom as I have acquired. I have had a long life, I have had much time for thought as I lay alone in my stall, and I think I may say that I understand the nature of life on this earth as well as any animal now living. It is about this that I wish to speak to you.” </p><p>—— 摘自Animal Farm-动物农庄</p>', 'format': 11}, {'id': '38', 'title': '<p> All of the following explains why the speaker wants to share his personal wisdom EXCEPT</p>', 'format': 1, 'feedback': null, 'answers': [{'content': 'He had just had a strange dream. ', 'type': 1, 'isCorrect': false}, {'content': 'He thought he was going to pass away soon. ', 'type': 1, 'isCorrect': true}, {'content': 'He thought he had enough life experiences.', 'type': 1, 'isCorrect': false}, {'content': 'He thought he was thoughtful animal. ', 'type': 1, 'isCorrect': false}]}, {'id': '39', 'title': '<p>Which of the following is least likely to be talked about in his speech?</p>', 'format': 1, 'feedback': null, 'answers': [{'content': 'How to build lasting friendship with others.', 'type': 1, 'isCorrect': false}, {'content': 'How to lead a meaningful and productive life. ', 'type': 1, 'isCorrect': true}, {'content': 'How to build the strongest house. ', 'type': 1, 'isCorrect': false}, {'content': 'How to stay true to one’s own heart.', 'type': 1, 'isCorrect': false}]}, {'id': '40', 'title': '<p>When I was alive and had a human heart," answered the statue, "I did not know what tears were, for I lived in the Palace of Sans- Souci, where sorrow is not allowed to enter. In the daytime I played with my companions in the garden, and in the evening I led the dance in the Great Hall. Round the garden ran a very lofty wall, but I never cared to ask what lay beyond it, everything about me was so beautiful. My courtiers called me the Happy Prince, and happy indeed I was, if pleasure be happiness. So I lived, and so I died. And now that I am dead they have set me up here so high that I can see all the ugliness and all the misery of my city, and though my heart is made of lead yet I cannot chose but weep."</p><p>—— 摘自The Happy Prince-快乐王子</p>', 'format': 11}, {'id': '41', 'title': '<p>According to the statue, to him, each of the following is one of the reasons of being happy EXCEPT? </p>', 'format': 1, 'feedback': null, 'answers': [{'content': 'He lived in a place where sorrow wasn’t permitted to enter.', 'type': 1, 'isCorrect': false}, {'content': 'There were various entertainments in the Palace of Sans-Souci.', 'type': 1, 'isCorrect': true}, {'content': 'He never cast his eyes out of the limited space where he lived.', 'type': 1, 'isCorrect': false}, {'content': 'His heart is made of lead, which is incapable of feeling sorrow.', 'type': 1, 'isCorrect': false}]}, {'id': '42', 'title': '<p>Why did happy prince weep?</p>', 'format': 1, 'feedback': null, 'answers': [{'content': 'Because he died and couldn’t enjoy the happiness in the palace anymore. ', 'type': 1, 'isCorrect': false}, {'content': 'Because he saw many things that he hadn’t seen before.', 'type': 1, 'isCorrect': true}, {'content': 'because his heart is made of lead.', 'type': 1, 'isCorrect': false}, {'content': 'because he couldn’t choose where his monument was erected.', 'type': 1, 'isCorrect': false}]}, {'id': '43', 'title': '<p>Which of the following is NOT true according to this passage? </p>', 'format': 1, 'feedback': null, 'answers': [{'content': 'People’s ideas might change over time.', 'type': 1, 'isCorrect': false}, {'content': 'One’s outlook might be affected by his surroundings.', 'type': 1, 'isCorrect': true}, {'content': 'Walls can prevent people from exploring into the bigger world.', 'type': 1, 'isCorrect': false}, {'content': 'When you have pleasure, you have happiness. ', 'type': 1, 'isCorrect': false}]}, {'id': '44', 'title': "<p>I confess that I was considerably startled by this fresh proof of the practical nature of my companion's theories. My respect for his powers of analysis increased wondrously. There still remained some lurking suspicion in my mind, however, that the whole thing was a pre-arranged episode, intended to dazzle me, though what earthly object he could have in taking me in was past my comprehension. When I looked at him he had finished reading the note, and his eyes had assumed the vacant, lack-lustre expression which showed mental abstraction. </p><p>—— (摘自Sherlock Holmes A study in Scarlet-福尔摩斯探案集之血字的研究</p>", 'format': 11}, {'id': '45', 'title': '<p>Which of the following best describes the narrator’s feeling toward his companion?</p>', 'format': 1, 'feedback': null, 'answers': [{'content': 'Surprised and scared', 'type': 1, 'isCorrect': false}, {'content': 'Admiring but doubtful', 'type': 1, 'isCorrect': true}, {'content': 'Amazed and startled', 'type': 1, 'isCorrect': false}, {'content': 'unbelieving and critical', 'type': 1, 'isCorrect': false}]}, {'id': '46', 'title': '<p>Which of the following adjective is LEAST appropriate to describe the narrator’s companion?</p>', 'format': 1, 'feedback': null, 'answers': [{'content': 'analytical', 'type': 1, 'isCorrect': false}, {'content': 'talkative', 'type': 1, 'isCorrect': true}, {'content': 'thoughtful', 'type': 1, 'isCorrect': false}, {'content': 'practical', 'type': 1, 'isCorrect': false}]}]
-            }));
-            resolve();
-        });
+export const receiveQuizData = ({id, name, question_count, data: questions}) => {
+    return {
+        type: RECEIVE_QUIZ_DATA,
+        payload: {
+            id,
+            name,
+            question_count,
+            questions
+        }
+    };
+};
+
+/**
+ * 题目数据请求 & 答题记录请求
+ */
+export const fetchQuizData = ({stats_quiz_id}) => async dispatch => {
+    dispatch(requestQuizData());
+    let [err, result] = await fetchData(Api.APIURL_Content_Quiz_Grammar);
+    if (err) return dispatch(networkError(err));
+    let {user, quiz} = result;
+    dispatch(saveUser(user));
+    let no = 0;
+    quiz.data.forEach(question => {
+        if (question.format === 1 || question.format === 3) {
+            no++;
+            question.no = no;
+        }
+        if (question.answers) {
+            // 后端 api 选项字段命名不合理，前端 fix
+            question.options = question.answers.map((item, index) => {
+                item.value = index;
+                return item;
+            });
+            delete question.answers;
+        }
     });
+    dispatch(receiveQuizData(quiz));
+    if (user.role_id === '3' && !stats_quiz_id) {
+        dispatch(openTipModal());
+    }
+    if (stats_quiz_id) {
+        dispatch(requestStatsQuizData());
+        let [err_detail, result_detail] = await fetchData(Api.APIURL_Stats_Quiz_Detail, {cid: stats_quiz_id});
+        if (err_detail) return dispatch(networkError(err_detail));
+        let {statsQuiz, statsQuizDetail} = result_detail;
+        dispatch(receiveStatsQuizData({statsQuiz, statsQuizDetail}));
+        dispatch(updateOperation({user, statsQuiz}));
+    } else {
+        dispatch(updateOperation({user}));
+    }
+};
+
+/**
+ * 提交答案
+ */
+export const submitAnswer = () => (dispatch, getState) => {
+    let {quiz, questionsById, answersById} = getState();
+    if (!_hasCompleteQuiz(questionsById, answersById)) return alert('请答完全部试题再后提交');
+    let answers = [];
+    for (let key in answersById) {
+        if (answersById.hasOwnProperty(key)) {
+            answers.push(answersById[key]);
+        }
+    }
+    dispatch({type: UPLOADING_QUESTIONS});
+    return fetchData(Api.APIURL_Stats_Quiz_Save, {quiz_id: quiz.id, answers}).then(([err, result]) => {
+        if (err) return dispatch(networkError(err));
+        dispatch({type: UPLOADED_QUESTIONS});
+        location.href = `/tgrammar/quiz?stats_quiz_id=${result.statsQuiz.id}`;
+    });
+};
+
+/**
+ * 提交批改记录
+ */
+export const submitCheckAnswer = () => async (dispatch, getState) => {
+    let {statsQuiz, questionsById, answersById} = getState();
+    if (!_hasCompleteCheckQuiz(questionsById, answersById)) return alert('请批改完全部试题后再提交');
+    let answers = [];
+    for (let key in answersById) {
+        if (answersById.hasOwnProperty(key)) {
+            answers.push(answersById[key]);
+        }
+    }
+    dispatch({type: UPLOADING_QUESTIONS});
+    let [err] = await fetchData(Api.APIURL_Stats_Quiz_Update, {stats_quiz_id: statsQuiz.id, answers});
+    if (err) return dispatch(networkError(err));
+    dispatch({type: UPLOADED_QUESTIONS});
+    location.href = '/tgrammar/stats/list';
+};
+
+export const fetchStatsQuizList = () => async dispatch => {
+    dispatch({type: REQUEST_STATS_QUIZ_LIST});
+    let [err, result] = await fetchData(Api.APIURL_Stats_Quiz_List);
+    if (err) return dispatch(networkError(err));
+    dispatch({type: RECEIVE_STATS_QUIZ_LIST, payload: result});
+};
+
+export const requestStatsQuizData = () => ({
+    type: REQUEST_STATS_QUIZ_DATA
+});
+
+export const receiveStatsQuizData = ({statsQuiz, statsQuizDetail}) => ({
+    type: RECEIVE_STATS_QUIZ_DATA,
+    payload: {
+        statsQuiz,
+        statsQuizDetail
+    }
+});
+
+export const saveQuestion1SelectAnswer = ({id, select_value}) => ({
+    type: SAVE_QUESTION1_SELECT_ANSWER,
+    payload: {
+        id,
+        select_value
+    }
+});
+
+export const saveQuestion1FeedbackSelectAnswer = ({id, is_correct}) => ({
+    type: SAVE_QUESTION1_FEEDBACK_SELECT_ANSWER,
+    payload: {
+        id,
+        is_correct
+    }
+});
+
+export const saveQuestion3SelectAnswer = ({id, select_value}) => ({
+    type: SAVE_QUESTION3_SELECT_ANSWER,
+    payload: {
+        id,
+        select_value
+    }
+});
+
+export const saveQuestion3TextAnswer = ({id, text_value}) => ({
+    type: SAVE_QUESTION3_TEXT_ANSWER,
+    payload: {
+        id,
+        text_value
+    }
+});
+
+export const saveQuestion3FeedbackTextAnswer = ({id, feedback}) => ({
+    type: SAVE_QUESTION3_FEEDBACK_TEXT_ANSWER,
+    payload: {
+        id,
+        feedback
+    }
+});
+
+export const saveQuestion3FeedbackSelectAnswer = ({id, is_correct}) => ({
+    type: SAVE_QUESTION3_FEEDBACK_SELECT_ANSWER,
+    payload: {
+        id,
+        is_correct
+    }
+});
+
+export const networkError = err => (dispatch) => {
+    let text = err instanceof Error ? err.message : err;
+    dispatch({
+        type: NETWORK_ERROR,
+        payload: {text}
+    });
+    setTimeout(() => {
+        dispatch({
+            type: NETWORK_ERROR_TIMEOUT,
+            payload: {text}
+        });
+    }, 3000);
+};
+
+/**
+ * 更新当前操作状态
+ */
+export const updateOperation = ({user, statsQuiz}) => {
+    let is_stu_operation_visible = user && statsQuiz && user.role_id === '3' && statsQuiz.status === '2';
+    let is_stu_operation_editable = user && user.role_id === '3' && !statsQuiz;
+    let is_tea_operation_visible = user && user.role_id === '2' && statsQuiz;
+    let is_tea_operation_editable = user && user.role_id === '2' && statsQuiz;
+    return {
+        type: UPDATE_OPERATION,
+        payload: {
+            is_stu_operation_visible,
+            is_stu_operation_editable,
+            is_tea_operation_visible,
+            is_tea_operation_editable
+        }
+    };
+};
+
+export const closeTipModal = () => ({
+    type: CLOSE_TIP_MODAL
+});
+
+export const openTipModal = () => ({
+    type: OPEN_TIP_MODAL
+});
+
+/**
+ * 题目是否全部做完
+ * @param {*} questionsById
+ * @param {*} answersById
+ */
+const _hasCompleteQuiz = (questionsById, answersById) => {
+    let isComplete = true;
+    for (let key in questionsById) {
+        if (questionsById.hasOwnProperty(key)) {
+            let question = questionsById[key];
+            if (question.format === 1) {
+                let answer = answersById[key];
+                if (!answer || typeof answer.select_value === 'undefined') {
+                    isComplete = false;
+                    break;
+                }
+            } else if (question.format === 3) {
+                let answer = answersById[key];
+                if (!answer || typeof answer.select_value === 'undefined' || !answer.text_value) {
+                    isComplete = false;
+                    break;
+                }
+            }
+        }
+    }
+    return isComplete;
+};
+
+/**
+ * 检查是否全部批改完成
+ */
+const _hasCompleteCheckQuiz = () => {
+    return true;
 };

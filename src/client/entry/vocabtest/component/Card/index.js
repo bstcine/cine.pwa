@@ -96,7 +96,7 @@ export default class Card extends Component {
         let rightCount = 0;
         for (let i = 0; i < this.config.min_right_count && i < wordLevel.wordList.length; i++) {
             let item = wordLevel.wordList[i];
-            if (item.answer_index === 0) {
+            if (item.select_value === 0) {
                 rightCount++;
             }
         }
@@ -196,10 +196,10 @@ export default class Card extends Component {
     }
 
     //保存单个单词的答题信息
-    saveOneAnswer(answer_index) {
-        console.log(`answer_index ${answer_index}`);
+    saveOneAnswer(select_value) {
+        console.log(`select_value ${select_value}`);
         let word = this.wordLevelList[this.level_index].wordList[this.word_index];
-        word.answer_index = answer_index;
+        word.select_value = select_value;
     }
 
     //收集全部答题信息
@@ -207,10 +207,10 @@ export default class Card extends Component {
         let answers = [];
         this.wordLevelList.forEach(function(wordLevel) {
             wordLevel.wordList.forEach(function(item) {
-                if (!isNaN(item.answer_index)) {
+                if (!isNaN(item.select_value)) {
                     answers.push({
                         id: item.id,
-                        index: item.answer_index
+                        index: item.select_value
                     });
                 }
             });
@@ -235,7 +235,7 @@ export default class Card extends Component {
             let right_count = 0;
             let wrong_count = 0;
             wordLevel.wordList.forEach(function(item) {
-                if (item.answer_index === 0) {
+                if (item.select_value === 0) {
                     right_count++;
                 } else {
                     wrong_count++;
@@ -263,10 +263,10 @@ export default class Card extends Component {
         return curr_vocab;
     }
 
-    optionClick(answer_index) {
+    optionClick(select_value) {
         if (this.disableClick) return;
         this.disableClick = true;
-        this.saveOneAnswer(answer_index);
+        this.saveOneAnswer(select_value);
         // 按钮&进度条动画延迟
         this.setState(
             {

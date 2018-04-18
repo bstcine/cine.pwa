@@ -17,7 +17,7 @@ module.exports = {
 
     publicPath,
 
-    pages: ['content', 'cquiz', 'address', 'vocabtest','user'],
+    pages: ['content', 'cquiz', 'address', 'vocabtest','tgrammar'],
 
     vendors: [
         'react',

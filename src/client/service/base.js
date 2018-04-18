@@ -11,11 +11,14 @@ import Api from '@/../APIConfig';
  * @param query
  * @returns {PromiseLike<T> | Promise<T>}
  */
-export let fetchData = (APIURL, query) => {
-    return post(APIURL, query).then(res => {
-        return [res.except_case_desc, res.result]
-    })
-}
+export let fetchData = async (APIURL, query) => {
+    try {
+        let {except_case_desc, result} =  await post(APIURL, query);
+        return [except_case_desc, result];
+    } catch (error) {
+        return [error];
+    }
+};
 
 export let getWechatJsSignature = () => {
     let signatureUrl = getPureUrl();

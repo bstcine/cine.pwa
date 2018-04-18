@@ -1,8 +1,34 @@
 @import "~asset/style/common";
 @import "~asset/style/_cine.less";
 
-@import "questionformat.less";
+body {
+  .container, .container-fluid {
+    width: 100%;
+  }
+}
+.course-container-bg {
+    background-color: #f8f9fa;
+    overflow: hidden;
+}
 
-.questionitems{
-    margin: 0 20px;
+@media @media-up-sm {
+    
+  body {
+    background-color: #021a52;
+    .container {
+      width: 18.80rem;
+      margin: 0 auto;
+    }
+  }
+}
+
+@import 'tgrammar.less';
+@import 'tgrammar-stats-list.less';
+
+.tgrammar-stats-list,
+.tgrammar {
+    margin: 0.55rem auto;
+    background-color: #fff;
+    width: 18.8rem;
+    padding: 65px 40px;
 }

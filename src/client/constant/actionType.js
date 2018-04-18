@@ -43,6 +43,7 @@ export const Action_UI_RECEIVE = 'Action_UI_RECEIVE';
 //entry/user/coupon
 export const Action_UC_REQUEST = 'Action_UC_REQUEST';
 export const Action_UC_RECEIVE = 'Action_UC_RECEIVE';
+export const Action_UC_EXPAND = 'Action_UC_EXPAND';
 
 //entry/user/order
 export const Action_UO_ = 'Action_UO_';

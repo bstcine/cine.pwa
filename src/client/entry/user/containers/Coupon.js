@@ -12,7 +12,7 @@ class CouponPanel extends Component {
     }
 
     render() {
-        let {coupons} = this.props;
+        let {coupons,actions} = this.props;
 
         let use = coupons && coupons.filter(item => item.status === '0');
         let used = coupons && coupons.filter(item => item.status === '1');
@@ -28,13 +28,13 @@ class CouponPanel extends Component {
                     </TabItems>
                     <TabPanels>
                         <TabPanel>
-                            <CouponList coupons={use}/>
+                            <CouponList coupons={use} actions={actions}/>
                         </TabPanel>
                         <TabPanel>
-                            <CouponList coupons={used}/>
+                            <CouponList coupons={used} actions={actions}/>
                         </TabPanel>
                         <TabPanel>
-                            <CouponList coupons={expired}/>
+                            <CouponList coupons={expired} actions={actions}/>
                         </TabPanel>
                     </TabPanels>
                 </Tabs>
@@ -44,7 +44,7 @@ class CouponPanel extends Component {
 }
 
 const mapStateToProps = state => ({
-    coupons: state.postsByCoupon
+    coupons: state.coupons
 })
 
 const mapDispatchToProps = dispatch => ({

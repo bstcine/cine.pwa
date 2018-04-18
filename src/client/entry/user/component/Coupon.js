@@ -6,7 +6,7 @@ export default class Coupon extends Component {
     }
 
     render() {
-        let {coupon} = this.props;
+        let {coupon,actions} = this.props;
 
         let value = coupon.type === "1" ? coupon.value : 100 - Number(coupon.value) * 100;
         let unit = coupon.type === "1" ? "元" : "折";
@@ -25,7 +25,7 @@ export default class Coupon extends Component {
                     <span className="unit">{unit}</span>
                 </div>
                 <div className="coupon-desc">
-                    <div className="coupon-name">{coupon.name}</div>
+                    <div className="coupon-name" onClick={() => actions.expandCoupon(coupon.id)}>{coupon.name}</div>
                     <div className="coupon-no">优惠券码：{coupon.no}</div>
                 </div>
                 <div className="effective-date">

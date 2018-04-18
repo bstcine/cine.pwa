@@ -24,7 +24,7 @@ class App extends Component {
 }
 
 const mapStateToProps = state => ({
-    user: state.postsByUser
+    user: state.user
 })
 
 const mapDispatchToProps = dispatch => ({

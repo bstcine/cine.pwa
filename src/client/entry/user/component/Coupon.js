@@ -13,9 +13,9 @@ export default class Coupon extends Component {
 
         let couponStyle = "coupon-ticket";
         if (coupon.status === "1") {
-            couponStyle = "coupon-ticket-used";
+            couponStyle = "coupon-ticket coupon-ticket-used";
         } else if (coupon.status === "2") {
-            couponStyle = "coupon-ticket-expired";
+            couponStyle = "coupon-ticket coupon-ticket-expired";
         }
 
         return (
@@ -32,7 +32,8 @@ export default class Coupon extends Component {
                     有效期：{coupon.effective_at.substring(0, 10).replace(/-/g, '.')} -{' '}
                     {coupon.expire_at.substring(0, 10).replace(/-/g, '.')}
                 </div>
-                {coupon.status === "1" && <img src={require("../asset/image/ic_coupon_used.png")}/>}
+                {coupon.remark && <img className='coupon-expand' src={require("../asset/image/ico_arr_coup_up.png")}/>}
+                {coupon.status === "1" && <img className="coupon-status" src={require("../asset/image/ic_coupon_used.png")}/>}
             </div>
         );
     }

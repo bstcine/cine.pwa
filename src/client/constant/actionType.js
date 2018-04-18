@@ -1,3 +1,4 @@
+//通用的
 export const Action_List_Filter = 'Action_List_Filter';
 export const Action_List_Filter_Confirm = 'Action_List_Filter_Confirm';
 export const Action_List_Item_Link = 'Action_List_Item_Link';
@@ -16,13 +17,23 @@ export const Action_Handle_SaveAndNew = 'Action_Handle_SaveAndNew';
 export const Action_Handle_Publish = 'Action_Handle_Publish';
 export const Action_Handle_Refresh = 'Action_Handle_Refresh';
 
-//entry/content/course :2种命名2选一
-export const Action_CC_ = 'Action_CC_';
 
+//entry/content/course
 const Action_CC = {
     INIT: 'init',
+    NETWORK_ERROR: 'NETWORK_ERROR',
+    NETWORK_ERROR_TIMEOUT: 'NETWORK_ERROR_TIMEOUT',
 };
 export default Action_CC;
+
+
+//entry/text/grammar
+const Action_TG = {
+    INIT: 'init',
+    NETWORK_ERROR: 'NETWORK_ERROR',
+    NETWORK_ERROR_TIMEOUT: 'NETWORK_ERROR_TIMEOUT',
+};
+export default Action_TG;
 
 
 //entry/user/info

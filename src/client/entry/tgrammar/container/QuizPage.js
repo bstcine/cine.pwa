@@ -19,11 +19,17 @@ const mapStateToProps = state => {
     return {init};
 };
 
+const mapDispatchToProps = (dispatch) => ({
+    fetchQuizData: ({stats_quiz_id}) => {
+        dispatch(fetchQuizData({stats_quiz_id}));
+    }
+});
+
 class QuizPage extends Component {
     componentDidMount() {
         let {stats_quiz_id} = getParam();
-        const {dispatch} = this.props;
-        dispatch(fetchQuizData({stats_quiz_id}));
+        const {fetchQuizData} = this.props;
+        fetchQuizData({stats_quiz_id});
     }
 
     // componentWillReceiveProps(nextProps){
@@ -53,4 +59,4 @@ class QuizPage extends Component {
     }
 }
 
-export default withRouter(connect(mapStateToProps)(QuizPage));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(QuizPage));

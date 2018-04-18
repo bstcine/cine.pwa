@@ -52,6 +52,10 @@ export const fetchQuizData = ({stats_quiz_id}) => async dispatch => {
     let [err, result] = await fetchData(Api.APIURL_Content_Quiz_Grammar);
     if (err) return dispatch(networkError(err));
     let {user, quiz} = result;
+    if (user.role_id !== '3' && !stats_quiz_id) {
+        location.href = '/tgrammar/stats/list';
+        return;
+    }
     dispatch(saveUser(user));
     let no = 0;
     quiz.data.forEach(question => {

@@ -18,22 +18,27 @@ export default class Coupon extends Component {
             couponStyle = "coupon-ticket coupon-ticket-expired";
         }
 
+        let arrImgSrc = coupon.expand ? require("../asset/image/ico_arr_coup_up.png") : require("../asset/image/ico_arr_used_down.png")
+
         return (
-            <div className={couponStyle}>
-                <div className="coupon-value">
-                    <span className="value">{value}</span>
-                    <span className="unit">{unit}</span>
+            <div className={'coupon-detail'}>
+                <div className={couponStyle}>
+                    <div className="coupon-value">
+                        <span className="value">{value}</span>
+                        <span className="unit">{unit}</span>
+                    </div>
+                    <div className="coupon-desc">
+                        <div className="coupon-name">{coupon.name}</div>
+                        <div className="coupon-no">优惠券码：{coupon.no}</div>
+                    </div>
+                    <div className="effective-date">
+                        有效期：{coupon.effective_at.substring(0, 10).replace(/-/g, '.')} -{' '}
+                        {coupon.expire_at.substring(0, 10).replace(/-/g, '.')}
+                    </div>
+                    {coupon.remark && <img className='coupon-expand' src={arrImgSrc} onClick={() => actions.expandCoupon(coupon.id)}/>}
+                    {coupon.status === "1" && <img className="coupon-status" src={require("../asset/image/ic_coupon_used.png")}/>}
                 </div>
-                <div className="coupon-desc">
-                    <div className="coupon-name" onClick={() => actions.expandCoupon(coupon.id)}>{coupon.name}</div>
-                    <div className="coupon-no">优惠券码：{coupon.no}</div>
-                </div>
-                <div className="effective-date">
-                    有效期：{coupon.effective_at.substring(0, 10).replace(/-/g, '.')} -{' '}
-                    {coupon.expire_at.substring(0, 10).replace(/-/g, '.')}
-                </div>
-                {coupon.remark && <img className='coupon-expand' src={require("../asset/image/ico_arr_coup_up.png")}/>}
-                {coupon.status === "1" && <img className="coupon-status" src={require("../asset/image/ic_coupon_used.png")}/>}
+                {(coupon.remark && coupon.expand) && <div className={'coupon-remark'}>{coupon.remark}</div>}
             </div>
         );
     }

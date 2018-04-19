@@ -61,169 +61,185 @@
     font-size: .32rem;
   }
 
-  .coupon-ticket {
+  .coupon-detail {
     position: relative;
     margin-left: 1.2rem;
     margin-right: .59rem;
     margin-top: .9rem;
-    width: 6.5rem;
-    height: 2.8rem;
-    background: #fff url(../image/bg_coupon.png) no-repeat left;
-    background-size: contain;
-    border-radius: .12rem .12rem 0 0;
-    .coupon-value {
-      position: absolute;
-      top: .69rem;
-      left: .49rem;
-      font-size: 0;
-      font-family: PingFangSC-Medium;
-      .value, .unit {
-        vertical-align: bottom;
-        color: #f56e00;
+
+    .coupon-ticket {
+      position: relative;
+      width: 6.5rem;
+      height: 2.8rem;
+      background: #fff url(../image/bg_coupon.png) no-repeat left;
+      background-size: contain;
+      border-radius: .12rem .12rem 0 0;
+      .coupon-value {
+        position: absolute;
+        top: .69rem;
+        left: .49rem;
+        font-size: 0;
+        font-family: PingFangSC-Medium;
+        .value, .unit {
+          vertical-align: bottom;
+          color: #f56e00;
+        }
+        .value {
+          font-size: .32rem;
+        }
+        .unit {
+          font-size: .30rem;
+        }
       }
-      .value {
-        font-size: .32rem;
+      .coupon-desc {
+        position: absolute;
+        top: .57rem;
+        left: 2.53rem;
+        font-size: 0;
+        .coupon-name {
+          font-size: .32rem;
+          color: #2b2b2c;
+          font-family: PingFangSC-Medium;
+        }
+        .coupon-no {
+          margin-top: .15rem;
+          font-size: .22rem;
+          color: #7a7b7d;
+          font-family: PingFangSC-Regular;
+        }
       }
-      .unit {
-        font-size: .30rem;
-      }
-    }
-    .coupon-desc {
-      position: absolute;
-      top: .57rem;
-      left: 2.53rem;
-      font-size: 0;
-      .coupon-name {
-        font-size: .32rem;
+      .effective-date {
+        position: absolute;
+        top: 1.97rem;
+        left: .37rem;
+        font-family: PingFangSC-Regular;
+        font-size: .20rem;
         color: #2b2b2c;
-        font-family: PingFangSC-Medium;
       }
-      .coupon-no {
-        margin-top: .15rem;
-        font-size: .22rem;
-        color: #7a7b7d;
-        font-family: PingFangSC-Regular;
+      .coupon-expand{
+        position: absolute;
+        width: .28rem;
+        height: .25rem;
+        bottom: .2rem;
+        left: 3.11rem;
       }
     }
-    .effective-date {
-      position: absolute;
-      top: 1.97rem;
-      left: .37rem;
+
+    .coupon-remark {
+      width: 6.17rem;
+      margin-left: .05rem;
+      background-color: #fbfbfb;
+      border-radius: 0px 0px 12px 12px;
+      padding: .2rem .36rem .41rem .36rem;
+      color: #919395;
       font-family: PingFangSC-Regular;
-      font-size: .20rem;
-      color: #2b2b2c;
+      font-size: 12px;
     }
-    .coupon-expand{
-      position: absolute;
-      width: .28rem;
-      height: .25rem;
-      bottom: .2rem;
-      left: 3.11rem;
+
+    .coupon-ticket-used {
+      background: #fff url(../image/bg_coupon_used.png) no-repeat left;
+      background-size: contain;
+      border-radius: .12rem .12rem 0 0;
+      .coupon-value {
+        position: absolute;
+        top: .69rem;
+        left: .49rem;
+        font-size: 0;
+        font-family: PingFangSC-Medium;
+        .value, .unit {
+          vertical-align: bottom;
+          color: #959595;
+        }
+        .value {
+          font-size: .32rem;
+        }
+        .unit {
+          font-size: .30rem;
+        }
+      }
+      .coupon-desc {
+        position: absolute;
+        top: .57rem;
+        left: 2.53rem;
+        font-size: 0;
+        .coupon-name {
+          font-size: .32rem;
+          color: #7b7c7d;
+          font-family: PingFangSC-Medium;
+        }
+        .coupon-no {
+          margin-top: .15rem;
+          font-size: .22rem;
+          color: #7b7c7d;
+          font-family: PingFangSC-Regular;
+        }
+      }
+      .effective-date {
+        position: absolute;
+        top: 1.97rem;
+        left: .37rem;
+        font-family: PingFangSC-Regular;
+        font-size: .20rem;
+        color: #7b7c7d;
+      }
+      .coupon-status{
+        position: absolute;
+        width: 1.72rem;
+        height: 1.72rem;
+        right: .4rem;
+        bottom: .2rem;
+      }
+    }
+
+    .coupon-ticket-expired {
+      background: #fff url(../image/bg_coupon_expired.png) no-repeat left;
+      background-size: contain;
+      border-radius: .12rem .12rem 0 0;
+      .coupon-value {
+        position: absolute;
+        top: .69rem;
+        left: .49rem;
+        font-size: 0;
+        font-family: PingFangSC-Medium;
+        .value, .unit {
+          vertical-align: bottom;
+          color: #b8babc;
+        }
+        .value {
+          font-size: .32rem;
+        }
+        .unit {
+          font-size: .30rem;
+        }
+      }
+      .coupon-desc {
+        position: absolute;
+        top: .57rem;
+        left: 2.53rem;
+        font-size: 0;
+        .coupon-name {
+          font-size: .32rem;
+          color: #b8babc;
+          font-family: PingFangSC-Medium;
+        }
+        .coupon-no {
+          margin-top: .15rem;
+          font-size: .22rem;
+          color: #b8babc;
+          font-family: PingFangSC-Regular;
+        }
+      }
+      .effective-date {
+        position: absolute;
+        top: 1.97rem;
+        left: .37rem;
+        font-family: PingFangSC-Regular;
+        font-size: .20rem;
+        color: #b8babc;
+      }
     }
   }
 
-  .coupon-ticket-used {
-    background: #fff url(../image/bg_coupon_used.png) no-repeat left;
-    background-size: contain;
-    border-radius: .12rem .12rem 0 0;
-    .coupon-value {
-      position: absolute;
-      top: .69rem;
-      left: .49rem;
-      font-size: 0;
-      font-family: PingFangSC-Medium;
-      .value, .unit {
-        vertical-align: bottom;
-        color: #959595;
-      }
-      .value {
-        font-size: .32rem;
-      }
-      .unit {
-        font-size: .30rem;
-      }
-    }
-    .coupon-desc {
-      position: absolute;
-      top: .57rem;
-      left: 2.53rem;
-      font-size: 0;
-      .coupon-name {
-        font-size: .32rem;
-        color: #7b7c7d;
-        font-family: PingFangSC-Medium;
-      }
-      .coupon-no {
-        margin-top: .15rem;
-        font-size: .22rem;
-        color: #7b7c7d;
-        font-family: PingFangSC-Regular;
-      }
-    }
-    .effective-date {
-      position: absolute;
-      top: 1.97rem;
-      left: .37rem;
-      font-family: PingFangSC-Regular;
-      font-size: .20rem;
-      color: #7b7c7d;
-    }
-    .coupon-status{
-      position: absolute;
-      width: 1.72rem;
-      height: 1.72rem;
-      right: .4rem;
-      bottom: .2rem;
-    }
-  }
-
-  .coupon-ticket-expired {
-    background: #fff url(../image/bg_coupon_expired.png) no-repeat left;
-    background-size: contain;
-    border-radius: .12rem .12rem 0 0;
-    .coupon-value {
-      position: absolute;
-      top: .69rem;
-      left: .49rem;
-      font-size: 0;
-      font-family: PingFangSC-Medium;
-      .value, .unit {
-        vertical-align: bottom;
-        color: #b8babc;
-      }
-      .value {
-        font-size: .32rem;
-      }
-      .unit {
-        font-size: .30rem;
-      }
-    }
-    .coupon-desc {
-      position: absolute;
-      top: .57rem;
-      left: 2.53rem;
-      font-size: 0;
-      .coupon-name {
-        font-size: .32rem;
-        color: #b8babc;
-        font-family: PingFangSC-Medium;
-      }
-      .coupon-no {
-        margin-top: .15rem;
-        font-size: .22rem;
-        color: #b8babc;
-        font-family: PingFangSC-Regular;
-      }
-    }
-    .effective-date {
-      position: absolute;
-      top: 1.97rem;
-      left: .37rem;
-      font-family: PingFangSC-Regular;
-      font-size: .20rem;
-      color: #b8babc;
-    }
-  }
 }
 
 @media @media-up-xs {

@@ -99,7 +99,9 @@ Step2.  运行 `$ npm run prod-build`
 src/client/constant/actionType.js
 
 Action_CC...
-CC: entry对应的模块简写
+CC: entry对应的页面简写
+
+目前：可以清晰的看到某个模块某个页面对应actionType
 ```
 
 <br>
@@ -110,9 +112,9 @@ CC: entry对应的模块简写
 src/client/action/userAction.js
 
 命名规范:
-userAction: entry的User Page
-uCouponAction: entry的User Page对应的Coupon模块
-- 如果代码比较多，某个模块的Action也可单独写一个js文件
+userAction: entry的User模块
+uCouponAction: entry的User模块对应的Coupon page
+- 如果代码比较多，某个page的Action也可单独写一个js文件
 
 
 dispatch格式规范:
@@ -120,6 +122,9 @@ dispatch格式规范:
   type: ActionType定义的,   //与reducer需要的ActionType有1：1的对应关系
   payload: 需要传递的数据
 }
+
+
+目前：可以清晰的看到某个页面对应action
 ```
 
 <br>
@@ -141,6 +146,7 @@ src/client/entry/page/container/****.js
 
 - conponent
 ```
+  - 尽量使用Pure Function
   - 尽量不要写额外的Action，触发的Action来源于this.props.action
     Action代码应该都在：src/client/action/***Action.js
 

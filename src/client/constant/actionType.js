@@ -24,7 +24,7 @@ const Action_CC = {
     NETWORK_ERROR: 'NETWORK_ERROR',
     NETWORK_ERROR_TIMEOUT: 'NETWORK_ERROR_TIMEOUT',
 };
-export default Action_CC;
+export {Action_CC};
 
 
 //entry/text/grammar
@@ -33,17 +33,20 @@ const Action_TG = {
     NETWORK_ERROR: 'NETWORK_ERROR',
     NETWORK_ERROR_TIMEOUT: 'NETWORK_ERROR_TIMEOUT',
 };
-export default Action_TG;
+export {Action_TG};
 
 
 //entry/user/info
-export const Action_UI_REQUEST = 'Action_UI_REQUEST';
-export const Action_UI_RECEIVE = 'Action_UI_RECEIVE';
-
+export const Action_UI = {
+    REQUEST: 'UI_REQUEST',
+    RECEIVE: 'UI_RECEIVE',
+};
 //entry/user/coupon
-export const Action_UC_REQUEST = 'Action_UC_REQUEST';
-export const Action_UC_RECEIVE = 'Action_UC_RECEIVE';
-export const Action_UC_EXPAND = 'Action_UC_EXPAND';
+export const Action_UC = {
+    REQUEST: 'UC_REQUEST',
+    RECEIVE: 'UC_RECEIVE',
+    EXPAND: 'UC_EXPAND'
+};
 
 //entry/user/order
 export const Action_UO_ = 'Action_UO_';

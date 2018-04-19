@@ -1,5 +1,5 @@
 import {combineReducers} from 'redux'
-import {Action_UI, Action_UC} from "@/constant/actionType";
+import {Action_UI, Action_UC} from "@/constant/actionTypeUser";
 import CommonUtil from "@/util/common";
 
 const user = (state = {

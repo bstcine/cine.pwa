@@ -7,7 +7,7 @@ import {
 } from 'react-router-dom'
 import {Tabs, TabItems, TabItem, TabPanels, TabPanel} from '@/component/Tabs';
 import EntryComponent from '@/component/EntryComponent';
-import CouponPanel from '../containers/Coupon'
+import CouponContainer from '../containers/CouponContainer'
 import {logoutV1} from "@/service/base";
 import '../asset/style/index.less';
 
@@ -100,7 +100,7 @@ export default class UserPanel extends EntryComponent {
                                 <span>hello point</span>
                             </TabPanel>
                             <TabPanel id={'coupon'}>
-                                <CouponPanel/>
+                                <CouponContainer/>
                             </TabPanel>
                             <TabPanel/>
                             <TabPanel/>

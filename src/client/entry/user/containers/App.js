@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
-import * as UserActions from '@/action/userAction'
+import {actionUserInfo} from "@/action/userAction";
 import UserPanel from "@/entry/user/component/UserPanel";
 import storeUtil from "@/util/storeUtil";
 
@@ -28,7 +28,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-    actions: bindActionCreators(UserActions, dispatch)
+    actions: bindActionCreators(actionUserInfo, dispatch)
 })
 
 export default connect(

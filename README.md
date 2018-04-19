@@ -112,8 +112,8 @@ CC: entry对应的页面简写
 src/client/action/userAction.js
 
 命名规范:
-userAction: entry的User Page
-uCouponAction: entry的User Page对应的Coupon模块
+userAction: entry的User模块
+uCouponAction: entry的User模块对应的Coupon page
 - 如果代码比较多，某个模块的Action也可单独写一个js文件
 
 

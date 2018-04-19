@@ -114,7 +114,7 @@ src/client/action/userAction.js
 命名规范:
 userAction: entry的User模块
 uCouponAction: entry的User模块对应的Coupon page
-- 如果代码比较多，某个模块的Action也可单独写一个js文件
+- 如果代码比较多，某个page的Action也可单独写一个js文件
 
 
 dispatch格式规范:

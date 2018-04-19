@@ -4,7 +4,6 @@ const path = require('path');
 const MODE = '';
 const API_Host_URL = 'http://apptest.bstcine.com';
 
-
 let publicPath = MODE === 'static' ? '../../' : '/';
 
 module.exports = {
@@ -17,7 +16,7 @@ module.exports = {
 
     publicPath,
 
-    pages: ['content', 'cquiz', 'address', 'vocabtest','tgrammar','user'],
+    pages: ['content', 'cquiz', 'address', 'vocabtest', 'tgrammar', 'user'],
 
     vendors: [
         'react',

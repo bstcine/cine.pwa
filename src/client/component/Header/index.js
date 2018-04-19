@@ -11,7 +11,7 @@ export default class Header extends Component {
         this.closeNav = this.closeNav.bind(this);
         this.toggleNav = this.toggleNav.bind(this);
         this.toggleUserCenter = this.toggleUserCenter.bind(this);
-        console.log(`storeUtil.getToken() ${storeUtil.getToken()}`)
+        console.log(`storeUtil.getToken() ${storeUtil.getToken()}`);
         this.state = {
             logined: !!storeUtil.getToken(),
             isNavOpen: false,
@@ -23,11 +23,10 @@ export default class Header extends Component {
         e.stopPropagation();
         if (this.headerEle === e.target) {
             this.setState(preState => {
-                if (preState.isNavOpen) return {isNavOpen: false}
+                if (preState.isNavOpen) return {isNavOpen: false};
             });
         }
     }
-
 
     logout() {
         logoutV1().then(() => {
@@ -39,7 +38,6 @@ export default class Header extends Component {
         this.setState(preState => ({
             isNavOpen: !preState.isNavOpen
         }));
-
     }
 
     toggleUserCenter() {
@@ -74,6 +72,9 @@ export default class Header extends Component {
                                 <a href="/addFeedback">用户反馈</a>
                             </li>
                             <li className="nav-item">
+                                <a href="/tgrammar/quiz">核心语法测试</a>
+                            </li>
+                            <li className="nav-item">
                                 <a href="javascript:" onClick={this.logout}>
                                     退出
                                 </a>
@@ -100,24 +101,28 @@ export default class Header extends Component {
         let {isShow} = this.props;
         if (!isShow) return null;
         let {isNavOpen} = this.state;
-        console.log('header')
+        console.log('header');
         return (
             <div className="container">
-                <div className={isNavOpen ? 'header open' : 'header'} ref={ele => this.headerEle = ele} onClick={this.closeNav}>
-                    <div className="nav-toggle-open" onClick={this.toggleNav}/>
+                <div
+                    className={isNavOpen ? 'header open' : 'header'}
+                    ref={ele => (this.headerEle = ele)}
+                    onClick={this.closeNav}
+                >
+                    <div className="nav-toggle-open" onClick={this.toggleNav} />
                     <div className="brand-logo">
                         <a href="/">
-                            <img src={require('@/asset/image/logo_bstcine.png')} alt="brand-logo"/>
+                            <img src={require('@/asset/image/logo_bstcine.png')} alt="brand-logo" />
                         </a>
                     </div>
                     <div
-                        ref={ele => this.navEle = ele}
+                        ref={ele => (this.navEle = ele)}
                         className="nav-list"
                         onClick={e => {
                             e.stopPropagation();
                         }}
                     >
-                        <div className="nav-toggle-close" onClick={this.toggleNav}/>
+                        <div className="nav-toggle-close" onClick={this.toggleNav} />
                         <ul className="nav-list-left">
                             <li className="nav-item">
                                 <a href="/">首页</a>

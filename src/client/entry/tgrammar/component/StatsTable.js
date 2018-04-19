@@ -11,7 +11,16 @@ const convGrade = grade => {
 
 const Operation = ({item}) => {
     if (item.status === '2') {
-        return <span className="red">已批改 <i className="material-icons">&#xE876;</i></span>;
+        return <button
+            className="btn btn-round btn-done"
+            onClick={e => {
+                location.href = `/tgrammar/quiz?stats_quiz_id=${item.id}&cmd=check`;
+            }}
+        >
+        已批改 <i className="material-icons">&#xE876;</i>
+        </button>;
+
+        // <span className="red">已批改 <i className="material-icons">&#xE876;</i></span>;
     } else {
         return (
             <button

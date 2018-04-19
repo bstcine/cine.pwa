@@ -51,8 +51,12 @@ export const fetchQuizData = ({stats_quiz_id}) => async dispatch => {
     dispatch(requestQuizData());
     let [err, result] = await fetchData(Api.APIURL_Content_Quiz_Grammar);
     if (err) return dispatch(networkError(err));
-    let {user, quiz} = result;
-    if (user.role_id !== '3' && !stats_quiz_id) {
+    let {user, quiz, lastestStatsQuiz} = result;
+    let lastest_stats_quiz_id = null;
+    if (lastestStatsQuiz) {
+        lastest_stats_quiz_id = lastestStatsQuiz.id;
+    }
+    if (user.role_id !== '3' && !stats_quiz_id && !lastest_stats_quiz_id) {
         location.href = '/tgrammar/stats/list';
         return;
     }
@@ -73,12 +77,12 @@ export const fetchQuizData = ({stats_quiz_id}) => async dispatch => {
         }
     });
     dispatch(receiveQuizData(quiz));
-    if (user.role_id === '3' && !stats_quiz_id) {
+    if (user.role_id === '3' && !stats_quiz_id && !lastest_stats_quiz_id) {
         dispatch(openTipModal());
     }
-    if (stats_quiz_id) {
+    if (stats_quiz_id || lastest_stats_quiz_id) {
         dispatch(requestStatsQuizData());
-        let [err_detail, result_detail] = await fetchData(Api.APIURL_Stats_Quiz_Detail, {cid: stats_quiz_id});
+        let [err_detail, result_detail] = await fetchData(Api.APIURL_Stats_Quiz_Detail, {cid: stats_quiz_id || lastest_stats_quiz_id});
         if (err_detail) return dispatch(networkError(err_detail));
         let {statsQuiz, statsQuizDetail} = result_detail;
         dispatch(receiveStatsQuizData({statsQuiz, statsQuizDetail}));

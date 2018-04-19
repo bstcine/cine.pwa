@@ -99,7 +99,9 @@ Step2.  运行 `$ npm run prod-build`
 src/client/constant/actionType.js
 
 Action_CC...
-CC: entry对应的模块简写
+CC: entry对应的页面简写
+
+目前：可以清晰的看到某个模块某个页面对应actionType
 ```
 
 <br>
@@ -120,6 +122,9 @@ dispatch格式规范:
   type: ActionType定义的,   //与reducer需要的ActionType有1：1的对应关系
   payload: 需要传递的数据
 }
+
+
+目前：可以清晰的看到某个页面对应action
 ```
 
 <br>
@@ -141,6 +146,7 @@ src/client/entry/page/container/****.js
 
 - conponent
 ```
+  - 尽量使用Pure Function
   - 尽量不要写额外的Action，触发的Action来源于this.props.action
     Action代码应该都在：src/client/action/***Action.js
 

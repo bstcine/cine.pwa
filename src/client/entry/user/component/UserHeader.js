@@ -14,7 +14,7 @@ const UserHeader = ({user, handleClick}) => {
     return (
         <React.Fragment>
             <div className="user-header">
-                <a className={'user-panel'}><img src={require('../asset/image/ico_bst_home.png')}/></a>
+                <a className={'user-mine'}><img src={require('../asset/image/ico_mine@2x.png')}/></a>
                 <div className="user-logo">
                     <img src={headImg}/>
                 </div>

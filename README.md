@@ -144,7 +144,7 @@ src/client/entry/page/container/****.js
 
 <br>
 
-- conponent
+- component
 ```
   - 尽量使用Pure Function
   - 尽量不要写额外的Action，触发的Action来源于this.props.action

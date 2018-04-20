@@ -2,10 +2,10 @@ import React, {Component} from 'react';
 import {Tabs, TabItems, TabItem, TabPanels, TabPanel} from '@/component/Tabs/index';
 import CouponList from '../component/CouponList'
 import {connect} from "react-redux";
-import * as UserActions from '@/action/userAction'
 import {bindActionCreators} from 'redux'
+import {actionUserCoupon} from "@/action/userAction";
 
-class CouponPanel extends Component {
+class CouponContainer extends Component {
 
     componentDidMount() {
         this.props.actions.loadUserCoupon()
@@ -48,10 +48,10 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-    actions: bindActionCreators(UserActions, dispatch)
+    actions: bindActionCreators(actionUserCoupon, dispatch)
 })
 
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(CouponPanel)
+)(CouponContainer)

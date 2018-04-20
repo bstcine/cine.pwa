@@ -36,17 +36,6 @@ const Action_TG = {
 export {Action_TG};
 
 
-//entry/user/info
-export const Action_UI = {
-    REQUEST: 'UI_REQUEST',
-    RECEIVE: 'UI_RECEIVE',
-};
-//entry/user/coupon
-export const Action_UC = {
-    REQUEST: 'UC_REQUEST',
-    RECEIVE: 'UC_RECEIVE',
-    EXPAND: 'UC_EXPAND'
-};
 
 //entry/user/order
 export const Action_UO_ = 'Action_UO_';

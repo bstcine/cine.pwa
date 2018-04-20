@@ -6,9 +6,11 @@
   position: relative;
   width: 100%;
 
+  .user-mine {
+    display: none;
+  }
+
   .user-logo {
-    height: 1.21rem;
-    width: 1.21rem;
     margin-left: 0.85rem;
     margin-top: 0.38rem;
     float: left;
@@ -102,23 +104,54 @@
 
   .user-home {
     float: right;
+    display: flex;
     margin-top: 0.87rem;
-    line-height: 0;
     margin-right: 0.88rem;
 
     img {
-      width: 0.39rem;
-      height: 0.39rem;
+      width: .39rem;
+      height: .39rem;
     }
   }
 }
 
-@media @media-up-sm {
-  .header {
-    width: 18.8rem;
-    margin: 0 auto;
-    height: 1.82rem;
-    line-height: 1;
-    font-size: 0;
+@media @media-xs {
+  .user-header {
+    height: 1.1rem;
+
+    .user-mine {
+      display: flex;
+      margin-left: 0.35rem;
+      margin-top: 0.39rem;
+      float: left;
+      img {
+        width: .34rem;
+        height: .40rem;
+      }
+    }
+
+    .user-logo {
+      display: none;
+    }
+    .user-info {
+      display: none;
+    }
+    .user-point {
+      display: none;
+    }
+    .user-coupon {
+      display: none;
+    }
+    .user-home {
+      float: right;
+      display: flex;
+      margin-top: .40rem;
+      margin-right: .41rem;
+
+      img {
+        width: .39rem;
+        height: .39rem;
+      }
+    }
   }
 }

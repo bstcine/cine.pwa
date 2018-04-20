@@ -1,9 +1,9 @@
 import React from 'react';
-import {render} from 'react-dom';
-import {createStore, applyMiddleware} from 'redux';
+import { render } from 'react-dom';
+import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
-import {BrowserRouter as Router, Route} from 'react-router-dom';
-import {Provider} from 'react-redux';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { Provider } from 'react-redux';
 import rootReducer from './reducer';
 import QuizPage from './container/QuizPage';
 import StatsListPage from './container/StatsListPage';
@@ -25,11 +25,23 @@ render(
             <React.Fragment>
                 <Route
                     path="/tgrammar/quiz"
-                    component={props => createComponent(QuizPage, /* userRequired */ true, props)}
+                    component={props =>
+                        createComponent(
+                            QuizPage,
+                            /* userRequired */ true,
+                            props
+                        )
+                    }
                 />
                 <Route
                     path="/tgrammar/stats/list"
-                    component={props => createComponent(StatsListPage, /* userRequired */ true, props)}
+                    component={props =>
+                        createComponent(
+                            StatsListPage,
+                            /* userRequired */ true,
+                            props
+                        )
+                    }
                 />
             </React.Fragment>
         </Provider>

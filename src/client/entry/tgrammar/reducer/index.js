@@ -1,4 +1,4 @@
-import {combineReducers} from 'redux';
+import { combineReducers } from 'redux';
 
 import {
     SAVE_USER,
@@ -20,20 +20,20 @@ import {
     REQUEST_STATS_QUIZ_LIST,
     RECEIVE_STATS_QUIZ_LIST,
     NETWORK_ERROR,
-    NETWORK_ERROR_TIMEOUT
+    NETWORK_ERROR_TIMEOUT,
 } from '../action';
 
 /**
  * 除题目外的测验数据
  */
-const quiz = (state = {}, {type, payload}) => {
+const quiz = (state = {}, { type, payload }) => {
     switch (type) {
         case RECEIVE_QUIZ_DATA:
             return {
                 ...state,
                 id: payload.id,
                 name: payload.name,
-                question_count: payload.question_count
+                question_count: payload.question_count,
             };
         default:
             return state;
@@ -43,7 +43,7 @@ const quiz = (state = {}, {type, payload}) => {
 /**
  *  questionId 组成的数组
  */
-const questionIds = (state = [], {type, payload}) => {
+const questionIds = (state = [], { type, payload }) => {
     switch (type) {
         case RECEIVE_QUIZ_DATA: {
             let newState = payload.questions.map(question => question.id);
@@ -57,10 +57,10 @@ const questionIds = (state = [], {type, payload}) => {
 /**
  *  questionId 为 key 的 questions 对象
  */
-const questionsById = (state = {}, {type, payload}) => {
+const questionsById = (state = {}, { type, payload }) => {
     switch (type) {
         case RECEIVE_QUIZ_DATA: {
-            let newState = {...state};
+            let newState = { ...state };
             payload.questions.forEach(question => {
                 newState[question.id] = question;
             });
@@ -74,38 +74,38 @@ const questionsById = (state = {}, {type, payload}) => {
 /**
  *  questionId 为 key 的 answers 对象
  */
-const answersById = (state = {}, {type, payload}) => {
+const answersById = (state = {}, { type, payload }) => {
     switch (type) {
         case SAVE_QUESTION1_SELECT_ANSWER:
         case SAVE_QUESTION3_SELECT_ANSWER: {
-            let newState = {...state};
-            let {id: question_id, select_value} = payload;
-            if (!newState[question_id]) newState[question_id] = {question_id};
+            let newState = { ...state };
+            let { id: question_id, select_value } = payload;
+            if (!newState[question_id]) newState[question_id] = { question_id };
             let answer = newState[question_id];
             answer.select_value = select_value;
             return newState;
         }
         case SAVE_QUESTION3_TEXT_ANSWER: {
-            let newState = {...state};
-            let {id: question_id, text_value} = payload;
-            if (!newState[question_id]) newState[question_id] = {question_id};
+            let newState = { ...state };
+            let { id: question_id, text_value } = payload;
+            if (!newState[question_id]) newState[question_id] = { question_id };
             let answer = newState[question_id];
             answer.text_value = text_value;
             return newState;
         }
         case SAVE_QUESTION1_FEEDBACK_SELECT_ANSWER:
         case SAVE_QUESTION3_FEEDBACK_SELECT_ANSWER: {
-            let newState = {...state};
-            let {id: question_id, is_correct} = payload;
-            if (!newState[question_id]) newState[question_id] = {question_id};
+            let newState = { ...state };
+            let { id: question_id, is_correct } = payload;
+            if (!newState[question_id]) newState[question_id] = { question_id };
             let answer = newState[question_id];
             answer.is_correct = is_correct;
             return newState;
         }
         case SAVE_QUESTION3_FEEDBACK_TEXT_ANSWER: {
-            let newState = {...state};
-            let {id: question_id, feedback} = payload;
-            if (!newState[question_id]) newState[question_id] = {question_id};
+            let newState = { ...state };
+            let { id: question_id, feedback } = payload;
+            if (!newState[question_id]) newState[question_id] = { question_id };
             let answer = newState[question_id];
             answer.feedback = feedback;
             return newState;
@@ -126,11 +126,11 @@ const answersById = (state = {}, {type, payload}) => {
 /**
  * 学生答题记录-主表记录
  */
-const statsQuiz = (state = null, {type, payload}) => {
+const statsQuiz = (state = null, { type, payload }) => {
     switch (type) {
         case RECEIVE_STATS_QUIZ_DATA: {
             let statsQuiz = payload.statsQuiz;
-            return {...statsQuiz};
+            return { ...statsQuiz };
         }
         default:
             return state;
@@ -142,7 +142,10 @@ const statsQuiz = (state = null, {type, payload}) => {
  * init:初始化状态
  * pending:api请求中
  */
-const network = (state = {init: true, pending: true, error: false}, {type, payload}) => {
+const network = (
+    state = { init: true, pending: true, error: false },
+    { type, payload }
+) => {
     switch (type) {
         case REQUEST_QUIZ_DATA:
         case UPLOADING_QUESTIONS:
@@ -150,14 +153,14 @@ const network = (state = {init: true, pending: true, error: false}, {type, paylo
         case REQUEST_STATS_QUIZ_LIST:
             return {
                 ...state,
-                pending: true
+                pending: true,
             };
         case UPLOADED_QUESTIONS:
         case RECEIVE_STATS_QUIZ_DATA:
             return {
                 ...state,
                 pending: false,
-                text: payload ? payload.text : null
+                text: payload ? payload.text : null,
             };
         case RECEIVE_QUIZ_DATA:
         case RECEIVE_STATS_QUIZ_LIST:
@@ -165,7 +168,7 @@ const network = (state = {init: true, pending: true, error: false}, {type, paylo
                 ...state,
                 init: false,
                 pending: false,
-                text: payload ? payload.text : null
+                text: payload ? payload.text : null,
             };
         case NETWORK_ERROR:
             return {
@@ -173,22 +176,22 @@ const network = (state = {init: true, pending: true, error: false}, {type, paylo
                 init: false,
                 pending: false,
                 error: true,
-                text: payload ? payload.text : null
+                text: payload ? payload.text : null,
             };
         case NETWORK_ERROR_TIMEOUT:
             return {
                 ...state,
-                error: false
+                error: false,
             };
         default:
             return state;
     }
 };
 
-const user = (state = {}, {type, payload}) => {
+const user = (state = {}, { type, payload }) => {
     switch (type) {
         case SAVE_USER:
-            return {...payload};
+            return { ...payload };
         default:
             return state;
     }
@@ -199,30 +202,30 @@ const operation = (
         is_stu_operation_visible: false,
         is_stu_operation_editable: false,
         is_tea_operation_visible: false,
-        is_tea_operation_editable: false
+        is_tea_operation_editable: false,
     },
-    {type, payload}
+    { type, payload }
 ) => {
     switch (type) {
         case UPDATE_OPERATION:
-            return {...payload};
+            return { ...payload };
         default:
             return state;
     }
 };
 
-const tipModal = (state = {isOpen: false}, {type, payload}) => {
+const tipModal = (state = { isOpen: false }, { type, payload }) => {
     switch (type) {
         case CLOSE_TIP_MODAL:
-            return {isOpen: false};
+            return { isOpen: false };
         case OPEN_TIP_MODAL:
-            return {isOpen: true};
+            return { isOpen: true };
         default:
             return state;
     }
 };
 
-const statsQuizList = (state = [], {type, payload}) => {
+const statsQuizList = (state = [], { type, payload }) => {
     switch (type) {
         case RECEIVE_STATS_QUIZ_LIST:
             return [...payload];
@@ -241,7 +244,7 @@ const rootReducer = combineReducers({
     statsQuizList,
     answersById,
     network,
-    tipModal
+    tipModal,
 });
 
 export default rootReducer;

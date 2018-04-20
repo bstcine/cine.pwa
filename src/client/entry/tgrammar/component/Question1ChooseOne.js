@@ -3,18 +3,27 @@ import QuestionTitle from './QuestionTitle';
 import SelectOption from './SelectOption';
 import FeedbackSelect from './FeedbackSelect';
 import FeedbackCorrect from './FeedbackCorrect';
-const optionMap = {0: 'A', 1: 'B', 2: 'C', 3: 'D', 4: 'E', 5: 'F', 6: 'G'};
+const optionMap = { 0: 'A', 1: 'B', 2: 'C', 3: 'D', 4: 'E', 5: 'F', 6: 'G' };
 /**
  * 1:单选题
  */
-const Question1ChooseOne = ({item, select_value, is_correct, operation, onChange, onFeedbackSelectChange}) => {
+const Question1ChooseOne = ({
+    item,
+    select_value,
+    is_correct,
+    operation,
+    onChange,
+    onFeedbackSelectChange,
+}) => {
     console.log('Question1ChooseOne render');
-    let {no, id, title, options} = item;
+    let { no, id, title, options } = item;
     let correctIndex;
     return (
         <div className="questionformat questionformat1">
             <QuestionTitle no={no} title={title} />
-            <fieldset className="stu-operation" disabled={!operation.is_stu_operation_editable}>
+            <fieldset
+                className="stu-operation"
+                disabled={!operation.is_stu_operation_editable}>
                 <ul className="options">
                     {options.map((option, i) => {
                         if (option.isCorrect) {
@@ -35,9 +44,19 @@ const Question1ChooseOne = ({item, select_value, is_correct, operation, onChange
                 </ul>
             </fieldset>
             {operation.is_tea_operation_visible && (
-                <fieldset className="tea-operation" disabled={!operation.is_tea_operation_editable}>
-                    <FeedbackSelect id={id} is_correct={is_correct} onFeedbackSelectChange={onFeedbackSelectChange} />
-                    <FeedbackCorrect id={id} options={options} select_value={select_value} />
+                <fieldset
+                    className="tea-operation"
+                    disabled={!operation.is_tea_operation_editable}>
+                    <FeedbackSelect
+                        id={id}
+                        is_correct={is_correct}
+                        onFeedbackSelectChange={onFeedbackSelectChange}
+                    />
+                    <FeedbackCorrect
+                        id={id}
+                        options={options}
+                        select_value={select_value}
+                    />
                 </fieldset>
             )}
             {operation.is_stu_operation_visible && (

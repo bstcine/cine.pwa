@@ -8,14 +8,14 @@ const options = [
         content: '正确',
         type: 1,
         isCorrect: false,
-        value: 1
+        value: 1,
     },
     {
         content: '错误',
         type: 1,
         isCorrect: false,
-        value: 0
-    }
+        value: 0,
+    },
 ];
 
 /**
@@ -31,15 +31,17 @@ const Question3Correct = ({
     onSelectChange,
     onTextChange,
     onFeedbackSelectChange,
-    onFeedbackTextChange
+    onFeedbackTextChange,
 }) => {
     console.log('Question3Correct render');
-    let {no, id, title} = item;
+    let { no, id, title } = item;
 
     return (
         <div className="questionformat questionformat3">
             <QuestionTitle no={no} title={title} />
-            <fieldset className="stu-operation" disabled={!operation.is_stu_operation_editable}>
+            <fieldset
+                className="stu-operation"
+                disabled={!operation.is_stu_operation_editable}>
                 <ul className="options">
                     {options.map((option, i) => {
                         return (
@@ -57,17 +59,35 @@ const Question3Correct = ({
                 </ul>
                 <div className="answer">
                     <div className="tips">
-                        {typeof select_value === 'undefined' || select_value === 1 ? '翻译' : '修正错误'}：
+                        {typeof select_value === 'undefined' ||
+                        select_value === 1
+                            ? '翻译'
+                            : '修正错误'}：
                     </div>
-                    <textarea className="answerarea" value={text_value || ''} onChange={onTextChange} />
+                    <textarea
+                        className="answerarea"
+                        value={text_value || ''}
+                        onChange={onTextChange}
+                    />
                 </div>
             </fieldset>
 
             {operation.is_tea_operation_visible && (
-                <fieldset className="tea-operation" disabled={!operation.is_tea_operation_editable}>
-                    <FeedbackSelect id={id} is_correct={is_correct} onFeedbackSelectChange={onFeedbackSelectChange} />
-                    {!!(typeof is_correct !== 'undefined' && is_correct === 0) && (
-                        <FeedbackText feedback={feedback} onFeedbackTextChange={onFeedbackTextChange} />
+                <fieldset
+                    className="tea-operation"
+                    disabled={!operation.is_tea_operation_editable}>
+                    <FeedbackSelect
+                        id={id}
+                        is_correct={is_correct}
+                        onFeedbackSelectChange={onFeedbackSelectChange}
+                    />
+                    {!!(
+                        typeof is_correct !== 'undefined' && is_correct === 0
+                    ) && (
+                        <FeedbackText
+                            feedback={feedback}
+                            onFeedbackTextChange={onFeedbackTextChange}
+                        />
                     )}
                 </fieldset>
             )}

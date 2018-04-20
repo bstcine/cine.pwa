@@ -1,7 +1,7 @@
 import React from 'react';
 import SelectOption from './SelectOption';
 
-const FeedbackCorrect = ({id, options, select_value}) => {
+const FeedbackCorrect = ({ id, options, select_value }) => {
     return (
         <div className="feedback-correct">
             <div className="tips">正确答案</div>

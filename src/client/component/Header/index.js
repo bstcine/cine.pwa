@@ -1,6 +1,8 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
+import className from 'classnames';
 import storeUtil from '@/util/storeUtil';
-import {logoutV1} from '@/service/base';
+import { logoutV1, fetchData } from '@/service/base';
+import Api from '@/../APIConfig';
 import './header.less';
 
 export default class Header extends Component {
@@ -15,15 +17,26 @@ export default class Header extends Component {
         this.state = {
             logined: !!storeUtil.getToken(),
             isNavOpen: false,
-            isUserCenterOpen: false
+            isUserCenterOpen: false,
+            user: null,
         };
+    }
+
+    componentDidMount() {
+        if (storeUtil.getToken()) {
+            fetchData(Api.APIURL_User_Info).then(([err, result]) => {
+                if (!err) {
+                    this.setState({ user: result });
+                }
+            });
+        }
     }
 
     closeNav(e) {
         e.stopPropagation();
         if (this.headerEle === e.target) {
             this.setState(preState => {
-                if (preState.isNavOpen) return {isNavOpen: false};
+                if (preState.isNavOpen) return { isNavOpen: false };
             });
         }
     }
@@ -36,18 +49,18 @@ export default class Header extends Component {
 
     toggleNav() {
         this.setState(preState => ({
-            isNavOpen: !preState.isNavOpen
+            isNavOpen: !preState.isNavOpen,
         }));
     }
 
     toggleUserCenter() {
         this.setState(prevState => ({
-            isUserCenterOpen: !prevState.isUserCenterOpen
+            isUserCenterOpen: !prevState.isUserCenterOpen,
         }));
     }
 
     renderNavRight() {
-        let {logined, isUserCenterOpen} = this.state;
+        const { logined, isUserCenterOpen, user } = this.state;
         if (logined) {
             return (
                 <ul className="nav-list-right">
@@ -56,9 +69,10 @@ export default class Header extends Component {
                     </li>
                     <li
                         onClick={this.toggleUserCenter}
-                        className={isUserCenterOpen ? 'nav-item user-center open' : 'nav-item user-center'}
-                    >
-                        <a href="javascript:">
+                        className={className('nav-item user-center', {
+                            open: isUserCenterOpen,
+                        })}>
+                        <a>
                             我的<i className="material-icons">&#xE5C5;</i>
                         </a>
                         <ul className="nav-list-inner">
@@ -72,57 +86,66 @@ export default class Header extends Component {
                                 <a href="/addFeedback">用户反馈</a>
                             </li>
                             <li className="nav-item">
-                                <a href="/tgrammar/quiz">核心语法测试</a>
+                                {user && user.role_id === '3' ? (
+                                    <a href="/tgrammar/quiz">核心语法测试</a>
+                                ) : (
+                                    <a href="/tgrammar/stats/list">老师批改</a>
+                                )}
                             </li>
                             <li className="nav-item">
-                                <a href="javascript:" onClick={this.logout}>
-                                    退出
-                                </a>
+                                <a onClick={this.logout}>退出</a>
                             </li>
                         </ul>
                     </li>
                 </ul>
             );
-        } else {
-            return (
-                <ul className="nav-list-right guest-user">
-                    <li className="nav-item login-btn">
-                        <a href="/learn">登入学习</a>
-                    </li>
-                    <li className="nav-item register-btn">
-                        <a href="/register">注册</a>
-                    </li>
-                </ul>
-            );
         }
+        return (
+            <ul className="nav-list-right guest-user">
+                <li className="nav-item login-btn">
+                    <a href="/learn">登入学习</a>
+                </li>
+                <li className="nav-item register-btn">
+                    <a href="/register">注册</a>
+                </li>
+            </ul>
+        );
     }
 
     render() {
-        let {isShow} = this.props;
+        const { isShow } = this.props;
         if (!isShow) return null;
-        let {isNavOpen} = this.state;
+        const { isNavOpen } = this.state;
         console.log('header');
         return (
             <div className="container">
                 <div
-                    className={isNavOpen ? 'header open' : 'header'}
-                    ref={ele => (this.headerEle = ele)}
-                    onClick={this.closeNav}
-                >
+                    className={className('header', { open: isNavOpen })}
+                    ref={ele => {
+                        this.headerEle = ele;
+                    }}
+                    onClick={this.closeNav}>
                     <div className="nav-toggle-open" onClick={this.toggleNav} />
                     <div className="brand-logo">
                         <a href="/">
-                            <img src={require('@/asset/image/logo_bstcine.png')} alt="brand-logo" />
+                            <img
+                                src={require('@/asset/image/logo_bstcine.png')}
+                                alt="brand-logo"
+                            />
                         </a>
                     </div>
                     <div
-                        ref={ele => (this.navEle = ele)}
+                        ref={ele => {
+                            this.navEle = ele;
+                        }}
                         className="nav-list"
                         onClick={e => {
                             e.stopPropagation();
-                        }}
-                    >
-                        <div className="nav-toggle-close" onClick={this.toggleNav} />
+                        }}>
+                        <div
+                            className="nav-toggle-close"
+                            onClick={this.toggleNav}
+                        />
                         <ul className="nav-list-left">
                             <li className="nav-item">
                                 <a href="/">首页</a>

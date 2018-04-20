@@ -9,16 +9,19 @@ const convGrade = grade => {
     }
 };
 
-const Operation = ({item}) => {
+const Operation = ({ item }) => {
     if (item.status === '2') {
-        return <button
-            className="btn btn-round btn-done"
-            onClick={e => {
-                location.href = `/tgrammar/quiz?stats_quiz_id=${item.id}&cmd=check`;
-            }}
-        >
-        已批改 <i className="material-icons">&#xE876;</i>
-        </button>;
+        return (
+            <button
+                className="btn btn-round btn-done"
+                onClick={e => {
+                    location.href = `/tgrammar/quiz?stats_quiz_id=${
+                        item.id
+                    }&cmd=check`;
+                }}>
+                已批改 <i className="material-icons">&#xE876;</i>
+            </button>
+        );
 
         // <span className="red">已批改 <i className="material-icons">&#xE876;</i></span>;
     } else {
@@ -26,16 +29,17 @@ const Operation = ({item}) => {
             <button
                 className="btn btn-round"
                 onClick={e => {
-                    location.href = `/tgrammar/quiz?stats_quiz_id=${item.id}&cmd=check`;
-                }}
-            >
+                    location.href = `/tgrammar/quiz?stats_quiz_id=${
+                        item.id
+                    }&cmd=check`;
+                }}>
                 批改 <i className="material-icons">&#xE254;</i>
             </button>
         );
     }
 };
 
-const StatsTable = ({title, list = [], onClick}) => {
+const StatsTable = ({ title, list = [], onClick }) => {
     return (
         <div className="tgrammar-list">
             <table border="1">
@@ -53,10 +57,19 @@ const StatsTable = ({title, list = [], onClick}) => {
                         return (
                             <tr key={item.id}>
                                 <td>{item.id}</td>
-                                <td>{item.nickname || item.phone || item.email || item.user_id}</td>
+                                <td>
+                                    {item.nickname ||
+                                        item.phone ||
+                                        item.email ||
+                                        item.user_id}
+                                </td>
                                 <td>{convGrade(item.grade)}</td>
                                 <td>{item.create_at}</td>
-                                <td><span className="red">{item.score || '-'}</span></td>
+                                <td>
+                                    <span className="red">
+                                        {item.score || '-'}
+                                    </span>
+                                </td>
                                 <td>
                                     <Operation item={item} />
                                 </td>

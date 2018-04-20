@@ -1,16 +1,16 @@
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import Question3Correct from '../component/Question3Correct';
 import {
     saveQuestion3SelectAnswer,
     saveQuestion3TextAnswer,
     saveQuestion3FeedbackSelectAnswer,
-    saveQuestion3FeedbackTextAnswer
+    saveQuestion3FeedbackTextAnswer,
 } from '../action';
 
 const mapStateToProps = (state, ownProps) => {
-    let {answersById, questionsById, operation} = state;
+    let { answersById, questionsById, operation } = state;
     let id = ownProps.item.id;
-    let prop = {item: questionsById[id]};
+    let prop = { item: questionsById[id] };
     let answer = answersById[id];
     if (answer) {
         prop.select_value = answer.select_value;
@@ -24,17 +24,37 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
     onSelectChange: e => {
-        dispatch(saveQuestion3SelectAnswer({id: ownProps.item.id, select_value: parseInt(e.target.value, 10)}));
+        dispatch(
+            saveQuestion3SelectAnswer({
+                id: ownProps.item.id,
+                select_value: parseInt(e.target.value, 10),
+            })
+        );
     },
     onTextChange: e => {
-        dispatch(saveQuestion3TextAnswer({id: ownProps.item.id, text_value: e.target.value}));
+        dispatch(
+            saveQuestion3TextAnswer({
+                id: ownProps.item.id,
+                text_value: e.target.value,
+            })
+        );
     },
     onFeedbackSelectChange: e => {
-        dispatch(saveQuestion3FeedbackSelectAnswer({id: ownProps.item.id, is_correct: parseInt(e.target.value, 10)}));
+        dispatch(
+            saveQuestion3FeedbackSelectAnswer({
+                id: ownProps.item.id,
+                is_correct: parseInt(e.target.value, 10),
+            })
+        );
     },
     onFeedbackTextChange: e => {
-        dispatch(saveQuestion3FeedbackTextAnswer({id: ownProps.item.id, feedback: e.target.value}));
-    }
+        dispatch(
+            saveQuestion3FeedbackTextAnswer({
+                id: ownProps.item.id,
+                feedback: e.target.value,
+            })
+        );
+    },
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Question3Correct);

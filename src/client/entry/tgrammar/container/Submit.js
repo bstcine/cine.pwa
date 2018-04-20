@@ -1,11 +1,11 @@
 import React from 'react';
-import {connect} from 'react-redux';
-import {submitAnswer, submitCheckAnswer} from '../action';
+import { connect } from 'react-redux';
+import { submitAnswer, submitCheckAnswer } from '../action';
 
 const mapStateToProps = state => {
-    let {operation} = state;
+    let { operation } = state;
     return {
-        operation
+        operation,
     };
 };
 
@@ -15,10 +15,10 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     },
     onSubmitCheckAnswer: e => {
         dispatch(submitCheckAnswer());
-    }
+    },
 });
 
-const Submit = ({operation, onSubmitAnswer, onSubmitCheckAnswer}) => {
+const Submit = ({ operation, onSubmitAnswer, onSubmitCheckAnswer }) => {
     console.log('Submit render');
     if (operation.is_stu_operation_editable) {
         return (

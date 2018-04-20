@@ -1,21 +1,21 @@
 import '@/asset/style/modal.less';
 import React from 'react';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import ReactModal from 'react-modal';
-import {closeTipModal} from '../action';
+import { closeTipModal } from '../action';
 
 const mapStateToProps = state => {
-    let {tipModal, quiz} = state;
-    return {isOpen: tipModal.isOpen, title: quiz.name};
+    let { tipModal, quiz } = state;
+    return { isOpen: tipModal.isOpen, title: quiz.name };
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
     onClick: () => {
         dispatch(closeTipModal());
-    }
+    },
 });
 
-const TipModal = ({title, isOpen, onClick}) => {
+const TipModal = ({ title, isOpen, onClick }) => {
     return (
         <ReactModal
             isOpen={isOpen}
@@ -24,8 +24,7 @@ const TipModal = ({title, isOpen, onClick}) => {
             overlayClassName="modal-overlay"
             bodyOpenClassName="body-modal-open"
             shouldCloseOnOverlayClick={true}
-            shouldCloseOnEsc={true}
-        >
+            shouldCloseOnEsc={true}>
             <h2>{title}</h2>
             <p>
                 本试题用于测试学生的英语文法基础和阅读能力，故本试题中所涉及的语法都是事关英语句子结构的重点语法。对于一些细节性的语法，例如family做主语算单数还是复数这样的问题，我们不做考察。但对于定语从句里that在什么情况下可以省略、什么情况不可以省略的问题，我们加以考察，因为这个知识点直接关系到学生对句子结构的分析和对复杂句子的理解。

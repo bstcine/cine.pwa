@@ -1,8 +1,8 @@
 import '../asset/style/index.less';
-import React, {Component} from 'react';
-import {withRouter} from 'react-router-dom';
-import {connect} from 'react-redux';
-import {fetchStatsQuizList} from '../action';
+import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { fetchStatsQuizList } from '../action';
 import Header from '@/component/Header';
 import Footer from '@/component/Footer';
 import StatsTableContainer from '../container/StatsTableContainer';
@@ -10,26 +10,26 @@ import ToastLoading from './ToastLoading';
 import ToastError from './ToastError';
 
 const mapStateToProps = state => {
-    const {network} = state;
-    let {init} = network;
-    return {init};
+    const { network } = state;
+    let { init } = network;
+    return { init };
 };
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = dispatch => ({
     fetchStatsQuizList: () => {
         dispatch(fetchStatsQuizList());
-    }
+    },
 });
 
 class StatsListPage extends Component {
     componentDidMount() {
-        const {fetchStatsQuizList} = this.props;
+        const { fetchStatsQuizList } = this.props;
         fetchStatsQuizList();
     }
 
     render() {
         console.log('StatsListPage render');
-        const {init} = this.props;
+        const { init } = this.props;
         return (
             <React.Fragment>
                 <Header isShow={true} />
@@ -43,9 +43,10 @@ class StatsListPage extends Component {
                 </div>
                 <Footer />
             </React.Fragment>
-
         );
     }
 }
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(StatsListPage));
+export default withRouter(
+    connect(mapStateToProps, mapDispatchToProps)(StatsListPage)
+);

@@ -1,4 +1,4 @@
-import {fetchData} from '@/service/base';
+import { fetchData } from '@/service/base';
 import Api from '@/../APIConfig';
 
 export const REQUEST_QUIZ_DATA = 'REQUEST_QUIZ_DATA';
@@ -6,11 +6,14 @@ export const RECEIVE_QUIZ_DATA = 'RECEIVE_QUIZ_DATA';
 export const REQUEST_STATS_QUIZ_DATA = 'REQUEST_STATS_QUIZ_DATA';
 export const RECEIVE_STATS_QUIZ_DATA = 'RECEIVE_STATS_QUIZ_DATA';
 export const SAVE_QUESTION1_SELECT_ANSWER = 'SAVE_QUESTION1_SELECT_ANSWER';
-export const SAVE_QUESTION1_FEEDBACK_SELECT_ANSWER = 'SAVE_QUESTION1_FEEDBACK_SELECT_ANSWER';
+export const SAVE_QUESTION1_FEEDBACK_SELECT_ANSWER =
+    'SAVE_QUESTION1_FEEDBACK_SELECT_ANSWER';
 export const SAVE_QUESTION3_SELECT_ANSWER = 'SAVE_QUESTION3_SELECT_ANSWER';
 export const SAVE_QUESTION3_TEXT_ANSWER = 'SAVE_QUESTION3_TEXT_ANSWER';
-export const SAVE_QUESTION3_FEEDBACK_TEXT_ANSWER = 'SAVE_QUESTION3_FEEDBACK_TEXT_ANSWER';
-export const SAVE_QUESTION3_FEEDBACK_SELECT_ANSWER = 'SAVE_QUESTION3_FEEDBACK_SELECT_ANSWER';
+export const SAVE_QUESTION3_FEEDBACK_TEXT_ANSWER =
+    'SAVE_QUESTION3_FEEDBACK_TEXT_ANSWER';
+export const SAVE_QUESTION3_FEEDBACK_SELECT_ANSWER =
+    'SAVE_QUESTION3_FEEDBACK_SELECT_ANSWER';
 export const SAVE_QUESTIONS = 'SAVE_QUESTIONS';
 export const SAVE_USER = 'SAVE_USER';
 export const UPDATE_OPERATION = 'UPDATE_OPERATION';
@@ -25,33 +28,38 @@ export const NETWORK_ERROR_TIMEOUT = 'NETWORK_ERROR_TIMEOUT';
 
 export const saveUser = user => ({
     type: SAVE_USER,
-    payload: {user}
+    payload: { user },
 });
 
 export const requestQuizData = () => ({
-    type: REQUEST_QUIZ_DATA
+    type: REQUEST_QUIZ_DATA,
 });
 
-export const receiveQuizData = ({id, name, question_count, data: questions}) => {
+export const receiveQuizData = ({
+    id,
+    name,
+    question_count,
+    data: questions,
+}) => {
     return {
         type: RECEIVE_QUIZ_DATA,
         payload: {
             id,
             name,
             question_count,
-            questions
-        }
+            questions,
+        },
     };
 };
 
 /**
  * 题目数据请求 & 答题记录请求
  */
-export const fetchQuizData = ({stats_quiz_id}) => async dispatch => {
+export const fetchQuizData = ({ stats_quiz_id }) => async dispatch => {
     dispatch(requestQuizData());
     let [err, result] = await fetchData(Api.APIURL_Content_Quiz_Grammar);
     if (err) return dispatch(networkError(err));
-    let {user, quiz, lastestStatsQuiz} = result;
+    let { user, quiz, lastestStatsQuiz } = result;
     let lastest_stats_quiz_id = null;
     if (lastestStatsQuiz) {
         lastest_stats_quiz_id = lastestStatsQuiz.id;
@@ -82,13 +90,16 @@ export const fetchQuizData = ({stats_quiz_id}) => async dispatch => {
     }
     if (stats_quiz_id || lastest_stats_quiz_id) {
         dispatch(requestStatsQuizData());
-        let [err_detail, result_detail] = await fetchData(Api.APIURL_Stats_Quiz_Detail, {cid: stats_quiz_id || lastest_stats_quiz_id});
+        let [err_detail, result_detail] = await fetchData(
+            Api.APIURL_Stats_Quiz_Detail,
+            { cid: stats_quiz_id || lastest_stats_quiz_id }
+        );
         if (err_detail) return dispatch(networkError(err_detail));
-        let {statsQuiz, statsQuizDetail} = result_detail;
-        dispatch(receiveStatsQuizData({statsQuiz, statsQuizDetail}));
-        dispatch(updateOperation({user, statsQuiz}));
+        let { statsQuiz, statsQuizDetail } = result_detail;
+        dispatch(receiveStatsQuizData({ statsQuiz, statsQuizDetail }));
+        dispatch(updateOperation({ user, statsQuiz }));
     } else {
-        dispatch(updateOperation({user}));
+        dispatch(updateOperation({ user }));
     }
 };
 
@@ -96,7 +107,7 @@ export const fetchQuizData = ({stats_quiz_id}) => async dispatch => {
  * 提交答案
  */
 export const submitAnswer = () => (dispatch, getState) => {
-    let {quiz, questionsById, answersById} = getState();
+    let { quiz, questionsById, answersById } = getState();
     if (!_hasCompleteQuiz(questionsById, answersById)) return alert('请答完全部试题再后提交');
     let answers = [];
     for (let key in answersById) {
@@ -104,10 +115,13 @@ export const submitAnswer = () => (dispatch, getState) => {
             answers.push(answersById[key]);
         }
     }
-    dispatch({type: UPLOADING_QUESTIONS});
-    return fetchData(Api.APIURL_Stats_Quiz_Save, {quiz_id: quiz.id, answers}).then(([err, result]) => {
+    dispatch({ type: UPLOADING_QUESTIONS });
+    return fetchData(Api.APIURL_Stats_Quiz_Save, {
+        quiz_id: quiz.id,
+        answers,
+    }).then(([err, result]) => {
         if (err) return dispatch(networkError(err));
-        dispatch({type: UPLOADED_QUESTIONS});
+        dispatch({ type: UPLOADED_QUESTIONS });
         location.href = `/tgrammar/quiz?stats_quiz_id=${result.statsQuiz.id}`;
     });
 };
@@ -116,7 +130,7 @@ export const submitAnswer = () => (dispatch, getState) => {
  * 提交批改记录
  */
 export const submitCheckAnswer = () => async (dispatch, getState) => {
-    let {statsQuiz, questionsById, answersById} = getState();
+    let { statsQuiz, questionsById, answersById } = getState();
     if (!_hasCompleteCheckQuiz(questionsById, answersById)) return alert('请批改完全部试题后再提交');
     let answers = [];
     for (let key in answersById) {
@@ -124,90 +138,93 @@ export const submitCheckAnswer = () => async (dispatch, getState) => {
             answers.push(answersById[key]);
         }
     }
-    dispatch({type: UPLOADING_QUESTIONS});
-    let [err] = await fetchData(Api.APIURL_Stats_Quiz_Update, {stats_quiz_id: statsQuiz.id, answers});
+    dispatch({ type: UPLOADING_QUESTIONS });
+    let [err] = await fetchData(Api.APIURL_Stats_Quiz_Update, {
+        stats_quiz_id: statsQuiz.id,
+        answers,
+    });
     if (err) return dispatch(networkError(err));
-    dispatch({type: UPLOADED_QUESTIONS});
+    dispatch({ type: UPLOADED_QUESTIONS });
     location.href = '/tgrammar/stats/list';
 };
 
 export const fetchStatsQuizList = () => async dispatch => {
-    dispatch({type: REQUEST_STATS_QUIZ_LIST});
+    dispatch({ type: REQUEST_STATS_QUIZ_LIST });
     let [err, result] = await fetchData(Api.APIURL_Stats_Quiz_List);
     if (err) return dispatch(networkError(err));
-    dispatch({type: RECEIVE_STATS_QUIZ_LIST, payload: result});
+    dispatch({ type: RECEIVE_STATS_QUIZ_LIST, payload: result });
 };
 
 export const requestStatsQuizData = () => ({
-    type: REQUEST_STATS_QUIZ_DATA
+    type: REQUEST_STATS_QUIZ_DATA,
 });
 
-export const receiveStatsQuizData = ({statsQuiz, statsQuizDetail}) => ({
+export const receiveStatsQuizData = ({ statsQuiz, statsQuizDetail }) => ({
     type: RECEIVE_STATS_QUIZ_DATA,
     payload: {
         statsQuiz,
-        statsQuizDetail
-    }
+        statsQuizDetail,
+    },
 });
 
-export const saveQuestion1SelectAnswer = ({id, select_value}) => ({
+export const saveQuestion1SelectAnswer = ({ id, select_value }) => ({
     type: SAVE_QUESTION1_SELECT_ANSWER,
     payload: {
         id,
-        select_value
-    }
+        select_value,
+    },
 });
 
-export const saveQuestion1FeedbackSelectAnswer = ({id, is_correct}) => ({
+export const saveQuestion1FeedbackSelectAnswer = ({ id, is_correct }) => ({
     type: SAVE_QUESTION1_FEEDBACK_SELECT_ANSWER,
     payload: {
         id,
-        is_correct
-    }
+        is_correct,
+    },
 });
 
-export const saveQuestion3SelectAnswer = ({id, select_value}) => ({
+export const saveQuestion3SelectAnswer = ({ id, select_value }) => ({
     type: SAVE_QUESTION3_SELECT_ANSWER,
     payload: {
         id,
-        select_value
-    }
+        select_value,
+    },
 });
 
-export const saveQuestion3TextAnswer = ({id, text_value}) => ({
+export const saveQuestion3TextAnswer = ({ id, text_value }) => ({
     type: SAVE_QUESTION3_TEXT_ANSWER,
     payload: {
         id,
-        text_value
-    }
+        text_value,
+    },
 });
 
-export const saveQuestion3FeedbackTextAnswer = ({id, feedback}) => ({
+export const saveQuestion3FeedbackTextAnswer = ({ id, feedback }) => ({
     type: SAVE_QUESTION3_FEEDBACK_TEXT_ANSWER,
     payload: {
         id,
-        feedback
-    }
+        feedback,
+    },
 });
 
-export const saveQuestion3FeedbackSelectAnswer = ({id, is_correct}) => ({
+export const saveQuestion3FeedbackSelectAnswer = ({ id, is_correct }) => ({
     type: SAVE_QUESTION3_FEEDBACK_SELECT_ANSWER,
     payload: {
         id,
-        is_correct
-    }
+        is_correct,
+    },
 });
 
-export const networkError = err => (dispatch) => {
+export const networkError = err => dispatch => {
     let text = err instanceof Error ? err.message : err;
     dispatch({
         type: NETWORK_ERROR,
-        payload: {text}
+        payload: { text },
     });
     setTimeout(() => {
         dispatch({
             type: NETWORK_ERROR_TIMEOUT,
-            payload: {text}
+            payload: { text },
         });
     }, 3000);
 };
@@ -215,8 +232,9 @@ export const networkError = err => (dispatch) => {
 /**
  * 更新当前操作状态
  */
-export const updateOperation = ({user, statsQuiz}) => {
-    let is_stu_operation_visible = user && statsQuiz && user.role_id === '3' && statsQuiz.status === '2';
+export const updateOperation = ({ user, statsQuiz }) => {
+    let is_stu_operation_visible =
+        user && statsQuiz && user.role_id === '3' && statsQuiz.status === '2';
     let is_stu_operation_editable = user && user.role_id === '3' && !statsQuiz;
     let is_tea_operation_visible = user && user.role_id === '2' && statsQuiz;
     let is_tea_operation_editable = user && user.role_id === '2' && statsQuiz;
@@ -226,17 +244,17 @@ export const updateOperation = ({user, statsQuiz}) => {
             is_stu_operation_visible,
             is_stu_operation_editable,
             is_tea_operation_visible,
-            is_tea_operation_editable
-        }
+            is_tea_operation_editable,
+        },
     };
 };
 
 export const closeTipModal = () => ({
-    type: CLOSE_TIP_MODAL
+    type: CLOSE_TIP_MODAL,
 });
 
 export const openTipModal = () => ({
-    type: OPEN_TIP_MODAL
+    type: OPEN_TIP_MODAL,
 });
 
 /**
@@ -257,7 +275,11 @@ const _hasCompleteQuiz = (questionsById, answersById) => {
                 }
             } else if (question.format === 3) {
                 let answer = answersById[key];
-                if (!answer || typeof answer.select_value === 'undefined' || !answer.text_value) {
+                if (
+                    !answer ||
+                    typeof answer.select_value === 'undefined' ||
+                    !answer.text_value
+                ) {
                     isComplete = false;
                     break;
                 }

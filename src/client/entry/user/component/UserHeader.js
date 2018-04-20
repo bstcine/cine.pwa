@@ -14,34 +14,31 @@ const UserHeader = ({user, handleClick}) => {
     return (
         <React.Fragment>
             <div className="user-header">
-                <a className={'user-mine'}><img src={require('../asset/image/ico_mine@2x.png')}/></a>
+                <a className={'nav-open'}/>
                 <div className="user-logo">
                     <img src={headImg}/>
                 </div>
                 <div className="user-info">
                     <div className="user-flex-a">
                         <span className="user-name">{user.nickname}</span>
-                        <img className="user-edit" src={require('../asset/image/ico_edit.png')}
-                             alt="user-type"/>
+                        <a className={'user-edit'}></a>
                     </div>
                     <div className="user-flex-b">
-                        <img className="user-type"
-                             src={roleImg}
-                             alt="user-type"/>
+                        <img className="user-role" src={roleImg}/>
                         <span className="user-phone">{user.phone}</span>
                     </div>
                 </div>
                 <div className="user-point">
-                    <span className="user-font-hint">积分：</span>
-                    <span className="user-font-val">{user.point}</span>
+                    <span className="point-hint">积分：</span>
+                    <span className="point-val">{user.point}</span>
                 </div>
 
                 <div className="user-coupon">
-                    <span className="user-font-hint">优惠券：</span>
-                    <span className="user-font-val">{user.unuseCouponsCount}</span>
+                    <span className="coupon-hint">优惠券：</span>
+                    <span className="coupon-val">{user.unuseCouponsCount}</span>
                 </div>
 
-                <a className="user-home" href={'/'}><img src={require('../asset/image/ico_bst_home.png')} alt="user-home"/></a>
+                <a className="nav-home" href={'/'}></a>
             </div>
             <Tabs className="user-tabs" selectedId={'coupon'}>
                 <TabItems>
@@ -58,17 +55,10 @@ const UserHeader = ({user, handleClick}) => {
                     <TabItem className="tab-item tab-quit" onClick={e => handleClick('quit')}>退出</TabItem>
                 </TabItems>
                 <TabPanels>
-                    <TabPanel id={'order'}>
-                        <span>hello order</span>
-                    </TabPanel>
-                    <TabPanel/>
-                    <TabPanel/>
+                    <TabPanel id={'order'}/>
                     <TabPanel id={'coupon'}>
                         <CouponContainer/>
                     </TabPanel>
-                    <TabPanel/>
-                    <TabPanel/>
-                    <TabPanel/>
                 </TabPanels>
             </Tabs>
         </React.Fragment>

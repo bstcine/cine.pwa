@@ -24,7 +24,9 @@ module.exports = {
         'react-router-dom',
         'react-transition-group',
         'react-modal',
-        // 'material-icons',
+        'react-redux',
+        'redux',
+        'redux-thunk',
         'babel-polyfill'
     ],
 

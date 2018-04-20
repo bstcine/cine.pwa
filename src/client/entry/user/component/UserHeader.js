@@ -55,17 +55,10 @@ const UserHeader = ({user, handleClick}) => {
                     <TabItem className="tab-item tab-quit" onClick={e => handleClick('quit')}>退出</TabItem>
                 </TabItems>
                 <TabPanels>
-                    <TabPanel id={'order'}>
-                        <span>hello order</span>
-                    </TabPanel>
-                    <TabPanel/>
-                    <TabPanel/>
+                    <TabPanel id={'order'}/>
                     <TabPanel id={'coupon'}>
                         <CouponContainer/>
                     </TabPanel>
-                    <TabPanel/>
-                    <TabPanel/>
-                    <TabPanel/>
                 </TabPanels>
             </Tabs>
         </React.Fragment>

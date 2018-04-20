@@ -11,7 +11,7 @@ const Config = require('./webpack.config');
 const WebpackMildCompile = require('webpack-mild-compile').Plugin;
 const OfflinePlugin = require('offline-plugin');
 
-const pages = Config.pages;
+const pages = ['content'];
 let entry = {};
 let HtmlWebpackPlugins = [];
 let rewrites = [];
@@ -71,7 +71,7 @@ module.exports = {
             rewrites: rewrites
         },
         inline: true,
-        port: 5000,
+        port: 5001,
         disableHostCheck: true,
         // host: "0.0.0.0",
         // useLocalIp:true,

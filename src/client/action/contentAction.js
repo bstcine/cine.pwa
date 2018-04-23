@@ -16,7 +16,11 @@ let cCourseAction = {
             type: "type.Action_UC_initWithParam",
             payload: param
         })
-    }
+    },
+
+    handleCourseSetLink: function (courseID) {
+       alert('hello, Im joe' + courseID)
+    },
 
 
 };

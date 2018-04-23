@@ -22,6 +22,7 @@ import RecommendModal from './RecommendModal';
 import Api from '../../../../../APIConfig';
 import * as BaseService from '@/service/base';
 import {fetchData} from '@/service/base';
+import cCourseAction from '@/action/contentAction';
 
 
 export default class Course extends Component {
@@ -272,7 +273,14 @@ export default class Course extends Component {
 
     render() {
         let {course, user, comments, showLoginModal, showRecommendModal, showCouponModal} = this.state;
+        let _courseSet = {
+            setID: 'd011524109258308yWQTmzK5Bq',
+            setName: '《神奇树屋》精读课程套餐（7册）',
+            setOriginalPrice: 1180,
+            setPromotePrice: 1060
+        };
 
+        //alert(cCourseAction)
         return (
             <React.Fragment>
                 <Header isShow={!siteCodeUtil.inAPP() && !uaUtil.wechat()} />
@@ -294,9 +302,10 @@ export default class Course extends Component {
                         {course ?
                             <DetailDesc
                                 course={course}
-                                courseSet={this.relatedCourse}
+                                courseSet={null}
                                 courseComments={comments}
                                 isIOSAPP={siteCodeUtil.inIOSAPP()}
+                                onClickCourseSetLink = {cCourseAction.handleCourseSetLink}
                             />
                             : null }
 

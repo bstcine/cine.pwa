@@ -2,7 +2,7 @@ import React from 'react';
 
 const CourseSet = ({value, onLink}) => {
     let {setName, setID, setOriginalPrice, setPromotePrice} = value;
-    alert(JSON.stringify(setID))
+    //alert(JSON.stringify(setID))
     return (
 
         <div className="course-feature">

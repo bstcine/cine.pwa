@@ -21,6 +21,8 @@ export const UPLOADING_QUESTIONS = 'UPLOADING_QUESTIONS';
 export const UPLOADED_QUESTIONS = 'UPLOADED_QUESTIONS';
 export const CLOSE_TIP_MODAL = 'CLOSE_TIP_MODAL';
 export const OPEN_TIP_MODAL = 'OPEN_TIP_MODAL';
+export const CLOSE_CONFIRM_MODAL = 'CLOSE_CONFIRM_MODAL';
+export const OPEN_CONFIRM_MODAL = 'OPEN_CONFIRM_MODAL';
 export const REQUEST_STATS_QUIZ_LIST = 'REQUEST_STATS_QUIZ_LIST';
 export const RECEIVE_STATS_QUIZ_LIST = 'RECEIVE_STATS_QUIZ_LIST';
 export const NETWORK_ERROR = 'NETWORK_ERROR';
@@ -86,7 +88,10 @@ export const fetchQuizData = ({ stats_quiz_id }) => async dispatch => {
     });
     dispatch(receiveQuizData(quiz));
     if (user.role_id === '3' && !stats_quiz_id && !lastest_stats_quiz_id) {
-        dispatch(openTipModal());
+        let html = `<p>本试题用于测试学生的英语文法基础和阅读能力，故本试题中所涉及的语法都是事关英语句子结构的重点语法。对于一些细节性的语法，例如family做主语算单数还是复数这样的问题，我们不做考察。但对于定语从句里that在什么情况下可以省略、什么情况不可以省略的问题，我们加以考察，因为这个知识点直接关系到学生对句子结构的分析和对复杂句子的理解。</p>
+                    <p>这份试题被故意设计用于测试K-12年级的广谱学生，因此可能会有学生觉得一些题目困难，而另一些学生觉得一些题目特别简单，这是很正常的。挑选自己能做的做。在选择题部分，随机的猜测将不会提高学生的成绩，因为做错一题将被倒扣1/3分</p>`;
+        let button = '开始测试';
+        dispatch(openTipModal({ html, button }));
     }
     if (stats_quiz_id || lastest_stats_quiz_id) {
         dispatch(requestStatsQuizData());
@@ -96,6 +101,14 @@ export const fetchQuizData = ({ stats_quiz_id }) => async dispatch => {
         );
         if (err_detail) return dispatch(networkError(err_detail));
         let { statsQuiz, statsQuizDetail } = result_detail;
+        if (
+            user &&
+            user.role_id === '3' &&
+            (statsQuiz.status === '1' || statsQuiz.status === '2')
+        ) {
+            let html = `<div class="waiting"><div class="waiting-img"></div><span>当前老师正在批改中…，请稍候查看结果</span></div>`;
+            dispatch(openTipModal({ html }));
+        }
         dispatch(receiveStatsQuizData({ statsQuiz, statsQuizDetail }));
         dispatch(updateOperation({ user, statsQuiz }));
     } else {
@@ -106,9 +119,25 @@ export const fetchQuizData = ({ stats_quiz_id }) => async dispatch => {
 /**
  * 提交答案
  */
+export const preSubmitAnswer = () => (dispatch, getState) => {
+    let { questionsById, answersById } = getState();
+    let unCompletedNos = _getUnCompletedNos(questionsById, answersById);
+    if (unCompletedNos.length) {
+        let html = `<p>你有 ${unCompletedNos.join('、')} 共 ${
+            unCompletedNos.length
+        } 道题未答，是否确定提交答卷？</p>`;
+        let cancelButton = '否，我要继续答题';
+        let confirmButton = '是，现在就提交';
+        return dispatch(openConfirmModal({ html, cancelButton, confirmButton }));
+    }
+    dispatch(submitAnswer());
+};
+
+/**
+ * 提交答案
+ */
 export const submitAnswer = () => (dispatch, getState) => {
-    let { quiz, questionsById, answersById } = getState();
-    if (!_hasCompleteQuiz(questionsById, answersById)) return alert('请答完全部试题再后提交');
+    let { quiz, answersById } = getState();
     let answers = [];
     for (let key in answersById) {
         if (answersById.hasOwnProperty(key)) {
@@ -234,7 +263,7 @@ export const networkError = err => dispatch => {
  */
 export const updateOperation = ({ user, statsQuiz }) => {
     let is_stu_operation_visible =
-        user && statsQuiz && user.role_id === '3' && statsQuiz.status === '2';
+        user && statsQuiz && user.role_id === '3' && statsQuiz.status === '3';
     let is_stu_operation_editable = user && user.role_id === '3' && !statsQuiz;
     let is_tea_operation_visible = user && user.role_id === '2' && statsQuiz;
     let is_tea_operation_editable = user && user.role_id === '2' && statsQuiz;
@@ -253,8 +282,17 @@ export const closeTipModal = () => ({
     type: CLOSE_TIP_MODAL,
 });
 
-export const openTipModal = () => ({
+export const openTipModal = ({ html, button }) => ({
     type: OPEN_TIP_MODAL,
+    payload: { html, button },
+});
+export const closeConfirmModal = () => ({
+    type: CLOSE_CONFIRM_MODAL,
+});
+
+export const openConfirmModal = ({ html, cancelButton, confirmButton }) => ({
+    type: OPEN_CONFIRM_MODAL,
+    payload: { html, cancelButton, confirmButton },
 });
 
 /**
@@ -262,31 +300,32 @@ export const openTipModal = () => ({
  * @param {*} questionsById
  * @param {*} answersById
  */
-const _hasCompleteQuiz = (questionsById, answersById) => {
-    let isComplete = true;
+const _getUnCompletedNos = (questionsById, answersById) => {
+    let unCompletedNos = [];
+    let questionIndex = 0;
     for (let key in questionsById) {
         if (questionsById.hasOwnProperty(key)) {
             let question = questionsById[key];
             if (question.format === 1) {
+                questionIndex++;
                 let answer = answersById[key];
                 if (!answer || typeof answer.select_value === 'undefined') {
-                    isComplete = false;
-                    break;
+                    unCompletedNos.push(questionIndex);
                 }
             } else if (question.format === 3) {
+                questionIndex++;
                 let answer = answersById[key];
                 if (
                     !answer ||
                     typeof answer.select_value === 'undefined' ||
                     !answer.text_value
                 ) {
-                    isComplete = false;
-                    break;
+                    unCompletedNos.push(questionIndex);
                 }
             }
         }
     }
-    return isComplete;
+    return unCompletedNos;
 };
 
 /**

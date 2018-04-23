@@ -23,7 +23,6 @@ const FeedbackSelect = ({ id, is_correct, onFeedbackSelectChange }) => {
                     return (
                         <SelectOption
                             key={id + i}
-                            index={i}
                             name={`fs_${id}`}
                             value={option.value}
                             onChange={onFeedbackSelectChange}

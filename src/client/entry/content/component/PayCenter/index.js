@@ -1,23 +1,24 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import QRCode from 'qrcode';
 import uaUtil from '@/util/uaUtil';
 import siteCodeUtil from '@/util/sitecodeUtil';
 import Header from '@/component/Header';
 import PayingModal from '@/entry/content/component/PayCenter/PayingModal';
 import QRModal from '@/entry/content/component/PayCenter/QRModal';
-import {addParam, getParam} from '@/util/urlUtil';
+import { addParam, getParam } from '@/util/urlUtil';
 import HelpModal from '@/entry/content/component/PayCenter/HelpModal';
-import {fetchData} from '@/service/base';
+import { fetchData } from '@/service/base';
 import errorMsg from '@/util/errorMsg';
-import {initWechat} from '@/util/wechatUtil';
+import { initWechat } from '@/util/wechatUtil';
 import Api from '@/../APIConfig';
 
 export default class PayCenter extends Component {
-
     static getWechatOpenId() {
         if (uaUtil.wechat() && getParam().redirected !== '1') {
-            let url = addParam(location.href, {redirected: 1});
-            location.href = 'http://www.bstcine.com/wechat/authorize?redirect=' + encodeURIComponent(url);
+            let url = addParam(location.href, { redirected: 1 });
+            location.href =
+                'http://www.bstcine.com/wechat/authorize?redirect=' +
+                encodeURIComponent(url);
         }
     }
 
@@ -31,9 +32,9 @@ export default class PayCenter extends Component {
             code_url: '',
             pay_btn: {
                 text: '立即支付',
-                disabled: false
+                disabled: false,
             },
-            pay_type: 1
+            pay_type: 1,
         };
         this.closePayingModal = this.closePayingModal.bind(this);
         this.closeQRModal = this.closeQRModal.bind(this);
@@ -44,13 +45,13 @@ export default class PayCenter extends Component {
 
     async componentWillMount() {
         let cid = getParam().cid;
-        fetchData(Api.APIURL_Order_Detail, {cid}).then(([err, result]) => {
+        fetchData(Api.APIURL_Order_Detail, { cid }).then(([err, result]) => {
             if (err) return alert(errorMsg(err));
-            let {order} = result.detail;
+            let { order } = result.detail;
             if (order.pay_status === '1') {
                 location.href = `/pay/status?cid=${order.id}`;
             }
-            this.setState({order});
+            this.setState({ order });
         });
     }
 
@@ -60,48 +61,46 @@ export default class PayCenter extends Component {
         initWechat();
     }
 
-
-
     closePayingModal() {
         this.setState({
-            showPayingModal: false
+            showPayingModal: false,
         });
     }
 
     openPayingModal() {
         this.setState({
-            showPayingModal: true
+            showPayingModal: true,
         });
     }
 
     closeQRModal() {
         this.setState({
-            showQRModal: false
+            showQRModal: false,
         });
     }
 
     openQRModal(code_url) {
         this.setState({
             showQRModal: true,
-            code_url
+            code_url,
         });
     }
 
     closeHelpModal() {
         this.setState({
-            showHelpModal: false
+            showHelpModal: false,
         });
     }
 
     openHelpModal() {
         this.setState({
-            showHelpModal: true
+            showHelpModal: true,
         });
     }
 
     choosePayType(pay_type) {
         this.setState({
-            pay_type
+            pay_type,
         });
     }
 
@@ -109,16 +108,18 @@ export default class PayCenter extends Component {
         if (this.timer) {
             clearInterval(this.timer);
         }
-        let {order} = this.state;
+        let { order } = this.state;
         this.timer = setInterval(() => {
-            fetchData(Api.APIURL_Order_Pay_Status, {cid: order.id}).then(([err, result]) => {
-                if (err) return alert(errorMsg(err));
-                let {pay_status} = result;
-                if (pay_status === '1') {
-                    clearInterval(this.timer);
-                    location.href = `/pay/status?cid=${order.id}`;
+            fetchData(Api.APIURL_Order_Pay_Status, { cid: order.id }).then(
+                ([err, result]) => {
+                    if (err) return alert(errorMsg(err));
+                    let { pay_status } = result;
+                    if (pay_status === '1') {
+                        clearInterval(this.timer);
+                        location.href = `/pay/status?cid=${order.id}`;
+                    }
                 }
-            });
+            );
         }, 3000);
     }
 
@@ -128,81 +129,92 @@ export default class PayCenter extends Component {
     }
 
     doPayWechatJsapi() {
-        const {openid} = getParam();
-        let {order} = this.state;
+        const { openid } = getParam();
+        let { order } = this.state;
         let _this = this;
         _this.setState({
-            pay_btn: {text: '支付中...', disabled: true}
+            pay_btn: { text: '支付中...', disabled: true },
         });
-        fetchData(Api.APIURL_Pay_Wechat_Jsapi, {cid: order.id, openid}).then(([err, config]) => {
-            this.checkingOrderStatus();
-            wx.chooseWXPay({
-                timestamp: config.timeStamp,
-                nonceStr: config.nonceStr,
-                package: config.package,
-                signType: config.signType,
-                paySign: config.paySign,
-                success: function(res) {
-                    _this.setState({
-                        pay_btn: {text: '立即支付', disabled: false}
-                    });
-                },
-                cancel: function(res) {
-                    _this.setState({
-                        pay_btn: {text: '重新支付', disabled: false}
-                    });
-                },
-                fail: function(res) {
-                    _this.setState({
-                        pay_btn: {text: '重新支付', disabled: false}
-                    });
-                }
-            });
-        });
+        fetchData(Api.APIURL_Pay_Wechat_Jsapi, { cid: order.id, openid }).then(
+            ([err, config]) => {
+                if (err) console.log(err);
+                this.checkingOrderStatus();
+                wx.chooseWXPay({
+                    timestamp: config.timeStamp,
+                    nonceStr: config.nonceStr,
+                    package: config.package,
+                    signType: config.signType,
+                    paySign: config.paySign,
+                    success: function(res) {
+                        _this.setState({
+                            pay_btn: { text: '立即支付', disabled: false },
+                        });
+                    },
+                    cancel: function(res) {
+                        _this.setState({
+                            pay_btn: { text: '重新支付', disabled: false },
+                        });
+                    },
+                    fail: function(res) {
+                        _this.setState({
+                            pay_btn: { text: '重新支付', disabled: false },
+                        });
+                    },
+                });
+            }
+        );
     }
 
     doPayWechatQrcode() {
-        let {order} = this.state;
+        let { order } = this.state;
         this.setState({
-            pay_btn: {text: '支付中...', disabled: true}
+            pay_btn: { text: '支付中...', disabled: true },
         });
-        fetchData(Api.APIURL_Pay_Wechat_Qrcode, {cid: order.id}).then(([err, result]) => {
-            if (err) return alert(errorMsg(err));
-            this.checkingOrderStatus();
-            this.setState({
-                pay_btn: {text: '重新支付', disabled: false}
-            });
-            let {code_url} = result;
-            QRCode.toDataURL(code_url, {width: 200})
-                .then(url => {
-                    this.openQRModal(url);
-                })
-                .catch(err => {
-                    alert(err);
+        fetchData(Api.APIURL_Pay_Wechat_Qrcode, { cid: order.id }).then(
+            ([err, result]) => {
+                if (err) return alert(errorMsg(err));
+                this.checkingOrderStatus();
+                this.setState({
+                    pay_btn: { text: '重新支付', disabled: false },
                 });
-        });
+                let { code_url } = result;
+                QRCode.toDataURL(code_url, { width: 200 })
+                    .then(url => {
+                        this.openQRModal(url);
+                    })
+                    .catch(err => {
+                        alert(err);
+                    });
+            }
+        );
     }
 
     doPayWechatMweb() {
         this.openPayingModal();
         this.checkingOrderStatus();
-        this.goPayRedirect(`${Api.APIURL_Pay_Wechat_Mweb}?cid=${this.state.order.id}`);
+        this.goPayRedirect(
+            `${Api.APIURL_Pay_Wechat_Mweb}?cid=${this.state.order.id}`
+        );
     }
 
     doPayAliPc() {
         this.openPayingModal();
         this.checkingOrderStatus();
-        this.goPayRedirect(`${Api.APIURL_Pay_Ali_Pc}?cid=${this.state.order.id}`);
+        this.goPayRedirect(
+            `${Api.APIURL_Pay_Ali_Pc}?cid=${this.state.order.id}`
+        );
     }
 
     doPayAliMweb() {
         this.openPayingModal();
         this.checkingOrderStatus();
-        this.goPayRedirect(`${Api.APIURL_Pay_Ali_Mweb}?cid=${this.state.order.id}`);
+        this.goPayRedirect(
+            `${Api.APIURL_Pay_Ali_Mweb}?cid=${this.state.order.id}`
+        );
     }
 
     submitPay() {
-        let {pay_type} = this.state;
+        let { pay_type } = this.state;
         if (pay_type === 1) {
             if (uaUtil.wechat()) {
                 this.openHelpModal();
@@ -215,7 +227,7 @@ export default class PayCenter extends Component {
             }
         } else if (pay_type === 3) {
             if (uaUtil.wechat()) {
-                const {openid} = getParam();
+                const { openid } = getParam();
                 if (openid) {
                     // 微信jsapi支付
                     this.doPayWechatJsapi();
@@ -234,7 +246,15 @@ export default class PayCenter extends Component {
     }
 
     render() {
-        let {showPayingModal, showQRModal, showHelpModal, order, pay_type, pay_btn, code_url} = this.state;
+        let {
+            showPayingModal,
+            showQRModal,
+            showHelpModal,
+            order,
+            pay_type,
+            pay_btn,
+            code_url,
+        } = this.state;
         return (
             <React.Fragment>
                 <Header isShow={!siteCodeUtil.inAPP() && !uaUtil.wechat()} />
@@ -245,15 +265,24 @@ export default class PayCenter extends Component {
                         </div>
                         <div className="pay-content">
                             <div className="orderno-title">
-                                订单号 <span className="orderid">{order ? order.id : ''}</span>
+                                订单号{' '}
+                                <span className="orderid">
+                                    {order ? order.id : ''}
+                                </span>
                             </div>
                             <div className="order-content">
-                                <div className="order-name">{order ? order.subject : ''}</div>
-                                <div className="order-price">{order ? order.pay_price : ''}</div>
+                                <div className="order-name">
+                                    {order ? order.subject : ''}
+                                </div>
+                                <div className="order-price">
+                                    {order ? order.pay_price : ''}
+                                </div>
                             </div>
                             <div className="pay-method">
                                 <div className="pay-method-title">
-                                    选择支付方式<span className="pay-method-tip">（支付宝、微信）</span>
+                                    选择支付方式<span className="pay-method-tip">
+                                        （支付宝、微信）
+                                    </span>
                                 </div>
                                 <div className="pay-method-choose clearfix">
                                     <div
@@ -262,9 +291,11 @@ export default class PayCenter extends Component {
                                                 ? 'pay-method-item pay-method-alipay active'
                                                 : 'pay-method-item pay-method-alipay'
                                         }
-                                        onClick={() => this.choosePayType(1)}
-                                    >
-                                        <img src={require('../../asset/image/pic_alipay.png')} alt="支付宝支付" />
+                                        onClick={() => this.choosePayType(1)}>
+                                        <img
+                                            src={require('../../asset/image/pic_alipay.png')}
+                                            alt="支付宝支付"
+                                        />
                                     </div>
                                     <div
                                         className={
@@ -272,9 +303,11 @@ export default class PayCenter extends Component {
                                                 ? 'pay-method-item pay-method-wechatpay active'
                                                 : 'pay-method-item pay-method-wechatpay'
                                         }
-                                        onClick={() => this.choosePayType(3)}
-                                    >
-                                        <img src={require('../../asset/image/pic_wechat.png')} alt="微信支付" />
+                                        onClick={() => this.choosePayType(3)}>
+                                        <img
+                                            src={require('../../asset/image/pic_wechat.png')}
+                                            alt="微信支付"
+                                        />
                                     </div>
                                 </div>
                             </div>
@@ -282,7 +315,7 @@ export default class PayCenter extends Component {
                                 <a
                                     ref={ele => (this.gopayEle = ele)}
                                     href=""
-                                    style={{display: 'none'}}
+                                    style={{ display: 'none' }}
                                     target="payWindow"
                                 />
 
@@ -290,8 +323,7 @@ export default class PayCenter extends Component {
                                     id="payBtn"
                                     className="btn btn-danger btn-confirm"
                                     onClick={this.submitPay}
-                                    disabled={pay_btn.disabled}
-                                >
+                                    disabled={pay_btn.disabled}>
                                     {pay_btn.text}
                                 </button>
                             </div>
@@ -316,7 +348,10 @@ export default class PayCenter extends Component {
                                 code_url={code_url}
                                 pay_price={order ? order.pay_price : ''}
                             />
-                            <HelpModal isOpen={showHelpModal} onRequestClose={this.closeHelpModal} />
+                            <HelpModal
+                                isOpen={showHelpModal}
+                                onRequestClose={this.closeHelpModal}
+                            />
                         </div>
                     </div>
                 </div>

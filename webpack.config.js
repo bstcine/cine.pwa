@@ -27,14 +27,14 @@ module.exports = {
         'react-redux',
         'redux',
         'redux-thunk',
-        'babel-polyfill'
+        'babel-polyfill',
     ],
 
     output: {
         path: path.resolve(__dirname, 'build'),
         publicPath: publicPath,
         filename: 'entry/[name]/index.[chunkhash:8].js',
-        chunkFilename: 'entry/[name].[chunkhash:4].js'
+        chunkFilename: 'entry/[name].[chunkhash:4].js',
     },
 
     module: {
@@ -47,8 +47,8 @@ module.exports = {
                 options: {
                     cacheDirectory: true,
                     plugins: ['lodash'],
-                    presets: ['env', 'stage-0', 'react']
-                }
+                    presets: ['env', 'stage-0', 'react'],
+                },
             },
             {
                 test: /\.less$/,
@@ -58,17 +58,20 @@ module.exports = {
                     {
                         loader: 'postcss-loader',
                         options: {
-                            plugins: [require('postcss-import'), require('autoprefixer')],
+                            plugins: [
+                                require('postcss-import'),
+                                require('autoprefixer'),
+                            ],
                             browsers: [
                                 '>1%',
                                 'last 4 versions',
                                 'Firefox ESR',
-                                'not ie < 9' // React doesn't support IE8 anyway
-                            ]
-                        }
+                                'not ie < 9', // React doesn't support IE8 anyway
+                            ],
+                        },
                     },
-                    'less-loader'
-                ]
+                    'less-loader',
+                ],
             },
             {
                 test: /\.css$/,
@@ -78,16 +81,19 @@ module.exports = {
                     {
                         loader: 'postcss-loader',
                         options: {
-                            plugins: [require('postcss-import'), require('autoprefixer')],
+                            plugins: [
+                                require('postcss-import'),
+                                require('autoprefixer'),
+                            ],
                             browsers: [
                                 '>1%',
                                 'last 4 versions',
                                 'Firefox ESR',
-                                'not ie < 9' // React doesn't support IE8 anyway
-                            ]
-                        }
-                    }
-                ]
+                                'not ie < 9', // React doesn't support IE8 anyway
+                            ],
+                        },
+                    },
+                ],
             },
             {
                 test: /\.(png|jpg|jpeg|gif|svg)$/i,
@@ -95,25 +101,26 @@ module.exports = {
                 options: {
                     limit: 10000,
                     name: 'asset/image/[name].[hash:8].[ext]',
-                    publicPath
-                }
+                    publicPath,
+                },
             },
             {
                 test: /\.(woff|woff2|eot|otf|webp|ttf)$/i,
                 loader: 'file-loader',
                 options: {
                     name: 'asset/font/[name].[hash:8].[ext]',
-                    publicPath
-                }
-            }
-        ]
+                    publicPath,
+                },
+            },
+        ],
     },
 
     resolve: {
         modules: [path.resolve(__dirname, 'src/client'), 'node_modules'],
         alias: {
             '@': path.resolve(__dirname, 'src/client'),
-            'material-icons': 'material-design-icons/iconfont/material-icons.css'
-        }
-    }
+            'material-icons':
+                'material-design-icons/iconfont/material-icons.css',
+        },
+    },
 };

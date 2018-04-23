@@ -8,6 +8,7 @@ import rootReducer from './reducer';
 import QuizPage from './container/QuizPage';
 import StatsListPage from './container/StatsListPage';
 import storeUtil from '@/util/storeUtil';
+// import logger from 'redux-logger';
 
 const store = createStore(rootReducer, applyMiddleware(thunk));
 

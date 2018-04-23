@@ -12,6 +12,7 @@ import { getParam } from '@/util/urlUtil';
 import ToastLoading from './ToastLoading';
 import ToastError from './ToastError';
 import TipModal from './TipModal';
+import ConfirmModal from './ConfirmModal';
 
 const mapStateToProps = state => {
     const { network } = state;
@@ -48,6 +49,7 @@ class QuizPage extends Component {
                         <ToastLoading />
                         <ToastError />
                         <TipModal />
+                        <ConfirmModal />
                         {!init && <Title />}
                         {!init && <QuestionItems />}
                         {!init && <Submit />}

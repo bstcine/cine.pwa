@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { submitAnswer, submitCheckAnswer } from '../action';
+import { preSubmitAnswer, submitCheckAnswer } from '../action';
 
 const mapStateToProps = state => {
     let { operation } = state;
@@ -11,7 +11,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
     onSubmitAnswer: e => {
-        dispatch(submitAnswer());
+        dispatch(preSubmitAnswer());
     },
     onSubmitCheckAnswer: e => {
         dispatch(submitCheckAnswer());

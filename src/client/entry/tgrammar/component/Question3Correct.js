@@ -92,10 +92,10 @@ const Question3Correct = ({
                 </fieldset>
             )}
 
-            {operation.is_stu_operation_visible && (
-                <fieldset className="tea-operation">
-                    <div className="feedback-select">
-                        <div className="tips">老师批改</div>
+            {operation.is_stu_operation_visible &&
+                typeof is_correct === 'number' && (
+                <fieldset>
+                    <div className="feedback-score">
                         {is_correct ? (
                             <div className="correct">恭喜，答对了！</div>
                         ) : (
@@ -103,7 +103,13 @@ const Question3Correct = ({
                         )}
                     </div>
                     {!is_correct && (
-                        <FeedbackText feedback={feedback} readOnly={true} />
+                        <div className="feedback-answer">
+                            <div className="tips">正确答案：</div>
+                            <div
+                                className="textarea"
+                                dangerouslySetInnerHTML={{ __html: feedback }}
+                            />
+                        </div>
                     )}
                 </fieldset>
             )}

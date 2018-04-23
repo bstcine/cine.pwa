@@ -10,7 +10,7 @@ const convGrade = grade => {
 };
 
 const Operation = ({ item }) => {
-    if (item.status === '2') {
+    if (item.status === '3') {
         return (
             <button
                 className="btn btn-round btn-done"
@@ -22,8 +22,6 @@ const Operation = ({ item }) => {
                 已批改 <i className="material-icons">&#xE876;</i>
             </button>
         );
-
-        // <span className="red">已批改 <i className="material-icons">&#xE876;</i></span>;
     } else {
         return (
             <button

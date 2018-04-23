@@ -1,18 +1,13 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import ReactModal from 'react-modal';
-import uaUtil from "@/util/uaUtil";
+import uaUtil from '@/util/uaUtil';
 
-const androidImg = require('../../asset/image/wechat-android.png')
-const iosImg = require('../../asset/image/wechat-ios.png')
+const androidImg = require('../../asset/image/wechat-android.png');
+const iosImg = require('../../asset/image/wechat-ios.png');
 
 export default class HelpModal extends Component {
-    constructor(props) {
-        super(props);
-    }
-
-
     render() {
-        let {isOpen, onRequestClose} = this.props;
+        let { isOpen, onRequestClose } = this.props;
         return (
             <ReactModal
                 isOpen={isOpen}
@@ -22,8 +17,7 @@ export default class HelpModal extends Component {
                 overlayClassName="modal-overlay"
                 bodyOpenClassName="body-modal-open"
                 shouldCloseOnOverlayClick={true}
-                shouldCloseOnEsc={true}
-            >
+                shouldCloseOnEsc={true}>
                 <img src={uaUtil.iOS() ? iosImg : androidImg} />
             </ReactModal>
         );

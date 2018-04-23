@@ -17,6 +17,8 @@ import {
     UPLOADED_QUESTIONS,
     CLOSE_TIP_MODAL,
     OPEN_TIP_MODAL,
+    OPEN_CONFIRM_MODAL,
+    CLOSE_CONFIRM_MODAL,
     REQUEST_STATS_QUIZ_LIST,
     RECEIVE_STATS_QUIZ_LIST,
     NETWORK_ERROR,
@@ -219,7 +221,20 @@ const tipModal = (state = { isOpen: false }, { type, payload }) => {
         case CLOSE_TIP_MODAL:
             return { isOpen: false };
         case OPEN_TIP_MODAL:
-            return { isOpen: true };
+            return { isOpen: true, html: payload.html };
+        default:
+            return state;
+    }
+};
+
+const confirmModal = (state = { isOpen: false }, { type, payload }) => {
+    switch (type) {
+        case CLOSE_CONFIRM_MODAL:
+            return { isOpen: false };
+        case OPEN_CONFIRM_MODAL: {
+            let { html, cancelButton, confirmButton } = payload;
+            return { isOpen: true, html, cancelButton, confirmButton };
+        }
         default:
             return state;
     }
@@ -245,6 +260,7 @@ const rootReducer = combineReducers({
     answersById,
     network,
     tipModal,
+    confirmModal,
 });
 
 export default rootReducer;

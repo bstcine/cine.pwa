@@ -59,10 +59,10 @@ const Question1ChooseOne = ({
                     />
                 </fieldset>
             )}
-            {operation.is_stu_operation_visible && (
-                <fieldset className="tea-operation">
-                    <div className="feedback-select">
-                        <div className="tips">老师批改</div>
+            {operation.is_stu_operation_visible &&
+                typeof is_correct === 'number' && (
+                <fieldset>
+                    <div className="feedback-score">
                         {is_correct ? (
                             <div className="correct">恭喜，答对了！</div>
                         ) : (
@@ -70,9 +70,13 @@ const Question1ChooseOne = ({
                         )}
                     </div>
                     {!is_correct && (
-                        <div className="feedback-correct">
-                            <div className="tips">正确答案</div>
-                            <span>{optionMap[correctIndex] || '暂未提供'}</span>
+                        <div className="feedback-answer">
+                            <div className="tips">
+                                    正确答案：
+                                <span>
+                                    {optionMap[correctIndex] || '暂未提供'}
+                                </span>
+                            </div>
                         </div>
                     )}
                 </fieldset>

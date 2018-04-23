@@ -154,6 +154,12 @@
             * {
               cursor: not-allowed;
             }
+            input[type='radio'] + span {
+              visibility: hidden;
+            }
+            input[type='radio']:checked + span {
+              visibility: visible;
+            }
           }
         }
         textarea:disabled {
@@ -224,10 +230,12 @@
           .correct {
             color: #13b749;
             font-size: 18px;
+            margin-bottom: 18px;
           }
           .wrong {
             color: #ff0000;
             font-size: 18px;
+            margin-bottom: 18px;
           }
         }
         .feedback-correct {
@@ -251,6 +259,38 @@
               box-shadow: 0px 2px 2px 0px rgba(247, 211, 204, 0.2);
             }
           }
+        }
+      }
+
+      .feedback-score {
+        font-size: 18px;
+        margin-bottom: 18px;
+        .correct {
+          color: #13b749;
+        }
+        .wrong {
+          color: #ff0000;
+        }
+      }
+
+      .feedback-answer {
+        font-size: 14px;
+        line-height: 24px;
+        .tips {
+          color: #ff0000;
+          margin-bottom: 12px;
+        }
+        .textarea {
+          width: 100%;
+          min-height: 100px;
+          background-color: #fffafa;
+          padding: 18px 20px;
+          font-size: 16px;
+          line-height: 24px;
+          color: #fe0000;
+          word-wrap: keep-all;
+          white-space: pre;
+          box-shadow: 0px 2px 2px 0px rgba(247, 211, 204, 0.2);
         }
       }
 

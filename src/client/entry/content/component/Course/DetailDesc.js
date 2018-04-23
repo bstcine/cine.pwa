@@ -5,6 +5,7 @@ import React from 'react';
 import timeUtil from '@/util/timeUtil';
 import {Tabs, TabItems, TabItem, TabPanels, TabPanel} from '@/component/Tabs';
 import Comments from './Comments';
+import CourseSet from './CourseSet';
 
 
 export default class DetailDesc extends React.Component {
@@ -14,7 +15,7 @@ export default class DetailDesc extends React.Component {
     }
 
     render() {
-        let {course, courseComments, isIOSAPP} = this.props;
+        let {course, courseSet, courseComments, isIOSAPP, onClickCourseSetLink} = this.props;
         let _tabItem_desc = course.object_type === '1' ? '课程概要' : '详情';
         let _tabItem_evaluate = course.object_type === '1' ? '学员评价' : '评价';
         let _will_show_lessons = course.object_type === '1' && !isIOSAPP;
@@ -29,6 +30,9 @@ export default class DetailDesc extends React.Component {
                     </TabItems>
                     <TabPanels>
                         <TabPanel>
+                            {courseSet ? (
+                                <CourseSet value={courseSet} onLink={onClickCourseSetLink}/>
+                            ) : null}
                             <div
                                 className="course-feature"
                                 dangerouslySetInnerHTML={{__html: course.h5remark}}

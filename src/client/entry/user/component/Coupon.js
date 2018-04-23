@@ -28,10 +28,10 @@ const Coupon = ({coupon,actions}) => {
                     有效期：{coupon.effective_at.substring(0, 10).replace(/-/g, '.')} -{' '}
                     {coupon.expire_at.substring(0, 10).replace(/-/g, '.')}
                 </div>
-                {coupon.remark && <img className='coupon-expand' src={arrImgSrc} onClick={() => actions.expandCoupon(coupon.id)}/>}
+                {coupon.desc && <img className='coupon-expand' src={arrImgSrc} onClick={() => actions.expandCoupon(coupon.id)}/>}
                 {coupon.status === "1" && <img className="coupon-status" src={require("../asset/image/ic_coupon_used.png")}/>}
             </div>
-            {(coupon.remark && coupon.expand) && <div className={'coupon-remark'}>{coupon.remark}</div>}
+            {(coupon.desc && coupon.expand) && <div className={'coupon-remark'}>{coupon.desc}</div>}
         </div>
     );
 }

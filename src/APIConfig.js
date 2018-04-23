@@ -40,9 +40,12 @@ exports.APIURL_Share_Update = '/api/web/updatesharelog'; // 更新分享状态
 exports.APIURL_Share_CoursePackage = '/api/share/coursePackage'; // 课程详情分享(购买后订单分享)
 
 exports.APIURL_User_Coupon = '/api/user/coupon/list'; // 查询优惠券
+exports.APIURL_User_Coupon_Add = '/api/user/coupon/add'; // 添加优惠券
+exports.APIURL_User_Point = '/api/user/integral/list'; // 查询积分
 exports.APIURL_User_Info = '/api/user/info'; // 用户信息
 exports.APIURL_User_Address_Add = '/api/user/address/add'; // 新增收货地址
 exports.APIURL_User_Address = '/api/user/address'; // 查询收货地址
+exports.APIURL_Global_Integral_Rule = '/api/global/integral/rule'; //积分规则
 
 exports.APIURL_LogoutV1 = '/api/web/logout'; // 登出
 

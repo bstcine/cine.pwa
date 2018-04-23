@@ -71,7 +71,7 @@ module.exports = {
             rewrites: rewrites
         },
         inline: true,
-        port: 5000,
+        port: 5001,
         disableHostCheck: true,
         // host: "0.0.0.0",
         // useLocalIp:true,

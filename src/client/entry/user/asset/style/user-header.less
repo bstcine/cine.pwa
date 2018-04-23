@@ -1,156 +1,175 @@
 @import '~asset/style/_cine.less';
 
 .user-header {
-  background-color: #014292;
-  height: 2.04rem;
   position: relative;
+  background-color: #014292;
   width: 100%;
+  height: 1.1rem;
 
-  .user-mine {
-    display: none;
+  .nav-open {
+    display: block;
+    margin-left: 0.35rem;
+    margin-top: 0.39rem;
+    width: .34rem;
+    height: .4rem;
+    float: left;
+    background: url('../image/ico_mine@2x.png') no-repeat;
+    background-size: .34rem .4rem;
+  }
+
+  .nav-home {
+    float: right;
+    margin-top: .40rem;
+    margin-right: .41rem;
+
+    width: .39rem;
+    height: .39rem;
+
+    background: url('../image/ico_bst_home.png') no-repeat;
+    background-size: .39rem .39rem;
   }
 
   .user-logo {
-    margin-left: 0.85rem;
-    margin-top: 0.38rem;
-    float: left;
-    line-height: 0;
-
-    img {
-      width: 1.21rem;
-      height: 1.21rem;
-      border-radius: 50px;
-    }
+    display: none;
   }
-
   .user-info {
-    height: 0.75rem;
-    width: 3.24rem;
-    margin-top: 0.63rem;
-    margin-left: 0.28rem;
-    float: left;
-    display: -webkit-flex;
-    display: flex;
-    flex-direction: column;
-
-    .user-flex-a {
-      display: -webkit-flex;
-      display: flex;
-      align-items: center;
-
-      .user-name {
-        font-family: PingFangSC-Medium;
-        font-size: 15px;
-        color: #ffffff;
-        height: 0.3rem;
-      }
-
-      .user-edit {
-        width: 0.24rem;
-        height: 0.24rem;
-        margin-left: 0.17rem;
-      }
-    }
-
-    .user-flex-b {
-      display: -webkit-flex;
-      display: flex;
-      align-items: center;
-      margin-top: 0.14rem;
-
-      .user-type {
-        width: 0.86rem;
-      }
-
-      .user-phone {
-        font-family: PingFangSC-Regular;
-        font-size: 12px;
-        color: #ececed;
-        margin-bottom: 0.05rem;
-        margin-left: 0.11rem;
-      }
-    }
-
+    display: none;
   }
-
-  .user-font-hint {
-    font-family: PingFangSC-Regular;
-    font-size: 15px;
-    color: #ffffff;
-  }
-
-  .user-font-val {
-    font-family: PingFangSC-Regular;
-    font-size: 15px;
-    color: #ff9630;
-    margin-left: 0.19rem;
-  }
-
   .user-point {
-    margin-top: 0.99rem;
-    margin-left: 1.76rem;
-    float: left;
-    display: -webkit-flex;
-    display: flex;
+    display: none;
   }
-
   .user-coupon {
-    margin-top: 0.99rem;
-    margin-left: 1.51rem;
-    float: left;
-    display: -webkit-flex;
-    display: flex;
-  }
-
-  .user-home {
-    float: right;
-    display: flex;
-    margin-top: 0.87rem;
-    margin-right: 0.88rem;
-
-    img {
-      width: .39rem;
-      height: .39rem;
-    }
+    display: none;
   }
 }
 
-@media @media-xs {
+@media @media-up-sm {
   .user-header {
-    height: 1.1rem;
+    height: 2.04rem;
 
-    .user-mine {
-      display: flex;
-      margin-left: 0.35rem;
-      margin-top: 0.39rem;
-      float: left;
-      img {
-        width: .34rem;
-        height: .40rem;
-      }
+    .nav-open {
+      display: none;
+    }
+
+    .nav-home {
+      float: right;
+      margin-top: .87rem;
+      margin-right: .88rem;
+
+      width: .39rem;
+      height: .39rem;
+
+      background: url('../image/ico_bst_home.png') no-repeat;
+      background-size: .39rem .39rem;
     }
 
     .user-logo {
-      display: none;
-    }
-    .user-info {
-      display: none;
-    }
-    .user-point {
-      display: none;
-    }
-    .user-coupon {
-      display: none;
-    }
-    .user-home {
-      float: right;
-      display: flex;
-      margin-top: .40rem;
-      margin-right: .41rem;
+      display: block;
+      margin-left: 0.85rem;
+      margin-top: 0.38rem;
+      float: left;
+      line-height: 0;
 
       img {
-        width: .39rem;
-        height: .39rem;
+        width: 1.21rem;
+        height: 1.21rem;
+        border-radius: 50px;
+      }
+    }
+
+    .user-info {
+      height: 0.75rem;
+      width: 3.24rem;
+      margin-top: 0.63rem;
+      margin-left: 0.28rem;
+      float: left;
+      display: -webkit-flex;
+      display: flex;
+      flex-direction: column;
+
+      .user-flex-a {
+        display: -webkit-flex;
+        display: flex;
+        align-items: center;
+
+        .user-name {
+          font-family: PingFangSC-Medium;
+          font-size: 15px;
+          color: #ffffff;
+          height: 0.3rem;
+        }
+
+        .user-edit {
+          margin-left: 0.17rem;
+          width: .24rem;
+          height: .24rem;
+
+          background: url('../image/ico_edit.png') no-repeat;
+          background-size: .24rem .24rem;
+        }
+      }
+
+      .user-flex-b {
+        display: -webkit-flex;
+        display: flex;
+        align-items: center;
+        margin-top: 0.14rem;
+
+        .user-role {
+          width: .86rem;
+          height: .30rem;
+        }
+
+        .user-phone {
+          font-family: PingFangSC-Regular;
+          font-size: 12px;
+          color: #ececed;
+          margin-bottom: 0.05rem;
+          margin-left: 0.11rem;
+        }
+      }
+
+    }
+
+    .user-point {
+      margin-top: 0.99rem;
+      margin-left: 1.76rem;
+      float: left;
+      display: -webkit-flex;
+      display: flex;
+
+      .point-hint {
+        font-family: PingFangSC-Regular;
+        font-size: 15px;
+        color: #ffffff;
+      }
+
+      .point-val {
+        font-family: PingFangSC-Regular;
+        font-size: 15px;
+        color: #ff9630;
+        margin-left: 0.19rem;
+      }
+    }
+
+    .user-coupon {
+      margin-top: 0.99rem;
+      margin-left: 1.51rem;
+      float: left;
+      display: -webkit-flex;
+      display: flex;
+
+      .coupon-hint {
+        font-family: PingFangSC-Regular;
+        font-size: 15px;
+        color: #ffffff;
+      }
+
+      .coupon-val {
+        font-family: PingFangSC-Regular;
+        font-size: 15px;
+        color: #ff9630;
+        margin-left: 0.19rem;
       }
     }
   }

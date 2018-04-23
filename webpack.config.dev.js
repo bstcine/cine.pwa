@@ -11,7 +11,7 @@ const Config = require('./webpack.config');
 const WebpackMildCompile = require('webpack-mild-compile').Plugin;
 const OfflinePlugin = require('offline-plugin');
 
-const pages = ['content'];
+const pages = Config.pages;
 let entry = {};
 let HtmlWebpackPlugins = [];
 let rewrites = [];

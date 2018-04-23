@@ -13,3 +13,8 @@ export const Action_UC = {
     RECEIVE: 'UC_RECEIVE',
     EXPAND: 'UC_EXPAND'
 };
+//entry/user/point
+export const Action_UP = {
+    REQUEST: 'UP_REQUEST',
+    RECEIVE: 'UP_RECEIVE'
+};

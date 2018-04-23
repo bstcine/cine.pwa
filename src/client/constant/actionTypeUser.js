@@ -11,7 +11,11 @@ export const Action_UI = {
 export const Action_UC = {
     REQUEST: 'UC_REQUEST',
     RECEIVE: 'UC_RECEIVE',
-    EXPAND: 'UC_EXPAND'
+    EXPAND: 'UC_EXPAND',
+    DIALOG_ADD: 'UC_DIALOG_ADD',
+    REQUEST_ADD: 'UC_REQUEST_ADD',
+    RECEIVE_ADD: 'UC_RECEIVE_ADD',
+    TOAST_HIDE: 'UC_TOAST_HIDE',
 };
 //entry/user/point
 export const Action_UP = {

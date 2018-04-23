@@ -33,12 +33,41 @@ export const actionUserCoupon = {
         type: Action_UC.EXPAND,
         id: id
     }),
+    dialogAddCoupon: () => ({
+        type: Action_UC.DIALOG_ADD
+    }),
+    requestAdd: () => ({
+        type: Action_UC.REQUEST_ADD,
+    }),
+    receiveAdd: (err, res) => ({
+        type: Action_UC.RECEIVE_ADD,
+        payload: res,
+        err: err,
+    }),
+    hideToast: () => ({
+        type: Action_UC.TOAST_HIDE
+    }),
     loadUserCoupon: () => async dispatch => {
         dispatch(actionUserCoupon.request())
 
         let param = {page: 1, pageSize: 1000000, orderBy: 'create_at', orderValue: 'desc'}
         let [err, result] = await fetchData(Api.APIURL_User_Coupon, param)
         dispatch(actionUserCoupon.receive(result))
+    },
+    addCoupon: (no) => async dispatch => {
+        dispatch(actionUserCoupon.requestAdd())
+        dispatch(actionUserCoupon.dialogAddCoupon())
+
+        let [err, result] = await fetchData(Api.APIURL_User_Coupon_Add, {no: no})
+        if (err === 'coupon_not_exist') err = '优惠券不存在'
+
+        dispatch(actionUserCoupon.receiveAdd(err, result))
+
+        setTimeout(() => {
+            dispatch(actionUserCoupon.hideToast());
+        }, 3000);
+
+        if (!err) dispatch(actionUserCoupon.loadUserCoupon());
     }
 }
 
@@ -46,9 +75,9 @@ export const actionUserPoint = {
     request: () => ({
         type: Action_UP.REQUEST,
     }),
-    receive: (rows,remark) => ({
+    receive: (rows, remark) => ({
         type: Action_UP.RECEIVE,
-        payload: {rows,remark}
+        payload: {rows, remark}
     }),
     loadUserPoint: () => async dispatch => {
         dispatch(actionUserPoint.request())
@@ -57,9 +86,9 @@ export const actionUserPoint = {
         let [error, result] = await fetchData(Api.APIURL_User_Point, param)
         let rows = result.rows;
 
-        let [err,res] = await fetchData(Api.APIURL_Global_Integral_Rule,{part:'1',type:'1'})
+        let [err, res] = await fetchData(Api.APIURL_Global_Integral_Rule, {part: '1', type: '1'})
         let remark = res.remark
 
-        dispatch(actionUserPoint.receive(rows,remark))
+        dispatch(actionUserPoint.receive(rows, remark))
     }
 }

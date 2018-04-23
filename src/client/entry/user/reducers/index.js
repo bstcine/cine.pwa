@@ -1,6 +1,5 @@
 import {combineReducers} from 'redux'
 import {Action_UI, Action_UC, Action_UP} from "@/constant/actionTypeUser";
-import CommonUtil from "@/util/common";
 
 const user = (state = {
     nickname: '',
@@ -18,24 +17,32 @@ const user = (state = {
     }
 }
 
-const expandCoupon = (couponsState, action) => {
-    return CommonUtil.updateItemInArray(couponsState, action.id, coupon => {
-        return CommonUtil.updateObject(coupon, {expand: !coupon.expand});
-    });
-}
-
-const coupons = (state = [], action) => {
+const coupons = (state = {rows: [], isOpen: false, network: {loading: false, msg: '', error: ''}}, action) => {
     switch (action.type) {
         case Action_UC.RECEIVE:
-            return action.payload
+            return {...state, rows: action.payload}
         case Action_UC.EXPAND:
-            return expandCoupon(state, action)
+            return {
+                ...state,
+                rows: state.rows.map((item) => ({
+                    ...item,
+                    expand: (item.id === action.id) ? !item.expand : item.expand
+                }))
+            }
+        case Action_UC.DIALOG_ADD:
+            return {...state, isOpen: !state.isOpen}
+        case Action_UC.REQUEST_ADD:
+            return {...state, network: {loading: true, msg: '', error: ''}}
+        case Action_UC.RECEIVE_ADD:
+            return {...state, network: {loading: false, msg: '添加成功', error: action.err}}
+        case Action_UC.TOAST_HIDE:
+            return {...state, network: {loading: false, msg: '', error: ''}}
         default:
             return state
     }
 }
 
-const points = (state = {rows:[],remark:""}, action) => {
+const points = (state = {rows: [], remark: ""}, action) => {
     switch (action.type) {
         case Action_UP.RECEIVE:
             return action.payload

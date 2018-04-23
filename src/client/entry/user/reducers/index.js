@@ -1,5 +1,5 @@
 import {combineReducers} from 'redux'
-import {Action_UI, Action_UC} from "@/constant/actionTypeUser";
+import {Action_UI, Action_UC, Action_UP} from "@/constant/actionTypeUser";
 import CommonUtil from "@/util/common";
 
 const user = (state = {
@@ -35,9 +35,19 @@ const coupons = (state = [], action) => {
     }
 }
 
+const points = (state = [], action) => {
+    switch (action.type) {
+        case Action_UP.RECEIVE:
+            return action.payload
+        default:
+            return state
+    }
+}
+
 const rootReducer = combineReducers({
     user,
-    coupons
+    coupons,
+    points
 })
 
 export default rootReducer

@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
 import {actionUserInfo} from "@/action/userAction";
-import UserHeader from "@/entry/user/component/UserHeader";
+import User from "@/entry/user/component/User";
 import {logoutV1} from "@/service/base";
 
 class Root extends Component {
@@ -33,7 +33,7 @@ class Root extends Component {
     render() {
         const {user} = this.props
         return (
-            <UserHeader user={user} handleClick={this.handleClick}/>
+            <User user={user} handleClick={this.handleClick}/>
         )
     }
 }

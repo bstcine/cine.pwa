@@ -8,7 +8,7 @@ import {Tabs, TabItems, TabItem} from "@/component/Tabs";
 import {TabPanels, TabPanel} from "@/component/Tabs";
 import PointContainer from "@/entry/user/containers/PointContainer";
 
-const UserHeader = ({user, handleClick}) => {
+const User = ({user, handleClick}) => {
     let headImg = user.head_image ? "/f/" + user.head_image : require('../asset/image/ico_headpic.png');
     let roleImg = user.role_id + '' === "2" ? require('../asset/image/ico_teacher.png') : require('../asset/image/ico_student.png');
 
@@ -69,4 +69,4 @@ const UserHeader = ({user, handleClick}) => {
     )
 }
 
-export default UserHeader
+export default User

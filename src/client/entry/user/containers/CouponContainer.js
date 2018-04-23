@@ -59,46 +59,48 @@ class CouponContainer extends Component {
 
         return (
             <MuiThemeProvider muiTheme={muiTheme}>
-                <ToastLoading show={network.loading}/>
-                <ToastError show={!network.loading && network.error} text={network.error}/>
-                <ToastSuccess show={!network.loading && !network.error && network.msg} text={network.msg}/>
-                <Tabs className={'coupon-tabs'}>
-                    <TabItems>
-                        <TabItem>未使用</TabItem>
-                        <TabItem>已使用</TabItem>
-                        <TabItem>已过期</TabItem>
-                    </TabItems>
-                    <TabPanels>
-                        <TabPanel>
-                            <CouponList coupons={use} actions={actions}/>
-                        </TabPanel>
-                        <TabPanel>
-                            <CouponList coupons={used} actions={actions}/>
-                        </TabPanel>
-                        <TabPanel>
-                            <CouponList coupons={expired} actions={actions}/>
-                        </TabPanel>
-                    </TabPanels>
-                </Tabs>
-                <a className="float-button" onClick={event => {
-                    actions.dialogAddCoupon()
-                }}><img src={require('../asset/image/ico_add_coupon.png')}/></a>
-                <Dialog
-                    title="添加优惠券"
-                    modal={false}
-                    actions={dialogActions}
-                    open={coupons.isOpen}
-                    onRequestClose={actions.dialogAddCoupon}
-                >
-                    <TextField
-                        ref={this.noInput}
-                        onChange={(e, val) => {
-                            this.couponNo = val
-                        }}
-                        defaultValue={this.couponNo}
-                        hintText="请输入您的优惠券"
-                    />
-                </Dialog>
+                <React.Fragment>
+                    <ToastLoading show={network.loading}/>
+                    <ToastError show={!network.loading && network.error} text={network.error}/>
+                    <ToastSuccess show={!network.loading && !network.error && network.msg} text={network.msg}/>
+                    <Tabs className={'coupon-tabs'}>
+                        <TabItems>
+                            <TabItem>未使用</TabItem>
+                            <TabItem>已使用</TabItem>
+                            <TabItem>已过期</TabItem>
+                        </TabItems>
+                        <TabPanels>
+                            <TabPanel>
+                                <CouponList coupons={use} actions={actions}/>
+                            </TabPanel>
+                            <TabPanel>
+                                <CouponList coupons={used} actions={actions}/>
+                            </TabPanel>
+                            <TabPanel>
+                                <CouponList coupons={expired} actions={actions}/>
+                            </TabPanel>
+                        </TabPanels>
+                    </Tabs>
+                    <a className="float-button" onClick={event => {
+                        actions.dialogAddCoupon()
+                    }}><img src={require('../asset/image/ico_add_coupon.png')}/></a>
+                    <Dialog
+                        title="添加优惠券"
+                        modal={false}
+                        actions={dialogActions}
+                        open={coupons.isOpen}
+                        onRequestClose={actions.dialogAddCoupon}
+                    >
+                        <TextField
+                            ref={this.noInput}
+                            onChange={(e, val) => {
+                                this.couponNo = val
+                            }}
+                            defaultValue={this.couponNo}
+                            hintText="请输入您的优惠券"
+                        />
+                    </Dialog>
+                </React.Fragment>
             </MuiThemeProvider>
         )
     }

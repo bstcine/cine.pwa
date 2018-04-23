@@ -2,7 +2,7 @@ import '@/asset/style/modal.less';
 import React from 'react';
 import { connect } from 'react-redux';
 import ReactModal from 'react-modal';
-import { closeTipModal } from '../action';
+import { closeTipModal } from '@/action/tgrammarAction';
 
 const mapStateToProps = state => {
     let { tipModal, quiz } = state;

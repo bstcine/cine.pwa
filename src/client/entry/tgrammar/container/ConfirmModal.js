@@ -2,7 +2,7 @@ import '@/asset/style/modal.less';
 import React from 'react';
 import { connect } from 'react-redux';
 import ReactModal from 'react-modal';
-import { closeConfirmModal, submitAnswer } from '../action';
+import { closeConfirmModal, submitAnswer } from '@/action/tgrammarAction';
 
 const mapStateToProps = state => {
     let { confirmModal, quiz } = state;

@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import ReactModal from 'react-modal';
 import '@/asset/style/modal.less';
 import * as Service from '@/service/base';
@@ -14,7 +14,7 @@ export default class LoginModal extends Component {
         this.state = {
             username: '',
             password: '',
-            loginBtn: '登录'
+            loginBtn: '登录',
         };
     }
 
@@ -24,13 +24,13 @@ export default class LoginModal extends Component {
 
     handleUsername(e) {
         this.setState({
-            username: e.target.value
+            username: e.target.value,
         });
     }
 
     handlePassword(e) {
         this.setState({
-            password: e.target.value
+            password: e.target.value,
         });
     }
 
@@ -39,12 +39,11 @@ export default class LoginModal extends Component {
         let username = this.state.username;
         let password = this.state.password;
 
-        let res = await Service.login({username, password});
+        let res = await Service.login({ username, password });
         if (res.except_case_desc) {
             return alert(errorMsg(res.except_case_desc));
         }
-        // storeUtil.setToken(res.token);
-        this.props.loginSuccess();
+        this.props.onLoginSuccess();
     }
 
     render() {
@@ -57,8 +56,7 @@ export default class LoginModal extends Component {
                 overlayClassName="modal-overlay"
                 bodyOpenClassName="body-modal-open"
                 shouldCloseOnOverlayClick={true}
-                shouldCloseOnEsc={true}
-            >
+                shouldCloseOnEsc={true}>
                 <div className="login-top">
                     登录
                     <span className="register-tip">

@@ -3,7 +3,7 @@ import Question1ChooseOne from '../component/Question1ChooseOne';
 import {
     saveQuestion1SelectAnswer,
     saveQuestion3FeedbackSelectAnswer,
-} from '../action';
+} from '@/action/tgrammarAction';
 
 const mapStateToProps = (state, ownProps) => {
     let { answersById, questionsById, operation } = state;

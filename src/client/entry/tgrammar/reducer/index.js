@@ -19,11 +19,15 @@ import {
     OPEN_TIP_MODAL,
     OPEN_CONFIRM_MODAL,
     CLOSE_CONFIRM_MODAL,
+    CLOSE_LOGIN_MODAL,
+    OPEN_LOGIN_MODAL,
     REQUEST_STATS_QUIZ_LIST,
     RECEIVE_STATS_QUIZ_LIST,
     NETWORK_ERROR,
     NETWORK_ERROR_TIMEOUT,
-} from '../action';
+    RESTORE_LOCAL_ANSWERS,
+    RECORD_TIME,
+} from '@/constant/actionTypeTGrammar';
 
 /**
  * 除题目外的测验数据
@@ -120,6 +124,8 @@ const answersById = (state = {}, { type, payload }) => {
             });
             return newState;
         }
+        case RESTORE_LOCAL_ANSWERS:
+            return { ...payload };
         default:
             return state;
     }
@@ -164,6 +170,7 @@ const network = (
                 pending: false,
                 text: payload ? payload.text : null,
             };
+        case OPEN_LOGIN_MODAL:
         case RECEIVE_QUIZ_DATA:
         case RECEIVE_STATS_QUIZ_LIST:
             return {
@@ -240,10 +247,33 @@ const confirmModal = (state = { isOpen: false }, { type, payload }) => {
     }
 };
 
+const loginModal = (state = { isOpen: false }, { type, payload }) => {
+    switch (type) {
+        case CLOSE_LOGIN_MODAL:
+            return { isOpen: false };
+        case OPEN_LOGIN_MODAL: {
+            return { isOpen: true };
+        }
+        default:
+            return state;
+    }
+};
+
 const statsQuizList = (state = [], { type, payload }) => {
     switch (type) {
         case RECEIVE_STATS_QUIZ_LIST:
             return [...payload];
+        default:
+            return state;
+    }
+};
+
+const timer = (state = {}, { type, payload }) => {
+    switch (type) {
+        case RECORD_TIME: {
+            let startTime = payload.startTime;
+            return { ...state, startTime };
+        }
         default:
             return state;
     }
@@ -261,6 +291,8 @@ const rootReducer = combineReducers({
     network,
     tipModal,
     confirmModal,
+    loginModal,
+    timer,
 });
 
 export default rootReducer;

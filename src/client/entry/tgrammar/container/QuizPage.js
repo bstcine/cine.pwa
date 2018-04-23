@@ -2,7 +2,7 @@ import '../asset/style/index.less';
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { fetchQuizData } from '../action';
+import { fetchQuizData } from '@/action/tgrammarAction';
 import Header from '@/component/Header';
 import Footer from '@/component/Footer';
 import Title from '../container/Title';
@@ -13,6 +13,7 @@ import ToastLoading from './ToastLoading';
 import ToastError from './ToastError';
 import TipModal from './TipModal';
 import ConfirmModal from './ConfirmModal';
+import LoginModal from './LoginModal';
 
 const mapStateToProps = state => {
     const { network } = state;
@@ -53,6 +54,7 @@ class QuizPage extends Component {
                         {!init && <Title />}
                         {!init && <QuestionItems />}
                         {!init && <Submit />}
+                        <LoginModal />
                     </div>
                 </div>
                 <Footer />

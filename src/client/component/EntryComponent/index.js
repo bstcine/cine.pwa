@@ -1,5 +1,5 @@
-import React, {Component} from 'react';
-import {getParam} from '@/util/urlUtil';
+import { Component } from 'react';
+import { getParam } from '@/util/urlUtil';
 import siteCodeUtil from '@/util/sitecodeUtil';
 import storeUtil from '@/util/storeUtil';
 import SITECODE from '@/constant/sitecode';
@@ -9,7 +9,7 @@ class EntryComponent extends Component {
     constructor(props) {
         super(props);
         console.log(`EntryComponent constructor`);
-        let {token, sitecode, baseurl} = getParam();
+        let { token, sitecode, baseurl } = getParam();
         console.log(`From current url: token[${token}] sitecode[${sitecode}] `);
 
         // sitecode 以 URL 上的为最高优先级，不传的时候以当前浏览器 user-agent 设置
@@ -39,7 +39,7 @@ class EntryComponent extends Component {
 
         // host 前缀以 URL 上的优先级最高，不传的时候取构建时传的
         if (baseurl) {
-            window.API_Host_URL = decodeURIComponent(baseurl)
+            window.API_Host_URL = decodeURIComponent(baseurl);
         } else {
             if (process.env.API_Host_URL) {
                 window.API_Host_URL = process.env.API_Host_URL;

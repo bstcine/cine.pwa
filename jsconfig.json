@@ -1,0 +1,10 @@
+{
+    "compilerOptions": {
+        "target": "ES6",
+        "baseUrl": ".",
+        "paths": {
+            "@/*": ["./src/client/*"]
+        }
+    },
+    "exclude": ["node_modules", "**/node_modules/*"]
+}

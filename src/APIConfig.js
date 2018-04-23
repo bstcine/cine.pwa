@@ -26,11 +26,11 @@ exports.APIURL_Content_Tag_Tree = '/api/content/tag/tree'; // 标签树
 exports.APIURL_Content_Course_Detail = '/api/content/course/detail'; // 课程详情
 exports.APIURL_Content_Quiz = '/api/web/quiz/'; // 小节测试
 
-exports.APIURL_Content_Quiz_Grammar = '/api/content/quiz/grammar';             // 阅读理解测试题目
-exports.APIURL_Stats_Quiz_Save = '/api/stats/quiz/save';                       // 保存阅读理解测试答案
-exports.APIURL_Stats_Quiz_Update = '/api/stats/quiz/update';                   // 更新阅读理解测试批改结果
-exports.APIURL_Stats_Quiz_List = '/api/stats/quiz/list';                       // 阅读理解测试学生答题列表
-exports.APIURL_Stats_Quiz_Detail = '/api/stats/quiz/detail';                   // 阅读理解测试答题明细
+exports.APIURL_Content_Quiz_Grammar = '/api/content/quiz/grammar'; // 阅读理解测试题目
+exports.APIURL_Stats_Quiz_Save = '/api/stats/quiz/save'; // 保存阅读理解测试答案
+exports.APIURL_Stats_Quiz_Update = '/api/stats/quiz/update'; // 更新阅读理解测试批改结果
+exports.APIURL_Stats_Quiz_List = '/api/stats/quiz/list'; // 阅读理解测试学生答题列表
+exports.APIURL_Stats_Quiz_Detail = '/api/stats/quiz/detail'; // 阅读理解测试答题明细
 
 exports.APIURL_Wechat_Js_Signature = '/api/wechat/jssignature';
 
@@ -39,7 +39,7 @@ exports.APIURL_Share_Common = '/api/share/common'; // 创建通用分享
 exports.APIURL_Share_Update = '/api/web/updatesharelog'; // 更新分享状态
 exports.APIURL_Share_CoursePackage = '/api/share/coursePackage'; // 课程详情分享(购买后订单分享)
 
-exports.APIURL_User_Coupon = '/api/user/coupon/list'; //查询优惠券
+exports.APIURL_User_Coupon = '/api/user/coupon/list'; // 查询优惠券
 exports.APIURL_User_Info = '/api/user/info'; // 用户信息
 exports.APIURL_User_Address_Add = '/api/user/address/add'; // 新增收货地址
 exports.APIURL_User_Address = '/api/user/address'; // 查询收货地址

@@ -12,6 +12,7 @@ const optionText = (index, content) => {
 const SelectOption = ({
     index,
     name,
+    className,
     value,
     content,
     checked,
@@ -19,7 +20,11 @@ const SelectOption = ({
     onChange,
 }) => {
     return (
-        <li className={classNames('option', { checked })}>
+        <li
+            className={classNames('option', {
+                checked,
+                [className]: !!className,
+            })}>
             <label>
                 <input
                     type="radio"

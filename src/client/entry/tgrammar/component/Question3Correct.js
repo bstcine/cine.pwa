@@ -64,11 +64,18 @@ const Question3Correct = ({
                             ? '翻译'
                             : '修正错误'}：
                     </div>
-                    <textarea
-                        className="answerarea"
-                        value={text_value || ''}
-                        onChange={onTextChange}
-                    />
+                    {operation.is_stu_operation_editable ? (
+                        <textarea
+                            className="answerarea"
+                            value={text_value || ''}
+                            onChange={onTextChange}
+                        />
+                    ) : (
+                        <div
+                            className="textarea-stu"
+                            dangerouslySetInnerHTML={{ __html: text_value }}
+                        />
+                    )}
                 </div>
             </fieldset>
 

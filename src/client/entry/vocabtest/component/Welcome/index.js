@@ -13,7 +13,7 @@ export default class Welcome extends Component {
         super(props);
         console.log('Welcome constructor');
         this.startClick = this.startClick.bind(this);
-        this.loginSuccess = this.loginSuccess.bind(this);
+        this.onLoginSuccess = this.onLoginSuccess.bind(this);
         this.toggleLoginModal = this.toggleLoginModal.bind(this);
         this.state = {
             showLoginModal: false,
@@ -52,7 +52,7 @@ export default class Welcome extends Component {
         }));
     }
 
-    async loginSuccess() {
+    async onLoginSuccess() {
         let [err, result] = await fetchData(Api.APIURL_User_Info, {});
         if (err) return alert(errorMsg(err));
         storeUtil.set('user', result);
@@ -80,7 +80,7 @@ export default class Welcome extends Component {
                 <LoginModal
                     isOpen={showLoginModal}
                     toggleModal={this.toggleLoginModal}
-                    loginSuccess={this.loginSuccess}
+                    onLoginSuccess={this.onLoginSuccess}
                 />
                 <div className="welcome">
                     <div className="start-bg" />

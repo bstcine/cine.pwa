@@ -162,11 +162,6 @@
             }
           }
         }
-        textarea:disabled {
-          cursor: not-allowed;
-          background-color: #f1f7fe;
-          border: 1px solid #f1f7fe;
-        }
       }
 
       .tea-operation {
@@ -237,6 +232,12 @@
             font-size: 18px;
             margin-bottom: 18px;
           }
+          .check-right {
+            color: #13b749;
+          }
+          .check-wrong {
+            color: #ff0000;
+          }
         }
         .feedback-correct {
           span {
@@ -292,6 +293,20 @@
           white-space: pre;
           box-shadow: 0px 2px 2px 0px rgba(247, 211, 204, 0.2);
         }
+      }
+
+      .textarea-stu {
+        width: 100%;
+        min-height: 100px;
+        padding: 18px 20px;
+        font-size: 16px;
+        line-height: 24px;
+        color: @black;
+        resize: vertical;
+        word-wrap: keep-all;
+        white-space: pre;
+        background-color: #f1f7fe;
+        border: 1px solid #f1f7fe;
       }
 
       .answer {

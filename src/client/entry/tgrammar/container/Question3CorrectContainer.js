@@ -5,7 +5,7 @@ import {
     saveQuestion3TextAnswer,
     saveQuestion3FeedbackSelectAnswer,
     saveQuestion3FeedbackTextAnswer,
-} from '../action';
+} from '@/action/tgrammarAction';
 
 const mapStateToProps = (state, ownProps) => {
     let { answersById, questionsById, operation } = state;

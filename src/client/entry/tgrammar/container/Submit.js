@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { preSubmitAnswer, submitCheckAnswer } from '../action';
+import { preSubmitAnswer, submitCheckAnswer } from '@/action/tgrammarAction';
 
 const mapStateToProps = state => {
     let { operation } = state;

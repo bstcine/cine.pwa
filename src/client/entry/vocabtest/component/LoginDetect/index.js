@@ -12,7 +12,7 @@ export default class LoginDetect extends Component {
         this.goLoginClick = this.goLoginClick.bind(this);
         this.startClick = this.startClick.bind(this);
         this.toggleLoginModal = this.toggleLoginModal.bind(this);
-        this.loginSuccess = this.loginSuccess.bind(this);
+        this.onLoginSuccess = this.onLoginSuccess.bind(this);
         this.state = {
             showLoginModal : false
         }
@@ -32,7 +32,7 @@ export default class LoginDetect extends Component {
         }));
     }
 
-    async loginSuccess() {
+    async onLoginSuccess() {
         this.setState({
             showLoginModal: false
         });
@@ -64,7 +64,7 @@ export default class LoginDetect extends Component {
                 <LoginModal
                     isOpen={showLoginModal}
                     toggleModal={this.toggleLoginModal}
-                    loginSuccess={this.loginSuccess}
+                    onLoginSuccess={this.onLoginSuccess}
                 />
                 <div className="login-detect">
                     <div className="title">

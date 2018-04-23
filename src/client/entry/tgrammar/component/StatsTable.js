@@ -10,30 +10,48 @@ const convGrade = grade => {
 };
 
 const Operation = ({ item }) => {
-    if (item.status === '3') {
-        return (
-            <button
-                className="btn btn-round btn-done"
-                onClick={e => {
-                    location.href = `/tgrammar/quiz?stats_quiz_id=${
-                        item.id
-                    }&cmd=check`;
-                }}>
-                已批改 <i className="material-icons">&#xE876;</i>
-            </button>
-        );
-    } else {
-        return (
-            <button
-                className="btn btn-round"
-                onClick={e => {
-                    location.href = `/tgrammar/quiz?stats_quiz_id=${
-                        item.id
-                    }&cmd=check`;
-                }}>
-                批改 <i className="material-icons">&#xE254;</i>
-            </button>
-        );
+    const UNCHECK = '1';
+    const CHECKING = '2';
+    const CHECKED = '3';
+    switch (item.status) {
+        case UNCHECK:
+            return (
+                <button
+                    className="btn btn-round"
+                    onClick={e => {
+                        location.href = `/tgrammar/quiz?stats_quiz_id=${
+                            item.id
+                        }&cmd=check`;
+                    }}>
+                    批改 <i className="material-icons">&#xE254;</i>
+                </button>
+            );
+        case CHECKING:
+            return (
+                <button
+                    className="btn btn-round btn-checking"
+                    onClick={e => {
+                        location.href = `/tgrammar/quiz?stats_quiz_id=${
+                            item.id
+                        }&cmd=check`;
+                    }}>
+                    批改中...
+                </button>
+            );
+        case CHECKED:
+            return (
+                <button
+                    className="btn btn-round btn-done"
+                    onClick={e => {
+                        location.href = `/tgrammar/quiz?stats_quiz_id=${
+                            item.id
+                        }&cmd=check`;
+                    }}>
+                    已批改 <i className="material-icons">&#xE876;</i>
+                </button>
+            );
+        default:
+            return null;
     }
 };
 
@@ -45,24 +63,27 @@ const StatsTable = ({ title, list = [], onClick }) => {
                 <tbody>
                     <tr>
                         <th>编号</th>
-                        <th>学生姓名</th>
+                        <th>学生账号</th>
+                        <th>姓名</th>
                         <th>年级</th>
-                        <th>创建时间</th>
+                        <th>考试时长</th>
+                        <th>提交时间</th>
+                        <th>批改老师</th>
                         <th>得分</th>
-                        <th>操作</th>
+                        <th>批改操作</th>
                     </tr>
                     {list.map(item => {
                         return (
                             <tr key={item.id}>
                                 <td>{item.id}</td>
                                 <td>
-                                    {item.nickname ||
-                                        item.phone ||
-                                        item.email ||
-                                        item.user_id}
+                                    {item.phone || item.email || item.login}
                                 </td>
+                                <td>{item.nickname}</td>
                                 <td>{convGrade(item.grade)}</td>
+                                <td>{item.duration}</td>
                                 <td>{item.create_at}</td>
+                                <td>{item.update_by}</td>
                                 <td>
                                     <span className="red">
                                         {item.score || '-'}

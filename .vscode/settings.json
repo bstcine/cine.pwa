@@ -1,2 +1,6 @@
 {
+    "path-intellisense.mappings": {
+        "/": "${workspaceRoot}",
+        "@": "${workspaceRoot}/src/client"
+    }
 }

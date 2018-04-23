@@ -5,11 +5,9 @@
     "main": "server.js",
     "scripts": {
         "prod-dll": "webpack -p --progress --colors --config=webpack.vendor.js",
-        "prod-build":
-            "webpack -p --progress --colors --config=webpack.config.prod.js",
+        "prod-build": "webpack -p --progress --colors --config=webpack.config.prod.js",
         "dev-dll": "webpack --progress --colors --config=webpack.vendor.js",
-        "dev-build":
-            "webpack --progress --colors --config=webpack.config.dev.js",
+        "dev-build": "webpack --progress --colors --config=webpack.config.dev.js",
         "start": "webpack-dev-server --config=webpack.config.dev.js"
     },
     "repository": {
@@ -30,14 +28,14 @@
         "path": "^0.12.7",
         "qrcode": "^1.2.0",
         "query-string": "^6.0.0",
-        "react": "^16.3.1",
-        "react-dom": "^16.3.1",
+        "react": "^16.3.2",
+        "react-dom": "^16.3.2",
         "react-modal": "^3.3.2",
         "react-redux": "^5.0.7",
         "react-router-dom": "^4.2.2",
         "react-slick": "^0.16.0",
-        "react-transition-group": "^2.3.0",
-        "redux": "^3.7.2",
+        "react-transition-group": "^2.3.1",
+        "redux": "^4.0.0",
         "redux-logger": "^3.0.6",
         "redux-thunk": "^2.2.0",
         "store": "^2.0.12",

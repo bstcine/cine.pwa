@@ -53,7 +53,7 @@ class PointContainer extends Component {
                                         </TableRow>
                                     </TableHeader>
                                     <TableBody displayRowCheckbox={false}>
-                                        {points.map(item => {
+                                        {points.rows.map(item => {
                                             return <TableRow key={item.id}>
                                                 <TableRowColumn>{item.value}</TableRowColumn>
                                                 <TableRowColumn>{item.action_text}</TableRowColumn>
@@ -65,6 +65,7 @@ class PointContainer extends Component {
                                 </Table>
                             </TabPanel>
                             <TabPanel>
+                                <div dangerouslySetInnerHTML={{__html:points.remark}}></div>
                             </TabPanel>
                         </TabPanels>
                     </Tabs>

@@ -46,15 +46,20 @@ export const actionUserPoint = {
     request: () => ({
         type: Action_UP.REQUEST,
     }),
-    receive: (result) => ({
+    receive: (rows,remark) => ({
         type: Action_UP.RECEIVE,
-        payload: result.rows
+        payload: {rows,remark}
     }),
     loadUserPoint: () => async dispatch => {
         dispatch(actionUserPoint.request())
 
         let param = {page: 1, pageSize: 1000000, orderBy: 'create_at', orderValue: 'desc'}
-        let [err, result] = await fetchData(Api.APIURL_User_Point, param)
-        dispatch(actionUserPoint.receive(result))
+        let [error, result] = await fetchData(Api.APIURL_User_Point, param)
+        let rows = result.rows;
+
+        let [err,res] = await fetchData(Api.APIURL_Global_Integral_Rule,{part:'1',type:'1'})
+        let remark = res.remark
+
+        dispatch(actionUserPoint.receive(rows,remark))
     }
 }

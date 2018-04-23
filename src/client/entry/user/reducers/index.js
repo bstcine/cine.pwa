@@ -35,7 +35,7 @@ const coupons = (state = [], action) => {
     }
 }
 
-const points = (state = [], action) => {
+const points = (state = {rows:[],remark:""}, action) => {
     switch (action.type) {
         case Action_UP.RECEIVE:
             return action.payload

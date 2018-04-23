@@ -46,26 +46,12 @@ export default class Course extends Component {
         this.initData = this.initData.bind(this);
         this.login = this.login.bind(this);
         this.relatedCourse = this.relatedCourse.bind(this);
-        this.handlerScroll = this.handlerScroll.bind(this);
         this.toggleLoginModal = this.toggleLoginModal.bind(this);
         this.toggleRecommendModal = this.toggleRecommendModal.bind(this);
         this.toggleCouponModal = this.toggleCouponModal.bind(this);
         this.getUserName = this.getUserName.bind(this);
     }
 
-    handlerScroll() {
-        let tabs = ReactDOM.findDOMNode(this.refs.tabs);
-        let courseDetail = ReactDOM.findDOMNode(this.refs.courseDetail);
-        if(tabs && courseDetail){
-            let courseDetailOffset = courseDetail.getBoundingClientRect();
-            let clazz = 'tab-fixed';
-            if (courseDetailOffset.top < 0) {
-                if (!tabs.classList.contains(clazz)) tabs.classList.add(clazz);
-            } else {
-                if (tabs.classList.contains(clazz)) tabs.classList.remove(clazz);
-            }
-        }
-    }
 
     async componentDidMount() {
         if (siteCodeUtil.inIOSAPP()) {
@@ -81,7 +67,7 @@ export default class Course extends Component {
         this.initCurrentPageWechat();
         await this.initData();
 
-        window.addEventListener('scroll', this.handlerScroll);
+
         if (siteCodeUtil.inIOSAPP()) {
             Bridge.ios(BRIDGE_EVENT.TIMELINE, {type: 'visible'});
         }
@@ -105,10 +91,6 @@ export default class Course extends Component {
                 });
             }
         });
-    }
-
-    componentWillUnmount() {
-        window.removeEventListener('scroll', this.handlerScroll);
     }
 
     componentWillReceiveProps(nextProps) {

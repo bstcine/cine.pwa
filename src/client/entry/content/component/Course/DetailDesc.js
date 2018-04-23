@@ -1,7 +1,5 @@
-/**
- * Created by joe on 4/17/18.
- */
 import React from 'react';
+import ReactDOM from 'react-dom';
 import timeUtil from '@/util/timeUtil';
 import {Tabs, TabItems, TabItem, TabPanels, TabPanel} from '@/component/Tabs';
 import Comments from './Comments';
@@ -12,6 +10,31 @@ export default class DetailDesc extends React.Component {
 
     constructor(props) {
         super(props);
+
+        this.handleScroll = this.handleScroll.bind(this);
+    }
+
+    componentDidMount() {
+        window.addEventListener('scroll', this.handleScroll);
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener('scroll', this.handleScroll);
+    }
+
+    handleScroll() {
+        let tabs = ReactDOM.findDOMNode(this.refs.tabs);
+        let courseDetail = ReactDOM.findDOMNode(this.refs.courseDetail);
+
+        if (tabs && courseDetail) {
+            let courseDetailOffset = courseDetail.getBoundingClientRect();
+            let clazz = 'tab-fixed';
+            if (courseDetailOffset.top < 0) {
+                if (!tabs.classList.contains(clazz)) tabs.classList.add(clazz);
+            } else {
+                if (tabs.classList.contains(clazz)) tabs.classList.remove(clazz);
+            }
+        }
     }
 
     render() {

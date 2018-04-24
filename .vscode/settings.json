@@ -2,5 +2,9 @@
     "path-intellisense.mappings": {
         "/": "${workspaceRoot}",
         "@": "${workspaceRoot}/src/client"
-    }
+    },
+    "javascript.format.enable": false,
+    "editor.formatOnSave": true,
+    "editor.formatOnSaveTimeout": 10000,
+    "prettier.eslintIntegration": true
 }

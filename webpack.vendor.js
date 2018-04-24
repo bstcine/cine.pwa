@@ -11,7 +11,7 @@ module.exports = {
     },
     output: {
         path: path.resolve(__dirname, './build'),
-        filename: 'dll/[name].[chunkhash:8].js',
+        filename: 'dll/[name].vendor.1632400.js', //1632: React Version, 400: Redux Version
         library: '[name]'// 当前Dll的所有内容都会存放在这个参数指定变量名的一个全局变量下，注意与DllPlugin的name参数保持一致
     },
     module: Config.module,

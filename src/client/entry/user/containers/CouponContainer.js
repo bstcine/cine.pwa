@@ -15,7 +15,7 @@ import {ToastError, ToastLoading, ToastSuccess} from "@/component/Toast";
 class CouponContainer extends Component {
 
     constructor(props) {
-        super(props)
+        super(props);
 
         this.couponNo = '';
     }
@@ -81,7 +81,7 @@ class CouponContainer extends Component {
                             </TabPanel>
                         </TabPanels>
                     </Tabs>
-                    <a className="float-button" onClick={event => {
+                    <a className="float-button" onClick={() => {
                         actions.dialogAddCoupon()
                     }}><img src={require('../asset/image/ico_add_coupon.png')}/></a>
                     <Dialog
@@ -91,13 +91,11 @@ class CouponContainer extends Component {
                         open={coupons.isOpen}
                         onRequestClose={actions.dialogAddCoupon}
                     >
-                        <TextField
-                            ref={this.noInput}
-                            onChange={(e, val) => {
-                                this.couponNo = val
-                            }}
-                            defaultValue={this.couponNo}
-                            hintText="请输入您的优惠券"
+                        <TextField fullWidth={true} onChange={(e, val) => {
+                            this.couponNo = val
+                        }}
+                                   defaultValue={this.couponNo}
+                                   hintText="请输入您的优惠券"
                         />
                     </Dialog>
                 </React.Fragment>

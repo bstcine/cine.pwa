@@ -93,6 +93,7 @@ class CouponContainer extends Component {
                     >
                         <TextField
                             ref={this.noInput}
+                            fullWidth={true}
                             onChange={(e, val) => {
                                 this.couponNo = val
                             }}

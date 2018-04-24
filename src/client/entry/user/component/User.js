@@ -8,7 +8,7 @@ import {Tabs, TabItems, TabItem} from "@/component/Tabs";
 import {TabPanels, TabPanel} from "@/component/Tabs";
 import PointContainer from "@/entry/user/containers/PointContainer";
 
-const User = ({user, handleClick}) => {
+const User = ({topicId, user, handleClick}) => {
     let headImg = user.head_image ? "/f/" + user.head_image : require('../asset/image/ico_headpic.png');
     let roleImg = user.role_id + '' === "2" ? require('../asset/image/ico_teacher.png') : require('../asset/image/ico_student.png');
 
@@ -39,21 +39,26 @@ const User = ({user, handleClick}) => {
                     <span className="coupon-val">{user.unuseCouponsCount}</span>
                 </div>
 
-                <a className="nav-home" href={'/'}></a>
+                <a className="nav-home" href={'/'}/>
             </div>
-            <Tabs className="user-tabs" selectedId={'coupon'}>
+            <Tabs className="user-tabs" selectedId={topicId}>
                 <TabItems>
-                    <TabItem className="tab-item tab-order"
-                             indicator={user.unpayOrdersCount}>我的订单</TabItem>
-                    <TabItem className="tab-item tab-study" onClick={e => handleClick('study')}>我的学习</TabItem>
-                    <TabItem id={'integral'} className="tab-item tab-integral">我的积分</TabItem>
-                    <TabItem id={'coupon'} className="tab-item tab-coupon">我的优惠券</TabItem>
+                    <TabItem className="tab-item tab-order" indicator={user.unpayOrdersCount}
+                             onClick={(index, id) => handleClick(index, id)}>我的订单</TabItem>
+                    <TabItem className="tab-item tab-study"
+                             onClick={(index, id) => handleClick(index, id)}>我的学习</TabItem>
+                    <TabItem id={'integral'} className="tab-item tab-integral"
+                             onClick={(index, id) => handleClick(index, id)}>我的积分</TabItem>
+                    <TabItem id={'coupon'} className="tab-item tab-coupon"
+                             onClick={(index, id) => handleClick(index, id)}>我的优惠券</TabItem>
                     <TabItem className="tab-item tab-wordtest"
-                             onClick={e => handleClick('wordtest')}>词汇测试</TabItem>
-                    <TabItem className="tab-item tab-grammar">核心语法测试</TabItem>
+                             onClick={(index, id) => handleClick(index, id)}>词汇测试</TabItem>
+                    <TabItem className="tab-item tab-grammar"
+                             onClick={(index, id) => handleClick(index, id)}>核心语法测试</TabItem>
                     <TabItem className="tab-item tab-password"
-                             onClick={e => handleClick('password')}>修改密码</TabItem>
-                    <TabItem className="tab-item tab-quit" onClick={e => handleClick('quit')}>退出</TabItem>
+                             onClick={(index, id) => handleClick(index, id)}>修改密码</TabItem>
+                    <TabItem className="tab-item tab-quit"
+                             onClick={(index, id) => handleClick(index, id)}>退出</TabItem>
                 </TabItems>
                 <TabPanels>
                     <TabPanel/>

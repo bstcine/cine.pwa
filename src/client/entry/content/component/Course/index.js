@@ -1,16 +1,18 @@
 import React, { Component } from 'react';
-import * as Service from '@/service/content';
+import BRIDGE_EVENT from '@/constant/bridgeEvent';
+import Bridge from '@/util/bridge';
+import { eventEmmiter } from '@/util/eventEmmiter';
 import { getParam, removeParam } from '@/util/urlUtil';
 import { initWechat, setShareParam } from '@/util/wechatUtil';
-import storeUtil from '@/util/storeUtil';
-import Bridge from '@/util/bridge';
-import BRIDGE_EVENT from '@/constant/bridgeEvent';
 import { createShare, share } from '@/util/shareUtil';
-import { eventEmmiter } from '@/util/eventEmmiter';
 import siteCodeUtil from '@/util/sitecodeUtil';
 import uaUtil from '@/util/uaUtil';
 import routeUtil from '@/util/routeUtil';
 import errorMsg from '@/util/errorMsg';
+
+import storeUtil from '@/util/storeUtil';
+import * as Service from '@/service/content';
+import cCourseAction from '@/action/contentAction';
 
 import LoginModal from '@/component/LoginModal';
 import Header from '@/component/Header';
@@ -18,7 +20,6 @@ import Brief from './Brief';
 import DetailDesc from './DetailDesc';
 import CouponModal from './CouponModal';
 import RecommendModal from './RecommendModal';
-import cCourseAction from '@/action/contentAction';
 
 export default class Course extends Component {
     constructor(props) {
@@ -28,7 +29,6 @@ export default class Course extends Component {
             showCouponModal: false,
             showRecommendModal: false,
             course: null,
-            comments: [],
             coupon: null,
             user: null,
         };
@@ -104,8 +104,8 @@ export default class Course extends Component {
 
     async initData() {
         let { cid } = getParam();
-        let { course, comments, user } = await cCourseAction.initCourseDetail(cid);
-        this.setState({ course, comments, user });
+        let { course, user } = await cCourseAction.initCourseDetail(cid);
+        this.setState({ course, user });
     }
 
     handleBuy() {
@@ -248,7 +248,6 @@ export default class Course extends Component {
         let {
             course,
             user,
-            comments,
             showLoginModal,
             showRecommendModal,
             showCouponModal,
@@ -282,13 +281,14 @@ export default class Course extends Component {
                             <DetailDesc
                                 course={course}
                                 courseSet={null}
-                                courseComments={comments}
+                                courseID={getParam().cid}
                                 isIOSAPP={siteCodeUtil.inIOSAPP()}
                                 onClickCourseSetLink={
                                     cCourseAction.handleCourseSetLink
                                 }
+                                onLoadComments={cCourseAction.loadingComments}
                             />
-                        ) : null}
+                        ) : <div className="course-detail"></div>}
 
                         <LoginModal
                             isOpen={showLoginModal}

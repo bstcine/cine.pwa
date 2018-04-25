@@ -1,23 +1,32 @@
 import '../asset/style/share.less';
 import uaUtil from './uaUtil';
-import {setShareParam} from './wechatUtil';
-import {getParam, addParam} from './urlUtil';
+import { setShareParam } from './wechatUtil';
+import { getParam, addParam } from './urlUtil';
 import Bridge from './bridge';
-import {get} from '../service/request';
+import { get } from '../service/request';
 import Api from '../../APIConfig';
 import BRIDGE_EVENT from '@/constant/bridgeEvent';
 import siteCodeUtil from '@/util/sitecodeUtil';
-import {fetchData} from "@/service/base";
+import { fetchData } from '@/service/base';
 
 const imgUrl = require('../asset/image/pic_share_arr@2x.png');
 let inter = null;
 
-export let createShare = async ({type, share_link, cid, source_user_id}) => {
-    let err, result;
+export let createShare = async ({ type, share_link, cid, source_user_id }) => {
+    let err = null;
+    let result = null;
     if (type === 7) {
-        [err, result] = await fetchData(Api.APIURL_Share_Common, {type, share_link, source_user_id});
+        [err, result] = await fetchData(Api.APIURL_Share_Common, {
+            type,
+            share_link,
+            source_user_id,
+        });
     } else if (type === 4 || type === 5) {
-        [err, result] = await fetchData(Api.APIURL_Share_CoursePackage, {type, cid, source_user_id});
+        [err, result] = await fetchData(Api.APIURL_Share_CoursePackage, {
+            type,
+            cid,
+            source_user_id,
+        });
     } else {
         return ['invalid_type', null];
     }
@@ -25,7 +34,7 @@ export let createShare = async ({type, share_link, cid, source_user_id}) => {
 };
 
 export let updateShare = sharelog_id => {
-    return get(Api.APIURL_Share_Update, {sharelog_id}).then(res => {
+    return get(Api.APIURL_Share_Update, { sharelog_id }).then(res => {
         console.log(`updateShare ${JSON.stringify(res)}`);
         if (!res.status) {
             return alert(res.msg);
@@ -36,7 +45,7 @@ export let updateShare = sharelog_id => {
 };
 
 export let queryShare = sharelog_id => {
-    return get(Api.APIURL_Web_Share_Log, {sharelog_id});
+    return get(Api.APIURL_Web_Share_Log, { sharelog_id });
 };
 
 export let showShareMask = () => {
@@ -53,7 +62,8 @@ export let showShareMask = () => {
 };
 
 export let hideShareMask = () => {
-    document.querySelector('.share-mask') && document.querySelector('.share-mask').remove();
+    document.querySelector('.share-mask') &&
+        document.querySelector('.share-mask').remove();
 };
 
 export let checkShareMask = () => {
@@ -62,10 +72,12 @@ export let checkShareMask = () => {
     }
 };
 
-export let showShareQRCode = ({url, sharelog_id}) => {
+export let showShareQRCode = ({ url, sharelog_id }) => {
     console.log(`sharelog_id ${sharelog_id}`);
-    let updatedUrl = addParam(url, {share_mask: 1, sharelog_id});
-    let qrcode = `http://www.bstcine.com/qrcode?text=${encodeURIComponent(updatedUrl)}`;
+    let updatedUrl = addParam(url, { share_mask: 1, sharelog_id });
+    let qrcode = `http://www.bstcine.com/qrcode?text=${encodeURIComponent(
+        updatedUrl
+    )}`;
     hideShareMask();
     let maskNode = document.createElement('div');
     maskNode.className = 'share-mask';
@@ -77,7 +89,7 @@ export let showShareQRCode = ({url, sharelog_id}) => {
     `;
     document.body.appendChild(maskNode);
     let closeNode = document.querySelector('.share-close');
-    closeNode.addEventListener('click', function () {
+    closeNode.addEventListener('click', function() {
         hideShareQRCode();
     });
 };
@@ -97,14 +109,14 @@ let checkShareStatus = sharelog_id => {
                 if (res.status && res.data.status === '1') {
                     inter && clearInterval(inter);
                     hideShareQRCode();
-                    resolve({status: true});
+                    resolve({ status: true });
                 }
             });
         }, 3000);
     });
 };
 
-export let share = async ({share_params}) => {
+export let share = async ({ share_params }) => {
     if (siteCodeUtil.inIOSAPP()) {
         let list = await Bridge.ios(BRIDGE_EVENT.INSTALLED_APP_LIST);
         if (list && list.wechat === 1) {
@@ -145,7 +157,7 @@ export let share = async ({share_params}) => {
 function qrShare(share_params) {
     showShareQRCode({
         url: share_params.link,
-        sharelog_id: share_params.sharelog_id
+        sharelog_id: share_params.sharelog_id,
     });
     return checkShareStatus(share_params.sharelog_id);
 }

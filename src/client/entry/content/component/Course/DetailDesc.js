@@ -8,12 +8,22 @@ import CourseSet from './CourseSet';
 export default class DetailDesc extends React.Component {
     constructor(props) {
         super(props);
-
+        this.state = {
+            comments: [],
+        };
         this.handleScroll = this.handleScroll.bind(this);
     }
 
     componentDidMount() {
         window.addEventListener('scroll', this.handleScroll);
+
+        if (this.props.courseID) {
+            let cid = this.props.courseID;
+            this.props.onLoadComments(cid).then(result => {
+                // alert(JSON.stringify(result));
+                this.setState({ comments: result });
+            });
+        }
     }
 
     componentWillUnmount() {
@@ -36,13 +46,7 @@ export default class DetailDesc extends React.Component {
     }
 
     render() {
-        let {
-            course,
-            courseSet,
-            courseComments,
-            isIOSAPP,
-            onClickCourseSetLink,
-        } = this.props;
+        let { course, courseSet, isIOSAPP, onClickCourseSetLink } = this.props;
         let _tabItem_desc = course.object_type === '1' ? '课程概要' : '详情';
         let _tabItem_evaluate =
             course.object_type === '1' ? '学员评价' : '评价';
@@ -121,8 +125,13 @@ export default class DetailDesc extends React.Component {
                                                                                                 i
                                                                                             ) => {
                                                                                                 return (
-                                                                                                    <li key={i}>
-                                                                                                        {lesson.name}
+                                                                                                    <li
+                                                                                                        key={
+                                                                                                            i
+                                                                                                        }>
+                                                                                                        {
+                                                                                                            lesson.name
+                                                                                                        }
                                                                                                         {lesson.duration ? (
                                                                                                             <span className="meta">
                                                                                                                 {timeUtil.durationFormat(
@@ -149,7 +158,7 @@ export default class DetailDesc extends React.Component {
                         ) : null}
 
                         <TabPanel>
-                            <Comments comments={courseComments} />
+                            <Comments comments={this.state.comments} />
                         </TabPanel>
                     </TabPanels>
                 </Tabs>

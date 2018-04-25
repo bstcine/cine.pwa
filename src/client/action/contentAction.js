@@ -41,16 +41,15 @@ let cCourseAction = {
 
     initCourseDetail: async function(courseID) {
         let courseProm = this._getCourseDetail(courseID);
-        let commentsProm = this._getCourseComments(courseID);
         let userProm = userAction.getUserInfo();
+        let [course, user] = await Promise.all([courseProm, userProm]);
 
-        let [course, comments, user] = await Promise.all([
-            courseProm,
-            commentsProm,
-            userProm,
-        ]);
+        return { course, user };
+    },
 
-        return { course, comments, user };
+    loadingComments: async function(courseID) {
+        let comments = await cCourseAction._getCourseComments(courseID);
+        return comments;
     },
 
     logAccessMonitor: function() {

@@ -1,16 +1,11 @@
 const path = require('path');
 const webpack = require('webpack');
 const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin');
-// const BuildManifestPlugin = require('build-manifest-webpack-plugin');
-// const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
-//     .BundleAnalyzerPlugin;
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
-const Config = require('./webpack.config');
-
 const WebpackMildCompile = require('webpack-mild-compile').Plugin;
-// const OfflinePlugin = require('offline-plugin');
+const Config = require('./webpack.config');
 
 const pages = Config.pages;
 let entry = {};
@@ -80,7 +75,6 @@ module.exports = {
         useLocalIp: true,
         proxy: {
             '/api': {
-                // target: "http://localhost:9000",
                 target: Config.API_Host_URL,
                 secure: false,
                 changeOrigin: true,

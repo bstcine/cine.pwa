@@ -1,21 +1,29 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import timeUtil from '@/util/timeUtil';
-import {Tabs, TabItems, TabItem, TabPanels, TabPanel} from '@/component/Tabs';
+import { Tabs, TabItems, TabItem, TabPanels, TabPanel } from '@/component/Tabs';
 import Comments from './Comments';
 import CourseSet from './CourseSet';
 
-
 export default class DetailDesc extends React.Component {
-
     constructor(props) {
         super(props);
-
+        this.state = {
+            comments: [],
+        };
         this.handleScroll = this.handleScroll.bind(this);
     }
 
     componentDidMount() {
         window.addEventListener('scroll', this.handleScroll);
+
+        if (this.props.courseID) {
+            let cid = this.props.courseID;
+            this.props.onLoadComments(cid).then(result => {
+                // alert(JSON.stringify(result));
+                this.setState({ comments: result });
+            });
+        }
     }
 
     componentWillUnmount() {
@@ -38,9 +46,10 @@ export default class DetailDesc extends React.Component {
     }
 
     render() {
-        let {course, courseSet, courseComments, isIOSAPP, onClickCourseSetLink} = this.props;
+        let { course, courseSet, isIOSAPP, onClickCourseSetLink } = this.props;
         let _tabItem_desc = course.object_type === '1' ? '课程概要' : '详情';
-        let _tabItem_evaluate = course.object_type === '1' ? '学员评价' : '评价';
+        let _tabItem_evaluate =
+            course.object_type === '1' ? '学员评价' : '评价';
         let _will_show_lessons = course.object_type === '1' && !isIOSAPP;
 
         return (
@@ -48,17 +57,24 @@ export default class DetailDesc extends React.Component {
                 <Tabs ref="tabs">
                     <TabItems>
                         <TabItem>{_tabItem_desc}</TabItem>
-                        {_will_show_lessons ? (<TabItem>课程目录</TabItem>) : null}
+                        {_will_show_lessons ? (
+                            <TabItem>课程目录</TabItem>
+                        ) : null}
                         <TabItem>{_tabItem_evaluate}</TabItem>
                     </TabItems>
                     <TabPanels>
                         <TabPanel>
                             {courseSet ? (
-                                <CourseSet value={courseSet} onLink={onClickCourseSetLink}/>
+                                <CourseSet
+                                    value={courseSet}
+                                    onLink={onClickCourseSetLink}
+                                />
                             ) : null}
                             <div
                                 className="course-feature"
-                                dangerouslySetInnerHTML={{__html: course.h5remark}}
+                                dangerouslySetInnerHTML={{
+                                    __html: course.h5remark,
+                                }}
                             />
                         </TabPanel>
 
@@ -67,73 +83,86 @@ export default class DetailDesc extends React.Component {
                                 {course.catalog ? (
                                     <div
                                         className="course-feature"
-                                        dangerouslySetInnerHTML={{__html: course.catalog}}
+                                        dangerouslySetInnerHTML={{
+                                            __html: course.catalog,
+                                        }}
                                     />
                                 ) : null}
 
                                 <div className="course-category">
                                     <ul className="course-list">
                                         {course.contents &&
-                                        course.contents.length &&
-                                        course.contents.map((course, i) => {
-                                            return (
-                                                <li key={i}>
-                                                    {course.name}
-                                                    <ul className="chapter-list">
-                                                        {course.children &&
-                                                        course.children.length &&
-                                                        course.children.map((chapter, i) => {
-                                                            return (
-                                                                <li key={i}>
-                                                                    {chapter.name}
-                                                                    <ul className="lesson-list">
-                                                                        {chapter.children &&
-                                                                        chapter.children
-                                                                            .length &&
-                                                                        chapter.children.map(
-                                                                            (lesson, i) => {
-                                                                                return (
-                                                                                    <li
-                                                                                        key={
-                                                                                            i
-                                                                                        }
-                                                                                    >
-                                                                                        {
-                                                                                            lesson.name
-                                                                                        }
-                                                                                        {lesson.duration ? (
-                                                                                            <span
-                                                                                                className="meta">
+                                            course.contents.length &&
+                                            course.contents.map((course, i) => {
+                                                return (
+                                                    <li key={i}>
+                                                        {course.name}
+                                                        <ul className="chapter-list">
+                                                            {course.children &&
+                                                                course.children
+                                                                    .length &&
+                                                                course.children.map(
+                                                                    (
+                                                                        chapter,
+                                                                        i
+                                                                    ) => {
+                                                                        return (
+                                                                            <li
+                                                                                key={
+                                                                                    i
+                                                                                }>
+                                                                                {
+                                                                                    chapter.name
+                                                                                }
+                                                                                <ul className="lesson-list">
+                                                                                    {chapter.children &&
+                                                                                        chapter
+                                                                                            .children
+                                                                                            .length &&
+                                                                                        chapter.children.map(
+                                                                                            (
+                                                                                                lesson,
+                                                                                                i
+                                                                                            ) => {
+                                                                                                return (
+                                                                                                    <li
+                                                                                                        key={
+                                                                                                            i
+                                                                                                        }>
+                                                                                                        {
+                                                                                                            lesson.name
+                                                                                                        }
+                                                                                                        {lesson.duration ? (
+                                                                                                            <span className="meta">
                                                                                                                 {timeUtil.durationFormat(
                                                                                                                     lesson.duration
                                                                                                                 )}
                                                                                                             </span>
-                                                                                        ) : null}
-                                                                                    </li>
-                                                                                );
-                                                                            }
-                                                                        )}
-                                                                    </ul>
-                                                                </li>
-                                                            );
-                                                        })}
-                                                    </ul>
-                                                </li>
-                                            );
-                                        })}
+                                                                                                        ) : null}
+                                                                                                    </li>
+                                                                                                );
+                                                                                            }
+                                                                                        )}
+                                                                                </ul>
+                                                                            </li>
+                                                                        );
+                                                                    }
+                                                                )}
+                                                        </ul>
+                                                    </li>
+                                                );
+                                            })}
                                     </ul>
                                 </div>
                             </TabPanel>
                         ) : null}
 
                         <TabPanel>
-                            <Comments comments={courseComments}/>
+                            <Comments comments={this.state.comments} />
                         </TabPanel>
                     </TabPanels>
                 </Tabs>
-
             </div>
-
         );
     }
 }

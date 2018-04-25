@@ -4,20 +4,34 @@ import {connect} from 'react-redux'
 import {actionUserInfo} from "@/action/userAction";
 import User from "@/entry/user/component/User";
 import {logoutV1} from "@/service/base";
+import uaUtil from "@/util/uaUtil";
+import siteCodeUtil from "@/util/sitecodeUtil";
 
 class Root extends Component {
 
+    constructor(props) {
+        super(props)
+        this.topicId = props.match.params.topicId || 'coupon';
+    }
+
     componentDidMount() {
+        //移动端不加载用户信息
+        if (uaUtil.AndroidMobile() || uaUtil.iPhone()) return;
+
         this.props.actions.loadUserInfo()
     }
 
-    handleClick = (tab) => {
-        switch (tab) {
+    handleClick = (id) => {
+        switch (id) {
             case 'study':
                 location.href = '/learn';
                 break
             case 'wordtest':
-                window.open('/vocabtest');
+                // window.open('/vocabtest');
+                location.href = '/vocabtest';
+                break
+            case 'tgrammar':
+                location.href = '/tgrammar/quiz';
                 break
             case 'password':
                 location.href = '/resetPassword';
@@ -33,7 +47,7 @@ class Root extends Component {
     render() {
         const {user} = this.props
         return (
-            <User user={user} handleClick={this.handleClick}/>
+            <User topicId={this.topicId} user={user} handleClick={this.handleClick}/>
         )
     }
 }

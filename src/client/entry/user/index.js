@@ -27,12 +27,23 @@ const createComponent = (Component, userRequired, props) => {
     return <Component {...props} />;
 };
 
+const Topics = ({match}) => (
+    <React.Fragment>
+        <Route
+            exact
+            path={match.url}
+            component={Root}
+        />
+        <Route path={`${match.url}/:topicId`} component={Root}/>
+    </React.Fragment>
+);
+
 render(
     <Router>
         <Provider store={store}>
             <Route
-                basename="/user"
-                component={props => createComponent(Root, /* userRequired */ true, props)}
+                path="/user"
+                component={props => createComponent(Topics, /* userRequired */ true, props)}
             />
         </Provider>
     </Router>,

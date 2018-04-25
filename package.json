@@ -5,9 +5,9 @@
     "main": "server.js",
     "scripts": {
         "prod-dll": "webpack -p --progress --colors --config=webpack.vendor.js",
-        "prod-build": "webpack -p --progress --colors --config=webpack.config.prod.js",
+        "prod": "webpack -p --progress --colors --config=webpack.config.prod.js",
         "dev-dll": "webpack --progress --colors --config=webpack.vendor.js",
-        "dev-build": "webpack --progress --colors --config=webpack.config.dev.js",
+        "dev": "webpack --progress --colors --config=webpack.config.dev.js",
         "start": "webpack-dev-server --config=webpack.config.dev.js"
     },
     "repository": {

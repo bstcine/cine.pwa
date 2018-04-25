@@ -18,8 +18,6 @@ import Brief from './Brief';
 import DetailDesc from './DetailDesc';
 import CouponModal from './CouponModal';
 import RecommendModal from './RecommendModal';
-import Api from '../../../../../APIConfig';
-import * as BaseService from '@/service/base';
 import cCourseAction from '@/action/contentAction';
 
 export default class Course extends Component {
@@ -66,7 +64,6 @@ export default class Course extends Component {
         if (siteCodeUtil.inIOSAPP()) {
             Bridge.ios(BRIDGE_EVENT.TIMELINE, { type: 'visible' });
         }
-        BaseService.accessLog();
     }
 
     componentWillReceiveProps(nextProps) {
@@ -107,29 +104,8 @@ export default class Course extends Component {
 
     async initData() {
         let { cid } = getParam();
-        let courseProm = BaseService.fetchData(Api.APIURL_Content_Course_Detail, {
-            cid,
-        }).then(([err, result]) => {
-            if (err) return Promise.reject(err);
-            return Promise.resolve(result.detail);
-        });
-        let commentsProm = BaseService.fetchData(Api.APIURL_Content_Course_Comment, {
-            cid,
-        }).then(([err, result]) => {
-            if (err) return Promise.reject(err);
-            return Promise.resolve(result);
-        });
-        let userProm = BaseService.fetchData(Api.APIURL_User_Info, {}).then(
-            ([err, result]) => {
-                if (err) return Promise.resolve();
-                return Promise.resolve(result);
-            }
-        );
-        return Promise.all([courseProm, commentsProm, userProm]).then(
-            ([course, comments, user]) => {
-                this.setState({ course, comments, user });
-            }
-        );
+        let { course, comments, user } = await cCourseAction.initCourseDetail(cid);
+        this.setState({ course, comments, user });
     }
 
     handleBuy() {

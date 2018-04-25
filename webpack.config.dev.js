@@ -1,15 +1,11 @@
 const path = require('path');
 const webpack = require('webpack');
 const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin');
-// const BuildManifestPlugin = require('build-manifest-webpack-plugin');
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
-const Config = require('./webpack.config');
-
 const WebpackMildCompile = require('webpack-mild-compile').Plugin;
-const OfflinePlugin = require('offline-plugin');
+const Config = require('./webpack.config');
 
 const pages = Config.pages;
 let entry = {};
@@ -22,13 +18,15 @@ pages.forEach(page => {
             filename: `entry/${page}/index.html`,
             template: `src/client/entry/${page}/index.html`,
             inject: true,
-            chunks: [page]
+            chunks: [page],
         })
     );
-    rewrites.push({from: new RegExp(`^/${page}.*`), to: `/entry/${page}/index.html`});
+    rewrites.push({
+        from: new RegExp(`^/${page}.*`),
+        to: `/entry/${page}/index.html`,
+    });
 });
-rewrites.push({from: /.*/, to: `/entry/content/index.html`});
-
+rewrites.push({ from: /.*/, to: `/entry/content/index.html` });
 
 module.exports = {
     cache: false,
@@ -41,20 +39,20 @@ module.exports = {
         new webpack.EnvironmentPlugin({
             DEBUG: Config.debug,
             MODE: Config.MODE,
-            API_Host_URL: Config.MODE === '' ? '' : Config.API_Host_URL
+            API_Host_URL: Config.MODE === '' ? '' : Config.API_Host_URL,
         }),
         new WebpackMildCompile(),
-        new CleanWebpackPlugin(['build/*.*', 'build/entry'], {verbose: false}),
+        new CleanWebpackPlugin(['build/*.*', 'build/entry'], { verbose: false }),
         new webpack.DllReferencePlugin({
             context: __dirname,
-            manifest: 'build/dll/manifest-dll.json'
+            manifest: 'build/dll/manifest-dll.json',
         }),
         ...HtmlWebpackPlugins,
         new AddAssetHtmlPlugin({
             filepath: path.resolve(__dirname, 'build/dll/dll.*.js'),
             publicPath: Config.publicPath + 'dll/',
             includeSourcemap: false,
-            outputPath: 'dll'
+            outputPath: 'dll',
         }),
         new LodashModuleReplacementPlugin(),
         // new BuildManifestPlugin({
@@ -68,7 +66,7 @@ module.exports = {
         compress: true,
         historyApiFallback: {
             disableDotRule: true,
-            rewrites: rewrites
+            rewrites: rewrites,
         },
         inline: true,
         port: 5001,
@@ -77,11 +75,10 @@ module.exports = {
         // useLocalIp:true,
         proxy: {
             '/api': {
-                //target: "http://localhost:9000",
                 target: Config.API_Host_URL,
                 secure: false,
-                changeOrigin: true
-            }
-        }
-    }
+                changeOrigin: true,
+            },
+        },
+    },
 };

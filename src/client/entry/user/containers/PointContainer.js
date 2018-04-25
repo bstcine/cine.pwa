@@ -35,7 +35,7 @@ class PointContainer extends Component {
                                         <div
                                             className={item.value < 0 ? 'point-value use' : 'point-value'}>{item.value > 0 ? '+' + item.value : item.value}</div>
                                         <div className={'point-time'}>{item.create_at}</div>
-                                        <div className={'point-total'}>积分：{item.current_total_value}</div>
+                                        <div className={'point-total'}>{item.current_total_value}</div>
                                     </div>
                                 })}
                             </div>

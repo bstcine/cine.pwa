@@ -21,13 +21,17 @@ class Root extends Component {
         this.props.actions.loadUserInfo()
     }
 
-    handleClick = (index,id) => {
+    handleClick = (id) => {
         switch (id) {
             case 'study':
                 location.href = '/learn';
                 break
             case 'wordtest':
-                window.open('/vocabtest');
+                // window.open('/vocabtest');
+                location.href = '/vocabtest';
+                break
+            case 'tgrammar':
+                location.href = '/tgrammar/quiz';
                 break
             case 'password':
                 location.href = '/resetPassword';

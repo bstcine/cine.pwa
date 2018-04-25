@@ -1,12 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {Route} from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import './asset/style/index.less';
 import appBanner from '@/util/appBanner';
 import Footer from '@/component/Footer';
 import Router from '@/component/Router';
-import EntryComponent from '@/component/EntryComponent';
-import {chunkComponent} from '@/util/chunkComponent';
+import Entry from '@/component/Entry';
+import { chunkComponent } from '@/util/chunkComponent';
 import storeUtil from '@/util/storeUtil';
 import Home from './component/Home';
 import Course from './component/Course';
@@ -28,7 +28,7 @@ const createComponent = (Component, userRequired, props) => {
     return <Component {...props} />;
 };
 
-class Content extends EntryComponent {
+class Content extends Entry {
     constructor(props) {
         super(props);
         console.log('Content Main constructor');
@@ -56,15 +56,33 @@ class Content extends EntryComponent {
                         <Route path="/content/course" component={Course} />
                         <Route
                             path="/pay/prepare"
-                            component={props => createComponent(PayPrepare, /* userRequired */ true, props)}
+                            component={props =>
+                                createComponent(
+                                    PayPrepare,
+                                    /* userRequired */ true,
+                                    props
+                                )
+                            }
                         />
                         <Route
                             path="/pay/center"
-                            component={props => createComponent(PayCenter, /* userRequired */ true, props)}
+                            component={props =>
+                                createComponent(
+                                    PayCenter,
+                                    /* userRequired */ true,
+                                    props
+                                )
+                            }
                         />
                         <Route
                             path="/pay/status"
-                            component={props => createComponent(PayStatus, /* userRequired */ true, props)}
+                            component={props =>
+                                createComponent(
+                                    PayStatus,
+                                    /* userRequired */ true,
+                                    props
+                                )
+                            }
                         />
                     </React.Fragment>
                 </Router>

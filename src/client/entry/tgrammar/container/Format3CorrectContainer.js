@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import Question3Correct from '../component/Question3Correct';
+import Format3Correct from '../component/Format3Correct';
 import {
     saveQuestion3SelectAnswer,
     saveQuestion3TextAnswer,
@@ -15,7 +15,10 @@ const mapStateToProps = (state, ownProps) => {
     if (answer) {
         prop.select_value = answer.select_value;
         prop.text_value = answer.text_value;
-        prop.is_correct = answer.is_correct;
+        prop.is_select_correct = answer.is_select_correct;
+        prop.is_text_correct = answer.is_text_correct;
+        prop.select_score = answer.select_score;
+        prop.text_score = answer.text_score;
         prop.feedback = answer.feedback;
     }
     prop.operation = operation;
@@ -43,7 +46,7 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
         dispatch(
             saveQuestion3FeedbackSelectAnswer({
                 id: ownProps.item.id,
-                is_correct: parseInt(e.target.value, 10),
+                is_text_correct: parseInt(e.target.value, 10),
             })
         );
     },
@@ -57,4 +60,4 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     },
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Question3Correct);
+export default connect(mapStateToProps, mapDispatchToProps)(Format3Correct);

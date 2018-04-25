@@ -1,21 +1,27 @@
 import React from 'react';
 import SelectOption from './SelectOption';
 
-const FeedbackCorrect = ({ id, options, select_value }) => {
+const QuestionSelect = ({
+    id,
+    editable,
+    options,
+    select_value,
+    onSelectChange,
+}) => {
     return (
-        <div className="feedback-correct">
-            <div className="tips">正确答案</div>
-            <fieldset disabled>
+        <div className="question-select">
+            <fieldset disabled={!editable}>
                 <ul className="options">
                     {options.map((option, i) => {
                         return (
                             <SelectOption
                                 key={id + i}
                                 index={i}
-                                name={'fc_' + id}
+                                name={'qid' + id}
                                 value={option.value}
-                                readOnly={true}
-                                checked={option.isCorrect}
+                                onChange={onSelectChange}
+                                content={option.content}
+                                checked={select_value === option.value}
                             />
                         );
                     })}
@@ -25,4 +31,4 @@ const FeedbackCorrect = ({ id, options, select_value }) => {
     );
 };
 
-export default FeedbackCorrect;
+export default QuestionSelect;

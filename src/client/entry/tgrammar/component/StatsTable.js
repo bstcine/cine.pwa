@@ -1,11 +1,18 @@
 import React from 'react';
-const convGrade = grade => {
+
+const formatGrade = grade => {
     if (grade === 0) {
         return '学龄前';
     } else if (grade === 13) {
         return '成人';
     } else {
         return `${grade}年级`;
+    }
+};
+
+const formatTime = time => {
+    if (time) {
+        return time.substring(2, 16);
     }
 };
 
@@ -80,10 +87,10 @@ const StatsTable = ({ title, list = [], onClick }) => {
                                     {item.phone || item.email || item.login}
                                 </td>
                                 <td>{item.nickname}</td>
-                                <td>{convGrade(item.grade)}</td>
+                                <td>{formatGrade(item.grade)}</td>
                                 <td>{item.duration}</td>
-                                <td>{item.create_at}</td>
-                                <td>{item.update_by}</td>
+                                <td>{formatTime(item.create_at)}</td>
+                                <td>{item.t_nickname}</td>
                                 <td>
                                     <span className="red">
                                         {item.score || '-'}

@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import Question10CommonDesc from '../component/Question10CommonDesc';
+import Format10CommonDesc from '../component/Format10CommonDesc';
 
 const mapStateToProps = (state, ownProps) => {
     let { questionsById } = state;
@@ -8,4 +8,4 @@ const mapStateToProps = (state, ownProps) => {
     return prop;
 };
 
-export default connect(mapStateToProps)(Question10CommonDesc);
+export default connect(mapStateToProps)(Format10CommonDesc);

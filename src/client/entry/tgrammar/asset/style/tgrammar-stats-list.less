@@ -38,22 +38,25 @@
     }
   }
 
-  button.btn {
+  button.btn.btn-round {
     background-color: #fff;
     width: 80px;
     text-align: center;
     font-size: 14px;
     line-height: 26px;
     border: none;
-    box-shadow: 0px 3px 3px 0px rgba(57, 83, 122, 0.13);
     border-radius: 14px;
     border: solid 1px #7f9ac3;
     color: #113f82;
-    .btn-done {
+    transition: all 0.1s ease-in;
+    &.btn-done {
       color: #ee0d0d;
     }
-    .btn-checking {
+    &.btn-checking {
       color: #199c25;
+    }
+    &:hover {
+      box-shadow: 0px 3px 3px 0px rgba(57, 83, 122, 0.13);
     }
   }
   span.red {

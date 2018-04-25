@@ -3,23 +3,27 @@ import SelectOption from './SelectOption';
 
 let feedbackOptions = [
     {
-        content: '答对',
+        content: '修正正确，给分',
         type: 1,
         value: 1,
-        className: 'check-right',
+        className: 'correct',
     },
     {
-        content: '答错',
+        content: '修正错误，不给分',
         type: 1,
         value: 0,
-        className: 'check-wrong',
+        className: 'wrong',
     },
 ];
 
-const FeedbackSelect = ({ id, is_correct, onFeedbackSelectChange }) => {
+const FeedbackTextScore = ({
+    id,
+    is_text_correct,
+    text_score,
+    onFeedbackSelectChange,
+}) => {
     return (
-        <div className="feedback-select">
-            <div className="tips">老师批改</div>
+        <div className="feedback-select-score">
             <ul className="options">
                 {feedbackOptions.map((option, i) => {
                     return (
@@ -28,15 +32,18 @@ const FeedbackSelect = ({ id, is_correct, onFeedbackSelectChange }) => {
                             key={id + i}
                             name={`fs_${id}`}
                             value={option.value}
-                            onChange={onFeedbackSelectChange}
                             content={option.content}
-                            checked={is_correct === option.value}
+                            checked={is_text_correct === option.value}
+                            onChange={onFeedbackSelectChange}
                         />
                     );
                 })}
             </ul>
+            <div className="score">
+                得 <span>{text_score}</span> 分
+            </div>
         </div>
     );
 };
 
-export default FeedbackSelect;
+export default FeedbackTextScore;

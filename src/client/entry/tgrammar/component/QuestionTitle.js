@@ -2,9 +2,12 @@ import React from 'react';
 
 const QuestionTitle = ({ no, title }) => {
     return (
-        <div className="titlewrap">
-            <span className="questionno">{no}.</span>
-            <div className="title" dangerouslySetInnerHTML={{ __html: title }} />
+        <div className="question-title">
+            <span className="question-no">{no}.</span>
+            <div
+                className="question-content"
+                dangerouslySetInnerHTML={{ __html: title }}
+            />
         </div>
     );
 };

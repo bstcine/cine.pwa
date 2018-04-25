@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import Question11ReadingDesc from '../component/Question11ReadingDesc';
+import Format11ReadingDesc from '../component/Format11ReadingDesc';
 
 const mapStateToProps = (state, ownProps) => {
     let { questionsById } = state;
@@ -8,4 +8,4 @@ const mapStateToProps = (state, ownProps) => {
     return prop;
 };
 
-export default connect(mapStateToProps)(Question11ReadingDesc);
+export default connect(mapStateToProps)(Format11ReadingDesc);

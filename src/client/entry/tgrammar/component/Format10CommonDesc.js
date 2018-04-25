@@ -2,7 +2,7 @@ import React from 'react';
 /**
  * 描述文本（富文本）
  */
-const Question10CommonDesc = ({ item }) => {
+const Format10CommonDesc = ({ item }) => {
     console.log('Question10Desc render');
     let { title } = item;
     return (
@@ -13,4 +13,4 @@ const Question10CommonDesc = ({ item }) => {
     );
 };
 
-export default Question10CommonDesc;
+export default Format10CommonDesc;

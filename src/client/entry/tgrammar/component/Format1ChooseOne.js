@@ -7,10 +7,10 @@ const optionMap = { 0: 'A', 1: 'B', 2: 'C', 3: 'D', 4: 'E', 5: 'F', 6: 'G' };
 /**
  * 1:单选题
  */
-const Question1ChooseOne = ({
+const Format1ChooseOne = ({
     item,
     select_value,
-    is_correct,
+    is_select_correct,
     operation,
     onChange,
     onFeedbackSelectChange,
@@ -23,7 +23,7 @@ const Question1ChooseOne = ({
             <QuestionTitle no={no} title={title} />
             <fieldset
                 className="stu-operation"
-                disabled={!operation.is_stu_operation_editable}>
+                disabled={!operation.is_student_editable}>
                 <ul className="options">
                     {options.map((option, i) => {
                         if (option.isCorrect) {
@@ -43,13 +43,13 @@ const Question1ChooseOne = ({
                     })}
                 </ul>
             </fieldset>
-            {operation.is_tea_operation_visible && (
+            {operation.is_teacher_visible && (
                 <fieldset
                     className="tea-operation"
-                    disabled={!operation.is_tea_operation_editable}>
+                    disabled={!operation.is_teacher_editable}>
                     <FeedbackSelect
                         id={id}
-                        is_correct={is_correct}
+                        is_select_correct={is_select_correct}
                         onFeedbackSelectChange={onFeedbackSelectChange}
                     />
                     <FeedbackCorrect
@@ -59,17 +59,17 @@ const Question1ChooseOne = ({
                     />
                 </fieldset>
             )}
-            {operation.is_stu_operation_visible &&
-                typeof is_correct === 'number' && (
+            {operation.is_student_visible &&
+                typeof is_select_correct === 'number' && (
                 <fieldset>
                     <div className="feedback-score">
-                        {is_correct ? (
+                        {is_select_correct ? (
                             <div className="correct">恭喜，答对了！</div>
                         ) : (
                             <div className="wrong">答错了！</div>
                         )}
                     </div>
-                    {!is_correct && (
+                    {!is_select_correct && (
                         <div className="feedback-answer">
                             <div className="tips">
                                     正确答案：
@@ -85,4 +85,4 @@ const Question1ChooseOne = ({
     );
 };
 
-export default Question1ChooseOne;
+export default Format1ChooseOne;

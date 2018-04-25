@@ -16,11 +16,19 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     onSubmitCheckAnswer: e => {
         dispatch(submitCheckAnswer());
     },
+    onPauseCheckAnswer: e => {
+        dispatch(submitCheckAnswer(false));
+    },
 });
 
-const Submit = ({ operation, onSubmitAnswer, onSubmitCheckAnswer }) => {
+const Submit = ({
+    operation,
+    onSubmitAnswer,
+    onSubmitCheckAnswer,
+    onPauseCheckAnswer,
+}) => {
     console.log('Submit render');
-    if (operation.is_stu_operation_editable) {
+    if (operation.isStudent) {
         return (
             <div className="submit">
                 <button className="btn-blue" onClick={onSubmitAnswer}>
@@ -29,11 +37,14 @@ const Submit = ({ operation, onSubmitAnswer, onSubmitCheckAnswer }) => {
             </div>
         );
     }
-    if (operation.is_tea_operation_editable) {
+    if (operation.isTeacher) {
         return (
             <div className="submit">
                 <button className="btn-red" onClick={onSubmitCheckAnswer}>
-                    提交答案
+                    批改完成
+                </button>
+                <button className="btn-blue" onClick={onPauseCheckAnswer}>
+                    暂停批改
                 </button>
             </div>
         );

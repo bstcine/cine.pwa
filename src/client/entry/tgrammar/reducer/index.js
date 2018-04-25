@@ -99,13 +99,21 @@ const answersById = (state = {}, { type, payload }) => {
             answer.text_value = text_value;
             return newState;
         }
-        case SAVE_QUESTION1_FEEDBACK_SELECT_ANSWER:
-        case SAVE_QUESTION3_FEEDBACK_SELECT_ANSWER: {
+        case SAVE_QUESTION1_FEEDBACK_SELECT_ANSWER: {
             let newState = { ...state };
-            let { id: question_id, is_correct } = payload;
+            let { id: question_id, is_select_correct } = payload;
             if (!newState[question_id]) newState[question_id] = { question_id };
             let answer = newState[question_id];
-            answer.is_correct = is_correct;
+            answer.is_select_correct = is_select_correct;
+            return newState;
+        }
+        case SAVE_QUESTION3_FEEDBACK_SELECT_ANSWER: {
+            let newState = { ...state };
+            let { id: question_id, is_text_correct, text_score } = payload;
+            if (!newState[question_id]) newState[question_id] = { question_id };
+            let answer = newState[question_id];
+            answer.is_text_correct = is_text_correct;
+            answer.text_score = text_score;
             return newState;
         }
         case SAVE_QUESTION3_FEEDBACK_TEXT_ANSWER: {
@@ -208,16 +216,14 @@ const user = (state = {}, { type, payload }) => {
 
 const operation = (
     state = {
-        is_stu_operation_visible: false,
-        is_stu_operation_editable: false,
-        is_tea_operation_visible: false,
-        is_tea_operation_editable: false,
+        isStudent: true,
+        isTeacher: false,
     },
     { type, payload }
 ) => {
     switch (type) {
         case UPDATE_OPERATION:
-            return { ...payload };
+            return { ...state, ...payload };
         default:
             return state;
     }

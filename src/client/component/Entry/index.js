@@ -5,7 +5,7 @@ import storeUtil from '@/util/storeUtil';
 import SITECODE from '@/constant/sitecode';
 import uaUtil from '@/util/uaUtil';
 
-class EntryComponent extends Component {
+class Entry extends Component {
     constructor(props) {
         super(props);
         console.log(`EntryComponent constructor`);
@@ -48,4 +48,4 @@ class EntryComponent extends Component {
     }
 }
 
-export default EntryComponent;
+export default Entry;

@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import Question1ChooseOne from '../component/Question1ChooseOne';
+import Format1ChooseOne from '../component/Format1ChooseOne';
 import {
     saveQuestion1SelectAnswer,
     saveQuestion3FeedbackSelectAnswer,
@@ -12,7 +12,7 @@ const mapStateToProps = (state, ownProps) => {
     let answer = answersById[id];
     if (answer) {
         prop.select_value = answer.select_value;
-        prop.is_correct = answer.is_correct;
+        prop.is_select_correct = answer.is_select_correct;
         prop.feedback = answer.feedback;
     }
     prop.operation = operation;
@@ -32,10 +32,10 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
         dispatch(
             saveQuestion3FeedbackSelectAnswer({
                 id: ownProps.item.id,
-                is_correct: parseInt(e.target.value, 10),
+                is_select_correct: parseInt(e.target.value, 10),
             })
         );
     },
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Question1ChooseOne);
+export default connect(mapStateToProps, mapDispatchToProps)(Format1ChooseOne);

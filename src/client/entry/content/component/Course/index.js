@@ -19,7 +19,7 @@ import Brief from './Brief';
 import DetailDesc from './DetailDesc';
 import CouponModal from './CouponModal';
 import RecommendModal from './RecommendModal';
-import Api from '../../../../../APIConfig';
+import Api from '@/../APIConfig';
 import * as BaseService from '@/service/base';
 import {fetchData} from '@/service/base';
 import cCourseAction from '@/action/contentAction';

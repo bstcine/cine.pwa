@@ -1,15 +1,22 @@
 import React from 'react';
 
-const FeedbackText = ({ feedback, readOnly, onFeedbackTextChange }) => {
+const FeedbackText = ({ feedback, editable, onFeedbackTextChange }) => {
     return (
         <div className="feedback-text">
-            <div className="tips">老师解答</div>
-            <textarea
-                className="feedbackarea"
-                value={feedback || ''}
-                readOnly={readOnly}
-                onChange={onFeedbackTextChange}
-            />
+            <span>
+                老师解答 <i className="material-icons">&#xE87F;</i>
+            </span>
+            {editable ? (
+                <textarea
+                    value={feedback || ''}
+                    onChange={onFeedbackTextChange}
+                />
+            ) : (
+                <div
+                    className="textarea"
+                    dangerouslySetInnerHTML={{ __html: feedback }}
+                />
+            )}
         </div>
     );
 };

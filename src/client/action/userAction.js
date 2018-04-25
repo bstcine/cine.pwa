@@ -98,7 +98,7 @@ export const actionUserPoint = {
 
         let param = {
             page: 1,
-            pageSize: 1000000,
+            pageSize: 300,
             orderBy: 'create_at',
             orderValue: 'desc',
         };

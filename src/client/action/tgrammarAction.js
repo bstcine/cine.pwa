@@ -184,7 +184,11 @@ export const submitAnswer = () => (dispatch, getState) => {
                 (!question.isCorrect && answer.select_value === 0)
                     ? 1
                     : 0;
-            answer.select_score = answer.is_select_correct ? 1 : 0;
+            if (question.isCorrect) {
+                answer.select_score = answer.is_select_correct ? 2 : 0;
+            } else {
+                answer.select_score = answer.is_select_correct ? 1 : 0;
+            }
             if (answer.is_select_correct === 0) {
                 answer.is_text_correct = 0;
                 answer.text_score = 0;

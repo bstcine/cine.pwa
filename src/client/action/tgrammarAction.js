@@ -82,8 +82,12 @@ export const fetchQuizData = ({ stats_quiz_id }) => async dispatch => {
     dispatch(receiveQuizData(quiz));
     if (user.role_id === STUDENT && !stats_quiz_id && !lastest_stats_quiz_id) {
         let localAnswer = hasLocalAnswers(quiz, user);
-        if (localAnswer && confirm('检测到有未提交的答题记录，是否恢复？')) {
-            dispatch(restoreLocalAnswers(localAnswer));
+        if (localAnswer) {
+            if (confirm('检测到有未提交的答题记录，是否恢复？')) {
+                dispatch(restoreLocalAnswers(localAnswer));
+            } else {
+                clearLocalAnswers(quiz, user);
+            }
         }
         dispatch(recordTime());
     }

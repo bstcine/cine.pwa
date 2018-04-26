@@ -9,7 +9,7 @@ import {TabPanels, TabPanel} from "@/component/Tabs";
 import PointContainer from "@/entry/user/containers/PointContainer";
 
 const User = ({topicId, user, handleClick}) => {
-    let headImg = user.head_image ? "/f/" + user.head_image : require('../asset/image/ico_headpic.png');
+    let headImg = user.head_image ? "http://www.bstcine.com/f/" + user.head_image : require('../asset/image/ico_headpic.png');
     let roleImg = user.role_id + '' === "2" ? require('../asset/image/ico_teacher.png') : require('../asset/image/ico_student.png');
 
     return (
@@ -43,8 +43,8 @@ const User = ({topicId, user, handleClick}) => {
             </div>
             <Tabs className="user-tabs" selectedId={topicId}>
                 <TabItems>
-                    <TabItem id={'order'} className="tab-item tab-order" indicator={user.unpayOrdersCount}
-                             onClick={(index, id) => handleClick(id)}>我的订单</TabItem>
+                    {/* <TabItem id={'order'} className="tab-item tab-order" indicator={user.unpayOrdersCount}
+                             onClick={(index, id) => handleClick(id)}>我的订单</TabItem> */}
                     <TabItem className="tab-item tab-study"
                              onClick={() => handleClick('study')}>我的学习</TabItem>
                     <TabItem id={'integral'} className="tab-item tab-integral"
@@ -58,10 +58,9 @@ const User = ({topicId, user, handleClick}) => {
                     <TabItem className="tab-item tab-password"
                              onClick={() => handleClick('password')}>修改密码</TabItem>
                     <TabItem className="tab-item tab-quit"
-                             onClick={() => handleClick('exit')}>退出</TabItem>
+                             onClick={() => handleClick('quit')}>退出</TabItem>
                 </TabItems>
                 <TabPanels>
-                    <TabPanel id={'order'}/>
                     <TabPanel id={'integral'}>
                         <PointContainer/>
                     </TabPanel>

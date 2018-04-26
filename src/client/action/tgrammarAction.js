@@ -1,5 +1,5 @@
 import { fetchData } from '@/service/base';
-import Api from '@/../APIConfig';
+import Api, { APIURL_Stats_Quiz_Reset } from '@/../APIConfig';
 import storeUtil from '@/util/storeUtil';
 import { ANSWERING, WAITING4CHECK, CHECKING } from '@/constant/statsQuizStatus';
 import {
@@ -195,9 +195,7 @@ export const submitAnswer = () => (dispatch, getState) => {
         duration,
     }).then(([err, result]) => {
         if (err) {
-            if (err === 'no_login') {
-                return dispatch(openLoginModal());
-            }
+            if (err === 'no_login') return dispatch(openLoginModal());
             return dispatch(networkError(err));
         }
         dispatch({ type: UPLOADED_QUESTIONS });
@@ -213,28 +211,44 @@ export const submitCheckAnswer = (complete = true) => async (
     dispatch,
     getState
 ) => {
-    let { statsQuiz, questionsById, answersById } = getState();
+    let { statsQuiz, questionIds, questionsById, answersById } = getState();
     if (!_hasCompleteCheckQuiz(questionsById, answersById)) return alert('请批改完全部试题后再提交');
     let answers = [];
-    for (let key in answersById) {
-        if (answersById.hasOwnProperty(key)) {
-            answers.push(answersById[key]);
+    let score = 0;
+    questionIds.forEach(questionId => {
+        let question = questionsById[questionId];
+        if (question.format === 3) {
+            let answer = answersById[questionId];
+            if (typeof answer.select_score === 'number') score += answer.select_score;
+            if (typeof answer.text_score === 'number') score += answer.text_score;
+            answers.push(answer);
         }
-    }
+    });
     dispatch({ type: UPLOADING_QUESTIONS });
     let [err] = await fetchData(Api.APIURL_Stats_Quiz_Update, {
         stats_quiz_id: statsQuiz.id,
         answers,
         complete,
+        score,
     });
     if (err) {
-        if (err === 'no_login') {
-            return dispatch(openLoginModal());
-        }
+        if (err === 'no_login') return dispatch(openLoginModal());
         return dispatch(networkError(err));
     }
     dispatch({ type: UPLOADED_QUESTIONS });
     location.href = '/tgrammar/stats/list';
+};
+
+export const resetQuiz = () => async (dispatch, getState) => {
+    let { statsQuiz } = getState();
+    let [err] = await fetchData(APIURL_Stats_Quiz_Reset, {
+        stats_quiz_id: statsQuiz.id,
+    });
+    if (err) {
+        if (err === 'no_login') return dispatch(openLoginModal());
+        return dispatch(networkError(err));
+    }
+    alert('重置成功!');
 };
 
 const recordTime = () => ({

@@ -1,3 +1,6 @@
+/**
+ * from react official repo
+ */
 module.exports = {
     bracketSpacing: false,
     singleQuote: true,

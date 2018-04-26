@@ -1,6 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { preSubmitAnswer, submitCheckAnswer } from '@/action/tgrammarAction';
+import {
+    preSubmitAnswer,
+    submitCheckAnswer,
+    resetQuiz,
+} from '@/action/tgrammarAction';
+import { ANSWERING } from '@/constant/statsQuizStatus';
 
 const mapStateToProps = state => {
     let { operation } = state;
@@ -19,6 +24,9 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     onPauseCheckAnswer: e => {
         dispatch(submitCheckAnswer(false));
     },
+    onResetQuiz: e => {
+        dispatch(resetQuiz());
+    },
 });
 
 const Submit = ({
@@ -26,9 +34,10 @@ const Submit = ({
     onSubmitAnswer,
     onSubmitCheckAnswer,
     onPauseCheckAnswer,
+    onResetQuiz,
 }) => {
     console.log('Submit render');
-    if (operation.isStudent) {
+    if (operation.isStudent && operation.statsQuizStatus === ANSWERING) {
         return (
             <div className="submit">
                 <button className="btn-blue" onClick={onSubmitAnswer}>
@@ -45,6 +54,9 @@ const Submit = ({
                 </button>
                 <button className="btn-blue" onClick={onPauseCheckAnswer}>
                     暂停批改
+                </button>
+                <button className="btn-blue" onClick={onResetQuiz}>
+                    重做
                 </button>
             </div>
         );

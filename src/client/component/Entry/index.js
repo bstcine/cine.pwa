@@ -8,7 +8,7 @@ import uaUtil from '@/util/uaUtil';
 class Entry extends Component {
     constructor(props) {
         super(props);
-        console.log(`EntryComponent constructor`);
+        console.log(`Entry constructor`);
         let { token, sitecode, baseurl } = getParam();
         console.log(`From current url: token[${token}] sitecode[${sitecode}] `);
 

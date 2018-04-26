@@ -6,7 +6,7 @@ import {
 } from 'react-router-dom'
 import {getParam} from '@/util/urlUtil'
 
-import EntryComponent from "@/component/EntryComponent";
+import Entry from "@/component/Entry";
 import Index from './component/Index';
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
@@ -15,7 +15,7 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme';
 
 import './asset/style/index.less'
 
-class Address extends EntryComponent {
+class Address extends Entry {
 
     constructor(props) {
         super(props)

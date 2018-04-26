@@ -11,9 +11,9 @@ import Bridge from '@/util/bridge';
 import BRIDGE_EVENT from '@/constant/bridgeEvent';
 import siteCodeUtil from '@/util/sitecodeUtil';
 import 'material-icons';
-import EntryComponent from '@/component/EntryComponent';
+import Entry from '@/component/Entry';
 
-class Word extends EntryComponent {
+class Word extends Entry {
     constructor(props) {
         super(props);
         console.log('Word Main constructor');

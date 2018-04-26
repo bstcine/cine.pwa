@@ -1,13 +1,16 @@
 import React from 'react';
 
 const formatText = (is_select_correct, is_text_correct) => {
-    if (is_select_correct && is_text_correct) {
+    if (
+        (is_select_correct === 1 && is_text_correct === 1) ||
+        (is_select_correct === 1 && typeof is_text_correct !== 'number')
+    ) {
         return (
             <span className="correct">
                 <i className="material-icons">&#xE876;</i>正确
             </span>
         );
-    } else if (is_select_correct) {
+    } else if (is_select_correct === 1 && is_text_correct === 0) {
         return (
             <span className="wrong">
                 <i className="material-icons">&#xE14C;</i>选项正确，改正有误

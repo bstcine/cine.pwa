@@ -49,19 +49,19 @@ const User = ({topicId, user, handleClick}) => {
                         {/* <TabItem id={'order'} className="tab-item tab-order" indicator={user.unpayOrdersCount}
                              onClick={(index, id) => handleClick(id)}>我的订单</TabItem> */}
                         <TabItem className="tab-item tab-study"
-                                 onClick={() => handleClick('study')}>我的学习</TabItem>
+                                 onTabItemClick={() => handleClick('study')}>我的学习</TabItem>
                         <TabItem id={'integral'} className="tab-item tab-integral"
                                  onClick={(index, id) => handleClick(id)}>我的积分</TabItem>
                         <TabItem id={'coupon'} className="tab-item tab-coupon"
                                  onClick={(index, id) => handleClick(id)}>我的优惠券</TabItem>
                         <TabItem className="tab-item tab-wordtest"
-                                 onClick={() => handleClick('wordtest')}>词汇测试</TabItem>
+                                 onTabItemClick={() => handleClick('wordtest')}>词汇测试</TabItem>
                         <TabItem className="tab-item tab-grammar"
-                                 onClick={() => handleClick('tgrammar')}>核心语法测试</TabItem>
+                                 onTabItemClick={() => handleClick('tgrammar')}>核心语法测试</TabItem>
                         <TabItem className="tab-item tab-password"
-                                 onClick={() => handleClick('password')}>修改密码</TabItem>
+                                 onTabItemClick={() => handleClick('password')}>修改密码</TabItem>
                         <TabItem className="tab-item tab-quit"
-                                 onClick={() => handleClick('quit')}>退出</TabItem>
+                                 onTabItemClick={() => handleClick('quit')}>退出</TabItem>
                     </TabItems>
                     <TabPanels>
                         <TabPanel id={'integral'}>

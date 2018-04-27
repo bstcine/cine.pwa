@@ -1,20 +1,20 @@
 .user-tabs {
-  .tab-items {
-    display: none;
-  }
+   .tab-items {
+     display: none;
+   }
 
-  .tab-panels {
-    .tab-panel {
-      display: none;
-      min-height: 10rem;
-      padding: 0;
+   .tab-panels {
+     .tab-panel {
+       display: none;
+       min-height: 10rem;
+       padding: 0;
 
-      &.active {
-        display: block;
-      }
-    }
-  }
-}
+       &.active {
+         display: block;
+       }
+     }
+   }
+ }
 
 @media @media-up-sm {
   .user-tabs {
@@ -72,11 +72,16 @@
     }
 
     .tab-panels {
+      background: #f0f2f3;
+
       .tab-panel {
         display: none;
         min-height: 10rem;
 
-        padding: .6rem .84rem;
+        width: 18.80rem;
+        margin: 0 auto;
+
+        padding-top: .6rem;
 
         &.active {
           display: block;

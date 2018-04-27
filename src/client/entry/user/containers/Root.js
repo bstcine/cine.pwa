@@ -26,6 +26,12 @@ class Root extends Component {
             case 'study':
                 location.href = '/learn';
                 break
+            case 'integral':
+                this.props.history.push("/user/integral");
+                break
+            case 'coupon':
+                this.props.history.push("/user/coupon");
+                break
             case 'wordtest':
                 // window.open('/vocabtest');
                 location.href = '/vocabtest';
@@ -37,7 +43,8 @@ class Root extends Component {
                 location.href = '/resetPassword';
                 break
             case 'quit':
-                logoutV1().then(() => {
+                logoutV1().then((err, res) => {
+                    console.log(110,err, res);
                     location.href = '/';
                 });
                 break

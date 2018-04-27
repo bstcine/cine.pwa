@@ -22,8 +22,8 @@ const User = ({topicId, user, handleClick}) => {
                     </div>
                     <div className="user-info">
                         <div className="user-flex-a">
-                            <span className="user-name">{user.nickname}</span>
-                            <a className={'user-edit'}></a>
+                            <span className="user-name">{user.login}</span>
+                            {/*<a className={'user-edit'}/>*/}
                         </div>
                         <div className="user-flex-b">
                             {user.role_id !== '1' && <img className="user-role" src={roleImg}/>}

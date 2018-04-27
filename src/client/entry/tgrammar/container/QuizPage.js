@@ -11,8 +11,8 @@ import Submit from '../container/Submit';
 import { getParam } from '@/util/urlUtil';
 import ToastLoading from './ToastLoading';
 import ToastError from './ToastError';
-import TipModal from './TipModal';
-import ConfirmModal from './ConfirmModal';
+import Alert from './Alert';
+import Confirm from './Confirm';
 import LoginModal from './LoginModal';
 
 const mapStateToProps = state => {
@@ -47,13 +47,13 @@ class QuizPage extends Component {
                 <Header isShow={true} />
                 <div className="container-fluid course-container-bg">
                     <div className="tgrammar">
-                        <ToastLoading />
-                        <ToastError />
-                        <TipModal />
-                        <ConfirmModal />
+                        <Alert />
+                        <Confirm />
                         {!init && <Title />}
                         {!init && <QuestionItems />}
                         {!init && <Submit />}
+                        <ToastLoading />
+                        <ToastError />
                         <LoginModal />
                     </div>
                 </div>

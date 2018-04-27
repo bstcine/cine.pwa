@@ -27,6 +27,8 @@ import {
     NETWORK_ERROR_TIMEOUT,
     RESTORE_LOCAL_ANSWERS,
     RECORD_TIME,
+    FILTER_COMPLETE_QUESTION,
+    SHOW_ALL_QUESTION,
 } from '@/constant/actionTypeTGrammar';
 
 /**
@@ -234,7 +236,7 @@ const tipModal = (state = { isOpen: false }, { type, payload }) => {
         case CLOSE_TIP_MODAL:
             return { isOpen: false };
         case OPEN_TIP_MODAL:
-            return { isOpen: true, html: payload.html };
+            return { isOpen: true, text: payload.text };
         default:
             return state;
     }
@@ -245,8 +247,8 @@ const confirmModal = (state = { isOpen: false }, { type, payload }) => {
         case CLOSE_CONFIRM_MODAL:
             return { isOpen: false };
         case OPEN_CONFIRM_MODAL: {
-            let { html, cancelButton, confirmButton } = payload;
-            return { isOpen: true, html, cancelButton, confirmButton };
+            let { text } = payload;
+            return { isOpen: true, text };
         }
         default:
             return state;
@@ -285,6 +287,17 @@ const timer = (state = {}, { type, payload }) => {
     }
 };
 
+const visibilityFilter = (state = 'ALL', { type, payload }) => {
+    switch (type) {
+        case FILTER_COMPLETE_QUESTION:
+            return 'UMCOMPLETE';
+        case SHOW_ALL_QUESTION:
+            return 'ALL';
+        default:
+            return state;
+    }
+};
+
 const rootReducer = combineReducers({
     quiz,
     user,
@@ -299,6 +312,7 @@ const rootReducer = combineReducers({
     confirmModal,
     loginModal,
     timer,
+    visibilityFilter,
 });
 
 export default rootReducer;

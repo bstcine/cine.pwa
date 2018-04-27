@@ -4,6 +4,8 @@ import {
     preSubmitAnswer,
     submitCheckAnswer,
     resetQuiz,
+    filterCompleteQuestion,
+    showAllQuestion,
 } from '@/action/tgrammarAction';
 import { ANSWERING } from '@/constant/statsQuizStatus';
 
@@ -27,6 +29,12 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     onResetQuiz: e => {
         dispatch(resetQuiz());
     },
+    filterCompleteQuestion: e => {
+        dispatch(filterCompleteQuestion);
+    },
+    showAllQuestion: e => {
+        dispatch(showAllQuestion);
+    },
 });
 
 const Submit = ({
@@ -35,6 +43,8 @@ const Submit = ({
     onSubmitCheckAnswer,
     onPauseCheckAnswer,
     onResetQuiz,
+    filterCompleteQuestion,
+    showAllQuestion,
 }) => {
     console.log('Submit render');
     if (operation.isStudent && operation.statsQuizStatus === ANSWERING) {
@@ -50,13 +60,19 @@ const Submit = ({
         return (
             <div className="submit">
                 <button className="btn-red" onClick={onSubmitCheckAnswer}>
-                    批改完成
+                    完成批改
                 </button>
                 <button className="btn-blue" onClick={onPauseCheckAnswer}>
-                    暂停批改
+                    保存批改
                 </button>
                 <button className="btn-blue" onClick={onResetQuiz}>
                     重做
+                </button>
+                <button className="btn-orange" onClick={filterCompleteQuestion}>
+                    精简显示
+                </button>
+                <button className="btn-orange" onClick={showAllQuestion}>
+                    全部显示
                 </button>
             </div>
         );

@@ -29,6 +29,8 @@ import {
     NETWORK_ERROR_TIMEOUT,
     RESTORE_LOCAL_ANSWERS,
     RECORD_TIME,
+    FILTER_COMPLETE_QUESTION,
+    SHOW_ALL_QUESTION,
 } from '@/constant/actionTypeTGrammar';
 import { STUDENT, TEACHER, ADMINISTRATOR } from '@/constant/roleId';
 
@@ -134,8 +136,7 @@ const fetchStatQuiz = ({ stats_quiz_id, user }) => async (dispatch, getState) =>
         user.role_id === STUDENT &&
         (statsQuiz.status === WAITING4CHECK || statsQuiz.status === CHECKING)
     ) {
-        let html = `<div class="waiting"><div class="waiting-img"></div><span>当前老师正在批改中…，请稍候查看结果</span></div>`;
-        dispatch(openTipModal({ html }));
+        dispatch(openTipModal({ text: '当前老师正在批改中…，请稍候查看结果' }));
     }
     statsQuizDetail.forEach(item => {
         if (user.role_id === TEACHER && !item.feedback) item.feedback = questionsById[item.question_id].feedback;
@@ -151,12 +152,10 @@ export const preSubmitAnswer = () => (dispatch, getState) => {
     let { questionsById, answersById } = getState();
     let unCompletedNos = _getUnCompletedNos(questionsById, answersById);
     if (unCompletedNos.length) {
-        let html = `<p>你有 ${unCompletedNos.join('、')} 共 ${
+        let text = `你有 ${unCompletedNos.join(',')} 共 ${
             unCompletedNos.length
-        } 道题未答，是否确定提交答卷？</p>`;
-        let cancelButton = '否，我要继续答题';
-        let confirmButton = '是，现在就提交';
-        return dispatch(openConfirmModal({ html, cancelButton, confirmButton }));
+        } 道题未答，是否确定提交答卷？`;
+        return dispatch(openConfirmModal({ text }));
     }
     dispatch(submitAnswer());
 };
@@ -186,6 +185,7 @@ export const submitAnswer = () => (dispatch, getState) => {
                     : 0;
             if (question.isCorrect) {
                 answer.select_score = answer.is_select_correct ? 2 : 0;
+                delete answer.text_value;
             } else {
                 answer.select_score = answer.is_select_correct ? 1 : 0;
             }
@@ -414,18 +414,18 @@ export const closeTipModal = () => ({
     type: CLOSE_TIP_MODAL,
 });
 
-export const openTipModal = ({ html, button }) => ({
+export const openTipModal = ({ text }) => ({
     type: OPEN_TIP_MODAL,
-    payload: { html, button },
+    payload: { text },
 });
 
 export const closeConfirmModal = () => ({
     type: CLOSE_CONFIRM_MODAL,
 });
 
-export const openConfirmModal = ({ html, cancelButton, confirmButton }) => ({
+export const openConfirmModal = ({ text }) => ({
     type: OPEN_CONFIRM_MODAL,
-    payload: { html, cancelButton, confirmButton },
+    payload: { text },
 });
 
 export const closeLoginModal = () => ({
@@ -475,3 +475,7 @@ const _getUnCompletedNos = (questionsById, answersById) => {
 const _hasCompleteCheckQuiz = () => {
     return true;
 };
+
+export const filterCompleteQuestion = { type: FILTER_COMPLETE_QUESTION };
+
+export const showAllQuestion = { type: SHOW_ALL_QUESTION };

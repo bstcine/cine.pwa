@@ -1,8 +1,16 @@
 import React from 'react';
+import classNames from 'classnames';
 
-const FeedbackSelectScore = ({ is_select_correct, select_score }) => {
+const FeedbackSelectScore = ({
+    is_select_correct,
+    is_show_tip,
+    select_score,
+}) => {
     return (
-        <div className="feedback-score">
+        <div
+            className={classNames('feedback-select-score', {
+                'hide-tip': !is_show_tip,
+            })}>
             {is_select_correct ? (
                 <span className="correct">
                     <i className="material-icons">&#xE876;</i>正确

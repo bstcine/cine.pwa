@@ -6,8 +6,44 @@ import Format11ReadingDescContainer from './Format11ReadingDescContainer';
 import Format3CorrectContainer from '../container/Format3CorrectContainer';
 
 const mapStateToProps = (state, ownProps) => {
-    const { questionIds, questionsById } = state;
-    return { questionIds, questionsById };
+    const { questionIds, questionsById, answersById, visibilityFilter } = state;
+    return {
+        questionIds: filterQuestions(
+            questionIds,
+            questionsById,
+            answersById,
+            visibilityFilter
+        ),
+        questionsById,
+    };
+};
+
+const filterQuestions = (
+    questionIds,
+    questionsById,
+    answersById,
+    visibilityFilter
+) => {
+    if (visibilityFilter === 'ALL') {
+        return questionIds;
+    } else {
+        return questionIds.filter(id => {
+            const question = questionsById[id];
+            if (question.format === 3) {
+                const answer = answersById[id];
+                // 系统就能自动判分的，默认不用展示给老师
+                if (question.isCorrect) {
+                    return false;
+                } else {
+                    if (!question.isCorrect && answer.select_value === 1) return false;
+                    if (answer.select_value === null) return false;
+                }
+                return true;
+            } else {
+                return true;
+            }
+        });
+    }
 };
 
 const QuestionItems = ({ questionIds, questionsById }) => {

@@ -12,7 +12,7 @@ const optionText = (index, content) => {
 const SelectOption = ({
     index,
     name,
-    className,
+    className = 'option',
     value,
     content,
     checked,
@@ -21,9 +21,8 @@ const SelectOption = ({
 }) => {
     return (
         <li
-            className={classNames('option', {
+            className={classNames(className, {
                 checked,
-                [className]: !!className,
             })}>
             <label>
                 <input

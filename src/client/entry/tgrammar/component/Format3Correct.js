@@ -4,7 +4,6 @@ import QuestionSelect from './QuestionSelect';
 import QuestionText from './QuestionText';
 import FeedbackSelectScore from './FeedbackSelectScore';
 import FeedbackTextScore from './FeedbackTextScore';
-import FeedbackScore from './FeedbackScore';
 import FeedbackText from './FeedbackText';
 import { ANSWERING, CHECKED } from '@/constant/statsQuizStatus';
 
@@ -59,12 +58,15 @@ const Format3Correct = ({
                 onSelectChange={onSelectChange}
             />
 
-            {operation.isTeacher && (
+            {(operation.isTeacher ||
+                (operation.isStudent &&
+                    operation.statsQuizStatus === CHECKED)) && (
                 <FeedbackSelectScore
-                    id={id}
-                    is_select_correct={is_select_correct}
-                    select_score={select_score}
-                />
+                        id={id}
+                        is_show_tip={operation.isStudent}
+                        is_select_correct={is_select_correct}
+                        select_score={select_score}
+                    />
             )}
 
             {select_value === 0 && (
@@ -79,22 +81,15 @@ const Format3Correct = ({
             )}
 
             {text_value &&
-                operation.isTeacher && (
-                <FeedbackTextScore
+                (operation.isTeacher ||
+                    (operation.isStudent &&
+                        operation.statsQuizStatus === CHECKED)) && (
+                        <FeedbackTextScore
                     id={id}
+                    editable={operation.isTeacher}
                     is_text_correct={is_text_correct}
                     text_score={text_score}
                     onFeedbackSelectChange={onFeedbackSelectChange}
-                />
-            )}
-
-            {operation.isStudent &&
-                operation.statsQuizStatus === CHECKED && (
-                <FeedbackScore
-                    is_text_correct={is_text_correct}
-                    text_score={text_score}
-                    is_select_correct={is_select_correct}
-                    select_score={select_score}
                 />
             )}
 

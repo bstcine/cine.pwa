@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import {
     Tabs,
     TabItems,
@@ -7,16 +7,16 @@ import {
     TabPanel,
 } from '@/component/Tabs/index';
 import CouponList from '../component/CouponList';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { actionUserCoupon } from '@/action/userAction';
-import { grey400, indigo500, indigo700 } from 'material-ui/styles/colors';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+import {actionUserCoupon} from '@/action/userAction';
+import {grey400, indigo500, indigo700} from 'material-ui/styles/colors';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
-import { TextField } from 'material-ui';
-import { ToastError, ToastLoading, ToastSuccess } from '@/component/Toast';
+import {TextField} from 'material-ui';
+import {ToastError, ToastLoading, ToastSuccess} from '@/component/Toast';
 
 class CouponContainer extends Component {
     constructor(props) {
@@ -30,7 +30,7 @@ class CouponContainer extends Component {
     }
 
     render() {
-        let { coupons, actions } = this.props;
+        let {coupons, actions} = this.props;
 
         let rows = coupons.rows;
         let network = coupons.network;
@@ -65,7 +65,7 @@ class CouponContainer extends Component {
         return (
             <MuiThemeProvider muiTheme={muiTheme}>
                 <React.Fragment>
-                    <ToastLoading show={network.loading} />
+                    <ToastLoading show={network.loading}/>
                     <ToastError
                         show={!network.loading && network.error}
                         text={network.error}
@@ -82,10 +82,10 @@ class CouponContainer extends Component {
                         </TabItems>
                         <TabPanels>
                             <TabPanel>
-                                <CouponList coupons={use} actions={actions} />
+                                <CouponList coupons={use} actions={actions}/>
                             </TabPanel>
                             <TabPanel>
-                                <CouponList coupons={used} actions={actions} />
+                                <CouponList coupons={used} actions={actions}/>
                             </TabPanel>
                             <TabPanel>
                                 <CouponList
@@ -95,15 +95,11 @@ class CouponContainer extends Component {
                             </TabPanel>
                         </TabPanels>
                     </Tabs>
-                    <a
-                        className="float-button"
-                        onClick={() => {
+                    <div className={'coupon-todo'}>
+                        <a className="float-button" onClick={() => {
                             actions.dialogAddCoupon();
-                        }}>
-                        <img
-                            src={require('../asset/image/ico_add_coupon.png')}
-                        />
-                    </a>
+                        }}/>
+                    </div>
                     <Dialog
                         title="添加优惠券"
                         modal={false}

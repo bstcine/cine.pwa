@@ -30,13 +30,19 @@ export default class Tabs extends Component {
                             let props = {
                                 index,
                                 id: tabItem.props.id,
-                                onTabItemClick: this.onTabItemClick,
                             };
                             if (selectedId) {
                                 props.selected = props.id === selectedId
                             } else {
                                 props.selected = index === selectedIndex
                             }
+
+                            if(tabItem.props.onTabItemClick){
+                                props.onTabItemClick = tabItem.props.onTabItemClick
+                            }else {
+                                props.onTabItemClick = this.onTabItemClick
+                            }
+
                             if(tabItem.props.onClick) {
                                 props.onClick = tabItem.props.onClick
                             }

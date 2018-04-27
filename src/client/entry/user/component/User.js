@@ -15,7 +15,7 @@ const User = ({topicId, user, handleClick}) => {
     return (
         <React.Fragment>
             <div className={'header-bg'}>
-                <div className="container user-header">
+                <div className="user-header">
                     <a className={'nav-open'}/>
                     <div className="user-logo">
                         <img src={headImg}/>

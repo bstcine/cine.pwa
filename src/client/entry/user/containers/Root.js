@@ -37,7 +37,8 @@ class Root extends Component {
                 location.href = '/resetPassword';
                 break
             case 'quit':
-                logoutV1().then(() => {
+                logoutV1().then((err,res) => {
+                    console.log(err,res);
                     location.href = '/';
                 });
                 break

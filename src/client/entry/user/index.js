@@ -1,23 +1,20 @@
-import React from 'react'
-import {render} from 'react-dom'
-import {createStore, applyMiddleware} from 'redux'
-import {Provider} from 'react-redux'
-import thunk from 'redux-thunk'
-import {createLogger} from 'redux-logger'
-import reducer from './reducers'
-import storeUtil from "@/util/storeUtil";
-import Root from "@/entry/user/containers/Root";
-import {BrowserRouter as Router, Route} from 'react-router-dom';
+import React from 'react';
+import { render } from 'react-dom';
+import { createStore, applyMiddleware } from 'redux';
+import { Provider } from 'react-redux';
+import thunk from 'redux-thunk';
+import { createLogger } from 'redux-logger';
+import reducer from './reducers';
+import storeUtil from '@/util/storeUtil';
+import Root from '@/entry/user/containers/Root';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 
-const middleware = [thunk]
+const middleware = [thunk];
 if (process.env.NODE_ENV !== 'production') {
-    middleware.push(createLogger())
+    middleware.push(createLogger());
 }
 
-const store = createStore(
-    reducer,
-    applyMiddleware(...middleware)
-)
+const store = createStore(reducer, applyMiddleware(...middleware));
 
 const createComponent = (Component, userRequired, props) => {
     if (userRequired && !storeUtil.getToken()) {
@@ -27,14 +24,10 @@ const createComponent = (Component, userRequired, props) => {
     return <Component {...props} />;
 };
 
-const Topics = ({match}) => (
+const Topics = ({ match }) => (
     <React.Fragment>
-        <Route
-            exact
-            path={match.url}
-            component={Root}
-        />
-        <Route path={`${match.url}/:topicId`} component={Root}/>
+        <Route exact path={match.url} component={Root} />
+        <Route path={`${match.url}/:topicId`} component={Root} />
     </React.Fragment>
 );
 
@@ -43,9 +36,11 @@ render(
         <Provider store={store}>
             <Route
                 path="/user"
-                component={props => createComponent(Topics, /* userRequired */ true, props)}
+                component={props =>
+                    createComponent(Topics, /* userRequired */ true, props)
+                }
             />
         </Provider>
     </Router>,
     document.getElementById('root')
-)
+);

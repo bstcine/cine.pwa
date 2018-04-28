@@ -9,7 +9,7 @@ import uaUtil from '@/util/uaUtil';
 class Root extends Component {
     constructor(props) {
         super(props);
-        this.topicId = props.match.params.topicId || 'coupon';
+        this.topicId = props.match.params.topicId || 'integral';
     }
 
     componentDidMount() {

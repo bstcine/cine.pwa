@@ -83,11 +83,15 @@ const User = ({ topicId, user, handleClick }) => {
                             onTabItemClick={() => handleClick('tgrammar')}>
                             核心语法测试
                         </TabItem>
-                        {user.role_id !== 3 && <TabItem
-                            className="tab-item tab-grammar"
-                            onTabItemClick={() => handleClick('tgrammar-teacher')}>
-                            老师批改
-                        </TabItem>}
+                        {user.role_id !== '3' && (
+                            <TabItem
+                                className="tab-item tab-grammar"
+                                onTabItemClick={() =>
+                                    handleClick('tgrammar-teacher')
+                                }>
+                                老师批改
+                            </TabItem>
+                        )}
                         <TabItem
                             className="tab-item tab-password"
                             onTabItemClick={() => handleClick('password')}>

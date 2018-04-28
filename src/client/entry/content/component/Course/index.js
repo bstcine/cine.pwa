@@ -252,12 +252,6 @@ export default class Course extends Component {
             showRecommendModal,
             showCouponModal,
         } = this.state;
-        let _courseSet = {
-            setID: 'd011524109258308yWQTmzK5Bq',
-            setName: '《神奇树屋》精读课程套餐（7册）',
-            setOriginalPrice: 1180,
-            setPromotePrice: 1060,
-        };
 
         return (
             <React.Fragment>
@@ -280,13 +274,12 @@ export default class Course extends Component {
                         {course ? (
                             <DetailDesc
                                 course={course}
-                                courseSet={null}
                                 courseID={getParam().cid}
                                 isIOSAPP={siteCodeUtil.inIOSAPP()}
                                 onClickCourseSetLink={
                                     cCourseAction.handleCourseSetLink
                                 }
-                                onLoadComments={cCourseAction.loadingComments}
+                                onLoadComments={cCourseAction.loadSetAndComments}
                             />
                         ) : <div className="course-detail"></div>}
 

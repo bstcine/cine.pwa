@@ -1,3 +1,4 @@
+/* eslint-disable prettier */
 import React from 'react';
 import ReactDOM from 'react-dom';
 import timeUtil from '@/util/timeUtil';
@@ -10,6 +11,7 @@ export default class DetailDesc extends React.Component {
         super(props);
         this.state = {
             comments: [],
+            courseSet: null,
         };
         this.handleScroll = this.handleScroll.bind(this);
     }
@@ -19,9 +21,9 @@ export default class DetailDesc extends React.Component {
 
         if (this.props.courseID) {
             let cid = this.props.courseID;
-            this.props.onLoadComments(cid).then(result => {
-                // alert(JSON.stringify(result));
-                this.setState({ comments: result });
+            let set_id = null;
+            this.props.onLoadComments(cid, set_id).then(({ comments, courseSet }) => {
+                this.setState({ comments, courseSet });
             });
         }
     }
@@ -46,21 +48,22 @@ export default class DetailDesc extends React.Component {
     }
 
     render() {
-        let { course, courseSet, isIOSAPP, onClickCourseSetLink } = this.props;
-        let _tabItem_desc = course.object_type === '1' ? '课程概要' : '详情';
-        let _tabItem_evaluate =
+        let { course, isIOSAPP, onClickCourseSetLink } = this.props;
+        let courseSet = this.state.courseSet;
+        let tabItem_desc = course.object_type === '1' ? '课程概要' : '详情';
+        let tabItem_evaluate =
             course.object_type === '1' ? '学员评价' : '评价';
-        let _will_show_lessons = course.object_type === '1' && !isIOSAPP;
+        let will_show_lessons = course.object_type === '1' && !isIOSAPP;
 
         return (
             <div className="course-detail" ref="courseDetail">
                 <Tabs ref="tabs">
                     <TabItems>
-                        <TabItem>{_tabItem_desc}</TabItem>
-                        {_will_show_lessons ? (
+                        <TabItem>{tabItem_desc}</TabItem>
+                        {will_show_lessons ? (
                             <TabItem>课程目录</TabItem>
                         ) : null}
-                        <TabItem>{_tabItem_evaluate}</TabItem>
+                        <TabItem>{tabItem_evaluate}</TabItem>
                     </TabItems>
                     <TabPanels>
                         <TabPanel>
@@ -78,7 +81,7 @@ export default class DetailDesc extends React.Component {
                             />
                         </TabPanel>
 
-                        {_will_show_lessons ? (
+                        {will_show_lessons ? (
                             <TabPanel>
                                 {course.catalog ? (
                                     <div

@@ -52,6 +52,11 @@ let cCourseAction = {
         return comments;
     },
 
+    loadSetAndComments: async function(courseID, courseSetID) {
+        let comments = await cCourseAction._getCourseComments(courseID);
+        return comments;
+    },
+
     logAccessMonitor: function() {
         // Leo提供的， 目前发现没有在使用，Monitor直接写在Cine.Web middleware
         BaseService.accessLog();

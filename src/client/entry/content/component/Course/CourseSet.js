@@ -1,15 +1,16 @@
 import React from 'react';
 
 const CourseSet = ({ value, onLink }) => {
-    let { setName, setID, setOriginalPrice, setPromotePrice } = value;
-    // alert(JSON.stringify(setID))
+    let { name, id, original_price, price } = value;
+    let originalPrice = original_price ? '，原价：' + original_price + '元' : '';
+    let href = '/content/course?cid=' + id;
     return (
         <div className="course-feature">
             <h2>配套套餐</h2>
             <p>
-                <a onClick={onLink.bind(this, setID)}>
-                    {setName}
-                </a>， 售价：{setPromotePrice}元，原价：{setOriginalPrice}元
+                <a href={href}>
+                    {name}
+                </a>， 售价：{price}元{originalPrice}
             </p>
             <p>如果已购买过套餐中的任一单品课程，亦可以直接补差价升级套餐。</p>
         </div>

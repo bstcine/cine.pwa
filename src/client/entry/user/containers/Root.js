@@ -27,10 +27,10 @@ class Root extends Component {
                 location.href = '/learn';
                 break
             case 'integral':
-                this.props.history.push("/user/integral");
+                this.props.history.replace("/user/integral");
                 break
             case 'coupon':
-                this.props.history.push("/user/coupon");
+                this.props.history.replace("/user/coupon");
                 break
             case 'wordtest':
                 // window.open('/vocabtest');

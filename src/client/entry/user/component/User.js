@@ -55,7 +55,7 @@ const User = ({topicId, user, handleClick}) => {
                         <TabItem id={'coupon'} className="tab-item tab-coupon"
                                  onClick={(index, id) => handleClick(id)}>我的优惠券</TabItem>
                         <TabItem className="tab-item tab-wordtest"
-                                 onTabItemClick={() => handleClick('wordtest')}>词汇测试</TabItem>
+                                 onTabItemClick={() => handleClick('wordtest')}>词汇量测试</TabItem>
                         <TabItem className="tab-item tab-grammar"
                                  onTabItemClick={() => handleClick('tgrammar')}>核心语法测试</TabItem>
                         <TabItem className="tab-item tab-password"

@@ -31,14 +31,16 @@ class Root extends Component {
                 this.props.history.replace('/user/coupon');
                 break;
             case 'wordtest':
-                // window.open('/vocabtest');
-                location.href = '/vocabtest';
+                window.open('/vocabtest');
+                // location.href = '/vocabtest';
                 break;
             case 'tgrammar':
-                location.href = '/tgrammar/quiz';
+                // location.href = '/tgrammar/quiz';
+                window.open('/tgrammar/quiz');
                 break;
             case 'tgrammar-teacher':
-                location.href = '/tgrammar/stats/list';
+                // location.href = '/tgrammar/stats/list';
+                window.open('/tgrammar/stats/list');
                 break;
             case 'password':
                 location.href = '/resetPassword';

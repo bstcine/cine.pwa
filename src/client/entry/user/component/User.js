@@ -4,10 +4,10 @@
 import React from 'react';
 import '../asset/style/index.less';
 import CouponContainer from '@/entry/user/containers/CouponContainer';
-import { Tabs, TabItems, TabItem, TabPanels, TabPanel } from '@/component/Tabs';
+import {Tabs, TabItems, TabItem, TabPanels, TabPanel} from '@/component/Tabs';
 import PointContainer from '@/entry/user/containers/PointContainer';
 
-const User = ({ topicId, user, handleClick }) => {
+const User = ({topicId, isPanel, user, handleClick}) => {
     let headImg = user.head_image
         ? 'http://www.bstcine.com/f/' + user.head_image
         : require('../asset/image/ico_headpic.png');
@@ -18,11 +18,65 @@ const User = ({ topicId, user, handleClick }) => {
 
     return (
         <React.Fragment>
-            <div className={'header-bg'}>
+            <div className={isPanel ? 'header-panel panel' : 'header-panel'}>
+                <div className={'user-panel-a'}>
+                    <img src={headImg}/>
+                    <label>{user.login}</label>
+                </div>
+                <div className={'user-panel-b'}>
+                    <div className={'a'}>
+                        <div className="point-hint">可用积分</div>
+                        <div className="point-val">{user.point}</div>
+                    </div>
+                    <div className={'b'}>
+                        <div className="coupon-hint">优惠券</div>
+                        <div className="coupon-val">
+                            {user.unuseCouponsCount}
+                        </div>
+                    </div>
+                </div>
+                <div className={'user-panel-c'}>
+                    <div className={'tab'}>
+                        <img src={require('../asset/image/ico_my_study.png')}/>
+                        <a href={'/learn'}>我的学习</a>
+                    </div>
+                    <div className={'tab'}>
+                        <img src={require('../asset/image/ico_integral.png')}/>
+                        <a href={'/user/integral'}>我的积分</a>
+                    </div>
+                    <div className={'tab'}>
+                        <img src={require('../asset/image/ico_coupon@2x.png')}/>
+                        <a href={'/user/coupon'}>我的优惠</a>
+                    </div>
+                    <div className={'tab'}>
+                        <img src={require('../asset/image/ico_edit1.png')}/>
+                        <a href={'/resetPassword'}>修改密码</a>
+                    </div>
+                </div>
+                <div className={'user-panel-c'}>
+                    <div className={'tab'}>
+                        <img src={require('../asset/image/ico_wordtest@2x.png')}/>
+                        <a href={'/wordtest'}>词汇量测试</a>
+                    </div>
+                    <div className={'tab'}>
+                        <img src={require('../asset/image/ico_gramar@2x.png')}/>
+                        <a href={'/tgrammar/quiz'}>核心语法测试</a>
+                    </div>
+                    <div className={'tab'}>
+                        <img src={require('../asset/image/ico_wordtest@2x.png')}/>
+                        <a href={'/tgrammar/stats/list'}>老师批改</a>
+                    </div>
+                    <div className={'tab'}>
+                        <img src={require('../asset/image/ico_quit@2x.png')}/>
+                        <a onClick={() => handleClick('quiz')}>退出</a>
+                    </div>
+                </div>
+            </div>
+            <div className={isPanel ? 'header-bg panel' : 'header-bg'}>
                 <div className="user-header">
-                    <a className={'nav-open'} />
+                    <a className={'nav-open'}/>
                     <div className="user-logo">
-                        <img src={headImg} />
+                        <img src={headImg}/>
                     </div>
                     <div className="user-info">
                         <div className="user-flex-a">
@@ -31,7 +85,7 @@ const User = ({ topicId, user, handleClick }) => {
                         </div>
                         <div className="user-flex-b">
                             {user.role_id !== '1' && (
-                                <img className="user-role" src={roleImg} />
+                                <img className="user-role" src={roleImg}/>
                             )}
                             <span className="user-phone">{user.phone}</span>
                         </div>
@@ -48,10 +102,10 @@ const User = ({ topicId, user, handleClick }) => {
                         </span>
                     </div>
 
-                    <a className="nav-home" href={'/'} />
+                    <a className="nav-home" href={'/'}/>
                 </div>
             </div>
-            <div className={'header-tab-bg'}>
+            <div className={isPanel ? 'header-tab-bg panel' : 'header-tab-bg'}>
                 <Tabs className="user-tabs" selectedId={topicId}>
                     <TabItems className={'tab-items container'}>
                         {/* <TabItem id={'order'} className="tab-item tab-order" indicator={user.unpayOrdersCount}
@@ -105,10 +159,10 @@ const User = ({ topicId, user, handleClick }) => {
                     </TabItems>
                     <TabPanels>
                         <TabPanel id={'integral'}>
-                            <PointContainer />
+                            <PointContainer/>
                         </TabPanel>
                         <TabPanel id={'coupon'}>
-                            <CouponContainer />
+                            <CouponContainer/>
                         </TabPanel>
                     </TabPanels>
                 </Tabs>

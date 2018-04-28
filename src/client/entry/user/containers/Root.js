@@ -10,12 +10,12 @@ class Root extends Component {
     constructor(props) {
         super(props);
         this.topicId = props.match.params.topicId || 'integral';
+        this.isPanel = !props.match.params.topicId;
     }
 
     componentDidMount() {
-        // 移动端不加载用户信息
-        if (uaUtil.AndroidMobile() || uaUtil.iPhone()) return;
-
+        // 移动端且不是用户面板时不加载用户信息
+        if ((uaUtil.AndroidMobile() || uaUtil.iPhone()) && !this.isPanel) return;
         this.props.actions.loadUserInfo();
     }
 
@@ -59,6 +59,7 @@ class Root extends Component {
         return (
             <User
                 topicId={this.topicId}
+                isPanel={this.isPanel}
                 user={user}
                 handleClick={this.handleClick}
             />

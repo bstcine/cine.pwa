@@ -39,17 +39,36 @@ let cCourseAction = {
         });
     },
 
+    _getCourseSet: function(courseID, courseSetID) {
+        // if (!courseSetID) return Promise.resolve(null);
+        let param = {
+            cid: courseID,
+            set_id: courseSetID,
+        };
+        return BaseService.fetchData(Api.APIURL_Content_Course_Set, param).then(
+            ([err, result]) => {
+                if (err) return Promise.reject(err);
+                return Promise.resolve(result);
+            }
+        );
+    },
+
     initCourseDetail: async function(courseID) {
-        let courseProm = this._getCourseDetail(courseID);
+        let courseProm = cCourseAction._getCourseDetail(courseID);
         let userProm = userAction.getUserInfo();
         let [course, user] = await Promise.all([courseProm, userProm]);
 
         return { course, user };
     },
 
-    loadingComments: async function(courseID) {
-        let comments = await cCourseAction._getCourseComments(courseID);
-        return comments;
+    loadSetAndComments: async function(courseID, courseSetID) {
+        let setProm = cCourseAction._getCourseSet(courseID, courseSetID);
+        let commentProm = cCourseAction._getCourseComments(courseID);
+        let [set, comments] = await Promise.all([setProm, commentProm]);
+        // alert(JSON.stringify(set.data));
+        let courseSet = set.data && set.data.length > 0 ? set.data[0] : null;
+
+        return { courseSet, comments };
     },
 
     logAccessMonitor: function() {

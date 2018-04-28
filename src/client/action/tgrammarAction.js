@@ -185,7 +185,10 @@ export const submitAnswer = () => (dispatch, getState) => {
                     : 0;
             if (question.isCorrect) {
                 answer.select_score = answer.is_select_correct ? 2 : 0;
-                delete answer.text_value;
+                if (answer.select_value === 1) {
+                    // 选项正确且学生选择正确，无需保存 text_value
+                    delete answer.text_value;
+                }
             } else {
                 answer.select_score = answer.is_select_correct ? 1 : 0;
             }

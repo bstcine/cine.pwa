@@ -181,6 +181,7 @@
             display: block;
             padding: 0.5em 2em;
             line-height: 24px;
+            cursor: pointer;
           }
           &:last-child {
             margin-right: 0;
@@ -331,27 +332,48 @@
   }
 
   .submit {
-    padding-top: 56px;
-    padding-bottom: 100px;
-    border-top: 4px solid @blue;
+    padding: 25px 10px;
+    border: 1px solid #093d8a;
     text-align: center;
+    position: fixed;
+    bottom: 60px;
+    background: #fff;
+    right: 20px;
+    width: 130px;
+    overflow: hidden;
+    box-shadow: 2px 3px 7px 0px rgba(0, 0, 0, 0.4);
+    > button {
+      margin-bottom: 20px;
+    }
     button {
-      width: 300px;
-      height: 64px;
-      color: #fff;
-      font-size: 24px;
-      text-align: center;
+      width: 100%;
+      padding: 0.5em 1em;
+      line-height: 1.6;
+      color: @black;
+      font-size: 14px;
+      border-radius: 4px;
+      background-color: #fff;
+      text-align: left;
+      i {
+        vertical-align: middle;
+        font-size: 14px;
+      }
+      &:active,
+      &:hover {
+        opacity: 0.9;
+      }
     }
     button.btn-blue {
       background-color: #0a3069;
       box-shadow: 2px 3px 7px 0px rgba(9, 61, 138, 0.16);
       border: 1px solid #0a3069;
+      color: #fff;
     }
     button.btn-red {
       background-color: #b70e2e;
       box-shadow: 2px 3px 7px 0px rgba(9, 61, 138, 0.16);
       border: 1px solid #b70e2e;
-      margin-right: 20px;
+      color: #fff;
     }
   }
 }

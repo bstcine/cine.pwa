@@ -6,13 +6,20 @@ import Format11ReadingDescContainer from './Format11ReadingDescContainer';
 import Format3CorrectContainer from '../container/Format3CorrectContainer';
 
 const mapStateToProps = (state, ownProps) => {
-    const { questionIds, questionsById, answersById, visibilityFilter } = state;
+    const {
+        questionIds,
+        questionsById,
+        answersById,
+        visibilityFilter,
+        operation,
+    } = state;
     return {
         questionIds: filterQuestions(
             questionIds,
             questionsById,
             answersById,
-            visibilityFilter
+            visibilityFilter,
+            operation
         ),
         questionsById,
     };
@@ -22,16 +29,18 @@ const filterQuestions = (
     questionIds,
     questionsById,
     answersById,
-    visibilityFilter
+    visibilityFilter,
+    operation
 ) => {
-    if (visibilityFilter === 'ALL') {
+    if (operation.isStudent || visibilityFilter === 'ALL') {
         return questionIds;
     } else {
         return questionIds.filter(id => {
             const question = questionsById[id];
             if (question.format === 3) {
                 const answer = answersById[id];
-                // 系统就能自动判分的，默认不用展示给老师
+                if (!answer) return false;
+                // 系统能自动判分的，默认不用展示给老师
                 if (question.isCorrect) {
                     return false;
                 } else {

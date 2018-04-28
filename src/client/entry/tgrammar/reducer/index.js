@@ -287,7 +287,7 @@ const timer = (state = {}, { type, payload }) => {
     }
 };
 
-const visibilityFilter = (state = 'ALL', { type, payload }) => {
+const visibilityFilter = (state = 'UMCOMPLETE', { type, payload }) => {
     switch (type) {
         case FILTER_COMPLETE_QUESTION:
             return 'UMCOMPLETE';

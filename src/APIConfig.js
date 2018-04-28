@@ -24,6 +24,7 @@ exports.APIURL_Pay_Ali_Mweb = '/pay/ali/mweb'; // 支付宝mweb支付 页面路�
 exports.APIURL_Content_Home = '/api/content/home'; // app首页
 exports.APIURL_Content_Tag_Tree = '/api/content/tag/tree'; // 标签树
 exports.APIURL_Content_Course_Detail = '/api/content/course/detail'; // 课程详情
+exports.APIURL_Content_Course_Set = '/api/content/course/set'; // 课程详情
 exports.APIURL_Content_Quiz = '/api/web/quiz/'; // 小节测试
 
 exports.APIURL_Content_Quiz_Grammar = '/api/content/quiz/grammar'; // 阅读理解测试题目

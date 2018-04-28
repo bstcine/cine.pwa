@@ -52,7 +52,7 @@ const Submit = ({
         return (
             <div className="submit">
                 <button className="btn-blue" onClick={onSubmitAnswer}>
-                    提交答案
+                    <i className="material-icons">&#xE255;</i> 提交答案
                 </button>
             </div>
         );

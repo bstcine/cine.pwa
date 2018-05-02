@@ -116,8 +116,8 @@ const User = ({topicId, isPanel, user, handleClick}) => {
             <div className={isPanel ? 'header-tab-bg panel' : 'header-tab-bg'}>
                 <Tabs className="user-tabs" selectedId={topicId}>
                     <TabItems className={'tab-items container'}>
-                        {/* <TabItem id={'order'} className="tab-item tab-order" indicator={user.unpayOrdersCount}
-                             onClick={(index, id) => handleClick(id)}>我的订单</TabItem> */}
+                        {/*onClick={(index, id) => handleClick(id)}*/}
+                        <TabItem id={'order'} className="tab-item tab-order" indicator={user.unpayOrdersCount} onTabItemClick={()=>handleClick('order')}>我的订单</TabItem>
                         <TabItem
                             className="tab-item tab-study"
                             onTabItemClick={() => handleClick('study')}>

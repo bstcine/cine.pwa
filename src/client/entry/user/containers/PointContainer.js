@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import {
     Tabs,
     TabItems,
@@ -6,9 +6,9 @@ import {
     TabPanels,
     TabPanel,
 } from '@/component/Tabs/index';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { actionUserPoint } from '@/action/userAction';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+import {actionUserPoint} from '@/action/userAction';
 
 class PointContainer extends Component {
     componentDidMount() {
@@ -16,7 +16,7 @@ class PointContainer extends Component {
     }
 
     render() {
-        let { points } = this.props;
+        let {points} = this.props;
 
         return (
             <React.Fragment>
@@ -28,6 +28,7 @@ class PointContainer extends Component {
                     <TabPanels>
                         <TabPanel>
                             <div className={'point-list'}>
+                            {points && points.rows > 0 ? <React.Fragment>
                                 <div className={'point-header'}>
                                     <div className={'point-value'}>积分</div>
                                     <div className={'point-text'}>积分明细</div>
@@ -63,6 +64,7 @@ class PointContainer extends Component {
                                         </div>
                                     );
                                 })}
+                            </React.Fragment> : <div className={'point-not-found'}>暂无数据</div>}
                             </div>
                         </TabPanel>
                         <TabPanel>

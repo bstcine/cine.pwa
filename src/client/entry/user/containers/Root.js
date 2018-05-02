@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
+import { grey400, indigo500, indigo700 } from 'material-ui/styles/colors';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { connect } from 'react-redux';
 import { actionUserInfo } from '@/action/userAction';
 import User from '@/entry/user/component/User';
@@ -10,12 +13,12 @@ class Root extends Component {
     constructor(props) {
         super(props);
         this.topicId = props.match.params.topicId || 'integral';
+        this.isPanel = !props.match.params.topicId;
     }
 
     componentDidMount() {
-        // 移动端不加载用户信息
-        if (uaUtil.AndroidMobile() || uaUtil.iPhone()) return;
-
+        // 移动端且不是用户面板时不加载用户信息
+        if ((uaUtil.AndroidMobile() || uaUtil.iPhone()) && !this.isPanel) return;
         this.props.actions.loadUserInfo();
     }
 
@@ -25,23 +28,32 @@ class Root extends Component {
                 location.href = '/learn';
                 break;
             case 'integral':
-                this.props.history.replace('/user/integral');
+                if (uaUtil.AndroidMobile() || uaUtil.iPhone()) {
+                    this.props.history.push('/user/integral');
+                } else {
+                    this.props.history.replace('/user/integral');
+                }
                 break;
             case 'coupon':
-                this.props.history.replace('/user/coupon');
+                if (uaUtil.AndroidMobile() || uaUtil.iPhone()) {
+                    this.props.history.push('/user/coupon');
+                } else {
+                    this.props.history.replace('/user/coupon');
+                }
                 break;
             case 'wordtest':
                 window.open('/vocabtest');
-                // location.href = '/vocabtest';
                 break;
             case 'tgrammar':
-                // location.href = '/tgrammar/quiz';
                 window.open('/tgrammar/quiz');
                 break;
             case 'tgrammar-teacher':
-                // location.href = '/tgrammar/stats/list';
                 window.open('/tgrammar/stats/list');
                 break;
+            /* case 'address':
+                let localUrl = encodeURIComponent(location.href);
+                location.href = `/address?case=1&redirect=${localUrl}`;
+                break; */
             case 'password':
                 location.href = '/resetPassword';
                 break;
@@ -56,12 +68,24 @@ class Root extends Component {
 
     render() {
         const { user } = this.props;
+
+        const muiTheme = getMuiTheme({
+            palette: {
+                primary1Color: indigo500,
+                primary2Color: indigo700,
+                primary3Color: grey400,
+            },
+        });
+
         return (
-            <User
-                topicId={this.topicId}
-                user={user}
-                handleClick={this.handleClick}
-            />
+            <MuiThemeProvider muiTheme={muiTheme}>
+                <User
+                    topicId={this.topicId}
+                    isPanel={this.isPanel}
+                    user={user}
+                    handleClick={this.handleClick}
+                />
+            </MuiThemeProvider>
         );
     }
 }

@@ -1,5 +1,136 @@
 @import '~asset/style/_cine.less';
 
+.header-panel {
+  display: none;
+  &.panel {
+    display: block;
+  }
+
+  .user-panel-a{
+    background: #014292;
+    height: 2.21rem;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+
+    img{
+      width: 1.21rem;
+      height: 1.21rem;
+      border-radius: 50px;
+    }
+
+    label{
+      font-family: PingFangSC-Medium;
+      font-size: 0.3rem;
+      color: #ffffff;
+    }
+  }
+
+  .user-panel-b{
+    height: 1rem;
+    background: #ffffff;
+    display: flex;
+
+    .a{
+      flex-grow: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      .point-hint{
+        font-family: PingFangSC-Regular;
+	      font-size: 0.24rem;
+	      color: #3d3e3f;
+      }
+      .point-val{
+        margin-left: 0.17rem;
+        font-family: PPingFang-SC-Bold;
+	      font-size: 0.36rem;
+	      color: #f54500;
+      }
+    }
+
+    .b {
+      flex-grow: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      .coupon-hint{
+        font-family: PingFangSC-Regular;
+	      font-size: 0.24rem;
+	      color: #3d3e3f;
+      }
+      .coupon-val{
+        margin-left: 0.17rem;
+        font-family: PPingFang-SC-Bold;
+	      font-size: 0.36rem;
+	      color: #f54500;
+      }
+    }
+  }
+
+  .user-panel-c{
+    margin-top: .17rem;
+    height: 1.65rem;
+    background: #ffffff;
+    display: flex;
+
+    & img{
+      width: .42rem;
+      height: .39rem;
+    }
+
+    & a {
+      color: #3d3e3f;
+      margin-top: .29rem;
+    }
+    & a:active{
+      color: #3d3e3f;
+    }
+
+    .tab {
+      font-family: PingFangSC-Regular;
+      font-size: .24rem;
+      color: #3d3e3f;
+      width: 25%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      .gray{
+        -webkit-filter: grayscale(100%);
+        -moz-filter: grayscale(100%);
+        -ms-filter: grayscale(100%);
+        -o-filter: grayscale(100%);
+        filter: grayscale(100%);
+        filter: gray;
+      }
+
+      .tab-indicator {
+        width: 0.33rem;
+        height: 0.33rem;
+        background-color: #fe682d;
+        -moz-border-radius: 50px;
+        -webkit-border-radius: 50px;
+        border-radius: 50px;
+
+        margin-top: -0.15rem;
+        margin-left: 0.1rem;
+        margin-right: -0.4rem;
+
+        font-family: Helvetica;
+        font-size: 11px;
+        color: #ffffff;
+        text-align: center;
+        line-height: 0.33rem;
+      }
+
+    }
+  }
+}
+
 .user-header {
   position: relative;
   background-color: #014292;
@@ -10,23 +141,23 @@
     display: block;
     margin-left: 0.35rem;
     margin-top: 0.39rem;
-    width: .34rem;
-    height: .4rem;
+    width: 0.34rem;
+    height: 0.4rem;
     float: left;
     background: url('../image/ico_mine@2x.png') no-repeat;
-    background-size: .34rem .4rem;
+    background-size: 0.34rem 0.4rem;
   }
 
   .nav-home {
     float: right;
-    margin-top: .40rem;
-    margin-right: .41rem;
+    margin-top: 0.4rem;
+    margin-right: 0.41rem;
 
-    width: .39rem;
-    height: .39rem;
+    width: 0.39rem;
+    height: 0.39rem;
 
     background: url('../image/ico_bst_home.png') no-repeat;
-    background-size: .39rem .39rem;
+    background-size: 0.39rem 0.39rem;
   }
 
   .user-logo {
@@ -61,15 +192,35 @@
   }
 }
 
-@media @media-up-sm {
+.header-bg {
+  &.panel {
+    display: none;
+  }
+}
 
-  .header-bg{
+.header-tab-bg {
+  &.panel {
+    display: none;
+  }
+}
+
+@media @media-up-sm {
+  .header-panel {
+    &.panel {
+      display: none;
+    }
+  }
+
+  .header-bg {
     background-color: #014292;
+    &.panel {
+      display: block;
+    }
   }
 
   .user-header {
     height: 2.04rem;
-    width: 18.80rem;
+    width: 18.8rem;
     margin: 0 auto;
 
     .nav-open {
@@ -78,14 +229,14 @@
 
     .nav-home {
       float: right;
-      margin-top: .87rem;
-      margin-right: .1rem;
+      margin-top: 0.87rem;
+      margin-right: 0.1rem;
 
-      width: .39rem;
-      height: .39rem;
+      width: 0.39rem;
+      height: 0.39rem;
 
       background: url('../image/ico_bst_home.png') no-repeat;
-      background-size: .39rem .39rem;
+      background-size: 0.39rem 0.39rem;
     }
 
     .user-logo {
@@ -126,11 +277,11 @@
 
         .user-edit {
           margin-left: 0.17rem;
-          width: .24rem;
-          height: .24rem;
+          width: 0.24rem;
+          height: 0.24rem;
 
           background: url('../image/ico_edit.png') no-repeat;
-          background-size: .24rem .24rem;
+          background-size: 0.24rem 0.24rem;
         }
       }
 
@@ -141,8 +292,8 @@
         margin-top: 0.14rem;
 
         .user-role {
-          width: .86rem;
-          height: .30rem;
+          width: 0.86rem;
+          height: 0.3rem;
         }
 
         .user-phone {
@@ -153,7 +304,6 @@
           margin-left: 0.11rem;
         }
       }
-
     }
 
     .user-point {
@@ -199,28 +349,32 @@
     }
   }
 
-  .header-tab-bg{
+  .header-tab-bg {
     background: #ffffff;
+    &.panel {
+      display: block;
+    }
   }
 
   .user-tabs {
     .tab-items {
-      width: 18.80rem;
+      width: 18.8rem;
       margin: 0 auto;
 
       display: flex;
-      background-color: #FFFFFF;
+      flex-wrap: wrap;
+      background-color: #ffffff;
       //padding-left: 0.85rem;
       .tab-item {
         font-family: PingFangSC-Regular;
         font-size: 14px;
-        margin-right: .5rem;
+        margin-right: 0.5rem;
         display: flex;
 
         & a {
-          min-width: 1.40rem;
+          min-width: 1.4rem;
           display: inline-block;
-          padding: .57rem .0rem .57rem .56rem;
+          padding: 0.57rem 0rem 0.57rem 0.56rem;
           text-decoration: none;
           color: #3d3e3f;
           position: relative;
@@ -233,7 +387,7 @@
             bottom: 0;
             left: 0;
             width: 100%;
-            border-bottom: .07rem solid #014292;
+            border-bottom: 0.07rem solid #014292;
           }
         }
         &:last-child {
@@ -248,55 +402,82 @@
           -webkit-border-radius: 50px;
           border-radius: 50px;
 
-          margin-top: .4rem;
-          margin-left: .1rem;
+          margin-top: 0.4rem;
+          margin-left: 0.1rem;
 
           font-family: Helvetica;
           font-size: 11px;
           color: #ffffff;
           text-align: center;
-          line-height: .33rem;
+          line-height: 0.33rem;
         }
       }
 
       .tab-order {
         background: url(../image/ico_order.png) no-repeat left;
         background-size: 0.41rem 0.42rem;
+
+        -webkit-filter: grayscale(100%);
+        -moz-filter: grayscale(100%);
+        -ms-filter: grayscale(100%);
+        -o-filter: grayscale(100%);
+        filter: grayscale(100%);
+        filter: gray;
+
+        a{
+          color:grey;
+        }
       }
-    
+
       .tab-study {
         background: url(../image/ico_my_study.png) no-repeat left;
-        background-size: .45rem .41rem;
+        background-size: 0.45rem 0.41rem;
       }
-    
+
       .tab-integral {
         background: url(../image/ico_integral.png) no-repeat left;
-        background-size: .45rem .45rem;
+        background-size: 0.45rem 0.45rem;
       }
-    
+
       .tab-coupon {
         background: url(../image/ico_coupon.png) no-repeat left;
-        background-size: .49rem .47rem;
+        background-size: 0.49rem 0.47rem;
       }
-    
+
       .tab-wordtest {
         background: url(../image/ico_wordtest.png) no-repeat left;
-        background-size: .41rem .45rem;
+        background-size: 0.41rem 0.45rem;
       }
-    
+
       .tab-grammar {
         background: url(../image/ico_grammar.png) no-repeat left;
-        background-size: .41rem .43rem;
+        background-size: 0.41rem 0.43rem;
       }
-    
+
+      .tab-address{
+        background: url(../image/ico_edit1.png) no-repeat left;
+        background-size: 0.37rem 0.39rem;
+
+        -webkit-filter: grayscale(100%);
+        -moz-filter: grayscale(100%);
+        -ms-filter: grayscale(100%);
+        -o-filter: grayscale(100%);
+        filter: grayscale(100%);
+        filter: gray;
+
+        a{
+          color:grey;
+        }
+      }
+
       .tab-password {
         background: url(../image/ico_edit1.png) no-repeat left;
-        background-size: .37rem .39rem;
+        background-size: 0.37rem 0.39rem;
       }
-    
+
       .tab-quit {
         background: url(../image/ico_quit.png) no-repeat left;
-        background-size: .36rem .34rem;
+        background-size: 0.36rem 0.34rem;
       }
     }
 
@@ -307,10 +488,10 @@
         display: none;
         min-height: 10rem;
 
-        width: 18.80rem;
+        width: 18.8rem;
         margin: 0 auto;
 
-        padding-top: .6rem;
+        padding-top: 0.6rem;
 
         &.active {
           display: block;
@@ -318,5 +499,4 @@
       }
     }
   }
-
 }

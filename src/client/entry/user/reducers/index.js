@@ -4,7 +4,7 @@ import { Action_UI, Action_UC, Action_UP } from '@/constant/actionTypeUser';
 const user = (
     state = {
         nickname: '',
-        role_id: '1',
+        role_id: '3',
         phone: '',
         point: 0,
         unuseCouponsCount: 0,

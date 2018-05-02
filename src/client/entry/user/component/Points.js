@@ -1,5 +1,5 @@
 import React from 'react';
-const PointList = ({ points, ...props }) => {
+const Points = ({ points, ...props }) => {
     let renderPoints;
     if (points && points.rows && points.rows.length) {
         renderPoints = (
@@ -40,4 +40,4 @@ const PointList = ({ points, ...props }) => {
     return <div className="point-list">{renderPoints}</div>;
 };
 
-export default PointList;
+export default Points;

@@ -9,7 +9,7 @@ import {
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { actionUserPoint } from '@/action/userAction';
-import PointList from '@/entry/user/component/PointList';
+import Points from '@/entry/user/component/Points';
 
 class PointContainer extends Component {
     componentDidMount() {
@@ -28,7 +28,7 @@ class PointContainer extends Component {
                     </TabItems>
                     <TabPanels>
                         <TabPanel>
-                            <PointList points={points} />
+                            <Points points={points} />
                         </TabPanel>
                         <TabPanel>
                             <div

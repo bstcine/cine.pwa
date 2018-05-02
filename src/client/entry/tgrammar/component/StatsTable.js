@@ -16,7 +16,7 @@ const formatTime = time => {
     }
 };
 
-const Operation = ({ item }) => {
+const OperationButton = ({ item }) => {
     const UNCHECK = '1';
     const CHECKING = '2';
     const CHECKED = '3';
@@ -97,7 +97,7 @@ const StatsTable = ({ title, list = [], onClick }) => {
                                     </span>
                                 </td>
                                 <td>
-                                    <Operation item={item} />
+                                    <OperationButton item={item} />
                                 </td>
                             </tr>
                         );

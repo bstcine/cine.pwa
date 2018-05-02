@@ -4,13 +4,13 @@ import {
     saveQuestion3SelectAnswer,
     saveQuestion3TextAnswer,
     saveQuestion3FeedbackSelectAnswer,
-    saveQuestion3FeedbackTextAnswer,
+    saveFeedbackText,
 } from '@/action/tgrammarAction';
 
 const mapStateToProps = (state, ownProps) => {
-    let { answersById, questionsById, operation } = state;
+    let { answersById, questionsById, currentQuizState } = state;
     let id = ownProps.item.id;
-    let prop = { item: questionsById[id] };
+    let prop = { item: questionsById[id], currentQuizState };
     let answer = answersById[id];
     if (answer) {
         prop.select_value = answer.select_value;
@@ -21,7 +21,6 @@ const mapStateToProps = (state, ownProps) => {
         prop.text_score = answer.text_score;
         prop.feedback = answer.feedback;
     }
-    prop.operation = operation;
     return prop;
 };
 
@@ -52,7 +51,7 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     },
     onFeedbackTextChange: e => {
         dispatch(
-            saveQuestion3FeedbackTextAnswer({
+            saveFeedbackText({
                 id: ownProps.item.id,
                 feedback: e.target.value,
             })

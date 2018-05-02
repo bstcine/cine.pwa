@@ -2,25 +2,25 @@ import { connect } from 'react-redux';
 import Format1ChooseOne from '../component/Format1ChooseOne';
 import {
     saveQuestion1SelectAnswer,
-    saveQuestion3FeedbackSelectAnswer,
+    saveFeedbackText,
 } from '@/action/tgrammarAction';
 
 const mapStateToProps = (state, ownProps) => {
-    let { answersById, questionsById, operation } = state;
+    let { answersById, questionsById, currentQuizState } = state;
     let id = ownProps.item.id;
-    let prop = { item: questionsById[id] };
+    let prop = { item: questionsById[id], currentQuizState };
     let answer = answersById[id];
     if (answer) {
         prop.select_value = answer.select_value;
         prop.is_select_correct = answer.is_select_correct;
+        prop.select_score = answer.select_score;
         prop.feedback = answer.feedback;
     }
-    prop.operation = operation;
     return prop;
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-    onChange: e => {
+    onSelectChange: e => {
         dispatch(
             saveQuestion1SelectAnswer({
                 id: ownProps.item.id,
@@ -28,11 +28,11 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
             })
         );
     },
-    onFeedbackSelectChange: e => {
+    onFeedbackTextChange: e => {
         dispatch(
-            saveQuestion3FeedbackSelectAnswer({
+            saveFeedbackText({
                 id: ownProps.item.id,
-                is_select_correct: parseInt(e.target.value, 10),
+                feedback: e.target.value,
             })
         );
     },

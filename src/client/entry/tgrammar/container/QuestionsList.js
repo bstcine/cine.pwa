@@ -2,24 +2,25 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Format10CommonDescContainer from './Format10CommonDescContainer';
 import Format11ReadingDescContainer from './Format11ReadingDescContainer';
-// import Question1ChooseOneContainer from '../container/Question1ChooseOneContainer';
+import Format1ChooseOneContainer from '../container/Format1ChooseOneContainer';
 import Format3CorrectContainer from '../container/Format3CorrectContainer';
+import { CurrentQuizState } from '@/action/tgrammarAction';
 
 const mapStateToProps = (state, ownProps) => {
     const {
         questionIds,
         questionsById,
         answersById,
-        visibilityFilter,
-        operation,
+        questionsFilter,
+        currentQuizState,
     } = state;
     return {
         questionIds: filterQuestions(
             questionIds,
             questionsById,
             answersById,
-            visibilityFilter,
-            operation
+            questionsFilter,
+            currentQuizState
         ),
         questionsById,
     };
@@ -29,10 +30,13 @@ const filterQuestions = (
     questionIds,
     questionsById,
     answersById,
-    visibilityFilter,
-    operation
+    questionsFilter,
+    currentQuizState
 ) => {
-    if (operation.isStudent || visibilityFilter === 'ALL') {
+    if (
+        currentQuizState !== CurrentQuizState.CHECKING ||
+        questionsFilter === 'ALL'
+    ) {
         return questionIds;
     } else {
         return questionIds.filter(id => {
@@ -55,20 +59,20 @@ const filterQuestions = (
     }
 };
 
-const QuestionItems = ({ questionIds, questionsById }) => {
-    console.log('QuestionItems render');
+const QuestionsList = ({ questionIds, questionsById }) => {
+    console.log('QuestionsList render');
     return (
         <div className="questionitems">
             {questionIds.map(id => {
                 let item = questionsById[id];
                 switch (item.format) {
-                    // case 1:
-                    //     return (
-                    //         <Question1ChooseOneContainer
-                    //             key={item.id}
-                    //             item={item}
-                    //         />
-                    //     );
+                    case 1:
+                        return (
+                            <Format1ChooseOneContainer
+                                key={item.id}
+                                item={item}
+                            />
+                        );
                     case 3:
                         return (
                             <Format3CorrectContainer
@@ -98,4 +102,4 @@ const QuestionItems = ({ questionIds, questionsById }) => {
     );
 };
 
-export default connect(mapStateToProps)(QuestionItems);
+export default connect(mapStateToProps)(QuestionsList);

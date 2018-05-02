@@ -1,20 +1,20 @@
 import { fetchData } from '@/service/base';
-import Api, { APIURL_Stats_Quiz_Reset } from '@/../APIConfig';
-import storeUtil from '@/util/storeUtil';
-import { ANSWERING, WAITING4CHECK, CHECKING } from '@/constant/statsQuizStatus';
 import {
-    SAVE_USER,
-    UPDATE_OPERATION,
+    APIURL_Stats_Quiz_Reset,
+    APIURL_Content_Quiz_Grammar,
+    APIURL_Stats_Quiz_Save,
+    APIURL_Stats_Quiz_Update,
+    APIURL_Stats_Quiz_List,
+} from '@/../APIConfig';
+import storeUtil from '@/util/storeUtil';
+import {
     REQUEST_QUIZ_DATA,
     RECEIVE_QUIZ_DATA,
-    REQUEST_STATS_QUIZ_DATA,
-    RECEIVE_STATS_QUIZ_DATA,
     SAVE_QUESTION1_SELECT_ANSWER,
-    SAVE_QUESTION1_FEEDBACK_SELECT_ANSWER,
     SAVE_QUESTION3_SELECT_ANSWER,
     SAVE_QUESTION3_TEXT_ANSWER,
     SAVE_QUESTION3_FEEDBACK_SELECT_ANSWER,
-    SAVE_QUESTION3_FEEDBACK_TEXT_ANSWER,
+    SAVE_FEEDBACK_TEXT,
     UPLOADING_QUESTIONS,
     UPLOADED_QUESTIONS,
     CLOSE_TIP_MODAL,
@@ -29,33 +29,67 @@ import {
     NETWORK_ERROR_TIMEOUT,
     RESTORE_LOCAL_ANSWERS,
     RECORD_TIME,
-    FILTER_COMPLETE_QUESTION,
+    SHOW_UNCOMPLETED_QUESTION,
     SHOW_ALL_QUESTION,
+    UPDATE_ANSWERS,
 } from '@/constant/actionTypeTGrammar';
-import { STUDENT, TEACHER, ADMINISTRATOR } from '@/constant/roleId';
 
-export const saveUser = user => ({
-    type: SAVE_USER,
-    payload: user,
-});
+/**
+ * 当前试卷的状态
+ * 该状态与 stats_quiz 表中的状态有所区别，本状态与当前登录角色有一定关系
+ */
+export const CurrentQuizState = {
+    ANSWERING: 'ANSWERING',
+    WAITING4CHECK: 'WAITING4CHECK',
+    CHECKING: 'CHECKING',
+    REVIEWING: 'REVIEWING',
+};
+
+export const RoleID = {
+    ADMINISTRATOR: '1',
+    TEACHER: '2',
+    STUDENT: '3',
+    AGENT: '4',
+};
+
+export const StatsQuizStatus = {
+    /**
+     * 0:答题中
+     */
+    ANSWERING: '0',
+    /**
+     * 1:待批改
+     */
+    WAITING4CHECK: '1',
+    /**
+     * 2:批改中
+     */
+    CHECKING: '2',
+    /**
+     * 3:已批改
+     */
+    CHECKED: '3',
+};
 
 export const requestQuizData = () => ({
     type: REQUEST_QUIZ_DATA,
 });
 
 export const receiveQuizData = ({
-    id,
-    name,
-    question_count,
-    data: questions,
+    user,
+    quiz,
+    statsQuiz,
+    statsQuizDetail,
+    currentQuizState,
 }) => {
     return {
         type: RECEIVE_QUIZ_DATA,
         payload: {
-            id,
-            name,
-            question_count,
-            questions,
+            user,
+            quiz,
+            statsQuiz,
+            statsQuizDetail,
+            currentQuizState,
         },
     };
 };
@@ -63,26 +97,39 @@ export const receiveQuizData = ({
 /**
  * 题目数据请求 & 答题记录请求
  */
-export const fetchQuizData = ({ stats_quiz_id }) => async dispatch => {
+export const fetchQuizData = ({
+    quiz_id,
+    stats_quiz_id,
+    cmd,
+}) => async dispatch => {
     dispatch(requestQuizData());
-    let [err, result] = await fetchData(Api.APIURL_Content_Quiz_Grammar);
+    let [err, result] = await fetchData(APIURL_Content_Quiz_Grammar, {
+        quiz_id,
+        stats_quiz_id,
+    });
     if (err) return dispatch(networkError(err));
-    let { user, quiz, lastestStatsQuiz } = result;
-    let lastest_stats_quiz_id = null;
-    if (lastestStatsQuiz) {
-        lastest_stats_quiz_id = lastestStatsQuiz.id;
-    }
+    const { user, quiz, statsQuiz, statsQuizDetail } = result;
+    quizDataFix(quiz.data);
     if (
-        (user.role_id === ADMINISTRATOR || user.role_id === TEACHER) &&
-        !stats_quiz_id
+        (user.role_id === RoleID.ADMINISTRATOR ||
+            user.role_id === RoleID.TEACHER) &&
+        !statsQuiz
     ) {
         location.href = '/tgrammar/stats/list';
         return;
     }
-    dispatch(saveUser(user));
-    quiz.data = quizDataFix(quiz.data);
-    dispatch(receiveQuizData(quiz));
-    if (user.role_id === STUDENT && !stats_quiz_id && !lastest_stats_quiz_id) {
+    const currentQuizState = getCurrentQuizState(user, statsQuiz, cmd);
+    dispatch(
+        receiveQuizData({
+            user,
+            quiz,
+            statsQuiz,
+            statsQuizDetail,
+            currentQuizState,
+        })
+    );
+
+    if (currentQuizState === CurrentQuizState.ANSWERING) {
         let localAnswer = hasLocalAnswers(quiz, user);
         if (localAnswer) {
             if (confirm('检测到有未提交的答题记录，是否恢复？')) {
@@ -92,19 +139,62 @@ export const fetchQuizData = ({ stats_quiz_id }) => async dispatch => {
             }
         }
         dispatch(recordTime());
-    }
-    if (stats_quiz_id || lastest_stats_quiz_id) {
-        dispatch(
-            fetchStatQuiz({
-                stats_quiz_id: stats_quiz_id || lastest_stats_quiz_id,
-                user,
-            })
-        );
-    } else {
-        dispatch(updateOperation({ user }));
+    } else if (currentQuizState === CurrentQuizState.WAITING4CHECK) {
+        dispatch(openTipModal({ text: '当前老师正在批改中…，请稍候查看结果' }));
+    } else if (currentQuizState === CurrentQuizState.CHECKING) {
+        dispatch(showDefaultFeedback());
     }
 };
 
+/**
+ * 当前测试试卷的状态，不同的角色不同的答题记录对应不同的状态
+ */
+const getCurrentQuizState = (user, statsQuiz, cmd) => {
+    if (user.role_id === RoleID.STUDENT) {
+        if (statsQuiz) {
+            if (statsQuiz.status === StatsQuizStatus.CHECKED) {
+                return CurrentQuizState.REVIEWING;
+            } else {
+                return CurrentQuizState.WAITING4CHECK;
+            }
+        } else {
+            return CurrentQuizState.ANSWERING;
+        }
+    }
+    if (user.role_id === RoleID.TEACHER) {
+        if (statsQuiz) {
+            if (cmd === 'check') {
+                return CurrentQuizState.CHECKING;
+            } else {
+                return CurrentQuizState.REVIEWING;
+            }
+        }
+    }
+    return CurrentQuizState.ANSWERING;
+};
+
+/**
+ * 老师在批改的时候显示出默认提示
+ */
+const showDefaultFeedback = () => (dispatch, getState) => {
+    let { questionsById, answersById } = getState();
+    for (let question_id in answersById) {
+        if (answersById.hasOwnProperty(question_id)) {
+            let answer = answersById[question_id];
+            if (!answer.feedback) answer.feedback = questionsById[question_id].feedback;
+        }
+    }
+    dispatch(updateAnswers(answersById));
+};
+
+const updateAnswers = answersById => ({
+    type: UPDATE_ANSWERS,
+    payload: answersById,
+});
+
+/**
+ * 题号格式化 & fix api 不合理字段命名
+ */
 const quizDataFix = data => {
     let no = 0;
     data.forEach(question => {
@@ -113,7 +203,6 @@ const quizDataFix = data => {
             question.no = no;
         }
         if (question.answers) {
-            // 后端 api 选项字段命名不合理，前端 fix
             question.options = question.answers.map((item, index) => {
                 item.value = index;
                 return item;
@@ -121,28 +210,6 @@ const quizDataFix = data => {
             delete question.answers;
         }
     });
-    return data;
-};
-
-const fetchStatQuiz = ({ stats_quiz_id, user }) => async (dispatch, getState) => {
-    let { questionsById } = getState();
-    dispatch(requestStatsQuizData());
-    let [err, result] = await fetchData(Api.APIURL_Stats_Quiz_Detail, {
-        cid: stats_quiz_id,
-    });
-    if (err) return dispatch(networkError(err));
-    let { statsQuiz, statsQuizDetail } = result;
-    if (
-        user.role_id === STUDENT &&
-        (statsQuiz.status === WAITING4CHECK || statsQuiz.status === CHECKING)
-    ) {
-        dispatch(openTipModal({ text: '当前老师正在批改中…，请稍候查看结果' }));
-    }
-    statsQuizDetail.forEach(item => {
-        if (user.role_id === TEACHER && !item.feedback) item.feedback = questionsById[item.question_id].feedback;
-    });
-    dispatch(receiveStatsQuizData({ statsQuiz, statsQuizDetail }));
-    dispatch(updateOperation({ user, statsQuiz }));
 };
 
 /**
@@ -176,31 +243,16 @@ export const submitAnswer = () => (dispatch, getState) => {
     let answers = [];
     questionIds.forEach(questionId => {
         let question = questionsById[questionId];
-        if (question.format === 3) {
-            let answer = answersById[questionId] || { question_id: questionId };
-            answer.is_select_correct =
-                (question.isCorrect && answer.select_value === 1) ||
-                (!question.isCorrect && answer.select_value === 0)
-                    ? 1
-                    : 0;
-            if (question.isCorrect) {
-                answer.select_score = answer.is_select_correct ? 2 : 0;
-                if (answer.select_value === 1) {
-                    // 选项正确且学生选择正确，无需保存 text_value
-                    delete answer.text_value;
-                }
-            } else {
-                answer.select_score = answer.is_select_correct ? 1 : 0;
-            }
-            if (answer.is_select_correct === 0) {
-                answer.is_text_correct = 0;
-                answer.text_score = 0;
-            }
+        if (question.format === 1) {
+            let answer = parseFormat1Answer(question, answersById);
+            answers.push(answer);
+        } else if (question.format === 3) {
+            let answer = parseFormat3Answer(question, answersById);
             answers.push(answer);
         }
     });
     dispatch({ type: UPLOADING_QUESTIONS });
-    return fetchData(Api.APIURL_Stats_Quiz_Save, {
+    return fetchData(APIURL_Stats_Quiz_Save, {
         quiz_id: quiz.id,
         answers,
         duration,
@@ -213,6 +265,40 @@ export const submitAnswer = () => (dispatch, getState) => {
         clearLocalAnswers(quiz, user);
         location.href = `/tgrammar/quiz?stats_quiz_id=${result.statsQuiz.id}`;
     });
+};
+
+const parseFormat1Answer = (question, answersById) => {
+    let answer = answersById[question.id] || { question_id: question.id };
+    let correct_value;
+    question.options.forEach((option, i) => {
+        if (option.isCorrect) correct_value = i;
+    });
+    answer.is_select_correct = answer.select_value === correct_value ? 1 : 0;
+    answer.select_score = answer.is_select_correct ? 2 : 0;
+    return answer;
+};
+
+const parseFormat3Answer = (question, answersById) => {
+    let answer = answersById[question.id] || { question_id: question.id };
+    answer.is_select_correct =
+        (question.isCorrect && answer.select_value === 1) ||
+        (!question.isCorrect && answer.select_value === 0)
+            ? 1
+            : 0;
+    if (question.isCorrect) {
+        answer.select_score = answer.is_select_correct ? 2 : 0;
+        if (answer.select_value === 1) {
+            // 选项正确且学生选择正确，无需保存 text_value
+            delete answer.text_value;
+        }
+    } else {
+        answer.select_score = answer.is_select_correct ? 1 : 0;
+    }
+    if (answer.is_select_correct === 0) {
+        answer.is_text_correct = 0;
+        answer.text_score = 0;
+    }
+    return answer;
 };
 
 /**
@@ -228,7 +314,11 @@ export const submitCheckAnswer = (complete = true) => async (
     let score = 0;
     questionIds.forEach(questionId => {
         let question = questionsById[questionId];
-        if (question.format === 3) {
+        if (question.format === 1) {
+            let answer = answersById[questionId];
+            if (typeof answer.select_score === 'number') score += answer.select_score;
+            answers.push(answer);
+        } else if (question.format === 3) {
             let answer = answersById[questionId];
             if (typeof answer.select_score === 'number') score += answer.select_score;
             if (typeof answer.text_score === 'number') score += answer.text_score;
@@ -236,7 +326,7 @@ export const submitCheckAnswer = (complete = true) => async (
         }
     });
     dispatch({ type: UPLOADING_QUESTIONS });
-    let [err] = await fetchData(Api.APIURL_Stats_Quiz_Update, {
+    let [err] = await fetchData(APIURL_Stats_Quiz_Update, {
         stats_quiz_id: statsQuiz.id,
         answers,
         complete,
@@ -271,22 +361,10 @@ const recordTime = () => ({
 
 export const fetchStatsQuizList = () => async dispatch => {
     dispatch({ type: REQUEST_STATS_QUIZ_LIST });
-    let [err, result] = await fetchData(Api.APIURL_Stats_Quiz_List);
+    let [err, result] = await fetchData(APIURL_Stats_Quiz_List);
     if (err) return dispatch(networkError(err));
     dispatch({ type: RECEIVE_STATS_QUIZ_LIST, payload: result });
 };
-
-export const requestStatsQuizData = () => ({
-    type: REQUEST_STATS_QUIZ_DATA,
-});
-
-export const receiveStatsQuizData = ({ statsQuiz, statsQuizDetail }) => ({
-    type: RECEIVE_STATS_QUIZ_DATA,
-    payload: {
-        statsQuiz,
-        statsQuizDetail,
-    },
-});
 
 export const saveQuestion1SelectAnswer = ({ id, select_value }) => dispatch => {
     dispatch({
@@ -294,20 +372,6 @@ export const saveQuestion1SelectAnswer = ({ id, select_value }) => dispatch => {
         payload: {
             id,
             select_value,
-        },
-    });
-    dispatch(autoSaveLocalAnswers());
-};
-
-export const saveQuestion1FeedbackSelectAnswer = ({
-    id,
-    is_select_correct,
-}) => dispatch => {
-    dispatch({
-        type: SAVE_QUESTION1_FEEDBACK_SELECT_ANSWER,
-        payload: {
-            id,
-            is_select_correct,
         },
     });
     dispatch(autoSaveLocalAnswers());
@@ -335,17 +399,6 @@ export const saveQuestion3TextAnswer = ({ id, text_value }) => dispatch => {
     dispatch(autoSaveLocalAnswers());
 };
 
-export const saveQuestion3FeedbackTextAnswer = ({ id, feedback }) => dispatch => {
-    dispatch({
-        type: SAVE_QUESTION3_FEEDBACK_TEXT_ANSWER,
-        payload: {
-            id,
-            feedback,
-        },
-    });
-    dispatch(autoSaveLocalAnswers());
-};
-
 export const saveQuestion3FeedbackSelectAnswer = ({
     id,
     is_text_correct,
@@ -358,17 +411,28 @@ export const saveQuestion3FeedbackSelectAnswer = ({
             text_score: is_text_correct ? 1 : 0,
         },
     });
-    dispatch(autoSaveLocalAnswers());
 };
+
+export const saveFeedbackText = ({ id, feedback }) => dispatch => {
+    dispatch({
+        type: SAVE_FEEDBACK_TEXT,
+        payload: {
+            id,
+            feedback,
+        },
+    });
+};
+
+const getLocalAnswersKey = (quiz, user) => `${quiz.id}-${user.id}`;
 
 export const autoSaveLocalAnswers = () => (dispatch, getState) => {
     let { quiz, user, answersById } = getState();
-    const key = quiz.id + user.id;
+    const key = getLocalAnswersKey(quiz, user);
     storeUtil.set(key, answersById);
 };
 
 const hasLocalAnswers = (quiz, user) => {
-    const key = quiz.id + user.id;
+    const key = getLocalAnswersKey(quiz, user);
     return storeUtil.get(key);
 };
 
@@ -378,7 +442,7 @@ const restoreLocalAnswers = answersById => ({
 });
 
 const clearLocalAnswers = (quiz, user) => {
-    const key = quiz.id + user.id;
+    const key = getLocalAnswersKey(quiz, user);
     storeUtil.remove(key);
 };
 
@@ -394,23 +458,6 @@ export const networkError = err => dispatch => {
             payload: { text },
         });
     }, 3000);
-};
-
-/**
- * 更新当前操作状态
- */
-export const updateOperation = ({ user, statsQuiz }) => {
-    const isStudent = user && user.role_id === STUDENT;
-    const isTeacher = user && user.role_id === TEACHER;
-    const statsQuizStatus = statsQuiz ? statsQuiz.status : ANSWERING;
-    return {
-        type: UPDATE_OPERATION,
-        payload: {
-            isStudent,
-            isTeacher,
-            statsQuizStatus,
-        },
-    };
 };
 
 export const closeTipModal = () => ({
@@ -479,6 +526,6 @@ const _hasCompleteCheckQuiz = () => {
     return true;
 };
 
-export const filterCompleteQuestion = { type: FILTER_COMPLETE_QUESTION };
+export const showUncompleteQuestion = { type: SHOW_UNCOMPLETED_QUESTION };
 
 export const showAllQuestion = { type: SHOW_ALL_QUESTION };

@@ -1,18 +1,18 @@
 import { combineReducers } from 'redux';
 
 import {
-    SAVE_USER,
-    UPDATE_OPERATION,
+    // SAVE_USER,
+    // UPDATE_OPERATION,
     REQUEST_QUIZ_DATA,
     RECEIVE_QUIZ_DATA,
-    REQUEST_STATS_QUIZ_DATA,
-    RECEIVE_STATS_QUIZ_DATA,
+    // REQUEST_STATS_QUIZ_DATA,
+    // RECEIVE_STATS_QUIZ_DATA,
     SAVE_QUESTION1_SELECT_ANSWER,
     SAVE_QUESTION1_FEEDBACK_SELECT_ANSWER,
     SAVE_QUESTION3_SELECT_ANSWER,
     SAVE_QUESTION3_TEXT_ANSWER,
     SAVE_QUESTION3_FEEDBACK_SELECT_ANSWER,
-    SAVE_QUESTION3_FEEDBACK_TEXT_ANSWER,
+    SAVE_FEEDBACK_TEXT,
     UPLOADING_QUESTIONS,
     UPLOADED_QUESTIONS,
     CLOSE_TIP_MODAL,
@@ -27,22 +27,28 @@ import {
     NETWORK_ERROR_TIMEOUT,
     RESTORE_LOCAL_ANSWERS,
     RECORD_TIME,
-    FILTER_COMPLETE_QUESTION,
+    SHOW_UNCOMPLETED_QUESTION,
     SHOW_ALL_QUESTION,
+    UPDATE_ANSWERS,
 } from '@/constant/actionTypeTGrammar';
+import { CurrentQuizState } from '@/action/tgrammarAction';
 
 /**
- * 除题目外的测验数据
+ * 除题目外的试卷数据
  */
 const quiz = (state = {}, { type, payload }) => {
     switch (type) {
-        case RECEIVE_QUIZ_DATA:
+        case RECEIVE_QUIZ_DATA: {
+            const { quiz } = payload;
+            const { id, name, status, question_count } = quiz;
             return {
                 ...state,
-                id: payload.id,
-                name: payload.name,
-                question_count: payload.question_count,
+                id,
+                name,
+                status,
+                question_count,
             };
+        }
         default:
             return state;
     }
@@ -54,7 +60,8 @@ const quiz = (state = {}, { type, payload }) => {
 const questionIds = (state = [], { type, payload }) => {
     switch (type) {
         case RECEIVE_QUIZ_DATA: {
-            let newState = payload.questions.map(question => question.id);
+            const { quiz } = payload;
+            let newState = quiz.data.map(question => question.id);
             return newState;
         }
         default:
@@ -68,8 +75,9 @@ const questionIds = (state = [], { type, payload }) => {
 const questionsById = (state = {}, { type, payload }) => {
     switch (type) {
         case RECEIVE_QUIZ_DATA: {
-            let newState = { ...state };
-            payload.questions.forEach(question => {
+            let newState = {};
+            const { quiz } = payload;
+            quiz.data.forEach(question => {
                 newState[question.id] = question;
             });
             return newState;
@@ -118,7 +126,7 @@ const answersById = (state = {}, { type, payload }) => {
             answer.text_score = text_score;
             return newState;
         }
-        case SAVE_QUESTION3_FEEDBACK_TEXT_ANSWER: {
+        case SAVE_FEEDBACK_TEXT: {
             let newState = { ...state };
             let { id: question_id, feedback } = payload;
             if (!newState[question_id]) newState[question_id] = { question_id };
@@ -126,15 +134,20 @@ const answersById = (state = {}, { type, payload }) => {
             answer.feedback = feedback;
             return newState;
         }
-        case RECEIVE_STATS_QUIZ_DATA: {
-            let newState = {};
-            let answers = payload.statsQuizDetail;
-            answers.forEach(answer => {
-                newState[answer.question_id] = answer;
-            });
-            return newState;
+        case RECEIVE_QUIZ_DATA: {
+            let { statsQuiz, statsQuizDetail } = payload;
+            if (statsQuiz && statsQuizDetail && statsQuizDetail.length) {
+                let newState = {};
+                statsQuizDetail.forEach(answer => {
+                    newState[answer.question_id] = answer;
+                });
+                return newState;
+            } else {
+                return state;
+            }
         }
         case RESTORE_LOCAL_ANSWERS:
+        case UPDATE_ANSWERS:
             return { ...payload };
         default:
             return state;
@@ -146,9 +159,13 @@ const answersById = (state = {}, { type, payload }) => {
  */
 const statsQuiz = (state = null, { type, payload }) => {
     switch (type) {
-        case RECEIVE_STATS_QUIZ_DATA: {
-            let statsQuiz = payload.statsQuiz;
-            return { ...statsQuiz };
+        case RECEIVE_QUIZ_DATA: {
+            let { statsQuiz } = payload;
+            if (statsQuiz) {
+                return { ...statsQuiz };
+            } else {
+                return state;
+            }
         }
         default:
             return state;
@@ -167,14 +184,12 @@ const network = (
     switch (type) {
         case REQUEST_QUIZ_DATA:
         case UPLOADING_QUESTIONS:
-        case REQUEST_STATS_QUIZ_DATA:
         case REQUEST_STATS_QUIZ_LIST:
             return {
                 ...state,
                 pending: true,
             };
         case UPLOADED_QUESTIONS:
-        case RECEIVE_STATS_QUIZ_DATA:
             return {
                 ...state,
                 pending: false,
@@ -209,27 +224,27 @@ const network = (
 
 const user = (state = {}, { type, payload }) => {
     switch (type) {
-        case SAVE_USER:
-            return { ...payload };
+        case RECEIVE_QUIZ_DATA:
+            return { ...payload.user };
         default:
             return state;
     }
 };
 
-const operation = (
-    state = {
-        isStudent: true,
-        isTeacher: false,
-    },
-    { type, payload }
-) => {
-    switch (type) {
-        case UPDATE_OPERATION:
-            return { ...state, ...payload };
-        default:
-            return state;
-    }
-};
+// const operation = (
+//     state = {
+//         isStudent: true,
+//         isTeacher: false,
+//     },
+//     { type, payload }
+// ) => {
+//     switch (type) {
+//         case UPDATE_OPERATION:
+//             return { ...state, ...payload };
+//         default:
+//             return state;
+//     }
+// };
 
 const tipModal = (state = { isOpen: false }, { type, payload }) => {
     switch (type) {
@@ -287,12 +302,27 @@ const timer = (state = {}, { type, payload }) => {
     }
 };
 
-const visibilityFilter = (state = 'UMCOMPLETE', { type, payload }) => {
+const questionsFilter = (state = 'UNCOMPLETED', { type, payload }) => {
     switch (type) {
-        case FILTER_COMPLETE_QUESTION:
-            return 'UMCOMPLETE';
+        case SHOW_UNCOMPLETED_QUESTION:
+            return 'UNCOMPLETED';
         case SHOW_ALL_QUESTION:
             return 'ALL';
+        default:
+            return state;
+    }
+};
+
+/**
+ * 当前试卷的状态，不同的角色不同的答题记录对应不同的状态
+ */
+const currentQuizState = (
+    state = CurrentQuizState.REVIEWING,
+    { type, payload }
+) => {
+    switch (type) {
+        case RECEIVE_QUIZ_DATA:
+            return payload.currentQuizState;
         default:
             return state;
     }
@@ -301,7 +331,7 @@ const visibilityFilter = (state = 'UMCOMPLETE', { type, payload }) => {
 const rootReducer = combineReducers({
     quiz,
     user,
-    operation,
+    // operation,
     questionIds,
     questionsById,
     statsQuiz,
@@ -312,7 +342,8 @@ const rootReducer = combineReducers({
     confirmModal,
     loginModal,
     timer,
-    visibilityFilter,
+    questionsFilter,
+    currentQuizState,
 });
 
 export default rootReducer;

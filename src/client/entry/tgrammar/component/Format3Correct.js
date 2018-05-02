@@ -5,7 +5,7 @@ import QuestionText from './QuestionText';
 import FeedbackSelectScore from './FeedbackSelectScore';
 import FeedbackTextScore from './FeedbackTextScore';
 import FeedbackText from './FeedbackText';
-import { ANSWERING, CHECKED } from '@/constant/statsQuizStatus';
+import { CurrentQuizState } from '@/action/tgrammarAction';
 
 const options = [
     {
@@ -34,7 +34,7 @@ const Format3Correct = ({
     select_score,
     text_score,
     feedback,
-    operation,
+    currentQuizState,
     onSelectChange,
     onTextChange,
     onFeedbackSelectChange,
@@ -49,56 +49,50 @@ const Format3Correct = ({
 
             <QuestionSelect
                 id={id}
-                editable={
-                    operation.isStudent &&
-                    operation.statsQuizStatus === ANSWERING
-                }
+                editable={currentQuizState === CurrentQuizState.ANSWERING}
                 options={options}
                 select_value={select_value}
                 onSelectChange={onSelectChange}
             />
 
-            {(operation.isTeacher ||
-                (operation.isStudent &&
-                    operation.statsQuizStatus === CHECKED)) && (
+            {(currentQuizState === CurrentQuizState.CHECKING ||
+                currentQuizState === CurrentQuizState.REVIEWING) && (
                 <FeedbackSelectScore
-                        id={id}
-                        is_show_tip={operation.isStudent}
-                        is_select_correct={is_select_correct}
-                        select_score={select_score}
-                    />
+                    id={id}
+                    is_show_tip={
+                        currentQuizState === CurrentQuizState.REVIEWING
+                    }
+                    is_select_correct={is_select_correct}
+                    select_score={select_score}
+                />
             )}
 
             {select_value === 0 && (
                 <QuestionText
-                    editable={
-                        operation.isStudent &&
-                        operation.statsQuizStatus === ANSWERING
-                    }
+                    editable={currentQuizState === CurrentQuizState.ANSWERING}
                     text_value={text_value}
                     onTextChange={onTextChange}
                 />
             )}
 
             {text_value &&
-                (operation.isTeacher ||
-                    (operation.isStudent &&
-                        operation.statsQuizStatus === CHECKED)) && (
-                        <FeedbackTextScore
+                (currentQuizState === CurrentQuizState.CHECKING ||
+                    currentQuizState === CurrentQuizState.REVIEWING) && (
+                <FeedbackTextScore
                     id={id}
-                    editable={operation.isTeacher}
+                    editable={
+                        currentQuizState === CurrentQuizState.CHECKING
+                    }
                     is_text_correct={is_text_correct}
                     text_score={text_score}
                     onFeedbackSelectChange={onFeedbackSelectChange}
                 />
             )}
 
-            {((operation.isStudent &&
-                operation.statsQuizStatus === CHECKED &&
-                feedback) ||
-                operation.isTeacher) && (
+            {((currentQuizState === CurrentQuizState.REVIEWING && feedback) ||
+                currentQuizState === CurrentQuizState.CHECKING) && (
                 <FeedbackText
-                    editable={operation.isTeacher}
+                    editable={currentQuizState === CurrentQuizState.CHECKING}
                     feedback={feedback}
                     onFeedbackTextChange={onFeedbackTextChange}
                 />

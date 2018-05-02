@@ -6,7 +6,7 @@ import { fetchQuizData } from '@/action/tgrammarAction';
 import Header from '@/component/Header';
 import Footer from '@/component/Footer';
 import Title from '../container/Title';
-import QuestionItems from '../container/QuestionItems';
+import QuestionsList from '../container/QuestionsList';
 import Submit from '../container/Submit';
 import { getParam } from '@/util/urlUtil';
 import ToastLoading from './ToastLoading';
@@ -22,16 +22,16 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => ({
-    fetchQuizData: ({ stats_quiz_id }) => {
-        dispatch(fetchQuizData({ stats_quiz_id }));
+    fetchQuizData: ({ quiz_id, stats_quiz_id, cmd }) => {
+        dispatch(fetchQuizData({ quiz_id, stats_quiz_id, cmd }));
     },
 });
 
 class QuizPage extends Component {
     componentDidMount() {
-        let { stats_quiz_id } = getParam();
+        let { quiz_id, stats_quiz_id, cmd } = getParam();
         const { fetchQuizData } = this.props;
-        fetchQuizData({ stats_quiz_id });
+        fetchQuizData({ quiz_id, stats_quiz_id, cmd });
     }
 
     // componentWillReceiveProps(nextProps){
@@ -50,7 +50,7 @@ class QuizPage extends Component {
                         <Alert />
                         <Confirm />
                         {!init && <Title />}
-                        {!init && <QuestionItems />}
+                        {!init && <QuestionsList />}
                         {!init && <Submit />}
                         <ToastLoading />
                         <ToastError />

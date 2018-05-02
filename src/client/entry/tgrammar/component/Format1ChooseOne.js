@@ -1,85 +1,56 @@
 import React from 'react';
 import QuestionTitle from './QuestionTitle';
-import SelectOption from './SelectOption';
-import FeedbackSelect from './FeedbackSelect';
-import FeedbackCorrect from './FeedbackCorrect';
-const optionMap = { 0: 'A', 1: 'B', 2: 'C', 3: 'D', 4: 'E', 5: 'F', 6: 'G' };
+import QuestionSelect from './QuestionSelect';
+import FeedbackText from './FeedbackText';
+import FeedbackSelectScore from './FeedbackSelectScore';
+import { CurrentQuizState } from '@/action/tgrammarAction';
+
 /**
  * 1:单选题
  */
 const Format1ChooseOne = ({
     item,
     select_value,
+    select_score,
     is_select_correct,
-    operation,
-    onChange,
-    onFeedbackSelectChange,
+    feedback,
+    currentQuizState,
+    onSelectChange,
+    onFeedbackTextChange,
 }) => {
     console.log('Question1ChooseOne render');
     let { no, id, title, options } = item;
-    let correctIndex;
     return (
         <div className="questionformat questionformat1">
             <QuestionTitle no={no} title={title} />
-            <fieldset
-                className="stu-operation"
-                disabled={!operation.is_student_editable}>
-                <ul className="options">
-                    {options.map((option, i) => {
-                        if (option.isCorrect) {
-                            correctIndex = i;
-                        }
-                        return (
-                            <SelectOption
-                                key={id + i}
-                                index={i}
-                                name={'qid' + id}
-                                value={option.value}
-                                onChange={onChange}
-                                content={option.content}
-                                checked={select_value === option.value}
-                            />
-                        );
-                    })}
-                </ul>
-            </fieldset>
-            {operation.is_teacher_visible && (
-                <fieldset
-                    className="tea-operation"
-                    disabled={!operation.is_teacher_editable}>
-                    <FeedbackSelect
-                        id={id}
-                        is_select_correct={is_select_correct}
-                        onFeedbackSelectChange={onFeedbackSelectChange}
-                    />
-                    <FeedbackCorrect
-                        id={id}
-                        options={options}
-                        select_value={select_value}
-                    />
-                </fieldset>
+
+            <QuestionSelect
+                id={id}
+                editable={currentQuizState === CurrentQuizState.ANSWERING}
+                options={options}
+                select_value={select_value}
+                onSelectChange={onSelectChange}
+            />
+
+            {(currentQuizState === CurrentQuizState.CHECKING ||
+                currentQuizState === CurrentQuizState.REVIEWING) && (
+                <FeedbackSelectScore
+                    id={id}
+                    is_show_tip={
+                        currentQuizState === CurrentQuizState.REVIEWING
+                    }
+                    is_select_correct={is_select_correct}
+                    select_score={select_score}
+                />
             )}
-            {operation.is_student_visible &&
-                typeof is_select_correct === 'number' && (
-                <fieldset>
-                    <div className="feedback-score">
-                        {is_select_correct ? (
-                            <div className="correct">恭喜，答对了！</div>
-                        ) : (
-                            <div className="wrong">答错了！</div>
-                        )}
-                    </div>
-                    {!is_select_correct && (
-                        <div className="feedback-answer">
-                            <div className="tips">
-                                    正确答案：
-                                <span>
-                                    {optionMap[correctIndex] || '暂未提供'}
-                                </span>
-                            </div>
-                        </div>
-                    )}
-                </fieldset>
+
+            {((currentQuizState === CurrentQuizState.REVIEWING && feedback) ||
+                currentQuizState === CurrentQuizState.CHECKING) && (
+                <FeedbackText
+                    editable={currentQuizState === CurrentQuizState.CHECKING}
+                    feedback={feedback}
+                    onFeedbackTextChange={onFeedbackTextChange}
+                />
             )}
         </div>
     );

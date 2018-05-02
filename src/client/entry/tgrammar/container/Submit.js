@@ -5,15 +5,15 @@ import {
     preSubmitAnswer,
     submitCheckAnswer,
     resetQuiz,
-    filterCompleteQuestion,
+    showUncompleteQuestion,
     showAllQuestion,
+    CurrentQuizState,
 } from '@/action/tgrammarAction';
-import { ANSWERING } from '@/constant/statsQuizStatus';
 
 const mapStateToProps = state => {
-    let { operation } = state;
+    let { currentQuizState } = state;
     return {
-        operation,
+        currentQuizState,
     };
 };
 
@@ -30,8 +30,8 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     onResetQuiz: e => {
         dispatch(resetQuiz());
     },
-    filterCompleteQuestion: e => {
-        dispatch(filterCompleteQuestion);
+    showUncompleteQuestion: e => {
+        dispatch(showUncompleteQuestion);
     },
     showAllQuestion: e => {
         dispatch(showAllQuestion);
@@ -39,16 +39,16 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
 });
 
 const Submit = ({
-    operation,
+    currentQuizState,
     onSubmitAnswer,
     onSubmitCheckAnswer,
     onPauseCheckAnswer,
     onResetQuiz,
-    filterCompleteQuestion,
+    showUncompleteQuestion,
     showAllQuestion,
 }) => {
     console.log('Submit render');
-    if (operation.isStudent && operation.statsQuizStatus === ANSWERING) {
+    if (currentQuizState === CurrentQuizState.ANSWERING) {
         return (
             <div className="submit">
                 <button className="btn-blue" onClick={onSubmitAnswer}>
@@ -57,7 +57,7 @@ const Submit = ({
             </div>
         );
     }
-    if (operation.isTeacher) {
+    if (currentQuizState === CurrentQuizState.CHECKING) {
         return (
             <div className="submit">
                 <button className="btn-red" onClick={onSubmitCheckAnswer}>
@@ -74,7 +74,7 @@ const Submit = ({
                     checked={true}
                     onChange={({ checked }) => {
                         if (checked) {
-                            filterCompleteQuestion();
+                            showUncompleteQuestion();
                         } else {
                             showAllQuestion();
                         }
@@ -82,12 +82,6 @@ const Submit = ({
                     name="filterQuestion"
                     label="精简显示"
                 />
-                {/* <button className="btn-orange" onClick={filterCompleteQuestion}>
-                    精简显示
-                </button>
-                <button className="btn-orange" onClick={showAllQuestion}>
-                    全部显示
-                </button> */}
             </div>
         );
     }

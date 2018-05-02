@@ -12,7 +12,7 @@ import logger from 'redux-logger';
 import { getParam } from '@/util/urlUtil';
 import Entry from '@/component/Entry';
 
-const store = createStore(rootReducer, applyMiddleware(logger, thunk));
+const store = createStore(rootReducer, applyMiddleware(thunk, logger));
 
 const createComponent = (Component, userRequired, props) => {
     if (userRequired && !storeUtil.getToken() && !getParam().token) {

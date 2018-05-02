@@ -36,45 +36,53 @@ const User = ({topicId, isPanel, user, handleClick}) => {
                     </div>
                 </div>
                 <div className={'user-panel-c'}>
-                    <div className={'tab'}>
+                    <div className={'tab'} onClick={() => handleClick('study')}>
                         <img src={require('../asset/image/ico_my_study.png')}/>
-                        <a href={'/learn'}>我的学习</a>
+                        <a>我的学习</a>
                     </div>
-                    <div className={'tab'}>
+                    <div className={'tab'} onClick={() => handleClick('integral')}>
                         <img src={require('../asset/image/ico_integral.png')}/>
-                        <a href={'/user/integral'}>我的积分</a>
+                        <a>我的积分</a>
                     </div>
-                    <div className={'tab'}>
+                    <div className={'tab'} onClick={() => handleClick('coupon')}>
                         <img src={require('../asset/image/ico_coupon@2x.png')}/>
-                        <a href={'/user/coupon'}>我的优惠</a>
-                    </div>
-                    <div className={'tab'}>
-                        <img src={require('../asset/image/ico_edit1.png')}/>
-                        <a href={'/resetPassword'}>修改密码</a>
+                        <a>我的优惠</a>
                     </div>
                 </div>
                 <div className={'user-panel-c'}>
-                    <div className={'tab'}>
+                    <div className={'tab'} onClick={() => handleClick('wordtest')}>
                         <img src={require('../asset/image/ico_wordtest@2x.png')}/>
-                        <a href={'/wordtest'}>词汇量测试</a>
+                        <a>词汇量测试</a>
                     </div>
-                    <div className={'tab'}>
+                    <div className={'tab'} onClick={() => handleClick('tgrammar')}>
                         <img src={require('../asset/image/ico_gramar@2x.png')}/>
-                        <a href={'/tgrammar/quiz'}>核心语法测试</a>
+                        <a>核心语法测试</a>
                     </div>
-                    <div className={'tab'}>
-                        <img src={require('../asset/image/ico_wordtest@2x.png')}/>
-                        <a href={'/tgrammar/stats/list'}>老师批改</a>
+                    {user.role_id !== '3' && (
+                        <div className={'tab'} onClick={() => handleClick('tgrammar-teacher')}>
+                            <img src={require('../asset/image/ico_wordtest@2x.png')}/>
+                            <a>老师批改</a>
+                        </div>
+                    )}
+                </div>
+                <div className={'user-panel-c'}>
+                    <div className={'tab'} onClick={() => handleClick('address')}>
+                        <img src={require('../asset/image/ico_coupon@2x.png')}/>
+                        <a>我的地址</a>
                     </div>
-                    <div className={'tab'}>
+                    <div className={'tab'} onClick={() => handleClick('password')}>
+                        <img src={require('../asset/image/ico_edit1.png')}/>
+                        <a>修改密码</a>
+                    </div>
+                    <div className={'tab'} onClick={() => handleClick('quiz')}>
                         <img src={require('../asset/image/ico_quit@2x.png')}/>
-                        <a onClick={() => handleClick('quiz')}>退出</a>
+                        <a>退出</a>
                     </div>
                 </div>
             </div>
             <div className={isPanel ? 'header-bg panel' : 'header-bg'}>
                 <div className="user-header">
-                    <a className={'nav-open'}/>
+                    <a className={'nav-open'} href={'/user'}/>
                     <div className="user-logo">
                         <img src={headImg}/>
                     </div>

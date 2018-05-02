@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-import { actionUserInfo } from '@/action/userAction';
+import React, {Component} from 'react';
+import {bindActionCreators} from 'redux';
+import {connect} from 'react-redux';
+import {actionUserInfo} from '@/action/userAction';
 import User from '@/entry/user/component/User';
-import { logoutV1 } from '@/service/base';
+import {logoutV1} from '@/service/base';
 import uaUtil from '@/util/uaUtil';
 
 class Root extends Component {
@@ -32,15 +32,16 @@ class Root extends Component {
                 break;
             case 'wordtest':
                 window.open('/vocabtest');
-                // location.href = '/vocabtest';
                 break;
             case 'tgrammar':
-                // location.href = '/tgrammar/quiz';
                 window.open('/tgrammar/quiz');
                 break;
             case 'tgrammar-teacher':
-                // location.href = '/tgrammar/stats/list';
                 window.open('/tgrammar/stats/list');
+                break;
+            case 'address':
+                let localUrl = encodeURIComponent(location.href);
+                location.href = `/address?case=1&redirect=${localUrl}`;
                 break;
             case 'password':
                 location.href = '/resetPassword';
@@ -55,7 +56,7 @@ class Root extends Component {
     };
 
     render() {
-        const { user } = this.props;
+        const {user} = this.props;
         return (
             <User
                 topicId={this.topicId}

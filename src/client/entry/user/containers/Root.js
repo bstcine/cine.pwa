@@ -25,10 +25,18 @@ class Root extends Component {
                 location.href = '/learn';
                 break;
             case 'integral':
-                this.props.history.replace('/user/integral');
+                if(uaUtil.AndroidMobile() || uaUtil.iPhone()){
+                    this.props.history.push('/user/integral');
+                }else {
+                    this.props.history.replace('/user/integral');
+                }
                 break;
             case 'coupon':
-                this.props.history.replace('/user/coupon');
+                if(uaUtil.AndroidMobile() || uaUtil.iPhone()){
+                    this.props.history.push('/user/coupon');
+                }else {
+                    this.props.history.replace('/user/coupon');
+                }
                 break;
             case 'wordtest':
                 window.open('/vocabtest');

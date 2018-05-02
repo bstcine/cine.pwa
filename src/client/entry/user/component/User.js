@@ -36,6 +36,10 @@ const User = ({topicId, isPanel, user, handleClick}) => {
                     </div>
                 </div>
                 <div className={'user-panel-c'}>
+                    <div className={'tab'}>
+                        <img src={require('../asset/image/ico_order@2x.png')}/>
+                        <a>我的订单</a>
+                    </div>
                     <div className={'tab'} onClick={() => handleClick('study')}>
                         <img src={require('../asset/image/ico_my_study.png')}/>
                         <a>我的学习</a>

@@ -6,13 +6,10 @@ import {
     TabPanels,
     TabPanel,
 } from '@/component/Tabs/index';
-import CouponList from '../component/CouponList';
+import CouponList from '../component/coupon/CouponList';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { actionUserCoupon } from '@/action/userAction';
-import { grey400, indigo500, indigo700 } from 'material-ui/styles/colors';
-import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 import { TextField } from 'material-ui';
@@ -39,14 +36,6 @@ class CouponContainer extends Component {
         let used = rows && rows.filter(item => item.status === '1');
         let expired = rows && rows.filter(item => item.status === '2');
 
-        const muiTheme = getMuiTheme({
-            palette: {
-                primary1Color: indigo500,
-                primary2Color: indigo700,
-                primary3Color: grey400,
-            },
-        });
-
         const dialogActions = [
             <FlatButton
                 key={1}
@@ -65,63 +54,58 @@ class CouponContainer extends Component {
         ];
 
         return (
-            <MuiThemeProvider muiTheme={muiTheme}>
-                <React.Fragment>
-                    <ToastLoading show={network.loading} />
-                    <ToastError
-                        show={!network.loading && network.error}
-                        text={network.error}
+            <React.Fragment>
+                <ToastLoading show={network.loading} />
+                <ToastError
+                    show={!network.loading && network.error}
+                    text={network.error}
+                />
+                <ToastSuccess
+                    show={!network.loading && !network.error && network.msg}
+                    text={network.msg}
+                />
+                <Tabs className={'coupon-tabs'}>
+                    <TabItems>
+                        <TabItem>未使用</TabItem>
+                        <TabItem>已使用</TabItem>
+                        <TabItem>已过期</TabItem>
+                    </TabItems>
+                    <TabPanels>
+                        <TabPanel>
+                            <CouponList coupons={use} actions={actions} />
+                        </TabPanel>
+                        <TabPanel>
+                            <CouponList coupons={used} actions={actions} />
+                        </TabPanel>
+                        <TabPanel>
+                            <CouponList coupons={expired} actions={actions} />
+                        </TabPanel>
+                    </TabPanels>
+                </Tabs>
+                <div className={'coupon-todo'}>
+                    <a
+                        className="float-button"
+                        onClick={() => {
+                            actions.dialogAddCoupon();
+                        }}
                     />
-                    <ToastSuccess
-                        show={!network.loading && !network.error && network.msg}
-                        text={network.msg}
+                </div>
+                <Dialog
+                    title="添加优惠券"
+                    modal={false}
+                    actions={dialogActions}
+                    open={coupons.isOpen}
+                    onRequestClose={actions.dialogAddCoupon}>
+                    <TextField
+                        fullWidth={true}
+                        onChange={(e, val) => {
+                            this.couponNo = val;
+                        }}
+                        defaultValue={this.couponNo}
+                        hintText="请输入您的优惠券"
                     />
-                    <Tabs className={'coupon-tabs'}>
-                        <TabItems>
-                            <TabItem>未使用</TabItem>
-                            <TabItem>已使用</TabItem>
-                            <TabItem>已过期</TabItem>
-                        </TabItems>
-                        <TabPanels>
-                            <TabPanel>
-                                <CouponList coupons={use} actions={actions} />
-                            </TabPanel>
-                            <TabPanel>
-                                <CouponList coupons={used} actions={actions} />
-                            </TabPanel>
-                            <TabPanel>
-                                <CouponList
-                                    coupons={expired}
-                                    actions={actions}
-                                />
-                            </TabPanel>
-                        </TabPanels>
-                    </Tabs>
-                    <div className={'coupon-todo'}>
-                        <a
-                            className="float-button"
-                            onClick={() => {
-                                actions.dialogAddCoupon();
-                            }}
-                        />
-                    </div>
-                    <Dialog
-                        title="添加优惠券"
-                        modal={false}
-                        actions={dialogActions}
-                        open={coupons.isOpen}
-                        onRequestClose={actions.dialogAddCoupon}>
-                        <TextField
-                            fullWidth={true}
-                            onChange={(e, val) => {
-                                this.couponNo = val;
-                            }}
-                            defaultValue={this.couponNo}
-                            hintText="请输入您的优惠券"
-                        />
-                    </Dialog>
-                </React.Fragment>
-            </MuiThemeProvider>
+                </Dialog>
+            </React.Fragment>
         );
     }
 }

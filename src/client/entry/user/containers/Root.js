@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
+import { grey400, indigo500, indigo700 } from 'material-ui/styles/colors';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { connect } from 'react-redux';
 import { actionUserInfo } from '@/action/userAction';
 import User from '@/entry/user/component/User';
@@ -65,13 +68,24 @@ class Root extends Component {
 
     render() {
         const { user } = this.props;
+
+        const muiTheme = getMuiTheme({
+            palette: {
+                primary1Color: indigo500,
+                primary2Color: indigo700,
+                primary3Color: grey400,
+            },
+        });
+
         return (
-            <User
-                topicId={this.topicId}
-                isPanel={this.isPanel}
-                user={user}
-                handleClick={this.handleClick}
-            />
+            <MuiThemeProvider muiTheme={muiTheme}>
+                <User
+                    topicId={this.topicId}
+                    isPanel={this.isPanel}
+                    user={user}
+                    handleClick={this.handleClick}
+                />
+            </MuiThemeProvider>
         );
     }
 }

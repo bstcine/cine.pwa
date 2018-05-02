@@ -13,8 +13,8 @@ const Coupon = ({ coupon, actions }) => {
     }
 
     let arrImgSrc = coupon.expand
-        ? require('../asset/image/ico_arr_coup_up.png')
-        : require('../asset/image/ico_arr_used_down.png');
+        ? require('../../asset/image/ico_arr_coup_up.png')
+        : require('../../asset/image/ico_arr_used_down.png');
 
     return (
         <div className={'coupon-detail'}>
@@ -43,7 +43,7 @@ const Coupon = ({ coupon, actions }) => {
                 {coupon.status === '1' && (
                     <img
                         className="coupon-status"
-                        src={require('../asset/image/ic_coupon_used.png')}
+                        src={require('../../asset/image/ic_coupon_used.png')}
                     />
                 )}
             </div>

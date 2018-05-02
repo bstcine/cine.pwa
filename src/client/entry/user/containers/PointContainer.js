@@ -9,7 +9,7 @@ import {
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { actionUserPoint } from '@/action/userAction';
-import Points from '@/entry/user/component/Points';
+import Points from '@/entry/user/component/integral/Points';
 
 class PointContainer extends Component {
     componentDidMount() {

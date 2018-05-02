@@ -6,7 +6,7 @@ import { Tabs, TabItems, TabItem, TabPanels, TabPanel } from '@/component/Tabs';
 import Comments from './Comments';
 import CourseSet from './CourseSet';
 
-export default class DetailDesc extends React.Component {
+export default class DetailDesc extends React.PureComponent {
     constructor(props) {
         super(props);
         this.state = {
@@ -48,7 +48,7 @@ export default class DetailDesc extends React.Component {
     }
 
     render() {
-        let { course, isIOSAPP, onClickCourseSetLink } = this.props;
+        let { course, isIOSAPP } = this.props;
         let courseSet = this.state.courseSet;
         let tabItem_desc = course.object_type === '1' ? '课程概要' : '详情';
         let tabItem_evaluate =

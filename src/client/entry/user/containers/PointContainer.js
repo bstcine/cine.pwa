@@ -28,7 +28,7 @@ class PointContainer extends Component {
                     <TabPanels>
                         <TabPanel>
                             <div className={'point-list'}>
-                            {points && points.rows > 0 ? <React.Fragment>
+                            {points && points.rows && points.rows.length ? <React.Fragment>
                                 <div className={'point-header'}>
                                     <div className={'point-value'}>积分</div>
                                     <div className={'point-text'}>积分明细</div>

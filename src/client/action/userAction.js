@@ -4,6 +4,7 @@
 import Api from '../../APIConfig';
 import { fetchData } from '@/service/base';
 import { Action_UI, Action_UC, Action_UP } from '@/constant/actionTypeUser';
+import errorMsg from '@/util/errorMsg';
 
 export const actionUserInfo = {
     request: () => ({
@@ -73,7 +74,7 @@ export const actionUserCoupon = {
         let [err, result] = await fetchData(Api.APIURL_User_Coupon_Add, {
             no: no,
         });
-        if (err === 'coupon_not_exist') err = '优惠券不存在';
+        if (err) err = errorMsg(err);
 
         dispatch(actionUserCoupon.receiveAdd(err, result));
 

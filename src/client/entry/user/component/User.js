@@ -40,7 +40,7 @@ const User = ({topicId, isPanel, user, handleClick}) => {
                         <div style={{display: 'flex'}}>
                             <img src={require('../asset/image/ico_order@2x.png')} className={'gray'}/>
                             {(Number(user.unpayOrdersCount) > 0) &&
-                            <span className="tab-indicator">{user.unpayOrdersCount + ''}</span>}
+                            <span className="tab-indicator gray">{user.unpayOrdersCount + ''}</span>}
                         </div>
                         <a style={{color: 'gray'}}>我的订单</a>
                     </div>

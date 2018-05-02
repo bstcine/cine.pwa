@@ -36,7 +36,7 @@ import {
 
 /**
  * 当前试卷的状态
- * 该状态与 stats_quiz 表中的状态有所区别，本状态与当前登录角色有一定关系
+ * 该状态与测验报告(stats_quiz)表中的状态有所区别，本状态与当前登录角色有一定关系
  */
 export const CurrentQuizState = {
     ANSWERING: 'ANSWERING',
@@ -45,6 +45,9 @@ export const CurrentQuizState = {
     REVIEWING: 'REVIEWING',
 };
 
+/**
+ * 用户角色
+ */
 export const RoleID = {
     ADMINISTRATOR: '1',
     TEACHER: '2',
@@ -52,6 +55,9 @@ export const RoleID = {
     AGENT: '4',
 };
 
+/**
+ * 测验报告状态
+ */
 export const StatsQuizStatus = {
     /**
      * 0:答题中
@@ -95,7 +101,7 @@ export const receiveQuizData = ({
 };
 
 /**
- * 题目数据请求 & 答题记录请求
+ * 题目数据 & 答题记录请求
  */
 export const fetchQuizData = ({
     quiz_id,

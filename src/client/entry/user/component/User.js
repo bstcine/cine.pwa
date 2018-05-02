@@ -37,11 +37,12 @@ const User = ({topicId, isPanel, user, handleClick}) => {
                 </div>
                 <div className={'user-panel-c'}>
                     <div className={'tab'}>
-                        <div style={{display:'flex'}}>
-                            <img src={require('../asset/image/ico_order@2x.png')}/>
-                            {(Number(user.unpayOrdersCount) > 0) && <span className="tab-indicator">{user.unpayOrdersCount + ''}</span>}
+                        <div style={{display: 'flex'}}>
+                            <img src={require('../asset/image/ico_order@2x.png')} className={'gray'}/>
+                            {(Number(user.unpayOrdersCount) > 0) &&
+                            <span className="tab-indicator">{user.unpayOrdersCount + ''}</span>}
                         </div>
-                        <a>我的订单</a>
+                        <a style={{color: 'gray'}}>我的订单</a>
                     </div>
                     <div className={'tab'} onClick={() => handleClick('study')}>
                         <img src={require('../asset/image/ico_my_study.png')}/>
@@ -73,9 +74,9 @@ const User = ({topicId, isPanel, user, handleClick}) => {
                     )}
                 </div>
                 <div className={'user-panel-c'}>
-                    <div className={'tab'} onClick={() => handleClick('address')}>
-                        <img src={require('../asset/image/ico_coupon@2x.png')}/>
-                        <a>我的地址</a>
+                    <div className={'tab'}>
+                        <img src={require('../asset/image/ico_coupon@2x.png')} className={'gray'}/>
+                        <a style={{color: 'gray'}}>我的地址</a>
                     </div>
                     <div className={'tab'} onClick={() => handleClick('password')}>
                         <img src={require('../asset/image/ico_edit1.png')}/>
@@ -124,7 +125,8 @@ const User = ({topicId, isPanel, user, handleClick}) => {
                 <Tabs className="user-tabs" selectedId={topicId}>
                     <TabItems className={'tab-items container'}>
                         {/*onClick={(index, id) => handleClick(id)}*/}
-                        <TabItem id={'order'} className="tab-item tab-order" indicator={user.unpayOrdersCount} onTabItemClick={()=>handleClick('order')}>我的订单</TabItem>
+                        <TabItem id={'order'} className="tab-item tab-order" indicator={user.unpayOrdersCount}
+                                 onTabItemClick={() => handleClick('order')}>我的订单</TabItem>
                         <TabItem
                             className="tab-item tab-study"
                             onTabItemClick={() => handleClick('study')}>

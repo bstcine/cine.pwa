@@ -47,10 +47,10 @@ class Root extends Component {
             case 'tgrammar-teacher':
                 window.open('/tgrammar/stats/list');
                 break;
-            case 'address':
+            /*case 'address':
                 let localUrl = encodeURIComponent(location.href);
                 location.href = `/address?case=1&redirect=${localUrl}`;
-                break;
+                break;*/
             case 'password':
                 location.href = '/resetPassword';
                 break;

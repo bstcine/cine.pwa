@@ -74,7 +74,7 @@ const User = ({topicId, isPanel, user, handleClick}) => {
                         <img src={require('../asset/image/ico_edit1.png')}/>
                         <a>修改密码</a>
                     </div>
-                    <div className={'tab'} onClick={() => handleClick('quiz')}>
+                    <div className={'tab'} onClick={() => handleClick('quit')}>
                         <img src={require('../asset/image/ico_quit@2x.png')}/>
                         <a>退出</a>
                     </div>

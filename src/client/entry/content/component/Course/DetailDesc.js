@@ -19,10 +19,10 @@ export default class DetailDesc extends React.Component {
     componentDidMount() {
         window.addEventListener('scroll', this.handleScroll);
 
-        if (this.props.courseID) {
-            let cid = this.props.courseID;
-            let set_id = null;
-            this.props.onLoadComments(cid, set_id).then(({ comments, courseSet }) => {
+        if (this.props.course) {
+            let cid = this.props.course.id;
+            let set_id = this.props.course.set_id;
+            this.props.onLoadSetAndComments(cid, set_id).then(({ comments, courseSet }) => {
                 this.setState({ comments, courseSet });
             });
         }
@@ -68,10 +68,7 @@ export default class DetailDesc extends React.Component {
                     <TabPanels>
                         <TabPanel>
                             {courseSet ? (
-                                <CourseSet
-                                    value={courseSet}
-                                    onLink={onClickCourseSetLink}
-                                />
+                                <CourseSet value={courseSet}/>
                             ) : null}
                             <div
                                 className="course-feature"

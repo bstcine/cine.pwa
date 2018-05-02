@@ -274,12 +274,8 @@ export default class Course extends Component {
                         {course ? (
                             <DetailDesc
                                 course={course}
-                                courseID={getParam().cid}
                                 isIOSAPP={siteCodeUtil.inIOSAPP()}
-                                onClickCourseSetLink={
-                                    cCourseAction.handleCourseSetLink
-                                }
-                                onLoadComments={cCourseAction.loadSetAndComments}
+                                onLoadSetAndComments={cCourseAction.loadSetAndComments}
                             />
                         ) : <div className="course-detail"></div>}
 

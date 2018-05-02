@@ -17,10 +17,6 @@ let cCourseAction = {
         });
     },
 
-    handleCourseSetLink: function(courseID) {
-        alert('hello, Im joe' + courseID);
-    },
-
     _getCourseDetail: function(courseID) {
         return BaseService.fetchData(Api.APIURL_Content_Course_Detail, {
             cid: courseID,
@@ -39,7 +35,7 @@ let cCourseAction = {
         });
     },
 
-    _getCourseSet: function(courseID, courseSetID) {
+    _getCourseSet: function (courseID, courseSetID) {
         // if (!courseSetID) return Promise.resolve(null);
         let param = {
             cid: courseID,

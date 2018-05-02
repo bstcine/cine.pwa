@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import {
     Tabs,
     TabItems,
@@ -6,9 +6,10 @@ import {
     TabPanels,
     TabPanel,
 } from '@/component/Tabs/index';
-import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
-import {actionUserPoint} from '@/action/userAction';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { actionUserPoint } from '@/action/userAction';
+import PointList from '@/entry/user/component/PointList';
 
 class PointContainer extends Component {
     componentDidMount() {
@@ -16,7 +17,7 @@ class PointContainer extends Component {
     }
 
     render() {
-        let {points} = this.props;
+        let { points } = this.props;
 
         return (
             <React.Fragment>
@@ -27,45 +28,7 @@ class PointContainer extends Component {
                     </TabItems>
                     <TabPanels>
                         <TabPanel>
-                            <div className={'point-list'}>
-                            {points && points.rows && points.rows.length ? <React.Fragment>
-                                <div className={'point-header'}>
-                                    <div className={'point-value'}>积分</div>
-                                    <div className={'point-text'}>积分明细</div>
-                                    <div className={'point-time'}>积分时间</div>
-                                    <div className={'point-total'}>
-                                        剩余积分
-                                    </div>
-                                </div>
-                                {points.rows.map(item => {
-                                    return (
-                                        <div
-                                            className={'point-body'}
-                                            key={item.id}>
-                                            <div className={'point-text'}>
-                                                {item.action_text}
-                                            </div>
-                                            <div
-                                                className={
-                                                    item.value < 0
-                                                        ? 'point-value use'
-                                                        : 'point-value'
-                                                }>
-                                                {item.value > 0
-                                                    ? '+' + item.value
-                                                    : item.value}
-                                            </div>
-                                            <div className={'point-time'}>
-                                                {item.create_at}
-                                            </div>
-                                            <div className={'point-total'}>
-                                                {item.current_total_value}
-                                            </div>
-                                        </div>
-                                    );
-                                })}
-                            </React.Fragment> : <div className={'point-not-found'}>暂无数据</div>}
-                            </div>
+                            <PointList points={points} />
                         </TabPanel>
                         <TabPanel>
                             <div

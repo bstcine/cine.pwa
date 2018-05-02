@@ -155,6 +155,11 @@ const User = ({topicId, isPanel, user, handleClick}) => {
                             </TabItem>
                         )}
                         <TabItem
+                            className="tab-item tab-address"
+                            onTabItemClick={() => handleClick('address')}>
+                            地址管理
+                        </TabItem>
+                        <TabItem
                             className="tab-item tab-password"
                             onTabItemClick={() => handleClick('password')}>
                             修改密码

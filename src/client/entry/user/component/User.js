@@ -37,7 +37,10 @@ const User = ({topicId, isPanel, user, handleClick}) => {
                 </div>
                 <div className={'user-panel-c'}>
                     <div className={'tab'}>
-                        <img src={require('../asset/image/ico_order@2x.png')}/>
+                        <div style={{display:'flex'}}>
+                            <img src={require('../asset/image/ico_order@2x.png')}/>
+                            {(Number(user.unpayOrdersCount) > 0) && <span className="tab-indicator">{user.unpayOrdersCount + ''}</span>}
+                        </div>
                         <a>我的订单</a>
                     </div>
                     <div className={'tab'} onClick={() => handleClick('study')}>

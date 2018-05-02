@@ -4,10 +4,10 @@
 import React from 'react';
 import '../asset/style/index.less';
 import CouponContainer from '@/entry/user/containers/CouponContainer';
-import {Tabs, TabItems, TabItem, TabPanels, TabPanel} from '@/component/Tabs';
+import { Tabs, TabItems, TabItem, TabPanels, TabPanel } from '@/component/Tabs';
 import PointContainer from '@/entry/user/containers/PointContainer';
 
-const User = ({topicId, isPanel, user, handleClick}) => {
+const User = ({ topicId, isPanel, user, handleClick }) => {
     let headImg = user.head_image
         ? 'http://www.bstcine.com/f/' + user.head_image
         : require('../asset/image/ico_headpic.png');
@@ -20,7 +20,7 @@ const User = ({topicId, isPanel, user, handleClick}) => {
         <React.Fragment>
             <div className={isPanel ? 'header-panel panel' : 'header-panel'}>
                 <div className={'user-panel-a'}>
-                    <img src={headImg}/>
+                    <img src={headImg} />
                     <label>{user.login}</label>
                 </div>
                 <div className={'user-panel-b'}>
@@ -37,62 +37,91 @@ const User = ({topicId, isPanel, user, handleClick}) => {
                 </div>
                 <div className={'user-panel-c'}>
                     <div className={'tab'}>
-                        <div style={{display: 'flex'}}>
-                            <img src={require('../asset/image/ico_order@2x.png')} className={'gray'}/>
-                            {(Number(user.unpayOrdersCount) > 0) &&
-                            <span className="tab-indicator gray">{user.unpayOrdersCount + ''}</span>}
+                        <div style={{ display: 'flex' }}>
+                            <img
+                                src={require('../asset/image/ico_order@2x.png')}
+                                className={'gray'}
+                            />
+                            {Number(user.unpayOrdersCount) > 0 && (
+                                <span className="tab-indicator gray">
+                                    {String(user.unpayOrdersCount)}
+                                </span>
+                            )}
                         </div>
-                        <a style={{color: 'gray'}}>我的订单</a>
+                        <a style={{ color: 'gray' }}>我的订单</a>
                     </div>
                     <div className={'tab'} onClick={() => handleClick('study')}>
-                        <img src={require('../asset/image/ico_my_study.png')}/>
+                        <img src={require('../asset/image/ico_my_study.png')} />
                         <a>我的学习</a>
                     </div>
-                    <div className={'tab'} onClick={() => handleClick('integral')}>
-                        <img src={require('../asset/image/ico_integral.png')}/>
+                    <div
+                        className={'tab'}
+                        onClick={() => handleClick('integral')}>
+                        <img src={require('../asset/image/ico_integral.png')} />
                         <a>我的积分</a>
                     </div>
-                    <div className={'tab'} onClick={() => handleClick('coupon')}>
-                        <img src={require('../asset/image/ico_coupon@2x.png')}/>
+                    <div
+                        className={'tab'}
+                        onClick={() => handleClick('coupon')}>
+                        <img
+                            src={require('../asset/image/ico_coupon@2x.png')}
+                        />
                         <a>我的优惠</a>
                     </div>
                 </div>
                 <div className={'user-panel-c'}>
-                    <div className={'tab'} onClick={() => handleClick('wordtest')}>
-                        <img src={require('../asset/image/ico_wordtest@2x.png')}/>
+                    <div
+                        className={'tab'}
+                        onClick={() => handleClick('wordtest')}>
+                        <img
+                            src={require('../asset/image/ico_wordtest@2x.png')}
+                        />
                         <a>词汇量测试</a>
                     </div>
-                    <div className={'tab'} onClick={() => handleClick('tgrammar')}>
-                        <img src={require('../asset/image/ico_gramar@2x.png')}/>
+                    <div
+                        className={'tab'}
+                        onClick={() => handleClick('tgrammar')}>
+                        <img
+                            src={require('../asset/image/ico_gramar@2x.png')}
+                        />
                         <a>核心语法测试</a>
                     </div>
                     {user.role_id !== '3' && (
-                        <div className={'tab'} onClick={() => handleClick('tgrammar-teacher')}>
-                            <img src={require('../asset/image/ico_wordtest@2x.png')}/>
+                        <div
+                            className={'tab'}
+                            onClick={() => handleClick('tgrammar-teacher')}>
+                            <img
+                                src={require('../asset/image/ico_wordtest@2x.png')}
+                            />
                             <a>老师批改</a>
                         </div>
                     )}
                 </div>
                 <div className={'user-panel-c'}>
                     <div className={'tab'}>
-                        <img src={require('../asset/image/ico_coupon@2x.png')} className={'gray'}/>
-                        <a style={{color: 'gray'}}>我的地址</a>
+                        <img
+                            src={require('../asset/image/ico_coupon@2x.png')}
+                            className={'gray'}
+                        />
+                        <a style={{ color: 'gray' }}>我的地址</a>
                     </div>
-                    <div className={'tab'} onClick={() => handleClick('password')}>
-                        <img src={require('../asset/image/ico_edit1.png')}/>
+                    <div
+                        className={'tab'}
+                        onClick={() => handleClick('password')}>
+                        <img src={require('../asset/image/ico_edit1.png')} />
                         <a>修改密码</a>
                     </div>
                     <div className={'tab'} onClick={() => handleClick('quit')}>
-                        <img src={require('../asset/image/ico_quit@2x.png')}/>
+                        <img src={require('../asset/image/ico_quit@2x.png')} />
                         <a>退出</a>
                     </div>
                 </div>
             </div>
             <div className={isPanel ? 'header-bg panel' : 'header-bg'}>
                 <div className="user-header">
-                    <a className={'nav-open'} href={'/user'}/>
+                    <a className={'nav-open'} href={'/user'} />
                     <div className="user-logo">
-                        <img src={headImg}/>
+                        <img src={headImg} />
                     </div>
                     <div className="user-info">
                         <div className="user-flex-a">
@@ -101,7 +130,7 @@ const User = ({topicId, isPanel, user, handleClick}) => {
                         </div>
                         <div className="user-flex-b">
                             {user.role_id !== '1' && (
-                                <img className="user-role" src={roleImg}/>
+                                <img className="user-role" src={roleImg} />
                             )}
                             <span className="user-phone">{user.phone}</span>
                         </div>
@@ -118,15 +147,20 @@ const User = ({topicId, isPanel, user, handleClick}) => {
                         </span>
                     </div>
 
-                    <a className="nav-home" href={'/'}/>
+                    <a className="nav-home" href={'/'} />
                 </div>
             </div>
             <div className={isPanel ? 'header-tab-bg panel' : 'header-tab-bg'}>
                 <Tabs className="user-tabs" selectedId={topicId}>
                     <TabItems className={'tab-items container'}>
-                        {/*onClick={(index, id) => handleClick(id)}*/}
-                        <TabItem id={'order'} className="tab-item tab-order" indicator={user.unpayOrdersCount}
-                                 onTabItemClick={() => handleClick('order')}>我的订单</TabItem>
+                        {/* onClick={(index, id) => handleClick(id)} */}
+                        <TabItem
+                            id={'order'}
+                            className="tab-item tab-order"
+                            indicator={user.unpayOrdersCount}
+                            onTabItemClick={() => handleClick('order')}>
+                            我的订单
+                        </TabItem>
                         <TabItem
                             className="tab-item tab-study"
                             onTabItemClick={() => handleClick('study')}>
@@ -181,10 +215,10 @@ const User = ({topicId, isPanel, user, handleClick}) => {
                     </TabItems>
                     <TabPanels>
                         <TabPanel id={'integral'}>
-                            <PointContainer/>
+                            <PointContainer />
                         </TabPanel>
                         <TabPanel id={'coupon'}>
-                            <CouponContainer/>
+                            <CouponContainer />
                         </TabPanel>
                     </TabPanels>
                 </Tabs>

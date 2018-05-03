@@ -91,7 +91,7 @@ const User = ({ topicId, isPanel, user, handleClick }) => {
                             className={'tab'}
                             onClick={() => handleClick('tgrammar-teacher')}>
                             <img
-                                src={require('../asset/image/ico_wordtest@2x.png')}
+                                src={require('../asset/image/ico_teacher@2x.png')}
                             />
                             <a>老师批改</a>
                         </div>
@@ -190,7 +190,7 @@ const User = ({ topicId, isPanel, user, handleClick }) => {
                         </TabItem>
                         {user.role_id !== '3' && (
                             <TabItem
-                                className="tab-item tab-grammar"
+                                className="tab-item tab-grammar-teacher"
                                 onTabItemClick={() =>
                                     handleClick('tgrammar-teacher')
                                 }>

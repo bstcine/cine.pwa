@@ -33,15 +33,7 @@ export let post = (url, data) => {
 
     // alert(_apiURL)
     console.log(_httpBody);
-    return axios
-        .post(_apiURL, _httpBody)
-        .then(response => response.data)
-        .then(res => {
-            if (res.code !== '1') {
-                return alert(res.code_desc);
-            }
-            return res;
-        });
+    return axios.post(_apiURL, _httpBody).then(response => response.data);
 };
 
 export let get = (url, params) => {

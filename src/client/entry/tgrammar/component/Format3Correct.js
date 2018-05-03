@@ -5,7 +5,7 @@ import QuestionText from './QuestionText';
 import FeedbackSelectScore from './FeedbackSelectScore';
 import FeedbackTextScore from './FeedbackTextScore';
 import FeedbackText from './FeedbackText';
-import { CurrentQuizState } from '@/action/tgrammarAction';
+import { CurrentQuizState } from '@/constant/index';
 
 const options = [
     {
@@ -26,7 +26,9 @@ const options = [
  * 句子改错
  */
 const Format3Correct = ({
-    item,
+    no,
+    id,
+    title,
     select_value,
     text_value,
     is_select_correct,
@@ -41,7 +43,6 @@ const Format3Correct = ({
     onFeedbackTextChange,
 }) => {
     console.log('Question3Correct render');
-    let { no, id, title } = item;
 
     return (
         <div className="questionformat questionformat3">

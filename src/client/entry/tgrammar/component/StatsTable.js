@@ -79,10 +79,10 @@ const StatsTable = ({ title, list = [], onClick }) => {
                         <th>得分</th>
                         <th>批改操作</th>
                     </tr>
-                    {list.map(item => {
+                    {list.map((item, i) => {
                         return (
                             <tr key={item.id}>
-                                <td>{item.id}</td>
+                                <td>{i + 1}</td>
                                 <td>
                                     {item.phone || item.email || item.login}
                                 </td>
@@ -93,7 +93,9 @@ const StatsTable = ({ title, list = [], onClick }) => {
                                 <td>{item.t_nickname}</td>
                                 <td>
                                     <span className="red">
-                                        {item.score || '-'}
+                                        {typeof item.score === 'number'
+                                            ? item.score
+                                            : '-'}
                                     </span>
                                 </td>
                                 <td>

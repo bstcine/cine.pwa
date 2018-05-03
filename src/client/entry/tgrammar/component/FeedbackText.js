@@ -1,4 +1,5 @@
 import React from 'react';
+import TextareaAutosize from 'react-autosize-textarea';
 
 const FeedbackText = ({ feedback, editable, onFeedbackTextChange }) => {
     return (
@@ -7,7 +8,7 @@ const FeedbackText = ({ feedback, editable, onFeedbackTextChange }) => {
                 老师解答 <i className="material-icons">&#xE87F;</i>
             </span>
             {editable ? (
-                <textarea
+                <TextareaAutosize
                     value={feedback || ''}
                     onChange={onFeedbackTextChange}
                 />

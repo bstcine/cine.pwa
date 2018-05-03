@@ -13,8 +13,14 @@ import Api from '@/../APIConfig';
  */
 export let fetchData = async (APIURL, query) => {
     try {
-        let { except_case_desc, result } = await post(APIURL, query);
-        return [except_case_desc, result];
+        let { code_desc, except_case_desc, result } = await post(APIURL, query);
+        let error = null;
+        if (code_desc !== 'success') {
+            error = code_desc;
+        } else {
+            error = except_case_desc;
+        }
+        return [error, result];
     } catch (error) {
         return [error];
     }

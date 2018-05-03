@@ -2,9 +2,8 @@ import React from 'react';
 /**
  * 描述文本（富文本）
  */
-const Format10CommonDesc = ({ item }) => {
+const Format10CommonDesc = ({ title }) => {
     console.log('Question10Desc render');
-    let { title } = item;
     return (
         <div
             className="questionformat10"

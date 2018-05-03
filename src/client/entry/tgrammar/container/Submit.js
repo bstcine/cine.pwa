@@ -1,14 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import Switch from '@/component/Switch';
+// import Switch from '@/component/Switch';
 import {
     preSubmitAnswer,
     submitCheckAnswer,
     resetQuiz,
     showUncompleteQuestion,
     showAllQuestion,
-    CurrentQuizState,
 } from '@/action/tgrammarAction';
+import { CurrentQuizState } from '@/constant/index';
 
 const mapStateToProps = state => {
     let { currentQuizState } = state;
@@ -67,10 +67,10 @@ const Submit = ({
                     <i className="material-icons">&#xE161;</i> 保存批改
                 </button>
                 <button className="btn-blue" onClick={onResetQuiz}>
-                    重做
+                    <i className="material-icons">&#xE863;</i> 重置试卷
                 </button>
 
-                <Switch
+                {/* <Switch
                     checked={true}
                     onChange={({ checked }) => {
                         if (checked) {
@@ -81,7 +81,7 @@ const Submit = ({
                     }}
                     name="filterQuestion"
                     label="精简显示"
-                />
+                /> */}
             </div>
         );
     }

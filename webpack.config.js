@@ -120,8 +120,6 @@ module.exports = {
         modules: [path.resolve(__dirname, 'src/client'), 'node_modules'],
         alias: {
             '@': path.resolve(__dirname, 'src/client'),
-            'material-icons':
-                'material-design-icons/iconfont/material-icons.css',
         },
     },
 };

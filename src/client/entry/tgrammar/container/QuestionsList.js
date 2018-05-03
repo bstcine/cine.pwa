@@ -1,34 +1,25 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import Format10CommonDescContainer from './Format10CommonDescContainer';
-import Format11ReadingDescContainer from './Format11ReadingDescContainer';
-import Format1ChooseOneContainer from '../container/Format1ChooseOneContainer';
-import Format3CorrectContainer from '../container/Format3CorrectContainer';
-import { CurrentQuizState } from '@/action/tgrammarAction';
+import Format10CommonDesc from '../component/Format10CommonDesc';
+import Format11ReadingDesc from '../component/Format11ReadingDesc';
+import Format1ChooseOne from './Format1ChooseOne';
+import Format3Correct from './Format3Correct';
+import { CurrentQuizState } from '@/constant/index';
 
 const mapStateToProps = (state, ownProps) => {
-    const {
-        questionIds,
-        questionsById,
-        answersById,
-        questionsFilter,
-        currentQuizState,
-    } = state;
+    const { questions, answersById, questionsFilter, currentQuizState } = state;
     return {
-        questionIds: filterQuestions(
-            questionIds,
-            questionsById,
+        questions: filterQuestions(
+            questions,
             answersById,
             questionsFilter,
             currentQuizState
         ),
-        questionsById,
     };
 };
 
 const filterQuestions = (
-    questionIds,
-    questionsById,
+    questions,
     answersById,
     questionsFilter,
     currentQuizState
@@ -37,10 +28,11 @@ const filterQuestions = (
         currentQuizState !== CurrentQuizState.CHECKING ||
         questionsFilter === 'ALL'
     ) {
-        return questionIds;
+        return questions;
     } else {
-        return questionIds.filter(id => {
-            const question = questionsById[id];
+        let newQuestions = { ...questions };
+        newQuestions.allIds = questions.allIds.filter(id => {
+            const question = questions.byId[id];
             if (question.format === 3) {
                 const answer = answersById[id];
                 if (!answer) return false;
@@ -59,40 +51,24 @@ const filterQuestions = (
     }
 };
 
-const QuestionsList = ({ questionIds, questionsById }) => {
+const QuestionsList = ({ questions }) => {
     console.log('QuestionsList render');
     return (
         <div className="questionitems">
-            {questionIds.map(id => {
-                let item = questionsById[id];
+            {questions.allIds.map(id => {
+                let item = questions.byId[id];
                 switch (item.format) {
                     case 1:
-                        return (
-                            <Format1ChooseOneContainer
-                                key={item.id}
-                                item={item}
-                            />
-                        );
+                        return <Format1ChooseOne key={id} id={id} />;
                     case 3:
-                        return (
-                            <Format3CorrectContainer
-                                key={item.id}
-                                item={item}
-                            />
-                        );
+                        return <Format3Correct key={id} id={id} />;
                     case 10:
                         return (
-                            <Format10CommonDescContainer
-                                key={item.id}
-                                item={item}
-                            />
+                            <Format10CommonDesc key={id} title={item.title} />
                         );
                     case 11:
                         return (
-                            <Format11ReadingDescContainer
-                                key={item.id}
-                                item={item}
-                            />
+                            <Format11ReadingDesc key={id} title={item.title} />
                         );
                     default:
                         return null;

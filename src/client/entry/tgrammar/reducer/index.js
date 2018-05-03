@@ -1,12 +1,8 @@
 import { combineReducers } from 'redux';
 
 import {
-    // SAVE_USER,
-    // UPDATE_OPERATION,
     REQUEST_QUIZ_DATA,
     RECEIVE_QUIZ_DATA,
-    // REQUEST_STATS_QUIZ_DATA,
-    // RECEIVE_STATS_QUIZ_DATA,
     SAVE_QUESTION1_SELECT_ANSWER,
     SAVE_QUESTION1_FEEDBACK_SELECT_ANSWER,
     SAVE_QUESTION3_SELECT_ANSWER,
@@ -31,7 +27,7 @@ import {
     SHOW_ALL_QUESTION,
     UPDATE_ANSWERS,
 } from '@/constant/actionTypeTGrammar';
-import { CurrentQuizState } from '@/action/tgrammarAction';
+import { CurrentQuizState } from '@/constant/index';
 
 /**
  * 除题目外的试卷数据
@@ -55,32 +51,20 @@ const quiz = (state = {}, { type, payload }) => {
 };
 
 /**
- *  questionId 组成的数组
+ * byId : questionId 为 key 的 question 对象
+ * allIds : questionId 组成的数组
  */
-const questionIds = (state = [], { type, payload }) => {
+const questions = (state = { byId: {}, allIds: [] }, { type, payload }) => {
     switch (type) {
         case RECEIVE_QUIZ_DATA: {
             const { quiz } = payload;
-            let newState = quiz.data.map(question => question.id);
-            return newState;
-        }
-        default:
-            return state;
-    }
-};
-
-/**
- *  questionId 为 key 的 questions 对象
- */
-const questionsById = (state = {}, { type, payload }) => {
-    switch (type) {
-        case RECEIVE_QUIZ_DATA: {
-            let newState = {};
-            const { quiz } = payload;
+            let byId = {};
+            let allIds = [];
             quiz.data.forEach(question => {
-                newState[question.id] = question;
+                byId[question.id] = question;
+                allIds.push(question.id);
             });
-            return newState;
+            return { byId, allIds };
         }
         default:
             return state;
@@ -231,21 +215,6 @@ const user = (state = {}, { type, payload }) => {
     }
 };
 
-// const operation = (
-//     state = {
-//         isStudent: true,
-//         isTeacher: false,
-//     },
-//     { type, payload }
-// ) => {
-//     switch (type) {
-//         case UPDATE_OPERATION:
-//             return { ...state, ...payload };
-//         default:
-//             return state;
-//     }
-// };
-
 const tipModal = (state = { isOpen: false }, { type, payload }) => {
     switch (type) {
         case CLOSE_TIP_MODAL:
@@ -262,8 +231,8 @@ const confirmModal = (state = { isOpen: false }, { type, payload }) => {
         case CLOSE_CONFIRM_MODAL:
             return { isOpen: false };
         case OPEN_CONFIRM_MODAL: {
-            let { text } = payload;
-            return { isOpen: true, text };
+            let { text, onConfirm, onCancel } = payload;
+            return { isOpen: true, text, onConfirm, onCancel };
         }
         default:
             return state;
@@ -302,7 +271,7 @@ const timer = (state = {}, { type, payload }) => {
     }
 };
 
-const questionsFilter = (state = 'UNCOMPLETED', { type, payload }) => {
+const questionsFilter = (state = 'ALL', { type, payload }) => {
     switch (type) {
         case SHOW_UNCOMPLETED_QUESTION:
             return 'UNCOMPLETED';
@@ -331,10 +300,8 @@ const currentQuizState = (
 const rootReducer = combineReducers({
     quiz,
     user,
-    // operation,
-    questionIds,
-    questionsById,
     statsQuiz,
+    questions,
     statsQuizList,
     answersById,
     network,

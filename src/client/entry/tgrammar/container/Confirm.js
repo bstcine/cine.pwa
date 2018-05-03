@@ -2,36 +2,50 @@ import '@/asset/style/modal.less';
 import React from 'react';
 import Dialog from '@/component/Dialog/index';
 import { connect } from 'react-redux';
-import { closeConfirmModal, submitAnswer } from '@/action/tgrammarAction';
+import { closeConfirmModal } from '@/action/tgrammarAction';
 
 const mapStateToProps = state => {
     let { confirmModal } = state;
-    let { isOpen, text } = confirmModal;
+    let { isOpen, text, onConfirm, onCancel } = confirmModal;
     return {
         isOpen,
         text,
+        onConfirm,
+        onCancel,
     };
 };
 
-const mapDispatchToProps = (dispatch, ownProps) => ({
-    onCancel: () => {
-        dispatch(closeConfirmModal());
-    },
-    onSubmit: () => {
-        dispatch(submitAnswer());
-    },
-});
+const mergeProps = (stateProps, dispatchProps, ownProps) => {
+    const { onConfirm, onCancel } = stateProps;
+    const { dispatch } = dispatchProps;
+    return {
+        ...stateProps,
+        ...ownProps,
+        onCancel: () => {
+            if (typeof onCancel === 'function') {
+                dispatch(onCancel());
+            }
+            dispatch(closeConfirmModal());
+        },
+        onConfirm: () => {
+            if (typeof onConfirm === 'function') {
+                dispatch(onConfirm());
+            }
+            dispatch(closeConfirmModal());
+        },
+    };
+};
 
-const Confirm = ({ title, text, isOpen, onSubmit, onCancel }) => {
+const Confirm = ({ title, text, isOpen, onConfirm, onCancel }) => {
     return (
         <Dialog
             isOpen={isOpen}
             title={title}
             text={text}
             onCancel={onCancel}
-            onConfirm={onSubmit}
+            onConfirm={onConfirm}
         />
     );
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Confirm);
+export default connect(mapStateToProps, null, mergeProps)(Confirm);

@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {BrowserRouter as Router, Route} from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Welcome from './component/Welcome';
 import UserInfo from './component/UserInfo';
 import Card from './component/Card';
@@ -10,7 +10,6 @@ import './asset/style/index.less';
 import Bridge from '@/util/bridge';
 import BRIDGE_EVENT from '@/constant/bridgeEvent';
 import siteCodeUtil from '@/util/sitecodeUtil';
-import 'material-icons';
 import Entry from '@/component/Entry';
 
 class Word extends Entry {
@@ -21,7 +20,7 @@ class Word extends Entry {
 
     componentDidMount() {
         if (siteCodeUtil.inIOSAPP()) {
-            Bridge.ios(BRIDGE_EVENT.TIMELINE, {type: 'loaded'});
+            Bridge.ios(BRIDGE_EVENT.TIMELINE, { type: 'loaded' });
         }
     }
 

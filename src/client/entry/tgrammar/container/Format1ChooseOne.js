@@ -6,10 +6,11 @@ import {
 } from '@/action/tgrammarAction';
 
 const mapStateToProps = (state, ownProps) => {
-    let { answersById, questionsById, currentQuizState } = state;
-    let id = ownProps.item.id;
-    let prop = { item: questionsById[id], currentQuizState };
-    let answer = answersById[id];
+    const { answersById, questions, currentQuizState } = state;
+    const id = ownProps.id;
+    const { no, title, options } = questions.byId[id];
+    let prop = { ...ownProps, no, title, options, currentQuizState };
+    const answer = answersById[id];
     if (answer) {
         prop.select_value = answer.select_value;
         prop.is_select_correct = answer.is_select_correct;
@@ -23,7 +24,7 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     onSelectChange: e => {
         dispatch(
             saveQuestion1SelectAnswer({
-                id: ownProps.item.id,
+                id: ownProps.id,
                 select_value: parseInt(e.target.value, 10),
             })
         );
@@ -31,7 +32,7 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     onFeedbackTextChange: e => {
         dispatch(
             saveFeedbackText({
-                id: ownProps.item.id,
+                id: ownProps.id,
                 feedback: e.target.value,
             })
         );

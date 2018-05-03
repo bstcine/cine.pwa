@@ -3,13 +3,16 @@ import QuestionTitle from './QuestionTitle';
 import QuestionSelect from './QuestionSelect';
 import FeedbackText from './FeedbackText';
 import FeedbackSelectScore from './FeedbackSelectScore';
-import { CurrentQuizState } from '@/action/tgrammarAction';
+import { CurrentQuizState } from '@/constant/index';
 
 /**
  * 1:单选题
  */
 const Format1ChooseOne = ({
-    item,
+    no,
+    id,
+    title,
+    options,
     select_value,
     select_score,
     is_select_correct,
@@ -19,7 +22,6 @@ const Format1ChooseOne = ({
     onFeedbackTextChange,
 }) => {
     console.log('Question1ChooseOne render');
-    let { no, id, title, options } = item;
     return (
         <div className="questionformat questionformat1">
             <QuestionTitle no={no} title={title} />

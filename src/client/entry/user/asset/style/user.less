@@ -1,6 +1,6 @@
 @import '~asset/style/_cine.less';
 
-.header-panel {
+.user-mobile {
   display: none;
   &.panel {
     display: block;
@@ -131,6 +131,12 @@
   }
 }
 
+.user-header-bg {
+  &.panel {
+    display: none;
+  }
+}
+
 .user-header {
   position: relative;
   background-color: #014292;
@@ -174,6 +180,12 @@
   }
 }
 
+.user-tabs-bg {
+  &.panel {
+    display: none;
+  }
+}
+
 .user-tabs {
   .tab-items {
     display: none;
@@ -192,26 +204,14 @@
   }
 }
 
-.header-bg {
-  &.panel {
-    display: none;
-  }
-}
-
-.header-tab-bg {
-  &.panel {
-    display: none;
-  }
-}
-
 @media @media-up-sm {
-  .header-panel {
+  .user-mobile {
     &.panel {
       display: none;
     }
   }
 
-  .header-bg {
+  .user-header-bg {
     background-color: #014292;
     &.panel {
       display: block;
@@ -349,7 +349,7 @@
     }
   }
 
-  .header-tab-bg {
+  .user-tabs-bg {
     background: #ffffff;
     &.panel {
       display: block;
@@ -451,11 +451,16 @@
 
       .tab-grammar {
         background: url(../image/ico_grammar.png) no-repeat left;
-        background-size: 0.41rem 0.43rem;
+        background-size: 0.41rem 0.45rem;
+      }
+
+      .tab-grammar-teacher{
+        background: url(../image/ico_teacher@2x.png) no-repeat left;
+        background-size: 0.44rem 0.44rem;
       }
 
       .tab-address{
-        background: url(../image/ico_edit1.png) no-repeat left;
+        background: url(../image/ico_address@2x.png) no-repeat left;
         background-size: 0.37rem 0.39rem;
 
         -webkit-filter: grayscale(100%);
@@ -472,7 +477,7 @@
 
       .tab-password {
         background: url(../image/ico_edit1.png) no-repeat left;
-        background-size: 0.37rem 0.39rem;
+        background-size: 0.37rem 0.36rem;
       }
 
       .tab-quit {

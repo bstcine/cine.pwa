@@ -7,10 +7,11 @@ import CouponContainer from '@/entry/user/containers/CouponContainer';
 import { Tabs, TabItems, TabItem, TabPanels, TabPanel } from '@/component/Tabs';
 import PointContainer from '@/entry/user/containers/PointContainer';
 
-const User = ({ topicId, isPanel, user, handleClick }) => {
+const User = ({ topicId, isJustUserRoute, user, handleClick }) => {
     let headImg = user.head_image
         ? 'http://www.bstcine.com/f/' + user.head_image
         : require('../asset/image/ico_headpic.png');
+
     let roleImg =
         String(user.role_id) === '3'
             ? require('../asset/image/ico_student.png')
@@ -18,7 +19,7 @@ const User = ({ topicId, isPanel, user, handleClick }) => {
 
     return (
         <React.Fragment>
-            <div className={isPanel ? 'header-panel panel' : 'header-panel'}>
+            <div className={isJustUserRoute ? 'user-mobile panel' : 'user-mobile'}>
                 <div className={'user-panel-a'}>
                     <img src={headImg} />
                     <label>{user.login}</label>
@@ -41,6 +42,7 @@ const User = ({ topicId, isPanel, user, handleClick }) => {
                             <img
                                 src={require('../asset/image/ico_order@2x.png')}
                                 className={'gray'}
+                                style={{ width: '.42rem', height: '.45rem' }}
                             />
                             {Number(user.unpayOrdersCount) > 0 && (
                                 <span className="tab-indicator gray">
@@ -51,13 +53,15 @@ const User = ({ topicId, isPanel, user, handleClick }) => {
                         <a style={{ color: 'gray' }}>我的订单</a>
                     </div>
                     <div className={'tab'} onClick={() => handleClick('study')}>
-                        <img src={require('../asset/image/ico_my_study.png')} />
+                        <img src={require('../asset/image/ico_my_study.png')}
+                            style={{ width: '.42rem', height: '.39rem' }}/>
                         <a>我的学习</a>
                     </div>
                     <div
                         className={'tab'}
                         onClick={() => handleClick('integral')}>
-                        <img src={require('../asset/image/ico_integral.png')} />
+                        <img src={require('../asset/image/ico_integral.png')}
+                            style={{ width: '.42rem', height: '.42rem' }}/>
                         <a>我的积分</a>
                     </div>
                     <div
@@ -65,6 +69,7 @@ const User = ({ topicId, isPanel, user, handleClick }) => {
                         onClick={() => handleClick('coupon')}>
                         <img
                             src={require('../asset/image/ico_coupon@2x.png')}
+                            style={{ width: '.42rem', height: '.40rem' }}
                         />
                         <a>我的优惠</a>
                     </div>
@@ -74,7 +79,8 @@ const User = ({ topicId, isPanel, user, handleClick }) => {
                         className={'tab'}
                         onClick={() => handleClick('wordtest')}>
                         <img
-                            src={require('../asset/image/ico_wordtest@2x.png')}
+                            src={require('../asset/image/ico_test_word@2x.png')}
+                            style={{ height: '.57rem', width: '.57rem' }}
                         />
                         <a>词汇量测试</a>
                     </div>
@@ -82,7 +88,8 @@ const User = ({ topicId, isPanel, user, handleClick }) => {
                         className={'tab'}
                         onClick={() => handleClick('tgrammar')}>
                         <img
-                            src={require('../asset/image/ico_gramar@2x.png')}
+                            src={require('../asset/image/ico_test_grammar@2x.png')}
+                            style={{ height: '.57rem', width: '.57rem' }}
                         />
                         <a>核心语法测试</a>
                     </div>
@@ -91,7 +98,8 @@ const User = ({ topicId, isPanel, user, handleClick }) => {
                             className={'tab'}
                             onClick={() => handleClick('tgrammar-teacher')}>
                             <img
-                                src={require('../asset/image/ico_wordtest@2x.png')}
+                                src={require('../asset/image/ico_test_teacher@2x.png')}
+                                style={{ height: '.57rem', width: '.57rem' }}
                             />
                             <a>老师批改</a>
                         </div>
@@ -100,24 +108,27 @@ const User = ({ topicId, isPanel, user, handleClick }) => {
                 <div className={'user-panel-c'}>
                     <div className={'tab'}>
                         <img
-                            src={require('../asset/image/ico_coupon@2x.png')}
+                            src={require('../asset/image/ico_address@2x.png')}
                             className={'gray'}
+                            style={{ width: '.34rem', height: '.40rem' }}
                         />
                         <a style={{ color: 'gray' }}>我的地址</a>
                     </div>
                     <div
                         className={'tab'}
                         onClick={() => handleClick('password')}>
-                        <img src={require('../asset/image/ico_edit1.png')} />
+                        <img src={require('../asset/image/ico_edit1.png')}
+                            style={{ width: '.37rem', height: '.38rem' }}
+                        />
                         <a>修改密码</a>
                     </div>
                     <div className={'tab'} onClick={() => handleClick('quit')}>
-                        <img src={require('../asset/image/ico_quit@2x.png')} />
+                        <img src={require('../asset/image/ico_quit@2x.png')} style={{ width: '.34rem', height: '.35rem' }} />
                         <a>退出</a>
                     </div>
                 </div>
             </div>
-            <div className={isPanel ? 'header-bg panel' : 'header-bg'}>
+            <div className={isJustUserRoute ? 'user-header-bg panel' : 'user-header-bg'}>
                 <div className="user-header">
                     <a className={'nav-open'} href={'/user'} />
                     <div className="user-logo">
@@ -150,7 +161,7 @@ const User = ({ topicId, isPanel, user, handleClick }) => {
                     <a className="nav-home" href={'/'} />
                 </div>
             </div>
-            <div className={isPanel ? 'header-tab-bg panel' : 'header-tab-bg'}>
+            <div className={isJustUserRoute ? 'user-tabs-bg panel' : 'user-tabs-bg'}>
                 <Tabs className="user-tabs" selectedId={topicId}>
                     <TabItems className={'tab-items container'}>
                         {/* onClick={(index, id) => handleClick(id)} */}
@@ -190,7 +201,7 @@ const User = ({ topicId, isPanel, user, handleClick }) => {
                         </TabItem>
                         {user.role_id !== '3' && (
                             <TabItem
-                                className="tab-item tab-grammar"
+                                className="tab-item tab-grammar-teacher"
                                 onTabItemClick={() =>
                                     handleClick('tgrammar-teacher')
                                 }>

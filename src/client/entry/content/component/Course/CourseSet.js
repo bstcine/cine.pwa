@@ -1,6 +1,6 @@
 import React from 'react';
 
-const CourseSet = ({ value, onLink }) => {
+const CourseSet = ({ value }) => {
     let { name, id, original_price, price } = value;
     let originalPrice = original_price ? '，原价：' + original_price + '元' : '';
     let href = '/content/course?cid=' + id;

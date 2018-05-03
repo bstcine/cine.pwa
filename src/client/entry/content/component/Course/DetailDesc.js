@@ -6,7 +6,7 @@ import { Tabs, TabItems, TabItem, TabPanels, TabPanel } from '@/component/Tabs';
 import Comments from './Comments';
 import CourseSet from './CourseSet';
 
-export default class DetailDesc extends React.Component {
+export default class DetailDesc extends React.PureComponent {
     constructor(props) {
         super(props);
         this.state = {
@@ -19,10 +19,10 @@ export default class DetailDesc extends React.Component {
     componentDidMount() {
         window.addEventListener('scroll', this.handleScroll);
 
-        if (this.props.courseID) {
-            let cid = this.props.courseID;
-            let set_id = null;
-            this.props.onLoadComments(cid, set_id).then(({ comments, courseSet }) => {
+        if (this.props.course) {
+            let cid = this.props.course.id;
+            let set_id = this.props.course.set_id;
+            this.props.onLoadSetAndComments(cid, set_id).then(({ comments, courseSet }) => {
                 this.setState({ comments, courseSet });
             });
         }
@@ -48,7 +48,7 @@ export default class DetailDesc extends React.Component {
     }
 
     render() {
-        let { course, isIOSAPP, onClickCourseSetLink } = this.props;
+        let { course, isIOSAPP } = this.props;
         let courseSet = this.state.courseSet;
         let tabItem_desc = course.object_type === '1' ? '课程概要' : '详情';
         let tabItem_evaluate =
@@ -68,10 +68,7 @@ export default class DetailDesc extends React.Component {
                     <TabPanels>
                         <TabPanel>
                             {courseSet ? (
-                                <CourseSet
-                                    value={courseSet}
-                                    onLink={onClickCourseSetLink}
-                                />
+                                <CourseSet value={courseSet}/>
                             ) : null}
                             <div
                                 className="course-feature"

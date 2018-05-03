@@ -7,10 +7,11 @@ import CouponContainer from '@/entry/user/containers/CouponContainer';
 import { Tabs, TabItems, TabItem, TabPanels, TabPanel } from '@/component/Tabs';
 import PointContainer from '@/entry/user/containers/PointContainer';
 
-const User = ({ topicId, isPanel, user, handleClick }) => {
+const User = ({ topicId, isJustUserRoute, user, handleClick }) => {
     let headImg = user.head_image
         ? 'http://www.bstcine.com/f/' + user.head_image
         : require('../asset/image/ico_headpic.png');
+
     let roleImg =
         String(user.role_id) === '3'
             ? require('../asset/image/ico_student.png')
@@ -18,7 +19,7 @@ const User = ({ topicId, isPanel, user, handleClick }) => {
 
     return (
         <React.Fragment>
-            <div className={isPanel ? 'header-panel panel' : 'header-panel'}>
+            <div className={isJustUserRoute ? 'user-mobile panel' : 'user-mobile'}>
                 <div className={'user-panel-a'}>
                     <img src={headImg} />
                     <label>{user.login}</label>
@@ -127,7 +128,7 @@ const User = ({ topicId, isPanel, user, handleClick }) => {
                     </div>
                 </div>
             </div>
-            <div className={isPanel ? 'header-bg panel' : 'header-bg'}>
+            <div className={isJustUserRoute ? 'user-header-bg panel' : 'user-header-bg'}>
                 <div className="user-header">
                     <a className={'nav-open'} href={'/user'} />
                     <div className="user-logo">
@@ -160,7 +161,7 @@ const User = ({ topicId, isPanel, user, handleClick }) => {
                     <a className="nav-home" href={'/'} />
                 </div>
             </div>
-            <div className={isPanel ? 'header-tab-bg panel' : 'header-tab-bg'}>
+            <div className={isJustUserRoute ? 'user-tabs-bg panel' : 'user-tabs-bg'}>
                 <Tabs className="user-tabs" selectedId={topicId}>
                     <TabItems className={'tab-items container'}>
                         {/* onClick={(index, id) => handleClick(id)} */}

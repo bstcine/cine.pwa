@@ -12,13 +12,13 @@ import uaUtil from '@/util/uaUtil';
 class Root extends Component {
     constructor(props) {
         super(props);
-        this.topicId = props.match.params.topicId || 'integral';
-        this.isPanel = !props.match.params.topicId;
+        this.topicId = props.match.params.topicId || 'integral';// 用户路由的子路由{/user/integral}
+        this.isJustUserRoute = !props.match.params.topicId;// 是否纯用户路由{/user}
     }
 
     componentDidMount() {
-        // 移动端且不是用户面板时不加载用户信息
-        if ((uaUtil.AndroidMobile() || uaUtil.iPhone()) && !this.isPanel) return;
+        // 移动端且不是纯用户路由时不加载用户信息
+        if ((uaUtil.AndroidMobile() || uaUtil.iPhone()) && !this.isJustUserRoute) return;
         this.props.actions.loadUserInfo();
     }
 
@@ -81,7 +81,7 @@ class Root extends Component {
             <MuiThemeProvider muiTheme={muiTheme}>
                 <User
                     topicId={this.topicId}
-                    isPanel={this.isPanel}
+                    isJustUserRoute={this.isJustUserRoute}
                     user={user}
                     handleClick={this.handleClick}
                 />

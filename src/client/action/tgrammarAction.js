@@ -33,7 +33,12 @@ import {
     SHOW_ALL_QUESTION,
     UPDATE_ANSWERS,
 } from '@/constant/actionTypeTGrammar';
-import { RoleID, CurrentQuizState, StatsQuizStatus } from '@/constant/index';
+import {
+    RoleID,
+    CurrentQuizState,
+    StatsQuizStatus,
+    QuestionFormat,
+} from '@/constant/index';
 
 /**
  * 题目数据 & 答题记录请求
@@ -117,10 +122,10 @@ export const submitAnswer = () => (dispatch, getState) => {
     let answers = [];
     questions.allIds.forEach(questionId => {
         let question = questions.byId[questionId];
-        if (question.format === 1) {
+        if (question.format === QuestionFormat.FORMAT1_CHOOSE_ONE) {
             let answer = parseFormat1Answer(question, answersById);
             answers.push(answer);
-        } else if (question.format === 3) {
+        } else if (question.format === QuestionFormat.FORMAT3_CORRECT) {
             let answer = parseFormat3Answer(question, answersById);
             answers.push(answer);
         }
@@ -154,11 +159,11 @@ export const submitCheckAnswer = (complete = true) => async (
     let score = 0;
     questions.allIds.forEach(questionId => {
         let question = questions.byId[questionId];
-        if (question.format === 1) {
+        if (question.format === QuestionFormat.FORMAT1_CHOOSE_ONE) {
             let answer = answersById[questionId];
             if (typeof answer.select_score === 'number') score += answer.select_score;
             answers.push(answer);
-        } else if (question.format === 3) {
+        } else if (question.format === QuestionFormat.FORMAT3_CORRECT) {
             let answer = answersById[questionId];
             if (typeof answer.select_score === 'number') score += answer.select_score;
             if (typeof answer.text_score === 'number') score += answer.text_score;
@@ -270,7 +275,10 @@ export const receiveQuizData = ({
 const quizDataFix = data => {
     let no = 0;
     data.forEach(question => {
-        if (question.format === 1 || question.format === 3) {
+        if (
+            question.format === QuestionFormat.FORMAT1_CHOOSE_ONE ||
+            question.format === QuestionFormat.FORMAT3_CORRECT
+        ) {
             no++;
             question.no = no;
         }
@@ -466,13 +474,13 @@ const _getUnCompletedNos = (questionIds, answersById) => {
     for (let key in questionIds) {
         if (questionIds.hasOwnProperty(key)) {
             let question = questionIds[key];
-            if (question.format === 1) {
+            if (question.format === QuestionFormat.FORMAT1_CHOOSE_ONE) {
                 questionIndex++;
                 let answer = answersById[key];
                 if (!answer || typeof answer.select_value !== 'number') {
                     unCompletedNos.push(questionIndex);
                 }
-            } else if (question.format === 3) {
+            } else if (question.format === QuestionFormat.FORMAT3_CORRECT) {
                 questionIndex++;
                 let answer = answersById[key];
                 if (!answer || typeof answer.select_value !== 'number') {

@@ -83,7 +83,7 @@ export const QuestionFormat = {
     /**
      * 2:多选题
      */
-    FORMAT1_CHOOSE_MULTI: 2,
+    FORMAT2_CHOOSE_MULTI: 2,
 
     /**
      * 3:句子改错

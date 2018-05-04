@@ -14,8 +14,6 @@ class Root extends Component {
         super(props);
         this.topicId = props.match.params.topicId || 'integral'; // 用户路由的子路由{/user/integral}
         this.isJustUserRoute = !props.match.params.topicId; // 是否纯用户路由{/user}
-
-        console.log(110, this.topicId);
     }
 
     componentDidMount() {

@@ -11,10 +11,6 @@ import {
     SAVE_FEEDBACK_TEXT,
     UPLOADING_QUESTIONS,
     UPLOADED_QUESTIONS,
-    CLOSE_TIP_MODAL,
-    OPEN_TIP_MODAL,
-    OPEN_CONFIRM_MODAL,
-    CLOSE_CONFIRM_MODAL,
     CLOSE_LOGIN_MODAL,
     OPEN_LOGIN_MODAL,
     REQUEST_STATS_QUIZ_LIST,
@@ -28,6 +24,7 @@ import {
     UPDATE_ANSWERS,
 } from '@/constant/actionTypeTGrammar';
 import { CurrentQuizState } from '@/constant/index';
+import { tipModal, confirmModal } from '@/reducer/index';
 
 /**
  * 除题目外的试卷数据
@@ -210,30 +207,6 @@ const user = (state = {}, { type, payload }) => {
     switch (type) {
         case RECEIVE_QUIZ_DATA:
             return { ...payload.user };
-        default:
-            return state;
-    }
-};
-
-const tipModal = (state = { isOpen: false }, { type, payload }) => {
-    switch (type) {
-        case CLOSE_TIP_MODAL:
-            return { isOpen: false };
-        case OPEN_TIP_MODAL:
-            return { isOpen: true, text: payload.text };
-        default:
-            return state;
-    }
-};
-
-const confirmModal = (state = { isOpen: false }, { type, payload }) => {
-    switch (type) {
-        case CLOSE_CONFIRM_MODAL:
-            return { isOpen: false };
-        case OPEN_CONFIRM_MODAL: {
-            let { text, onConfirm, onCancel } = payload;
-            return { isOpen: true, text, onConfirm, onCancel };
-        }
         default:
             return state;
     }

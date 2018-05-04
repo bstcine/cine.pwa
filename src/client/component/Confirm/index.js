@@ -1,8 +1,7 @@
-import '@/asset/style/modal.less';
 import React from 'react';
 import Dialog from '@/component/Dialog/index';
 import { connect } from 'react-redux';
-import { closeConfirmModal } from '@/action/tgrammarAction';
+import { closeConfirmModal } from '@/action/commonAction';
 
 const mapStateToProps = state => {
     let { confirmModal } = state;
@@ -23,9 +22,11 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
         ...ownProps,
         onCancel: () => {
             onCancel && dispatch(onCancel());
+            dispatch(closeConfirmModal());
         },
         onConfirm: () => {
             onConfirm && dispatch(onConfirm());
+            dispatch(closeConfirmModal());
         },
     };
 };

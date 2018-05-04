@@ -17,16 +17,10 @@ import {
     SAVE_FEEDBACK_TEXT,
     UPLOADING_QUESTIONS,
     UPLOADED_QUESTIONS,
-    CLOSE_TIP_MODAL,
-    OPEN_TIP_MODAL,
-    OPEN_CONFIRM_MODAL,
-    CLOSE_CONFIRM_MODAL,
     CLOSE_LOGIN_MODAL,
     OPEN_LOGIN_MODAL,
     REQUEST_STATS_QUIZ_LIST,
     RECEIVE_STATS_QUIZ_LIST,
-    NETWORK_ERROR,
-    NETWORK_ERROR_TIMEOUT,
     RESTORE_LOCAL_ANSWERS,
     RECORD_TIME,
     SHOW_UNCOMPLETED_QUESTION,
@@ -39,6 +33,11 @@ import {
     StatsQuizStatus,
     QuestionFormat,
 } from '@/constant/index';
+import {
+    openConfirmModal,
+    openTipModal,
+    networkError,
+} from '@/action/commonAction';
 
 /**
  * 题目数据 & 答题记录请求
@@ -423,38 +422,6 @@ const clearLocalAnswers = (quiz, user) => dispatch => {
     storeUtil.remove(key);
 };
 
-export const networkError = err => dispatch => {
-    let text = err instanceof Error ? err.message : err;
-    dispatch({
-        type: NETWORK_ERROR,
-        payload: { text },
-    });
-    setTimeout(() => {
-        dispatch({
-            type: NETWORK_ERROR_TIMEOUT,
-            payload: { text },
-        });
-    }, 3000);
-};
-
-export const closeTipModal = () => ({
-    type: CLOSE_TIP_MODAL,
-});
-
-export const openTipModal = ({ text }) => ({
-    type: OPEN_TIP_MODAL,
-    payload: { text },
-});
-
-export const closeConfirmModal = () => ({
-    type: CLOSE_CONFIRM_MODAL,
-});
-
-export const openConfirmModal = ({ text, onConfirm, onCancel }) => ({
-    type: OPEN_CONFIRM_MODAL,
-    payload: { text, onConfirm, onCancel },
-});
-
 export const closeLoginModal = () => ({
     type: CLOSE_LOGIN_MODAL,
 });
@@ -503,6 +470,6 @@ const _hasCompleteCheckQuiz = () => {
     return true;
 };
 
-export const showUncompleteQuestion = { type: SHOW_UNCOMPLETED_QUESTION };
+export const showUncompletedQuestion = { type: SHOW_UNCOMPLETED_QUESTION };
 
 export const showAllQuestion = { type: SHOW_ALL_QUESTION };

@@ -1,8 +1,7 @@
-import '@/asset/style/modal.less';
 import React from 'react';
 import { connect } from 'react-redux';
 import Dialog from '@/component/Dialog/index';
-import { closeTipModal } from '@/action/tgrammarAction';
+import { closeTipModal } from '@/action/commonAction';
 
 const mapStateToProps = state => {
     let { tipModal } = state;

@@ -5,7 +5,7 @@ import {
     preSubmitAnswer,
     submitCheckAnswer,
     resetQuiz,
-    showUncompleteQuestion,
+    showUncompletedQuestion,
     showAllQuestion,
 } from '@/action/tgrammarAction';
 import { CurrentQuizState } from '@/constant/index';
@@ -30,8 +30,8 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     onResetQuiz: e => {
         dispatch(resetQuiz());
     },
-    showUncompleteQuestion: e => {
-        dispatch(showUncompleteQuestion);
+    showUncompletedQuestion: e => {
+        dispatch(showUncompletedQuestion);
     },
     showAllQuestion: e => {
         dispatch(showAllQuestion);
@@ -44,7 +44,7 @@ const Submit = ({
     onSubmitCheckAnswer,
     onPauseCheckAnswer,
     onResetQuiz,
-    showUncompleteQuestion,
+    showUncompletedQuestion,
     showAllQuestion,
 }) => {
     console.log('Submit render');
@@ -74,7 +74,7 @@ const Submit = ({
                     checked={true}
                     onChange={({ checked }) => {
                         if (checked) {
-                            showUncompleteQuestion();
+                            showUncompletedQuestion();
                         } else {
                             showAllQuestion();
                         }

@@ -5,14 +5,14 @@ import { connect } from 'react-redux';
 import { fetchQuizData } from '@/action/tgrammarAction';
 import Header from '@/component/Header';
 import Footer from '@/component/Footer';
+import Alert from '@/component/Alert';
+import Confirm from '@/component/Confirm';
 import Title from '../container/Title';
 import QuestionsList from '../container/QuestionsList';
 import Submit from '../container/Submit';
 import { getParam } from '@/util/urlUtil';
 import ToastLoading from './ToastLoading';
 import ToastError from './ToastError';
-import Alert from './Alert';
-import Confirm from './Confirm';
 import LoginModal from './LoginModal';
 
 const mapStateToProps = state => {

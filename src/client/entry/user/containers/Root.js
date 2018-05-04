@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 import { grey400, indigo500, indigo700 } from 'material-ui/styles/colors';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import { connect } from 'react-redux';
 import { actionUserInfo } from '@/action/userAction';
 import User from '@/entry/user/component/User';
 import { logoutV1 } from '@/service/base';
@@ -12,13 +12,16 @@ import uaUtil from '@/util/uaUtil';
 class Root extends Component {
     constructor(props) {
         super(props);
-        this.topicId = props.match.params.topicId || 'integral';// 用户路由的子路由{/user/integral}
-        this.isJustUserRoute = !props.match.params.topicId;// 是否纯用户路由{/user}
+        this.topicId = props.match.params.topicId || 'integral'; // 用户路由的子路由{/user/integral}
+        this.isJustUserRoute = !props.match.params.topicId; // 是否纯用户路由{/user}
     }
 
     componentDidMount() {
         // 移动端且不是纯用户路由时不加载用户信息
-        if ((uaUtil.AndroidMobile() || uaUtil.iPhone()) && !this.isJustUserRoute) return;
+        if (
+            (uaUtil.AndroidMobile() || uaUtil.iPhone()) &&
+            !this.isJustUserRoute
+        ) return;
         this.props.actions.loadUserInfo();
     }
 
@@ -32,6 +35,7 @@ class Root extends Component {
                     this.props.history.push('/user/integral');
                 } else {
                     this.props.history.replace('/user/integral');
+                    this.topicId = 'integral';
                 }
                 break;
             case 'coupon':
@@ -39,6 +43,7 @@ class Root extends Component {
                     this.props.history.push('/user/coupon');
                 } else {
                     this.props.history.replace('/user/coupon');
+                    this.topicId = 'coupon';
                 }
                 break;
             case 'wordtest':
@@ -50,10 +55,6 @@ class Root extends Component {
             case 'tgrammar-teacher':
                 window.open('/tgrammar/stats/list');
                 break;
-            /* case 'address':
-                let localUrl = encodeURIComponent(location.href);
-                location.href = `/address?case=1&redirect=${localUrl}`;
-                break; */
             case 'password':
                 location.href = '/resetPassword';
                 break;

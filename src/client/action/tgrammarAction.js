@@ -105,7 +105,7 @@ export const preSubmitAnswer = () => (dispatch, getState) => {
     let { questions, answersById } = getState();
     let unCompletedNos = _getUnCompletedNos(questions.byId, answersById);
     if (unCompletedNos.length) {
-        let text = `你有第 ${unCompletedNos.join(',')} 题共 ${
+        let text = `你的第 ${unCompletedNos.join(',')} 题共 ${
             unCompletedNos.length
         } 道题未答，是否确定提交答卷？`;
         return dispatch(openConfirmModal({ text, onConfirm: submitAnswer }));

@@ -22,16 +22,10 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
         ...stateProps,
         ...ownProps,
         onCancel: () => {
-            if (typeof onCancel === 'function') {
-                dispatch(onCancel());
-            }
-            dispatch(closeConfirmModal());
+            onCancel && dispatch(onCancel());
         },
         onConfirm: () => {
-            if (typeof onConfirm === 'function') {
-                dispatch(onConfirm());
-            }
-            dispatch(closeConfirmModal());
+            onConfirm && dispatch(onConfirm());
         },
     };
 };

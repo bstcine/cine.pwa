@@ -11,12 +11,7 @@ import storeUtil from '@/util/storeUtil';
 import { getParam } from '@/util/urlUtil';
 import Entry from '@/component/Entry';
 
-const middlewares = [thunk];
-if (process.env.NODE_ENV === `development`) {
-    const { logger } = require(`redux-logger`);
-    middlewares.push(logger);
-}
-const store = createStore(rootReducer, applyMiddleware(...middlewares));
+const store = createStore(rootReducer, applyMiddleware(thunk));
 
 const createComponent = (Component, userRequired, props) => {
     if (userRequired && !storeUtil.getToken() && !getParam().token) {

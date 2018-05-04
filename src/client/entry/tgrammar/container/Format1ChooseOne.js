@@ -1,8 +1,8 @@
 import { connect } from 'react-redux';
 import Format1ChooseOne from '../component/Format1ChooseOne';
 import {
-    saveQuestion1SelectAnswer,
-    saveFeedbackText,
+    saveQuestion1SelectValue,
+    saveQuestionFeedback,
 } from '@/action/tgrammarAction';
 
 const mapStateToProps = (state, ownProps) => {
@@ -23,7 +23,7 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch, ownProps) => ({
     onSelectChange: e => {
         dispatch(
-            saveQuestion1SelectAnswer({
+            saveQuestion1SelectValue({
                 id: ownProps.id,
                 select_value: parseInt(e.target.value, 10),
             })
@@ -31,7 +31,7 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     },
     onFeedbackTextChange: e => {
         dispatch(
-            saveFeedbackText({
+            saveQuestionFeedback({
                 id: ownProps.id,
                 feedback: e.target.value,
             })

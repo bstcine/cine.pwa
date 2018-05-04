@@ -3,20 +3,17 @@ import { combineReducers } from 'redux';
 import {
     REQUEST_QUIZ_DATA,
     RECEIVE_QUIZ_DATA,
-    SAVE_QUESTION1_SELECT_ANSWER,
-    SAVE_QUESTION1_FEEDBACK_SELECT_ANSWER,
-    SAVE_QUESTION3_SELECT_ANSWER,
-    SAVE_QUESTION3_TEXT_ANSWER,
-    SAVE_QUESTION3_FEEDBACK_SELECT_ANSWER,
-    SAVE_FEEDBACK_TEXT,
+    SAVE_QUESTION1_SELECT_VALUE,
+    SAVE_QUESTION3_SELECT_VALUE,
+    SAVE_QUESTION3_TEXT_VALUE,
+    SAVE_QUESTION3_TEXT_SCORE,
+    SAVE_QUESTION_FEEDBACK,
     UPLOADING_QUESTIONS,
     UPLOADED_QUESTIONS,
     CLOSE_LOGIN_MODAL,
     OPEN_LOGIN_MODAL,
     REQUEST_STATS_QUIZ_LIST,
     RECEIVE_STATS_QUIZ_LIST,
-    NETWORK_ERROR,
-    NETWORK_ERROR_TIMEOUT,
     RESTORE_LOCAL_ANSWERS,
     RECORD_TIME,
     SHOW_UNCOMPLETED_QUESTION,
@@ -25,6 +22,10 @@ import {
 } from '@/constant/actionTypeTGrammar';
 import { CurrentQuizState } from '@/constant/index';
 import { tipModal, confirmModal } from '@/reducer/index';
+import {
+    OPEN_NETWORK_ERROR,
+    CLOSE_NETWORK_ERROR,
+} from '@/constant/actionTypeCommon';
 
 /**
  * 除题目外的试卷数据
@@ -73,8 +74,8 @@ const questions = (state = { byId: {}, allIds: [] }, { type, payload }) => {
  */
 const answersById = (state = {}, { type, payload }) => {
     switch (type) {
-        case SAVE_QUESTION1_SELECT_ANSWER:
-        case SAVE_QUESTION3_SELECT_ANSWER: {
+        case SAVE_QUESTION1_SELECT_VALUE:
+        case SAVE_QUESTION3_SELECT_VALUE: {
             let newState = { ...state };
             let { id: question_id, select_value } = payload;
             if (!newState[question_id]) newState[question_id] = { question_id };
@@ -82,7 +83,7 @@ const answersById = (state = {}, { type, payload }) => {
             answer.select_value = select_value;
             return newState;
         }
-        case SAVE_QUESTION3_TEXT_ANSWER: {
+        case SAVE_QUESTION3_TEXT_VALUE: {
             let newState = { ...state };
             let { id: question_id, text_value } = payload;
             if (!newState[question_id]) newState[question_id] = { question_id };
@@ -90,15 +91,7 @@ const answersById = (state = {}, { type, payload }) => {
             answer.text_value = text_value;
             return newState;
         }
-        case SAVE_QUESTION1_FEEDBACK_SELECT_ANSWER: {
-            let newState = { ...state };
-            let { id: question_id, is_select_correct } = payload;
-            if (!newState[question_id]) newState[question_id] = { question_id };
-            let answer = newState[question_id];
-            answer.is_select_correct = is_select_correct;
-            return newState;
-        }
-        case SAVE_QUESTION3_FEEDBACK_SELECT_ANSWER: {
+        case SAVE_QUESTION3_TEXT_SCORE: {
             let newState = { ...state };
             let { id: question_id, is_text_correct, text_score } = payload;
             if (!newState[question_id]) newState[question_id] = { question_id };
@@ -107,7 +100,7 @@ const answersById = (state = {}, { type, payload }) => {
             answer.text_score = text_score;
             return newState;
         }
-        case SAVE_FEEDBACK_TEXT: {
+        case SAVE_QUESTION_FEEDBACK: {
             let newState = { ...state };
             let { id: question_id, feedback } = payload;
             if (!newState[question_id]) newState[question_id] = { question_id };
@@ -185,7 +178,7 @@ const network = (
                 pending: false,
                 text: payload ? payload.text : null,
             };
-        case NETWORK_ERROR:
+        case OPEN_NETWORK_ERROR:
             return {
                 ...state,
                 init: false,
@@ -193,7 +186,7 @@ const network = (
                 error: true,
                 text: payload ? payload.text : null,
             };
-        case NETWORK_ERROR_TIMEOUT:
+        case CLOSE_NETWORK_ERROR:
             return {
                 ...state,
                 error: false,
@@ -244,12 +237,12 @@ const timer = (state = {}, { type, payload }) => {
     }
 };
 
-const questionsFilter = (state = 'ALL', { type, payload }) => {
+const questionsFilter = (state = SHOW_ALL_QUESTION, { type, payload }) => {
     switch (type) {
         case SHOW_UNCOMPLETED_QUESTION:
-            return 'UNCOMPLETED';
+            return SHOW_UNCOMPLETED_QUESTION;
         case SHOW_ALL_QUESTION:
-            return 'ALL';
+            return SHOW_ALL_QUESTION;
         default:
             return state;
     }

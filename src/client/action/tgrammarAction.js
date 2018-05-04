@@ -10,11 +10,11 @@ import storeUtil from '@/util/storeUtil';
 import {
     REQUEST_QUIZ_DATA,
     RECEIVE_QUIZ_DATA,
-    SAVE_QUESTION1_SELECT_ANSWER,
-    SAVE_QUESTION3_SELECT_ANSWER,
-    SAVE_QUESTION3_TEXT_ANSWER,
-    SAVE_QUESTION3_FEEDBACK_SELECT_ANSWER,
-    SAVE_FEEDBACK_TEXT,
+    SAVE_QUESTION1_SELECT_VALUE,
+    SAVE_QUESTION3_SELECT_VALUE,
+    SAVE_QUESTION3_TEXT_VALUE,
+    SAVE_QUESTION3_TEXT_SCORE,
+    SAVE_QUESTION_FEEDBACK,
     UPLOADING_QUESTIONS,
     UPLOADED_QUESTIONS,
     CLOSE_LOGIN_MODAL,
@@ -342,9 +342,9 @@ export const fetchStatsQuizList = () => async dispatch => {
     dispatch({ type: RECEIVE_STATS_QUIZ_LIST, payload: result });
 };
 
-export const saveQuestion1SelectAnswer = ({ id, select_value }) => dispatch => {
+export const saveQuestion1SelectValue = ({ id, select_value }) => dispatch => {
     dispatch({
-        type: SAVE_QUESTION1_SELECT_ANSWER,
+        type: SAVE_QUESTION1_SELECT_VALUE,
         payload: {
             id,
             select_value,
@@ -353,9 +353,9 @@ export const saveQuestion1SelectAnswer = ({ id, select_value }) => dispatch => {
     dispatch(autoSaveLocalAnswers());
 };
 
-export const saveQuestion3SelectAnswer = ({ id, select_value }) => dispatch => {
+export const saveQuestion3SelectValue = ({ id, select_value }) => dispatch => {
     dispatch({
-        type: SAVE_QUESTION3_SELECT_ANSWER,
+        type: SAVE_QUESTION3_SELECT_VALUE,
         payload: {
             id,
             select_value,
@@ -364,9 +364,9 @@ export const saveQuestion3SelectAnswer = ({ id, select_value }) => dispatch => {
     dispatch(autoSaveLocalAnswers());
 };
 
-export const saveQuestion3TextAnswer = ({ id, text_value }) => dispatch => {
+export const saveQuestion3TextValue = ({ id, text_value }) => dispatch => {
     dispatch({
-        type: SAVE_QUESTION3_TEXT_ANSWER,
+        type: SAVE_QUESTION3_TEXT_VALUE,
         payload: {
             id,
             text_value,
@@ -375,12 +375,9 @@ export const saveQuestion3TextAnswer = ({ id, text_value }) => dispatch => {
     dispatch(autoSaveLocalAnswers());
 };
 
-export const saveQuestion3FeedbackSelectAnswer = ({
-    id,
-    is_text_correct,
-}) => dispatch => {
+export const saveQuestion3TextScore = ({ id, is_text_correct }) => dispatch => {
     dispatch({
-        type: SAVE_QUESTION3_FEEDBACK_SELECT_ANSWER,
+        type: SAVE_QUESTION3_TEXT_SCORE,
         payload: {
             id,
             is_text_correct,
@@ -389,9 +386,9 @@ export const saveQuestion3FeedbackSelectAnswer = ({
     });
 };
 
-export const saveFeedbackText = ({ id, feedback }) => dispatch => {
+export const saveQuestionFeedback = ({ id, feedback }) => dispatch => {
     dispatch({
-        type: SAVE_FEEDBACK_TEXT,
+        type: SAVE_QUESTION_FEEDBACK,
         payload: {
             id,
             feedback,

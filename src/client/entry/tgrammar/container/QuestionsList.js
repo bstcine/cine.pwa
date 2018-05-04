@@ -5,6 +5,7 @@ import Format11ReadingDesc from '../component/Format11ReadingDesc';
 import Format1ChooseOne from './Format1ChooseOne';
 import Format3Correct from './Format3Correct';
 import { CurrentQuizState, QuestionFormat } from '@/constant/index';
+import { SHOW_ALL_QUESTION } from '@/constant/actionTypeTGrammar';
 
 const mapStateToProps = (state, ownProps) => {
     const { questions, answersById, questionsFilter, currentQuizState } = state;
@@ -26,7 +27,7 @@ const filterQuestions = (
 ) => {
     if (
         currentQuizState !== CurrentQuizState.CHECKING ||
-        questionsFilter === 'ALL'
+        questionsFilter === SHOW_ALL_QUESTION
     ) {
         return questions;
     } else {

@@ -1,10 +1,10 @@
 import { connect } from 'react-redux';
 import Format3Correct from '../component/Format3Correct';
 import {
-    saveQuestion3SelectAnswer,
-    saveQuestion3TextAnswer,
-    saveQuestion3FeedbackSelectAnswer,
-    saveFeedbackText,
+    saveQuestion3SelectValue,
+    saveQuestion3TextValue,
+    saveQuestion3TextScore,
+    saveQuestionFeedback,
 } from '@/action/tgrammarAction';
 
 const mapStateToProps = (state, ownProps) => {
@@ -28,7 +28,7 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch, ownProps) => ({
     onSelectChange: e => {
         dispatch(
-            saveQuestion3SelectAnswer({
+            saveQuestion3SelectValue({
                 id: ownProps.id,
                 select_value: parseInt(e.target.value, 10),
             })
@@ -36,7 +36,7 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     },
     onTextChange: e => {
         dispatch(
-            saveQuestion3TextAnswer({
+            saveQuestion3TextValue({
                 id: ownProps.id,
                 text_value: e.target.value,
             })
@@ -44,7 +44,7 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     },
     onFeedbackSelectChange: e => {
         dispatch(
-            saveQuestion3FeedbackSelectAnswer({
+            saveQuestion3TextScore({
                 id: ownProps.id,
                 is_text_correct: parseInt(e.target.value, 10),
             })
@@ -52,7 +52,7 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     },
     onFeedbackTextChange: e => {
         dispatch(
-            saveFeedbackText({
+            saveQuestionFeedback({
                 id: ownProps.id,
                 feedback: e.target.value,
             })

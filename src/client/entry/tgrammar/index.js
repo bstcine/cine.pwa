@@ -8,11 +8,15 @@ import rootReducer from './reducer';
 import QuizPage from './container/QuizPage';
 import StatsListPage from './container/StatsListPage';
 import storeUtil from '@/util/storeUtil';
-import logger from 'redux-logger';
 import { getParam } from '@/util/urlUtil';
 import Entry from '@/component/Entry';
 
-const store = createStore(rootReducer, applyMiddleware(thunk, logger));
+const middlewares = [thunk];
+if (process.env.NODE_ENV === `development`) {
+    const { logger } = require(`redux-logger`);
+    middlewares.push(logger);
+}
+const store = createStore(rootReducer, applyMiddleware(...middlewares));
 
 const createComponent = (Component, userRequired, props) => {
     if (userRequired && !storeUtil.getToken() && !getParam().token) {

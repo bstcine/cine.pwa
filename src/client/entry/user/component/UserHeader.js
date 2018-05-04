@@ -211,7 +211,7 @@ const UserHeader = ({ topicId, isJustUserRoute, user, handleClick }) => {
                     </div>
                     {user.role_id !== '3' && (
                         <div className={'item tab-grammar-teacher'}>
-                            <a href="/tgrammar/stats/list">老师批改</a>
+                            <a href="/tgrammar/stats/list" target="_blank">老师批改</a>
                         </div>
                     )}
                     <div className={'item tab-address'}>

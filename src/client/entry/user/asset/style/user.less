@@ -76,19 +76,6 @@
     background: #ffffff;
     display: flex;
 
-    & img {
-      width: 0.42rem;
-      height: 0.39rem;
-    }
-
-    & a {
-      color: #3d3e3f;
-      margin-top: 0.29rem;
-    }
-    & a:active {
-      color: #3d3e3f;
-    }
-
     .tab {
       font-family: PingFangSC-Regular;
       font-size: 0.24rem;
@@ -98,6 +85,19 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
+
+      & a {
+        color: #3d3e3f;
+      }
+      & a:active {
+        color: #3d3e3f;
+      }
+
+      & img {
+        width: 0.42rem;
+        height: 0.39rem;
+        margin-bottom: 0.29rem;
+      }
 
       .gray {
         -webkit-filter: grayscale(100%);
@@ -472,7 +472,7 @@
 
   .user-content {
     width: 18.8rem;
-    margin: .44rem auto 0 auto;
+    margin: 0.44rem auto 0 auto;
 
     &.just-user {
       display: block;

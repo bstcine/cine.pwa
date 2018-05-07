@@ -31,20 +31,12 @@ class Root extends Component {
                 location.href = '/learn';
                 break;
             case 'integral':
-                if (uaUtil.AndroidMobile() || uaUtil.iPhone()) {
-                    this.props.history.push('/user/integral');
-                } else {
-                    this.props.history.replace('/user/integral');
-                    this.topicId = 'integral';
-                }
+                this.props.history.replace('/user/integral');
+                this.topicId = 'integral';
                 break;
             case 'coupon':
-                if (uaUtil.AndroidMobile() || uaUtil.iPhone()) {
-                    this.props.history.push('/user/coupon');
-                } else {
-                    this.props.history.replace('/user/coupon');
-                    this.topicId = 'coupon';
-                }
+                this.props.history.replace('/user/coupon');
+                this.topicId = 'coupon';
                 break;
             case 'wordtest':
                 window.open('/vocabtest');

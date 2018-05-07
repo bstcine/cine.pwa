@@ -2,15 +2,21 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { actionUserInfo } from '@/action/userAction';
-import User from '@/entry/user/component/User';
 import { logoutV1 } from '@/service/base';
 import uaUtil from '@/util/uaUtil';
+import UserMobile from '@/entry/user/component/UserMobile';
+import UserHeader from '@/entry/user/component/UserHeader';
+import { Route } from 'react-router-dom';
+import '../asset/style/index.less';
 
 class Root extends Component {
     constructor(props) {
         super(props);
-        this.topicId = props.match.params.topicId || 'integral'; // 用户路由的子路由{/user/integral}
-        this.isJustUserRoute = !props.match.params.topicId; // 是否纯用户路由{/user}
+        this.topicId = 'integral';
+
+        // 是否纯用户路由{/user}
+        this.isJustUserRoute =
+            location.pathname === '/user' || location.pathname === '/user/';
     }
 
     componentDidMount() {
@@ -57,14 +63,40 @@ class Root extends Component {
     };
 
     render() {
-        const { user } = this.props;
+        const { user, routes } = this.props;
+
+        if (this.isJustUserRoute) {
+            if (uaUtil.AndroidMobile() || uaUtil.iPhone()) {
+                return (
+                    <UserMobile user={user} handleClick={this.handleClick} />
+                );
+            } else {
+                location.href = '/user/integral';
+            }
+        }
+
         return (
-            <User
-                topicId={this.topicId}
-                isJustUserRoute={this.isJustUserRoute}
-                user={user}
-                handleClick={this.handleClick}
-            />
+            <React.Fragment>
+                <UserHeader
+                    topicId={this.topicId}
+                    user={user}
+                    handleClick={this.handleClick}
+                />
+                <div
+                    className={
+                        this.isJustUserRoute
+                            ? 'user-content just-user'
+                            : 'user-content'
+                    }>
+                    {routes.map((route, i) => (
+                        <Route
+                            key={i}
+                            path={route.path}
+                            render={props => <route.component {...props} />}
+                        />
+                    ))}
+                </div>
+            </React.Fragment>
         );
     }
 }

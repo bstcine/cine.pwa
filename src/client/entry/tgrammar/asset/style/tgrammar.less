@@ -46,7 +46,11 @@
 
   .questionitems {
     margin: 0 20px;
-    font-family: Times, Times New Roman, serif;
+
+    .questionformat10,
+    .questionformat11 {
+      font-family: Times, Times New Roman, serif;
+    }
 
     .questionformat10 {
       position: relative;
@@ -104,6 +108,7 @@
         line-height: 24px;
         color: @black;
         white-space: pre-wrap;
+        font-family: Times, Times New Roman, serif;
 
         .question-content {
           padding-left: 10px;
@@ -111,6 +116,7 @@
       }
 
       .question-select {
+        font-family: Times, Times New Roman, serif;
         .options {
           margin-bottom: 10px;
         }
@@ -213,6 +219,7 @@
 
         textarea,
         .textarea {
+          font-family: Times, Times New Roman, serif;
           width: 100%;
           min-height: 100px;
           padding: 18px 20px;
@@ -222,7 +229,6 @@
         }
 
         textarea {
-          font-family: Times, Times New Roman, serif;
           resize: vertical;
           border: solid 1px #dadcdd;
           &:focus {
@@ -251,6 +257,7 @@
 
         textarea,
         .textarea {
+          font-family: Times, Times New Roman, serif;
           width: 100%;
           min-height: 100px;
           padding: 18px 20px;
@@ -261,7 +268,6 @@
         }
 
         textarea {
-          font-family: Times, Times New Roman, serif;
           resize: vertical;
           border: solid 1px #ffded9;
           &:focus {

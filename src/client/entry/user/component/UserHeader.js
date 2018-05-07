@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const UserHeader = ({ topicId, isJustUserRoute, user, handleClick }) => {
     let headImg = user.head_image
@@ -34,7 +35,7 @@ const UserHeader = ({ topicId, isJustUserRoute, user, handleClick }) => {
                     </div>
                 </div>
                 <div className={'user-panel-c'}>
-                    <div className={'tab'}>
+                    <a className={'tab'} style={{ color: 'gray' }}>
                         <div style={{ display: 'flex' }}>
                             <img
                                 src={require('../asset/image/ico_order@2x.png')}
@@ -47,90 +48,84 @@ const UserHeader = ({ topicId, isJustUserRoute, user, handleClick }) => {
                                 </span>
                             )}
                         </div>
-                        <a style={{ color: 'gray' }}>我的订单</a>
-                    </div>
-                    <div className={'tab'} onClick={() => handleClick('study')}>
+                        我的订单
+                    </a>
+                    <a className={'tab'} href={'/learn'}>
                         <img
                             src={require('../asset/image/ico_my_study.png')}
                             style={{ width: '.42rem', height: '.39rem' }}
                         />
-                        <a>我的学习</a>
-                    </div>
-                    <div
-                        className={'tab'}
-                        onClick={() => handleClick('integral')}>
+                        我的学习
+                    </a>
+                    <Link className={'tab'} to={'/user/integral'}>
                         <img
                             src={require('../asset/image/ico_integral.png')}
                             style={{ width: '.42rem', height: '.42rem' }}
                         />
-                        <a>我的积分</a>
-                    </div>
-                    <div
-                        className={'tab'}
-                        onClick={() => handleClick('coupon')}>
+                        我的积分
+                    </Link>
+                    <Link className={'tab'} to={'/user/coupon'}>
                         <img
                             src={require('../asset/image/ico_coupon@2x.png')}
                             style={{ width: '.42rem', height: '.40rem' }}
                         />
-                        <a>我的优惠</a>
-                    </div>
+                        我的优惠
+                    </Link>
                 </div>
                 <div className={'user-panel-c'}>
-                    <div
-                        className={'tab'}
-                        onClick={() => handleClick('wordtest')}>
+                    <a className={'tab'} href={'/vocabtest'} target={'_blank'}>
                         <img
                             src={require('../asset/image/ico_test_word@2x.png')}
                             style={{ height: '.57rem', width: '.57rem' }}
                         />
-                        <a>词汇量测试</a>
-                    </div>
-                    <div
+                        词汇量测试
+                    </a>
+                    <a
                         className={'tab'}
-                        onClick={() => handleClick('tgrammar')}>
+                        href={'/tgrammar/quiz'}
+                        target={'_blank'}>
                         <img
                             src={require('../asset/image/ico_test_grammar@2x.png')}
                             style={{ height: '.57rem', width: '.57rem' }}
                         />
-                        <a>核心语法测试</a>
-                    </div>
+                        核心语法测试
+                    </a>
                     {user.role_id !== '3' && (
-                        <div
+                        <a
                             className={'tab'}
-                            onClick={() => handleClick('tgrammar-teacher')}>
+                            href={'/tgrammar/stats/list'}
+                            target={'_blank'}>
                             <img
                                 src={require('../asset/image/ico_test_teacher@2x.png')}
                                 style={{ height: '.57rem', width: '.57rem' }}
                             />
-                            <a>老师批改</a>
-                        </div>
+                            老师批改
+                        </a>
                     )}
                 </div>
                 <div className={'user-panel-c'}>
-                    <div className={'tab'}>
+                    <a className={'tab'} style={{ color: 'gray' }}>
                         <img
                             src={require('../asset/image/ico_address@2x.png')}
                             className={'gray'}
                             style={{ width: '.34rem', height: '.40rem' }}
                         />
-                        <a style={{ color: 'gray' }}>我的地址</a>
-                    </div>
-                    <div
-                        className={'tab'}
-                        onClick={() => handleClick('password')}>
+                        我的地址
+                    </a>
+                    <a className={'tab'} href={'/resetPassword'}>
                         <img
                             src={require('../asset/image/ico_edit1.png')}
                             style={{ width: '.37rem', height: '.38rem' }}
                         />
-                        <a>修改密码</a>
-                    </div>
-                    <div className={'tab'} onClick={() => handleClick('quit')}>
+                        修改密码
+                    </a>
+                    <a className={'tab'} onClick={() => handleClick('quit')}>
                         <img
                             src={require('../asset/image/ico_quit@2x.png')}
                             style={{ width: '.34rem', height: '.35rem' }}
                         />
-                        <a>退出</a>
-                    </div>
+                        退出
+                    </a>
                 </div>
             </div>
             {/* 用户主页-PC */}
@@ -211,7 +206,9 @@ const UserHeader = ({ topicId, isJustUserRoute, user, handleClick }) => {
                     </div>
                     {user.role_id !== '3' && (
                         <div className={'item tab-grammar-teacher'}>
-                            <a href="/tgrammar/stats/list" target="_blank">老师批改</a>
+                            <a href="/tgrammar/stats/list" target="_blank">
+                                老师批改
+                            </a>
                         </div>
                     )}
                     <div className={'item tab-address'}>

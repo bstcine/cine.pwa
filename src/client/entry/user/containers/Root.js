@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { grey400, indigo500, indigo700 } from 'material-ui/styles/colors';
-import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { actionUserInfo } from '@/action/userAction';
 import User from '@/entry/user/component/User';
 import { logoutV1 } from '@/service/base';
@@ -31,20 +28,12 @@ class Root extends Component {
                 location.href = '/learn';
                 break;
             case 'integral':
-                if (uaUtil.AndroidMobile() || uaUtil.iPhone()) {
-                    this.props.history.push('/user/integral');
-                } else {
-                    this.props.history.replace('/user/integral');
-                    this.topicId = 'integral';
-                }
+                this.props.history.replace('/user/integral');
+                this.topicId = 'integral';
                 break;
             case 'coupon':
-                if (uaUtil.AndroidMobile() || uaUtil.iPhone()) {
-                    this.props.history.push('/user/coupon');
-                } else {
-                    this.props.history.replace('/user/coupon');
-                    this.topicId = 'coupon';
-                }
+                this.props.history.replace('/user/coupon');
+                this.topicId = 'coupon';
                 break;
             case 'wordtest':
                 window.open('/vocabtest');
@@ -69,24 +58,13 @@ class Root extends Component {
 
     render() {
         const { user } = this.props;
-
-        const muiTheme = getMuiTheme({
-            palette: {
-                primary1Color: indigo500,
-                primary2Color: indigo700,
-                primary3Color: grey400,
-            },
-        });
-
         return (
-            <MuiThemeProvider muiTheme={muiTheme}>
-                <User
-                    topicId={this.topicId}
-                    isJustUserRoute={this.isJustUserRoute}
-                    user={user}
-                    handleClick={this.handleClick}
-                />
-            </MuiThemeProvider>
+            <User
+                topicId={this.topicId}
+                isJustUserRoute={this.isJustUserRoute}
+                user={user}
+                handleClick={this.handleClick}
+            />
         );
     }
 }

@@ -1,10 +1,13 @@
 import React from 'react';
 import CouponContainer from '@/entry/user/containers/CouponContainer';
 import PointContainer from '@/entry/user/containers/PointContainer';
+import uaUtil from '@/util/uaUtil';
 
 const UserContent = ({ topicId, isJustUserRoute, ...props }) => {
-    let content = <PointContainer />;
+    // 移动端且纯用户路由时不加载
+    if ((uaUtil.AndroidMobile() || uaUtil.iPhone()) && isJustUserRoute) return <div />;
 
+    let content;
     switch (topicId) {
         case 'coupon':
             content = <CouponContainer />;
@@ -16,7 +19,9 @@ const UserContent = ({ topicId, isJustUserRoute, ...props }) => {
 
     return (
         <div
-            className={isJustUserRoute ? 'user-content just-user' : 'user-content'}>
+            className={
+                isJustUserRoute ? 'user-content just-user' : 'user-content'
+            }>
             {content}
         </div>
     );

@@ -60,6 +60,7 @@ class Root extends Component {
                 );
             } else {
                 location.href = '/user/integral';
+                return <div/>;
             }
         }
 

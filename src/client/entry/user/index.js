@@ -38,27 +38,25 @@ const userRoute = {
     ],
 };
 
+const RouteWithSubRoutes = route => (
+    <Route
+        path={route.path}
+        render={props => {
+            if (!storeUtil.getToken()) {
+                location.href =
+                    '/login?go=' + encodeURIComponent(location.href);
+                return;
+            }
+            return <route.component {...props} routes={route.routes} />;
+        }}
+    />
+);
+
 render(
     <Router>
         <Provider store={store}>
             <MuiThemeProvider muiTheme={muiTheme}>
-                <Route
-                    path={userRoute.path}
-                    render={props => {
-                        if (!storeUtil.getToken()) {
-                            location.href =
-                                '/login?go=' +
-                                encodeURIComponent(location.href);
-                            return;
-                        }
-                        return (
-                            <userRoute.component
-                                {...props}
-                                routes={userRoute.routes}
-                            />
-                        );
-                    }}
-                />
+                <RouteWithSubRoutes {...userRoute} />
             </MuiThemeProvider>
         </Provider>
     </Router>,

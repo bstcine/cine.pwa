@@ -3,12 +3,14 @@ import { connect } from 'react-redux';
 import moment from 'moment';
 
 const mapStateToProps = (state, ownProps) => {
-    let { quiz, statsQuiz } = state;
+    let { quiz, statsContentQuiz } = state;
     return {
         title: quiz.name,
         question_count: quiz.question_count,
-        date: statsQuiz ? statsQuiz.create_at.substring(0, 10) : null,
-        score: statsQuiz ? statsQuiz.score : null,
+        date: statsContentQuiz
+            ? statsContentQuiz.create_at.substring(0, 10)
+            : null,
+        score: statsContentQuiz ? statsContentQuiz.score : null,
     };
 };
 

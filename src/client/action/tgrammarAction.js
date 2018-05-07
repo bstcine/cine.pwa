@@ -1,36 +1,38 @@
 import { fetchData } from '@/service/base';
 import {
     APIURL_Stats_Quiz_Reset,
-    APIURL_Content_Quiz_Grammar,
+    APIURL_Content_Quiz,
     APIURL_Stats_Quiz_Save,
     APIURL_Stats_Quiz_Update,
     APIURL_Stats_Quiz_List,
 } from '@/../APIConfig';
 import storeUtil from '@/util/storeUtil';
 import {
-    REQUEST_QUIZ_DATA,
-    RECEIVE_QUIZ_DATA,
+    REQUEST_CONTENT_QUIZ,
+    RECEIVE_CONTENT_QUIZ,
+    REQUEST_STATS_QUIZ_SAVE,
+    RECEIVE_STATS_QUIZ_SAVE,
+    REQUEST_STATS_QUIZ_LIST,
+    RECEIVE_STATS_QUIZ_LIST,
     SAVE_QUESTION1_SELECT_VALUE,
     SAVE_QUESTION3_SELECT_VALUE,
     SAVE_QUESTION3_TEXT_VALUE,
     SAVE_QUESTION3_TEXT_SCORE,
     SAVE_QUESTION_FEEDBACK,
-    UPLOADING_QUESTIONS,
-    UPLOADED_QUESTIONS,
     CLOSE_LOGIN_MODAL,
     OPEN_LOGIN_MODAL,
-    REQUEST_STATS_QUIZ_LIST,
-    RECEIVE_STATS_QUIZ_LIST,
     RESTORE_LOCAL_ANSWERS,
     RECORD_TIME,
     SHOW_UNCOMPLETED_QUESTION,
     SHOW_ALL_QUESTION,
     UPDATE_ANSWERS,
+    REQUEST_STATS_QUIZ_UPDATE,
+    RECEIVE_STATS_QUIZ_UPDATE,
 } from '@/constant/actionTypeTGrammar';
 import {
     RoleID,
     CurrentQuizState,
-    StatsQuizStatus,
+    StatsContentQuizStatus,
     QuestionFormat,
 } from '@/constant/index';
 import {
@@ -44,13 +46,13 @@ import {
  */
 export const fetchQuizData = ({
     quiz_id,
-    stats_quiz_id,
+    stats_content_quiz_id,
     cmd,
 }) => async dispatch => {
     dispatch(requestQuizData());
-    let [err, result] = await fetchData(APIURL_Content_Quiz_Grammar, {
+    let [err, result] = await fetchData(APIURL_Content_Quiz, {
         quiz_id,
-        stats_quiz_id,
+        stats_content_quiz_id,
     });
     if (err) {
         if (err === 'stats_quiz_not_found') {
@@ -60,23 +62,23 @@ export const fetchQuizData = ({
         }
         return;
     }
-    const { user, quiz, statsQuiz, statsQuizDetail } = result;
+    const { user, quiz, statsContentQuiz, statsContentQuizDetail } = result;
     quizDataFix(quiz.data);
     if (
         (user.role_id === RoleID.ADMINISTRATOR ||
             user.role_id === RoleID.TEACHER) &&
-        !statsQuiz
+        !statsContentQuiz
     ) {
         location.href = '/tgrammar/stats/list';
         return;
     }
-    const currentQuizState = getCurrentQuizState(user, statsQuiz, cmd);
+    const currentQuizState = getCurrentQuizState(user, statsContentQuiz, cmd);
     dispatch(
         receiveQuizData({
             user,
             quiz,
-            statsQuiz,
-            statsQuizDetail,
+            statsContentQuiz,
+            statsContentQuizDetail,
             currentQuizState,
         })
     );
@@ -85,8 +87,12 @@ export const fetchQuizData = ({
         let localAnswer = hasLocalAnswers(quiz, user);
         if (localAnswer) {
             const text = '检测到有未提交的答题记录，是否恢复？';
-            const onConfirm = () => restoreLocalAnswers(localAnswer);
-            const onCancel = () => clearLocalAnswers(quiz, user);
+            const onConfirm = () => {
+                dispatch(restoreLocalAnswers(localAnswer));
+            };
+            const onCancel = () => {
+                clearLocalAnswers(quiz, user);
+            };
             dispatch(openConfirmModal({ text, onConfirm, onCancel }));
         }
         dispatch(recordTime());
@@ -107,7 +113,14 @@ export const preSubmitAnswer = () => (dispatch, getState) => {
         let text = `你的第 ${unCompletedNos.join(',')} 题共 ${
             unCompletedNos.length
         } 道题未答，是否确定提交答卷？`;
-        return dispatch(openConfirmModal({ text, onConfirm: submitAnswer }));
+        return dispatch(
+            openConfirmModal({
+                text,
+                onConfirm: () => {
+                    dispatch(submitAnswer());
+                },
+            })
+        );
     }
     dispatch(submitAnswer());
 };
@@ -129,7 +142,7 @@ export const submitAnswer = () => (dispatch, getState) => {
             answers.push(answer);
         }
     });
-    dispatch({ type: UPLOADING_QUESTIONS });
+    dispatch({ type: REQUEST_STATS_QUIZ_SAVE });
     return fetchData(APIURL_Stats_Quiz_Save, {
         quiz_id: quiz.id,
         answers,
@@ -139,9 +152,11 @@ export const submitAnswer = () => (dispatch, getState) => {
             if (err === 'no_login') return dispatch(openLoginModal());
             return dispatch(networkError(err));
         }
-        dispatch({ type: UPLOADED_QUESTIONS });
+        dispatch({ type: RECEIVE_STATS_QUIZ_SAVE });
         clearLocalAnswers(quiz, user);
-        location.href = `/tgrammar/quiz?stats_quiz_id=${result.statsQuiz.id}`;
+        location.href = `/tgrammar/quiz?stats_content_quiz_id=${
+            result.statsContentQuiz.id
+        }`;
     });
 };
 
@@ -152,7 +167,7 @@ export const submitCheckAnswer = (complete = true) => async (
     dispatch,
     getState
 ) => {
-    let { statsQuiz, questions, answersById } = getState();
+    let { statsContentQuiz, questions, answersById } = getState();
     if (!_hasCompleteCheckQuiz(questions.byId, answersById)) return alert('请批改完全部试题后再提交');
     let answers = [];
     let score = 0;
@@ -169,9 +184,9 @@ export const submitCheckAnswer = (complete = true) => async (
             answers.push(answer);
         }
     });
-    dispatch({ type: UPLOADING_QUESTIONS });
+    dispatch({ type: REQUEST_STATS_QUIZ_UPDATE });
     let [err] = await fetchData(APIURL_Stats_Quiz_Update, {
-        stats_quiz_id: statsQuiz.id,
+        stats_content_quiz_id: statsContentQuiz.id,
         answers,
         complete,
         score,
@@ -180,7 +195,7 @@ export const submitCheckAnswer = (complete = true) => async (
         if (err === 'no_login') return dispatch(openLoginModal());
         return dispatch(networkError(err));
     }
-    dispatch({ type: UPLOADED_QUESTIONS });
+    dispatch({ type: RECEIVE_STATS_QUIZ_UPDATE });
     location.href = '/tgrammar/stats/list';
 };
 
@@ -188,9 +203,9 @@ export const submitCheckAnswer = (complete = true) => async (
  * 重置试卷
  */
 export const resetQuiz = () => async (dispatch, getState) => {
-    let { statsQuiz } = getState();
+    let { statsContentQuiz } = getState();
     let [err] = await fetchData(APIURL_Stats_Quiz_Reset, {
-        stats_quiz_id: statsQuiz.id,
+        stats_content_quiz_id: statsContentQuiz.id,
     });
     if (err) {
         if (err === 'no_login') return dispatch(openLoginModal());
@@ -200,12 +215,22 @@ export const resetQuiz = () => async (dispatch, getState) => {
 };
 
 /**
+ * 答题记录列表
+ */
+export const fetchStatsContentQuizList = () => async dispatch => {
+    dispatch({ type: REQUEST_STATS_QUIZ_LIST });
+    let [err, result] = await fetchData(APIURL_Stats_Quiz_List);
+    if (err) return dispatch(networkError(err));
+    dispatch({ type: RECEIVE_STATS_QUIZ_LIST, payload: result });
+};
+
+/**
  * 当前测试试卷的状态，不同的角色不同的答题记录对应不同的状态
  */
-const getCurrentQuizState = (user, statsQuiz, cmd) => {
+const getCurrentQuizState = (user, statsContentQuiz, cmd) => {
     if (user.role_id === RoleID.STUDENT) {
-        if (statsQuiz) {
-            if (statsQuiz.status === StatsQuizStatus.CHECKED) {
+        if (statsContentQuiz) {
+            if (statsContentQuiz.status === StatsContentQuizStatus.CHECKED) {
                 return CurrentQuizState.REVIEWING;
             } else {
                 return CurrentQuizState.WAITING4CHECK;
@@ -215,7 +240,7 @@ const getCurrentQuizState = (user, statsQuiz, cmd) => {
         }
     }
     if (user.role_id === RoleID.TEACHER) {
-        if (statsQuiz) {
+        if (statsContentQuiz) {
             if (cmd === 'check') {
                 return CurrentQuizState.CHECKING;
             } else {
@@ -246,23 +271,23 @@ const updateAnswers = answersById => ({
 });
 
 export const requestQuizData = () => ({
-    type: REQUEST_QUIZ_DATA,
+    type: REQUEST_CONTENT_QUIZ,
 });
 
 export const receiveQuizData = ({
     user,
     quiz,
-    statsQuiz,
-    statsQuizDetail,
+    statsContentQuiz,
+    statsContentQuizDetail,
     currentQuizState,
 }) => {
     return {
-        type: RECEIVE_QUIZ_DATA,
+        type: RECEIVE_CONTENT_QUIZ,
         payload: {
             user,
             quiz,
-            statsQuiz,
-            statsQuizDetail,
+            statsContentQuiz,
+            statsContentQuizDetail,
             currentQuizState,
         },
     };
@@ -331,16 +356,6 @@ const recordTime = () => ({
         startTime: new Date().getTime(),
     },
 });
-
-/**
- * 答题记录列表
- */
-export const fetchStatsQuizList = () => async dispatch => {
-    dispatch({ type: REQUEST_STATS_QUIZ_LIST });
-    let [err, result] = await fetchData(APIURL_Stats_Quiz_List);
-    if (err) return dispatch(networkError(err));
-    dispatch({ type: RECEIVE_STATS_QUIZ_LIST, payload: result });
-};
 
 export const saveQuestion1SelectValue = ({ id, select_value }) => dispatch => {
     dispatch({
@@ -414,7 +429,7 @@ const restoreLocalAnswers = answersById => ({
     payload: answersById,
 });
 
-const clearLocalAnswers = (quiz, user) => dispatch => {
+const clearLocalAnswers = (quiz, user) => {
     const key = getLocalAnswersKey(quiz, user);
     storeUtil.remove(key);
 };
@@ -426,6 +441,10 @@ export const closeLoginModal = () => ({
 export const openLoginModal = () => ({
     type: OPEN_LOGIN_MODAL,
 });
+
+export const showUncompletedQuestion = { type: SHOW_UNCOMPLETED_QUESTION };
+
+export const showAllQuestion = { type: SHOW_ALL_QUESTION };
 
 /**
  * 题目是否全部做完
@@ -466,7 +485,3 @@ const _getUnCompletedNos = (questionIds, answersById) => {
 const _hasCompleteCheckQuiz = () => {
     return true;
 };
-
-export const showUncompletedQuestion = { type: SHOW_UNCOMPLETED_QUESTION };
-
-export const showAllQuestion = { type: SHOW_ALL_QUESTION };

@@ -52,7 +52,7 @@ export const RoleID = {
 /**
  * 测验报告状态
  */
-export const StatsQuizStatus = {
+export const StatsContentQuizStatus = {
     /**
      * 0:答题中
      */

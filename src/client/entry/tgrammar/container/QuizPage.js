@@ -22,20 +22,20 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => ({
-    fetchQuizData: ({ quiz_id, stats_quiz_id, cmd }) => {
-        dispatch(fetchQuizData({ quiz_id, stats_quiz_id, cmd }));
+    fetchQuizData: ({ quiz_id, stats_content_quiz_id, cmd }) => {
+        dispatch(fetchQuizData({ quiz_id, stats_content_quiz_id, cmd }));
     },
 });
 
 class QuizPage extends Component {
     componentDidMount() {
-        let { quiz_id, stats_quiz_id, cmd } = getParam();
+        let { quiz_id, stats_content_quiz_id, cmd } = getParam();
         const { fetchQuizData } = this.props;
-        fetchQuizData({ quiz_id, stats_quiz_id, cmd });
+        fetchQuizData({ quiz_id, stats_content_quiz_id, cmd });
     }
 
     // componentWillReceiveProps(nextProps){
-    //     let {stats_quiz_id} = getParam();
+    //     let {stats_content_quiz_id} = getParam();
     //     if()
     // }
 

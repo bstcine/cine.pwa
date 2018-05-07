@@ -1,19 +1,19 @@
 import { combineReducers } from 'redux';
 
 import {
-    REQUEST_QUIZ_DATA,
-    RECEIVE_QUIZ_DATA,
+    REQUEST_CONTENT_QUIZ,
+    RECEIVE_CONTENT_QUIZ,
+    REQUEST_STATS_QUIZ_SAVE,
+    RECEIVE_STATS_QUIZ_SAVE,
+    REQUEST_STATS_QUIZ_LIST,
+    RECEIVE_STATS_QUIZ_LIST,
     SAVE_QUESTION1_SELECT_VALUE,
     SAVE_QUESTION3_SELECT_VALUE,
     SAVE_QUESTION3_TEXT_VALUE,
     SAVE_QUESTION3_TEXT_SCORE,
     SAVE_QUESTION_FEEDBACK,
-    UPLOADING_QUESTIONS,
-    UPLOADED_QUESTIONS,
     CLOSE_LOGIN_MODAL,
     OPEN_LOGIN_MODAL,
-    REQUEST_STATS_QUIZ_LIST,
-    RECEIVE_STATS_QUIZ_LIST,
     RESTORE_LOCAL_ANSWERS,
     RECORD_TIME,
     SHOW_UNCOMPLETED_QUESTION,
@@ -32,7 +32,7 @@ import {
  */
 const quiz = (state = {}, { type, payload }) => {
     switch (type) {
-        case RECEIVE_QUIZ_DATA: {
+        case RECEIVE_CONTENT_QUIZ: {
             const { quiz } = payload;
             const { id, name, status, question_count } = quiz;
             return {
@@ -54,7 +54,7 @@ const quiz = (state = {}, { type, payload }) => {
  */
 const questions = (state = { byId: {}, allIds: [] }, { type, payload }) => {
     switch (type) {
-        case RECEIVE_QUIZ_DATA: {
+        case RECEIVE_CONTENT_QUIZ: {
             const { quiz } = payload;
             let byId = {};
             let allIds = [];
@@ -108,11 +108,15 @@ const answersById = (state = {}, { type, payload }) => {
             answer.feedback = feedback;
             return newState;
         }
-        case RECEIVE_QUIZ_DATA: {
-            let { statsQuiz, statsQuizDetail } = payload;
-            if (statsQuiz && statsQuizDetail && statsQuizDetail.length) {
+        case RECEIVE_CONTENT_QUIZ: {
+            let { statsContentQuiz, statsContentQuizDetail } = payload;
+            if (
+                statsContentQuiz &&
+                statsContentQuizDetail &&
+                statsContentQuizDetail.length
+            ) {
                 let newState = {};
-                statsQuizDetail.forEach(answer => {
+                statsContentQuizDetail.forEach(answer => {
                     newState[answer.question_id] = answer;
                 });
                 return newState;
@@ -131,12 +135,12 @@ const answersById = (state = {}, { type, payload }) => {
 /**
  * 学生答题记录-主表记录
  */
-const statsQuiz = (state = null, { type, payload }) => {
+const statsContentQuiz = (state = null, { type, payload }) => {
     switch (type) {
-        case RECEIVE_QUIZ_DATA: {
-            let { statsQuiz } = payload;
-            if (statsQuiz) {
-                return { ...statsQuiz };
+        case RECEIVE_CONTENT_QUIZ: {
+            let { statsContentQuiz } = payload;
+            if (statsContentQuiz) {
+                return { ...statsContentQuiz };
             } else {
                 return state;
             }
@@ -156,21 +160,21 @@ const network = (
     { type, payload }
 ) => {
     switch (type) {
-        case REQUEST_QUIZ_DATA:
-        case UPLOADING_QUESTIONS:
+        case REQUEST_CONTENT_QUIZ:
+        case REQUEST_STATS_QUIZ_SAVE:
         case REQUEST_STATS_QUIZ_LIST:
             return {
                 ...state,
                 pending: true,
             };
-        case UPLOADED_QUESTIONS:
+        case RECEIVE_STATS_QUIZ_SAVE:
             return {
                 ...state,
                 pending: false,
                 text: payload ? payload.text : null,
             };
         case OPEN_LOGIN_MODAL:
-        case RECEIVE_QUIZ_DATA:
+        case RECEIVE_CONTENT_QUIZ:
         case RECEIVE_STATS_QUIZ_LIST:
             return {
                 ...state,
@@ -198,7 +202,7 @@ const network = (
 
 const user = (state = {}, { type, payload }) => {
     switch (type) {
-        case RECEIVE_QUIZ_DATA:
+        case RECEIVE_CONTENT_QUIZ:
             return { ...payload.user };
         default:
             return state;
@@ -217,7 +221,7 @@ const loginModal = (state = { isOpen: false }, { type, payload }) => {
     }
 };
 
-const statsQuizList = (state = [], { type, payload }) => {
+const statsContentQuizList = (state = [], { type, payload }) => {
     switch (type) {
         case RECEIVE_STATS_QUIZ_LIST:
             return [...payload];
@@ -256,7 +260,7 @@ const currentQuizState = (
     { type, payload }
 ) => {
     switch (type) {
-        case RECEIVE_QUIZ_DATA:
+        case RECEIVE_CONTENT_QUIZ:
             return payload.currentQuizState;
         default:
             return state;
@@ -266,9 +270,9 @@ const currentQuizState = (
 const rootReducer = combineReducers({
     quiz,
     user,
-    statsQuiz,
+    statsContentQuiz,
     questions,
-    statsQuizList,
+    statsContentQuizList,
     answersById,
     network,
     tipModal,

@@ -25,14 +25,13 @@ exports.APIURL_Content_Home = '/api/content/home'; // app首页
 exports.APIURL_Content_Tag_Tree = '/api/content/tag/tree'; // 标签树
 exports.APIURL_Content_Course_Detail = '/api/content/course/detail'; // 课程详情
 exports.APIURL_Content_Course_Set = '/api/content/course/set'; // 课程详情
-exports.APIURL_Content_Quiz = '/api/web/quiz/'; // 小节测试
+exports.APIURL_Content_Lesson_Quiz = '/api/web/quiz/'; // 小节测试
 
-exports.APIURL_Content_Quiz_Grammar = '/api/content/quiz/grammar'; // 阅读理解测试题目
+exports.APIURL_Content_Quiz = '/api/content/quiz'; // 阅读理解题目数据 & 答题记录请求
 exports.APIURL_Stats_Quiz_Save = '/api/stats/quiz/save'; // 保存阅读理解测试答案
 exports.APIURL_Stats_Quiz_Update = '/api/stats/quiz/update'; // 更新阅读理解测试批改结果
 exports.APIURL_Stats_Quiz_Reset = '/api/stats/quiz/reset'; //  重置阅读理解测试（学生重做）
 exports.APIURL_Stats_Quiz_List = '/api/stats/quiz/list'; // 阅读理解测试学生答题列表
-exports.APIURL_Stats_Quiz_Detail = '/api/stats/quiz/detail'; // 阅读理解测试答题明细
 
 exports.APIURL_Wechat_Js_Signature = '/api/wechat/jssignature';
 

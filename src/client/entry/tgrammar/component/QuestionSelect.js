@@ -1,13 +1,7 @@
 import React from 'react';
 import SelectOption from './SelectOption';
 
-const QuestionSelect = ({
-    id,
-    editable,
-    options,
-    select_value,
-    onSelectChange,
-}) => {
+const QuestionSelect = ({ id, editable, options, select_value, onChange }) => {
     return (
         <div className="question-select">
             <fieldset disabled={!editable}>
@@ -19,7 +13,7 @@ const QuestionSelect = ({
                                 index={i}
                                 name={'qid' + id}
                                 value={option.value}
-                                onChange={onSelectChange}
+                                onChange={onChange}
                                 content={option.content}
                                 checked={select_value === option.value}
                             />

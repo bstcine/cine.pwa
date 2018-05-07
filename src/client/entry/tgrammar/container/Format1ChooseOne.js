@@ -21,7 +21,7 @@ const mapStateToProps = (state, ownProps) => {
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-    onSelectChange: e => {
+    saveQuestion1SelectValue: e => {
         dispatch(
             saveQuestion1SelectValue({
                 id: ownProps.id,
@@ -29,7 +29,7 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
             })
         );
     },
-    onFeedbackTextChange: e => {
+    saveQuestionFeedback: e => {
         dispatch(
             saveQuestionFeedback({
                 id: ownProps.id,

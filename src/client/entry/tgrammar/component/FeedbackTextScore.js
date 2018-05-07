@@ -21,7 +21,7 @@ const FeedbackTextScore = ({
     editable,
     is_text_correct,
     text_score,
-    onFeedbackSelectChange,
+    onChange,
 }) => {
     return (
         <div className="feedback-text-score">
@@ -36,7 +36,7 @@ const FeedbackTextScore = ({
                                 value={option.value}
                                 content={option.content}
                                 checked={is_text_correct === option.value}
-                                onChange={onFeedbackSelectChange}
+                                onChange={onChange}
                             />
                         );
                     })}

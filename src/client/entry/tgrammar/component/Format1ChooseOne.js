@@ -18,8 +18,8 @@ const Format1ChooseOne = ({
     is_select_correct,
     feedback,
     currentQuizState,
-    onSelectChange,
-    onFeedbackTextChange,
+    saveQuestion1SelectValue,
+    saveQuestionFeedback,
 }) => {
     console.log('Question1ChooseOne render');
     return (
@@ -31,7 +31,7 @@ const Format1ChooseOne = ({
                 editable={currentQuizState === CurrentQuizState.ANSWERING}
                 options={options}
                 select_value={select_value}
-                onSelectChange={onSelectChange}
+                onChange={saveQuestion1SelectValue}
             />
 
             {(currentQuizState === CurrentQuizState.CHECKING ||
@@ -51,7 +51,7 @@ const Format1ChooseOne = ({
                 <FeedbackText
                     editable={currentQuizState === CurrentQuizState.CHECKING}
                     feedback={feedback}
-                    onFeedbackTextChange={onFeedbackTextChange}
+                    onChange={saveQuestionFeedback}
                 />
             )}
         </div>

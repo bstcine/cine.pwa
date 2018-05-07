@@ -37,10 +37,10 @@ const Format3Correct = ({
     text_score,
     feedback,
     currentQuizState,
-    onSelectChange,
-    onTextChange,
-    onFeedbackSelectChange,
-    onFeedbackTextChange,
+    saveQuestion3SelectValue,
+    saveQuestion3TextValue,
+    saveQuestion3TextScore,
+    saveQuestionFeedback,
 }) => {
     console.log('Question3Correct render');
 
@@ -53,7 +53,7 @@ const Format3Correct = ({
                 editable={currentQuizState === CurrentQuizState.ANSWERING}
                 options={options}
                 select_value={select_value}
-                onSelectChange={onSelectChange}
+                onChange={saveQuestion3SelectValue}
             />
 
             {(currentQuizState === CurrentQuizState.CHECKING ||
@@ -72,7 +72,7 @@ const Format3Correct = ({
                 <QuestionText
                     editable={currentQuizState === CurrentQuizState.ANSWERING}
                     text_value={text_value}
-                    onTextChange={onTextChange}
+                    onChange={saveQuestion3TextValue}
                 />
             )}
 
@@ -86,7 +86,7 @@ const Format3Correct = ({
                     }
                     is_text_correct={is_text_correct}
                     text_score={text_score}
-                    onFeedbackSelectChange={onFeedbackSelectChange}
+                    onChange={saveQuestion3TextScore}
                 />
             )}
 
@@ -95,7 +95,7 @@ const Format3Correct = ({
                 <FeedbackText
                     editable={currentQuizState === CurrentQuizState.CHECKING}
                     feedback={feedback}
-                    onFeedbackTextChange={onFeedbackTextChange}
+                    onChange={saveQuestionFeedback}
                 />
             )}
         </div>

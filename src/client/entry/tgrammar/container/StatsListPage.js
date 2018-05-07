@@ -2,7 +2,7 @@ import '../asset/style/index.less';
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { fetchStatsQuizList } from '@/action/tgrammarAction';
+import { fetchStatsContentQuizList } from '@/action/tgrammarAction';
 import Header from '@/component/Header';
 import Footer from '@/component/Footer';
 import StatsTable from '../container/StatsTable';
@@ -16,15 +16,15 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => ({
-    fetchStatsQuizList: () => {
-        dispatch(fetchStatsQuizList());
+    fetchStatsContentQuizList: () => {
+        dispatch(fetchStatsContentQuizList());
     },
 });
 
 class StatsListPage extends Component {
     componentDidMount() {
-        const { fetchStatsQuizList } = this.props;
-        fetchStatsQuizList();
+        const { fetchStatsContentQuizList } = this.props;
+        fetchStatsContentQuizList();
     }
 
     render() {

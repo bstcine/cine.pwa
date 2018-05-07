@@ -1,14 +1,14 @@
 import React from 'react';
 import TextareaAutosize from 'react-autosize-textarea';
 
-const QuestionText = ({ editable, text_value, onTextChange }) => {
+const QuestionText = ({ editable, text_value, onChange }) => {
     return (
         <div className="question-text">
             <span>修正错误：</span>
             {editable ? (
                 <TextareaAutosize
                     value={text_value || ''}
-                    onChange={onTextChange}
+                    onChange={onChange}
                 />
             ) : (
                 <div

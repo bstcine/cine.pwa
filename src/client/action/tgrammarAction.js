@@ -235,7 +235,10 @@ const getCurrentQuizState = (user, statsContentQuiz, cmd) => {
             return CurrentQuizState.ANSWERING;
         }
     }
-    if (user.role_id === RoleID.TEACHER) {
+    if (
+        user.role_id === RoleID.TEACHER ||
+        user.role_id === RoleID.ADMINISTRATOR
+    ) {
         if (statsContentQuiz) {
             if (cmd === 'check') {
                 return CurrentQuizState.CHECKING;

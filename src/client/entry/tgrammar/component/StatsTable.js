@@ -10,10 +10,26 @@ const formatGrade = grade => {
     }
 };
 
+const formatDuration = duration => {
+    let number = parseInt(duration, 10);
+    let sec = number % 60;
+    let min = (number - sec) / 60;
+    let str = '';
+    min && (str += min + '分');
+    sec && (str += sec + '秒');
+    return str;
+};
+
 const formatTime = time => {
     if (time) {
         return time.substring(2, 16);
     }
+};
+
+const Score = ({ score }) => {
+    return (
+        <span className="red">{typeof score === 'number' ? score : '-'}</span>
+    );
 };
 
 const OperationButton = ({ item }) => {
@@ -73,31 +89,27 @@ const StatsTable = ({ title, list = [], onClick }) => {
                         <th>学生账号</th>
                         <th>姓名</th>
                         <th>年级</th>
-                        <th>考试时长</th>
+                        <th>用时</th>
                         <th>提交时间</th>
-                        <th>批改老师</th>
                         <th>得分</th>
-                        <th>批改操作</th>
+                        <th>指导老师</th>
+                        <th>批改老师</th>
+                        <th>操作</th>
                     </tr>
                     {list.map((item, i) => {
                         return (
                             <tr key={item.id}>
                                 <td>{i + 1}</td>
-                                <td>
-                                    {item.phone || item.email || item.login}
-                                </td>
-                                <td>{item.nickname}</td>
+                                <td>{item.login}</td>
+                                <td>{item.nickname || '-'}</td>
                                 <td>{formatGrade(item.grade)}</td>
-                                <td>{item.duration}</td>
+                                <td>{formatDuration(item.duration)}</td>
                                 <td>{formatTime(item.create_at)}</td>
-                                <td>{item.t_nickname}</td>
                                 <td>
-                                    <span className="red">
-                                        {typeof item.score === 'number'
-                                            ? item.score
-                                            : '-'}
-                                    </span>
+                                    <Score score={item.score} />
                                 </td>
+                                <td>{item.teacher_nickname}</td>
+                                <td>{item.checker_nickname}</td>
                                 <td>
                                     <OperationButton item={item} />
                                 </td>

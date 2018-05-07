@@ -2,15 +2,24 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { actionUserInfo } from '@/action/userAction';
-import User from '@/entry/user/component/User';
 import { logoutV1 } from '@/service/base';
 import uaUtil from '@/util/uaUtil';
+import UserMobile from '@/entry/user/component/UserMobile';
+import UserHeader from '@/entry/user/component/UserHeader';
+import { Route } from 'react-router-dom';
+import '../asset/style/index.less';
 
 class Root extends Component {
     constructor(props) {
         super(props);
-        this.topicId = props.match.params.topicId || 'integral'; // 用户路由的子路由{/user/integral}
-        this.isJustUserRoute = !props.match.params.topicId; // 是否纯用户路由{/user}
+        this.selectId = location.pathname
+            .replace('/user', '')
+            .split('/')
+            .join('');
+        console.log(111, this.selectId);
+
+        // 是否纯用户路由{/user}
+        this.isJustUserRoute = location.pathname.split('/').join('') === 'user';
     }
 
     componentDidMount() {
@@ -24,28 +33,13 @@ class Root extends Component {
 
     handleClick = id => {
         switch (id) {
-            case 'study':
-                location.href = '/learn';
-                break;
             case 'integral':
                 this.props.history.replace('/user/integral');
-                this.topicId = 'integral';
+                this.selectId = 'integral';
                 break;
             case 'coupon':
                 this.props.history.replace('/user/coupon');
-                this.topicId = 'coupon';
-                break;
-            case 'wordtest':
-                window.open('/vocabtest');
-                break;
-            case 'tgrammar':
-                window.open('/tgrammar/quiz');
-                break;
-            case 'tgrammar-teacher':
-                window.open('/tgrammar/stats/list');
-                break;
-            case 'password':
-                location.href = '/resetPassword';
+                this.selectId = 'coupon';
                 break;
             case 'quit':
                 logoutV1().then((err, res) => {
@@ -57,14 +51,36 @@ class Root extends Component {
     };
 
     render() {
-        const { user } = this.props;
+        const { user, routes } = this.props;
+
+        if (this.isJustUserRoute) {
+            if (uaUtil.AndroidMobile() || uaUtil.iPhone()) {
+                return (
+                    <UserMobile user={user} handleClick={this.handleClick} />
+                );
+            } else {
+                location.href = '/user/integral';
+                return <div/>;
+            }
+        }
+
         return (
-            <User
-                topicId={this.topicId}
-                isJustUserRoute={this.isJustUserRoute}
-                user={user}
-                handleClick={this.handleClick}
-            />
+            <React.Fragment>
+                <UserHeader
+                    selectId={this.selectId}
+                    user={user}
+                    handleClick={this.handleClick}
+                />
+                <div className={'user-content'}>
+                    {routes.map((route, i) => (
+                        <Route
+                            key={i}
+                            path={route.path}
+                            render={props => <route.component {...props} />}
+                        />
+                    ))}
+                </div>
+            </React.Fragment>
         );
     }
 }

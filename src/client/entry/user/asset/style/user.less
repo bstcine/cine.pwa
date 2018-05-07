@@ -1,10 +1,7 @@
 @import '~asset/style/_cine.less';
 
 .user-mobile {
-  display: none;
-  &.just-user {
-    display: block;
-  }
+  display: block;
 
   .user-panel-a {
     background: #014292;
@@ -173,10 +170,6 @@
       display: none;
     }
   }
-
-  &.panel {
-    display: none;
-  }
 }
 
 .user-header-tab {
@@ -184,17 +177,9 @@
 }
 
 .user-content {
-  &.just-user {
-    display: none;
-  }
 }
 
 @media @media-up-sm {
-  .user-mobile {
-    &.just-user {
-      display: none;
-    }
-  }
 
   .user-header-info {
     background-color: #014292;
@@ -328,10 +313,6 @@
           margin-left: 0.19rem;
         }
       }
-    }
-
-    &.panel {
-      display: block;
     }
   }
 
@@ -473,9 +454,5 @@
   .user-content {
     width: 18.8rem;
     margin: 0.44rem auto 0 auto;
-
-    &.just-user {
-      display: block;
-    }
   }
 }

@@ -10,23 +10,10 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { grey400, indigo500, indigo700 } from 'material-ui/styles/colors';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import CouponContainer from '@/entry/user/containers/CouponContainer';
+import PointContainer from '@/entry/user/containers/PointContainer';
 
 const store = createStore(reducer, applyMiddleware(thunk));
-
-const createComponent = (Component, userRequired, props) => {
-    if (userRequired && !storeUtil.getToken()) {
-        location.href = '/login?go=' + encodeURIComponent(location.href);
-        return;
-    }
-    return <Component {...props} />;
-};
-
-const Topics = ({ match }) => (
-    <React.Fragment>
-        <Route exact path={match.url} component={Root} />
-        <Route path={`${match.url}/:topicId`} component={Root} />
-    </React.Fragment>
-);
 
 const muiTheme = getMuiTheme({
     palette: {
@@ -36,16 +23,40 @@ const muiTheme = getMuiTheme({
     },
 });
 
+const userRoute = {
+    path: '/user',
+    component: Root,
+    routes: [
+        {
+            path: '/user/coupon',
+            component: CouponContainer,
+        },
+        {
+            path: '/user/integral',
+            component: PointContainer,
+        },
+    ],
+};
+
+const RouteWithSubRoutes = route => (
+    <Route
+        path={route.path}
+        render={props => {
+            if (!storeUtil.getToken()) {
+                location.href =
+                    '/login?go=' + encodeURIComponent(location.href);
+                return;
+            }
+            return <route.component {...props} routes={route.routes} />;
+        }}
+    />
+);
+
 render(
     <Router>
         <Provider store={store}>
             <MuiThemeProvider muiTheme={muiTheme}>
-                <Route
-                    path="/user"
-                    component={props =>
-                        createComponent(Topics, /* userRequired */ true, props)
-                    }
-                />
+                <RouteWithSubRoutes {...userRoute} />
             </MuiThemeProvider>
         </Provider>
     </Router>,

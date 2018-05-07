@@ -2,7 +2,8 @@ const path = require('path');
 const webpack = require('webpack');
 const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin');
 // const BuildManifestPlugin = require('build-manifest-webpack-plugin');
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+// const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
+//     .BundleAnalyzerPlugin;
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
@@ -29,12 +30,11 @@ pages.forEach(page => {
                 keepClosingSlash: true,
                 minifyJS: true,
                 minifyCSS: true,
-                minifyURLs: true
-            }
+                minifyURLs: true,
+            },
         })
     );
 });
-
 
 module.exports = {
     cache: false,
@@ -47,19 +47,19 @@ module.exports = {
         new webpack.EnvironmentPlugin({
             DEBUG: Config.debug,
             MODE: Config.MODE,
-            API_Host_URL: Config.MODE === '' ? '' : Config.API_Host_URL
+            API_Host_URL: Config.MODE === '' ? '' : Config.API_Host_URL,
         }),
-        new CleanWebpackPlugin(['build/*.*', 'build/entry'], {verbose: false}),
+        new CleanWebpackPlugin(['build/*.*', 'build/entry'], { verbose: false }),
         new webpack.DllReferencePlugin({
             context: __dirname,
-            manifest: 'build/dll/manifest-dll.json'
+            manifest: 'build/dll/manifest-dll.json',
         }),
         ...HtmlWebpackPlugins,
         new AddAssetHtmlPlugin({
             filepath: path.resolve(__dirname, 'build/dll/dll.*.js'),
             publicPath: Config.publicPath + 'dll/',
             includeSourcemap: false,
-            outputPath: 'dll'
+            outputPath: 'dll',
         }),
         new LodashModuleReplacementPlugin(),
         new webpack.optimize.UglifyJsPlugin({
@@ -70,23 +70,23 @@ module.exports = {
                 // Pending further investigation:
                 // https://github.com/mishoo/UglifyJS2/issues/2011
                 comparisons: false,
-                drop_console: true
+                drop_console: true,
             },
             mangle: {
-                safari10: true
+                safari10: true,
             },
             output: {
                 comments: false,
                 // Turned on because emoji and regex is not minified properly using default
                 // https://github.com/facebookincubator/create-react-app/issues/2488
-                ascii_only: true
+                ascii_only: true,
             },
-            sourceMap: true
+            sourceMap: true,
         }),
         // new BuildManifestPlugin({
         //     name: 'build-manifest.json',
         //     buildPath: path.join(__dirname, 'build')
         // })
-        // new BundleAnalyzerPlugin({analyzerMode:'static'})
-    ]
+        // new BundleAnalyzerPlugin({ analyzerMode: 'static' }),
+    ],
 };

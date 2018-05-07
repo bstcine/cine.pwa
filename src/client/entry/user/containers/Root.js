@@ -14,56 +14,59 @@ class Root extends Component {
     }
 
     componentDidMount() {
-    // 移动端且不是纯用户路由时不加载用户信息
-        if ((uaUtil.AndroidMobile() || uaUtil.iPhone()) && !this.isJustUserRoute) return;
+        // 移动端且不是纯用户路由时不加载用户信息
+        if (
+            (uaUtil.AndroidMobile() || uaUtil.iPhone()) &&
+            !this.isJustUserRoute
+        ) return;
         this.props.actions.loadUserInfo();
     }
 
-  handleClick = id => {
-      switch (id) {
-          case 'study':
-              location.href = '/learn';
-              break;
-          case 'integral':
-              this.props.history.replace('/user/integral');
-              this.topicId = 'integral';
-              break;
-          case 'coupon':
-              this.props.history.replace('/user/coupon');
-              this.topicId = 'coupon';
-              break;
-          case 'wordtest':
-              window.open('/vocabtest');
-              break;
-          case 'tgrammar':
-              window.open('/tgrammar/quiz');
-              break;
-          case 'tgrammar-teacher':
-              window.open('/tgrammar/stats/list');
-              break;
-          case 'password':
-              location.href = '/resetPassword';
-              break;
-          case 'quit':
-              logoutV1().then((err, res) => {
-                  console.log(110, err, res);
-                  location.href = '/';
-              });
-              break;
-      }
-  };
+    handleClick = id => {
+        switch (id) {
+            case 'study':
+                location.href = '/learn';
+                break;
+            case 'integral':
+                this.props.history.replace('/user/integral');
+                this.topicId = 'integral';
+                break;
+            case 'coupon':
+                this.props.history.replace('/user/coupon');
+                this.topicId = 'coupon';
+                break;
+            case 'wordtest':
+                window.open('/vocabtest');
+                break;
+            case 'tgrammar':
+                window.open('/tgrammar/quiz');
+                break;
+            case 'tgrammar-teacher':
+                window.open('/tgrammar/stats/list');
+                break;
+            case 'password':
+                location.href = '/resetPassword';
+                break;
+            case 'quit':
+                logoutV1().then((err, res) => {
+                    console.log(110, err, res);
+                    location.href = '/';
+                });
+                break;
+        }
+    };
 
-  render() {
-      const { user } = this.props;
-      return (
-          <User
-              topicId={this.topicId}
-              isJustUserRoute={this.isJustUserRoute}
-              user={user}
-              handleClick={this.handleClick}
-          />
-      );
-  }
+    render() {
+        const { user } = this.props;
+        return (
+            <User
+                topicId={this.topicId}
+                isJustUserRoute={this.isJustUserRoute}
+                user={user}
+                handleClick={this.handleClick}
+            />
+        );
+    }
 }
 
 const mapStateToProps = state => ({

@@ -12,11 +12,14 @@ import '../asset/style/index.less';
 class Root extends Component {
     constructor(props) {
         super(props);
-        this.topicId = 'integral';
+        this.selectId = location.pathname
+            .replace('/user', '')
+            .split('/')
+            .join('');
+        console.log(111, this.selectId);
 
         // 是否纯用户路由{/user}
-        this.isJustUserRoute =
-            location.pathname === '/user' || location.pathname === '/user/';
+        this.isJustUserRoute = location.pathname.split('/').join('') === 'user';
     }
 
     componentDidMount() {
@@ -30,28 +33,13 @@ class Root extends Component {
 
     handleClick = id => {
         switch (id) {
-            case 'study':
-                location.href = '/learn';
-                break;
             case 'integral':
                 this.props.history.replace('/user/integral');
-                this.topicId = 'integral';
+                this.selectId = 'integral';
                 break;
             case 'coupon':
                 this.props.history.replace('/user/coupon');
-                this.topicId = 'coupon';
-                break;
-            case 'wordtest':
-                window.open('/vocabtest');
-                break;
-            case 'tgrammar':
-                window.open('/tgrammar/quiz');
-                break;
-            case 'tgrammar-teacher':
-                window.open('/tgrammar/stats/list');
-                break;
-            case 'password':
-                location.href = '/resetPassword';
+                this.selectId = 'coupon';
                 break;
             case 'quit':
                 logoutV1().then((err, res) => {
@@ -78,16 +66,11 @@ class Root extends Component {
         return (
             <React.Fragment>
                 <UserHeader
-                    topicId={this.topicId}
+                    selectId={this.selectId}
                     user={user}
                     handleClick={this.handleClick}
                 />
-                <div
-                    className={
-                        this.isJustUserRoute
-                            ? 'user-content just-user'
-                            : 'user-content'
-                    }>
+                <div className={'user-content'}>
                     {routes.map((route, i) => (
                         <Route
                             key={i}

@@ -1,6 +1,6 @@
 import React from 'react';
 
-const UserHeader = ({ topicId, user, handleClick }) => {
+const UserHeader = ({ selectId, user, handleClick }) => {
     let headImg = user.head_image
         ? 'http://www.bstcine.com/f/' + user.head_image
         : require('../asset/image/ico_headpic.png');
@@ -55,7 +55,7 @@ const UserHeader = ({ topicId, user, handleClick }) => {
                     </div>
                     <div
                         className={`item tab-integral ${
-                            topicId === 'integral' ? 'active' : ''
+                            selectId === 'integral' ? 'active' : ''
                         }`}
                         onClick={() => {
                             handleClick('integral');
@@ -64,7 +64,7 @@ const UserHeader = ({ topicId, user, handleClick }) => {
                     </div>
                     <div
                         className={`item tab-coupon ${
-                            topicId === 'coupon' ? 'active' : ''
+                            selectId === 'coupon' ? 'active' : ''
                         }`}
                         onClick={() => {
                             handleClick('coupon');

@@ -6,7 +6,7 @@ const UserMobile = ({ user, handleClick }) => {
         : require('../asset/image/ico_headpic.png');
 
     return (
-        <div className={'user-mobile just-user'}>
+        <div className={'user-mobile'}>
             <div className={'user-panel-a'}>
                 <img src={headImg} />
                 <label>{user.login}</label>

@@ -1,27 +1,27 @@
 import {
-    CLOSE_TIP_MODAL,
-    OPEN_TIP_MODAL,
-    CLOSE_CONFIRM_MODAL,
-    OPEN_CONFIRM_MODAL,
+    CLOSE_ALERT,
+    OPEN_ALERT,
+    CLOSE_CONFIRM,
+    OPEN_CONFIRM,
     OPEN_NETWORK_ERROR,
     CLOSE_NETWORK_ERROR,
 } from '@/constant/actionTypeCommon';
 
-export const closeTipModal = () => ({
-    type: CLOSE_TIP_MODAL,
+export const closeAlert = () => ({
+    type: CLOSE_ALERT,
 });
 
-export const openTipModal = ({ text }) => ({
-    type: OPEN_TIP_MODAL,
+export const openAlert = ({ text }) => ({
+    type: OPEN_ALERT,
     payload: { text },
 });
 
-export const closeConfirmModal = () => ({
-    type: CLOSE_CONFIRM_MODAL,
+export const closeConfirm = () => ({
+    type: CLOSE_CONFIRM,
 });
 
-export const openConfirmModal = ({ text, onConfirm, onCancel }) => ({
-    type: OPEN_CONFIRM_MODAL,
+export const openConfirm = ({ text, onConfirm, onCancel }) => ({
+    type: OPEN_CONFIRM,
     payload: { text, onConfirm, onCancel },
 });
 

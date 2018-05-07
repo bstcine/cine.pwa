@@ -1,19 +1,19 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Dialog from '@/component/Dialog/index';
-import { closeTipModal } from '@/action/commonAction';
+import { closeAlert } from '@/action/commonAction';
 
 const mapStateToProps = state => {
-    let { tipModal } = state;
+    let { alertModal } = state;
     return {
-        isOpen: tipModal.isOpen,
-        text: tipModal.text,
+        isOpen: alertModal.isOpen,
+        text: alertModal.text,
     };
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
     onClick: () => {
-        dispatch(closeTipModal());
+        dispatch(closeAlert());
     },
 });
 

@@ -35,11 +35,7 @@ import {
     StatsContentQuizStatus,
     QuestionFormat,
 } from '@/constant/index';
-import {
-    openConfirmModal,
-    openTipModal,
-    networkError,
-} from '@/action/commonAction';
+import { openConfirm, openAlert, networkError } from '@/action/commonAction';
 
 /**
  * 题目数据 & 答题记录请求
@@ -93,11 +89,11 @@ export const fetchQuizData = ({
             const onCancel = () => {
                 clearLocalAnswers(quiz, user);
             };
-            dispatch(openConfirmModal({ text, onConfirm, onCancel }));
+            dispatch(openConfirm({ text, onConfirm, onCancel }));
         }
         dispatch(recordTime());
     } else if (currentQuizState === CurrentQuizState.WAITING4CHECK) {
-        dispatch(openTipModal({ text: '当前老师正在批改中…，请稍候查看结果' }));
+        dispatch(openAlert({ text: '当前老师正在批改中…，请稍候查看结果' }));
     } else if (currentQuizState === CurrentQuizState.CHECKING) {
         dispatch(showDefaultFeedback());
     }
@@ -114,7 +110,7 @@ export const preSubmitAnswer = () => (dispatch, getState) => {
             unCompletedNos.length
         } 道题未答，是否确定提交答卷？`;
         return dispatch(
-            openConfirmModal({
+            openConfirm({
                 text,
                 onConfirm: () => {
                     dispatch(submitAnswer());
@@ -211,7 +207,7 @@ export const resetQuiz = () => async (dispatch, getState) => {
         if (err === 'no_login') return dispatch(openLoginModal());
         return dispatch(networkError(err));
     }
-    dispatch(openTipModal({ text: '该学生试卷已重置成功！' }));
+    dispatch(openAlert({ text: '该学生试卷已重置成功！' }));
 };
 
 /**

@@ -21,7 +21,7 @@ import {
     UPDATE_ANSWERS,
 } from '@/constant/actionTypeTGrammar';
 import { CurrentQuizState } from '@/constant/index';
-import { tipModal, confirmModal } from '@/reducer/index';
+import { alertModal, confirmModal } from '@/reducer/index';
 import {
     OPEN_NETWORK_ERROR,
     CLOSE_NETWORK_ERROR,
@@ -275,7 +275,7 @@ const rootReducer = combineReducers({
     statsContentQuizList,
     answersById,
     network,
-    tipModal,
+    alertModal,
     confirmModal,
     loginModal,
     timer,

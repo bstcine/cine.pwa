@@ -51,6 +51,7 @@ const Format1ChooseOne = ({
                 <FeedbackText
                     editable={currentQuizState === CurrentQuizState.CHECKING}
                     feedback={feedback}
+                    is_select_correct={is_select_correct}
                     onChange={saveQuestionFeedback}
                 />
             )}

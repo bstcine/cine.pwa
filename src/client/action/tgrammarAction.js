@@ -93,7 +93,12 @@ export const fetchQuizData = ({
         }
         dispatch(recordTime());
     } else if (currentQuizState === CurrentQuizState.WAITING4CHECK) {
-        dispatch(openAlert({ text: '当前老师正在批改中…，请稍候查看结果' }));
+        dispatch(
+            openAlert({
+                text:
+                    '试卷已提交，正在等待老师阅卷。批改完成后，老师会与直接您联系。',
+            })
+        );
     } else if (currentQuizState === CurrentQuizState.CHECKING) {
         dispatch(showDefaultFeedback());
     }
@@ -105,10 +110,13 @@ export const fetchQuizData = ({
 export const preSubmitAnswer = () => (dispatch, getState) => {
     let { questions, answersById } = getState();
     let unCompletedNos = _getUnCompletedNos(questions.byId, answersById);
+    let text;
     if (unCompletedNos.length) {
-        let text = `你的第 ${unCompletedNos.join(',')} 题共 ${
+        text = `您共有${
             unCompletedNos.length
-        } 道题未答，是否确定提交答卷？`;
+        }题尚未作答，是否确认提交？提交后不能再修改。\n\n尚未作答的题目：第${unCompletedNos.join(
+            '、'
+        )}题`;
         return dispatch(
             openConfirm({
                 text,
@@ -117,8 +125,17 @@ export const preSubmitAnswer = () => (dispatch, getState) => {
                 },
             })
         );
+    } else {
+        text = '您已作答完毕，是否确认提交？提交后不能再修改';
     }
-    dispatch(submitAnswer());
+    return dispatch(
+        openConfirm({
+            text,
+            onConfirm: () => {
+                dispatch(submitAnswer());
+            },
+        })
+    );
 };
 
 /**
@@ -198,16 +215,23 @@ export const submitCheckAnswer = (complete = true) => async (
 /**
  * 重置试卷
  */
-export const resetQuiz = () => async (dispatch, getState) => {
-    let { statsContentQuiz } = getState();
-    let [err] = await fetchData(APIURL_Stats_Quiz_Reset, {
-        stats_content_quiz_id: statsContentQuiz.id,
-    });
-    if (err) {
-        if (err === 'no_login') return dispatch(openLoginModal());
-        return dispatch(networkError(err));
-    }
-    dispatch(openAlert({ text: '该学生试卷已重置成功！' }));
+export const resetQuiz = () => (dispatch, getState) => {
+    return dispatch(
+        openConfirm({
+            text: '是否确认重置？重置后将清空学生的所有作答记录。',
+            onConfirm: async () => {
+                let { statsContentQuiz } = getState();
+                let [err] = await fetchData(APIURL_Stats_Quiz_Reset, {
+                    stats_content_quiz_id: statsContentQuiz.id,
+                });
+                if (err) {
+                    if (err === 'no_login') return dispatch(openLoginModal());
+                    return dispatch(networkError(err));
+                }
+                dispatch(openAlert({ text: '该学生试卷已重置成功！' }));
+            },
+        })
+    );
 };
 
 /**

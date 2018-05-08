@@ -86,10 +86,12 @@ export default class Header extends Component {
                                 <a href="/addFeedback">用户反馈</a>
                             </li>
                             <li className="nav-item">
-                                {user && user.role_id === '3' ? (
-                                    {/*<a href="/tgrammar/quiz">核心语法测试</a>*/}
-                                ) : (
-                                    <a href="/tgrammar/stats/list">老师批改</a>
+                                {!!user &&
+                                    (user.role_id === '1' ||
+                                        user.role_id === '2') && (
+                                    <a href="/tgrammar/stats/list">
+                                            老师批改
+                                    </a>
                                 )}
                             </li>
                             <li className="nav-item">

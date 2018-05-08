@@ -20,13 +20,13 @@ class Root extends Component {
         let width = window.innerWidth > 0 ? window.innerWidth : screen.width;
         this.isLessUpSm = width < 1024;
 
-        // 是否纯用户路由{/user}
-        this.isJustUserRoute = location.pathname.split('/').join('') === 'user';
+        // 是否用户主页{/user}
+        this.isUserHome = location.pathname.split('/').join('') === 'user';
     }
 
     componentDidMount() {
-        // 移动端且不是纯用户路由时不加载用户信息
-        if (this.isLessUpSm && !this.isJustUserRoute) return;
+        // 移动端且不是用户主页时不加载用户信息
+        if (this.isLessUpSm && !this.isUserHome) return;
         this.props.actions.loadUserInfo();
     }
 
@@ -52,7 +52,7 @@ class Root extends Component {
     render() {
         const { user, routes } = this.props;
 
-        if (this.isJustUserRoute) {
+        if (this.isUserHome) {
             if (this.isLessUpSm) {
                 return (
                     <UserMobile user={user} handleClick={this.handleClick} />

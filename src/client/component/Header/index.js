@@ -87,7 +87,7 @@ export default class Header extends Component {
                             </li>
                             <li className="nav-item">
                                 {user && user.role_id === '3' ? (
-                                    <a href="/tgrammar/quiz">核心语法测试</a>
+                                    {/*<a href="/tgrammar/quiz">核心语法测试</a>*/}
                                 ) : (
                                     <a href="/tgrammar/stats/list">老师批改</a>
                                 )}

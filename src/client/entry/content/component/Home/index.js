@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
+// import ReactDOM from 'react-dom';
+import { normalize, schema } from 'normalizr';
 import { Tabs, TabItems, TabItem, TabPanels, TabPanel } from '@/component/Tabs';
 import { getParam } from '@/util/urlUtil';
 import _ from 'lodash';
@@ -14,10 +15,68 @@ import Article from '@/entry/content/component/Home/Article';
 import Header from '@/component/Header';
 import { fetchData } from '@/service/base';
 import errorMsg from '@/util/errorMsg';
+import { APIURL_Content_Home } from '@/../APIConfig';
 const bottomImg1 = require('../../asset/image/book.jpg');
-const Api = require('@/../APIConfig');
 const bottomImg2 = require('../../asset/image/moon.jpg');
 let bottomImg = Math.round(Math.random() * 10) % 2 ? bottomImg2 : bottomImg1;
+
+const getSelectedTags = () => {
+    let tags = [];
+    let params = getParam();
+    for (let [key, value] of Object.entries(params)) {
+        if (/^tag_/i.test(key)) {
+            tags.push({
+                pid: key.substring(4),
+                id: value,
+            });
+        }
+    }
+    return tags;
+};
+const formatCourseIds2Array = course_ids =>
+    course_ids.split(',').map(obj => obj.replace(/\$/g, ''));
+
+const formatData = tabs => {
+    tabs.forEach(tab => {
+        tab.tags &&
+            tab.tags.length &&
+            tab.tags.forEach(pTag => {
+                pTag.children &&
+                    pTag.children.length &&
+                    pTag.children.forEach(item => {
+                        if (
+                            item.attributes &&
+                            item.attributes.course_ids &&
+                            item.attributes.course_ids.length
+                        ) {
+                            item.attributes.course_ids = formatCourseIds2Array(
+                                item.attributes.course_ids
+                            );
+                        }
+                    });
+            });
+    });
+};
+
+const normalizeData = tabs => {
+    formatData(tabs);
+    const course = new schema.Entity('courseByIds');
+    const category = new schema.Entity('categoryByIds', {
+        courses: [course],
+    });
+    const subTag = new schema.Entity('subTagByIds', {
+        courses: [course],
+    });
+    const tag = new schema.Entity('tagByIds', {
+        children: [subTag],
+    });
+    const tab = new schema.Entity('tabByIds', {
+        categorys: [category],
+        tags: [tag],
+    });
+    const tabList = [tab];
+    return normalize(tabs, tabList);
+};
 
 export default class Home extends Component {
     static categoryConverter(categorys, filterIds0, filterIds1) {
@@ -75,11 +134,12 @@ export default class Home extends Component {
             categorys0: [],
             categorys1: [],
             categorys2: [],
-            tagids: [],
+            tagIds: [],
             notices: [],
             newsCategorys: [],
+            tags: [],
         };
-        this.handlerScroll = this.handlerScroll.bind(this);
+        // this.handlerScroll = this.handlerScroll.bind(this);
     }
 
     async componentDidMount() {
@@ -93,41 +153,41 @@ export default class Home extends Component {
 
         initWechat();
         // window.addEventListener('scroll', this.handlerScroll);
-        let params = getParam();
-        let tagids = [];
-        for (let [key, value] of Object.entries(params)) {
-            if (/^tag_/i.test(key)) {
-                tagids.push({
-                    pid: key.substring(4),
-                    id: value,
-                });
-            }
-        }
-        let [err, result] = await fetchData(Api.APIURL_Content_Home, {});
+        const tags = getSelectedTags();
+
+        let [err, res] = await fetchData(APIURL_Content_Home);
         if (err) return alert(errorMsg(err));
-        let { banners, notices, newsCategorys, tags, categorys } = result;
-        this.tagsCache = {};
-        _.compact(
-            _.flatten([
-                ...tags.tagTree0.map(item => item.children),
-                ...tags.tagTree1.map(item => item.children),
-            ])
-        ).forEach(item => {
-            if (
-                item.attributes &&
-                item.attributes.course_ids &&
-                item.attributes.course_ids.length
-            ) {
-                item.attributes.course_ids = item.attributes.course_ids
-                    .split(',')
-                    .map(obj => obj.replace(/\$/g, ''));
-            }
-            this.tagsCache[item.id] = item;
-        });
+        let { tabs, banners, notices, newsCategorys } = res;
+        let { result: tabIds, entities } = normalizeData(tabs);
+        let {
+            courseByIds,
+            categoryByIds,
+            subTagByIds,
+            tagByIds,
+            tabByIds,
+        } = entities;
+        // this.tagsCache = {};
+        // _.compact(
+        //     _.flatten([
+        //         ...tags.tagTree0.map(item => item.children),
+        //         ...tags.tagTree1.map(item => item.children),
+        //     ])
+        // ).forEach(item => {
+        //     if (
+        //         item.attributes &&
+        //         item.attributes.course_ids &&
+        //         item.attributes.course_ids.length
+        //     ) {
+        //         item.attributes.course_ids = item.attributes.course_ids
+        //             .split(',')
+        //             .map(obj => obj.replace(/\$/g, ''));
+        //     }
+        //     this.tagsCache[item.id] = item;
+        // });
 
-        this.categorys = categorys.slice();
+        // this.categorys = categorys.slice();
 
-        let { courseIds0, courseIds1 } = this.matchCourseIds(tagids);
+        let { courseIds0, courseIds1 } = this.matchCourseIds(tagIds);
         const { categorys0, categorys1, categorys2 } = Home.categoryConverter(
             this.categorys,
             courseIds0,
@@ -140,7 +200,7 @@ export default class Home extends Component {
             categorys0,
             categorys1,
             categorys2,
-            tagids,
+            tagIds,
             notices,
             newsCategorys,
         });
@@ -148,24 +208,15 @@ export default class Home extends Component {
 
     async componentWillReceiveProps(nextProps) {
         console.log('componentWillReceiveProps');
-        let params = getParam();
-        let tagids = [];
-        for (let [key, value] of Object.entries(params)) {
-            if (/^tag_/i.test(key)) {
-                tagids.push({
-                    pid: key.substring(4),
-                    id: value,
-                });
-            }
-        }
-        let { courseIds0, courseIds1 } = this.matchCourseIds(tagids);
+        const tags = getSelectedTags();
+        let { courseIds0, courseIds1 } = this.matchCourseIds(tagIds);
         const { categorys0, categorys1, categorys2 } = Home.categoryConverter(
             this.categorys,
             courseIds0,
             courseIds1
         );
         this.setState({
-            tagids,
+            tagIds,
             categorys0,
             categorys1,
             categorys2,
@@ -176,21 +227,21 @@ export default class Home extends Component {
         // window.removeEventListener('scroll', this.handlerScroll);
     }
 
-    handlerScroll() {
-        let header = ReactDOM.findDOMNode(this.refs.header);
-        let home = ReactDOM.findDOMNode(this.refs.homeContainer);
-        let homeOffset = home.getBoundingClientRect();
-        if (homeOffset.top < 0) {
-            if (!header.classList.contains('white-header')) header.classList.add('white-header');
-        } else {
-            if (header.classList.contains('white-header')) header.classList.remove('white-header');
-        }
-    }
+    // handlerScroll() {
+    //     let header = ReactDOM.findDOMNode(this.refs.header);
+    //     let home = ReactDOM.findDOMNode(this.refs.homeContainer);
+    //     let homeOffset = home.getBoundingClientRect();
+    //     if (homeOffset.top < 0) {
+    //         if (!header.classList.contains('white-header')) header.classList.add('white-header');
+    //     } else {
+    //         if (header.classList.contains('white-header')) header.classList.remove('white-header');
+    //     }
+    // }
 
-    matchCourseIds(tagids) {
+    matchCourseIds(tagIds) {
         let courseIds0 = null;
         let courseIds1 = null;
-        tagids.forEach(item => {
+        tagIds.forEach(item => {
             const tag = this.tagsCache[item.id];
             if (
                 tag.attributes &&
@@ -237,7 +288,7 @@ export default class Home extends Component {
                                     <TagFilter
                                         tags={this.state.tagTree0}
                                         history={this.props.history}
-                                        tagids={this.state.tagids}
+                                        tagIds={this.state.tagIds}
                                     />
                                     <CategoryList
                                         categorys={this.state.categorys0}
@@ -248,7 +299,7 @@ export default class Home extends Component {
                                     <TagFilter
                                         tags={this.state.tagTree1}
                                         history={this.props.history}
-                                        tagids={this.state.tagids}
+                                        tagIds={this.state.tagIds}
                                     />
                                     <CategoryList
                                         categorys={this.state.categorys1}

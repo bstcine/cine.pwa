@@ -4,7 +4,6 @@ import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import reducer from './reducers';
-import storeUtil from '@/util/storeUtil';
 import Root from '@/entry/user/containers/Root';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { grey400, indigo500, indigo700 } from 'material-ui/styles/colors';
@@ -12,6 +11,7 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import CouponContainer from '@/entry/user/containers/CouponContainer';
 import PointContainer from '@/entry/user/containers/PointContainer';
+import CommonUtil  from '@/util/common';
 
 const store = createStore(reducer, applyMiddleware(thunk));
 
@@ -42,11 +42,7 @@ const RouteWithSubRoutes = route => (
     <Route
         path={route.path}
         render={props => {
-            if (!storeUtil.getToken()) {
-                location.href =
-                    '/login?go=' + encodeURIComponent(location.href);
-                return;
-            }
+            if (!CommonUtil.isAuth()) return <div/>;
             return <route.component {...props} routes={route.routes} />;
         }}
     />

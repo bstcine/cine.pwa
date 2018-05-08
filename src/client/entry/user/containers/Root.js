@@ -3,7 +3,6 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { actionUserInfo } from '@/action/userAction';
 import { logoutV1 } from '@/service/base';
-import uaUtil from '@/util/uaUtil';
 import UserMobile from '@/entry/user/component/UserMobile';
 import UserHeader from '@/entry/user/component/UserHeader';
 import { Route } from 'react-router-dom';
@@ -16,7 +15,10 @@ class Root extends Component {
             .replace('/user', '')
             .split('/')
             .join('');
-        console.log(111, this.selectId);
+
+        // 是否小于横屏Pad
+        let width = window.innerWidth > 0 ? window.innerWidth : screen.width;
+        this.isLessUpSm = width < 1024;
 
         // 是否纯用户路由{/user}
         this.isJustUserRoute = location.pathname.split('/').join('') === 'user';
@@ -24,10 +26,7 @@ class Root extends Component {
 
     componentDidMount() {
         // 移动端且不是纯用户路由时不加载用户信息
-        if (
-            (uaUtil.AndroidMobile() || uaUtil.iPhone()) &&
-            !this.isJustUserRoute
-        ) return;
+        if (this.isLessUpSm && !this.isJustUserRoute) return;
         this.props.actions.loadUserInfo();
     }
 
@@ -54,13 +53,13 @@ class Root extends Component {
         const { user, routes } = this.props;
 
         if (this.isJustUserRoute) {
-            if (uaUtil.AndroidMobile() || uaUtil.iPhone()) {
+            if (this.isLessUpSm) {
                 return (
                     <UserMobile user={user} handleClick={this.handleClick} />
                 );
             } else {
                 location.href = '/user/integral';
-                return <div/>;
+                return <div />;
             }
         }
 

@@ -10,6 +10,7 @@ import StatsListPage from './container/StatsListPage';
 import storeUtil from '@/util/storeUtil';
 import { getParam } from '@/util/urlUtil';
 import Entry from '@/component/Entry';
+// import '@/util/test';
 
 const store = createStore(rootReducer, applyMiddleware(thunk));
 

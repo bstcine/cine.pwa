@@ -37,13 +37,16 @@ const formatCourseIds2Array = course_ids =>
     course_ids.split(',').map(obj => obj.replace(/\$/g, ''));
 
 const formatData = tabs => {
+    let subTagsByTabId = {};
     tabs.forEach(tab => {
+        let subTags = [];
         tab.tags &&
             tab.tags.length &&
             tab.tags.forEach(pTag => {
                 pTag.children &&
                     pTag.children.length &&
                     pTag.children.forEach(item => {
+                        subTags.push(item);
                         if (
                             item.attributes &&
                             item.attributes.course_ids &&
@@ -55,27 +58,10 @@ const formatData = tabs => {
                         }
                     });
             });
-    });
-};
 
-const normalizeData = tabs => {
-    formatData(tabs);
-    const course = new schema.Entity('courseByIds');
-    const category = new schema.Entity('categoryByIds', {
-        courses: [course],
+        subTagsByTabId[tab.id] = subTags;
     });
-    const subTag = new schema.Entity('subTagByIds', {
-        courses: [course],
-    });
-    const tag = new schema.Entity('tagByIds', {
-        children: [subTag],
-    });
-    const tab = new schema.Entity('tabByIds', {
-        categorys: [category],
-        tags: [tag],
-    });
-    const tabList = [tab];
-    return normalize(tabs, tabList);
+    return { subTagsByTabId, tabs };
 };
 
 export default class Home extends Component {
@@ -158,14 +144,8 @@ export default class Home extends Component {
         let [err, res] = await fetchData(APIURL_Content_Home);
         if (err) return alert(errorMsg(err));
         let { tabs, banners, notices, newsCategorys } = res;
-        let { result: tabIds, entities } = normalizeData(tabs);
-        let {
-            courseByIds,
-            categoryByIds,
-            subTagByIds,
-            tagByIds,
-            tabByIds,
-        } = entities;
+        let { subTagsByTabId, tabs } = formatData(tabs);
+
         // this.tagsCache = {};
         // _.compact(
         //     _.flatten([

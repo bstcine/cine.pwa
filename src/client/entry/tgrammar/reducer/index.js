@@ -7,6 +7,7 @@ import {
     RECEIVE_STATS_QUIZ_SAVE,
     REQUEST_STATS_QUIZ_LIST,
     RECEIVE_STATS_QUIZ_LIST,
+    RECEIVE_STATS_WORD_LIST,
     SAVE_QUESTION1_SELECT_VALUE,
     SAVE_QUESTION3_SELECT_VALUE,
     SAVE_QUESTION3_TEXT_VALUE,
@@ -230,6 +231,15 @@ const statsContentQuizList = (state = [], { type, payload }) => {
     }
 };
 
+const statsContentWordList = (state = [], { type, payload }) => {
+    switch (type) {
+        case RECEIVE_STATS_WORD_LIST:
+            return [...payload];
+        default:
+            return state;
+    }
+};
+
 const timer = (state = {}, { type, payload }) => {
     switch (type) {
         case RECORD_TIME: {
@@ -273,6 +283,7 @@ const rootReducer = combineReducers({
     statsContentQuiz,
     questions,
     statsContentQuizList,
+    statsContentWordList,
     answersById,
     network,
     alertModal,

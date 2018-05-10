@@ -5,6 +5,7 @@ import {
     APIURL_Stats_Quiz_Save,
     APIURL_Stats_Quiz_Update,
     APIURL_Stats_Quiz_List,
+    APIURL_Content_Word_Result_List,
 } from '@/../APIConfig';
 import storeUtil from '@/util/storeUtil';
 import {
@@ -28,6 +29,8 @@ import {
     UPDATE_ANSWERS,
     REQUEST_STATS_QUIZ_UPDATE,
     RECEIVE_STATS_QUIZ_UPDATE,
+    REQUEST_STATS_WORD_LIST,
+    RECEIVE_STATS_WORD_LIST,
 } from '@/constant/actionTypeTGrammar';
 import {
     RoleID,
@@ -242,6 +245,16 @@ export const fetchStatsContentQuizList = () => async dispatch => {
     let [err, result] = await fetchData(APIURL_Stats_Quiz_List);
     if (err) return dispatch(networkError(err));
     dispatch({ type: RECEIVE_STATS_QUIZ_LIST, payload: result });
+};
+
+/**
+ * 词汇测试列表
+ */
+export const fetchStatsContentWordList = () => async dispatch => {
+    dispatch({ type: REQUEST_STATS_WORD_LIST });
+    let [err, result] = await fetchData(APIURL_Content_Word_Result_List);
+    if (err) return dispatch(networkError(err));
+    dispatch({ type: RECEIVE_STATS_WORD_LIST, payload: result });
 };
 
 /**

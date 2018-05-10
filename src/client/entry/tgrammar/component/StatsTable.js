@@ -82,7 +82,9 @@ const StatsTable = ({ title, list = [], onClick }) => {
     return (
         <div className="tgrammar-list">
             <table border="1">
-                <caption>学生英语文法和阅读基础能力测试——批改结果</caption>
+                <caption style={{ marginTop: '.4rem', marginBottom: '.4rem' }}>
+                    学生英语文法和阅读基础能力测试——批改结果
+                </caption>
                 <tbody>
                     <tr>
                         <th>编号</th>

@@ -6,9 +6,9 @@ export default class TabItems extends Component {
     };
 
     render() {
-        const {children, className} = this.props;
+        const {children, className, style} = this.props;
         return (
-            <div className={className} role="tab-items">
+            <div className={className} role="tab-items" style={style}>
                 {children}
             </div>
         );

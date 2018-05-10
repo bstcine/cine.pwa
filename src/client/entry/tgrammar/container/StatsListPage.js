@@ -46,7 +46,7 @@ class StatsListPage extends Component {
     }
 
     wordsItemClick = id => {
-        this.props.history.push(`/report?id=${id}`);
+        this.props.history.push(`/vocabtest/report?id=${id}`);
     };
 
     render() {

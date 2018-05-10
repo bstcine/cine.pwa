@@ -1,5 +1,5 @@
-import React, {Component} from 'react';
-import {getParam} from '@/util/urlUtil';
+import React, { Component } from 'react';
+import { getParam } from '@/util/urlUtil';
 
 export default class TagFilter extends Component {
     constructor(props) {
@@ -12,36 +12,48 @@ export default class TagFilter extends Component {
             return (
                 <li key={i} className="p1-tag">
                     <span>{item.text}</span>
-                    <ul className="p2-tags">{this.renderP2Tags(item.id, item.children.slice())}</ul>
+                    <ul className="p2-tags">
+                        {this.renderP2Tags(item.id, item.children.slice())}
+                    </ul>
                 </li>
             );
         });
     }
 
     renderP2Tags(parent_id, items) {
-        let ids = []
-        this.props.tagids.forEach(item => {
-            if (item.pid == parent_id) {
-                ids.push(item.id)
-            }
-        });
-        items.unshift({id: '', text: '全部', attributes: {parent_id}});
+        const { selectedTags } = this.props;
+        let ids = [];
+        selectedTags &&
+            selectedTags.length &&
+            selectedTags.forEach(item => {
+                if (item.pid === parent_id) {
+                    ids.push(item.id);
+                }
+            });
+        items.unshift({ id: '', text: '全部', attributes: { parent_id }});
 
         return items.map((item, i) => {
             const label =
-                item.attributes && item.attributes.label ? <span className="label">{item.attributes.label}</span> : '';
+                item.attributes && item.attributes.label ? (
+                    <span className="label">{item.attributes.label}</span>
+                ) : (
+                    ''
+                );
             let className = 'p2-tag';
             if (ids.length) {
-                if (ids.includes(item.id+'')) {
-                    className += ' active'
+                if (ids.includes(item.id)) {
+                    className += ' active';
                 }
             } else {
                 if (item.id === '') {
-                    className += ' active'
+                    className += ' active';
                 }
             }
             return (
-                <li key={i} className={className} onClick={e => this.tagClick(item, e)}>
+                <li
+                    key={i}
+                    className={className}
+                    onClick={e => this.tagClick(item, e)}>
                     {item.text} {label}
                 </li>
             );

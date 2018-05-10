@@ -1,13 +1,9 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import CourseList from './CourseList';
 
 export default class Category extends Component {
-    constructor(props) {
-        super(props);
-    }
-
     render() {
-        let {category, ...props} = this.props;
+        let { category, ...props } = this.props;
         return (
             <div className="category">
                 <div className="category-text">
@@ -15,7 +11,7 @@ export default class Category extends Component {
                     <span className="text-blue">•</span> {category.name}
                     <span className="category-intro">{category.remark}</span>
                 </div>
-                <CourseList courses={category.children} {...props} />
+                <CourseList courses={category.courses} {...props} />
             </div>
         );
     }

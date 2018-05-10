@@ -21,12 +21,15 @@ export default class TagFilter extends Component {
     }
 
     renderP2Tags(parent_id, items) {
+        const { selectedTags } = this.props;
         let ids = [];
-        this.props.tagIds.forEach(item => {
-            if (item.pid == parent_id) {
-                ids.push(item.id);
-            }
-        });
+        selectedTags &&
+            selectedTags.length &&
+            selectedTags.forEach(item => {
+                if (item.pid === parent_id) {
+                    ids.push(item.id);
+                }
+            });
         items.unshift({ id: '', text: '全部', attributes: { parent_id }});
 
         return items.map((item, i) => {
@@ -38,7 +41,7 @@ export default class TagFilter extends Component {
                 );
             let className = 'p2-tag';
             if (ids.length) {
-                if (ids.includes(String(item.id))) {
+                if (ids.includes(item.id)) {
                     className += ' active';
                 }
             } else {

@@ -22,9 +22,11 @@ export default class DetailDesc extends React.PureComponent {
         if (this.props.course) {
             let cid = this.props.course.id;
             let set_id = this.props.course.set_id;
-            this.props.onLoadSetAndComments(cid, set_id).then(({ comments, courseSet }) => {
-                this.setState({ comments, courseSet });
-            });
+            this.props
+                .onLoadSetAndComments(cid, set_id)
+                .then(({ comments, courseSet }) => {
+                    this.setState({ comments, courseSet });
+                });
         }
     }
 
@@ -51,8 +53,7 @@ export default class DetailDesc extends React.PureComponent {
         let { course, isIOSAPP } = this.props;
         let courseSet = this.state.courseSet;
         let tabItem_desc = course.object_type === '1' ? '课程概要' : '详情';
-        let tabItem_evaluate =
-            course.object_type === '1' ? '学员评价' : '评价';
+        let tabItem_evaluate = course.object_type === '1' ? '学员评价' : '评价';
         let will_show_lessons = course.object_type === '1' && !isIOSAPP;
 
         return (
@@ -60,22 +61,21 @@ export default class DetailDesc extends React.PureComponent {
                 <Tabs ref="tabs">
                     <TabItems>
                         <TabItem>{tabItem_desc}</TabItem>
-                        {will_show_lessons ? (
-                            <TabItem>课程目录</TabItem>
-                        ) : null}
+                        {will_show_lessons ? <TabItem>课程目录</TabItem> : null}
                         <TabItem>{tabItem_evaluate}</TabItem>
                     </TabItems>
                     <TabPanels>
                         <TabPanel>
-                            {courseSet ? (
-                                <CourseSet value={courseSet}/>
-                            ) : null}
-                            <div
-                                className="course-feature"
-                                dangerouslySetInnerHTML={{
-                                    __html: course.h5remark,
-                                }}
-                            />
+                            <div className="course-feature">
+                                {courseSet ? (
+                                    <CourseSet value={courseSet} />
+                                ) : null}
+                                <div
+                                    dangerouslySetInnerHTML={{
+                                        __html: course.h5remark,
+                                    }}
+                                />
+                            </div>
                         </TabPanel>
 
                         {will_show_lessons ? (

@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-// import ReactDOM from 'react-dom';
-import { normalize, schema } from 'normalizr';
 import { Tabs, TabItems, TabItem, TabPanels, TabPanel } from '@/component/Tabs';
 import { getParam } from '@/util/urlUtil';
 import _ from 'lodash';
@@ -26,8 +24,8 @@ const getSelectedTags = () => {
     for (let [key, value] of Object.entries(params)) {
         if (/^tag_/i.test(key)) {
             tags.push({
-                pid: key.substring(4),
-                id: value,
+                pid: parseInt(key.substring(4), 10),
+                id: parseInt(value, 10),
             });
         }
     }
@@ -64,192 +62,114 @@ const formatData = tabs => {
     return { subTagsByTabId, tabs };
 };
 
-export default class Home extends Component {
-    static categoryConverter(categorys, filterIds0, filterIds1) {
-        // 视频课程
-        let categorys0 = [];
-        // 教材教辅
-        let categorys1 = [];
-        // 在线小班
-        let categorys2 = [];
-        categorys.forEach(category => {
-            if (category.children && category.children.length) {
-                let children0 = [];
-                let children1 = [];
-                let children2 = [];
-                category.children.forEach(course => {
-                    if (
-                        course.object_type === '1' ||
-                        course.object_type === '4'
-                    ) {
-                        if (filterIds0 && !filterIds0.includes(course.id)) return;
-                        children0.push(course);
-                    } else if (course.object_type === '5') {
-                        children2.push(course);
-                    } else {
-                        if (filterIds1 && !filterIds1.includes(course.id)) return;
-                        children1.push(course);
-                    }
-                });
-                if (children0.length) {
-                    let category0 = Object.assign({}, category);
-                    category0.children = children0;
-                    categorys0.push(category0);
-                }
-                if (children1.length) {
-                    let category1 = Object.assign({}, category);
-                    category1.children = children1;
-                    categorys1.push(category1);
-                }
-                if (children2.length) {
-                    let category2 = Object.assign({}, category);
-                    category2.children = children2;
-                    categorys2.push(category2);
-                }
-            }
-        });
-        return { categorys0, categorys1, categorys2 };
-    }
+const needFilterCourse = (tab, subTagsByTabId, selectedTagIds) => {
+    if (!selectedTagIds || !selectedTagIds.length) return false;
+    let isNeedFilterCourse = false;
+    let filterCourseIds = [];
+    let subTags = subTagsByTabId[tab.id];
+    subTags.forEach(tag => {
+        if (selectedTagIds.includes(tag.id)) {
+            isNeedFilterCourse = true;
+            filterCourseIds = filterCourseIds.length
+                ? _.intersection(filterCourseIds, tag.attributes.course_ids)
+                : tag.attributes.course_ids;
+        }
+    });
+    return { isNeedFilterCourse, filterCourseIds };
+};
 
+const tabWithFilterCourse = (tabs, subTagsByTabId, selectedTagIds) => {
+    return tabs.map(tab => {
+        let { isNeedFilterCourse, filterCourseIds } = needFilterCourse(
+            tab,
+            subTagsByTabId,
+            selectedTagIds
+        );
+        if (isNeedFilterCourse) {
+            let newTab = _.cloneDeep(tab);
+            const newCategorys = [];
+            newTab.categorys.forEach(item => {
+                let newItem = { ...item };
+                let courses = newItem.courses.filter(course =>
+                    filterCourseIds.includes(course.id)
+                );
+                if (courses.length) {
+                    newItem.courses = courses;
+                    newCategorys.push(newItem);
+                }
+            });
+            newTab.categorys = newCategorys;
+            return newTab;
+        } else {
+            return tab;
+        }
+    });
+};
+
+export default class Home extends Component {
     constructor(props) {
         super(props);
         this.state = {
             banners: [],
-            tagTree0: [],
-            tagTree1: [],
-            categorys0: [],
-            categorys1: [],
-            categorys2: [],
-            tagIds: [],
             notices: [],
             newsCategorys: [],
-            tags: [],
+            tabs: [],
+            selectedTagIds: [],
         };
-        // this.handlerScroll = this.handlerScroll.bind(this);
     }
 
     async componentDidMount() {
         console.log('componentDidMount');
-        if (uaUtil.wechat()) {
-            document.title = '善恩英语';
-        } else {
-            document.title =
-                '善恩英语 - 卓越的在线英语课程、英文原版‎阅读、托福SAT备考';
-        }
-
+        document.title = uaUtil.wechat()
+            ? '善恩英语'
+            : '善恩英语 - 卓越的在线英语课程、英文原版‎阅读、托福SAT备考';
         initWechat();
-        // window.addEventListener('scroll', this.handlerScroll);
-        const tags = getSelectedTags();
 
         let [err, res] = await fetchData(APIURL_Content_Home);
         if (err) return alert(errorMsg(err));
         let { tabs, banners, notices, newsCategorys } = res;
-        let { subTagsByTabId, tabs } = formatData(tabs);
-
-        // this.tagsCache = {};
-        // _.compact(
-        //     _.flatten([
-        //         ...tags.tagTree0.map(item => item.children),
-        //         ...tags.tagTree1.map(item => item.children),
-        //     ])
-        // ).forEach(item => {
-        //     if (
-        //         item.attributes &&
-        //         item.attributes.course_ids &&
-        //         item.attributes.course_ids.length
-        //     ) {
-        //         item.attributes.course_ids = item.attributes.course_ids
-        //             .split(',')
-        //             .map(obj => obj.replace(/\$/g, ''));
-        //     }
-        //     this.tagsCache[item.id] = item;
-        // });
-
-        // this.categorys = categorys.slice();
-
-        let { courseIds0, courseIds1 } = this.matchCourseIds(tagIds);
-        const { categorys0, categorys1, categorys2 } = Home.categoryConverter(
-            this.categorys,
-            courseIds0,
-            courseIds1
+        const selectedTags = getSelectedTags();
+        const selectedTagIds = selectedTags.map(item => item.id);
+        let { subTagsByTabId, tabs: formatedTabs } = formatData(tabs);
+        this.subTagsByTabId = subTagsByTabId;
+        this.formatedTabs = formatedTabs;
+        let filteredTabs = tabWithFilterCourse(
+            formatedTabs,
+            subTagsByTabId,
+            selectedTagIds
         );
+
         this.setState({
             banners,
-            tagTree0: tags.tagTree0,
-            tagTree1: tags.tagTree1,
-            categorys0,
-            categorys1,
-            categorys2,
-            tagIds,
             notices,
             newsCategorys,
+            tabs: filteredTabs,
+            selectedTags,
         });
     }
 
     async componentWillReceiveProps(nextProps) {
         console.log('componentWillReceiveProps');
-        const tags = getSelectedTags();
-        let { courseIds0, courseIds1 } = this.matchCourseIds(tagIds);
-        const { categorys0, categorys1, categorys2 } = Home.categoryConverter(
-            this.categorys,
-            courseIds0,
-            courseIds1
+        const selectedTags = getSelectedTags();
+        const selectedTagIds = selectedTags.map(item => item.id);
+        let filteredTabs = tabWithFilterCourse(
+            this.formatedTabs,
+            this.subTagsByTabId,
+            selectedTagIds
         );
         this.setState({
-            tagIds,
-            categorys0,
-            categorys1,
-            categorys2,
+            tabs: filteredTabs,
+            selectedTags,
         });
-    }
-
-    componentWillUnmount() {
-        // window.removeEventListener('scroll', this.handlerScroll);
-    }
-
-    // handlerScroll() {
-    //     let header = ReactDOM.findDOMNode(this.refs.header);
-    //     let home = ReactDOM.findDOMNode(this.refs.homeContainer);
-    //     let homeOffset = home.getBoundingClientRect();
-    //     if (homeOffset.top < 0) {
-    //         if (!header.classList.contains('white-header')) header.classList.add('white-header');
-    //     } else {
-    //         if (header.classList.contains('white-header')) header.classList.remove('white-header');
-    //     }
-    // }
-
-    matchCourseIds(tagIds) {
-        let courseIds0 = null;
-        let courseIds1 = null;
-        tagIds.forEach(item => {
-            const tag = this.tagsCache[item.id];
-            if (
-                tag.attributes &&
-                tag.attributes.course_ids &&
-                tag.attributes.course_ids.length
-            ) {
-                if (tag.attributes.type === '1') {
-                    courseIds0 = courseIds0
-                        ? _.intersection(tag.attributes.course_ids, courseIds0)
-                        : tag.attributes.course_ids;
-                } else {
-                    courseIds1 = courseIds1
-                        ? _.intersection(tag.attributes.course_ids, courseIds1)
-                        : tag.attributes.course_ids;
-                }
-            }
-        });
-        return { courseIds0, courseIds1 };
     }
 
     render() {
         console.log(`Home`);
+        let { tabs, selectedTags } = this.state;
         return (
             <React.Fragment>
                 <Header isShow={!siteCodeUtil.inAPP()} />
-                <div
-                    className="container-fluid courses-container-bg"
-                    ref="homeContainer">
+                <div className="container-fluid courses-container-bg">
                     <Slider banners={this.state.banners} />
 
                     <div className="container">
@@ -259,39 +179,42 @@ export default class Home extends Component {
                     <div className="container courses-container">
                         <Tabs className="home-tabs" selectedId={getParam().tab}>
                             <TabItems>
-                                <TabItem id={'spkc'}>视频课程</TabItem>
-                                <TabItem id={'jcjf'}>教材教辅</TabItem>
-                                <TabItem id={'zxxb'}>在线小班</TabItem>
+                                {tabs.map(tab => {
+                                    return (
+                                        <TabItem
+                                            key={tab.id}
+                                            id={tab.id}
+                                            style={{
+                                                background: `url(${
+                                                    tab.image
+                                                }) center center / contain no-repeat`,
+                                            }}
+                                            activeStyle={{
+                                                background: `url(${
+                                                    tab.image_active
+                                                }) center center / contain no-repeat`,
+                                            }}>
+                                            {tab.name}
+                                        </TabItem>
+                                    );
+                                })}
                             </TabItems>
                             <TabPanels>
-                                <TabPanel id={'spkc'}>
-                                    <TagFilter
-                                        tags={this.state.tagTree0}
-                                        history={this.props.history}
-                                        tagIds={this.state.tagIds}
-                                    />
-                                    <CategoryList
-                                        categorys={this.state.categorys0}
-                                        history={this.props.history}
-                                    />
-                                </TabPanel>
-                                <TabPanel id={'jcjf'}>
-                                    <TagFilter
-                                        tags={this.state.tagTree1}
-                                        history={this.props.history}
-                                        tagIds={this.state.tagIds}
-                                    />
-                                    <CategoryList
-                                        categorys={this.state.categorys1}
-                                        history={this.props.history}
-                                    />
-                                </TabPanel>
-                                <TabPanel id={'zxxb'}>
-                                    <CategoryList
-                                        categorys={this.state.categorys2}
-                                        history={this.props.history}
-                                    />
-                                </TabPanel>
+                                {tabs.map(tab => {
+                                    return (
+                                        <TabPanel key={tab.id} id={tab.id}>
+                                            <TagFilter
+                                                tags={tab.tags}
+                                                history={this.props.history}
+                                                selectedTags={selectedTags}
+                                            />
+                                            <CategoryList
+                                                categorys={tab.categorys}
+                                                history={this.props.history}
+                                            />
+                                        </TabPanel>
+                                    );
+                                })}
                             </TabPanels>
                         </Tabs>
                     </div>

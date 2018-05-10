@@ -1,31 +1,50 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
+import classNames from 'classnames';
 
 export default class TabItem extends Component {
     static defaultProps = {
         className: 'tab-item',
-        id: null
+        id: null,
     };
 
     constructor(props) {
         super(props);
-
-        this.clickHandler = this.clickHandler.bind(this)
+        this.clickHandler = this.clickHandler.bind(this);
     }
 
     clickHandler(index, id, e) {
-        let {onTabItemClick, onClick} = this.props;
+        let { onTabItemClick, onClick } = this.props;
         onTabItemClick && onTabItemClick(index, id, e);
         onClick && onClick(index, id, e);
     }
 
     render() {
-        const {id, children, className, index, indicator, selected} = this.props;
+        const {
+            id,
+            children,
+            className,
+            index,
+            indicator,
+            selected,
+            style,
+            activeStyle,
+        } = this.props;
+        let tabItemStyle = null;
+        if (style && activeStyle) {
+            tabItemStyle = selected ? activeStyle : style;
+        }
         return (
-            <div className={`${className}${selected ? ' active' : ''}`} role="tab-item">
-                <a href="javascript:" onClick={e => this.clickHandler(index, id, e)}>
+            <div
+                className={classNames(className, { active: selected })}
+                role="tab-item">
+                <a
+                    style={tabItemStyle}
+                    onClick={e => this.clickHandler(index, id, e)}>
                     {children}
                 </a>
-                {(Number(indicator) > 0) && <span className="tab-indicator">{indicator + ''}</span>}
+                {Number(indicator) > 0 && (
+                    <span className="tab-indicator">{String(indicator)}</span>
+                )}
             </div>
         );
     }

@@ -22,7 +22,7 @@ function httpBody(bodyData) {
         sitecode: _sitecode,
         channel: '',
         locale: 'zh_CN',
-        appver: '2.0.2',
+        appver: '2.3.1',
         data: bodyData,
     };
 }

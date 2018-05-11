@@ -146,7 +146,7 @@ src/client/entry/page/container/****.js
 
 - component
 ```
-  - 尽量使用Pure Function
+  - 尽量使用Pure Function or PureComponent
   - 尽量不要写额外的Action，触发的Action来源于this.props.action
     Action代码应该都在：src/client/action/***Action.js
 

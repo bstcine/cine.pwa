@@ -26,6 +26,7 @@ exports.APIURL_Content_Tag_Tree = '/api/content/tag/tree'; // 标签树
 exports.APIURL_Content_Course_Detail = '/api/content/course/detail'; // 课程详情
 exports.APIURL_Content_Course_Set = '/api/content/course/set'; // 课程详情
 exports.APIURL_Content_Lesson_Quiz = '/api/web/quiz/'; // 小节测试
+exports.APIURL_Content_StuQuizWord_List = '/api/content/stuQuizWord/list'; // 获取学生、核心语法测试、词汇测试列表，根据管理员或老师
 
 exports.APIURL_Content_Quiz = '/api/content/quiz'; // 阅读理解题目数据 & 答题记录请求
 exports.APIURL_Stats_Quiz_Save = '/api/stats/quiz/save'; // 保存阅读理解测试答案

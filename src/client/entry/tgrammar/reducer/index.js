@@ -5,9 +5,9 @@ import {
     RECEIVE_CONTENT_QUIZ,
     REQUEST_STATS_QUIZ_SAVE,
     RECEIVE_STATS_QUIZ_SAVE,
-    REQUEST_STATS_QUIZ_LIST,
-    RECEIVE_STATS_QUIZ_LIST,
-    RECEIVE_STATS_WORD_LIST,
+    // REQUEST_STATS_QUIZ_LIST,
+    // RECEIVE_STATS_QUIZ_LIST,
+    // RECEIVE_STATS_WORD_LIST,
     SAVE_QUESTION1_SELECT_VALUE,
     SAVE_QUESTION3_SELECT_VALUE,
     SAVE_QUESTION3_TEXT_VALUE,
@@ -20,6 +20,8 @@ import {
     SHOW_UNCOMPLETED_QUESTION,
     SHOW_ALL_QUESTION,
     UPDATE_ANSWERS,
+    RECEIVE_STATS_STUDENT_QUIZ_WORD_LIST,
+    REQUEST_STATS_STUDENT_QUIZ_WORD_LIST,
 } from '@/constant/actionTypeTGrammar';
 import { CurrentQuizState } from '@/constant/index';
 import { alertModal, confirmModal } from '@/reducer/index';
@@ -163,7 +165,7 @@ const network = (
     switch (type) {
         case REQUEST_CONTENT_QUIZ:
         case REQUEST_STATS_QUIZ_SAVE:
-        case REQUEST_STATS_QUIZ_LIST:
+        case REQUEST_STATS_STUDENT_QUIZ_WORD_LIST:
             return {
                 ...state,
                 pending: true,
@@ -176,7 +178,7 @@ const network = (
             };
         case OPEN_LOGIN_MODAL:
         case RECEIVE_CONTENT_QUIZ:
-        case RECEIVE_STATS_QUIZ_LIST:
+        case RECEIVE_STATS_STUDENT_QUIZ_WORD_LIST:
             return {
                 ...state,
                 init: false,
@@ -222,23 +224,32 @@ const loginModal = (state = { isOpen: false }, { type, payload }) => {
     }
 };
 
-const statsContentQuizList = (state = [], { type, payload }) => {
+const statsContentStuQuizWordList = (state = [], { type, payload }) => {
     switch (type) {
-        case RECEIVE_STATS_QUIZ_LIST:
-            return [...payload];
+        case RECEIVE_STATS_STUDENT_QUIZ_WORD_LIST:
+            return payload;
         default:
             return state;
     }
 };
 
-const statsContentWordList = (state = [], { type, payload }) => {
-    switch (type) {
-        case RECEIVE_STATS_WORD_LIST:
-            return [...payload];
-        default:
-            return state;
-    }
-};
+// const statsContentQuizList = (state = [], { type, payload }) => {
+//     switch (type) {
+//         case RECEIVE_STATS_QUIZ_LIST:
+//             return [...payload];
+//         default:
+//             return state;
+//     }
+// };
+//
+// const statsContentWordList = (state = [], { type, payload }) => {
+//     switch (type) {
+//         case RECEIVE_STATS_WORD_LIST:
+//             return [...payload];
+//         default:
+//             return state;
+//     }
+// };
 
 const timer = (state = {}, { type, payload }) => {
     switch (type) {
@@ -282,8 +293,9 @@ const rootReducer = combineReducers({
     user,
     statsContentQuiz,
     questions,
-    statsContentQuizList,
-    statsContentWordList,
+    statsContentStuQuizWordList,
+    // statsContentQuizList,
+    // statsContentWordList,
     answersById,
     network,
     alertModal,

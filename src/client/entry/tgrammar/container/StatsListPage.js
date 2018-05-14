@@ -2,10 +2,7 @@ import '../asset/style/index.less';
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import {
-    fetchStatsContentQuizList,
-    fetchStatsContentWordList,
-} from '@/action/tgrammarAction';
+import { fetchStatsContentStuQuizWordList } from '@/action/tgrammarAction';
 import Header from '@/component/Header';
 import Footer from '@/component/Footer';
 import StatsTable from '../container/StatsTable';
@@ -27,26 +24,19 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => ({
-    fetchStatsContentQuizList: () => {
-        dispatch(fetchStatsContentQuizList());
-    },
-    fetchStatsContentWordList: () => {
-        dispatch(fetchStatsContentWordList());
+    fetchStatsContentStuQuizWordList: () => {
+        dispatch(fetchStatsContentStuQuizWordList());
     },
 });
 
 class StatsListPage extends Component {
     componentDidMount() {
-        const {
-            fetchStatsContentQuizList,
-            fetchStatsContentWordList,
-        } = this.props;
-        fetchStatsContentQuizList();
-        fetchStatsContentWordList();
+        const { fetchStatsContentStuQuizWordList } = this.props;
+        fetchStatsContentStuQuizWordList();
     }
 
     wordsItemClick = id => {
-        this.props.history.push(`/vocabtest/report?id=${id}`);
+        location.href = `/vocabtest/report?id=${id}`;
     };
 
     render() {
@@ -69,7 +59,9 @@ class StatsListPage extends Component {
                             <TabPanels>
                                 <TabPanel>{!init && <StatsTable />}</TabPanel>
                                 <TabPanel>
-                                    <WordsTable wordsItemClick={this.wordsItemClick}/>
+                                    <WordsTable
+                                        wordsItemClick={this.wordsItemClick}
+                                    />
                                 </TabPanel>
                             </TabPanels>
                         </Tabs>

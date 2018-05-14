@@ -6,6 +6,7 @@ import {
     APIURL_Stats_Quiz_Update,
     APIURL_Stats_Quiz_List,
     APIURL_Content_Word_Result_List,
+    APIURL_Content_StuQuizWord_List,
 } from '@/../APIConfig';
 import storeUtil from '@/util/storeUtil';
 import {
@@ -31,6 +32,8 @@ import {
     RECEIVE_STATS_QUIZ_UPDATE,
     REQUEST_STATS_WORD_LIST,
     RECEIVE_STATS_WORD_LIST,
+    REQUEST_STATS_STUDENT_QUIZ_WORD_LIST,
+    RECEIVE_STATS_STUDENT_QUIZ_WORD_LIST,
 } from '@/constant/actionTypeTGrammar';
 import {
     RoleID,
@@ -238,24 +241,34 @@ export const resetQuiz = () => (dispatch, getState) => {
 };
 
 /**
- * 答题记录列表
+ * 获取学生、答题记录、词汇测试列表
  */
-export const fetchStatsContentQuizList = () => async dispatch => {
-    dispatch({ type: REQUEST_STATS_QUIZ_LIST });
-    let [err, result] = await fetchData(APIURL_Stats_Quiz_List);
+export const fetchStatsContentStuQuizWordList = () => async dispatch => {
+    dispatch({ type: REQUEST_STATS_STUDENT_QUIZ_WORD_LIST });
+    let [err, result] = await fetchData(APIURL_Content_StuQuizWord_List);
     if (err) return dispatch(networkError(err));
-    dispatch({ type: RECEIVE_STATS_QUIZ_LIST, payload: result });
+    dispatch({ type: RECEIVE_STATS_STUDENT_QUIZ_WORD_LIST, payload: result });
 };
 
-/**
- * 词汇测试列表
- */
-export const fetchStatsContentWordList = () => async dispatch => {
-    dispatch({ type: REQUEST_STATS_WORD_LIST });
-    let [err, result] = await fetchData(APIURL_Content_Word_Result_List);
-    if (err) return dispatch(networkError(err));
-    dispatch({ type: RECEIVE_STATS_WORD_LIST, payload: result });
-};
+// /**
+//  * 答题记录列表
+//  */
+// export const fetchStatsContentQuizList = () => async dispatch => {
+//     dispatch({ type: REQUEST_STATS_QUIZ_LIST });
+//     let [err, result] = await fetchData(APIURL_Stats_Quiz_List);
+//     if (err) return dispatch(networkError(err));
+//     dispatch({ type: RECEIVE_STATS_QUIZ_LIST, payload: result });
+// };
+//
+// /**
+//  * 词汇测试列表
+//  */
+// export const fetchStatsContentWordList = () => async dispatch => {
+//     dispatch({ type: REQUEST_STATS_WORD_LIST });
+//     let [err, result] = await fetchData(APIURL_Content_Word_Result_List);
+//     if (err) return dispatch(networkError(err));
+//     dispatch({ type: RECEIVE_STATS_WORD_LIST, payload: result });
+// };
 
 /**
  * 当前测试试卷的状态，不同的角色不同的答题记录对应不同的状态

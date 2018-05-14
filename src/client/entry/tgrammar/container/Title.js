@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import moment from 'moment';
+import dayjs from 'dayjs';
 
 const mapStateToProps = (state, ownProps) => {
     let { quiz, statsContentQuiz } = state;
@@ -16,7 +16,7 @@ const mapStateToProps = (state, ownProps) => {
 
 const Title = ({ title, date, score, question_count }) => {
     console.log('Title render');
-    let today = moment().format('YYYY-MM-DD');
+    let today = dayjs().format('YYYY-MM-DD');
     return (
         <div className="title">
             <h1>{title}</h1>

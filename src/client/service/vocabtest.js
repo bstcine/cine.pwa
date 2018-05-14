@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import {post} from '@/service/request';
+import { post } from '@/service/request';
 import Api from '@/../APIConfig';
 
 export let getContentWordConfig = query => {
@@ -20,26 +20,26 @@ export let getWordList = () => {
             return result;
         })
         .then(result => {
-            let {wordLevelList, config} = result.result;
+            let { wordLevelList, config } = result.result;
             wordLevelList.forEach(function(wordLevel) {
                 wordLevel.wordList = wordLevel.wordList.map(function(item) {
                     let options = [
-                        {zh: item.zh, isCorrect: true, value: 0},
-                        {zh: item.zh_similar1, isCorrect: false, value: 1},
-                        {zh: item.zh_similar2, isCorrect: false, value: 2},
-                        {zh: item.zh_similar3, isCorrect: false, value: 3}
+                        { zh: item.zh, isCorrect: true, value: 0 },
+                        { zh: item.zh_similar1, isCorrect: false, value: 1 },
+                        { zh: item.zh_similar2, isCorrect: false, value: 2 },
+                        { zh: item.zh_similar3, isCorrect: false, value: 3 },
                     ];
                     options = _.shuffle(options);
                     return {
                         id: item.id,
                         word: item.word,
-                        options: options
+                        options: options,
                     };
                 });
             });
             return {
                 wordLevelList: wordLevelList,
-                config: config
+                config: config,
             };
         })
         .catch(error => {

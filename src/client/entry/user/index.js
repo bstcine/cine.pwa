@@ -4,11 +4,10 @@ import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import reducer from './reducers';
-import { BrowserRouter as Router } from 'react-router-dom';
 import { grey400, indigo500, indigo700 } from 'material-ui/styles/colors';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import RouteWithSubRoutes from './userRouter';
+import { UserRouter } from './userRouter';
 
 const store = createStore(reducer, applyMiddleware(thunk));
 
@@ -21,12 +20,10 @@ const muiTheme = getMuiTheme({
 });
 
 render(
-    <Router>
+    <MuiThemeProvider muiTheme={muiTheme}>
         <Provider store={store}>
-            <MuiThemeProvider muiTheme={muiTheme}>
-                <RouteWithSubRoutes/>
-            </MuiThemeProvider>
+            <UserRouter />
         </Provider>
-    </Router>,
+    </MuiThemeProvider>,
     document.getElementById('root')
 );

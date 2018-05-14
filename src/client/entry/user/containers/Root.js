@@ -5,7 +5,6 @@ import { actionUserInfo } from '@/action/userAction';
 import { logoutV1 } from '@/service/base';
 import UserMobile from '@/entry/user/component/UserMobile';
 import UserHeader from '@/entry/user/component/UserHeader';
-import { Route } from 'react-router-dom';
 import '../asset/style/index.less';
 
 class Root extends Component {
@@ -71,13 +70,7 @@ class Root extends Component {
                     handleClick={this.handleClick}
                 />
                 <div className={'user-content'}>
-                    {routes.map((route, i) => (
-                        <Route
-                            key={i}
-                            path={route.path}
-                            render={props => <route.component {...props} />}
-                        />
-                    ))}
+                    {routes}
                 </div>
             </React.Fragment>
         );

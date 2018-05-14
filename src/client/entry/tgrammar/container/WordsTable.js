@@ -4,10 +4,11 @@ import WordsTable from '../component/WordsTable';
 const mapStateToProps = (state, ownProps) => {
     const { statsContentStuQuizWordList } = state;
 
-    if (!statsContentStuQuizWordList || !statsContentStuQuizWordList.word) return { list: [] };
-
     return {
-        list: statsContentStuQuizWordList.word.slice(0, 200),
+        list:
+            !statsContentStuQuizWordList || !statsContentStuQuizWordList.word
+                ? []
+                : statsContentStuQuizWordList.word,
     };
 };
 

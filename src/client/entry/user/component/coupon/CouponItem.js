@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Coupon = ({ coupon, actions }) => {
+const CouponItem = ({ coupon, actions }) => {
     let value =
         coupon.type === '1' ? coupon.value : 100 - Number(coupon.value) * 100;
     let unit = coupon.type === '1' ? '元' : '折';
@@ -55,4 +55,4 @@ const Coupon = ({ coupon, actions }) => {
     );
 };
 
-export default Coupon;
+export default CouponItem;

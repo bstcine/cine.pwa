@@ -24,11 +24,11 @@ const renderQuizList = (list, quizsItemClick) => {
         return (
             <div className={'studentQuiz'}>
                 <div className={'quizHeader'}>
-                    <span>提交时间</span>
+                    <span className={'left'}>提交时间</span>
                     <span>用时</span>
                     <span>批改人</span>
                     <span>得分</span>
-                    <span>状态</span>
+                    <span className={'right'}>状态</span>
                 </div>
                 {list.map((item, index) => {
                     let quizStat = '待批改';
@@ -60,7 +60,7 @@ const renderQuizList = (list, quizsItemClick) => {
 
                     return (
                         <div key={index} className={'quizBody'}>
-                            <div className={'quizItem'}>
+                            <div className={'quizItem left'}>
                                 {formatTime(item.create_at)}
                             </div>
                             <div className={'quizItem'}>
@@ -71,7 +71,7 @@ const renderQuizList = (list, quizsItemClick) => {
                             </div>
                             <div className={'quizItem'}>{item.score}</div>
                             <div
-                                className={'quizItem'}
+                                className={'quizItem right'}
                                 onClick={() => {
                                     if (
                                         item.active === '1' &&
@@ -97,9 +97,9 @@ const renderWordList = (list, wordsItemClick) => {
         return (
             <div className={'studentWord'}>
                 <div className={'wordHeader'}>
-                    <span>提交时间</span>
+                    <span className={'left'}>提交时间</span>
                     <span>用时</span>
-                    <span>词汇量</span>
+                    <span className={'right'}>词汇量</span>
                 </div>
                 {list.slice(0, 5).map((item, index) => {
                     return (
@@ -109,13 +109,13 @@ const renderWordList = (list, wordsItemClick) => {
                             onClick={() => {
                                 wordsItemClick(item.id);
                             }}>
-                            <div className={'wordItem'}>
+                            <div className={'wordItem left'}>
                                 {formatTime(item.create_at)}
                             </div>
                             <div className={'wordItem'}>
                                 {formatDuration(item.duration)}
                             </div>
-                            <div className={'wordItem'}>
+                            <div className={'wordItem right'}>
                                 <span style={{ color: '#ee0d0d' }}>
                                     {item.vocab}
                                 </span>

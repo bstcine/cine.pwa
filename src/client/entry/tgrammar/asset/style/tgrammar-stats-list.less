@@ -62,4 +62,189 @@
   span.red {
     color: #ee0d0d;
   }
+
+  .tabs .tab-items .tab-item {
+    flex: none;
+  }
+
+  .studentList {
+    padding: 0.5rem;
+
+    .studentPanel {
+      display: flex;
+      flex-direction: column;
+      padding-top: 0.1rem;
+
+      .studentInfo {
+        display: flex;
+        flex-direction: row;
+        margin: 0.5rem 0;
+        span {
+          font-family: PingFangSC-Regular;
+          font-size: 0.3rem;
+          color: #0c3975;
+          padding-right: 0.4rem;
+        }
+      }
+
+      hr {
+        color: #ebf2f9;
+        background-color: #ebf2f9;
+        margin-top: 0.15rem;
+        margin-bottom: 0.2rem;
+        border: 0;
+        height: 0.01rem;
+      }
+
+      .studentTitle {
+        width: 20%;
+        display: flex;
+        min-height: 0.8rem;
+        align-items: center;
+        justify-content: center;
+        font-family: PingFangSC-Regular;
+        font-size: 0.28rem;
+        font-weight: normal;
+        font-stretch: normal;
+        letter-spacing: 0px;
+        color: #2b2c2d;
+      }
+
+      .studentNoData {
+        width: 80%;
+        display: flex;
+        min-height: 0.8rem;
+        align-items: center;
+        justify-content: center;
+        font-family: PingFangSC-Regular;
+        font-size: 0.28rem;
+        font-weight: normal;
+        font-stretch: normal;
+        letter-spacing: 0px;
+        color: #c2c3c5;
+      }
+
+      .studentQuiz {
+        width: 80%;
+        .quizHeader {
+          display: flex;
+          width: 100%;
+          flex-wrap: nowrap;
+          justify-content: space-between;
+          padding: 0.2rem;
+          span {
+            width: 20%;
+            text-align: center;
+            font-family: PingFangSC-Medium;
+            font-size: 0.24rem;
+            font-weight: normal;
+            font-stretch: normal;
+            color: #2b2c2d;
+
+            &.left {
+              text-align: left;
+              padding-left: 0.2rem;
+            }
+
+            &.right {
+              text-align: right;
+              padding-right: 0.1rem;
+            }
+          }
+        }
+        .quizBody {
+          display: flex;
+          width: 100%;
+          flex-wrap: nowrap;
+          justify-content: space-between;
+          padding: 0.2rem;
+          font-family: PingFangSC-Regular;
+          font-size: 0.24rem;
+          font-weight: normal;
+          font-stretch: normal;
+          letter-spacing: 0px;
+          color: #2b2c2d;
+
+          .quizItem {
+            text-align: center;
+            width: 20%;
+
+            &.left {
+              text-align: left;
+            }
+
+            &.right {
+              text-align: right;
+            }
+          }
+
+          span {
+            color: #848587;
+            text-align: center;
+          }
+        }
+      }
+
+      .studentWord {
+        width: 80%;
+        .wordHeader {
+          display: flex;
+          width: 100%;
+          flex-wrap: nowrap;
+          justify-content: space-between;
+          padding: 0.2rem;
+          span {
+            width: 33%;
+            text-align: center;
+            font-family: PingFangSC-Medium;
+            font-size: 0.24rem;
+            font-weight: normal;
+            font-stretch: normal;
+            color: #2b2c2d;
+
+            &.left {
+              text-align: left;
+              padding-left: 0.2rem;
+            }
+
+            &.right {
+              text-align: right;
+            }
+          }
+        }
+        .wordBody {
+          display: flex;
+          width: 100%;
+          flex-wrap: nowrap;
+          justify-content: space-between;
+          padding: 0.2rem;
+          font-family: PingFangSC-Regular;
+          font-size: 0.24rem;
+          font-weight: normal;
+          font-stretch: normal;
+          letter-spacing: 0px;
+          color: #2b2c2d;
+          cursor: pointer;
+
+          .wordItem {
+            text-align: center;
+            width: 33%;
+
+            &.left {
+              text-align: left;
+            }
+
+            &.right {
+              text-align: right;
+            }
+          }
+          span {
+            color: #848587;
+            text-align: center;
+            width: 33%;
+          }
+        }
+      }
+    }
+  }
 }

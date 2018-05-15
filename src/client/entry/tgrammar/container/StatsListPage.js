@@ -16,6 +16,7 @@ import {
     TabPanel,
 } from '@/component/Tabs/index';
 import WordsTable from '@/entry/tgrammar/container/WordsTable';
+import StudentTable from '@/entry/tgrammar/container/StudentTable';
 
 const mapStateToProps = state => {
     const { network } = state;
@@ -39,6 +40,10 @@ class StatsListPage extends Component {
         location.href = `/vocabtest/report?id=${id}`;
     };
 
+    quizsItemClick = id => {
+        location.href = `/tgrammar/quiz?stats_content_quiz_id=${id}&cmd=check`;
+    };
+
     render() {
         console.log('StatsListPage render');
         const { init } = this.props;
@@ -53,15 +58,26 @@ class StatsListPage extends Component {
                         <ToastError />
                         <Tabs>
                             <TabItems style={{ backgroundColor: 'transparent' }}>
-                                <TabItem>核心语法测试</TabItem>
+                                <TabItem>我的学生</TabItem>
                                 <TabItem>词汇量测试</TabItem>
+                                <TabItem>核心语法测试</TabItem>
                             </TabItems>
                             <TabPanels>
-                                <TabPanel>{!init && <StatsTable />}</TabPanel>
+                                <TabPanel>
+                                    {!init && (
+                                        <StudentTable
+                                            wordsItemClick={this.wordsItemClick}
+                                            quizsItemClick={this.quizsItemClick}
+                                        />
+                                    )}
+                                </TabPanel>
                                 <TabPanel>
                                     <WordsTable
                                         wordsItemClick={this.wordsItemClick}
                                     />
+                                </TabPanel>
+                                <TabPanel>
+                                    <StatsTable />
                                 </TabPanel>
                             </TabPanels>
                         </Tabs>

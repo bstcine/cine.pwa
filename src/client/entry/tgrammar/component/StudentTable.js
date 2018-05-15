@@ -33,14 +33,13 @@ const renderQuizList = (list, quizsItemClick) => {
                 {list.map((item, index) => {
                     let quizStat = '待批改';
                     let quizStatStyle = {
-                        color: '#113f82',
-                        borderStyle: 'solid',
-                        borderWidth: '.02rem',
-                        paddingTop: '.05rem',
-                        paddingLeft: '.1rem',
-                        paddingRight: '.1rem',
-                        paddingBottom: '.05rem',
+                        color: '#0b4a9e',
+                        borderRadius: '0.04rem',
+                        border: 'solid 0.02rem #0b4a9e',
+                        padding: '0.05rem 0.1rem',
                         cursor: 'pointer',
+                        boxShadow:
+                            '0 0.04rem 0.04rem 0 rgba(57, 83, 122, 0.08)',
                     };
                     switch (item.status) {
                         case '2':
@@ -69,7 +68,11 @@ const renderQuizList = (list, quizsItemClick) => {
                             <div className={'quizItem'}>
                                 {item.checker_nickname}
                             </div>
-                            <div className={'quizItem'}>{item.score}</div>
+                            <div
+                                className={'quizItem'}
+                                style={{ color: '#ee0d0d' }}>
+                                {item.score}
+                            </div>
                             <div
                                 className={'quizItem right'}
                                 onClick={() => {

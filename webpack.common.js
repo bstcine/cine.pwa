@@ -29,7 +29,7 @@ module.exports = {
         publicPath,
     },
     plugins: [
-        new CleanWebpackPlugin(['build']),
+        new CleanWebpackPlugin(['build'], { verbose: devMode }),
         new MiniCssExtractPlugin({
             filename: 'entry/[name]/index.[contenthash:8].css',
         }),

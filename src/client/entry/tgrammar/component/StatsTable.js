@@ -15,8 +15,8 @@ const formatDuration = duration => {
     let sec = number % 60;
     let min = (number - sec) / 60;
     let str = '';
-    min && (str += min + '分');
-    sec && (str += sec + '秒');
+    min && (str += min + '\'');
+    sec && (str += sec + '\'\'');
     return str;
 };
 
@@ -102,7 +102,7 @@ const StatsTable = ({ title, list = [], onClick }) => {
                         return (
                             <tr key={item.id}>
                                 <td>{i + 1}</td>
-                                <td>{item.login}</td>
+                                <td>{item.login.slice(-10)}</td>
                                 <td>{item.nickname || '-'}</td>
                                 <td>{formatGrade(item.grade)}</td>
                                 <td>{formatDuration(item.duration)}</td>

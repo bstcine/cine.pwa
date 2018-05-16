@@ -24,70 +24,77 @@ const renderQuizList = (list, quizItemClick) => {
         return (
             <div className={'studentQuiz'}>
                 <div className={'quizHeader'}>
-                    <span className={'left'}>提交时间</span>
+                    <span className={'left create_at'}>提交时间</span>
                     <span>用时</span>
                     <span>批改人</span>
-                    <span>得分</span>
+                    <span className={'score'}>得分</span>
                     <span className={'right'}>状态</span>
                 </div>
-                {list.map((item, index) => {
-                    let quizStat = '待批改';
-                    let quizStatStyle = {
-                        color: '#0b4a9e',
-                        borderRadius: '0.04rem',
-                        border: 'solid 0.02rem #0b4a9e',
-                        padding: '0.05rem 0.1rem',
-                        boxShadow:
-                            '0 0.04rem 0.04rem 0 rgba(57, 83, 122, 0.08)',
-                    };
-                    switch (item.status) {
-                        case '2':
-                            quizStat = '批改中';
-                            quizStatStyle = { color: '#ee0d0d' };
-                            break;
-                        case '3':
-                            quizStat = '已批改';
-                            quizStatStyle = { color: '#1f9d34' };
-                            break;
-                    }
+                {list
+                    .sort(
+                        (a, b) => new Date(b.create_at) - new Date(a.create_at)
+                    )
+                    .map((item, index) => {
+                        let quizStat = '待批改';
+                        let quizStatStyle = {
+                            color: '#0b4a9e',
+                            borderRadius: '0.04rem',
+                            border: 'solid 0.02rem #0b4a9e',
+                            padding: '0.05rem 0.1rem',
+                            boxShadow:
+                                '0 0.04rem 0.04rem 0 rgba(57, 83, 122, 0.08)',
+                        };
+                        switch (item.status) {
+                            case '2':
+                                quizStat = '批改中';
+                                quizStatStyle = { color: '#ee0d0d' };
+                                break;
+                            case '3':
+                                quizStat = '已批改';
+                                quizStatStyle = { color: '#1f9d34' };
+                                break;
+                        }
 
-                    if (item.active === '0') {
-                        quizStat = '已重置';
-                        quizStatStyle = { color: '#8b8b8c' };
-                    }
+                        if (item.active === '0') {
+                            quizStat = '已重置';
+                            quizStatStyle = { color: '#8b8b8c' };
+                        }
 
-                    return (
-                        <div
-                            key={index}
-                            className={'quizBody'}
-                            onClick={() => {
-                                quizItemClick(
-                                    item.id,
-                                    item.active === '1' && item.status === '1'
-                                        ? 'check'
-                                        : ''
-                                );
-                            }}>
-                            <div className={'quizItem left'}>
-                                {formatTime(item.create_at)}
-                            </div>
-                            <div className={'quizItem'}>
-                                {formatDuration(item.duration)}
-                            </div>
-                            <div className={'quizItem'}>
-                                {item.checker_nickname || '-'}
-                            </div>
+                        return (
                             <div
-                                className={'quizItem'}
-                                style={{ color: '#ee0d0d' }}>
-                                {item.score || '-'}
+                                key={index}
+                                className={'quizBody'}
+                                onClick={() => {
+                                    quizItemClick(
+                                        item.id,
+                                        item.active === '1' &&
+                                        item.status === '1'
+                                            ? 'check'
+                                            : ''
+                                    );
+                                }}>
+                                <div className={'quizItem left create_at'}>
+                                    {formatTime(item.create_at)}
+                                </div>
+                                <div className={'quizItem'}>
+                                    {formatDuration(item.duration)}
+                                </div>
+                                <div className={'quizItem'}>
+                                    {item.checker_nickname || '-'}
+                                </div>
+                                <div
+                                    className={'quizItem score'}
+                                    style={{ color: '#ee0d0d' }}>
+                                    {item.score || '-'}
+                                </div>
+                                <div className={'quizItem right'}>
+                                    <span style={quizStatStyle}>
+                                        {quizStat}
+                                    </span>
+                                </div>
                             </div>
-                            <div className={'quizItem right'}>
-                                <span style={quizStatStyle}>{quizStat}</span>
-                            </div>
-                        </div>
-                    );
-                })}
+                        );
+                    })}
             </div>
         );
     } else {
@@ -104,28 +111,33 @@ const renderWordList = (list, wordsItemClick) => {
                     <span>用时</span>
                     <span className={'right'}>词汇量</span>
                 </div>
-                {list.slice(0, 5).map((item, index) => {
-                    return (
-                        <div
-                            key={index}
-                            className={'wordBody'}
-                            onClick={() => {
-                                wordsItemClick(item.id);
-                            }}>
-                            <div className={'wordItem left'}>
-                                {formatTime(item.create_at)}
+                {list
+                    .slice(0, 5)
+                    .sort(
+                        (a, b) => new Date(a.create_at) - new Date(b.create_at)
+                    )
+                    .map((item, index) => {
+                        return (
+                            <div
+                                key={index}
+                                className={'wordBody'}
+                                onClick={() => {
+                                    wordsItemClick(item.id);
+                                }}>
+                                <div className={'wordItem left'}>
+                                    {formatTime(item.create_at)}
+                                </div>
+                                <div className={'wordItem'}>
+                                    {formatDuration(item.duration)}
+                                </div>
+                                <div className={'wordItem right'}>
+                                    <span style={{ color: '#ee0d0d' }}>
+                                        {item.vocab}
+                                    </span>
+                                </div>
                             </div>
-                            <div className={'wordItem'}>
-                                {formatDuration(item.duration)}
-                            </div>
-                            <div className={'wordItem right'}>
-                                <span style={{ color: '#ee0d0d' }}>
-                                    {item.vocab}
-                                </span>
-                            </div>
-                        </div>
-                    );
-                })}
+                        );
+                    })}
             </div>
         );
     } else {

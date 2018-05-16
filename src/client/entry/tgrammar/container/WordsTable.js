@@ -2,9 +2,13 @@ import { connect } from 'react-redux';
 import WordsTable from '../component/WordsTable';
 
 const mapStateToProps = (state, ownProps) => {
-    const { statsContentWordList } = state;
+    const { statsContentStuQuizWordList } = state;
+
     return {
-        list: statsContentWordList,
+        list:
+            !statsContentStuQuizWordList || !statsContentStuQuizWordList.word
+                ? []
+                : statsContentStuQuizWordList.word,
     };
 };
 

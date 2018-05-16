@@ -2,10 +2,7 @@ import '../asset/style/index.less';
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import {
-    fetchStatsContentQuizList,
-    fetchStatsContentWordList,
-} from '@/action/tgrammarAction';
+import { fetchStatsContentStuQuizWordList } from '@/action/tgrammarAction';
 import Header from '@/component/Header';
 import Footer from '@/component/Footer';
 import StatsTable from '../container/StatsTable';
@@ -19,6 +16,7 @@ import {
     TabPanel,
 } from '@/component/Tabs/index';
 import WordsTable from '@/entry/tgrammar/container/WordsTable';
+import StudentTable from '@/entry/tgrammar/container/StudentTable';
 
 const mapStateToProps = state => {
     const { network } = state;
@@ -27,26 +25,23 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => ({
-    fetchStatsContentQuizList: () => {
-        dispatch(fetchStatsContentQuizList());
-    },
-    fetchStatsContentWordList: () => {
-        dispatch(fetchStatsContentWordList());
+    fetchStatsContentStuQuizWordList: () => {
+        dispatch(fetchStatsContentStuQuizWordList());
     },
 });
 
 class StatsListPage extends Component {
     componentDidMount() {
-        const {
-            fetchStatsContentQuizList,
-            fetchStatsContentWordList,
-        } = this.props;
-        fetchStatsContentQuizList();
-        fetchStatsContentWordList();
+        const { fetchStatsContentStuQuizWordList } = this.props;
+        fetchStatsContentStuQuizWordList();
     }
 
     wordsItemClick = id => {
-        this.props.history.push(`/report?id=${id}`);
+        window.open(`/vocabtest/report?id=${id}`);
+    };
+
+    quizItemClick = (id, cmd) => {
+        window.open(`/tgrammar/quiz?stats_content_quiz_id=${id}&cmd=${cmd}`);
     };
 
     render() {
@@ -56,20 +51,31 @@ class StatsListPage extends Component {
             <React.Fragment>
                 <Header isShow={true} />
                 <div className="container-fluid course-container-bg">
-                    <div
-                        className="tgrammar-stats-list"
-                        style={{ paddingTop: '.4rem' }}>
+                    <div className="tgrammar-stats-list">
                         <ToastLoading />
                         <ToastError />
                         <Tabs>
                             <TabItems style={{ backgroundColor: 'transparent' }}>
-                                <TabItem>核心语法测试</TabItem>
+                                <TabItem>我的学生</TabItem>
                                 <TabItem>词汇量测试</TabItem>
+                                <TabItem>核心语法测试</TabItem>
                             </TabItems>
                             <TabPanels>
-                                <TabPanel>{!init && <StatsTable />}</TabPanel>
                                 <TabPanel>
-                                    <WordsTable wordsItemClick={this.wordsItemClick}/>
+                                    {!init && (
+                                        <StudentTable
+                                            wordsItemClick={this.wordsItemClick}
+                                            quizItemClick={this.quizItemClick}
+                                        />
+                                    )}
+                                </TabPanel>
+                                <TabPanel>
+                                    <WordsTable
+                                        wordsItemClick={this.wordsItemClick}
+                                    />
+                                </TabPanel>
+                                <TabPanel>
+                                    <StatsTable />
                                 </TabPanel>
                             </TabPanels>
                         </Tabs>

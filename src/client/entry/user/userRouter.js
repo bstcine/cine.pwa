@@ -1,11 +1,33 @@
 import React from 'react';
-import { Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 
+import CommonUtil from '@/util/common';
 import Root from '@/entry/user/containers/Root';
 import CouponContainer from '@/entry/user/containers/CouponContainer';
 import PointContainer from '@/entry/user/containers/PointContainer';
 
-import CommonUtil  from '@/util/common';
+const routes = routes =>
+    routes.map((route, i) => (
+        <Route
+            key={i}
+            path={route.path}
+            render={props => <route.component {...props} />}
+        />
+    ));
+
+const CRouter = ({ route }) => (
+    <Router>
+        <Route
+            path={route.path}
+            render={props => {
+                if (route.willCheckAuth && !CommonUtil.isAuth()) return <div />;
+                return (
+                    <route.component {...props} routes={routes(route.routes)} />
+                );
+            }}
+        />
+    </Router>
+);
 
 const userRoute = {
     path: '/user',
@@ -20,16 +42,6 @@ const userRoute = {
             component: PointContainer,
         },
     ],
+    willCheckAuth: true,
 };
-
-const RouteWithSubRoutes = () => (
-    <Route
-        path={userRoute.path}
-        render={props => {
-            if (!CommonUtil.isAuth()) return <div/>;
-            return <userRoute.component {...props} routes={userRoute.routes} />;
-        }}
-    />
-);
-
-export default RouteWithSubRoutes;
+export const UserRouter = () => <CRouter route={userRoute} />;

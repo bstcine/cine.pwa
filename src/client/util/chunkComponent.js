@@ -3,11 +3,11 @@
  */
 import React from 'react';
 
-export const chunkComponent = loadComponent => (
+export const chunkComponent = loadComponent =>
     class AsyncComponent extends React.Component {
         state = {
             Component: null,
-        }
+        };
 
         componentWillMount() {
             if (this.hasLoadedComponent()) {
@@ -16,11 +16,13 @@ export const chunkComponent = loadComponent => (
 
             loadComponent()
                 .then(module => module.default)
-                .then((Component) => {
-                    this.setState({Component});
+                .then(Component => {
+                    this.setState({ Component });
                 })
-                .catch((err) => {
-                    console.error(`Cannot load component in <AsyncComponent />`);
+                .catch(err => {
+                    console.error(
+                        `Cannot load component in <AsyncComponent />`
+                    );
                     throw err;
                 });
         }
@@ -30,9 +32,7 @@ export const chunkComponent = loadComponent => (
         }
 
         render() {
-            const {Component} = this.state;
-            return (Component) ? <Component {...this.props} /> : null;
+            const { Component } = this.state;
+            return Component ? <Component {...this.props} /> : null;
         }
-    }
-);
-
+    };

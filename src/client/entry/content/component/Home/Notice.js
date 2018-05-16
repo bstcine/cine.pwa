@@ -1,30 +1,30 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 
 export default class Notice extends Component {
-
     static defaultProps = {
-        notices:[]
-    }
-    constructor(props) {
-        super(props);
-    }
+        notices: [],
+    };
 
     render() {
         console.log(`GlobalNotice`);
-        let {notices} = this.props;
+        let { notices } = this.props;
         return (
             <div className="notice-container">
-                <div className="notice-text"/>
+                <div className="notice-text" />
                 <ul className="notice-list">
-                    {notices.map((item,i)=>{
+                    {notices.map((item, i) => {
                         return (
                             <li className="notice-item" key={i}>
                                 <a href={item.href}>
-                                    <span className="notice-tag">{item.tag}</span>
-                                    <span className="notice-title">{item.name}</span>
+                                    <span className="notice-tag">
+                                        {item.tag}
+                                    </span>
+                                    <span className="notice-title">
+                                        {item.name}
+                                    </span>
                                 </a>
                             </li>
-                        )
+                        );
                     })}
                 </ul>
             </div>

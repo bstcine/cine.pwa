@@ -1,7 +1,6 @@
 const merge = require('webpack-merge');
 const common = require('./webpack.common.js');
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
@@ -9,30 +8,51 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
 
 module.exports = merge(common, {
     mode: 'production',
-    plugins: [
-        new MiniCssExtractPlugin({
-            filename: 'entry/[name]/index.[contenthash:8].css',
-        }),
-        new LodashModuleReplacementPlugin(),
-        new UglifyJSPlugin({
-            uglifyOptions: {
-                cache: true,
-                parallel: true,
-                sourceMap: true,
-                compress: {
-                    warnings: false,
-                    comparisons: false,
-                    drop_console: true,
+    stats: 'verbose',
+    optimization: {
+        splitChunks: {
+            chunks: 'all',
+            cacheGroups: {
+                commons: {
+                    name: 'commons',
+                    minSize: 1,
+                    chunks: 'initial',
+                    priority: 2,
+                    minChunks: 2,
                 },
-                mangle: {
-                    safari10: true,
-                },
-                output: {
-                    comments: false,
-                    ascii_only: true,
+                vendors: {
+                    name: 'vendors',
+                    test: /node_modules/,
+                    chunks: 'initial',
+                    priority: 10,
+                    minChunks: 2,
                 },
             },
-        }),
+        },
+        minimizer: [
+            new UglifyJSPlugin({
+                uglifyOptions: {
+                    cache: true,
+                    parallel: true,
+                    sourceMap: true,
+                    compress: {
+                        warnings: false,
+                        comparisons: false,
+                        drop_console: true,
+                    },
+                    mangle: {
+                        safari10: true,
+                    },
+                    output: {
+                        comments: false,
+                        ascii_only: true,
+                    },
+                },
+            }),
+        ],
+    },
+    plugins: [
+        new LodashModuleReplacementPlugin(),
         new OptimizeCSSAssetsPlugin(),
         new BundleAnalyzerPlugin({ analyzerMode: 'static' }),
     ],

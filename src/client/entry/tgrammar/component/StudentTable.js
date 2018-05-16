@@ -14,12 +14,12 @@ const formatDuration = duration => {
     let sec = number % 60;
     let min = (number - sec) / 60;
     let str = '';
-    min && (str += min + '分');
-    sec && (str += sec + '秒');
+    min && (str += min + "'");
+    sec && (str += sec + "''");
     return str;
 };
 
-const renderQuizList = (list, quizsItemClick) => {
+const renderQuizList = (list, quizItemClick) => {
     if (list && list.length) {
         return (
             <div className={'studentQuiz'}>
@@ -37,7 +37,6 @@ const renderQuizList = (list, quizsItemClick) => {
                         borderRadius: '0.04rem',
                         border: 'solid 0.02rem #0b4a9e',
                         padding: '0.05rem 0.1rem',
-                        cursor: 'pointer',
                         boxShadow:
                             '0 0.04rem 0.04rem 0 rgba(57, 83, 122, 0.08)',
                     };
@@ -58,7 +57,17 @@ const renderQuizList = (list, quizsItemClick) => {
                     }
 
                     return (
-                        <div key={index} className={'quizBody'}>
+                        <div
+                            key={index}
+                            className={'quizBody'}
+                            onClick={() => {
+                                quizItemClick(
+                                    item.id,
+                                    item.active === '1' && item.status === '1'
+                                        ? 'check'
+                                        : ''
+                                );
+                            }}>
                             <div className={'quizItem left'}>
                                 {formatTime(item.create_at)}
                             </div>
@@ -66,23 +75,14 @@ const renderQuizList = (list, quizsItemClick) => {
                                 {formatDuration(item.duration)}
                             </div>
                             <div className={'quizItem'}>
-                                {item.checker_nickname}
+                                {item.checker_nickname || '-'}
                             </div>
                             <div
                                 className={'quizItem'}
                                 style={{ color: '#ee0d0d' }}>
-                                {item.score}
+                                {item.score || '-'}
                             </div>
-                            <div
-                                className={'quizItem right'}
-                                onClick={() => {
-                                    if (
-                                        item.active === '1' &&
-                                        item.status === '1'
-                                    ) {
-                                        quizsItemClick(item.id);
-                                    }
-                                }}>
+                            <div className={'quizItem right'}>
                                 <span style={quizStatStyle}>{quizStat}</span>
                             </div>
                         </div>
@@ -133,7 +133,7 @@ const renderWordList = (list, wordsItemClick) => {
     }
 };
 
-const StudentTable = ({ list, wordsItemClick, quizsItemClick, ...props }) => {
+const StudentTable = ({ list, wordsItemClick, quizItemClick, ...props }) => {
     let students = list.student || [];
     let quizs = list.quiz || [];
     let words = list.word || [];
@@ -145,7 +145,7 @@ const StudentTable = ({ list, wordsItemClick, quizsItemClick, ...props }) => {
     let quizMap = {};
     quizs.forEach(item => {
         let quizKey = item.user_id;
-        let quizVal = quizMap[quizKey] ? quizMap[quizKey] : [item];
+        let quizVal = quizMap[quizKey] ? quizMap[quizKey] : [];
         quizVal.push(item);
         quizMap[quizKey] = quizVal;
     });
@@ -153,12 +153,10 @@ const StudentTable = ({ list, wordsItemClick, quizsItemClick, ...props }) => {
     let wordMap = {};
     words.forEach(item => {
         let wordKey = item.user_id;
-        let wordVal = wordMap[wordKey] ? wordMap[wordKey] : [item];
+        let wordVal = wordMap[wordKey] ? wordMap[wordKey] : [];
         wordVal.push(item);
         wordMap[wordKey] = wordVal;
     });
-
-    console.log(students, quizMap, wordMap);
 
     let renderList = students.map((item, key) => {
         let student_id = item.student_id;
@@ -169,13 +167,13 @@ const StudentTable = ({ list, wordsItemClick, quizsItemClick, ...props }) => {
                 <div className={'studentInfo'}>
                     <span>{key + 1}</span>
                     <span>{item.student_nickname}</span>
-                    <span>{item.student_login}</span>
+                    <span>{item.student_login.slice(-8)}</span>
                     <span>{item.teacher_nickname}</span>
                 </div>
                 <hr />
                 <div style={{ display: 'flex' }}>
                     <div className={'studentTitle'}>语法测试</div>
-                    {renderQuizList(stdQuizs, quizsItemClick)}
+                    {renderQuizList(stdQuizs, quizItemClick)}
                 </div>
                 <hr />
                 <div style={{ display: 'flex' }}>

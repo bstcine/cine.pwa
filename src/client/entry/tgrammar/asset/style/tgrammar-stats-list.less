@@ -1,250 +1,293 @@
 .tgrammar-stats-list {
-  h1 {
-    line-height: 70px;
-    color: #093d8a;
-    text-align: center;
-    font-size: 26px;
-    border-bottom: 5px solid #093d8a;
-    margin-bottom: 50px;
-  }
-  table {
-    margin: auto;
-    border: 1px solid #345e8c;
-    border-collapse: collapse;
-    text-align: center;
+    padding-top: 0.4rem;
 
-    caption {
-      font-size: 22px;
-      line-height: 48px;
-      color: #1a1a1a;
+    h1 {
+        line-height: 70px;
+        color: #093d8a;
+        text-align: center;
+        font-size: 26px;
+        border-bottom: 5px solid #093d8a;
+        margin-bottom: 50px;
     }
-    th {
-      background-color: #0c3975;
-      color: #fff;
-      font-size: 16px;
-      padding: 18px 10px;
+    table {
+        margin: auto;
+        border: 1px solid #345e8c;
+        border-collapse: collapse;
+        text-align: center;
+
+        caption {
+            font-size: 22px;
+            line-height: 48px;
+            color: #1a1a1a;
+        }
+        th {
+            background-color: #0c3975;
+            color: #fff;
+            font-size: 16px;
+            padding: 18px 10px;
+        }
+        tbody {
+            border-color: #345e8c !important;
+        }
+        td {
+            font-size: 14px;
+            color: #2b2c2d;
+            padding: 16px 10px;
+            border: 1px solid #e7effa;
+            i {
+                font-size: 14px;
+            }
+        }
     }
-    tbody {
-      border-color: #345e8c !important;
-    }
-    td {
-      font-size: 14px;
-      color: #2b2c2d;
-      padding: 16px 10px;
-      border: 1px solid #e7effa;
-      i {
+
+    button.btn.btn-round {
+        background-color: #fff;
+        width: 80px;
+        text-align: center;
         font-size: 14px;
-      }
-    }
-  }
-
-  button.btn.btn-round {
-    background-color: #fff;
-    width: 80px;
-    text-align: center;
-    font-size: 14px;
-    line-height: 26px;
-    border: none;
-    border-radius: 14px;
-    border: solid 1px #7f9ac3;
-    color: #113f82;
-    transition: all 0.1s ease-in;
-    &.btn-done {
-      color: #ee0d0d;
-    }
-    &.btn-checking {
-      color: #199c25;
-    }
-    &:hover {
-      box-shadow: 0px 3px 3px 0px rgba(57, 83, 122, 0.13);
-    }
-  }
-  span.red {
-    color: #ee0d0d;
-  }
-
-  .tabs .tab-items .tab-item {
-    flex: none;
-  }
-
-  .studentList {
-    padding: 0.5rem;
-
-    .studentPanel {
-      display: flex;
-      flex-direction: column;
-      padding-top: 0.1rem;
-
-      .studentInfo {
-        display: flex;
-        flex-direction: row;
-        margin: 0.5rem 0 0.2rem;
-        span {
-          font-family: PingFangSC-Regular;
-          font-size: 0.3rem;
-          color: #0b4a9e;
-          padding-right: 0.6rem;
+        line-height: 26px;
+        border: none;
+        border-radius: 14px;
+        border: solid 1px #7f9ac3;
+        color: #113f82;
+        transition: all 0.1s ease-in;
+        &.btn-done {
+            color: #ee0d0d;
         }
-      }
-
-      hr {
-        color: #ebf2f9;
-        background-color: #ebf2f9;
-        margin-top: 0.15rem;
-        margin-bottom: 0.2rem;
-        border: 0;
-        height: 0.01rem;
-      }
-
-      .studentTitle {
-        width: 20%;
-        display: flex;
-        min-height: 0.8rem;
-        align-items: center;
-        padding-left: 0.7rem;
-        font-family: PingFangSC-Regular;
-        font-size: 0.28rem;
-        font-weight: normal;
-        font-stretch: normal;
-        letter-spacing: 0px;
-        color: #2b2c2d;
-      }
-
-      .studentNoData {
-        width: 80%;
-        display: flex;
-        min-height: 0.8rem;
-        align-items: center;
-        justify-content: center;
-        font-family: PingFangSC-Regular;
-        font-size: 0.28rem;
-        font-weight: normal;
-        font-stretch: normal;
-        letter-spacing: 0px;
-        color: #c2c3c5;
-      }
-
-      .studentQuiz {
-        width: 80%;
-        .quizHeader {
-          display: flex;
-          width: 100%;
-          flex-wrap: nowrap;
-          justify-content: space-between;
-          padding: 0.2rem;
-          span {
-            width: 20%;
-            text-align: center;
-            font-family: PingFangSC-Medium;
-            font-size: 0.24rem;
-            font-weight: normal;
-            font-stretch: normal;
-            color: #2b2c2d;
-
-            &.left {
-              text-align: left;
-              padding-left: 0.2rem;
-            }
-
-            &.right {
-              text-align: right;
-              padding-right: 0.1rem;
-            }
-          }
+        &.btn-checking {
+            color: #199c25;
         }
-        .quizBody {
-          display: flex;
-          width: 100%;
-          flex-wrap: nowrap;
-          justify-content: space-between;
-          padding: 0.2rem;
-          font-family: PingFangSC-Regular;
-          font-size: 0.24rem;
-          font-weight: normal;
-          font-stretch: normal;
-          letter-spacing: 0px;
-          color: #2b2c2d;
-
-          .quizItem {
-            text-align: center;
-            width: 20%;
-
-            &.left {
-              text-align: left;
-            }
-
-            &.right {
-              text-align: right;
-            }
-          }
-
-          span {
-            color: #848587;
-            text-align: center;
-          }
+        &:hover {
+            box-shadow: 0px 3px 3px 0px rgba(57, 83, 122, 0.13);
         }
-      }
-
-      .studentWord {
-        width: 80%;
-        .wordHeader {
-          display: flex;
-          width: 100%;
-          flex-wrap: nowrap;
-          justify-content: space-between;
-          padding: 0.2rem;
-          span {
-            width: 33%;
-            text-align: center;
-            font-family: PingFangSC-Medium;
-            font-size: 0.24rem;
-            font-weight: normal;
-            font-stretch: normal;
-            color: #2b2c2d;
-
-            &.left {
-              text-align: left;
-              padding-left: 0.2rem;
-            }
-
-            &.right {
-              text-align: right;
-            }
-          }
-        }
-        .wordBody {
-          display: flex;
-          width: 100%;
-          flex-wrap: nowrap;
-          justify-content: space-between;
-          padding: 0.2rem;
-          font-family: PingFangSC-Regular;
-          font-size: 0.24rem;
-          font-weight: normal;
-          font-stretch: normal;
-          letter-spacing: 0px;
-          color: #2b2c2d;
-          cursor: pointer;
-
-          .wordItem {
-            text-align: center;
-            width: 33%;
-
-            &.left {
-              text-align: left;
-            }
-
-            &.right {
-              text-align: right;
-            }
-          }
-          span {
-            color: #848587;
-            text-align: center;
-            width: 33%;
-          }
-        }
-      }
     }
-  }
+    span.red {
+        color: #ee0d0d;
+    }
+
+    .tabs .tab-items .tab-item {
+        flex: none;
+    }
+
+    .studentList {
+        padding: 0.5rem;
+
+        .studentPanel {
+            display: flex;
+            flex-direction: column;
+            padding-top: 0.1rem;
+
+            .studentInfo {
+                display: flex;
+                flex-direction: row;
+                margin: 0.5rem 0 0.2rem;
+                span {
+                    font-family: PingFangSC-Regular;
+                    font-size: 0.3rem;
+                    color: #0b4a9e;
+                    padding-right: 0.6rem;
+                }
+            }
+
+            hr {
+                color: #ebf2f9;
+                background-color: #ebf2f9;
+                margin-top: 0.15rem;
+                margin-bottom: 0.2rem;
+                border: 0;
+                height: 0.01rem;
+            }
+
+            .studentTitle {
+                width: 20%;
+                display: flex;
+                min-height: 0.8rem;
+                align-items: center;
+                padding-left: 0.7rem;
+                font-family: PingFangSC-Regular;
+                font-size: 0.28rem;
+                font-weight: normal;
+                font-stretch: normal;
+                letter-spacing: 0px;
+                color: #2b2c2d;
+            }
+
+            .studentNoData {
+                width: 80%;
+                display: flex;
+                min-height: 0.8rem;
+                align-items: center;
+                justify-content: center;
+                font-family: PingFangSC-Regular;
+                font-size: 0.28rem;
+                font-weight: normal;
+                font-stretch: normal;
+                letter-spacing: 0px;
+                color: #c2c3c5;
+            }
+
+            .studentQuiz {
+                width: 80%;
+                .quizHeader {
+                    display: flex;
+                    width: 100%;
+                    flex-wrap: nowrap;
+                    justify-content: space-between;
+                    padding: 0.2rem;
+                    span {
+                        width: 20%;
+                        text-align: center;
+                        font-family: PingFangSC-Medium;
+                        font-size: 0.24rem;
+                        font-weight: normal;
+                        font-stretch: normal;
+                        color: #2b2c2d;
+
+                        &.left {
+                            text-align: left;
+                            padding-left: 0.2rem;
+                        }
+
+                        &.right {
+                            text-align: right;
+                            padding-right: 0.1rem;
+                        }
+                    }
+                }
+                .quizBody {
+                    display: flex;
+                    width: 100%;
+                    flex-wrap: nowrap;
+                    justify-content: space-between;
+                    padding: 0.2rem;
+                    font-family: PingFangSC-Regular;
+                    font-size: 0.24rem;
+                    font-weight: normal;
+                    font-stretch: normal;
+                    letter-spacing: 0px;
+                    color: #2b2c2d;
+                    cursor: pointer;
+
+                    .quizItem {
+                        text-align: center;
+                        width: 20%;
+
+                        &.left {
+                            text-align: left;
+                        }
+
+                        &.right {
+                            text-align: right;
+                        }
+                    }
+
+                    span {
+                        color: #848587;
+                        text-align: center;
+                    }
+                }
+            }
+
+            .studentWord {
+                width: 80%;
+                .wordHeader {
+                    display: flex;
+                    width: 100%;
+                    flex-wrap: nowrap;
+                    justify-content: space-between;
+                    padding: 0.2rem;
+                    span {
+                        width: 33%;
+                        text-align: center;
+                        font-family: PingFangSC-Medium;
+                        font-size: 0.24rem;
+                        font-weight: normal;
+                        font-stretch: normal;
+                        color: #2b2c2d;
+
+                        &.left {
+                            text-align: left;
+                            padding-left: 0.2rem;
+                        }
+
+                        &.right {
+                            text-align: right;
+                        }
+                    }
+                }
+                .wordBody {
+                    display: flex;
+                    width: 100%;
+                    flex-wrap: nowrap;
+                    justify-content: space-between;
+                    padding: 0.2rem;
+                    font-family: PingFangSC-Regular;
+                    font-size: 0.24rem;
+                    font-weight: normal;
+                    font-stretch: normal;
+                    letter-spacing: 0px;
+                    color: #2b2c2d;
+                    cursor: pointer;
+
+                    .wordItem {
+                        text-align: center;
+                        width: 33%;
+
+                        &.left {
+                            text-align: left;
+                        }
+
+                        &.right {
+                            text-align: right;
+                        }
+                    }
+                    span {
+                        color: #848587;
+                        text-align: center;
+                        width: 33%;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media @media-xs {
+    .tgrammar-stats-list,
+    .tgrammar {
+        margin: 0;
+        background-color: #fff;
+        width: 100%;
+        padding: 0.2rem;
+        min-height: 600px;
+
+        .studentList {
+            padding: 0;
+            .studentPanel {
+                .studentTitle {
+                    display: none;
+                }
+                .studentQuiz {
+                    width: 100%;
+                    .quizHeader {
+                        span {
+                            &.left {
+                                padding-left: 0;
+                            }
+                        }
+                    }
+                }
+                .studentWord {
+                    width: 100%;
+                    .wordHeader {
+                        span {
+                            &.left {
+                                padding-left: 0;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 }

@@ -37,11 +37,11 @@ class StatsListPage extends Component {
     }
 
     wordsItemClick = id => {
-        location.href = `/vocabtest/report?id=${id}`;
+        window.open(`/vocabtest/report?id=${id}`);
     };
 
-    quizsItemClick = id => {
-        location.href = `/tgrammar/quiz?stats_content_quiz_id=${id}&cmd=check`;
+    quizItemClick = (id, cmd) => {
+        window.open(`/tgrammar/quiz?stats_content_quiz_id=${id}&cmd=${cmd}`);
     };
 
     render() {
@@ -51,9 +51,7 @@ class StatsListPage extends Component {
             <React.Fragment>
                 <Header isShow={true} />
                 <div className="container-fluid course-container-bg">
-                    <div
-                        className="tgrammar-stats-list"
-                        style={{ paddingTop: '.4rem' }}>
+                    <div className="tgrammar-stats-list">
                         <ToastLoading />
                         <ToastError />
                         <Tabs>
@@ -67,7 +65,7 @@ class StatsListPage extends Component {
                                     {!init && (
                                         <StudentTable
                                             wordsItemClick={this.wordsItemClick}
-                                            quizsItemClick={this.quizsItemClick}
+                                            quizItemClick={this.quizItemClick}
                                         />
                                     )}
                                 </TabPanel>

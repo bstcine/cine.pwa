@@ -3,7 +3,7 @@ const webpack = require('webpack');
 const merge = require('webpack-merge');
 const common = require('./webpack.common.js');
 
-const API_Host_URL = 'http://apptest.bstcine.com';
+const Dev_Host_URL = 'http://apptest.bstcine.com';
 
 let rewrites = [];
 for (let entry in common.entry) {
@@ -33,7 +33,7 @@ module.exports = merge(common, {
         useLocalIp: true,
         proxy: {
             '/api': {
-                target: API_Host_URL,
+                target: Dev_Host_URL,
                 secure: false,
                 changeOrigin: true,
             },

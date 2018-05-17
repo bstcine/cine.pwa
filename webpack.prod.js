@@ -15,14 +15,12 @@ module.exports = merge(common, {
                 commons: {
                     name: 'commons',
                     test: /src[\/]/,
-                    minSize: 1,
                     chunks: 'initial',
                     priority: 2,
                     minChunks: 2,
                 },
                 vendors: {
                     name: 'vendors',
-                    minSize: 1,
                     test: /node_modules/,
                     chunks: 'initial',
                     priority: 10,

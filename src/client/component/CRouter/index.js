@@ -13,7 +13,6 @@ const routes = routes =>
 
 export const CRouter = ({ route }) => (
     <Router>
-        <Switch>
             <Route
                 path={route.path}
                 render={props => {
@@ -26,6 +25,5 @@ export const CRouter = ({ route }) => (
                     );
                 }}
             />
-        </Switch>
     </Router>
 );

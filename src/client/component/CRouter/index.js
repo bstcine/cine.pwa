@@ -13,17 +13,14 @@ const routes = routes =>
 
 export const CRouter = ({ route }) => (
     <Router>
-            <Route
-                path={route.path}
-                render={props => {
-                    if (route.willCheckAuth && !CommonUtil.isAuth()) return <div />;
-                    return (
-                        <route.component
-                            {...props}
-                            routes={routes(route.routes)}
-                        />
-                    );
-                }}
-            />
+        <Route
+            path={route.path}
+            render={props => {
+                if (route.willCheckAuth && !CommonUtil.isAuth()) return <div />;
+                return (
+                    <route.component {...props} routes={routes(route.routes)} />
+                );
+            }}
+        />
     </Router>
 );

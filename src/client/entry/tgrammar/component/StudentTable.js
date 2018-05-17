@@ -82,13 +82,7 @@ const renderQuizList = (list, quizItemClick) => {
                                 key={index}
                                 className={'quizBody'}
                                 onClick={() => {
-                                    quizItemClick(
-                                        item.id,
-                                        item.active === '1' &&
-                                        item.status === '1'
-                                            ? 'check'
-                                            : ''
-                                    );
+                                    quizItemClick(item.id, 'check');
                                 }}>
                                 <div className={'quizItem left create_at'}>
                                     {formatTime(item.create_at)}

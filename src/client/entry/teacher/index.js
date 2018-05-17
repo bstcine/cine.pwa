@@ -4,24 +4,24 @@ import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import rootReducer from './reducer';
-import QuizPage from './container/QuizPage';
+import rootReducer from '../tgrammar/reducer';
+import StatsListPage from '../tgrammar/container/StatsListPage';
 import Entry from '@/component/Entry';
 import CommonUtil from '@/util/common';
 // import '@/util/test';
 
 const store = createStore(rootReducer, applyMiddleware(thunk));
 
-class Tgrammar extends Entry {
+class Teacher extends Entry {
     render() {
         return (
             <Router>
                 <Provider store={store}>
                     <Route
-                        path="/tgrammar/quiz"
+                        path="/teacher/dashboard"
                         component={props => {
                             if (!CommonUtil.isAuth()) return <div />;
-                            return <QuizPage {...props} />;
+                            return <StatsListPage {...props} />;
                         }}
                     />
                 </Provider>
@@ -29,5 +29,4 @@ class Tgrammar extends Entry {
         );
     }
 }
-
-ReactDOM.render(<Tgrammar />, document.getElementById('root'));
+ReactDOM.render(<Teacher />, document.getElementById('root'));

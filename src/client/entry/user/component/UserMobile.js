@@ -77,7 +77,7 @@ const UserMobile = ({ user, handleClick }) => {
                 {user.role_id !== '3' && (
                     <a
                         className={'tab'}
-                        href={'/tgrammar/stats/list'}
+                        href={'/teacher/dashboard'}
                         target={'_blank'}>
                         <img
                             src={require('../asset/image/ico_test_teacher@2x.png')}

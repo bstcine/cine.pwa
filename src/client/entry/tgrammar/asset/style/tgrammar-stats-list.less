@@ -152,6 +152,14 @@
                             text-align: right;
                             padding-right: 0.1rem;
                         }
+
+                        &.create_at{
+                            width: 30%;
+                        }
+
+                        &.score{
+                            width: 10%;
+                        }
                     }
                 }
                 .quizBody {
@@ -179,6 +187,14 @@
                         &.right {
                             text-align: right;
                         }
+
+                        &.create_at{
+                            width: 30%;
+                        }
+
+                        &.score{
+                            width: 10%;
+                        }
                     }
 
                     span {
@@ -197,7 +213,7 @@
                     justify-content: space-between;
                     padding: 0.2rem;
                     span {
-                        width: 33%;
+                        width: 20%;
                         text-align: center;
                         font-family: PingFangSC-Medium;
                         font-size: 0.24rem;
@@ -208,10 +224,12 @@
                         &.left {
                             text-align: left;
                             padding-left: 0.2rem;
+                            width: 30%;
                         }
 
                         &.right {
                             text-align: right;
+                            width: 50%;
                         }
                     }
                 }
@@ -231,14 +249,16 @@
 
                     .wordItem {
                         text-align: center;
-                        width: 33%;
+                        width: 20%;
 
                         &.left {
                             text-align: left;
+                            width: 30%;
                         }
 
                         &.right {
                             text-align: right;
+                            width: 50%;
                         }
                     }
                     span {
@@ -260,6 +280,10 @@
         width: 100%;
         padding: 0.2rem;
         min-height: 600px;
+
+        .tabs .tab-items .tab-item {
+            flex: 1;
+        }
 
         .studentList {
             padding: 0;

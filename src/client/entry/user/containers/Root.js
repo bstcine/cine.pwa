@@ -69,9 +69,7 @@ class Root extends Component {
                     user={user}
                     handleClick={this.handleClick}
                 />
-                <div className={'user-content'}>
-                    {routes}
-                </div>
+                <div className={'user-content'}>{routes}</div>
             </React.Fragment>
         );
     }

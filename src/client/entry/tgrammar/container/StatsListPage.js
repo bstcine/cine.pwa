@@ -15,7 +15,6 @@ import {
     TabPanels,
     TabPanel,
 } from '@/component/Tabs/index';
-import WordsTable from '@/entry/tgrammar/container/WordsTable';
 import StudentTable from '@/entry/tgrammar/container/StudentTable';
 
 const mapStateToProps = state => {
@@ -57,7 +56,6 @@ class StatsListPage extends Component {
                         <Tabs>
                             <TabItems style={{ backgroundColor: 'transparent' }}>
                                 <TabItem>我的学生</TabItem>
-                                <TabItem>词汇量测试</TabItem>
                                 <TabItem>核心语法测试</TabItem>
                             </TabItems>
                             <TabPanels>
@@ -68,11 +66,6 @@ class StatsListPage extends Component {
                                             quizItemClick={this.quizItemClick}
                                         />
                                     )}
-                                </TabPanel>
-                                <TabPanel>
-                                    <WordsTable
-                                        wordsItemClick={this.wordsItemClick}
-                                    />
                                 </TabPanel>
                                 <TabPanel>
                                     <StatsTable />

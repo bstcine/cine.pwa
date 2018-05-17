@@ -17,7 +17,7 @@ export const actionUserInfo = {
     loadUserInfo: () => async dispatch => {
         dispatch(actionUserInfo.request());
 
-        let [err, result] = await fetchData(Api.APIURL_User_Info);
+        let [, result] = await fetchData(Api.APIURL_User_Info);
         dispatch(actionUserInfo.receive(result));
     },
 
@@ -64,7 +64,7 @@ export const actionUserCoupon = {
             orderBy: 'create_at',
             orderValue: 'desc',
         };
-        let [err, result] = await fetchData(Api.APIURL_User_Coupon, param);
+        let [, result] = await fetchData(Api.APIURL_User_Coupon, param);
         dispatch(actionUserCoupon.receive(result));
     },
     addCoupon: no => async dispatch => {
@@ -103,10 +103,10 @@ export const actionUserPoint = {
             orderBy: 'create_at',
             orderValue: 'desc',
         };
-        let [error, result] = await fetchData(Api.APIURL_User_Point, param);
+        let [, result] = await fetchData(Api.APIURL_User_Point, param);
         let rows = result.rows;
 
-        let [err, res] = await fetchData(Api.APIURL_Global_Integral_Rule, {
+        let [, res] = await fetchData(Api.APIURL_Global_Integral_Rule, {
             part: '1',
             type: '1',
         });

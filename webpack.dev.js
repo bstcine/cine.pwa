@@ -4,7 +4,6 @@ const merge = require('webpack-merge');
 const common = require('./webpack.common.js');
 
 const API_Host_URL = 'http://apptest.bstcine.com';
-// const API_Host_URL = 'http://local.bstcine.com:9000';
 
 let rewrites = [];
 for (let entry in common.entry) {
@@ -22,6 +21,7 @@ module.exports = merge(common, {
     devtool: 'cheap-module-source-map',
     devServer: {
         contentBase: path.join(__dirname, 'build'),
+        compress: true,
         hot: true,
         historyApiFallback: {
             disableDotRule: true,

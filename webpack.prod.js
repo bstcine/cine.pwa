@@ -3,8 +3,8 @@ const common = require('./webpack.common.js');
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
-// const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
-//     .BundleAnalyzerPlugin;
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
+    .BundleAnalyzerPlugin;
 
 module.exports = merge(common, {
     mode: 'production',
@@ -14,6 +14,7 @@ module.exports = merge(common, {
             cacheGroups: {
                 commons: {
                     name: 'commons',
+                    test: /src[\/]/,
                     minSize: 1,
                     chunks: 'initial',
                     priority: 2,
@@ -21,6 +22,7 @@ module.exports = merge(common, {
                 },
                 vendors: {
                     name: 'vendors',
+                    minSize: 1,
                     test: /node_modules/,
                     chunks: 'initial',
                     priority: 10,
@@ -53,6 +55,6 @@ module.exports = merge(common, {
     plugins: [
         new LodashModuleReplacementPlugin(),
         new OptimizeCSSAssetsPlugin(),
-        // new BundleAnalyzerPlugin({ analyzerMode: 'static' }),
+        new BundleAnalyzerPlugin({ analyzerMode: 'static' }),
     ],
 });

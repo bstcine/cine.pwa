@@ -53,3 +53,6 @@ exports.APIURL_LogoutV1 = '/api/web/logout'; // 登出
 
 exports.APIURL_Auth_Signin = '/api/auth/signin'; // 登录
 exports.APIURL_System_AccessLog_Create = '/api/system/accesslog/create'; // 创建访问日志
+
+exports.APIURL_Temp_User_Course_Coupon = '/api/temp/user/course/coupon'; // 获取用户将永久转为限时课程可以获得的优惠券
+exports.APIURL_Temp_User_Course_Coupon_Check = '/api/temp/user/course/coupon/check'; // 将永久课程转为限时课程，并赠送优惠券

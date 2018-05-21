@@ -8,7 +8,7 @@ const devMode = process.env.NODE_ENV !== 'production';
 const API_Host_URL = 'http://apptest.bstcine.com';
 // const API_Host_URL = 'http://local.bstcine.com:9000';
 const publicPath = '/'; // for cdn
-const pages = ['content', 'cquiz', 'address', 'vocabtest', 'tgrammar', 'user'];
+const pages = ['content', 'cquiz', 'address', 'vocabtest', 'tgrammar', 'user', 'temp'];
 
 let entry = {};
 let htmlWebpackPlugins = [];

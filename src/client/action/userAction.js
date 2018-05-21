@@ -42,10 +42,10 @@ export const actionUserCoupon = {
         id: id,
     }),
     requestAdd: () => ({
-        type: Action_UC.REQUEST_ADD,
+        type: Action_UC.ADD_COUPON_START,
     }),
     receiveAdd: (err, res) => ({
-        type: Action_UC.RECEIVE_ADD,
+        type: Action_UC.ADD_COUPON_END,
         payload: res,
         err: err,
     }),
@@ -65,7 +65,7 @@ export const actionUserCoupon = {
         dispatch(actionUserCoupon.receive(result));
     },
     toggleCouponDialog: () => ({
-        type: Action_UC.DIALOG_TOGGLE,
+        type: Action_UC.TOGGLE_DIALOG,
     }),
     addCoupon: no => async dispatch => {
         dispatch(actionUserCoupon.requestAdd());

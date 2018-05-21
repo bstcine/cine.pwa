@@ -18,11 +18,11 @@ const coupons = (
                     expand: item.id === action.id ? !item.expand : item.expand,
                 })),
             };
-        case Action_UC.DIALOG_TOGGLE:
+        case Action_UC.TOGGLE_DIALOG:
             return { ...state, isOpen: !state.isOpen };
-        case Action_UC.REQUEST_ADD:
+        case Action_UC.ADD_COUPON_START:
             return { ...state, network: { loading: true, msg: '', error: '' }};
-        case Action_UC.RECEIVE_ADD:
+        case Action_UC.ADD_COUPON_END:
             return {
                 ...state,
                 network: { loading: false, msg: '添加成功', error: action.err },

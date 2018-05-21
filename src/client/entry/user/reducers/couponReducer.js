@@ -18,7 +18,7 @@ const coupons = (
                     expand: item.id === action.id ? !item.expand : item.expand,
                 })),
             };
-        case Action_UC.DIALOG_ADD:
+        case Action_UC.DIALOG_TOGGLE:
             return { ...state, isOpen: !state.isOpen };
         case Action_UC.REQUEST_ADD:
             return { ...state, network: { loading: true, msg: '', error: '' }};

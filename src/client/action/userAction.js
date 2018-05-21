@@ -41,9 +41,6 @@ export const actionUserCoupon = {
         type: Action_UC.EXPAND,
         id: id,
     }),
-    dialogAddCoupon: () => ({
-        type: Action_UC.DIALOG_ADD,
-    }),
     requestAdd: () => ({
         type: Action_UC.REQUEST_ADD,
     }),
@@ -67,9 +64,12 @@ export const actionUserCoupon = {
         let [, result] = await fetchData(Api.APIURL_User_Coupon, param);
         dispatch(actionUserCoupon.receive(result));
     },
+    toggleCouponDialog: () => ({
+        type: Action_UC.DIALOG_TOGGLE,
+    }),
     addCoupon: no => async dispatch => {
         dispatch(actionUserCoupon.requestAdd());
-        dispatch(actionUserCoupon.dialogAddCoupon());
+        dispatch(actionUserCoupon.toggleCouponDialog());
 
         let [err, result] = await fetchData(Api.APIURL_User_Coupon_Add, {
             no: no,

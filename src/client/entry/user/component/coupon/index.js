@@ -15,7 +15,7 @@ const CouponPanel = ({ isOpen, coupons, actions }) => {
             key={1}
             label="取消"
             primary={true}
-            onClick={actions.dialogAddCoupon}
+            onClick={actions.toggleCouponDialog}
         />,
         <FlatButton
             key={2}
@@ -32,9 +32,7 @@ const CouponPanel = ({ isOpen, coupons, actions }) => {
             <div className={'coupon-todo'}>
                 <a
                     className="float-button"
-                    onClick={() => {
-                        actions.dialogAddCoupon();
-                    }}
+                    onClick={actions.toggleCouponDialog}
                 />
             </div>
             <Dialog
@@ -42,7 +40,7 @@ const CouponPanel = ({ isOpen, coupons, actions }) => {
                 modal={false}
                 actions={dialogActions}
                 open={isOpen}
-                onRequestClose={actions.dialogAddCoupon}>
+                onRequestClose={actions.toggleCouponDialog}>
                 <TextField
                     fullWidth={true}
                     onChange={(e, val) => {

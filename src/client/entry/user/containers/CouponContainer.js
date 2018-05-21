@@ -14,6 +14,7 @@ class CouponContainer extends Component {
         let { coupons, actions } = this.props;
         let network = coupons.network;
         let isOpen = coupons.isOpen;
+        let rows = coupons.rows;
 
         return (
             <React.Fragment>
@@ -28,7 +29,7 @@ class CouponContainer extends Component {
                 />
                 <CouponPanel
                     isOpen={isOpen}
-                    coupons={coupons.rows}
+                    coupons={rows}
                     actions={actions}
                 />
             </React.Fragment>

@@ -7,7 +7,7 @@ import FlatButton from 'material-ui/FlatButton';
 import { TextField } from 'material-ui';
 import CouponTabs from '../coupon/CouponTabs';
 
-const CouponPanel = ({ isOpen, use, used, expired, actions }) => {
+const CouponPanel = ({ isOpen, coupons, actions }) => {
     let couponNo = '';
 
     const dialogActions = [
@@ -28,7 +28,7 @@ const CouponPanel = ({ isOpen, use, used, expired, actions }) => {
     ];
     return (
         <React.Fragment>
-            <CouponTabs use = {use} used = {used} expired = {expired} actions = {actions} />
+            <CouponTabs coupons={coupons} actions={actions} />
             <div className={'coupon-todo'}>
                 <a
                     className="float-button"

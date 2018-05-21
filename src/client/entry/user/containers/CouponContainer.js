@@ -12,14 +12,8 @@ class CouponContainer extends Component {
 
     render() {
         let { coupons, actions } = this.props;
-
-        let rows = coupons.rows;
         let network = coupons.network;
         let isOpen = coupons.isOpen;
-
-        let use = rows && rows.filter(item => item.status === '0');
-        let used = rows && rows.filter(item => item.status === '1');
-        let expired = rows && rows.filter(item => item.status === '2');
 
         return (
             <React.Fragment>
@@ -34,9 +28,7 @@ class CouponContainer extends Component {
                 />
                 <CouponPanel
                     isOpen={isOpen}
-                    use={use}
-                    used={used}
-                    expired={expired}
+                    coupons={coupons.rows}
                     actions={actions}
                 />
             </React.Fragment>

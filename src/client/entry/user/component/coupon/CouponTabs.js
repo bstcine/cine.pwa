@@ -10,7 +10,12 @@ import CouponList from '../coupon/CouponList';
 
 export default class CouponTabs extends React.PureComponent {
     render() {
-        let { use, used, expired, actions } = this.props;
+        let { coupons, actions } = this.props;
+        let rows = coupons;
+        let use = rows && rows.filter(item => item.status === '0');
+        let used = rows && rows.filter(item => item.status === '1');
+        let expired = rows && rows.filter(item => item.status === '2');
+
         return (
             <React.Fragment>
                 <Tabs className={'coupon-tabs'}>

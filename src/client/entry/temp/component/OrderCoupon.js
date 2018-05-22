@@ -72,6 +72,9 @@ export default class OrderCoupon extends Component {
                                 type="radio"
                                 name="radioName"
                                 id="radioName1"
+                                onChange={() => {
+                                    this.onChangRadio('1');
+                                }}
                                 checked={curIndex === '0'}
                                 hidden
                             />
@@ -105,6 +108,9 @@ export default class OrderCoupon extends Component {
                                 type="radio"
                                 name="radioName"
                                 id="radioName2"
+                                onChange={() => {
+                                    this.onChangRadio('1');
+                                }}
                                 checked={curIndex === '1'}
                                 hidden
                             />

@@ -51,6 +51,7 @@ export default class OrderCoupon extends Component {
         } else if (list) {
             content = (
                 <div className={'panel'}>
+                    <h1>善恩视频课程有效期转换</h1>
                     <div className={'hint-a'}>亲爱的用户：</div>
                     <div className={'hint-b'}>
                         您好！从2018年5月25日起，新购买善恩视频课程的有效期统一调整为2年。您账户下的所有已购课程可选择：
@@ -81,6 +82,7 @@ export default class OrderCoupon extends Component {
                                         {value.hint}
                                     </div>
                                 ))}
+                                <div className={'hint-f'}>注：此优惠券仅可用于购买善恩视频课程。</div>
                             </div>
                         </div>
                         <div
@@ -96,7 +98,7 @@ export default class OrderCoupon extends Component {
                                 type="radio"
                                 checked={curIndex === '1'}
                             />
-                            <div className="hint-f">
+                            <div className="hint-g">
                                 我不需要调整本账户下所有课程的有效期。
                             </div>
                         </div>
@@ -114,8 +116,8 @@ export default class OrderCoupon extends Component {
 
         return (
             <React.Fragment>
-                <Header isShow={true} />
-                <div className={'container'}>{content}</div>
+                <Header isShow={true} style={{}}/>
+                <div className={'main'}>{content}</div>
             </React.Fragment>
         );
     }

@@ -23,6 +23,12 @@ export default class OrderCoupon extends Component {
             {}
         );
 
+        if (!err || !result || result.length <= 0) {
+            alert('您无法参加该活动');
+            location.href = '/';
+            return;
+        }
+
         this.setState({ err, list: result });
     }
 
@@ -76,9 +82,6 @@ export default class OrderCoupon extends Component {
                                     {expireDate}。
                                 </div>
                                 <div className={'hint-d'}>并获得：</div>
-                                {(!list || list.length <= 0) && (
-                                    <div className={'hint-e'}>暂无优惠</div>
-                                )}
                                 {list.map((value, index) => (
                                     <div className={'hint-e'} key={index}>
                                         {value.hint}

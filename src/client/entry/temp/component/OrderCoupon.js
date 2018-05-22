@@ -31,13 +31,12 @@ export default class OrderCoupon extends Component {
     };
 
     submit = async () => {
-        let [err] = await fetchData(
-            Api.APIURL_Temp_User_Course_Coupon_Check,
-            { type: String(this.state.curIndex) }
-        );
-        if(err){
+        let [err] = await fetchData(Api.APIURL_Temp_User_Course_Coupon_Check, {
+            type: String(this.state.curIndex),
+        });
+        if (err) {
             alert('系统异常');
-        }else {
+        } else {
             alert('操作成功');
         }
     };
@@ -76,13 +75,17 @@ export default class OrderCoupon extends Component {
                                     {expireDate}。
                                 </div>
                                 <div className={'hint-d'}>并获得：</div>
-                                {list && <div className={'hint-e'}>暂无优惠</div>}
+                                {(!list || list.length <= 0) && (
+                                    <div className={'hint-e'}>暂无优惠</div>
+                                )}
                                 {list.map((value, index) => (
                                     <div className={'hint-e'} key={index}>
                                         {value.hint}
                                     </div>
                                 ))}
-                                <div className={'hint-f'}>注：此优惠券仅可用于购买善恩视频课程。</div>
+                                <div className={'hint-f'}>
+                                    注：此优惠券仅可用于购买善恩视频课程。
+                                </div>
                             </div>
                         </div>
                         <div
@@ -116,7 +119,7 @@ export default class OrderCoupon extends Component {
 
         return (
             <React.Fragment>
-                <Header isShow={true} style={{}}/>
+                <Header isShow={true} style={{}} />
                 <div className={'main'}>{content}</div>
             </React.Fragment>
         );

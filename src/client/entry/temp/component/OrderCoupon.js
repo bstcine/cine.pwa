@@ -23,7 +23,7 @@ export default class OrderCoupon extends Component {
             {}
         );
 
-        if (!err || !result || result.length <= 0) {
+        if (!err && (!result || result.length <= 0)) {
             alert('您无法参加该活动');
             location.href = '/';
             return;

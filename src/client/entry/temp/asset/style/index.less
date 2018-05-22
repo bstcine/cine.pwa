@@ -37,64 +37,81 @@ body {
             padding-top: 0.35rem;
         }
 
-        .temp-option {
-            display: flex;
-            align-items: center;
-            width: 100%;
-            padding: 0.36rem 0;
-            color: #2f2f2f;
+        .hint-c {
+            font-family: PingFangSC-Medium;
+            font-size: 0.3rem;
+            font-weight: normal;
+            font-stretch: normal;
+            line-height: 0.42rem;
+            color: #3a3b3c;
+        }
 
-            .hint-c {
-                font-family: PingFangSC-Medium;
-                font-size: 0.3rem;
-                font-weight: normal;
-                font-stretch: normal;
-                line-height: 0.42rem;
-                color: #3a3b3c;
-            }
+        .hint-d {
+            padding-top: 0.35rem;
+            font-family: PingFangSC-Regular;
+            font-size: 0.26rem;
+            font-weight: normal;
+            font-stretch: normal;
+            color: #3a3b3c;
+        }
 
-            .hint-d {
-                padding-top: 0.35rem;
-                font-family: PingFangSC-Regular;
-                font-size: 0.26rem;
-                font-weight: normal;
-                font-stretch: normal;
-                color: #3a3b3c;
-            }
+        .hint-e {
+            font-family: PingFangSC-Regular;
+            font-size: 0.24rem;
+            font-weight: normal;
+            font-stretch: normal;
+            color: #ff5e00;
+            margin-top: 0.25rem;
+        }
 
-            .hint-e {
-                font-family: PingFangSC-Regular;
-                font-size: 0.24rem;
-                font-weight: normal;
-                font-stretch: normal;
-                color: #ff5e00;
-                margin-top: 0.25rem;
-            }
+        .hint-f {
+            font-family: PingFangSC-Regular;
+            font-size: 0.2rem;
+            font-weight: normal;
+            font-stretch: normal;
+            line-height: 0.8rem;
+            letter-spacing: 0rem;
+            color: #6d6d6d;
+            margin-top: 0.03rem;
+        }
 
-            .hint-f {
-                font-family: PingFangSC-Regular;
-                font-size: 0.2rem;
-                font-weight: normal;
-                font-stretch: normal;
-                line-height: 0.8rem;
-                letter-spacing: 0rem;
-                color: #6d6d6d;
-                margin-top: 0.03rem;
-            }
+        .hint-g {
+            font-family: PingFangSC-Medium;
+            font-size: 0.3rem;
+            font-weight: normal;
+            font-stretch: normal;
+            color: #3a3b3c;
+        }
 
-            .hint-g {
-                font-family: PingFangSC-Medium;
-                font-size: 0.3rem;
-                font-weight: normal;
-                font-stretch: normal;
-                color: #3a3b3c;
-            }
+        .radio-beauty-container{
+            font-size: 0;
 
-            input[type='radio'] {
-                margin-right: 0.15rem;
-                appearance: radio;
-                -moz-appearance: radio; /* Firefox */
-                -webkit-appearance: radio; /* Safari 和 Chrome */
+            .radio-label{
+                display: flex;
+                width: 100%;
+                padding: 0.36rem 0;
+                color: #2f2f2f;
+
+                .radio-beauty{
+                    width: 18px;
+                    height: 18px;
+                    box-sizing: border-box;
+                    display: inline-block;
+                    border: 1px solid #ff4208;
+                    vertical-align: middle;
+                    margin: 0 15px 0 3px;
+                    border-radius: 50%;
+                    padding: 2px;
+                }
+
+                .radio-content{
+                    width: 100%;
+                }
+
+                .radio-beauty:hover,input[type="radio"]:checked + .radio-beauty{
+                    background-color: #ff4208;
+                    background-clip: content-box;
+                }
             }
         }
 

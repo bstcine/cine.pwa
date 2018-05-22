@@ -62,21 +62,25 @@ export default class OrderCoupon extends Component {
                     <div className={'hint-b'}>
                         您好！从2018年5月25日起，新购买善恩视频课程的有效期统一调整为2年。您账户下的所有已购课程可选择：
                     </div>
-                    <div>
-                        <div
-                            className="temp-option"
+                    <div className="radio-beauty-container">
+                        <label
+                            className={'radio-label'}
                             onClick={() => {
                                 this.onChangRadio('0');
                             }}>
                             <input
-                                id={0}
                                 type="radio"
-                                onChange={() => {
-                                    this.onChangRadio('0');
-                                }}
+                                name="radioName"
+                                id="radioName1"
                                 checked={curIndex === '0'}
+                                hidden
                             />
-                            <div>
+                            <label
+                                htmlFor="radioName1"
+                                className="radio-beauty"
+                                style={{ marginTop: '10px' }}
+                            />
+                            <div className="radio-content">
                                 <div className={'hint-c'}>
                                     我同意将本账户下所有已购课程的有效期从“永久有效”调整为“2年有效”，新的有效期为：即日起至
                                     {expireDate}。
@@ -91,24 +95,27 @@ export default class OrderCoupon extends Component {
                                     注：此优惠券仅可用于购买善恩视频课程。
                                 </div>
                             </div>
-                        </div>
-                        <div
-                            className="temp-option"
+                        </label>
+                        <label
+                            className={'radio-label'}
                             onClick={() => {
                                 this.onChangRadio('1');
                             }}>
                             <input
-                                id={1}
-                                onChange={() => {
-                                    this.onChangRadio('1');
-                                }}
                                 type="radio"
+                                name="radioName"
+                                id="radioName2"
                                 checked={curIndex === '1'}
+                                hidden
                             />
-                            <div className="hint-g">
+                            <label
+                                htmlFor="radioName2"
+                                className="radio-beauty"
+                            />
+                            <div className="radio-content hint-g">
                                 我不需要调整本账户下所有课程的有效期。
                             </div>
-                        </div>
+                        </label>
                     </div>
                     <div
                         className={'btn'}

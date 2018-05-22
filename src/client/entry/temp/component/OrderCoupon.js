@@ -38,6 +38,7 @@ export default class OrderCoupon extends Component {
             alert('系统异常');
         } else {
             alert('操作成功');
+            location.href = '/';
         }
     };
 

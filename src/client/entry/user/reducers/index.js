@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import coupons from './couponReducer';
+import couponRedu from './couponReducer';
 import points from './pointReducer';
 import { Action_UI } from '@/constant/actionTypeUser';
 
@@ -25,7 +25,7 @@ const user = (
 
 const rootReducer = combineReducers({
     user,
-    coupons,
+    couponRedu,
     points,
 });
 

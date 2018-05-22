@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { actionUserCoupon } from '@/action/userAction';
+import { actionUserCoupon } from '@/action/uCouponAction';
 import { ToastError, ToastLoading, ToastSuccess } from '@/component/Toast';
 import CouponPanel from '@/entry/user/component/coupon';
 
@@ -11,10 +11,7 @@ class CouponContainer extends Component {
     }
 
     render() {
-        let { coupons, actions } = this.props;
-        let network = coupons.network;
-        let isOpen = coupons.isOpen;
-        let rows = coupons.rows;
+        let { coupons, network, isOpen, actions } = this.props;
 
         return (
             <React.Fragment>
@@ -27,19 +24,19 @@ class CouponContainer extends Component {
                     show={!network.loading && !network.error && network.msg}
                     text={network.msg}
                 />
-                <CouponPanel
-                    isOpen={isOpen}
-                    coupons={rows}
-                    actions={actions}
-                />
+                <CouponPanel isOpen={isOpen} coupons={coupons} actions={actions} />
             </React.Fragment>
         );
     }
 }
 
-const mapStateToProps = state => ({
-    coupons: state.coupons,
-});
+const mapStateToProps = state => {
+    return {
+        coupons: state.couponRedu.get('rows'),
+        network: state.couponRedu.get('network'),
+        isOpen: state.couponRedu.get('isOpen'),
+    };
+};
 
 const mapDispatchToProps = dispatch => ({
     actions: bindActionCreators(actionUserCoupon, dispatch),

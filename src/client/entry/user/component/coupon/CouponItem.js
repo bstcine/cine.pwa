@@ -37,7 +37,7 @@ const CouponItem = ({ coupon, actions }) => {
                     <img
                         className="coupon-expand"
                         src={arrImgSrc}
-                        onClick={() => actions.expandCoupon(coupon.id)}
+                        onClick={() => actions.expandCouponItem(coupon.id)}
                     />
                 )}
                 {coupon.status === '1' && (

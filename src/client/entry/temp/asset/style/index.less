@@ -83,16 +83,16 @@ body {
             color: #3a3b3c;
         }
 
-        .radio-beauty-container{
+        .radio-beauty-container {
             font-size: 0;
 
-            .radio-label{
+            .radio-label {
                 display: flex;
                 width: 100%;
                 padding: 0.36rem 0;
                 color: #2f2f2f;
 
-                .radio-beauty{
+                .radio-beauty {
                     width: 18px;
                     height: 18px;
                     box-sizing: border-box;
@@ -104,11 +104,12 @@ body {
                     padding: 2px;
                 }
 
-                .radio-content{
+                .radio-content {
                     width: 100%;
                 }
 
-                .radio-beauty:hover,input[type="radio"]:checked + .radio-beauty{
+                .radio-beauty:hover,
+                input[type='radio']:checked + .radio-beauty {
                     background-color: #ff4208;
                     background-clip: content-box;
                 }
@@ -134,6 +135,74 @@ body {
     }
 }
 
+.success-modal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    width: 6rem;
+
+    padding: 0.4rem;
+
+    img {
+        width: 1rem;
+        height: 1rem;
+    }
+
+    .font-a {
+        font-family: PingFangSC-Medium;
+        font-size: 0.4rem;
+        font-weight: normal;
+        font-stretch: normal;
+        line-height: 0.5rem;
+        letter-spacing: 0rem;
+        color: #3a3b3c;
+        margin-top: 0.3rem;
+    }
+
+    .font-b {
+        font-family: PingFangSC-Regular;
+        font-size: 0.3rem;
+        font-weight: normal;
+        font-stretch: normal;
+        line-height: 0.5rem;
+        letter-spacing: 0rem;
+        margin-top: 0.9rem;
+        color: #6d6d6d;
+    }
+
+    .font-c {
+        font-family: PingFangSC-Regular;
+        font-size: 0.3rem;
+        font-weight: normal;
+        font-stretch: normal;
+        line-height: 0.5rem;
+        letter-spacing: 0rem;
+        color: #6d6d6d;
+        margin-top: 0.5rem;
+    }
+
+    .font-d {
+        margin-top: 0.6rem;
+        width: 3.8rem;
+        height: 0.8rem;
+        background-color: #ffffff;
+        border-radius: 0.1rem;
+        border: solid 0.01rem #143d9c;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        font-family: PingFangSC-Medium;
+        font-size: 0.3rem;
+        font-weight: normal;
+        font-stretch: normal;
+        line-height: 0.5rem;
+        letter-spacing: 0rem;
+        color: #0f3795;
+    }
+}
+
 @media @media-up-sm {
     body {
         background-color: #f0f2f3;
@@ -151,20 +220,40 @@ body {
 
         h1 {
             display: block;
+            font-family: PingFangSC-Medium;
+            font-size: 0.5rem;
+            font-weight: normal;
+            font-stretch: normal;
             line-height: 0.8rem;
+            letter-spacing: 0rem;
             color: #093d8a;
             text-align: center;
-            font-size: 0.26rem;
-            border-bottom: 0.05rem solid #093d8a;
-            margin-bottom: 1rem;
+            border-bottom: 0.1rem solid #093d8a;
+            margin-bottom: 0.5rem;
         }
 
         .panel {
+            .hint-a{
+                margin-top: 1.3rem;
+                font-family: PingFangSC-Medium;
+                font-size: 0.4rem;
+                font-weight: normal;
+                font-stretch: normal;
+                line-height: 0rem;
+                letter-spacing: 0rem;
+                color: #222222;
+            }
+
             .btn {
                 height: 1.1rem;
                 width: 6.2rem;
                 margin: 1.3rem auto;
             }
         }
+    }
+
+    .success-modal {
+        width: 9.6rem;
+        padding: 0.9rem;
     }
 }

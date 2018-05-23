@@ -1,7 +1,25 @@
 import React, { Component } from 'react';
 import Api from '../../../../APIConfig';
 import { fetchData } from '@/service/base';
+import Modal from 'react-modal';
 import Header from '../../../component/Header';
+
+const customStyles = {
+    content: {
+        top: '50%',
+        left: '50%',
+        right: 'auto',
+        bottom: 'auto',
+        padding: '0',
+        marginRight: '-50%',
+        transform: 'translate(-50%, -50%)',
+    },
+    overlay: {
+        backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    },
+};
+
+Modal.setAppElement('#root');
 
 export default class OrderCoupon extends Component {
     constructor(props) {
@@ -12,7 +30,13 @@ export default class OrderCoupon extends Component {
         let yyyy = today.getFullYear() + 2;
         let expireDate = ' ' + yyyy + ' 年 ' + mm + ' 月 ' + dd + ' 日';
 
-        this.state = { err: null, list: null, curIndex: '0', expireDate };
+        this.state = {
+            showModal: false,
+            err: null,
+            list: null,
+            curIndex: '0',
+            expireDate,
+        };
     }
 
     async componentDidMount() {
@@ -36,15 +60,24 @@ export default class OrderCoupon extends Component {
         this.setState({ curIndex: index });
     };
 
+    handleOpenModal = () => {
+        this.setState({ showModal: true });
+    };
+
+    handleCloseModal = () => {
+        this.setState({ showModal: false });
+        location.href = '/';
+    };
+
     submit = async () => {
         let [err] = await fetchData(Api.APIURL_Temp_User_Course_Coupon_Check, {
             type: String(this.state.curIndex),
         });
+
         if (err) {
             alert('系统异常');
         } else {
-            alert('操作成功');
-            location.href = '/';
+            this.handleOpenModal();
         }
     };
 
@@ -138,6 +171,26 @@ export default class OrderCoupon extends Component {
             <React.Fragment>
                 <Header isShow={true} style={{}} />
                 <div className={'main'}>{content}</div>
+                <Modal
+                    isOpen={this.state.showModal}
+                    style={customStyles}
+                    contentLabel="Example Modal">
+                    <div className={'success-modal'}>
+                        <img src={require('../asset/image/ico_success.png')} />
+                        <div className={'font-a'}>操作已成功！</div>
+                        <div className={'font-b'}>
+                            本账户下所有已购课程的有效期已从“永久有效”调整为“2年有效”。
+                        </div>
+                        <div className={'font-c'}>
+                            优惠券已存入您的账号，可下载“善恩英语”APP并登录查看。
+                        </div>
+                        <div
+                            className={'font-d'}
+                            onClick={this.handleCloseModal}>
+                            返回官网首页
+                        </div>
+                    </div>
+                </Modal>
             </React.Fragment>
         );
     }

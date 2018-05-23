@@ -8,130 +8,128 @@ body {
     }
 }
 
-.main {
+.panel {
     width: 100%;
+
+    padding: 0.7rem 0.54rem;
 
     h1 {
         display: none;
     }
 
-    .panel {
-        padding: 0.7rem 0.54rem;
+    .hint-a {
+        font-family: PingFangSC-Medium;
+        font-size: 0.3rem;
+        font-weight: normal;
+        font-stretch: normal;
+        color: #222222;
+    }
 
-        .hint-a {
-            font-family: PingFangSC-Medium;
-            font-size: 0.3rem;
-            font-weight: normal;
-            font-stretch: normal;
-            color: #222222;
-        }
+    .hint-b {
+        font-family: PingFangSC-Regular;
+        font-size: 0.28rem;
+        font-weight: normal;
+        font-stretch: normal;
+        line-height: 0.48rem;
+        letter-spacing: 0;
+        color: #222222;
+        padding-top: 0.35rem;
+    }
 
-        .hint-b {
-            font-family: PingFangSC-Regular;
-            font-size: 0.28rem;
-            font-weight: normal;
-            font-stretch: normal;
-            line-height: 0.48rem;
-            letter-spacing: 0;
-            color: #222222;
-            padding-top: 0.35rem;
-        }
+    .hint-c {
+        font-family: PingFangSC-Medium;
+        font-size: 0.3rem;
+        font-weight: normal;
+        font-stretch: normal;
+        line-height: 0.42rem;
+        color: #3a3b3c;
+    }
 
-        .hint-c {
-            font-family: PingFangSC-Medium;
-            font-size: 0.3rem;
-            font-weight: normal;
-            font-stretch: normal;
-            line-height: 0.42rem;
-            color: #3a3b3c;
-        }
+    .hint-d {
+        padding-top: 0.35rem;
+        font-family: PingFangSC-Regular;
+        font-size: 0.26rem;
+        font-weight: normal;
+        font-stretch: normal;
+        color: #3a3b3c;
+    }
 
-        .hint-d {
-            padding-top: 0.35rem;
-            font-family: PingFangSC-Regular;
-            font-size: 0.26rem;
-            font-weight: normal;
-            font-stretch: normal;
-            color: #3a3b3c;
-        }
+    .hint-e {
+        font-family: PingFangSC-Regular;
+        font-size: 0.24rem;
+        font-weight: normal;
+        font-stretch: normal;
+        color: #ff5e00;
+        margin-top: 0.25rem;
+    }
 
-        .hint-e {
-            font-family: PingFangSC-Regular;
-            font-size: 0.24rem;
-            font-weight: normal;
-            font-stretch: normal;
-            color: #ff5e00;
-            margin-top: 0.25rem;
-        }
+    .hint-f {
+        font-family: PingFangSC-Regular;
+        font-size: 0.2rem;
+        font-weight: normal;
+        font-stretch: normal;
+        line-height: 0.8rem;
+        letter-spacing: 0rem;
+        color: #6d6d6d;
+        margin-top: 0.03rem;
+    }
 
-        .hint-f {
-            font-family: PingFangSC-Regular;
-            font-size: 0.2rem;
-            font-weight: normal;
-            font-stretch: normal;
-            line-height: 0.8rem;
-            letter-spacing: 0rem;
-            color: #6d6d6d;
-            margin-top: 0.03rem;
-        }
+    .hint-g {
+        font-family: PingFangSC-Medium;
+        font-size: 0.3rem;
+        font-weight: normal;
+        font-stretch: normal;
+        color: #3a3b3c;
+    }
 
-        .hint-g {
-            font-family: PingFangSC-Medium;
-            font-size: 0.3rem;
-            font-weight: normal;
-            font-stretch: normal;
-            color: #3a3b3c;
-        }
+    .radio-beauty-container {
+        font-size: 0;
 
-        .radio-beauty-container {
-            font-size: 0;
+        .radio-label {
+            display: flex;
+            width: 100%;
+            padding: 0.36rem 0;
+            color: #2f2f2f;
 
-            .radio-label {
-                display: flex;
+            .radio-beauty {
+                width: 18px;
+                height: 18px;
+                box-sizing: border-box;
+                display: inline-block;
+                border: 1px solid #ff4208;
+                vertical-align: middle;
+                margin: 0 15px 0 3px;
+                border-radius: 50%;
+                padding: 2px;
+            }
+
+            .radio-content {
                 width: 100%;
-                padding: 0.36rem 0;
-                color: #2f2f2f;
+            }
 
-                .radio-beauty {
-                    width: 18px;
-                    height: 18px;
-                    box-sizing: border-box;
-                    display: inline-block;
-                    border: 1px solid #ff4208;
-                    vertical-align: middle;
-                    margin: 0 15px 0 3px;
-                    border-radius: 50%;
-                    padding: 2px;
-                }
-
-                .radio-content {
-                    width: 100%;
-                }
-
-                .radio-beauty:hover,
-                input[type='radio']:checked + .radio-beauty {
-                    background-color: #ff4208;
-                    background-clip: content-box;
-                }
+            .radio-beauty:hover,
+            input[type='radio']:checked + .radio-beauty {
+                background-color: #ff4208;
+                background-clip: content-box;
             }
         }
+    }
 
-        .btn {
-            height: 1.1rem;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin: 0.7rem 0.24rem;
-            background-color: #ff5e00;
-            box-shadow: 0 0.06rem 0.07rem 0 rgba(255, 98, 0, 0.24);
-            border-radius: 0.08rem;
+    .btn {
+        height: 1.1rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0.7rem 0.24rem;
+        background-color: #ff5e00;
+        box-shadow: 0 0.06rem 0.07rem 0 rgba(255, 98, 0, 0.24);
+        border-radius: 0.08rem;
 
-            font-family: PingFangSC-Medium;
-            font-size: 0.42rem;
-            font-weight: normal;
-            font-stretch: normal;
-            color: #ffffff;
-        }
+        font-family: PingFangSC-Medium;
+        font-size: 0.42rem;
+        font-weight: normal;
+        font-stretch: normal;
+        color: #ffffff;
     }
 }
 
@@ -211,12 +209,12 @@ body {
         }
     }
 
-    .main {
+    .panel {
         width: 18.8rem;
         margin: 1rem auto;
         background-color: #ffffff;
         height: 15rem;
-        padding: 0 0.92rem;
+        padding: 0.9rem 1.9rem;
 
         h1 {
             display: block;
@@ -232,23 +230,21 @@ body {
             margin-bottom: 0.5rem;
         }
 
-        .panel {
-            .hint-a{
-                margin-top: 1.3rem;
-                font-family: PingFangSC-Medium;
-                font-size: 0.4rem;
-                font-weight: normal;
-                font-stretch: normal;
-                line-height: 0rem;
-                letter-spacing: 0rem;
-                color: #222222;
-            }
+        .hint-a{
+            margin-top: 1.3rem;
+            font-family: PingFangSC-Medium;
+            font-size: 0.4rem;
+            font-weight: normal;
+            font-stretch: normal;
+            line-height: 0rem;
+            letter-spacing: 0rem;
+            color: #222222;
+        }
 
-            .btn {
-                height: 1.1rem;
-                width: 6.2rem;
-                margin: 1.3rem auto;
-            }
+        .btn {
+            height: 1.1rem;
+            width: 6.2rem;
+            margin: 1.3rem auto;
         }
     }
 

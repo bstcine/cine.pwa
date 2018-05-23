@@ -32,28 +32,32 @@ export default class OrderCoupon extends Component {
 
         this.state = {
             showModal: false,
-            err: null,
-            list: null,
             curIndex: '0',
             expireDate,
         };
     }
 
     async componentDidMount() {
-        console.log('componentDidMount');
-
         let [err, result] = await fetchData(
             Api.APIURL_Temp_User_Course_Coupon,
             {}
         );
 
-        if (!err && (!result || result.length <= 0)) {
+        if (err === 'no_login') {
+            location.reload();
+            return;
+        } else if (err) {
+            alert('系统异常');
+            return;
+        }
+
+        if (!result || result.length <= 0) {
             alert('您无法参加该活动');
             location.href = '/';
             return;
         }
 
-        this.setState({ err, list: result });
+        this.setState({ list: result });
     }
 
     onChangRadio = index => {
@@ -70,107 +74,110 @@ export default class OrderCoupon extends Component {
     };
 
     submit = async () => {
-        let [err] = await fetchData(Api.APIURL_Temp_User_Course_Coupon_Check, {
-            type: String(this.state.curIndex),
-        });
+        let type = this.state.curIndex;
+        if (type === '0') {
+            let [err] = await fetchData(
+                Api.APIURL_Temp_User_Course_Coupon_Check,
+                { type: type }
+            );
 
-        if (err) {
-            alert('系统异常');
+            if (err) {
+                alert('系统异常');
+            } else {
+                this.handleOpenModal();
+            }
         } else {
-            this.handleOpenModal();
+            alert('您放弃了该活动');
+            location.href = '/';
         }
     };
 
     render() {
-        const { err, list, curIndex, expireDate } = this.state;
-
-        let content;
-        if (err) {
-            content = <div>系统异常</div>;
-        } else if (list) {
-            content = (
-                <div className={'panel'}>
-                    <h1>善恩视频课程有效期转换</h1>
-                    <div className={'hint-a'}>亲爱的用户：</div>
-                    <div className={'hint-b'}>
-                        您好！从2018年5月25日起，新购买善恩视频课程的有效期统一调整为2年。您账户下的所有已购课程可选择：
-                    </div>
-                    <div className="radio-beauty-container">
-                        <label
-                            className={'radio-label'}
-                            onClick={() => {
-                                this.onChangRadio('0');
-                            }}>
-                            <input
-                                type="radio"
-                                name="radioName"
-                                id="radioName1"
-                                onChange={() => {
-                                    this.onChangRadio('1');
-                                }}
-                                checked={curIndex === '0'}
-                                hidden
-                            />
-                            <label
-                                htmlFor="radioName1"
-                                className="radio-beauty"
-                                style={{ marginTop: '10px' }}
-                            />
-                            <div className="radio-content">
-                                <div className={'hint-c'}>
-                                    我同意将本账户下所有已购课程的有效期从“永久有效”调整为“2年有效”，新的有效期为：即日起至
-                                    {expireDate}。
-                                </div>
-                                <div className={'hint-d'}>并获得：</div>
-                                {list.map((value, index) => (
-                                    <div className={'hint-e'} key={index}>
-                                        {value.hint}
-                                    </div>
-                                ))}
-                                <div className={'hint-f'}>
-                                    注：此优惠券仅可用于购买善恩视频课程。
-                                </div>
-                            </div>
-                        </label>
-                        <label
-                            className={'radio-label'}
-                            onClick={() => {
-                                this.onChangRadio('1');
-                            }}>
-                            <input
-                                type="radio"
-                                name="radioName"
-                                id="radioName2"
-                                onChange={() => {
-                                    this.onChangRadio('1');
-                                }}
-                                checked={curIndex === '1'}
-                                hidden
-                            />
-                            <label
-                                htmlFor="radioName2"
-                                className="radio-beauty"
-                            />
-                            <div className="radio-content hint-g">
-                                我不需要调整本账户下所有课程的有效期。
-                            </div>
-                        </label>
-                    </div>
-                    <div
-                        className={'btn'}
-                        onClick={() => {
-                            this.submit();
-                        }}>
-                        确定
-                    </div>
-                </div>
-            );
-        }
-
+        const { list, curIndex, expireDate } = this.state;
         return (
             <React.Fragment>
-                <Header isShow={true} style={{}} />
-                <div className={'main'}>{content}</div>
+                <Header isShow={list} />
+                <div className={'main'}>
+                    {list && (
+                        <div className={'panel'}>
+                            <h1>善恩视频课程有效期转换</h1>
+                            <div className={'hint-a'}>亲爱的用户：</div>
+                            <div className={'hint-b'}>
+                                您好！从2018年5月25日起，新购买善恩视频课程的有效期统一调整为2年。您账户下的所有已购课程可选择：
+                            </div>
+                            <div className="radio-beauty-container">
+                                <label
+                                    className={'radio-label'}
+                                    onClick={() => {
+                                        this.onChangRadio('0');
+                                    }}>
+                                    <input
+                                        type="radio"
+                                        name="radioName"
+                                        id="radioName1"
+                                        onChange={() => {
+                                            this.onChangRadio('1');
+                                        }}
+                                        checked={curIndex === '0'}
+                                        hidden
+                                    />
+                                    <label
+                                        htmlFor="radioName1"
+                                        className="radio-beauty"
+                                        style={{ marginTop: '10px' }}
+                                    />
+                                    <div className="radio-content">
+                                        <div className={'hint-c'}>
+                                            我同意将本账户下所有已购课程的有效期从“永久有效”调整为“2年有效”，新的有效期为：即日起至
+                                            {expireDate}。
+                                        </div>
+                                        <div className={'hint-d'}>并获得：</div>
+                                        {list.map((value, index) => (
+                                            <div
+                                                className={'hint-e'}
+                                                key={index}>
+                                                {value.hint}
+                                            </div>
+                                        ))}
+                                        <div className={'hint-f'}>
+                                            注：此优惠券仅可用于购买善恩视频课程。
+                                        </div>
+                                    </div>
+                                </label>
+                                <label
+                                    className={'radio-label'}
+                                    onClick={() => {
+                                        this.onChangRadio('1');
+                                    }}>
+                                    <input
+                                        type="radio"
+                                        name="radioName"
+                                        id="radioName2"
+                                        onChange={() => {
+                                            this.onChangRadio('1');
+                                        }}
+                                        checked={curIndex === '1'}
+                                        hidden
+                                    />
+                                    <label
+                                        htmlFor="radioName2"
+                                        className="radio-beauty"
+                                    />
+                                    <div className="radio-content hint-g">
+                                        我不需要调整本账户下所有课程的有效期。
+                                    </div>
+                                </label>
+                            </div>
+                            <div
+                                className={'btn'}
+                                onClick={() => {
+                                    this.submit();
+                                }}>
+                                确定
+                            </div>
+                        </div>
+                    )}
+                </div>
                 <Modal
                     isOpen={this.state.showModal}
                     style={customStyles}

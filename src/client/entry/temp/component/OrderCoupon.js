@@ -52,7 +52,7 @@ export default class OrderCoupon extends Component {
         }
 
         if (!result || result.length <= 0) {
-            alert('您无法参加该活动');
+            alert('您账号下的所有课程不需要调整有效期');
             location.href = '/';
             return;
         }
@@ -75,25 +75,22 @@ export default class OrderCoupon extends Component {
 
     submit = async () => {
         let type = this.state.curIndex;
-        if (type === '0') {
-            let [err] = await fetchData(
-                Api.APIURL_Temp_User_Course_Coupon_Check,
-                { type: type }
-            );
+        let [err] = await fetchData(Api.APIURL_Temp_User_Course_Coupon_Check, {
+            type: type,
+        });
 
-            if (err) {
-                alert('系统异常');
-            } else {
-                this.handleOpenModal();
-            }
+        if (err) {
+            alert('系统异常');
         } else {
-            alert('您放弃了该活动');
-            location.href = '/';
+            this.handleOpenModal();
         }
     };
 
     render() {
-        const { list, curIndex, expireDate } = this.state;
+        const { showModal, list, curIndex, expireDate } = this.state;
+
+        let modalHint;
+
         return (
             <React.Fragment>
                 <Header isShow={list} />
@@ -179,20 +176,20 @@ export default class OrderCoupon extends Component {
                     )}
                 </div>
                 <Modal
-                    isOpen={this.state.showModal}
+                    isOpen={showModal}
                     style={customStyles}
                     contentLabel="Example Modal">
                     <div className={'success-modal'}>
                         <img src={require('../asset/image/ico_success.png')} />
                         <div className={'font-a'}>操作已成功！</div>
-                        <div className={'font-b'}>
+                        <div className={`font-b ${curIndex !== '0' && 'none'}`}>
                             本账户下所有已购课程的有效期已从“永久有效”调整为“2年有效”。
                         </div>
-                        <div className={'font-c'}>
+                        <div className={`font-c ${curIndex !== '0' && 'none'}`}>
                             优惠券已存入您的账号，可下载“善恩英语”APP并登录查看。
                         </div>
                         <div
-                            className={'font-d'}
+                            className={`btn ${curIndex !== '0' && 'none'}`}
                             onClick={this.handleCloseModal}>
                             返回官网首页
                         </div>

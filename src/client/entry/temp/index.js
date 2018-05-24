@@ -19,7 +19,7 @@ class Temp extends Entry {
             <Router>
                 <Provider store={store}>
                     <Route
-                        path="/temp/activity"
+                        path="/temp/promote"
                         component={props => {
                             if (!CommonUtil.isAuth()) return <div />;
                             return <OrderCoupon {...props} />;

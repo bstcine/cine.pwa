@@ -3,6 +3,7 @@ import QRCode from 'qrcode';
 import uaUtil from '@/util/uaUtil';
 import siteCodeUtil from '@/util/sitecodeUtil';
 import Header from '@/component/Header';
+import Footer from '@/component/Footer';
 import PayingModal from '@/entry/content/component/PayCenter/PayingModal';
 import QRModal from '@/entry/content/component/PayCenter/QRModal';
 import { addParam, getParam } from '@/util/urlUtil';
@@ -353,6 +354,7 @@ export default class PayCenter extends Component {
                         </div>
                     </div>
                 </div>
+                <Footer isShow={!uaUtil.mobile()} />
             </React.Fragment>
         );
     }

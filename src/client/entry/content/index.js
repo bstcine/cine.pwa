@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import { Route } from 'react-router-dom';
 import './asset/style/index.less';
 import appBanner from '@/util/appBanner';
-import Footer from '@/component/Footer';
 import Router from '@/component/Router';
 import Entry from '@/component/Entry';
 import { chunkComponent } from '@/util/chunkComponent';
@@ -86,7 +85,6 @@ class Content extends Entry {
                         />
                     </React.Fragment>
                 </Router>
-                <Footer />
             </React.Fragment>
         );
     }

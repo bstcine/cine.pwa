@@ -11,6 +11,7 @@ import siteCodeUtil from '@/util/sitecodeUtil';
 import uaUtil from '@/util/uaUtil';
 import Article from '@/entry/content/component/Home/Article';
 import Header from '@/component/Header';
+import Footer from '@/component/Footer';
 import { fetchData } from '@/service/base';
 import errorMsg from '@/util/errorMsg';
 import { APIURL_Content_Home } from '@/../APIConfig';
@@ -234,6 +235,7 @@ export default class Home extends Component {
                         />
                     </div>
                 ) : null}
+                <Footer isShow={true} />
             </React.Fragment>
         );
     }

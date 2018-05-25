@@ -3,6 +3,7 @@ import { getParam } from '@/util/urlUtil';
 import errorMsg from '@/util/errorMsg';
 import uaUtil from '@/util/uaUtil';
 import Header from '@/component/Header';
+import Footer from '@/component/Footer';
 import siteCodeUtil from '@/util/sitecodeUtil';
 import Api from '@/../APIConfig';
 import { fetchData } from '@/service/base';
@@ -125,6 +126,7 @@ export default class PayStatus extends Component {
                         </div>
                     </div>
                 </div>
+                <Footer isShow={!uaUtil.mobile()}/>
             </React.Fragment>
         );
     }

@@ -16,6 +16,7 @@ import cCourseAction from '@/action/contentAction';
 
 import LoginModal from '@/component/LoginModal';
 import Header from '@/component/Header';
+import Footer from '@/component/Footer';
 import Brief from './Brief';
 import DetailDesc from './DetailDesc';
 import CouponModal from './CouponModal';
@@ -297,6 +298,7 @@ export default class Course extends Component {
                         />
                     </div>
                 </div>
+                <Footer isShow={!uaUtil.mobile()}/>
             </React.Fragment>
         );
     }

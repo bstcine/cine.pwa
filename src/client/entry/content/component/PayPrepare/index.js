@@ -1,13 +1,12 @@
-import React, {Component} from 'react';
-import * as Service from '@/service/content';
-import {getParam} from '@/util/urlUtil';
+import React, { Component } from 'react';
+import { getParam } from '@/util/urlUtil';
 import errorMsg from '@/util/errorMsg';
 import uaUtil from '@/util/uaUtil';
-import storeUtil from '@/util/storeUtil';
 import Header from '@/component/Header';
+import Footer from '@/component/Footer';
 import siteCodeUtil from '@/util/sitecodeUtil';
-import Api from "../../../../../APIConfig";
-import {fetchData} from "@/service/base";
+import Api from '@/../APIConfig';
+import { fetchData } from '@/service/base';
 
 export default class PayPrepare extends Component {
     constructor(props) {
@@ -28,7 +27,7 @@ export default class PayPrepare extends Component {
             point: '',
             point_msg: '',
             remark: '',
-            orderedLessonsOrders: []
+            orderedLessonsOrders: [],
         };
     }
 
@@ -36,7 +35,7 @@ export default class PayPrepare extends Component {
         document.title = '结算中心';
         let cid = getParam().cid;
 
-        fetchData(Api.APIURL_Order_Prepare, {cid}).then(([err, result]) => {
+        fetchData(Api.APIURL_Order_Prepare, { cid }).then(([err, result]) => {
             if (err) return alert(errorMsg(err));
             let {
                 is_show_point,
@@ -45,7 +44,7 @@ export default class PayPrepare extends Component {
                 user,
                 calPrice,
                 orderedLessonsOrders,
-                addressInfo
+                addressInfo,
             } = result;
             let updateStater = {
                 is_show_point,
@@ -53,7 +52,7 @@ export default class PayPrepare extends Component {
                 course,
                 user,
                 calPrice,
-                orderedLessonsOrders
+                orderedLessonsOrders,
             };
             if (calPrice.point_discount) {
                 updateStater.point = calPrice.point_discount;
@@ -65,7 +64,10 @@ export default class PayPrepare extends Component {
                 updateStater.addressInfo = {
                     name: addressInfo.name,
                     phone: addressInfo.phone,
-                    address: addressInfo.area.replace(/-/g, '').replace(/-市辖区-/, '') + addressInfo.address
+                    address:
+                        addressInfo.area
+                            .replace(/-/g, '')
+                            .replace(/-市辖区-/, '') + addressInfo.address,
                 };
             }
             this.setState(updateStater, () => {
@@ -77,11 +79,11 @@ export default class PayPrepare extends Component {
     }
 
     inputChange(e) {
-        let {name, value} = e.target;
+        let { name, value } = e.target;
         if (name === 'point' && value && !/^(\d|\.)+$/.test(value)) return;
         this.setState(
             {
-                [name]: value
+                [name]: value,
             },
             () => {
                 if (this.timer) {
@@ -96,11 +98,15 @@ export default class PayPrepare extends Component {
     }
 
     preCalculatePrice() {
-        let {point, coupon_no} = this.state;
-        fetchData(Api.APIURL_Order_PreCalculatePrice, {cid:getParam().cid, point, coupon_no}).then(([err, result]) => {
+        let { point, coupon_no } = this.state;
+        fetchData(Api.APIURL_Order_PreCalculatePrice, {
+            cid: getParam().cid,
+            point,
+            coupon_no,
+        }).then(([err, result]) => {
             if (err) return alert(errorMsg(err));
             this.setState(prevState => ({
-                calPrice: Object.assign(prevState.calPrice, result)
+                calPrice: Object.assign(prevState.calPrice, result),
             }));
         });
     }
@@ -112,8 +118,8 @@ export default class PayPrepare extends Component {
 
     confirmOrder() {
         let cid = getParam().cid;
-        let {coupon_no, point, remark, course, addressInfo} = this.state;
-        let orderBody = {cid, coupon_no, point, remark};
+        let { coupon_no, point, remark, course, addressInfo } = this.state;
+        let orderBody = { cid, coupon_no, point, remark };
         if (course.is_need_remark === '1') {
             if (!addressInfo) {
                 alert('请填写详细地址');
@@ -125,7 +131,7 @@ export default class PayPrepare extends Component {
 
         fetchData(Api.APIURL_Order_Create, orderBody).then(([err, result]) => {
             if (this.hasError(err)) return;
-            let {order_id} = result
+            let { order_id } = result;
             location.href = `/pay/center?cid=${order_id}`;
         });
     }
@@ -134,20 +140,20 @@ export default class PayPrepare extends Component {
         if (msg) {
             if (msg.indexOf('point') !== -1) {
                 this.setState({
-                    point_msg: errorMsg(msg)
+                    point_msg: errorMsg(msg),
                 });
             } else {
                 this.setState({
-                    point_msg: ''
+                    point_msg: '',
                 });
             }
             if (msg.indexOf('coupon') !== -1) {
                 this.setState({
-                    coupon_msg: errorMsg(msg)
+                    coupon_msg: errorMsg(msg),
                 });
             } else {
                 this.setState({
-                    coupon_msg: ''
+                    coupon_msg: '',
                 });
             }
             if (msg.indexOf('coupon') === -1 && msg.indexOf('point') === -1) {
@@ -157,14 +163,14 @@ export default class PayPrepare extends Component {
         } else {
             this.setState({
                 point_msg: '',
-                coupon_msg: ''
+                coupon_msg: '',
             });
             return false;
         }
     }
 
     renderPackageLesson() {
-        let {course} = this.state;
+        let { course } = this.state;
         if (!course || !course.packages || !course.packages.length) return null;
         return (
             <div className="package">
@@ -181,14 +187,16 @@ export default class PayPrepare extends Component {
     }
 
     renderOrderedLessons() {
-        let {orderedLessonsOrders} = this.state;
+        let { orderedLessonsOrders } = this.state;
         if (!orderedLessonsOrders || !orderedLessonsOrders.length) return null;
         return (
             <div className="ordered-package">
                 {orderedLessonsOrders.map((item, i) => {
                     return (
                         <div className="item" key={i}>
-                            <span className="title">{item.subject}（已购）</span>
+                            <span className="title">
+                                {item.subject}（已购）
+                            </span>
                         </div>
                     );
                 })}
@@ -207,7 +215,7 @@ export default class PayPrepare extends Component {
             coupon_no,
             coupon_msg,
             point,
-            point_msg
+            point_msg,
         } = this.state;
         return (
             <React.Fragment>
@@ -221,21 +229,32 @@ export default class PayPrepare extends Component {
                                     style={
                                         course && course.img
                                             ? {
-                                                  background: `url(${
-                                                      course.img ? 'http://www.bstcine.com/f/' + course.img : ''
-                                                  }) center center / cover no-repeat`
-                                              }
+                                                background: `url(${
+                                                    course.img
+                                                        ? 'http://www.bstcine.com/f/' +
+                                                            course.img
+                                                        : ''
+                                                }) center center / cover no-repeat`,
+                                            }
                                             : null
                                     }
                                 />
                             </div>
                             <div className="right">
-                                <div className="title">{course && course.name ? course.name : ''}</div>
+                                <div className="title">
+                                    {course && course.name ? course.name : ''}
+                                </div>
                                 <div className="prices">
-                                    {course && course.price ? <span className="price">￥{course.price}</span> : null}
+                                    {course && course.price ? (
+                                        <span className="price">
+                                            ￥{course.price}
+                                        </span>
+                                    ) : null}
                                     {course && course.original_price ? (
                                         <span className="old-price">
-                                            原价：<span className="del">￥{course.original_price}</span>
+                                            原价：<span className="del">
+                                                ￥{course.original_price}
+                                            </span>
                                         </span>
                                     ) : null}
                                 </div>
@@ -245,7 +264,11 @@ export default class PayPrepare extends Component {
 
                         <div className="order-control total-price">
                             <span className="label">应付金额</span>
-                            {calPrice && calPrice.price ? <span className="price">￥{calPrice.price}</span> : null}
+                            {calPrice && calPrice.price ? (
+                                <span className="price">
+                                    ￥{calPrice.price}
+                                </span>
+                            ) : null}
                         </div>
                         {this.renderOrderedLessons()}
 
@@ -260,8 +283,12 @@ export default class PayPrepare extends Component {
                                         className={coupon_msg ? 'err' : ''}
                                         onChange={this.inputChange}
                                     />
-                                    <span className="error-tips">{coupon_msg}</span>
-                                    <span className="red">抵扣：-￥{calPrice.coupon_discount}</span>
+                                    <span className="error-tips">
+                                        {coupon_msg}
+                                    </span>
+                                    <span className="red">
+                                        抵扣：-￥{calPrice.coupon_discount}
+                                    </span>
                                 </div>
                             </div>
                         ) : null}
@@ -279,8 +306,12 @@ export default class PayPrepare extends Component {
                                         onChange={this.inputChange}
                                     />
                                     <span className="normal">积分</span>
-                                    <span className="error-tips">{point_msg}</span>
-                                    <span className="red">抵扣：-￥{calPrice.point_discount}</span>
+                                    <span className="error-tips">
+                                        {point_msg}
+                                    </span>
+                                    <span className="red">
+                                        抵扣：-￥{calPrice.point_discount}
+                                    </span>
                                 </div>
                             </div>
                         ) : null}
@@ -288,20 +319,26 @@ export default class PayPrepare extends Component {
                         <div className="order-control pay-price">
                             <span className="label">实付金额</span>
                             {calPrice && calPrice.pay_price ? (
-                                <span className="price">￥{calPrice.pay_price}</span>
+                                <span className="price">
+                                    ￥{calPrice.pay_price}
+                                </span>
                             ) : null}
                         </div>
                         {course && course.is_need_remark === '1' ? (
                             <div className="order-control address">
                                 <span className="label">收货地址</span>
-                                <button className="btn-outline" onClick={this.goAddress}>
+                                <button
+                                    className="btn-outline"
+                                    onClick={this.goAddress}>
                                     {addressInfo ? '修改地址' : '添加地址'}
                                 </button>
                                 {addressInfo ? (
                                     <div className="my-address">
                                         <div className="my-address-contact">
                                             <span>收货人：</span>
-                                            <span className="my-name">{addressInfo.name}</span>
+                                            <span className="my-name">
+                                                {addressInfo.name}
+                                            </span>
                                             <span>{addressInfo.phone}</span>
                                         </div>
                                         <div className="my-area">
@@ -327,11 +364,14 @@ export default class PayPrepare extends Component {
                             </div>
                         ) : null}
 
-                        <button className="btn-action btn-confirm" onClick={this.confirmOrder}>
+                        <button
+                            className="btn-action btn-confirm"
+                            onClick={this.confirmOrder}>
                             提交订单
                         </button>
                     </div>
                 </div>
+                <Footer isShow={!uaUtil.mobile()} />
             </React.Fragment>
         );
     }

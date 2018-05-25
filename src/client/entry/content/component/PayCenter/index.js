@@ -13,15 +13,6 @@ import { initWechat } from '@/util/wechatUtil';
 import Api from '@/../APIConfig';
 
 export default class PayCenter extends Component {
-    static getWechatOpenId() {
-        if (uaUtil.wechat() && getParam().redirected !== '1') {
-            let url = addParam(location.href, { redirected: 1 });
-            location.href =
-                'http://www.bstcine.com/wechat/authorize?redirect=' +
-                encodeURIComponent(url);
-        }
-    }
-
     constructor(props) {
         super(props);
         this.state = {
@@ -43,22 +34,25 @@ export default class PayCenter extends Component {
         this.submitPay = this.submitPay.bind(this);
     }
 
-    async componentWillMount() {
-        let cid = getParam().cid;
-        fetchData(Api.APIURL_Order_Detail, { cid }).then(([err, result]) => {
-            if (err) return alert(errorMsg(err));
-            let { order } = result.detail;
-            if (order.pay_status === '1') {
-                location.href = `/pay/status?cid=${order.id}`;
-            }
-            this.setState({ order });
-        });
-    }
-
     componentDidMount() {
         document.title = '善恩英语 - 收银台';
-        PayCenter.getWechatOpenId();
-        initWechat();
+        if (uaUtil.wechat() && getParam().redirected !== '1') {
+            let url = addParam(location.href, { redirected: 1 });
+            location.href =
+                'http://www.bstcine.com/wechat/authorize?redirect=' +
+                encodeURIComponent(url);
+        } else {
+            initWechat();
+            let cid = getParam().cid;
+            fetchData(Api.APIURL_Order_Detail, { cid }).then(([err, result]) => {
+                if (err) return alert(errorMsg(err));
+                let { order } = result.detail;
+                if (order.pay_status === '1') {
+                    location.href = `/pay/status?cid=${order.id}`;
+                }
+                this.setState({ order });
+            });
+        }
     }
 
     closePayingModal() {
@@ -112,7 +106,9 @@ export default class PayCenter extends Component {
         this.timer = setInterval(() => {
             fetchData(Api.APIURL_Order_Pay_Status, { cid: order.id }).then(
                 ([err, result]) => {
-                    if (err) return alert(errorMsg(err));
+                    if (err) {
+                        return alert(errorMsg(err));
+                    }
                     let { pay_status } = result;
                     if (pay_status === '1') {
                         clearInterval(this.timer);
@@ -172,7 +168,9 @@ export default class PayCenter extends Component {
         });
         fetchData(Api.APIURL_Pay_Wechat_Qrcode, { cid: order.id }).then(
             ([err, result]) => {
-                if (err) return alert(errorMsg(err));
+                if (err) {
+                    return alert(errorMsg(err));
+                }
                 this.checkingOrderStatus();
                 this.setState({
                     pay_btn: { text: '重新支付', disabled: false },

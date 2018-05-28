@@ -41,8 +41,10 @@ class Entry extends Component {
         if (baseurl) {
             window.API_Host_URL = decodeURIComponent(baseurl);
         } else {
-            if (process.env.API_Host_URL) {
-                window.API_Host_URL = process.env.API_Host_URL;
+            // eslint-disable-next-line no-undef
+            if (SERVICE_URL) {
+                // eslint-disable-next-line no-undef
+                window.API_Host_URL = SERVICE_URL;
             }
         }
     }

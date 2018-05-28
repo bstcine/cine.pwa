@@ -5,10 +5,19 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const devMode = process.env.NODE_ENV !== 'production';
 
-const API_Host_URL = 'http://apptest.bstcine.com';
-// const API_Host_URL = 'http://local.bstcine.com:9000';
+// 默认无需配置，需要指定 a.bstcine.com 下访问 b.bstcine.com 的时候才需要指定
+const SERVICE_URL = null;
 const publicPath = '/'; // for cdn
-const pages = ['content', 'cquiz', 'address', 'vocabtest', 'tgrammar', 'user', 'teacher', 'temp'];
+const pages = [
+    'content',
+    'cquiz',
+    'address',
+    'vocabtest',
+    'tgrammar',
+    'user',
+    'teacher',
+    'temp',
+];
 
 let entry = {};
 let htmlWebpackPlugins = [];
@@ -33,7 +42,7 @@ module.exports = {
     },
     plugins: [
         new webpack.DefinePlugin({
-            API_Host_URL,
+            SERVICE_URL: JSON.stringify(SERVICE_URL),
         }),
         new CleanWebpackPlugin(['build'], { verbose: devMode }),
         new MiniCssExtractPlugin({

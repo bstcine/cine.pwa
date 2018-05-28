@@ -100,7 +100,7 @@ export default class OrderCoupon extends Component {
                             <h1>善恩视频课程有效期转换</h1>
                             <div className={'hint-a'}>亲爱的用户：</div>
                             <div className={'hint-b'}>
-                                您好！从2018年5月25日起，新购买善恩视频课程的有效期统一调整为2年。您账户下的所有已购课程可选择：
+                                您好！从2018年5月28日起，新购买善恩视频课程的有效期统一调整为2年。您账户下的所有已购课程可选择：
                             </div>
                             <div className="radio-beauty-container">
                                 <label

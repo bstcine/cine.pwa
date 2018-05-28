@@ -89,8 +89,6 @@ export default class OrderCoupon extends Component {
     render() {
         const { showModal, list, curIndex, expireDate } = this.state;
 
-        let modalHint;
-
         return (
             <React.Fragment>
                 <Header isShow={list} />

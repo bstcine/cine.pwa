@@ -27,7 +27,7 @@ export default class OrderCoupon extends Component {
         let today = new Date();
         let dd = today.getDate();
         let mm = today.getMonth() + 1;
-        let yyyy = today.getFullYear() + 2;
+        let yyyy = today.getFullYear() + 5;
         let expireDate = ' ' + yyyy + ' 年 ' + mm + ' 月 ' + dd + ' 日';
 
         this.state = {

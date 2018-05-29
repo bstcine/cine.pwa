@@ -181,7 +181,7 @@ export default class OrderCoupon extends Component {
                         <img src={require('../asset/image/ico_success.png')} />
                         <div className={'font-a'}>操作已成功！</div>
                         <div className={`font-b ${curIndex !== '0' && 'none'}`}>
-                            本账户下所有已购课程的有效期已从“永久有效”调整为“2年有效”。
+                            本账户下所有已购课程的有效期已从“永久有效”调整为“5年有效”。
                         </div>
                         <div className={`font-c ${curIndex !== '0' && 'none'}`}>
                             优惠券已存入您的账号，可下载“善恩英语”APP并登录查看。

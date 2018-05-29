@@ -41,7 +41,7 @@ export const actionUserCoupon = {
 
         let param = {
             page: 1,
-            pageSize: 1000000,
+            pageSize: 500,
             orderBy: 'create_at',
             orderValue: 'desc',
         };

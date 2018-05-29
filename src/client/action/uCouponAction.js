@@ -55,6 +55,10 @@ export const actionUserCoupon = {
         dispatch(actionUserCoupon._toggleCouponDialog(willOpen));
     },
 
+    toggleCouponTransfer: coupon => (dispatch, getState) => {
+        alert(JSON.stringify(coupon));
+    },
+
     expandCouponItem: id => (dispatch, getState) => {
         let coupons = getState().couponRedu.get('rows');
         let newCoupons = coupons.map(item => ({
@@ -87,5 +91,9 @@ export const actionUserCoupon = {
         setTimeout(() => {
             dispatch(actionUserCoupon._hideToast());
         }, toastTimeout);
+    },
+
+    transferCoupon: transferUser => async dispatch => {
+        alert(JSON.stringify(transferUser));
     },
 };

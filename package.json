@@ -25,6 +25,7 @@
         "echarts": "^3.8.5",
         "immutable": "^3.8.2",
         "lodash": "^4.17.4",
+        "@material-ui/core": "^1.1.0",
         "material-ui": "^0.20.1",
         "moment": "^2.22.1",
         "path": "^0.12.7",

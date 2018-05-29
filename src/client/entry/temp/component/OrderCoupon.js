@@ -123,7 +123,7 @@ export default class OrderCoupon extends Component {
                                     />
                                     <div className="radio-content">
                                         <div className={'hint-c'}>
-                                            我同意将本账户下所有已购课程的有效期从“永久有效”调整为“2年有效”，新的有效期为：即日起至
+                                            我同意将本账户下所有已购课程的有效期从“永久有效”调整为“5年有效”，新的有效期为：即日起至
                                             {expireDate}。
                                         </div>
                                         <div className={'hint-d'}>并获得：</div>

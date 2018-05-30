@@ -73,12 +73,7 @@ const UserHeader = ({ selectId, user, handleClick }) => {
                     </div>
                     <div className={'item tab-wordtest'}>
                         <a href="/vocabtest" target="_blank">
-                            词汇量测试
-                        </a>
-                    </div>
-                    <div className={'item tab-grammar'}>
-                        <a href="/tgrammar/quiz" target="_blank">
-                            核心语法测试
+                            我的测试
                         </a>
                     </div>
                     {user.role_id !== '3' && (

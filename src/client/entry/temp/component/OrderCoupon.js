@@ -98,7 +98,7 @@ export default class OrderCoupon extends Component {
                             <h1>善恩视频课程有效期转换</h1>
                             <div className={'hint-a'}>亲爱的用户：</div>
                             <div className={'hint-b'}>
-                                您好！从2018年5月28日起，新购买善恩视频课程的有效期统一调整为2年。您账户下的所有已购课程可选择：
+                                您好！从2018年5月28日起，新购买善恩视频课程的有效期统一调整为5年。您账户下的所有已购课程可选择：
                             </div>
                             <div className="radio-beauty-container">
                                 <label
@@ -181,7 +181,7 @@ export default class OrderCoupon extends Component {
                         <img src={require('../asset/image/ico_success.png')} />
                         <div className={'font-a'}>操作已成功！</div>
                         <div className={`font-b ${curIndex !== '0' && 'none'}`}>
-                            本账户下所有已购课程的有效期已从“永久有效”调整为“2年有效”。
+                            本账户下所有已购课程的有效期已从“永久有效”调整为“5年有效”。
                         </div>
                         <div className={`font-c ${curIndex !== '0' && 'none'}`}>
                             优惠券已存入您的账号，可下载“善恩英语”APP并登录查看。

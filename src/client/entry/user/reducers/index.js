@@ -2,6 +2,7 @@ import { combineReducers } from 'redux';
 import couponRedu from './couponReducer';
 import points from './pointReducer';
 import { Action_UI } from '@/constant/actionTypeUser';
+import { toastRedu } from '@/reducer';
 
 const user = (
     state = {
@@ -22,11 +23,11 @@ const user = (
     }
 };
 
-
 const rootReducer = combineReducers({
     user,
     couponRedu,
     points,
+    toastRedu,
 });
 
 export default rootReducer;

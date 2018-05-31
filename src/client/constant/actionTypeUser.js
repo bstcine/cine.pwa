@@ -13,9 +13,6 @@ export const Action_UC = {
     RECEIVE: 'UC_RECEIVE',
     EXPAND: 'UC_EXPAND',
     TOGGLE_DIALOG: 'UC_DIALOG_TOGGLE',
-    ADD_COUPON_START: 'UC_REQUEST_ADD',
-    ADD_COUPON_END: 'UC_RECEIVE_ADD',
-    TOAST_HIDE: 'UC_TOAST_HIDE',
 };
 // entry/user/point
 export const Action_UP = {

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { actionUserCoupon } from '@/action/uCouponAction';
-import { ToastError, ToastLoading, ToastSuccess } from '@/component/Toast';
+import { Toast } from '@/component/Toast';
 import CouponPanel from '@/entry/user/component/coupon';
 
 class CouponContainer extends Component {
@@ -15,16 +15,12 @@ class CouponContainer extends Component {
 
         return (
             <React.Fragment>
-                <ToastLoading show={network.loading} />
-                <ToastError
-                    show={!network.loading && network.error}
-                    text={network.error}
+                <Toast network={network} />
+                <CouponPanel
+                    isOpen={isOpen}
+                    coupons={coupons}
+                    actions={actions}
                 />
-                <ToastSuccess
-                    show={!network.loading && !network.error && network.msg}
-                    text={network.msg}
-                />
-                <CouponPanel isOpen={isOpen} coupons={coupons} actions={actions} />
             </React.Fragment>
         );
     }
@@ -33,8 +29,8 @@ class CouponContainer extends Component {
 const mapStateToProps = state => {
     return {
         coupons: state.couponRedu.get('rows'),
-        network: state.couponRedu.get('network'),
         isOpen: state.couponRedu.get('isOpen'),
+        network: state.toastRedu,
     };
 };
 

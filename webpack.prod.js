@@ -52,7 +52,11 @@ module.exports = merge(common, {
     },
     plugins: [
         new LodashModuleReplacementPlugin(),
-        new OptimizeCSSAssetsPlugin(),
+        new OptimizeCSSAssetsPlugin({
+            cssProcessorOptions: {
+                isSafe: true,
+            },
+        }),
         new BundleAnalyzerPlugin({ analyzerMode: 'static' }),
     ],
 });

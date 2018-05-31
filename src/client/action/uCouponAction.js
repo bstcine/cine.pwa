@@ -4,7 +4,6 @@ import { Action_UC } from '@/constant/actionTypeUser';
 import { toastAction } from '@/action/commonAction';
 import errorMsg from '@/util/errorMsg';
 
-const toastTimeout = 2000;
 export const actionUserCoupon = {
     request: () => ({
         type: Action_UC.REQUEST,
@@ -12,10 +11,6 @@ export const actionUserCoupon = {
     receive: result => ({
         type: Action_UC.RECEIVE,
         payload: result.rows,
-    }),
-
-    _hideToast: () => ({
-        type: Action_UC.TOAST_HIDE,
     }),
 
     _expandCouponItem: coupons => ({
@@ -43,7 +38,7 @@ export const actionUserCoupon = {
     },
 
     toggleCouponDialog: isOpen => (dispatch, getState) => {
-        let willOpen = !getState().couponRedu.get('isOpen');
+        let willOpen = !getState().couponRedu.get('isOpenAdd');
         dispatch(actionUserCoupon._toggleCouponDialog(willOpen));
     },
 
@@ -74,16 +69,12 @@ export const actionUserCoupon = {
             } else {
                 dispatch(toastAction.show('添加成功'));
                 dispatch(actionUserCoupon._toggleCouponDialog(false));
+
                 dispatch(actionUserCoupon.loadUserCoupon());
             }
         } else {
-            let error = '请输入优惠码！';
-            dispatch(toastAction.showError(error));
+            dispatch(toastAction.showError('请输入优惠码！'));
         }
-
-        /*     setTimeout(() => {
-            dispatch(toastAction.hide());
-        }, toastTimeout); */
     },
 
     transferCoupon: transferUser => async dispatch => {

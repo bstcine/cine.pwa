@@ -11,13 +11,14 @@ class CouponContainer extends Component {
     }
 
     render() {
-        let { coupons, network, isOpen, actions } = this.props;
+        let { coupons, network, isOpenAdd, transfer, actions } = this.props;
 
         return (
             <React.Fragment>
                 <Toast network={network} />
                 <CouponPanel
-                    isOpen={isOpen}
+                    isOpenAdd={isOpenAdd}
+                    transfer={transfer}
                     coupons={coupons}
                     actions={actions}
                 />
@@ -29,7 +30,8 @@ class CouponContainer extends Component {
 const mapStateToProps = state => {
     return {
         coupons: state.couponRedu.get('rows'),
-        isOpen: state.couponRedu.get('isOpen'),
+        isOpenAdd: state.couponRedu.get('isOpenAdd'),
+        transfer: state.couponRedu.get('transfer'),
         network: state.toastRedu,
     };
 };

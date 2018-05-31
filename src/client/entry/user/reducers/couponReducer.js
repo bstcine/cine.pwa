@@ -3,7 +3,11 @@ import { Action_UC } from '@/constant/actionTypeUser';
 
 const initialState = fromJS({
     rows: [],
-    isOpen: false,
+    isOpenAdd: false,
+    transfer: {
+        isOpen: false,
+        coupon: null,
+    },
 });
 
 const couponRedu = (state = initialState, action) => {
@@ -11,7 +15,7 @@ const couponRedu = (state = initialState, action) => {
         case Action_UC.RECEIVE:
             return state.set('rows', action.payload);
         case Action_UC.TOGGLE_DIALOG:
-            return state.set('isOpen', action.payload);
+            return state.set('isOpenAdd', action.payload);
         case Action_UC.EXPAND:
             return state.set('rows', action.payload);
 

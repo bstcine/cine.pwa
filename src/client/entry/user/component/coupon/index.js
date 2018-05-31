@@ -4,20 +4,31 @@
 import React from 'react';
 import CouponTabs from '../coupon/CouponTabs';
 import DialogCouponAdd from '../coupon/DialogCouponAdd';
+import DialogCouponTransfer from '../coupon/DialogCouponTransfer';
 
-const CouponPanel = ({ isOpen, coupons, actions }) => {
-    return (
-        <React.Fragment>
-            <CouponTabs coupons={coupons} actions={actions} />
-            <div className={'coupon-todo'}>
-                <a
-                    className="float-button"
-                    onClick={actions.toggleCouponDialog}
+export default class CouponPanel extends React.PureComponent {
+    render() {
+        let { isOpenAdd, transfer, coupons, actions } = this.props;
+
+        return (
+            <React.Fragment>
+                <CouponTabs coupons={coupons} actions={actions} />
+
+                <div className={'coupon-todo'}>
+                    <a
+                        className="float-button"
+                        onClick={actions.toggleCouponDialog}
+                    />
+                </div>
+
+                <DialogCouponAdd isOpen={isOpenAdd} actions={actions} />
+
+                <DialogCouponTransfer
+                    isOpen={transfer.isOpen}
+                    coupon={transfer.coupon}
+                    actions={actions}
                 />
-            </div>
-            <DialogCouponAdd isOpen={isOpen} actions={actions} />
-        </React.Fragment>
-    );
-};
-
-export default CouponPanel;
+            </React.Fragment>
+        );
+    }
+}

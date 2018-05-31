@@ -1,6 +1,7 @@
 import Api from '../../APIConfig';
 import { fetchData } from '@/service/base';
 import { Action_UC } from '@/constant/actionTypeUser';
+import { toastAction } from '@/action/commonAction';
 import errorMsg from '@/util/errorMsg';
 
 const toastTimeout = 2000;
@@ -25,15 +26,6 @@ export const actionUserCoupon = {
     _toggleCouponDialog: isOpen => ({
         type: Action_UC.TOGGLE_DIALOG,
         payload: isOpen,
-    }),
-
-    _addCouponRequestStart: () => ({
-        type: Action_UC.ADD_COUPON_START,
-    }),
-
-    _addCouponRequestEnd: err => ({
-        type: Action_UC.ADD_COUPON_END,
-        payload: err,
     }),
 
     loadUserCoupon: () => async dispatch => {
@@ -71,26 +63,27 @@ export const actionUserCoupon = {
 
     addCoupon: no => async dispatch => {
         if (no.trim().length !== 0) {
-            dispatch(actionUserCoupon._addCouponRequestStart());
-
+            // dispatch(toastAction.loading());
             let [err, result] = await fetchData(Api.APIURL_User_Coupon_Add, {
                 no,
             });
-            if (err) err = errorMsg(err);
-            dispatch(actionUserCoupon._addCouponRequestEnd(err));
 
-            if (!err) {
+            if (err) {
+                err = errorMsg(err);
+                dispatch(toastAction.showError(err));
+            } else {
+                dispatch(toastAction.show('添加成功'));
                 dispatch(actionUserCoupon._toggleCouponDialog(false));
                 dispatch(actionUserCoupon.loadUserCoupon());
             }
         } else {
             let error = '请输入优惠码！';
-            dispatch(actionUserCoupon._addCouponRequestEnd(error));
+            dispatch(toastAction.showError(error));
         }
 
-        setTimeout(() => {
-            dispatch(actionUserCoupon._hideToast());
-        }, toastTimeout);
+        /*     setTimeout(() => {
+            dispatch(toastAction.hide());
+        }, toastTimeout); */
     },
 
     transferCoupon: transferUser => async dispatch => {

@@ -35,4 +35,20 @@ const ToastError = ({ show, text }) => {
     );
 };
 
-export { ToastSuccess, ToastLoading, ToastError };
+const Toast = ({ network }) => {
+    return (
+        <React.Fragment>
+            <ToastLoading show={network.loading} />
+            <ToastError
+                show={!network.loading && network.error}
+                text={network.error}
+            />
+            <ToastSuccess
+                show={!network.loading && !network.error && network.msg}
+                text={network.msg}
+            />
+        </React.Fragment>
+    );
+};
+
+export { ToastSuccess, ToastLoading, ToastError, Toast };

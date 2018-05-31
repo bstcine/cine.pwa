@@ -1,4 +1,3 @@
-//通用的
 export const Action_List_Filter = 'Action_List_Filter';
 export const Action_List_Filter_Confirm = 'Action_List_Filter_Confirm';
 export const Action_List_Item_Link = 'Action_List_Item_Link';
@@ -16,34 +15,3 @@ export const Action_Handle_Save = 'Action_Handle_Save';
 export const Action_Handle_SaveAndNew = 'Action_Handle_SaveAndNew';
 export const Action_Handle_Publish = 'Action_Handle_Publish';
 export const Action_Handle_Refresh = 'Action_Handle_Refresh';
-
-
-//entry/content/course
-const Action_CC = {
-    INIT: 'init',
-    NETWORK_ERROR: 'NETWORK_ERROR',
-    NETWORK_ERROR_TIMEOUT: 'NETWORK_ERROR_TIMEOUT',
-};
-export {Action_CC};
-
-
-//entry/text/grammar
-const Action_TG = {
-    INIT: 'init',
-    NETWORK_ERROR: 'NETWORK_ERROR',
-    NETWORK_ERROR_TIMEOUT: 'NETWORK_ERROR_TIMEOUT',
-};
-export {Action_TG};
-
-
-
-//entry/user/order
-export const Action_UO_ = 'Action_UO_';
-
-
-//entry/test/grammar
-export const Action_TG_ = 'Action_TG_';
-
-//entry/test/vocab
-export const Action_TV_ = 'Action_TV_';
-

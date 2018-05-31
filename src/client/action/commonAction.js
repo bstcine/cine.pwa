@@ -1,12 +1,4 @@
-/* import {
-    CLOSE_ALERT,
-    OPEN_ALERT,
-    CLOSE_CONFIRM,
-    OPEN_CONFIRM,
-    OPEN_NETWORK_ERROR,
-    CLOSE_NETWORK_ERROR,
-} from '@/constant/actionTypeCommon'; */
-import * as actType from '@/constant/actionTypeCommon';
+import * as actType from '@/constant/actionType';
 
 export const closeAlert = () => ({
     type: actType.CLOSE_ALERT,

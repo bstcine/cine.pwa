@@ -28,7 +28,7 @@ import { alertModal, confirmModal } from '@/reducer/index';
 import {
     OPEN_NETWORK_ERROR,
     CLOSE_NETWORK_ERROR,
-} from '@/constant/actionTypeCommon';
+} from '@/constant/actionType';
 
 /**
  * 除题目外的试卷数据

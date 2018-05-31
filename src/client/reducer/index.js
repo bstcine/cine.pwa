@@ -1,4 +1,4 @@
-import * as actType from '@/constant/actionTypeCommon';
+import * as actType from '@/constant/actionType';
 
 export const alertModal = (state = { isOpen: false }, { type, payload }) => {
     switch (type) {

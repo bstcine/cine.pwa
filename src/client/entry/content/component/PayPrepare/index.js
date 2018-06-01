@@ -104,7 +104,7 @@ export default class PayPrepare extends Component {
             point,
             coupon_no,
         }).then(([err, result]) => {
-            if (err) return alert(errorMsg(err));
+            if (this.hasError(err)) return;
             this.setState(prevState => ({
                 calPrice: Object.assign(prevState.calPrice, result),
             }));

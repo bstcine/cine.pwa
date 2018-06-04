@@ -71,9 +71,9 @@ export default class PayStatus extends Component {
                         进行学习
                     </p>
                     <p className="tips">
-                        注：加微信善恩小助手（<span className="wechat-name">
+                        如需咨询，请加善恩小助手微信（<span className="wechat-name">
                             BSTCINE01
-                        </span>）为好友，进入本课程的学习群！
+                        </span>）好友
                     </p>
                 </div>
             </div>
@@ -126,7 +126,7 @@ export default class PayStatus extends Component {
                         </div>
                     </div>
                 </div>
-                <Footer isShow={!uaUtil.mobile()}/>
+                <Footer isShow={!uaUtil.mobile()} />
             </React.Fragment>
         );
     }

@@ -33,7 +33,10 @@ const CouponItem = ({ coupon, actions }) => {
                         .replace(/-/g, '.')}{' '}
                     - {coupon.expire_at.substring(0, 10).replace(/-/g, '.')}
                 </div>
-                <div className="verb" onClick={() => {alert("转赠他人")}}>转让</div>
+                {coupon.status === '0' && (
+                        <div className="verb" onClick={() => {actions.initTransferDialog(coupon)}}>转让</div>
+                )}
+
                 {coupon.desc && (
                     <img
                         className="coupon-expand"

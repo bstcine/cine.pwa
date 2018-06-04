@@ -23,6 +23,11 @@ export const actionUserCoupon = {
         payload: isOpen,
     }),
 
+    _toggleTransferDialog: transfer => ({
+        type: Action_UC.TOGGLE_TRANSFER_DIALOG,
+        payload: transfer,
+    }),
+
     loadUserCoupon: () => async dispatch => {
         dispatch(actionUserCoupon.request());
 
@@ -42,8 +47,76 @@ export const actionUserCoupon = {
         dispatch(actionUserCoupon._toggleCouponDialog(willOpen));
     },
 
-    toggleCouponTransfer: coupon => (dispatch, getState) => {
-        alert(JSON.stringify(coupon));
+    initTransferDialog: coupon => (dispatch, getState) => {
+        let transfer = {
+            isOpen: true,
+            isCheck: true,
+            coupon:coupon,
+            checkMessage:'',
+            userAccount:'',
+        }
+        dispatch(actionUserCoupon._toggleTransferDialog(transfer))
+    },
+
+    toggleTransferDialog: () => (dispatch, getState) => {
+        let transfer = getState().couponRedu.get('transfer')
+
+        transfer.isOpen = !transfer.isOpen
+        let newTransfer = {
+            isOpen: !transfer.isOpen,
+            isCheck: transfer.isCheck,
+            coupon:transfer.coupon,
+            checkMessage:transfer.checkMessage,
+            userAccount:transfer.userAccount,
+        }
+        dispatch(actionUserCoupon._toggleTransferDialog(transfer))
+    },
+    toggleTransferCheck: (isCheck,checkMessage,userAccount) => (dispatch, getState) => {
+        let transfer = getState().couponRedu.get('transfer')
+
+        let newTransfer = {
+            isOpen: transfer.isOpen,
+            isCheck: isCheck,
+            coupon:transfer.coupon,
+            checkMessage:checkMessage,
+            userAccount:userAccount,
+        }
+
+        dispatch(actionUserCoupon._toggleTransferDialog(newTransfer));
+    },
+    toggleTransferCheckStatus: account => async (dispatch, getState) => {
+        // 需要检查输入的值
+        if (account === "") {
+            dispatch(toastAction.showError('检查信息不能为空'));
+            return
+        }
+
+        let param = {
+            query: account,
+        };
+
+        // 调用输入的账户
+        let [err,result] = await fetchData(Api.APIURL_User_Query,param);
+
+        if (err){
+
+            err = errorMsg(err);
+            dispatch(toastAction.showError(err));
+            return
+        }
+
+        var isCheck = true, checkMessage = '';
+
+        if (result.length < 1){
+            checkMessage = '没有查询到指定的用户';
+        }else if (result.length === 1){
+            isCheck = false;
+            checkMessage = '已查询到指定的用户: '+result[0].nickname;
+        }else {
+            checkMessage = '查询到'+result.length+'个用户，请指定更详细的信息';
+        }
+
+        dispatch(actionUserCoupon.toggleTransferCheck(isCheck,checkMessage,account));
     },
 
     expandCouponItem: id => (dispatch, getState) => {
@@ -77,7 +150,31 @@ export const actionUserCoupon = {
         }
     },
 
-    transferCoupon: transferUser => async dispatch => {
+    transferCoupon: transferUser => async (dispatch, getState) => {
         alert(JSON.stringify(transferUser));
+        // 开始转增优惠券
+        let transfer = getState().couponRedu.get('transfer')
+        alert(transfer)
+        alert(transfer.coupon)
+        let param = {
+            transfer: transferUser,
+            coupons:[transfer.coupon.id],
+        }
+
+        let [err,result] = await fetchData(Api.APIURL_User_Coupon_Transfer,param);
+
+        if (err) {
+            err = errorMsg(err);
+            dispatch(toastAction.showError(err));
+            return
+        }
+
+        if (result !== '1'){
+            dispatch(toastAction.showError('转赠失败'))
+            return
+        }
+
+        dispatch(actionUserCoupon.loadUserCoupon())
+        dispatch(actionUserCoupon.toggleCouponDialog(false))
     },
 };

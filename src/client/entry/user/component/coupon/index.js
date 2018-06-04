@@ -25,6 +25,9 @@ export default class CouponPanel extends React.PureComponent {
 
                 <DialogCouponTransfer
                     isOpen={transfer.isOpen}
+                    isCheck={transfer.isCheck}
+                    checkMessage={transfer.checkMessage}
+                    userAccount={transfer.userAccount}
                     coupon={transfer.coupon}
                     actions={actions}
                 />

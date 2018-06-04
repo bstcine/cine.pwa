@@ -35,7 +35,7 @@ export const toastRedu = (
         }
 
         case actType.TOAST_DISPLAY_SUCCESS:
-            return { loading: false, msg: '添加成功', error: '' };
+            return { loading: false, msg: action.payload, error: '' };
 
         case actType.TOAST_DISPLAY_ERROR: {
             let toastStatus = {

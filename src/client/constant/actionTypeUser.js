@@ -13,6 +13,7 @@ export const Action_UC = {
     RECEIVE: 'UC_RECEIVE',
     EXPAND: 'UC_EXPAND',
     TOGGLE_DIALOG: 'UC_DIALOG_TOGGLE',
+    TOGGLE_TRANSFER_DIALOG:'UC_TRANSFER_DIALOG_TOGGLE',
 };
 // entry/user/point
 export const Action_UP = {

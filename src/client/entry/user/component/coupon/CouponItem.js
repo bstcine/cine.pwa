@@ -12,6 +12,13 @@ const CouponItem = ({ coupon, actions }) => {
         couponStyle = 'coupon-ticket coupon-ticket-expired';
     }
 
+    var usedImgSrc = require('../../asset/image/ic_coupon_used.png');
+    if (coupon.sub_status == '1'){
+        usedImgSrc = require('../../asset/image/ic_coupon_transfered.png');
+    }else if (coupon.sub_status == '2') {
+        usedImgSrc = require('../../asset/image/ic_coupon_synthesizered.png')
+    }
+
     let arrImgSrc = coupon.expand
         ? require('../../asset/image/ico_arr_coup_up.png')
         : require('../../asset/image/ico_arr_used_down.png');
@@ -47,7 +54,7 @@ const CouponItem = ({ coupon, actions }) => {
                 {coupon.status === '1' && (
                     <img
                         className="coupon-status"
-                        src={require('../../asset/image/ic_coupon_used.png')}
+                        src={usedImgSrc}
                     />
                 )}
             </div>

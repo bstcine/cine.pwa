@@ -43,7 +43,7 @@ exports.APIURL_Share_CoursePackage = '/api/share/coursePackage'; // 课程详情
 
 exports.APIURL_User_Coupon = '/api/user/coupon/list'; // 查询优惠券
 exports.APIURL_User_Coupon_Add = '/api/user/coupon/add'; // 添加优惠券
-exports.APIURL_User_Coupon_Transfer = '/api/user/coupon/transfer'; // 转移用户积分
+exports.APIURL_User_Coupon_Transfer = '/api/user/coupon/transfer'; // 转移用户优惠券
 exports.APIURL_User_Point = '/api/user/integral/list'; // 查询积分
 exports.APIURL_User_Query = '/api/user/query'; // 查询用户是否存在
 exports.APIURL_User_Info = '/api/user/info'; // 用户信息
@@ -58,3 +58,5 @@ exports.APIURL_System_AccessLog_Create = '/api/system/accesslog/create'; // 创�
 
 exports.APIURL_Temp_User_Course_Coupon = '/api/temp/user/course/coupon'; // 获取用户将永久转为限时课程可以获得的优惠券
 exports.APIURL_Temp_User_Course_Coupon_Check = '/api/temp/user/course/coupon/check'; // 将永久课程转为限时课程，并赠送优惠券
+exports.APIURL_Admin_Coupon_Synthesizer = '/api/admin/user/coupon/synthesizer'; // 管理员将某用户的通用、直减、未使用的优惠券执行合并
+exports.APIURL_Admin_User_Coupon_List ='/api/admin/user/coupon/list'; // 管理员获取某用户的未使用优惠券列表

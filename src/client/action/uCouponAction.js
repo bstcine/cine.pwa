@@ -61,7 +61,6 @@ export const actionUserCoupon = {
     toggleTransferDialog: () => (dispatch, getState) => {
         let transfer = getState().couponRedu.get('transfer')
 
-        transfer.isOpen = !transfer.isOpen
         let newTransfer = {
             isOpen: !transfer.isOpen,
             isCheck: transfer.isCheck,
@@ -69,7 +68,7 @@ export const actionUserCoupon = {
             checkMessage:transfer.checkMessage,
             userAccount:transfer.userAccount,
         }
-        dispatch(actionUserCoupon._toggleTransferDialog(transfer))
+        dispatch(actionUserCoupon._toggleTransferDialog(newTransfer))
     },
     toggleTransferCheck: (isCheck,checkMessage,userAccount) => (dispatch, getState) => {
         let transfer = getState().couponRedu.get('transfer')
@@ -99,7 +98,6 @@ export const actionUserCoupon = {
         let [err,result] = await fetchData(Api.APIURL_User_Query,param);
 
         if (err){
-
             err = errorMsg(err);
             dispatch(toastAction.showError(err));
             return
@@ -112,6 +110,7 @@ export const actionUserCoupon = {
         }else if (result.length === 1){
             isCheck = false;
             checkMessage = '已查询到指定的用户: '+result[0].nickname;
+            account = result[0].id
         }else {
             checkMessage = '查询到'+result.length+'个用户，请指定更详细的信息';
         }
@@ -151,30 +150,28 @@ export const actionUserCoupon = {
     },
 
     transferCoupon: transferUser => async (dispatch, getState) => {
-        alert(JSON.stringify(transferUser));
         // 开始转增优惠券
         let transfer = getState().couponRedu.get('transfer')
-        alert(transfer)
-        alert(transfer.coupon)
+
         let param = {
             transfer: transferUser,
-            coupons:[transfer.coupon.id],
+            coupon_no:transfer.coupon.no,
         }
 
         let [err,result] = await fetchData(Api.APIURL_User_Coupon_Transfer,param);
 
         if (err) {
             err = errorMsg(err);
-            dispatch(toastAction.showError(err));
+            dispatch(toastAction.showError(errorMsg(err)));
             return
         }
 
-        if (result !== '1'){
-            dispatch(toastAction.showError('转赠失败'))
+        if (result === '0'){
+            dispatch(toastAction.showError('转赠失败'));
             return
         }
 
-        dispatch(actionUserCoupon.loadUserCoupon())
-        dispatch(actionUserCoupon.toggleCouponDialog(false))
+        dispatch(actionUserCoupon.toggleTransferDialog());
+        dispatch(actionUserCoupon.loadUserCoupon());
     },
 };

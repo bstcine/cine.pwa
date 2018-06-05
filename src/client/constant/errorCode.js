@@ -24,6 +24,7 @@ const errorCode = {
     coupon_limit_lesson: '优惠券限指定课程使用',
     coupon_used: '优惠券已使用',
     coupon_in_use: '优惠券使用中',
+    transfer_is_yourself: '不能转让给自己',
     order_already_paid: '订单已支付',
     related_lesson_required: '写作课程请先购买对应的视频课程',
     point_too_large: '当前积分已超出应付金额'

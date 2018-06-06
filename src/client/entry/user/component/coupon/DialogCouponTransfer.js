@@ -37,11 +37,11 @@ const CouponTransfer = ({ isOpen, isCheck, checkMessage, userAccount, coupon, ac
         marginBottom: "0.2rem",
     }
     let nameStyle = {
-        color:"blue",
+        color:"black",
         fontsize:"0.5rem",
     }
     let valueStyle = {
-        color: "red",
+        color: "#fc5c63",
         paddingLeft: "1rem",
         fontsize:"0.5rem",
     }
@@ -52,7 +52,7 @@ const CouponTransfer = ({ isOpen, isCheck, checkMessage, userAccount, coupon, ac
         </div>
     );
     let checkStyle = {
-        color:"red",
+        color:"#fc5c63",
         marginTop: "0.5rem",
     }
     const checkInfo = (
@@ -63,6 +63,7 @@ const CouponTransfer = ({ isOpen, isCheck, checkMessage, userAccount, coupon, ac
 
     return (
         <React.Fragment>
+
             <CDialog
                 title="优惠券转让"
                 modal={false}

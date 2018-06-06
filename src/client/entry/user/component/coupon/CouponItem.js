@@ -5,18 +5,33 @@ const CouponItem = ({ coupon, actions }) => {
         coupon.type === '1' ? coupon.value : 100 - Number(coupon.value) * 100;
     let unit = coupon.type === '1' ? '元' : '折';
 
-    let couponStyle = 'coupon-ticket';
-    if (coupon.status === '1') {
+    var couponStyle;
+    var couponStatusShow;
+    var usedImgSrc;
+    if (coupon.status === '0') {
+        couponStyle = 'coupon-ticket';
+        couponStatusShow = true;
+
+        if (coupon.sub_status == '0'){
+            couponStatusShow = false;
+        }else if (coupon.sub_status == '1'){
+            usedImgSrc = require('../../asset/image/ic_coupon_transfer.png');
+        }else if (coupon.sub_status == '2') {
+            usedImgSrc = require('../../asset/image/ic_coupon_synthesizer.png')
+        }
+    }else if (coupon.status === '1') {
         couponStyle = 'coupon-ticket coupon-ticket-used';
+        couponStatusShow = true;
+        if (coupon.sub_status == '0') {
+            usedImgSrc = require('../../asset/image/ic_coupon_used.png');
+        }else if (coupon.sub_status == '1'){
+            usedImgSrc = require('../../asset/image/ic_coupon_transfered.png');
+        }else if (coupon.sub_status == '2') {
+            usedImgSrc = require('../../asset/image/ic_coupon_synthesizered.png')
+        }
     } else if (coupon.status === '2') {
         couponStyle = 'coupon-ticket coupon-ticket-expired';
-    }
-
-    var usedImgSrc = require('../../asset/image/ic_coupon_used.png');
-    if (coupon.sub_status == '1'){
-        usedImgSrc = require('../../asset/image/ic_coupon_transfered.png');
-    }else if (coupon.sub_status == '2') {
-        usedImgSrc = require('../../asset/image/ic_coupon_synthesizered.png')
+        couponStatusShow = false
     }
 
     let arrImgSrc = coupon.expand
@@ -40,10 +55,6 @@ const CouponItem = ({ coupon, actions }) => {
                         .replace(/-/g, '.')}{' '}
                     - {coupon.expire_at.substring(0, 10).replace(/-/g, '.')}
                 </div>
-                {coupon.status === '0' && (
-                        <div className="verb" onClick={() => {actions.initTransferDialog(coupon)}}>转让</div>
-                )}
-
                 {coupon.desc && (
                     <img
                         className="coupon-expand"
@@ -51,11 +62,15 @@ const CouponItem = ({ coupon, actions }) => {
                         onClick={() => actions.expandCouponItem(coupon.id)}
                     />
                 )}
-                {coupon.status === '1' && (
+                {couponStatusShow && (
                     <img
                         className="coupon-status"
+                        disabled={true}
                         src={usedImgSrc}
                     />
+                )}
+                {coupon.status === '0' && (
+                    <div className="verb" onClick={() => {actions.initTransferDialog(coupon)}}>转让</div>
                 )}
             </div>
             {coupon.desc &&

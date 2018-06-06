@@ -86,7 +86,7 @@ export const actionUserCoupon = {
     toggleTransferCheckStatus: account => async (dispatch, getState) => {
         // 需要检查输入的值
         if (account === "") {
-            dispatch(toastAction.showError('检查信息不能为空'));
+            dispatch(toastAction.showError('不能为空'));
             return
         }
 
@@ -162,7 +162,7 @@ export const actionUserCoupon = {
 
         if (err) {
             err = errorMsg(err);
-            dispatch(toastAction.showError(errorMsg(err)));
+            dispatch(toastAction.showError(err));
             return
         }
 
@@ -171,6 +171,7 @@ export const actionUserCoupon = {
             return
         }
 
+        dispatch(toastAction.show('转让成功'));
         dispatch(actionUserCoupon.toggleTransferDialog());
         dispatch(actionUserCoupon.loadUserCoupon());
     },

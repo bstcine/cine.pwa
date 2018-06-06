@@ -58,7 +58,7 @@ const CouponTransfer = ({ isOpen, isCheck, checkMessage, userAccount, coupon, ac
     }
     let checkPromote = '';
     if (!isCheck){
-        checkPromote = '如确认无误，请点击右下方\"确定\"按钮，一旦确定，将无法撤回';
+        checkPromote = '如确认无误，请点击\"确定\"按钮';
     }
     const checkInfo = (
         checkMessage !== "" && checkMessage !== undefined &&

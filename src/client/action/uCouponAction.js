@@ -171,7 +171,7 @@ export const actionUserCoupon = {
             return
         }
 
-        dispatch(toastAction.show('转让成功'));
+        dispatch(toastAction.show('转赠成功'));
         dispatch(actionUserCoupon.toggleTransferDialog());
         dispatch(actionUserCoupon.loadUserCoupon());
     },

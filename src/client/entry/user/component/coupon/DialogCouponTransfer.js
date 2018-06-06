@@ -48,16 +48,26 @@ const CouponTransfer = ({ isOpen, isCheck, checkMessage, userAccount, coupon, ac
     const couponInfo = (
         <div style={couponSyle}>
             <span style={nameStyle}>{coupon === undefined ? '' : coupon.name}</span>
-            <span style={valueStyle}>面值：{couponValue}</span>
+            <span style={valueStyle}>价值：{couponValue}</span>
         </div>
     );
     let checkStyle = {
         color:"#fc5c63",
         marginTop: "0.5rem",
+        lineHeight: "0.5rem"
+    }
+    let checkPromote = '';
+    if (!isCheck){
+        checkPromote = '如确认无误，请点击右下方\"确定\"按钮，一旦确定，将无法撤回';
     }
     const checkInfo = (
+        checkMessage !== "" && checkMessage !== undefined &&
         <div style={checkStyle}>
-            <span>{checkMessage}</span>
+            <p>
+                {checkMessage}
+                <br/>
+                {checkPromote}
+            </p>
         </div>
     )
 
@@ -65,7 +75,7 @@ const CouponTransfer = ({ isOpen, isCheck, checkMessage, userAccount, coupon, ac
         <React.Fragment>
 
             <CDialog
-                title="优惠券转让"
+                title="优惠券转赠"
                 modal={false}
                 actions={dialogActions}
                 open={isOpen}
@@ -83,10 +93,11 @@ const CouponTransfer = ({ isOpen, isCheck, checkMessage, userAccount, coupon, ac
                     }}
 
                     defaultValue={userAccount}
-                    hintText="请输入接收人手机或账号"
+                    hintText="请输入被转赠者学习账号或注册手机号"
                 />
 
                 {checkInfo}
+
 
             </CDialog>
         </React.Fragment>

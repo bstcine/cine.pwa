@@ -70,7 +70,7 @@ const CouponItem = ({ coupon, actions }) => {
                     />
                 )}
                 {coupon.status === '0' && (
-                    <div className="verb" onClick={() => {actions.initTransferDialog(coupon)}}>转让</div>
+                    <div className="verb" onClick={() => {actions.initTransferDialog(coupon)}}>转赠</div>
                 )}
             </div>
             {coupon.desc &&

@@ -14,7 +14,7 @@ module.exports = merge(common, {
             cacheGroups: {
                 commons: {
                     name: 'commons',
-                    test: /src[\/]/,
+                    test: /src[\/].+\.js$/,
                     chunks: 'initial',
                     priority: 2,
                     minChunks: 2,

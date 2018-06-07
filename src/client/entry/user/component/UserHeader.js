@@ -47,11 +47,23 @@ const UserHeader = ({ selectId, user, handleClick }) => {
             </div>
             <div className={'user-header-tab'}>
                 <div className={'container'}>
-                    <div className={'item tab-order'}>
-                        <a>我的订单</a>
-                    </div>
+
                     <div className={'item tab-study'}>
                         <a href="/learn">我的学习</a>
+                    </div>
+                    <div className={'item tab-wordtest'}>
+                        <a href="/vocabtest" target="_blank">
+                            我的测试
+                        </a>
+                    </div>
+                    <div
+                        className={`item tab-coupon ${
+                            selectId === 'coupon' ? 'active' : ''
+                            }`}
+                        onClick={() => {
+                            handleClick('coupon');
+                        }}>
+                        <a>我的优惠券</a>
                     </div>
                     <div
                         className={`item tab-integral ${
@@ -62,19 +74,11 @@ const UserHeader = ({ selectId, user, handleClick }) => {
                         }}>
                         <a>我的积分</a>
                     </div>
-                    <div
-                        className={`item tab-coupon ${
-                            selectId === 'coupon' ? 'active' : ''
-                        }`}
-                        onClick={() => {
-                            handleClick('coupon');
-                        }}>
-                        <a>我的优惠券</a>
+                    <div className={'item tab-order'}>
+                        <a>我的订单</a>
                     </div>
-                    <div className={'item tab-wordtest'}>
-                        <a href="/vocabtest" target="_blank">
-                            我的测试
-                        </a>
+                    <div className={'item tab-address'}>
+                        <a>地址管理</a>
                     </div>
                     {user.role_id !== '3' && (
                         <div className={'item tab-grammar-teacher'}>
@@ -83,9 +87,6 @@ const UserHeader = ({ selectId, user, handleClick }) => {
                             </a>
                         </div>
                     )}
-                    <div className={'item tab-address'}>
-                        <a>地址管理</a>
-                    </div>
                     <div className={'item tab-password'}>
                         <a href="/resetPassword">修改密码</a>
                     </div>

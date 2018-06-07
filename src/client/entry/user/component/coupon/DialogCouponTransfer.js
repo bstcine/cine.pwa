@@ -58,7 +58,7 @@ const CouponTransfer = ({ isOpen, isCheck, checkMessage, userAccount, coupon, ac
     }
     let checkPromote = '';
     if (!isCheck){
-        checkPromote = '如确认无误，请点击右下方\"确定\"按钮，一旦确定，将无法撤回';
+        checkPromote = '如确认无误，请点击\"确定\"按钮';
     }
     const checkInfo = (
         checkMessage !== "" && checkMessage !== undefined &&
@@ -93,7 +93,7 @@ const CouponTransfer = ({ isOpen, isCheck, checkMessage, userAccount, coupon, ac
                     }}
 
                     defaultValue={userAccount}
-                    hintText="请输入被转赠者学习账号或注册手机号"
+                    hintText="请输入账号或手机号"
                 />
 
                 {checkInfo}

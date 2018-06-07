@@ -9,15 +9,9 @@ import { chunkComponent } from '@/util/chunkComponent';
 import storeUtil from '@/util/storeUtil';
 import Home from './component/Home';
 import Course from './component/Course';
-const PayPrepare = chunkComponent(() =>
-    import(/* webpackChunkName: "content/chunk/index.pp" */ './component/PayPrepare')
-);
-const PayCenter = chunkComponent(() =>
-    import(/* webpackChunkName: "content/chunk/index.pc" */ './component/PayCenter')
-);
-const PayStatus = chunkComponent(() =>
-    import(/* webpackChunkName: "content/chunk/index.ps" */ './component/PayStatus')
-);
+const PayPrepare = chunkComponent(() => import('./component/PayPrepare'));
+const PayCenter = chunkComponent(() => import('./component/PayCenter'));
+const PayStatus = chunkComponent(() => import('./component/PayStatus'));
 
 const createComponent = (Component, userRequired, props) => {
     if (userRequired && !storeUtil.getToken()) {

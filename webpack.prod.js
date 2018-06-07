@@ -1,16 +1,18 @@
-const merge = require('webpack-merge');
-const common = require('./webpack.common.js');
+const base = require('./webpack.base.js');
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
     .BundleAnalyzerPlugin;
 
-module.exports = merge(common, {
-    mode: 'production',
+module.exports = {
+    mode: base.mode,
+    entry: base.entry,
+    output: base.output,
+    resolve: base.resolve,
+    module: base.module,
     optimization: {
         splitChunks: {
-            chunks: 'all',
             cacheGroups: {
                 commons: {
                     name: 'commons',
@@ -19,21 +21,14 @@ module.exports = merge(common, {
                     priority: 2,
                     minChunks: 2,
                 },
-                vendors: {
-                    name: 'vendors',
-                    test: /node_modules/,
-                    chunks: 'initial',
-                    priority: 10,
-                    minChunks: 2,
-                },
             },
         },
         minimizer: [
             new UglifyJSPlugin({
+                cache: true,
+                parallel: true,
+                sourceMap: true,
                 uglifyOptions: {
-                    cache: true,
-                    parallel: true,
-                    sourceMap: true,
                     compress: {
                         warnings: false,
                         comparisons: false,
@@ -52,6 +47,7 @@ module.exports = merge(common, {
     },
     plugins: [
         new LodashModuleReplacementPlugin(),
+        ...base.plugins,
         new OptimizeCSSAssetsPlugin({
             cssProcessorOptions: {
                 isSafe: true,
@@ -59,4 +55,4 @@ module.exports = merge(common, {
         }),
         new BundleAnalyzerPlugin({ analyzerMode: 'static' }),
     ],
-});
+};

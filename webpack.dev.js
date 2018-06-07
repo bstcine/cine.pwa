@@ -1,13 +1,12 @@
 const path = require('path');
 const webpack = require('webpack');
-const merge = require('webpack-merge');
-const common = require('./webpack.common.js');
+const base = require('./webpack.base.js');
 
 const Dev_Host_URL = 'http://apptest.bstcine.com';
 
 let rewrites = [];
-for (let entry in common.entry) {
-    if (common.entry.hasOwnProperty(entry)) {
+for (let entry in base.entry) {
+    if (base.entry.hasOwnProperty(entry)) {
         rewrites.push({
             from: new RegExp(`^/${entry}.*`),
             to: `/entry/${entry}/index.html`,
@@ -16,9 +15,13 @@ for (let entry in common.entry) {
 }
 rewrites.push({ from: /.*/, to: `/entry/content/index.html` });
 
-module.exports = merge(common, {
-    mode: 'development',
+module.exports = {
+    mode: base.mode,
     devtool: 'cheap-module-source-map',
+    entry: base.entry,
+    output: base.output,
+    resolve: base.resolve,
+    module: base.module,
     devServer: {
         contentBase: path.join(__dirname, 'build'),
         compress: true,
@@ -39,5 +42,5 @@ module.exports = merge(common, {
             },
         },
     },
-    plugins: [new webpack.HotModuleReplacementPlugin()],
-});
+    plugins: [...base.plugins, new webpack.HotModuleReplacementPlugin()],
+};

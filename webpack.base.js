@@ -1,5 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
+const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
@@ -7,6 +8,7 @@ const devMode = process.env.NODE_ENV !== 'production';
 
 // 默认无需配置，需要指定 a.bstcine.com 下访问 b.bstcine.com 的时候才需要指定
 const SERVICE_URL = null;
+const vendors_name = devMode ? 'vendors' : 'vendors_min';
 const publicPath = '/'; // for cdn
 const pages = [
     'content',
@@ -37,7 +39,9 @@ module.exports = {
     mode: devMode ? 'development' : 'production',
     entry,
     output: {
-        filename: 'entry/[name]/index.[hash:8].js',
+        filename: devMode
+            ? 'entry/[name]/index.[hash:8].js'
+            : 'entry/[name]/index.[contenthash:8].js',
         path: path.resolve(__dirname, 'build'),
         publicPath,
     },
@@ -45,11 +49,26 @@ module.exports = {
         new webpack.DefinePlugin({
             SERVICE_URL: JSON.stringify(SERVICE_URL),
         }),
-        new CleanWebpackPlugin(['build'], { verbose: devMode }),
+        new CleanWebpackPlugin(['build/*.*', 'build/entry', 'build/asset'], {
+            verbose: devMode,
+        }),
         new MiniCssExtractPlugin({
             filename: 'entry/[name]/index.[contenthash:8].css',
         }),
         ...htmlWebpackPlugins,
+        new webpack.DllReferencePlugin({
+            context: __dirname,
+            manifest: `build/dll/manifest-${vendors_name}.json`,
+        }),
+        new AddAssetHtmlPlugin({
+            filepath: path.resolve(
+                __dirname,
+                `build/dll/001.${vendors_name}.js`
+            ),
+            publicPath: publicPath + 'dll/',
+            includeSourcemap: false,
+            outputPath: 'dll',
+        }),
     ],
     resolve: {
         modules: [path.resolve(__dirname, 'src/client'), 'node_modules'],

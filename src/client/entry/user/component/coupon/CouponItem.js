@@ -6,27 +6,31 @@ const CouponItem = ({ coupon, actions }) => {
     let unit = coupon.type === '1' ? '元' : '折';
 
     var couponStyle;
-    var couponStatusShow;
+    var couponStatusShow=false;
     var usedImgSrc;
     if (coupon.status === '0') {
         couponStyle = 'coupon-ticket';
-        couponStatusShow = true;
 
         if (coupon.sub_status == '0'){
             couponStatusShow = false;
-        }else if (coupon.sub_status == '1'){
+        }else if (coupon.sub_status == '-1'){
+            couponStatusShow = true;
             usedImgSrc = require('../../asset/image/ic_coupon_transfer.png');
-        }else if (coupon.sub_status == '2') {
+        }else if (coupon.sub_status == '-2') {
+            couponStatusShow = true;
             usedImgSrc = require('../../asset/image/ic_coupon_synthesizer.png')
         }
     }else if (coupon.status === '1') {
         couponStyle = 'coupon-ticket coupon-ticket-used';
-        couponStatusShow = true;
+
         if (coupon.sub_status == '0') {
+            couponStatusShow = true;
             usedImgSrc = require('../../asset/image/ic_coupon_used.png');
         }else if (coupon.sub_status == '1'){
+            couponStatusShow = true;
             usedImgSrc = require('../../asset/image/ic_coupon_transfered.png');
         }else if (coupon.sub_status == '2') {
+            couponStatusShow = true;
             usedImgSrc = require('../../asset/image/ic_coupon_synthesizered.png')
         }
     } else if (coupon.status === '2') {

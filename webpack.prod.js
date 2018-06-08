@@ -30,10 +30,10 @@ module.exports = merge(common, {
         },
         minimizer: [
             new UglifyJSPlugin({
+                cache: true,
+                parallel: true,
+                sourceMap: true,
                 uglifyOptions: {
-                    cache: true,
-                    parallel: true,
-                    sourceMap: true,
                     compress: {
                         warnings: false,
                         comparisons: false,

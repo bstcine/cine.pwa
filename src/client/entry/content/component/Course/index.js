@@ -276,9 +276,13 @@ export default class Course extends Component {
                             <DetailDesc
                                 course={course}
                                 isIOSAPP={siteCodeUtil.inIOSAPP()}
-                                onLoadSetAndComments={cCourseAction.loadSetAndComments}
+                                onLoadSetAndComments={
+                                    cCourseAction.loadSetAndComments
+                                }
                             />
-                        ) : <div className="course-detail"></div>}
+                        ) : (
+                            <div className="course-detail" />
+                        )}
 
                         <LoginModal
                             isOpen={showLoginModal}
@@ -298,7 +302,7 @@ export default class Course extends Component {
                         />
                     </div>
                 </div>
-                <Footer isShow={!uaUtil.mobile()}/>
+                <Footer isShow={!uaUtil.mobile()} />
             </React.Fragment>
         );
     }

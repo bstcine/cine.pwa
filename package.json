@@ -3,13 +3,14 @@
     "version": "4.0.1",
     "description": "React-PWA",
     "private": true,
-    "sideEffects": ["*.less", "*.css"],
+    "sideEffects": [
+        "*.less",
+        "*.css"
+    ],
     "scripts": {
-        "start":
-            "NODE_ENV=development webpack-dev-server --config webpack.dev.js",
+        "start": "NODE_ENV=development webpack-dev-server --config webpack.dev.js",
         "dev": "NODE_ENV=development webpack --config webpack.dev.js",
-        "prod":
-            "NODE_ENV=production webpack --progress --config webpack.prod.js"
+        "prod": "NODE_ENV=production webpack --progress --config webpack.prod.js"
     },
     "repository": {
         "type": "git",
@@ -18,6 +19,7 @@
     "author": "Joe L",
     "dependencies": {
         "@material-ui/core": "^1.1.0",
+        "@widgetjs/tree": "^1.3.0",
         "axios": "^0.18.0",
         "babel-polyfill": "^6.26.0",
         "classnames": "^2.2.5",
@@ -90,7 +92,9 @@
         "Edge >= 15"
     ],
     "babel": {
-        "plugins": ["lodash"],
+        "plugins": [
+            "lodash"
+        ],
         "presets": [
             [
                 "@babel/preset-env",

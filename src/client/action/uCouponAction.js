@@ -86,7 +86,7 @@ export const actionUserCoupon = {
     toggleTransferCheckStatus: account => async (dispatch, getState) => {
         // 需要检查输入的值
         if (account === "") {
-            dispatch(toastAction.showError('不能为空'));
+            dispatch(toastAction.showError('请输入账号'));
             return
         }
 

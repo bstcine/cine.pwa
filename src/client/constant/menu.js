@@ -15,7 +15,7 @@ const cineMenu = {
             icon_path: '',
         },
         {
-            label: '我的积分',
+            label: '我的订单',
             url: h5.URL_User_Order,
             icon: '',
             icon_path: '',

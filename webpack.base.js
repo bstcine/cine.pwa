@@ -8,7 +8,7 @@ const devMode = process.env.NODE_ENV !== 'production';
 
 // 默认无需配置，需要指定 a.bstcine.com 下访问 b.bstcine.com 的时候才需要指定
 const SERVICE_URL = null;
-const vendors_name = devMode ? 'vendors' : 'vendors_min';
+const vendors_name = 'vendors';
 const publicPath = '/'; // for cdn
 const pages = [
     'content',

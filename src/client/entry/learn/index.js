@@ -27,23 +27,11 @@ const createComponent = (Component, userRequired, props) => {
     return <Component {...props} />;
 };
 
-class Content extends Entry {
+class Learn extends Entry {
     constructor(props) {
         super(props);
-        console.log('Content Main constructor');
+        console.log('Learn Main constructor');
         this.handleLoad = this.handleLoad.bind(this);
-    }
-
-    componentDidMount() {
-        window.addEventListener('load', this.handleLoad);
-    }
-
-    componentWillUnmount() {
-        window.removeEventListener('load', this.handleLoad);
-    }
-
-    handleLoad() {
-        appBanner.init();
     }
 
     render() {
@@ -90,4 +78,4 @@ class Content extends Entry {
     }
 }
 
-ReactDOM.render(<Content />, document.getElementById('root'));
+ReactDOM.render(<Learn />, document.getElementById('root'));

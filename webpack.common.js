@@ -36,7 +36,9 @@ pages.forEach(page => {
 module.exports = {
     entry,
     output: {
-        filename: 'entry/[name]/index.[hash:8].js',
+        filename: devMode
+            ? 'entry/[name]/index.[hash:8].js'
+            : 'entry/[name]/index.[contenthash:8].js',
         path: path.resolve(__dirname, 'build'),
         publicPath,
     },

@@ -1,10 +1,9 @@
 {
     "compilerOptions": {
-        "target": "ES6",
-        "baseUrl": ".",
-        "allowSyntheticDefaultImports": true,
+        "module": "commonjs",
+        "baseUrl": "./",
         "paths": {
-            "@/*": ["./src/client/*"]
+            "@/*": ["src/client/*"]
         }
     },
     "exclude": ["node_modules", "**/node_modules/*"]

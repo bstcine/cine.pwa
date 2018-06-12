@@ -2,32 +2,35 @@
 
 ### Step 1. Install
 
-1. Terminal 中运行如下命令
+_请统一使用 cnpm 下载安装依赖_，cnpm 和 npm 打出来的包 hash 不一致，造成缓存失效
 
-	```shell
-	$ git clone https://github.com/bstcine/cine.pwa.git
-	$ cd cine.pwa
-	$ npm install
+1.  Terminal 中运行如下命令
 
-	```
+    ```shell
+    $ git clone https://github.com/bstcine/cine.pwa.git
+    $ cd cine.pwa
+    $ cnpm install
+    ```
 
 <br>
 <br>
 
 ### Step 2. Modify
 
-1. 根据页面路由 `/content/course` 找到 `src/client/entry/content/index.js` 入口文件
+1.  根据页面路由 `/content/course` 找到 `src/client/entry/content/index.js` 入口文件
 
-2. 根据入口文件，确定 `Course` component 组件路径 `src/client/entry/content/component/Course/index.js`，找到 TabItem 组件，修改"详情"-->"详情2"
+2.  根据入口文件，确定 `Course` component 组件路径 `src/client/entry/content/component/Course/index.js`，找到 TabItem 组件，修改"详情"-->"详情 2"
 
 <br>
 <br>
 
 ### Step 3. Build & Run
-- 把通用third-party packages 生成一个vendor.js
-    ```shell
 
+*   把通用 third-party packages 生成一个 vendor.js
+
+    ```shell
     $ npm run prod-dll
+    ```
 
 
     备注：- build/dll/dll.99977741.js
@@ -35,13 +38,15 @@
 
 <br>
 
-- #### 3.1. 构建开发模式
+*   #### 3.1. 构建开发模式
+
 ```shell
 Step1:   $ npm run start
 Step2:   浏览器打开 `http://localhost:5000/`
 ```
 
-- #### 3.2. Static Mode
+*   #### 3.2. Static Mode
+
 ```shell
 Step1:  修改 `webpack.config.js`，Line 4
             const MODE = 'static';
@@ -51,9 +56,10 @@ Step2.  运行 `$ npm run dev-build`
 Step3.  直接打开 `build/entry/content/index.html`， 在网页中直接某课程
 ```
 
-- #### 3.3. Production Mode - 生产模式
+*   #### 3.3. Production Mode - 生产模式
 
-1. For PC
+1.  For PC
+
 ```shell
 Step1:  修改 `webpack.config.js`，Line 4
             const MODE = '';
@@ -61,7 +67,8 @@ Step1:  修改 `webpack.config.js`，Line 4
 Step2.  运行 `$ npm run prod-build`
 ```
 
-2. For iPad
+2.  For iPad
+
 ```shell
 Step1:  修改 `webpack.config.js`，Line 4~5
             const MODE = 'static';
@@ -74,17 +81,23 @@ Step2.  运行 `$ npm run prod-build`
 <br>
 
 ## 项目遗留问题
-- 1, 不同的Build模式，需要修改不同的config.配置，有点麻烦
+
+*   1, 不同的 Build 模式，需要修改不同的 config.配置，有点麻烦
+
 ```
 目前情况：需要修改*.config.*.js的配置
 目标：不同的Build模式，只需要运行不同的scripts
 ```
-- 2, Static模式，用户无法登入成功
+
+*   2, Static 模式，用户无法登入成功
+
 ```
 原因：Static模式，服务器触发保存Browser的Coockie， 但无法保存成功
 目标：可以正常使用登入功能
 ```
-- 3, Static模式，课程详情页-课程概要的链接异常
+
+*   3, Static 模式，课程详情页-课程概要的链接异常
+
 ```
 目前情况：iPad使用预先加载本地JS，点击“课程详情页-课程概要”链接，显示空白
 目标：iPad可以正常使用
@@ -94,7 +107,9 @@ Step2.  运行 `$ npm run prod-build`
 <br>
 
 ## 代码规范 （Redux）
-- ActionType定义路径
+
+*   ActionType 定义路径
+
 ```
 src/client/constant/actionType.js
 
@@ -106,7 +121,8 @@ CC: entry对应的页面简写
 
 <br>
 
-- Action
+*   Action
+
 ```
 代码路径:
 src/client/action/userAction.js
@@ -129,7 +145,8 @@ dispatch格式规范:
 
 <br>
 
-- Container
+*   Container
+
 ```
 代码路径1:
 src/client/entry/page/**Container.js
@@ -144,7 +161,8 @@ src/client/entry/page/container/****.js
 
 <br>
 
-- component
+*   component
+
 ```
   - 尽量使用Pure Function or PureComponent
   - 尽量不要写额外的Action，触发的Action来源于this.props.action
@@ -153,7 +171,8 @@ src/client/entry/page/container/****.js
   - 不要写Container
 ```
 
-- reducer
-``` 
+*   reducer
+
+```
   - 建议使用 immutable
 ```

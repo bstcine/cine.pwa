@@ -3,6 +3,7 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const WebpackMd5Hash = require('webpack-md5-hash');
 const devMode = process.env.NODE_ENV !== 'production';
 
 // 默认无需配置，需要指定 a.bstcine.com 下访问 b.bstcine.com 的时候才需要指定
@@ -38,17 +39,18 @@ module.exports = {
     output: {
         filename: devMode
             ? 'entry/[name]/index.[hash:8].js'
-            : 'entry/[name]/index.[contenthash:8].js',
+            : 'entry/[name]/index.[chunkhash:8].js',
         path: path.resolve(__dirname, 'build'),
         publicPath,
     },
     plugins: [
+        new WebpackMd5Hash(),
         new webpack.DefinePlugin({
             SERVICE_URL: JSON.stringify(SERVICE_URL),
         }),
         new CleanWebpackPlugin(['build'], { verbose: devMode }),
         new MiniCssExtractPlugin({
-            filename: 'entry/[name]/index.[contenthash:8].css',
+            filename: 'entry/[name]/index.[chunkhash:8].css',
         }),
         ...htmlWebpackPlugins,
     ],

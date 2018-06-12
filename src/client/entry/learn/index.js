@@ -1,79 +1,31 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Route } from 'react-router-dom';
-import './asset/style/index.less';
-import appBanner from '@/util/appBanner';
-import Router from '@/component/Router';
+import { createStore, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import rootReducer from './reducer';
+import HomePage from './container/HomePage';
 import Entry from '@/component/Entry';
-import { chunkComponent } from '@/util/chunkComponent';
-import storeUtil from '@/util/storeUtil';
-import Home from './component/Home';
-import Course from './component/Course';
-const PayPrepare = chunkComponent(() =>
-    import(/* webpackChunkName: "content/chunk/index.pp" */ './component/PayPrepare')
-);
-const PayCenter = chunkComponent(() =>
-    import(/* webpackChunkName: "content/chunk/index.pc" */ './component/PayCenter')
-);
-const PayStatus = chunkComponent(() =>
-    import(/* webpackChunkName: "content/chunk/index.ps" */ './component/PayStatus')
-);
+import CommonUtil from '@/util/common';
 
-const createComponent = (Component, userRequired, props) => {
-    if (userRequired && !storeUtil.getToken()) {
-        location.href = '/login?go=' + encodeURIComponent(location.href);
-        return;
-    }
-    return <Component {...props} />;
-};
+const preloadedState = window.__PRELOADED_STATE__;
+const store = createStore(rootReducer, preloadedState, applyMiddleware(thunk));
 
 class Learn extends Entry {
-    constructor(props) {
-        super(props);
-        console.log('Learn Main constructor');
-        this.handleLoad = this.handleLoad.bind(this);
-    }
-
     render() {
         return (
-            <React.Fragment>
-                <Router>
-                    <React.Fragment>
-                        <Route exact path="/" component={Home} />
-                        <Route path="/content/course" component={Course} />
-                        <Route
-                            path="/pay/prepare"
-                            component={props =>
-                                createComponent(
-                                    PayPrepare,
-                                    /* userRequired */ true,
-                                    props
-                                )
-                            }
-                        />
-                        <Route
-                            path="/pay/center"
-                            component={props =>
-                                createComponent(
-                                    PayCenter,
-                                    /* userRequired */ true,
-                                    props
-                                )
-                            }
-                        />
-                        <Route
-                            path="/pay/status"
-                            component={props =>
-                                createComponent(
-                                    PayStatus,
-                                    /* userRequired */ true,
-                                    props
-                                )
-                            }
-                        />
-                    </React.Fragment>
-                </Router>
-            </React.Fragment>
+            <Router>
+                <Provider store={store}>
+                    <Route
+                        path="/learn/home"
+                        component={props => {
+                            if (!CommonUtil.isAuth()) return <div />;
+                            return <HomePage {...props} />;
+                        }}
+                    />
+                </Provider>
+            </Router>
         );
     }
 }

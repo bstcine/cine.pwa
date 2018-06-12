@@ -1,8 +1,8 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import ReactSlider from 'react-slick';
 import uaUtil from '@/util/uaUtil';
 import siteCodeUtil from '@/util/sitecodeUtil';
-import {addParam} from '@/util/urlUtil';
+import { addParam } from '@/util/urlUtil';
 import storeUtil from '@/util/storeUtil';
 import routeUtil from '@/util/routeUtil';
 
@@ -18,7 +18,7 @@ export default class Slider extends Component {
             autoplay: true,
             slidesToShow: 1,
             slidesToScroll: 1,
-            dotsClass: 'slick-dots-orange'
+            dotsClass: 'slick-dots-orange',
         };
         this.wideImg = uaUtil.iPad() || uaUtil.AndroidTablet() || uaUtil.PC();
         this.handlerClick = this.handlerClick.bind(this);
@@ -40,7 +40,9 @@ export default class Slider extends Component {
                     className="slider-item"
                     key={i}
                     style={{
-                        background: `url(${this.getImg(item)}) center center / cover no-repeat`
+                        background: `url(${this.getImg(
+                            item
+                        )}) center center / cover no-repeat`,
                     }}
                     onClick={e => this.handlerClick(item)}
                 />
@@ -48,33 +50,39 @@ export default class Slider extends Component {
         });
     }
 
-    handlerClick({type, course_id, href, tab_id}) {
-        let {history} = this.props;
+    handlerClick({ type, course_id, href, tab_id }) {
+        let { history } = this.props;
         if (type === '1') {
-            routeUtil.goCourse({id: course_id}, history);
+            routeUtil.goCourse({ id: course_id }, history);
         } else if (type === '2') {
             let url = href;
             if (siteCodeUtil.inAPP()) {
-                url = addParam(url, {token: storeUtil.getToken()});
+                url = addParam(url, { token: storeUtil.getToken() });
             }
             location.href = url;
         } else if (type === '3') {
             let url = href;
             if (siteCodeUtil.inAPP()) {
-                url = addParam(url, {token: storeUtil.getToken()});
+                url = addParam(url, { token: storeUtil.getToken() });
             }
             location.href = url;
         } else if (type === '4') {
-            let url = addParam(location.href,{tab:tab_id});
+            let url = addParam(location.href, { tab: tab_id });
             if (siteCodeUtil.inAPP()) {
-                url = addParam(url, {token: storeUtil.getToken()});
+                url = addParam(url, { token: storeUtil.getToken() });
             }
             location.href = url;
         }
     }
 
+    componentWillUpdate(nextProps, nextState) {
+        return false;
+    }
+
     render() {
         console.log(`BannerSlider`);
-        return <ReactSlider {...this.settings}>{this.renderItems()}</ReactSlider>;
+        return (
+            <ReactSlider {...this.settings}>{this.renderItems()}</ReactSlider>
+        );
     }
 }

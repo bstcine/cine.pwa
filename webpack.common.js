@@ -28,7 +28,7 @@ pages.forEach(page => {
         new HtmlWebpackPlugin({
             filename: `entry/${page}/index.html`,
             template: `src/client/entry/${page}/index.html`,
-            chunks: ['vendors', 'commons', page],
+            chunks: [page],
         })
     );
 });

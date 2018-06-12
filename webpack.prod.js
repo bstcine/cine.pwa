@@ -6,22 +6,25 @@ const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
     .BundleAnalyzerPlugin;
 
+const entrys = Object.keys(common.entry);
 module.exports = merge(common, {
     mode: 'production',
     optimization: {
         splitChunks: {
             chunks: 'all',
             cacheGroups: {
-                commons: {
-                    name: 'commons',
-                    test: /src[\/].+\.js$/,
-                    chunks: 'initial',
-                    priority: 2,
-                    minChunks: 2,
-                },
                 vendors: {
                     name: 'vendors',
-                    test: /node_modules/,
+                    test: (module, chunks) => {
+                        // 所有 entry 均包含的公共组件
+                        const names = chunks.map(c => c.name).filter(Boolean);
+                        return (
+                            entrys.length &&
+                            entrys.every(entry =>
+                                names.some(name => name === entry)
+                            )
+                        );
+                    },
                     chunks: 'initial',
                     priority: 10,
                     minChunks: 2,

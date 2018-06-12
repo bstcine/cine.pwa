@@ -93,7 +93,7 @@ const CouponTransfer = ({ isOpen, isCheck, checkMessage, userAccount, coupon, ac
                     }}
 
                     defaultValue={userAccount}
-                    hintText="请输入账号或手机号"
+                    hintText="请输入对方用户账号"
                 />
 
                 {checkInfo}

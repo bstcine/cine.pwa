@@ -10,10 +10,7 @@ const CouponItem = ({ coupon, actions }) => {
     var usedImgSrc;
     if (coupon.status === '0') {
         couponStyle = 'coupon-ticket';
-
-        if (coupon.sub_status == '0'){
-            couponStatusShow = false;
-        }else if (coupon.sub_status == '-1'){
+        if (coupon.sub_status == '-1'){
             couponStatusShow = true;
             usedImgSrc = require('../../asset/image/ic_coupon_transfer.png');
         }else if (coupon.sub_status == '-2') {
@@ -22,20 +19,15 @@ const CouponItem = ({ coupon, actions }) => {
         }
     }else if (coupon.status === '1') {
         couponStyle = 'coupon-ticket coupon-ticket-used';
-
-        if (coupon.sub_status == '0') {
-            couponStatusShow = true;
-            usedImgSrc = require('../../asset/image/ic_coupon_used.png');
-        }else if (coupon.sub_status == '1'){
-            couponStatusShow = true;
+        couponStatusShow = true;
+        usedImgSrc = require('../../asset/image/ic_coupon_used.png');
+        if (coupon.sub_status == '1'){
             usedImgSrc = require('../../asset/image/ic_coupon_transfered.png');
         }else if (coupon.sub_status == '2') {
-            couponStatusShow = true;
             usedImgSrc = require('../../asset/image/ic_coupon_synthesizered.png')
         }
     } else if (coupon.status === '2') {
         couponStyle = 'coupon-ticket coupon-ticket-expired';
-        couponStatusShow = false
     }
 
     let arrImgSrc = coupon.expand
@@ -74,7 +66,7 @@ const CouponItem = ({ coupon, actions }) => {
                     />
                 )}
                 {coupon.status === '0' && (
-                    <div className="verb" onClick={() => {actions.initTransferDialog(coupon)}}>转赠</div>
+                    <a className="verb" onClick={() => {actions.initTransferDialog(coupon)}}>转赠</a>
                 )}
             </div>
             {coupon.desc &&

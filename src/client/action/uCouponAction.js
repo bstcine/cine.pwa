@@ -86,7 +86,7 @@ export const actionUserCoupon = {
     toggleTransferCheckStatus: account => async (dispatch, getState) => {
         // 需要检查输入的值
         if (account === "") {
-            dispatch(toastAction.showError('不能为空'));
+            dispatch(toastAction.showError('请输入对方账号'));
             return
         }
 
@@ -109,7 +109,7 @@ export const actionUserCoupon = {
             checkMessage = '没有查询到指定的用户';
         }else if (result.length === 1){
             isCheck = false;
-            checkMessage = '已查询到指定的用户: '+result[0].nickname;
+            checkMessage = '已查询到指定的用户: '+result[0].phone;
             account = result[0].id
         }else {
             checkMessage = '查询到'+result.length+'个用户，请指定更详细的信息';

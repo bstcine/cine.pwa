@@ -1,6 +1,6 @@
 import React from 'react';
-const GHeader = () => {
+const GMiniHeaderContainer = () => {
     return <header />;
 };
 
-export default GHeader;
+export default GMiniHeaderContainer;

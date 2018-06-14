@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux';
 import vocabularyRedu from './vocabularyTaskReducer';
-import { Action_UI } from '@/constant/actionTypeUser';
-import { toastRedu } from '@/reducer';
+import { userInfo } from '@/reducer';
 
 const rootReducer = combineReducers({
+    userInfo,
     vocabularyRedu,
 });
 

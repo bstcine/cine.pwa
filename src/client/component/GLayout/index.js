@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { GHeader } from '@/component/GHeader';
+import { GHeaderContainer } from '@/component/GHeader';
 import GMain from '@/component/GMain';
 import GFooter from '@/component/GFooter';
 
-export default class Layout extends Component {
+export default class GLayout extends Component {
     render() {
         const { children } = this.props;
         return (
             <React.Fragment>
-                <GHeader user={{ nickname: '哈哈哈啊哈哈' }} />
+                <GHeaderContainer />
                 <GMain>{children}</GMain>
                 <GFooter />
             </React.Fragment>
@@ -17,6 +17,6 @@ export default class Layout extends Component {
     }
 }
 
-Layout.propTypes = {
+GLayout.propTypes = {
     children: PropTypes.arrayOf(PropTypes.element).isRequired,
 };

@@ -3,16 +3,22 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Toast } from '@/component/Toast';
 import { actionVocabularyTask } from '@/action/lVocabularyTaskAction';
+import VocabularyTask from '../component/vocabularyTask';
 
 class VocabularyTaskContainer extends Component {
-    render() {
-        alert('词汇任务');
 
-        let { isTest } = this.props;
+    componentDidMount() {
+        let {actions} = this.props;
+        actions.loadVocabulary();
+    }
+
+    render() {
+
+        let {vocabularyList,actions} = this.props;
 
         return (
             <React.Fragment>
-                <div> 词汇任务 </div>
+                <VocabularyTask vocabularyList={vocabularyList} actions={actions} />
             </React.Fragment>
         );
     }
@@ -20,7 +26,7 @@ class VocabularyTaskContainer extends Component {
 
 const mapStateToProps = state => {
     return {
-        isTest: state.vocabularyRedu.get('isTest'),
+        vocabularyList: state.vocabularyRedu.get('vocabularyList'),
     };
 };
 

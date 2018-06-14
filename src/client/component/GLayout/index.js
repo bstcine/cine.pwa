@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { GHeaderContainer } from '@/component/GHeader';
+import { GHeaderContainer as GHeader } from '@/component/GHeader';
 import GMain from '@/component/GMain';
 import GFooter from '@/component/GFooter';
 
@@ -9,7 +9,7 @@ export default class GLayout extends Component {
         const { children } = this.props;
         return (
             <React.Fragment>
-                <GHeaderContainer />
+                <GHeader />
                 <GMain>{children}</GMain>
                 <GFooter />
             </React.Fragment>

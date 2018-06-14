@@ -18,6 +18,7 @@ const pages = [
     'user',
     'teacher',
     'temp',
+    'learn',
 ];
 
 let entry = {};
@@ -44,7 +45,6 @@ module.exports = {
         publicPath,
     },
     plugins: [
-        // new WebpackMd5Hash(),
         new webpack.DefinePlugin({
             SERVICE_URL: JSON.stringify(SERVICE_URL),
         }),

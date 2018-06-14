@@ -1,0 +1,18 @@
+import React from 'react';
+import '../GLayout/style.less';
+
+const Footer = () => {
+    return (
+        <footer className="footer">
+            <div className="container">
+                <div className="copyright">
+                    善严教育科技（上海）有限公司<br />
+                    Copyright © 2014 - 2018 BSTCINE. All Rights Reserved.
+                    沪ICP备14053596号-1
+                </div>
+            </div>
+        </footer>
+    );
+};
+
+export default Footer;

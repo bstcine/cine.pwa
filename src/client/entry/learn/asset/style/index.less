@@ -1,0 +1,49 @@
+@import '~asset/style/_cine.less';
+
+// tasks-container
+.tasks-container {
+    padding: 0.52rem 0.6rem;
+    background-color: #fff;
+}
+
+.task-nav {
+    font-size: 0.32rem;
+    display: flex;
+    border-bottom: 1px solid #f5f9fc;
+
+    a {
+        position: relative;
+        padding: 0 10px;
+        color: #3a3b3c;
+        line-height: 0.7rem;
+        border-bottom: 0.06rem solid transparent;
+        margin-right: 1.2rem;
+
+        &:hover,
+        &.active {
+            color: #1c76dd;
+            border-bottom-color: #1c76dd;
+        }
+    }
+
+    .badge {
+        position: absolute;
+        top: -4px;
+        transform: translateX(-20%) scale(0.5, 0.5);
+        font-size: 20px;
+        text-align: center;
+        line-height: 32px;
+        min-width: 32px;
+        border-radius: 16px;
+        background-color: #fc3447;
+        color: #fff;
+    }
+}
+.task-list {
+    .grid-row();
+}
+
+// courses-container
+.courses-container {
+    padding: 0.52rem 0.6rem;
+}

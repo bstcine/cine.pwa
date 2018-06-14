@@ -1,0 +1,27 @@
+@import '~asset/style/common';
+@import '~asset/style/_cine.less';
+
+body {
+    font-size: 14px;
+    background-color: #fff;
+}
+#root {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100vh;
+    .main {
+        flex: 1;
+    }
+}
+
+.container {
+    width: 100%;
+}
+
+@media @media-up-sm {
+    .container {
+        width: 18.8rem;
+        margin: 0 auto;
+    }
+}

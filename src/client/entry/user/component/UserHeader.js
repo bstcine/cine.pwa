@@ -3,7 +3,7 @@ import React from 'react';
 const UserHeader = ({ selectId, user, handleClick }) => {
     let headImg = user.head_image
         ? 'http://www.bstcine.com/f/' + user.head_image
-        : require('../asset/image/ico_headpic.png');
+        : require('@/asset/image/ico_headpic.png');
 
     let roleImg =
         String(user.role_id) === '3'
@@ -47,7 +47,6 @@ const UserHeader = ({ selectId, user, handleClick }) => {
             </div>
             <div className={'user-header-tab'}>
                 <div className={'container'}>
-
                     <div className={'item tab-study'}>
                         <a href="/learn">我的学习</a>
                     </div>
@@ -59,7 +58,7 @@ const UserHeader = ({ selectId, user, handleClick }) => {
                     <div
                         className={`item tab-coupon ${
                             selectId === 'coupon' ? 'active' : ''
-                            }`}
+                        }`}
                         onClick={() => {
                             handleClick('coupon');
                         }}>

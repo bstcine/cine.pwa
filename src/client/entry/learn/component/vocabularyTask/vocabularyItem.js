@@ -17,7 +17,8 @@ class VocabularyItem extends React.PureComponent {
                     <a className="phonetic">{vocabulary.phonetic}</a>
                 </div>
 
-                <span className="transition">{vocabulary.zh}</span>
+                <span className="voice">声音</span>
+                <p className="transition">{vocabulary.zh}</p>
             </div>
         );
 

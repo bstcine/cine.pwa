@@ -40,8 +40,6 @@ const mapStateToProps = state => {
     const { userInfo } = state;
     const user = userInfo.data;
     const { navs1, navs2 } = getNav(user);
-    console.log('navs1', navs1);
-    console.log('navs2', navs2);
     return { user, navs1, navs2 };
 };
 

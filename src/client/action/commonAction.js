@@ -1,4 +1,6 @@
 import * as actType from '@/constant/actionType';
+import { fetchData } from '@/service/base';
+import { APIURL_User_Info } from '../../APIConfig';
 
 export const closeAlert = () => ({
     type: actType.CLOSE_ALERT,
@@ -71,4 +73,11 @@ export const toastAction = {
             dispatch(toastAction._hide());
         }, 2000);
     },
+};
+
+export const fetchUserInfo = () => async (dispatch, getState) => {
+    if (getState().userInfo.loading) return;
+    dispatch({ type: actType.REQUEST_USER_INFO });
+    const [, user] = await fetchData(APIURL_User_Info);
+    if (user) dispatch({ type: actType.RECEIVE_USER_INFO, payload: user });
 };

@@ -1,8 +1,8 @@
 import React from 'react';
 import '../GLayout/style.less';
 
-const Header = () => {
+const GMiniHeader = () => {
     return <header className="miniheader">gheader</header>;
 };
 
-export default Header;
+export default GMiniHeader;

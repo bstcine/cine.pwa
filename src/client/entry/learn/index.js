@@ -7,8 +7,6 @@ import { Provider } from 'react-redux';
 import rootReducer from './reducer';
 import HomePage from './container/HomePage';
 import VocabularyContainer from './container/vocabularyTaskContainer';
-import Entry from '@/component/Entry';
-import CommonUtil from '@/util/common';
 
 const preloadedState = window.__PRELOADED_STATE__;
 const store = createStore(rootReducer, preloadedState, applyMiddleware(thunk));

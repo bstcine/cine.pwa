@@ -18,7 +18,7 @@ const HeaderImg = ({ user }) => {
     return <img src={img} alt="HeaderImg" />;
 };
 
-class Header extends PureComponent {
+class GHeader extends PureComponent {
     constructor(props) {
         super(props);
         this.onToggleUserBar = this.onToggleUserBar.bind(this);
@@ -32,7 +32,8 @@ class Header extends PureComponent {
     }
 
     render() {
-        const { user } = this.props;
+        const { user, navs1, navs2 } = this.props;
+        if (!user) return null;
         const { isOpenUserBar } = this.state;
 
         return (
@@ -41,10 +42,18 @@ class Header extends PureComponent {
                     <div className="container">
                         <Brand />
                         <nav className="nav-1st">
-                            <a href="/">首页</a>
-                            <a href="/learn">学习首页</a>
-                            <a href="/user">个人中心</a>
-                            <a href="/teacher/dashboard">老师批改</a>
+                            {navs1 &&
+                                navs1.length &&
+                                navs1.map(menu => (
+                                    <a
+                                        key={menu.url}
+                                        href={menu.url}
+                                        className={classNames({
+                                            active: menu.active,
+                                        })}>
+                                        {menu.label}
+                                    </a>
+                                ))}
                         </nav>
 
                         <div
@@ -68,16 +77,23 @@ class Header extends PureComponent {
                 </header>
 
                 <nav className="nav-2nd">
-                    <div
-                        className="container"
-                        onClick={this.onNavClick}
-                        ref={this.navContainer}>
-                        <a href="/learn">我的学习</a>
-                        <a href="#">我的测试</a>
+                    <div className="container" onClick={this.onNavClick}>
+                        {navs2 &&
+                            navs2.length &&
+                            navs2.map(menu => (
+                                <a
+                                    key={menu.url}
+                                    href={menu.url}
+                                    className={classNames({
+                                        active: menu.active,
+                                    })}>
+                                    {menu.label}
+                                </a>
+                            ))}
                     </div>
                 </nav>
             </React.Fragment>
         );
     }
 }
-export default Header;
+export default GHeader;

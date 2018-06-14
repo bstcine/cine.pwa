@@ -1,13 +1,21 @@
 @import '~asset/style/_cine.less';
 
-// tasks-container
-.tasks-container {
-    padding: 0.52rem 0.6rem;
+.textfix {
+    margin-left: -0.4em;
+}
+.tasks-container,
+.courses-container {
+    padding: 0.3rem 0.45rem 0;
     background-color: #fff;
 }
 
+// tasks-container
+.tasks-container {
+    border-bottom: 0.1rem solid #f2f4f6;
+}
+
 .task-nav {
-    font-size: 0.32rem;
+    font-size: 0.3rem;
     display: flex;
     border-bottom: 1px solid #f5f9fc;
 
@@ -15,9 +23,9 @@
         position: relative;
         padding: 0 10px;
         color: #3a3b3c;
-        line-height: 0.7rem;
+        line-height: 0.6rem;
         border-bottom: 0.06rem solid transparent;
-        margin-right: 1.2rem;
+        margin-right: 0.8rem;
 
         &:hover,
         &.active {
@@ -41,9 +49,92 @@
 }
 .task-list {
     .grid-row();
+
+    .task-item {
+        line-height: 0.9rem;
+        color: #3a3b3c;
+        border-bottom: 0.02rem solid #f2f4f6;
+        .label {
+            display: inline-flex;
+            font-size: 0.22rem;
+            line-height: 0.26rem;
+            color: #72aeef;
+            border-radius: 0.02rem;
+            border: solid 0.02rem #72aeef;
+            width: 0.6rem;
+            justify-content: center;
+            align-items: center;
+            margin-right: 0.12rem;
+        }
+        a {
+            color: inherit;
+        }
+        &:last-of-type {
+            border-bottom: none;
+        }
+    }
+    .expand_more {
+        display: flex;
+        flex-grow: 1;
+        align-items: center;
+        justify-content: center;
+        color: #c6c7c7;
+        font-size: 0.22rem;
+        line-height: 0.6rem;
+        i {
+            font-size: 0.22rem;
+        }
+    }
 }
 
 // courses-container
 .courses-container {
-    padding: 0.52rem 0.6rem;
+    h2 {
+        color: #3a3b3c;
+        font-size: 0.3rem;
+        line-height: 1;
+        font-weight: normal;
+        margin-bottom: 0.2rem;
+    }
+    .courses-list {
+        .courses-item {
+            display: flex;
+            margin-bottom: 0.26rem;
+            .course-img {
+                flex-basis: 1.8rem;
+                height: 1rem;
+                margin-right: 0.18rem;
+                border-radius: 0.04rem;
+            }
+            .course-meta {
+                flex-grow: 1;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                span {
+                    font-size: 0.28rem;
+                    color: #3a3b3c;
+                    line-height: 0.38rem;
+                }
+                .progress {
+                    font-size: 0.24rem;
+                    line-height: 0.32rem;
+                    color: #c6c7c7;
+                }
+            }
+        }
+    }
+}
+
+@media @media-up-xs {
+    .tasks-container,
+    .courses-container {
+        padding: 0.52rem 0.6rem;
+    }
+    .task-nav {
+        font-size: 0.32rem;
+        a {
+            line-height: 0.7rem;
+        }
+    }
 }

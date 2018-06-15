@@ -8,7 +8,7 @@
     min-height:100%;
 
 
-    .vocabularyHeader{
+    .v_Task_VocabularyHeader{
 
         margin-left: 0.9rem;
         margin-right: 0.9rem;
@@ -19,7 +19,7 @@
         border-bottom-color: #f5f9fc;
         border-bottom-width: 1px;
 
-        .taskName{
+        .v_Task_H_TaskName{
             display: inline-block;
             color: #3a3b3c;
             height: 1.2rem;
@@ -31,7 +31,7 @@
             float: left;
         }
 
-        .historyDoor{
+        .v_Task_H_HistoryDoor{
             display: inline-block;
             float: right;
             height: 1.2rem;
@@ -46,7 +46,7 @@
         }
     }
 
-    .vocabularyfooter {
+    .v_Task_VocabularyFooter {
         display: block;
         position: fixed;
         font-size: 30px;
@@ -54,22 +54,22 @@
         left:50%;
         transform: translateX(-50%);
         font-size: 0.28rem;
-        height: 0.6rem;
         padding-left: 0.24rem;
         padding-right: 0.24rem;
         //margin-left:auto;
         //margin-right: auto;
-        .promote {
-            height: 0.6rem;
+        .v_Task_F_Promote {
             padding-top: 0.16rem;
+            padding-bottom: 0.16rem;
             padding-right: 0.3rem;
             float: left;
             color: #7a7b7c;
+            line-height: 0.4rem;
         }
 
-        .testDoor {
-            height: 0.6rem;
+        .v_Task_F_TestDoor {
             padding-top: 0.16rem;
+            padding-bottom: 0.16rem;
             padding-left: 0.3rem;
             padding-right: 0.3rem;
             float: left;
@@ -81,7 +81,7 @@
         }
     }
 
-    .vocabularyList{
+    .v_Task_VocabularyList{
         flex-grow: 1;
         margin-left: 0.9rem;
         margin-right: 0.9rem;
@@ -89,14 +89,14 @@
         background-color: white;
         min-width: 5rem;
 
-        .vocabularyItem{
+        .v_Task_L_VocabularyItem{
             display: inline-block;
             width: 100%;
             margin-top:2px;
             padding-top: 0.28rem;
             padding-bottom: 0.28rem;
 
-            .seq{
+            .v_Task_L_Item_Seq{
                 display: inline-block;
                 padding-top: 0.15rem;
                 margin-left: 0;
@@ -107,31 +107,31 @@
                 color: #3a3b3c;
                 float: left;
             }
-            .detail{
+            .v_Task_L_Item_Detail{
                 display: inline-block;
                 float: left;
                 width: 22%;
                 margin-left: 0.5rem;
                 line-height: 0.5rem;
 
-                .word{
+                .v_Task_L_Item_Word{
                     margin-left: 0;
                     font-family: PingFangSC-Medium;
                     font-size: 0.4rem;
                 }
-                .phonetic{
+                .v_Task_L_Item_Phonetic{
                     margin-left: 0.3rem;
                     font-size: 0.24rem;
                     padding-top: 0rem;
                 }
             }
-            .voice{
+            .v_Task_L_Item_Voice{
                 display: inline-block;
                 margin-left: 1.1rem;
                 float: left;
                 padding-top: 0.1rem;
             }
-            .transition{
+            .v_Task_L_Item_Transition{
                 display: inline-block;
                 margin-left: 1.1rem;
                 font-size: 0.28rem;

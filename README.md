@@ -112,10 +112,6 @@ Step2.  运行 `$ npm run prod-build`
 
 ```
 src/client/constant/actionType.js
-
-Action_CC...
-CC: entry对应的页面简写
-
 目的：可以清晰的看到某个模块某个页面对应actionType
 ```
 
@@ -175,4 +171,16 @@ src/client/entry/page/container/****.js
 
 ```
   - 建议使用 immutable
+```
+
+
+<br>
+<br>
+
+## 命名规范 
+- _**********             //基本满足业内通用的标准
+- C**********             //所有的项目都能使用
+- G**********             //Cine.PWA项目 全局最通过的部分
+```
+创建以上文件需要沟通确认的
 ```

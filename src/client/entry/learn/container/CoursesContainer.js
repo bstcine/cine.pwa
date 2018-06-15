@@ -1,13 +1,6 @@
 import React, { Component } from 'react';
-
-import classNames from 'classnames';
-import { Row, Column122 } from '@/component/GGrid';
-
-const TextFix = ({ children }) => (
-    <span className={classNames({ textfix: children.indexOf('《') === 0 })}>
-        {children}
-    </span>
-);
+import { Grid, Column122 } from '@/component/GGrid';
+import TextFix from '@/component/TextFix';
 
 class CoursesContainer extends Component {
     render() {
@@ -18,6 +11,7 @@ class CoursesContainer extends Component {
                 img: 'http://www.bstcine.com/f/2018/05/31/155700603SE2Vwgk.jpg',
                 last_content_name: 'Lesson 1',
                 progress: 100,
+                expire_at: '2018/05/04',
             },
             {
                 id: '41',
@@ -25,6 +19,7 @@ class CoursesContainer extends Component {
                 img: 'http://www.bstcine.com/f/2018/05/31/155700603SE2Vwgk.jpg',
                 last_content_name: 'Lesson 3',
                 progress: 20,
+                expire_at: '2018/05/04',
             },
             {
                 id: '4',
@@ -32,6 +27,7 @@ class CoursesContainer extends Component {
                 img: 'http://www.bstcine.com/f/2018/05/31/155700603SE2Vwgk.jpg',
                 last_content_name: 'Lesson 4',
                 progress: 30,
+                expire_at: '2018/05/04',
             },
             {
                 id: '45',
@@ -39,33 +35,44 @@ class CoursesContainer extends Component {
                 img: 'http://www.bstcine.com/f/2018/05/31/155700603SE2Vwgk.jpg',
                 last_content_name: 'Lesson 5',
                 progress: 10,
+                expire_at: '2018/05/04',
             },
         ];
         return (
             <div className="courses-container">
                 <h2>我的课程</h2>
-                <Row className="courses-list">
+                <Grid className="courses-list">
                     {courses.map(course => {
                         return (
-                            <Column122 key={course.id} className="courses-item">
+                            <Column122
+                                key={course.id}
+                                className="courses-item"
+                                href={'/learn/lesson/' + course.id}>
                                 <div
                                     className="course-img"
                                     style={{
                                         background: `url("${
                                             course.img
                                         }") center center / cover no-repeat`,
-                                    }}
-                                />
+                                    }}>
+                                    <i />
+                                </div>
                                 <div className="course-meta">
                                     <TextFix>{course.name}</TextFix>
                                     <div className="progress">
+                                        <div className="progressbar" />
+                                    </div>
+                                    <div className="status">
                                         进度 {course.last_content_name}
+                                    </div>
+                                    <div className="expire_at">
+                                        有效期 {course.expire_at}
                                     </div>
                                 </div>
                             </Column122>
                         );
                     })}
-                </Row>
+                </Grid>
             </div>
         );
     }

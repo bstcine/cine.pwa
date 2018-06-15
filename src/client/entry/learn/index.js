@@ -7,6 +7,7 @@ import { Provider } from 'react-redux';
 import rootReducer from './reducer';
 import HomePage from './container/HomePage';
 import VocabularyContainer from './container/vocabularyTaskContainer';
+import HistoryTaskContainer from './container/historyTaskContainer';
 
 const preloadedState = window.__PRELOADED_STATE__;
 const store = createStore(rootReducer, preloadedState, applyMiddleware(thunk));
@@ -29,6 +30,13 @@ class Learn extends Component {
                             path="/learn/vocabularytask"
                             component={props => {
                                 return <VocabularyContainer {...props} />;
+                            }}
+                        />
+
+                        <Route
+                            path="/learn/historytask"
+                            component={props => {
+                                return <HistoryTaskContainer {...props} />
                             }}
                         />
                     </Switch>

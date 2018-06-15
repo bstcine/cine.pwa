@@ -12,7 +12,7 @@ class HistoryTask extends React.PureComponent {
 
         const button = (
             <button
-                className="verbButton"
+                className="searchButton"
                 onClick={() => {actions.dialogShow(true)}}
             >
                 筛选

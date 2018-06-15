@@ -17,9 +17,9 @@ export const actionHistoryTask = {
         type: ACTION_LH.RECEIVE,
         payload: result,
     }),
-    _dialogShow: isVerb => ({
+    _dialogShow: isShow => ({
         type: ACTION_LH.DIALOG,
-        payload: isVerb,
+        payload: isShow,
     }),
 
     // 加载历史任务数据

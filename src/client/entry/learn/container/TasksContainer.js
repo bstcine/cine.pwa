@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { Row, Column122 } from '@/component/GGrid';
-import classNames from 'classnames';
+import { Grid, Column122 } from '@/component/GGrid';
 import GIcon from '@/component/GIcon';
+import uaUtil from '@/util/uaUtil';
+import TextFix from '@/component/TextFix';
 
 const Label = ({ type }) => {
     const map = {
@@ -14,18 +15,12 @@ const Label = ({ type }) => {
     return <span className="label">{map[type]}</span>;
 };
 
-const TextFix = ({ children }) => (
-    <span className={classNames({ textfix: children.indexOf('《') === 0 })}>
-        {children}
-    </span>
-);
-
 class TasksContainer extends Component {
     constructor(props) {
         super(props);
         this.showAllTask = this.showAllTask.bind(this);
         this.state = {
-            tasksLimit: 5,
+            tasksLimit: uaUtil.mobile() ? 5 : 100,
         };
     }
 
@@ -60,7 +55,7 @@ class TasksContainer extends Component {
                         <span className="badge">3</span>
                     </a>
                 </nav>
-                <Row className="task-list">
+                <Grid className="task-list">
                     {tasks.map((task, i) => {
                         if (i > tasksLimit - 1) return null;
                         return (
@@ -79,7 +74,7 @@ class TasksContainer extends Component {
                             展开更多作业 <GIcon name="expand_more" />
                         </span>
                     )}
-                </Row>
+                </Grid>
             </div>
         );
     }

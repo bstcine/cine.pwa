@@ -1,8 +1,5 @@
 @import '~asset/style/_cine.less';
 
-.textfix {
-    margin-left: -0.4em;
-}
 .tasks-container,
 .courses-container {
     padding: 0.3rem 0.45rem 0;
@@ -17,11 +14,11 @@
 .task-nav {
     font-size: 0.3rem;
     display: flex;
-    border-bottom: 1px solid #f5f9fc;
+    border-bottom: 0.02rem solid #f5f9fc;
 
     a {
         position: relative;
-        padding: 0 10px;
+        padding: 0 0.2rem;
         color: #3a3b3c;
         line-height: 0.6rem;
         border-bottom: 0.06rem solid transparent;
@@ -36,20 +33,18 @@
 
     .badge {
         position: absolute;
-        top: -4px;
+        top: -0.08rem;
         transform: translateX(-20%) scale(0.5, 0.5);
-        font-size: 20px;
+        font-size: 0.4rem;
         text-align: center;
-        line-height: 32px;
-        min-width: 32px;
-        border-radius: 16px;
+        line-height: 0.64rem;
+        min-width: 0.64rem;
+        border-radius: 0.32rem;
         background-color: #fc3447;
         color: #fff;
     }
 }
 .task-list {
-    .grid-row();
-
     .task-item {
         line-height: 0.9rem;
         color: #3a3b3c;
@@ -100,11 +95,32 @@
         .courses-item {
             display: flex;
             margin-bottom: 0.26rem;
+            transition: all 0.2s;
             .course-img {
-                flex-basis: 1.8rem;
+                flex: 0 0 1.8rem;
                 height: 1rem;
                 margin-right: 0.18rem;
                 border-radius: 0.04rem;
+                position: relative;
+                i {
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    display: block;
+                    width: 0.5rem;
+                    height: 0.5rem;
+                    background-color: rgba(0, 0, 0, 0.5);
+                    border-radius: 50%;
+                    &:before {
+                        display: block;
+                        height: 0.5rem;
+                        width: 0.5rem;
+                        content: '';
+                        background: url(~asset/image/ic_play_c.png) center;
+                        background-size: 0.36rem;
+                    }
+                }
             }
             .course-meta {
                 flex-grow: 1;
@@ -116,12 +132,20 @@
                     color: #3a3b3c;
                     line-height: 0.38rem;
                 }
-                .progress {
+                .status,
+                .expire_at {
                     font-size: 0.24rem;
                     line-height: 0.32rem;
                     color: #c6c7c7;
                 }
+                .progress,
+                .expire_at {
+                    display: none;
+                }
             }
+        }
+        .courses-item:hover {
+            opacity: 0.8;
         }
     }
 }
@@ -129,12 +153,70 @@
 @media @media-up-xs {
     .tasks-container,
     .courses-container {
-        padding: 0.52rem 0.6rem;
+        padding: 0.5rem 0.6rem;
     }
     .task-nav {
-        font-size: 0.32rem;
+        font-size: 0.3rem;
         a {
             line-height: 0.7rem;
+        }
+    }
+    .task-list {
+        padding-top: 0.2rem;
+        .task-item {
+            border-bottom: none;
+            line-height: 0.8rem;
+            a {
+                font-size: 0.3rem;
+            }
+        }
+    }
+
+    .courses-container {
+        h2 {
+            font-size: 0.4rem;
+            padding-bottom: 0.3rem;
+            border-bottom: 0.02rem solid #f5f9fc;
+            margin-bottom: 0.5rem;
+        }
+        .courses-list {
+            justify-content: space-between;
+            .courses-item {
+                display: flex;
+                margin-bottom: 0.7rem;
+                padding-right: 1rem;
+                .course-img {
+                    height: 1.8rem;
+                    flex-basis: 3.3rem;
+                    margin-right: 0.3rem;
+                }
+                .course-meta {
+                    span {
+                        font-size: 0.3rem;
+                        flex-grow: 1;
+                        line-height: 0.4rem;
+                    }
+                    .progress {
+                        display: block;
+                        width: 4.4rem;
+                        height: 0.06rem;
+                        background-color: #ecf1f6;
+                        border-radius: 0.02rem;
+                        margin-bottom: 0.3em;
+                        .progressbar {
+                            width: 50%;
+                            height: 100%;
+                            background-color: #fc3447;
+                            border-radius: 0.02rem;
+                        }
+                    }
+                    .status,
+                    .expire_at {
+                        display: block;
+                        line-height: 0.4rem;
+                    }
+                }
+            }
         }
     }
 }

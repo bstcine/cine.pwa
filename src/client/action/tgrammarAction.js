@@ -4,8 +4,6 @@ import {
     APIURL_Content_Quiz,
     APIURL_Stats_Quiz_Save,
     APIURL_Stats_Quiz_Update,
-    APIURL_Stats_Quiz_List,
-    APIURL_Content_Word_Result_List,
     APIURL_Content_StuQuizWord_List,
 } from '@/../APIConfig';
 import storeUtil from '@/util/storeUtil';
@@ -14,8 +12,6 @@ import {
     RECEIVE_CONTENT_QUIZ,
     REQUEST_STATS_QUIZ_SAVE,
     RECEIVE_STATS_QUIZ_SAVE,
-    REQUEST_STATS_QUIZ_LIST,
-    RECEIVE_STATS_QUIZ_LIST,
     SAVE_QUESTION1_SELECT_VALUE,
     SAVE_QUESTION3_SELECT_VALUE,
     SAVE_QUESTION3_TEXT_VALUE,
@@ -30,8 +26,6 @@ import {
     UPDATE_ANSWERS,
     REQUEST_STATS_QUIZ_UPDATE,
     RECEIVE_STATS_QUIZ_UPDATE,
-    REQUEST_STATS_WORD_LIST,
-    RECEIVE_STATS_WORD_LIST,
     REQUEST_STATS_STUDENT_QUIZ_WORD_LIST,
     RECEIVE_STATS_STUDENT_QUIZ_WORD_LIST,
 } from '@/constant/actionTypeTGrammar';

@@ -25,6 +25,9 @@ exports.APIURL_Content_Home = '/api/content/home'; // app首页
 exports.APIURL_Content_Tag_Tree = '/api/content/tag/tree'; // 标签树
 exports.APIURL_Content_Course_Detail = '/api/content/course/detail'; // 课程详情
 exports.APIURL_Content_Course_Set = '/api/content/course/set'; // 课程详情
+exports.APIURL_Content_Lesson_Detail = '/api/content/lesson/detail'; // 课内容
+exports.APIURL_User_Content_Course_Mylist = '/api/user/content/course/list'; // 我的学习列表
+exports.APIURL_User_Content_Task_Current = '/api/user/content/task/current'; // 我的本周作业
 exports.APIURL_Content_Lesson_Quiz = '/api/web/quiz/'; // 小节测试
 exports.APIURL_Content_StuQuizWord_List = '/api/content/stuQuizWord/list'; // 获取学生、核心语法测试、词汇测试列表，根据管理员或老师
 
@@ -57,6 +60,7 @@ exports.APIURL_Auth_Signin = '/api/auth/signin'; // 登录
 exports.APIURL_System_AccessLog_Create = '/api/system/accesslog/create'; // 创建访问日志
 
 exports.APIURL_Temp_User_Course_Coupon = '/api/temp/user/course/coupon'; // 获取用户将永久转为限时课程可以获得的优惠券
-exports.APIURL_Temp_User_Course_Coupon_Check = '/api/temp/user/course/coupon/check'; // 将永久课程转为限时课程，并赠送优惠券
+exports.APIURL_Temp_User_Course_Coupon_Check =
+    '/api/temp/user/course/coupon/check'; // 将永久课程转为限时课程，并赠送优惠券
 exports.APIURL_Admin_Coupon_Synthesizer = '/api/admin/user/coupon/synthesizer'; // 管理员将某用户的通用、直减、未使用的优惠券执行合并
-exports.APIURL_Admin_User_Coupon_List ='/api/admin/user/coupon/list'; // 管理员获取某用户的未使用优惠券列表
+exports.APIURL_Admin_User_Coupon_List = '/api/admin/user/coupon/list'; // 管理员获取某用户的未使用优惠券列表

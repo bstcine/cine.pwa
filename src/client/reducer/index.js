@@ -53,7 +53,7 @@ export const toastRedu = (
     }
 };
 
-export const userInfo = (state = { loading: false, data: null }, action) => {
+export const user = (state = { loading: false, data: null }, action) => {
     switch (action.type) {
         case actType.REQUEST_USER_INFO:
             return { ...state, loading: true };

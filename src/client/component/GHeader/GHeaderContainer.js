@@ -37,10 +37,9 @@ const getNav = user => {
 };
 
 const mapStateToProps = state => {
-    const { userInfo } = state;
-    const user = userInfo.data;
-    const { navs1, navs2 } = getNav(user);
-    return { user, navs1, navs2 };
+    const { user } = state;
+    const { navs1, navs2 } = getNav(user.data);
+    return { user: user.data, navs1, navs2 };
 };
 
 const mapDispatchToProps = dispatch => ({

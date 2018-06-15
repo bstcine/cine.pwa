@@ -8,7 +8,7 @@
 
 // tasks-container
 .tasks-container {
-    border-bottom: 0.1rem solid #f2f4f6;
+    border-bottom: 0.1rem solid #f3f4f5;
 }
 
 .task-nav {
@@ -49,8 +49,9 @@
         line-height: 0.9rem;
         color: #3a3b3c;
         border-bottom: 0.02rem solid #f2f4f6;
+        display: flex;
         .label {
-            display: inline-flex;
+            display: block;
             font-size: 0.22rem;
             line-height: 0.26rem;
             color: #72aeef;
@@ -66,6 +67,9 @@
         }
         &:last-of-type {
             border-bottom: none;
+        }
+        .task-title {
+            .text-one-line();
         }
     }
     .expand_more {

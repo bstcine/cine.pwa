@@ -1,22 +1,32 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import Entry from '@/component/Entry';
 import GLayout from '@/component/GLayout';
-import TasksContainer from './TasksContainer';
-import CoursesContainer from './CoursesContainer';
+import Tasks from './Tasks';
+import Courses from './Courses';
 import '../asset/style/index.less';
+import { fetchUserInfo } from '@/action/commonAction';
+const mapStateToProps = state => {
+    const { user } = state;
+    return { user: user.data };
+};
+const mapDispatchToProps = dispatch => ({
+    fetchUserInfo: () => {
+        dispatch(fetchUserInfo());
+    },
+});
 
 class HomePage extends Entry {
     componentDidMount() {
-        // const { fetchHomeData } = this.props;
-        // fetchHomeData();
+        this.props.fetchUserInfo();
     }
 
     render() {
+        const { user } = this.props;
         return (
             <GLayout>
-                <TasksContainer />
-                <CoursesContainer />
+                {!!user && user.type === '2' && <Tasks />}
+                <Courses />
             </GLayout>
         );
     }
@@ -26,4 +36,4 @@ HomePage.propTypes = {
     // fetchHomeData: PropTypes.func.isRequired,
 };
 
-export default HomePage;
+export default connect(mapStateToProps, mapDispatchToProps)(HomePage);

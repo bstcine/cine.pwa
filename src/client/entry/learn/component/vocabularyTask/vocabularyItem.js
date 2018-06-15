@@ -13,7 +13,7 @@ class VocabularyItem extends React.PureComponent {
             <div className="vocabularyItem">
                 <p className="seq">{vocabulary.id}</p>
                 <div className="detail">
-                    <p className="word">{vocabulary.word}</p>
+                    <a className="word">{vocabulary.word}</a>
                     <a className="phonetic">{vocabulary.phonetic}</a>
                 </div>
 

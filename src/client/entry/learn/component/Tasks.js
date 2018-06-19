@@ -13,54 +13,55 @@ const Label = ({ type }) => {
     };
     return <span className="label">{map[type]}</span>;
 };
+
+const Badge = ({ tasks }) => {
+    if (!tasks || !tasks.length) return null;
+
+    return <span className="badge">{tasks.length}</span>;
+};
+const TasksList = ({ tasks, isLimitTasks }) => {
+    if (!tasks || !tasks.length) return <div className="notask">暂无作业</div>;
+
+    return tasks.map((task, i) => {
+        if (isLimitTasks && i >= 5) return null;
+        return (
+            <Column122 key={task.id} className="task-item" href="/learn/task/">
+                <Label type={task.type} />
+                <TextFix className="task-title">{task.title}</TextFix>
+            </Column122>
+        );
+    });
+};
+
+const ExpandMore = ({ tasks, isLimitTasks, onShowAllTask }) => {
+    if (tasks && tasks.length > 5) {
+        return (
+            <span className="expand_more" onClick={onShowAllTask}>
+                展开更多作业 <GIcon name="expand_more" />
+            </span>
+        );
+    } else {
+        return null;
+    }
+};
+
 const Tasks = ({ tasks, isLimitTasks, onShowAllTask }) => {
-    // const tasks = [
-    //     { id: '1', title: 'Longman3000基础词汇', type: '4' },
-    //     { id: '2', title: '《神奇树屋1-恐龙谷历险记》第4课', type: '1' },
-    //     { id: '3', title: '《动物农庄》第3课习题', type: '2' },
-    //     { id: '4', title: '《动物农庄》第3课习题', type: '2' },
-    //     { id: '5', title: '《动物农庄》第3课习题', type: '2' },
-    //     { id: '6', title: '《动物农庄》第3课习题', type: '2' },
-    //     { id: '7', title: '《动物农庄》第3课习题', type: '2' },
-    //     { id: '8', title: '《动物农庄》第3课习题', type: '2' },
-    // ];
     return (
         <div className="tasks-container">
             <nav className="task-nav">
-                <a href="/learn/task">
-                    以前作业
-                    {/* <span className="badge">1</span> */}
-                </a>
+                <a href="/learn/task">以前作业</a>
                 <a className="active" href="">
                     本周作业
-                    {tasks &&
-                        !!tasks.length && (
-                        <span className="badge">{tasks.length}</span>
-                    )}
+                    <Badge tasks={tasks} />
                 </a>
             </nav>
             <Grid className="task-list">
-                {!!tasks &&
-                    !!tasks.length &&
-                    tasks.map((task, i) => {
-                        if (isLimitTasks && i >= 5) return null;
-                        return (
-                            <Column122
-                                key={task.id}
-                                className="task-item"
-                                href="/learn/task/">
-                                <Label type={task.type} />
-                                <TextFix className="task-title">
-                                    {task.title}
-                                </TextFix>
-                            </Column122>
-                        );
-                    })}
-                {isLimitTasks && (
-                    <span className="expand_more" onClick={onShowAllTask}>
-                        展开更多作业 <GIcon name="expand_more" />
-                    </span>
-                )}
+                <TasksList tasks={tasks} isLimitTasks={isLimitTasks} />
+                <ExpandMore
+                    tasks={tasks}
+                    isLimitTasks={isLimitTasks}
+                    onShowAllTask={onShowAllTask}
+                />
             </Grid>
         </div>
     );

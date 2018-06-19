@@ -10,15 +10,15 @@ class VocabularyItem extends React.PureComponent {
         let vocabulary = this.props.vocabulary;
 
         return (
-            <div className="vocabularyItem">
-                <p className="seq">{vocabulary.id}</p>
-                <div className="detail">
-                    <a className="word">{vocabulary.word}</a>
-                    <a className="phonetic">{vocabulary.phonetic}</a>
+            <div className="v_Task_L_VocabularyItem">
+                <p className="v_Task_L_Item_Seq">{vocabulary.id}</p>
+                <div className="v_Task_L_Item_Detail">
+                    <a className="v_Task_L_Item_Word">{vocabulary.word}</a>
+                    <a className="v_Task_L_Item_Phonetic">{vocabulary.phonetic}</a>
                 </div>
 
-                <span className="voice">声音</span>
-                <p className="transition">{vocabulary.zh}</p>
+                <span className="v_Task_L_Item_Voice">声音</span>
+                <p className="v_Task_L_Item_Transition">{vocabulary.zh}</p>
             </div>
         );
 

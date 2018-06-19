@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux';
 import vocabularyRedu from './vocabularyTaskReducer';
 import historyTaskRedu from './historyTaskReducer';
+import vocabularyTestRedu from './vocabularyTestReducer';
 import { user } from '@/reducer';
 import {
     RECEIVE_CURRENT_TASK,
@@ -31,6 +32,7 @@ const rootReducer = combineReducers({
     courses,
     vocabularyRedu,
     historyTaskRedu,
+    vocabularyTestRedu,
 });
 
 export default rootReducer;

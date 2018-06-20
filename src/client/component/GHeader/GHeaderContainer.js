@@ -4,10 +4,10 @@ import { connect } from 'react-redux';
 import GHeader from './GHeader';
 import { fetchUserInfo } from '@/action/commonAction';
 import menu from '@/constant/menu';
+import { logoutV1 } from '@/service/base';
 
 const getNav = user => {
     if (!user) return { navs1: null, navs2: null };
-    console.log('cineMenu', menu);
     const filter = (menu, role_id) => {
         if (!menu.role_id) return true;
         if (Array.isArray(menu.role_id) && menu.role_id.includes(user.role_id)) return true;
@@ -49,13 +49,31 @@ const mapDispatchToProps = dispatch => ({
 });
 
 class GHeaderContainer extends Component {
+    constructor(props) {
+        super(props);
+        this.logout = this.logout.bind(this);
+    }
+
     componentDidMount() {
         this.props.fetchUserInfo();
     }
 
+    logout() {
+        logoutV1().then(() => {
+            location.href = '/';
+        });
+    }
+
     render() {
         const { user, navs1, navs2 } = this.props;
-        return <GHeader user={user} navs1={navs1} navs2={navs2} />;
+        return (
+            <GHeader
+                user={user}
+                navs1={navs1}
+                navs2={navs2}
+                onLogout={this.logout}
+            />
+        );
     }
 }
 

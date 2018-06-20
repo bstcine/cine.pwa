@@ -3,6 +3,13 @@ import { Grid, Column122 } from '@/component/GGrid';
 import TextFix from '@/component/TextFix';
 
 const Courses = ({ courses }) => {
+    const getHref = course => {
+        let url = '/learn/lesson/' + course.id;
+        if (course.last_content_id) {
+            url += '?lesson_id=' + course.last_content_id;
+        }
+        return url;
+    };
     return (
         <div className="courses-container">
             <h2>我的课程</h2>
@@ -12,7 +19,7 @@ const Courses = ({ courses }) => {
                         <Column122
                             key={course.id}
                             className="courses-item"
-                            href={'/learn/lesson/' + course.id}>
+                            href={getHref(course)}>
                             <div
                                 className="course-img"
                                 style={{
@@ -38,7 +45,10 @@ const Courses = ({ courses }) => {
                                 {course.expire_at && (
                                     <div className="expire_at">
                                         有效期{' '}
-                                        {course.expire_at.substring(0, 10)}
+                                        {course.expire_at >
+                                        '2100-01-01 00:00:00'
+                                            ? course.expire_at.substring(0, 10)
+                                            : '长期有效'}
                                     </div>
                                 )}
                             </div>

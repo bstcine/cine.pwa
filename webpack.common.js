@@ -38,6 +38,7 @@ pages.forEach(page => {
 });
 
 module.exports = {
+    // stats: 'verbose',
     entry,
     output: {
         filename: devMode

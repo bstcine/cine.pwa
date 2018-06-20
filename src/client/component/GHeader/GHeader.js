@@ -35,7 +35,7 @@ const Nav1 = ({ navs }) => (
     </nav>
 );
 
-const UserBar = ({ user, isOpenUserBar, onToggleUserBar }) => (
+const UserBar = ({ user, isOpenUserBar, onToggleUserBar, onLogout }) => (
     <div
         className={classNames('user-bar', {
             open: isOpenUserBar,
@@ -46,9 +46,9 @@ const UserBar = ({ user, isOpenUserBar, onToggleUserBar }) => (
             <GIcon name="arrow_drop_up" />
         </div>
         <nav className="nav-user">
-            <a href="">个人资料</a>
-            <a href="">修改密码</a>
-            <a href="">退出</a>
+            <a href="/user">个人资料</a>
+            <a href="/resetPassword">修改密码</a>
+            <a onClick={onLogout}>退出</a>
         </nav>
     </div>
 );
@@ -86,7 +86,7 @@ class GHeader extends PureComponent {
     }
 
     render() {
-        const { user, navs1, navs2 } = this.props;
+        const { user, navs1, navs2, onLogout } = this.props;
         if (!user) return null;
         const { isOpenUserBar } = this.state;
 
@@ -100,6 +100,7 @@ class GHeader extends PureComponent {
                             user={user}
                             isOpenUserBar={isOpenUserBar}
                             onToggleUserBar={this.onToggleUserBar}
+                            onLogout={onLogout}
                         />
                     </div>
                 </header>

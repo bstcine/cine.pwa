@@ -16,6 +16,7 @@ import {
     SAVE_QUESTION3_SELECT_VALUE,
     SAVE_QUESTION3_TEXT_VALUE,
     SAVE_QUESTION3_TEXT_SCORE,
+    SAVE_QUESTION4_TEXT_VALUE,
     SAVE_QUESTION_FEEDBACK,
     CLOSE_LOGIN_MODAL,
     OPEN_LOGIN_MODAL,
@@ -161,6 +162,9 @@ export const submitAnswer = () => (dispatch, getState) => {
         } else if (question.format === QuestionFormat.FORMAT3_CORRECT) {
             let answer = parseFormat3Answer(question, answersById);
             answers.push(answer);
+        } else if (question.format === QuestionFormat.FORMAT4_SHORT_QUE) {
+            let answer = parseFormat4Answer(question, answersById);
+            answers.push(answer);
         }
     });
     dispatch({ type: REQUEST_STATS_QUIZ_SAVE });
@@ -199,6 +203,11 @@ export const submitCheckAnswer = (complete = true) => async (
             if (typeof answer.select_score === 'number') score += answer.select_score;
             answers.push(answer);
         } else if (question.format === QuestionFormat.FORMAT3_CORRECT) {
+            let answer = answersById[questionId];
+            if (typeof answer.select_score === 'number') score += answer.select_score;
+            if (typeof answer.text_score === 'number') score += answer.text_score;
+            answers.push(answer);
+        } else if (question.format === QuestionFormat.FORMAT4_SHORT_QUE) {
             let answer = answersById[questionId];
             if (typeof answer.select_score === 'number') score += answer.select_score;
             if (typeof answer.text_score === 'number') score += answer.text_score;
@@ -420,6 +429,12 @@ const parseFormat3Answer = (question, answersById) => {
     return answer;
 };
 
+const parseFormat4Answer = (question, answersById) => {
+    let answer = answersById[question.id] || { question_id: question.id };
+    // todo 简答题得分
+    return answer;
+};
+
 const recordTime = () => ({
     type: RECORD_TIME,
     payload: {
@@ -469,6 +484,17 @@ export const saveQuestion3TextScore = ({ id, is_text_correct }) => dispatch => {
             text_score: is_text_correct ? 1 : 0,
         },
     });
+};
+
+export const saveQuestion4TextValue = ({ id, text_value }) => dispatch => {
+    dispatch({
+        type: SAVE_QUESTION4_TEXT_VALUE,
+        payload: {
+            id,
+            text_value,
+        },
+    });
+    dispatch(autoSaveLocalAnswers());
 };
 
 export const saveQuestionFeedback = ({ id, feedback }) => dispatch => {

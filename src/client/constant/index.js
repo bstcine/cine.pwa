@@ -91,6 +91,11 @@ export const QuestionFormat = {
     FORMAT3_CORRECT: 3,
 
     /**
+     * 4:简答题
+     */
+    FORMAT4_SHORT_QUE: 4,
+
+    /**
      * 10:描述文本(富文本)
      */
     FORMAT10_COMMON_DESC: 10,
@@ -99,11 +104,6 @@ export const QuestionFormat = {
      * 11:阅读理解描述文本(富文本)
      */
     FORMAT11_READING_DESC: 11,
-
-    /**
-     * 13:简答题
-     */
-    FORMAT4_SHORT_QUE: '4',
 };
 
 /**

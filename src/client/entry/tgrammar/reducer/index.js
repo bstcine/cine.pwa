@@ -12,6 +12,7 @@ import {
     SAVE_QUESTION3_SELECT_VALUE,
     SAVE_QUESTION3_TEXT_VALUE,
     SAVE_QUESTION3_TEXT_SCORE,
+    SAVE_QUESTION4_TEXT_VALUE,
     SAVE_QUESTION_FEEDBACK,
     CLOSE_LOGIN_MODAL,
     OPEN_LOGIN_MODAL,
@@ -25,10 +26,7 @@ import {
 } from '@/constant/actionTypeTGrammar';
 import { CurrentQuizState } from '@/constant/index';
 import { alertModal, confirmModal } from '@/reducer/index';
-import {
-    OPEN_NETWORK_ERROR,
-    CLOSE_NETWORK_ERROR,
-} from '@/constant/actionType';
+import { OPEN_NETWORK_ERROR, CLOSE_NETWORK_ERROR } from '@/constant/actionType';
 
 /**
  * 除题目外的试卷数据
@@ -101,6 +99,14 @@ const answersById = (state = {}, { type, payload }) => {
             let answer = newState[question_id];
             answer.is_text_correct = is_text_correct;
             answer.text_score = text_score;
+            return newState;
+        }
+        case SAVE_QUESTION4_TEXT_VALUE: {
+            let newState = { ...state };
+            let { id: question_id, text_value } = payload;
+            if (!newState[question_id]) newState[question_id] = { question_id };
+            let answer = newState[question_id];
+            answer.text_value = text_value;
             return newState;
         }
         case SAVE_QUESTION_FEEDBACK: {

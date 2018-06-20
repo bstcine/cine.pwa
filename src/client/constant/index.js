@@ -100,3 +100,25 @@ export const QuestionFormat = {
      */
     FORMAT11_READING_DESC: 11,
 };
+
+/**
+ * 任务类型
+ */
+export const Task_Type = {
+    /**
+     * 1:视频
+     */
+    Video: '1',
+    /**
+     * 2:习题
+     */
+    Quiz: '2',
+    /**
+     * 3:习题反馈
+     */
+    Quiz_Feedback: '3',
+    /**
+     * 4:单词
+     */
+    Word: '4',
+};

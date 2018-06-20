@@ -9,6 +9,8 @@ import { chunkComponent } from '@/util/chunkComponent';
 import storeUtil from '@/util/storeUtil';
 import Home from './component/Home';
 import Course from './component/Course';
+// import * as OfflinePluginRuntime from 'offline-plugin/runtime';
+// OfflinePluginRuntime.install();
 const PayPrepare = chunkComponent(() =>
     import(/* webpackChunkName: "content/chunk/index.pp" */ './component/PayPrepare')
 );

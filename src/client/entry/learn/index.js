@@ -8,7 +8,9 @@ import rootReducer from './reducer';
 import HomePage from './container/HomePage';
 import VocabularyContainer from './container/vocabularyTaskContainer';
 import HistoryTaskContainer from './container/historyTaskContainer';
-import VocabularyTestContainer from './container/vocabularyTestContainer'
+import VocabularyTestContainer from './container/vocabularyTestContainer';
+// import * as OfflinePluginRuntime from 'offline-plugin/runtime';
+// OfflinePluginRuntime.install();
 
 const preloadedState = window.__PRELOADED_STATE__;
 const store = createStore(rootReducer, preloadedState, applyMiddleware(thunk));
@@ -37,14 +39,14 @@ class Learn extends Component {
                         <Route
                             path="/learn/historytask"
                             component={props => {
-                                return <HistoryTaskContainer {...props} />
+                                return <HistoryTaskContainer {...props} />;
                             }}
                         />
 
                         <Route
                             path="/learn/vocabularytest"
                             component={props => {
-                                return <VocabularyTestContainer {...props} />
+                                return <VocabularyTestContainer {...props} />;
                             }}
                         />
                     </Switch>

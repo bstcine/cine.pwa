@@ -3,6 +3,8 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+// const OfflinePlugin = require('offline-plugin');
+
 const devMode = process.env.NODE_ENV !== 'production';
 
 // *请统一使用 cnpm 下载安装依赖*，cnpm 和 npm 打出来的包 hash 不一致，造成缓存失效
@@ -45,6 +47,15 @@ module.exports = {
         publicPath,
     },
     plugins: [
+        // new OfflinePlugin({
+        //     // relativePaths: false,
+        //     // publicPath: '/',
+        //     externals: ['/', '/learn'],
+        //     ServiceWorker: {
+        //         output: `learn/sw.js`,
+        //         navigateFallbackURL: `/learn`,
+        //     },
+        // }),
         new webpack.DefinePlugin({
             SERVICE_URL: JSON.stringify(SERVICE_URL),
         }),

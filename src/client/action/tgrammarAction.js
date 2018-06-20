@@ -41,14 +41,22 @@ import { openConfirm, openAlert, networkError } from '@/action/commonAction';
  * 题目数据 & 答题记录请求
  */
 export const fetchQuizData = ({
+    user_id,
     quiz_id,
     stats_content_quiz_id,
+    lesson_id,
+    chapter_id,
+    course_id,
     cmd,
 }) => async dispatch => {
     dispatch(requestQuizData());
     let [err, result] = await fetchData(APIURL_Content_Quiz, {
+        user_id,
         quiz_id,
         stats_content_quiz_id,
+        lesson_id,
+        chapter_id,
+        course_id,
     });
     if (err) {
         if (err === 'stats_quiz_not_found') {
@@ -342,9 +350,28 @@ export const receiveQuizData = ({
 const quizDataFix = data => {
     let no = 0;
     data.forEach(question => {
+        if (question.type) {
+            question.format =
+                question.type === '1'
+                    ? QuestionFormat.FORMAT1_CHOOSE_ONE
+                    : question.type === '3'
+                        ? QuestionFormat.FORMAT4_SHORT_QUE
+                        : '';
+        }
+
+        if (question.options) {
+            let options = JSON.parse(question.options);
+            question.options = options.map((item, index) => {
+                item.value = index;
+                item.isCorrect = String(index) === question.answer;
+                return item;
+            });
+        }
+
         if (
             question.format === QuestionFormat.FORMAT1_CHOOSE_ONE ||
-            question.format === QuestionFormat.FORMAT3_CORRECT
+            question.format === QuestionFormat.FORMAT3_CORRECT ||
+            question.format === QuestionFormat.FORMAT4_SHORT_QUE
         ) {
             no++;
             question.no = no;

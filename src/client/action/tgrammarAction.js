@@ -395,6 +395,8 @@ const quizDataFix = data => {
             });
             delete question.answers;
         }
+        // 默认需要批改
+        if (!question.need_feedback) question.need_feedback = '1';
     });
 };
 

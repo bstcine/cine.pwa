@@ -54,6 +54,6 @@ module.exports = merge(common, {
     },
     plugins: [
         new LodashModuleReplacementPlugin(),
-        new BundleAnalyzerPlugin({ analyzerMode: 'static' }),
+        // new BundleAnalyzerPlugin({ analyzerMode: 'static' }),
     ],
 });

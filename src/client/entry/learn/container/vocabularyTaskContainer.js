@@ -1,4 +1,5 @@
 // 访问本页 /learn/vocabularytask?task_id=
+import GLayout from '@/component/GLayout';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -40,9 +41,9 @@ class VocabularyTaskContainer extends Component {
         let {vocabularyList,actions} = this.props;
 
         return (
-            <React.Fragment>
+            <GLayout>
                 <VocabularyTask vocabularyList={vocabularyList} actions={actions} playAction={this.playAudio} />
-            </React.Fragment>
+            </GLayout>
         );
     }
 }

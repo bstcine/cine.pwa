@@ -12,7 +12,7 @@ class VocabularyTest extends React.PureComponent {
             <div className="vocabularyTest">
                 <div className="v_Test_VocabularyHeader">
                     <a className="v_Test_H_TaskName">Longman 3000基础词汇</a>
-                    <a className="v_Test_H_HistoryDoor" href="/learn/vocabularytask">词汇学习</a>
+                    <a className="v_Test_H_HistoryDoor" href="/learn/word">词汇学习</a>
                 </div>
             </div>
         );

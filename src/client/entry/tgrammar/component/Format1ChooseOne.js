@@ -12,16 +12,23 @@ const Format1ChooseOne = ({
     no,
     id,
     title,
+    feedback,
+    need_feedback,
     options,
     select_value,
     select_score,
     is_select_correct,
-    feedback,
+    answer_feedback,
     currentQuizState,
     saveQuestion1SelectValue,
     saveQuestionFeedback,
 }) => {
     console.log('Question1ChooseOne render');
+    let waiting_and_not_need_feedback =
+        currentQuizState === CurrentQuizState.WAITING4CHECK &&
+        need_feedback &&
+        need_feedback === '0';
+
     return (
         <div className="questionformat questionformat1">
             <QuestionTitle no={no} title={title} />
@@ -35,22 +42,35 @@ const Format1ChooseOne = ({
             />
 
             {(currentQuizState === CurrentQuizState.CHECKING ||
-                currentQuizState === CurrentQuizState.REVIEWING) && (
+                currentQuizState === CurrentQuizState.REVIEWING ||
+                waiting_and_not_need_feedback) && (
                 <FeedbackSelectScore
                     id={id}
                     is_show_tip={
-                        currentQuizState === CurrentQuizState.REVIEWING
+                        currentQuizState === CurrentQuizState.REVIEWING ||
+                        waiting_and_not_need_feedback
                     }
                     is_select_correct={is_select_correct}
                     select_score={select_score}
                 />
             )}
 
-            {((currentQuizState === CurrentQuizState.REVIEWING && feedback) ||
+            {!answer_feedback &&
+                feedback &&
+                waiting_and_not_need_feedback && (
+                <FeedbackText
+                    hint={'默认解析'}
+                    feedback={feedback}
+                    is_select_correct={is_select_correct}
+                />
+            )}
+
+            {((currentQuizState === CurrentQuizState.REVIEWING &&
+                answer_feedback) ||
                 currentQuizState === CurrentQuizState.CHECKING) && (
                 <FeedbackText
                     editable={currentQuizState === CurrentQuizState.CHECKING}
-                    feedback={feedback}
+                    feedback={answer_feedback}
                     is_select_correct={is_select_correct}
                     onChange={saveQuestionFeedback}
                 />

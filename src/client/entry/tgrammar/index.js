@@ -10,7 +10,14 @@ import Entry from '@/component/Entry';
 import CommonUtil from '@/util/common';
 // import '@/util/test';
 
-const store = createStore(rootReducer, applyMiddleware(thunk));
+const logger = store => next => action => {
+    console.log('dispatching', action);
+    let result = next(action);
+    console.log('next state', store.getState());
+    return result;
+};
+
+const store = createStore(rootReducer, applyMiddleware(thunk, logger));
 
 class Tgrammar extends Entry {
     render() {

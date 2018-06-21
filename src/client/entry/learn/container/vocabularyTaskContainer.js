@@ -13,14 +13,18 @@ class VocabularyTaskContainer extends Component {
 
         // 获取参数
         let param = getParam();
-        let task_id = param.task_id;
-        if (task_id === undefined || task_id === "" || task_id === null){
+        let taskId = param.task_id;
+        if (taskId === undefined || taskId === "" || taskId === null){
             alert("未获取指定的任务id");
             return
         }
+        let startIndex = param.start_index
+        let endIndex = param.end_index
+        let wordType = param.word_type
+
         // 准备访问
         let {actions} = this.props;
-        actions.loadVocabulary();
+        actions.loadVocabulary(taskId,startIndex,endIndex,wordType);
     }
 
     render() {

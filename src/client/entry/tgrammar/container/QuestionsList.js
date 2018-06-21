@@ -4,6 +4,7 @@ import Format10CommonDesc from '../component/Format10CommonDesc';
 import Format11ReadingDesc from '../component/Format11ReadingDesc';
 import Format1ChooseOne from './Format1ChooseOne';
 import Format3Correct from './Format3Correct';
+import Format4ShortQue from './Format4ShortQue';
 import { CurrentQuizState, QuestionFormat } from '@/constant/index';
 import { SHOW_ALL_QUESTION } from '@/constant/actionTypeTGrammar';
 
@@ -63,6 +64,8 @@ const QuestionsList = ({ questions }) => {
                         return <Format1ChooseOne key={id} id={id} />;
                     case QuestionFormat.FORMAT3_CORRECT:
                         return <Format3Correct key={id} id={id} />;
+                    case QuestionFormat.FORMAT4_SHORT_QUE:
+                        return <Format4ShortQue key={id} id={id} />;
                     case QuestionFormat.FORMAT10_COMMON_DESC:
                         return (
                             <Format10CommonDesc key={id} title={item.title} />

@@ -359,6 +359,7 @@ export const receiveQuizData = ({
 const quizDataFix = data => {
     let no = 0;
     data.forEach(question => {
+        // 将最新的习题格式转为旧格式 start
         if (question.type) {
             question.format =
                 question.type === '1'
@@ -367,7 +368,8 @@ const quizDataFix = data => {
                         ? QuestionFormat.FORMAT4_SHORT_QUE
                         : '';
         }
-
+        if (question.steam) question.title = question.steam;
+        if (question.analysis) question.feedback = question.analysis;
         if (question.options) {
             let options = JSON.parse(question.options);
             question.options = options.map((item, index) => {
@@ -376,6 +378,7 @@ const quizDataFix = data => {
                 return item;
             });
         }
+        // 将最新的习题格式转为旧格式 end
 
         if (
             question.format === QuestionFormat.FORMAT1_CHOOSE_ONE ||

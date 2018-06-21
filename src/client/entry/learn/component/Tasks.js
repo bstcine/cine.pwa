@@ -37,7 +37,10 @@ const TasksList = ({ tasks, isLimitTasks }) => {
                     '4': 'content_quiz_id',
                     '5': 'stats_content_quiz_id',
                 };
-                return `/learn/quiz?${map[task.object_type]}=${task.object_id}`;
+                // todo 临时 quiz 路径
+                return `/tgrammar/quiz?${map[task.object_type]}=${
+                    task.object_id
+                }`;
             }
             case Task_Type.Word:
                 if (task.word_start_index && task.word_end_index) {

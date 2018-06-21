@@ -8,14 +8,14 @@ import {
 const mapStateToProps = (state, ownProps) => {
     const { answersById, questions, currentQuizState } = state;
     const id = ownProps.id;
-    const { no, title, options } = questions.byId[id];
-    let prop = { ...ownProps, no, title, options, currentQuizState };
+    const { no, title, feedback, need_feedback, options } = questions.byId[id];
+    let prop = { ...ownProps, no, title, feedback, need_feedback, options, currentQuizState };
     const answer = answersById[id];
     if (answer) {
         prop.select_value = answer.select_value;
         prop.is_select_correct = answer.is_select_correct;
         prop.select_score = answer.select_score;
-        prop.feedback = answer.feedback;
+        prop.answer_feedback = answer.feedback;
     }
     return prop;
 };

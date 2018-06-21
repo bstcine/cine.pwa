@@ -6,10 +6,10 @@ class VocabularyTask extends React.PureComponent {
 
     render () {
 
-        let {vocabularyList, actions} = this.props
+        let {vocabularyList, actions, playAction} = this.props
 
         const vocabularyItems = vocabularyList.map(item => {
-            return <VocabularyItem vocabulary={item} />;
+            return <VocabularyItem vocabulary={item} playAction={playAction} />;
         });
 
         return (

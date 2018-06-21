@@ -5,9 +5,27 @@ import React from 'react';
 
 class VocabularyItem extends React.PureComponent {
 
+    constructor(props){
+        super(props)
+
+        let {vocabulary, playAction} = props;
+
+        let voice_url = vocabulary.voice_url_b;
+        if (voice_url === undefined || voice_url === null || voice_url === ''){
+            voice_url = vocabulary.voice_url_a;
+        }
+
+        this.voiceSrc = voice_url;
+        this.playAction = playAction;
+    }
+
+    playVoice=()=>{
+        this.playAction(this.voiceSrc);
+    }
+
     render() {
 
-        let vocabulary = this.props.vocabulary;
+        let {vocabulary, playAction} = this.props;
 
         var phonetic = '';
         if (vocabulary.phonetic_a) {
@@ -21,11 +39,6 @@ class VocabularyItem extends React.PureComponent {
             }
         }
 
-        let voice_url = vocabulary.voice_url_b;
-        if (voice_url === undefined || voice_url === null || voice_url === ''){
-            voice_url = vocabulary.voice_url_a;
-        }
-
         return (
             <div className="v_Task_L_VocabularyItem">
                 <p className="v_Task_L_Item_Seq">{vocabulary.id}</p>
@@ -34,7 +47,7 @@ class VocabularyItem extends React.PureComponent {
                     <a className="v_Task_L_Item_Phonetic">{phonetic}</a>
                 </div>
 
-                <span className="v_Task_L_Item_Voice">声音</span>
+                <span className="v_Task_L_Item_Voice" onClick={this.playVoice}></span>
                 <p className="v_Task_L_Item_Transition">{vocabulary.zh}</p>
             </div>
         );

@@ -12,6 +12,24 @@ import VocabularyTestContainer from './container/vocabularyTestContainer';
 // import * as OfflinePluginRuntime from 'offline-plugin/runtime';
 // OfflinePluginRuntime.install();
 
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function() {
+        navigator.serviceWorker
+            .register('/sw.js', { scope: '/' })
+            .then(function(registration) {
+                // 注册成功
+                console.log(
+                    'ServiceWorker registration successful with scope: ',
+                    registration.scope
+                );
+            })
+            .catch(function(err) {
+                // 注册失败:(
+                console.log('ServiceWorker registration failed: ', err);
+            });
+    });
+}
+
 const preloadedState = window.__PRELOADED_STATE__;
 const store = createStore(rootReducer, preloadedState, applyMiddleware(thunk));
 

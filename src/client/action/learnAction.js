@@ -12,7 +12,11 @@ import {
 
 export const fetchCurrentTask = () => async dispatch => {
     dispatch(requsetCurrentTask());
-    let [, result] = await fetchData(APIURL_User_Content_Task_Current);
+    let [, result] = await fetchData(
+        APIURL_User_Content_Task_Current,
+        null,
+        'GET'
+    );
     dispatch(recieveCurrentTask({ tasks: result }));
 };
 
@@ -33,7 +37,11 @@ export const recieveCurrentTask = ({ tasks }) => {
 
 export const fetchMyCourseList = () => async dispatch => {
     dispatch(requsetMyCourseList());
-    let [, result] = await fetchData(APIURL_User_Content_Course_Mylist);
+    let [, result] = await fetchData(
+        APIURL_User_Content_Course_Mylist,
+        null,
+        'GET'
+    );
     dispatch(recieveMyCourseList({ courses: result.rows }));
 };
 

@@ -9,11 +9,17 @@ import Api from '@/../APIConfig';
  * 通用数据层
  * @param APIURL
  * @param query
+ * @param type
  * @returns {PromiseLike<T> | Promise<T>}
  */
-export let fetchData = async (APIURL, query) => {
+export let fetchData = async (APIURL, query, type = 'POST') => {
     try {
-        let { code_desc, except_case_desc, result } = await post(APIURL, query);
+        console.log('fetchData type', type);
+        const network = type === 'POST' ? post : get;
+        let { code_desc, except_case_desc, result } = await network(
+            APIURL,
+            query
+        );
         let error = null;
         if (code_desc !== 'success') {
             error = code_desc;

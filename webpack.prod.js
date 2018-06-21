@@ -32,7 +32,7 @@ module.exports = merge(common, {
         },
         minimizer: [
             new UglifyJSPlugin({
-                cache: true,
+                cache: false,
                 parallel: true,
                 sourceMap: true,
                 uglifyOptions: {
@@ -54,6 +54,6 @@ module.exports = merge(common, {
     },
     plugins: [
         new LodashModuleReplacementPlugin(),
-        new BundleAnalyzerPlugin({ analyzerMode: 'static' }),
+        // new BundleAnalyzerPlugin({ analyzerMode: 'static' }),
     ],
 });

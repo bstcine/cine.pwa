@@ -9,22 +9,30 @@ import {getParam} from '@/util/urlUtil';
 
 class VocabularyTaskContainer extends Component {
 
+    playAudio = (audioSrc) => {
+
+        this.audioPlayer.src = 'http://oss.bstcine.com/word/top10000/'+audioSrc;
+        this.audioPlayer.play();
+    }
+
+    constructor(props){
+        super(props)
+
+        this.audioPlayer = new Audio()
+    }
+
     componentDidMount() {
 
         // 获取参数
         let param = getParam();
-        let taskId = param.task_id;
-        if (taskId === undefined || taskId === "" || taskId === null){
-            alert("未获取指定的任务id");
-            return
-        }
+
         let startIndex = param.start_index
         let endIndex = param.end_index
         let wordType = param.word_type
 
         // 准备访问
         let {actions} = this.props;
-        actions.loadVocabulary(taskId,startIndex,endIndex,wordType);
+        actions.loadVocabulary(startIndex,endIndex,wordType);
     }
 
     render() {
@@ -33,7 +41,7 @@ class VocabularyTaskContainer extends Component {
 
         return (
             <React.Fragment>
-                <VocabularyTask vocabularyList={vocabularyList} actions={actions} />
+                <VocabularyTask vocabularyList={vocabularyList} actions={actions} playAction={this.playAudio} />
             </React.Fragment>
         );
     }

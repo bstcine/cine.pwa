@@ -15,17 +15,21 @@ export const actionVocabularyTask = {
         payload: result.rows,
     }),
 
-    loadVocabulary: (taskId,startIndex,endIndex,wordType) => async dispatch => {
+    loadVocabulary: (startIndex,endIndex,wordType) => async dispatch => {
 
         // 使用真实的api请求获取数据
         let param = {
-            task_id : taskId,
             start_index : startIndex,
             end_index : endIndex,
             word_type : wordType,
         };
 
-        let [,result] = await fetchData(Api.APIURL_User_Learn_Word,param);
+        let [error,result] = await fetchData(Api.APIURL_User_Learn_Word,param);
+
+        if (error){
+            dispatch(toastAction.showError(errorMsg(error)));
+            return
+        }
 
         dispatch(actionVocabularyTask._receive(result));
     },

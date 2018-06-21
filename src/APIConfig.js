@@ -64,3 +64,5 @@ exports.APIURL_Temp_User_Course_Coupon_Check =
     '/api/temp/user/course/coupon/check'; // 将永久课程转为限时课程，并赠送优惠券
 exports.APIURL_Admin_Coupon_Synthesizer = '/api/admin/user/coupon/synthesizer'; // 管理员将某用户的通用、直减、未使用的优惠券执行合并
 exports.APIURL_Admin_User_Coupon_List = '/api/admin/user/coupon/list'; // 管理员获取某用户的未使用优惠券列表
+
+exports.APIURL_User_Learn_Word = '/api/user/vocabulary/task'; // 词汇任务单词列表

@@ -1,7 +1,5 @@
 .vocabularyTask{
-    //margin: 0;
-    //width: auto;
-    //height: auto;
+
     display: flex;
     align-content: space-between;
     flex-direction: column;
@@ -47,37 +45,45 @@
     }
 
     .v_Task_VocabularyFooter {
-        display: block;
-        position: fixed;
-        font-size: 30px;
-        bottom: 0.5rem;
-        left:50%;
-        transform: translateX(-50%);
-        font-size: 0.28rem;
-        padding-left: 0.24rem;
-        padding-right: 0.24rem;
-        //margin-left:auto;
-        //margin-right: auto;
-        .v_Task_F_Promote {
-            padding-top: 0.16rem;
-            padding-bottom: 0.16rem;
-            padding-right: 0.3rem;
-            float: left;
-            color: #7a7b7c;
-            line-height: 0.4rem;
-        }
+        position: static;
+        margin-left: 0.9rem;
+        margin-right: 0.9rem;
+        background-color: white;
+        clear: both;
 
-        .v_Task_F_TestDoor {
-            padding-top: 0.16rem;
-            padding-bottom: 0.16rem;
-            padding-left: 0.3rem;
-            padding-right: 0.3rem;
-            float: left;
-            border-radius: 0.3rem;
-            border-color: #246cc6;
-            border-width: 1px;
-            border-style: solid;
-            color: #0e58ac;
+        .v_Task_VF_Container {
+            display: inline-block;
+            position: relative;
+            font-size: 30px;
+            margin-top: 0.16rem;
+            margin-bottom: 0.16rem;
+            left:50%;
+            transform: translateX(-50%);
+            font-size: 0.28rem;
+            padding-left: 0.24rem;
+            padding-right: 0.24rem;
+
+            .v_Task_F_Promote {
+                padding-top: 0.16rem;
+                padding-bottom: 0.16rem;
+                padding-right: 0.3rem;
+                float: left;
+                color: #7a7b7c;
+                line-height: 0.4rem;
+            }
+
+            .v_Task_F_TestDoor {
+                padding-top: 0.16rem;
+                padding-bottom: 0.16rem;
+                padding-left: 0.3rem;
+                padding-right: 0.3rem;
+                float: left;
+                border-radius: 0.3rem;
+                border-color: #246cc6;
+                border-width: 1px;
+                border-style: solid;
+                color: #0e58ac;
+            }
         }
     }
 
@@ -88,6 +94,9 @@
         clear: both;
         background-color: white;
         min-width: 5rem;
+        white-space: inherit;
+        overflow-y: auto;
+
 
         .v_Task_L_VocabularyItem{
             display: inline-block;

@@ -30,14 +30,14 @@ class Learn extends Component {
                         />
 
                         <Route
-                            path="/learn/vocabularytask"
+                            path="/learn/word"
                             component={props => {
                                 return <VocabularyContainer {...props} />;
                             }}
                         />
 
                         <Route
-                            path="/learn/historytask"
+                            path="/learn/task"
                             component={props => {
                                 return <HistoryTaskContainer {...props} />;
                             }}

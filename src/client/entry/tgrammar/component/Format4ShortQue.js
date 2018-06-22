@@ -24,16 +24,11 @@ const Format4ShortQue = ({
     saveQuestion4TextValue,
     saveQuestionFeedback,
 }) => {
-    console.log(
-        'Question4ShortQue render',
-        feedback,
-        need_feedback,
-        answer_feedback
-    );
+    console.log('Question4ShortQue render');
     let waiting_and_not_need_feedback =
         currentQuizState === CurrentQuizState.WAITING4CHECK &&
-        need_feedback &&
         need_feedback === '0';
+
     return (
         <div className="questionformat questionformat1">
             <QuestionTitle no={no} title={title} />
@@ -44,18 +39,15 @@ const Format4ShortQue = ({
                 onChange={saveQuestion4TextValue}
             />
 
-            {!answer_feedback &&
-                feedback &&
-                waiting_and_not_need_feedback && (
-                <FeedbackText hint={'默认解析'} feedback={feedback} />
-            )}
-
-            {((currentQuizState === CurrentQuizState.REVIEWING &&
-                answer_feedback) ||
-                currentQuizState === CurrentQuizState.CHECKING) && (
+            {/* 学生提交后且不需要批改且有解析 或 老师批改中 或 学生检阅中 */}
+            {((waiting_and_not_need_feedback && feedback) ||
+                currentQuizState === CurrentQuizState.CHECKING ||
+                (currentQuizState === CurrentQuizState.REVIEWING &&
+                    answer_feedback)) && (
                 <FeedbackText
                     editable={currentQuizState === CurrentQuizState.CHECKING}
-                    feedback={answer_feedback}
+                    feedback={answer_feedback || feedback}
+                    is_select_correct={is_text_correct}
                     onChange={saveQuestionFeedback}
                 />
             )}

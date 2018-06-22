@@ -35,12 +35,13 @@ const quiz = (state = {}, { type, payload }) => {
     switch (type) {
         case RECEIVE_CONTENT_QUIZ: {
             const { quiz } = payload;
-            const { id, name, status, question_count } = quiz;
+            const { id, name, status, type, question_count } = quiz;
             return {
                 ...state,
                 id,
                 name,
                 status,
+                type,
                 question_count,
             };
         }

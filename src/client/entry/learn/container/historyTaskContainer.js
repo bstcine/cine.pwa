@@ -9,6 +9,7 @@ import { Toast } from '@/component/Toast';
 import { actionHistoryTask } from '@/action/lHistoryTaskAction';
 import HistoryTask from '../component/historyTask'
 
+import CThemeProvider from '@/component/CThemeProvider';
 class HistoryTaskContainer extends React.PureComponent {
 
     componentDidMount() {
@@ -18,19 +19,18 @@ class HistoryTaskContainer extends React.PureComponent {
 
     render(){
 
-        const {isVerb,taskModels,selectedValue,selectTitles,actions} = this.props;
-
-        // alert(taskModels.length);
+        const {isDialogShow,taskModels,selectedValue,selectTitles,actions} = this.props;
 
         return (
             <GLayout>
+                <CThemeProvider><div>
                 <HistoryTask
-                isVerb={isVerb}
+                isDialogShow={isDialogShow}
                 taskModels={taskModels}
                 selectedValue={selectedValue}
                 selectTitles={selectTitles}
-                actions={actions}
-            />
+                actions={actions}/>
+                </div></CThemeProvider>
             </GLayout>
         );
     }
@@ -40,7 +40,7 @@ class HistoryTaskContainer extends React.PureComponent {
 const mapStateToProps = state => {
     return {
         selectType: state.historyTaskRedu.get('selectType'),
-        isVerb:state.historyTaskRedu.get('isVerb'),
+        isDialogShow:state.historyTaskRedu.get('isDialogShow'),
         taskModels:state.historyTaskRedu.get('taskModels'),
         selectedValue:state.historyTaskRedu.get('selectedValue'),
         selectTitles:state.historyTaskRedu.get('selectTitles'),

@@ -6,7 +6,7 @@ import { ACTION_LH } from '@/constant/actionTypeLearn';
 
 const initTaskPageState = fromJS({
     selectType: 0,
-    isVerb:false,
+    isDialogShow:false,
     taskModels:[],
     selectedValue:"",
     selectTitles:[],
@@ -18,7 +18,7 @@ const historyTaskRedu = (state = initTaskPageState, action) => {
         case ACTION_LH.RECEIVE:
             return state.set('taskModels',action.payload);
         case ACTION_LH.DIALOG:
-            return state.set('isVerb',action.payload);
+            return state.set('isDialogShow',action.payload);
         default:
             return state;
     }

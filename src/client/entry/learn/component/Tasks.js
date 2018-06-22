@@ -9,10 +9,44 @@ const Badge = ({ tasks }) => {
 
     return <span className="badge">{tasks.length}</span>;
 };
+<<<<<<< HEAD
+=======
+const TasksList = ({ tasks, isLimitTasks }) => {
+    if (!tasks || !tasks.length) return <div className="notask">暂无作业</div>;
+    const getHref = task => {
+        switch (task.type) {
+            case Task_Type.Video:
+                return `/learn/course/${task.course_id}?lesson_id=${
+                    task.lesson_id
+                }`;
+            case Task_Type.Quiz:
+            case Task_Type.Quiz_Feedback: {
+                const map = {
+                    '1': 'lesson_id',
+                    '2': 'chapter_id',
+                    '3': 'course_id',
+                    '4': 'content_quiz_id',
+                    '5': 'stats_content_quiz_id',
+                };
+                return `/learn/quiz?${map[task.object_type]}=${task.object_id}`;
+            }
+            case Task_Type.Word:
+                if (task.word_start_index && task.word_end_index) {
+                    return `/learn/word?start_index=${
+                        task.word_start_index
+                    }&end_index=${task.word_end_index}`;
+                } else {
+                    return `/learn/word?word_type=${task.object_id}`;
+                }
+        }
+    };
+    return tasks.map((task, i) => {
+        if (isLimitTasks && i >= 5) return null;
+>>>>>>> 106a078820843ad4712bb525063b2e53db2213db
 
 
 const ExpandMore = ({ tasks, isLimitTasks, onShowAllTask }) => {
-    if (tasks && tasks.length > 5) {
+    if (tasks && tasks.length > 5 && isLimitTasks) {
         return (
             <span className="expand_more" onClick={onShowAllTask}>
                 展开更多作业 <GIcon name="expand_more" />

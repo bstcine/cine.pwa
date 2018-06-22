@@ -574,6 +574,16 @@ const _getUnCompletedNos = (questionIds, answersById) => {
                         unCompletedNos.push(questionIndex);
                     }
                 }
+            }else if (question.format === QuestionFormat.FORMAT4_SHORT_QUE) {
+                questionIndex++;
+                let answer = answersById[key];
+                if (!answer) {
+                    unCompletedNos.push(questionIndex);
+                } else {
+                    if (!answer.text_value) {
+                        unCompletedNos.push(questionIndex);
+                    }
+                }
             }
         }
     }

@@ -9,6 +9,7 @@ import HomePage from './container/HomePage';
 import VocabularyContainer from './container/vocabularyTaskContainer';
 import HistoryTaskContainer from './container/historyTaskContainer';
 import VocabularyTestContainer from './container/vocabularyTestContainer';
+import CommonUtil from '@/util/common';
 // import * as OfflinePluginRuntime from 'offline-plugin/runtime';
 // OfflinePluginRuntime.install();
 
@@ -43,7 +44,9 @@ class Learn extends Component {
                             exact
                             path="/learn"
                             component={props => {
-                                return <HomePage {...props} />;
+                                if (!CommonUtil.isAuth()) {
+                                    return <div />;
+                                } else { return <HomePage {...props} /> }
                             }}
                         />
 

@@ -8,8 +8,9 @@ const initTaskPageState = fromJS({
     selectType: 0,
     isDialogShow:false,
     taskModels:[],
-    selectedValue:"",
-    selectTitles:[],
+    startTime:'',
+    endTime:'',
+    defaultType:'4',
 });
 
 const historyTaskRedu = (state = initTaskPageState, action) => {
@@ -19,6 +20,12 @@ const historyTaskRedu = (state = initTaskPageState, action) => {
             return state.set('taskModels',action.payload);
         case ACTION_LH.DIALOG:
             return state.set('isDialogShow',action.payload);
+        case ACTION_LH.CHANGESTARTTIME:
+            return state.set('startTime',action.payload);
+        case ACTION_LH.CHANGEENDTIME:
+            return state.set('endTime',action.payload);
+        case ACTION_LH.CHANGETYPE:
+            return state.set('defaultType',action.payload);
         default:
             return state;
     }

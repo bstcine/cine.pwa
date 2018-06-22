@@ -19,7 +19,7 @@ class HistoryTaskContainer extends React.PureComponent {
 
     render(){
 
-        const {isDialogShow,taskModels,selectedValue,selectTitles,actions} = this.props;
+        const {isDialogShow,taskModels,startTime,endTime,defaultType,actions} = this.props;
 
         return (
             <GLayout>
@@ -27,8 +27,9 @@ class HistoryTaskContainer extends React.PureComponent {
                 <HistoryTask
                 isDialogShow={isDialogShow}
                 taskModels={taskModels}
-                selectedValue={selectedValue}
-                selectTitles={selectTitles}
+                startTime={startTime}
+                endTime={endTime}
+                defaultType={defaultType}
                 actions={actions}/>
                 </div></CThemeProvider>
             </GLayout>
@@ -42,8 +43,9 @@ const mapStateToProps = state => {
         selectType: state.historyTaskRedu.get('selectType'),
         isDialogShow:state.historyTaskRedu.get('isDialogShow'),
         taskModels:state.historyTaskRedu.get('taskModels'),
-        selectedValue:state.historyTaskRedu.get('selectedValue'),
-        selectTitles:state.historyTaskRedu.get('selectTitles'),
+        startTime:state.historyTaskRedu.get('startTime'),
+        endTime:state.historyTaskRedu.get('endTime'),
+        defaultType:state.historyTaskRedu.get('defaultType'),
     };
 };
 

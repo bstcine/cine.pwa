@@ -19,7 +19,7 @@ const ListText = (isOpen,list,handleAction)=>{
     );
 };
 
-const SearchTaskDialog = ({ isOpen, actions }) => {
+const SearchTaskDialog = ({ isOpen, startTime, endTime, defaultType, actions }) => {
 
     const taskTypes = [
         {'key':'1','value':'视频'},
@@ -52,10 +52,6 @@ const SearchTaskDialog = ({ isOpen, actions }) => {
         color:"#3a3b3c",
     }
 
-    let formStyle = {
-        fontSize: "0.28rem",
-    }
-
     return (
             <CDialog
                 title="任务搜索"
@@ -68,13 +64,13 @@ const SearchTaskDialog = ({ isOpen, actions }) => {
 
                 <form  >
                     <CDatePicker
-                        defaultValue="2018-06-24"
+                        defaultValue={startTime}
                         onChange={(e, val) => {
                             alert(val);
                         }}
                     />
                     <CDatePicker
-                        defaultValue="2018-06-24"
+                        defaultValue={endTime}
                         onChange={(e, val) => {
                             alert(val);
                         }}
@@ -83,15 +79,13 @@ const SearchTaskDialog = ({ isOpen, actions }) => {
 
                 <div style={itemStyle} >类型</div>
 
-                <form noValidate>
-                    <CSelect
-                        defaultValue="单词"
-                        values={taskTypes}
-                        onChange={(e,val)=>{
-                            alert(val);
-                        }}
-                    />
-                </form>
+                <CSelect
+                    defaultValue={defaultType}
+                    values={taskTypes}
+                    onChange={(event) => {
+                        actions.changeType(event.target.value);
+                    }}
+                />
 
             </CDialog>
     );

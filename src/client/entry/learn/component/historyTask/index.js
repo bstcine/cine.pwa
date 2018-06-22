@@ -12,7 +12,7 @@ class HistoryTask extends React.PureComponent {
 
     render() {
 
-        const {isDialogShow,taskModels,selectedValue,selectTitles,actions} = this.props;
+        const {isDialogShow,taskModels,startTime,endTime,defaultType,actions} = this.props;
 
         const button = (
             <button
@@ -34,6 +34,9 @@ class HistoryTask extends React.PureComponent {
                 {button}
                 <SearchTaskDialog
                     isOpen={isDialogShow}
+                    startTime={startTime}
+                    endTime={endTime}
+                    defaultType={defaultType}
                     actions={actions}
                 />
             </div>

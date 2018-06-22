@@ -5,8 +5,7 @@ import { TextField } from 'material-ui';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
-import Select from '@material-ui/core/Select';
-import MenuItem from '@material-ui/core/MenuItem';
+import NativeSelect from '@material-ui/core/NativeSelect';
 
 const CFlatButton = props => {
     return <FlatButton {...props} />;
@@ -29,25 +28,17 @@ export const CDatePicker = ({ defaultValue, onChange }) => {
 export const CSelect = ({defaultValue, values, onChange}) => {
 
     const children = values.map(item => {
-        return <MenuItem value={item.key}>{item.value}</MenuItem>
+        return <option value={item.key}>{item.value}</option>
     });
 
     return (
-        <div>
-            <Select
-                value={defaultValue}
-                onChange={onChange}
-                inputProps={{
-                    name: 'age',
-                    id: 'age-simple',
-                }}
-            >
-                <MenuItem value="">
-                    <em>None</em>
-                </MenuItem>
-                {children}
-            </Select>
-        </div>
+        <NativeSelect
+            value={defaultValue}
+            onChange={onChange}
+        >
+            <option value='' />
+            {children}
+        </NativeSelect>
     );
 }
 

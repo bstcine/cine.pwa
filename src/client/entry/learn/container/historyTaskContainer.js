@@ -1,6 +1,7 @@
 /**
  * Created by lidangkun on 2018/6/15.
  */
+import GLayout from '@/component/GLayout';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -19,16 +20,18 @@ class HistoryTaskContainer extends React.PureComponent {
 
         const {isVerb,taskModels,selectedValue,selectTitles,actions} = this.props;
 
-        alert(taskModels.length);
+        // alert(taskModels.length);
 
         return (
-            <HistoryTask
+            <GLayout>
+                <HistoryTask
                 isVerb={isVerb}
                 taskModels={taskModels}
                 selectedValue={selectedValue}
                 selectTitles={selectTitles}
                 actions={actions}
             />
+            </GLayout>
         );
     }
 

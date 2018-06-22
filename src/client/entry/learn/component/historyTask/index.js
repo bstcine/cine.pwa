@@ -4,6 +4,9 @@
 import React from 'react';
 import "../../asset/style/historyTask.less"
 
+import { Grid } from '@/component/GGrid';
+import TasksList from '../TasksList';
+
 class HistoryTask extends React.PureComponent {
 
     render() {
@@ -45,25 +48,30 @@ export default HistoryTask;
 
 const TaskContentComponent = ({content}) => {
     return (
-        <div className="taskContent">
-            <p className="taskContentType">{content.type}</p>
-            <p className="taskContentText">{content.text}</p>
-            <a className="taskContentInspect">查看</a>
-        </div>
+        <TasksList task={content}/>
     );
 }
 
 const TaskComponent = ({taskModel}) => {
-    const children = taskModel.content.map(item => {
-        return <TaskContentComponent content={item} />
-    });
+    // const children = taskModel.content.map(item => {
+    //     return <TaskContentComponent content={item} />
+    // });
+
+    var arr = [
+        {id:'11',title:'动物农dd庄123123',type:'1'},
+        {id:'151',title:'动物dd农庄123123',type:'2'},
+        {id:'141',title:'动物农庄123123',type:'3'},
+        {id:'131',title:'动物aa农庄123123',type:'1'},
+        {id:'112',title:'动dd物农庄123123',type:'1'},
+
+    ]
 
     return (
         <div>
             <div className="taskContentHeader">
                 <p className="taskHeaderTitle">{taskModel.title}</p>
             </div>
-            {children}
+            <Grid className="task-list"><TasksList tasks={arr}/></Grid>
         </div>
     );
 }
@@ -71,9 +79,9 @@ const TaskComponent = ({taskModel}) => {
 class TaskListComponent extends React.PureComponent {
     render() {
         const taskModels = this.props.taskModels;
-        alert("刷新列表");
-        const children = taskModels.map(item => {
-            return <TaskComponent taskModel={item} />
+        // alert("刷新列表");
+        const children = taskModels.map((item,i) => {
+            return <TaskComponent key={i} taskModel={item} />
         })
 
         return (

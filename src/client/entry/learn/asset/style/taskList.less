@@ -1,0 +1,75 @@
+@import '~asset/style/_cine.less';
+
+.task-list {
+    .notask {
+        line-height: 2;
+        color: #c6c7c7;
+    }
+    .task-item {
+        line-height: 0.9rem;
+
+        display: flex;
+
+        color: #3a3b3c;
+        border-bottom: 0.02rem solid #f2f4f6;
+
+        align-items: center;
+        .label {
+            font-size: 0.22rem;
+
+            display: flex;
+
+            width: 0.6rem;
+            height: 0.3rem;
+            margin-right: 0.12rem;
+
+            color: #72aeef;
+            border: solid 0.02rem #72aeef;
+            border-radius: 0.04rem;
+
+            justify-content: center;
+            align-items: center;
+            flex-shrink: 0;
+        }
+        a {
+            color: inherit;
+        }
+        &:last-of-type {
+            border-bottom: none;
+        }
+        .task-title {
+            .text-one-line();
+        }
+    }
+    .expand_more {
+        font-size: 0.22rem;
+        line-height: 0.6rem;
+
+        display: flex;
+
+        color: #c6c7c7;
+
+        flex-grow: 1;
+        align-items: center;
+        justify-content: center;
+        i {
+            font-size: 0.22rem;
+        }
+    }
+}
+
+@media @media-up-sm {
+.task-list {
+    padding-top: 0.2rem;
+    .task-item {
+        line-height: 0.8rem;
+
+        padding-right: 0.56rem;
+
+        border-bottom: none;
+        a {
+            font-size: 0.3rem;
+        }
+    }
+}
+}

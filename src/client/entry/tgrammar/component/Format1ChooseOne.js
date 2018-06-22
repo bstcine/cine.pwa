@@ -26,13 +26,11 @@ const Format1ChooseOne = ({
     console.log('Question1ChooseOne render');
     let waiting_and_not_need_feedback =
         currentQuizState === CurrentQuizState.WAITING4CHECK &&
-        need_feedback &&
         need_feedback === '0';
 
     return (
         <div className="questionformat questionformat1">
             <QuestionTitle no={no} title={title} />
-
             <QuestionSelect
                 id={id}
                 editable={currentQuizState === CurrentQuizState.ANSWERING}
@@ -40,7 +38,7 @@ const Format1ChooseOne = ({
                 select_value={select_value}
                 onChange={saveQuestion1SelectValue}
             />
-
+            {/* 学生提交后且不需要批改，老师批改中，学生检阅中， => 显示答案 */}
             {(currentQuizState === CurrentQuizState.CHECKING ||
                 currentQuizState === CurrentQuizState.REVIEWING ||
                 waiting_and_not_need_feedback) && (
@@ -55,23 +53,14 @@ const Format1ChooseOne = ({
                 />
             )}
 
-            {!answer_feedback &&
-                feedback &&
-                waiting_and_not_need_feedback && (
-                <FeedbackText
-                    hint={'默认解析'}
-                    feedback={feedback}
-                    is_select_correct={is_select_correct}
-                />
-            )}
-
-            {((currentQuizState === CurrentQuizState.REVIEWING &&
-                answer_feedback) ||
-                currentQuizState === CurrentQuizState.CHECKING) && (
+            {/* 学生提交后且不需要批改且有解析 或 老师批改中 或 学生检阅中 */}
+            {((waiting_and_not_need_feedback && feedback) ||
+                currentQuizState === CurrentQuizState.CHECKING ||
+                (currentQuizState === CurrentQuizState.REVIEWING &&
+                    answer_feedback)) && (
                 <FeedbackText
                     editable={currentQuizState === CurrentQuizState.CHECKING}
-                    feedback={answer_feedback}
-                    is_select_correct={is_select_correct}
+                    feedback={answer_feedback || feedback}
                     onChange={saveQuestionFeedback}
                 />
             )}

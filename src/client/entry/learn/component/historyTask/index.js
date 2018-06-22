@@ -3,7 +3,6 @@
  */
 import React from 'react';
 import "../../asset/style/historyTask.less"
-
 import { Grid } from '@/component/GGrid';
 import TasksList from '../TasksList';
 
@@ -15,7 +14,7 @@ class HistoryTask extends React.PureComponent {
 
         const button = (
             <button
-                className="searchButton"
+                className="HT_SearchButton"
                 onClick={() => {actions.dialogShow(true)}}
             >
                 筛选
@@ -36,7 +35,7 @@ class HistoryTask extends React.PureComponent {
         // );
 
         return (
-            <div className="task">
+            <div className="historyTask">
                 {taskList}
                 {button}
             </div>
@@ -45,12 +44,6 @@ class HistoryTask extends React.PureComponent {
 }
 
 export default HistoryTask;
-
-const TaskContentComponent = ({content}) => {
-    return (
-        <TasksList task={content}/>
-    );
-}
 
 const TaskComponent = ({taskModel}) => {
     // const children = taskModel.content.map(item => {
@@ -68,10 +61,10 @@ const TaskComponent = ({taskModel}) => {
 
     return (
         <div>
-            <div className="taskContentHeader">
-                <p className="taskHeaderTitle">{taskModel.title}</p>
-            </div>
-            <Grid className="task-list"><TasksList tasks={arr}/></Grid>
+            <div className="HT_TaskHeaderTitle">{taskModel.title}</div>
+            <Grid className="task-list">
+                <TasksList tasks={arr}/>
+            </Grid>
         </div>
     );
 }

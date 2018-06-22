@@ -16,7 +16,7 @@ class VocabularyTask extends React.PureComponent {
             <div className="vocabularyTask">
                 <div className="v_Task_VocabularyHeader">
                     <a className="v_Task_H_TaskName">词汇学习</a>
-                    <a className="v_Task_H_HistoryDoor" href="/learn/historytask">历史学习</a>
+                    <a className="v_Task_H_HistoryDoor" href="/learn/task">历史学习</a>
                 </div>
                 <div className="v_Task_VocabularyList">
                     {vocabularyItems}

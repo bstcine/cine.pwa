@@ -1,17 +1,13 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 
 export default class Article extends Component {
     static defaultProps = {
-        newsCategorys: []
+        newsCategorys: [],
     };
-
-    constructor(props) {
-        super(props);
-    }
 
     render() {
         console.log(`Article`);
-        let {newsCategorys} = this.props;
+        let { newsCategorys } = this.props;
         return (
             <div className="article-container">
                 <div className="title">
@@ -30,17 +26,19 @@ export default class Article extends Component {
                                 <div
                                     className="article-img"
                                     style={{
-                                        background: `url(http://www.bstcine.com/f/${
+                                        background: `url(//www.bstcine.com/f/${
                                             newsCategory.img
                                         }) no-repeat center`,
-                                        backgroundSize: 'cover'
+                                        backgroundSize: 'cover',
                                     }}
                                 />
                                 <ul className="article-list">
                                     {newsCategory.children.map((item, i) => {
                                         return (
                                             <li className="article" key={i}>
-                                                <a href={`/news/${item.id}`}>{item.name}</a>
+                                                <a href={`/news/${item.id}`}>
+                                                    {item.name}
+                                                </a>
                                             </li>
                                         );
                                     })}

@@ -2,7 +2,7 @@ import React from 'react';
 
 const UserMobile = ({ user, handleClick }) => {
     let headImg = user.head_image
-        ? 'http://www.bstcine.com/f/' + user.head_image
+        ? '//www.bstcine.com/f/' + user.head_image
         : require('@/asset/image/ico_headpic.png');
 
     return (

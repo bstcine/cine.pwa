@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
+
 import { Provider } from 'react-redux';
 import rootReducer from './reducer';
 import { LearnRouter } from './learnRouter';
@@ -12,7 +13,7 @@ import { LearnRouter } from './learnRouter';
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', function() {
         navigator.serviceWorker
-            .register('/sw.js', { scope: '/' })
+            .register('/sw.js', { scope: '/learn' })
             .then(function(registration) {
                 // 注册成功
                 console.log(

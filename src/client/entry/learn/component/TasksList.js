@@ -38,9 +38,9 @@ const TasksList = ({ tasks, isLimitTasks }) => {
             }
             case Task_Type.Word:
                 if (task.word_start_index && task.word_end_index) {
-                    return `/learn/word?word_start_index=${
+                    return `/learn/word?start_index=${
                         task.word_start_index
-                    }&word_end_index=${task.word_end_index}`;
+                    }&end_index=${task.word_end_index}`;
                 } else {
                     return `/learn/word?word_type=${task.object_id}`;
                 }

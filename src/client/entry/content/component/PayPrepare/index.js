@@ -231,7 +231,7 @@ export default class PayPrepare extends Component {
                                             ? {
                                                 background: `url(${
                                                     course.img
-                                                        ? 'http://www.bstcine.com/f/' +
+                                                        ? '//www.bstcine.com/f/' +
                                                             course.img
                                                         : ''
                                                 }) center center / cover no-repeat`,

@@ -1,7 +1,6 @@
 /**
  * Created by lidangkun on 2018/6/15.
  */
-import GLayout from '@/component/GLayout';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';

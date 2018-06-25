@@ -3,7 +3,7 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-// const OfflinePlugin = require('offline-plugin');
+const OfflinePlugin = require('offline-plugin');
 
 const devMode = process.env.NODE_ENV !== 'production';
 
@@ -48,15 +48,7 @@ module.exports = {
         publicPath,
     },
     plugins: [
-        // new OfflinePlugin({
-        //     // relativePaths: false,
-        //     // publicPath: '/',
-        //     externals: ['/', '/learn'],
-        //     ServiceWorker: {
-        //         output: `learn/sw.js`,
-        //         navigateFallbackURL: `/learn`,
-        //     },
-        // }),
+        // new OfflinePlugin(),
         new webpack.DefinePlugin({
             SERVICE_URL: JSON.stringify(SERVICE_URL),
         }),

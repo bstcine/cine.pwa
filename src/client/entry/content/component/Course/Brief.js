@@ -1,14 +1,13 @@
-import React, {Component} from 'react';
-import {getParam} from '@/util/urlUtil';
+import React, { Component } from 'react';
+import { getParam } from '@/util/urlUtil';
 import siteCodeUtil from '@/util/sitecodeUtil';
-// import Video from '@/component/Video';
-import TryPlayer from '../../../../component/TryPlayer';
+import TryPlayer from '@/component/TryPlayer';
 
 export default class Brief extends Component {
     static defaultProps = {
         course: null,
         user: null,
-        isShowRecommend: false
+        isShowRecommend: false,
     };
 
     // 优惠列表
@@ -21,7 +20,10 @@ export default class Brief extends Component {
                             {activity.share_after_desc}
                         </div>
                     ) : (
-                        <div key={i} className="promote-title share pointer" onClick={this.props.onClickShare}>
+                        <div
+                            key={i}
+                            className="promote-title share pointer"
+                            onClick={this.props.onClickShare}>
                             {activity.share_before_desc}
                         </div>
                     );
@@ -57,8 +59,12 @@ export default class Brief extends Component {
                                 当前积分{user.point}，可抵扣{user.point}元
                             </div>
                         ) : (
-                            <div className="promote-title pointer" onClick={this.props.login}>
-                                1积分抵扣1元钱，<span className="blue">登录</span>
+                            <div
+                                className="promote-title pointer"
+                                onClick={this.props.login}>
+                                1积分抵扣1元钱，<span className="blue">
+                                    登录
+                                </span>
                                 <span className="grey">查看可抵扣金额</span>
                             </div>
                         )}
@@ -69,23 +75,33 @@ export default class Brief extends Component {
     }
 
     renderBottomButton(course) {
-
-        const {onClickLearn, onClickBuy, onClickShare} = this.props;
+        const { onClickLearn, onClickBuy, onClickShare } = this.props;
         if (course.status === '1') {
             if (course.is_paid) {
                 if (siteCodeUtil.inIOSAPP()) return;
                 if (siteCodeUtil.inAndroidAPP()) {
-                    if (course.product_type === '1' && (course.object_type === '1' || course.object_type === '4')) {
+                    if (
+                        course.product_type === '1' &&
+                        (course.object_type === '1' ||
+                            course.object_type === '4')
+                    ) {
                         return (
-                            <button className="btn-action btn-learn" onClick={onClickLearn}>
+                            <button
+                                className="btn-action btn-learn"
+                                onClick={onClickLearn}>
                                 立即学习
                             </button>
                         );
                     }
                 } else {
-                    if (course.object_type === '1' || course.object_type === '4') {
+                    if (
+                        course.object_type === '1' ||
+                        course.object_type === '4'
+                    ) {
                         return (
-                            <button className="btn-action btn-learn" onClick={onClickLearn}>
+                            <button
+                                className="btn-action btn-learn"
+                                onClick={onClickLearn}>
                                 立即学习
                             </button>
                         );
@@ -99,13 +115,17 @@ export default class Brief extends Component {
                     course.object_type === '5'
                 ) {
                     return (
-                        <button className="btn-action btn-buy" onClick={onClickBuy}>
+                        <button
+                            className="btn-action btn-buy"
+                            onClick={onClickBuy}>
                             立即购买
                         </button>
                     );
                 } else if (course.object_type === '4') {
                     return (
-                        <button className="btn-action btn-share" onClick={e => onClickShare(true, 5)}>
+                        <button
+                            className="btn-action btn-share"
+                            onClick={e => onClickShare(true, 5)}>
                             分享开通
                         </button>
                     );
@@ -150,16 +170,22 @@ export default class Brief extends Component {
                 if (course.original_price) {
                     return (
                         <div className="prices">
-                            <span className="price">￥{course.activity_price}</span>
+                            <span className="price">
+                                ￥{course.activity_price}
+                            </span>
                             <span className="old-price">
-                                原价：<span className="del">￥{course.original_price}</span>
+                                原价：<span className="del">
+                                    ￥{course.original_price}
+                                </span>
                             </span>
                         </div>
                     );
                 } else {
                     return (
                         <div className="prices">
-                            <span className="price">￥{course.activity_price}</span>
+                            <span className="price">
+                                ￥{course.activity_price}
+                            </span>
                         </div>
                     );
                 }
@@ -169,14 +195,18 @@ export default class Brief extends Component {
         }
     }
     renderVideoContainer(course) {
-        if (!course) return <div className="video-container"/>;
+        if (!course) return <div className="video-container" />;
         return (
             <div className="video-container">
                 {course.try_contents && course.try_contents.length ? (
                     <div className="content">
                         <TryPlayer
                             playList={course.try_contents}
-                            poster={course.img ? 'http://www.bstcine.com/f/' + course.img : null}
+                            poster={
+                                course.img
+                                    ? `//www.bstcine.com/f/${course.img}`
+                                    : null
+                            }
                         />
                     </div>
                 ) : (
@@ -184,8 +214,10 @@ export default class Brief extends Component {
                         className="content"
                         style={{
                             background: `url(${
-                                course.img ? 'http://www.bstcine.com/f/' + course.img : ''
-                            }) center center / cover no-repeat`
+                                course.img
+                                    ? `//www.bstcine.com/f/${course.img}`
+                                    : ''
+                            }) center center / cover no-repeat`,
                         }}
                     />
                 )}
@@ -194,8 +226,15 @@ export default class Brief extends Component {
     }
 
     render() {
-        let {course, user, relatedCourse, onClickRecommend, isShowRecommend, onClickCoupon,} = this.props;
-        const {onClickShare} = this.props;
+        let {
+            course,
+            user,
+            relatedCourse,
+            onClickRecommend,
+            isShowRecommend,
+            onClickCoupon,
+        } = this.props;
+        const { onClickShare } = this.props;
         let source_user_id = getParam().source_user_id;
         return (
             <div className="brief-container">
@@ -207,7 +246,7 @@ export default class Brief extends Component {
                             <ul className="share-icons">
                                 <li
                                     style={{
-                                        background: `url(${require('../../asset/image/ico_wechat.png')}) center center / contain no-repeat`
+                                        background: `url(${require('../../asset/image/ico_wechat.png')}) center center / contain no-repeat`,
                                     }}
                                     onClick={e => onClickShare(false)}
                                 />
@@ -218,30 +257,49 @@ export default class Brief extends Component {
 
                 <div className="desc-container">
                     <div className="desc-main">
-                        {course ? <div className="title">{course.name}</div> : null}
+                        {course ? (
+                            <div className="title">{course.name}</div>
+                        ) : null}
 
-                        {course && course.subtitle ? <div className="slogan">{course.subtitle}</div> : null}
+                        {course && course.subtitle ? (
+                            <div className="slogan">{course.subtitle}</div>
+                        ) : null}
 
                         {course && course.related_lesson_id ? (
                             <div className="related-course">
-                                <span onClick={e => relatedCourse(course.related_lesson_id, e)}>学习精读课程 >></span>
+                                <span
+                                    onClick={e =>
+                                        relatedCourse(
+                                            course.related_lesson_id,
+                                            e
+                                        )
+                                    }>
+                                    学习精读课程 >>
+                                </span>
                             </div>
                         ) : null}
 
                         {this.renderMeta(course)}
                         {this.renderPrices(course)}
 
-                        {course && ((course.activitys && course.activitys.length) || course.is_allow_point === '1') ? (
-                            <div className="promotes">
-                                {this.renderActivityPromoteList(course)}
-                                {this.renderPointPromoteList(course, user)}
-                            </div>
-                        ) : null}
+                        {course &&
+                        ((course.activitys && course.activitys.length) ||
+                            course.is_allow_point === '1') ? (
+                                <div className="promotes">
+                                    {this.renderActivityPromoteList(course)}
+                                    {this.renderPointPromoteList(course, user)}
+                                </div>
+                            ) : null}
 
                         {course && course.notice ? (
                             <div className="notice">
                                 <div className="label">公告</div>
-                                <div className="notice-details" dangerouslySetInnerHTML={{__html: course.notice}} />
+                                <div
+                                    className="notice-details"
+                                    dangerouslySetInnerHTML={{
+                                        __html: course.notice,
+                                    }}
+                                />
                             </div>
                         ) : null}
                     </div>
@@ -251,9 +309,14 @@ export default class Brief extends Component {
                     {isShowRecommend ? (
                         <div className="right-desc">
                             {source_user_id ? (
-                                <div className="get-coupon" onClick={onClickCoupon} />
+                                <div
+                                    className="get-coupon"
+                                    onClick={onClickCoupon}
+                                />
                             ) : (
-                                <div className="recommend" onClick={onClickRecommend}>
+                                <div
+                                    className="recommend"
+                                    onClick={onClickRecommend}>
                                     <div className="red-bag" />
                                     <div className="desc">推荐得积分</div>
                                 </div>

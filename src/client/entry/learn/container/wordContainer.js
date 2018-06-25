@@ -1,5 +1,4 @@
 // 访问本页 /learn/vocabularytask?task_id=
-import GLayout from '@/component/GLayout';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';

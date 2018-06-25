@@ -1,13 +1,12 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import storeUtil from '@/util/storeUtil';
-import Bridge from "@/util/bridge";
+import Bridge from '@/util/bridge';
 import End from './end.js';
-import siteCodeUtil from "@/util/sitecodeUtil";
-import BRIDGE_EVENT from "@/constant/bridgeEvent";
-import * as Service from "@/service/quiz";
+import siteCodeUtil from '@/util/sitecodeUtil';
+import BRIDGE_EVENT from '@/constant/bridgeEvent';
+import * as Service from '@/service/quiz';
 
 export default class Card extends Component {
-
     constructor(props) {
         super(props);
         console.log('constructor');
@@ -18,11 +17,11 @@ export default class Card extends Component {
             selectOption: -1,
             inputDisabled: false,
             isEnd: false,
-            btnHint: '下一题'
+            btnHint: '下一题',
         };
 
         this.dataList = [];
-        this.optionName = ["A", "B", "C", "D", "E", "F", "G", "H", "I"];
+        this.optionName = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I'];
 
         this.quizId = storeUtil.get('quiz_id');
         this.quizBar = storeUtil.get('quiz_bar');
@@ -35,11 +34,11 @@ export default class Card extends Component {
 
     componentDidMount() {
         if (this.quizId) {
-            Service.getQuiz({id: this.quizId}).then(result => {
+            Service.getQuiz({ id: this.quizId }).then(result => {
                 console.log(result.data);
                 this.dataList = result.data.data;
                 this.init();
-            })
+            });
         } else {
             if (siteCodeUtil.inIOSAPP()) {
                 Bridge.ios(BRIDGE_EVENT.INIT_QUIZ_DATA).then(res => {
@@ -80,7 +79,7 @@ export default class Card extends Component {
 
             let btnHint = '下一题';
             if (this.dataList.length - 1 == index) {
-                btnHint = this.quizBar ? '继续学习' : '查看得分'
+                btnHint = this.quizBar ? '继续学习' : '查看得分';
             }
 
             this.setState({
@@ -89,7 +88,7 @@ export default class Card extends Component {
                 index: index,
                 selectOption: -1,
                 inputDisabled: false,
-                btnHint: btnHint
+                btnHint: btnHint,
             });
 
             window.scroll(0, 0);
@@ -110,23 +109,23 @@ export default class Card extends Component {
             this.setState({
                 selectLog: selectLog,
                 selectOption: input.id,
-                inputDisabled: true
+                inputDisabled: true,
             });
         }
     }
 
-    //下一题
+    // 下一题
     onNextCard() {
         this.loadCardByIndex(this.state.index + 1);
     }
 
-    //重新加载
+    // 重新加载
     onAgainLoad() {
         this.loadCardByIndex(0);
         this.props.history.push('/card');
     }
 
-    //退出答题
+    // 退出答题
     exitQuiz() {
         if (siteCodeUtil.inIOSAPP()) {
             Bridge.ios(BRIDGE_EVENT.QUIZ_EXIT);
@@ -138,11 +137,11 @@ export default class Card extends Component {
         }
     }
 
-    //结束页
+    // 结束页
     toEnd() {
         let correctCount = 0;
         let allCount = this.dataList.length;
-        this.state.selectLog.forEach((item) => {
+        this.state.selectLog.forEach(item => {
             if (item == 'true') correctCount++;
         });
         console.log(correctCount);
@@ -151,19 +150,28 @@ export default class Card extends Component {
         if (isNaN(correctCount) || isNaN(allCount)) {
             score = 0;
         } else {
-            score = allCount <= 0 ? "0" : (Math.round(correctCount / allCount * 10000) / 100);
+            score =
+                allCount <= 0
+                    ? '0'
+                    : Math.round(correctCount / allCount * 10000) / 100;
         }
 
         this.setState({
             isEnd: true,
-            score: score
+            score: score,
         });
     }
 
     render() {
-        if (this.state.isEnd) return <End score={this.state.score} exit={this.exitQuiz} again={this.onAgainLoad}/>;
+        if (this.state.isEnd) { return (
+            <End
+                score={this.state.score}
+                exit={this.exitQuiz}
+                again={this.onAgainLoad}
+            />
+        ); }
 
-        if (!this.state.data) return <div/>;
+        if (!this.state.data) return <div />;
 
         let correctIndex = 0;
         let selectOption = this.state.selectOption;
@@ -172,52 +180,81 @@ export default class Card extends Component {
             if (option.isCorrect) correctIndex = index;
 
             let isCurIndex = selectOption == index;
-            let content = option.type == '2' ?
-                <img className="content" src={"http://www.bstcine.com" + option.content}/> : option.content;
+            let content =
+                option.type == '2' ? (
+                    <img
+                        className="content"
+                        src={'//www.bstcine.com' + option.content}
+                    />
+                ) : (
+                    option.content
+                );
 
-            let optionHintStyle = isCurIndex ? {visibility: 'visible'} : {visibility: 'hidden'};
+            let optionHintStyle = isCurIndex
+                ? { visibility: 'visible' }
+                : { visibility: 'hidden' };
 
-            return <label key={index} className="card-option">
-                <img className="hint"
-                     style={optionHintStyle}
-                     src={require(option.isCorrect ? './../asset/image/ico_right.png' : './../asset/image/ico_wrong.png')}/>
-                <input id={index} disabled={this.state.inputDisabled} value={option.isCorrect} type="radio"
-                       onChange={this.onChangRadio}
-                       checked={isCurIndex}/>
-                <span className="option">{this.optionName[index] + ". "}</span>
-                <span className="content">{content}</span>
-            </label>
+            return (
+                <label key={index} className="card-option">
+                    <img
+                        className="hint"
+                        style={optionHintStyle}
+                        src={require(option.isCorrect
+                            ? './../asset/image/ico_right.png'
+                            : './../asset/image/ico_wrong.png')}
+                    />
+                    <input
+                        id={index}
+                        disabled={this.state.inputDisabled}
+                        value={option.isCorrect}
+                        type="radio"
+                        onChange={this.onChangRadio}
+                        checked={isCurIndex}
+                    />
+                    <span className="option">
+                        {this.optionName[index] + '. '}
+                    </span>
+                    <span className="content">{content}</span>
+                </label>
+            );
         });
 
         let isCorrect = selectOption == correctIndex;
-        return <div className="quiz-card">
-            <div className="card-title">
-                <span style={{float: "left"}}>{(this.state.index + 1) + "."}&nbsp;</span>
-                <div dangerouslySetInnerHTML={{__html: this.state.data.title}}/>
-            </div>
-            {OptionUI}
-            <div className="card-line"/>
-            <div className="card-todo">
-                <div className="card-answer">
-                    <span
-                        className={selectOption == -1 ? "" : (isCorrect ? "green" : "red")}>
-                        {isCorrect ? '回答正确! ' : '正确答案：' + this.optionName[correctIndex]}
+        return (
+            <div className="quiz-card">
+                <div className="card-title">
+                    <span style={{ float: 'left' }}>
+                        {this.state.index + 1 + '.'}&nbsp;
                     </span>
+                    <div
+                        dangerouslySetInnerHTML={{
+                            __html: this.state.data.title,
+                        }}
+                    />
                 </div>
-                <button className="card-next"
+                {OptionUI}
+                <div className="card-line" />
+                <div className="card-todo">
+                    <div className="card-answer">
+                        <span
+                            className={
+                                selectOption == -1
+                                    ? ''
+                                    : isCorrect ? 'green' : 'red'
+                            }>
+                            {isCorrect
+                                ? '回答正确! '
+                                : '正确答案：' + this.optionName[correctIndex]}
+                        </span>
+                    </div>
+                    <button
+                        className="card-next"
                         onClick={this.onNextCard}
-                        disabled={(this.state.selectOption == -1) ? true : false}>
-                    {this.state.btnHint}
-                </button>
+                        disabled={this.state.selectOption == -1 ? true : false}>
+                        {this.state.btnHint}
+                    </button>
+                </div>
             </div>
-        </div>
+        );
     }
-
 }
-
-
-
-
-
-
-

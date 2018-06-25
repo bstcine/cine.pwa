@@ -10,7 +10,7 @@ const initTaskPageState = fromJS({
     taskModels:[],
     startTime:'',
     endTime:'',
-    defaultType:'4',
+    defaultType:'',
 });
 
 const historyTaskRedu = (state = initTaskPageState, action) => {

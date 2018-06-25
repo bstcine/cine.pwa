@@ -3,7 +3,7 @@ const webpack = require('webpack');
 const merge = require('webpack-merge');
 const common = require('./webpack.common.js');
 
-const Dev_Host_URL = 'http://local.bstcine.com:9000';
+const Dev_Host_URL = 'https://dev.bstcine.com';
 
 let rewrites = [];
 for (let entry in common.entry) {

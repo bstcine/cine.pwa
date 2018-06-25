@@ -13,13 +13,6 @@ const cineMenu = [
                 icon: '',
                 icon_path: '',
             },
-            {
-                label: '我的测试',
-                url: h5.URL_User_Exam,
-                icon: '',
-                icon_path: '',
-                visible: false,
-            },
         ],
     },
     {
@@ -38,6 +31,13 @@ const cineMenu = [
                 icon: '',
                 icon_path: '',
             },
+            {
+                label: '我的测试',
+                url: h5.URL_User_Quiz,
+                icon: '',
+                icon_path: '',
+                visible: false,
+            },
             // {
             //     label: '我的订单',
             //     url: h5.URL_User_Order,
@@ -48,13 +48,19 @@ const cineMenu = [
         ],
     },
     {
-        label: '老师批改',
+        label: '导师批改',
         url: h5.URL_Mentor_Index,
         role_id: [RoleID.TEACHER, RoleID.ADMINISTRATOR],
         children: [
             {
-                label: '学生列表',
-                url: h5.URL_Mentor_StudentList,
+                label: '学生作业',
+                url: h5.URL_Mentor_Student_Task,
+                icon: '',
+                icon_path: '',
+            },
+            {
+                label: '学生测试',
+                url: h5.URL_Mentor_Student_Quiz,
                 icon: '',
                 icon_path: '',
             },

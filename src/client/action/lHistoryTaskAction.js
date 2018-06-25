@@ -34,25 +34,26 @@ export const actionHistoryTask = {
         payload: endTime,
     }),
 
-    // 加载历史任务数据
-    loadHistoryTask: () =>  async dispatch => {
+    _loadHistoryTask : (param,isInit) => async dispatch => {
+        let [error,result] = await fetchData(Api.APIURL_User_Learn_Task,param);
 
-        let [error,result] = await fetchData(Api.APIURL_User_Learn_Task);
-
-        if (error){
+        if (error) {
             dispatch(toastAction.showError(errorMsg(error)));
             return
         }
 
-        if (result.rows.length === 0){
-            dispatch(toastAction.showError("没有历史任务"));
-            return
-        }
-
-        dispatch(actionHistoryTask._changeStartTime(result.rows[0].effective_at));
-        dispatch(actionHistoryTask._changeEndTime(result.rows[0].expire_at));
+        // if (isInit) {
+        //     dispatch(actionHistoryTask._changeStartTime(result.rows[0].effective_at));
+        //     dispatch(actionHistoryTask._changeEndTime(result.rows[0].expire_at));
+        // }
 
         dispatch(actionHistoryTask._receive(result));
+        dispatch(actionHistoryTask._dialogShow(false));
+    },
+
+    // 加载历史任务数据
+    loadHistoryTask: () =>  async dispatch => {
+        dispatch(actionHistoryTask._loadHistoryTask({},true))
     },
 
     // dialog窗口显示/隐藏
@@ -67,13 +68,18 @@ export const actionHistoryTask = {
     },
 
     // 改变起始时间
-    changeStartTime: (value) => {
-        actionHistoryTask._changeStartTime(value);
+    changeStartTime: (value) => async dispatch => {
+        dispatch(actionHistoryTask._changeStartTime(value));
     },
 
     // 改变结束时间
-    changeEndTime: (value) => {
-        actionHistoryTask._changeEndTime(value);
+    changeEndTime: (value) => async dispatch => {
+        dispatch(actionHistoryTask._changeEndTime(value));
+    },
+
+    // 开始搜索选择结果
+    selectResult: (param) => async dispatch => {
+        dispatch(actionHistoryTask._loadHistoryTask(param,false));
     },
 
 };

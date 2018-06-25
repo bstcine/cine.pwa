@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Entry from '@/component/Entry';
-import GLayout from '@/component/GLayout';
 import Tasks from './Tasks';
 import Courses from './Courses';
 import '../asset/style/index.less';
@@ -24,10 +23,10 @@ class HomePage extends Entry {
     render() {
         const { user } = this.props;
         return (
-            <GLayout>
+            <React.Fragment>
                 {!!user && user.type === '2' && <Tasks />}
                 <Courses />
-            </GLayout>
+            </React.Fragment>
         );
     }
 }

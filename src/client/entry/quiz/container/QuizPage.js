@@ -2,7 +2,7 @@ import '../asset/style/index.less';
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { fetchQuizData } from '@/action/tgrammarAction';
+import { fetchQuizData } from '@/action/quizAction';
 import Header from '@/component/Header';
 import Footer from '@/component/Footer';
 import Alert from '@/component/Alert';

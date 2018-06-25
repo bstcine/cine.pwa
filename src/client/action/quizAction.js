@@ -117,34 +117,60 @@ export const fetchQuizData = ({
  * 准备提交答案
  */
 export const preSubmitAnswer = () => (dispatch, getState) => {
-    let { questions, answersById } = getState();
+    let { quiz, questions, answersById } = getState();
     let unCompletedNos = _getUnCompletedNos(questions.byId, answersById);
     let text;
-    if (unCompletedNos.length) {
-        text = `您共有${
-            unCompletedNos.length
-        }题尚未作答，是否确认提交？提交后不能再修改。\n\n尚未作答的题目：第${unCompletedNos.join(
-            '、'
-        )}题`;
-        return dispatch(
-            openConfirm({
-                text,
-                onConfirm: () => {
-                    dispatch(submitAnswer());
-                },
-            })
-        );
+
+    if (['1', '3'].includes(quiz.type)) {
+        if (unCompletedNos.length) {
+            text = `您共有${
+                unCompletedNos.length
+            }题尚未作答，请作答完后再提交。\n\n尚未作答的题目：第${unCompletedNos.join(
+                '、'
+            )}题`;
+            return dispatch(
+                openAlert({
+                    text,
+                })
+            );
+        } else {
+            text = '您已作答完毕，是否确认提交？提交后不能再修改';
+            return dispatch(
+                openConfirm({
+                    text,
+                    onConfirm: () => {
+                        dispatch(submitAnswer());
+                    },
+                })
+            );
+        }
     } else {
-        text = '您已作答完毕，是否确认提交？提交后不能再修改';
+        if (unCompletedNos.length) {
+            text = `您共有${
+                unCompletedNos.length
+            }题尚未作答，是否确认提交？提交后不能再修改。\n\n尚未作答的题目：第${unCompletedNos.join(
+                '、'
+            )}题`;
+            return dispatch(
+                openConfirm({
+                    text,
+                    onConfirm: () => {
+                        dispatch(submitAnswer());
+                    },
+                })
+            );
+        } else {
+            text = '您已作答完毕，是否确认提交？提交后不能再修改';
+            return dispatch(
+                openConfirm({
+                    text,
+                    onConfirm: () => {
+                        dispatch(submitAnswer());
+                    },
+                })
+            );
+        }
     }
-    return dispatch(
-        openConfirm({
-            text,
-            onConfirm: () => {
-                dispatch(submitAnswer());
-            },
-        })
-    );
 };
 
 /**
@@ -574,7 +600,7 @@ const _getUnCompletedNos = (questionIds, answersById) => {
                         unCompletedNos.push(questionIndex);
                     }
                 }
-            }else if (question.format === QuestionFormat.FORMAT4_SHORT_QUE) {
+            } else if (question.format === QuestionFormat.FORMAT4_SHORT_QUE) {
                 questionIndex++;
                 let answer = answersById[key];
                 if (!answer) {

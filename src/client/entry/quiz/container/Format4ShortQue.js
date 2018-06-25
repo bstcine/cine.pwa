@@ -3,7 +3,7 @@ import Format4ShortQue from '../component/Format4ShortQue';
 import {
     saveQuestion4TextValue,
     saveQuestionFeedback,
-} from '@/action/tgrammarAction';
+} from '@/action/quizAction';
 
 const mapStateToProps = (state, ownProps) => {
     const { answersById, questions, currentQuizState } = state;

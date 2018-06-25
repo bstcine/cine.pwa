@@ -16,11 +16,11 @@ const pages = [
     'cquiz',
     'address',
     'vocabtest',
-    'tgrammar',
     'user',
     'teacher',
     'temp',
     'learn',
+    'quiz',
 ];
 
 let entry = {};

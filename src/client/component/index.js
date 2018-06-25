@@ -1,7 +1,6 @@
 import React from 'react';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
-// import { TextField } from 'material-ui';
 
 import TextField from '@material-ui/core/TextField';
 import NativeSelect from '@material-ui/core/NativeSelect';
@@ -25,10 +24,10 @@ export const CDatePicker = ({ defaultValue, label, onChange }) => {
     );
 };
 
-export const CSelect = ({defaultValue, values, onChange}) => {
+export const CSelect = ({ defaultValue, values, onChange }) => {
 
     const children = values.map(item => {
-        return <option value={item.key} >{item.value}</option>
+        return <option key={item.key} value={item.key} >{item.value}</option>;
     });
 
     return (
@@ -36,7 +35,7 @@ export const CSelect = ({defaultValue, values, onChange}) => {
             value={defaultValue}
             onChange={onChange}
         >
-            <option value='' >none</option>
+            <option key={'0'} value={''} >none</option>
             {children}
         </NativeSelect>
     );

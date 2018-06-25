@@ -2,7 +2,7 @@
  * Created by lidangkun on 2018/6/22.
  */
 import React from 'react';
-import { CFlatButton, CDialog, CDatePicker, CList, CListItem, CListItemText, CSelect } from '@/component';
+import { CFlatButton, CDialog, CDatePicker, CSelect } from '@/component';
 
 const ListText = (isOpen,list,handleAction)=>{
     return (
@@ -40,7 +40,11 @@ const SearchTaskDialog = ({ isOpen, startTime, endTime, defaultType, actions }) 
             key={2}
             label="搜索"
             primary={true}
-            onClick={()=>{actions.dialogShow(false)}}
+            onClick={()=>{actions.selectResult({
+                startTime:startTime,
+                endTime:endTime,
+                type:defaultType
+            })}}
         />,
     ];
 
@@ -60,32 +64,35 @@ const SearchTaskDialog = ({ isOpen, startTime, endTime, defaultType, actions }) 
                 open={isOpen}
                 onRequestClose={()=>{actions.dialogShow(false)}} >
 
-                <div style={itemStyle} >时间</div>
+                <div style={itemStyle} >选择时间范围</div>
 
                 <form  >
                     <CDatePicker
                         defaultValue={startTime}
-                        onChange={(e, val) => {
-                            alert(val);
+                        label="from"
+                        onChange={(event) => {
+                            actions.changeStartTime(event.target.value);
                         }}
                     />
                     <CDatePicker
                         defaultValue={endTime}
-                        onChange={(e, val) => {
-                            alert(val);
+                        label="to"
+                        onChange={(event) => {
+                            actions.changeEndTime(event.target.value);
                         }}
                     />
                 </form>
 
-                <div style={itemStyle} >类型</div>
-
-                <CSelect
-                    defaultValue={defaultType}
-                    values={taskTypes}
-                    onChange={(event) => {
+                <div style={itemStyle} >选择任务类型</div>
+                <form>
+                    <CSelect
+                        defaultValue={defaultType}
+                        values={taskTypes}
+                        onChange={(event) => {
                         actions.changeType(event.target.value);
-                    }}
-                />
+                        }}
+                    />
+                </form>
 
             </CDialog>
     );

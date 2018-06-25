@@ -7,7 +7,7 @@ import errorMsg from '@/util/errorMsg';
 export const actionVocabularyTask = {
 
     _request: () => ({
-        type : ACTION_LV.REQUEST,
+        type: ACTION_LV.REQUEST,
     }),
 
     _receive: result => ({
@@ -15,23 +15,22 @@ export const actionVocabularyTask = {
         payload: result.rows,
     }),
 
-    loadVocabulary: (startIndex,endIndex,wordType) => async dispatch => {
+    loadVocabulary: (startIndex, endIndex, wordType) => async dispatch => {
 
         // 使用真实的api请求获取数据
         let param = {
-            start_index : startIndex,
-            end_index : endIndex,
-            word_type : wordType,
+            start_index: startIndex,
+            end_index: endIndex,
+            word_type: wordType,
         };
 
-        let [error,result] = await fetchData(Api.APIURL_User_Learn_Word,param);
+        let [error, result] = await fetchData(Api.APIURL_User_Learn_Word, param);
 
-        if (error){
+        if (error) {
             dispatch(toastAction.showError(errorMsg(error)));
-            return
+        } else {
+            dispatch(actionVocabularyTask._receive(result));
         }
-
-        dispatch(actionVocabularyTask._receive(result));
     },
 
 };

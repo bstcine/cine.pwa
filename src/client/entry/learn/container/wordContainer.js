@@ -2,12 +2,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Toast } from '@/component/Toast';
 import { actionVocabularyTask } from '@/action/lVocabularyTaskAction';
 import VocabularyTask from '../component/vocabularyTask';
 import { getParam } from '@/util/urlUtil';
 
 class VocabularyTaskContainer extends Component {
+
     playAudio = audioSrc => {
         this.audioPlayer.src =
             'http://oss.bstcine.com/word/top10000/' + audioSrc;

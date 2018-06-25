@@ -18,6 +18,6 @@ const userRoute = {
             component: PointContainer,
         },
     ],
-    willCheckAuth: true,
+    checkAuth: true,
 };
 export const UserRouter = () => <CRouter route={userRoute} />;

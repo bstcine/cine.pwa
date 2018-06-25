@@ -1,21 +1,21 @@
 import React from 'react';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
-import { TextField } from 'material-ui';
+// import { TextField } from 'material-ui';
 
-// import TextField from '@material-ui/core/TextField';
-
+import TextField from '@material-ui/core/TextField';
 import NativeSelect from '@material-ui/core/NativeSelect';
 
 const CFlatButton = props => {
     return <FlatButton {...props} />;
 };
 
-export const CDatePicker = ({ defaultValue, onChange }) => {
+export const CDatePicker = ({ defaultValue, label, onChange }) => {
     return (
         <TextField
             id="date"
             type="date"
+            label={label}
             defaultValue={defaultValue}
             InputLabelProps={{
                 shrink: true,

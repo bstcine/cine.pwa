@@ -64,24 +64,26 @@ const SearchTaskDialog = ({ isOpen, startTime, endTime, defaultType, actions }) 
                 open={isOpen}
                 onRequestClose={()=>{actions.dialogShow(false)}} >
 
-                <div style={itemStyle} >时间</div>
+                <div style={itemStyle} >选择时间范围</div>
 
                 <form  >
                     <CDatePicker
                         defaultValue={startTime}
+                        label="from"
                         onChange={(event) => {
                             actions.changeStartTime(event.target.value);
                         }}
                     />
                     <CDatePicker
                         defaultValue={endTime}
+                        label="to"
                         onChange={(event) => {
                             actions.changeEndTime(event.target.value);
                         }}
                     />
                 </form>
 
-                <div style={itemStyle} >类型</div>
+                <div style={itemStyle} >选择任务类型</div>
                 <form>
                     <CSelect
                         defaultValue={defaultType}

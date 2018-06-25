@@ -23,7 +23,7 @@ const Courses = ({ courses }) => {
                             <div
                                 className="course-img"
                                 style={{
-                                    background: `url("http://www.bstcine.com/f/${
+                                    background: `url("//www.bstcine.com/f/${
                                         course.img
                                     }") center center / cover no-repeat`,
                                 }}>

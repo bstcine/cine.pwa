@@ -4,16 +4,18 @@ import '../GLayout/style.less';
 import GIcon from '@/component/GIcon';
 
 const Brand = () => (
-    <img
-        className="brand"
-        src={require('@/asset/image/logo_bstcine.png')}
-        alt="brand"
-    />
+    <a href="/">
+        <img
+            className="brand"
+            src={require('@/asset/image/logo_bstcine.png')}
+            alt="brand"
+        />
+    </a>
 );
 
 const HeaderImg = ({ user }) => {
     let img = user.head_image
-        ? 'http://www.bstcine.com/f/' + user.head_image
+        ? `//www.bstcine.com/f/${user.head_image}`
         : require('@/asset/image/ico_headpic.png');
     return <img src={img} alt="HeaderImg" />;
 };

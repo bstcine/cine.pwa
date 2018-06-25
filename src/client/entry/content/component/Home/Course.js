@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import CourseLink from '@/component/CourseLink';
 
 export default class Course extends Component {
@@ -16,7 +16,9 @@ export default class Course extends Component {
                         <div className="course-price">
                             ￥{course.price}
                             <span className="old-price-text">原价</span>
-                            <span className="old-price">￥{course.original_price}</span>
+                            <span className="old-price">
+                                ￥{course.original_price}
+                            </span>
                         </div>
                     );
                 } else {
@@ -28,59 +30,60 @@ export default class Course extends Component {
         }
     }
 
-    renderAuthor(course){
-        if(course.object_type === '1'){
+    renderAuthor(course) {
+        if (course.object_type === '1') {
             return (
                 <div className="course-author">
-                    {course.author ? `授课老师：${course.author}` : ""}
+                    {course.author ? `授课老师：${course.author}` : ''}
                 </div>
-            )
-        }else{
-            if(course.author){
+            );
+        } else {
+            if (course.author) {
                 return (
                     <div className="course-author">
                         {`授课老师：${course.author}`}
                     </div>
-                )
-            }else{
-                return null
+                );
+            } else {
+                return null;
             }
         }
     }
 
     renderTimeArrange(course) {
-        if(course.object_type === '1'){
+        if (course.object_type === '1') {
             return (
                 <div className="course-arrange">
-                    {course.time_arrange ? `学习课时：${course.time_arrange}` : ""}
+                    {course.time_arrange
+                        ? `学习课时：${course.time_arrange}`
+                        : ''}
                 </div>
-            )
-        }else{
-            if(course.time_arrange){
+            );
+        } else {
+            if (course.time_arrange) {
                 return (
                     <div className="course-arrange">
                         {`学习课时：${course.time_arrange}`}
                     </div>
-                )
-            }else{
-                return null
+                );
+            } else {
+                return null;
             }
         }
     }
 
     render() {
-        const {course, ...props} = this.props;
+        const { course, ...props } = this.props;
 
         return (
             <div className="course-wrap">
                 <CourseLink course={course} className="course-item" {...props}>
-
                     <div
                         className="course-img"
                         style={{
-                            background: `url(http://www.bstcine.com/f/${
+                            background: `url(//www.bstcine.com/f/${
                                 course.img
-                                }) center center / cover no-repeat`
+                            }) center center / cover no-repeat`,
                         }}
                     />
 
@@ -90,7 +93,6 @@ export default class Course extends Component {
                         {this.renderTimeArrange(course)}
                         {this.displayPrice(course)}
                     </div>
-
                 </CourseLink>
             </div>
         );

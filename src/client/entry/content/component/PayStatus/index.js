@@ -67,8 +67,7 @@ export default class PayStatus extends Component {
                     </p>
                     <p>
                         推荐学习方式：电脑登录{' '}
-                        <a href="http://www.bstcine.com">www.bstcine.com</a>{' '}
-                        进行学习
+                        <a href="//www.bstcine.com">www.bstcine.com</a> 进行学习
                     </p>
                     <p className="tips">
                         如需咨询，请加善恩小助手微信（<span className="wechat-name">

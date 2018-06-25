@@ -1,7 +1,6 @@
 import React from 'react';
-import { Grid, Column122 } from '@/component/GGrid';
+import { Grid } from '@/component/GGrid';
 import GIcon from '@/component/GIcon';
-import { Task_Type } from '@/constant';
 import TasksList from './TasksList';
 
 const Badge = ({ tasks }) => {

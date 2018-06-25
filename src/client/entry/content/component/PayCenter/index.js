@@ -40,7 +40,7 @@ export default class PayCenter extends Component {
         if (uaUtil.wechat() && getParam().redirected !== '1') {
             let url = addParam(location.href, { redirected: 1 });
             location.href =
-                'http://www.bstcine.com/wechat/authorize?redirect=' +
+                '//www.bstcine.com/wechat/authorize?redirect=' +
                 encodeURIComponent(url);
         } else {
             initWechat();

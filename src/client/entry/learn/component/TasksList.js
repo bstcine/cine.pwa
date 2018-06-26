@@ -28,13 +28,18 @@ const TasksList = ({ tasks, isLimitTasks }) => {
                     '1': 'lesson_id',
                     '2': 'chapter_id',
                     '3': 'course_id',
-                    '4': 'content_quiz_id',
+                    '4': 'quiz_id',
                     '5': 'stats_content_quiz_id',
                 };
-                // todo 临时 quiz 路径
-                return `/tgrammar/quiz?${map[task.object_type]}=${
-                    task.object_id
-                }`;
+                if (['1', '2', '3'].includes(task.object_type)) {
+                    return `/quiz/kj?${map[task.object_type]}=${
+                        task.object_id
+                    }`;
+                } else {
+                    return `/quiz/grammar?${map[task.object_type]}=${
+                        task.object_id
+                    }`;
+                }
             }
             case Task_Type.Word:
                 if (task.word_start_index && task.word_end_index) {

@@ -18,19 +18,23 @@ class VocabularyTaskContainer extends Component {
         super(props);
 
         this.audioPlayer = new Audio();
-    }
-
-    componentDidMount() {
         // 获取参数
         let param = getParam();
 
         let startIndex = param.start_index;
         let endIndex = param.end_index;
         let wordType = param.word_type;
+        this.param = {
+            startIndex: startIndex,
+            endIndex: endIndex,
+            wordType: wordType,
+        };
+    }
 
+    componentDidMount() {
         // 准备访问
         let { actions } = this.props;
-        actions.loadVocabulary(startIndex, endIndex, wordType);
+        actions.loadVocabulary(this.param.startIndex, this.param.endIndex, this.param.wordType);
     }
 
     render() {
@@ -41,6 +45,7 @@ class VocabularyTaskContainer extends Component {
                 vocabularyList={vocabularyList}
                 actions={actions}
                 playAction={this.playAudio}
+                param={this.param}
             />
         );
     }

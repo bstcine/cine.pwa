@@ -6,9 +6,20 @@ class VocabularyTask extends React.PureComponent {
 
     render() {
 
-        let { vocabularyList, playAction } = this.props;
-        const vocabularyItems = vocabularyList.map(item => {
-            return <VocabularyItem key={item.id} vocabulary={item} playAction={playAction}/>;
+        let { vocabularyList, playAction, param } = this.props;
+        let testHref = '/learn/wordquiz?'+'start_index='+param.startIndex+'&end_index='+param.endIndex+'&word_type='+param.wordType;
+
+        const vocabularyItems = vocabularyList.map((item,index) => {
+            let backgroundColor = '';
+            if (index % 2 === 0) {
+                backgroundColor = '#fff';
+            } else {
+                backgroundColor = '#f6fcff';
+            }
+            let style = {
+                backgroundColor: backgroundColor,
+            }
+            return <VocabularyItem style={style} key={item.id} vocabulary={item} playAction={playAction}/>;
         });
 
         return (
@@ -22,7 +33,7 @@ class VocabularyTask extends React.PureComponent {
                     <div className="v_Task_VocabularyFooter">
                         <div className="v_Task_VF_Container">
                             <a className="v_Task_F_Promote">别忘记了词汇测试，通过了测试才算完成当日测试任务哦！</a>
-                            <a className="v_Task_F_TestDoor" href="/learn/vocabularytest">立即测试</a>
+                            <a className="v_Task_F_TestDoor" href={testHref}>立即测试</a>
                         </div>
                     </div>
                 </div>

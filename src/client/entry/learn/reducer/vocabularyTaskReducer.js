@@ -11,7 +11,7 @@ const vocabularyRedu = (state = initialState, action) => {
             return state;
 
         case ACTION_LV.RECEIVE:
-            return state.set('vocabularyList',action.payload);
+            return state.set('vocabularyList', action.payload);
 
         default:
             return state;

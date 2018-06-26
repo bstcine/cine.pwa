@@ -5,7 +5,7 @@ import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 
 import rootReducer from './reducer';
-import { LearnRouter } from './learnRouter';
+import { MentorRouter } from './mentorRouter';
 
 const preloadedState = window.__PRELOADED_STATE__;
 const store = createStore(rootReducer, preloadedState, applyMiddleware(thunk));
@@ -14,7 +14,7 @@ class Mentor extends Component {
     render() {
         return (
             <Provider store={store}>
-                <LearnRouter />
+                <MentorRouter />
             </Provider>
         );
     }

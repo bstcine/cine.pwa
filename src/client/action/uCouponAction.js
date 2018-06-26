@@ -51,43 +51,46 @@ export const actionUserCoupon = {
         let transfer = {
             isOpen: true,
             isCheck: true,
-            coupon:coupon,
-            checkMessage:'',
-            userAccount:'',
-        }
-        dispatch(actionUserCoupon._toggleTransferDialog(transfer))
+            coupon: coupon,
+            checkMessage: '',
+            userAccount: '',
+        };
+        dispatch(actionUserCoupon._toggleTransferDialog(transfer));
     },
 
     toggleTransferDialog: () => (dispatch, getState) => {
-        let transfer = getState().couponRedu.get('transfer')
+        let transfer = getState().couponRedu.get('transfer');
 
         let newTransfer = {
             isOpen: !transfer.isOpen,
             isCheck: transfer.isCheck,
-            coupon:transfer.coupon,
-            checkMessage:transfer.checkMessage,
-            userAccount:transfer.userAccount,
-        }
-        dispatch(actionUserCoupon._toggleTransferDialog(newTransfer))
+            coupon: transfer.coupon,
+            checkMessage: transfer.checkMessage,
+            userAccount: transfer.userAccount,
+        };
+        dispatch(actionUserCoupon._toggleTransferDialog(newTransfer));
     },
-    toggleTransferCheck: (isCheck,checkMessage,userAccount) => (dispatch, getState) => {
-        let transfer = getState().couponRedu.get('transfer')
+    toggleTransferCheck: (isCheck, checkMessage, userAccount) => (
+        dispatch,
+        getState
+    ) => {
+        let transfer = getState().couponRedu.get('transfer');
 
         let newTransfer = {
             isOpen: transfer.isOpen,
             isCheck: isCheck,
-            coupon:transfer.coupon,
-            checkMessage:checkMessage,
-            userAccount:userAccount,
-        }
+            coupon: transfer.coupon,
+            checkMessage: checkMessage,
+            userAccount: userAccount,
+        };
 
         dispatch(actionUserCoupon._toggleTransferDialog(newTransfer));
     },
     toggleTransferCheckStatus: account => async (dispatch, getState) => {
         // 需要检查输入的值
-        if (account === "") {
+        if (account === '') {
             dispatch(toastAction.showError('请输入对方账号'));
-            return
+            return;
         }
 
         let param = {
@@ -95,27 +98,31 @@ export const actionUserCoupon = {
         };
 
         // 调用输入的账户
-        let [err,result] = await fetchData(Api.APIURL_User_Query,param);
+        let [err, result] = await fetchData(Api.APIURL_User_Query, param);
 
-        if (err){
+        if (err) {
             err = errorMsg(err);
             dispatch(toastAction.showError(err));
-            return
+            return;
         }
 
-        var isCheck = true, checkMessage = '';
+        let isCheck = true,
+            checkMessage = '';
 
-        if (result.length < 1){
+        if (result.length < 1) {
             checkMessage = '没有查询到指定的用户';
-        }else if (result.length === 1){
+        } else if (result.length === 1) {
             isCheck = false;
-            checkMessage = '已查询到指定的用户: '+result[0].phone;
-            account = result[0].id
-        }else {
-            checkMessage = '查询到'+result.length+'个用户，请指定更详细的信息';
+            checkMessage = '已查询到指定的用户: ' + result[0].phone;
+            account = result[0].id;
+        } else {
+            checkMessage =
+                '查询到' + result.length + '个用户，请指定更详细的信息';
         }
 
-        dispatch(actionUserCoupon.toggleTransferCheck(isCheck,checkMessage,account));
+        dispatch(
+            actionUserCoupon.toggleTransferCheck(isCheck, checkMessage, account)
+        );
     },
 
     expandCouponItem: id => (dispatch, getState) => {
@@ -151,24 +158,27 @@ export const actionUserCoupon = {
 
     transferCoupon: transferUser => async (dispatch, getState) => {
         // 开始转增优惠券
-        let transfer = getState().couponRedu.get('transfer')
+        let transfer = getState().couponRedu.get('transfer');
 
         let param = {
             transfer: transferUser,
-            coupon_no:transfer.coupon.no,
-        }
+            coupon_no: transfer.coupon.no,
+        };
 
-        let [err,result] = await fetchData(Api.APIURL_User_Coupon_Transfer,param);
+        let [err, result] = await fetchData(
+            Api.APIURL_User_Coupon_Transfer,
+            param
+        );
 
         if (err) {
             err = errorMsg(err);
             dispatch(toastAction.showError(err));
-            return
+            return;
         }
 
-        if (result === '0'){
+        if (result === '0') {
             dispatch(toastAction.showError('转赠失败'));
-            return
+            return;
         }
 
         dispatch(toastAction.show('转赠成功'));

@@ -2,7 +2,6 @@
  * Created by lidangkun on 2018/6/14.
  */
 import React from 'react';
-// import uaUtil from '@/util/uaUtil';
 
 class VocabularyItem extends React.PureComponent {
 
@@ -12,7 +11,7 @@ class VocabularyItem extends React.PureComponent {
         let { vocabulary, playAction } = props;
 
         let voice_url = vocabulary.voice_url_b;
-        if (voice_url === undefined || voice_url === null || voice_url === '') {
+        if (voice_url === null || voice_url === '') {
             voice_url = vocabulary.voice_url_a;
         }
 
@@ -34,12 +33,6 @@ class VocabularyItem extends React.PureComponent {
         } else if (vocabulary.phonetic_b) {
             phonetic = vocabulary.phonetic_b;
         }
-
-        // if (uaUtil.PC()) {
-        //     sitecode = SITECODE.WEB_PC;
-        // } else {
-        //     sitecode = SITECODE.WEB_IPHONE;
-        // }
 
         return (
             <div className="v_Task_L_VocabularyItem" onClick={this.playVoice}>

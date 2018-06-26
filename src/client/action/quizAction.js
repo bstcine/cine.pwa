@@ -462,6 +462,12 @@ const parseFormat3Answer = (question, answersById) => {
 
 const parseFormat4Answer = (question, answersById) => {
     let answer = answersById[question.id] || { question_id: question.id };
+
+    // 两头去空
+    if (answer && answer.text_value) {
+        answer.text_value = answer.text_value.replace(/^\s+|\s+$/g, '');
+    }
+
     // todo 简答题得分
     return answer;
 };

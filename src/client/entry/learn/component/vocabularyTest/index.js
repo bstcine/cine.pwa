@@ -7,11 +7,14 @@ import "../../asset/style/vocabularyTest.less"
 class VocabularyTest extends React.PureComponent {
 
     render() {
+        let { param, rows } = this.props;
+        let wordHref = '/learn/word?'+'start_index='+param.startIndex+'&end_index='+param.endIndex+'&word_type='+param.wordType;
+        alert(rows.length);
         return (
             <div className="vocabularyTest">
                 <div className="v_Test_VocabularyHeader">
-                    <a className="v_Test_H_TaskName">Longman 3000基础词汇</a>
-                    <a className="v_Test_H_HistoryDoor" href="/learn/word">词汇学习</a>
+                    <a className="v_Test_H_TaskName">词汇测试</a>
+                    <a className="v_Test_H_HistoryDoor" href={wordHref}>词汇学习</a>
                 </div>
 
                 <div className="v_Test_VocabularyContent_Start">

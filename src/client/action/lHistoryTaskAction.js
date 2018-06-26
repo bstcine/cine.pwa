@@ -3,14 +3,13 @@
  */
 import Api from '../../APIConfig';
 import { fetchData } from '@/service/base';
-import { fromJS } from 'immutable';
 import { ACTION_LH } from '@/constant/actionTypeLearn';
 import { toastAction } from '@/action/commonAction';
 import errorMsg from '@/util/errorMsg';
 
 export const actionHistoryTask = {
     _request: () => ({
-        type : ACTION_LH.REQUEST,
+        type: ACTION_LH.REQUEST,
     }),
 
     _receive: result => ({
@@ -26,34 +25,29 @@ export const actionHistoryTask = {
         payload: defaultType,
     }),
     _changeStartTime: startTime => ({
-        type:ACTION_LH.CHANGESTARTTIME,
+        type: ACTION_LH.CHANGESTARTTIME,
         payload: startTime,
     }),
     _changeEndTime: endTime => ({
-        type:ACTION_LH.CHANGEENDTIME,
+        type: ACTION_LH.CHANGEENDTIME,
         payload: endTime,
     }),
 
-    _loadHistoryTask : (param,isInit) => async dispatch => {
-        let [error,result] = await fetchData(Api.APIURL_User_Learn_Task,param);
+    _loadHistoryTask: (param, isInit) => async dispatch => {
+        let [error, result] = await fetchData(Api.APIURL_User_Learn_Task, param);
 
         if (error) {
             dispatch(toastAction.showError(errorMsg(error)));
-            return
+            return;
         }
-
-        // if (isInit) {
-        //     dispatch(actionHistoryTask._changeStartTime(result.rows[0].effective_at));
-        //     dispatch(actionHistoryTask._changeEndTime(result.rows[0].expire_at));
-        // }
 
         dispatch(actionHistoryTask._receive(result));
         dispatch(actionHistoryTask._dialogShow(false));
     },
 
     // 加载历史任务数据
-    loadHistoryTask: () =>  async dispatch => {
-        dispatch(actionHistoryTask._loadHistoryTask({},true))
+    loadHistoryTask: () => async dispatch => {
+        dispatch(actionHistoryTask._loadHistoryTask({}, true))
     },
 
     // dialog窗口显示/隐藏
@@ -79,7 +73,7 @@ export const actionHistoryTask = {
 
     // 开始搜索选择结果
     selectResult: (param) => async dispatch => {
-        dispatch(actionHistoryTask._loadHistoryTask(param,false));
+        dispatch(actionHistoryTask._loadHistoryTask(param, false));
     },
 
 };

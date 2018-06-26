@@ -25,7 +25,7 @@ class VocabularyItem extends React.PureComponent {
 
     render() {
 
-        let { vocabulary } = this.props;
+        let { vocabulary, style } = this.props;
 
         let phonetic = '';
         if (vocabulary.phonetic_a) {
@@ -35,7 +35,7 @@ class VocabularyItem extends React.PureComponent {
         }
 
         return (
-            <div className="v_Task_L_VocabularyItem" onClick={this.playVoice}>
+            <div style={style} className="v_Task_L_VocabularyItem" onClick={this.playVoice}>
                 <div className="v_Task_L_Item_Info" >
                     <p className="v_Task_L_Item_Seq">{vocabulary.id}</p>
                     <a className="v_Task_L_Item_Word">{vocabulary.word}</a>

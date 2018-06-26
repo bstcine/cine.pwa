@@ -38,7 +38,9 @@ export let post = (url, data) => {
 
 export let get = (url, params) => {
     let _apiURL = httpUrl(url);
-    return axios.get(_apiURL, { params }).then(response => response.data);
+    return axios
+        .get(_apiURL, { params, withCredentials: true })
+        .then(response => response.data);
 };
 
 export let postv1 = (url, data) => {

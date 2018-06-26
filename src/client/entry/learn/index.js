@@ -7,13 +7,10 @@ import { Provider } from 'react-redux';
 import rootReducer from './reducer';
 import { LearnRouter } from './learnRouter';
 
-// import * as OfflinePluginRuntime from 'offline-plugin/runtime';
-// OfflinePluginRuntime.install();
-
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', function() {
         navigator.serviceWorker
-            .register('/sw.js', { scope: '/learn' })
+            .register('/sw-learn.js', { scope: '/learn' })
             .then(function(registration) {
                 // 注册成功
                 console.log(

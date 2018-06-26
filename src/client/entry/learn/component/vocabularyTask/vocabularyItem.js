@@ -5,13 +5,13 @@ import React from 'react';
 
 class VocabularyItem extends React.PureComponent {
 
-    constructor(props){
+    constructor(props) {
         super(props)
 
-        let {vocabulary, playAction} = props;
+        let { vocabulary, playAction } = props;
 
         let voice_url = vocabulary.voice_url_b;
-        if (voice_url === undefined || voice_url === null || voice_url === ''){
+        if (voice_url === undefined || voice_url === null || voice_url === '') {
             voice_url = vocabulary.voice_url_a;
         }
 
@@ -19,22 +19,22 @@ class VocabularyItem extends React.PureComponent {
         this.playAction = playAction;
     }
 
-    playVoice=()=>{
+    playVoice = () => {
         this.playAction(this.voiceSrc);
     }
 
     render() {
 
-        let {vocabulary, playAction} = this.props;
+        let { vocabulary } = this.props;
 
-        var phonetic = '';
+        let phonetic = '';
         if (vocabulary.phonetic_a) {
             phonetic = '美:' + vocabulary.phonetic_a;
         }
-        if (vocabulary.phonetic_b){
-            if (phonetic === ''){
+        if (vocabulary.phonetic_b) {
+            if (phonetic === '') {
                 phonetic = '英:' + vocabulary.phonetic_b;
-            }else {
+            } else {
                 phonetic = phonetic + ' ; ' + '英:' + vocabulary.phonetic_b;
             }
         }

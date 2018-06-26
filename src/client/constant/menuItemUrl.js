@@ -8,7 +8,7 @@ export const URL_Learn_Task_Word = '/learn/task/word'; // 我的所有词汇作�
 export const URL_Learn_Task_KJ = '/learn/task/kj';     // 我的所有课件作业
 export const URL_User_Quiz = '/user/test';
 export const URL_User_Quiz_Vocab_New = '/vocabtest';
-export const URL_User_Quiz_Grammar_New = '/tgrammar/quiz';
+export const URL_User_Quiz_Grammar_New = '/quiz/grammar';
 
 export const URL_User_Index = '/user';
 export const URL_User_Order = '/user/order';

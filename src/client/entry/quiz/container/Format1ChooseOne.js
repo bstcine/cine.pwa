@@ -3,7 +3,7 @@ import Format1ChooseOne from '../component/Format1ChooseOne';
 import {
     saveQuestion1SelectValue,
     saveQuestionFeedback,
-} from '@/action/tgrammarAction';
+} from '@/action/quizAction';
 
 const mapStateToProps = (state, ownProps) => {
     const { answersById, questions, currentQuizState } = state;

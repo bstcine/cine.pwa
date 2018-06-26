@@ -19,22 +19,31 @@ const logger = store => next => action => {
 
 const store = createStore(rootReducer, applyMiddleware(thunk, logger));
 
-class Tgrammar extends Entry {
+class Quiz extends Entry {
     render() {
         return (
             <Router>
                 <Provider store={store}>
-                    <Route
-                        path="/tgrammar/quiz"
-                        component={props => {
-                            if (!CommonUtil.isAuth()) return <div />;
-                            return <QuizPage {...props} />;
-                        }}
-                    />
+                    <React.Fragment>
+                        <Route
+                            path="/quiz/kj"
+                            component={props => {
+                                if (!CommonUtil.isAuth()) return <div />;
+                                return <QuizPage {...props} />;
+                            }}
+                        />
+                        <Route
+                            path="/quiz/grammar"
+                            component={props => {
+                                if (!CommonUtil.isAuth()) return <div />;
+                                return <QuizPage {...props} />;
+                            }}
+                        />
+                    </React.Fragment>
                 </Provider>
             </Router>
         );
     }
 }
 
-ReactDOM.render(<Tgrammar />, document.getElementById('root'));
+ReactDOM.render(<Quiz />, document.getElementById('root'));

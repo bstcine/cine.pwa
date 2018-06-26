@@ -1,17 +1,28 @@
 /**
  * Created by lidangkun on 2018/6/15.
  */
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Toast } from '@/component/Toast';
 import { actionVocabularyTest } from '@/action/lVocabularyTestAction';
-import VocabularyTest from  '../component/vocabularyTest'
+import VocabularyTest from  '../component/vocabularyTest';
+// import { getParam } from '@/util/urlUtil';
 
 class VocabularyTestContainer extends Component {
 
-    render() {
+    componentDidMount() {
+        // // 获取参数
+        // let param = getParam();
+        //
+        // let startIndex = param.start_index;
+        // let endIndex = param.end_index;
+        // let wordType = param.word_type;
+        //
+        // // 准备访问
+        // let { actions } = this.props;
+    }
 
+    render() {
         return (
             <React.Fragment>
                 <VocabularyTest />

@@ -6,18 +6,17 @@ import "../../asset/style/historyTask.less"
 import { Grid } from '@/component/GGrid';
 import TasksList from '../TasksList';
 import SearchTaskDialog from './SearchTaskDialog';
-import { CFlatButton, CDialog, CTextField } from '@/component';
 
 class HistoryTask extends React.PureComponent {
 
     render() {
 
-        const {isDialogShow,taskModels,startTime,endTime,defaultType,actions} = this.props;
+        const { isDialogShow , taskModels , startTime , endTime , defaultType , actions } = this.props;
 
         const button = (
             <button
                 className="HT_SearchButton"
-                onClick={() => {actions.dialogShow(true)}}
+                onClick={() => { actions.dialogShow(true) }}
             >
                 筛选
             </button>
@@ -33,6 +32,7 @@ class HistoryTask extends React.PureComponent {
                 {taskList}
                 {button}
                 <SearchTaskDialog
+                    key="selectDialog"
                     isOpen={isDialogShow}
                     startTime={startTime}
                     endTime={endTime}
@@ -46,7 +46,7 @@ class HistoryTask extends React.PureComponent {
 
 export default HistoryTask;
 
-const TaskComponent = ({taskModel}) => {
+const TaskComponent = ({ taskModel }) => {
 
     return (
         <div>

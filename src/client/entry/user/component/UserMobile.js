@@ -67,7 +67,7 @@ const UserMobile = ({ user, handleClick }) => {
                     />
                     词汇量测试
                 </a>
-                <a className={'tab'} href={'/tgrammar/quiz'} target={'_blank'}>
+                <a className={'tab'} href={'/quiz/grammar'} target={'_blank'}>
                     <img
                         src={require('../asset/image/ico_test_grammar@2x.png')}
                         style={{ height: '.57rem', width: '.57rem' }}

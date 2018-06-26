@@ -11,13 +11,12 @@ const devMode = process.env.NODE_ENV !== 'production';
 const SERVICE_URL = null;
 const publicPath = '/'; // for cdn
 const pages = [
-    'content',
     'cquiz',
     'address',
-    'vocabtest',
-    'user',
-    'teacher',
     'temp',
+    'vocabtest',
+    'content',
+    'user',
     'learn',
     'quiz',
     'mentor',

@@ -3,7 +3,6 @@ import { alertModal, confirmModal } from '@/reducer/index';
 import {
     quiz,
     statsContentQuiz,
-    statsContentStuQuizWordList,
     questions,
     answersById,
     questionsFilter,
@@ -18,7 +17,6 @@ const rootReducer = combineReducers({
     quiz,
     statsContentQuiz,
     questions,
-    statsContentStuQuizWordList,
     answersById,
     questionsFilter,
     currentQuizState,

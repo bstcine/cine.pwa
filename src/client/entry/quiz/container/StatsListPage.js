@@ -3,11 +3,7 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { fetchStatsContentStuQuizWordList } from '@/action/quizAction';
-import Header from '@/component/Header';
-import Footer from '@/component/Footer';
 import StatsTable from '../container/StatsTable';
-import ToastLoading from './ToastLoading';
-import ToastError from './ToastError';
 import {
     Tabs,
     TabItems,
@@ -48,33 +44,27 @@ class StatsListPage extends Component {
         const { init } = this.props;
         return (
             <React.Fragment>
-                <Header isShow={true} />
-                <div className="container-fluid course-container-bg">
-                    <div className="tgrammar-stats-list">
-                        <ToastLoading />
-                        <ToastError />
-                        <Tabs>
-                            <TabItems style={{ backgroundColor: 'transparent' }}>
-                                <TabItem>我的学生</TabItem>
-                                <TabItem>核心语法测试</TabItem>
-                            </TabItems>
-                            <TabPanels>
-                                <TabPanel>
-                                    {!init && (
-                                        <StudentTable
-                                            wordsItemClick={this.wordsItemClick}
-                                            quizItemClick={this.quizItemClick}
-                                        />
-                                    )}
-                                </TabPanel>
-                                <TabPanel>
-                                    <StatsTable />
-                                </TabPanel>
-                            </TabPanels>
-                        </Tabs>
-                    </div>
+                <div className="tgrammar-stats-list">
+                    <Tabs>
+                        <TabItems style={{ backgroundColor: 'transparent' }}>
+                            <TabItem>我的学生</TabItem>
+                            <TabItem>核心语法测试</TabItem>
+                        </TabItems>
+                        <TabPanels>
+                            <TabPanel>
+                                {!init && (
+                                    <StudentTable
+                                        wordsItemClick={this.wordsItemClick}
+                                        quizItemClick={this.quizItemClick}
+                                    />
+                                )}
+                            </TabPanel>
+                            <TabPanel>
+                                <StatsTable />
+                            </TabPanel>
+                        </TabPanels>
+                    </Tabs>
                 </div>
-                <Footer />
             </React.Fragment>
         );
     }

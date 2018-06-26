@@ -7,7 +7,7 @@ import {
     resetQuiz,
     showUncompletedQuestion,
     showAllQuestion,
-} from '@/action/tgrammarAction';
+} from '@/action/quizAction';
 import { CurrentQuizState } from '@/constant/index';
 
 const mapStateToProps = state => {

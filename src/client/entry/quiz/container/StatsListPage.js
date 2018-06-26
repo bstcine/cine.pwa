@@ -2,7 +2,7 @@ import '../asset/style/index.less';
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { fetchStatsContentStuQuizWordList } from '@/action/tgrammarAction';
+import { fetchStatsContentStuQuizWordList } from '@/action/quizAction';
 import Header from '@/component/Header';
 import Footer from '@/component/Footer';
 import StatsTable from '../container/StatsTable';
@@ -15,7 +15,7 @@ import {
     TabPanels,
     TabPanel,
 } from '@/component/Tabs/index';
-import StudentTable from '@/entry/tgrammar/container/StudentTable';
+import StudentTable from '../container/StudentTable';
 
 const mapStateToProps = state => {
     const { network } = state;
@@ -40,7 +40,7 @@ class StatsListPage extends Component {
     };
 
     quizItemClick = (id, cmd) => {
-        window.open(`/tgrammar/quiz?stats_content_quiz_id=${id}&cmd=${cmd}`);
+        window.open(`/quiz/grammar?stats_content_quiz_id=${id}&cmd=${cmd}`);
     };
 
     render() {

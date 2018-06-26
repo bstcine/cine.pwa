@@ -5,7 +5,7 @@ import {
     saveQuestion3TextValue,
     saveQuestion3TextScore,
     saveQuestionFeedback,
-} from '@/action/tgrammarAction';
+} from '@/action/quizAction';
 
 const mapStateToProps = (state, ownProps) => {
     const { answersById, questions, currentQuizState } = state;

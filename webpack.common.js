@@ -3,7 +3,7 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const OfflinePlugin = require('offline-plugin');
+const WebpackServiceWorkerPlugin = require('./plugins/webpackServiceWorkerPlugin');
 
 const devMode = process.env.NODE_ENV !== 'production';
 
@@ -16,11 +16,11 @@ const pages = [
     'cquiz',
     'address',
     'vocabtest',
-    'tgrammar',
     'user',
     'teacher',
     'temp',
     'learn',
+    'quiz',
 ];
 
 let entry = {};
@@ -57,6 +57,10 @@ module.exports = {
             filename: 'entry/[name]/index.[contenthash:8].css',
         }),
         ...htmlWebpackPlugins,
+        new WebpackServiceWorkerPlugin({
+            name: 'service-worker.js',
+            path: path.join(__dirname, 'build/entry/learn'),
+        }),
     ],
     resolve: {
         modules: [path.resolve(__dirname, 'src/client'), 'node_modules'],

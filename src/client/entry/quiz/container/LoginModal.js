@@ -1,7 +1,7 @@
 import LoginModal from '@/component/LoginModal';
 import '@/asset/style/modal.less';
 import { connect } from 'react-redux';
-import { closeLoginModal } from '@/action/tgrammarAction';
+import { closeLoginModal } from '@/action/quizAction';
 
 const mapStateToProps = state => {
     let { loginModal } = state;

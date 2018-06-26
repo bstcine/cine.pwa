@@ -57,7 +57,7 @@ const UserBar = ({ user, isOpenUserBar, onToggleUserBar, onLogout }) => (
 
 const Nav2 = ({ navs }) => (
     <nav className="nav-2nd">
-        <div className="container">
+        <div className="gcontainer">
             {navs &&
                 navs.length &&
                 navs.map(menu => (
@@ -94,8 +94,8 @@ class GHeader extends PureComponent {
 
         return (
             <React.Fragment>
-                <header className="header">
-                    <div className="container">
+                <header className="gheader">
+                    <div className="gcontainer">
                         <Brand />
                         <Nav1 navs={navs1} />
                         <UserBar

@@ -3,8 +3,8 @@ import '../GLayout/style.less';
 
 const Footer = () => {
     return (
-        <footer className="footer">
-            <div className="container">
+        <footer className="gfooter">
+            <div className="gcontainer">
                 <div className="copyright">
                     善严教育科技（上海）有限公司<br />
                     Copyright © 2014 - 2018 BSTCINE. All Rights Reserved.

@@ -3,16 +3,16 @@ const fs = require('fs');
 const getTime = () => {
     let date = new Date();
     let str =
-        String(date.getFullYear()) + (date.getMonth() + 1) > 9
-            ? date.getMonth() + 1
-            : '0' +
-              (date.getMonth() + 1) +
-              date.getDate() +
-              date.getHours() +
-              date.getMinutes() +
-              date.getSeconds();
+        String(date.getFullYear()) +
+        prefixZero(date.getMonth() + 1) +
+        prefixZero(date.getDate()) +
+        prefixZero(date.getHours()) +
+        prefixZero(date.getMinutes()) +
+        prefixZero(date.getSeconds());
     return str;
 };
+
+const prefixZero = num => (num > 10 ? num : '0' + num);
 
 function ServiceWorkerPlugin(options) {
     const defaultOptions = {

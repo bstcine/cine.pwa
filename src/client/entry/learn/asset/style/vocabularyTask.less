@@ -1,15 +1,18 @@
+@import '~asset/style/common';
+@import '~asset/style/_cine.less';
+
 .vocabularyTask{
 
     display: flex;
     align-content: space-between;
     flex-direction: column;
     min-height:100%;
+    background-color: white;
+    padding-left: 0.4rem;
+    padding-right: 0.4rem;
 
     .v_Task_VocabularyHeader{
 
-        padding-left: 0.4rem;
-        padding-right: 0.4rem;
-        background-color: white;
         clear: both;
         height: 1.25rem;
         border-bottom: solid;
@@ -42,67 +45,128 @@
     }
 
     .v_Task_VocabularyFooter {
-        padding-left: 0.4rem;
-        padding-right: 0.4rem;
         position: static;
         background-color: white;
         clear: both;
+        margin-top: 0.2rem;
 
         .v_Task_VF_Container {
-            display: inline-block;
+            display: inline-flex;
             position: relative;
-            font-size: 30px;
-            margin-top: 0.16rem;
-            margin-bottom: 0.16rem;
             left:50%;
             transform: translateX(-50%);
-            font-size: 0.28rem;
-            padding-left: 0.24rem;
-            padding-right: 0.24rem;
+            align-items: center;
 
             .v_Task_F_Promote {
-                padding-top: 0.16rem;
-                padding-bottom: 0.16rem;
                 padding-right: 0.3rem;
-                float: left;
+                font-family: PingFangSC-Regular;
+                font-size: 0.28rem;
                 color: #7a7b7c;
                 line-height: 0.4rem;
+                text-align: center;
             }
 
             .v_Task_F_TestDoor {
                 padding-top: 0.16rem;
-                padding-bottom: 0.16rem;
-                padding-left: 0.3rem;
-                padding-right: 0.3rem;
-                float: left;
-                border-radius: 0.3rem;
+                width: 3rem;
+                height: 0.66rem;
+                border-radius: 0.33rem;
                 border-color: #246cc6;
                 border-width: 1px;
                 border-style: solid;
-                color: #0e58ac;
+                background-color: #fe682d;
+                font-family: PingFangSC-Medium;
+                font-size: 0.32rem;
+                color: #fff;
+                text-align: center;
+                box-shadow: 0px 4px 6px 0px rgba(246, 100, 42, 0.14);
             }
         }
     }
 
     .v_Task_VocabularyList{
-        padding-left: 0.4rem;
-        padding-right: 0.4rem;
+        padding-top: 0.2rem;
+        padding-bottom: 0.4rem;
         flex-grow: 1;
         clear: both;
-        background-color: white;
-        min-width: 5rem;
-        // white-space: inherit;
-        //overflow-y: auto;
+    }
+
+    .v_Task_L_VocabularyItem{
+        display: flex;
+        flex-direction: column;
+        padding-top: 0.24rem;
+        padding-bottom: 0.24rem;
+        cursor: pointer;
+        align-items: center;
+    }
+
+    .v_Task_L_Item_Info{
+        display: flex;
+        align-contents: space-between;
+        flex-direction: row;
+        width: 100%;
+        align-items: center;
+
+        .v_Task_L_Item_ Seq{
+            display: inline-block;
+            width: 0.66rem;
+            font-family: PingFangSC-Regular;
+            font-size: 0.24rem;
+            text-align: right;
+            color: #3a3b3c;
+            float: left;
+        }
+
+        .v_Task_L_Item_Word{
+            margin-left: 0.8rem;
+            font-family: PingFangSC-Medium;
+            font-size: 0.4rem;
+        }
+        .v_Task_L_Item_Phonetic{
+            margin-left: 0.3rem;
+            font-size: 0.24rem;
+        }
+        .v_Task_L_Item_Voice{
+            margin-left: 0.48rem;
+            right: 0;
+            float: left;
+            width: 0.4rem;
+            height: 0.4rem;
+            background: url("../image/voice.png") no-repeat center;
+        }
+    }
+
+    .v_Task_L_Item_Transition{
+        display: inline-block;
+        width:100%;
+        margin-left: 2.5rem;
+        margin-top: 0.28rem;
+        font-family: PingFangSC-Regular;
+        font-size: 0.28rem;
+        text-align: left;
+        line-height: 0.5rem;
+        letter-spacing: 0;
+        white-space: pre-wrap;
+    }
+
+    @media @media-up-xs{
 
         .v_Task_L_VocabularyItem{
-            display: inline-block;
-            width: 100%;
-            .v_Task_L_Item_Seq{
-                margin-top: 0.28rem;
-                margin-bottom: 0.28rem;
+            display: flex;
+            flex-direction: row;
+            padding-top: 0.24rem;
+            padding-bottom: 0.24rem;
+            cursor: pointer;
+            //align-items: center;
+        }
+
+        .v_Task_L_Item_Info{
+            display: flex;
+            width: 40%;
+            align-items: center;
+
+            .v_Task_L_Item_ Seq{
                 display: inline-block;
-                padding-top: 0.15rem;
-                margin-left: 0;
                 width: 0.66rem;
                 font-family: PingFangSC-Regular;
                 font-size: 0.24rem;
@@ -110,49 +174,34 @@
                 color: #3a3b3c;
                 float: left;
             }
-            .v_Task_L_Item_Detail{
-                display: inline-block;
-                float: left;
-                width: 22%;
-                margin-left: 0.5rem;
-                line-height: 0.5rem;
-                margin-top: 0.28rem;
-                margin-bottom: 0.28rem;
-
-                .v_Task_L_Item_Word{
-                    margin-left: 0;
-                    font-family: PingFangSC-Medium;
-                    font-size: 0.4rem;
-                }
-                .v_Task_L_Item_Phonetic{
-                    margin-left: 0.3rem;
-                    font-size: 0.24rem;
-                    padding-top: 0rem;
-                }
+            .v_Task_L_Item_Word{
+                margin-left: 0.8rem;
+                font-family: PingFangSC-Medium;
+                font-size: 0.4rem;
+            }
+            .v_Task_L_Item_Phonetic{
+                margin-left: 0.3rem;
+                font-size: 0.24rem;
             }
             .v_Task_L_Item_Voice{
-                cursor: pointer;
-                display: inline-block;
-                margin-left: 1.1rem;
+                margin-left: 0.48rem;
                 float: left;
-                width: 1.10rem;
-                height: 1.10rem;
-                background: #fff url("../image/voice.png") no-repeat center;
-            }
-            .v_Task_L_Item_Transition{
-                display: inline-block;
-                margin-left: 1.1rem;
-                font-size: 0.28rem;
-                margin-top: 0.28rem;
-                margin-bottom: 0.28rem;
-                float: left;
-                width: 48%;
-                text-align: left;
-                padding-top: -0.05rem;
-                line-height: 0.6rem;
-                white-space: pre-wrap;
+                width: 0.4rem;
+                height: 0.4rem;
+                background: url("../image/voice.png") no-repeat center;
             }
         }
-    }
 
+        .v_Task_L_Item_Transition{
+            display: inline-block;
+            width:60%;
+            font-family: PingFangSC-Regular;
+            font-size: 0.28rem;
+            text-align: left;
+            line-height: 0.5rem;
+            letter-spacing: 0;
+            white-space: pre-wrap;
+        }
+
+    }
 }

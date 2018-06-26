@@ -2,6 +2,7 @@
  * Created by lidangkun on 2018/6/14.
  */
 import React from 'react';
+// import uaUtil from '@/util/uaUtil';
 
 class VocabularyItem extends React.PureComponent {
 
@@ -29,26 +30,28 @@ class VocabularyItem extends React.PureComponent {
 
         let phonetic = '';
         if (vocabulary.phonetic_a) {
-            phonetic = '美:' + vocabulary.phonetic_a;
+            phonetic = vocabulary.phonetic_a;
+        } else if (vocabulary.phonetic_b) {
+            phonetic = vocabulary.phonetic_b;
         }
-        if (vocabulary.phonetic_b) {
-            if (phonetic === '') {
-                phonetic = '英:' + vocabulary.phonetic_b;
-            } else {
-                phonetic = phonetic + ' ; ' + '英:' + vocabulary.phonetic_b;
-            }
-        }
+
+        // if (uaUtil.PC()) {
+        //     sitecode = SITECODE.WEB_PC;
+        // } else {
+        //     sitecode = SITECODE.WEB_IPHONE;
+        // }
 
         return (
-            <div className="v_Task_L_VocabularyItem">
-                <p className="v_Task_L_Item_Seq">{vocabulary.id}</p>
-                <div className="v_Task_L_Item_Detail">
+            <div className="v_Task_L_VocabularyItem" onClick={this.playVoice}>
+                <div className="v_Task_L_Item_Info" >
+                    <p className="v_Task_L_Item_Seq">{vocabulary.id}</p>
                     <a className="v_Task_L_Item_Word">{vocabulary.word}</a>
                     <a className="v_Task_L_Item_Phonetic">{phonetic}</a>
+                    <span className="v_Task_L_Item_Voice"></span>
                 </div>
-
-                <span className="v_Task_L_Item_Voice" onClick={this.playVoice}></span>
-                <p className="v_Task_L_Item_Transition">{vocabulary.zh}</p>
+                <div className="v_Task_L_Item_Transition">
+                    {vocabulary.zh}
+                </div>
             </div>
         );
 

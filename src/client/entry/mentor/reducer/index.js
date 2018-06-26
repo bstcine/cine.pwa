@@ -2,14 +2,12 @@ import { combineReducers } from 'redux';
 import { alertModal, confirmModal, user } from '@/reducer/index';
 
 import {
-    statsContentQuiz,
-    statsContentStuQuizWordList,
+    stuQuizGrammarAndWordList,
     network,
 } from '@/entry/quiz/reducer/stuQuizReducer';
 
 const rootReducer = combineReducers({
-    statsContentQuiz,
-    statsContentStuQuizWordList,
+    stuQuizGrammarAndWordList,
     network,
 
     alertModal,

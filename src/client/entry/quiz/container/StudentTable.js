@@ -2,10 +2,10 @@ import { connect } from 'react-redux';
 import StudentTable from '../component/StudentTable';
 
 const mapStateToProps = (state, ownProps) => {
-    const { statsContentStuQuizWordList } = state;
+    const { stuQuizGrammarAndWordList } = state;
 
     return {
-        list: statsContentStuQuizWordList,
+        list: stuQuizGrammarAndWordList,
     };
 };
 

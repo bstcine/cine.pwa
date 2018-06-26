@@ -64,13 +64,13 @@ const cineMenu = [
                 icon: '',
                 icon_path: '',
             },
-            /*      {
+            {
                 label: '待批改列表',
                 url: h5.URL_Mentor_CorrectList,
                 icon: '',
                 icon_path: '',
                 visible: false,
-            }, */
+            },
         ],
     },
 ];

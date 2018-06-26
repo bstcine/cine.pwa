@@ -15,6 +15,7 @@ const Format1ChooseOne = ({
     feedback,
     need_feedback,
     options,
+    correct_value,
     select_value,
     select_score,
     is_select_correct,
@@ -23,7 +24,7 @@ const Format1ChooseOne = ({
     saveQuestion1SelectValue,
     saveQuestionFeedback,
 }) => {
-    console.log('Question1ChooseOne render');
+    console.log('Question1ChooseOne render', correct_value);
     let waiting_and_not_need_feedback =
         currentQuizState === CurrentQuizState.WAITING4CHECK &&
         need_feedback === '0';
@@ -50,6 +51,7 @@ const Format1ChooseOne = ({
                     }
                     is_select_correct={is_select_correct}
                     select_score={select_score}
+                    correct_value={correct_value}
                 />
             )}
 

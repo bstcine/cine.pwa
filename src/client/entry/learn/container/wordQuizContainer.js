@@ -6,26 +6,36 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { actionVocabularyTest } from '@/action/lVocabularyTestAction';
 import VocabularyTest from  '../component/vocabularyTest';
-// import { getParam } from '@/util/urlUtil';
+import { getParam } from '@/util/urlUtil';
 
 class VocabularyTestContainer extends Component {
-
+    constructor(props) {
+        super(props);
+        // 获取参数
+        let param = getParam();
+        let startIndex = param.start_index;
+        let endIndex = param.end_index;
+        let wordType = param.word_type;
+        this.param = {
+            startIndex: startIndex,
+            endIndex: endIndex,
+            wordType: wordType,
+        };
+    }
     componentDidMount() {
-        // // 获取参数
-        // let param = getParam();
-        //
-        // let startIndex = param.start_index;
-        // let endIndex = param.end_index;
-        // let wordType = param.word_type;
-        //
-        // // 准备访问
-        // let { actions } = this.props;
+        // 准备访问
+        let { actions } = this.props;
+        actions.loadWords(this.param.startIndex, this.param.endIndex, this.param.wordType);
     }
 
     render() {
+        let { rows } = this.props;
         return (
             <React.Fragment>
-                <VocabularyTest />
+                <VocabularyTest
+                    rows={rows}
+                    param={this.param}
+                />
             </React.Fragment>
         );
     }
@@ -33,7 +43,7 @@ class VocabularyTestContainer extends Component {
 
 const mapStateToProps = state => {
     return {
-
+        rows: state.vocabularyTestRedu.get('rows'),
     };
 };
 

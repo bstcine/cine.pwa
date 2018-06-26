@@ -16,7 +16,15 @@ export const actionVocabularyTask = {
     }),
 
     loadVocabulary: (startIndex, endIndex, wordType) => async dispatch => {
-
+        if (startIndex === 'undefined') {
+            startIndex=undefined;
+        }
+        if (endIndex === 'undefined') {
+            endIndex=undefined;
+        }
+        if (wordType === 'undefined') {
+            wordType=undefined;
+        }
         // 使用真实的api请求获取数据
         let param = {
             start_index: startIndex,

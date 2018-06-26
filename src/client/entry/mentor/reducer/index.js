@@ -2,32 +2,19 @@ import { combineReducers } from 'redux';
 import { alertModal, confirmModal, user } from '@/reducer/index';
 
 import {
-    quiz,
     statsContentQuiz,
     statsContentStuQuizWordList,
-    questions,
-    answersById,
-    questionsFilter,
-    currentQuizState,
     network,
-    loginModal,
-    timer,
-} from '@/entry/quiz/reducer/quizDetailReducer';
+} from '@/entry/quiz/reducer/stuQuizReducer';
 
 const rootReducer = combineReducers({
-    quiz,
     statsContentQuiz,
-    questions,
     statsContentStuQuizWordList,
-    answersById,
-    questionsFilter,
-    currentQuizState,
     network,
-    loginModal,
-    timer,
+
     alertModal,
     confirmModal,
-    user
+    user,
 });
 
 export default rootReducer;

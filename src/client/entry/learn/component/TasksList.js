@@ -32,7 +32,7 @@ const TasksList = ({ tasks, isLimitTasks }) => {
                     '5': 'stats_content_quiz_id',
                 };
                 // todo 临时 quiz 路径
-                return `/tgrammar/quiz?${map[task.object_type]}=${
+                return `/quiz/grammar?${map[task.object_type]}=${
                     task.object_id
                 }`;
             }

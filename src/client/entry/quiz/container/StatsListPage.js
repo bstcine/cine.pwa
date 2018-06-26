@@ -40,7 +40,7 @@ class StatsListPage extends Component {
     };
 
     quizItemClick = (id, cmd) => {
-        window.open(`/tgrammar/quiz?stats_content_quiz_id=${id}&cmd=${cmd}`);
+        window.open(`/quiz/grammar?stats_content_quiz_id=${id}&cmd=${cmd}`);
     };
 
     render() {

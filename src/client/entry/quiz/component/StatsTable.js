@@ -42,7 +42,7 @@ const OperationButton = ({ item }) => {
                 <button
                     className="btn btn-round"
                     onClick={e => {
-                        location.href = `/tgrammar/quiz?stats_content_quiz_id=${
+                        location.href = `/quiz/grammar?stats_content_quiz_id=${
                             item.id
                         }&cmd=check`;
                     }}>
@@ -54,7 +54,7 @@ const OperationButton = ({ item }) => {
                 <button
                     className="btn btn-round btn-checking"
                     onClick={e => {
-                        location.href = `/tgrammar/quiz?stats_content_quiz_id=${
+                        location.href = `/quiz/grammar?stats_content_quiz_id=${
                             item.id
                         }&cmd=check`;
                     }}>
@@ -66,7 +66,7 @@ const OperationButton = ({ item }) => {
                 <button
                     className="btn btn-round btn-done"
                     onClick={e => {
-                        location.href = `/tgrammar/quiz?stats_content_quiz_id=${
+                        location.href = `/quiz/grammar?stats_content_quiz_id=${
                             item.id
                         }&cmd=check`;
                     }}>

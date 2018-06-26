@@ -33,7 +33,7 @@ class Quiz extends Entry {
                             }}
                         />
                         <Route
-                            path="/quiz/tgrammar"
+                            path="/quiz/grammar"
                             component={props => {
                                 if (!CommonUtil.isAuth()) return <div />;
                                 return <QuizPage {...props} />;

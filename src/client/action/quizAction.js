@@ -61,7 +61,7 @@ export const fetchQuizData = ({
     });
     if (err) {
         if (err === 'stats_quiz_not_found') {
-            location.href = '/tgrammar/quiz';
+            location.href = '/quiz/grammar';
         } else {
             dispatch(networkError(err));
         }
@@ -205,7 +205,7 @@ export const submitAnswer = () => (dispatch, getState) => {
         }
         dispatch({ type: RECEIVE_STATS_QUIZ_SAVE });
         clearLocalAnswers(quiz, user);
-        location.href = `/tgrammar/quiz?stats_content_quiz_id=${
+        location.href = `/quiz/grammar?stats_content_quiz_id=${
             result.statsContentQuiz.id
         }`;
     });

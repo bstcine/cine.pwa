@@ -21,9 +21,10 @@ const FeedbackSelectScore = ({
             ) : (
                 <span className="wrong">
                     <i className="material-icons">&#xE14C;</i>错误
-                    {correct_value && (
+                    {correct_value > 0 &&
+                        correct_value < correct_db.length && (
                         <span className="correct-hint">
-                            答案：{correct_db[correct_value]}
+                                答案：{correct_db[correct_value]}
                         </span>
                     )}
                 </span>

@@ -1,10 +1,13 @@
 import React from 'react';
 import classNames from 'classnames';
 
+const correct_db = ['A', 'B', 'C', 'D', 'E', 'F'];
+
 const FeedbackSelectScore = ({
     is_select_correct,
     is_show_tip,
     select_score,
+    correct_value,
 }) => {
     return (
         <div
@@ -18,6 +21,11 @@ const FeedbackSelectScore = ({
             ) : (
                 <span className="wrong">
                     <i className="material-icons">&#xE14C;</i>错误
+                    {correct_value && (
+                        <span className="correct-hint">
+                            答案：{correct_db[correct_value]}
+                        </span>
+                    )}
                 </span>
             )}
 

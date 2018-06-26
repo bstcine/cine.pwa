@@ -9,7 +9,13 @@ const mapStateToProps = (state, ownProps) => {
     const { answersById, questions, currentQuizState } = state;
     const id = ownProps.id;
     const { no, title, feedback, need_feedback, options } = questions.byId[id];
-    let prop = { ...ownProps, no, title, feedback, need_feedback, options, currentQuizState };
+
+    let correct_value;
+    options.forEach((option, i) => {
+        if (option.isCorrect) correct_value = i;
+    });
+
+    let prop = { ...ownProps, no, title, feedback, need_feedback, options, correct_value, currentQuizState };
     const answer = answersById[id];
     if (answer) {
         prop.select_value = answer.select_value;

@@ -5,6 +5,7 @@ import { fromJS } from 'immutable';
 import { ACTION_LT } from '@/constant/actionTypeLearn';
 
 const initialState = fromJS({
+    isTest: false,
     rows: [],
 });
 
@@ -14,6 +15,8 @@ const vocabularyTestRedu = (state = initialState, action) => {
             return state;
         case ACTION_LT.RECEIVE:
             return state.set('rows', action.payload);
+        case ACTION_LT.STARTTEST:
+            return state.set('isTest', action.payload);
         default:
             return state;
     }

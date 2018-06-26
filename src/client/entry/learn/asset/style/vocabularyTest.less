@@ -5,6 +5,8 @@
     flex-direction: column;
     padding-left: 0.9rem;
     padding-right: 0.9rem;
+    height: 100%;
+    width: 100%;
     background-color: white;
 
     .v_Test_VocabularyHeader{
@@ -31,18 +33,23 @@
         }
     }
 
-    .v_Test_VocabularyContent_Start {
-        display: inline-block;
+    .v_Test_VocabularyContent {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
         width: 100%;
-        padding-top: 3rem;
 
         .promot_Start {
+            margin-top: 2.4rem;
             font-family: PingFangSC-Regular;
             font-size: 0.32rem;
             color: #3a3b3c;
         }
 
         .test_Start {
+            cursor: pointer;
+            margin-top: 1.6rem;
+            margin-bottom: 2.4rem;
             width: 3rem;
             height: 3rem;
             border-radius: 1.5rem;

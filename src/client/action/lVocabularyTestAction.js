@@ -16,14 +16,17 @@ export const actionVocabularyTest = {
         type: ACTION_LT.RECEIVE,
         payload: result.rows,
     }),
+    _test: isStart => ({
+        type: ACTION_LT.STARTTEST,
+        payload: isStart,
+    }),
     _loadWords: (param, isInit) => async dispatch => {
-        let [error, result] = await fetchData(Api.APIURL_User_Learn_Task, param);
+        let [error, result] = await fetchData(Api.APIURL_User_Learn_Word, param);
 
         if (error) {
             dispatch(toastAction.showError(errorMsg(error)));
             return;
         }
-
         dispatch(actionVocabularyTest._receive(result));
     },
     loadWords: (startIndex, endIndex, wordType) => async dispatch => {
@@ -42,5 +45,12 @@ export const actionVocabularyTest = {
             word_type: wordType,
         };
         dispatch(actionVocabularyTest._loadWords(param, true));
+    },
+    startTest: () => async dispatch => {
+        alert('点击了开始按钮');
+        dispatch(actionVocabularyTest._test(true));
+    },
+    changeIndex: () => async dispatch => {
+        alert('下一个');
     },
 };

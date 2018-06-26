@@ -58,7 +58,7 @@ module.exports = {
         }),
         ...htmlWebpackPlugins,
         new WebpackServiceWorkerPlugin({
-            name: 'service-worker.js',
+            name: 'sw.js',
             path: path.join(__dirname, 'build/entry/learn'),
         }),
     ],

@@ -1,5 +1,18 @@
 const path = require('path');
 const fs = require('fs');
+const getTime = () => {
+    let date = new Date();
+    let str =
+        String(date.getFullYear()) + (date.getMonth() + 1) > 9
+            ? date.getMonth() + 1
+            : '0' +
+              (date.getMonth() + 1) +
+              date.getDate() +
+              date.getHours() +
+              date.getMinutes() +
+              date.getSeconds();
+    return str;
+};
 
 function ServiceWorkerPlugin(options) {
     const defaultOptions = {
@@ -13,7 +26,7 @@ ServiceWorkerPlugin.prototype.apply = function(compiler) {
     compiler.hooks.done.tap('ServiceWorkerPlugin', () => {
         fs.writeFileSync(
             path.resolve(this.options.path, this.options.name),
-            this.generate(new Date().getTime()),
+            this.generate(getTime()),
             'utf-8'
         );
     });

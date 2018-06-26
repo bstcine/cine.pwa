@@ -16,8 +16,7 @@ export const URL_User_Coupon = '/user/coupon';
 export const URL_User_Integral = '/user/integral';
 export const URL_User_Address = '/user/address';
 
-export const URL_Mentor_Index = '/mentor/dashboard';
+export const URL_Mentor_Index = '/mentor';
 export const URL_Mentor_Student_Task = '/mentor/student/task';
 export const URL_Mentor_Student_Quiz = '/mentor/student/quiz';
 export const URL_Mentor_CorrectList = '/mentor/correct';
-export const URL_Mentor_Correct_Quiz = '/mentor/correct/quiz';

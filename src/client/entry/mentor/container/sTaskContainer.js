@@ -18,7 +18,7 @@ class StuTaskContainer extends Component {
 
 const mapStateToProps = state => {
     return {
-        state: state.task.get('vocabularyList'),
+        state: state,
     };
 };
 

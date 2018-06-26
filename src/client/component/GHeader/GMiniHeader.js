@@ -2,7 +2,7 @@ import React from 'react';
 import '../GLayout/style.less';
 
 const GMiniHeader = () => {
-    return <header className="miniheader">gheader</header>;
+    return <header className="gminiheader">gheader</header>;
 };
 
 export default GMiniHeader;

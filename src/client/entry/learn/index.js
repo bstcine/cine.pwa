@@ -10,7 +10,7 @@ import { LearnRouter } from './learnRouter';
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', function() {
         navigator.serviceWorker
-            .register('/entry/learn/sw.js', { scope: '/learn' })
+            .register('/sw-learn.js', { scope: '/learn' })
             .then(function(registration) {
                 // 注册成功
                 console.log(

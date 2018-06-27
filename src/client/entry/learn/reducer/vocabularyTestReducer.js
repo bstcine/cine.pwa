@@ -6,15 +6,15 @@ import { ACTION_LT } from '@/constant/actionTypeLearn';
 
 const initialState = fromJS({
     isTest: false,
+    rows: [],
+    correctCount: 0,
+    selectStatus: -1,
     content: {
         index: -1,
-        wordCount: 0,
-        correctCount: 0,
         value: 'wordTest',
         real_zh: -1,
         zh: [],
     },
-    rows: [],
 });
 
 const vocabularyTestRedu = (state = initialState, action) => {
@@ -27,6 +27,10 @@ const vocabularyTestRedu = (state = initialState, action) => {
             return state.set('isTest', action.payload);
         case ACTION_LT.CHANGECONTENT:
             return state.set('content', action.payload);
+        case ACTION_LT.CORRECTCOUNT:
+            return state.set('correctCount', action.payload);
+        case ACTION_LT.CHANGESELECTSTATUS:
+            return state.set('selectStatus', action.payload);
         default:
             return state;
     }

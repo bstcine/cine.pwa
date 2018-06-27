@@ -29,12 +29,15 @@ class VocabularyTestContainer extends Component {
     }
 
     render() {
-        let { isTest, content, actions } = this.props;
+        let { isTest, selectStatus, rows, correctCount, content, actions } = this.props;
         return (
             <React.Fragment>
                 <VocabularyTest
                     param={this.param}
                     isTest={isTest}
+                    selectStatus={selectStatus}
+                    rows={rows}
+                    correctCount={correctCount}
                     content={content}
                     actions={actions}
                 />
@@ -46,7 +49,10 @@ class VocabularyTestContainer extends Component {
 const mapStateToProps = state => {
     return {
         isTest: state.vocabularyTestRedu.get('isTest'),
+        selectStatus: state.vocabularyTestRedu.get('selectStatus'),
+        rows: state.vocabularyTestRedu.get('rows'),
         content: state.vocabularyTestRedu.get('content'),
+        correctCount: state.vocabularyTestRedu.get('correctCount'),
     };
 };
 

@@ -103,7 +103,7 @@ self.addEventListener('fetch', function(event) {
                 if (!httpRes || httpRes.status !== 200) {
                     return httpRes;
                 }
-
+                
                 let responseClone = httpRes.clone();
                 caches.open(OFFLINE_CACHE_NAME).then(function(cache) {
                     cache.put(event.request, responseClone);

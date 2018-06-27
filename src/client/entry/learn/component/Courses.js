@@ -39,9 +39,11 @@ const Courses = ({ courses }) => {
                                         style={{ width: `${course.progress}%` }}
                                     />
                                 </div>
-                                <div className="status">
-                                    进度 {course.last_content}
-                                </div>
+                                {Boolean(course.last_content) && (
+                                    <div className="status">
+                                        进度 {course.last_content}
+                                    </div>
+                                )}
                                 {course.expire_at && (
                                     <div className="expire_at">
                                         有效期{' '}

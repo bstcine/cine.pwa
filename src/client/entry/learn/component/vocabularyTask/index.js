@@ -7,7 +7,7 @@ class VocabularyTask extends React.PureComponent {
     render() {
 
         let { vocabularyList, playAction, param } = this.props;
-        let testHref = '/learn/wordquiz?'+'start_index='+param.startIndex+'&end_index='+param.endIndex+'&word_type='+param.wordType;
+        let testHref = '/learn/wordquiz?start_index=' + param.startIndex + '&end_index=' + param.endIndex + '&word_type=' + param.wordType;
 
         const vocabularyItems = vocabularyList.map((item,index) => {
             let backgroundColor = '';
@@ -26,7 +26,7 @@ class VocabularyTask extends React.PureComponent {
             <div className="vocabularyTask">
                 <div className="v_Task_VocabularyHeader">
                     <a className="v_Task_H_TaskName">词汇学习</a>
-                    <a className="v_Task_H_HistoryDoor" href="/learn/task">历史学习</a>
+                    <a className="v_Task_H_HistoryDoor" href="/learn/task?type=4">历史学习</a>
                 </div>
                 <div className="v_Task_VocabularyList">
                     {vocabularyItems}

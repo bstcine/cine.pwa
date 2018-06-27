@@ -11,7 +11,7 @@ class HistoryTask extends React.PureComponent {
 
     render() {
 
-        const { isDialogShow , taskModels , startTime , endTime , defaultType , actions } = this.props;
+        const { isDialogShow, taskModels, startTime, endTime, defaultType, actions } = this.props;
 
         const button = (
             <button
@@ -61,11 +61,11 @@ const TaskComponent = ({ taskModel }) => {
 class TaskListComponent extends React.PureComponent {
     render() {
         const taskModels = this.props.taskModels;
-        
         const children = taskModels.map((item) => {
-            return <TaskComponent key={item.week} taskModel={item} />
+            return (
+                <TaskComponent key={item.week} taskModel={item} />
+            );
         })
-
         return (
             <div className="taskList">
                 {children}

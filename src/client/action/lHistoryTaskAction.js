@@ -46,8 +46,8 @@ export const actionHistoryTask = {
     },
 
     // 加载历史任务数据
-    loadHistoryTask: () => async dispatch => {
-        dispatch(actionHistoryTask._loadHistoryTask({}, true))
+    loadHistoryTask: (param) => async dispatch => {
+        dispatch(actionHistoryTask._loadHistoryTask(param, true));
     },
 
     // dialog窗口显示/隐藏

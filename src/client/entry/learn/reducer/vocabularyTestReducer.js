@@ -7,8 +7,9 @@ import { ACTION_LT } from '@/constant/actionTypeLearn';
 const initialState = fromJS({
     isTest: false,
     content: {
-        index: 0,
+        index: -1,
         wordCount: 0,
+        correctCount: 0,
         value: 'wordTest',
         real_zh: -1,
         zh: [],

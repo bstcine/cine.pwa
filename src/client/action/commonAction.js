@@ -1,6 +1,7 @@
 import * as actType from '@/constant/actionType';
 import { fetchData } from '@/service/base';
 import { APIURL_User_Info } from '../../APIConfig';
+import storeUtil from '@/util/storeUtil';
 
 export const closeAlert = () => ({
     type: actType.CLOSE_ALERT,

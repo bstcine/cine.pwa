@@ -45,16 +45,6 @@ self.addEventListener('install', function(event) {
     //     })
     // );
     event.waitUntil(self.skipWaiting());
-    // 在激活事件中清除非当前版本的缓存避免用户存储空间急剧膨胀
-    // event.waitUntil(caches.keys().then(function(cacheNames) {
-    //     return Promise.all(cacheNames.map(function(cacheName) {
-    //         if (cacheName !== OFFLINE_CACHE_NAME) {
-    //             if(cacheName.indexOf(OFFLINE_CACHE_PREFIX) !== -1) {
-    //                 return caches.delete(cacheName);
-    //             }
-    //         }
-    //     }));
-    // }));
 });
 
 self.addEventListener('activate', function(event) {
@@ -81,33 +71,47 @@ self.addEventListener('activate', function(event) {
 self.addEventListener('fetch', function(event) {
     console.log('[Service Worker] Fetch', event.request.url);
     if (event.request.method === 'GET') {
-        event.respondWith(
-            caches.match(event.request).then(function(response) {
-                // 来来来，代理可以搞一些代理的事情
+        // caches.match(event.request).then(function(response) {
+            //     // 来来来，代理可以搞一些代理的事情
 
-                // 如果 Service Worker 有自己的返回，就直接返回，减少一次 http 请求
-                if (response) {
-                    return response;
+            //     // 如果 Service Worker 有自己的返回，就直接返回，减少一次 http 请求
+            //     if (response) {
+            //         return response;
+            //     }
+
+            //     // 如果 service worker 没有返回，那就得直接请求真实远程服务
+            //     let request = event.request.clone(); // 把原始请求拷过来
+                // return fetch(request).then(function(httpRes) {
+                //     // http请求的返回已被抓到，可以处置了。
+
+                //     // 请求失败了，直接返回失败的结果就好了。。
+                //     if (!httpRes || httpRes.status !== 200) {
+                //         return httpRes;
+                //     }
+
+                //     // 请求成功的话，将请求缓存起来。
+                //     let responseClone = httpRes.clone();
+                //     caches.open(OFFLINE_CACHE_NAME).then(function(cache) {
+                //         cache.put(event.request, responseClone);
+                //     });
+
+                //     return httpRes;
+                // });
+            // })
+        event.respondWith(
+            fetch(event.request).then(function(httpRes) {
+                if (!httpRes || httpRes.status !== 200) {
+                    return httpRes;
                 }
 
-                // 如果 service worker 没有返回，那就得直接请求真实远程服务
-                let request = event.request.clone(); // 把原始请求拷过来
-                return fetch(request).then(function(httpRes) {
-                    // http请求的返回已被抓到，可以处置了。
-
-                    // 请求失败了，直接返回失败的结果就好了。。
-                    if (!httpRes || httpRes.status !== 200) {
-                        return httpRes;
-                    }
-
-                    // 请求成功的话，将请求缓存起来。
-                    let responseClone = httpRes.clone();
-                    caches.open(OFFLINE_CACHE_NAME).then(function(cache) {
-                        cache.put(event.request, responseClone);
-                    });
-
-                    return httpRes;
+                let responseClone = httpRes.clone();
+                caches.open(OFFLINE_CACHE_NAME).then(function(cache) {
+                    cache.put(event.request, responseClone);
                 });
+
+                return httpRes;
+            }).catch(function() {
+                return caches.match(event.request)
             })
         );
     }

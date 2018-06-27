@@ -6,6 +6,7 @@ const correct_db = ['A', 'B', 'C', 'D', 'E', 'F'];
 const FeedbackSelectScore = ({
     is_select_correct,
     is_show_tip,
+    is_show_score,
     select_score,
     correct_value,
 }) => {
@@ -29,10 +30,11 @@ const FeedbackSelectScore = ({
                     )}
                 </span>
             )}
-
-            <div className="score">
-                得 <span>{select_score}</span> 分
-            </div>
+            {is_show_score && (
+                <div className="score">
+                    得 <span>{select_score}</span> 分
+                </div>
+            )}
         </div>
     );
 };

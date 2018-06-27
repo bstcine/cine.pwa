@@ -6,6 +6,8 @@ import { fetchData } from '@/service/base';
 import { ACTION_LT } from '@/constant/actionTypeLearn';
 import { toastAction } from '@/action/commonAction';
 import errorMsg from '@/util/errorMsg';
+import { fromJS } from 'immutable';
+import vocabularyTestRedu from '../entry/learn/reducer/vocabularyTestReducer';
 
 export const actionVocabularyTest = {
 
@@ -32,13 +34,7 @@ export const actionVocabularyTest = {
             return;
         }
 
-        let content = {
-            index: 0,
-            wordCount: result.rows.length,
-            value: result.rows[0].word,
-            real_zh: 0,
-            zh: ['123', '321', '231', '213'],
-        };
+        let content = actionVocabularyTest.getContent(result.rows, 0);
         dispatch(actionVocabularyTest._changeContent(content));
         dispatch(actionVocabularyTest._receive(result));
     },
@@ -64,5 +60,56 @@ export const actionVocabularyTest = {
     },
     changeIndex: () => async dispatch => {
         alert('下一个');
+    },
+    getContent: (rows, index) => {
+        // 生成随机下表
+        let randomCount = 3;
+        if (rows.length <= 3) {
+            randomCount = rows.length - 1;
+        }
+        alert(randomCount);
+        // 随机生成下表数组
+        let randomNumbers = actionVocabularyTest.getRandomNumbers(rows.length, randomCount);
+        alert(fromJS(randomNumbers));
+        let content = {
+            index: index,
+            wordCount: rows.length,
+            correctCount: 0,
+            value: rows[index].word,
+            real_zh: 0,
+            zh: ['123', '321', '231', '213'],
+        };
+        return content;
+    },
+    /**
+     * @ 获取不重复的随机数（int）
+     * @param max 最大范围
+     * @param count 获取的数量
+     * @return 随机数组
+     */
+    getRandomNumbers: (max, count) => {
+        let numbers = []
+        while (numbers.length < count) {
+            let randomNumer = actionVocabularyTest.getRandomNumber(max);
+            if (numbers.length === 0) {
+                numbers.push(randomNumer);
+                continue;
+            }
+            for (let i = 0; i < numbers.length; i++) {
+                if (numbers[i] === randomNumer) {
+                    continue;
+                }
+            }
+            numbers.push(randomNumer);
+        }
+        return numbers;
+    },
+    /**
+     * @ 获取随机数
+     * @ max 最大范围
+     * @return 生成数值
+     * */
+    getRandomNumber: (max) => {
+        return Math.round(Math.random() * max);
     },
 };

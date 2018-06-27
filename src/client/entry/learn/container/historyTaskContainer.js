@@ -1,18 +1,30 @@
 /**
  * Created by lidangkun on 2018/6/15.
  */
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Toast } from '@/component/Toast';
 import { actionHistoryTask } from '@/action/lHistoryTaskAction';
 import HistoryTask from '../component/historyTask';
-
 import CThemeProvider from '@/component/CThemeProvider';
+import { getParam } from '@/util/urlUtil';
+
 class HistoryTaskContainer extends React.PureComponent {
+    constructor(props) {
+        super(props);
+
+        this.audioPlayer = new Audio();
+        // 获取参数
+        let param = getParam();
+
+        let type = param.type;
+        this.param = {
+            type: type,
+        };
+    }
     componentDidMount() {
         let { actions } = this.props;
-        actions.loadHistoryTask();
+        actions.loadHistoryTask(this.param);
     }
 
     render() {

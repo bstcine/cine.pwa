@@ -21,6 +21,7 @@ const Format1ChooseOne = ({
     is_select_correct,
     answer_feedback,
     currentQuizState,
+    currentQuizType,
     saveQuestion1SelectValue,
     saveQuestionFeedback,
 }) => {
@@ -49,6 +50,7 @@ const Format1ChooseOne = ({
                         currentQuizState === CurrentQuizState.REVIEWING ||
                         waiting_and_not_need_feedback
                     }
+                    is_show_score={currentQuizType === '2'}
                     is_select_correct={is_select_correct}
                     select_score={select_score}
                     correct_value={correct_value}

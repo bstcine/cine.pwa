@@ -102,10 +102,10 @@
 
     .v_Task_L_Item_Info{
         display: flex;
-        align-contents: space-between;
         flex-direction: row;
         width: 100%;
         align-items: center;
+        justify-content: space-between;
 
         .v_Task_L_Item_ Seq{
             display: inline-block;
@@ -116,7 +116,9 @@
             color: #3a3b3c;
             float: left;
         }
-
+        .v_Task_L_Item_Value{
+            flex-grow: 1;
+        }
         .v_Task_L_Item_Word{
             margin-left: 0.8rem;
             font-family: PingFangSC-Medium;
@@ -167,6 +169,7 @@
             display: flex;
             width: 40%;
             align-items: center;
+            justify-content: flex-start;
 
             .v_Task_L_Item_ Seq{
                 display: inline-block;
@@ -176,6 +179,9 @@
                 text-align: right;
                 color: #3a3b3c;
                 float: left;
+            }
+            .v_Task_L_Item_Value{
+                flex-grow: inherit;
             }
             .v_Task_L_Item_Word{
                 margin-left: 0.4rem;

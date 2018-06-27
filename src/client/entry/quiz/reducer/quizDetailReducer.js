@@ -22,7 +22,7 @@ import {
     RECEIVE_STATS_STUDENT_QUIZ_WORD_LIST,
     REQUEST_STATS_STUDENT_QUIZ_WORD_LIST,
 } from '@/constant/actionTypeTGrammar';
-import { CurrentQuizState } from '@/constant/index';
+import { CurrentQuizState } from '@/constant/quiz';
 import { OPEN_NETWORK_ERROR, CLOSE_NETWORK_ERROR } from '@/constant/actionType';
 
 /**

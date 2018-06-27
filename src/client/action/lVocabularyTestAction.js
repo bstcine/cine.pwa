@@ -45,6 +45,7 @@ export const actionVocabularyTest = {
      * */
     _changeCorrectCount: count => ({
         type: ACTION_LT.CORRECTCOUNT,
+        payload: count,
     }),
     /**
      * 内容改变的方法（私有）
@@ -213,7 +214,11 @@ export const actionVocabularyTest = {
     /**
      * 点击选中翻译项
      * */
-    selectItem: (zh_index, content) => async dispatch => {
+    selectItem: (zh_index, content, correctCount) => async dispatch => {
+        if (zh_index === content.real_zh) {
+            let count = correctCount + 1;
+            dispatch(actionVocabularyTest._changeCorrectCount(count));
+        }
         dispatch(actionVocabularyTest._changeSelectStatus(zh_index));
     },
     /**

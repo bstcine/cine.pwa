@@ -30,16 +30,14 @@ class VocabularyTest extends React.PureComponent {
             }
             if (selectStatus > -1) {
                 return (
-                    <div key={item} className="v_Test_VC_SelectItem" style={style} onClick={() => {
-                        actions.selectItem(index, content);
-                    }} >
+                    <div key={item} className="v_Test_VC_SelectItem" style={style} >
                         <p className="v_Test_VC_SelectItem_Text">{item}</p>
                     </div>
                 );
             } else {
                 return (
                     <div key={item} className="v_Test_VC_SelectItem" onClick={() => {
-                        actions.selectItem(index, content);
+                        actions.selectItem(index, content, correctCount);
                     }} >
                         <p className="v_Test_VC_SelectItem_Text">{item}</p>
                     </div>

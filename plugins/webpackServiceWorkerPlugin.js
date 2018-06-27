@@ -70,7 +70,7 @@ self.addEventListener('activate', function(event) {
 
 self.addEventListener('fetch', function(event) {
     console.log('[Service Worker] Fetch', event.request.url);
-    if (event.request.method === 'GET') {
+    if (event.request.method === 'GET' && event.request.url.indexOf('https') === 0) {
         // caches.match(event.request).then(function(response) {
             //     // 来来来，代理可以搞一些代理的事情
 

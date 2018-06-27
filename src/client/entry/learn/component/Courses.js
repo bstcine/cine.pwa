@@ -4,7 +4,7 @@ import TextFix from '@/component/TextFix';
 
 const Courses = ({ courses }) => {
     const getHref = course => {
-        let url = '/learn/lesson/' + course.id;
+        let url = '/learn/course/' + course.id;
         if (course.last_content_id) {
             url += '?lesson_id=' + course.last_content_id;
         }

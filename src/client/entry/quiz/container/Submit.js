@@ -8,7 +8,7 @@ import {
     showUncompletedQuestion,
     showAllQuestion,
 } from '@/action/quizAction';
-import { CurrentQuizState } from '@/constant/index';
+import { CurrentQuizState } from '@/constant/quiz';
 
 const mapStateToProps = state => {
     let { currentQuizState } = state;

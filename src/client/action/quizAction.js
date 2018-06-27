@@ -31,11 +31,11 @@ import {
     RECEIVE_STATS_STUDENT_QUIZ_WORD_LIST,
 } from '@/constant/actionTypeTGrammar';
 import {
-    RoleID,
     CurrentQuizState,
     StatsContentQuizStatus,
     QuestionFormat,
-} from '@/constant/index';
+} from '@/constant/quiz';
+import { RoleID } from '@/constant/index';
 import { openConfirm, openAlert, networkError } from '@/action/commonAction';
 
 /**

@@ -4,7 +4,7 @@ import { RoleID } from '@/constant';
 const cineMenu = [
     { label: '首页', url: '/' },
     {
-        label: '学习首页',
+        label: '学习系统',
         url: h5.URL_Learn_Index,
         children: [
             {

@@ -5,7 +5,7 @@ import QuestionText from './QuestionText';
 import FeedbackSelectScore from './FeedbackSelectScore';
 import FeedbackTextScore from './FeedbackTextScore';
 import FeedbackText from './FeedbackText';
-import { CurrentQuizState } from '@/constant/index';
+import { CurrentQuizState } from '@/constant/quiz';
 
 const options = [
     {

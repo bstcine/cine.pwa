@@ -47,8 +47,8 @@ const Courses = ({ courses }) => {
                                         有效期{' '}
                                         {course.expire_at >
                                         '2100-01-01 00:00:00'
-                                            ? course.expire_at.substring(0, 10)
-                                            : '长期有效'}
+                                            ? '长期有效'
+                                            : course.expire_at.substring(0, 10)}
                                     </div>
                                 )}
                             </div>

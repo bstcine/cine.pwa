@@ -11,10 +11,11 @@ const mapStateToProps = (state, ownProps) => {
             ? statsContentQuiz.create_at.substring(0, 10)
             : null,
         score: statsContentQuiz ? statsContentQuiz.score : null,
+        quiz_type: quiz.type,
     };
 };
 
-const Title = ({ title, date, score, question_count }) => {
+const Title = ({ title, date, score, question_count, quiz_type }) => {
     console.log('Title render');
     let today = dayjs().format('YYYY-MM-DD');
     return (
@@ -25,9 +26,10 @@ const Title = ({ title, date, score, question_count }) => {
                     <span className="meta">做题时间：{date || today}</span>
                 </div>
                 <div className="metas-right">
-                    {typeof score === 'number' && (
+                    {quiz_type === '2' &&
+                        typeof score === 'number' && (
                         <span className="meta">
-                            得分 <span>{score}</span> 分
+                                得分 <span>{score}</span> 分
                         </span>
                     )}
                     <span className="meta">共 {question_count} 题</span>

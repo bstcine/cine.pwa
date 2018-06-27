@@ -14,16 +14,17 @@ const Brand = () => (
 );
 
 const HeaderImg = ({ user }) => {
-    let img = user.head_image
-        ? `//www.bstcine.com/f/${user.head_image}`
-        : require('@/asset/image/ico_headpic.png');
+    let img =
+        user && user.head_image
+            ? `//www.bstcine.com/f/${user.head_image}`
+            : require('@/asset/image/ico_headpic.png');
     return <img src={img} alt="HeaderImg" />;
 };
 
 const Nav1 = ({ navs }) => (
     <nav className="nav-1st">
         {navs &&
-            navs.length &&
+            Boolean(navs.length) &&
             navs.map(menu => (
                 <a
                     key={menu.url}
@@ -43,7 +44,7 @@ const UserBar = ({ user, isOpenUserBar, onToggleUserBar, onLogout }) => (
             open: isOpenUserBar,
         })}>
         <div className="nickname" onClick={onToggleUserBar}>
-            <span>{user.nickname}</span>
+            {Boolean(user) && <span>{user.nickname}</span>}
             <HeaderImg user={user} />
             <GIcon name="arrow_drop_up" />
         </div>
@@ -89,7 +90,6 @@ class GHeader extends PureComponent {
 
     render() {
         const { user, navs1, navs2, onLogout } = this.props;
-        if (!user) return null;
         const { isOpenUserBar } = this.state;
 
         return (
@@ -98,6 +98,7 @@ class GHeader extends PureComponent {
                     <div className="gcontainer">
                         <Brand />
                         <Nav1 navs={navs1} />
+
                         <UserBar
                             user={user}
                             isOpenUserBar={isOpenUserBar}

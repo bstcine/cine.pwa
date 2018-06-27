@@ -3,8 +3,6 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { fetchQuizData } from '@/action/quizAction';
-import Header from '@/component/Header';
-import Footer from '@/component/Footer';
 import Alert from '@/component/Alert';
 import Confirm from '@/component/Confirm';
 import Title from '../container/Title';
@@ -22,16 +20,32 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => ({
-    fetchQuizData: (obj) => {
+    fetchQuizData: obj => {
         dispatch(fetchQuizData(obj));
     },
 });
 
 class QuizPage extends Component {
     componentDidMount() {
-        let { user_id, quiz_id, stats_content_quiz_id, lesson_id, chapter_id, course_id, cmd } = getParam();
+        let {
+            user_id,
+            quiz_id,
+            stats_content_quiz_id,
+            lesson_id,
+            chapter_id,
+            course_id,
+            cmd,
+        } = getParam();
         const { fetchQuizData } = this.props;
-        fetchQuizData({ user_id, quiz_id, stats_content_quiz_id, lesson_id, chapter_id, course_id, cmd });
+        fetchQuizData({
+            user_id,
+            quiz_id,
+            stats_content_quiz_id,
+            lesson_id,
+            chapter_id,
+            course_id,
+            cmd,
+        });
     }
 
     // componentWillReceiveProps(nextProps){
@@ -43,22 +57,18 @@ class QuizPage extends Component {
         console.log('QuizPage render');
         const { init } = this.props;
         return (
-            <React.Fragment>
-                <Header isShow={true} />
-                <div className="container-fluid course-container-bg">
-                    <div className="tgrammar">
-                        <Alert />
-                        <Confirm />
-                        {!init && <Title />}
-                        {!init && <QuestionsList />}
-                        {!init && <Submit />}
-                        <ToastLoading />
-                        <ToastError />
-                        <LoginModal />
-                    </div>
+            <div className="container-fluid course-container-bg">
+                <div className="tgrammar">
+                    <Alert />
+                    <Confirm />
+                    {!init && <Title />}
+                    {!init && <QuestionsList />}
+                    {!init && <Submit />}
+                    <ToastLoading />
+                    <ToastError />
+                    <LoginModal />
                 </div>
-                <Footer />
-            </React.Fragment>
+            </div>
         );
     }
 }

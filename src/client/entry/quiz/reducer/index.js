@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux';
 import { alertModal, confirmModal } from '@/reducer/index';
+import { user } from '@/reducer';
 import {
     quiz,
     statsContentQuiz,
@@ -7,7 +8,6 @@ import {
     answersById,
     questionsFilter,
     currentQuizState,
-    user,
     network,
     loginModal,
     timer,

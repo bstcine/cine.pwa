@@ -20,3 +20,7 @@ export const URL_Mentor_Index = '/mentor';
 export const URL_Mentor_Student_Task = '/mentor/student/task';
 export const URL_Mentor_Student_Quiz = '/mentor/student/quiz';
 export const URL_Mentor_CorrectList = '/mentor/correct';
+
+export const URL_Quiz_Index = '/quiz';
+export const URL_Quiz_Kj = '/quiz/kj';
+export const URL_Quiz_Grammar = '/quiz/grammar';

@@ -9,16 +9,11 @@ import { CurrentQuizState } from '@/constant';
  */
 const Format4ShortQue = ({
     no,
-    id,
     title,
     feedback,
     need_feedback,
-    select_value,
     text_value,
-    is_select_correct,
     is_text_correct,
-    select_score,
-    text_score,
     answer_feedback,
     currentQuizState,
     saveQuestion4TextValue,

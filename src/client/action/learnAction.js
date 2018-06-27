@@ -9,7 +9,6 @@ import {
     REQUEST_MY_COURSE_LIST,
     RECEIVE_MY_COURSE_LIST,
 } from '@/constant/actionTypeLearn';
-import storeUtil from '@/util/storeUtil';
 
 export const fetchCurrentTask = () => async dispatch => {
     dispatch(requsetCurrentTask());

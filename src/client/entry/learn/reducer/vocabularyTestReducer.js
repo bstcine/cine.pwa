@@ -6,6 +6,13 @@ import { ACTION_LT } from '@/constant/actionTypeLearn';
 
 const initialState = fromJS({
     isTest: false,
+    content: {
+        index: 0,
+        wordCount: 0,
+        value: 'wordTest',
+        real_zh: -1,
+        zh: [],
+    },
     rows: [],
 });
 
@@ -17,6 +24,8 @@ const vocabularyTestRedu = (state = initialState, action) => {
             return state.set('rows', action.payload);
         case ACTION_LT.STARTTEST:
             return state.set('isTest', action.payload);
+        case ACTION_LT.CHANGECONTENT:
+            return state.set('content', action.payload);
         default:
             return state;
     }

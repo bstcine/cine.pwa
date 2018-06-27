@@ -20,6 +20,10 @@ export const actionVocabularyTest = {
         type: ACTION_LT.STARTTEST,
         payload: isStart,
     }),
+    _changeContent: content => ({
+        type: ACTION_LT.CHANGECONTENT,
+        payload: content,
+    }),
     _loadWords: (param, isInit) => async dispatch => {
         let [error, result] = await fetchData(Api.APIURL_User_Learn_Word, param);
 
@@ -27,6 +31,15 @@ export const actionVocabularyTest = {
             dispatch(toastAction.showError(errorMsg(error)));
             return;
         }
+
+        let content = {
+            index: 0,
+            wordCount: result.rows.length,
+            value: result.rows[0].word,
+            real_zh: 0,
+            zh: ['123', '321', '231', '213'],
+        };
+        dispatch(actionVocabularyTest._changeContent(content));
         dispatch(actionVocabularyTest._receive(result));
     },
     loadWords: (startIndex, endIndex, wordType) => async dispatch => {
@@ -47,7 +60,6 @@ export const actionVocabularyTest = {
         dispatch(actionVocabularyTest._loadWords(param, true));
     },
     startTest: () => async dispatch => {
-        alert('点击了开始按钮');
         dispatch(actionVocabularyTest._test(true));
     },
     changeIndex: () => async dispatch => {

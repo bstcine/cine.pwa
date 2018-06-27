@@ -1,4 +1,4 @@
-import SITECODE from '@/constant/sitecode';
+import { SITECODE } from '@/constant/index';
 import storeUtil from '@/util/storeUtil';
 
 let siteCodeUtil = {
@@ -32,7 +32,7 @@ let siteCodeUtil = {
      */
     inAPP: () => {
         return siteCodeUtil.inIOSAPP() || siteCodeUtil.inAndroidAPP();
-    }
+    },
 };
 
 export default siteCodeUtil;

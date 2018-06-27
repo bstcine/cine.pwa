@@ -2,7 +2,7 @@ import { Component } from 'react';
 import { getParam } from '@/util/urlUtil';
 import siteCodeUtil from '@/util/sitecodeUtil';
 import storeUtil from '@/util/storeUtil';
-import SITECODE from '@/constant/sitecode';
+import { SITECODE } from '@/constant/index';
 import uaUtil from '@/util/uaUtil';
 
 class Entry extends Component {

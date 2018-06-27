@@ -15,8 +15,8 @@ const formatDuration = duration => {
     let sec = number % 60;
     let min = (number - sec) / 60;
     let str = '';
-    min && (str += min + '\'');
-    sec && (str += sec + '\'\'');
+    min && (str += min + "'");
+    sec && (str += sec + "''");
     return str;
 };
 
@@ -78,7 +78,7 @@ const OperationButton = ({ item }) => {
     }
 };
 
-const StatsTable = ({ title, list = [], onClick }) => {
+const StatsTable = ({ list = [] }) => {
     return (
         <div className="tgrammar-list">
             <table border="1">
@@ -102,7 +102,7 @@ const StatsTable = ({ title, list = [], onClick }) => {
                         return (
                             <tr key={item.id}>
                                 <td>{i + 1}</td>
-                                <td>{item.login.slice(-10)}</td>
+                                <td>{item.login && item.login.slice(-10)}</td>
                                 <td>{item.nickname || '-'}</td>
                                 <td>{formatGrade(item.grade)}</td>
                                 <td>{formatDuration(item.duration)}</td>

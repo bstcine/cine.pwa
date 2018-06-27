@@ -6,7 +6,7 @@ import {
 } from '@/action/quizAction';
 
 const mapStateToProps = (state, ownProps) => {
-    const { answersById, questions, currentQuizState } = state;
+    const { quiz, answersById, questions, currentQuizState } = state;
     const id = ownProps.id;
     const { no, title, feedback, need_feedback, options } = questions.byId[id];
 
@@ -15,7 +15,7 @@ const mapStateToProps = (state, ownProps) => {
         if (option.isCorrect) correct_value = i;
     });
 
-    let prop = { ...ownProps, no, title, feedback, need_feedback, options, correct_value, currentQuizState };
+    let prop = { ...ownProps, no, title, feedback, need_feedback, options, correct_value, currentQuizState, currentQuizType: quiz.type };
     const answer = answersById[id];
     if (answer) {
         prop.select_value = answer.select_value;

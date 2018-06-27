@@ -9,16 +9,11 @@ import { CurrentQuizState } from '@/constant';
  */
 const Format4ShortQue = ({
     no,
-    id,
     title,
     feedback,
     need_feedback,
-    select_value,
     text_value,
-    is_select_correct,
     is_text_correct,
-    select_score,
-    text_score,
     answer_feedback,
     currentQuizState,
     saveQuestion4TextValue,
@@ -50,6 +45,12 @@ const Format4ShortQue = ({
                     is_select_correct={is_text_correct}
                     onChange={saveQuestionFeedback}
                 />
+            )}
+
+            {/* 学生提交后且需要批 显示 老师批改中... */}
+            {currentQuizState === CurrentQuizState.WAITING4CHECK &&
+                need_feedback === '1' && (
+                <div style={{ color: '#ff0000' }}>老师批改中...</div>
             )}
         </div>
     );

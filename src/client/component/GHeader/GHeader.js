@@ -59,7 +59,7 @@ const Nav2 = ({ navs }) => (
     <nav className="nav-2nd">
         <div className="gcontainer">
             {navs &&
-                navs.length &&
+                navs.length > 0 &&
                 navs.map(menu => (
                     <a
                         key={menu.url}

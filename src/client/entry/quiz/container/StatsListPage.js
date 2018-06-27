@@ -3,14 +3,6 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { fetchStatsContentStuQuizWordList } from '@/action/quizAction';
-import StatsTable from '../container/StatsTable';
-import {
-    Tabs,
-    TabItems,
-    TabItem,
-    TabPanels,
-    TabPanel,
-} from '@/component/Tabs/index';
 import StudentTable from '../container/StudentTable';
 
 const mapStateToProps = state => {
@@ -45,25 +37,12 @@ class StatsListPage extends Component {
         return (
             <React.Fragment>
                 <div className="tgrammar-stats-list">
-                    <Tabs>
-                        <TabItems style={{ backgroundColor: 'transparent' }}>
-                            <TabItem>我的学生</TabItem>
-                            <TabItem>核心语法测试</TabItem>
-                        </TabItems>
-                        <TabPanels>
-                            <TabPanel>
-                                {!init && (
-                                    <StudentTable
-                                        wordsItemClick={this.wordsItemClick}
-                                        quizItemClick={this.quizItemClick}
-                                    />
-                                )}
-                            </TabPanel>
-                            <TabPanel>
-                                <StatsTable />
-                            </TabPanel>
-                        </TabPanels>
-                    </Tabs>
+                    {!init && (
+                        <StudentTable
+                            wordsItemClick={this.wordsItemClick}
+                            quizItemClick={this.quizItemClick}
+                        />
+                    )}
                 </div>
             </React.Fragment>
         );

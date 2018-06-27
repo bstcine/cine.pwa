@@ -2,7 +2,7 @@ import React from 'react';
 import { CRouter } from '@/component/CRouter';
 import * as h5 from '@/constant/menuItemUrl';
 import Root from './container/root';
-import StuTaskContainer from './container/sTaskContainer';
+import StuTaskContainer from './container/stuTaskContainer';
 import StatsListPage from '@/entry/quiz/container/StatsListPage';
 
 

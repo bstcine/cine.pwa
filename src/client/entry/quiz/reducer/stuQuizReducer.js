@@ -10,24 +10,6 @@ import {
 import { OPEN_NETWORK_ERROR, CLOSE_NETWORK_ERROR } from '@/constant/actionType';
 
 /**
- * 学生答题记录-主表记录
- */
-export const statsContentQuiz = (state = null, { type, payload }) => {
-    switch (type) {
-        case RECEIVE_CONTENT_QUIZ: {
-            let { statsContentQuiz } = payload;
-            if (statsContentQuiz) {
-                return { ...statsContentQuiz };
-            } else {
-                return state;
-            }
-        }
-        default:
-            return state;
-    }
-};
-
-/**
  * 网络状态，控制 spinner 组件显示状态
  * init:初始化状态
  * pending:api请求中
@@ -77,7 +59,7 @@ export const network = (
     }
 };
 
-export const statsContentStuQuizWordList = (state = [], { type, payload }) => {
+export const stuQuizGrammarAndWordList = (state = [], { type, payload }) => {
     switch (type) {
         case RECEIVE_STATS_STUDENT_QUIZ_WORD_LIST:
             return payload;

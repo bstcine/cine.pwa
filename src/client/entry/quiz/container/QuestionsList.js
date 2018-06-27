@@ -5,7 +5,7 @@ import Format11ReadingDesc from '../component/Format11ReadingDesc';
 import Format1ChooseOne from './Format1ChooseOne';
 import Format3Correct from './Format3Correct';
 import Format4ShortQue from './Format4ShortQue';
-import { CurrentQuizState, QuestionFormat } from '@/constant/index';
+import { CurrentQuizState, QuestionFormat } from '@/constant/quiz';
 import { SHOW_ALL_QUESTION } from '@/constant/actionTypeTGrammar';
 
 const mapStateToProps = (state, ownProps) => {

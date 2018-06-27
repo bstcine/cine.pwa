@@ -1,10 +1,7 @@
 import { combineReducers } from 'redux';
 import { alertModal, confirmModal, user } from '@/reducer/index';
 
-import {
-    stuQuizGrammarAndWordList,
-    network,
-} from '@/entry/quiz/reducer/stuQuizReducer';
+import { stuQuizGrammarAndWordList, network } from './stuQuizReducer';
 
 const rootReducer = combineReducers({
     stuQuizGrammarAndWordList,

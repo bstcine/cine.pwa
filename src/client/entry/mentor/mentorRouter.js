@@ -3,8 +3,8 @@ import { CRouter } from '@/component/CRouter';
 import * as h5 from '@/constant/menuItemUrl';
 import Root from './container/root';
 import StuTaskContainer from './container/stuTaskContainer';
-import StatsListPage from '@/entry/quiz/container/StatsListPage';
-
+import StatsListPage from './container/StatsListPage';
+import stuQuizContainer from './container/stuQuizContainer';
 
 const routes = {
     path: '/mentor',
@@ -21,6 +21,10 @@ const routes = {
         },
         {
             path: h5.URL_Mentor_Student_Quiz,
+            component: stuQuizContainer,
+        },
+        {
+            path: h5.URL_Mentor_CorrectList,
             component: StatsListPage,
         },
     ],

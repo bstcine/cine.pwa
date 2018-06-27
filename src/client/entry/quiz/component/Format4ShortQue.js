@@ -2,7 +2,7 @@ import React from 'react';
 import QuestionTitle from './QuestionTitle';
 import QuestionText from './QuestionText';
 import FeedbackText from './FeedbackText';
-import { CurrentQuizState } from '@/constant';
+import { CurrentQuizState } from '@/constant/quiz';
 
 /**
  * 4:简答题

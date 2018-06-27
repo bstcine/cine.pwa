@@ -3,7 +3,7 @@ import QuestionTitle from './QuestionTitle';
 import QuestionSelect from './QuestionSelect';
 import FeedbackText from './FeedbackText';
 import FeedbackSelectScore from './FeedbackSelectScore';
-import { CurrentQuizState } from '@/constant/index';
+import { CurrentQuizState } from '@/constant/quiz';
 
 /**
  * 1:单选题

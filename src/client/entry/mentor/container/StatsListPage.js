@@ -3,12 +3,17 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { fetchStatsContentStuQuizWordList } from '@/action/quizAction';
-import StudentTable from '../container/StudentTable';
+import StatsTable from '../component/Correct/StatsTable';
 
 const mapStateToProps = state => {
-    const { network } = state;
-    let { init } = network;
-    return { init };
+    const { network, stuQuizGrammarAndWordList } = state;
+    return {
+        init: network.init,
+        stats_list:
+            stuQuizGrammarAndWordList && stuQuizGrammarAndWordList.quiz
+                ? stuQuizGrammarAndWordList.quiz
+                : [],
+    };
 };
 
 const mapDispatchToProps = dispatch => ({
@@ -33,16 +38,11 @@ class StatsListPage extends Component {
 
     render() {
         console.log('StatsListPage render');
-        const { init } = this.props;
+        const { init, stats_list } = this.props;
         return (
             <React.Fragment>
                 <div className="tgrammar-stats-list">
-                    {!init && (
-                        <StudentTable
-                            wordsItemClick={this.wordsItemClick}
-                            quizItemClick={this.quizItemClick}
-                        />
-                    )}
+                    {!init && <StatsTable list={stats_list} />}
                 </div>
             </React.Fragment>
         );

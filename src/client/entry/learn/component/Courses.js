@@ -4,7 +4,7 @@ import TextFix from '@/component/TextFix';
 
 const Courses = ({ courses }) => {
     const getHref = course => {
-        let url = '/learn/lesson/' + course.id;
+        let url = '/learn/course/' + course.id;
         if (course.last_content_id) {
             url += '?lesson_id=' + course.last_content_id;
         }
@@ -39,16 +39,18 @@ const Courses = ({ courses }) => {
                                         style={{ width: `${course.progress}%` }}
                                     />
                                 </div>
-                                <div className="status">
-                                    进度 {course.last_content}
-                                </div>
+                                {Boolean(course.last_content) && (
+                                    <div className="status">
+                                        进度 {course.last_content}
+                                    </div>
+                                )}
                                 {course.expire_at && (
                                     <div className="expire_at">
                                         有效期{' '}
                                         {course.expire_at >
                                         '2100-01-01 00:00:00'
-                                            ? course.expire_at.substring(0, 10)
-                                            : '长期有效'}
+                                            ? '长期有效'
+                                            : course.expire_at.substring(0, 10)}
                                     </div>
                                 )}
                             </div>

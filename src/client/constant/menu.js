@@ -43,16 +43,22 @@ const cineMenu = [
                 label: '我的测试',
                 url: h5.URL_User_Quiz,
                 icon: require('@/entry/user/asset/image/ico_wordtest.png'),
+                icon_path: ''
+            },
+            {
+                label: '我的订单',
+                url: h5.URL_User_Order,
+                icon: 'payment',
                 icon_path: '',
                 visible: false,
             },
-            // {
-            //     label: '我的订单',
-            //     url: h5.URL_User_Order,
-            //     icon: '',
-            //     icon_path: '',
-            //     visible: false,
-            // },
+            {
+                label: '地址管理',
+                url: h5.URL_User_Address,
+                icon: 'add_location',
+                icon_path: '',
+                visible: false,
+            },
         ],
     },
     {

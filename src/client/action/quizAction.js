@@ -177,7 +177,7 @@ export const preSubmitAnswer = () => (dispatch, getState) => {
  * 提交答案
  */
 export const submitAnswer = () => (dispatch, getState) => {
-    let { quiz, user, answersById, questions, timer } = getState();
+    let { quiz, userRedu, answersById, questions, timer } = getState();
     let duration = Math.round((new Date().getTime() - timer.startTime) / 1000);
     let answers = [];
     questions.allIds.forEach(questionId => {
@@ -204,7 +204,7 @@ export const submitAnswer = () => (dispatch, getState) => {
             return dispatch(networkError(err));
         }
         dispatch({ type: RECEIVE_STATS_QUIZ_SAVE });
-        clearLocalAnswers(quiz, user);
+        clearLocalAnswers(quiz, userRedu.data || {});
         location.href = `/quiz/grammar?stats_content_quiz_id=${
             result.statsContentQuiz.id
         }`;
@@ -547,8 +547,8 @@ export const saveQuestionFeedback = ({ id, feedback }) => dispatch => {
 const getLocalAnswersKey = (quiz, user) => `${quiz.id}-${user.id}`;
 
 export const autoSaveLocalAnswers = () => (dispatch, getState) => {
-    let { quiz, user, answersById } = getState();
-    const key = getLocalAnswersKey(quiz, user);
+    let { quiz, userRedu, answersById } = getState();
+    const key = getLocalAnswersKey(quiz, userRedu.data || {});
     storeUtil.set(key, answersById);
 };
 

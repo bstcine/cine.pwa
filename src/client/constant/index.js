@@ -60,3 +60,6 @@ export const SITECODE = {
     WEB_ANDROID_PAD: 'cine.web.android.pad',
     WEB_OTHER: 'cine.web.other',
 };
+
+export const LEARN_TEST_CORRECT_SELLP = 5;
+export const LEARN_TEST_WRONG_SELLP = 1;

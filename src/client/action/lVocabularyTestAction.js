@@ -41,11 +41,25 @@ export const actionVocabularyTest = {
         payload: isStart,
     }),
     /**
+     * 改变掌握数量
+     * */
+    _changeCorrectCount: count => ({
+        type: ACTION_LT.CORRECTCOUNT,
+        payload: count,
+    }),
+    /**
      * 内容改变的方法（私有）
      * */
     _changeContent: content => ({
         type: ACTION_LT.CHANGECONTENT,
         payload: content,
+    }),
+    /**
+     * 改变选择状态
+     * */
+    _changeSelectStatus: status => ({
+        type: ACTION_LT.CHANGESELECTSTATUS,
+        payload: status,
     }),
     /**
      * 加载单词数组的方法（私有）
@@ -85,8 +99,6 @@ export const actionVocabularyTest = {
         zhArr.splice(realIndex, 0, zh);
         let content = {
             index: index,
-            wordCount: rows.length,
-            correctCount: 0,
             value: rows[index].word,
             real_zh: realIndex,
             zh: zhArr,
@@ -198,6 +210,16 @@ export const actionVocabularyTest = {
      * */
     startTest: () => async dispatch => {
         dispatch(actionVocabularyTest._test(true));
+    },
+    /**
+     * 点击选中翻译项
+     * */
+    selectItem: (zh_index, content, correctCount) => async dispatch => {
+        if (zh_index === content.real_zh) {
+            let count = correctCount + 1;
+            dispatch(actionVocabularyTest._changeCorrectCount(count));
+        }
+        dispatch(actionVocabularyTest._changeSelectStatus(zh_index));
     },
     /**
      * @ 获取不重复的随机数（int）

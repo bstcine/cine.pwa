@@ -38,7 +38,7 @@ const Format4ShortQue = ({
             {((waiting_and_not_need_feedback && feedback) ||
                 currentQuizState === CurrentQuizState.CHECKING ||
                 (currentQuizState === CurrentQuizState.REVIEWING &&
-                    answer_feedback)) && (
+                    (answer_feedback || feedback))) && (
                 <FeedbackText
                     editable={currentQuizState === CurrentQuizState.CHECKING}
                     feedback={answer_feedback || feedback}

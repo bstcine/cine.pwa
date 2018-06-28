@@ -28,8 +28,8 @@ const cineMenu = [
             {
                 label: '我的优惠券',
                 url: h5.URL_User_Coupon,
-                // icon: 'mi-bug_report',
-                icon: 'ci-coupon',
+                icon: 'mi-bug_report',
+                // icon: 'ci-coupon',
             },
             {
                 label: '我的积分',

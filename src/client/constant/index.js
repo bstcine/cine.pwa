@@ -61,5 +61,5 @@ export const SITECODE = {
     WEB_OTHER: 'cine.web.other',
 };
 
-export const LEARN_TEST_CORRECT_SELLP = 5;
-export const LEARN_TEST_WRONG_SELLP = 1;
+export const LEARN_TEST_CORRECT_SELLP = 1;
+export const LEARN_TEST_WRONG_SELLP = 5;

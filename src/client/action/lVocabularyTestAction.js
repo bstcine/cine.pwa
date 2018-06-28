@@ -6,7 +6,7 @@ import { fetchData } from '@/service/base';
 import { ACTION_LT } from '@/constant/actionTypeLearn';
 import { toastAction } from '@/action/commonAction';
 import errorMsg from '@/util/errorMsg';
-import { LEARN_TEST_CORRECT_SELLP, LEARN_TEST_WRONG_SELLP } from '@/constant/index';
+import { Learn_Word_Correct_SleepTime, Learn_Word_Failed_SleepTime } from '@/constant/index';
 
 const Vocabulary = {
     n: ['n.'],
@@ -19,7 +19,7 @@ const Vocabulary = {
     u: ['int.'],
 };
 
-export const actionVocabularyTest = {
+export const lWordQuizAction = {
     /**
      * 请求数据的方法（私有）
      * */
@@ -32,6 +32,13 @@ export const actionVocabularyTest = {
     _receive: result => ({
         type: ACTION_LT.RECEIVE,
         payload: result.rows,
+    }),
+    /**
+     * 修改单词总数
+     * */
+    _changeWordCount: count => ({
+        type: ACTION_LT.CHANGEWORDCOUNT,
+        payload: count,
     }),
     /**
      * 开始测试的方法（私有）
@@ -57,9 +64,26 @@ export const actionVocabularyTest = {
     /**
      * 改变选择状态
      * */
-    _changeSelectStatus: status => ({
+    _changeSelectIndex: selectIndex => ({
         type: ACTION_LT.CHANGESELECTSTATUS,
-        payload: status,
+        payload: selectIndex,
+    }),
+    /**
+     * 改变错误下标
+     * */
+    _changeFaileIndex: index => ({
+        type: ACTION_LT.CHANGEFAILEINDEX,
+        payload: index,
+    }),
+    // 改变错误下标数组
+    _changeFaileIndexArray: indexArray => ({
+        type: ACTION_LT.CHANGEFAILEINDEXARRAY,
+        payload: indexArray,
+    }),
+    // 改变临时错误下标数组
+    _changeFaileTempIndexArray: tempIndexArray => ({
+        type: ACTION_LT.CHANGEFAILETEMPINDEXARRAY,
+        payload: tempIndexArray,
     }),
     /**
      * 加载单词数组的方法（私有）
@@ -70,9 +94,10 @@ export const actionVocabularyTest = {
             dispatch(toastAction.showError(errorMsg(error)));
             return;
         }
-        let content = actionVocabularyTest._getContent(result.rows, 0);
-        dispatch(actionVocabularyTest._changeContent(content));
-        dispatch(actionVocabularyTest._receive(result));
+        let content = lWordQuizAction._getContent(result.rows, 0);
+        dispatch(lWordQuizAction._changeContent(content));
+        dispatch(lWordQuizAction._changeWordCount(result['rows'].length));
+        dispatch(lWordQuizAction._receive(result));
     },
     /**
      * 获取当前内容的方法（私有）
@@ -84,17 +109,17 @@ export const actionVocabularyTest = {
             randomCount = rows.length - 1;
         }
         // 获取指定数量的干扰项目
-        let interferenceRows = actionVocabularyTest._getInterferenceRows(rows, index, randomCount);
+        let interferenceRows = lWordQuizAction._getInterferenceRows(rows, index, randomCount);
         // 随机生成正确下标的值
-        let realIndex = actionVocabularyTest.getRandomNumber(randomCount);
+        let realIndex = lWordQuizAction.getRandomNumber(randomCount);
         // 生命翻译文字数组
         let zhArr = [];
         // 获取正确的翻译
-        let { zh } = actionVocabularyTest._getChinessTransition(rows[index].type, rows[index].zh);
-        for (let i = 0; i < interferenceRows.length; i++) {
-            let { zh } = actionVocabularyTest._getChinessTransition(interferenceRows[i].type, interferenceRows[i].zh);
-            zhArr.push(zh);
-        }
+        let { zh } = lWordQuizAction._getChinessTransition(rows[index].type, rows[index].zh);
+        zhArr = interferenceRows.map((item) => {
+            let { zh } = lWordQuizAction._getChinessTransition(item.type, item.zh);
+            return zh;
+        });
         // 将正确的翻译元素插入到指定位置
         zhArr.splice(realIndex, 0, zh);
         let content = {
@@ -114,14 +139,15 @@ export const actionVocabularyTest = {
      * */
     _getInterferenceRows: (rows, index, count) => {
         // 获取禁止下标的词性
-        let wordType = rows[index].type;
+        let wordType = rows[index]['type'];
+        let wordValue = rows[index]['word'];
         // 获取所有该词性的元素
-        let newRows = []
+        let newRows = [];
         for (let i = 0; i < rows.length; i++) {
-            if (rows[i] === rows[index]) {
+            if (rows[i]['word'] === wordValue) {
                 continue;
             }
-            if (rows[i].type === wordType) {
+            if (rows[i]['type'] === wordType) {
                 newRows.push(rows[i]);
             }
         }
@@ -132,7 +158,7 @@ export const actionVocabularyTest = {
         // 如果数量超出，随机取出count个
         if (newRows.length > count) {
             let resultRows = [];
-            let randomIndexArr = actionVocabularyTest.getRandomNumbers(newRows.length - 1, count);
+            let randomIndexArr = lWordQuizAction.getRandomNumbers(newRows.length - 1, count);
             for (let i = 0; i < randomIndexArr.length; i++) {
                 resultRows.push(newRows[randomIndexArr[i]]);
             }
@@ -140,10 +166,10 @@ export const actionVocabularyTest = {
         }
         // 此时表示数量不足,需要补足
         while (newRows.length < count) {
-            let randomIndex = actionVocabularyTest.getRandomNumber(rows.length);
+            let randomIndex = lWordQuizAction.getRandomNumber(rows.length - 1);
             let hadRandom = false;
             for (let i = 0; i < newRows.length; i++) {
-                if (newRows[i] === rows[randomIndex]) {
+                if (newRows[i]['word'] === rows[randomIndex]['word'] || wordValue === rows[randomIndex]['word']) {
                     hadRandom = true;
                     break;
                 }
@@ -158,7 +184,7 @@ export const actionVocabularyTest = {
      * 根据翻译文字和词性列表获取准确的翻译文字
      * */
     _getChinessTransition: (wordType, originZH) => {
-        if (wordType === undefined || originZH === undefined) {
+        if (wordType === null || originZH === null) {
             toastAction.show('data error');
             return null;
         }
@@ -174,13 +200,13 @@ export const actionVocabularyTest = {
             }
         }
         // 表示没有词性和翻译相同的部分，抽取翻译，词性为空
-        if (zhs.length === 0) {
+        if (zhs.length <= 1) {
             return {
                 zh: zhs[0],
             };
         }
         // 获取不违反规定的随机数
-        let randomIndex = actionVocabularyTest.getRandomNumber(zhs.length - 1);
+        let randomIndex = lWordQuizAction.getRandomNumber(zhs.length - 1);
         return {
             zh: zhs[randomIndex],
         };
@@ -203,51 +229,105 @@ export const actionVocabularyTest = {
             end_index: endIndex,
             word_type: wordType,
         };
-        dispatch(actionVocabularyTest._loadWords(param, true));
+        dispatch(lWordQuizAction._loadWords(param, true));
     },
     /**
      * 开始测试（对外调用）
      * */
     startTest: () => async dispatch => {
-        dispatch(actionVocabularyTest._test(true));
+        dispatch(lWordQuizAction._test(true));
     },
     /**
      * 开始下一个（对外调用）
      * */
-    startNext: (rows, currentIndex) => async dispatch => {
-        let index = currentIndex + 1;
-        let content = actionVocabularyTest._getContent(rows, index);
+    startNext: (currentIndex) => async (dispatch, getState) => {
+        let reducer = getState().vocabularyTestRedu
+        let correctCount = reducer.get('correctCount');
+        let wordCount = reducer.get('wordCount');
+        if (correctCount === wordCount) {
+            dispatch(toastAction.show('测试完成'));
+            return;
+        }
+        let rows = reducer.get('rows');
+        let faileIndex = reducer.get('faileIndex');
+        let faileIndexArr = reducer.get('faileIndexArr');
+        let faileTempIndexArr = reducer.get('faileTempIndexArr');
+
+        let index;
+        if (faileIndex === -1) {
+            if (currentIndex < wordCount - 1) {
+                index = currentIndex + 1;
+            } else {
+                // 将临时错误数组赋值给错误数组
+                dispatch(lWordQuizAction._changeFaileIndexArray(faileTempIndexArr));
+                // 将临时错误数组清空
+                dispatch(lWordQuizAction._changeFaileTempIndexArray([]));
+                // 当前错误下标置为 0
+                dispatch(lWordQuizAction._changeFaileIndex(0));
+                // 取出错误数组中的第一个值作为下标
+                index = faileTempIndexArr[0];
+            }
+        } else {
+            if (faileIndex < faileIndexArr.length - 1) {
+                // faileIndex + 1
+                faileIndex = faileIndex + 1;
+                dispatch(lWordQuizAction._changeFaileIndex(faileIndex));
+                index = faileIndexArr[faileIndex];
+            } else {
+                // 将临时错误数组赋值给错误数组
+                dispatch(lWordQuizAction._changeFaileIndexArray(faileTempIndexArr));
+                // 将临时错误数组清空
+                dispatch(lWordQuizAction._changeFaileTempIndexArray([]));
+                // 当前错误下标置为 0
+                dispatch(lWordQuizAction._changeFaileIndex(0));
+                // 取出错误数组中的第一个值作为下标
+                index = faileTempIndexArr[0];
+            }
+        }
+        let content = lWordQuizAction._getContent(rows, index);
         // 选项清除
-        dispatch(actionVocabularyTest._changeSelectStatus(-1));
+        dispatch(lWordQuizAction._changeSelectIndex(-1));
         // 切换内容
-        dispatch(actionVocabularyTest._changeContent(content));
+        dispatch(lWordQuizAction._changeContent(content));
     },
     // 实现定时器，选择正确后的跳转（LEARN_TEST_CORRECT_SELLP）
-    selectCorrect: (rows, index) => async dispatch => {
-        let timerId = setTimeout(function () {
-            dispatch(actionVocabularyTest.startNext(rows, index));
-            clearTimeout(timerId);
-        }, LEARN_TEST_CORRECT_SELLP * 1000);
+    selectCorrect: (index) => async dispatch => {
+        setTimeout(function () {
+            dispatch(lWordQuizAction.startNext(index));
+        }, Learn_Word_Correct_SleepTime * 1000);
     },
     // 实现定时器，选择错误后的跳转（LEARN_TEST_WRONG_SELLP）
-    selectWrong: (rows, index) => async dispatch => {
-        let timerId = setTimeout(function () {
-            dispatch(actionVocabularyTest.startNext(rows, index));
-            clearTimeout(timerId);
-        }, LEARN_TEST_WRONG_SELLP * 1000);
+    selectWrong: (index) => async dispatch => {
+        setTimeout(function () {
+            dispatch(lWordQuizAction.startNext(index));
+        }, Learn_Word_Failed_SleepTime * 1000);
     },
     /**
      * 点击选中翻译项
      * */
-    selectItem: (zh_index, content, correctCount, rows) => async dispatch => {
-        dispatch(actionVocabularyTest._changeSelectStatus(zh_index));
+    selectItem: (selectIndex) => async (dispatch, getState) => {
+        // 改变选择状态
+        dispatch(lWordQuizAction._changeSelectIndex(selectIndex));
+        // 获取内容信息
+        let reducer = getState().vocabularyTestRedu;
+        let content = reducer.get('content');
+        let correctCount = reducer.get('correctCount');
         let index = content.index;
-        if (zh_index === content.real_zh) {
+        if (selectIndex === content.real_zh) {
             let count = correctCount + 1;
-            dispatch(actionVocabularyTest._changeCorrectCount(count));
-            dispatch(actionVocabularyTest.selectCorrect(rows, index));
+            dispatch(lWordQuizAction._changeCorrectCount(count));
+            dispatch(lWordQuizAction.selectCorrect(index));
         } else {
-            dispatch(actionVocabularyTest.selectWrong(rows, index));
+            // 将错误的下标录入到临时错误数组中
+            let faileTempIndexArr = reducer.get('faileTempIndexArr');
+            if (faileTempIndexArr === null) {
+                faileTempIndexArr = [content['index']];
+            } else {
+                faileTempIndexArr.push(content['index']);
+            }
+            console.log('error:', faileTempIndexArr);
+            dispatch(lWordQuizAction._changeFaileTempIndexArray(faileTempIndexArr));
+            dispatch(lWordQuizAction.selectWrong(index));
         }
     },
     /**
@@ -259,7 +339,7 @@ export const actionVocabularyTest = {
     getRandomNumbers: (max, count) => {
         let numbers = []
         while (numbers.length < count) {
-            let randomNumer = actionVocabularyTest.getRandomNumber(max);
+            let randomNumer = lWordQuizAction.getRandomNumber(max);
             if (numbers.length === 0) {
                 numbers.push(randomNumer);
                 continue;

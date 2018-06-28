@@ -4,9 +4,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { actionVocabularyTest } from '@/action/lVocabularyTestAction';
+import { lWordQuizAction } from '@/action/lVocabularyTestAction';
 import VocabularyTest from  '../component/vocabularyTest';
 import { getParam } from '@/util/urlUtil';
+import { Toast } from '@/component/Toast';
 
 class VocabularyTestContainer extends Component {
     constructor(props) {
@@ -29,14 +30,15 @@ class VocabularyTestContainer extends Component {
     }
 
     render() {
-        let { isTest, selectStatus, rows, correctCount, content, actions } = this.props;
+        let { network, isTest, selectIndex, wordCount, correctCount, content, actions } = this.props;
         return (
             <React.Fragment>
+                <Toast network={network} />
                 <VocabularyTest
                     param={this.param}
                     isTest={isTest}
-                    selectStatus={selectStatus}
-                    rows={rows}
+                    selectIndex={selectIndex}
+                    wordCount={wordCount}
                     correctCount={correctCount}
                     content={content}
                     actions={actions}
@@ -49,15 +51,16 @@ class VocabularyTestContainer extends Component {
 const mapStateToProps = state => {
     return {
         isTest: state.vocabularyTestRedu.get('isTest'),
-        selectStatus: state.vocabularyTestRedu.get('selectStatus'),
-        rows: state.vocabularyTestRedu.get('rows'),
+        selectIndex: state.vocabularyTestRedu.get('selectIndex'),
+        wordCount: state.vocabularyTestRedu.get('wordCount'),
         content: state.vocabularyTestRedu.get('content'),
         correctCount: state.vocabularyTestRedu.get('correctCount'),
+        network: state.toastRedu,
     };
 };
 
 const mapDispatchToProps = dispatch => ({
-    actions: bindActionCreators(actionVocabularyTest, dispatch),
+    actions: bindActionCreators(lWordQuizAction, dispatch),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(

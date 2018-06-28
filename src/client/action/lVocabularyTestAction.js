@@ -6,7 +6,7 @@ import { fetchData } from '@/service/base';
 import { ACTION_LT } from '@/constant/actionTypeLearn';
 import { toastAction } from '@/action/commonAction';
 import errorMsg from '@/util/errorMsg';
-import { fromJS } from 'immutable';
+import { LEARN_TEST_CORRECT_SELLP, LEARN_TEST_WRONG_SELLP } from '@/constant/index';
 
 const Vocabulary = {
     n: ['n.'],
@@ -212,14 +212,43 @@ export const actionVocabularyTest = {
         dispatch(actionVocabularyTest._test(true));
     },
     /**
+     * 开始下一个（对外调用）
+     * */
+    startNext: (rows, currentIndex) => async dispatch => {
+        let index = currentIndex + 1;
+        let content = actionVocabularyTest._getContent(rows, index);
+        // 选项清除
+        dispatch(actionVocabularyTest._changeSelectStatus(-1));
+        // 切换内容
+        dispatch(actionVocabularyTest._changeContent(content));
+    },
+    // 实现定时器，选择正确后的跳转（LEARN_TEST_CORRECT_SELLP）
+    selectCorrect: (rows, index) => async dispatch => {
+        let timerId = setTimeout(function () {
+            dispatch(actionVocabularyTest.startNext(rows, index));
+            clearTimeout(timerId);
+        }, LEARN_TEST_CORRECT_SELLP * 1000);
+    },
+    // 实现定时器，选择错误后的跳转（LEARN_TEST_WRONG_SELLP）
+    selectWrong: (rows, index) => async dispatch => {
+        let timerId = setTimeout(function () {
+            dispatch(actionVocabularyTest.startNext(rows, index));
+            clearTimeout(timerId);
+        }, LEARN_TEST_WRONG_SELLP * 1000);
+    },
+    /**
      * 点击选中翻译项
      * */
-    selectItem: (zh_index, content, correctCount) => async dispatch => {
+    selectItem: (zh_index, content, correctCount, rows) => async dispatch => {
+        dispatch(actionVocabularyTest._changeSelectStatus(zh_index));
+        let index = content.index;
         if (zh_index === content.real_zh) {
             let count = correctCount + 1;
             dispatch(actionVocabularyTest._changeCorrectCount(count));
+            dispatch(actionVocabularyTest.selectCorrect(rows, index));
+        } else {
+            dispatch(actionVocabularyTest.selectWrong(rows, index));
         }
-        dispatch(actionVocabularyTest._changeSelectStatus(zh_index));
     },
     /**
      * @ 获取不重复的随机数（int）
@@ -235,12 +264,16 @@ export const actionVocabularyTest = {
                 numbers.push(randomNumer);
                 continue;
             }
+            let hadNumber = false;
             for (let i = 0; i < numbers.length; i++) {
                 if (numbers[i] === randomNumer) {
-                    continue;
+                    hadNumber = true;
+                    break;
                 }
             }
-            numbers.push(randomNumer);
+            if (!hadNumber) {
+                numbers.push(randomNumer);
+            }
         }
         return numbers;
     },

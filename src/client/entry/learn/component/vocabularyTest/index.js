@@ -2,9 +2,15 @@
  * Created by lidangkun on 2018/6/15.
  */
 import React from 'react';
-import "../../asset/style/vocabularyTest.less";
+import '../../asset/style/vocabularyTest.less';
 
 class VocabularyTest extends React.PureComponent {
+    // 跳转下一个项目
+    showNext= () => {
+        let { rows, content, actions } = this.props;
+        let index = content.index;
+        actions.startNext(rows, index);
+    };
 
     render() {
         let { param, isTest, selectStatus, rows, correctCount, content, actions } = this.props;
@@ -18,36 +24,33 @@ class VocabularyTest extends React.PureComponent {
                 <p className="v_Test_VC_Test_Start" onClick={actions.startTest}>开始测试</p>
             </div>
         );
-        const selectList = content.zh && content.zh.map((item, index) => {
+        let selectList = content.zh && content.zh.map((item, index) => {
+            if (selectStatus === -1) {
+                return (
+                    <div key={index} className="v_Test_VC_SelectItem" onClick={() => {
+                        actions.selectItem(index, content, correctCount, rows);
+                    }}>
+                        <p className="v_Test_VC_SelectItem_Text">{item}</p>
+                    </div>
+                );
+            }
             let backgroundColor = '#fff';
             if (index === content.real_zh) {
                 backgroundColor = '#3cd163';
             } else if (index === selectStatus) {
                 backgroundColor = '#ff8181';
             }
-            let style = {
-                backgroundColor: backgroundColor,
-            }
-            if (selectStatus > -1) {
-                return (
-                    <div key={item} className="v_Test_VC_SelectItem" style={style} >
-                        <p className="v_Test_VC_SelectItem_Text">{item}</p>
-                    </div>
-                );
-            } else {
-                return (
-                    <div key={item} className="v_Test_VC_SelectItem" onClick={() => {
-                        actions.selectItem(index, content, correctCount);
-                    }} >
-                        <p className="v_Test_VC_SelectItem_Text">{item}</p>
-                    </div>
-                );
-            }
+            return (
+                <div key={index} className="v_Test_VC_SelectItem_Result" style={{ backgroundColor: backgroundColor }}>
+                    <p className="v_Test_VC_SelectItem_Text">{item}</p>
+                </div>
+            );
         });
+        let inProgressWidth = (correctCount * 100 / rows.length).toString() + '%';
         const testContent = (
             <div className="v_Test_VocabularyContent">
                 <div className="v_Test_VC_Progress">
-                    <div className="v_Test_VC_InProgress" />
+                    <div style={{ width: inProgressWidth }} className="v_Test_VC_InProgress"/>
                 </div>
                 <div className="v_Test_VC_Progress_Text">
                     <p className="v_Test_VC_Progress_Correct">{correctWord}</p>

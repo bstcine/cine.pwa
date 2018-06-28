@@ -2,7 +2,7 @@ import { combineReducers } from 'redux';
 import vocabularyRedu from './vocabularyTaskReducer';
 import historyTaskRedu from './historyTaskReducer';
 import vocabularyTestRedu from './vocabularyTestReducer';
-import { user } from '@/reducer';
+import { userRedu } from '@/reducer';
 import {
     RECEIVE_CURRENT_TASK,
     RECEIVE_MY_COURSE_LIST,
@@ -27,7 +27,7 @@ const courses = (state = [], action) => {
 };
 
 const rootReducer = combineReducers({
-    user,
+    userRedu,
     currentTasks,
     courses,
     vocabularyRedu,

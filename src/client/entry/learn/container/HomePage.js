@@ -6,8 +6,8 @@ import Courses from './Courses';
 import '../asset/style/index.less';
 import { fetchUserInfo } from '@/action/commonAction';
 const mapStateToProps = state => {
-    const { user } = state;
-    return { user: user.data };
+    const { userRedu } = state;
+    return { user: userRedu.data };
 };
 const mapDispatchToProps = dispatch => ({
     fetchUserInfo: () => {

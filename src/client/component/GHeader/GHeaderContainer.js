@@ -7,9 +7,9 @@ import { logoutV1 } from '@/service/base';
 import { getNav } from '@/util/menuUtil';
 
 const mapStateToProps = state => {
-    let { user } = state;
-    const { navs1, navs2 } = getNav(user.data);
-    return { user: user.data, navs1, navs2 };
+    let { userRedu } = state;
+    const { navs1, navs2 } = getNav(userRedu.data);
+    return { user: userRedu.data, navs1, navs2 };
 };
 
 const mapDispatchToProps = dispatch => ({

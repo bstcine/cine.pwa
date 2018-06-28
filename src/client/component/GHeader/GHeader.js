@@ -46,7 +46,7 @@ const UserBar = ({ user, isOpenUserBar, onToggleUserBar, onLogout }) => (
         <div className="nickname" onClick={onToggleUserBar}>
             {Boolean(user) && <span>{user.nickname}</span>}
             <HeaderImg user={user} />
-            <GIcon name="arrow_drop_up" />
+            <GIcon name="mi-arrow_drop_up" />
         </div>
         <nav className="nav-user">
             <a href="/user">个人资料</a>
@@ -61,16 +61,35 @@ const Nav2 = ({ navs }) => (
         <div className="gcontainer">
             {navs &&
                 navs.length > 0 &&
-                navs.map(menu => (
-                    <a
-                        key={menu.url}
-                        href={menu.url}
-                        className={classNames({
-                            active: menu.active,
-                        })}>
-                        {menu.label}
-                    </a>
-                ))}
+                navs.map(
+                    menu =>
+                        (!menu.disabled ? (
+                            <a
+                                key={menu.url}
+                                href={menu.url}
+                                className={classNames({
+                                    active: menu.active,
+                                })}>
+                                {Boolean(menu.icon) && (
+                                    <GIcon name={menu.icon} />
+                                )}
+                                {Boolean(menu.icon_path) && (
+                                    <GIcon url={menu.icon_path} />
+                                )}
+                                {menu.label}
+                            </a>
+                        ) : (
+                            <a key={menu.url} className="disabled">
+                                {Boolean(menu.icon) && (
+                                    <GIcon name={menu.icon} />
+                                )}
+                                {Boolean(menu.icon_path) && (
+                                    <GIcon url={menu.icon_path} />
+                                )}
+                                {menu.label}
+                            </a>
+                        ))
+                )}
         </div>
     </nav>
 );

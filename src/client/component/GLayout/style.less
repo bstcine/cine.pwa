@@ -38,8 +38,8 @@
             justify-content: space-between;
         }
         .brand {
-            margin-top: 0.2rem;
             width: 1.86rem;
+            margin-top: 0.2rem;
         }
     }
 
@@ -84,7 +84,7 @@
 
             display: flex;
 
-            width: 1.4rem;
+            min-width: 1.8rem;
             margin: 0 0.4rem;
 
             transition: all 0.1s;
@@ -98,6 +98,20 @@
             &:hover,
             &.active {
                 border-bottom: 4px solid #0748a0;
+            }
+            &.disabled {
+                cursor: not-allowed;
+
+                filter: grayscale(100%);
+                filter: gray;
+            }
+            &.disabled:hover {
+                border: transparent;
+            }
+            i {
+                color: #0748a0;
+                width: 0.4rem;
+                margin-right: 0.3em;
             }
         }
     }

@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import { alertModal, confirmModal, user } from '@/reducer/index';
+import { alertModal, confirmModal, userRedu } from '@/reducer/index';
 
 import { stuQuizGrammarAndWordList, network } from './stuQuizReducer';
 
@@ -9,7 +9,7 @@ const rootReducer = combineReducers({
 
     alertModal,
     confirmModal,
-    user,
+    userRedu,
 });
 
 export default rootReducer;

@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 import { alertModal, confirmModal } from '@/reducer/index';
-import { user } from '@/reducer';
+import { userRedu } from '@/reducer';
 import {
     quiz,
     statsContentQuiz,
@@ -20,7 +20,7 @@ const rootReducer = combineReducers({
     answersById,
     questionsFilter,
     currentQuizState,
-    user,
+    userRedu,
     network,
     loginModal,
     timer,

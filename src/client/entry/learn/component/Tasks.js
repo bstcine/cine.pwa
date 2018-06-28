@@ -13,7 +13,7 @@ const ExpandMore = ({ tasks, isLimitTasks, onShowAllTask }) => {
     if (tasks && tasks.length > 5 && isLimitTasks) {
         return (
             <span className="expand_more" onClick={onShowAllTask}>
-                展开更多作业 <GIcon name="expand_more" />
+                展开更多作业 <GIcon name="mi-expand_more" />
             </span>
         );
     } else {

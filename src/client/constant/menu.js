@@ -23,7 +23,6 @@ const cineMenu = [
                 label: '我的学习',
                 url: h5.URL_Learn_Index,
                 icon: 'ci-my_study',
-                icon_path: '', // remote url or require(local file)
             },
         ],
     },

@@ -33,8 +33,7 @@ const cineMenu = [
             {
                 label: '我的优惠券',
                 url: h5.URL_User_Coupon,
-                icon: 'mi-bug_report',
-                // icon: 'ci-coupon',
+                icon: 'ci-coupon',
             },
             {
                 label: '我的积分',
@@ -49,13 +48,13 @@ const cineMenu = [
             {
                 label: '我的订单',
                 url: h5.URL_User_Order,
-                icon: 'ci-order',
+                icon: 'mi-payment',
                 disabled: true,
             },
             {
                 label: '地址管理',
                 url: h5.URL_User_Address,
-                icon: 'ci-address',
+                icon: 'mi-add_location',
                 disabled: true,
             },
         ],

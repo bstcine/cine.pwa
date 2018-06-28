@@ -68,6 +68,9 @@ const Nav2 = ({ navs }) => (
                         className={classNames({
                             active: menu.active,
                         })}>
+                        {Boolean(menu.icon) && (
+                            <img src={menu.icon || menu.icon_path} alt="" />
+                        )}
                         {menu.label}
                     </a>
                 ))}

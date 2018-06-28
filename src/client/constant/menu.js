@@ -1,6 +1,14 @@
 import * as h5 from './menuItemUrl';
 import { RoleID } from '@/constant';
-
+// ../image/ico_my_study.png
+// ../image/ico_integral.png
+// ../image/ico_coupon.png
+// ../image/ico_wordtest.png
+// ../image/ico_grammar.png
+// ../image/ico_teacher@2x.png
+// ../image/ico_address@2x.png
+// ../image/ico_edit1.png
+// ../image/ico_quit.png
 const cineMenu = [
     { label: '首页', url: '/' },
     {
@@ -10,8 +18,8 @@ const cineMenu = [
             {
                 label: '我的学习',
                 url: h5.URL_Learn_Index,
-                icon: '',
-                icon_path: '',
+                icon: require('@/entry/user/asset/image/ico_my_study.png'),
+                icon_path: '', // remote url
             },
         ],
     },
@@ -22,19 +30,19 @@ const cineMenu = [
             {
                 label: '我的优惠券',
                 url: h5.URL_User_Coupon,
-                icon: '',
+                icon: require('@/entry/user/asset/image/ico_coupon.png'),
                 icon_path: '',
             },
             {
                 label: '我的积分',
                 url: h5.URL_User_Integral,
-                icon: '',
+                icon: require('@/entry/user/asset/image/ico_integral.png'),
                 icon_path: '',
             },
             {
                 label: '我的测试',
                 url: h5.URL_User_Quiz,
-                icon: '',
+                icon: require('@/entry/user/asset/image/ico_wordtest.png'),
                 icon_path: '',
                 visible: false,
             },
@@ -55,19 +63,19 @@ const cineMenu = [
             {
                 label: '学生作业',
                 url: h5.URL_Mentor_Student_Task,
-                icon: '',
+                icon: require('@/entry/user/asset/image/ico_integral.png'),
                 icon_path: '',
             },
             {
                 label: '学生测试',
                 url: h5.URL_Mentor_Student_Quiz,
-                icon: '',
+                icon: require('@/entry/user/asset/image/ico_integral.png'),
                 icon_path: '',
             },
             {
                 label: '待批改列表',
                 url: h5.URL_Mentor_CorrectList,
-                icon: '',
+                icon: require('@/entry/user/asset/image/ico_integral.png'),
                 icon_path: '',
                 visible: false,
             },

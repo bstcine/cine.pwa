@@ -4,8 +4,8 @@ import { connect } from 'react-redux';
 import { actionUserInfo } from '@/action/userAction';
 import { logoutV1 } from '@/service/base';
 import UserMobile from '@/entry/user/component/UserMobile';
-import UserHeader from '@/entry/user/component/UserHeader';
 import '../asset/style/index.less';
+import GLayout from '@/component/GLayout';
 
 class Root extends Component {
     constructor(props) {
@@ -63,14 +63,9 @@ class Root extends Component {
         }
 
         return (
-            <React.Fragment>
-                <UserHeader
-                    selectId={this.selectId}
-                    user={user}
-                    handleClick={this.handleClick}
-                />
+            <GLayout>
                 <div className={'user-content'}>{routes}</div>
-            </React.Fragment>
+            </GLayout>
         );
     }
 }

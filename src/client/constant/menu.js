@@ -6,6 +6,12 @@ import { RoleID } from '@/constant';
  * ci-xxx --> cine-icons
  * 已有样式在 @component/GIcon/style.less
  * ===icon===
+ *
+ * ===icon_path===
+ * icon_path: require('@/entry/user/asset/image/ico_integral.png')
+ * icon_path: '//www.bstcine.com/asset/image/ico_headpic.d8668494.png'
+ * remote url 建议以 `//` 开头，便于 http/https 切换
+ * ===icon_path===
  */
 const cineMenu = [
     { label: '首页', url: '/' },

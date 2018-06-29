@@ -92,7 +92,7 @@ export default class Header extends Component {
                                 {!!user &&
                                     (user.role_id === '1' ||
                                         user.role_id === '2') && (
-                                    <a href="/teacher/dashboard">
+                                    <a href="/mentor">
                                             老师批改
                                     </a>
                                 )}

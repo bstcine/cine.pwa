@@ -75,10 +75,7 @@ const UserMobile = ({ user, handleClick }) => {
                     核心语法测试
                 </a>
                 {user.role_id !== '3' && (
-                    <a
-                        className={'tab'}
-                        href={'/teacher/dashboard'}
-                        target={'_blank'}>
+                    <a className={'tab'} href={'/mentor'} target={'_blank'}>
                         <img
                             src={require('../asset/image/ico_test_teacher@2x.png')}
                             style={{ height: '.57rem', width: '.57rem' }}

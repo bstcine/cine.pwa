@@ -20,13 +20,13 @@ const initialState = fromJS({
         zh: [],                      // 所有翻译内容数组
     },
     param: {                         // api访问参数
-        startIndex: null,
-        endIndex: null,
-        wordType: null,
+        start_index: null,
+        end_index: null,
+        word_type: null,
     }
 });
 
-const vocabularyTestRedu = (state = initialState, action) => {
+const WordQuizRedu = (state = initialState, action) => {
     switch (action.type) {
         case ACTION_LT.SAVEPARAM:
             return state.set('param', action.payload);
@@ -55,4 +55,4 @@ const vocabularyTestRedu = (state = initialState, action) => {
     }
 };
 
-export default vocabularyTestRedu;
+export default WordQuizRedu;

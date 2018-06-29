@@ -1,13 +1,12 @@
 import { combineReducers } from 'redux';
-import vocabularyRedu from './vocabularyTaskReducer';
-import historyTaskRedu from './historyTaskReducer';
-import vocabularyTestRedu from './vocabularyTestReducer';
-import { userRedu } from '@/reducer';
+import WordRedu from './WordReducer';
+import WordQuizRedu from './WordQuizReducer';
+import TaskRedu from './TaskReducer';
+import { userRedu, toastRedu } from '@/reducer';
 import {
     RECEIVE_CURRENT_TASK,
     RECEIVE_MY_COURSE_LIST,
 } from '@/constant/actionTypeLearn';
-import { toastRedu } from '@/reducer';
 
 const currentTasks = (state = [], action) => {
     switch (action.type) {
@@ -31,9 +30,9 @@ const rootReducer = combineReducers({
     userRedu,
     currentTasks,
     courses,
-    vocabularyRedu,
-    historyTaskRedu,
-    vocabularyTestRedu,
+    WordRedu,
+    TaskRedu,
+    WordQuizRedu,
     toastRedu,
 });
 

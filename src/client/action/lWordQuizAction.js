@@ -237,7 +237,7 @@ export const lWordQuizAction = {
         dispatch(lWordQuizAction._loadWords(param, true));
     },
     updateTask: (status) => async (dispatch, getState) => {
-        let reducer = getState().vocabularyTestRedu;
+        let reducer = getState().WordQuizRedu;
         let param = reducer.get('param');
         param['task_status'] = status;
         await fetchData(Api.APIURL_User_Learn_UpdateTaskStatus, param);
@@ -251,15 +251,45 @@ export const lWordQuizAction = {
         dispatch(lWordQuizAction._test(true));
     },
     /**
+     * 测试结束
+     * */
+    testDone: () => async (dispatch, getState) => {
+        // 更新测试状态为已完成
+        dispatch(lWordQuizAction.updateTask('2'));
+        // 提示用户已完成全部测试（掌握全部单词）
+        dispatch(toastAction.show('测试完成'));
+        // 返回学习界面
+        setTimeout(function () {
+            let reducer = getState().WordQuizRedu;
+            let param = reducer.get('param');
+            console.log(param);
+            let startIndex = param.start_index;
+            let endIndex = param.end_index;
+            let wordType = param.word_type;
+            console.log(startIndex, endIndex, wordType);
+            let paramString = '';
+            if (startIndex && endIndex) {
+                paramString = 'start_index=' + startIndex + '&end_index=' + endIndex;
+            }
+            if (wordType) {
+                if (paramString === '') {
+                    paramString = 'word_type=' + wordType;
+                } else {
+                    paramString = '&word_type=' + wordType;
+                }
+            }
+            location.href = '/learn/word?' + paramString;
+        }, 250);
+    },
+    /**
      * 开始下一个（对外调用）
      * */
     startNext: (currentIndex) => async (dispatch, getState) => {
-        let reducer = getState().vocabularyTestRedu;
+        let reducer = getState().WordQuizRedu;
         let correctCount = reducer.get('correctCount');
         let wordCount = reducer.get('wordCount');
         if (correctCount === wordCount) {
-            dispatch(lWordQuizAction.updateTask('2'));
-            dispatch(toastAction.show('测试完成'));
+            dispatch(lWordQuizAction.testDone())
             return;
         }
         let rows = reducer.get('rows');
@@ -323,7 +353,7 @@ export const lWordQuizAction = {
         // 改变选择状态
         dispatch(lWordQuizAction._changeSelectIndex(selectIndex));
         // 获取内容信息
-        let reducer = getState().vocabularyTestRedu;
+        let reducer = getState().WordQuizRedu;
         let content = reducer.get('content');
         let correctCount = reducer.get('correctCount');
         let index = content.index;

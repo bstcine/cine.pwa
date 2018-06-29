@@ -4,7 +4,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { actionHistoryTask } from '@/action/lHistoryTaskAction';
+import { lTaskAction } from '@/action/lTaskAction';
 import HistoryTask from '../component/historyTask';
 import CThemeProvider from '@/component/CThemeProvider';
 import { getParam } from '@/util/urlUtil';
@@ -56,17 +56,17 @@ class HistoryTaskContainer extends React.PureComponent {
 
 const mapStateToProps = state => {
     return {
-        selectType: state.historyTaskRedu.get('selectType'),
-        isDialogShow: state.historyTaskRedu.get('isDialogShow'),
-        taskModels: state.historyTaskRedu.get('taskModels'),
-        startTime: state.historyTaskRedu.get('startTime'),
-        endTime: state.historyTaskRedu.get('endTime'),
-        defaultType: state.historyTaskRedu.get('defaultType'),
+        selectType: state.TaskRedu.get('selectType'),
+        isDialogShow: state.TaskRedu.get('isDialogShow'),
+        taskModels: state.TaskRedu.get('taskModels'),
+        startTime: state.TaskRedu.get('startTime'),
+        endTime: state.TaskRedu.get('endTime'),
+        defaultType: state.TaskRedu.get('defaultType'),
     };
 };
 
 const mapDispatchToProps = dispatch => ({
-    actions: bindActionCreators(actionHistoryTask, dispatch),
+    actions: bindActionCreators(lTaskAction, dispatch),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(

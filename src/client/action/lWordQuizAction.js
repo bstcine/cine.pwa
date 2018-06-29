@@ -197,7 +197,7 @@ export const lWordQuizAction = {
         }
         let vocabularyList = Vocabulary[wordType];
         let zhs = originZH.split('\n');
-        if (vocabularyList !== undefined && vocabularyList !== null && vocabularyList.length > 0) {
+        if (vocabularyList && vocabularyList.length > 0) {
             for (let i = 0; i < vocabularyList.length; i++) {
                 for (let j = 0; j < zhs.length; j++) {
                     if (zhs[j].indexOf(vocabularyList[i]) > -1) {
@@ -262,11 +262,9 @@ export const lWordQuizAction = {
         setTimeout(function () {
             let reducer = getState().WordQuizRedu;
             let param = reducer.get('param');
-            console.log(param);
             let startIndex = param.start_index;
             let endIndex = param.end_index;
             let wordType = param.word_type;
-            console.log(startIndex, endIndex, wordType);
             let paramString = '';
             if (startIndex && endIndex) {
                 paramString = 'start_index=' + startIndex + '&end_index=' + endIndex;
@@ -381,7 +379,7 @@ export const lWordQuizAction = {
      * @return 随机数组
      */
     getRandomNumbers: (max, count) => {
-        let numbers = []
+        let numbers = [];
         while (numbers.length < count) {
             let randomNumer = lWordQuizAction.getRandomNumber(max);
             if (numbers.length === 0) {

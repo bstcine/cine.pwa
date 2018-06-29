@@ -19,10 +19,17 @@ const initialState = fromJS({
         real_zh: -1,                 // 正确的翻译下标（0，1，2，3）
         zh: [],                      // 所有翻译内容数组
     },
+    param: {                         // api访问参数
+        startIndex: null,
+        endIndex: null,
+        wordType: null,
+    }
 });
 
 const vocabularyTestRedu = (state = initialState, action) => {
     switch (action.type) {
+        case ACTION_LT.SAVEPARAM:
+            return state.set('param', action.payload);
         case ACTION_LT.REQUEST:
             return state;
         case ACTION_LT.RECEIVE:

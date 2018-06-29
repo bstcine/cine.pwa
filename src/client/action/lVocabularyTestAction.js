@@ -222,27 +222,24 @@ export const lWordQuizAction = {
      * 加载单词数据（对外调用）
      * */
     loadWords: (startIndex, endIndex, wordType) => async dispatch => {
-        if (startIndex === 'undefined') {
-            startIndex = undefined;
+        let param = {}
+        if (startIndex && startIndex !== 'undefined') {
+            param['start_index'] = startIndex;
         }
-        if (endIndex === 'undefined') {
-            endIndex = undefined;
+        if (endIndex && endIndex !== 'undefined') {
+            param['end_index'] = endIndex;
         }
-        if (wordType === 'undefined') {
-            wordType = null;
+        if (wordType && wordType !== 'undefined') {
+            param['word_type'] = wordType;
         }
-        let param = {
-            start_index: startIndex,
-            end_index: endIndex,
-            word_type: wordType,
-        };
+        console.log(param);
         dispatch(lWordQuizAction._saveParam(param));
         dispatch(lWordQuizAction._loadWords(param, true));
     },
     updateTask: (status) => async (dispatch, getState) => {
         let reducer = getState().vocabularyTestRedu;
         let param = reducer.get('param');
-        param['word_type'] = status;
+        param['task_status'] = status;
         await fetchData(Api.APIURL_User_Learn_UpdateTaskStatus, param);
     },
     /**

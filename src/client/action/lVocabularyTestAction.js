@@ -21,6 +21,13 @@ const Vocabulary = {
 
 export const lWordQuizAction = {
     /**
+     * 保存访问参数
+     * */
+    _saveParam: param => ({
+        type: ACTION_LT.SAVEPARAM,
+        payload: param,
+    }),
+    /**
      * 请求数据的方法（私有）
      * */
     _request: () => ({
@@ -229,22 +236,32 @@ export const lWordQuizAction = {
             end_index: endIndex,
             word_type: wordType,
         };
+        dispatch(lWordQuizAction._saveParam(param));
         dispatch(lWordQuizAction._loadWords(param, true));
+    },
+    updateTask: (status) => async (dispatch, getState) => {
+        let reducer = getState().vocabularyTestRedu;
+        let param = reducer.get('param');
+        param['word_type'] = status;
+        await fetchData(Api.APIURL_User_Learn_UpdateTaskStatus, param);
     },
     /**
      * 开始测试（对外调用）
      * */
     startTest: () => async dispatch => {
+        // 更新任务状态
+        dispatch(lWordQuizAction.updateTask('1'));
         dispatch(lWordQuizAction._test(true));
     },
     /**
      * 开始下一个（对外调用）
      * */
     startNext: (currentIndex) => async (dispatch, getState) => {
-        let reducer = getState().vocabularyTestRedu
+        let reducer = getState().vocabularyTestRedu;
         let correctCount = reducer.get('correctCount');
         let wordCount = reducer.get('wordCount');
         if (correctCount === wordCount) {
+            dispatch(lWordQuizAction.updateTask('2'));
             dispatch(toastAction.show('测试完成'));
             return;
         }

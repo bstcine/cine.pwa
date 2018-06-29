@@ -17,11 +17,19 @@ class VocabularyTestContainer extends Component {
         let startIndex = param.start_index;
         let endIndex = param.end_index;
         let wordType = param.word_type;
-        this.param = {
-            startIndex: startIndex,
-            endIndex: endIndex,
-            wordType: wordType,
-        };
+        this.param = {};
+        if (startIndex && endIndex) {
+            this.param['startIndex'] = startIndex;
+            this.param['endIndex'] = endIndex;
+        }
+        if (wordType) {
+            this.param['wordType'] = wordType;
+        }
+        // this.param = {
+        //     startIndex: startIndex,
+        //     endIndex: endIndex,
+        //     wordType: wordType,
+        // };
     }
     componentDidMount() {
         // 准备访问

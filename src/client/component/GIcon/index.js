@@ -11,7 +11,8 @@ const GIcon = ({ name, className, url }) => {
             <i
                 className={classNames('gicons', className)}
                 style={{
-                    background: `url(${url}) center center / cover no-repeat`,
+                    background: `url(${url}) center center / contain no-repeat`,
+                    height: '.40rem',
                 }}
             />
         );

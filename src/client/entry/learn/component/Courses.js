@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid, Column122 } from '@/component/GGrid';
+import { Grid, Column112 } from '@/component/GGrid';
 import TextFix from '@/component/TextFix';
 
 const Courses = ({ courses }) => {
@@ -16,7 +16,7 @@ const Courses = ({ courses }) => {
             <Grid className="courses-list">
                 {courses.map(course => {
                     return (
-                        <Column122
+                        <Column112
                             key={course.id}
                             className="courses-item"
                             href={getHref(course)}>
@@ -54,7 +54,7 @@ const Courses = ({ courses }) => {
                                     </div>
                                 )}
                             </div>
-                        </Column122>
+                        </Column112>
                     );
                 })}
             </Grid>

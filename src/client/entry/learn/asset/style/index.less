@@ -1,8 +1,14 @@
 @import '~asset/style/_cine.less';
 @import './taskList.less';
 
+.gmain .gcontainer {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
 .tasks-container,
 .courses-container {
+    flex-shrink: 0;
     padding: 0.3rem 0.45rem 0;
 
     background-color: #fff;
@@ -56,9 +62,9 @@
     }
 }
 
-
 // courses-container
 .courses-container {
+    flex-grow: 1;
     h2 {
         font-size: 0.3rem;
         font-weight: normal;
@@ -143,10 +149,23 @@
     }
 }
 
+@media @media-up-xs {
+    .tasks-container,
+    .courses-container {
+        margin-bottom: 0.22rem;
+        padding: 0.5rem 0.6rem;
+
+        border-bottom: none;
+        border-radius: 0.24rem;
+        box-shadow: 0rem 0.16rem 0.3rem 0rem rgba(168, 170, 174, 0.18);
+    }
+}
+
 @media @media-up-sm {
     .tasks-container,
     .courses-container {
         padding: 0.5rem 0.6rem;
+        border-radius: 0;
     }
     .task-nav {
         font-size: 0.3rem;
@@ -154,7 +173,6 @@
             line-height: 0.7rem;
         }
     }
-    
 
     .courses-container {
         h2 {

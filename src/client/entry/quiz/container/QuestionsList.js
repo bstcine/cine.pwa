@@ -6,7 +6,7 @@ import Format1ChooseOne from './Format1ChooseOne';
 import Format3Correct from './Format3Correct';
 import Format4ShortQue from './Format4ShortQue';
 import { CurrentQuizState, QuestionFormat } from '@/constant/quiz';
-import { SHOW_ALL_QUESTION } from '@/constant/actionTypeTGrammar';
+import { SHOW_ALL_QUESTION } from '@/constant/actionTypeQuiz';
 
 const mapStateToProps = (state, ownProps) => {
     const { questions, answersById, questionsFilter, currentQuizState } = state;

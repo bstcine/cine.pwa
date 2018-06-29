@@ -47,10 +47,14 @@ class HistoryTask extends React.PureComponent {
 export default HistoryTask;
 
 const TaskComponent = ({ taskModel }) => {
-
+    // 重写week
+    let week = taskModel.week;
+    let year = week.substring(0, 4);
+    let realWeek = week.substring(4, 6);
+    week = year + '第' + realWeek + '周';
     return (
         <div>
-            <div className="HT_TaskHeaderTitle">{taskModel.week}</div>
+            <div className="HT_TaskHeaderTitle">{week}</div>
             <Grid className="task-list">
                 <TasksList tasks={taskModel.taskList}/>
             </Grid>

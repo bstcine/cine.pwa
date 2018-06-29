@@ -4,7 +4,6 @@ import {
     APIURL_Content_Quiz,
     APIURL_Stats_Quiz_Save,
     APIURL_Stats_Quiz_Update,
-    APIURL_Content_StuQuizWord_List,
 } from '@/../APIConfig';
 import storeUtil from '@/util/storeUtil';
 import {
@@ -27,9 +26,7 @@ import {
     UPDATE_ANSWERS,
     REQUEST_STATS_QUIZ_UPDATE,
     RECEIVE_STATS_QUIZ_UPDATE,
-    REQUEST_STATS_STUDENT_QUIZ_WORD_LIST,
-    RECEIVE_STATS_STUDENT_QUIZ_WORD_LIST,
-} from '@/constant/actionTypeTGrammar';
+} from '@/constant/actionTypeQuiz';
 import {
     CurrentQuizState,
     StatsContentQuizStatus,
@@ -277,15 +274,6 @@ export const resetQuiz = () => (dispatch, getState) => {
     );
 };
 
-/**
- * 获取学生、答题记录、词汇测试列表
- */
-export const fetchStatsContentStuQuizWordList = () => async dispatch => {
-    dispatch({ type: REQUEST_STATS_STUDENT_QUIZ_WORD_LIST });
-    let [err, result] = await fetchData(APIURL_Content_StuQuizWord_List);
-    if (err) return dispatch(networkError(err));
-    dispatch({ type: RECEIVE_STATS_STUDENT_QUIZ_WORD_LIST, payload: result });
-};
 
 // /**
 //  * 答题记录列表

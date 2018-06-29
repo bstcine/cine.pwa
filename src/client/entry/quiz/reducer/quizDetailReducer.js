@@ -3,9 +3,6 @@ import {
     RECEIVE_CONTENT_QUIZ,
     REQUEST_STATS_QUIZ_SAVE,
     RECEIVE_STATS_QUIZ_SAVE,
-    // REQUEST_STATS_QUIZ_LIST,
-    // RECEIVE_STATS_QUIZ_LIST,
-    // RECEIVE_STATS_WORD_LIST,
     SAVE_QUESTION1_SELECT_VALUE,
     SAVE_QUESTION3_SELECT_VALUE,
     SAVE_QUESTION3_TEXT_VALUE,
@@ -19,9 +16,7 @@ import {
     SHOW_UNCOMPLETED_QUESTION,
     SHOW_ALL_QUESTION,
     UPDATE_ANSWERS,
-    RECEIVE_STATS_STUDENT_QUIZ_WORD_LIST,
-    REQUEST_STATS_STUDENT_QUIZ_WORD_LIST,
-} from '@/constant/actionTypeTGrammar';
+} from '@/constant/actionTypeQuiz';
 import { CurrentQuizState } from '@/constant/quiz';
 import { OPEN_NETWORK_ERROR, CLOSE_NETWORK_ERROR } from '@/constant/actionType';
 
@@ -169,7 +164,6 @@ export const network = (
     switch (type) {
         case REQUEST_CONTENT_QUIZ:
         case REQUEST_STATS_QUIZ_SAVE:
-        case REQUEST_STATS_STUDENT_QUIZ_WORD_LIST:
             return {
                 ...state,
                 pending: true,
@@ -182,7 +176,6 @@ export const network = (
             };
         case OPEN_LOGIN_MODAL:
         case RECEIVE_CONTENT_QUIZ:
-        case RECEIVE_STATS_STUDENT_QUIZ_WORD_LIST:
             return {
                 ...state,
                 init: false,
@@ -207,15 +200,6 @@ export const network = (
     }
 };
 
-export const user = (state = {}, { type, payload }) => {
-    switch (type) {
-        case RECEIVE_CONTENT_QUIZ:
-            return { ...payload.user };
-        default:
-            return state;
-    }
-};
-
 export const loginModal = (state = { isOpen: false }, { type, payload }) => {
     switch (type) {
         case CLOSE_LOGIN_MODAL:
@@ -223,15 +207,6 @@ export const loginModal = (state = { isOpen: false }, { type, payload }) => {
         case OPEN_LOGIN_MODAL: {
             return { isOpen: true };
         }
-        default:
-            return state;
-    }
-};
-
-export const statsContentStuQuizWordList = (state = [], { type, payload }) => {
-    switch (type) {
-        case RECEIVE_STATS_STUDENT_QUIZ_WORD_LIST:
-            return payload;
         default:
             return state;
     }

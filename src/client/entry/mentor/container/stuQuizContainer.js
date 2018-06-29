@@ -2,7 +2,7 @@ import '../asset/style/index.less';
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { fetchStatsContentStuQuizWordList } from '@/action/quizAction';
+import { fetchStatsContentStuQuizWordList } from '@/action/mentorAction';
 import StudentTable from '../component/StuQuiz/StudentTable';
 
 const mapStateToProps = state => {

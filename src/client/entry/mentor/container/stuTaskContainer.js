@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { mentorAction } from '@/action/mentorAction';
+import * as mentorAction from '@/action/mentorAction';
 
 class StuTaskContainer extends Component {
     componentDidMount() {

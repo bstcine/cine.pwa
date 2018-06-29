@@ -1,12 +1,7 @@
 import {
-    REQUEST_CONTENT_QUIZ,
-    RECEIVE_CONTENT_QUIZ,
-    REQUEST_STATS_QUIZ_SAVE,
-    RECEIVE_STATS_QUIZ_SAVE,
-    OPEN_LOGIN_MODAL,
     RECEIVE_STATS_STUDENT_QUIZ_WORD_LIST,
     REQUEST_STATS_STUDENT_QUIZ_WORD_LIST,
-} from '@/constant/actionTypeTGrammar';
+} from '@/constant/actionTypeMentor';
 import { OPEN_NETWORK_ERROR, CLOSE_NETWORK_ERROR } from '@/constant/actionType';
 
 /**
@@ -19,21 +14,11 @@ export const network = (
     { type, payload }
 ) => {
     switch (type) {
-        case REQUEST_CONTENT_QUIZ:
-        case REQUEST_STATS_QUIZ_SAVE:
         case REQUEST_STATS_STUDENT_QUIZ_WORD_LIST:
             return {
                 ...state,
                 pending: true,
             };
-        case RECEIVE_STATS_QUIZ_SAVE:
-            return {
-                ...state,
-                pending: false,
-                text: payload ? payload.text : null,
-            };
-        case OPEN_LOGIN_MODAL:
-        case RECEIVE_CONTENT_QUIZ:
         case RECEIVE_STATS_STUDENT_QUIZ_WORD_LIST:
             return {
                 ...state,

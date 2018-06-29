@@ -81,7 +81,7 @@ const UserHeader = ({ selectId, user, handleClick }) => {
                     </div>
                     {user.role_id !== '3' && (
                         <div className={'item tab-grammar-teacher'}>
-                            <a href="/teacher/dashboard" target="_blank">
+                            <a href="/mentor" target="_blank">
                                 老师批改
                             </a>
                         </div>

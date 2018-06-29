@@ -74,7 +74,7 @@ export const fetchQuizData = ({
             user.role_id === RoleID.TEACHER) &&
         !statsContentQuiz
     ) {
-        location.href = '/teacher/dashboard';
+        location.href = '/mentor';
         return;
     }
     const currentQuizState = getCurrentQuizState(user, statsContentQuiz, cmd);
@@ -252,7 +252,7 @@ export const submitCheckAnswer = (complete = true) => async (
         return dispatch(networkError(err));
     }
     dispatch({ type: RECEIVE_STATS_QUIZ_UPDATE });
-    location.href = '/teacher/dashboard';
+    location.href = '/mentor';
 };
 
 /**

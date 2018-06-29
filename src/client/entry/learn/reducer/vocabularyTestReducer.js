@@ -5,15 +5,19 @@ import { fromJS } from 'immutable';
 import { ACTION_LT } from '@/constant/actionTypeLearn';
 
 const initialState = fromJS({
-    isTest: false,
-    rows: [],
-    correctCount: 0,
-    selectStatus: -1,
-    content: {
-        index: -1,
-        value: 'wordTest',
-        real_zh: -1,
-        zh: [],
+    isTest: false,                   // 是否正在测试
+    rows: [],                        // 任务源数据
+    wordCount: 0,                    // 单词总数
+    faileTempIndexArr: null,         // 选择错误的单词临时下标
+    faileIndexArr: null,             // 选择错误的单词下标集合
+    faileIndex: -1,                  // 正在使用的错误下标数组的下标
+    correctCount: 0,                 // 已掌握单词数量
+    selectIndex: -1,                 // 选中下标 ,-1尚未选择
+    content: {                       // 显示内容对象
+        index: -1,                   // 当前单词下标
+        value: 'wordTest',           // 当前单词
+        real_zh: -1,                 // 正确的翻译下标（0，1，2，3）
+        zh: [],                      // 所有翻译内容数组
     },
 });
 
@@ -23,6 +27,8 @@ const vocabularyTestRedu = (state = initialState, action) => {
             return state;
         case ACTION_LT.RECEIVE:
             return state.set('rows', action.payload);
+        case ACTION_LT.CHANGEWORDCOUNT:
+            return state.set('wordCount', action.payload);
         case ACTION_LT.STARTTEST:
             return state.set('isTest', action.payload);
         case ACTION_LT.CHANGECONTENT:
@@ -30,7 +36,13 @@ const vocabularyTestRedu = (state = initialState, action) => {
         case ACTION_LT.CORRECTCOUNT:
             return state.set('correctCount', action.payload);
         case ACTION_LT.CHANGESELECTSTATUS:
-            return state.set('selectStatus', action.payload);
+            return state.set('selectIndex', action.payload);
+        case ACTION_LT.CHANGEFAILEINDEX:
+            return state.set('faileIndex', action.payload);
+        case ACTION_LT.CHANGEFAILEINDEXARRAY:
+            return state.set('faileIndexArr', action.payload);
+        case ACTION_LT.CHANGEFAILETEMPINDEXARRAY:
+            return state.set('faileTempIndexArr', action.payload);
         default:
             return state;
     }

@@ -9,7 +9,7 @@ const initialState = fromJS({
         isCheck: true,
         coupon: null,
         checkMessage: '',
-        userAccount:'',
+        userAccount: '',
     },
 });
 
@@ -22,8 +22,7 @@ const couponRedu = (state = initialState, action) => {
         case Action_UC.EXPAND:
             return state.set('rows', action.payload);
         case Action_UC.TOGGLE_TRANSFER_DIALOG:
-            return state.set('transfer',action.payload);
-
+            return state.set('transfer', action.payload);
         default:
             return state;
     }

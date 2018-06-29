@@ -6,14 +6,14 @@ import { ACTION_LH } from '@/constant/actionTypeLearn';
 
 const initTaskPageState = fromJS({
     selectType: 0,
-    isDialogShow:false,
-    taskModels:[],
-    startTime:'',
-    endTime:'',
-    defaultType:'',
+    isDialogShow: false,
+    taskModels: [],
+    startTime: '',
+    endTime: '',
+    defaultType: '',
 });
 
-const historyTaskRedu = (state = initTaskPageState, action) => {
+const TaskRedu = (state = initTaskPageState, action) => {
 
     switch (action.type) {
         case ACTION_LH.RECEIVE:
@@ -31,4 +31,4 @@ const historyTaskRedu = (state = initTaskPageState, action) => {
     }
 }
 
-export default historyTaskRedu;
+export default TaskRedu;

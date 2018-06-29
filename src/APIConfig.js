@@ -69,3 +69,4 @@ exports.APIURL_Admin_User_Coupon_List = '/api/admin/user/coupon/list'; // 管理
 
 exports.APIURL_User_Learn_Word = '/api/user/learn/word'; // 词汇任务单词列表
 exports.APIURL_User_Learn_Task = '/api/user/learn/task'; // 历史任务列表
+exports.APIURL_User_Learn_UpdateTaskStatus = '/api/user/learn/updatetask'; // 更新任务状态

@@ -57,17 +57,15 @@ class QuizPage extends Component {
         console.log('QuizPage render');
         const { init } = this.props;
         return (
-            <div className="container-fluid course-container-bg">
-                <div className="tgrammar">
-                    <Alert />
-                    <Confirm />
-                    {!init && <Title />}
-                    {!init && <QuestionsList />}
-                    {!init && <Submit />}
-                    <ToastLoading />
-                    <ToastError />
-                    <LoginModal />
-                </div>
+            <div className="tgrammar">
+                <Alert />
+                <Confirm />
+                {!init && <Title />}
+                {!init && <QuestionsList />}
+                {!init && <Submit />}
+                <ToastLoading />
+                <ToastError />
+                <LoginModal />
             </div>
         );
     }

@@ -4,7 +4,7 @@ import { ACTION_LV } from '@/constant/actionTypeLearn';
 import { toastAction } from '@/action/commonAction';
 import errorMsg from '@/util/errorMsg';
 
-export const actionVocabularyTask = {
+export const lWordAction = {
 
     _request: () => ({
         type: ACTION_LV.REQUEST,
@@ -16,28 +16,23 @@ export const actionVocabularyTask = {
     }),
 
     loadVocabulary: (startIndex, endIndex, wordType) => async dispatch => {
-        if (startIndex === 'undefined') {
-            startIndex=undefined;
+        let param = {};
+        if (startIndex && startIndex !== 'undefined') {
+            param['start_index'] = startIndex;
         }
-        if (endIndex === 'undefined') {
-            endIndex=undefined;
+        if (endIndex && endIndex !== 'undefined') {
+            param['end_index'] = endIndex;
         }
-        if (wordType === 'undefined') {
-            wordType=undefined;
+        if (wordType && wordType !== 'undefined') {
+            param['word_type'] = wordType;
         }
-        // 使用真实的api请求获取数据
-        let param = {
-            start_index: startIndex,
-            end_index: endIndex,
-            word_type: wordType,
-        };
 
         let [error, result] = await fetchData(Api.APIURL_User_Learn_Word, param);
 
         if (error) {
             dispatch(toastAction.showError(errorMsg(error)));
         } else {
-            dispatch(actionVocabularyTask._receive(result));
+            dispatch(lWordAction._receive(result));
         }
     },
 

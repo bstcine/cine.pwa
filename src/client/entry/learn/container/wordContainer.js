@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { actionVocabularyTask } from '@/action/lVocabularyTaskAction';
+import { lWordAction } from '@/action/lWordAction';
 import VocabularyTask from '../component/vocabularyTask';
 import { getParam } from '@/util/urlUtil';
 
@@ -53,12 +53,12 @@ class VocabularyTaskContainer extends Component {
 
 const mapStateToProps = state => {
     return {
-        vocabularyList: state.vocabularyRedu.get('vocabularyList'),
+        vocabularyList: state.WordRedu.get('vocabularyList'),
     };
 };
 
 const mapDispatchToProps = dispatch => ({
-    actions: bindActionCreators(actionVocabularyTask, dispatch),
+    actions: bindActionCreators(lWordAction, dispatch),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(

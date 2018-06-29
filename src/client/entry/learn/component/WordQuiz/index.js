@@ -4,7 +4,7 @@
 import React from 'react';
 import '../../asset/style/vocabularyTest.less';
 
-class VocabularyTest extends React.PureComponent {
+class WordQuiz extends React.PureComponent {
     // 跳转下一个项目
     showNext= () => {
         let { rows, content, actions } = this.props;
@@ -74,4 +74,4 @@ class VocabularyTest extends React.PureComponent {
 
 }
 
-export default VocabularyTest;
+export default WordQuiz;

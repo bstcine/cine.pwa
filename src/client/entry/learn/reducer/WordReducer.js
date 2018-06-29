@@ -5,7 +5,7 @@ const initialState = fromJS({
     vocabularyList: [],
 });
 
-const vocabularyRedu = (state = initialState, action) => {
+const WordRedu = (state = initialState, action) => {
     switch (action.type) {
         case ACTION_LV.REQUEST:
             return state;
@@ -18,4 +18,4 @@ const vocabularyRedu = (state = initialState, action) => {
     }
 };
 
-export default vocabularyRedu;
+export default WordRedu;

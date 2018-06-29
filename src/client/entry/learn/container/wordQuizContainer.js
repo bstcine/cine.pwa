@@ -4,10 +4,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { lWordQuizAction } from '@/action/lVocabularyTestAction';
-import VocabularyTest from  '../component/vocabularyTest';
 import { getParam } from '@/util/urlUtil';
 import { Toast } from '@/component/Toast';
+import { lWordQuizAction } from '@/action/lWordQuizAction';
+import WordQuiz from  '../component/WordQuiz';
 
 class VocabularyTestContainer extends Component {
     constructor(props) {
@@ -17,11 +17,14 @@ class VocabularyTestContainer extends Component {
         let startIndex = param.start_index;
         let endIndex = param.end_index;
         let wordType = param.word_type;
-        this.param = {
-            startIndex: startIndex,
-            endIndex: endIndex,
-            wordType: wordType,
-        };
+        this.param = {};
+        if (startIndex && endIndex) {
+            this.param['startIndex'] = startIndex;
+            this.param['endIndex'] = endIndex;
+        }
+        if (wordType) {
+            this.param['wordType'] = wordType;
+        }
     }
     componentDidMount() {
         // 准备访问
@@ -34,7 +37,7 @@ class VocabularyTestContainer extends Component {
         return (
             <React.Fragment>
                 <Toast network={network} />
-                <VocabularyTest
+                <WordQuiz
                     param={this.param}
                     isTest={isTest}
                     selectIndex={selectIndex}
@@ -50,11 +53,11 @@ class VocabularyTestContainer extends Component {
 
 const mapStateToProps = state => {
     return {
-        isTest: state.vocabularyTestRedu.get('isTest'),
-        selectIndex: state.vocabularyTestRedu.get('selectIndex'),
-        wordCount: state.vocabularyTestRedu.get('wordCount'),
-        content: state.vocabularyTestRedu.get('content'),
-        correctCount: state.vocabularyTestRedu.get('correctCount'),
+        isTest: state.WordQuizRedu.get('isTest'),
+        selectIndex: state.WordQuizRedu.get('selectIndex'),
+        wordCount: state.WordQuizRedu.get('wordCount'),
+        content: state.WordQuizRedu.get('content'),
+        correctCount: state.WordQuizRedu.get('correctCount'),
         network: state.toastRedu,
     };
 };

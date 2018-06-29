@@ -2,23 +2,32 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { Toast } from '@/component/Toast';
 import * as mentorAction from '@/action/mentorAction';
+import { FETCH_MENTOR_STUDENT_TASK } from '@/constant/actionTypeMentor';
 
 class StuTaskContainer extends Component {
     componentDidMount() {
-        // 获取参
+        this.props.actions.fetchMentorStudentTask();
     }
 
     render() {
-        // let { state, actions } = this.props;
+        let { networkFetchStatus } = this.props;
+        let network = networkFetchStatus[FETCH_MENTOR_STUDENT_TASK] || {};
 
-        return <div>学生作业列表</div>;
+        return (
+            <div>
+                学生作业列表
+                <Toast network={network} />
+            </div>
+        );
     }
 }
 
 const mapStateToProps = state => {
     return {
-        state: state,
+        networkFetchStatus: state.networkFetchStatus,
+        mentorStudentTask: state.mentorStudentTask,
     };
 };
 

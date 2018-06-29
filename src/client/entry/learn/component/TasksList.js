@@ -2,6 +2,7 @@ import React from 'react';
 import TextFix from '@/component/TextFix';
 import { Task_Type } from '@/constant';
 import { Column122 } from '@/component/GGrid';
+import GIcon from '@/component/GIcon';
 
 const Label = ({ type }) => {
     const map = {
@@ -12,6 +13,18 @@ const Label = ({ type }) => {
         '9': '其他',
     };
     return <span className="label">{map[type]}</span>;
+};
+
+const Status = ({ task }) => {
+    if (task.status === '0' || task.status === '1') {
+        return task.type === '3' ? (
+            <span className="task-opration">查看</span>
+        ) : (
+            <span className="task-opration">待完成</span>
+        );
+    } else {
+        return <GIcon name="ci-study_finish" className="task-opration" />;
+    }
 };
 
 const TasksList = ({ tasks, isLimitTasks }) => {
@@ -58,6 +71,7 @@ const TasksList = ({ tasks, isLimitTasks }) => {
             <Column122 key={task.id} className="task-item" href={getHref(task)}>
                 <Label type={task.type} />
                 <TextFix className="task-title">{task.title}</TextFix>
+                <Status task={task} />
             </Column122>
         );
     });

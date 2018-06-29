@@ -7,7 +7,7 @@ import { ACTION_LH } from '@/constant/actionTypeLearn';
 import { toastAction } from '@/action/commonAction';
 import errorMsg from '@/util/errorMsg';
 
-export const actionHistoryTask = {
+export const lTaskAction = {
     _request: () => ({
         type: ACTION_LH.REQUEST,
     }),
@@ -41,39 +41,39 @@ export const actionHistoryTask = {
             return;
         }
 
-        dispatch(actionHistoryTask._receive(result));
-        dispatch(actionHistoryTask._dialogShow(false));
+        dispatch(lTaskAction._receive(result));
+        dispatch(lTaskAction._dialogShow(false));
     },
 
     // 加载历史任务数据
     loadHistoryTask: (param) => async dispatch => {
-        dispatch(actionHistoryTask._loadHistoryTask(param, true));
+        dispatch(lTaskAction._loadHistoryTask(param, true));
     },
 
     // dialog窗口显示/隐藏
     dialogShow: (isShow) => (dispatch) => {
         // 获取显示隐藏
-        dispatch(actionHistoryTask._dialogShow(isShow));
+        dispatch(lTaskAction._dialogShow(isShow));
     },
 
     // 改变选择类型
     changeType: (value) => async dispatch => {
-        dispatch(actionHistoryTask._changeType(value));
+        dispatch(lTaskAction._changeType(value));
     },
 
     // 改变起始时间
     changeStartTime: (value) => async dispatch => {
-        dispatch(actionHistoryTask._changeStartTime(value));
+        dispatch(lTaskAction._changeStartTime(value));
     },
 
     // 改变结束时间
     changeEndTime: (value) => async dispatch => {
-        dispatch(actionHistoryTask._changeEndTime(value));
+        dispatch(lTaskAction._changeEndTime(value));
     },
 
     // 开始搜索选择结果
     selectResult: (param) => async dispatch => {
-        dispatch(actionHistoryTask._loadHistoryTask(param, false));
+        dispatch(lTaskAction._loadHistoryTask(param, false));
     },
 
 };

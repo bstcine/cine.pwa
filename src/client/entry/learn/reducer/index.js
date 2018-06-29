@@ -7,6 +7,7 @@ import {
     RECEIVE_CURRENT_TASK,
     RECEIVE_MY_COURSE_LIST,
 } from '@/constant/actionTypeLearn';
+import { toastRedu } from '@/reducer';
 
 const currentTasks = (state = [], action) => {
     switch (action.type) {
@@ -33,6 +34,7 @@ const rootReducer = combineReducers({
     vocabularyRedu,
     historyTaskRedu,
     vocabularyTestRedu,
+    toastRedu,
 });
 
 export default rootReducer;

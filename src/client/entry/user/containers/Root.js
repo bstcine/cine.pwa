@@ -5,6 +5,12 @@ import GLayout from '@/component/GLayout';
 import { fetchUserInfo } from '@/action/commonAction';
 
 class Root extends Component {
+    constructor(props) {
+        super(props);
+        const isUserHome = location.pathname.split('/').join('') === 'user';
+        if (isUserHome) location.href = '/user/integral';
+    }
+
     componentDidMount() {
         this.props.fetchUserInfo();
     }

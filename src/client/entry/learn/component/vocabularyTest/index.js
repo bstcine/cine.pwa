@@ -13,22 +13,22 @@ class VocabularyTest extends React.PureComponent {
     };
 
     render() {
-        let { param, isTest, selectStatus, rows, correctCount, content, actions } = this.props;
+        let { param, isTest, selectIndex, wordCount, correctCount, content, actions } = this.props;
         let wordHref = '/learn/word?start_index=' + param.startIndex + '&end_index=' + param.endIndex + '&word_type=' + param.wordType;
-        let wordCount = '本次学习单词' + rows.length + '个，测试下掌握了多少？';
+        let wordCountPromot = '本次学习单词' + wordCount + '个，测试下掌握了多少？';
         let correctWord = '已掌握' + correctCount + '个';
-        let wordAll = '共' + rows.length + '个';
+        let wordAllPromot = '共' + wordCount + '个';
         const initContent = (
             <div className="v_Test_VocabularyContent">
-                <p className="v_Test_VC_Promot_Start">{wordCount}</p>
+                <p className="v_Test_VC_Promot_Start">{wordCountPromot}</p>
                 <p className="v_Test_VC_Test_Start" onClick={actions.startTest}>开始测试</p>
             </div>
         );
         let selectList = content.zh && content.zh.map((item, index) => {
-            if (selectStatus === -1) {
+            if (selectIndex === -1) {
                 return (
                     <div key={index} className="v_Test_VC_SelectItem" onClick={() => {
-                        actions.selectItem(index, content, correctCount, rows);
+                        actions.selectItem(index);
                     }}>
                         <p className="v_Test_VC_SelectItem_Text">{item}</p>
                     </div>
@@ -37,7 +37,7 @@ class VocabularyTest extends React.PureComponent {
             let backgroundColor = '#fff';
             if (index === content.real_zh) {
                 backgroundColor = '#3cd163';
-            } else if (index === selectStatus) {
+            } else if (index === selectIndex) {
                 backgroundColor = '#ff8181';
             }
             return (
@@ -46,7 +46,7 @@ class VocabularyTest extends React.PureComponent {
                 </div>
             );
         });
-        let inProgressWidth = (correctCount * 100 / rows.length).toString() + '%';
+        let inProgressWidth = (correctCount * 100 / wordCount).toString() + '%';
         const testContent = (
             <div className="v_Test_VocabularyContent">
                 <div className="v_Test_VC_Progress">
@@ -54,7 +54,7 @@ class VocabularyTest extends React.PureComponent {
                 </div>
                 <div className="v_Test_VC_Progress_Text">
                     <p className="v_Test_VC_Progress_Correct">{correctWord}</p>
-                    <p className="v_Test_VC_Progress_WordCount">{wordAll}</p>
+                    <p className="v_Test_VC_Progress_WordCount">{wordAllPromot}</p>
                 </div>
                 <p className="v_Test_VC_Word">{content.value}</p>
                 {selectList}

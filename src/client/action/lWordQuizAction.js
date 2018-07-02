@@ -367,7 +367,15 @@ export const lWordQuizAction = {
             } else {
                 faileTempIndexArr.push(content['index']);
             }
-            console.log('error:', faileTempIndexArr);
+            // 将选择错误的单词信息上传到服务器
+            let errorParam = {
+                word: content.value,
+                word_selected: content.zh[selectIndex],
+                is_correct: content.zh[content.real_zh],
+                task_param: reducer.get('param'),
+            };
+            fetchData(Api.APIURL_User_Learn_SaveFailure, errorParam);
+            // 保存错误信息
             dispatch(lWordQuizAction._changeFaileTempIndexArray(faileTempIndexArr));
             dispatch(lWordQuizAction.selectWrong(index));
         }

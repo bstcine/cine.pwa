@@ -1,52 +1,7 @@
-import {
-    RECEIVE_STATS_STUDENT_QUIZ_WORD_LIST,
-    REQUEST_STATS_STUDENT_QUIZ_WORD_LIST,
-} from '@/constant/actionTypeMentor';
-import { OPEN_NETWORK_ERROR, CLOSE_NETWORK_ERROR } from '@/constant/actionType';
-
-/**
- * 网络状态，控制 spinner 组件显示状态
- * init:初始化状态
- * pending:api请求中
- */
-export const network = (
-    state = { init: true, pending: true, error: false },
-    { type, payload }
-) => {
+import { FETCH_MENTOR_STUDENT_QUIZ_WORD } from '@/constant/actionTypeMentor';
+export const mentorStudentQuizWord = (state = [], { type, payload }) => {
     switch (type) {
-        case REQUEST_STATS_STUDENT_QUIZ_WORD_LIST:
-            return {
-                ...state,
-                pending: true,
-            };
-        case RECEIVE_STATS_STUDENT_QUIZ_WORD_LIST:
-            return {
-                ...state,
-                init: false,
-                pending: false,
-                text: payload ? payload.text : null,
-            };
-        case OPEN_NETWORK_ERROR:
-            return {
-                ...state,
-                init: false,
-                pending: false,
-                error: true,
-                text: payload ? payload.text : null,
-            };
-        case CLOSE_NETWORK_ERROR:
-            return {
-                ...state,
-                error: false,
-            };
-        default:
-            return state;
-    }
-};
-
-export const stuQuizGrammarAndWordList = (state = [], { type, payload }) => {
-    switch (type) {
-        case RECEIVE_STATS_STUDENT_QUIZ_WORD_LIST:
+        case FETCH_MENTOR_STUDENT_QUIZ_WORD:
             return payload;
         default:
             return state;

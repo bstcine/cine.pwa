@@ -6,9 +6,9 @@ import { bindActionCreators } from 'redux';
 import { Toast } from '@/component/Toast';
 import * as mentorAction from '@/action/mentorAction';
 import { FETCH_MENTOR_STUDENT_QUIZ_WORD } from '@/constant/actionTypeMentor';
-import StuQuizTable from '../component/StuQuiz/StuQuizTable';
+import StatsTable from '../component/Correct/StatsTable';
 
-class StuQuizContainer extends Component {
+class stuCorrectContainer extends Component {
     componentDidMount() {
         this.props.actions.fetchMentorStudentQuizWord();
     }
@@ -26,12 +26,14 @@ class StuQuizContainer extends Component {
         let network = networks[FETCH_MENTOR_STUDENT_QUIZ_WORD] || {};
 
         return (
-            <div className="mentor-container quiz">
+            <div className="mentor-container correct">
                 <Toast network={network} />
-                <StuQuizTable
-                    list={mentorStudentQuizWord}
-                    wordsItemClick={this.wordsItemClick}
-                    quizItemClick={this.quizItemClick}
+                <StatsTable
+                    list={
+                        mentorStudentQuizWord
+                            ? mentorStudentQuizWord.quiz || []
+                            : []
+                    }
                 />
             </div>
         );
@@ -48,5 +50,5 @@ const mapDispatchToProps = dispatch => ({
 });
 
 export default withRouter(
-    connect(mapStateToProps, mapDispatchToProps)(StuQuizContainer)
+    connect(mapStateToProps, mapDispatchToProps)(stuCorrectContainer)
 );

@@ -84,7 +84,17 @@ const StudentTable = ({ list, ...props }) => {
                         <span>{student.teacher_nickname}</span>
                     </div>
                     <hr className={'hr1'} />
-                    <h4>本周作业</h4>
+                    <div className={'studentHeader'}>
+                        <h4>本周作业</h4>
+                        <label
+                            onClick={() => {
+                                window.open(
+                                    `/learn/task?user_id=${student.student_id}`
+                                );
+                            }}>
+                            全部&gt;
+                        </label>
+                    </div>
                     <br />
                     {student.tasks &&
                         student.tasks.map((task, key) => (

@@ -1,5 +1,5 @@
 import React from 'react';
-
+import timeUtil from '@/util/timeUtil';
 const formatGrade = grade => {
     if (grade === 0) {
         return '学龄前';
@@ -8,16 +8,6 @@ const formatGrade = grade => {
     } else {
         return `${grade}年级`;
     }
-};
-
-const formatDuration = duration => {
-    let number = parseInt(duration, 10);
-    let sec = number % 60;
-    let min = (number - sec) / 60;
-    let str = '';
-    min && (str += min + "'");
-    sec && (str += sec + "''");
-    return str;
 };
 
 const formatTime = time => {
@@ -105,7 +95,11 @@ const StatsTable = ({ list = [] }) => {
                                 <td>{item.login && item.login.slice(-10)}</td>
                                 <td>{item.nickname || '-'}</td>
                                 <td>{formatGrade(item.grade)}</td>
-                                <td>{formatDuration(item.duration)}</td>
+                                <td>
+                                    {timeUtil.durationShortFormat(
+                                        item.duration
+                                    )}
+                                </td>
                                 <td>{formatTime(item.create_at)}</td>
                                 <td>
                                     <Score score={item.score} />

@@ -2,6 +2,7 @@
  * Created by joe on 4/19/18.
  */
 import React from 'react';
+import timeUtil from '@/util/timeUtil';
 
 const gradeArr = {
     '0': '学龄前',
@@ -24,16 +25,6 @@ const formatTime = time => {
     if (time) {
         return time.substring(2, 16);
     }
-};
-
-const formatDuration = duration => {
-    let number = parseInt(duration, 10);
-    let sec = number % 60;
-    let min = (number - sec) / 60;
-    let str = '';
-    min && (str += min + "'");
-    sec && (str += sec + "''");
-    return str;
 };
 
 const renderQuizList = (list, quizItemClick) => {
@@ -88,7 +79,9 @@ const renderQuizList = (list, quizItemClick) => {
                                     {formatTime(item.create_at)}
                                 </div>
                                 <div className={'quizItem'}>
-                                    {formatDuration(item.duration)}
+                                    {timeUtil.durationShortFormat(
+                                        item.duration
+                                    )}
                                 </div>
                                 <div className={'quizItem'}>
                                     {item.checker_nickname || '-'}
@@ -139,7 +132,9 @@ const renderWordList = (list, wordsItemClick) => {
                                     {formatTime(item.create_at)}
                                 </div>
                                 <div className={'wordItem'}>
-                                    {formatDuration(item.duration)}
+                                    {timeUtil.durationShortFormat(
+                                        item.duration
+                                    )}
                                 </div>
                                 <div className={'wordItem right'}>
                                     <span style={{ color: '#ee0d0d' }}>

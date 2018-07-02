@@ -1,6 +1,6 @@
 import Api from '../../APIConfig';
 import { fetchData } from '@/service/base';
-import { Action_UI, Action_UP } from '@/constant/actionTypeUser';
+import { Action_UI, Action_UP, Action_UQ } from '@/constant/actionTypeUser';
 
 export const actionUserInfo = {
     request: () => ({
@@ -52,5 +52,21 @@ export const actionUserPoint = {
         let remark = res.remark;
 
         dispatch(actionUserPoint.receive(rows, remark));
+    },
+};
+
+export const actionUserQuiz = {
+    request: () => ({
+        type: Action_UQ.REQUEST,
+    }),
+    receive: result => ({
+        type: Action_UQ.RECEIVE,
+        payload: result,
+    }),
+    loadStats: () => async dispatch => {
+        dispatch(actionUserQuiz.request());
+
+        let [, result] = await fetchData(Api.APIURL_User_Quiz_Stats);
+        dispatch(actionUserQuiz.receive(result));
     },
 };

@@ -1,14 +1,14 @@
-import React, {Component} from 'react';
-import * as Service from '@/service/vocabtest';
+import React, { Component } from 'react';
+import * as Service from '@/service/quizvocab';
 import storeUtil from '@/util/storeUtil';
-import timeUtil from "@/util/timeUtil";
+import timeUtil from '@/util/timeUtil';
 
 export default class ReportList extends Component {
     constructor(props) {
         super(props);
         console.log('ReportList constructor');
         this.state = {
-            list: []
+            list: [],
         };
         this.itemClick = this.itemClick.bind(this);
         this.goStart = this.goStart.bind(this);
@@ -21,7 +21,7 @@ export default class ReportList extends Component {
             }
             if (res.result && res.result.length) {
                 this.setState({
-                    list: res.result
+                    list: res.result,
                 });
             }
         });
@@ -40,7 +40,7 @@ export default class ReportList extends Component {
     }
 
     renderList() {
-        let {list} = this.state;
+        let { list } = this.state;
         if (!list.length) {
             return (
                 <tr>
@@ -54,11 +54,14 @@ export default class ReportList extends Component {
                         key={item.id}
                         onClick={e => {
                             this.itemClick(item.id, e);
-                        }}
-                    >
+                        }}>
                         <td>{i + 1}</td>
-                        <td>{item.create_at ? item.create_at.substring(0, 10) : '-'}</td>
-                        <td>{timeUtil.durationFormat(item.duration,2)}</td>
+                        <td>
+                            {item.create_at
+                                ? item.create_at.substring(0, 10)
+                                : '-'}
+                        </td>
+                        <td>{timeUtil.durationFormat(item.duration, 2)}</td>
                         <td>{item.vocab}</td>
                     </tr>
                 );
@@ -82,7 +85,9 @@ export default class ReportList extends Component {
                         <tbody>{this.renderList()}</tbody>
                     </table>
                     <div className="list-footer">
-                        <button onClick={this.goStart} className="btn btn_sm btn_blue btn_try">
+                        <button
+                            onClick={this.goStart}
+                            className="btn btn_sm btn_blue btn_try">
                             测试
                         </button>
                     </div>

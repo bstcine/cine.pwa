@@ -1,12 +1,8 @@
-import React, {Component} from 'react';
-import * as Service from '@/service/vocabtest';
+import React, { Component } from 'react';
+import * as Service from '@/service/quizvocab';
 import storeUtil from '@/util/storeUtil';
 
 export default class Index extends Component {
-    constructor(props) {
-        super(props);
-    }
-
     componentWillMount() {
         console.log('componentWillMount');
         Service.getContentWordConfig({}).then(result => {
@@ -14,7 +10,10 @@ export default class Index extends Component {
             if (result.except_case_desc === 'no_login') {
                 return this.props.history.push('/logindetect');
             }
-            if (result.except_case_desc && result.except_case_desc !== 'no_login') {
+            if (
+                result.except_case_desc &&
+                result.except_case_desc !== 'no_login'
+            ) {
                 return alert(result.except_case_desc);
             }
             let user = result.result.user;

@@ -48,7 +48,7 @@ class QuizContainer extends Component {
                                     {vocabStats.map(item => {
                                         return (
                                             <a
-                                                href={`/vocabtest/report?id=${
+                                                href={`/quizvocab/report?id=${
                                                     item.id
                                                 }`}
                                                 key={item.id}>

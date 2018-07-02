@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { getParam, addParam, removeParam } from '@/util/urlUtil';
-import * as Service from '@/service/vocabtest';
+import * as Service from '@/service/quizvocab';
 import { initWechat, setShareParam } from '@/util/wechatUtil';
 import { createShare, share } from '@/util/shareUtil';
 import Bridge from '@/util/bridge';
@@ -11,6 +11,15 @@ import CourseLink from '@/component/CourseLink';
 import errorMsg from '@/util/errorMsg';
 
 export default class Report extends Component {
+    static convGrade(grade) {
+        if (grade === 0) {
+            return '学龄前';
+        } else if (grade === 13) {
+            return '成人';
+        } else {
+            return `${grade}年级`;
+        }
+    }
     constructor(props) {
         super(props);
         console.log('Report constructor');
@@ -21,16 +30,6 @@ export default class Report extends Component {
         this.shareClick = this.shareClick.bind(this);
         this.retryClick = this.retryClick.bind(this);
         this.courseClick = this.courseClick.bind(this);
-    }
-
-    static convGrade(grade) {
-        if (grade === 0) {
-            return '学龄前';
-        } else if (grade === 13) {
-            return '成人';
-        } else {
-            return `${grade}年级`;
-        }
     }
 
     async componentDidMount() {

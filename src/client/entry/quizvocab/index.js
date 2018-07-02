@@ -26,7 +26,7 @@ class Word extends Entry {
 
     render() {
         return (
-            <Router basename="/vocabtest">
+            <Router basename="/quizvocab">
                 <div className="word-main">
                     <div className="map-bg" />
                     <Route exact path="/" component={Welcome} />

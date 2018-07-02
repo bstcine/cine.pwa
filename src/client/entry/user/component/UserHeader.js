@@ -51,7 +51,7 @@ const UserHeader = ({ selectId, user, handleClick }) => {
                         <a href="/learn">我的学习</a>
                     </div>
                     <div className={'item tab-wordtest'}>
-                        <a href="/vocabtest" target="_blank">
+                        <a href="/quizvocab" target="_blank">
                             我的测试
                         </a>
                     </div>

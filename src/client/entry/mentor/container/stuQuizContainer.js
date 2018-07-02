@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { fetchStatsContentStuQuizWordList } from '@/action/mentorAction';
-import StudentTable from '../component/StuQuiz/StudentTable';
+import StuQuizTable from '../component/StuQuiz/StuQuizTable';
 
 const mapStateToProps = state => {
     const { network, stuQuizGrammarAndWordList } = state;
@@ -34,17 +34,15 @@ class StuQuizContainer extends Component {
         console.log('StuQuizContainer render', this.props);
         const { init, quiz_list } = this.props;
         return (
-            <React.Fragment>
-                <div className="tgrammar-stats-list">
-                    {!init && (
-                        <StudentTable
-                            list={quiz_list}
-                            wordsItemClick={this.wordsItemClick}
-                            quizItemClick={this.quizItemClick}
-                        />
-                    )}
-                </div>
-            </React.Fragment>
+            <div className="mentor-container quiz">
+                {!init && (
+                    <StuQuizTable
+                        list={quiz_list}
+                        wordsItemClick={this.wordsItemClick}
+                        quizItemClick={this.quizItemClick}
+                    />
+                )}
+            </div>
         );
     }
 }

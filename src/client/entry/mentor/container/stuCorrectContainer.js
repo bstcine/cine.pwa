@@ -22,7 +22,7 @@ const mapDispatchToProps = dispatch => ({
     },
 });
 
-class StatsListPage extends Component {
+class stuCorrectContainer extends Component {
     componentDidMount() {
         const { fetchStatsContentStuQuizWordList } = this.props;
         fetchStatsContentStuQuizWordList();
@@ -41,7 +41,7 @@ class StatsListPage extends Component {
         const { init, stats_list } = this.props;
         return (
             <React.Fragment>
-                <div className="tgrammar-stats-list">
+                <div className="mentor-container correct">
                     {!init && <StatsTable list={stats_list} />}
                 </div>
             </React.Fragment>
@@ -50,5 +50,5 @@ class StatsListPage extends Component {
 }
 
 export default withRouter(
-    connect(mapStateToProps, mapDispatchToProps)(StatsListPage)
+    connect(mapStateToProps, mapDispatchToProps)(stuCorrectContainer)
 );

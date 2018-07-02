@@ -47,23 +47,27 @@ class QuizContainer extends Component {
                                 <ul className="table-body">
                                     {vocabStats.map(item => {
                                         return (
-                                            <li
-                                                className="table-tr"
+                                            <a
+                                                href={`/vocabtest/report?id=${
+                                                    item.id
+                                                }`}
                                                 key={item.id}>
-                                                <span>
-                                                    {timeUtil.shortTime(
-                                                        item.create_at
-                                                    )}
-                                                </span>
-                                                <span>
-                                                    {timeUtil.durationShortFormat(
-                                                        item.duration
-                                                    )}
-                                                </span>
-                                                <span className="score">
-                                                    {item.vocab}
-                                                </span>
-                                            </li>
+                                                <li className="table-tr">
+                                                    <span>
+                                                        {timeUtil.shortTime(
+                                                            item.create_at
+                                                        )}
+                                                    </span>
+                                                    <span>
+                                                        {timeUtil.durationShortFormat(
+                                                            item.duration
+                                                        )}
+                                                    </span>
+                                                    <span className="score">
+                                                        {item.vocab}
+                                                    </span>
+                                                </li>
+                                            </a>
                                         );
                                     })}
                                 </ul>
@@ -81,32 +85,36 @@ class QuizContainer extends Component {
                                 <ul className="table-body">
                                     {grammarStats.map(item => {
                                         return (
-                                            <li
-                                                key={item.id}
-                                                className="table-tr">
-                                                <span>
-                                                    {timeUtil.shortTime(
-                                                        item.create_at
-                                                    )}
-                                                </span>
-                                                <span>
-                                                    {timeUtil.durationShortFormat(
-                                                        item.duration
-                                                    )}
-                                                </span>
-                                                <span className="score">
-                                                    {item.score}
-                                                </span>
-                                                <span>
-                                                    {item.checker_nickname}
-                                                </span>
-                                                <span
-                                                    className={`status__${
-                                                        item.status
-                                                    }`}>
-                                                    {statusMap[item.status]}
-                                                </span>
-                                            </li>
+                                            <a
+                                                href={`/quiz/grammar?stats_content_quiz_id=${
+                                                    item.id
+                                                }`}
+                                                key={item.id}>
+                                                <li className="table-tr">
+                                                    <span>
+                                                        {timeUtil.shortTime(
+                                                            item.create_at
+                                                        )}
+                                                    </span>
+                                                    <span>
+                                                        {timeUtil.durationShortFormat(
+                                                            item.duration
+                                                        )}
+                                                    </span>
+                                                    <span className="score">
+                                                        {item.score}
+                                                    </span>
+                                                    <span>
+                                                        {item.checker_nickname}
+                                                    </span>
+                                                    <span
+                                                        className={`status__${
+                                                            item.status
+                                                        }`}>
+                                                        {statusMap[item.status]}
+                                                    </span>
+                                                </li>
+                                            </a>
                                         );
                                     })}
                                 </ul>

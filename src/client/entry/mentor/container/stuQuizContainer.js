@@ -22,7 +22,6 @@ class StuQuizContainer extends Component {
     };
 
     render() {
-        console.log('StuQuizContainer render', this.props);
         const { networks, mentorStudentQuizWord } = this.props;
         let network = networks[FETCH_MENTOR_STUDENT_QUIZ_WORD] || {};
 
@@ -39,12 +38,10 @@ class StuQuizContainer extends Component {
     }
 }
 
-const mapStateToProps = state => {
-    return {
-        networks: state.networks,
-        mentorStudentQuizWord: state.mentorStudentQuizWord,
-    };
-};
+const mapStateToProps = state => ({
+    networks: state.networks,
+    mentorStudentQuizWord: state.mentorStudentQuizWord,
+});
 
 const mapDispatchToProps = dispatch => ({
     actions: bindActionCreators(mentorAction, dispatch),

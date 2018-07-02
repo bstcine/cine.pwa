@@ -25,12 +25,10 @@ class StuTaskContainer extends Component {
     }
 }
 
-const mapStateToProps = state => {
-    return {
-        networks: state.networks,
-        mentorStudentTask: state.mentorStudentTask,
-    };
-};
+const mapStateToProps = state => ({
+    networks: state.networks,
+    mentorStudentTask: state.mentorStudentTask,
+});
 
 const mapDispatchToProps = dispatch => ({
     actions: bindActionCreators(mentorAction, dispatch),

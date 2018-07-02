@@ -2,30 +2,15 @@ import '../asset/style/index.less';
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { fetchStatsContentStuQuizWordList } from '@/action/mentorAction';
+import { bindActionCreators } from 'redux';
+import { Toast } from '@/component/Toast';
+import * as mentorAction from '@/action/mentorAction';
+import { FETCH_MENTOR_STUDENT_QUIZ_WORD } from '@/constant/actionTypeMentor';
 import StatsTable from '../component/Correct/StatsTable';
-
-const mapStateToProps = state => {
-    const { network, stuQuizGrammarAndWordList } = state;
-    return {
-        init: network.init,
-        stats_list:
-            stuQuizGrammarAndWordList && stuQuizGrammarAndWordList.quiz
-                ? stuQuizGrammarAndWordList.quiz
-                : [],
-    };
-};
-
-const mapDispatchToProps = dispatch => ({
-    fetchStatsContentStuQuizWordList: () => {
-        dispatch(fetchStatsContentStuQuizWordList());
-    },
-});
 
 class stuCorrectContainer extends Component {
     componentDidMount() {
-        const { fetchStatsContentStuQuizWordList } = this.props;
-        fetchStatsContentStuQuizWordList();
+        this.props.actions.fetchMentorStudentQuizWord();
     }
 
     wordsItemClick = id => {
@@ -37,17 +22,32 @@ class stuCorrectContainer extends Component {
     };
 
     render() {
-        console.log('StatsListPage render');
-        const { init, stats_list } = this.props;
+        const { networks, mentorStudentQuizWord } = this.props;
+        let network = networks[FETCH_MENTOR_STUDENT_QUIZ_WORD] || {};
+
         return (
-            <React.Fragment>
-                <div className="mentor-container correct">
-                    {!init && <StatsTable list={stats_list} />}
-                </div>
-            </React.Fragment>
+            <div className="mentor-container correct">
+                <Toast network={network} />
+                <StatsTable
+                    list={
+                        mentorStudentQuizWord
+                            ? mentorStudentQuizWord.quiz || []
+                            : []
+                    }
+                />
+            </div>
         );
     }
 }
+
+const mapStateToProps = state => ({
+    networks: state.networks,
+    mentorStudentQuizWord: state.mentorStudentQuizWord,
+});
+
+const mapDispatchToProps = dispatch => ({
+    actions: bindActionCreators(mentorAction, dispatch),
+});
 
 export default withRouter(
     connect(mapStateToProps, mapDispatchToProps)(stuCorrectContainer)

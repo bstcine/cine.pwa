@@ -50,6 +50,8 @@
             padding: 0.3rem 0 0.4rem;
             width: 100%;
             display: flex;
+            align-items: center;
+
             &.click {
                 cursor: pointer;
             }
@@ -73,6 +75,10 @@
                 font-family: PingFangSC-Regular;
                 font-size: 0.3rem;
                 color: #3a3b3c;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                word-break: keep-all;
+                overflow: hidden;
             }
             .task-status {
                 width: 1.5rem;
@@ -92,8 +98,18 @@
 
 @media @media-xs {
     .mentor-container.task {
-        .taskPanel {
-            flex-wrap: wrap;
+        padding: 0.2rem;
+
+        .studentPanel {
+            .taskPanel {
+                .task-title {
+                    font-size: 0.24rem;
+                }
+
+                .task-status {
+                    font-size: 0.24rem;
+                }
+            }
         }
     }
 }

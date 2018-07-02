@@ -33,6 +33,9 @@ class VocabularyItem extends React.PureComponent {
         } else if (vocabulary.phonetic_b) {
             phonetic = vocabulary.phonetic_b;
         }
+        const voiceSpan = (
+            this.voiceSrc && <span className="v_Task_L_Item_Voice"></span>
+        );
 
         return (
             <div style={style} className="v_Task_L_VocabularyItem" onClick={this.playVoice}>
@@ -42,7 +45,7 @@ class VocabularyItem extends React.PureComponent {
                         <a className="v_Task_L_Item_Word">{vocabulary.word}</a>
                         <a className="v_Task_L_Item_Phonetic">{phonetic}</a>
                     </div>
-                    <span className="v_Task_L_Item_Voice"></span>
+                    {voiceSpan}
                 </div>
                 <div className="v_Task_L_Item_Transition">
                     {vocabulary.zh}

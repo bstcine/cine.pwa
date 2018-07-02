@@ -53,6 +53,15 @@ export const toastRedu = (
     }
 };
 
+export const networks = (state = {}, { type, payload }) => {
+    switch (type) {
+        case actType.UPDATE_NETWORK_FETCH_STATUS:
+            return { ...state, [payload.type]: payload };
+        default:
+            return state;
+    }
+};
+
 export const userRedu = (state = { loading: false, data: null }, action) => {
     switch (action.type) {
         case actType.REQUEST_USER_INFO:

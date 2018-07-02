@@ -20,6 +20,44 @@ export const openConfirm = ({ text, onConfirm, onCancel }) => ({
     payload: { text, onConfirm, onCancel },
 });
 
+export const updateNetworkFetchStatus = ({ type, pending, error }) => ({
+    type: actType.UPDATE_NETWORK_FETCH_STATUS,
+    payload: { type, pending, error },
+});
+
+export const networkFetch = (type, url, callback) => async dispatch => {
+    dispatch({
+        type: actType.UPDATE_NETWORK_FETCH_STATUS,
+        payload: { type, loading: true },
+    });
+
+    let [error, result] = await fetchData(url);
+
+    dispatch({
+        type: actType.UPDATE_NETWORK_FETCH_STATUS,
+        payload: {
+            type,
+            loading: false,
+            error: error instanceof Error ? error.message : error,
+        },
+    });
+
+    if (error) {
+        setTimeout(() => {
+            dispatch({
+                type: actType.UPDATE_NETWORK_FETCH_STATUS,
+                payload: { type, loading: false },
+            });
+        }, 3000);
+    } else {
+        if (callback) {
+            callback(result);
+        } else {
+            dispatch({ type, payload: result });
+        }
+    }
+};
+
 export const networkError = err => dispatch => {
     let text = err instanceof Error ? err.message : err;
     dispatch({

@@ -1,0 +1,99 @@
+.mentor-container.task {
+    .studentPanel {
+        display: flex;
+        flex-direction: column;
+        padding-top: 0.1rem;
+        padding-bottom: 0.5rem;
+
+        .studentInfo {
+            display: flex;
+            flex-direction: row;
+            margin: 0.2rem 0 0.2rem;
+            span {
+                font-family: PingFangSC-Regular;
+                font-size: 0.3rem;
+                color: #1b71db;
+                padding-right: 0.6rem;
+            }
+        }
+
+        .hr1 {
+            color: #1b71db;
+            background-color: #1b71db;
+            margin-top: 0.15rem;
+            margin-bottom: 0.2rem;
+            border: 0;
+            height: 0.05rem;
+        }
+
+        .studentHeader {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.4rem 0.1rem 0;
+
+            label {
+                font-family: PingFangSC-Regular;
+                font-size: 0.26rem;
+                color: #b2b3b5;
+                cursor: pointer;
+            }
+        }
+
+        .hr2 {
+            color: #f2f4f6;
+            background-color: #f2f4f6;
+            border: 0;
+            height: 0.02rem;
+        }
+
+        .taskPanel {
+            padding: 0.3rem 0 0.4rem;
+            width: 100%;
+            display: flex;
+            &.click {
+                cursor: pointer;
+            }
+
+            .task-type {
+                min-width: 0.6rem;
+                font-size: 0.22rem;
+                display: flex;
+                height: 0.3rem;
+                margin-right: 0.12rem;
+                color: #b2b3b5;
+                border: solid 0.02rem #c2c3c5;
+                border-radius: 0.04rem;
+                justify-content: center;
+                align-items: center;
+                flex-shrink: 0;
+            }
+            .task-title {
+                width: 100%;
+                padding-right: 0.1rem;
+                font-family: PingFangSC-Regular;
+                font-size: 0.3rem;
+                color: #3a3b3c;
+            }
+            .task-status {
+                width: 1.5rem;
+                &.red {
+                    color: #fb525a;
+                }
+                &.green {
+                    color: #19bd4f;
+                }
+            }
+            .task-todo {
+                width: 2rem;
+            }
+        }
+    }
+}
+
+@media @media-xs {
+    .mentor-container.task {
+        .taskPanel {
+            flex-wrap: wrap;
+        }
+    }
+}

@@ -151,7 +151,7 @@ const renderWordList = (list, wordsItemClick) => {
     }
 };
 
-const StudentTable = ({ list, wordsItemClick, quizItemClick, ...props }) => {
+const StuQuizTable = ({ list, wordsItemClick, quizItemClick, ...props }) => {
     let students = list.student || [];
     let quizs = list.quiz || [];
     let words = list.word || [];
@@ -206,4 +206,4 @@ const StudentTable = ({ list, wordsItemClick, quizItemClick, ...props }) => {
     return <div className="studentList">{renderList}</div>;
 };
 
-export default StudentTable;
+export default StuQuizTable;

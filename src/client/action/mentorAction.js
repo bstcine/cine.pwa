@@ -1,17 +1,33 @@
-import { APIURL_Content_StuQuizWord_List } from '../../APIConfig';
-import { fetchData } from '@/service/base';
 import {
-    REQUEST_STATS_STUDENT_QUIZ_WORD_LIST,
-    RECEIVE_STATS_STUDENT_QUIZ_WORD_LIST,
+    APIURL_Content_StuQuizWord_List,
+    APIURL_Mentor_Student_ListWithTask,
+} from '../../APIConfig';
+import {
+    FETCH_MENTOR_STUDENT_QUIZ_WORD,
+    FETCH_MENTOR_STUDENT_TASK,
 } from '@/constant/actionTypeMentor';
-import { networkError } from '@/action/commonAction';
+import { networkFetch } from '@/action/commonAction';
 
 /**
  * 获取学生、答题记录、词汇测试列表
  */
-export const fetchStatsContentStuQuizWordList = () => async dispatch => {
-    dispatch({ type: REQUEST_STATS_STUDENT_QUIZ_WORD_LIST });
-    let [err, result] = await fetchData(APIURL_Content_StuQuizWord_List);
-    if (err) return dispatch(networkError(err));
-    dispatch({ type: RECEIVE_STATS_STUDENT_QUIZ_WORD_LIST, payload: result });
+export const fetchMentorStudentQuizWord = () => async dispatch => {
+    dispatch(
+        networkFetch(
+            FETCH_MENTOR_STUDENT_QUIZ_WORD,
+            APIURL_Content_StuQuizWord_List
+        )
+    );
+};
+
+/**
+ * 获取学生作业
+ */
+export const fetchMentorStudentTask = () => async dispatch => {
+    dispatch(
+        networkFetch(
+            FETCH_MENTOR_STUDENT_TASK,
+            APIURL_Mentor_Student_ListWithTask
+        )
+    );
 };

@@ -6,6 +6,7 @@ import { fetchData } from '@/service/base';
 import { ACTION_LH } from '@/constant/actionTypeLearn';
 import { toastAction } from '@/action/commonAction';
 import errorMsg from '@/util/errorMsg';
+import { fromJS } from 'immutable';
 
 export const lTaskAction = {
     _request: () => ({
@@ -40,6 +41,8 @@ export const lTaskAction = {
             dispatch(toastAction.showError(errorMsg(error)));
             return;
         }
+
+        console.log(result);
 
         dispatch(lTaskAction._receive(result));
         dispatch(lTaskAction._dialogShow(false));

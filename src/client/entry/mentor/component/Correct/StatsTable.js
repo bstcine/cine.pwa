@@ -70,7 +70,7 @@ const OperationButton = ({ item }) => {
 
 const StatsTable = ({ list = [] }) => {
     return (
-        <div className="tgrammar-list">
+        <div className="mentor-list">
             <table border="1">
                 <caption style={{ marginTop: '.4rem', marginBottom: '.4rem' }}>
                     学生英语文法和阅读基础能力测试——批改结果

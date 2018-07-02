@@ -52,6 +52,7 @@ exports.APIURL_User_Coupon_Transfer = '/api/user/coupon/transfer'; // 转移用�
 exports.APIURL_User_Point = '/api/user/integral/list'; // 查询积分
 exports.APIURL_User_Query = '/api/user/query'; // 查询用户是否存在
 exports.APIURL_User_Info = '/api/user/info'; // 用户信息
+exports.APIURL_User_Quiz_Stats = '/api/user/quiz/stats'; // 用户测试历史
 exports.APIURL_User_Address_Add = '/api/user/address/add'; // 新增收货地址
 exports.APIURL_User_Address = '/api/user/address'; // 查询收货地址
 exports.APIURL_Global_Integral_Rule = '/api/global/integral/rule'; // 积分规则
@@ -70,4 +71,5 @@ exports.APIURL_Admin_User_Coupon_List = '/api/admin/user/coupon/list'; // 管理
 exports.APIURL_User_Learn_Word = '/api/user/learn/word'; // 词汇任务单词列表
 exports.APIURL_User_Learn_Task = '/api/user/learn/task'; // 历史任务列表
 exports.APIURL_User_Learn_UpdateTaskStatus = '/api/user/learn/updatetask'; // 更新任务状态
+
 exports.APIURL_User_Learn_SaveFailure = '/api/user/learn/savefailure'; // 保存选择错误的信息

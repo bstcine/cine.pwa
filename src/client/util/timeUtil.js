@@ -29,7 +29,19 @@ let timeUtil = {
             }
             return time;
         }
-    }
+    },
+    durationShortFormat: duration => {
+        let number = parseInt(duration, 10);
+        let sec = number % 60;
+        let min = (number - sec) / 60;
+        let str = '';
+        min && (str += min + "'");
+        sec && (str += sec + "''");
+        return str;
+    },
+    shortTime: timeStr => {
+        return timeStr.substring(0, 10);
+    },
 };
 
-export default timeUtil
+export default timeUtil;

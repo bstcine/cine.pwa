@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux';
 import couponRedu from './couponReducer';
 import points from './pointReducer';
+import stats from './quizReducer';
 import { toastRedu, userRedu } from '@/reducer';
 
 const rootReducer = combineReducers({
@@ -8,6 +9,7 @@ const rootReducer = combineReducers({
     couponRedu,
     points,
     toastRedu,
+    stats,
 });
 
 export default rootReducer;

@@ -14,7 +14,7 @@ const pages = [
     'cquiz',
     'address',
     'temp',
-    'vocabtest',
+    'quizvocab',
     'content',
     'user',
     'learn',

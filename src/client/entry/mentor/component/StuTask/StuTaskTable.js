@@ -129,6 +129,7 @@ const StudentTable = ({ list, ...props }) => {
                                         )}>
                                         {taskStatus[task.status]}
                                     </div>
+                                    <div className={'task-todo'} />
                                 </div>
                                 <hr className={'hr2'} />
                             </React.Fragment>

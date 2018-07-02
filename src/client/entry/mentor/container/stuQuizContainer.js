@@ -2,24 +2,15 @@ import '../asset/style/index.less';
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { fetchStatsContentStuQuizWordList } from '@/action/mentorAction';
+import { bindActionCreators } from 'redux';
+import { Toast } from '@/component/Toast';
+import * as mentorAction from '@/action/mentorAction';
+import { FETCH_MENTOR_STUDENT_QUIZ_WORD } from '@/constant/actionTypeMentor';
 import StuQuizTable from '../component/StuQuiz/StuQuizTable';
-
-const mapStateToProps = state => {
-    const { network, stuQuizGrammarAndWordList } = state;
-    return { init: network.init, quiz_list: stuQuizGrammarAndWordList };
-};
-
-const mapDispatchToProps = dispatch => ({
-    fetchStatsContentStuQuizWordList: () => {
-        dispatch(fetchStatsContentStuQuizWordList());
-    },
-});
 
 class StuQuizContainer extends Component {
     componentDidMount() {
-        const { fetchStatsContentStuQuizWordList } = this.props;
-        fetchStatsContentStuQuizWordList();
+        this.props.actions.fetchMentorStudentQuizWord();
     }
 
     wordsItemClick = id => {
@@ -32,20 +23,32 @@ class StuQuizContainer extends Component {
 
     render() {
         console.log('StuQuizContainer render', this.props);
-        const { init, quiz_list } = this.props;
+        const { networks, mentorStudentQuizWord } = this.props;
+        let network = networks[FETCH_MENTOR_STUDENT_QUIZ_WORD] || {};
+
         return (
             <div className="mentor-container quiz">
-                {!init && (
-                    <StuQuizTable
-                        list={quiz_list}
-                        wordsItemClick={this.wordsItemClick}
-                        quizItemClick={this.quizItemClick}
-                    />
-                )}
+                <Toast network={network} />
+                <StuQuizTable
+                    list={mentorStudentQuizWord}
+                    wordsItemClick={this.wordsItemClick}
+                    quizItemClick={this.quizItemClick}
+                />
             </div>
         );
     }
 }
+
+const mapStateToProps = state => {
+    return {
+        networks: state.networks,
+        mentorStudentQuizWord: state.mentorStudentQuizWord,
+    };
+};
+
+const mapDispatchToProps = dispatch => ({
+    actions: bindActionCreators(mentorAction, dispatch),
+});
 
 export default withRouter(
     connect(mapStateToProps, mapDispatchToProps)(StuQuizContainer)

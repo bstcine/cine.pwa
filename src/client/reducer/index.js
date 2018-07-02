@@ -53,7 +53,7 @@ export const toastRedu = (
     }
 };
 
-export const networkFetchStatus = (state = {}, { type, payload }) => {
+export const networks = (state = {}, { type, payload }) => {
     switch (type) {
         case actType.UPDATE_NETWORK_FETCH_STATUS:
             return { ...state, [payload.type]: payload };

@@ -13,8 +13,8 @@ class StuTaskContainer extends Component {
     }
 
     render() {
-        let { networkFetchStatus, mentorStudentTask } = this.props;
-        let network = networkFetchStatus[FETCH_MENTOR_STUDENT_TASK] || {};
+        let { networks, mentorStudentTask } = this.props;
+        let network = networks[FETCH_MENTOR_STUDENT_TASK] || {};
 
         return (
             <div className="mentor-container task">
@@ -27,7 +27,7 @@ class StuTaskContainer extends Component {
 
 const mapStateToProps = state => {
     return {
-        networkFetchStatus: state.networkFetchStatus,
+        networks: state.networks,
         mentorStudentTask: state.mentorStudentTask,
     };
 };

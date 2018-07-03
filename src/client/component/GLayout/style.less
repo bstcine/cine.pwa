@@ -9,7 +9,8 @@
 .gheader {
     display: none;
 }
-.nav-2nd {
+.nav-2nd,
+.nav-3nd {
     display: none;
 }
 
@@ -110,13 +111,31 @@
             &.disabled:hover {
                 border: transparent;
             }
-            i {
+            i.gicons {
+                line-height: 0.36rem;
                 width: 0.4rem;
                 margin-right: 0.3em;
 
                 color: #0748a0;
             }
         }
+    }
+
+    .nav-3nd {
+        display: block;
+        .gcontainer {
+            display: flex;
+            height: 1.1rem;
+            align-items: center;
+            white-space: pre;
+        }
+    }
+    .nav-3nd__home {
+        font-size: 0.28rem;
+        color: #014c98;
+    }
+    .nav-3nd__curr {
+        font-size: 0.28rem;
     }
 
     .user-bar {

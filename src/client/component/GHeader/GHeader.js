@@ -70,21 +70,21 @@ const Nav2 = ({ navs }) => (
                                 className={classNames({
                                     active: menu.active,
                                 })}>
-                                {Boolean(menu.icon) && (
-                                    <GIcon name={menu.icon} />
-                                )}
-                                {Boolean(menu.icon_path) && (
-                                    <GIcon url={menu.icon_path} />
+                                {(!!menu.icon || !!menu.icon_path) && (
+                                    <GIcon
+                                        name={menu.icon}
+                                        url={menu.icon_path}
+                                    />
                                 )}
                                 {menu.label}
                             </a>
                         ) : (
                             <a key={menu.url} className="disabled">
-                                {Boolean(menu.icon) && (
-                                    <GIcon name={menu.icon} />
-                                )}
-                                {Boolean(menu.icon_path) && (
-                                    <GIcon url={menu.icon_path} />
+                                {(!!menu.icon || !!menu.icon_path) && (
+                                    <GIcon
+                                        name={menu.icon}
+                                        url={menu.icon_path}
+                                    />
                                 )}
                                 {menu.label}
                             </a>
@@ -94,6 +94,29 @@ const Nav2 = ({ navs }) => (
     </nav>
 );
 
+const Nav3 = ({ navs }) => {
+    const [menu1st, menu2nd] = navs;
+    return (
+        <nav className="nav-3nd">
+            <div className="gcontainer">
+                <span className="nav-3nd__home">
+                    {(!!menu1st.icon || !!menu1st.icon_path) && (
+                        <GIcon name={menu1st.icon} url={menu1st.icon_path} />
+                    )}
+                    {menu1st.label}
+                </span>
+                <span> - </span>
+                <span className="nav-3nd__curr">{menu2nd.label}</span>
+            </div>
+        </nav>
+    );
+};
+
+/**
+ * navs1 顶部一级导航
+ * navs2 一级页面导航
+ * navs3 二级页面导航
+ */
 class GHeader extends PureComponent {
     constructor(props) {
         super(props);
@@ -108,7 +131,7 @@ class GHeader extends PureComponent {
     }
 
     render() {
-        const { user, navs1, navs2, onLogout } = this.props;
+        const { user, navs1, navs2, navs3, onLogout } = this.props;
         const { isOpenUserBar } = this.state;
 
         return (
@@ -126,7 +149,11 @@ class GHeader extends PureComponent {
                         />
                     </div>
                 </header>
-                <Nav2 navs={navs2} />
+                {navs3 && navs3.length ? (
+                    <Nav3 navs={navs3} />
+                ) : (
+                    <Nav2 navs={navs2} />
+                )}
             </React.Fragment>
         );
     }

@@ -23,7 +23,7 @@ class QuizContainer extends Component {
 
         return (
             <div className="quiz-stats-tabs">
-                <Tabs>
+                <Tabs className="coupon-tabs">
                     <TabItems>
                         <TabItem>词汇量测试</TabItem>
                         {user &&

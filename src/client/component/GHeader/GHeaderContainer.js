@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import GHeader from './GHeader';
@@ -8,8 +8,8 @@ import { getNav } from '@/util/menuUtil';
 
 const mapStateToProps = state => {
     let { userRedu } = state;
-    const { navs1, navs2 } = getNav(userRedu.data);
-    return { user: userRedu.data, navs1, navs2 };
+    const { navs1, navs2, navs3 } = getNav(userRedu.data);
+    return { user: userRedu.data, navs1, navs2, navs3 };
 };
 
 const mapDispatchToProps = dispatch => ({
@@ -18,7 +18,7 @@ const mapDispatchToProps = dispatch => ({
     },
 });
 
-class GHeaderContainer extends Component {
+class GHeaderContainer extends PureComponent {
     static defaultProps = getNav();
     constructor(props) {
         super(props);
@@ -36,12 +36,13 @@ class GHeaderContainer extends Component {
     }
 
     render() {
-        const { user, navs1, navs2 } = this.props;
+        const { user, navs1, navs2, navs3 } = this.props;
         return (
             <GHeader
                 user={user}
                 navs1={navs1}
                 navs2={navs2}
+                navs3={navs3}
                 onLogout={this.logout}
             />
         );

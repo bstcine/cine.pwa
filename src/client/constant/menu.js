@@ -23,6 +23,12 @@ const cineMenu = [
                 label: '我的学习',
                 url: h5.URL_Learn_Index,
                 icon: 'ci-my_study',
+                children: [
+                    {
+                        label: '历史作业',
+                        url: h5.URL_Learn_Task,
+                    },
+                ],
             },
         ],
     },
@@ -44,6 +50,12 @@ const cineMenu = [
                 label: '我的测试',
                 url: h5.URL_User_Quiz,
                 icon: 'ci-grammar',
+                children: [
+                    {
+                        label: '习题测试',
+                        url: h5.URL_Quiz_Kj,
+                    },
+                ],
             },
             {
                 label: '我的订单',

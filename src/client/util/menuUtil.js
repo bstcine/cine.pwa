@@ -1,4 +1,4 @@
-import menu from '@/constant/menu';
+import menus from '@/constant/menu';
 
 const getNav = user => {
     const filter = (menu, user) => {
@@ -16,23 +16,52 @@ const getNav = user => {
     const path = location.pathname.replace(/\/$/, '');
     let navs1 = [];
     let navs2 = [];
-    menu.forEach(menu => {
-        if (filter(menu, user)) {
-            if (menu.url !== '/' && path.indexOf(menu.url) === 0) {
-                menu.active = true;
-                if (menu.children && menu.children.length) {
-                    menu.children.forEach(child_menu => {
-                        if (filter(child_menu, user)) {
-                            if (path.indexOf(child_menu.url) === 0) child_menu.active = true;
-                            navs2.push(child_menu);
-                        }
-                    });
-                }
-            }
-            navs1.push(menu);
-        }
+    let navs3 = [];
+    menus.filter(menu => filter(menu, user)).forEach(menu1st => {
+        navs1.push(menu1st);
+        if (menu1st.url === path) menu1st.active = true;
+        menu1st.children &&
+            menu1st.children
+                .filter(menu => filter(menu, user))
+                .map(menu2nd => {
+                    if (menu2nd.url === path) {
+                        menu1st.active = true;
+                        menu2nd.active = true;
+                    }
+                    return menu2nd;
+                })
+                .forEach(menu2nd => {
+                    menu1st.active && navs2.push(menu2nd);
+                    menu2nd.children &&
+                        menu2nd.children
+                            .filter(menu => filter(menu, user))
+                            .forEach(menu3rd => {
+                                if (menu3rd.url === path) {
+                                    menu1st.active = true;
+                                    menu2nd.active = true;
+                                    navs3.push(menu2nd);
+                                    navs3.push(menu3rd);
+                                }
+                            });
+                });
     });
-    return { navs1, navs2 };
+    // menu.forEach(menu => {
+    //     if (filter(menu, user)) {
+    //         if (menu.url !== '/' && path.indexOf(menu.url) === 0) {
+    //             menu.active = true;
+    //             if (menu.children && menu.children.length) {
+    //                 menu.children.forEach(child_menu => {
+    //                     if (filter(child_menu, user)) {
+    //                         if (path.indexOf(child_menu.url) === 0) child_menu.active = true;
+    //                         navs2.push(child_menu);
+    //                     }
+    //                 });
+    //             }
+    //         }
+    //         navs1.push(menu);
+    //     }
+    // });
+    return { navs1, navs2, navs3 };
 };
 
 export { getNav };

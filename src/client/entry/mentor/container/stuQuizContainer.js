@@ -14,7 +14,7 @@ class StuQuizContainer extends Component {
     }
 
     wordsItemClick = id => {
-        window.open(`/vocabtest/report?id=${id}`);
+        window.open(`/quizvocab/report?id=${id}`);
     };
 
     quizItemClick = (id, cmd) => {

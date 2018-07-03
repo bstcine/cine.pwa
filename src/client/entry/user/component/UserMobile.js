@@ -60,7 +60,7 @@ const UserMobile = ({ user, handleClick }) => {
                 </a>
             </div>
             <div className={'user-panel-c'}>
-                <a className={'tab'} href={'/vocabtest'} target={'_blank'}>
+                <a className={'tab'} href={'/quizvocab'} target={'_blank'}>
                     <img
                         src={require('../asset/image/ico_test_word@2x.png')}
                         style={{ height: '.57rem', width: '.57rem' }}

@@ -1,458 +1,458 @@
 @import '~asset/style/_cine.less';
 
 .user-mobile {
-  display: block;
+    display: block;
 
-  .user-panel-a {
-    background: #014292;
-    height: 2.21rem;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
+    .user-panel-a {
+        background: #014292;
+        height: 2.21rem;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
 
-    img {
-      width: 1.21rem;
-      height: 1.21rem;
-      border-radius: 50px;
+        img {
+            width: 1.21rem;
+            height: 1.21rem;
+            border-radius: 50px;
+        }
+
+        label {
+            font-family: PingFangSC-Medium;
+            font-size: 0.3rem;
+            color: #ffffff;
+        }
     }
 
-    label {
-      font-family: PingFangSC-Medium;
-      font-size: 0.3rem;
-      color: #ffffff;
+    .user-panel-b {
+        height: 1rem;
+        background: #ffffff;
+        display: flex;
+
+        .a {
+            flex-grow: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            .point-hint {
+                font-family: PingFangSC-Regular;
+                font-size: 0.24rem;
+                color: #3d3e3f;
+            }
+            .point-val {
+                margin-left: 0.17rem;
+                font-family: PPingFang-SC-Bold;
+                font-size: 0.36rem;
+                color: #f54500;
+            }
+        }
+
+        .b {
+            flex-grow: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            .coupon-hint {
+                font-family: PingFangSC-Regular;
+                font-size: 0.24rem;
+                color: #3d3e3f;
+            }
+            .coupon-val {
+                margin-left: 0.17rem;
+                font-family: PPingFang-SC-Bold;
+                font-size: 0.36rem;
+                color: #f54500;
+            }
+        }
     }
-  }
 
-  .user-panel-b {
-    height: 1rem;
-    background: #ffffff;
-    display: flex;
+    .user-panel-c {
+        margin-top: 0.17rem;
+        height: 1.65rem;
+        background: #ffffff;
+        display: flex;
 
-    .a {
-      flex-grow: 1;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      .point-hint {
-        font-family: PingFangSC-Regular;
-        font-size: 0.24rem;
-        color: #3d3e3f;
-      }
-      .point-val {
-        margin-left: 0.17rem;
-        font-family: PPingFang-SC-Bold;
-        font-size: 0.36rem;
-        color: #f54500;
-      }
+        .tab {
+            font-family: PingFangSC-Regular;
+            font-size: 0.24rem;
+            color: #3d3e3f;
+            width: 25%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+            & a {
+                color: #3d3e3f;
+            }
+            & a:active {
+                color: #3d3e3f;
+            }
+
+            & img {
+                width: 0.42rem;
+                height: 0.39rem;
+                margin-bottom: 0.29rem;
+            }
+
+            .gray {
+                -webkit-filter: grayscale(100%);
+                -moz-filter: grayscale(100%);
+                -ms-filter: grayscale(100%);
+                -o-filter: grayscale(100%);
+                filter: grayscale(100%);
+                filter: gray;
+            }
+
+            .tab-indicator {
+                width: 0.33rem;
+                height: 0.33rem;
+                background-color: #fe682d;
+                -moz-border-radius: 50px;
+                -webkit-border-radius: 50px;
+                border-radius: 50px;
+
+                margin-top: -0.15rem;
+                margin-left: 0.1rem;
+                margin-right: -0.4rem;
+
+                font-family: Helvetica;
+                font-size: 11px;
+                color: #ffffff;
+                text-align: center;
+                line-height: 0.33rem;
+            }
+        }
     }
-
-    .b {
-      flex-grow: 1;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-
-      .coupon-hint {
-        font-family: PingFangSC-Regular;
-        font-size: 0.24rem;
-        color: #3d3e3f;
-      }
-      .coupon-val {
-        margin-left: 0.17rem;
-        font-family: PPingFang-SC-Bold;
-        font-size: 0.36rem;
-        color: #f54500;
-      }
-    }
-  }
-
-  .user-panel-c {
-    margin-top: 0.17rem;
-    height: 1.65rem;
-    background: #ffffff;
-    display: flex;
-
-    .tab {
-      font-family: PingFangSC-Regular;
-      font-size: 0.24rem;
-      color: #3d3e3f;
-      width: 25%;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-
-      & a {
-        color: #3d3e3f;
-      }
-      & a:active {
-        color: #3d3e3f;
-      }
-
-      & img {
-        width: 0.42rem;
-        height: 0.39rem;
-        margin-bottom: 0.29rem;
-      }
-
-      .gray {
-        -webkit-filter: grayscale(100%);
-        -moz-filter: grayscale(100%);
-        -ms-filter: grayscale(100%);
-        -o-filter: grayscale(100%);
-        filter: grayscale(100%);
-        filter: gray;
-      }
-
-      .tab-indicator {
-        width: 0.33rem;
-        height: 0.33rem;
-        background-color: #fe682d;
-        -moz-border-radius: 50px;
-        -webkit-border-radius: 50px;
-        border-radius: 50px;
-
-        margin-top: -0.15rem;
-        margin-left: 0.1rem;
-        margin-right: -0.4rem;
-
-        font-family: Helvetica;
-        font-size: 11px;
-        color: #ffffff;
-        text-align: center;
-        line-height: 0.33rem;
-      }
-    }
-  }
 }
 
 .user-header-info {
-  .container {
-    position: relative;
-    background-color: #014292;
-    width: 100%;
-    height: 1.1rem;
+    .container {
+        position: relative;
+        background-color: #014292;
+        width: 100%;
+        height: 1.1rem;
 
-    .nav-open {
-      display: block;
-      margin-left: 0.35rem;
-      margin-top: 0.39rem;
-      width: 0.34rem;
-      height: 0.4rem;
-      float: left;
-      background: url('../image/ico_mine@2x.png') no-repeat;
-      background-size: 0.34rem 0.4rem;
-    }
+        .nav-open {
+            display: block;
+            margin-left: 0.35rem;
+            margin-top: 0.39rem;
+            width: 0.34rem;
+            height: 0.4rem;
+            float: left;
+            background: url('../image/ico_mine@2x.png') no-repeat;
+            background-size: 0.34rem 0.4rem;
+        }
 
-    .nav-home {
-      float: right;
-      margin-top: 0.4rem;
-      margin-right: 0.41rem;
+        .nav-home {
+            float: right;
+            margin-top: 0.4rem;
+            margin-right: 0.41rem;
 
-      width: 0.39rem;
-      height: 0.39rem;
+            width: 0.39rem;
+            height: 0.39rem;
 
-      background: url('../image/ico_bst_home.png') no-repeat;
-      background-size: 0.39rem 0.39rem;
-    }
+            background: url('../image/ico_bst_home.png') no-repeat;
+            background-size: 0.39rem 0.39rem;
+        }
 
-    .user-logo {
-      display: none;
+        .user-logo {
+            display: none;
+        }
+        .user-info {
+            display: none;
+        }
+        .user-point {
+            display: none;
+        }
+        .user-coupon {
+            display: none;
+        }
     }
-    .user-info {
-      display: none;
-    }
-    .user-point {
-      display: none;
-    }
-    .user-coupon {
-      display: none;
-    }
-  }
 }
 
 .user-header-tab {
-  display: none;
+    display: none;
 }
 
 .user-content {
+    position: relative;
 }
 
 @media @media-up-sm {
+    .user-header-info {
+        background-color: #014292;
 
-  .user-header-info {
-    background-color: #014292;
+        .container {
+            height: 2.04rem;
+            width: 18.8rem;
+            margin: 0 auto;
 
-    .container {
-      height: 2.04rem;
-      width: 18.8rem;
-      margin: 0 auto;
+            .nav-open {
+                display: none;
+            }
 
-      .nav-open {
-        display: none;
-      }
+            .nav-home {
+                float: right;
+                margin-top: 0.87rem;
+                margin-right: 0.1rem;
 
-      .nav-home {
-        float: right;
-        margin-top: 0.87rem;
-        margin-right: 0.1rem;
+                width: 0.39rem;
+                height: 0.39rem;
 
-        width: 0.39rem;
-        height: 0.39rem;
+                background: url('../image/ico_bst_home.png') no-repeat;
+                background-size: 0.39rem 0.39rem;
+            }
 
-        background: url('../image/ico_bst_home.png') no-repeat;
-        background-size: 0.39rem 0.39rem;
-      }
+            .user-logo {
+                display: block;
+                //margin-left: 0.85rem;
+                margin-top: 0.38rem;
+                float: left;
+                line-height: 0;
 
-      .user-logo {
+                img {
+                    width: 1.21rem;
+                    height: 1.21rem;
+                    border-radius: 50px;
+                }
+            }
+
+            .user-info {
+                height: 0.75rem;
+                width: 3.24rem;
+                margin-top: 0.63rem;
+                margin-left: 0.28rem;
+                float: left;
+                display: -webkit-flex;
+                display: flex;
+                flex-direction: column;
+
+                .user-flex-a {
+                    display: -webkit-flex;
+                    display: flex;
+                    align-items: center;
+
+                    .user-name {
+                        font-family: PingFangSC-Medium;
+                        font-size: 15px;
+                        color: #ffffff;
+                        height: 0.3rem;
+                    }
+
+                    .user-edit {
+                        margin-left: 0.17rem;
+                        width: 0.24rem;
+                        height: 0.24rem;
+
+                        background: url('../image/ico_edit.png') no-repeat;
+                        background-size: 0.24rem 0.24rem;
+                    }
+                }
+
+                .user-flex-b {
+                    display: -webkit-flex;
+                    display: flex;
+                    align-items: center;
+                    margin-top: 0.14rem;
+
+                    .user-role {
+                        width: 0.86rem;
+                        height: 0.3rem;
+                    }
+
+                    .user-phone {
+                        font-family: PingFangSC-Regular;
+                        font-size: 12px;
+                        color: #ececed;
+                        margin-bottom: 0.05rem;
+                        margin-left: 0.11rem;
+                    }
+                }
+            }
+
+            .user-point {
+                margin-top: 0.99rem;
+                margin-left: 1.76rem;
+                float: left;
+                display: -webkit-flex;
+                display: flex;
+
+                .point-hint {
+                    font-family: PingFangSC-Regular;
+                    font-size: 15px;
+                    color: #ffffff;
+                }
+
+                .point-val {
+                    font-family: PingFangSC-Regular;
+                    font-size: 15px;
+                    color: #ff9630;
+                    margin-left: 0.19rem;
+                }
+            }
+
+            .user-coupon {
+                margin-top: 0.99rem;
+                margin-left: 1.51rem;
+                float: left;
+                display: -webkit-flex;
+                display: flex;
+
+                .coupon-hint {
+                    font-family: PingFangSC-Regular;
+                    font-size: 15px;
+                    color: #ffffff;
+                }
+
+                .coupon-val {
+                    font-family: PingFangSC-Regular;
+                    font-size: 15px;
+                    color: #ff9630;
+                    margin-left: 0.19rem;
+                }
+            }
+        }
+    }
+
+    .user-header-tab {
+        background: #ffffff;
         display: block;
-        //margin-left: 0.85rem;
-        margin-top: 0.38rem;
-        float: left;
-        line-height: 0;
 
-        img {
-          width: 1.21rem;
-          height: 1.21rem;
-          border-radius: 50px;
+        .container {
+            width: 18.8rem;
+            margin: 0 auto;
+
+            display: flex;
+            flex-wrap: wrap;
+            background-color: #ffffff;
+
+            .item {
+                font-family: PingFangSC-Regular;
+                font-size: 14px;
+                margin-right: 0.46rem;
+                display: flex;
+
+                & a {
+                    min-width: 1.4rem;
+                    display: inline-block;
+                    padding: 0.57rem 0rem 0.57rem 0.45rem;
+                    text-decoration: none;
+                    color: #3d3e3f;
+                    position: relative;
+                    cursor: pointer;
+                }
+                &.active a {
+                    color: #014292;
+                    &:after {
+                        content: '';
+                        position: absolute;
+                        bottom: 0;
+                        left: 0;
+                        width: 100%;
+                        border-bottom: 0.07rem solid #014292;
+                    }
+                }
+                &:last-child {
+                    margin-right: 0;
+                }
+
+                .tab-indicator {
+                    width: 0.33rem;
+                    height: 0.33rem;
+                    background-color: #fe682d;
+                    -moz-border-radius: 50px;
+                    -webkit-border-radius: 50px;
+                    border-radius: 50px;
+
+                    margin-top: 0.4rem;
+                    margin-left: 0.1rem;
+
+                    font-family: Helvetica;
+                    font-size: 11px;
+                    color: #ffffff;
+                    text-align: center;
+                    line-height: 0.33rem;
+                }
+            }
+
+            .tab-order {
+                background: url(../image/ico_order.png) no-repeat left;
+                background-size: 0.41rem 0.42rem;
+
+                -webkit-filter: grayscale(100%);
+                -moz-filter: grayscale(100%);
+                -ms-filter: grayscale(100%);
+                -o-filter: grayscale(100%);
+                filter: grayscale(100%);
+                filter: gray;
+
+                a {
+                    color: grey;
+                }
+            }
+
+            .tab-study {
+                background: url(../image/ico_my_study.png) no-repeat left;
+                background-size: 0.37rem 0.34rem;
+            }
+
+            .tab-integral {
+                background: url(../image/ico_integral.png) no-repeat left;
+                background-size: 0.37rem 0.37rem;
+            }
+
+            .tab-coupon {
+                background: url(../image/ico_coupon.png) no-repeat left;
+                background-size: 0.37rem 0.35rem;
+            }
+
+            .tab-wordtest {
+                background: url(../image/ico_wordtest.png) no-repeat left;
+                background-size: 0.37rem 0.4rem;
+            }
+
+            .tab-grammar {
+                background: url(../image/ico_grammar.png) no-repeat left;
+                background-size: 0.37rem 0.4rem;
+            }
+
+            .tab-grammar-teacher {
+                background: url(../image/ico_teacher@2x.png) no-repeat left;
+                background-size: 0.37rem 0.37rem;
+            }
+
+            .tab-address {
+                background: url(../image/ico_address@2x.png) no-repeat left;
+                background-size: 0.37rem 0.39rem;
+
+                -webkit-filter: grayscale(100%);
+                -moz-filter: grayscale(100%);
+                -ms-filter: grayscale(100%);
+                -o-filter: grayscale(100%);
+                filter: grayscale(100%);
+                filter: gray;
+
+                a {
+                    color: grey;
+                }
+            }
+
+            .tab-password {
+                background: url(../image/ico_edit1.png) no-repeat left;
+                background-size: 0.37rem 0.36rem;
+            }
+
+            .tab-quit {
+                background: url(../image/ico_quit.png) no-repeat left;
+                background-size: 0.36rem 0.34rem;
+            }
         }
-      }
-
-      .user-info {
-        height: 0.75rem;
-        width: 3.24rem;
-        margin-top: 0.63rem;
-        margin-left: 0.28rem;
-        float: left;
-        display: -webkit-flex;
-        display: flex;
-        flex-direction: column;
-
-        .user-flex-a {
-          display: -webkit-flex;
-          display: flex;
-          align-items: center;
-
-          .user-name {
-            font-family: PingFangSC-Medium;
-            font-size: 15px;
-            color: #ffffff;
-            height: 0.3rem;
-          }
-
-          .user-edit {
-            margin-left: 0.17rem;
-            width: 0.24rem;
-            height: 0.24rem;
-
-            background: url('../image/ico_edit.png') no-repeat;
-            background-size: 0.24rem 0.24rem;
-          }
-        }
-
-        .user-flex-b {
-          display: -webkit-flex;
-          display: flex;
-          align-items: center;
-          margin-top: 0.14rem;
-
-          .user-role {
-            width: 0.86rem;
-            height: 0.3rem;
-          }
-
-          .user-phone {
-            font-family: PingFangSC-Regular;
-            font-size: 12px;
-            color: #ececed;
-            margin-bottom: 0.05rem;
-            margin-left: 0.11rem;
-          }
-        }
-      }
-
-      .user-point {
-        margin-top: 0.99rem;
-        margin-left: 1.76rem;
-        float: left;
-        display: -webkit-flex;
-        display: flex;
-
-        .point-hint {
-          font-family: PingFangSC-Regular;
-          font-size: 15px;
-          color: #ffffff;
-        }
-
-        .point-val {
-          font-family: PingFangSC-Regular;
-          font-size: 15px;
-          color: #ff9630;
-          margin-left: 0.19rem;
-        }
-      }
-
-      .user-coupon {
-        margin-top: 0.99rem;
-        margin-left: 1.51rem;
-        float: left;
-        display: -webkit-flex;
-        display: flex;
-
-        .coupon-hint {
-          font-family: PingFangSC-Regular;
-          font-size: 15px;
-          color: #ffffff;
-        }
-
-        .coupon-val {
-          font-family: PingFangSC-Regular;
-          font-size: 15px;
-          color: #ff9630;
-          margin-left: 0.19rem;
-        }
-      }
     }
-  }
 
-  .user-header-tab {
-    background: #ffffff;
-    display: block;
-
-    .container {
-      width: 18.8rem;
-      margin: 0 auto;
-
-      display: flex;
-      flex-wrap: wrap;
-      background-color: #ffffff;
-
-      .item {
-        font-family: PingFangSC-Regular;
-        font-size: 14px;
-        margin-right: 0.46rem;
-        display: flex;
-
-        & a {
-          min-width: 1.4rem;
-          display: inline-block;
-          padding: 0.57rem 0rem 0.57rem 0.45rem;
-          text-decoration: none;
-          color: #3d3e3f;
-          position: relative;
-          cursor: pointer;
-        }
-        &.active a {
-          color: #014292;
-          &:after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            border-bottom: 0.07rem solid #014292;
-          }
-        }
-        &:last-child {
-          margin-right: 0;
-        }
-
-        .tab-indicator {
-          width: 0.33rem;
-          height: 0.33rem;
-          background-color: #fe682d;
-          -moz-border-radius: 50px;
-          -webkit-border-radius: 50px;
-          border-radius: 50px;
-
-          margin-top: 0.4rem;
-          margin-left: 0.1rem;
-
-          font-family: Helvetica;
-          font-size: 11px;
-          color: #ffffff;
-          text-align: center;
-          line-height: 0.33rem;
-        }
-      }
-
-      .tab-order {
-        background: url(../image/ico_order.png) no-repeat left;
-        background-size: 0.41rem 0.42rem;
-
-        -webkit-filter: grayscale(100%);
-        -moz-filter: grayscale(100%);
-        -ms-filter: grayscale(100%);
-        -o-filter: grayscale(100%);
-        filter: grayscale(100%);
-        filter: gray;
-
-        a {
-          color: grey;
-        }
-      }
-
-      .tab-study {
-        background: url(../image/ico_my_study.png) no-repeat left;
-        background-size: 0.37rem 0.34rem;
-      }
-
-      .tab-integral {
-        background: url(../image/ico_integral.png) no-repeat left;
-        background-size: 0.37rem 0.37rem;
-      }
-
-      .tab-coupon {
-        background: url(../image/ico_coupon.png) no-repeat left;
-        background-size: 0.37rem 0.35rem;
-      }
-
-      .tab-wordtest {
-        background: url(../image/ico_wordtest.png) no-repeat left;
-        background-size: 0.37rem 0.40rem;
-      }
-
-      .tab-grammar {
-        background: url(../image/ico_grammar.png) no-repeat left;
-        background-size: 0.37rem 0.40rem;
-      }
-
-      .tab-grammar-teacher {
-        background: url(../image/ico_teacher@2x.png) no-repeat left;
-        background-size: 0.37rem 0.37rem;
-      }
-
-      .tab-address {
-        background: url(../image/ico_address@2x.png) no-repeat left;
-        background-size: 0.37rem 0.39rem;
-
-        -webkit-filter: grayscale(100%);
-        -moz-filter: grayscale(100%);
-        -ms-filter: grayscale(100%);
-        -o-filter: grayscale(100%);
-        filter: grayscale(100%);
-        filter: gray;
-
-        a {
-          color: grey;
-        }
-      }
-
-      .tab-password {
-        background: url(../image/ico_edit1.png) no-repeat left;
-        background-size: 0.37rem 0.36rem;
-      }
-
-      .tab-quit {
-        background: url(../image/ico_quit.png) no-repeat left;
-        background-size: 0.36rem 0.34rem;
-      }
+    .user-content {
+        width: 18.8rem;
+        margin: 0.44rem auto 0 auto;
     }
-  }
-
-  .user-content {
-    width: 18.8rem;
-    margin: 0.44rem auto 0 auto;
-  }
 }

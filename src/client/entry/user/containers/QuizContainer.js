@@ -10,13 +10,8 @@ import {
     TabPanels,
     TabPanel,
 } from '@/component/Tabs/index';
-
-const statusMap = {
-    '0': '答题中',
-    '1': '待批改',
-    '2': '批改中',
-    '3': '已批改',
-};
+import GrammarStats from '../component/quiz/GrammarStats';
+import QuizVocabStats from '../component/quiz/QuizVocabStats';
 
 class QuizContainer extends Component {
     componentDidMount() {
@@ -45,27 +40,7 @@ class QuizContainer extends Component {
                                     <span>词汇量</span>
                                 </div>
                                 <ul className="table-body">
-                                    {vocabStats.map(item => {
-                                        return (
-                                            <li
-                                                className="table-tr"
-                                                key={item.id}>
-                                                <span>
-                                                    {timeUtil.shortTime(
-                                                        item.create_at
-                                                    )}
-                                                </span>
-                                                <span>
-                                                    {timeUtil.durationShortFormat(
-                                                        item.duration
-                                                    )}
-                                                </span>
-                                                <span className="score">
-                                                    {item.vocab}
-                                                </span>
-                                            </li>
-                                        );
-                                    })}
+                                    <QuizVocabStats list={vocabStats} />
                                 </ul>
                             </div>
                         </TabPanel>
@@ -79,36 +54,7 @@ class QuizContainer extends Component {
                                     <span>状态</span>
                                 </div>
                                 <ul className="table-body">
-                                    {grammarStats.map(item => {
-                                        return (
-                                            <li
-                                                key={item.id}
-                                                className="table-tr">
-                                                <span>
-                                                    {timeUtil.shortTime(
-                                                        item.create_at
-                                                    )}
-                                                </span>
-                                                <span>
-                                                    {timeUtil.durationShortFormat(
-                                                        item.duration
-                                                    )}
-                                                </span>
-                                                <span className="score">
-                                                    {item.score}
-                                                </span>
-                                                <span>
-                                                    {item.checker_nickname}
-                                                </span>
-                                                <span
-                                                    className={`status__${
-                                                        item.status
-                                                    }`}>
-                                                    {statusMap[item.status]}
-                                                </span>
-                                            </li>
-                                        );
-                                    })}
+                                    <GrammarStats list={grammarStats} />
                                 </ul>
                             </div>
                         </TabPanel>

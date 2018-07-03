@@ -1,13 +1,13 @@
 import React, {Component} from 'react';
 import storeUtil from '@/util/storeUtil';
-import * as Service from '@/service/vocabtest';
+import * as Service from '@/service/quizvocab';
 import {CSSTransition} from 'react-transition-group';
 import {initWechat} from '@/util/wechatUtil';
 
 export default class Card extends Component {
     constructor(props) {
         super(props);
-        console.log('Card constructor');
+        console.log('Card constructor'); 
         this.state = {
             loading: true,
             uploading: false,

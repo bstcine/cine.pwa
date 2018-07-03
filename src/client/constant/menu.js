@@ -64,8 +64,8 @@ const cineMenu = [
                 icon: 'ci-grammar',
                 children: [
                     {
-                        label: '习题测试',
-                        url: h5.URL_Quiz_Kj,
+                        label: '语法测试',
+                        url: h5.URL_Quiz_Grammar,
                     },
                 ],
             },

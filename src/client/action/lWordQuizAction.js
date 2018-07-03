@@ -201,22 +201,17 @@ export const lWordQuizAction = {
             for (let i = 0; i < vocabularyList.length; i++) {
                 for (let j = 0; j < zhs.length; j++) {
                     if (zhs[j].indexOf(vocabularyList[i]) > -1) {
-                        return { zh: zhs[j] };
+                        let zh = zhs[j].split('.');
+                        let index = zh.length > 1 ? 1 : 0;
+                        return { zh: zh[index] };
                     }
                 }
             }
         }
         // 表示没有词性和翻译相同的部分，抽取翻译，词性为空
-        if (zhs.length <= 1) {
-            return {
-                zh: zhs[0],
-            };
-        }
-        // 获取不违反规定的随机数
-        let randomIndex = lWordQuizAction.getRandomNumber(zhs.length - 1);
-        return {
-            zh: zhs[randomIndex],
-        };
+        let zh = zhs[0].split('.');
+        let index = zh.length > 1 ? 1 : 0;
+        return { zh: zh[index] };
     },
     /**
      * 加载单词数据（对外调用）

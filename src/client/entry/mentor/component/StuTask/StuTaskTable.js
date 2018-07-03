@@ -3,6 +3,7 @@
  */
 import React from 'react';
 import classNames from 'classnames';
+import { Task_Type } from '@/constant';
 
 const gradeArr = {
     '0': '学龄前',
@@ -35,29 +36,44 @@ const taskStatus = {
     '2': '已完成',
 };
 
-const taskOnClick = (task, student_id) => {
-    // 习题跳转
-    if (task.type === '2') {
-        let url;
-        const map = {
-            '1': 'lesson_id',
-            '2': 'chapter_id',
-            '3': 'course_id',
-            '4': 'quiz_id',
-            '5': 'stats_content_quiz_id',
-        };
-        if (['1', '2', '3'].includes(task.object_type)) {
-            url = `/quiz/kj?user_id=${student_id}&${map[task.object_type]}=${
-                task.object_id
-            }&cmd=check`;
-        } else {
-            url = `/quiz/grammar?user_id=${student_id}&${
-                map[task.object_type]
-            }=${task.object_id}&cmd=check`;
+const getHref = (task, student_id) => {
+    switch (task.type) {
+        case Task_Type.Video:
+            return `/learn/course/${task.course_id}?lesson_id=${
+                task.lesson_id
+            }`;
+        case Task_Type.Quiz:
+        case Task_Type.Quiz_Feedback: {
+            const map = {
+                '1': 'lesson_id',
+                '2': 'chapter_id',
+                '3': 'course_id',
+                '4': 'quiz_id',
+                '5': 'stats_content_quiz_id',
+            };
+            if (['1', '2', '3'].includes(task.object_type)) {
+                return `/quiz/kj?user_id=${student_id}&${
+                    map[task.object_type]
+                }=${task.object_id}&cmd=check`;
+            } else {
+                return `/quiz/grammar?user_id=${student_id}&${
+                    map[task.object_type]
+                }=${task.object_id}&cmd=check`;
+            }
         }
-
-        window.open(url);
+        case Task_Type.Word:
+            if (task.word_start_index && task.word_end_index) {
+                return `/learn/word?start_index=${
+                    task.word_start_index
+                }&end_index=${task.word_end_index}`;
+            } else {
+                return `/learn/word?word_type=${task.object_id}`;
+            }
     }
+};
+
+const taskOnClick = (task, student_id) => {
+    window.open(getHref(task, student_id));
 };
 
 const StudentTable = ({ list, ...props }) => {
@@ -102,13 +118,15 @@ const StudentTable = ({ list, ...props }) => {
                                 <div
                                     className={classNames('taskPanel', {
                                         click:
-                                            task.type === '2' &&
-                                            task.status === '2',
+                                            ['1', '4'].includes(task.type) ||
+                                            (task.type === '2' &&
+                                                task.status === '2'),
                                     })}
                                     onClick={() => {
                                         if (
-                                            task.type === '2' &&
-                                            task.status === '2'
+                                            ['1', '4'].includes(task.type) ||
+                                            (task.type === '2' &&
+                                                task.status === '2')
                                         ) {
                                             taskOnClick(
                                                 task,

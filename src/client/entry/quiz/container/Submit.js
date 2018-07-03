@@ -11,8 +11,9 @@ import {
 import { CurrentQuizState } from '@/constant/quiz';
 
 const mapStateToProps = state => {
-    let { currentQuizState } = state;
+    let { quiz, currentQuizState } = state;
     return {
+        quiz,
         currentQuizState,
     };
 };
@@ -39,6 +40,7 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
 });
 
 const Submit = ({
+    quiz,
     currentQuizState,
     onSubmitAnswer,
     onSubmitCheckAnswer,
@@ -66,9 +68,11 @@ const Submit = ({
                 <button className="btn-blue" onClick={onPauseCheckAnswer}>
                     <i className="material-icons">&#xE161;</i> 保存批改
                 </button>
-                <button className="btn-blue" onClick={onResetQuiz}>
-                    <i className="material-icons">&#xE863;</i> 重置试卷
-                </button>
+                {!['1', '3'].includes(quiz.type) && (
+                    <button className="btn-blue" onClick={onResetQuiz}>
+                        <i className="material-icons">&#xE863;</i> 重置试卷
+                    </button>
+                )}
 
                 {/* <Switch
                     checked={true}

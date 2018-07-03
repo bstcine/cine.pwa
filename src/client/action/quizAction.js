@@ -40,6 +40,7 @@ import { openConfirm, openAlert, networkError } from '@/action/commonAction';
  */
 export const fetchQuizData = ({
     user_id,
+    task_schedule_id,
     quiz_id,
     stats_content_quiz_id,
     lesson_id,
@@ -50,6 +51,7 @@ export const fetchQuizData = ({
     dispatch(requestQuizData());
     let [err, result] = await fetchData(APIURL_Content_Quiz, {
         user_id,
+        task_schedule_id,
         quiz_id,
         stats_content_quiz_id,
         lesson_id,
@@ -212,9 +214,7 @@ export const submitAnswer = () => (dispatch, getState) => {
         }
         dispatch({ type: RECEIVE_STATS_QUIZ_SAVE });
         clearLocalAnswers(quiz, userRedu.data || {});
-        location.href = `/quiz/grammar?stats_content_quiz_id=${
-            result.statsContentQuiz.id
-        }`;
+        window.location.reload();
     });
 };
 

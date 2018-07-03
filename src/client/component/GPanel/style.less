@@ -1,0 +1,70 @@
+@import '~asset/style/_cine.less';
+
+.g-panel {
+    margin-bottom: 0.2rem;
+    padding: 0.3rem 0.4rem;
+
+    background-color: #fff;
+}
+.g-panel__head {
+    display: flex;
+
+    height: 0.62rem;
+
+    color: #3a3b3c;
+
+    justify-content: space-between;
+    align-items: center;
+}
+.g-panel__title {
+    font-size: 0.3rem;
+
+    position: relative;
+}
+.g-panel__badge {
+    font-size: 0.4rem;
+    line-height: 0.64rem;
+
+    position: absolute;
+    top: -0.3rem;
+
+    min-width: 0.64rem;
+
+    transform: translateX(-20%) scale(0.5, 0.5);
+    text-align: center;
+
+    color: #fff;
+    border-radius: 0.32rem;
+    background-color: #fc3447;
+}
+.g-panel__ext {
+    font-size: 0.28rem;
+
+    color: #7a7b7c;
+}
+.g-panel__body {
+    padding: 0.2rem 0;
+}
+
+.g-panel:last-child {
+    margin-bottom: 0 !important;
+}
+
+@media @media-up-xs {
+    .g-panel {
+        margin-bottom: 0.4rem;
+        padding: 0.5rem 0.6rem;
+    }
+    .g-panel__head {
+        border-bottom: 1px solid #f5f9fc;
+    }
+    .g-panel__title {
+        font-size: 0.36rem;
+    }
+    .g-panel__ext {
+        font-size: 0.32rem;
+    }
+    .g-panel__body {
+        padding: 0.4rem 0.1rem;
+    }
+}

@@ -1,23 +1,18 @@
 @import '~asset/style/_cine.less';
 @import './taskList.less';
 
-.gmain .gcontainer {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-}
-.tasks-container,
-.courses-container {
-    flex-shrink: 0;
-    padding: 0.3rem 0.45rem 0;
+// .tasks-container,
+// .courses-container {
+//     flex-shrink: 0;
+//     padding: 0.3rem 0.45rem 0;
 
-    background-color: #fff;
-}
+//     background-color: #fff;
+// }
 
 // tasks-container
-.tasks-container {
-    border-bottom: 0.1rem solid #f3f4f5;
-}
+// .tasks-container {
+//     border-bottom: 0.1rem solid #f3f4f5;
+// }
 
 .task-nav {
     font-size: 0.3rem;
@@ -62,181 +57,146 @@
     }
 }
 
-// courses-container
 .courses-container {
-    flex-grow: 1;
-    h2 {
-        font-size: 0.3rem;
-        font-weight: normal;
-        line-height: 1;
+    height: 100%;
+}
+.courses-list {
+    .courses-item {
+        display: flex;
 
-        margin-bottom: 0.2rem;
+        margin-bottom: 0.26rem;
 
-        color: #3a3b3c;
-    }
-    .courses-list {
-        .courses-item {
-            display: flex;
+        transition: all 0.2s;
+        .course-img {
+            position: relative;
 
-            margin-bottom: 0.26rem;
+            flex: 0 0 1.8rem;
 
-            transition: all 0.2s;
-            .course-img {
-                position: relative;
+            height: 1rem;
+            // padding-right: 0.18rem;
 
-                flex: 0 0 1.8rem;
+            border-radius: 0.04rem;
+            i {
+                position: absolute;
+                top: 50%;
+                left: 50%;
 
-                height: 1rem;
-                margin-right: 0.18rem;
+                display: block;
 
-                border-radius: 0.04rem;
-                i {
-                    position: absolute;
-                    top: 50%;
-                    left: 50%;
+                width: 0.5rem;
+                height: 0.5rem;
 
+                transform: translate(-50%, -50%);
+
+                border-radius: 50%;
+                background-color: rgba(0, 0, 0, 0.5);
+                &:before {
                     display: block;
 
                     width: 0.5rem;
                     height: 0.5rem;
 
-                    transform: translate(-50%, -50%);
+                    content: '';
 
-                    border-radius: 50%;
-                    background-color: rgba(0, 0, 0, 0.5);
-                    &:before {
-                        display: block;
-
-                        width: 0.5rem;
-                        height: 0.5rem;
-
-                        content: '';
-
-                        background: url(~asset/image/ic_play_c.png) center
-                            no-repeat;
-                        background-size: 0.36rem;
-                    }
-                }
-            }
-            .course-meta {
-                display: flex;
-                flex-direction: column;
-
-                flex-grow: 1;
-                justify-content: space-between;
-                span {
-                    font-size: 0.28rem;
-                    line-height: 0.38rem;
-
-                    color: #3a3b3c;
-                }
-                .status,
-                .expire_at {
-                    font-size: 0.24rem;
-                    line-height: 0.32rem;
-
-                    color: #c6c7c7;
-                }
-                .progress,
-                .expire_at {
-                    display: none;
+                    background: url(~asset/image/ic_play_c.png) center no-repeat;
+                    background-size: 0.36rem;
                 }
             }
         }
-        .courses-item:hover {
-            opacity: 0.8;
+        .course-meta {
+            display: flex;
+            flex-direction: column;
+
+            flex-grow: 1;
+            justify-content: space-between;
+            overflow: hidden;
+            padding-left: 0.2rem;
+            .course-title {
+                font-size: 0.28rem;
+                line-height: 0.38rem;
+
+                color: #3a3b3c;
+            }
+            .status,
+            .expire_at {
+                font-size: 0.24rem;
+                line-height: 0.32rem;
+
+                color: #c6c7c7;
+            }
+            .progress,
+            .expire_at {
+                display: none;
+            }
         }
+    }
+    .courses-item:hover {
+        opacity: 0.8;
     }
 }
 
 @media @media-up-xs {
-    .tasks-container,
-    .courses-container {
-        margin-bottom: 0.22rem;
-        padding: 0.5rem 0.6rem;
+    // .tasks-container,
+    // .courses-container {
+    //     margin-bottom: 0.22rem;
+    //     padding: 0.5rem 0.6rem;
 
-        border-bottom: none;
-        border-radius: 0.24rem;
-        box-shadow: 0rem 0.16rem 0.3rem 0rem rgba(168, 170, 174, 0.18);
-    }
+    //     border-bottom: none;
+    //     border-radius: 0.24rem;
+    //     box-shadow: 0rem 0.16rem 0.3rem 0rem rgba(168, 170, 174, 0.18);
+    // }
 }
 
 @media @media-up-sm {
-    .tasks-container,
-    .courses-container {
-        padding: 0.5rem 0.6rem;
-        border-radius: 0;
-    }
-    .task-nav {
-        font-size: 0.3rem;
-        a {
-            line-height: 0.7rem;
-        }
-    }
+    .courses-list {
+        justify-content: space-between;
+        margin: 0 -0.5rem;
+        .courses-item {
+            display: flex;
 
-    .courses-container {
-        h2 {
-            font-size: 0.4rem;
+            margin-bottom: 0.7rem;
+            padding: 0 0.5rem;
+            .course-img {
+                height: 1.8rem;
 
-            margin-bottom: 0.5rem;
-            padding-bottom: 0.3rem;
+                flex-basis: 3.3rem;
+                i {
+                    width: 0.9rem;
+                    height: 0.9rem;
 
-            border-bottom: 0.02rem solid #f5f9fc;
-        }
-        .courses-list {
-            justify-content: space-between;
-            .courses-item {
-                display: flex;
-
-                margin-bottom: 0.7rem;
-                padding-right: 1rem;
-                .course-img {
-                    height: 1.8rem;
-                    margin-right: 0.3rem;
-
-                    flex-basis: 3.3rem;
-                    i {
+                    &:before {
                         width: 0.9rem;
                         height: 0.9rem;
 
-                        &:before {
-                            width: 0.9rem;
-                            height: 0.9rem;
-
-                            background-size: 0.6rem;
-                        }
+                        background-size: 0.6rem;
                     }
                 }
-                .course-meta {
-                    span {
-                        font-size: 0.3rem;
-                        line-height: 0.4rem;
+            }
+            .course-meta {
+                padding-left: 0.3rem;
+                .course-title {
+                    flex-grow: 1;
+                }
+                .progress {
+                    display: block;
+                    height: 0.06rem;
+                    margin-bottom: 0.3em;
 
-                        flex-grow: 1;
-                    }
-                    .progress {
-                        display: block;
-
-                        width: 4.4rem;
-                        height: 0.06rem;
-                        margin-bottom: 0.3em;
+                    border-radius: 0.02rem;
+                    background-color: #ecf1f6;
+                    .progressbar {
+                        width: 50%;
+                        height: 100%;
 
                         border-radius: 0.02rem;
-                        background-color: #ecf1f6;
-                        .progressbar {
-                            width: 50%;
-                            height: 100%;
-
-                            border-radius: 0.02rem;
-                            background-color: #fc3447;
-                        }
+                        background-color: #fc3447;
                     }
-                    .status,
-                    .expire_at {
-                        line-height: 0.4rem;
+                }
+                .status,
+                .expire_at {
+                    line-height: 0.4rem;
 
-                        display: block;
-                    }
+                    display: block;
                 }
             }
         }

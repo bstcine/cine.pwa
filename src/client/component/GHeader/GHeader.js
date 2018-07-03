@@ -99,12 +99,12 @@ const Nav3 = ({ navs }) => {
     return (
         <nav className="nav-3nd">
             <div className="gcontainer">
-                <span className="nav-3nd__home">
+                <a className="nav-3nd__home" href={menu1st.url}>
                     {(!!menu1st.icon || !!menu1st.icon_path) && (
                         <GIcon name={menu1st.icon} url={menu1st.icon_path} />
                     )}
                     {menu1st.label}
-                </span>
+                </a>
                 <span> - </span>
                 <span className="nav-3nd__curr">{menu2nd.label}</span>
             </div>

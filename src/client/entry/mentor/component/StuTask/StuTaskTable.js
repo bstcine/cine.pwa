@@ -36,6 +36,13 @@ const taskStatus = {
     '2': '已完成',
 };
 
+const quizStatus = {
+    '0': '答题中',
+    '1': '待批改',
+    '2': '批改中',
+    '3': '已批改',
+};
+
 const getHref = (task, student_id) => {
     switch (task.type) {
         case Task_Type.Video:
@@ -147,7 +154,21 @@ const StudentTable = ({ list, ...props }) => {
                                         )}>
                                         {taskStatus[task.status]}
                                     </div>
-                                    <div className={'task-todo'} />
+                                    <div
+                                        className={classNames(
+                                            'task-todo',
+                                            task.status === '0'
+                                                ? 'blue'
+                                                : ['', 'red'][
+                                                    task.stats_status || '1'
+                                                ]
+                                        )}>
+                                        {task.status === '0'
+                                            ? '提醒'
+                                            : quizStatus[
+                                                task.stats_status || '1'
+                                            ]}
+                                    </div>
                                 </div>
                                 <hr className={'hr2'} />
                             </React.Fragment>

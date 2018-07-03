@@ -64,7 +64,13 @@ export const fetchQuizData = ({
         }
         return;
     }
-    const { user, quiz, statsContentQuiz, statsContentQuizDetail } = result;
+    const {
+        user,
+        quiz,
+        statsContentQuiz,
+        statsContentQuizDetail,
+        task_schedule_id,
+    } = result;
     quizDataFix(quiz.data);
     if (
         (user.role_id === RoleID.ADMINISTRATOR ||
@@ -82,6 +88,7 @@ export const fetchQuizData = ({
             statsContentQuiz,
             statsContentQuizDetail,
             currentQuizState,
+            task_schedule_id,
         })
     );
 
@@ -174,7 +181,14 @@ export const preSubmitAnswer = () => (dispatch, getState) => {
  * 提交答案
  */
 export const submitAnswer = () => (dispatch, getState) => {
-    let { quiz, userRedu, answersById, questions, timer } = getState();
+    let {
+        quiz,
+        userRedu,
+        answersById,
+        questions,
+        timer,
+        taskScheduleId,
+    } = getState();
     let duration = Math.round((new Date().getTime() - timer.startTime) / 1000);
     let answers = [];
     questions.allIds.forEach(questionId => {
@@ -195,6 +209,7 @@ export const submitAnswer = () => (dispatch, getState) => {
         quiz_id: quiz.id,
         answers,
         duration,
+        task_schedule_id: taskScheduleId,
     }).then(([err, result]) => {
         if (err) {
             if (err === 'no_login') return dispatch(openLoginModal());
@@ -273,7 +288,6 @@ export const resetQuiz = () => (dispatch, getState) => {
         })
     );
 };
-
 
 // /**
 //  * 答题记录列表
@@ -354,6 +368,7 @@ export const receiveQuizData = ({
     statsContentQuiz,
     statsContentQuizDetail,
     currentQuizState,
+    taskScheduleId,
 }) => {
     return {
         type: RECEIVE_CONTENT_QUIZ,
@@ -363,6 +378,7 @@ export const receiveQuizData = ({
             statsContentQuiz,
             statsContentQuizDetail,
             currentQuizState,
+            taskScheduleId,
         },
     };
 };

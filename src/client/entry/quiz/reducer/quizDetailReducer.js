@@ -248,3 +248,12 @@ export const currentQuizState = (
             return state;
     }
 };
+
+export const taskScheduleId = (state = null, { type, payload }) => {
+    switch (type) {
+        case RECEIVE_CONTENT_QUIZ:
+            return payload.taskScheduleId;
+        default:
+            return state;
+    }
+};

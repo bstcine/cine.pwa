@@ -49,11 +49,11 @@ const taskOnClick = (task, student_id) => {
         if (['1', '2', '3'].includes(task.object_type)) {
             url = `/quiz/kj?user_id=${student_id}&${map[task.object_type]}=${
                 task.object_id
-            }`;
+            }&cmd=check`;
         } else {
             url = `/quiz/grammar?user_id=${student_id}&${
                 map[task.object_type]
-            }=${task.object_id}`;
+            }=${task.object_id}&cmd=check`;
         }
 
         window.open(url);

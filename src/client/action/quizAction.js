@@ -64,13 +64,7 @@ export const fetchQuizData = ({
         }
         return;
     }
-    const {
-        user,
-        quiz,
-        statsContentQuiz,
-        statsContentQuizDetail,
-        task_schedule_id,
-    } = result;
+    const { user, quiz, statsContentQuiz, statsContentQuizDetail } = result;
     quizDataFix(quiz.data);
     if (
         (user.role_id === RoleID.ADMINISTRATOR ||
@@ -81,6 +75,7 @@ export const fetchQuizData = ({
         return;
     }
     const currentQuizState = getCurrentQuizState(user, statsContentQuiz, cmd);
+    const taskScheduleId = result.taskScheduleId || '';
     dispatch(
         receiveQuizData({
             user,
@@ -88,7 +83,7 @@ export const fetchQuizData = ({
             statsContentQuiz,
             statsContentQuizDetail,
             currentQuizState,
-            task_schedule_id,
+            taskScheduleId,
         })
     );
 

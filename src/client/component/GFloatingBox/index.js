@@ -1,5 +1,11 @@
+import React from 'react';
+import classNames from 'classnames';
 import './style.less';
-const GFloatingBox = () => {
-    return <div className="cine-floating-box">1</div>;
+const GFloatingBox = ({ children, className }) => {
+    return (
+        <div className={classNames('cine-floating-box', className)}>
+            {children}
+        </div>
+    );
 };
 export default GFloatingBox;

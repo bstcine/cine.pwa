@@ -157,17 +157,20 @@ const StudentTable = ({ list, ...props }) => {
                                     <div
                                         className={classNames(
                                             'task-todo',
-                                            task.status === '0'
-                                                ? 'blue'
-                                                : ['', 'red'][
-                                                    task.stats_status || '1'
-                                                ]
+                                            { blue: task.status === '0' },
+                                            {
+                                                red:
+                                                    task.type === '2' &&
+                                                    (task.status_status ||
+                                                        '1') === '1',
+                                            }
                                         )}>
                                         {task.status === '0'
                                             ? '提醒'
-                                            : quizStatus[
-                                                task.stats_status || '1'
-                                            ]}
+                                            : task.type === '2' &&
+                                              quizStatus[
+                                                  task.stats_status || '1'
+                                              ]}
                                     </div>
                                 </div>
                                 <hr className={'hr2'} />

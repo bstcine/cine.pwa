@@ -197,21 +197,37 @@ export const lWordQuizAction = {
         }
         let vocabularyList = Vocabulary[wordType];
         let zhs = originZH.split('\n');
+        let zh;
         if (vocabularyList && vocabularyList.length > 0) {
-            for (let i = 0; i < vocabularyList.length; i++) {
-                for (let j = 0; j < zhs.length; j++) {
+            let hadZh = false;
+            for (let j = 0; j < zhs.length; j++) {
+                if (hadZh) {
+                    break;
+                }
+
+                for (let i = 0; i < vocabularyList.length; i++) {
                     if (zhs[j].indexOf(vocabularyList[i]) > -1) {
-                        let zh = zhs[j].split('.');
-                        let index = zh.length > 1 ? 1 : 0;
-                        return { zh: zh[index] };
+                        zh = zhs[j];
+                        hadZh = true;
+                        break;
                     }
                 }
             }
         }
         // 表示没有词性和翻译相同的部分，抽取翻译，词性为空
-        let zh = zhs[0].split('.');
+        if (!zh) {
+            zh = zhs[0];
+        }
+        // 将zh中的词性移除
+        zh = zh.split('.');
         let index = zh.length > 1 ? 1 : 0;
-        return { zh: zh[index] };
+        zh = zh[index];
+        // 将zh中的"；"选项保留到两个及以下
+        let zh_component = zh.split('；');
+        if (zh_component.length > 2) {
+            zh = zh_component[0] + '；' + zh_component[1]
+        }
+        return { zh: zh };
     },
     /**
      * 加载单词数据（对外调用）

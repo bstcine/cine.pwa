@@ -150,9 +150,9 @@ const StudentTable = ({ list, ...props }) => {
                                             { blue: task.status === '0' },
                                             {
                                                 red:
+                                                    task.status === '2' &&
                                                     task.type === '2' &&
-                                                    (task.status_status ||
-                                                        '1') === '1',
+                                                    task.stats_status === '1',
                                             }
                                         )}>
                                         {task.status === '0'

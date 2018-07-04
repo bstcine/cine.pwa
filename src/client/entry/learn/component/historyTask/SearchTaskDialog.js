@@ -28,7 +28,7 @@ const SearchTaskDialog = ({ isOpen, startTime, endTime, defaultType, actions }) 
             label="搜索"
             primary={true}
             onClick={() => {
-                actions.selectResult({ startTime: startTime, endTime: endTime, type: defaultType });
+                actions.selectResult({ start_time: startTime, end_time: endTime, type: defaultType });
             } }
         />,
     ];

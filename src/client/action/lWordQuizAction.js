@@ -271,23 +271,23 @@ export const lWordQuizAction = {
         dispatch(toastAction.show('测试完成'));
         // 返回学习界面
         setTimeout(function () {
-            let reducer = getState().WordQuizRedu;
-            let param = reducer.get('param');
-            let startIndex = param.start_index;
-            let endIndex = param.end_index;
-            let wordType = param.word_type;
-            let paramString = '';
-            if (startIndex && endIndex) {
-                paramString = 'start_index=' + startIndex + '&end_index=' + endIndex;
-            }
-            if (wordType) {
-                if (paramString === '') {
-                    paramString = 'word_type=' + wordType;
-                } else {
-                    paramString = '&word_type=' + wordType;
-                }
-            }
-            location.href = '/learn/word?' + paramString;
+            // let reducer = getState().WordQuizRedu;
+            // let param = reducer.get('param');
+            // let startIndex = param.start_index;
+            // let endIndex = param.end_index;
+            // let wordType = param.word_type;
+            // let paramString = '';
+            // if (startIndex && endIndex) {
+            //     paramString = 'start_index=' + startIndex + '&end_index=' + endIndex;
+            // }
+            // if (wordType) {
+            //     if (paramString === '') {
+            //         paramString = 'word_type=' + wordType;
+            //     } else {
+            //         paramString = '&word_type=' + wordType;
+            //     }
+            // }
+            location.href = '/learn';
         }, 250);
     },
     /**

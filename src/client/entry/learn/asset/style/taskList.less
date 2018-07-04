@@ -6,7 +6,7 @@
         color: #c6c7c7;
     }
     .task-item {
-        line-height: 0.9rem;
+        line-height: 0.72rem;
 
         display: flex;
 
@@ -44,6 +44,7 @@
         }
         .task-opration {
             flex-shrink: 0;
+            line-height: 0.28rem;
         }
         span.task-opration {
             font-size: 12px;
@@ -51,8 +52,8 @@
             width: 1.2rem;
             text-align: center;
             line-height: 1;
-            padding-top: 0.5em;
-            padding-bottom: 0.5em;
+            padding-top: 0.4em;
+            padding-bottom: 0.4em;
             background-color: #ed3c4d;
             box-shadow: 0.02rem 0.02rem 0.06rem 0rem rgba(237, 60, 77, 0.24);
             border-radius: 0.04rem;
@@ -62,6 +63,7 @@
         }
     }
     .expand_more {
+        margin-bottom: -0.4rem;
         font-size: 0.22rem;
         line-height: 0.6rem;
 
@@ -80,11 +82,10 @@
 
 @media @media-up-sm {
     .task-list {
-        padding-top: 0.2rem;
+        margin: 0 -0.5rem;
         .task-item {
             line-height: 0.8rem;
-
-            padding-right: 0.56rem;
+            padding: 0 0.5rem;
 
             border-bottom: none;
             a {

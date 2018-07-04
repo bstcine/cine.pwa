@@ -20,9 +20,27 @@ const cineMenu = [
         url: h5.URL_Learn_Index,
         children: [
             {
-                label: '我的学习',
+                label: '学习首页',
                 url: h5.URL_Learn_Index,
                 icon: 'ci-my_study',
+                children: [
+                    {
+                        label: '作业列表',
+                        url: h5.URL_Learn_Task,
+                    },
+                    {
+                        label: '词汇学习',
+                        url: h5.URL_Learn_Word,
+                    },
+                    {
+                        label: '词汇测试',
+                        url: h5.URL_Learn_Word_Quiz,
+                    },
+                    {
+                        label: '练习',
+                        url: h5.URL_Quiz_Kj,
+                    },
+                ],
             },
         ],
     },
@@ -44,6 +62,12 @@ const cineMenu = [
                 label: '我的测试',
                 url: h5.URL_User_Quiz,
                 icon: 'ci-grammar',
+                children: [
+                    {
+                        label: '语法测试',
+                        url: h5.URL_Quiz_Grammar,
+                    },
+                ],
             },
             {
                 label: '我的订单',

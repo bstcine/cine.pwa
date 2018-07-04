@@ -29,6 +29,7 @@ class QuizPage extends Component {
     componentDidMount() {
         let {
             user_id,
+            task_schedule_id,
             quiz_id,
             stats_content_quiz_id,
             lesson_id,
@@ -39,6 +40,7 @@ class QuizPage extends Component {
         const { fetchQuizData } = this.props;
         fetchQuizData({
             user_id,
+            task_schedule_id,
             quiz_id,
             stats_content_quiz_id,
             lesson_id,

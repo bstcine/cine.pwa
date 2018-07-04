@@ -40,6 +40,7 @@ import { openConfirm, openAlert, networkError } from '@/action/commonAction';
  */
 export const fetchQuizData = ({
     user_id,
+    task_schedule_id,
     quiz_id,
     stats_content_quiz_id,
     lesson_id,
@@ -50,6 +51,7 @@ export const fetchQuizData = ({
     dispatch(requestQuizData());
     let [err, result] = await fetchData(APIURL_Content_Quiz, {
         user_id,
+        task_schedule_id,
         quiz_id,
         stats_content_quiz_id,
         lesson_id,
@@ -75,6 +77,7 @@ export const fetchQuizData = ({
         return;
     }
     const currentQuizState = getCurrentQuizState(user, statsContentQuiz, cmd);
+    const taskScheduleId = result.taskScheduleId || '';
     dispatch(
         receiveQuizData({
             user,
@@ -82,6 +85,7 @@ export const fetchQuizData = ({
             statsContentQuiz,
             statsContentQuizDetail,
             currentQuizState,
+            taskScheduleId,
         })
     );
 
@@ -174,7 +178,14 @@ export const preSubmitAnswer = () => (dispatch, getState) => {
  * 提交答案
  */
 export const submitAnswer = () => (dispatch, getState) => {
-    let { quiz, userRedu, answersById, questions, timer } = getState();
+    let {
+        quiz,
+        userRedu,
+        answersById,
+        questions,
+        timer,
+        taskScheduleId,
+    } = getState();
     let duration = Math.round((new Date().getTime() - timer.startTime) / 1000);
     let answers = [];
     questions.allIds.forEach(questionId => {
@@ -195,6 +206,7 @@ export const submitAnswer = () => (dispatch, getState) => {
         quiz_id: quiz.id,
         answers,
         duration,
+        task_schedule_id: taskScheduleId,
     }).then(([err, result]) => {
         if (err) {
             if (err === 'no_login') return dispatch(openLoginModal());
@@ -202,9 +214,7 @@ export const submitAnswer = () => (dispatch, getState) => {
         }
         dispatch({ type: RECEIVE_STATS_QUIZ_SAVE });
         clearLocalAnswers(quiz, userRedu.data || {});
-        location.href = `/quiz/grammar?stats_content_quiz_id=${
-            result.statsContentQuiz.id
-        }`;
+        window.location.reload();
     });
 };
 
@@ -273,7 +283,6 @@ export const resetQuiz = () => (dispatch, getState) => {
         })
     );
 };
-
 
 // /**
 //  * 答题记录列表
@@ -354,6 +363,7 @@ export const receiveQuizData = ({
     statsContentQuiz,
     statsContentQuizDetail,
     currentQuizState,
+    taskScheduleId,
 }) => {
     return {
         type: RECEIVE_CONTENT_QUIZ,
@@ -363,6 +373,7 @@ export const receiveQuizData = ({
             statsContentQuiz,
             statsContentQuizDetail,
             currentQuizState,
+            taskScheduleId,
         },
     };
 };

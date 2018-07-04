@@ -2,12 +2,7 @@ import React from 'react';
 import { Grid } from '@/component/GGrid';
 import GIcon from '@/component/GIcon';
 import TasksList from './TasksList';
-
-const Badge = ({ tasks }) => {
-    if (!tasks || !tasks.length) return null;
-
-    return <span className="badge">{tasks.length}</span>;
-};
+import GPanel from '@/component/GPanel';
 
 const ExpandMore = ({ tasks, isLimitTasks, onShowAllTask }) => {
     if (tasks && tasks.length > 5 && isLimitTasks) {
@@ -23,14 +18,11 @@ const ExpandMore = ({ tasks, isLimitTasks, onShowAllTask }) => {
 
 const Tasks = ({ tasks, isLimitTasks, onShowAllTask }) => {
     return (
-        <div className="tasks-container">
-            <nav className="task-nav">
-                <a href="/learn/task">以前作业</a>
-                <a className="active" href="">
-                    本周作业
-                    <Badge tasks={tasks} />
-                </a>
-            </nav>
+        <GPanel
+            title="本周作业"
+            badge={tasks.filter(i => i.status !== '2').length}
+            ext_title="历史作业"
+            ext_href="/learn/task">
             <Grid className="task-list">
                 <TasksList tasks={tasks} isLimitTasks={isLimitTasks} />
                 <ExpandMore
@@ -39,7 +31,17 @@ const Tasks = ({ tasks, isLimitTasks, onShowAllTask }) => {
                     onShowAllTask={onShowAllTask}
                 />
             </Grid>
-        </div>
+        </GPanel>
+        // <div className="tasks-container">
+        //     <nav className="task-nav">
+        //         <a href="/learn/task">以前作业</a>
+        //         <a className="active" href="">
+        //             本周作业
+        //             <Badge tasks={tasks} />
+        //         </a>
+        //     </nav>
+
+        // </div>
     );
 };
 

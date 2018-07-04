@@ -12,6 +12,8 @@ import {
 } from '@/component/Tabs/index';
 import GrammarStats from '../component/quiz/GrammarStats';
 import QuizVocabStats from '../component/quiz/QuizVocabStats';
+import { CFlatButton } from '@/component';
+import GFloatingBox from '@/component/GFloatingBox';
 
 class QuizContainer extends Component {
     componentDidMount() {
@@ -23,7 +25,7 @@ class QuizContainer extends Component {
 
         return (
             <div className="quiz-stats-tabs">
-                <Tabs>
+                <Tabs className="coupon-tabs">
                     <TabItems>
                         <TabItem>词汇量测试</TabItem>
                         {user &&
@@ -60,6 +62,22 @@ class QuizContainer extends Component {
                         </TabPanel>
                     </TabPanels>
                 </Tabs>
+                <GFloatingBox>
+                    <CFlatButton
+                        label="测试语法"
+                        primary={true}
+                        onClick={() => {
+                            location.href = '/quiz/grammar';
+                        }}
+                    />
+                    <CFlatButton
+                        label="测试词汇量"
+                        primary={true}
+                        onClick={() => {
+                            location.href = '/vocabquiz';
+                        }}
+                    />
+                </GFloatingBox>
             </div>
         );
     }

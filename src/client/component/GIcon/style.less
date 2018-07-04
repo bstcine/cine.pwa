@@ -1,8 +1,14 @@
 .gicons {
     display: inline-block;
     width: 0.4rem;
+    white-space: pre;
     &.cine-icons {
-        height: 0.4rem;
+        // height: 0.4rem;
+        line-height: 1;
+        &:before {
+            content: ' ';
+            display: block;
+        }
         &.ci-address {
             background: url('image/ico_address.png') no-repeat center;
             background-size: contain;

@@ -38,7 +38,7 @@ const TasksList = ({ tasks, isLimitTasks }) => {
             case Task_Type.Quiz:
                 return `/quiz/kj?task_schedule_id=${task.id}`;
             case Task_Type.Quiz_Feedback: {
-                return `/quiz/kj?stats_content_quiz_id=${task.id}`;
+                return `/quiz/kj?stats_content_quiz_id=${task.object_id}`;
             }
             case Task_Type.Word:
                 if (task.word_start_index && task.word_end_index) {

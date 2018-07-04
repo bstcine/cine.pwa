@@ -49,7 +49,7 @@ const UserBar = ({ user, isOpenUserBar, onToggleUserBar, onLogout }) => (
             <GIcon name="mi-arrow_drop_up" />
         </div>
         <nav className="nav-user">
-            <a href="/user">个人资料</a>
+            {/* <a href="/user">个人资料</a> */}
             <a href="/resetPassword">修改密码</a>
             <a onClick={onLogout}>退出</a>
         </nav>

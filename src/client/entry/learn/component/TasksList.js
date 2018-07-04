@@ -36,6 +36,7 @@ const TasksList = ({ tasks, isLimitTasks }) => {
                     task.lesson_id
                 }`;
             case Task_Type.Quiz:
+                return `/quiz/kj?task_schedule_id=${task.id}`;
             case Task_Type.Quiz_Feedback: {
                 const map = {
                     '1': 'lesson_id',

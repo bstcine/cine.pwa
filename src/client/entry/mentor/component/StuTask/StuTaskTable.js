@@ -50,6 +50,7 @@ const getHref = (task, student_id) => {
                 task.lesson_id
             }`;
         case Task_Type.Quiz:
+            return `/quiz/kj?task_schedule_id=${task.id}&cmd=check`;
         case Task_Type.Quiz_Feedback: {
             const map = {
                 '1': 'lesson_id',

@@ -15,12 +15,7 @@ class HistoryTaskContainer extends React.PureComponent {
 
         this.audioPlayer = new Audio();
         // 获取参数
-        let param = getParam();
-
-        let type = param.type;
-        this.param = {
-            type: type,
-        };
+        this.param = getParam();
     }
     componentDidMount() {
         let { actions } = this.props;

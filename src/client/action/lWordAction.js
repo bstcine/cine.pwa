@@ -20,17 +20,7 @@ export const lWordAction = {
         payload: result.status,
     }),
 
-    loadVocabulary: (startIndex, endIndex, wordType) => async dispatch => {
-        let param = {};
-        if (startIndex && startIndex !== 'undefined') {
-            param['start_index'] = startIndex;
-        }
-        if (endIndex && endIndex !== 'undefined') {
-            param['end_index'] = endIndex;
-        }
-        if (wordType && wordType !== 'undefined') {
-            param['word_type'] = wordType;
-        }
+    loadVocabulary: (param) => async dispatch => {
 
         let [error, result] = await fetchData(Api.APIURL_User_Learn_Word, param);
 

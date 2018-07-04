@@ -37,6 +37,7 @@ export const lWordAction = {
         if (error) {
             dispatch(toastAction.showError(errorMsg(error)));
         } else {
+            console.log(result);
             dispatch(lWordAction._receive(result));
             dispatch(lWordAction._changeTaskStatus(result));
         }

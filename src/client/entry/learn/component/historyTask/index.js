@@ -2,7 +2,8 @@
  * Created by lidangkun on 2018/6/15.
  */
 import React from 'react';
-import "../../asset/style/historyTask.less"
+import dayjs from 'dayjs';
+import "../../asset/style/historyTask.less";
 import { Grid } from '@/component/GGrid';
 import TasksList from '../TasksList';
 import SearchTaskDialog from './SearchTaskDialog';
@@ -47,11 +48,16 @@ class HistoryTask extends React.PureComponent {
 export default HistoryTask;
 
 const TaskComponent = ({ taskModel }) => {
+    let currentWeek = dayjs().format('GGGGWW');
     // 重写week
     let week = taskModel.week;
-    let year = week.substring(0, 4);
-    let realWeek = week.substring(4, 6);
-    week = year + '第' + realWeek + '周';
+    if (week === currentWeek) {
+        week = '本周';
+    } else {
+        let year = week.substring(0, 4);
+        let realWeek = week.substring(4, 6);
+        week = year + '第' + realWeek + '周';
+    }
     return (
         <div>
             <div className="HT_TaskHeaderTitle">{week}</div>

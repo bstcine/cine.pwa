@@ -15,6 +15,11 @@ export const lWordAction = {
         payload: result.rows,
     }),
 
+    _changeTaskStatus: result => ({
+        type: ACTION_LV.TASKSTATUS,
+        payload: result.status,
+    }),
+
     loadVocabulary: (startIndex, endIndex, wordType) => async dispatch => {
         let param = {};
         if (startIndex && startIndex !== 'undefined') {
@@ -33,6 +38,7 @@ export const lWordAction = {
             dispatch(toastAction.showError(errorMsg(error)));
         } else {
             dispatch(lWordAction._receive(result));
+            dispatch(lWordAction._changeTaskStatus(result));
         }
     },
 

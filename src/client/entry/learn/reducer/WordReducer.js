@@ -3,6 +3,7 @@ import { ACTION_LV } from '@/constant/actionTypeLearn';
 
 const initialState = fromJS({
     vocabularyList: [],
+    taskStatus: 0,
 });
 
 const WordRedu = (state = initialState, action) => {
@@ -12,6 +13,9 @@ const WordRedu = (state = initialState, action) => {
 
         case ACTION_LV.RECEIVE:
             return state.set('vocabularyList', action.payload);
+
+        case ACTION_LV.TASKSTATUS:
+            return state.set('taskStatus', action.payload);
 
         default:
             return state;

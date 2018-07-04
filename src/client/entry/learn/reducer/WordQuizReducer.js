@@ -6,6 +6,7 @@ import { ACTION_LT } from '@/constant/actionTypeLearn';
 
 const initialState = fromJS({
     isTest: false,                   // 是否正在测试
+    taskStatus: 0,                   // 任务状态
     rows: [],                        // 任务源数据
     wordCount: 0,                    // 单词总数
     faileTempIndexArr: null,         // 选择错误的单词临时下标
@@ -34,6 +35,8 @@ const WordQuizRedu = (state = initialState, action) => {
             return state;
         case ACTION_LT.RECEIVE:
             return state.set('rows', action.payload);
+        case ACTION_LT.TASKSTATUS:
+            return state.set('taskStatus', action.payload);
         case ACTION_LT.CHANGEWORDCOUNT:
             return state.set('wordCount', action.payload);
         case ACTION_LT.STARTTEST:

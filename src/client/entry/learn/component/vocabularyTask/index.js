@@ -6,7 +6,7 @@ class VocabularyTask extends React.PureComponent {
 
     render() {
 
-        let { vocabularyList, playAction, param } = this.props;
+        let { vocabularyList, taskStatus, playAction, param } = this.props;
         let testHref = '/learn/wordquiz?start_index=' + param.startIndex + '&end_index=' + param.endIndex + '&word_type=' + param.wordType;
 
         const vocabularyItems = vocabularyList.map((item,index) => {
@@ -22,6 +22,8 @@ class VocabularyTask extends React.PureComponent {
             return <VocabularyItem style={style} key={item.id} vocabulary={item} playAction={playAction}/>;
         });
 
+        const test = taskStatus === 2 ? '再测一次' : '立即测试';
+
         return (
             <div className="vocabularyTask">
                 <div className="v_Task_VocabularyHeader">
@@ -33,7 +35,7 @@ class VocabularyTask extends React.PureComponent {
                     <div className="v_Task_VocabularyFooter">
                         <div className="v_Task_VF_Container">
                             <a className="v_Task_F_Promote">别忘记了词汇测试，通过了测试才算完成当日测试任务哦！</a>
-                            <a className="v_Task_F_TestDoor" href={testHref}>立即测试</a>
+                            <a className="v_Task_F_TestDoor" href={testHref}>{test}</a>
                         </div>
                     </div>
                 </div>

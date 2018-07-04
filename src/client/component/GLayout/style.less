@@ -91,14 +91,14 @@
             transition: all 0.1s;
 
             color: #2c2d2f;
-            border-top: 4px solid transparent;
-            border-bottom: 4px solid transparent;
+            border-top: 0.08rem solid transparent;
+            border-bottom: 0.08rem solid transparent;
 
             align-items: center;
             justify-content: center;
             &:hover,
             &.active {
-                border-bottom: 4px solid #0748a0;
+                border-bottom: 0.08rem solid #0748a0;
             }
             &.disabled {
                 cursor: not-allowed;
@@ -113,6 +113,7 @@
             }
             i.gicons {
                 line-height: 0.36rem;
+
                 width: 0.4rem;
                 margin-right: 0.3em;
 
@@ -125,17 +126,22 @@
         display: block;
         .gcontainer {
             display: flex;
+
             height: 1.1rem;
-            align-items: center;
+
             white-space: pre;
+
+            align-items: center;
         }
     }
     .nav-3nd__home {
         font-size: 0.28rem;
+
         color: #014c98;
         &:hover {
-            color: #03386d;
             text-decoration: underline;
+
+            color: #03386d;
         }
     }
     .nav-3nd__curr {
@@ -157,8 +163,9 @@
         .nickname {
             display: flex;
 
-            min-width: 130px;
+            min-width: 2.6rem;
             height: 100%;
+            padding: 0 0.3rem;
 
             cursor: pointer;
 
@@ -187,7 +194,7 @@
             padding: 0.2rem 0;
 
             background-color: rgba(2, 68, 150, 0.9);
-            box-shadow: 0px 6px 9px 0px rgba(168, 170, 174, 0.18);
+            box-shadow: 0rem 0.12rem 0.18rem 0rem rgba(168, 170, 174, 0.18);
             a {
                 font-size: 0.28rem;
                 line-height: 0.6rem;
@@ -221,8 +228,8 @@
     .gmain {
         display: block;
 
-        padding-top: 28px;
-        padding-bottom: 42px;
+        padding-top: 0.56rem;
+        padding-bottom: 0.84rem;
     }
 
     // footer

@@ -263,7 +263,12 @@ export const lWordQuizAction = {
         }
         let param = reducer.get('param');
         param['task_status'] = status;
-        await fetchData(Api.APIURL_User_Learn_UpdateTaskStatus, param);
+        let [error, result] = await fetchData(Api.APIURL_User_Learn_UpdateTaskStatus, param);
+        if (error) {
+            alert(error);
+        } else {
+            console.log(result);
+        }
     },
     /**
      * 开始测试（对外调用）
@@ -397,7 +402,12 @@ export const lWordQuizAction = {
                 is_correct: content.zh[content.real_zh],
                 task_param: reducer.get('param'),
             };
-            fetchData(Api.APIURL_User_Learn_SaveFailure, errorParam);
+            let [error, result] = await fetchData(Api.APIURL_User_Learn_SaveFailure, errorParam);
+            if (error) {
+                console.log(error);
+            } else {
+                console.log(result);
+            }
             // 保存错误信息
             dispatch(lWordQuizAction._changeFaileTempIndexArray(faileTempIndexArr));
             dispatch(lWordQuizAction.selectWrong(index));

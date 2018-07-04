@@ -2,7 +2,7 @@
  * Created by lidangkun on 2018/6/15.
  */
 import React from 'react';
-import dayjs from 'dayjs';
+import moment from 'moment';
 import "../../asset/style/historyTask.less";
 import { Grid } from '@/component/GGrid';
 import TasksList from '../TasksList';
@@ -48,7 +48,7 @@ class HistoryTask extends React.PureComponent {
 export default HistoryTask;
 
 const TaskComponent = ({ taskModel }) => {
-    let currentWeek = dayjs().format('GGGGWW');
+    let currentWeek = moment().format('GGGGWW');
     // 重写week
     let week = taskModel.week;
     if (week === currentWeek) {

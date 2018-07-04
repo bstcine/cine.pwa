@@ -52,22 +52,7 @@ const getHref = (task, student_id) => {
         case Task_Type.Quiz:
             return `/quiz/kj?task_schedule_id=${task.id}&cmd=check`;
         case Task_Type.Quiz_Feedback: {
-            const map = {
-                '1': 'lesson_id',
-                '2': 'chapter_id',
-                '3': 'course_id',
-                '4': 'quiz_id',
-                '5': 'stats_content_quiz_id',
-            };
-            if (['1', '2', '3'].includes(task.object_type)) {
-                return `/quiz/kj?user_id=${student_id}&${
-                    map[task.object_type]
-                }=${task.object_id}&cmd=check`;
-            } else {
-                return `/quiz/grammar?user_id=${student_id}&${
-                    map[task.object_type]
-                }=${task.object_id}&cmd=check`;
-            }
+            return `/quiz/kj?stats_content_quiz_id=${task.id}&cmd=check`;
         }
         case Task_Type.Word:
             if (task.word_start_index && task.word_end_index) {

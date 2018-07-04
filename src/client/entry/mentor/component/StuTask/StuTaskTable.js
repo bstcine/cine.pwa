@@ -52,7 +52,7 @@ const getHref = (task, student_id) => {
         case Task_Type.Quiz:
             return `/quiz/kj?task_schedule_id=${task.id}&cmd=check`;
         case Task_Type.Quiz_Feedback: {
-            return `/quiz/kj?stats_content_quiz_id=${task.id}&cmd=check`;
+            return `/quiz/kj?stats_content_quiz_id=${task.object_id}&cmd=check`;
         }
         case Task_Type.Word:
             if (task.word_start_index && task.word_end_index) {
@@ -111,13 +111,17 @@ const StudentTable = ({ list, ...props }) => {
                                 <div
                                     className={classNames('taskPanel', {
                                         click:
-                                            ['1', '4'].includes(task.type) ||
+                                            ['1', '3', '4'].includes(
+                                                task.type
+                                            ) ||
                                             (task.type === '2' &&
                                                 task.status === '2'),
                                     })}
                                     onClick={() => {
                                         if (
-                                            ['1', '4'].includes(task.type) ||
+                                            ['1', '3', '4'].includes(
+                                                task.type
+                                            ) ||
                                             (task.type === '2' &&
                                                 task.status === '2')
                                         ) {

@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { actionUserQuiz } from '@/action/userAction';
-import timeUtil from '@/util/timeUtil';
 import {
     Tabs,
     TabItems,
@@ -14,6 +13,10 @@ import GrammarStats from '../component/quiz/GrammarStats';
 import QuizVocabStats from '../component/quiz/QuizVocabStats';
 import { CFlatButton } from '@/component';
 import GFloatingBox from '@/component/GFloatingBox';
+import {
+    URL_User_Quiz_Vocab_New,
+    URL_Quiz_Grammar,
+} from '@/constant/menuItemUrl';
 
 class QuizContainer extends Component {
     componentDidMount() {
@@ -63,18 +66,22 @@ class QuizContainer extends Component {
                     </TabPanels>
                 </Tabs>
                 <GFloatingBox>
-                    <CFlatButton
-                        label="测试语法"
-                        primary={true}
-                        onClick={() => {
-                            location.href = '/quiz/grammar';
-                        }}
-                    />
+                    {user &&
+                        user.type === '2' && (
+                        <CFlatButton
+                            label="测试语法"
+                            primary={true}
+                            onClick={() => {
+                                location.href = URL_Quiz_Grammar;
+                            }}
+                        />
+                    )}
+
                     <CFlatButton
                         label="测试词汇量"
                         primary={true}
                         onClick={() => {
-                            location.href = '/vocabquiz';
+                            location.href = URL_User_Quiz_Vocab_New;
                         }}
                     />
                 </GFloatingBox>

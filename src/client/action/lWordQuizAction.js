@@ -41,6 +41,13 @@ export const lWordQuizAction = {
         payload: result.rows,
     }),
     /**
+     * 改变任务状态
+     * */
+    _changeTaskStatus: result => ({
+        type: ACTION_LT.TASKSTATUS,
+        payload: ACTION_LT.status,
+    }),
+    /**
      * 修改单词总数
      * */
     _changeWordCount: count => ({
@@ -105,6 +112,7 @@ export const lWordQuizAction = {
         dispatch(lWordQuizAction._changeContent(content));
         dispatch(lWordQuizAction._changeWordCount(result['rows'].length));
         dispatch(lWordQuizAction._receive(result));
+        dispatch(lWordQuizAction._changeTaskStatus(result));
     },
     /**
      * 获取当前内容的方法（私有）
@@ -249,6 +257,10 @@ export const lWordQuizAction = {
     },
     updateTask: (status) => async (dispatch, getState) => {
         let reducer = getState().WordQuizRedu;
+        let taskStatus = reducer.get('taskStatus');
+        if (taskStatus === 2) {
+            return;
+        }
         let param = reducer.get('param');
         param['task_status'] = status;
         await fetchData(Api.APIURL_User_Learn_UpdateTaskStatus, param);

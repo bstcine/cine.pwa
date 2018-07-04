@@ -38,11 +38,12 @@ class VocabularyTaskContainer extends Component {
     }
 
     render() {
-        let { vocabularyList, actions } = this.props;
+        let { vocabularyList, taskStatus, actions } = this.props;
 
         return (
             <VocabularyTask
                 vocabularyList={vocabularyList}
+                taskStatus={taskStatus}
                 actions={actions}
                 playAction={this.playAudio}
                 param={this.param}
@@ -54,6 +55,7 @@ class VocabularyTaskContainer extends Component {
 const mapStateToProps = state => {
     return {
         vocabularyList: state.WordRedu.get('vocabularyList'),
+        taskStatus: state.WordRedu.get('taskStatus'),
     };
 };
 

@@ -4,6 +4,7 @@
 export const ACTION_LV = {
     REQUEST: 'LV_REQUEST',
     RECEIVE: 'LV_RECEIVE',
+    TASKSTATUS: 'LV_TASKSTATUS',
 };
 
 export const ACTION_LH = {

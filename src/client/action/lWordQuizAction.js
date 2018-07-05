@@ -350,13 +350,19 @@ export const lWordQuizAction = {
         dispatch(lWordQuizAction._changeContent(content));
     },
     // 实现定时器，选择正确后的跳转（LEARN_TEST_CORRECT_SELLP）
-    selectCorrect: (index) => async dispatch => {
+    selectCorrect: (index) => async (dispatch, getState) => {
+        let reducer = getState().WordQuizRedu;
+        let audioPlayer = reducer.get('audioTruePlayer');
+        audioPlayer.play();
         setTimeout(function () {
             dispatch(lWordQuizAction.startNext(index));
         }, Learn_Word_Correct_SleepTime * 1000);
     },
     // 实现定时器，选择错误后的跳转（LEARN_TEST_WRONG_SELLP）
-    selectWrong: (index) => async dispatch => {
+    selectWrong: (index) => async (dispatch, getState) => {
+        let reducer = getState().WordQuizRedu;
+        let audioPlayer = reducer.get('audioFalsePlayer');
+        audioPlayer.play();
         setTimeout(function () {
             dispatch(lWordQuizAction.startNext(index));
         }, Learn_Word_Failed_SleepTime * 1000);

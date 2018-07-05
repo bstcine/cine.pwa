@@ -62,4 +62,4 @@ export const SITECODE = {
 };
 
 export const Learn_Word_Correct_SleepTime = 1;
-export const Learn_Word_Failed_SleepTime = 3;
+export const Learn_Word_Failed_SleepTime = 2;

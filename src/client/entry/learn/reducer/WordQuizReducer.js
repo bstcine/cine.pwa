@@ -24,7 +24,9 @@ const initialState = fromJS({
         start_index: null,
         end_index: null,
         word_type: null,
-    }
+    },
+    audioTruePlayer: new Audio([require('@/asset/image/true.mp3')]),
+    audioFalsePlayer: new Audio([require('@/asset/image/false.mp3')]),
 });
 
 const WordQuizRedu = (state = initialState, action) => {

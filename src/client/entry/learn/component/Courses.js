@@ -59,10 +59,6 @@ const Courses = ({ courses }) => {
                 })}
             </Grid>
         </GPanel>
-        // <div className="courses-container">
-        //     <h2>我的课程</h2>
-
-        // </div>
     );
 };
 

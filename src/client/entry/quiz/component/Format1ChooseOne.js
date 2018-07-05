@@ -47,6 +47,7 @@ const Format1ChooseOne = ({
                 <FeedbackSelectScore
                     id={id}
                     is_show_tip={
+                        currentQuizState === CurrentQuizState.CHECKING ||
                         currentQuizState === CurrentQuizState.REVIEWING ||
                         waiting_and_not_need_feedback
                     }

@@ -32,16 +32,6 @@ const Tasks = ({ tasks, isLimitTasks, onShowAllTask }) => {
                 />
             </Grid>
         </GPanel>
-        // <div className="tasks-container">
-        //     <nav className="task-nav">
-        //         <a href="/learn/task">以前作业</a>
-        //         <a className="active" href="">
-        //             本周作业
-        //             <Badge tasks={tasks} />
-        //         </a>
-        //     </nav>
-
-        // </div>
     );
 };
 

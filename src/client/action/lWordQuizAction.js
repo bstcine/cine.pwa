@@ -45,7 +45,7 @@ export const lWordQuizAction = {
      * */
     _changeTaskStatus: result => ({
         type: ACTION_LT.TASKSTATUS,
-        payload: ACTION_LT.status,
+        payload: result.status,
     }),
     /**
      * 修改单词总数
@@ -240,25 +240,14 @@ export const lWordQuizAction = {
     /**
      * 加载单词数据（对外调用）
      * */
-    loadWords: (startIndex, endIndex, wordType) => async dispatch => {
-        let param = {}
-        if (startIndex && startIndex !== 'undefined') {
-            param['start_index'] = startIndex;
-        }
-        if (endIndex && endIndex !== 'undefined') {
-            param['end_index'] = endIndex;
-        }
-        if (wordType && wordType !== 'undefined') {
-            param['word_type'] = wordType;
-        }
-        console.log(param);
+    loadWords: (param) => async dispatch => {
         dispatch(lWordQuizAction._saveParam(param));
         dispatch(lWordQuizAction._loadWords(param, true));
     },
     updateTask: (status) => async (dispatch, getState) => {
         let reducer = getState().WordQuizRedu;
         let taskStatus = reducer.get('taskStatus');
-        if (taskStatus === 2) {
+        if (taskStatus === '2') {
             return;
         }
         let param = reducer.get('param');

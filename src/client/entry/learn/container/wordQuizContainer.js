@@ -13,23 +13,12 @@ class VocabularyTestContainer extends Component {
     constructor(props) {
         super(props);
         // 获取参数
-        let param = getParam();
-        let startIndex = param.start_index;
-        let endIndex = param.end_index;
-        let wordType = param.word_type;
-        this.param = {};
-        if (startIndex && endIndex) {
-            this.param['startIndex'] = startIndex;
-            this.param['endIndex'] = endIndex;
-        }
-        if (wordType) {
-            this.param['wordType'] = wordType;
-        }
+        this.param = getParam();
     }
     componentDidMount() {
         // 准备访问
         let { actions } = this.props;
-        actions.loadWords(this.param.startIndex, this.param.endIndex, this.param.wordType);
+        actions.loadWords(this.param);
     }
 
     render() {

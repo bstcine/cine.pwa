@@ -7,8 +7,15 @@ class VocabularyTask extends React.PureComponent {
     render() {
 
         let { vocabularyList, taskStatus, playAction, param } = this.props;
-        let testHref = '/learn/wordquiz?start_index=' + param.startIndex + '&end_index=' + param.endIndex + '&word_type=' + param.wordType;
-
+        let paramString = '';
+        for (let key in param) {
+            if (paramString === '') {
+                paramString = key + '=' + param[key];
+            } else {
+                paramString = paramString + '&' + key + '=' + param[key];
+            }
+        }
+        let testHref = '/learn/wordquiz?' + paramString;
         const vocabularyItems = vocabularyList.map((item,index) => {
             let backgroundColor = '';
             if (index % 2 === 0) {

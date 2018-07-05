@@ -80,8 +80,13 @@
                 word-break: keep-all;
                 overflow: hidden;
             }
+            .task-expire {
+                width: 3.5rem;
+                color: #b2b3b5;
+                font-size: 0.3rem;
+            }
             .task-status {
-                width: 1.5rem;
+                width: 2.5rem;
                 font-size: 0.3rem;
                 &.red {
                     color: #fb525a;
@@ -94,7 +99,6 @@
                 width: 1.5rem;
                 text-align: center;
                 font-size: 0.3rem;
-                color: #19bb4c;
 
                 &.red {
                     font-size: 12px;
@@ -109,6 +113,19 @@
                     border-radius: 0.9rem;
                 }
 
+                &.green {
+                    font-size: 12px;
+                    color: #fff;
+                    text-align: center;
+                    line-height: 1;
+                    padding-top: 0.5em;
+                    padding-bottom: 0.5em;
+                    background-color: #19bb4c;
+                    box-shadow: 0.02rem 0.02rem 0.06rem 0
+                        rgba(237, 60, 77, 0.24);
+                    border-radius: 0.9rem;
+                }
+
                 &.blue {
                     font-size: 12px;
                     color: #fff;
@@ -117,6 +134,19 @@
                     padding-top: 0.5em;
                     padding-bottom: 0.5em;
                     background-color: #468bdf;
+                    box-shadow: 0.02rem 0.02rem 0.06rem 0
+                        rgba(237, 60, 77, 0.24);
+                    border-radius: 0.9rem;
+                }
+
+                &.gray {
+                    font-size: 12px;
+                    color: #a4a9b1;
+                    text-align: center;
+                    line-height: 1;
+                    padding-top: 0.5em;
+                    padding-bottom: 0.5em;
+                    background-color: #e3e5ea;
                     box-shadow: 0.02rem 0.02rem 0.06rem 0
                         rgba(237, 60, 77, 0.24);
                     border-radius: 0.9rem;
@@ -136,18 +166,33 @@
                     font-size: 0.24rem;
                 }
 
+                .task-expire {
+                    width: 3.5rem;
+                    font-size: 0.24rem;
+                }
+
                 .task-status {
+                    width: 1.8rem;
                     font-size: 0.24rem;
                 }
 
                 .task-todo {
+                    width: 1.8rem;
                     font-size: 0.24rem;
 
                     &.red {
                         font-size: 10px;
                     }
 
+                    &.green {
+                        font-size: 10px;
+                    }
+
                     &.blue {
+                        font-size: 10px;
+                    }
+
+                    &.gray {
                         font-size: 10px;
                     }
                 }

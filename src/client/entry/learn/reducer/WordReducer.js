@@ -3,7 +3,7 @@ import { ACTION_LV } from '@/constant/actionTypeLearn';
 
 const initialState = fromJS({
     vocabularyList: [],
-    taskStatus: 0,
+    taskStatus: '0',
 });
 
 const WordRedu = (state = initialState, action) => {

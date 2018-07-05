@@ -21,8 +21,7 @@ class VocabularyTask extends React.PureComponent {
             }
             return <VocabularyItem style={style} key={item.id} vocabulary={item} playAction={playAction}/>;
         });
-
-        const test = taskStatus === 2 ? '再测一次' : '立即测试';
+        const test = taskStatus === '2' ? '再测一次' : '立即测试';
 
         return (
             <div className="vocabularyTask">

@@ -25,6 +25,7 @@ const initialState = fromJS({
         end_index: null,
         word_type: null,
     },
+    failureArray: null,
     audioTruePlayer: new Audio([require('@/asset/image/true.mp3')]),
     audioFalsePlayer: new Audio([require('@/asset/image/false.mp3')]),
 });
@@ -47,6 +48,8 @@ const WordQuizRedu = (state = initialState, action) => {
             return state.set('content', action.payload);
         case ACTION_LT.CORRECTCOUNT:
             return state.set('correctCount', action.payload);
+        case ACTION_LT.CHANGEFAILUREARRAY:
+            return state.set('failureArray', action.payload);
         case ACTION_LT.CHANGESELECTSTATUS:
             return state.set('selectIndex', action.payload);
         case ACTION_LT.CHANGEFAILEINDEX:

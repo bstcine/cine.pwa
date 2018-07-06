@@ -69,6 +69,13 @@ export const lWordQuizAction = {
         payload: count,
     }),
     /**
+     * 保存错误信息
+     * */
+    _changeFailureArray: failureArr => ({
+        type: ACTION_LT.CHANGEFAILUREARRAY,
+        payload: failureArr,
+    }),
+    /**
      * 内容改变的方法（私有）
      * */
     _changeContent: content => ({
@@ -271,28 +278,19 @@ export const lWordQuizAction = {
      * 测试结束
      * */
     testDone: () => async (dispatch, getState) => {
+        // 上传错误信息
+        let reducer = getState().WordQuizRedu;
+        let failureArr = reducer.get('failureArray');
+        if (failureArr) {
+            let [result] = await fetchData(Api.APIURL_User_Learn_SaveFailure, { failure_words: failureArr });
+            console.log(result);
+        }
         // 更新测试状态为已完成
         dispatch(lWordQuizAction.updateTask('2'));
         // 提示用户已完成全部测试（掌握全部单词）
         dispatch(toastAction.show('测试完成'));
         // 返回学习界面
         setTimeout(function () {
-            // let reducer = getState().WordQuizRedu;
-            // let param = reducer.get('param');
-            // let startIndex = param.start_index;
-            // let endIndex = param.end_index;
-            // let wordType = param.word_type;
-            // let paramString = '';
-            // if (startIndex && endIndex) {
-            //     paramString = 'start_index=' + startIndex + '&end_index=' + endIndex;
-            // }
-            // if (wordType) {
-            //     if (paramString === '') {
-            //         paramString = 'word_type=' + wordType;
-            //     } else {
-            //         paramString = '&word_type=' + wordType;
-            //     }
-            // }
             location.href = '/learn';
         }, 250);
     },
@@ -390,19 +388,20 @@ export const lWordQuizAction = {
             } else {
                 faileTempIndexArr.push(content['index']);
             }
-            // 将选择错误的单词信息上传到服务器
-            let errorParam = {
+            // 将选择错误的单词信息保存
+            let failureWord = {
                 word: content.value,
                 word_selected: content.zh[selectIndex],
                 is_correct: content.zh[content.real_zh],
                 task_param: reducer.get('param'),
             };
-            let [error, result] = await fetchData(Api.APIURL_User_Learn_SaveFailure, errorParam);
-            if (error) {
-                console.log(error);
+            let failureArr = reducer.get('failureArray');
+            if (failureArr) {
+                failureArr.push(failureWord);
             } else {
-                console.log(result);
+                failureArr = [failureWord];
             }
+            dispatch(lWordQuizAction._changeFailureArray(failureArr));
             // 保存错误信息
             dispatch(lWordQuizAction._changeFaileTempIndexArray(faileTempIndexArr));
             dispatch(lWordQuizAction.selectWrong(index));

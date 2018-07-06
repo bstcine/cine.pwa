@@ -25,7 +25,7 @@ const cineMenu = [
                 icon: 'ci-my_study',
                 children: [
                     {
-                        label: '作业列表',
+                        label: '历史作业',
                         url: h5.URL_Learn_Task,
                     },
                     {

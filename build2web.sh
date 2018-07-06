@@ -6,7 +6,7 @@ fi
 echo "npm install start..."
 cnpm install
 echo "npm install done"
-npm run-script prod
+npm run-script ${1:-'dev'}
 echo "npm prod done"
 if [ ! -d "../cine.web" ];
   then

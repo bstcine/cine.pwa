@@ -120,20 +120,15 @@ const StudentTable = ({ list, ...props }) => {
                             <React.Fragment key={key}>
                                 <div
                                     className={classNames('taskPanel', {
-                                        click:
-                                            ['1', '3', '4'].includes(
-                                                task.type
-                                            ) ||
-                                            (task.type === '2' &&
-                                                task.status === '2'),
+                                        click: ['1', '2', '3', '4'].includes(
+                                            task.type
+                                        ),
                                     })}
                                     onClick={() => {
                                         if (
-                                            ['1', '3', '4'].includes(
+                                            ['1', '2', '3', '4'].includes(
                                                 task.type
-                                            ) ||
-                                            (task.type === '2' &&
-                                                task.status === '2')
+                                            )
                                         ) {
                                             taskOnClick(
                                                 task,

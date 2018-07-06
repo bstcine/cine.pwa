@@ -14,9 +14,9 @@ import ToastError from './ToastError';
 import LoginModal from './LoginModal';
 
 const mapStateToProps = state => {
-    const { network } = state;
+    const { network, user } = state;
     let { init } = network;
-    return { init };
+    return { init, user };
 };
 
 const mapDispatchToProps = dispatch => ({
@@ -57,14 +57,16 @@ class QuizPage extends Component {
 
     render() {
         console.log('QuizPage render');
-        const { init } = this.props;
+        let { user_id } = getParam();
+        const { init, user } = this.props;
+        let isSelf = !user_id || (user && user_id === user.id);
         return (
             <div className="tgrammar">
                 <Alert />
                 <Confirm />
                 {!init && <Title />}
                 {!init && <QuestionsList />}
-                {!init && <Submit />}
+                {!init && isSelf && <Submit />}
                 <ToastLoading />
                 <ToastError />
                 <LoginModal />

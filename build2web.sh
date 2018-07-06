@@ -8,10 +8,15 @@ cnpm install
 echo "npm install done"
 npm run-script ${1:-'dev'}
 echo "npm prod done"
+if [ ! -d "build" ];
+  then
+  echo "not build dir."
+  exit 3
+fi
 if [ ! -d "../cine.web" ];
   then
   echo "not find cine.web."
-  exit 3
+  exit 4
 fi
 cd ../cine.web
 echo "update cine.web git code start..."

@@ -25,13 +25,11 @@ class HistoryTask extends React.PureComponent {
         return (
             <div className="historyTask">
                 <HistoryTaskList taskModels={taskModels} />
-                <div className="HT_FilterDiv">
-                    <CFloatingButton
-                        className="HT_FilterButton"
-                        iconName="search"
-                        onClick={this.handleFilter}
-                    />
-                </div>
+
+                <CFloatingButton
+                    iconName="search"
+                    onClick={this.handleFilter}
+                />
 
                 <FilterTaskDialog
                     key="selectDialog"

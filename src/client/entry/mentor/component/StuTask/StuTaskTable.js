@@ -25,7 +25,7 @@ const gradeArr = {
 const taskType = {
     '1': '视频',
     '2': '习题',
-    '3': '习题反馈',
+    '3': '反馈',
     '4': '单词',
     '9': '其他',
 };
@@ -48,9 +48,7 @@ const getHref = (task, student_id) => {
         case Task_Type.Video:
             return `/learn/course/${task.course_id}?task_id=${
                 task.id
-            }&user_id=${student_id}&lesson_id=${
-                task.lesson_id
-            }`;
+            }&user_id=${student_id}&lesson_id=${task.lesson_id}`;
         case Task_Type.Quiz:
             return `/quiz/kj?task_id=${
                 task.id
@@ -149,6 +147,9 @@ const StudentTable = ({ list, ...props }) => {
                                     <div className={'task-title'}>
                                         {task.title}
                                     </div>
+                                    <div className={'task-expire'}>
+                                        {task.expire_at}
+                                    </div>
                                     <div
                                         className={classNames(
                                             'task-status',
@@ -159,12 +160,20 @@ const StudentTable = ({ list, ...props }) => {
                                     <div
                                         className={classNames(
                                             'task-todo',
-                                            { blue: task.status === '0' },
+                                            { gray: task.status === '0' },
                                             {
                                                 red:
                                                     task.status === '2' &&
                                                     task.type === '2' &&
-                                                    task.stats_status === '1',
+                                                    ['1', '2'].includes(
+                                                        task.stats_status
+                                                    ),
+                                            },
+                                            {
+                                                green:
+                                                    task.status === '2' &&
+                                                    task.type === '2' &&
+                                                    task.stats_status === '3',
                                             }
                                         )}>
                                         {task.status === '0'

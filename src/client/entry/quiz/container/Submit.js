@@ -40,6 +40,8 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
 });
 
 const Submit = ({
+    user_id,
+    user,
     quiz,
     currentQuizState,
     onSubmitAnswer,
@@ -50,7 +52,8 @@ const Submit = ({
     showAllQuestion,
 }) => {
     console.log('Submit render');
-    if (currentQuizState === CurrentQuizState.ANSWERING) {
+    let isSelf = !user_id || (user && user_id === user.id);
+    if (currentQuizState === CurrentQuizState.ANSWERING && isSelf) {
         return (
             <div className="submit">
                 <button className="btn-blue" onClick={onSubmitAnswer}>

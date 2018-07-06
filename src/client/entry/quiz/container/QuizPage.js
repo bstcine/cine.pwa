@@ -59,14 +59,13 @@ class QuizPage extends Component {
         console.log('QuizPage render');
         let { user_id } = getParam();
         const { init, user } = this.props;
-        let isSelf = !user_id || (user && user_id === user.id);
         return (
             <div className="tgrammar">
                 <Alert />
                 <Confirm />
                 {!init && <Title />}
                 {!init && <QuestionsList />}
-                {!init && isSelf && <Submit />}
+                {!init && <Submit user_id={user_id} user={user} />}
                 <ToastLoading />
                 <ToastError />
                 <LoginModal />

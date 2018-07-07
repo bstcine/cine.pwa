@@ -2,16 +2,20 @@
  * Created by lidangkun on 2018/6/22.
  */
 import React from 'react';
-import {CFlatButton, CDialog, CDatePicker, CSelect} from '@/component';
+import { CFlatButton, CDialog, CDatePicker, CSelect } from '@/component/_base';
 
-const SearchTaskDialog = ({ isOpen, startTime, endTime, defaultType, actions }) => {
-
+const FilterTaskDialog = ({
+    isOpen,
+    startTime,
+    endTime,
+    defaultType,
+    actions,
+}) => {
     const taskTypes = [
-        { 'key': '1', 'value': '视频' },
-        { 'key': '2', 'value': '习题' },
-        { 'key': '3', 'value': '习题反馈' },
-        { 'key': '4', 'value': '单词' },
-        { 'key': '9', 'value': '其他' },
+        { key: '1', value: '视频' },
+        { key: '2', value: '习题' },
+        { key: '3', value: '习题反馈' },
+        { key: '4', value: '词汇' },
     ];
 
     const dialogActions = [
@@ -21,15 +25,19 @@ const SearchTaskDialog = ({ isOpen, startTime, endTime, defaultType, actions }) 
             primary={true}
             onClick={() => {
                 actions.dialogShow(false);
-            } }
+            }}
         />,
         <CFlatButton
             key={2}
             label="搜索"
             primary={true}
             onClick={() => {
-                actions.selectResult({ start_time: startTime, end_time: endTime, type: defaultType });
-            } }
+                actions.selectResult({
+                    start_time: startTime,
+                    end_time: endTime,
+                    type: defaultType,
+                });
+            }}
         />,
     ];
 
@@ -39,7 +47,7 @@ const SearchTaskDialog = ({ isOpen, startTime, endTime, defaultType, actions }) 
         fontFamily: 'PingFangSC-Medium',
         fontSize: '0.28rem',
         color: '#3a3b3c',
-    }
+    };
 
     return (
         <CDialog
@@ -49,16 +57,14 @@ const SearchTaskDialog = ({ isOpen, startTime, endTime, defaultType, actions }) 
             open={isOpen}
             onRequestClose={() => {
                 actions.dialogShow(false);
-            }}
-        >
-
+            }}>
             <div style={itemStyle}>选择时间范围</div>
 
             <CDatePicker
                 key={1000}
                 defaultValue={startTime}
                 label="from"
-                onChange={(event) => {
+                onChange={event => {
                     actions.changeStartTime(event.target.value);
                 }}
             />
@@ -66,7 +72,7 @@ const SearchTaskDialog = ({ isOpen, startTime, endTime, defaultType, actions }) 
                 key={1001}
                 defaultValue={endTime}
                 label="to"
-                onChange={(event) => {
+                onChange={event => {
                     actions.changeEndTime(event.target.value);
                 }}
             />
@@ -75,13 +81,12 @@ const SearchTaskDialog = ({ isOpen, startTime, endTime, defaultType, actions }) 
             <CSelect
                 defaultValue={defaultType}
                 values={taskTypes}
-                onChange={(event) => {
+                onChange={event => {
                     actions.changeType(event.target.value);
                 }}
             />
-
         </CDialog>
     );
 };
 
-export default SearchTaskDialog;
+export default FilterTaskDialog;

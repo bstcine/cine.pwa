@@ -1,5 +1,5 @@
 import React from 'react';
-import { CFlatButton, CDialog, CTextField } from '@/component';
+import { CFlatButton, CDialog, CTextField } from '@/component/_base';
 
 const DialogCouponAdd = ({ isOpen, coupons, actions }) => {
     let couponNo = '';

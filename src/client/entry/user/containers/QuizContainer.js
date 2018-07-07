@@ -11,7 +11,7 @@ import {
 } from '@/component/Tabs/index';
 import GrammarStats from '../component/quiz/GrammarStats';
 import QuizVocabStats from '../component/quiz/QuizVocabStats';
-import { CFlatButton } from '@/component';
+import { CFlatButton } from '@/component/_base';
 import GFloatingBox from '@/component/GFloatingBox';
 import {
     URL_User_Quiz_Vocab_New,

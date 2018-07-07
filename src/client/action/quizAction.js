@@ -68,14 +68,14 @@ export const fetchQuizData = ({
     }
     const { user, quiz, statsContentQuiz, statsContentQuizDetail } = result;
     quizDataFix(quiz.data);
-    if (
-        (user.role_id === RoleID.ADMINISTRATOR ||
-            user.role_id === RoleID.TEACHER) &&
-        !statsContentQuiz
-    ) {
-        location.href = '/mentor';
-        return;
-    }
+    // if (
+    //     (user.role_id === RoleID.ADMINISTRATOR ||
+    //         user.role_id === RoleID.TEACHER) &&
+    //     !statsContentQuiz
+    // ) {
+    //     location.href = '/mentor';
+    //     return;
+    // }
     const currentQuizState = getCurrentQuizState(user, statsContentQuiz, cmd);
     const taskScheduleId = result.taskScheduleId || '';
     dispatch(

@@ -1,0 +1,131 @@
+@import '../style';
+@import 'ripple';
+
+@btn-prefix-cls: ~'@{base-prefix}-btn';
+
+@color-white: #fff;
+@btn-default-color: rgba(0, 0, 0, 0.87);
+@btn-primary-color: #2196f3;
+@btn-secondary-color: #e10050;
+@btn-disabled-font-color: rgba(0, 0, 0, 0.26);
+@btn-default-contained-background-color: #e0e0e0;
+
+@btn-font-size: 0.28rem;
+@btn-font-weight: 500;
+@btn-line-height: @btn-font-size * 1.4;
+@btn-border-radius: 0.08rem;
+
+.@{btn-prefix-cls} {
+    .btnResetFn;
+    min-height: 0.72rem;
+    min-width: 1.76rem;
+    padding: 0.16rem 0.32rem;
+    background-color: #fff;
+    transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
+        box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+}
+
+// button color
+.@{btn-prefix-cls}--default {
+    color: @btn-default-color;
+    .btnStateColorFn(@btn-default-color);
+}
+
+.@{btn-prefix-cls}--primary {
+    color: @btn-primary-color;
+    .btnStateColorFn(@btn-primary-color);
+}
+
+.@{btn-prefix-cls}--secondary {
+    color: @btn-secondary-color;
+    .btnStateColorFn(@btn-secondary-color);
+}
+
+// button outlined
+.@{btn-prefix-cls}--outlined {
+    border: 0.02rem solid rgba(0, 0, 0, 0.23);
+}
+
+// button contained
+.@{btn-prefix-cls}--contained {
+    box-shadow: 0rem 0.02rem 0.1rem 0rem rgba(0, 0, 0, 0.2),
+        0rem 0.04rem 0.04rem 0rem rgba(0, 0, 0, 0.14),
+        0rem 0.06rem 0.02rem -0.04rem rgba(0, 0, 0, 0.12);
+
+    &.@{btn-prefix-cls}--default {
+        color: @btn-default-color;
+        .btnContainedStateColorFn(@btn-default-contained-background-color);
+    }
+
+    &.@{btn-prefix-cls}--primary {
+        color: @color-white;
+        .btnContainedStateColorFn(@btn-primary-color);
+    }
+
+    &.@{btn-prefix-cls}--secondary {
+        color: @color-white;
+        .btnContainedStateColorFn(@btn-secondary-color);
+    }
+}
+
+.btnResetFn() {
+    font-family: @font-family;
+    display: inline-flex;
+    justify-content: center;
+    user-select: none;
+    align-items: center;
+    box-sizing: border-box;
+    font-size: @btn-font-size;
+    font-weight: @btn-font-weight;
+    line-height: @btn-line-height;
+    -webkit-tap-highlight-color: transparent;
+    appearance: none;
+    cursor: pointer;
+    outline: none;
+    text-decoration: none;
+    border: 0;
+    border-radius: @btn-border-radius;
+}
+
+.btnStateColorFn(@color) {
+    &:hover,
+    &:focus {
+        background-color: fade(@color, 8%);
+    }
+
+    &:active,
+    &.@{btn-prefix-cls}--active {
+        background-color: fade(@color, 23%);
+    }
+
+    &:disabled,
+    &.@{btn-prefix-cls}--disabled {
+        color: @btn-disabled-font-color !important;
+        background-color: @color-white!important;
+        cursor: not-allowed;
+    }
+}
+
+.btnContainedStateColorFn(@color) {
+    background-color: @color;
+
+    &:hover,
+    &:focus {
+        background-color: darken(@color, 10%);
+    }
+
+    &:active,
+    &.@{btn-prefix-cls}--active {
+        background-color: fade(@color, 70%);
+        box-shadow: 0rem 0.1rem 0.1rem -0.06rem rgba(0, 0, 0, 0.2),
+            0rem 0.16rem 0.2rem 0.02rem rgba(0, 0, 0, 0.14),
+            0rem 0.06rem 0.28rem 0.04rem rgba(0, 0, 0, 0.12);
+    }
+
+    &:disabled,
+    &.@{btn-prefix-cls}--disabled {
+        color: rgba(0, 0, 0, 0.26) !important;
+        box-shadow: none !important;
+        background-color: rgba(0, 0, 0, 0.12) !important;
+    }
+}

@@ -4,6 +4,7 @@ import FlatButton from 'material-ui/FlatButton';
 
 import TextField from '@material-ui/core/TextField';
 import NativeSelect from '@material-ui/core/NativeSelect';
+import Button from './Button';
 
 const CFlatButton = props => {
     return <FlatButton {...props} />;
@@ -43,4 +44,4 @@ export const CSelect = ({ defaultValue, values, onChange }) => {
     );
 };
 
-export { CFlatButton, Dialog as CDialog, TextField as CTextField };
+export { CFlatButton, Dialog as CDialog, TextField as CTextField, Button };

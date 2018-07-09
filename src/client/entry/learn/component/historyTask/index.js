@@ -28,6 +28,7 @@ class HistoryTask extends React.PureComponent {
 
                 <CFloatingButton
                     iconName="search"
+                    color="primary"
                     onClick={this.handleFilter}
                 />
 

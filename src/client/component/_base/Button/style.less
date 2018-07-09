@@ -1,21 +1,14 @@
 @import '../style';
-@import 'ripple';
-
-@btn-prefix-cls: ~'@{base-prefix}-btn';
 
 @color-white: #fff;
-@btn-default-color: rgba(0, 0, 0, 0.87);
-@btn-primary-color: #2196f3;
-@btn-secondary-color: #e10050;
-@btn-disabled-font-color: rgba(0, 0, 0, 0.26);
+@btn-color-disabled: rgba(0, 0, 0, 0.26);
 @btn-default-contained-background-color: #e0e0e0;
-
 @btn-font-size: 0.28rem;
 @btn-font-weight: 500;
 @btn-line-height: @btn-font-size * 1.4;
 @btn-border-radius: 0.08rem;
 
-.@{btn-prefix-cls} {
+.@{btn} {
     .btnResetFn;
     min-height: 0.72rem;
     min-width: 1.76rem;
@@ -26,45 +19,45 @@
 }
 
 // button color
-.@{btn-prefix-cls}--default {
-    color: @btn-default-color;
-    .btnStateColorFn(@btn-default-color);
+.@{btn}--default {
+    color: @btn-color-default;
+    .btn-pseudo(@btn-color-default);
 }
 
-.@{btn-prefix-cls}--primary {
-    color: @btn-primary-color;
-    .btnStateColorFn(@btn-primary-color);
+.@{btn}--primary {
+    color: @btn-color-primary;
+    .btn-pseudo(@btn-color-primary);
 }
 
-.@{btn-prefix-cls}--secondary {
-    color: @btn-secondary-color;
-    .btnStateColorFn(@btn-secondary-color);
+.@{btn}--secondary {
+    color: @btn-color-secondary;
+    .btn-pseudo(@btn-color-secondary);
 }
 
 // button outlined
-.@{btn-prefix-cls}--outlined {
+.@{btn}--outlined {
     border: 0.02rem solid rgba(0, 0, 0, 0.23);
 }
 
 // button contained
-.@{btn-prefix-cls}--contained {
+.@{btn}--contained {
     box-shadow: 0rem 0.02rem 0.1rem 0rem rgba(0, 0, 0, 0.2),
         0rem 0.04rem 0.04rem 0rem rgba(0, 0, 0, 0.14),
         0rem 0.06rem 0.02rem -0.04rem rgba(0, 0, 0, 0.12);
 
-    &.@{btn-prefix-cls}--default {
-        color: @btn-default-color;
-        .btnContainedStateColorFn(@btn-default-contained-background-color);
+    &.@{btn}--default {
+        color: @btn-color-default;
+        .btn-contained-pseudo(@btn-default-contained-background-color);
     }
 
-    &.@{btn-prefix-cls}--primary {
+    &.@{btn}--primary {
         color: @color-white;
-        .btnContainedStateColorFn(@btn-primary-color);
+        .btn-contained-pseudo(@btn-color-primary);
     }
 
-    &.@{btn-prefix-cls}--secondary {
+    &.@{btn}--secondary {
         color: @color-white;
-        .btnContainedStateColorFn(@btn-secondary-color);
+        .btn-contained-pseudo(@btn-color-secondary);
     }
 }
 
@@ -87,43 +80,42 @@
     border-radius: @btn-border-radius;
 }
 
-.btnStateColorFn(@color) {
-    &:hover,
-    &:focus {
+.btn-pseudo(@color) {
+    &:hover {
         background-color: fade(@color, 8%);
     }
 
+    &:focus,
     &:active,
-    &.@{btn-prefix-cls}--active {
-        background-color: fade(@color, 23%);
+    &.@{btn}--active {
+        background-color: fade(@color, 16%);
     }
 
     &:disabled,
-    &.@{btn-prefix-cls}--disabled {
-        color: @btn-disabled-font-color !important;
+    &.@{btn}--disabled {
+        color: @btn-color-disabled !important;
         background-color: @color-white!important;
         cursor: not-allowed;
     }
 }
 
-.btnContainedStateColorFn(@color) {
+.btn-contained-pseudo(@color) {
     background-color: @color;
 
-    &:hover,
-    &:focus {
-        background-color: darken(@color, 10%);
+    &:hover {
+        background-color: darken(@color, 8%);
     }
 
+    &:focus,
     &:active,
-    &.@{btn-prefix-cls}--active {
-        background-color: fade(@color, 70%);
+    &.@{btn}--active {
         box-shadow: 0rem 0.1rem 0.1rem -0.06rem rgba(0, 0, 0, 0.2),
             0rem 0.16rem 0.2rem 0.02rem rgba(0, 0, 0, 0.14),
             0rem 0.06rem 0.28rem 0.04rem rgba(0, 0, 0, 0.12);
     }
 
     &:disabled,
-    &.@{btn-prefix-cls}--disabled {
+    &.@{btn}--disabled {
         color: rgba(0, 0, 0, 0.26) !important;
         box-shadow: none !important;
         background-color: rgba(0, 0, 0, 0.12) !important;

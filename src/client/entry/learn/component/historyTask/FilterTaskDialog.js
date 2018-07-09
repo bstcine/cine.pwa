@@ -12,7 +12,7 @@ const FilterTaskDialog = ({
     actions,
 }) => {
     const taskTypes = [
-        { key: '', value: 'All' },
+        { key: '', value: '全部' },
         { key: '1', value: '视频' },
         { key: '2', value: '习题' },
         { key: '3', value: '习题反馈' },
@@ -64,7 +64,7 @@ const FilterTaskDialog = ({
             <CDatePicker
                 key={1000}
                 defaultValue={startTime}
-                label="from"
+                label="开始时间"
                 onChange={event => {
                     actions.changeStartTime(event.target.value);
                 }}
@@ -72,7 +72,7 @@ const FilterTaskDialog = ({
             <CDatePicker
                 key={1001}
                 defaultValue={endTime}
-                label="to"
+                label="结束时间"
                 onChange={event => {
                     actions.changeEndTime(event.target.value);
                 }}

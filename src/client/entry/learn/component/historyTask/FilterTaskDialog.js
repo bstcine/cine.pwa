@@ -12,6 +12,7 @@ const FilterTaskDialog = ({
     actions,
 }) => {
     const taskTypes = [
+        { key: '', value: '全部' },
         { key: '1', value: '视频' },
         { key: '2', value: '习题' },
         { key: '3', value: '习题反馈' },
@@ -29,7 +30,7 @@ const FilterTaskDialog = ({
         />,
         <CFlatButton
             key={2}
-            label="搜索"
+            label="确定"
             primary={true}
             onClick={() => {
                 actions.selectResult({
@@ -51,19 +52,19 @@ const FilterTaskDialog = ({
 
     return (
         <CDialog
-            title="任务搜索"
+            title="搜索"
             modal={false}
             actions={dialogActions}
             open={isOpen}
             onRequestClose={() => {
                 actions.dialogShow(false);
             }}>
-            <div style={itemStyle}>选择时间范围</div>
+            <div style={itemStyle}>时间范围</div>
 
             <CDatePicker
                 key={1000}
                 defaultValue={startTime}
-                label="from"
+                label="开始时间"
                 onChange={event => {
                     actions.changeStartTime(event.target.value);
                 }}
@@ -71,18 +72,18 @@ const FilterTaskDialog = ({
             <CDatePicker
                 key={1001}
                 defaultValue={endTime}
-                label="to"
+                label="结束时间"
                 onChange={event => {
                     actions.changeEndTime(event.target.value);
                 }}
             />
-
-            <div style={itemStyle}>选择任务类型</div>
+            <br /> <br />
+            <div style={itemStyle}>任务类型</div>
             <CSelect
                 defaultValue={defaultType}
                 values={taskTypes}
-                onChange={event => {
-                    actions.changeType(event.target.value);
+                onChange={(event, index, value) => {
+                    actions.changeType(value);
                 }}
             />
         </CDialog>

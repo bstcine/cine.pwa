@@ -4,8 +4,7 @@ import { CSelectField } from './SelectField';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 import DatePicker from 'material-ui/DatePicker';
-
-import TextField from '@material-ui/core/TextField';
+import TextField from 'material-ui/TextField';
 import CButton from './Button';
 
 const CFlatButton = props => {

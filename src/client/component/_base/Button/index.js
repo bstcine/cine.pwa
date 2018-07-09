@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import classNames from 'classnames';
 import './style.less';
 
-export default class Buttom extends Component {
+export default class CButton extends Component {
     static defaultProps = {
         component: 'button',
         prefixCls: 'cine-btn',

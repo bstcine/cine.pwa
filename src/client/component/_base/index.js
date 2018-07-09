@@ -1,10 +1,11 @@
 import React from 'react';
 import { CFloatingButton } from './Floating';
+import { CSelectField } from './SelectField';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
+import DatePicker from 'material-ui/DatePicker';
 
 import TextField from '@material-ui/core/TextField';
-import NativeSelect from '@material-ui/core/NativeSelect';
 import CButton from './Button';
 
 const CFlatButton = props => {
@@ -13,33 +14,13 @@ const CFlatButton = props => {
 
 const CDatePicker = ({ defaultValue, label, onChange }) => {
     return (
-        <TextField
-            id="date"
-            type="date"
-            label={label}
-            defaultValue={defaultValue}
-            InputLabelProps={{
-                shrink: true,
-            }}
+        <DatePicker
+            hintText={label}
+            locale="en-US"
+            autoOk={true}
+            firstDayOfWeek={0}
             onChange={onChange}
         />
-    );
-};
-
-const CSelect = ({ defaultValue, values, onChange }) => {
-    const children = values.map(item => {
-        return (
-            <option key={item.key} value={item.key}>
-                {item.value}
-            </option>
-        );
-    });
-
-    return (
-        <NativeSelect value={defaultValue} onChange={onChange}>
-            <option key={'0'} value={''} />
-            {children}
-        </NativeSelect>
     );
 };
 
@@ -50,5 +31,5 @@ export {
     CButton,
     CDatePicker,
     CFloatingButton,
-    CSelect,
+    CSelectField as CSelect,
 };

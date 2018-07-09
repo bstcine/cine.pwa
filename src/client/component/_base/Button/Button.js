@@ -7,6 +7,7 @@ export default class Button extends Component {
     static defaultProps = {
         component: 'button',
         color: 'default',
+        size: 'medium',
     };
 
     render() {
@@ -18,6 +19,7 @@ export default class Button extends Component {
             href,
             color,
             variant,
+            size,
             onClick,
         } = this.props;
         let ComponentProp = component;
@@ -30,6 +32,8 @@ export default class Button extends Component {
                 className={classNames(
                     `${btnCls}`,
                     {
+                        [`${btnCls}--small`]: size === 'small',
+                        [`${btnCls}--large`]: size === 'large',
                         [`${btnCls}--${color}`]: !!color,
                         [`${btnCls}--${variant}`]: !!variant,
                         [`${btnCls}--disabled`]: disabled,

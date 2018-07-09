@@ -43,6 +43,28 @@ export default class Widget extends PureComponent {
                         Link
                     </Button>
                 </div>
+                <div>
+                    <Button size="small" color="primary">
+                        SMALL
+                    </Button>
+                    <Button size="small" variant="outlined" color="primary">
+                        SMALL
+                    </Button>
+                    <Button size="small" variant="contained" color="primary">
+                        SMALL
+                    </Button>
+                </div>
+                <div>
+                    <Button size="large" color="secondary">
+                        LARGE
+                    </Button>
+                    <Button size="large" variant="outlined" color="secondary">
+                        LARGE
+                    </Button>
+                    <Button size="large" variant="contained" color="secondary">
+                        LARGE
+                    </Button>
+                </div>
             </GPanel>
         );
     }

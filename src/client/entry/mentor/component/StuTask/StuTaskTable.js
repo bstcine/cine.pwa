@@ -116,72 +116,88 @@ const StudentTable = ({ list, ...props }) => {
                     </div>
                     <br />
                     {student.tasks &&
-                        student.tasks.map((task, key) => (
-                            <React.Fragment key={key}>
-                                <div
-                                    className={classNames('taskPanel', {
-                                        click: ['1', '2', '3', '4'].includes(
-                                            task.type
-                                        ),
-                                    })}
-                                    onClick={() => {
-                                        if (
-                                            ['1', '2', '3', '4'].includes(
-                                                task.type
-                                            )
-                                        ) {
-                                            taskOnClick(
-                                                task,
-                                                student.student_id
-                                            );
-                                        }
-                                    }}>
-                                    <div className={'task-type'}>
-                                        {taskType[task.type]}
-                                    </div>
-                                    <div className={'task-title'}>
-                                        {task.title}
-                                    </div>
-                                    <div className={'task-expire'}>
-                                        {task.expire_at}
-                                    </div>
+                        student.tasks.map((task, key) => {
+                            let todoLint;
+                            if (task.status === '0') {
+                                todoLint = '提醒';
+                            } else if (task.type === '2') {
+                                todoLint = quizStatus[task.stats_status || '1'];
+                                if (task.stats_status === '3') {
+                                    todoLint =
+                                        task.stats_is_auto_correct === '1'
+                                            ? '系统批改'
+                                            : '老师批改';
+                                }
+                            }
+
+                            return (
+                                <React.Fragment key={key}>
                                     <div
-                                        className={classNames(
-                                            'task-status',
-                                            ['red', 'red', 'green'][task.status]
-                                        )}>
-                                        {taskStatus[task.status]}
-                                    </div>
-                                    <div
-                                        className={classNames(
-                                            'task-todo',
-                                            { gray: task.status === '0' },
-                                            {
-                                                red:
-                                                    task.status === '2' &&
-                                                    task.type === '2' &&
-                                                    ['1', '2'].includes(
-                                                        task.stats_status
-                                                    ),
-                                            },
-                                            {
-                                                green:
-                                                    task.status === '2' &&
-                                                    task.type === '2' &&
-                                                    task.stats_status === '3',
+                                        className={classNames('taskPanel', {
+                                            click: [
+                                                '1',
+                                                '2',
+                                                '3',
+                                                '4',
+                                            ].includes(task.type),
+                                        })}
+                                        onClick={() => {
+                                            if (
+                                                ['1', '2', '3', '4'].includes(
+                                                    task.type
+                                                )
+                                            ) {
+                                                taskOnClick(
+                                                    task,
+                                                    student.student_id
+                                                );
                                             }
-                                        )}>
-                                        {task.status === '0'
-                                            ? '提醒'
-                                            : task.type === '2' &&
-                                              quizStatus[
-                                                  task.stats_status || '1'
-                                              ]}
+                                        }}>
+                                        <div className={'task-type'}>
+                                            {taskType[task.type]}
+                                        </div>
+                                        <div className={'task-title'}>
+                                            {task.title}
+                                        </div>
+                                        <div className={'task-expire'}>
+                                            {task.expire_at}
+                                        </div>
+                                        <div
+                                            className={classNames(
+                                                'task-status',
+                                                ['red', 'red', 'green'][
+                                                    task.status
+                                                ]
+                                            )}>
+                                            {taskStatus[task.status]}
+                                        </div>
+                                        <div
+                                            className={classNames(
+                                                'task-todo',
+                                                { gray: task.status === '0' },
+                                                {
+                                                    red:
+                                                        task.status === '2' &&
+                                                        task.type === '2' &&
+                                                        ['1', '2'].includes(
+                                                            task.stats_status
+                                                        ),
+                                                },
+                                                {
+                                                    green:
+                                                        task.status === '2' &&
+                                                        task.type === '2' &&
+                                                        task.stats_status ===
+                                                            '3',
+                                                }
+                                            )}>
+                                            {todoLint}
+                                        </div>
                                     </div>
-                                </div>
-                                <hr className={'hr2'} />
-                            </React.Fragment>
-                        ))}
+                                    <hr className={'hr2'} />
+                                </React.Fragment>
+                            );
+                        })}
                 </div>
             ))}
         </React.Fragment>

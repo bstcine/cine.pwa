@@ -2,6 +2,7 @@
  * Created by lidangkun on 2018/6/22.
  */
 import React from 'react';
+import moment from 'moment';
 import { CFlatButton, CDialog, CDatePicker, CSelect } from '@/component/_base';
 
 const FilterTaskDialog = ({
@@ -49,6 +50,20 @@ const FilterTaskDialog = ({
         fontSize: '0.28rem',
         color: '#3a3b3c',
     };
+    let startDate;
+    let endDate;
+    if (startTime) {
+        startDate = new Date(startTime);
+        startDate.setHours(0, 0, 0, 0);
+    } else {
+        startDate = undefined;
+    }
+    if (endTime) {
+        endDate = new Date(endTime);
+        endDate.setHours(0, 0, 0, 0);
+    } else {
+        endDate = undefined;
+    }
 
     return (
         <CDialog
@@ -63,18 +78,19 @@ const FilterTaskDialog = ({
 
             <CDatePicker
                 key={1000}
-                defaultValue={startTime}
+                defaultValue={startDate}
                 label="开始时间"
-                onChange={event => {
-                    actions.changeStartTime(event.target.value);
+                onChange={(event, date) => {
+                    // 将时间转换为时间
+                    actions.changeStartTime(moment(date).format('YYYY-MM-DD'));
                 }}
             />
             <CDatePicker
                 key={1001}
-                defaultValue={endTime}
+                defaultValue={endDate}
                 label="结束时间"
-                onChange={event => {
-                    actions.changeEndTime(event.target.value);
+                onChange={(event, date) => {
+                    actions.changeEndTime(moment(date).format('YYYY-MM-DD'));
                 }}
             />
             <br /> <br />

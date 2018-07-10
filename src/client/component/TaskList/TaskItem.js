@@ -32,7 +32,7 @@ const Status = ({ task }) => {
 };
 
 const getHref = task => {
-    let urlUserIdParam = user_id ? `&user_id=${user_id}` : '';
+    let urlUserIdParam = user_id ? `&user_id=${user_id}&cmd=check` : '';
     switch (task.type) {
         case Task_Type.Video:
             return `/learn/course/${task.course_id}?task_id=${

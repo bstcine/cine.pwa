@@ -82,6 +82,11 @@ export default class Widget extends PureComponent {
                         </Button>
                     </div>
                     <div>
+                        <Button variant="fab">
+                            <GIcon name="mi-lock" />
+                        </Button>
+                    </div>
+                    <div>
                         <Button fullWidth variant="contained" color="primary">
                             FULLWIDTH NORMAL
                         </Button>

@@ -5,8 +5,9 @@ import { getParam, removeParam } from './urlUtil';
 import uaUtil from '@/util/uaUtil';
 
 export let setShareParam = params => {
-    if (typeof window.wx === 'undefined' || !window.wx)
-        return console.log('window.wx not found, ensure include jweixin in your html');
+    if (typeof window.wx === 'undefined' || !window.wx) { return console.log(
+        'window.wx not found, ensure include jweixin in your html'
+    ); }
     return setShareTimeline(params);
 };
 
@@ -20,7 +21,7 @@ export let setShareTimeline = ({ title, link, imgUrl, desc }) => {
                 console.log('onMenuShareTimeline shared');
                 resolve();
             },
-            cancel: function() {}
+            cancel: function() {},
         });
         window.wx.onMenuShareAppMessage({
             title: title,
@@ -31,7 +32,7 @@ export let setShareTimeline = ({ title, link, imgUrl, desc }) => {
                 console.log('onMenuShareAppMessage shared');
                 // resolve()
             },
-            cancel: function() {}
+            cancel: function() {},
         });
     });
 };
@@ -56,7 +57,7 @@ export let initWechat = async () => {
                     title: data.share_title,
                     link: removeParam(data.share_link, ['token', 'share_mask']),
                     imgUrl: data.share_imgUrl,
-                    desc: data.share_desc
+                    desc: data.share_desc,
                 });
                 await updateShare(sharelog_id);
                 hideShareMask();
@@ -72,15 +73,22 @@ export let initWechat = async () => {
 
 export let configWechat = config => {
     return new Promise((resolve, reject) => {
-        if (typeof window.wx === 'undefined' || !window.wx)
-            return reject(new Error('window.wx not found, ensure include jweixin in your html'));
+        if (typeof window.wx === 'undefined' || !window.wx) { return reject(
+            new Error(
+                'window.wx not found, ensure include jweixin in your html'
+            )
+        ); }
         window.wx.config({
-            debug: false,
+            debug: true,
             appId: config.appId,
             timestamp: config.timestamp,
             nonceStr: config.nonceStr,
             signature: config.signature,
-            jsApiList: ['chooseWXPay', 'onMenuShareTimeline', 'onMenuShareAppMessage']
+            jsApiList: [
+                'chooseWXPay',
+                'onMenuShareTimeline',
+                'onMenuShareAppMessage',
+            ],
         });
         window.wx.ready(() => {
             console.log('wechat config ready');
@@ -89,7 +97,7 @@ export let configWechat = config => {
         window.wx.error(err => {
             // alert(`err ${err}`)
             console.log('wechat config err', err);
-            resolve(err);
+            alert(err);
         });
     });
 };

@@ -73,7 +73,7 @@
                 width: 100%;
                 padding-right: 0.1rem;
                 font-family: PingFangSC-Regular;
-                font-size: 0.3rem;
+                font-size: 0.28rem;
                 color: #3a3b3c;
                 white-space: nowrap;
                 text-overflow: ellipsis;
@@ -83,11 +83,11 @@
             .task-expire {
                 width: 3.5rem;
                 color: #b2b3b5;
-                font-size: 0.3rem;
+                font-size: 0.24rem;
             }
             .task-status {
                 width: 2.5rem;
-                font-size: 0.3rem;
+                font-size: 0.24rem;
                 &.red {
                     color: #fb525a;
                 }
@@ -96,60 +96,48 @@
                 }
             }
             .task-todo {
-                width: 2rem;
-                text-align: center;
-                font-size: 0.3rem;
+                width: 1.3rem;
+                height: 0.56rem;
+                font-family: PingFangSC-Medium;
+                font-size: 0.28rem;
+                border-radius: 0.27rem;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-shrink: 0;
 
                 &.red {
-                    font-size: 12px;
                     color: #fff;
-                    text-align: center;
-                    line-height: 1;
-                    padding-top: 0.5em;
-                    padding-bottom: 0.5em;
-                    background-color: #ed3c4d;
-                    box-shadow: 0.02rem 0.02rem 0.06rem 0
-                        rgba(237, 60, 77, 0.24);
-                    border-radius: 0.9rem;
+                    background-image: linear-gradient(#fb525a, #fb525a),
+                        linear-gradient(#ffffff, #ffffff);
+                    background-blend-mode: normal, normal;
+                    box-shadow: 0rem 0.08rem 0.078rem 0.002rem
+                        rgba(252, 104, 104, 0.24);
+                    border-radius: 0.27rem;
                 }
 
                 &.green {
-                    font-size: 12px;
                     color: #fff;
                     text-align: center;
-                    line-height: 1;
-                    padding-top: 0.5em;
-                    padding-bottom: 0.5em;
                     background-color: #19bb4c;
-                    box-shadow: 0.02rem 0.02rem 0.06rem 0
-                        rgba(237, 60, 77, 0.24);
-                    border-radius: 0.9rem;
+                    box-shadow: 0rem 0.08rem 0.078rem 0.002rem
+                        rgba(225, 228, 233, 0.3);
                 }
 
                 &.blue {
-                    font-size: 12px;
                     color: #fff;
-                    text-align: center;
-                    line-height: 1;
-                    padding-top: 0.5em;
-                    padding-bottom: 0.5em;
                     background-color: #468bdf;
                     box-shadow: 0.02rem 0.02rem 0.06rem 0
                         rgba(237, 60, 77, 0.24);
-                    border-radius: 0.9rem;
                 }
 
                 &.gray {
-                    font-size: 12px;
                     color: #a4a9b1;
-                    text-align: center;
-                    line-height: 1;
-                    padding-top: 0.5em;
-                    padding-bottom: 0.5em;
-                    background-color: #e3e5ea;
-                    box-shadow: 0.02rem 0.02rem 0.06rem 0
-                        rgba(237, 60, 77, 0.24);
-                    border-radius: 0.9rem;
+                    background-image: linear-gradient(#e3e5ea, #e3e5ea),
+                        linear-gradient(#ffffff, #ffffff);
+                    background-blend-mode: normal, normal;
+                    box-shadow: 0rem 0.08rem 0.078rem 0.002rem
+                        rgba(225, 228, 233, 0.3);
                 }
             }
         }
@@ -177,7 +165,9 @@
                 }
 
                 .task-todo {
-                    width: 2rem;
+                    width: 1.28rem;
+                    height: 0.54rem;
+                    flex-shrink: 1;
                     font-size: 0.24rem;
 
                     &.red {

@@ -20,6 +20,9 @@ const PayCenter = chunkComponent(() =>
 const PayStatus = chunkComponent(() =>
     import(/* webpackChunkName: "content/chunk/index.ps" */ './component/PayStatus')
 );
+const Widget = chunkComponent(() =>
+    import(/* webpackChunkName: "content/chunk/index.Widget" */ './component/Widget')
+);
 
 const createComponent = (Component, userRequired, props) => {
     if (userRequired && !storeUtil.getToken()) {
@@ -55,6 +58,7 @@ class Content extends Entry {
                     <React.Fragment>
                         <Route exact path="/" component={Home} />
                         <Route path="/content/course" component={Course} />
+                        <Route path="/widget" component={Widget} />
                         <Route
                             path="/pay/prepare"
                             component={props =>

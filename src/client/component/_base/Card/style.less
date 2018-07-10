@@ -1,0 +1,46 @@
+@import '../style';
+
+.@{grid} {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.@{card}__col-1-1-2 {
+    width: 100%;
+}
+
+@media @media-up-sm {
+    .@{card}__col-1-1-2 {
+        flex: 0 percentage(1/2);
+        width: percentage(1/2);
+    }
+}
+
+.@{card}__col-1-2-2 {
+    width: 100%;
+}
+
+@media @media-up-xs {
+    .@{card}__col-1-2-2 {
+        flex: 0 percentage(1/2);
+        width: percentage(1/2);
+    }
+}
+
+.@{card}__col-1-2-3 {
+    width: 100%;
+}
+
+@media @media-up-xs {
+    .@{card}__col-1-2-3 {
+        flex: 0 percentage(1/2);
+        width: percentage(1/2);
+    }
+}
+@media @media-up-sm {
+    .@{card}__col-1-2-3 {
+        flex: 0 percentage(1/3);
+        width: percentage(1/3);
+    }
+}

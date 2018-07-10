@@ -3,6 +3,8 @@ import classNames from 'classnames';
 import './style.less';
 import { baseprefix } from '@/component/_base/config';
 
+const btnCls = `${baseprefix}-btn`;
+
 export default class Button extends Component {
     static defaultProps = {
         component: 'button',
@@ -27,7 +29,7 @@ export default class Button extends Component {
         if (component === 'button' && href) {
             ComponentProp = 'a';
         }
-        const btnCls = `${baseprefix}-btn`;
+
         return (
             <ComponentProp
                 className={classNames(

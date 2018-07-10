@@ -12,7 +12,7 @@ import {
 import GrammarStats from '../component/quiz/GrammarStats';
 import QuizVocabStats from '../component/quiz/QuizVocabStats';
 import { CFlatButton } from '@/component/_base';
-import GFloatingBox from '@/component/GFloatingBox';
+import CFloatingBox from '@/component/CFloatingBox';
 import {
     URL_User_Quiz_Vocab_New,
     URL_Quiz_Grammar,
@@ -65,7 +65,7 @@ class QuizContainer extends Component {
                         </TabPanel>
                     </TabPanels>
                 </Tabs>
-                <GFloatingBox>
+                <CFloatingBox>
                     {user &&
                         user.type === '2' && (
                         <CFlatButton
@@ -84,7 +84,7 @@ class QuizContainer extends Component {
                             location.href = URL_User_Quiz_Vocab_New;
                         }}
                     />
-                </GFloatingBox>
+                </CFloatingBox>
             </div>
         );
     }

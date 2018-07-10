@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid, Column112 } from '@/component/GGrid';
+import { Grid, Column112 } from '@/component/CGrid';
 import TextFix from '@/component/TextFix';
 import GPanel from '@/component/GPanel';
 

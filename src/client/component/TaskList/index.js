@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid } from '@/component/GGrid';
+import { Grid } from '@/component/CGrid';
 import TaskItem from './TaskItem';
 
 

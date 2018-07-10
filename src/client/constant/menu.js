@@ -61,7 +61,7 @@ const cineMenu = [
             {
                 label: '我的测试',
                 url: h5.URL_User_Quiz,
-                icon: 'ci-grammar',
+                icon: 'mi-brightness_auto',
                 children: [
                     {
                         label: '语法测试',

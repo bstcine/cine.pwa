@@ -1,13 +1,12 @@
 import React from 'react';
 import moment from 'moment';
+import TaskList from '@/component/TaskList';
 import '../../asset/style/historyTask.less';
-import { Grid } from '@/component/GGrid';
-import TasksList from '../TasksList';
 
-const TaskSection = ({ taskModel }) => {
+const TaskWeek = ({ value }) => {
     let currentWeek = moment().format('GGGGWW');
     // 重写week
-    let week = taskModel.week;
+    let week = value;
     if (week === currentWeek) {
         week = '本周';
     } else {
@@ -15,23 +14,22 @@ const TaskSection = ({ taskModel }) => {
         let realWeek = week.substring(4, 6);
         week = year + '第' + realWeek + '周';
     }
-    return (
-        <div>
-            <div className="HT_TaskHeaderTitle">{week}</div>
-            <Grid className="task-list">
-                <TasksList tasks={taskModel.taskList} />
-            </Grid>
-        </div>
-    );
+    return <div className="HT_TaskHeaderTitle">{week}</div>;
 };
 
 class HistoryTaskList extends React.PureComponent {
     render() {
         const taskModels = this.props.taskModels;
-        const children = taskModels.map(item => {
-            return <TaskSection key={item.week} taskModel={item} />;
+
+        const children = taskModels.map((model, i) => {
+            return (
+                <div key={i}>
+                    <TaskWeek value={model.week} />
+                    <TaskList tasks={model.taskList} />
+                </div>
+            );
         });
-        return <div className="taskList">{children}</div>;
+        return <div className="historyTask">{children}</div>;
     }
 }
 

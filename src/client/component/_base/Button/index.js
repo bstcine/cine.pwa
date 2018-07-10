@@ -10,6 +10,7 @@ const CButton = ({
     color,
     variant,
     size,
+    mini,
     onClick,
 }) => (
     <Button
@@ -20,6 +21,7 @@ const CButton = ({
         color={color}
         variant={variant}
         size={size}
+        mini={mini}
         onClick={onClick}>
         {children}
     </Button>

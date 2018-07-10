@@ -23,6 +23,7 @@ export default class Button extends Component {
             color,
             variant,
             size,
+            mini,
             onClick,
         } = this.props;
         let ComponentProp = component;
@@ -40,7 +41,9 @@ export default class Button extends Component {
                         [`${btnCls}--large`]: size === 'large',
                         [`${btnCls}--${color}`]: !!color,
                         [`${btnCls}--${variant}`]: !!variant,
+                        [`${btnCls}--contained`]: variant === 'fab',
                         [`${btnCls}--disabled`]: disabled,
+                        [`${btnCls}--mini`]: mini,
                     },
                     className
                 )}

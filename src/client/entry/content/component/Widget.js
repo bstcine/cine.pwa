@@ -85,6 +85,12 @@ export default class Widget extends PureComponent {
                         <Button variant="fab">
                             <GIcon name="mi-lock" />
                         </Button>
+                        <Button variant="fab" color="primary">
+                            <GIcon name="mi-alarm" />
+                        </Button>
+                        <Button mini variant="fab" color="secondary">
+                            <GIcon name="mi-pets" />
+                        </Button>
                     </div>
                     <div>
                         <Button fullWidth variant="contained" color="primary">
@@ -101,7 +107,7 @@ export default class Widget extends PureComponent {
                 </GPanel>
                 <GPanel title="Gird Card default112">
                     <CGrid>
-                        <CCard>1</CCard>
+                        <CCard className="cbabsdf">1</CCard>
                         <CCard>2</CCard>
                         <CCard>3</CCard>
                         <CCard>4</CCard>
@@ -129,6 +135,18 @@ export default class Widget extends PureComponent {
                         <CCard layout="123">4</CCard>
                         <CCard layout="123">5</CCard>
                         <CCard layout="123">6</CCard>
+                    </CGrid>
+                </GPanel>
+                <GPanel title="Gird Card 234">
+                    <CGrid>
+                        <CCard layout="234">1</CCard>
+                        <CCard layout="234">2</CCard>
+                        <CCard layout="234">3</CCard>
+                        <CCard layout="234">4</CCard>
+                        <CCard layout="234">5</CCard>
+                        <CCard layout="234">6</CCard>
+                        <CCard layout="234">7</CCard>
+                        <CCard layout="234">8</CCard>
                     </CGrid>
                 </GPanel>
             </React.Fragment>

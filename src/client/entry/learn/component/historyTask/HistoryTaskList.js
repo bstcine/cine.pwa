@@ -4,14 +4,13 @@ import GPanel from '@/component/GPanel';
 import TaskList from '@/component/TaskList';
 import '../../asset/style/historyTask.less';
 
-const TaskWeek = ({ value }) => {
+const TaskWeek = ({ value, seq }) => {
     let currentWeek = moment().format('GGGGWW');
     // 重写week
     let week = value;
-    let className = 'HT_HeaderTitle';
+    let className = seq === 0 ? 'HT_FirstHeaderTitle' : 'HT_HeaderTitle';
     if (week === currentWeek) {
         week = '本周';
-        className = 'HT_FirstHeaderTitle';
     } else {
         let year = week.substring(0, 4);
         let realWeek = week.substring(4, 6);
@@ -30,7 +29,7 @@ class HistoryTaskList extends React.PureComponent {
         const children = taskModels.map((model, i) => {
             return (
                 <div key={i}>
-                    <TaskWeek value={model.week} />
+                    <TaskWeek value={model.week} seq={i}/>
                     <TaskList tasks={model.taskList} isMentor={isMentor} />
                 </div>
             );

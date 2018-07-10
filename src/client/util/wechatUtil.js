@@ -1,13 +1,19 @@
 import { getWechatJsSignature } from '@/service/base';
-import { checkShareMask, updateShare, hideShareMask } from './shareUtil';
-import { queryShare } from './shareUtil';
+import {
+    checkShareMask,
+    queryShare,
+    updateShare,
+    hideShareMask,
+} from './shareUtil';
 import { getParam, removeParam } from './urlUtil';
 import uaUtil from '@/util/uaUtil';
 
 export let setShareParam = params => {
-    if (typeof window.wx === 'undefined' || !window.wx) { return console.log(
-        'window.wx not found, ensure include jweixin in your html'
-    ); }
+    if (typeof window.wx === 'undefined' || !window.wx) {
+        return console.log(
+            'window.wx not found, ensure include jweixin in your html'
+        );
+    }
     return setShareTimeline(params);
 };
 
@@ -73,13 +79,15 @@ export let initWechat = async () => {
 
 export let configWechat = config => {
     return new Promise((resolve, reject) => {
-        if (typeof window.wx === 'undefined' || !window.wx) { return reject(
-            new Error(
-                'window.wx not found, ensure include jweixin in your html'
-            )
-        ); }
+        if (typeof window.wx === 'undefined' || !window.wx) {
+            return reject(
+                new Error(
+                    'window.wx not found, ensure include jweixin in your html'
+                )
+            );
+        }
         window.wx.config({
-            debug: true,
+            debug: false,
             appId: config.appId,
             timestamp: config.timestamp,
             nonceStr: config.nonceStr,
@@ -97,7 +105,7 @@ export let configWechat = config => {
         window.wx.error(err => {
             // alert(`err ${err}`)
             console.log('wechat config err', err);
-            alert(err);
+            resolve(err);
         });
     });
 };

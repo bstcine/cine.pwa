@@ -16,6 +16,7 @@ export default class Button extends Component {
             className,
             component,
             disabled,
+            fullWidth,
             href,
             color,
             variant,
@@ -32,6 +33,7 @@ export default class Button extends Component {
                 className={classNames(
                     `${btnCls}`,
                     {
+                        [`${btnCls}--fullWidth`]: !!fullWidth,
                         [`${btnCls}--small`]: size === 'small',
                         [`${btnCls}--large`]: size === 'large',
                         [`${btnCls}--${color}`]: !!color,

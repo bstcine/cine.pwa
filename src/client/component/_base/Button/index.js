@@ -5,6 +5,7 @@ const CButton = ({
     children,
     className,
     disabled,
+    fullWidth,
     href,
     color,
     variant,
@@ -14,6 +15,7 @@ const CButton = ({
     <Button
         className={className}
         disabled={disabled}
+        fullWidth={fullWidth}
         href={href}
         color={color}
         variant={variant}

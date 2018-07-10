@@ -18,9 +18,13 @@ class HistoryTask extends React.PureComponent {
             startTime,
             endTime,
             defaultType,
+            user,
             actions,
         } = this.props;
-        const isMentor = false;
+        let isMentor = false;
+        if (user && user.role_id && (user.role_id === '1' || user.role_id === '2')) {
+            isMentor = true;
+        }
         return (
             <React.Fragment>
                 <HistoryTaskList taskModels={taskModels} isMentor={isMentor}/>

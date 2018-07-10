@@ -29,9 +29,9 @@ class HistoryTaskContainer extends React.PureComponent {
             startTime,
             endTime,
             defaultType,
+            user,
             actions,
         } = this.props;
-
         return (
             <CThemeProvider>
                 <div>
@@ -41,6 +41,7 @@ class HistoryTaskContainer extends React.PureComponent {
                         startTime={startTime}
                         endTime={endTime}
                         defaultType={defaultType}
+                        user={user}
                         actions={actions}
                     />
                 </div>
@@ -57,6 +58,7 @@ const mapStateToProps = state => {
         startTime: state.TaskRedu.get('startTime'),
         endTime: state.TaskRedu.get('endTime'),
         defaultType: state.TaskRedu.get('defaultType'),
+        user: state.userRedu.data,
     };
 };
 

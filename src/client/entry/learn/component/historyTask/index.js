@@ -20,10 +20,10 @@ class HistoryTask extends React.PureComponent {
             defaultType,
             actions,
         } = this.props;
-
+        const isMentor = false;
         return (
             <React.Fragment>
-                <HistoryTaskList taskModels={taskModels} />
+                <HistoryTaskList taskModels={taskModels} isMentor={isMentor}/>
 
                 <CFloatingButton
                     iconName="search"

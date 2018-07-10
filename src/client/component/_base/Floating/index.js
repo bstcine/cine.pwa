@@ -12,7 +12,7 @@ export const CFloatingButton = ({ text, iconName, color, onClick, ...props }) =>
                 variant="fab"
                 color={_color}
                 onClick={onClick}
-                className="Button"
+                className="Button Location"
                 {...props}>
                 {icon}
             </Button>

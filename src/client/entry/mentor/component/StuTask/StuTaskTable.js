@@ -125,8 +125,8 @@ const StudentTable = ({ list, ...props }) => {
                                 if (task.stats_status === '3') {
                                     todoLint =
                                         task.stats_is_auto_correct === '1'
-                                            ? '系统批改'
-                                            : '老师批改';
+                                            ? '自动批改'
+                                            : '已批改';
                                 }
                             }
 

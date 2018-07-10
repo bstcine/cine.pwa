@@ -2,7 +2,6 @@
  * Created by lidangkun on 2018/6/15.
  */
 import React from 'react';
-import '../../asset/style/historyTask.less';
 import HistoryTaskList from './HistoryTaskList';
 import FilterTaskDialog from './FilterTaskDialog';
 import { CFloatingButton } from '@/component/_base';
@@ -23,7 +22,7 @@ class HistoryTask extends React.PureComponent {
         } = this.props;
 
         return (
-            <div className="historyTask">
+            <React.Fragment>
                 <HistoryTaskList taskModels={taskModels} />
 
                 <CFloatingButton
@@ -40,7 +39,7 @@ class HistoryTask extends React.PureComponent {
                     defaultType={defaultType}
                     actions={actions}
                 />
-            </div>
+            </React.Fragment>
         );
     }
 }

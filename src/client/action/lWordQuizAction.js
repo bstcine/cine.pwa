@@ -288,7 +288,7 @@ export const lWordQuizAction = {
         // 更新测试状态为已完成
         dispatch(lWordQuizAction.updateTask('2'));
         // 提示用户已完成全部测试（掌握全部单词）
-        dispatch(toastAction.show('测试完成'));
+        alert('测试完成');
         // 返回学习界面
         setTimeout(function () {
             location.href = '/learn';

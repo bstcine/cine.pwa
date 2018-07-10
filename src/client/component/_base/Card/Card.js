@@ -8,15 +8,13 @@ const cardCls = `${baseprefix}-card`;
 const Card = ({ layout = '112', className, children, onClick }) => {
     return (
         <div
-            className={classNames(
-                cardCls,
-                {
-                    [`${cardCls}--col${layout}`]: !!layout,
-                },
-                className
-            )}
+            className={classNames(cardCls, {
+                [`${cardCls}--col${layout}`]: !!layout,
+            })}
             onClick={onClick}>
-            <div className={`${cardCls}__content`}>{children}</div>
+            <div className={classNames(`${cardCls}__content`, className)}>
+                {children}
+            </div>
         </div>
     );
 };

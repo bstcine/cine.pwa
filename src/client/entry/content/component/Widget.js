@@ -137,6 +137,18 @@ export default class Widget extends PureComponent {
                         <CCard layout="123">6</CCard>
                     </CGrid>
                 </GPanel>
+                <GPanel title="Gird Card 234">
+                    <CGrid>
+                        <CCard layout="234">1</CCard>
+                        <CCard layout="234">2</CCard>
+                        <CCard layout="234">3</CCard>
+                        <CCard layout="234">4</CCard>
+                        <CCard layout="234">5</CCard>
+                        <CCard layout="234">6</CCard>
+                        <CCard layout="234">7</CCard>
+                        <CCard layout="234">8</CCard>
+                    </CGrid>
+                </GPanel>
             </React.Fragment>
         );
     }

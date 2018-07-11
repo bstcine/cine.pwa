@@ -14,6 +14,7 @@ const Label = ({ type }) => {
         '2': '习题',
         '3': '反馈',
         '4': '单词',
+        '5': '习题',
         '9': '其他',
     };
     return <span className="label">{map[type]}</span>;

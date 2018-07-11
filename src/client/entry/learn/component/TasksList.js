@@ -10,6 +10,7 @@ const Label = ({ type }) => {
         '2': '习题',
         '3': '反馈',
         '4': '单词',
+        '5': '习题',
         '9': '其他',
     };
     return <span className="label">{map[type]}</span>;
@@ -32,13 +33,16 @@ const TasksList = ({ tasks, isLimitTasks }) => {
     const getHref = task => {
         switch (task.type) {
             case Task_Type.Video:
-                return `/learn/course/${task.course_id}?task_id=${task.id}&lesson_id=${
-                    task.lesson_id
-                }`;
+            case Task_Type.PDF_Quiz:
+                return `/learn/course/${task.course_id}?task_id=${
+                    task.id
+                }&lesson_id=${task.lesson_id}`;
             case Task_Type.Quiz:
                 return `/quiz/kj?task_id=${task.id}`;
             case Task_Type.Quiz_Feedback: {
-                return `/quiz/kj?task_id=${task.id}&stats_content_quiz_id=${task.object_id}`;
+                return `/quiz/kj?task_id=${task.id}&stats_content_quiz_id=${
+                    task.object_id
+                }`;
             }
             case Task_Type.Word:
                 if (task.word_start_index && task.word_end_index) {
@@ -46,7 +50,9 @@ const TasksList = ({ tasks, isLimitTasks }) => {
                         task.word_start_index
                     }&end_index=${task.word_end_index}`;
                 } else {
-                    return `/learn/word?task_id=${task.id}&word_type=${task.object_id}`;
+                    return `/learn/word?task_id=${task.id}&word_type=${
+                        task.object_id
+                    }`;
                 }
         }
     };

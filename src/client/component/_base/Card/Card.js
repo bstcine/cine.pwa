@@ -20,3 +20,5 @@ const Card = ({ layout = '112', className, children, onClick }) => {
 };
 
 export default Card;
+
+export { cardCls as className };

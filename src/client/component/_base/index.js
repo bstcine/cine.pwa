@@ -14,6 +14,7 @@ const CFlatButton = props => {
 const CDatePicker = ({ defaultValue, label, onChange }) => {
     return (
         <DatePicker
+            defaultDate={defaultValue}
             hintText={label}
             locale="en-US"
             autoOk={true}

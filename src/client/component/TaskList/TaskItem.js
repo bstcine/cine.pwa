@@ -4,6 +4,9 @@ import { Task_Type } from '@/constant';
 import { Column112 } from '@/component/CGrid';
 import GIcon from '@/component/GIcon';
 import './style.less';
+import { getParam } from '@/util/urlUtil';
+
+const { user_id } = getParam();
 
 const Label = ({ type }) => {
     const map = {
@@ -29,17 +32,18 @@ const Status = ({ task }) => {
 };
 
 const getHref = task => {
+    let urlUserIdParam = user_id ? `&user_id=${user_id}&cmd=check` : '';
     switch (task.type) {
         case Task_Type.Video:
             return `/learn/course/${task.course_id}?task_id=${
                 task.id
             }&lesson_id=${task.lesson_id}`;
         case Task_Type.Quiz:
-            return `/quiz/kj?task_id=${task.id}`;
+            return `/quiz/kj?task_id=${task.id}${urlUserIdParam}`;
         case Task_Type.Quiz_Feedback: {
-            return `/quiz/kj?task_id=${task.id}&stats_content_quiz_id=${
-                task.object_id
-            }`;
+            return `/quiz/kj?task_id=${
+                task.id
+            }${urlUserIdParam}&stats_content_quiz_id=${task.object_id}`;
         }
         case Task_Type.Word:
             if (task.word_start_index && task.word_end_index) {

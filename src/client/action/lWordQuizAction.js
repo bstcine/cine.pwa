@@ -62,6 +62,13 @@ export const lWordQuizAction = {
         payload: isStart,
     }),
     /**
+     * 结束测试的方法
+     * */
+    _endTest: isEnd => ({
+        type: ACTION_LT.ENDTEST,
+        payload: isEnd,
+    }),
+    /**
      * 改变掌握数量
      * */
     _changeCorrectCount: count => ({
@@ -288,11 +295,7 @@ export const lWordQuizAction = {
         // 更新测试状态为已完成
         dispatch(lWordQuizAction.updateTask('2'));
         // 提示用户已完成全部测试（掌握全部单词）
-        alert('测试完成');
-        // 返回学习界面
-        setTimeout(function () {
-            location.href = '/learn';
-        }, 250);
+        dispatch(lWordQuizAction._endTest(true));
     },
     /**
      * 开始下一个（对外调用）

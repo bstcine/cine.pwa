@@ -43,6 +43,10 @@ export const Task_Type = {
      * 4:单词
      */
     Word: '4',
+    /**
+     * 5:pdf习题
+     */
+    PDF_Quiz: '5',
 };
 
 export const SITECODE = {

@@ -32,7 +32,7 @@ const CouponTransfer = ({
 
     let couponValue = '';
 
-    if (coupon !== undefined) {
+    if (coupon) {
         let value =
             coupon.type === '1'
                 ? coupon.value
@@ -55,9 +55,7 @@ const CouponTransfer = ({
     };
     const couponInfo = (
         <div style={couponSyle}>
-            <span style={nameStyle}>
-                {coupon === undefined ? '' : coupon.name}
-            </span>
+            <span style={nameStyle}>{!coupon ? '' : coupon.name}</span>
             <span style={valueStyle}>价值：{couponValue}</span>
         </div>
     );

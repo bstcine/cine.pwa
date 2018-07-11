@@ -1,7 +1,7 @@
-import { fromJS } from 'immutable';
+import { Map } from 'immutable';
 import { Action_UC } from '@/constant/actionTypeUser';
 
-const initialState = fromJS({
+const initialState = Map({
     rows: [],
     isOpenAdd: false,
     transfer: {

@@ -5,9 +5,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { getParam } from '@/util/urlUtil';
-import { Toast } from '@/component/Toast';
 import { lWordQuizAction } from '@/action/lWordQuizAction';
 import WordQuiz from  '../component/WordQuiz';
+import CThemeProvider from '@/component/CThemeProvider';
+import { CFlatButton, CDialog } from '@/component/_base';
 
 class VocabularyTestContainer extends Component {
     constructor(props) {
@@ -22,10 +23,20 @@ class VocabularyTestContainer extends Component {
     }
 
     render() {
-        let { network, isTest, selectIndex, wordCount, correctCount, content, actions } = this.props;
+        let { isTest, isDone, selectIndex, wordCount, correctCount, content, actions } = this.props;
+
+        const dialogActions = [
+            <CFlatButton
+                key={2}
+                label="确定"
+                primary={true}
+                onClick={() => {
+                    location.href = '/learn';
+                }}
+            />,
+        ];
         return (
-            <React.Fragment>
-                <Toast network={network} />
+            <CThemeProvider>
                 <WordQuiz
                     param={this.param}
                     isTest={isTest}
@@ -35,7 +46,16 @@ class VocabularyTestContainer extends Component {
                     content={content}
                     actions={actions}
                 />
-            </React.Fragment>
+                <CDialog
+                    title="已掌握全部单词，立刻返回学习首页"
+                    modal={false}
+                    actions={dialogActions}
+                    open={isDone}
+                    onRequestClose={() => {
+                        location.href = '/learn';
+                    }}>
+                </CDialog>
+            </CThemeProvider>
         );
     }
 }
@@ -43,11 +63,11 @@ class VocabularyTestContainer extends Component {
 const mapStateToProps = state => {
     return {
         isTest: state.WordQuizRedu.get('isTest'),
+        isDone: state.WordQuizRedu.get('isDone'),
         selectIndex: state.WordQuizRedu.get('selectIndex'),
         wordCount: state.WordQuizRedu.get('wordCount'),
         content: state.WordQuizRedu.get('content'),
         correctCount: state.WordQuizRedu.get('correctCount'),
-        network: state.toastRedu,
     };
 };
 

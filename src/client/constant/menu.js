@@ -91,18 +91,17 @@ const cineMenu = [
             {
                 label: '学生作业',
                 url: h5.URL_Mentor_Student_Task,
-                icon_path:
-                    '//www.bstcine.com/asset/image/ico_headpic.d8668494.png',
+                icon_path: require('@/asset/image/ico_stu_work.png'),
             },
             {
                 label: '学生测试',
                 url: h5.URL_Mentor_Student_Quiz,
-                icon_path: require('@/entry/user/asset/image/ico_integral.png'),
+                icon_path: require('@/asset/image/ico_stu_test.png'),
             },
             {
                 label: '待批改列表',
                 url: h5.URL_Mentor_CorrectList,
-                icon_path: require('@/entry/user/asset/image/ico_integral.png'),
+                icon_path: require('@/asset/image/ico_edit_list.png'),
                 disabled: true,
             },
         ],

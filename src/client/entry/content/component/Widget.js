@@ -78,7 +78,7 @@ export default class Widget extends PureComponent {
                             size="large"
                             variant="contained"
                             color="secondary">
-                            LARGE
+                            LARGE2
                         </Button>
                     </div>
                     <div>

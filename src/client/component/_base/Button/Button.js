@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import classNames from 'classnames';
 import './style.less';
 import { baseprefix } from '@/component/_base/config';
 
-const btnCls = `${baseprefix}-btn`;
+const cls = `${baseprefix}-btn`;
 
-export default class Button extends Component {
+export default class Button extends PureComponent {
     static defaultProps = {
         component: 'button',
         color: 'default',
@@ -20,8 +20,11 @@ export default class Button extends Component {
             disabled,
             fullWidth,
             href,
+            // null | 'primary' | 'secondary'
             color,
+            // null | 'contained' | 'outlined' | 'fab'
             variant,
+            // 'small' | null | 'large'
             size,
             mini,
             onClick,
@@ -33,18 +36,18 @@ export default class Button extends Component {
         return (
             <ComponentProp
                 className={classNames(
-                    `${btnCls}`,
+                    `${cls}`,
                     {
-                        [`${btnCls}--fullWidth`]: !!fullWidth,
-                        [`${btnCls}--small`]: size === 'small',
-                        [`${btnCls}--large`]: size === 'large',
-                        [`${btnCls}--${color}`]: !!color,
-                        [`${btnCls}--contained`]:
+                        [`${cls}--fullWidth`]: !!fullWidth,
+                        [`${cls}--small`]: size === 'small',
+                        [`${cls}--large`]: size === 'large',
+                        [`${cls}--${color}`]: !!color,
+                        [`${cls}--contained`]:
                             variant === 'contained' || variant === 'fab',
-                        [`${btnCls}--outlined`]: variant === 'outlined',
-                        [`${btnCls}--fab`]: variant === 'fab',
-                        [`${btnCls}--disabled`]: disabled,
-                        [`${btnCls}--mini`]: mini,
+                        [`${cls}--outlined`]: variant === 'outlined',
+                        [`${cls}--fab`]: variant === 'fab',
+                        [`${cls}--disabled`]: disabled,
+                        [`${cls}--mini`]: mini,
                     },
                     className
                 )}

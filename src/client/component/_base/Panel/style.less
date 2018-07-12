@@ -1,12 +1,16 @@
-@import '~asset/style/_cine.less';
+@import '../style';
 
-.g-panel {
+.@{panel} {
     margin-bottom: 0.2rem;
     padding: 0.3rem 0.4rem;
 
     background-color: #fff;
+
+    &:last-child {
+        margin-bottom: 0 !important;
+    }
 }
-.g-panel__head {
+.@{panel}__head {
     display: flex;
 
     height: 0.62rem;
@@ -16,12 +20,12 @@
     justify-content: space-between;
     align-items: center;
 }
-.g-panel__title {
+.@{panel}__title {
     font-size: 0.3rem;
 
     position: relative;
 }
-.g-panel__badge {
+.@{panel}__badge {
     font-size: 0.4rem;
     line-height: 0.64rem;
 
@@ -37,36 +41,32 @@
     border-radius: 0.32rem;
     background-color: #fc3447;
 }
-.g-panel__ext {
+.@{panel}__ext {
     font-size: 0.28rem;
 
     color: #7a7b7c;
 }
-.g-panel__body {
+.@{panel}__body {
     padding: 0.2rem 0;
-    overflow: hidden;
-}
-
-.g-panel:last-child {
-    margin-bottom: 0 !important;
 }
 
 @media @media-up-xs {
-    .g-panel {
+    .@{panel} {
         margin-bottom: 0.4rem;
         padding: 0.3rem 0.6rem;
     }
-    .g-panel__head {
+
+    .@{panel}__head {
         height: 0.8rem;
         border-bottom: 1px solid #f5f9fc;
     }
-    .g-panel__title {
+    .@{panel}__title {
         font-size: 0.36rem;
     }
-    .g-panel__ext {
+    .@{panel}__ext {
         font-size: 0.32rem;
     }
-    .g-panel__body {
+    .@{panel}__body {
         padding: 0.4rem 0;
     }
 }

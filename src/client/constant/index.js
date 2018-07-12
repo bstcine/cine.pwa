@@ -44,9 +44,9 @@ export const Task_Type = {
      */
     Word: '4',
     /**
-     * 5:pdf习题
+     * 5:习题pdf格式
      */
-    PDF_Quiz: '5',
+    Quiz_PDF: '5',
 };
 
 export const SITECODE = {

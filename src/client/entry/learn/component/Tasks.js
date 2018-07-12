@@ -2,7 +2,7 @@ import React from 'react';
 import { Grid } from '@/component/CGrid';
 import GIcon from '@/component/GIcon';
 import TasksList from './TasksList';
-import GPanel from '@/component/GPanel';
+import { CPanel } from '@/component/_base';
 
 const ExpandMore = ({ tasks, isLimitTasks, onShowAllTask }) => {
     if (tasks && tasks.length > 5 && isLimitTasks) {
@@ -18,7 +18,7 @@ const ExpandMore = ({ tasks, isLimitTasks, onShowAllTask }) => {
 
 const Tasks = ({ tasks, isLimitTasks, onShowAllTask }) => {
     return (
-        <GPanel
+        <CPanel
             title="本周作业"
             badge={tasks.filter(i => i.status !== '2').length}
             ext_title="历史作业"
@@ -31,7 +31,7 @@ const Tasks = ({ tasks, isLimitTasks, onShowAllTask }) => {
                     onShowAllTask={onShowAllTask}
                 />
             </Grid>
-        </GPanel>
+        </CPanel>
     );
 };
 

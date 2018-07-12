@@ -3,16 +3,33 @@ import classNames from 'classnames';
 import './style.less';
 import { baseprefix } from '@/component/_base/config';
 
-const cardCls = `${baseprefix}-card`;
+const cls = `${baseprefix}-card`;
 
-const Card = ({ layout = '112', className, children, onClick }) => {
+const Card = ({
+    // '112' | '122' | '123' | '234'
+    layout = '112',
+    // 'none' | 'shadow' | 'darken' | 'outlined'
+    hover = 'shadow',
+    className,
+    children,
+    onClick,
+}) => {
     return (
         <div
-            className={classNames(cardCls, {
-                [`${cardCls}--col${layout}`]: !!layout,
+            className={classNames(cls, {
+                [`${cls}--col${layout}`]: !!layout,
             })}
             onClick={onClick}>
-            <div className={classNames(`${cardCls}__content`, className)}>
+            <div
+                className={classNames(
+                    `${cls}__content`,
+                    {
+                        [`${cls}__content--shadow`]: hover === 'shadow',
+                        [`${cls}__content--darken`]: hover === 'darken',
+                        [`${cls}__content--outlined`]: hover === 'outlined',
+                    },
+                    className
+                )}>
                 {children}
             </div>
         </div>
@@ -20,5 +37,3 @@ const Card = ({ layout = '112', className, children, onClick }) => {
 };
 
 export default Card;
-
-export { cardCls as className };

@@ -1,36 +1,52 @@
 @import '../style';
 
-.@{grid} {
+.@{card__container} {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    margin: -0.1rem;
+    margin: -0.05rem;
 }
 
-.@{grid}__gap--none {
+.@{card} {
+    width: 100%;
+    padding: 0.05rem;
+}
+
+.@{card__container}__gap--none {
     margin: 0;
     .@{card} {
         padding: 0;
     }
 }
 
-.@{grid}__gap--small {
-    margin: -0.05rem;
+.@{card__container}__gap--large {
+    margin: -0.1rem;
     .@{card} {
-        padding: 0.05rem;
+        padding: 0.1rem;
     }
-}
-
-.@{card} {
-    width: 100%;
-    padding: 0.1rem;
 }
 
 .@{card}__content {
     width: 100%;
     transition: box-shadow 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.@{card}__content--shadow {
     &:hover {
         box-shadow: 0 0.08rem 0.16rem 0 rgba(0, 0, 0, 0.15);
+    }
+}
+
+.@{card}__content--darken {
+    &:hover {
+        box-shadow: rgba(0, 0, 0, 0.25) 0rem 0.28rem 0.9rem,
+            rgba(0, 0, 0, 0.22) 0rem 0.2rem 0.36rem;
+    }
+}
+
+.@{card}__content--outlined {
+    &:hover {
+        border: 0.02rem solid @btn-color-primary;
     }
 }
 

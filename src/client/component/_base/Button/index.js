@@ -7,8 +7,11 @@ const CButton = ({
     disabled,
     fullWidth,
     href,
+    // null | 'primary' | 'secondary'
     color,
+    // null | 'contained' | 'outlined' | 'fab'
     variant,
+    // 'small' | null | 'large'
     size,
     mini,
     onClick,
@@ -26,5 +29,13 @@ const CButton = ({
         {children}
     </Button>
 );
+
+const CIconButton = ({ color, mini, children, onClick }) => (
+    <Button mini={mini} variant="fab" color={color} onClick={onClick}>
+        <i className="material-icons">{children}</i>
+    </Button>
+);
+
+export { CIconButton };
 
 export default CButton;

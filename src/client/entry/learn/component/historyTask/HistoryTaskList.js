@@ -1,6 +1,6 @@
 import React from 'react';
 import moment from 'moment';
-import GPanel from '@/component/GPanel';
+import { CPanel } from '@/component/_base';
 import TaskList from '@/component/TaskList';
 import '../../asset/style/historyTask.less';
 
@@ -29,13 +29,13 @@ class HistoryTaskList extends React.PureComponent {
         const children = taskModels.map((model, i) => {
             return (
                 <div key={i}>
-                    <TaskWeek value={model.week} seq={i}/>
+                    <TaskWeek value={model.week} seq={i} />
                     <TaskList tasks={model.taskList} isMentor={isMentor} />
                 </div>
             );
         });
 
-        return <GPanel>{children}</GPanel>;
+        return <CPanel>{children}</CPanel>;
     }
 }
 

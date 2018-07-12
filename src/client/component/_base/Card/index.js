@@ -1,27 +1,30 @@
 import React from 'react';
 import Card from './Card';
-import Grid from './Grid';
+import CardContainer from './CardContainer';
 
-export const CCard = ({
-    layout,
-    selectedStyle,
+const CCard = ({
+    // '112' | '122' | '123' | '234'
+    layout = '112',
+    // 'none' | 'shadow' | 'darken' | 'outlined'
+    hover = 'shadow',
     className,
-    gap,
     onClick,
     children,
 }) => (
-    <Card
-        layout={layout}
-        selectedStyle={selectedStyle}
-        className={className}
-        gap={gap}
-        onClick={onClick}>
+    <Card layout={layout} className={className} hover={hover} onClick={onClick}>
         {children}
     </Card>
 );
 
-export const CGrid = ({ className, gap, children }) => (
-    <Grid className={className} gap={gap}>
+const CCardContainer = ({
+    className,
+    // 'none' | null | 'large'
+    gap,
+    children,
+}) => (
+    <CardContainer className={className} gap={gap}>
         {children}
-    </Grid>
+    </CardContainer>
 );
+
+export { CCardContainer, CCard };

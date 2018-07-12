@@ -1,7 +1,7 @@
 import React from 'react';
 import { Grid, Column112 } from '@/component/CGrid';
 import TextFix from '@/component/TextFix';
-import GPanel from '@/component/GPanel';
+import { CPanel } from '@/component/_base';
 
 const Courses = ({ courses }) => {
     const getHref = course => {
@@ -12,7 +12,7 @@ const Courses = ({ courses }) => {
         return url;
     };
     return (
-        <GPanel title="我的课程" className="courses-container">
+        <CPanel title="我的课程" className="courses-container">
             <Grid className="courses-list">
                 {courses.map(course => {
                     return (
@@ -58,7 +58,7 @@ const Courses = ({ courses }) => {
                     );
                 })}
             </Grid>
-        </GPanel>
+        </CPanel>
     );
 };
 

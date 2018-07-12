@@ -4,7 +4,7 @@
 import React from 'react';
 import HistoryTaskList from './HistoryTaskList';
 import FilterTaskDialog from './FilterTaskDialog';
-import { CFloatingButton } from '@/component/_base';
+import { CFloatingBox, CIconButton } from '@/component/_base';
 
 class HistoryTask extends React.PureComponent {
     handleFilter = () => {
@@ -22,18 +22,22 @@ class HistoryTask extends React.PureComponent {
             actions,
         } = this.props;
         let isMentor = false;
-        if (user && user.role_id && (user.role_id === '1' || user.role_id === '2')) {
+        if (
+            user &&
+            user.role_id &&
+            (user.role_id === '1' || user.role_id === '2')
+        ) {
             isMentor = true;
         }
         return (
             <React.Fragment>
-                <HistoryTaskList taskModels={taskModels} isMentor={isMentor}/>
+                <HistoryTaskList taskModels={taskModels} isMentor={isMentor} />
 
-                <CFloatingButton
-                    iconName="search"
-                    color="primary"
-                    onClick={this.handleFilter}
-                />
+                <CFloatingBox>
+                    <CIconButton color="primary" onClick={this.handleFilter}>
+                        search
+                    </CIconButton>
+                </CFloatingBox>
 
                 <FilterTaskDialog
                     key="selectDialog"

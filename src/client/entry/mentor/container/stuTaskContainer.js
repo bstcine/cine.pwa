@@ -13,13 +13,13 @@ class StuTaskContainer extends Component {
     }
 
     render() {
-        let { networks, mentorStudentTask } = this.props;
+        let { networks, mentorStudentTask, actions } = this.props;
         let network = networks[FETCH_MENTOR_STUDENT_TASK] || {};
 
         return (
             <div className="mentor-container task">
                 <Toast network={network} />
-                <StuTaskTable list={mentorStudentTask} />
+                <StuTaskTable list={mentorStudentTask} actions={actions} />
             </div>
         );
     }

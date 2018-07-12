@@ -1,11 +1,13 @@
 import {
     APIURL_Content_StuQuizWord_List,
     APIURL_Mentor_Student_ListWithTask,
+    APIURL_Content_Task_Update_Status,
 } from '../../APIConfig';
 import {
     FETCH_MENTOR_STUDENT_QUIZ_WORD,
     FETCH_MENTOR_STUDENT_TASK,
 } from '@/constant/actionTypeMentor';
+import { fetchData } from '@/service/base';
 import { networkFetch } from '@/action/commonAction';
 
 /**
@@ -30,4 +32,23 @@ export const fetchMentorStudentTask = () => async dispatch => {
             APIURL_Mentor_Student_ListWithTask
         )
     );
+};
+
+/**
+ * 确认学生pdf作业
+ */
+export const fetchMentorCorrectPdfTask = task => async dispatch => {
+    let [error] = await fetchData(APIURL_Content_Task_Update_Status, {
+        cid: task.id,
+        status: '2',
+    });
+
+    if (!error) {
+        dispatch(
+            networkFetch(
+                FETCH_MENTOR_STUDENT_TASK,
+                APIURL_Mentor_Student_ListWithTask
+            )
+        );
+    }
 };

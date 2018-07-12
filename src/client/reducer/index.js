@@ -53,10 +53,21 @@ export const toastRedu = (
     }
 };
 
+const _networks_handle = (state, payload) => {
+    let newState = { ...state };
+    let key = payload.type;
+    if (!payload.loading && !payload.error) {
+        newState[key] = null;
+    } else {
+        newState[key] = payload;
+    }
+    return newState;
+};
+
 export const networks = (state = {}, { type, payload }) => {
     switch (type) {
         case actType.UPDATE_NETWORK_FETCH_STATUS:
-            return { ...state, [payload.type]: payload };
+            return _networks_handle(state, payload);
         default:
             return state;
     }

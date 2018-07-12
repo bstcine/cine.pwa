@@ -5,7 +5,7 @@ import './style.less';
 
 export const CFloatingButton = ({ text, iconName, color, onClick, ...props }) => {
     const icon = <CIcon name={iconName} />;
-    const _color = color === undefined ? 'secondary' : color;
+    const _color = color ? color : 'secondary';
     return (
         <div className="Floating Container">
             <Button

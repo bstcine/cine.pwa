@@ -6,6 +6,7 @@ export const CCard = ({
     layout,
     selectedStyle,
     className,
+    gap,
     onClick,
     children,
 }) => (
@@ -13,11 +14,14 @@ export const CCard = ({
         layout={layout}
         selectedStyle={selectedStyle}
         className={className}
+        gap={gap}
         onClick={onClick}>
         {children}
     </Card>
 );
 
-export const CGrid = ({ className, children }) => (
-    <Grid className={className}>{children}</Grid>
+export const CGrid = ({ className, gap, children }) => (
+    <Grid className={className} gap={gap}>
+        {children}
+    </Grid>
 );

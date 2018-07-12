@@ -30,7 +30,6 @@ export default class Button extends Component {
         if (component === 'button' && href) {
             ComponentProp = 'a';
         }
-
         return (
             <ComponentProp
                 className={classNames(
@@ -40,8 +39,10 @@ export default class Button extends Component {
                         [`${btnCls}--small`]: size === 'small',
                         [`${btnCls}--large`]: size === 'large',
                         [`${btnCls}--${color}`]: !!color,
-                        [`${btnCls}--${variant}`]: !!variant,
-                        [`${btnCls}--contained`]: variant === 'fab',
+                        [`${btnCls}--contained`]:
+                            variant === 'contained' || variant === 'fab',
+                        [`${btnCls}--outlined`]: variant === 'outlined',
+                        [`${btnCls}--fab`]: variant === 'fab',
                         [`${btnCls}--disabled`]: disabled,
                         [`${btnCls}--mini`]: mini,
                     },

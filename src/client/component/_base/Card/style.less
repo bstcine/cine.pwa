@@ -4,12 +4,26 @@
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    margin: -0.2rem;
+    margin: -0.1rem;
+}
+
+.@{grid}__gap--none {
+    margin: 0;
+    .@{card} {
+        padding: 0;
+    }
+}
+
+.@{grid}__gap--small {
+    margin: -0.05rem;
+    .@{card} {
+        padding: 0.05rem;
+    }
 }
 
 .@{card} {
     width: 100%;
-    padding: 0.2rem;
+    padding: 0.1rem;
 }
 
 .@{card}__content {

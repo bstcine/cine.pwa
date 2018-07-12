@@ -78,7 +78,7 @@ export default class Widget extends PureComponent {
                             size="large"
                             variant="contained"
                             color="secondary">
-                            LARGE
+                            LARGE2
                         </Button>
                     </div>
                     <div>
@@ -106,7 +106,7 @@ export default class Widget extends PureComponent {
                     </div>
                 </GPanel>
                 <GPanel title="Gird Card default112">
-                    <CGrid>
+                    <CGrid gap="small">
                         <CCard className="cbabsdf">1</CCard>
                         <CCard>2</CCard>
                         <CCard>3</CCard>
@@ -117,7 +117,7 @@ export default class Widget extends PureComponent {
                 </GPanel>
 
                 <GPanel title="Gird Card 122">
-                    <CGrid>
+                    <CGrid gap="none">
                         <CCard layout="122">1</CCard>
                         <CCard layout="122">2</CCard>
                         <CCard layout="122">3</CCard>

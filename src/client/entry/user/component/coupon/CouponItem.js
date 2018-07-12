@@ -16,7 +16,7 @@ const CouponItem = ({ coupon, actions }) => {
             usedImgSrc = require('../../asset/image/ic_coupon_transfer.png');
         } else if (coupon.sub_status === -2) {
             couponStatusShow = true;
-            usedImgSrc = require('../../asset/image/ic_coupon_synthesizer.png')
+            usedImgSrc = require('../../asset/image/ic_coupon_synthesizer.png');
         }
     } else if (coupon.status === '1') {
         couponStyle = 'coupon-ticket coupon-ticket-used';
@@ -25,7 +25,7 @@ const CouponItem = ({ coupon, actions }) => {
         if (coupon.sub_status === 1) {
             usedImgSrc = require('../../asset/image/ic_coupon_transfered.png');
         } else if (coupon.sub_status === 2) {
-            usedImgSrc = require('../../asset/image/ic_coupon_synthesizered.png')
+            usedImgSrc = require('../../asset/image/ic_coupon_synthesizered.png');
         }
     } else if (coupon.status === '2') {
         couponStyle = 'coupon-ticket coupon-ticket-expired';

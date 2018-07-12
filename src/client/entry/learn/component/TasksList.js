@@ -33,7 +33,7 @@ const TasksList = ({ tasks, isLimitTasks }) => {
     const getHref = task => {
         switch (task.type) {
             case Task_Type.Video:
-            case Task_Type.PDF_Quiz:
+            case Task_Type.Quiz_PDF:
                 return `/learn/course/${task.course_id}?task_id=${
                     task.id
                 }&lesson_id=${task.lesson_id}`;

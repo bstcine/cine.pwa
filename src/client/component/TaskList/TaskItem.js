@@ -36,6 +36,7 @@ const getHref = task => {
     let urlUserIdParam = user_id ? `&user_id=${user_id}&cmd=check` : '';
     switch (task.type) {
         case Task_Type.Video:
+        case Task_Type.Quiz_PDF:
             return `/learn/course/${task.course_id}?task_id=${
                 task.id
             }&lesson_id=${task.lesson_id}`;

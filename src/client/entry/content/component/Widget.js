@@ -165,11 +165,15 @@ export default class Widget extends PureComponent {
                         <CCard layout="234">8</CCard>
                     </CCardContainer>
                     <CFloatingBox>
-                        <CIconButton>lock</CIconButton>
-                        <CIconButton color="primary">alarm</CIconButton>
-                        <CIconButton mini color="secondary">
-                            pets
-                        </CIconButton>
+                        <CButton variant="fab">
+                            <GIcon name="mi-lock" />
+                        </CButton>
+                        <CButton variant="fab" color="primary">
+                            <GIcon name="mi-alarm" />
+                        </CButton>
+                        <CButton variant="fab" mini color="secondary">
+                            <GIcon name="mi-pets" />
+                        </CButton>
                     </CFloatingBox>
                 </CPanel>
             </React.Fragment>

@@ -45,7 +45,8 @@ export default class Button extends PureComponent {
                         [`${cls}--contained`]:
                             variant === 'contained' || variant === 'fab',
                         [`${cls}--outlined`]: variant === 'outlined',
-                        [`${cls}--fab`]: variant === 'fab',
+                        [`${cls}--round`]:
+                            variant === 'fab' || variant === 'round',
                         [`${cls}--disabled`]: disabled,
                         [`${cls}--mini`]: mini,
                     },

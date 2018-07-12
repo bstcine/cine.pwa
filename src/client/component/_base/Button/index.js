@@ -9,7 +9,7 @@ const CButton = ({
     href,
     // null | 'primary' | 'secondary'
     color,
-    // null | 'contained' | 'outlined' | 'fab'
+    // null | 'contained' | 'outlined' | 'fab' || 'round'
     variant,
     // 'small' | null | 'large'
     size,
@@ -31,7 +31,7 @@ const CButton = ({
 );
 
 const CIconButton = ({ color, mini, children, onClick }) => (
-    <Button mini={mini} variant="fab" color={color} onClick={onClick}>
+    <Button mini={mini} variant="round" color={color} onClick={onClick}>
         <i className="material-icons">{children}</i>
     </Button>
 );

@@ -4,7 +4,8 @@
 import React from 'react';
 import HistoryTaskList from './HistoryTaskList';
 import FilterTaskDialog from './FilterTaskDialog';
-import { CFloatingBox, CIconButton } from '@/component/_base';
+import { CFloatingBox, CButton } from '@/component/_base';
+import GIcon from '@/component/GIcon';
 
 class HistoryTask extends React.PureComponent {
     handleFilter = () => {
@@ -34,9 +35,12 @@ class HistoryTask extends React.PureComponent {
                 <HistoryTaskList taskModels={taskModels} isMentor={isMentor} />
 
                 <CFloatingBox>
-                    <CIconButton color="primary" onClick={this.handleFilter}>
-                        search
-                    </CIconButton>
+                    <CButton
+                        variant="fab"
+                        color="primary"
+                        onClick={this.handleFilter}>
+                        <GIcon name="mi-search" />
+                    </CButton>
                 </CFloatingBox>
 
                 <FilterTaskDialog

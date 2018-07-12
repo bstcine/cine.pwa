@@ -50,6 +50,10 @@ const getHref = (task, student_id) => {
             return `/learn/course/${task.course_id}?task_id=${
                 task.id
             }&user_id=${student_id}&lesson_id=${task.lesson_id}`;
+        case Task_Type.Quiz_PDF:
+            return `/learn/course/${task.course_id}?task_id=${
+                task.id
+            }&user_id=${student_id}&lesson_id=${task.lesson_id}`;
         case Task_Type.Quiz:
             return `/quiz/kj?task_id=${
                 task.id
@@ -149,13 +153,18 @@ const StudentTable = ({ list, actions }) => {
                                                 '2',
                                                 '3',
                                                 '4',
+                                                '5',
                                             ].includes(task.type),
                                         })}
                                         onClick={() => {
                                             if (
-                                                ['1', '2', '3', '4'].includes(
-                                                    task.type
-                                                )
+                                                [
+                                                    '1',
+                                                    '2',
+                                                    '3',
+                                                    '4',
+                                                    '5',
+                                                ].includes(task.type)
                                             ) {
                                                 taskOnClick(
                                                     task,

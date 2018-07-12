@@ -1,6 +1,7 @@
 import React from 'react';
 
 const CouponItem = ({ coupon, actions }) => {
+    console.log(coupon);
     let value =
         coupon.type === '1' ? coupon.value : 100 - Number(coupon.value) * 100;
     let unit = coupon.type === '1' ? '元' : '折';
@@ -10,10 +11,10 @@ const CouponItem = ({ coupon, actions }) => {
     let usedImgSrc;
     if (coupon.status === '0') {
         couponStyle = 'coupon-ticket';
-        if (coupon.sub_status === '-1') {
+        if (coupon.sub_status === -1) {
             couponStatusShow = true;
             usedImgSrc = require('../../asset/image/ic_coupon_transfer.png');
-        } else if (coupon.sub_status === '-2') {
+        } else if (coupon.sub_status === -2) {
             couponStatusShow = true;
             usedImgSrc = require('../../asset/image/ic_coupon_synthesizer.png')
         }
@@ -21,9 +22,9 @@ const CouponItem = ({ coupon, actions }) => {
         couponStyle = 'coupon-ticket coupon-ticket-used';
         couponStatusShow = true;
         usedImgSrc = require('../../asset/image/ic_coupon_used.png');
-        if (coupon.sub_status === '1') {
+        if (coupon.sub_status === 1) {
             usedImgSrc = require('../../asset/image/ic_coupon_transfered.png');
-        } else if (coupon.sub_status === '2') {
+        } else if (coupon.sub_status === 2) {
             usedImgSrc = require('../../asset/image/ic_coupon_synthesizered.png')
         }
     } else if (coupon.status === '2') {

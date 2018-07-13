@@ -8,8 +8,8 @@ const cls = `${baseprefix}-card`;
 const Card = ({
     // '112' | '122' | '123' | '234'
     layout = '112',
-    // 'none' | 'shadow' | 'darken' | 'outlined'
-    hover = 'shadow',
+    // 'none' | 'shadow' | 'darken'| 'lighten' | 'outlined'
+    hover = 'darken',
     className,
     children,
     onClick,
@@ -27,6 +27,7 @@ const Card = ({
                         [`${cls}__content--shadow`]: hover === 'shadow',
                         [`${cls}__content--darken`]: hover === 'darken',
                         [`${cls}__content--outlined`]: hover === 'outlined',
+                        [`${cls}__content--lighten`]: hover === 'lighten',
                     },
                     className
                 )}>

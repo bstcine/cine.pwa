@@ -6,7 +6,7 @@ const CCard = ({
     // '112' | '122' | '123' | '234'
     layout = '112',
     // 'none' | 'shadow' | 'darken' | 'outlined'
-    hover = 'shadow',
+    hover = 'darken',
     className,
     onClick,
     children,

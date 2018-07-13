@@ -12,12 +12,14 @@ const CardContainer = ({
     gap,
 }) => {
     return (
-        <div
-            className={classNames(cls, className, {
-                [`${cls}__gap--large`]: gap === 'large',
-                [`${cls}__gap--none`]: gap === 'none',
-            })}>
-            {children}
+        <div className={classNames(cls, className)}>
+            <div
+                className={classNames(`${cls}__content`, {
+                    [`${cls}__gap--large`]: gap === 'large',
+                    [`${cls}__gap--none`]: gap === 'none',
+                })}>
+                {children}
+            </div>
         </div>
     );
 };

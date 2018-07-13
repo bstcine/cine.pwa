@@ -114,20 +114,32 @@ export default class Widget extends PureComponent {
                         <CCard className="cbabsdf">1</CCard>
                         <CCard hover="darken">2 hover=darken</CCard>
                         <CCard hover="outlined">3 hover=outlined</CCard>
-                        <CCard>4</CCard>
+                        <CCard hover="lighten">4 hover=lighten</CCard>
                         <CCard>5</CCard>
                         <CCard>6</CCard>
                     </CCardContainer>
                 </CPanel>
 
-                <CPanel title="Gird Card 122 gap=none">
+                <CPanel title="Gird Card 122 gap=none hover=lighten">
                     <CCardContainer gap="none">
-                        <CCard layout="122">1</CCard>
-                        <CCard layout="122">2</CCard>
-                        <CCard layout="122">3</CCard>
-                        <CCard layout="122">4</CCard>
-                        <CCard layout="122">5</CCard>
-                        <CCard layout="122">6</CCard>
+                        <CCard layout="122" hover="lighten">
+                            1
+                        </CCard>
+                        <CCard layout="122" hover="lighten">
+                            2
+                        </CCard>
+                        <CCard layout="122" hover="lighten">
+                            3
+                        </CCard>
+                        <CCard layout="122" hover="lighten">
+                            4
+                        </CCard>
+                        <CCard layout="122" hover="lighten">
+                            5
+                        </CCard>
+                        <CCard layout="122" hover="lighten">
+                            6
+                        </CCard>
                     </CCardContainer>
                 </CPanel>
 
@@ -153,7 +165,7 @@ export default class Widget extends PureComponent {
                         <CCard layout="234">8</CCard>
                     </CCardContainer>
                 </CPanel>
-                <CPanel title="CFloatingBox+ IConButton">
+                <CPanel title="CFloatingBox">
                     <CCardContainer>
                         <CCard layout="234">1</CCard>
                         <CCard layout="234">2</CCard>

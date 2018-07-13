@@ -47,6 +47,24 @@ export const boundNetworkError = error => dispatch => {
     }, 3000);
 };
 
+export const boundFetchNetwork = (
+    url,
+    query,
+    { dispatchActionType, showLoading = true, showError = true }
+) => async dispatch => {
+    if (showLoading) dispatch(openNetworkLoading());
+    let [error, result] = await fetchData(url, query);
+    if (showLoading) dispatch(closeNetworkLoading());
+
+    if (showError) dispatch(boundNetworkError(error));
+
+    if (dispatchActionType) {
+        dispatch({ type: dispatchActionType, payload: result });
+    } else {
+        return [error, result];
+    }
+};
+
 export const networkError = err => dispatch => {
     let text = err instanceof Error ? err.message : err;
     dispatch({

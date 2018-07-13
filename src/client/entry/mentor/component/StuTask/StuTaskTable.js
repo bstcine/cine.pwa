@@ -212,7 +212,8 @@ const StudentTable = ({ list, actions }) => {
                                                         task.status === '0',
                                                 }
                                             )}
-                                            onClick={() => {
+                                            onClick={e => {
+                                                e.stopPropagation();
                                                 if (
                                                     task.type === '5' &&
                                                     task.status === '0'

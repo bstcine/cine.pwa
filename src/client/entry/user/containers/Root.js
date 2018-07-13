@@ -20,7 +20,7 @@ class Root extends Component {
 
         return (
             <GLayout>
-                <div className={'user-content'}>{routes}</div>
+                {routes}
             </GLayout>
         );
     }

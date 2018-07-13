@@ -3,6 +3,7 @@
  */
 import React from 'react';
 import '../../asset/style/vocabularyTest.less';
+import { addParam } from '@/util/urlUtil';
 
 class WordQuiz extends React.PureComponent {
     // 跳转下一个项目
@@ -14,7 +15,7 @@ class WordQuiz extends React.PureComponent {
 
     render() {
         let { param, isTest, selectIndex, wordCount, correctCount, content, actions } = this.props;
-        let wordHref = '/learn/word?start_index=' + param.startIndex + '&end_index=' + param.endIndex + '&word_type=' + param.wordType;
+        const wordHref = addParam('/learn/word', param);
         let wordCountPromot = '本次学习单词' + wordCount + '个，测试下掌握了多少？';
         let correctWord = '已掌握' + correctCount + '个';
         let wordAllPromot = '共' + wordCount + '个';

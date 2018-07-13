@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Toast } from '@/component/Toast';
 import * as mentorAction from '@/action/mentorAction';
-import { FETCH_MENTOR_STUDENT_TASK } from '@/constant/actionTypeMentor';
 import StuTaskTable from '@/entry/mentor/component/StuTask/StuTaskTable';
 import Confirm from '@/component/Confirm';
 
@@ -14,8 +13,8 @@ class StuTaskContainer extends Component {
     }
 
     render() {
-        let { networks, mentorStudentTask, actions } = this.props;
-        let network = networks[FETCH_MENTOR_STUDENT_TASK] || {};
+        let { mentorStudentTask, networkModal, actions } = this.props;
+        let network = networkModal || {};
 
         return (
             <div className="mentor-container task">
@@ -28,7 +27,7 @@ class StuTaskContainer extends Component {
 }
 
 const mapStateToProps = state => ({
-    networks: state.networks,
+    networkModal: state.networkModal,
     mentorStudentTask: state.mentorStudentTask,
 });
 

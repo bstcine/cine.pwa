@@ -8,30 +8,33 @@ import {
     FETCH_MENTOR_STUDENT_TASK,
 } from '@/constant/actionTypeMentor';
 import { fetchData } from '@/service/base';
-import { networkFetch, openConfirm } from '@/action/commonAction';
+import {
+    openConfirm,
+    openNetworkLoading,
+    boundNetworkError,
+    closeNetworkLoading,
+} from '@/action/commonAction';
 
 /**
  * 获取学生、答题记录、词汇测试列表
  */
 export const fetchMentorStudentQuizWord = () => async dispatch => {
-    dispatch(
-        networkFetch(
-            FETCH_MENTOR_STUDENT_QUIZ_WORD,
-            APIURL_Content_StuQuizWord_List
-        )
-    );
+    dispatch(openNetworkLoading());
+    let [err, result] = await fetchData(APIURL_Content_StuQuizWord_List);
+    dispatch(closeNetworkLoading());
+    dispatch(boundNetworkError(err));
+    dispatch({ type: FETCH_MENTOR_STUDENT_QUIZ_WORD, payload: result });
 };
 
 /**
  * 获取学生作业
  */
 export const fetchMentorStudentTask = () => async dispatch => {
-    dispatch(
-        networkFetch(
-            FETCH_MENTOR_STUDENT_TASK,
-            APIURL_Mentor_Student_ListWithTask
-        )
-    );
+    dispatch(openNetworkLoading());
+    let [err, result] = await fetchData(APIURL_Mentor_Student_ListWithTask);
+    dispatch(closeNetworkLoading());
+    dispatch(boundNetworkError(err));
+    dispatch({ type: FETCH_MENTOR_STUDENT_TASK, payload: result });
 };
 
 /**

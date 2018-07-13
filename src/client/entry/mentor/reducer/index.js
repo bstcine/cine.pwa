@@ -1,5 +1,10 @@
 import { combineReducers } from 'redux';
-import { alertModal, confirmModal, userRedu, networks } from '@/reducer/index';
+import {
+    alertModal,
+    confirmModal,
+    userRedu,
+    networkModal,
+} from '@/reducer/index';
 
 import { mentorStudentQuizWord } from './stuQuizReducer';
 import { mentorStudentTask } from './stuTaskReducer';
@@ -11,7 +16,7 @@ const rootReducer = combineReducers({
     alertModal,
     confirmModal,
     userRedu,
-    networks,
+    networkModal,
 });
 
 export default rootReducer;

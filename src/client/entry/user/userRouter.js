@@ -5,6 +5,7 @@ import Root from '@/entry/user/containers/Root';
 import CouponContainer from '@/entry/user/containers/CouponContainer';
 import PointContainer from '@/entry/user/containers/PointContainer';
 import QuizContainer from '@/entry/user/containers/QuizContainer';
+import OrderContainer from '@/entry/user/containers/OrderContainer';
 
 const userRoute = {
     path: '/user',
@@ -21,6 +22,10 @@ const userRoute = {
         {
             path: '/user/quiz',
             component: QuizContainer,
+        },
+        {
+            path: '/user/order',
+            component: OrderContainer,
         },
     ],
     checkAuth: true,

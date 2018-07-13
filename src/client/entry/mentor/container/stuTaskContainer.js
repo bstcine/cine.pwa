@@ -6,6 +6,7 @@ import { Toast } from '@/component/Toast';
 import * as mentorAction from '@/action/mentorAction';
 import { FETCH_MENTOR_STUDENT_TASK } from '@/constant/actionTypeMentor';
 import StuTaskTable from '@/entry/mentor/component/StuTask/StuTaskTable';
+import Confirm from '@/component/Confirm';
 
 class StuTaskContainer extends Component {
     componentDidMount() {
@@ -19,6 +20,7 @@ class StuTaskContainer extends Component {
         return (
             <div className="mentor-container task">
                 <Toast network={network} />
+                <Confirm />
                 <StuTaskTable list={mentorStudentTask} actions={actions} />
             </div>
         );

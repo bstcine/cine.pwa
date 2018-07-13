@@ -9,6 +9,7 @@ import { lWordQuizAction } from '@/action/lWordQuizAction';
 import WordQuiz from  '../component/WordQuiz';
 import CThemeProvider from '@/component/CThemeProvider';
 import { CFlatButton, CDialog } from '@/component/_base';
+import { Toast } from '@/component/Toast';
 
 class VocabularyTestContainer extends Component {
     constructor(props) {
@@ -23,7 +24,7 @@ class VocabularyTestContainer extends Component {
     }
 
     render() {
-        let { isTest, isDone, selectIndex, wordCount, correctCount, content, actions } = this.props;
+        let { network, isTest, isDone, selectIndex, wordCount, correctCount, content, actions } = this.props;
 
         const dialogActions = [
             <CFlatButton
@@ -37,24 +38,27 @@ class VocabularyTestContainer extends Component {
         ];
         return (
             <CThemeProvider>
-                <WordQuiz
-                    param={this.param}
-                    isTest={isTest}
-                    selectIndex={selectIndex}
-                    wordCount={wordCount}
-                    correctCount={correctCount}
-                    content={content}
-                    actions={actions}
-                />
-                <CDialog
-                    title="已掌握全部单词，立刻返回学习首页"
-                    modal={false}
-                    actions={dialogActions}
-                    open={isDone}
-                    onRequestClose={() => {
-                        location.href = '/learn';
-                    }}>
-                </CDialog>
+                <React.Fragment>
+                    <Toast network={network} />
+                    <WordQuiz
+                        param={this.param}
+                        isTest={isTest}
+                        selectIndex={selectIndex}
+                        wordCount={wordCount}
+                        correctCount={correctCount}
+                        content={content}
+                        actions={actions}
+                    />
+                    <CDialog
+                        title="已掌握全部单词，立刻返回学习首页"
+                        modal={false}
+                        actions={dialogActions}
+                        open={isDone}
+                        onRequestClose={() => {
+                            location.href = '/learn';
+                        }}>
+                    </CDialog>
+                </React.Fragment>
             </CThemeProvider>
         );
     }
@@ -68,6 +72,7 @@ const mapStateToProps = state => {
         wordCount: state.WordQuizRedu.get('wordCount'),
         content: state.WordQuizRedu.get('content'),
         correctCount: state.WordQuizRedu.get('correctCount'),
+        network: state.toastRedu,
     };
 };
 

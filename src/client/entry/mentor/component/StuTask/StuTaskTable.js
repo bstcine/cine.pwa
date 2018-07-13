@@ -27,6 +27,7 @@ const taskType = {
     '2': '习题',
     '3': '反馈',
     '4': '单词',
+    '5': '习题',
     '9': '其他',
 };
 
@@ -46,6 +47,10 @@ const quizStatus = {
 const getHref = (task, student_id) => {
     switch (task.type) {
         case Task_Type.Video:
+            return `/learn/course/${task.course_id}?task_id=${
+                task.id
+            }&user_id=${student_id}&lesson_id=${task.lesson_id}`;
+        case Task_Type.Quiz_PDF:
             return `/learn/course/${task.course_id}?task_id=${
                 task.id
             }&user_id=${student_id}&lesson_id=${task.lesson_id}`;
@@ -79,7 +84,7 @@ const taskOnClick = (task, student_id) => {
     window.open(getHref(task, student_id));
 };
 
-const StudentTable = ({ list, ...props }) => {
+const StudentTable = ({ list, actions }) => {
     if (!list || !list.length) {
         return <div> 没有数据...</div>;
     }
@@ -119,14 +124,23 @@ const StudentTable = ({ list, ...props }) => {
                         student.tasks.map((task, key) => {
                             let todoLint;
                             if (task.status === '0') {
-                                todoLint = '提醒';
-                            } else if (task.type === '2') {
-                                todoLint = quizStatus[task.stats_status || '1'];
-                                if (task.stats_status === '3') {
+                                if (task.type === '5') {
+                                    todoLint = '待确认';
+                                } else {
+                                    todoLint = '提醒';
+                                }
+                            } else {
+                                if (task.type === '5') {
+                                    todoLint = '已确认';
+                                } else if (task.type === '2') {
                                     todoLint =
-                                        task.stats_is_auto_correct === '1'
-                                            ? '自动批改'
-                                            : '已批改';
+                                        quizStatus[task.stats_status || '1'];
+                                    if (task.stats_status === '3') {
+                                        todoLint =
+                                            task.stats_is_auto_correct === '1'
+                                                ? '自动批改'
+                                                : '已批改';
+                                    }
                                 }
                             }
 
@@ -139,13 +153,18 @@ const StudentTable = ({ list, ...props }) => {
                                                 '2',
                                                 '3',
                                                 '4',
+                                                '5',
                                             ].includes(task.type),
                                         })}
                                         onClick={() => {
                                             if (
-                                                ['1', '2', '3', '4'].includes(
-                                                    task.type
-                                                )
+                                                [
+                                                    '1',
+                                                    '2',
+                                                    '3',
+                                                    '4',
+                                                    '5',
+                                                ].includes(task.type)
                                             ) {
                                                 taskOnClick(
                                                     task,
@@ -174,23 +193,36 @@ const StudentTable = ({ list, ...props }) => {
                                         <div
                                             className={classNames(
                                                 'task-todo',
-                                                { gray: task.status === '0' },
+                                                {
+                                                    gray:
+                                                        task.type !== '5' &&
+                                                        task.status === '0',
+                                                },
                                                 {
                                                     red:
-                                                        task.status === '2' &&
                                                         task.type === '2' &&
+                                                        task.status === '2' &&
                                                         ['1', '2'].includes(
                                                             task.stats_status
                                                         ),
                                                 },
                                                 {
-                                                    green:
-                                                        task.status === '2' &&
-                                                        task.type === '2' &&
-                                                        task.stats_status ===
-                                                            '3',
+                                                    red:
+                                                        task.type === '5' &&
+                                                        task.status === '0',
                                                 }
-                                            )}>
+                                            )}
+                                            onClick={e => {
+                                                e.stopPropagation();
+                                                if (
+                                                    task.type === '5' &&
+                                                    task.status === '0'
+                                                ) {
+                                                    actions.fetchMentorCorrectPdfTask(
+                                                        task
+                                                    );
+                                                }
+                                            }}>
                                             {todoLint}
                                         </div>
                                     </div>

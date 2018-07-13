@@ -267,11 +267,7 @@ export const lWordQuizAction = {
         let param = reducer.get('param');
         param['task_status'] = status;
         let [error, result] = await fetchData(Api.APIURL_User_Learn_UpdateTaskStatus, param);
-        if (error) {
-            alert(error);
-        } else {
-            console.log(result);
-        }
+        console.log(error, result);
     },
     /**
      * 开始测试（对外调用）

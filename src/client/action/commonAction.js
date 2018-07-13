@@ -20,42 +20,31 @@ export const openConfirm = ({ text, onConfirm, onCancel }) => ({
     payload: { text, onConfirm, onCancel },
 });
 
-export const updateNetworkFetchStatus = ({ type, pending, error }) => ({
-    type: actType.UPDATE_NETWORK_FETCH_STATUS,
-    payload: { type, pending, error },
+export const closeNetworkLoading = () => ({
+    type: actType.CLOSE_NETWORK_LOADING,
 });
 
-export const networkFetch = (type, url, callback) => async dispatch => {
-    dispatch({
-        type: actType.UPDATE_NETWORK_FETCH_STATUS,
-        payload: { type, loading: true },
-    });
+export const openNetworkLoading = text => ({
+    type: actType.OPEN_NETWORK_LOADING,
+    payload: { text: text || '加载中' },
+});
 
-    let [error, result] = await fetchData(url);
+export const closeNetworkError = () => ({
+    type: actType.CLOSE_NETWORK_ERROR,
+});
 
-    dispatch({
-        type: actType.UPDATE_NETWORK_FETCH_STATUS,
-        payload: {
-            type,
-            loading: false,
-            error: error instanceof Error ? error.message : error,
-        },
-    });
+export const openNetworkError = error => ({
+    type: actType.OPEN_NETWORK_ERROR,
+    payload: { error: error || '系统错误' },
+});
 
-    if (error) {
-        setTimeout(() => {
-            dispatch({
-                type: actType.UPDATE_NETWORK_FETCH_STATUS,
-                payload: { type, loading: false },
-            });
-        }, 3000);
-    } else {
-        if (callback) {
-            callback(result);
-        } else {
-            dispatch({ type, payload: result });
-        }
-    }
+export const boundNetworkError = error => dispatch => {
+    if (!error) return;
+    let text = error instanceof Error ? error.message : error;
+    dispatch(openNetworkError(text));
+    setTimeout(() => {
+        dispatch(closeNetworkError());
+    }, 3000);
 };
 
 export const networkError = err => dispatch => {

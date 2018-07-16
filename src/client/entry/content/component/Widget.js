@@ -117,6 +117,7 @@ export default class Widget extends PureComponent {
                         <CCard hover="lighten">4 hover=lighten</CCard>
                         <CCard>5</CCard>
                         <CCard>6</CCard>
+                        <CCard>7</CCard>
                     </CCardContainer>
                 </CPanel>
 
@@ -139,6 +140,9 @@ export default class Widget extends PureComponent {
                         </CCard>
                         <CCard layout="122" hover="lighten">
                             6
+                        </CCard>
+                        <CCard layout="122" hover="lighten">
+                            7
                         </CCard>
                     </CCardContainer>
                 </CPanel>
@@ -163,6 +167,7 @@ export default class Widget extends PureComponent {
                         <CCard layout="234">6</CCard>
                         <CCard layout="234">7</CCard>
                         <CCard layout="234">8</CCard>
+                        <CCard layout="234">9</CCard>
                     </CCardContainer>
                 </CPanel>
                 <CPanel title="CFloatingBox">
@@ -174,7 +179,6 @@ export default class Widget extends PureComponent {
                         <CCard layout="234">5</CCard>
                         <CCard layout="234">6</CCard>
                         <CCard layout="234">7</CCard>
-                        <CCard layout="234">8</CCard>
                     </CCardContainer>
                     <CFloatingBox>
                         <CButton variant="fab">

@@ -10,7 +10,7 @@ import { Learn_Word_Correct_SleepTime, Learn_Word_Failed_SleepTime } from '@/con
 
 const Vocabulary = {
     n: ['n.'],
-    v: ['vt.', 'vi.'],
+    v: ['v.', 'vt.', 'vi.'],
     j: ['adj.'],
     i: ['prep.'],
     r: ['adv.'],
@@ -247,7 +247,7 @@ export const lWordQuizAction = {
         // 将zh中的"；"选项保留到两个及以下
         let zh_component = zh.split('；');
         if (zh_component.length > 2) {
-            zh = zh_component[0] + '；' + zh_component[1]
+            zh = zh_component[0] + '；' + zh_component[1];
         }
         return { zh: zh };
     },

@@ -17,6 +17,21 @@ const initialState = fromJS({
             isEaten: false,
             id: 2,
         },
+        {
+            id: 3,
+            weight: 333,
+            isEaten: false,
+        },
+        {
+            weight: 435,
+            id: 4,
+            isEaten: false,
+        },
+        {
+            weight: 556,
+            isEaten: false,
+            id: 5,
+        },
     ],
     isOpenDetail: false,
 });

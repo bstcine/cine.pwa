@@ -21,20 +21,19 @@ export default class Order extends React.PureComponent {
 
                 <OrderList
                     orders={orderlist}
-                    layout="111"
+                    layout="234"
                     className="bggrid"
-                    itemClassName="bg111"
+                    itemClassName="bg234"
                 />
 
                 <CPanel />
 
-                <div className="bgpanel">
-                    <OrderList
-                        orders={orderlist}
-                        layout="123"
-                        itemClassName="bg123"
-                    />
-                </div>
+                <OrderList
+                    orders={orderlist}
+                    layout="123"
+                    className="bgpanel"
+                    itemClassName="bg123"
+                />
             </React.Fragment>
         );
     }

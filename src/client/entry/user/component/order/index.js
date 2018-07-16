@@ -7,20 +7,34 @@ export default class Order extends React.PureComponent {
     render() {
         const { orders } = this.props;
         const orderlist = orders.toJS();
-        alert('React.PureComponent');
         alert(JSON.stringify(orders));
         return (
             <React.Fragment>
-                <CPanel />
-                <OrderList orders={orderlist} layout="111" className="bggrid" />
-
                 <CPanel title="Gird Card 234" className="bgpanel">
                     <OrderList
                         orders={orderlist}
                         layout="234"
                         className="bggrid"
+                        itemClassName="bg234"
                     />
                 </CPanel>
+
+                <OrderList
+                    orders={orderlist}
+                    layout="111"
+                    className="bggrid"
+                    itemClassName="bg111"
+                />
+
+                <CPanel />
+
+                <div className="bgpanel">
+                    <OrderList
+                        orders={orderlist}
+                        layout="123"
+                        itemClassName="bg123"
+                    />
+                </div>
             </React.Fragment>
         );
     }

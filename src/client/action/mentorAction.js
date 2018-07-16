@@ -8,33 +8,41 @@ import {
     FETCH_MENTOR_STUDENT_TASK,
 } from '@/constant/actionTypeMentor';
 import { fetchData } from '@/service/base';
-import {
-    openConfirm,
-    openNetworkLoading,
-    boundNetworkError,
-    closeNetworkLoading,
-} from '@/action/commonAction';
+import { openConfirm, boundFetchNetwork } from '@/action/commonAction';
 
 /**
  * 获取学生、答题记录、词汇测试列表
  */
 export const fetchMentorStudentQuizWord = () => async dispatch => {
-    dispatch(openNetworkLoading());
-    let [err, result] = await fetchData(APIURL_Content_StuQuizWord_List);
-    dispatch(closeNetworkLoading());
-    dispatch(boundNetworkError(err));
-    dispatch({ type: FETCH_MENTOR_STUDENT_QUIZ_WORD, payload: result });
+    // dispatch(openNetworkLoading());
+    // let [err, result] = await fetchData(APIURL_Content_StuQuizWord_List);
+    // dispatch(closeNetworkLoading());
+    // dispatch(boundNetworkError(err));
+    // dispatch({ type: FETCH_MENTOR_STUDENT_QUIZ_WORD, payload: result });
+    dispatch(
+        boundFetchNetwork(APIURL_Content_StuQuizWord_List, null, {
+            dispatchActionType: FETCH_MENTOR_STUDENT_QUIZ_WORD,
+        })
+    );
 };
 
 /**
  * 获取学生作业
  */
 export const fetchMentorStudentTask = () => async dispatch => {
-    dispatch(openNetworkLoading());
-    let [err, result] = await fetchData(APIURL_Mentor_Student_ListWithTask);
-    dispatch(closeNetworkLoading());
-    dispatch(boundNetworkError(err));
-    dispatch({ type: FETCH_MENTOR_STUDENT_TASK, payload: result });
+    dispatch(
+        boundFetchNetwork(APIURL_Mentor_Student_ListWithTask, null, {
+            dispatchActionType: FETCH_MENTOR_STUDENT_TASK,
+        })
+    );
+
+    // let [error, result] = await dispatch(
+    //     boundFetchNetwork(APIURL_Mentor_Student_ListWithTask, null, {
+    //         showLoading: true,
+    //         showError: true,
+    //     })
+    // );
+    // if (!error) dispatch({ type: FETCH_MENTOR_STUDENT_TASK, payload: result });
 };
 
 /**

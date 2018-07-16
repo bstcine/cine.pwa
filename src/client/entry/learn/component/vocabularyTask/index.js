@@ -1,21 +1,14 @@
 import React from 'react';
 import "../../asset/style/vocabularyTask.less";
 import VocabularyItem from './vocabularyItem';
+import { addParam } from '@/util/urlUtil';
 
 class VocabularyTask extends React.PureComponent {
 
     render() {
 
         let { vocabularyList, taskStatus, playAction, param } = this.props;
-        let paramString = '';
-        for (let key in param) {
-            if (paramString === '') {
-                paramString = key + '=' + param[key];
-            } else {
-                paramString = paramString + '&' + key + '=' + param[key];
-            }
-        }
-        let testHref = '/learn/wordquiz?' + paramString;
+        let testHref = addParam('/learn/wordquiz', param);
         const vocabularyItems = vocabularyList.map((item,index) => {
             let backgroundColor = '';
             if (index % 2 === 0) {

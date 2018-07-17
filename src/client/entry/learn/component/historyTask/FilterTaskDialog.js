@@ -10,6 +10,7 @@ const FilterTaskDialog = ({
     startTime,
     endTime,
     defaultType,
+    param,
     actions,
 }) => {
     const taskTypes = [
@@ -38,6 +39,7 @@ const FilterTaskDialog = ({
                     start_time: startTime,
                     end_time: endTime,
                     type: defaultType,
+                    user_id: param.user_id,
                 });
             }}
         />,

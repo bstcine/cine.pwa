@@ -9,6 +9,8 @@ class VocabularyTask extends React.PureComponent {
 
         let { vocabularyList, taskStatus, playAction, param } = this.props;
         let testHref = addParam('/learn/wordquiz', param);
+        param['type'] = '4';
+        let historyHref = addParam('/learn/task', param);
         const vocabularyItems = vocabularyList.map((item,index) => {
             let backgroundColor = '';
             if (index % 2 === 0) {
@@ -27,7 +29,7 @@ class VocabularyTask extends React.PureComponent {
             <div className="vocabularyTask">
                 <div className="v_Task_VocabularyHeader">
                     <a className="v_Task_H_TaskName">词汇学习</a>
-                    <a className="v_Task_H_HistoryDoor" href="/learn/task?type=4">历史学习</a>
+                    <a className="v_Task_H_HistoryDoor" href={historyHref}>历史学习</a>
                 </div>
                 <div className="v_Task_VocabularyList">
                     {vocabularyItems}

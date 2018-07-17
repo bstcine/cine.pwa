@@ -4,9 +4,6 @@ import { Task_Type } from '@/constant';
 import { Column112 } from '@/component/CGrid';
 import GIcon from '@/component/GIcon';
 import './style.less';
-import { getParam } from '@/util/urlUtil';
-
-const { user_id } = getParam();
 
 const Label = ({ type }) => {
     const map = {
@@ -32,8 +29,8 @@ const Status = ({ task }) => {
     }
 };
 
-const getHref = task => {
-    let urlUserIdParam = user_id ? `&user_id=${user_id}&cmd=check` : '';
+const getHref = (task, isMentor) => {
+    let urlMentorUser = isMentor ? `&user_id=${task.user_id}&cmd=check` : '';
     switch (task.type) {
         case Task_Type.Video:
         case Task_Type.Quiz_PDF:
@@ -41,17 +38,17 @@ const getHref = task => {
                 task.id
             }&lesson_id=${task.lesson_id}`;
         case Task_Type.Quiz:
-            return `/quiz/kj?task_id=${task.id}${urlUserIdParam}`;
+            return `/quiz/kj?task_id=${task.id}${urlMentorUser}`;
         case Task_Type.Quiz_Feedback: {
             return `/quiz/kj?task_id=${
                 task.id
-            }${urlUserIdParam}&stats_content_quiz_id=${task.object_id}`;
+            }${urlMentorUser}&stats_content_quiz_id=${task.object_id}`;
         }
         case Task_Type.Word:
             if (task.word_start_index && task.word_end_index) {
                 return `/learn/word?task_id=${task.id}&start_index=${
                     task.word_start_index
-                }&end_index=${task.word_end_index}`;
+                }&end_index=${task.word_end_index}${urlMentorUser}`;
             } else {
                 return `/learn/word?task_id=${task.id}&word_type=${
                     task.object_id
@@ -62,7 +59,10 @@ const getHref = task => {
 
 const TaskItem = ({ task, isMentor }) => {
     return (
-        <Column112 key={task.id} className="task-item" href={getHref(task)}>
+        <Column112
+            key={task.id}
+            className="task-item"
+            href={getHref(task, isMentor)}>
             <Label type={task.type} />
             <TextFix className="task-title">{task.title}</TextFix>
             <Status task={task} />

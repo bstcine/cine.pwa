@@ -9,9 +9,14 @@ class VocabularyTask extends React.PureComponent {
 
         let { vocabularyList, taskStatus, playAction, param } = this.props;
         let testHref = addParam('/learn/wordquiz', param);
-        param['type'] = '4';
-        let historyHref = addParam('/learn/task', param);
-        const vocabularyItems = vocabularyList.map((item,index) => {
+        let historyHref = '/learn/task?type=4';
+        if (param.user_id) {
+            historyHref = historyHref + '&user_id=' + param.user_id;
+        }
+        if (param.task_id) {
+            historyHref = historyHref + '&task_id=' + param.task_id;
+        }
+        const vocabularyItems = vocabularyList.map((item, index) => {
             let backgroundColor = '';
             if (index % 2 === 0) {
                 backgroundColor = '#fff';

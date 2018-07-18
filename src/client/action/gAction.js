@@ -8,13 +8,26 @@ const gAction = {
     }),
 
     hideLoading: () => ({ type: actionType.HIDE_LOADING }),
-    showLoading: () => ({ type: actionType.SHOW_LOADING }),
+    showLoading: () => dispatch => {
+        setTimeout(() => {
+            dispatch(gAction.hideLoading());
+        }, 3000);
+
+        dispatch({ type: actionType.SHOW_LOADING });
+    },
 
     hideMessage: () => ({ type: actionType.HIDE_MESSAGE }),
-    showMessage: ({ text, error }) => ({
-        type: actionType.SHOW_MESSAGE,
-        payload: { text, error },
-    }),
+    showMessage: ({ text, error }, autoHide = true) => dispatch => {
+        if (autoHide) {
+            setTimeout(() => {
+                dispatch(gAction.hideMessage());
+            }, 3000);
+        }
+        dispatch({
+            type: actionType.SHOW_MESSAGE,
+            payload: { text, error },
+        });
+    },
 };
 
 export default gAction;

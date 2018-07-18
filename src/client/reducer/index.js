@@ -84,3 +84,29 @@ export const alertRedu = (state = { isOpen: false }, { type, payload }) => {
             return state;
     }
 };
+
+export const loadingRedu = (state = { isOpen: false }, action) => {
+    switch (action.type) {
+        case actType.HIDE_LOADING:
+            return { isOpen: false };
+        case actType.SHOW_LOADING:
+            return { isOpen: true };
+        default:
+            return state;
+    }
+};
+
+export const messageRedu = (state = { isOpen: false }, action) => {
+    switch (action.type) {
+        case actType.HIDE_MESSAGE:
+            return { isOpen: false };
+        case actType.SHOW_MESSAGE:
+            return {
+                isOpen: true,
+                text: action.payload.text,
+                error: action.payload.error,
+            };
+        default:
+            return state;
+    }
+};

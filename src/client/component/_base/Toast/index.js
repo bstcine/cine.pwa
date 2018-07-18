@@ -1,36 +1,35 @@
 import React from 'react';
 import { componentNames } from '@/component/_base/config';
 const cls = componentNames.Toast;
+import './style.less';
+import { TransparentMask } from '@/component/Mask';
 
-const ToastError = ({ text }) => {
+const Loading = ({ isOpen, text }) => {
+    if (!isOpen) return null;
     return (
-        <div className={cls}>
-            <i className={`${cls}__icon material-icons`}>&#xE000;</i>
-            <p>{text || '网络异常'}</p>
-        </div>
+        <React.Fragment>
+            <TransparentMask />
+            <div className={cls}>
+                <i className={`${cls}__icon loading`} />
+                <p className={`${cls}__msg`}>{text || '加载中'}</p>
+            </div>
+        </React.Fragment>
     );
 };
 
-const ToastLoading = ({ text }) => {
+const Message = ({ isOpen, text, error }) => {
+    if (!isOpen) return null;
     return (
-        <div className={cls}>
-            <i className={`${cls}__icon loading`} />
-            <p>{text || '加载中'}</p>
-        </div>
+        <React.Fragment>
+            <TransparentMask />
+            <div className={cls}>
+                <i className={`${cls}__icon material-icons`}>
+                    {!error ? `done` : `error_outline`}
+                </i>
+                <p className={`${cls}__msg`}>{text || error || '已完成'}</p>
+            </div>
+        </React.Fragment>
     );
 };
 
-const ToastSuccess = ({ text }) => {
-    return (
-        <div className={cls}>
-            <i className={`${cls}__icon material-icons`}>&#xE876;</i>
-            <p>{text || '已完成'}</p>
-        </div>
-    );
-};
-
-export {
-    ToastError as CToastError,
-    ToastLoading as CToastLoading,
-    ToastSuccess as CToastSuccess,
-};
+export { Message as CMessage, Loading as CLoading };

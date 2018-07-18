@@ -211,7 +211,7 @@ class Container extends Component {
                     </CButton>
 
                     <CButton
-                        variant="contained"
+                        variant="outlined"
                         color="primary"
                         onClick={() => {
                             gActions.showAlert({
@@ -222,7 +222,38 @@ class Container extends Component {
                                 },
                             });
                         }}>
-                        点我显示ALERT
+                        ALERT
+                    </CButton>
+                    <CButton
+                        variant="outlined"
+                        color="primary"
+                        onClick={() => {
+                            gActions.showLoading();
+                        }}>
+                        Loading
+                    </CButton>
+                    <CButton
+                        variant="outlined"
+                        color="primary"
+                        onClick={() => {
+                            gActions.showMessage({
+                                text: 'hello Message!',
+                            });
+                        }}>
+                        Message
+                    </CButton>
+                    <CButton
+                        variant="outlined"
+                        color="primary"
+                        onClick={() => {
+                            gActions.showMessage(
+                                {
+                                    error: 'hello Message!',
+                                },
+                                false
+                            );
+                        }}>
+                        Message Error
                     </CButton>
                 </CPanel>
             </GLayout>

@@ -8,13 +8,7 @@ const gAction = {
     }),
 
     hideLoading: () => ({ type: actionType.HIDE_LOADING }),
-    showLoading: () => dispatch => {
-        setTimeout(() => {
-            dispatch(gAction.hideLoading());
-        }, 3000);
-
-        dispatch({ type: actionType.SHOW_LOADING });
-    },
+    showLoading: () => ({ type: actionType.SHOW_LOADING }),
 
     hideMessage: () => ({ type: actionType.HIDE_MESSAGE }),
     showMessage: ({ text, error }, autoHide = true) => dispatch => {

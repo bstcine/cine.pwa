@@ -1,9 +1,8 @@
 import React from 'react';
 import classNames from 'classnames';
 import './style.less';
-import { baseprefix } from '@/component/_base/config';
-
-const cls = `${baseprefix}-card`;
+import { componentNames } from '@/component/_base/config';
+const cls = componentNames.Card;
 
 const Card = ({
     // '112' | '122' | '123' | '234'

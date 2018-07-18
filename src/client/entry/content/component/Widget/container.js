@@ -1,6 +1,9 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
+
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 import GIcon from '@/component/GIcon';
-import '../asset/style/widget.less';
+import '../../asset/style/widget.less';
 import {
     CButton,
     CPanel,
@@ -9,10 +12,14 @@ import {
     CIconButton,
     CFloatingBox,
 } from '@/component/_base';
-export default class Widget extends PureComponent {
+import gAction from '@/action/gAction';
+import GLayout from '@/component/GLayout';
+
+class Container extends Component {
     render() {
+        const { actions } = this.props;
         return (
-            <React.Fragment>
+            <GLayout>
                 <CPanel title="CButton @seeat : entry/content/component/Widget.js">
                     <div>
                         <CButton>
@@ -192,7 +199,39 @@ export default class Widget extends PureComponent {
                         </CButton>
                     </CFloatingBox>
                 </CPanel>
-            </React.Fragment>
+                <CPanel title="Alert">
+                    <CButton
+                        variant="fab"
+                        mini
+                        color="secondary"
+                        onClick={() => {
+                            actions.showAlert({ text: 'hello alert!' });
+                        }}>
+                        <GIcon name="mi-pets" />
+                    </CButton>
+
+                    <CButton
+                        variant="contained"
+                        color="primary"
+                        onClick={() => {
+                            actions.showAlert({
+                                title: 'title',
+                                text: 'hello alert!',
+                                onConfirm: () => {
+                                    console.log('confirm');
+                                },
+                            });
+                        }}>
+                        点我显示ALERT
+                    </CButton>
+                </CPanel>
+            </GLayout>
         );
     }
 }
+
+const mapDispatchToProps = dispatch => ({
+    actions: bindActionCreators(gAction, dispatch),
+});
+
+export default connect(null, mapDispatchToProps)(Container);

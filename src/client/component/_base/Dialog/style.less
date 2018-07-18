@@ -1,0 +1,48 @@
+@import '../style';
+
+.@{dialog}__main {
+    position: fixed;
+    z-index: 5000;
+    width: 80%;
+    max-width: 6rem;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #ffffff;
+    text-align: center;
+    border-radius: 0.06rem;
+    overflow: hidden;
+}
+
+.@{dialog}__header {
+    text-align: left;
+    padding: 24px 24px 20px;
+    font-weight: 400;
+    font-size: 0.42rem;
+}
+
+.@{dialog}__content {
+    min-height: 0.8rem;
+    line-height: 1.3;
+    word-wrap: break-word;
+    word-break: break-all;
+    white-space: pre-wrap;
+    color: #808080;
+    padding: 0 24px 24px;
+    font-size: 0.34rem;
+    text-align: left;
+}
+
+.@{dialog}__content:first-child {
+    padding-top: 24px;
+}
+
+.@{dialog}__footer {
+    display: flex;
+    justify-content: flex-end;
+    margin: 0.16rem 0.08rem;
+}
+
+.@{dialog}__footer button {
+    min-width: 1.4rem;
+}

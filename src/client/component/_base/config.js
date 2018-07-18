@@ -1,5 +1,17 @@
 export const baseprefix = 'cine';
+
+export const componentNames = {
+    Button: `${baseprefix}-btn`,
+    Card: `${baseprefix}-card`,
+    Dialog: `${baseprefix}-dialog`,
+    FloatingBox: `${baseprefix}-floating-box`,
+    Mask: `${baseprefix}-mask`,
+    Panel: `${baseprefix}-panel`,
+    Toast: `${baseprefix}-toast`,
+};
+
 export const fontRatio = 5;
+
 export const cTheme = {
     palette: {
         primary: {

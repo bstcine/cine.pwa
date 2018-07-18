@@ -1,9 +1,8 @@
 import React, { PureComponent } from 'react';
 import classNames from 'classnames';
 import './style.less';
-import { baseprefix } from '@/component/_base/config';
-
-const cls = `${baseprefix}-btn`;
+import { componentNames } from '@/component/_base/config';
+const cls = componentNames.Button;
 
 export default class Button extends PureComponent {
     static defaultProps = {

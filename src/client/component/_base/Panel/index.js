@@ -1,9 +1,8 @@
 import React from 'react';
 import classNames from 'classnames';
 import './style.less';
-import { baseprefix } from '@/component/_base/config';
-
-const cls = `${baseprefix}-panel`;
+import { componentNames } from '@/component/_base/config';
+const cls = componentNames.Panel;
 
 const CPanel = ({ title, badge, children, className, ext_title, ext_href }) => {
     return (

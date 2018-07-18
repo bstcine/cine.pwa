@@ -20,6 +20,7 @@ class HistoryTask extends React.PureComponent {
             endTime,
             defaultType,
             user,
+            param,
             actions,
         } = this.props;
         let isMentor = false;
@@ -49,6 +50,7 @@ class HistoryTask extends React.PureComponent {
                     startTime={startTime}
                     endTime={endTime}
                     defaultType={defaultType}
+                    param={param}
                     actions={actions}
                 />
             </React.Fragment>

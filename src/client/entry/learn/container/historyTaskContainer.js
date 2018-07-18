@@ -42,6 +42,7 @@ class HistoryTaskContainer extends React.PureComponent {
                         endTime={endTime}
                         defaultType={defaultType}
                         user={user}
+                        param={this.param}
                         actions={actions}
                     />
                 </div>

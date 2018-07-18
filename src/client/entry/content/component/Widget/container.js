@@ -17,7 +17,7 @@ import GLayout from '@/component/GLayout';
 
 class Container extends Component {
     render() {
-        const { actions } = this.props;
+        const { gActions } = this.props;
         return (
             <GLayout>
                 <CPanel title="CButton @seeat : entry/content/component/Widget.js">
@@ -205,7 +205,7 @@ class Container extends Component {
                         mini
                         color="secondary"
                         onClick={() => {
-                            actions.showAlert({ text: 'hello alert!' });
+                            gActions.showAlert({ text: 'hello alert!' });
                         }}>
                         <GIcon name="mi-pets" />
                     </CButton>
@@ -214,7 +214,7 @@ class Container extends Component {
                         variant="contained"
                         color="primary"
                         onClick={() => {
-                            actions.showAlert({
+                            gActions.showAlert({
                                 title: 'title',
                                 text: 'hello alert!',
                                 onConfirm: () => {
@@ -231,7 +231,7 @@ class Container extends Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-    actions: bindActionCreators(gAction, dispatch),
+    gActions: bindActionCreators(gAction, dispatch),
 });
 
 export default connect(null, mapDispatchToProps)(Container);

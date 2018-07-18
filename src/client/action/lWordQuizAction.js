@@ -169,11 +169,10 @@ export const lWordQuizAction = {
     _getInterferenceRows: (rows, index, count) => {
         // 获取禁止下标的词性
         let wordType = rows[index]['type'];
-        let wordValue = rows[index]['word'];
         // 获取所有该词性的元素
         let newRows = [];
         for (let i = 0; i < rows.length; i++) {
-            if (rows[i]['word'] === wordValue) {
+            if (index === i) {
                 continue;
             }
             if (rows[i]['type'] === wordType) {
@@ -194,11 +193,14 @@ export const lWordQuizAction = {
             return resultRows;
         }
         // 此时表示数量不足,需要补足
-        while (newRows.length < count) {
+        while (newRows.length < count && rows.length > (newRows.length + 1)) {
             let randomIndex = lWordQuizAction.getRandomNumber(rows.length - 1);
+            if (index === randomIndex) {
+                continue;
+            }
             let hadRandom = false;
             for (let i = 0; i < newRows.length; i++) {
-                if (newRows[i]['word'] === rows[randomIndex]['word'] || wordValue === rows[randomIndex]['word']) {
+                if (newRows[i]['word'] === rows[randomIndex]['word']) {
                     hadRandom = true;
                     break;
                 }

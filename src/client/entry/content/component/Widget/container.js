@@ -229,6 +229,9 @@ class Container extends Component {
                         color="primary"
                         onClick={() => {
                             gActions.showLoading();
+                            setTimeout(() => {
+                                gActions.hideLoading();
+                            }, 3000);
                         }}>
                         Loading
                     </CButton>
@@ -248,7 +251,7 @@ class Container extends Component {
                         onClick={() => {
                             gActions.showMessage(
                                 {
-                                    error: 'hello Message!',
+                                    error: 'Error! autohide:false',
                                 },
                                 false
                             );

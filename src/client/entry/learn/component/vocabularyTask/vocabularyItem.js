@@ -34,7 +34,7 @@ class VocabularyItem extends React.PureComponent {
             phonetic = vocabulary.phonetic_b;
         }
         const voiceSpan = (
-            this.voiceSrc && <span className="v_Task_L_Item_Voice"></span>
+            this.voiceSrc && <p className="v_Task_L_Item_Voice"></p>
         );
         const wordColor = vocabulary.word_selected ? 'red' : '#1d70d6';
         return (
@@ -42,8 +42,8 @@ class VocabularyItem extends React.PureComponent {
                 <div className="v_Task_L_Item_Info" >
                     <p className="v_Task_L_Item_Seq">{vocabulary.id}</p>
                     <div className="v_Task_L_Item_Value">
-                        <a className="v_Task_L_Item_Word" style={{ color: wordColor }}>{vocabulary.word}</a>
-                        <a className="v_Task_L_Item_Phonetic">{phonetic}</a>
+                        <p className="v_Task_L_Item_Word" style={{ color: wordColor }}>{vocabulary.word}</p>
+                        <p className="v_Task_L_Item_Phonetic">{phonetic}</p>
                     </div>
                     {voiceSpan}
                 </div>

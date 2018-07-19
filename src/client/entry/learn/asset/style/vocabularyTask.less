@@ -47,11 +47,15 @@
 
     .v_Task_VocabularyFooter {
         position: static;
-        background-color: white;
         clear: both;
-        margin-top: 0.2rem;
+        margin-top: 0.4rem;
+        padding-top: 0.2rem;
+        padding-bottom: 0.2rem;
         padding-left: 0.4rem;
         padding-right: 0.4rem;
+        border-top: solid;
+        border-top-width: 1px;
+        border-top-color: #f3f4f5;
 
         .v_Task_VF_Container {
             display: inline-flex;
@@ -89,7 +93,6 @@
 
     .v_Task_VocabularyList{
         padding-top: 0.2rem;
-        padding-bottom: 0.4rem;
         flex-grow: 1;
         clear: both;
     }
@@ -121,10 +124,13 @@
             float: left;
         }
         .v_Task_L_Item_Value{
+            display: flex;
             flex-grow: 1;
+            flex-direction: row;
+            align-items: center;
         }
         .v_Task_L_Item_Word{
-            margin-left: 0.8rem;
+            margin-left: 0.5rem;
             font-family: PingFangSC-Medium;
             font-size: 0.4rem;
             color: #1d70d6;
@@ -184,10 +190,12 @@
                 font-size: 0.24rem;
                 text-align: right;
                 color: #3a3b3c;
-                float: left;
             }
             .v_Task_L_Item_Value{
+                display: flex;
                 flex-grow: inherit;
+                flex-direction: row;
+                align-items: center;
             }
             .v_Task_L_Item_Word{
                 margin-left: 0.4rem;
@@ -203,7 +211,6 @@
             }
             .v_Task_L_Item_Voice{
                 margin-left: 0.48rem;
-                float: left;
                 width: 0.4rem;
                 height: 0.4rem;
                 background: url("../image/voice.png") no-repeat center;

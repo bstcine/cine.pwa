@@ -38,11 +38,11 @@ class VocabularyTask extends React.PureComponent {
                 </div>
                 <div className="v_Task_VocabularyList">
                     {vocabularyItems}
-                    <div className="v_Task_VocabularyFooter">
-                        <div className="v_Task_VF_Container">
-                            <a className="v_Task_F_Promote">别忘记了词汇测试，通过了测试才算完成当日测试任务哦！</a>
-                            <a className="v_Task_F_TestDoor" href={testHref}>{test}</a>
-                        </div>
+                </div>
+                <div className="v_Task_VocabularyFooter">
+                    <div className="v_Task_VF_Container">
+                        <a className="v_Task_F_Promote">别忘记了词汇测试，通过了测试才算完成当日测试任务哦！</a>
+                        <a className="v_Task_F_TestDoor" href={testHref}>{test}</a>
                     </div>
                 </div>
             </div>

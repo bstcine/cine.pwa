@@ -77,10 +77,7 @@ export default class Header extends Component {
                         </a>
                         <ul className="nav-list-inner">
                             <li className="nav-item">
-                                <a href="/user/coupon">我的优惠券</a>
-                            </li>
-                            <li className="nav-item">
-                                <a href="/user/integral">我的积分</a>
+                                <a href="/user">个人中心</a>
                             </li>
                             <li className="nav-item">
                                 <a href="/resetPassword">修改密码</a>

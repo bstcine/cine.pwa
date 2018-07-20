@@ -1,7 +1,53 @@
 import React, { PureComponent } from 'react';
 import classNames from 'classnames';
-import '../GLayout/style.less';
 import GIcon from '@/component/GIcon';
+
+/**
+ * navs1 顶部一级导航
+ * navs2 一级页面导航
+ * navs3 二级页面导航
+ */
+class GHeader extends PureComponent {
+    constructor(props) {
+        super(props);
+        this.onToggleUserBar = this.onToggleUserBar.bind(this);
+        this.state = {
+            isOpenUserBar: false,
+        };
+    }
+
+    onToggleUserBar() {
+        this.setState(prevState => ({ isOpenUserBar: !prevState.isOpenUserBar }));
+    }
+
+    render() {
+        const { user, navs1, navs2, navs3, onLogout } = this.props;
+        const { isOpenUserBar } = this.state;
+
+        return (
+            <React.Fragment>
+                <header className="gheader">
+                    <div className="gcontainer">
+                        <Brand />
+                        <Nav1 navs={navs1} />
+
+                        <UserBar
+                            user={user}
+                            isOpenUserBar={isOpenUserBar}
+                            onToggleUserBar={this.onToggleUserBar}
+                            onLogout={onLogout}
+                        />
+                    </div>
+                </header>
+                {navs3 && navs3.length ? (
+                    <Nav3 navs={navs3} />
+                ) : (
+                    <Nav2 navs={navs2} />
+                )}
+            </React.Fragment>
+        );
+    }
+}
 
 const Brand = () => (
     <a href="/">
@@ -112,50 +158,4 @@ const Nav3 = ({ navs }) => {
     );
 };
 
-/**
- * navs1 顶部一级导航
- * navs2 一级页面导航
- * navs3 二级页面导航
- */
-class GHeader extends PureComponent {
-    constructor(props) {
-        super(props);
-        this.onToggleUserBar = this.onToggleUserBar.bind(this);
-        this.state = {
-            isOpenUserBar: false,
-        };
-    }
-
-    onToggleUserBar() {
-        this.setState(prevState => ({ isOpenUserBar: !prevState.isOpenUserBar }));
-    }
-
-    render() {
-        const { user, navs1, navs2, navs3, onLogout } = this.props;
-        const { isOpenUserBar } = this.state;
-
-        return (
-            <React.Fragment>
-                <header className="gheader">
-                    <div className="gcontainer">
-                        <Brand />
-                        <Nav1 navs={navs1} />
-
-                        <UserBar
-                            user={user}
-                            isOpenUserBar={isOpenUserBar}
-                            onToggleUserBar={this.onToggleUserBar}
-                            onLogout={onLogout}
-                        />
-                    </div>
-                </header>
-                {navs3 && navs3.length ? (
-                    <Nav3 navs={navs3} />
-                ) : (
-                    <Nav2 navs={navs2} />
-                )}
-            </React.Fragment>
-        );
-    }
-}
 export default GHeader;

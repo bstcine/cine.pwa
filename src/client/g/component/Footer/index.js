@@ -1,5 +1,4 @@
 import React from 'react';
-import '../GLayout/style.less';
 
 const Footer = () => {
     return (

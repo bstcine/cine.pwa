@@ -1,4 +1,6 @@
 import * as actionType from '../constant';
+import { APIURL_User_Info } from '../../../APIConfig';
+import { fetchData } from '@/service/base';
 
 const gAction = {
     hideAlert: () => ({ type: actionType.HIDE_ALERT }),
@@ -25,9 +27,27 @@ const gAction = {
 
     fetchUserInfo: () => async (dispatch, getState) => {
         if (getState().userRedu.loading) return;
-        dispatch({ type: actType.REQUEST_USER_INFO });
+        dispatch({ type: actionType.REQUEST_USER_INFO });
         const [, user] = await fetchData(APIURL_User_Info, null, 'GET');
-        if (user) dispatch({ type: actType.RECEIVE_USER_INFO, payload: user });
+        if (user) dispatch({ type: actionType.RECEIVE_USER_INFO, payload: user });
+    },
+
+    fetchData: (
+        url,
+        query,
+        { dispatchActionType, showLoading = true, showError = true }
+    ) => async dispatch => {
+        if (showLoading) dispatch(gAction.showLoading());
+        let [error, result] = await fetchData(url, query);
+        if (showLoading) dispatch(gAction.hideLoading());
+
+        if (showError) dispatch(gAction.showMessage({ error }));
+
+        if (dispatchActionType) {
+            dispatch({ type: dispatchActionType, payload: result });
+        } else {
+            return [error, result];
+        }
     },
 };
 

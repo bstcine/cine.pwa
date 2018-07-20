@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import '../asset/style/index.less';
 import { GLayoutContainer } from '@/g/container';
-import { fetchUserInfo } from '@/action/commonAction';
+import gAction from '@/g/action';
 
 class Root extends Component {
     constructor(props) {
@@ -26,7 +26,7 @@ const mapStateToProps = state => ({ user: state.userRedu.data });
 
 const mapDispatchToProps = dispatch => ({
     fetchUserInfo: () => {
-        dispatch(fetchUserInfo());
+        dispatch(gAction.fetchUserInfo());
     },
 });
 

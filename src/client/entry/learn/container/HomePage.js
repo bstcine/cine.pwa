@@ -4,14 +4,14 @@ import Entry from '@/component/Entry';
 import Tasks from './Tasks';
 import Courses from './Courses';
 import '../asset/style/index.less';
-import { fetchUserInfo } from '@/action/commonAction';
+import gAction from '@/g/action';
 const mapStateToProps = state => {
     const { userRedu } = state;
     return { user: userRedu.data };
 };
 const mapDispatchToProps = dispatch => ({
     fetchUserInfo: () => {
-        dispatch(fetchUserInfo());
+        dispatch(gAction.fetchUserInfo());
     },
 });
 

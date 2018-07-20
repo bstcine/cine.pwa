@@ -2,7 +2,8 @@ import { combineReducers } from 'redux';
 import WordRedu from './WordReducer';
 import WordQuizRedu from './WordQuizReducer';
 import TaskRedu from './TaskReducer';
-import { userRedu, toastRedu } from '@/reducer';
+// import { userRedu, toastRedu } from '@/reducer';
+import gReducer from '@/g/reducer';
 import {
     RECEIVE_CURRENT_TASK,
     RECEIVE_MY_COURSE_LIST,
@@ -27,13 +28,14 @@ const courses = (state = [], action) => {
 };
 
 const rootReducer = combineReducers({
-    userRedu,
+    // userRedu,
     currentTasks,
     courses,
     WordRedu,
     TaskRedu,
     WordQuizRedu,
-    toastRedu,
+    // toastRedu,
+    ...gReducer,
 });
 
 export default rootReducer;

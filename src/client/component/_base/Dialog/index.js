@@ -15,7 +15,13 @@ const Dialog = ({ isOpen, title, text, showCancel, onCancel, onConfirm }) => {
                 {title && <div className={`${cls}__header`}>{title}</div>}
                 <div className={`${cls}__content`}>{text}</div>
                 <div className={`${cls}__footer`}>
-                    {showCancel && <CButton onClick={onCancel}>取消</CButton>}
+                    {showCancel && (
+                        <CButton
+                            className={`${cls}__cancel`}
+                            onClick={onCancel}>
+                            取消
+                        </CButton>
+                    )}
 
                     <CButton color="primary" onClick={onConfirm}>
                         确定

@@ -1,121 +1,149 @@
-import * as actType from '@/constant/actionType';
-import { fetchData } from '@/service/base';
-import { APIURL_User_Info } from '../../APIConfig';
+// import { fetchData } from '@/service/base';
+// import gAction from '@/g/action';
 
-export const closeAlert = () => ({
-    type: actType.CLOSE_ALERT,
-});
+// export const gAction.fetchData = (
+//     url,
+//     query,
+//     { dispatchActionType, showLoading = true, showError = true }
+// ) => async dispatch => {
+//     if (showLoading) dispatch(gAction.showLoading());
+//     let [error, result] = await fetchData(url, query);
+//     if (showLoading) dispatch(gAction.hideLoading());
 
-export const openAlert = ({ text }) => ({
-    type: actType.OPEN_ALERT,
-    payload: { text },
-});
+//     if (showError) dispatch(gAction.showMessage({ error }));
 
-export const closeConfirm = () => ({
-    type: actType.CLOSE_CONFIRM,
-});
+//     if (dispatchActionType) {
+//         dispatch({ type: dispatchActionType, payload: result });
+//     } else {
+//         return [error, result];
+//     }
+// };
 
-export const openConfirm = ({ text, onConfirm, onCancel }) => ({
-    type: actType.OPEN_CONFIRM,
-    payload: { text, onConfirm, onCancel },
-});
+// import * as actType from '@/constant/actionType';
+// import { fetchData } from '@/service/base';
+// import { APIURL_User_Info } from '../../APIConfig';
 
-export const closeNetworkLoading = () => ({
-    type: actType.CLOSE_NETWORK_LOADING,
-});
+// export const closeAlert = () => ({
+//     type: actType.CLOSE_ALERT,
+// });
 
-export const openNetworkLoading = text => ({
-    type: actType.OPEN_NETWORK_LOADING,
-    payload: { text: text || '加载中' },
-});
+// export const openAlert = ({ text }) => ({
+//     type: actType.OPEN_ALERT,
+//     payload: { text },
+// });
 
-export const closeNetworkError = () => ({
-    type: actType.CLOSE_NETWORK_ERROR,
-});
+// export const closeConfirm = () => ({
+//     type: actType.CLOSE_CONFIRM,
+// });
 
-export const openNetworkError = error => ({
-    type: actType.OPEN_NETWORK_ERROR,
-    payload: { error: error || '系统错误' },
-});
+// export const openConfirm = ({ text, onConfirm, onCancel }) => ({
+//     type: actType.OPEN_CONFIRM,
+//     payload: { text, onConfirm, onCancel },
+// });
 
-export const boundNetworkError = error => dispatch => {
-    if (!error) return;
-    let text = error instanceof Error ? error.message : error;
-    dispatch(openNetworkError(text));
-    setTimeout(() => {
-        dispatch(closeNetworkError());
-    }, 3000);
-};
+// export const closeNetworkLoading = () => ({
+//     type: actType.CLOSE_NETWORK_LOADING,
+// });
 
-export const boundFetchNetwork = (
-    url,
-    query,
-    { dispatchActionType, showLoading = true, showError = true }
-) => async dispatch => {
-    if (showLoading) dispatch(openNetworkLoading());
-    let [error, result] = await fetchData(url, query);
-    if (showLoading) dispatch(closeNetworkLoading());
+// export const openNetworkLoading = text => ({
+//     type: actType.OPEN_NETWORK_LOADING,
+//     payload: { text: text || '加载中' },
+// });
 
-    if (showError) dispatch(boundNetworkError(error));
+// export const closeNetworkError = () => ({
+//     type: actType.CLOSE_NETWORK_ERROR,
+// });
 
-    if (dispatchActionType) {
-        dispatch({ type: dispatchActionType, payload: result });
-    } else {
-        return [error, result];
-    }
-};
+// export const openNetworkError = error => ({
+//     type: actType.OPEN_NETWORK_ERROR,
+//     payload: { error: error || '系统错误' },
+// });
 
-export const networkError = err => dispatch => {
-    let text = err instanceof Error ? err.message : err;
-    dispatch({
-        type: actType.OPEN_NETWORK_ERROR,
-        payload: { text },
-    });
-    setTimeout(() => {
-        dispatch({
-            type: actType.CLOSE_NETWORK_ERROR,
-            payload: { text },
-        });
-    }, 3000);
-};
+// export const boundNetworkError = error => dispatch => {
+//     if (!error) return;
+//     let text = error instanceof Error ? error.message : error;
+//     dispatch(openNetworkError(text));
+//     setTimeout(() => {
+//         dispatch(closeNetworkError());
+//     }, 3000);
+// };
 
-export const toastAction = {
-    _hide: () => ({
-        type: actType.TOAST_HIDE,
-    }),
-    _loading: () => ({
-        type: actType.TOAST_LOADING,
-    }),
-    _show: msg => ({
-        type: actType.TOAST_DISPLAY_SUCCESS,
-        payload: msg,
-    }),
-    _showError: error => ({
-        type: actType.TOAST_DISPLAY_ERROR,
-        payload: error,
-    }),
+// export const gAction.fetchData = (
+//     url,
+//     query,
+//     { dispatchActionType, showLoading = true, showError = true }
+// ) => async dispatch => {
+//     if (showLoading) dispatch(openNetworkLoading());
+//     let [error, result] = await fetchData(url, query);
+//     if (showLoading) dispatch(closeNetworkLoading());
 
-    hide: () => dispatch => {
-        dispatch(toastAction._hide());
-    },
+//     if (showError) dispatch(boundNetworkError(error));
 
-    loading: () => dispatch => {
-        dispatch(toastAction._loading());
-    },
+//     if (dispatchActionType) {
+//         dispatch({ type: dispatchActionType, payload: result });
+//     } else {
+//         return [error, result];
+//     }
+// };
 
-    show: msg => dispatch => {
-        dispatch(toastAction._show(msg));
+// export const networkError = err => dispatch => {
+//     let text = err instanceof Error ? err.message : err;
+//     dispatch({
+//         type: actType.OPEN_NETWORK_ERROR,
+//         payload: { text },
+//     });
+//     setTimeout(() => {
+//         dispatch({
+//             type: actType.CLOSE_NETWORK_ERROR,
+//             payload: { text },
+//         });
+//     }, 3000);
+// };
 
-        setTimeout(() => {
-            dispatch(toastAction._hide());
-        }, 2000);
-    },
+// export const toastAction = {
+//     _hide: () => ({
+//         type: actType.TOAST_HIDE,
+//     }),
+//     _loading: () => ({
+//         type: actType.TOAST_LOADING,
+//     }),
+//     _show: msg => ({
+//         type: actType.TOAST_DISPLAY_SUCCESS,
+//         payload: msg,
+//     }),
+//     _showError: error => ({
+//         type: actType.TOAST_DISPLAY_ERROR,
+//         payload: error,
+//     }),
 
-    showError: error => dispatch => {
-        dispatch(toastAction._showError(error));
+//     hide: () => dispatch => {
+//         dispatch(toastAction._hide());
+//     },
 
-        setTimeout(() => {
-            dispatch(toastAction._hide());
-        }, 2000);
-    },
-};
+//     loading: () => dispatch => {
+//         dispatch(toastAction._loading());
+//     },
+
+//     show: msg => dispatch => {
+//         dispatch(toastAction._show(msg));
+
+//         setTimeout(() => {
+//             dispatch(toastAction._hide());
+//         }, 2000);
+//     },
+
+//     showError: error => dispatch => {
+//         dispatch(toastAction._showError(error));
+
+//         setTimeout(() => {
+//             dispatch(toastAction._hide());
+//         }, 2000);
+//     },
+// };
+
+// export const fetchUserInfo = () => async (dispatch, getState) => {
+//     if (getState().userRedu.loading) return;
+//     dispatch({ type: actType.REQUEST_USER_INFO });
+//     const [, user] = await fetchData(APIURL_User_Info, null, 'GET');
+//     if (user) dispatch({ type: actType.RECEIVE_USER_INFO, payload: user });
+// };

@@ -8,7 +8,8 @@ import {
     FETCH_MENTOR_STUDENT_TASK,
 } from '@/constant/actionTypeMentor';
 import { fetchData } from '@/service/base';
-import { openConfirm, boundFetchNetwork } from '@/action/commonAction';
+import { openConfirm } from '@/action/commonAction';
+import gAction from '@/g/action';
 
 /**
  * 获取学生、答题记录、词汇测试列表
@@ -20,7 +21,7 @@ export const fetchMentorStudentQuizWord = () => async dispatch => {
     // dispatch(boundNetworkError(err));
     // dispatch({ type: FETCH_MENTOR_STUDENT_QUIZ_WORD, payload: result });
     dispatch(
-        boundFetchNetwork(APIURL_Content_StuQuizWord_List, null, {
+        gAction.fetchData(APIURL_Content_StuQuizWord_List, null, {
             dispatchActionType: FETCH_MENTOR_STUDENT_QUIZ_WORD,
         })
     );
@@ -31,13 +32,13 @@ export const fetchMentorStudentQuizWord = () => async dispatch => {
  */
 export const fetchMentorStudentTask = () => async dispatch => {
     dispatch(
-        boundFetchNetwork(APIURL_Mentor_Student_ListWithTask, null, {
+        gAction.fetchData(APIURL_Mentor_Student_ListWithTask, null, {
             dispatchActionType: FETCH_MENTOR_STUDENT_TASK,
         })
     );
 
     // let [error, result] = await dispatch(
-    //     boundFetchNetwork(APIURL_Mentor_Student_ListWithTask, null, {
+    //     gAction.fetchData(APIURL_Mentor_Student_ListWithTask, null, {
     //         showLoading: true,
     //         showError: true,
     //     })

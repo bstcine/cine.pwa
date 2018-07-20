@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import Header from '@/g/component/Header';
-import { fetchUserInfo } from '@/action/commonAction';
+import gAction from '@/g/action';
 import { logoutV1 } from '@/service/base';
 import { getNav } from './helper';
 
@@ -12,7 +12,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => ({
     fetchUserInfo: () => {
-        dispatch(fetchUserInfo());
+        dispatch(gAction.fetchUserInfo());
     },
     onLogout: () => {
         logoutV1().then(() => {

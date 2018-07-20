@@ -8,6 +8,7 @@ import {
     Message as MessageContainer,
 } from '@/g/container/Toast';
 import siteCodeUtil from '@/util/sitecodeUtil';
+import './style.less';
 
 export default class Layout extends Component {
     render() {

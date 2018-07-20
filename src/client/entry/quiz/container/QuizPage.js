@@ -3,25 +3,20 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { fetchQuizData } from '@/action/quizAction';
-import Alert from '@/component/Alert';
-import Confirm from '@/component/Confirm';
 import Title from '../container/Title';
 import QuestionsList from '../container/QuestionsList';
 import Submit from '../container/Submit';
 import { getParam } from '@/util/urlUtil';
-import ToastLoading from './ToastLoading';
-import ToastError from './ToastError';
 import LoginModal from './LoginModal';
 
 const mapStateToProps = state => {
-    const { network, user } = state;
-    let { init } = network;
-    return { init, user };
+    const { userRedu } = state;
+    return { user: userRedu.data };
 };
 
 const mapDispatchToProps = dispatch => ({
-    fetchQuizData: obj => {
-        dispatch(fetchQuizData(obj));
+    fetchQuizData: data => {
+        dispatch(fetchQuizData(data));
     },
 });
 
@@ -58,16 +53,12 @@ class QuizPage extends Component {
     render() {
         console.log('QuizPage render');
         let { user_id } = getParam();
-        const { init, user } = this.props;
+        const { user } = this.props;
         return (
             <div className="tgrammar">
-                <Alert />
-                <Confirm />
-                {!init && <Title />}
-                {!init && <QuestionsList />}
-                {!init && <Submit user_id={user_id} user={user} />}
-                <ToastLoading />
-                <ToastError />
+                <Title />
+                <QuestionsList />
+                <Submit user_id={user_id} user={user} />
                 <LoginModal />
             </div>
         );

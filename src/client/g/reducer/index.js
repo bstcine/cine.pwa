@@ -57,3 +57,10 @@ export const messageRedu = (state = { isOpen: false }, action) => {
             return state;
     }
 };
+
+export default {
+    userRedu,
+    alertRedu,
+    loadingRedu,
+    messageRedu,
+};

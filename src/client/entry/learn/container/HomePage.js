@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import Entry from '@/component/Entry';
 import Tasks from './Tasks';
 import Courses from './Courses';
-import '../asset/style/index.less';
 import { fetchUserInfo } from '@/action/commonAction';
 const mapStateToProps = state => {
     const { userRedu } = state;

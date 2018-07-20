@@ -1,6 +1,6 @@
 @import '~asset/style/_cine.less';
-
-.task-list {
+@scale-label :2;
+.task-list-complex {
     .task-item {
         line-height: 0.72rem;
 
@@ -12,17 +12,19 @@
         align-items: center;
         justify-content: space-between;
         .label {
-            font-size: 0.22rem;
+            font-size: 0.22rem * @scale-label;
 
             display: flex;
 
-            width: 0.6rem;
-            height: 0.3rem;
-            margin-right: 0.12rem;
+            width: 0.6rem * @scale-label;
+            height: 0.3rem * @scale-label;
+            margin: 0 -0.2rem 0 -0.3rem;
+
+            transform: scale(1 / @scale-label);
 
             color: #72aeef;
-            border: solid 0.02rem #72aeef;
-            border-radius: 0.04rem;
+            border: solid 0.02rem * @scale-label #72aeef;
+            border-radius: 0.04rem * @scale-label;
 
             justify-content: center;
             align-items: center;
@@ -61,7 +63,7 @@
 }
 
 @media @media-up-sm {
-    .task-list {
+    .task-list-complex {
         margin: 0 -0.5rem;
         .task-item {
             line-height: 0.8rem;

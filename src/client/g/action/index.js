@@ -22,6 +22,13 @@ const gAction = {
             payload: { text, error },
         });
     },
+
+    fetchUserInfo: () => async (dispatch, getState) => {
+        if (getState().userRedu.loading) return;
+        dispatch({ type: actType.REQUEST_USER_INFO });
+        const [, user] = await fetchData(APIURL_User_Info, null, 'GET');
+        if (user) dispatch({ type: actType.RECEIVE_USER_INFO, payload: user });
+    },
 };
 
 export default gAction;

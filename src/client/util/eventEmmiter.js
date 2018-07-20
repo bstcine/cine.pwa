@@ -17,7 +17,7 @@ class EventEmmiter {
             throw new Error(`no event[${event}] listener found`);
         }
         listenerObjs.forEach(listenerObj => {
-            const {listener, once} = listenerObj;
+            const { listener, once } = listenerObj;
             if (once) this.removeListener(event, listener);
             listener(...args);
         });
@@ -29,7 +29,7 @@ class EventEmmiter {
         let listenerObjs = this._events[event] || [];
         listenerObjs.push({
             listener,
-            once
+            once,
         });
         this._events[event] = listenerObjs;
     }

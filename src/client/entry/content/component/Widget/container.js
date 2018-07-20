@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import GIcon from '@/component/GIcon';
+import { GIcon } from '@/g/component';
 import '../../asset/style/widget.less';
 import {
     CButton,
@@ -12,14 +11,14 @@ import {
     CIconButton,
     CFloatingBox,
 } from '@/component/_base';
-import gAction from '@/action/gAction';
-import GLayout from '@/component/GLayout';
+import gAction from '@/g/action';
+import { GLayoutContainer } from '@/g/container';
 
 class Container extends Component {
     render() {
         const { gActions } = this.props;
         return (
-            <GLayout>
+            <GLayoutContainer>
                 <CPanel title="CButton @seeat : entry/content/component/Widget.js">
                     <div>
                         <CButton>
@@ -259,7 +258,7 @@ class Container extends Component {
                         Message Error
                     </CButton>
                 </CPanel>
-            </GLayout>
+            </GLayoutContainer>
         );
     }
 }

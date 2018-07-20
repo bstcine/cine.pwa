@@ -1,19 +1,23 @@
 import React, { PureComponent } from 'react';
 import classNames from 'classnames';
-import GIcon from '@/component/GIcon';
+import Icon from '../Icon';
 
 /**
  * navs1 顶部一级导航
  * navs2 一级页面导航
  * navs3 二级页面导航
  */
-class GHeader extends PureComponent {
+class Header extends PureComponent {
     constructor(props) {
         super(props);
         this.onToggleUserBar = this.onToggleUserBar.bind(this);
         this.state = {
             isOpenUserBar: false,
         };
+    }
+
+    componentDidMount() {
+        this.props.fetchUserInfo();
     }
 
     onToggleUserBar() {
@@ -92,7 +96,7 @@ const UserBar = ({ user, isOpenUserBar, onToggleUserBar, onLogout }) => (
         <div className="nickname" onClick={onToggleUserBar}>
             {Boolean(user) && <span>{user.nickname}</span>}
             <HeaderImg user={user} />
-            <GIcon name="mi-arrow_drop_up" />
+            <Icon name="mi-arrow_drop_up" />
         </div>
         <nav className="nav-user">
             {/* <a href="/user">个人资料</a> */}
@@ -117,7 +121,7 @@ const Nav2 = ({ navs }) => (
                                     active: menu.active,
                                 })}>
                                 {(!!menu.icon || !!menu.icon_path) && (
-                                    <GIcon
+                                    <Icon
                                         name={menu.icon}
                                         url={menu.icon_path}
                                     />
@@ -127,7 +131,7 @@ const Nav2 = ({ navs }) => (
                         ) : (
                             <a key={menu.url} className="disabled">
                                 {(!!menu.icon || !!menu.icon_path) && (
-                                    <GIcon
+                                    <Icon
                                         name={menu.icon}
                                         url={menu.icon_path}
                                     />
@@ -147,7 +151,7 @@ const Nav3 = ({ navs }) => {
             <div className="gcontainer">
                 <a className="nav-3nd__home" href={menu1st.url}>
                     {(!!menu1st.icon || !!menu1st.icon_path) && (
-                        <GIcon name={menu1st.icon} url={menu1st.icon_path} />
+                        <Icon name={menu1st.icon} url={menu1st.icon_path} />
                     )}
                     {menu1st.label}
                 </a>
@@ -158,4 +162,4 @@ const Nav3 = ({ navs }) => {
     );
 };
 
-export default GHeader;
+export default Header;

@@ -3,10 +3,9 @@ import { connect } from 'react-redux';
 
 const mapStateToProps = state => {
     let { loadingRedu } = state;
-    let { isOpen, text } = loadingRedu;
+    let { isOpen } = loadingRedu;
     return {
         isOpen,
-        text,
     };
 };
 

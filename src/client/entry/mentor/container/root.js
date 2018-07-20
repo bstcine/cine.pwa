@@ -1,6 +1,6 @@
 import React from 'react';
 import Entry from '@/component/Entry';
-import GLayout from '@/component/GLayout';
+import { GLayoutContainer } from '@/g/container';
 import * as h5 from '@/constant/menuItemUrl';
 
 class Root extends Entry {
@@ -10,7 +10,7 @@ class Root extends Entry {
 
     render() {
         const { routes } = this.props;
-        return <GLayout>{routes}</GLayout>;
+        return <GLayoutContainer>{routes}</GLayoutContainer>;
     }
 }
 

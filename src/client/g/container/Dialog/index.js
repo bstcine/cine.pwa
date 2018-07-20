@@ -1,6 +1,6 @@
 import Dialog from '@/component/_base/Dialog';
 import { connect } from 'react-redux';
-import gAction from '@/action/gAction';
+import action from '@/g/action';
 
 const mapStateToProps = state => {
     let { alertRedu } = state;
@@ -23,11 +23,11 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
         showCancel: !!onConfirm,
         onCancel: () => {
             onCancel && onCancel();
-            dispatch(gAction.hideAlert());
+            dispatch(action.hideAlert());
         },
         onConfirm: () => {
             onConfirm && onConfirm();
-            dispatch(gAction.hideAlert());
+            dispatch(action.hideAlert());
         },
     };
 };

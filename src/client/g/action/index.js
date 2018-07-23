@@ -2,7 +2,7 @@ import * as actionType from '../constant';
 import { APIURL_User_Info } from '../../../APIConfig';
 import { fetchData } from '@/service/base';
 
-const gAction = {
+const action = {
     hideAlert: () => ({ type: actionType.HIDE_ALERT }),
     showAlert: ({ title, text, onConfirm, onCancel }) => ({
         type: actionType.SHOW_ALERT,
@@ -16,7 +16,7 @@ const gAction = {
     showMessage: ({ text, error }, autoHide = true) => dispatch => {
         if (autoHide) {
             setTimeout(() => {
-                dispatch(gAction.hideMessage());
+                dispatch(action.hideMessage());
             }, 3000);
         }
         dispatch({
@@ -37,11 +37,11 @@ const gAction = {
         query,
         { dispatchActionType, showLoading = true, showError = true }
     ) => async dispatch => {
-        if (showLoading) dispatch(gAction.showLoading());
+        if (showLoading) dispatch(action.showLoading());
         let [error, result] = await fetchData(url, query);
-        if (showLoading) dispatch(gAction.hideLoading());
+        if (showLoading) dispatch(action.hideLoading());
 
-        if (showError) dispatch(gAction.showMessage({ error }));
+        if (showError) dispatch(action.showMessage({ error }));
 
         if (dispatchActionType) {
             dispatch({ type: dispatchActionType, payload: result });
@@ -51,4 +51,4 @@ const gAction = {
     },
 };
 
-export default gAction;
+export default action;

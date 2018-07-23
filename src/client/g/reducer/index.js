@@ -1,6 +1,6 @@
 import * as actionType from '../constant';
 
-export const userRedu = (state = { loading: false, data: null }, action) => {
+const userRedu = (state = { loading: false, data: null }, action) => {
     switch (action.type) {
         case actionType.REQUEST_USER_INFO:
             return { loading: true, ...state };
@@ -11,7 +11,7 @@ export const userRedu = (state = { loading: false, data: null }, action) => {
     }
 };
 
-export const alertRedu = (state = { isOpen: false }, action) => {
+const alertRedu = (state = { isOpen: false }, action) => {
     switch (action.type) {
         case actionType.HIDE_ALERT:
             return { isOpen: false };
@@ -30,7 +30,7 @@ export const alertRedu = (state = { isOpen: false }, action) => {
     }
 };
 
-export const loadingRedu = (state = { isOpen: false }, action) => {
+const loadingRedu = (state = { isOpen: false }, action) => {
     switch (action.type) {
         case actionType.HIDE_LOADING:
             return { isOpen: false };
@@ -41,7 +41,7 @@ export const loadingRedu = (state = { isOpen: false }, action) => {
     }
 };
 
-export const messageRedu = (state = { isOpen: false }, action) => {
+const messageRedu = (state = { isOpen: false }, action) => {
     switch (action.type) {
         case actionType.HIDE_MESSAGE:
             return { isOpen: false };

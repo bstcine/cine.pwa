@@ -16,10 +16,12 @@ class Quiz extends Entry {
         let urlParam = getParam();
 
         let quiz_id = urlParam.id;
+        let lesson_id = urlParam.lesson_id;
         let quiz_case = urlParam.case;
         let quiz_title = urlParam.title;
 
         storeUtil.set('quiz_id', quiz_id);
+        storeUtil.set('lesson_id', lesson_id);
         storeUtil.set('quiz_bar', quiz_case && quiz_case == '1'); // 小节测验
         storeUtil.set('quiz_title', quiz_title);
     }

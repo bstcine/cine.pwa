@@ -16,17 +16,14 @@ class Header extends PureComponent {
         };
     }
 
-    componentDidMount() {
-        this.props.fetchUserInfo();
-    }
-
     onToggleUserBar() {
         this.setState(prevState => ({ isOpenUserBar: !prevState.isOpenUserBar }));
     }
 
     render() {
-        const { user, navs1, navs2, navs3, onLogout } = this.props;
+        const { user, navs, onLogout } = this.props;
         const { isOpenUserBar } = this.state;
+        const { navs1, navs2, navs3 } = navs;
 
         return (
             <React.Fragment>

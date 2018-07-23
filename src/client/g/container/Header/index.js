@@ -2,12 +2,13 @@ import { connect } from 'react-redux';
 import Header from '@/g/component/Header';
 import gAction from '@/g/action';
 import { logoutV1 } from '@/service/base';
-import { getNav } from './helper';
+import { getNavs } from './helper';
+import React, { PureComponent } from 'react';
 
 const mapStateToProps = state => {
     let { userRedu } = state;
-    const { navs1, navs2, navs3 } = getNav(userRedu.data);
-    return { user: userRedu.data, navs1, navs2, navs3 };
+    const navs = getNavs(userRedu.data);
+    return { user: userRedu.data, navs };
 };
 
 const mapDispatchToProps = dispatch => ({
@@ -21,4 +22,15 @@ const mapDispatchToProps = dispatch => ({
     },
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Header);
+class HeaderContainer extends PureComponent {
+    componentDidMount() {
+        this.props.fetchUserInfo();
+    }
+
+    render() {
+        const props = this.props;
+        return <Header {...props} />;
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(HeaderContainer);

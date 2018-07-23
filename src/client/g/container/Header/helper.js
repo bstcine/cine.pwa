@@ -1,6 +1,6 @@
 import menus from '@/constant/menu';
 
-const getNav = user => {
+const getNavs = user => {
     const filter = (menu, user) => {
         if (!menu.role_id) return true;
         if (user) {
@@ -48,4 +48,4 @@ const getNav = user => {
     return { navs1, navs2, navs3 };
 };
 
-export { getNav };
+export { getNavs };

@@ -54,7 +54,6 @@ class QuizContainer extends Component {
                                     <span>提交时间</span>
                                     <span>用时</span>
                                     <span>得分</span>
-                                    <span>批改人</span>
                                     <span>状态</span>
                                 </div>
                                 <ul className="table-body">

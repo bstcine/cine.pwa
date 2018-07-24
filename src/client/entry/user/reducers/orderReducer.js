@@ -1,38 +1,8 @@
 import { fromJS } from 'immutable';
+import * as order from '@/service/data/response_card.json';
 
 const initialState = fromJS({
-    orders: [
-        {
-            id: 0,
-            weight: 233,
-            isEaten: false,
-        },
-        {
-            weight: 235,
-            id: 1,
-            isEaten: false,
-        },
-        {
-            weight: 256,
-            isEaten: false,
-            id: 2,
-        },
-        {
-            id: 3,
-            weight: 333,
-            isEaten: false,
-        },
-        {
-            weight: 435,
-            id: 4,
-            isEaten: false,
-        },
-        {
-            weight: 556,
-            isEaten: false,
-            id: 5,
-        },
-    ],
+    orders: order.result,
     isOpenDetail: false,
 });
 

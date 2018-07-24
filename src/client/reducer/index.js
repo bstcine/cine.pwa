@@ -24,21 +24,6 @@ export const confirmModal = (state = { isOpen: false }, { type, payload }) => {
     }
 };
 
-export const networkModal = (state = { loading: false }, { type, payload }) => {
-    switch (type) {
-        case actType.CLOSE_NETWORK_LOADING:
-            return { loading: false };
-        case actType.OPEN_NETWORK_LOADING:
-            return { loading: true, text: payload.text };
-        case actType.CLOSE_NETWORK_ERROR:
-            return { loading: false };
-        case actType.OPEN_NETWORK_ERROR:
-            return { loading: false, error: payload.error };
-        default:
-            return state;
-    }
-};
-
 export const toastRedu = (
     state = { loading: false, msg: '', error: '' },
     action

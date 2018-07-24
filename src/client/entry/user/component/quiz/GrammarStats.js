@@ -21,7 +21,6 @@ const GrammarStats = ({ list }) => {
                             {timeUtil.durationShortFormat(item.duration)}
                         </span>
                         <span className="score">{item.score}</span>
-                        <span>{item.checker_nickname}</span>
                         <span className={`status__${item.status}`}>
                             {statusMap[item.status]}
                         </span>

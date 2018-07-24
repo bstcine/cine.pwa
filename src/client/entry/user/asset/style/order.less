@@ -1,22 +1,107 @@
 .bgpanel {
     background-color: #424242;
 }
-.bggrid {
-    background-color: #03a9f4;
-}
-.bg111 {
-    background-color: #f44336;
-    height: 50px;
+.bgt {
+    background-color: transparent;
 }
 .bg112 {
     background-color: #673ab7;
     height: 100px;
 }
 .bg123 {
-    background-color: #03a9f4;
-    height: 120px;
+    background-color: #e0e5e7;
+}
+.cbg123 {
+    background-color: #e0e5e7;
 }
 .bg234 {
-    background-color: #ffeb3b;
-    height: 80px;
+    background-color: white;
+    padding: 10px;
+}
+.cbg234 {
+    background-color: white;
+}
+
+.card234 {
+    background-color: transparent;
+    padding: 3px;
+    .img-c {
+        padding-bottom: 8px;
+        display: block;
+        .img {
+            padding-top: (9/16) * 100%;
+        }
+    }
+
+    .text-c {
+        min-height: 100px;
+        color: rgb(72, 72, 72);
+        padding-left: 2px;
+        .title {
+            font-weight: 800;
+            font-size: 16px;
+            line-height: 20px;
+            max-height: 42px;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            /*! autoprefixer: off */
+            -webkit-box-orient: vertical;
+            margin-bottom: 4px;
+            overflow: hidden;
+        }
+        .sub-title {
+            color: rgb(115, 71, 41);
+            font-weight: 800;
+            font-size: 11px;
+            line-height: 15px;
+            letter-spacing: normal;
+            text-transform: uppercase;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            margin-bottom: 2px;
+            overflow: hidden;
+        }
+        .price {
+            font-weight: normal;
+            font-size: 13px;
+            line-height: 17px;
+            letter-spacing: normal;
+            -webkit-font-smoothing: antialiased;
+            font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto,
+                'Helvetica Neue', sans-serif;
+        }
+        .rate {
+            vertical-align: middle !important;
+            line-height: 21px !important;
+            margin-right: 2px !important;
+            -webkit-font-smoothing: antialiased;
+            .star5 {
+                display: inline-block !important;
+                color: rgb(0, 132, 137) !important;
+                font-size: 9px !important;
+                height: 10px !important;
+                margin-right: 1px !important;
+                width: 9px !important;
+                svg {
+                    height: 1em;
+                    width: 1em;
+                    display: block;
+                    fill: currentcolor;
+                }
+            }
+            .number {
+                padding-left: 3px;
+                font-weight: 600 !important;
+                word-wrap: break-word !important;
+                font-size: 12px !important;
+                line-height: 16px !important;
+                letter-spacing: normal !important;
+                font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif !important;
+                display: inline !important;
+                margin: 0px !important;
+                
+            }
+        }
+    }
 }

@@ -13,12 +13,10 @@ class StuTaskContainer extends Component {
     }
 
     render() {
-        let { mentorStudentTask, networkModal, actions } = this.props;
-        let network = networkModal || {};
-
+        let { mentorStudentTask, toastRedu, actions } = this.props;
         return (
             <div className="mentor-container task">
-                <Toast network={network} />
+                <Toast network={toastRedu} />
                 <Confirm />
                 <StuTaskTable list={mentorStudentTask} actions={actions} />
             </div>
@@ -27,7 +25,7 @@ class StuTaskContainer extends Component {
 }
 
 const mapStateToProps = state => ({
-    networkModal: state.networkModal,
+    toastRedu: state.toastRedu,
     mentorStudentTask: state.mentorStudentTask,
 });
 

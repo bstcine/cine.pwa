@@ -3,12 +3,18 @@ import { eventEmmiter } from './eventEmmiter';
 let Bridge = {
     ios: function(event, params, needCallback = true) {
         return new Promise(resolve => {
-            console.log(`invoke iOS.event[${event}] with params: ${JSON.stringify(params)}`);
+            console.log(
+                `invoke iOS.event[${event}] with params: ${JSON.stringify(
+                    params
+                )}`
+            );
             if (!params) params = {};
             const callbackEvent = this.getCallbackEvent(event);
             if (needCallback) {
                 eventEmmiter.once(callbackEvent, res => {
-                    console.log(`callback iOS.event[${callbackEvent}] with data: ${res}`);
+                    console.log(
+                        `callback iOS.event[${callbackEvent}] with data: ${res}`
+                    );
                     if (res && typeof res === 'string') res = JSON.parse(res);
                     resolve(res);
                 });
@@ -16,7 +22,7 @@ let Bridge = {
             let msg = JSON.stringify({
                 method: event,
                 data: params,
-                callback: callbackEvent
+                callback: callbackEvent,
             });
             console.log(`send iOS msg ${JSON.stringify(msg)}`);
             webkit.messageHandlers.native.postMessage(msg);
@@ -25,12 +31,18 @@ let Bridge = {
 
     android: function(event, params, needCallback = true) {
         return new Promise(resolve => {
-            console.log(`invoke Android.event[${event}] with params: ${JSON.stringify(params)}`);
+            console.log(
+                `invoke Android.event[${event}] with params: ${JSON.stringify(
+                    params
+                )}`
+            );
             if (!params) params = {};
             const callbackEvent = this.getCallbackEvent(event);
             if (needCallback) {
                 eventEmmiter.once(callbackEvent, res => {
-                    console.log(`callback Android.event[${callbackEvent}] with data: ${res}`);
+                    console.log(
+                        `callback Android.event[${callbackEvent}] with data: ${res}`
+                    );
                     if (res && typeof res === 'string') res = JSON.parse(res);
                     resolve(res);
                 });
@@ -38,7 +50,7 @@ let Bridge = {
             let msg = JSON.stringify({
                 method: event,
                 data: params,
-                callback: callbackEvent
+                callback: callbackEvent,
             });
             console.log(`send Android msg ${JSON.stringify(msg)}`);
             Android[event](msg);
@@ -46,8 +58,14 @@ let Bridge = {
     },
 
     getCallbackEvent: function(event) {
-        return event + '-' + new Date().getTime() + '-' + (Math.random() * 100).toFixed();
-    }
+        return (
+            event +
+            '-' +
+            new Date().getTime() +
+            '-' +
+            (Math.random() * 100).toFixed()
+        );
+    },
 };
 
 export default Bridge;

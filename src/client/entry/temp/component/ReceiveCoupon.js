@@ -4,14 +4,18 @@
 import React, { Component } from 'react';
 import Api from '../../../../APIConfig';
 import { fetchData } from '@/service/base';
-import Modal from 'react-modal';
 import Header from '../../../component/Header';
 import Footer from '../../../component/Footer';
 import '../asset/style/ReceiveCoupon.less';
+import storeUtil from '@/util/storeUtil';
+import LoginModal from '@/component/LoginModal';
 
 export default class ReceiveCoupon extends Component {
     constructor(props) {
         super(props);
+        this.state = {
+            isLoginModalShow: false,
+        }
         this.coupon = {
             value: 50,
             type: '1',
@@ -21,9 +25,13 @@ export default class ReceiveCoupon extends Component {
         };
     }
     async receiveHandle() {
-        let [err, result] = await fetchData(Api.APIURL_Temp_User_Coupon_Receive, this.coupon);
-        if (!err && result && result.status === true) {
-            location.href = '/user/coupon';
+        if (!storeUtil.getToken()) {
+            this.setState({ isLoginModalShow: true });
+        } else {
+            let [err, result] = await fetchData(Api.APIURL_Temp_User_Coupon_Receive, this.coupon);
+            if (!err && result && result.status === true) {
+                location.href = '/user/coupon';
+            }
         }
     }
     render() {
@@ -64,6 +72,12 @@ export default class ReceiveCoupon extends Component {
                         </p>
                     </div>
                 </div>
+                <LoginModal
+                    isOpen={this.state.isLoginModalShow}
+                    onLoginSuccess={() => {
+                        this.setState({ isLoginModalShow: false });
+                    }}
+                />
                 <Footer isShow={true}/>
             </React.Fragment>
         );

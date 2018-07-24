@@ -23,6 +23,9 @@ const PayStatus = chunkComponent(() =>
 const Widget = chunkComponent(() =>
     import(/* webpackChunkName: "content/chunk/index.Widget" */ './component/Widget')
 );
+const LayoutComp = chunkComponent(() =>
+    import(/* webpackChunkName: "content/chunk/index.LayoutComp" */ './component/Widget/LayoutComp')
+);
 
 const createComponent = (Component, userRequired, props) => {
     if (userRequired && !storeUtil.getToken()) {
@@ -59,6 +62,7 @@ class Content extends Entry {
                         <Route exact path="/" component={Home} />
                         <Route path="/content/course" component={Course} />
                         <Route path="/widget" component={Widget} />
+                        <Route path="/layoutcomp" component={LayoutComp} />
                         <Route
                             path="/pay/prepare"
                             component={props =>

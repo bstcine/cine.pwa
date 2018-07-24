@@ -1,12 +1,13 @@
+import AlertContainer from '@/g/container/Alert';
 import HeaderContainer from '@/g/container/Header';
-import DialogContainer from '@/g/container/Dialog';
 import LayoutContainer from '@/g/container/Layout';
-import { Loading, Message } from '@/g/container/Toast';
+import LoadingContainer from '@/g/container/Loading';
+import MessageContainer from '@/g/container/Message';
 
 export {
     HeaderContainer as GHeaderContainer,
-    DialogContainer as GDialogContainer,
+    AlertContainer as GAlertContainer,
     LayoutContainer as GLayoutContainer,
-    Loading as GLoadingContainer,
-    Message as GMessageContainer,
+    LoadingContainer as GLoadingContainer,
+    MessageContainer as GMessageContainer,
 };

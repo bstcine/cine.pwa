@@ -1,4 +1,4 @@
-import Dialog from '@/component/_base/Dialog';
+import Alert from '@/g/component/Alert';
 import { connect } from 'react-redux';
 import action from '@/g/action';
 
@@ -32,4 +32,4 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
     };
 };
 
-export default connect(mapStateToProps, null, mergeProps)(Dialog);
+export default connect(mapStateToProps, null, mergeProps)(Alert);

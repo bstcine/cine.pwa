@@ -1,4 +1,4 @@
-import { CMessage } from '@/component/_base/Toast';
+import Message from '@/g/component/Message';
 import { connect } from 'react-redux';
 
 const mapStateToProps = state => {
@@ -11,4 +11,4 @@ const mapStateToProps = state => {
     };
 };
 
-export default connect(mapStateToProps)(CMessage);
+export default connect(mapStateToProps)(Message);

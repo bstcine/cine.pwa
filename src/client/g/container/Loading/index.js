@@ -1,4 +1,4 @@
-import { CLoading } from '@/component/_base/Toast';
+import Loading from '@/g/component/Loading';
 import { connect } from 'react-redux';
 
 const mapStateToProps = state => {
@@ -9,4 +9,4 @@ const mapStateToProps = state => {
     };
 };
 
-export default connect(mapStateToProps)(CLoading);
+export default connect(mapStateToProps)(Loading);

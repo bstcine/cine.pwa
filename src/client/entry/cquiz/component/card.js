@@ -24,6 +24,7 @@ export default class Card extends Component {
         this.optionName = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I'];
 
         this.quizId = storeUtil.get('quiz_id');
+        this.lessonId = storeUtil.get('lesson_id');
         this.quizBar = storeUtil.get('quiz_bar');
 
         this.init = this.init.bind(this);
@@ -33,8 +34,8 @@ export default class Card extends Component {
     }
 
     componentDidMount() {
-        if (this.quizId) {
-            Service.getQuiz({ id: this.quizId }).then(result => {
+        if (this.quizId || this.lessonId) {
+            Service.getQuiz({ id: this.quizId, lesson_id: this.lessonId }).then(result => {
                 console.log(result.data);
                 this.dataList = result.data.data;
                 this.init();

@@ -1,0 +1,112 @@
+@import '~asset/style/common';
+@import '~asset/style/_cine.less';
+
+.receiveContent{
+    display: flex;
+    position: relative;
+    width: 100%;
+    flex-direction: column;
+    background-color: white;
+}
+
+.couponContent{
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    align-items: center;
+    margin: 0.8rem 0 0.8rem 0;
+    left:50%;
+    transform: translateX(-50%);
+    width: 5.9rem;
+    height: 3.93rem;
+    background: url("../image/bg_gift_coupon.png") no-repeat center center;
+    background-size: contain;
+
+    .couponHeader{
+        height: 1.14rem;
+        width: 100%;
+        display: flex;
+        position: relative;
+        flex-direction: row;
+        align-items: flex-end;
+
+        .couponValue{
+            margin-left: 0.85rem;
+            font-family: PingFangSC-Semibold;
+            font-size: 0.58rem;
+            color: #f41010;
+        }
+        .couponType{
+            margin-left: 0.1rem;
+            font-family: PingFangSC-Semibold;
+            font-size: 0.28rem;
+            color: #f41010;
+        }
+        .couponName{
+            margin-left: 0.75rem;
+            margin-right: 0.3rem;
+            font-family: PingFangSC-Medium;
+            font-size: 0.3rem;
+            color: #77531b;
+        }
+    }
+    .receiveButton{
+        display: flex;
+        position: relative;
+        flex-direction: row;
+        align-items: center;
+        width: 3.04rem;
+        height: 0.73rem;
+        margin-top: 1.34rem;
+        border-radius: 5px;
+        background-color: #feda78;
+        text-align: center;
+        font-family: PingFangSC-Medium;
+        font-size: 0.4rem;
+        cursor: pointer;
+
+        .receiveText{
+            width: 100%;
+        }
+    }
+}
+
+.promoteContent{
+    margin: 0 5% 10% 5%;  // 上 右 下 左
+
+    .promoteHeader{
+        position: absolute;
+        padding: 0 0.2rem 0 0.2rem;
+        left:50%;
+        transform: translateX(-50%);
+        font-family: PingFangSC-Regular;
+        font-size: 0.4rem;
+        color: #5b5b5b;
+        text-align: center;
+        background-color: white;
+    }
+    .promoteBody{
+        margin-top: 0.2rem;
+        padding-top: 0.5rem;
+        font-family: PingFangSC-Regular;
+        font-size: 0.35rem;
+        color: #a9a9ac;
+        text-align: left;
+        line-height: 0.5rem;
+        border-top-style: solid;
+        border-top-color: #a9a9ac;
+        border-top-width: 1px;
+    }
+}
+
+@media @media-up-xs{
+    .receiveContent{
+        width: 7.5rem;
+        left:50%;
+        transform: translateX(-50%);
+        display: flex;
+        position: relative;
+        flex-direction: column;
+        background-color: white;
+    }
+}

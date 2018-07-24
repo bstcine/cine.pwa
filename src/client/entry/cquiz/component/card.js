@@ -35,13 +35,11 @@ export default class Card extends Component {
 
     componentDidMount() {
         if (this.quizId || this.lessonId) {
-            Service.getQuiz({ id: this.quizId, lesson_id: this.lessonId }).then(
-                result => {
-                    console.log(result.data);
-                    this.dataList = result.data.data;
-                    this.init();
-                }
-            );
+            Service.getQuiz({ id: this.quizId, lesson_id: this.lessonId }).then(result => {
+                console.log(result.data);
+                this.dataList = result.data.data;
+                this.init();
+            });
         } else {
             if (siteCodeUtil.inIOSAPP()) {
                 Bridge.ios(BRIDGE_EVENT.INIT_QUIZ_DATA).then(res => {

@@ -39,8 +39,8 @@ const OrderItemH = ({ order, actions }) => {
                 </a>
 
                 <div className="text-c">
-                    <div className="sub-title">{order.sub_title}</div>
-                    <div className="title">{order.title}</div>
+                    <div className="line1 sub-title">{order.sub_title}</div>
+                    <div className="line2 title">{order.title}</div>
                     <div className="price">￥1,211 per person · Free</div>
                     <div className="rate">
                         <span className="star5">{svgStar}</span>

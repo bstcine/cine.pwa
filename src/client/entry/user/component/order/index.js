@@ -7,7 +7,7 @@ export default class Order extends React.PureComponent {
     render() {
         const { orders } = this.props;
         const orderlist = orders.toJS();
-        alert(JSON.stringify(orders));
+        // alert(JSON.stringify(orders));
         return (
             <React.Fragment>
                 <OrderList
@@ -20,6 +20,8 @@ export default class Order extends React.PureComponent {
                 <br />
                 <br />
                 <br />
+                <br />
+                <br />
 
                 <CPanel title="Gird Card 234" className="bgpanel">
                     <OrderList
@@ -29,6 +31,12 @@ export default class Order extends React.PureComponent {
                         itemClassName="cbg234"
                     />
                 </CPanel>
+
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
 
                 <OrderList
                     orders={orderlist}

@@ -1,3 +1,5 @@
+@import '~asset/style/_cine.less';
+
 .bgpanel {
     background-color: #424242;
 }
@@ -9,17 +11,20 @@
     height: 100px;
 }
 .bg123 {
-    background-color: #e0e5e7;
+    background-color: #f5f5f5;
 }
 .cbg123 {
-    background-color: #e0e5e7;
+    background-color: #f5f5f5;
 }
 .bg234 {
-    background-color: white;
-    padding: 10px;
+    background-color: #fafafa;
+    padding-left: 15px;
+    padding-bottom: 15px;
+    padding-right: 15px;
+    padding-top: 10px;
 }
 .cbg234 {
-    background-color: white;
+    background-color: #fafafa;
 }
 
 .card234 {
@@ -30,6 +35,8 @@
         display: block;
         .img {
             padding-top: (9/16) * 100%;
+            border-top-left-radius: 4px;
+            border-top-right-radius: 4px;
         }
     }
 
@@ -37,39 +44,65 @@
         min-height: 100px;
         color: rgb(72, 72, 72);
         padding-left: 2px;
-        .title {
-            font-weight: 800;
-            font-size: 16px;
-            line-height: 20px;
-            max-height: 42px;
+
+        .line1 {
+            text-overflow: ellipsis;
+            overflow: hidden;
+        }
+
+        .line2 {
             text-overflow: ellipsis;
             display: -webkit-box;
             -webkit-line-clamp: 2;
             /*! autoprefixer: off */
             -webkit-box-orient: vertical;
-            margin-bottom: 4px;
             overflow: hidden;
         }
+
+        .title {
+            font-weight: 700;
+            font-size: 14px;
+            line-height: 18px;
+            max-height: 40px;
+            margin-bottom: 4px;
+        }
+        @media @media-up-xs {
+            .title {
+                font-size: 16px;
+                line-height: 19px;
+            }
+        }
+
         .sub-title {
             color: rgb(115, 71, 41);
             font-weight: 800;
-            font-size: 11px;
-            line-height: 15px;
+            font-size: 10px;
+            line-height: 14px;
             letter-spacing: normal;
-            text-transform: uppercase;
-            text-overflow: ellipsis;
             white-space: nowrap;
+            text-transform: uppercase;
             margin-bottom: 2px;
-            overflow: hidden;
+        }
+        @media @media-up-xs {
+            .sub-title {
+                font-size: 11px;
+                line-height: 16px;
+            }
         }
         .price {
             font-weight: normal;
-            font-size: 13px;
-            line-height: 17px;
+            font-size: 12px;
+            line-height: 16px;
             letter-spacing: normal;
             -webkit-font-smoothing: antialiased;
             font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto,
                 'Helvetica Neue', sans-serif;
+        }
+        @media @media-up-xs {
+            .price {
+                font-size: 13px;
+                line-height: 17px;
+            }
         }
         .rate {
             vertical-align: middle !important;
@@ -81,8 +114,8 @@
                 color: rgb(0, 132, 137) !important;
                 font-size: 9px !important;
                 height: 10px !important;
-                margin-right: 1px !important;
                 width: 9px !important;
+                margin-right: 1px;
                 svg {
                     height: 1em;
                     width: 1em;
@@ -90,17 +123,29 @@
                     fill: currentcolor;
                 }
             }
+            @media @media-up-xs {
+                .star5 {
+                    height: 8px !important;
+                    width: 8px !important;
+                }
+            }
             .number {
                 padding-left: 3px;
                 font-weight: 600 !important;
                 word-wrap: break-word !important;
-                font-size: 12px !important;
-                line-height: 16px !important;
+                font-size: 11px !important;
+                line-height: 15px !important;
                 letter-spacing: normal !important;
-                font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif !important;
+                font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto,
+                    'Helvetica Neue', sans-serif !important;
                 display: inline !important;
                 margin: 0px !important;
-                
+            }
+            @media @media-up-xs {
+                .number {
+                    font-size: 12px !important;
+                    line-height: 16px !important;
+                }
             }
         }
     }

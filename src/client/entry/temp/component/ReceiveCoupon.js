@@ -77,6 +77,9 @@ export default class ReceiveCoupon extends Component {
                     onLoginSuccess={() => {
                         this.setState({ isLoginModalShow: false });
                     }}
+                    toggleModal={ () => {
+                        this.setState({ isLoginModalShow: false });
+                    }}
                 />
                 <Footer isShow={true}/>
             </React.Fragment>

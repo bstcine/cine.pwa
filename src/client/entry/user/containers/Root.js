@@ -3,12 +3,15 @@ import { connect } from 'react-redux';
 import '../asset/style/index.less';
 import GLayout from '@/component/GLayout';
 import { fetchUserInfo } from '@/action/commonAction';
+import UserMobile from '@/entry/user/component/UserMobile';
 
 class Root extends Component {
     constructor(props) {
         super(props);
-        const isUserHome = location.pathname.split('/').join('') === 'user';
-        if (isUserHome) location.href = '/user/integral';
+        this.isUserHome = location.pathname.split('/').join('') === 'user';
+        this.isLessUpSm =
+            (window.innerWidth > 0 ? window.innerWidth : screen.width) < 1024;
+        if (this.isUserHome && !this.isLessUpSm) location.href = '/user/integral';
     }
 
     componentDidMount() {
@@ -16,13 +19,9 @@ class Root extends Component {
     }
 
     render() {
-        const { routes } = this.props;
-
-        return (
-            <GLayout>
-                {routes}
-            </GLayout>
-        );
+        const { routes, user } = this.props;
+        if (this.isUserHome && this.isLessUpSm) return user && <UserMobile user={user} />;
+        return <GLayout>{routes}</GLayout>;
     }
 }
 

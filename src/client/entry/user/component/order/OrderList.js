@@ -3,9 +3,10 @@ import { CCardContainer, CCard } from '@/component/_base';
 import OrderItemH from './OrderItem';
 
 const OrderItem = ({ order, layout, className, actions }) => {
+    let hover = layout === '123' ? 'outlined' : 'darken';
     return (
-        <CCard layout={layout} className={className} hover="darken">
-            <OrderItemH order = {order} actions = {actions} />
+        <CCard layout={layout} className={className} hover={hover}>
+            <OrderItemH order={order} actions={actions} />
         </CCard>
     );
 };

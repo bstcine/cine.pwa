@@ -16,6 +16,7 @@ export default class ReceiveCoupon extends Component {
         this.state = {
             isLoginModalShow: false,
         }
+        this.endTime = '2018-07-31 23:59:59'
         this.coupon = {
             value: 50,
             type: '1',
@@ -38,6 +39,12 @@ export default class ReceiveCoupon extends Component {
         }
     }
     render() {
+        // 判断是否是可用时间
+        const currentTime = new Date();
+        const endTime = new Date(this.endTime);
+        if (currentTime > endTime) {
+            return <p>该功能已过期</p>;
+        }
         let { value, type, name } = this.coupon;
         let couponValue = 0;
         let couponType = '';
@@ -67,8 +74,8 @@ export default class ReceiveCoupon extends Component {
                             优惠券使用说明
                         </p>
                         <p className="promoteBody">
-                            1. 本券为参与729原版少儿童书展用户专享；<br/>
-                            2. 领取链接3日内有效；<br/>
+                            1. 本券仅限729原版少儿童书展用户领取；<br/>
+                            2. 领取链接7月31日24点前有效；<br/>
                             3. 本券可用于购买善恩官网上所有视频课程；<br/>
                             4. 本券仅限购买一门课程，不设找零，不可合并；<br/>
                             5. 本券自领取之日起生效，一个月内有效。

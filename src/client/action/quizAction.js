@@ -59,7 +59,10 @@ export const fetchQuizData = ({
         course_id,
     });
     if (err) {
-        if (err === 'stats_quiz_not_found') {
+        if (
+            err === 'stats_quiz_not_found' &&
+            !location.href.includes('/quiz/kj')
+        ) {
             location.href = '/quiz/grammar';
         } else {
             dispatch(networkError(err));
@@ -67,6 +70,15 @@ export const fetchQuizData = ({
         return;
     }
     const { user, quiz, statsContentQuiz, statsContentQuizDetail } = result;
+
+    if (
+        location.href.includes('/quiz/kj') &&
+        (!quiz || (quiz && quiz.type === '2'))
+    ) {
+        dispatch(networkError('not_quiz_kj'));
+        return;
+    }
+
     quizDataFix(quiz.data);
     // if (
     //     (user.role_id === RoleID.ADMINISTRATOR ||

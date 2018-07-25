@@ -21,7 +21,10 @@ export default class ReceiveCoupon extends Component {
             type: '1',
             object_type: '1',
             condition: '1',
-            name: '视频课程通用优惠券(JJ书展专享)',
+            name: '视频课程通用优惠券',
+            desc: '本券仅限购买一门课程，不设找零，不可合并;',
+            remark: 'JJ书展专享;',
+            create_by: 'd011499175389972J0QEkPd6An',
         };
     }
     async receiveHandle() {
@@ -64,11 +67,11 @@ export default class ReceiveCoupon extends Component {
                             优惠券使用说明
                         </p>
                         <p className="promoteBody">
-                            1. 本券有效期为一个月，可多次领取。<br/>
-                            2. 本券可用于购买善恩英语所有视频类课程，每个优惠券码仅限购买一套课程。<br/>
-                            3. 新客户首次下单24小时内可使用多个优惠券码购买多套课程。<br/>
-                            4.在下单页面中“优惠券”一栏输入优惠券码，点击“使用”即可享受优惠。<br/>
-                            5. 本券使用的最终解释权归善恩英语所有。<br/>
+                            1. 本券为参与729原版少儿童书展用户专享；<br/>
+                            2. 领取链接3日内有效；<br/>
+                            3. 本券可用于购买善恩官网上所有视频课程；<br/>
+                            4. 本券仅限购买一门课程，不设找零，不可合并；<br/>
+                            5. 本券自领取之日起生效，一个月内有效。
                         </p>
                     </div>
                 </div>

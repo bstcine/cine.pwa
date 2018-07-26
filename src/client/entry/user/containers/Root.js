@@ -11,6 +11,10 @@ class Root extends Component {
         if (isUserHome) location.href = '/user/integral';
     }
 
+    componentDidMount() {
+        this.props.fetchUserInfo();
+    }
+
     render() {
         const { routes, user, alert, message, loading } = this.props;
 
@@ -33,4 +37,10 @@ const mapStateToProps = state => ({
     loading: state.loadingRedu,
 });
 
-export default connect(mapStateToProps)(Root);
+const mapDispatchToProps = dispatch => ({
+    fetchUserInfo: () => {
+        dispatch(gAction.fetchUserInfo());
+    },
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Root);

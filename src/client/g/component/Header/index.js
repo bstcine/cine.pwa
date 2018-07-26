@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import classNames from 'classnames';
 import Icon from '../Icon';
 import { getNavs } from './helper';
+import { logoutV1 } from '@/service/base';
 
 /**
  * navs1 顶部一级导航
@@ -15,6 +16,17 @@ class Header extends PureComponent {
         this.state = {
             isOpenUserBar: false,
         };
+        this.onLogout = this.onLogout.bind(this);
+    }
+
+    componentDidMount() {
+        this.props.actions.preFetchUserInfo();
+    }
+
+    onLogout() {
+        logoutV1().then(() => {
+            location.href = '/';
+        });
     }
 
     onToggleUserBar() {
@@ -22,7 +34,7 @@ class Header extends PureComponent {
     }
 
     render() {
-        const { user, onLogout } = this.props;
+        const { user } = this.props;
         const { isOpenUserBar } = this.state;
         const { navs1, navs2, navs3 } = getNavs(user);
 
@@ -37,7 +49,7 @@ class Header extends PureComponent {
                             user={user}
                             isOpen={isOpenUserBar}
                             onToggle={this.onToggleUserBar}
-                            onLogout={onLogout}
+                            onLogout={this.onLogout}
                         />
                     </div>
                 </header>

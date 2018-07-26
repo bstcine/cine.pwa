@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import '../asset/style/index.less';
 import { GLayout } from '@/g/component';
+import { bindActionCreators } from 'redux';
 import gAction from '@/g/action';
 
 class Root extends Component {
@@ -11,15 +12,12 @@ class Root extends Component {
         if (isUserHome) location.href = '/user/integral';
     }
 
-    componentDidMount() {
-        this.props.fetchUserInfo();
-    }
-
     render() {
-        const { routes, user, alert, message, loading } = this.props;
+        const { routes, user, alert, message, loading, actions } = this.props;
 
         return (
             <GLayout
+                actions={actions}
                 user={user}
                 alert={alert}
                 message={message}
@@ -38,9 +36,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    fetchUserInfo: () => {
-        dispatch(gAction.fetchUserInfo());
-    },
+    actions: bindActionCreators(gAction, dispatch),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Root);

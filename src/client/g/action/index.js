@@ -1,6 +1,7 @@
 import * as actionType from '../constant';
 import { APIURL_User_Info } from '@/../APIConfig';
 import { fetchData } from '@/service/base';
+import storeUtil from '@/util/storeUtil';
 
 const action = {
     _hideAlert: () => ({ type: actionType.HIDE_ALERT }),
@@ -41,6 +42,11 @@ const action = {
             }, 3000);
         }
         dispatch(action._showMessage({ text, error }));
+    },
+
+    preFetchUserInfo: () => dispatch => {
+        if (!storeUtil.getToken()) return;
+        dispatch(action.fetchUserInfo());
     },
 
     fetchUserInfo: () => async (dispatch, getState) => {

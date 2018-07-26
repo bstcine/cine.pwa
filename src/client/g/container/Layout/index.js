@@ -1,25 +1,17 @@
-import React, { Component } from 'react';
-import Main from '@/g/component/Main';
-import Footer from '@/g/component/Footer';
-import HeaderContainer from '@/g/container/Header';
-import AlertContainer from '@/g/container/Alert';
-import LoadingContainer from '@/g/container/Loading';
-import MessageContainer from '@/g/container/Message';
-import siteCodeUtil from '@/util/sitecodeUtil';
-import '@/g/component/Layout/style.less';
+import { connect } from 'react-redux';
+import { GLayout } from '@/g/component';
+import { bindActionCreators } from 'redux';
+import gAction from '@/g/action';
 
-export default class Layout extends Component {
-    render() {
-        const { children } = this.props;
-        return (
-            <React.Fragment>
-                <AlertContainer />
-                <MessageContainer />
-                <LoadingContainer />
-                {!siteCodeUtil.inAPP() && <HeaderContainer />}
-                <Main>{children}</Main>
-                {!siteCodeUtil.inAPP() && <Footer />}
-            </React.Fragment>
-        );
-    }
-}
+const mapStateToProps = state => ({
+    user: state.userRedu.data,
+    alert: state.alertRedu,
+    message: state.messageRedu,
+    loading: state.loadingRedu,
+});
+
+const mapDispatchToProps = dispatch => ({
+    actions: bindActionCreators(gAction, dispatch),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(GLayout);

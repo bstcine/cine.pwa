@@ -22,7 +22,7 @@ class Container extends Component {
                 <CPanel title="CButton @seeat : entry/content/component/Widget.js">
                     <div>
                         <CButton>
-                            <GIcon name="mi-home" /> DEFAULT
+                            <GIcon name="mi-home" />
                         </CButton>
                         <CButton color="primary">PRIMARY</CButton>
                         <CButton color="secondary">SECONDARY</CButton>
@@ -115,6 +115,7 @@ class Container extends Component {
                         </CButton>
                     </div>
                 </CPanel>
+
                 <CPanel title="Gird Card default112 gap=large">
                     <CCardContainer gap="large">
                         <CCard className="cbabsdf">1</CCard>
@@ -215,9 +216,12 @@ class Container extends Component {
                         onClick={() => {
                             gActions.showAlert({
                                 title: 'title',
-                                text: 'hello alert!',
+                                text: 'hello alert!with cancel',
                                 onConfirm: () => {
                                     console.log('confirm');
+                                },
+                                onCancel: () => {
+                                    console.log(111);
                                 },
                             });
                         }}>

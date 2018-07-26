@@ -8,7 +8,6 @@ import {
     FETCH_MENTOR_STUDENT_TASK,
 } from '@/constant/actionTypeMentor';
 import { fetchData } from '@/service/base';
-import { openConfirm } from '@/action/commonAction';
 import gAction from '@/g/action';
 
 /**
@@ -39,7 +38,7 @@ export const fetchMentorStudentTask = () => async dispatch => {
 
     // let [error, result] = await dispatch(
     //     gAction.fetchData(APIURL_Mentor_Student_ListWithTask, null, {
-    //         showLoading: true,
+    //         _showMessage: true,
     //         showError: true,
     //     })
     // );
@@ -59,5 +58,5 @@ export const fetchMentorCorrectPdfTask = task => dispatch => {
 
         if (!error) dispatch(fetchMentorStudentTask());
     };
-    dispatch(openConfirm({ text, onConfirm }));
+    dispatch(gAction.showAlert({ text, onConfirm }));
 };

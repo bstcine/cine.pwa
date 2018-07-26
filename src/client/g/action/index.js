@@ -3,26 +3,44 @@ import { APIURL_User_Info } from '@/../APIConfig';
 import { fetchData } from '@/service/base';
 
 const action = {
-    hideAlert: () => ({ type: actionType.HIDE_ALERT }),
-    showAlert: ({ title, text, onConfirm, onCancel }) => ({
+    _hideAlert: () => ({ type: actionType.HIDE_ALERT }),
+    _showAlert: ({ title, text, isShowCancel, onConfirm, onCancel }) => ({
         type: actionType.SHOW_ALERT,
-        payload: { title, text, onConfirm, onCancel },
+        payload: { title, text, isShowCancel, onConfirm, onCancel },
     }),
+    showAlert: ({ title, text, onConfirm, onCancel }) => dispatch => {
+        dispatch(
+            action._showAlert({
+                title,
+                text,
+                isShowCancel: !!onConfirm,
+                onConfirm: () => {
+                    dispatch(action._hideAlert());
+                    onConfirm && onConfirm();
+                },
+                onCancel: () => {
+                    dispatch(action._hideAlert());
+                    onCancel && onCancel();
+                },
+            })
+        );
+    },
 
     hideLoading: () => ({ type: actionType.HIDE_LOADING }),
     showLoading: () => ({ type: actionType.SHOW_LOADING }),
 
-    hideMessage: () => ({ type: actionType.HIDE_MESSAGE }),
+    _hideMessage: () => ({ type: actionType.HIDE_MESSAGE }),
+    _showMessage: ({ text, error }) => ({
+        type: actionType.SHOW_MESSAGE,
+        payload: { text, error },
+    }),
     showMessage: ({ text, error }, autoHide = true) => dispatch => {
         if (autoHide) {
             setTimeout(() => {
-                dispatch(action.hideMessage());
+                dispatch(action._hideMessage());
             }, 3000);
         }
-        dispatch({
-            type: actionType.SHOW_MESSAGE,
-            payload: { text, error },
-        });
+        dispatch(action._showMessage({ text, error }));
     },
 
     fetchUserInfo: () => async (dispatch, getState) => {

@@ -232,7 +232,7 @@ export const submitAnswer = () => async (dispatch, getState) => {
     );
     if (error) {
         if (error === 'no_login') return dispatch(openLoginModal());
-        return dispatch(gAction.hideMessage({ error }));
+        return dispatch(gAction._hideMessage({ error }));
     }
     // dispatch({ type: RECEIVE_STATS_QUIZ_SAVE });
     clearLocalAnswers(quiz, userRedu.data || {});

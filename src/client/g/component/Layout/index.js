@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Main from '@/g/component/Main';
 import Footer from '@/g/component/Footer';
 import Header from '@/g/component/Header';
@@ -8,18 +8,17 @@ import Loading from '@/g/component/Loading';
 import siteCodeUtil from '@/util/sitecodeUtil';
 import '@/g/component/Layout/style.less';
 
-export default class Layout extends Component {
-    render() {
-        const { user, navs, alert, message, loading, children } = this.props;
-        return (
-            <React.Fragment>
-                <Alert {...alert} />
-                <Message {...message} />
-                <Loading {...loading} />
-                {!siteCodeUtil.inAPP() && <Header user={user} navs={navs} />}
-                <Main>{children}</Main>
-                {!siteCodeUtil.inAPP() && <Footer />}
-            </React.Fragment>
-        );
-    }
-}
+const Layout = ({ user, alert, message, loading, children }) => {
+    return (
+        <React.Fragment>
+            <Alert {...alert} />
+            <Message {...message} />
+            <Loading {...loading} />
+            {!siteCodeUtil.inAPP() && <Header user={user} />}
+            <Main>{children}</Main>
+            {!siteCodeUtil.inAPP() && <Footer />}
+        </React.Fragment>
+    );
+};
+
+export default Layout;

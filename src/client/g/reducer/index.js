@@ -16,13 +16,9 @@ const alertRedu = (state = { isOpen: false }, action) => {
         case actionType.HIDE_ALERT:
             return { isOpen: false };
         case actionType.SHOW_ALERT: {
-            const { title, text, onCancel, onConfirm } = action.payload;
             return {
                 isOpen: true,
-                title,
-                text,
-                onCancel,
-                onConfirm,
+                ...action.payload,
             };
         }
         default:

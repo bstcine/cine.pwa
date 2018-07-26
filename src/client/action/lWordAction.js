@@ -1,11 +1,10 @@
 import Api from '../../APIConfig';
 import { fetchData } from '@/service/base';
 import { ACTION_LV } from '@/constant/actionTypeLearn';
-import { toastAction } from '@/action/commonAction';
+import gAction from '@/g/action';
 import errorMsg from '@/util/errorMsg';
 
 export const lWordAction = {
-
     _request: () => ({
         type: ACTION_LV.REQUEST,
     }),
@@ -20,17 +19,18 @@ export const lWordAction = {
         payload: result.status,
     }),
 
-    loadVocabulary: (param) => async dispatch => {
-
-        let [error, result] = await fetchData(Api.APIURL_User_Learn_Word, param);
+    loadVocabulary: param => async dispatch => {
+        let [error, result] = await fetchData(
+            Api.APIURL_User_Learn_Word,
+            param
+        );
 
         if (error) {
-            dispatch(toastAction.showError(errorMsg(error)));
+            dispatch(gAction.showMessage({ error: errorMsg(error) }));
         } else {
             console.log(result);
             dispatch(lWordAction._receive(result));
             dispatch(lWordAction._changeTaskStatus(result));
         }
     },
-
 };

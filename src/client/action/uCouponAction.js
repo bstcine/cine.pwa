@@ -1,7 +1,8 @@
 import Api from '../../APIConfig';
 import { fetchData } from '@/service/base';
 import { Action_UC } from '@/constant/actionTypeUser';
-import { toastAction } from '@/action/commonAction';
+// import { toastAction } from '@/action/commonAction';
+import gAction from '@/g/action';
 import errorMsg from '@/util/errorMsg';
 
 export const actionUserCoupon = {
@@ -44,7 +45,18 @@ export const actionUserCoupon = {
 
     toggleCouponDialog: isOpen => (dispatch, getState) => {
         let willOpen = !getState().couponRedu.get('isOpenAdd');
-        dispatch(actionUserCoupon._toggleCouponDialog(willOpen));
+        // dispatch(actionUserCoupon._toggleCouponDialog(willOpen));
+        dispatch(
+            gAction.showAlert({
+                text: '12331',
+                onCancel: () => {
+                    alert('onCancel');
+                },
+                onConfirm: () => {
+                    alert('onConfirm');
+                },
+            })
+        );
     },
 
     initTransferDialog: coupon => (dispatch, getState) => {
@@ -89,7 +101,7 @@ export const actionUserCoupon = {
     toggleTransferCheckStatus: account => async (dispatch, getState) => {
         // 需要检查输入的值
         if (account === '') {
-            dispatch(toastAction.showError('请输入对方账号'));
+            dispatch(gAction.showMessage({ error: '请输入对方账号' }));
             return;
         }
 
@@ -102,12 +114,12 @@ export const actionUserCoupon = {
 
         if (err) {
             err = errorMsg(err);
-            dispatch(toastAction.showError(err));
+            dispatch(gAction.showMessage({ error: err }));
             return;
         }
 
-        let isCheck = true,
-            checkMessage = '';
+        let isCheck = true;
+        let checkMessage = '';
 
         if (result.length < 1) {
             checkMessage = '没有查询到指定的用户';
@@ -138,21 +150,21 @@ export const actionUserCoupon = {
     addCoupon: no => async dispatch => {
         if (no.trim().length !== 0) {
             // dispatch(toastAction.loading());
-            let [err, result] = await fetchData(Api.APIURL_User_Coupon_Add, {
+            let [err] = await fetchData(Api.APIURL_User_Coupon_Add, {
                 no,
             });
 
             if (err) {
                 err = errorMsg(err);
-                dispatch(toastAction.showError(err));
+                dispatch(gAction.showMessage({ error: err }));
             } else {
-                dispatch(toastAction.show('添加成功'));
+                dispatch(gAction.showMessage({ text: '添加成功' }));
                 dispatch(actionUserCoupon._toggleCouponDialog(false));
 
                 dispatch(actionUserCoupon.loadUserCoupon());
             }
         } else {
-            dispatch(toastAction.showError('请输入优惠码！'));
+            dispatch(gAction.showMessage({ error: '请输入优惠码' }));
         }
     },
 
@@ -172,16 +184,16 @@ export const actionUserCoupon = {
 
         if (err) {
             err = errorMsg(err);
-            dispatch(toastAction.showError(err));
+            dispatch(gAction.showMessage({ error: err }));
             return;
         }
 
         if (result === '0') {
-            dispatch(toastAction.showError('转赠失败'));
+            dispatch(gAction.showMessage({ error: '转赠失败' }));
             return;
         }
 
-        dispatch(toastAction.show('转赠成功'));
+        dispatch(gAction.showMessage({ text: '转赠成功' }));
         dispatch(actionUserCoupon.toggleTransferDialog());
         dispatch(actionUserCoupon.loadUserCoupon());
     },

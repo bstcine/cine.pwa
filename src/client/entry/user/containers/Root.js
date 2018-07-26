@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import '../asset/style/index.less';
-import { GLayoutContainer } from '@/g/container';
+import { GLayout } from '@/g/component';
 import gAction from '@/g/action';
 
 class Root extends Component {
@@ -16,13 +16,26 @@ class Root extends Component {
     }
 
     render() {
-        const { routes } = this.props;
+        const { routes, user, alert, message, loading } = this.props;
 
-        return <GLayoutContainer>{routes}</GLayoutContainer>;
+        return (
+            <GLayout
+                user={user}
+                alert={alert}
+                message={message}
+                loading={loading}>
+                {routes}
+            </GLayout>
+        );
     }
 }
 
-const mapStateToProps = state => ({ user: state.userRedu.data });
+const mapStateToProps = state => ({
+    user: state.userRedu.data,
+    alert: state.alertRedu,
+    message: state.messageRedu,
+    loading: state.loadingRedu,
+});
 
 const mapDispatchToProps = dispatch => ({
     fetchUserInfo: () => {

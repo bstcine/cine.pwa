@@ -4,9 +4,8 @@
 import Api from '../../APIConfig';
 import { fetchData } from '@/service/base';
 import { ACTION_LH } from '@/constant/actionTypeLearn';
-import { toastAction } from '@/action/commonAction';
+import gAction from '@/g/action';
 import errorMsg from '@/util/errorMsg';
-import { fromJS } from 'immutable';
 
 export const lTaskAction = {
     _request: () => ({
@@ -35,10 +34,13 @@ export const lTaskAction = {
     }),
 
     _loadHistoryTask: (param, isInit) => async dispatch => {
-        let [error, result] = await fetchData(Api.APIURL_User_Learn_Task, param);
+        let [error, result] = await fetchData(
+            Api.APIURL_User_Learn_Task,
+            param
+        );
 
         if (error) {
-            dispatch(toastAction.showError(errorMsg(error)));
+            dispatch(gAction.showMessage({ error: errorMsg(error) }));
             return;
         }
 
@@ -49,34 +51,33 @@ export const lTaskAction = {
     },
 
     // 加载历史任务数据
-    loadHistoryTask: (param) => async dispatch => {
+    loadHistoryTask: param => async dispatch => {
         dispatch(lTaskAction._loadHistoryTask(param, true));
     },
 
     // dialog窗口显示/隐藏
-    dialogShow: (isShow) => (dispatch) => {
+    dialogShow: isShow => dispatch => {
         // 获取显示隐藏
         dispatch(lTaskAction._dialogShow(isShow));
     },
 
     // 改变选择类型
-    changeType: (value) => async dispatch => {
+    changeType: value => async dispatch => {
         dispatch(lTaskAction._changeType(value));
     },
 
     // 改变起始时间
-    changeStartTime: (value) => async dispatch => {
+    changeStartTime: value => async dispatch => {
         dispatch(lTaskAction._changeStartTime(value));
     },
 
     // 改变结束时间
-    changeEndTime: (value) => async dispatch => {
+    changeEndTime: value => async dispatch => {
         dispatch(lTaskAction._changeEndTime(value));
     },
 
     // 开始搜索选择结果
-    selectResult: (param) => async dispatch => {
+    selectResult: param => async dispatch => {
         dispatch(lTaskAction._loadHistoryTask(param, false));
     },
-
 };

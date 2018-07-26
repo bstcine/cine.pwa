@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import classNames from 'classnames';
 import Icon from '../Icon';
+import { getNavs } from './helper';
 
 /**
  * navs1 顶部一级导航
@@ -21,9 +22,9 @@ class Header extends PureComponent {
     }
 
     render() {
-        const { user, navs, onLogout } = this.props;
+        const { user, onLogout } = this.props;
         const { isOpenUserBar } = this.state;
-        const { navs1, navs2, navs3 } = navs;
+        const { navs1, navs2, navs3 } = getNavs(user);
 
         return (
             <React.Fragment>
@@ -34,8 +35,8 @@ class Header extends PureComponent {
 
                         <UserBar
                             user={user}
-                            isOpenUserBar={isOpenUserBar}
-                            onToggleUserBar={this.onToggleUserBar}
+                            isOpen={isOpenUserBar}
+                            onToggle={this.onToggleUserBar}
                             onLogout={onLogout}
                         />
                     </div>
@@ -85,12 +86,12 @@ const Nav1 = ({ navs }) => (
     </nav>
 );
 
-const UserBar = ({ user, isOpenUserBar, onToggleUserBar, onLogout }) => (
+const UserBar = ({ user, isOpen, onToggle, onLogout }) => (
     <div
         className={classNames('user-bar', {
-            open: isOpenUserBar,
+            open: isOpen,
         })}>
-        <div className="nickname" onClick={onToggleUserBar}>
+        <div className="nickname" onClick={onToggle}>
             {Boolean(user) && <span>{user.nickname}</span>}
             <HeaderImg user={user} />
             <Icon name="mi-arrow_drop_up" />

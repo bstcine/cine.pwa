@@ -45,18 +45,18 @@ export const actionUserCoupon = {
 
     toggleCouponDialog: isOpen => (dispatch, getState) => {
         let willOpen = !getState().couponRedu.get('isOpenAdd');
-        // dispatch(actionUserCoupon._toggleCouponDialog(willOpen));
-        dispatch(
-            gAction.showAlert({
-                text: '12331',
-                onCancel: () => {
-                    alert('onCancel');
-                },
-                onConfirm: () => {
-                    alert('onConfirm');
-                },
-            })
-        );
+        dispatch(actionUserCoupon._toggleCouponDialog(willOpen));
+        // dispatch(
+        //     gAction.showAlert({
+        //         text: '12331',
+        //         onCancel: () => {
+        //             alert('onCancel');
+        //         },
+        //         onConfirm: () => {
+        //             alert('onConfirm');
+        //         },
+        //     })
+        // );
     },
 
     initTransferDialog: coupon => (dispatch, getState) => {

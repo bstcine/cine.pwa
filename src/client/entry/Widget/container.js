@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { GIcon } from '@/g/component';
-import '../../asset/style/widget.less';
+import './asset/style/widget.less';
 import {
     CButton,
     CPanel,

@@ -20,6 +20,7 @@ const pages = [
     'learn',
     'quiz',
     'mentor',
+    'widget',
 ];
 
 let entry = {};

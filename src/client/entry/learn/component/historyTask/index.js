@@ -5,7 +5,7 @@ import React from 'react';
 import HistoryTaskList from './HistoryTaskList';
 import FilterTaskDialog from './FilterTaskDialog';
 import { CFloatingBox, CButton } from '@/component/_base';
-import GIcon from '@/component/GIcon';
+import { GIcon } from '@/g/component';
 
 class HistoryTask extends React.PureComponent {
     handleFilter = () => {

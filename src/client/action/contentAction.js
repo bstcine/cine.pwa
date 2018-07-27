@@ -1,4 +1,4 @@
-import Api from './../../APIConfig';
+import Api from '@/../APIConfig';
 import * as BaseService from '@/service/base';
 import { actionUserInfo as userAction } from './userAction';
 
@@ -35,7 +35,7 @@ let cCourseAction = {
         });
     },
 
-    _getCourseSet: function (courseID, courseSetID) {
+    _getCourseSet: function(courseID, courseSetID) {
         // if (!courseSetID) return Promise.resolve(null);
         let param = {
             cid: courseID,

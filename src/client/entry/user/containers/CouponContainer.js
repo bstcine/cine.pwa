@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { actionUserCoupon } from '@/action/uCouponAction';
-import { Toast } from '@/component/Toast';
+// import { Toast } from '@/component/Toast';
 import CouponPanel from '@/entry/user/component/coupon';
 
 class CouponContainer extends Component {
@@ -11,11 +11,10 @@ class CouponContainer extends Component {
     }
 
     render() {
-        let { coupons, network, isOpenAdd, transfer, actions } = this.props;
+        let { coupons, isOpenAdd, transfer, actions } = this.props;
 
         return (
             <React.Fragment>
-                <Toast network={network} />
                 <CouponPanel
                     isOpenAdd={isOpenAdd}
                     transfer={transfer}
@@ -32,7 +31,7 @@ const mapStateToProps = state => {
         coupons: state.couponRedu.get('rows'),
         isOpenAdd: state.couponRedu.get('isOpenAdd'),
         transfer: state.couponRedu.get('transfer'),
-        network: state.toastRedu,
+        // network: state.toastRedu,
     };
 };
 

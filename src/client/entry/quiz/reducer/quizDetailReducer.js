@@ -1,8 +1,8 @@
 import {
-    REQUEST_CONTENT_QUIZ,
+    // REQUEST_CONTENT_QUIZ,
     RECEIVE_CONTENT_QUIZ,
-    REQUEST_STATS_QUIZ_SAVE,
-    RECEIVE_STATS_QUIZ_SAVE,
+    // REQUEST_STATS_QUIZ_SAVE,
+    // RECEIVE_STATS_QUIZ_SAVE,
     SAVE_QUESTION1_SELECT_VALUE,
     SAVE_QUESTION3_SELECT_VALUE,
     SAVE_QUESTION3_TEXT_VALUE,
@@ -18,7 +18,7 @@ import {
     UPDATE_ANSWERS,
 } from '@/constant/actionTypeQuiz';
 import { CurrentQuizState } from '@/constant/quiz';
-import { OPEN_NETWORK_ERROR, CLOSE_NETWORK_ERROR } from '@/constant/actionType';
+// import { OPEN_NETWORK_ERROR, CLOSE_NETWORK_ERROR } from '@/constant/actionType';
 
 /**
  * 除题目外的试卷数据
@@ -152,53 +152,53 @@ export const statsContentQuiz = (state = null, { type, payload }) => {
     }
 };
 
-/**
- * 网络状态，控制 spinner 组件显示状态
- * init:初始化状态
- * pending:api请求中
- */
-export const network = (
-    state = { init: true, pending: true, error: false },
-    { type, payload }
-) => {
-    switch (type) {
-        case REQUEST_CONTENT_QUIZ:
-        case REQUEST_STATS_QUIZ_SAVE:
-            return {
-                ...state,
-                pending: true,
-            };
-        case RECEIVE_STATS_QUIZ_SAVE:
-            return {
-                ...state,
-                pending: false,
-                text: payload ? payload.text : null,
-            };
-        case OPEN_LOGIN_MODAL:
-        case RECEIVE_CONTENT_QUIZ:
-            return {
-                ...state,
-                init: false,
-                pending: false,
-                text: payload ? payload.text : null,
-            };
-        case OPEN_NETWORK_ERROR:
-            return {
-                ...state,
-                init: false,
-                pending: false,
-                error: true,
-                text: payload ? payload.text : null,
-            };
-        case CLOSE_NETWORK_ERROR:
-            return {
-                ...state,
-                error: false,
-            };
-        default:
-            return state;
-    }
-};
+// /**
+//  * 网络状态，控制 spinner 组件显示状态
+//  * init:初始化状态
+//  * pending:api请求中
+//  */
+// export const network = (
+//     state = { init: true, pending: true, error: false },
+//     { type, payload }
+// ) => {
+//     switch (type) {
+//         case REQUEST_CONTENT_QUIZ:
+//         case REQUEST_STATS_QUIZ_SAVE:
+//             return {
+//                 ...state,
+//                 pending: true,
+//             };
+//         case RECEIVE_STATS_QUIZ_SAVE:
+//             return {
+//                 ...state,
+//                 pending: false,
+//                 text: payload ? payload.text : null,
+//             };
+//         case OPEN_LOGIN_MODAL:
+//         case RECEIVE_CONTENT_QUIZ:
+//             return {
+//                 ...state,
+//                 init: false,
+//                 pending: false,
+//                 text: payload ? payload.text : null,
+//             };
+//         case OPEN_NETWORK_ERROR:
+//             return {
+//                 ...state,
+//                 init: false,
+//                 pending: false,
+//                 error: true,
+//                 text: payload ? payload.text : null,
+//             };
+//         case CLOSE_NETWORK_ERROR:
+//             return {
+//                 ...state,
+//                 error: false,
+//             };
+//         default:
+//             return state;
+//     }
+// };
 
 export const loginModal = (state = { isOpen: false }, { type, payload }) => {
     switch (type) {

@@ -1,6 +1,5 @@
 import { combineReducers } from 'redux';
-import { alertModal, confirmModal } from '@/reducer/index';
-import { userRedu } from '@/reducer';
+import gReducer from '@/g/reducer';
 import {
     quiz,
     statsContentQuiz,
@@ -9,7 +8,6 @@ import {
     questionsFilter,
     currentQuizState,
     taskScheduleId,
-    network,
     loginModal,
     timer,
 } from './quizDetailReducer';
@@ -22,12 +20,9 @@ const rootReducer = combineReducers({
     questionsFilter,
     currentQuizState,
     taskScheduleId,
-    userRedu,
-    network,
     loginModal,
     timer,
-    alertModal,
-    confirmModal,
+    ...gReducer,
 });
 
 export default rootReducer;

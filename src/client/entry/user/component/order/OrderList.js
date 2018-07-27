@@ -1,12 +1,18 @@
 import React from 'react';
 import { CCardContainer, CCard } from '@/component/_base';
-import OrderItemH from './OrderItem';
+import { CardItem, CardItem112 } from './CardItem';
 
 const OrderItem = ({ order, layout, className, actions }) => {
     let hover = layout === '123' ? 'outlined' : 'darken';
+    hover = layout === '112' ? 'lighten' : hover;
+    const isCard112 = layout === '112';
     return (
         <CCard layout={layout} className={className} hover={hover}>
-            <OrderItemH order={order} actions={actions} />
+            {isCard112 ? (
+                <CardItem112 value={order} actions={actions} />
+            ) : (
+                <CardItem value={order} actions={actions} />
+            )}
         </CCard>
     );
 };

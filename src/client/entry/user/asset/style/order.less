@@ -7,8 +7,11 @@
     background-color: transparent;
 }
 .bg112 {
-    background-color: #673ab7;
-    height: 100px;
+    background-color: transparent;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-top: 10px;
+    padding-bottom: 20px;
 }
 .bg123 {
     background-color: #f5f5f5;
@@ -19,17 +22,19 @@
 .bg234 {
     background-color: #fafafa;
     padding-left: 15px;
-    padding-bottom: 15px;
     padding-right: 15px;
+    padding-bottom: 15px;
     padding-top: 10px;
 }
 .cbg234 {
     background-color: #fafafa;
 }
 
-.card234 {
+.card {
     background-color: transparent;
     padding: 3px;
+    text-size-adjust: none;
+
     .img-c {
         padding-bottom: 8px;
         display: block;
@@ -40,10 +45,48 @@
         }
     }
 
+    &.card112 {
+        display: flex;
+        flex-direction: row;
+        padding-right: 3px;
+    }
+    @media @media-up-xs {
+        &.card112 {
+            padding: 8px;
+        }
+    }
+
+    .img-c112 {
+        display: block;
+        flex-shrink: 0;
+        flex-grow: 0;
+        width: 40%;
+        /* flex: 0 0 33%; */
+        padding-right: 6px;
+        .img {
+            padding-top: (9/16) * 100%;
+            border-top-left-radius: 4px;
+        }
+    }
+
+    @media @media-up-xs {
+        .img-c112 {
+            width: 25%;
+        }
+    }
+
+    @media @media-up-sm {
+        .img-c112 {
+            width: 40%;
+        }
+    }
+
     .text-c {
-        min-height: 100px;
         color: rgb(72, 72, 72);
         padding-left: 2px;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
 
         .line1 {
             text-overflow: ellipsis;
@@ -65,11 +108,12 @@
             line-height: 18px;
             max-height: 40px;
             margin-bottom: 4px;
+            // text-size-adjust: none;
         }
         @media @media-up-xs {
             .title {
                 font-size: 16px;
-                line-height: 19px;
+                line-height: 20px;
             }
         }
 
@@ -85,7 +129,7 @@
         }
         @media @media-up-xs {
             .sub-title {
-                font-size: 11px;
+                font-size: 12px;
                 line-height: 16px;
             }
         }
@@ -97,6 +141,7 @@
             -webkit-font-smoothing: antialiased;
             font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto,
                 'Helvetica Neue', sans-serif;
+            flex: 1;
         }
         @media @media-up-xs {
             .price {
@@ -127,7 +172,7 @@
                 .star5 {
                     font-size: 9px !important;
                     height: 10px !important;
-                    width: 9px !important;
+                    width: 10px !important;
                 }
             }
             .number {

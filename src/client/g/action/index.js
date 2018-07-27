@@ -56,19 +56,19 @@ const action = {
         if (user) dispatch({ type: actionType.RECEIVE_USER_INFO, payload: user });
     },
 
-    fetchData: (
-        url,
-        query,
-        { dispatchActionType, showLoading = true, showError = true }
-    ) => async dispatch => {
-        if (showLoading) dispatch(action.showLoading());
+    fetchData: (url, query, _config) => async dispatch => {
+        let config = Object.assign(
+            { dispatchActionType: null, showLoading: true, showError: true },
+            _config
+        );
+        if (config.showLoading) dispatch(action.showLoading());
         let [error, result] = await fetchData(url, query);
-        if (showLoading) dispatch(action.hideLoading());
+        if (config.showLoading) dispatch(action.hideLoading());
 
-        if (showError) dispatch(action.showMessage({ error }));
+        if (config.showError) dispatch(action.showMessage({ error }));
 
-        if (dispatchActionType) {
-            dispatch({ type: dispatchActionType, payload: result });
+        if (config.dispatchActionType) {
+            dispatch({ type: config.dispatchActionType, payload: result });
         } else {
             return [error, result];
         }

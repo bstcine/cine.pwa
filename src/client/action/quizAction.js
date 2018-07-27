@@ -1,4 +1,4 @@
-import { fetchData } from '@/service/base';
+// import { fetchData } from '@/service/base';
 import {
     APIURL_Stats_Quiz_Reset,
     APIURL_Content_Quiz,
@@ -7,10 +7,10 @@ import {
 } from '@/../APIConfig';
 import storeUtil from '@/util/storeUtil';
 import {
-    REQUEST_CONTENT_QUIZ,
+    // REQUEST_CONTENT_QUIZ,
     RECEIVE_CONTENT_QUIZ,
-    REQUEST_STATS_QUIZ_SAVE,
-    RECEIVE_STATS_QUIZ_SAVE,
+    // REQUEST_STATS_QUIZ_SAVE,
+    // RECEIVE_STATS_QUIZ_SAVE,
     SAVE_QUESTION1_SELECT_VALUE,
     SAVE_QUESTION3_SELECT_VALUE,
     SAVE_QUESTION3_TEXT_VALUE,
@@ -24,8 +24,8 @@ import {
     SHOW_UNCOMPLETED_QUESTION,
     SHOW_ALL_QUESTION,
     UPDATE_ANSWERS,
-    REQUEST_STATS_QUIZ_UPDATE,
-    RECEIVE_STATS_QUIZ_UPDATE,
+    // REQUEST_STATS_QUIZ_UPDATE,
+    // RECEIVE_STATS_QUIZ_UPDATE,
 } from '@/constant/actionTypeQuiz';
 import {
     CurrentQuizState,
@@ -33,7 +33,8 @@ import {
     QuestionFormat,
 } from '@/constant/quiz';
 import { RoleID } from '@/constant/index';
-import { openConfirm, openAlert, networkError } from '@/action/commonAction';
+// import { gAction.showAlert, gAction.showAlert, networkError } from '@/action/commonAction';
+import gAction from '@/g/action';
 
 /**
  * 题目数据 & 答题记录请求
@@ -48,16 +49,22 @@ export const fetchQuizData = ({
     course_id,
     cmd,
 }) => async dispatch => {
-    dispatch(requestQuizData());
-    let [err, result] = await fetchData(APIURL_Content_Quiz, {
-        user_id,
-        task_schedule_id,
-        quiz_id,
-        stats_content_quiz_id,
-        lesson_id,
-        chapter_id,
-        course_id,
-    });
+    // dispatch(requestQuizData());
+    let [err, result] = await dispatch(
+        gAction.fetchData(
+            APIURL_Content_Quiz,
+            {
+                user_id,
+                task_schedule_id,
+                quiz_id,
+                stats_content_quiz_id,
+                lesson_id,
+                chapter_id,
+                course_id,
+            },
+            { showError: false }
+        )
+    );
     if (err) {
         if (
             err === 'stats_quiz_not_found' &&
@@ -65,7 +72,7 @@ export const fetchQuizData = ({
         ) {
             location.href = '/quiz/grammar';
         } else {
-            dispatch(networkError(err));
+            dispatch(gAction.showMessage({ error: err }));
         }
         return;
     }
@@ -75,7 +82,7 @@ export const fetchQuizData = ({
         location.href.includes('/quiz/kj') &&
         (!quiz || (quiz && quiz.type === '2'))
     ) {
-        dispatch(networkError('not_quiz_kj'));
+        dispatch(gAction.showMessage({ error: 'not_quiz_kj' }));
         return;
     }
 
@@ -111,12 +118,12 @@ export const fetchQuizData = ({
             const onCancel = () => {
                 clearLocalAnswers(quiz, user);
             };
-            dispatch(openConfirm({ text, onConfirm, onCancel }));
+            dispatch(gAction.showAlert({ text, onConfirm, onCancel }));
         }
         dispatch(recordTime());
     } else if (currentQuizState === CurrentQuizState.WAITING4CHECK) {
         dispatch(
-            openAlert({
+            gAction.showAlert({
                 text:
                     '试卷已提交，正在等待老师阅卷。批改完成后，老师会与直接您联系。',
             })
@@ -142,14 +149,14 @@ export const preSubmitAnswer = () => (dispatch, getState) => {
                 '、'
             )}题`;
             return dispatch(
-                openAlert({
+                gAction.showAlert({
                     text,
                 })
             );
         } else {
             text = '您已作答完毕，是否确认提交？提交后不能再修改';
             return dispatch(
-                openConfirm({
+                gAction.showAlert({
                     text,
                     onConfirm: () => {
                         dispatch(submitAnswer());
@@ -165,7 +172,7 @@ export const preSubmitAnswer = () => (dispatch, getState) => {
                 '、'
             )}题`;
             return dispatch(
-                openConfirm({
+                gAction.showAlert({
                     text,
                     onConfirm: () => {
                         dispatch(submitAnswer());
@@ -175,7 +182,7 @@ export const preSubmitAnswer = () => (dispatch, getState) => {
         } else {
             text = '您已作答完毕，是否确认提交？提交后不能再修改';
             return dispatch(
-                openConfirm({
+                gAction.showAlert({
                     text,
                     onConfirm: () => {
                         dispatch(submitAnswer());
@@ -189,7 +196,7 @@ export const preSubmitAnswer = () => (dispatch, getState) => {
 /**
  * 提交答案
  */
-export const submitAnswer = () => (dispatch, getState) => {
+export const submitAnswer = () => async (dispatch, getState) => {
     let {
         quiz,
         userRedu,
@@ -213,21 +220,26 @@ export const submitAnswer = () => (dispatch, getState) => {
             answers.push(answer);
         }
     });
-    dispatch({ type: REQUEST_STATS_QUIZ_SAVE });
-    return fetchData(APIURL_Stats_Quiz_Save, {
-        quiz_id: quiz.id,
-        answers,
-        duration,
-        task_schedule_id: taskScheduleId,
-    }).then(([err, result]) => {
-        if (err) {
-            if (err === 'no_login') return dispatch(openLoginModal());
-            return dispatch(networkError(err));
-        }
-        dispatch({ type: RECEIVE_STATS_QUIZ_SAVE });
-        clearLocalAnswers(quiz, userRedu.data || {});
-        window.location.reload();
-    });
+    // dispatch({ type: REQUEST_STATS_QUIZ_SAVE });
+    let [err] = await dispatch(
+        gAction.fetchData(
+            APIURL_Stats_Quiz_Save,
+            {
+                quiz_id: quiz.id,
+                answers,
+                duration,
+                task_schedule_id: taskScheduleId,
+            },
+            { showError: false }
+        )
+    );
+    if (err) {
+        if (err === 'no_login') return dispatch(openLoginModal());
+        return dispatch(gAction.showMessage({ error: err }));
+    }
+    // dispatch({ type: RECEIVE_STATS_QUIZ_SAVE });
+    clearLocalAnswers(quiz, userRedu.data || {});
+    window.location.reload();
 };
 
 /**
@@ -259,18 +271,24 @@ export const submitCheckAnswer = (complete = true) => async (
             answers.push(answer);
         }
     });
-    dispatch({ type: REQUEST_STATS_QUIZ_UPDATE });
-    let [err] = await fetchData(APIURL_Stats_Quiz_Update, {
-        stats_content_quiz_id: statsContentQuiz.id,
-        answers,
-        complete,
-        score,
-    });
+    // dispatch({ type: REQUEST_STATS_QUIZ_UPDATE });
+    let [err] = await dispatch(
+        gAction.fetchData(
+            APIURL_Stats_Quiz_Update,
+            {
+                stats_content_quiz_id: statsContentQuiz.id,
+                answers,
+                complete,
+                score,
+            },
+            { showError: false }
+        )
+    );
     if (err) {
         if (err === 'no_login') return dispatch(openLoginModal());
-        return dispatch(networkError(err));
+        return dispatch(gAction.showMessage({ error: err }));
     }
-    dispatch({ type: RECEIVE_STATS_QUIZ_UPDATE });
+    // dispatch({ type: RECEIVE_STATS_QUIZ_UPDATE });
     location.href = '/mentor';
 };
 
@@ -279,18 +297,24 @@ export const submitCheckAnswer = (complete = true) => async (
  */
 export const resetQuiz = () => (dispatch, getState) => {
     return dispatch(
-        openConfirm({
+        gAction.showAlert({
             text: '是否确认重置？重置后将清空学生的所有作答记录。',
             onConfirm: async () => {
                 let { statsContentQuiz } = getState();
-                let [err] = await fetchData(APIURL_Stats_Quiz_Reset, {
-                    stats_content_quiz_id: statsContentQuiz.id,
-                });
+                let [err] = await dispatch(
+                    gAction.fetchData(
+                        APIURL_Stats_Quiz_Reset,
+                        {
+                            stats_content_quiz_id: statsContentQuiz.id,
+                        },
+                        { showError: false }
+                    )
+                );
                 if (err) {
                     if (err === 'no_login') return dispatch(openLoginModal());
-                    return dispatch(networkError(err));
+                    return dispatch(gAction.showMessage({ error: err }));
                 }
-                dispatch(openAlert({ text: '该学生试卷已重置成功！' }));
+                dispatch(gAction.showAlert({ text: '该学生试卷已重置成功！' }));
             },
         })
     );
@@ -365,9 +389,9 @@ const updateAnswers = answersById => ({
     payload: answersById,
 });
 
-export const requestQuizData = () => ({
-    type: REQUEST_CONTENT_QUIZ,
-});
+// export const requestQuizData = () => ({
+//     type: REQUEST_CONTENT_QUIZ,
+// });
 
 export const receiveQuizData = ({
     user,

@@ -4,7 +4,7 @@ import { ACTION_LV } from '@/constant/actionTypeLearn';
 import { toastAction } from '@/action/commonAction';
 import errorMsg from '@/util/errorMsg';
 
-export const lWordAction = {
+export const lWordListAction = {
 
     _request: () => ({
         type: ACTION_LV.REQUEST,
@@ -28,8 +28,8 @@ export const lWordAction = {
             dispatch(toastAction.showError(errorMsg(error)));
         } else {
             console.log(result);
-            dispatch(lWordAction._receive(result));
-            dispatch(lWordAction._changeTaskStatus(result));
+            dispatch(lWordListAction._receive(result));
+            dispatch(lWordListAction._changeTaskStatus(result));
         }
     },
 

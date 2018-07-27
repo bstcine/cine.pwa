@@ -1,31 +1,24 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {
-    BrowserRouter as Router,
-    Route,
-} from 'react-router-dom'
-import {getParam} from '@/util/urlUtil'
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { getParam } from '@/util/urlUtil';
 
-import Entry from "@/component/Entry";
+import Entry from '@/component/Entry';
 import Index from './component/Index';
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import {grey400,indigo500,indigo700} from 'material-ui/styles/colors';
+import { grey400, indigo500, indigo700 } from 'material-ui/styles/colors';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 
-import './asset/style/index.less'
+import './asset/style/index.less';
 
 class Address extends Entry {
-
     constructor(props) {
-        super(props)
+        super(props);
         console.log('constructor');
 
         let urlParam = getParam();
         console.log(`Address getParam ==> ${JSON.stringify(urlParam)}`);
-    }
-
-    componentDidMount() {
     }
 
     render() {
@@ -41,12 +34,12 @@ class Address extends Entry {
             <Router basename="/address">
                 <MuiThemeProvider muiTheme={muiTheme}>
                     <div className="address-main">
-                        <Route exact path="/" component={Index}/>
+                        <Route exact path="/" component={Index} />
                     </div>
                 </MuiThemeProvider>
             </Router>
-        )
+        );
     }
 }
 
-ReactDOM.render(<Address/>, document.getElementById('root'))
+ReactDOM.render(<Address />, document.getElementById('root'));

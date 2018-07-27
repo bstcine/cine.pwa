@@ -6,7 +6,7 @@ const initialState = fromJS({
     taskStatus: '0',
 });
 
-const WordRedu = (state = initialState, action) => {
+const WordListRedu = (state = initialState, action) => {
     switch (action.type) {
         case ACTION_LV.REQUEST:
             return state;
@@ -22,4 +22,4 @@ const WordRedu = (state = initialState, action) => {
     }
 };
 
-export default WordRedu;
+export default WordListRedu;

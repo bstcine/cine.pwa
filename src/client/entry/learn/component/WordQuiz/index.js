@@ -2,7 +2,7 @@
  * Created by lidangkun on 2018/6/15.
  */
 import React from 'react';
-import '../../asset/style/vocabularyTest.less';
+import '../../asset/style/WordQuiz.less';
 import { addParam } from '@/util/urlUtil';
 
 class WordQuiz extends React.PureComponent {

@@ -1,36 +1,28 @@
+/**
+ * Created by lidangkun on 2018/7/26.
+ */
 import Api from '../../APIConfig';
 import { fetchData } from '@/service/base';
-import { ACTION_LV } from '@/constant/actionTypeLearn';
-import { toastAction } from '@/action/commonAction';
-import errorMsg from '@/util/errorMsg';
-
+import { ACTION_LW } from '@/constant/actionTypeLearn';
 export const lWordAction = {
-
     _request: () => ({
-        type: ACTION_LV.REQUEST,
+        type: ACTION_LW.REQUEST,
     }),
 
     _receive: result => ({
-        type: ACTION_LV.RECEIVE,
+        type: ACTION_LW.RECEIVE,
         payload: result.rows,
     }),
-
-    _changeTaskStatus: result => ({
-        type: ACTION_LV.TASKSTATUS,
-        payload: result.status,
-    }),
-
-    loadVocabulary: (param) => async dispatch => {
+    // 卡片式学习方法
+    loadWordList: (param) => async dispatch => {
 
         let [error, result] = await fetchData(Api.APIURL_User_Learn_Word, param);
 
-        if (error) {
-            dispatch(toastAction.showError(errorMsg(error)));
-        } else {
+        if (!error) {
             console.log(result);
             dispatch(lWordAction._receive(result));
-            dispatch(lWordAction._changeTaskStatus(result));
+        } else {
+            console.log(error);
         }
     },
-
 };

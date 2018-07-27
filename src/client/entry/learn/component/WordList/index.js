@@ -1,14 +1,14 @@
 import React from 'react';
-import "../../asset/style/vocabularyTask.less";
+import "../../asset/style/WordList.less";
 import VocabularyItem from './vocabularyItem';
 import { addParam } from '@/util/urlUtil';
 
-class VocabularyTask extends React.PureComponent {
+class WordList extends React.PureComponent {
 
     render() {
 
         let { vocabularyList, taskStatus, playAction, param } = this.props;
-        let testHref = addParam('/learn/wordquiz', param);
+        let testHref = addParam('/learn/word/quiz', param);
         let historyHref = '/learn/task?type=4';
         if (param.user_id) {
             historyHref = historyHref + '&user_id=' + param.user_id;
@@ -51,4 +51,4 @@ class VocabularyTask extends React.PureComponent {
 
 }
 
-export default VocabularyTask;
+export default WordList;

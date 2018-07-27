@@ -2,11 +2,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { lWordAction } from '@/action/lWordAction';
-import VocabularyTask from '../component/vocabularyTask';
+import { lWordListAction } from '@/action/lWordListAction';
+import WordList from '../component/WordList';
 import { getParam } from '@/util/urlUtil';
 
-class VocabularyTaskContainer extends Component {
+class WordListContainer extends Component {
 
     playAudio = audioSrc => {
         this.audioPlayer.src =
@@ -32,7 +32,7 @@ class VocabularyTaskContainer extends Component {
         let { vocabularyList, taskStatus, actions } = this.props;
 
         return (
-            <VocabularyTask
+            <WordList
                 vocabularyList={vocabularyList}
                 taskStatus={taskStatus}
                 actions={actions}
@@ -45,15 +45,15 @@ class VocabularyTaskContainer extends Component {
 
 const mapStateToProps = state => {
     return {
-        vocabularyList: state.WordRedu.get('vocabularyList'),
-        taskStatus: state.WordRedu.get('taskStatus'),
+        vocabularyList: state.WordListRedu.get('vocabularyList'),
+        taskStatus: state.WordListRedu.get('taskStatus'),
     };
 };
 
 const mapDispatchToProps = dispatch => ({
-    actions: bindActionCreators(lWordAction, dispatch),
+    actions: bindActionCreators(lWordListAction, dispatch),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(
-    VocabularyTaskContainer
+    WordListContainer
 );

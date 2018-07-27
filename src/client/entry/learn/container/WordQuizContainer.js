@@ -11,7 +11,7 @@ import CThemeProvider from '@/component/CThemeProvider';
 import { CFlatButton, CDialog } from '@/component/_base';
 import { Toast } from '@/component/Toast';
 
-class VocabularyTestContainer extends Component {
+class WordQuizContainer extends Component {
     constructor(props) {
         super(props);
         // 获取参数
@@ -81,5 +81,5 @@ const mapDispatchToProps = dispatch => ({
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(
-    VocabularyTestContainer
+    WordQuizContainer
 );

@@ -120,6 +120,7 @@ export const lWordQuizAction = {
      * 加载单词数组的方法（私有）
      * */
     _loadWords: (param, isInit) => async dispatch => {
+        console.log('开始猪呢比架子')
         let [error, result] = await fetchData(
             Api.APIURL_User_Learn_Word,
             param
@@ -276,6 +277,7 @@ export const lWordQuizAction = {
      * 加载单词数据（对外调用）
      * */
     loadWords: param => async dispatch => {
+        console.log('加载');
         dispatch(lWordQuizAction._saveParam(param));
         dispatch(lWordQuizAction._loadWords(param, true));
     },

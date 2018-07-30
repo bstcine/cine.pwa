@@ -9,14 +9,16 @@ import WordFooter from './WordFooter';
 
 class Word extends React.PureComponent {
     render() {
-        let { result, backAction } = this.props;
+        let { result, backAction, quizAction } = this.props;
         return (
             <div className="wordContent">
                 <WordHeader
                     name={result.name}
                     backAction={backAction}
                 />
-                <WordBody />
+                <WordBody
+                    quizAction={quizAction}
+                />
                 <WordFooter />
             </div>
         );

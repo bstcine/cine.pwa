@@ -19,7 +19,6 @@ export const lWordAction = {
         let [error, result] = await fetchData(Api.APIURL_User_Learn_Word, param);
 
         if (!error) {
-            console.log(result);
             dispatch(lWordAction._receive(result));
         } else {
             console.log(error);

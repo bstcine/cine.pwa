@@ -6,10 +6,10 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { getParam } from '@/util/urlUtil';
 import { lWordQuizAction } from '@/action/lWordQuizAction';
-import WordQuiz from  '../component/WordQuiz';
+import WordQuiz from '../component/WordQuiz';
 import CThemeProvider from '@/component/CThemeProvider';
 import { CFlatButton, CDialog } from '@/component/_base';
-import { Toast } from '@/component/Toast';
+// import { Toast } from '@/component/Toast';
 
 class WordQuizContainer extends Component {
     constructor(props) {
@@ -24,7 +24,15 @@ class WordQuizContainer extends Component {
     }
 
     render() {
-        let { network, isTest, isDone, selectIndex, wordCount, correctCount, content, actions } = this.props;
+        let {
+            isTest,
+            isDone,
+            selectIndex,
+            wordCount,
+            correctCount,
+            content,
+            actions,
+        } = this.props;
 
         const dialogActions = [
             <CFlatButton
@@ -39,7 +47,7 @@ class WordQuizContainer extends Component {
         return (
             <CThemeProvider>
                 <React.Fragment>
-                    <Toast network={network} />
+                    {/* <Toast network={network} /> */}
                     <WordQuiz
                         param={this.param}
                         isTest={isTest}
@@ -56,8 +64,8 @@ class WordQuizContainer extends Component {
                         open={isDone}
                         onRequestClose={() => {
                             location.href = '/learn';
-                        }}>
-                    </CDialog>
+                        }}
+                    />
                 </React.Fragment>
             </CThemeProvider>
         );
@@ -72,7 +80,7 @@ const mapStateToProps = state => {
         wordCount: state.WordQuizRedu.get('wordCount'),
         content: state.WordQuizRedu.get('content'),
         correctCount: state.WordQuizRedu.get('correctCount'),
-        network: state.toastRedu,
+        // network: state.toastRedu,
     };
 };
 
@@ -80,6 +88,4 @@ const mapDispatchToProps = dispatch => ({
     actions: bindActionCreators(lWordQuizAction, dispatch),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-    WordQuizContainer
-);
+export default connect(mapStateToProps, mapDispatchToProps)(WordQuizContainer);

@@ -3,21 +3,21 @@ import { connect } from 'react-redux';
 import Entry from '@/component/Entry';
 import Tasks from './Tasks';
 import Courses from './Courses';
-import { fetchUserInfo } from '@/action/commonAction';
+// import { fetchUserInfo } from '@/action/commonAction';
 const mapStateToProps = state => {
     const { userRedu } = state;
     return { user: userRedu.data };
 };
-const mapDispatchToProps = dispatch => ({
-    fetchUserInfo: () => {
-        dispatch(fetchUserInfo());
-    },
-});
+// const mapDispatchToProps = dispatch => ({
+//     fetchUserInfo: () => {
+//         dispatch(fetchUserInfo());
+//     },
+// });
 
 class HomePage extends Entry {
-    componentDidMount() {
-        this.props.fetchUserInfo();
-    }
+    // componentDidMount() {
+    //     this.props.fetchUserInfo();
+    // }
 
     render() {
         const { user } = this.props;
@@ -30,8 +30,8 @@ class HomePage extends Entry {
     }
 }
 
-HomePage.propTypes = {
-    // fetchHomeData: PropTypes.func.isRequired,
-};
+// HomePage.propTypes = {
+//     // fetchHomeData: PropTypes.func.isRequired,
+// };
 
-export default connect(mapStateToProps, mapDispatchToProps)(HomePage);
+export default connect(mapStateToProps)(HomePage);

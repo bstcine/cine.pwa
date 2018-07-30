@@ -8,7 +8,7 @@ class WordList extends React.PureComponent {
     render() {
 
         let { vocabularyList, taskStatus, playAction, param } = this.props;
-        let testHref = addParam('/learn/word/quiz', param);
+        let testHref = addParam('/lword/quiz', param);
         let historyHref = '/learn/task?type=4';
         if (param.user_id) {
             historyHref = historyHref + '&user_id=' + param.user_id;

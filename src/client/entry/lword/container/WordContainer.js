@@ -27,8 +27,12 @@ class WordContainer extends Component {
         location.href = '/learn/task';
     }
     gotoTest() {
-        let testHref = addParam('/learn/word/quiz', this.param);
+        let testHref = addParam('/lword/quiz', this.param);
         location.href = testHref;
+    }
+    gotoList() {
+        let listHref = addParam('/lword/card', this.param);
+        location.href = listHref;
     }
 
     render() {
@@ -39,6 +43,7 @@ class WordContainer extends Component {
                 action={action}
                 backAction={ () => { this.backLearnHome() }}
                 quizAction={ () => { this.gotoTest() }}
+                listAction={ () => { this.gotoList() }}
             />
         );
     }

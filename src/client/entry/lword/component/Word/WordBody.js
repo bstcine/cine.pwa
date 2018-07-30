@@ -5,8 +5,11 @@ import React from 'react';
 
 class WordBody extends React.PureComponent {
     render() {
-        let { quizAction } = this.props;
-        return (
+        let { rows, quizAction, listAction } = this.props;
+        if (!rows) {
+            return null;
+        }
+        return (rows &&
             <div className="word-Body">
                 <div className="word-Count">
                     <div className="word-grasp">
@@ -15,15 +18,17 @@ class WordBody extends React.PureComponent {
                     </div>
                     <div className="word-ungrasp">
                         <p className="word-ungrasp-text">不认识</p>
-                        <p className="word-ungrasp-count">50</p>
+                        <p className="word-ungrasp-count">{rows.length}</p>
                     </div>
                 </div>
-                <div className="word-Learn">
+                <div className="word-Learn" onClick={listAction}>
+                    <img src={require('../../asset/image/lword_card.svg')} />
                     <p className="text">背单词</p>
                 </div>
-                <div className="word-Test" onClick={quizAction}>{
+                <div className="word-Test" onClick={quizAction}>
+                    <img src={require('../../asset/image/lword_test.svg')} />
                     <p className="text">词汇测试</p>
-                }</div>
+                </div>
             </div>
         );
     }

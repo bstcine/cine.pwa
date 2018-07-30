@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 // import { Toast } from '@/component/Toast';
 import * as mentorAction from '@/action/mentorAction';
 import StuTaskTable from '@/entry/mentor/component/StuTask/StuTaskTable';
-import Confirm from '@/component/Confirm';
+// import Confirm from '@/component/Confirm';
 
 class StuTaskContainer extends Component {
     componentDidMount() {
@@ -17,7 +17,7 @@ class StuTaskContainer extends Component {
         return (
             <div className="mentor-container task">
                 {/* <Toast network={toastRedu} /> */}
-                <Confirm />
+                {/* <Confirm /> */}
                 <StuTaskTable list={mentorStudentTask} actions={actions} />
             </div>
         );

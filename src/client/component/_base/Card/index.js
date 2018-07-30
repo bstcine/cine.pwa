@@ -3,9 +3,7 @@ import Card from './Card';
 import CardContainer from './CardContainer';
 
 const CCard = ({
-    // '112' | '122' | '123' | '234'
     layout = '112',
-    // 'none' | 'shadow' | 'darken' | 'outlined'
     hover = 'darken',
     className,
     onClick,
@@ -16,12 +14,7 @@ const CCard = ({
     </Card>
 );
 
-const CCardContainer = ({
-    className,
-    // 'none' | null | 'large'
-    gap,
-    children,
-}) => (
+const CCardContainer = ({ className, gap, children }) => (
     <CardContainer className={className} gap={gap}>
         {children}
     </CardContainer>

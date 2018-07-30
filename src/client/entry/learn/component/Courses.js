@@ -1,7 +1,7 @@
 import React from 'react';
-import { Grid, Column112 } from '@/component/CGrid';
+// import { CCard } from '@/component/_base';
 import TextFix from '@/component/TextFix';
-import { CPanel } from '@/component/_base';
+import { CPanel, CCard, CCardContainer } from '@/component/_base';
 
 const Courses = ({ courses }) => {
     const getHref = course => {
@@ -13,10 +13,11 @@ const Courses = ({ courses }) => {
     };
     return (
         <CPanel title="我的课程" className="courses-container">
-            <Grid className="courses-list">
+            <CCardContainer className="courses-list">
                 {courses.map(course => {
                     return (
-                        <Column112
+                        <CCard
+                            hover="lighten"
                             key={course.id}
                             className="courses-item"
                             href={getHref(course)}>
@@ -54,10 +55,10 @@ const Courses = ({ courses }) => {
                                     </div>
                                 )}
                             </div>
-                        </Column112>
+                        </CCard>
                     );
                 })}
-            </Grid>
+            </CCardContainer>
         </CPanel>
     );
 };

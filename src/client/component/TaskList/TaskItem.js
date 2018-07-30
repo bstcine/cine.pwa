@@ -47,11 +47,11 @@ const getHref = (task, isMentor) => {
         }
         case Task_Type.Word:
             if (task.word_start_index && task.word_end_index) {
-                return `/learn/word?task_id=${task.id}&start_index=${
+                return `/lword?task_id=${task.id}&start_index=${
                     task.word_start_index
                 }&end_index=${task.word_end_index}${urlMentorUser}`;
             } else {
-                return `/learn/word?task_id=${task.id}&word_type=${
+                return `/lword?task_id=${task.id}&word_type=${
                     task.object_id
                 }`;
             }

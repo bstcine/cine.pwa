@@ -15,7 +15,7 @@
     align-items: center;
     margin-top: 0.5rem;
     margin-bottom: 0.2rem;
-    font-size: 0.3rem;
+    font-size: 0.36rem;
     text-align: left;
     cursor: pointer;
 }
@@ -45,78 +45,84 @@
     display: inline-block;
     vertical-align: text-bottom;
     width: 80%;
-    .text1 {
-        float: left;
-        position: relative;
-        height: auto;
-        font-family: PingFangSC-Regular;
-        font-size: 0.36rem;
-        color: #3a3b3c;
-        margin-top: 0.3rem;
-    }
-    .text2 {
-        float: left;
-        height: auto;
-        font-family: JustOldFashion-Condensed;
-        font-size: 0.8rem;
-        color: #1b71db;
-        margin-left: 1rem;
-    }
-    .text3 {
-        float: right;
-        height: auto;
-        font-family: PingFangSC-Regular;
-        font-size: 0.36rem;
-        color: #3a3b3c;
-        margin-top: 0.3rem;
-    }
-    .text4 {
-        float: right;
-        height: auto;
-        font-family: JustOldFashion-Condensed;
-        font-size: 0.8rem;
-        color: #1b71db;
-        margin-left: 1rem;
-    }
+}
+.word-grasp {
+    display: flex;
+    align-items: flex-end;
+    float: left;
+    position: relative;
+}
+.word-grasp-text {
+    height: auto;
+    font-family: PingFangSC-Regular;
+    font-size: 0.36rem;
+    color: #3a3b3c;
+    margin-top: 0.3rem;
+}
+.word-grasp-count {
+    height: auto;
+    font-family: JustOldFashion-Condensed;
+    font-size: 0.8rem;
+    color: #1b71db;
+    margin-left: 0.5rem;
+}
+.word-ungrasp {
+    display: flex;
+    align-items: flex-end;
+    float: right;
+    position: relative;
+}
+.word-ungrasp-text {
+    height: auto;
+    font-family: PingFangSC-Regular;
+    font-size: 0.36rem;
+    color: #3a3b3c;
+    margin-top: 0.3rem;
+}
+.word-ungrasp-count {
+    height: auto;
+    font-family: JustOldFashion-Condensed;
+    font-size: 0.8rem;
+    color: #1b71db;
+    margin-left: 0.5rem;
 }
 .word-Learn {
     display: flex;
     flex-direction: row;
+    justify-content: center;
     align-items: center;
     margin-top: 1rem;
-    width: 4.8rem;
+    width: 80%;
     height: 1.2rem;
     border-radius: 5px;
     background-color: #55a7f4;
-    text-align: center;
     cursor: pointer;
-    font-size: 0.36rem;
-    font-family: PingFangSC-Medium;
-
-    .text{
-        width: 100%;
-        color: white;
+    .text {
+        margin-left: 48px;
     }
 }
 .word-Test {
     display: flex;
     flex-direction: row;
+    justify-content: center;
     align-items: center;
     margin-top: 0.5rem;
-    width: 4.8rem;
+    width: 80%;
     height: 1.2rem;
     border-radius: 5px;
     background-color: #62bfeb;
-    text-align: center;
     cursor: pointer;
-    font-size: 0.36rem;
-    font-family: PingFangSC-Medium;
-    .text{
-        width: 100%;
-        color: white;
+    .text {
+        margin-left: 30px;
     }
 }
-
+.text{
+    width: auto;
+    color: white;
+    text-align: left;
+    font-size: 0.36rem;
+    font-family: PingFangSC-Medium;
+}
 .word-Footer {
     margin-top: 0.7rem;
     margin-bottom: 1rem;
@@ -152,5 +158,11 @@
         height: 1.6rem;
         font-size: 0.48rem;
         font-family: PingFangSC-Medium;
+    }
+    .word-grasp-count {
+        margin-left: 1rem;
+    }
+    .word-ungrasp-count {
+        margin-left: 1rem;
     }
 }

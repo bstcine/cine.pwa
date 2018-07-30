@@ -15,7 +15,7 @@ class WordQuiz extends React.PureComponent {
 
     render() {
         let { param, isTest, selectIndex, wordCount, correctCount, content, actions } = this.props;
-        const wordHref = addParam('/learn/word', param);
+        const wordHref = addParam('/lword', param);
         let wordCountPromot = '本次学习单词' + wordCount + '个，测试下掌握了多少？';
         let correctWord = '已掌握' + correctCount + '个';
         let wordAllPromot = '共' + wordCount + '个';

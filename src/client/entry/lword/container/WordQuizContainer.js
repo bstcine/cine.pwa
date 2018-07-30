@@ -16,6 +16,7 @@ class WordQuizContainer extends Component {
         super(props);
         // 获取参数
         this.param = getParam();
+        console.log(this.param);
     }
     componentDidMount() {
         // 准备访问
@@ -47,7 +48,6 @@ class WordQuizContainer extends Component {
         return (
             <CThemeProvider>
                 <React.Fragment>
-                    {/* <Toast network={network} /> */}
                     <WordQuiz
                         param={this.param}
                         isTest={isTest}
@@ -80,7 +80,7 @@ const mapStateToProps = state => {
         wordCount: state.WordQuizRedu.get('wordCount'),
         content: state.WordQuizRedu.get('content'),
         correctCount: state.WordQuizRedu.get('correctCount'),
-        // network: state.toastRedu,
+        toastRedu: state.toastRedu,
     };
 };
 

@@ -18,6 +18,7 @@ const pages = [
     'content',
     'user',
     'learn',
+    'lword',
     'quiz',
     'mentor',
     'widget',

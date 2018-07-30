@@ -67,13 +67,13 @@ const getHref = (task, student_id) => {
         }
         case Task_Type.Word:
             if (task.word_start_index && task.word_end_index) {
-                return `/learn/word?task_id=${
+                return `/lword?task_id=${
                     task.id
                 }&user_id=${student_id}&start_index=${
                     task.word_start_index
                 }&end_index=${task.word_end_index}`;
             } else {
-                return `/learn/word?task_id=${
+                return `/lword?task_id=${
                     task.id
                 }&user_id=${student_id}&word_type=${task.object_id}`;
             }

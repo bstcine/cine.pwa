@@ -1,8 +1,7 @@
 import React from 'react';
 import TextFix from '@/component/TextFix';
 import { Task_Type } from '@/constant';
-// import { Column112 } from '@/component/CGrid';
-import { CCard } from '@/component/_base';
+import { Column112 } from '@/component/CGrid';
 import { GIcon } from '@/g/component';
 
 const Label = ({ type }) => {
@@ -61,15 +60,11 @@ const TasksList = ({ tasks, isLimitTasks }) => {
         if (isLimitTasks && i >= 5) return null;
 
         return (
-            <CCard
-                key={task.id}
-                hover="lighten"
-                className="task-item"
-                href={getHref(task)}>
+            <Column112 key={task.id} className="task-item" href={getHref(task)}>
                 <Label type={task.type} />
                 <TextFix className="task-title">{task.title}</TextFix>
                 <Status task={task} />
-            </CCard>
+            </Column112>
         );
     });
 };

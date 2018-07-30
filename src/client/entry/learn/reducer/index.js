@@ -1,9 +1,5 @@
 import { combineReducers } from 'redux';
-import WordRedu from './WordRedu';
-import WordListRedu from './WordListReducer';
-import WordQuizRedu from './WordQuizReducer';
 import TaskRedu from './TaskReducer';
-import WordCardRedu from './WordCardReducer';
 import gReducer from '@/g/reducer';
 import {
     RECEIVE_CURRENT_TASK,
@@ -31,11 +27,7 @@ const courses = (state = [], action) => {
 const rootReducer = combineReducers({
     currentTasks,
     courses,
-    WordRedu,
-    WordListRedu,
     TaskRedu,
-    WordQuizRedu,
-    WordCardRedu,
     ...gReducer,
 });
 

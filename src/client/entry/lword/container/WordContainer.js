@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { lWordAction } from '@/action/lWordAction';
 import Word from '../component/Word';
-import { getParam } from '@/util/urlUtil';
+import { getParam, addParam } from '@/util/urlUtil';
 
 class WordContainer extends Component {
 
@@ -26,6 +26,14 @@ class WordContainer extends Component {
     backLearnHome() {
         location.href = '/learn/task';
     }
+    gotoTest() {
+        let testHref = addParam('/lword/quiz', this.param);
+        location.href = testHref;
+    }
+    gotoList() {
+        let listHref = addParam('/lword/card', this.param);
+        location.href = listHref;
+    }
 
     render() {
         let { result, action } = this.props;
@@ -34,6 +42,8 @@ class WordContainer extends Component {
                 result={result}
                 action={action}
                 backAction={ () => { this.backLearnHome() }}
+                quizAction={ () => { this.gotoTest() }}
+                listAction={ () => { this.gotoList() }}
             />
         );
     }

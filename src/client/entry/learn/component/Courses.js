@@ -13,7 +13,7 @@ const Courses = ({ courses }) => {
     };
     return (
         <CPanel title="我的课程" className="courses-container">
-            <CCardContainer className="courses-list">
+            <CCardContainer className="courses-list" gap="none">
                 {courses.map(course => {
                     return (
                         <CCard

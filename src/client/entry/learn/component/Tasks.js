@@ -23,7 +23,7 @@ const Tasks = ({ tasks, isLimitTasks, onShowAllTask }) => {
             badge={tasks.filter(i => i.status !== '2').length}
             ext_title="历史作业"
             ext_href="/learn/task">
-            <CCardContainer className="task-list">
+            <CCardContainer className="task-list" gap="none">
                 <TasksList tasks={tasks} isLimitTasks={isLimitTasks} />
                 <ExpandMore
                     tasks={tasks}

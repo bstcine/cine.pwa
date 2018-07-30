@@ -61,7 +61,11 @@ const TasksList = ({ tasks, isLimitTasks }) => {
         if (isLimitTasks && i >= 5) return null;
 
         return (
-            <CCard key={task.id} className="task-item" href={getHref(task)}>
+            <CCard
+                key={task.id}
+                hover="lighten"
+                className="task-item"
+                href={getHref(task)}>
                 <Label type={task.type} />
                 <TextFix className="task-title">{task.title}</TextFix>
                 <Status task={task} />

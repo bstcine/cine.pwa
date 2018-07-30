@@ -7,7 +7,7 @@ const TaskList = ({ tasks, isMentor }) => {
         return <TaskItem key={task.id} task={task} isMentor={isMentor} />;
     });
     return (
-        <CCardContainer className="task-list-complex">
+        <CCardContainer className="task-list-complex" gap="none">
             {taskList}
         </CCardContainer>
     );

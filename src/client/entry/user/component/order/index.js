@@ -10,6 +10,21 @@ export default class Order extends React.PureComponent {
         // alert(JSON.stringify(orders));
         return (
             <React.Fragment>
+                <CPanel title="Card 111" className="bgw">
+                    <OrderList
+                        orders={orderlist}
+                        layout="111"
+                        className="bglight"
+                        itemClassName="bgw"
+                    />
+                </CPanel>
+
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+
                 <OrderList
                     orders={orderlist}
                     layout="234"
@@ -36,7 +51,7 @@ export default class Order extends React.PureComponent {
                 <br />
                 <br />
 
-                <CPanel title="Gird Card 234" className="bgpanel">
+                <CPanel title="Gird Card 234" className="bgdark">
                     <OrderList
                         orders={orderlist}
                         layout="234"

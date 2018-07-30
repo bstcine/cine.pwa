@@ -1,18 +1,27 @@
 import React from 'react';
 import { CCardContainer, CCard } from '@/component/_base';
-import { CardItem, CardItem112 } from './CardItem';
+import { CardItem, CardItem112, CardItem111 } from './CardItem';
 
 const OrderItem = ({ order, layout, className, actions }) => {
     let hover = layout === '123' ? 'outlined' : 'darken';
     hover = layout === '112' ? 'lighten' : hover;
-    const isCard112 = layout === '112';
+
+    let item = <CardItem value={order} actions={actions} />;
+    switch (layout) {
+        case '111':
+            item = <CardItem111 value={order} actions={actions} />;
+            break;
+        case '112':
+            item = <CardItem112 value={order} actions={actions} />;
+            break;
+        case '123':
+            item = <CardItem value={order} actions={actions} />;
+            break;
+    }
+
     return (
         <CCard layout={layout} className={className} hover={hover}>
-            {isCard112 ? (
-                <CardItem112 value={order} actions={actions} />
-            ) : (
-                <CardItem value={order} actions={actions} />
-            )}
+            {item}
         </CCard>
     );
 };
@@ -31,7 +40,7 @@ const OrderList = ({ orders, layout, className, itemClassName, actions }) => {
     });
 
     return (
-        <CCardContainer className={className} gap="large">
+        <CCardContainer className={className} gap={layout === '111' ? 'lighten' : 'large'}>
             {orderList}
         </CCardContainer>
     );

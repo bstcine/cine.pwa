@@ -1,6 +1,6 @@
 import React from 'react';
 import { Grid } from '@/component/CGrid';
-import GIcon from '@/component/GIcon';
+import { GIcon } from '@/g/component';
 import TasksList from './TasksList';
 import { CPanel } from '@/component/_base';
 

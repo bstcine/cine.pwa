@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import { confirmModal, userRedu, toastRedu } from '@/reducer/index';
+import gReducer from '@/g/reducer';
 
 import { mentorStudentQuizWord } from './stuQuizReducer';
 import { mentorStudentTask } from './stuTaskReducer';
@@ -7,10 +7,7 @@ import { mentorStudentTask } from './stuTaskReducer';
 const rootReducer = combineReducers({
     mentorStudentQuizWord,
     mentorStudentTask,
-
-    confirmModal,
-    userRedu,
-    toastRedu,
+    ...gReducer,
 });
 
 export default rootReducer;

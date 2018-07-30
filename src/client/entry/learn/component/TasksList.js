@@ -2,7 +2,7 @@ import React from 'react';
 import TextFix from '@/component/TextFix';
 import { Task_Type } from '@/constant';
 import { Column112 } from '@/component/CGrid';
-import GIcon from '@/component/GIcon';
+import { GIcon } from '@/g/component';
 
 const Label = ({ type }) => {
     const map = {

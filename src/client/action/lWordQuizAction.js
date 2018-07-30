@@ -4,9 +4,12 @@
 import Api from '../../APIConfig';
 import { fetchData } from '@/service/base';
 import { ACTION_LT } from '@/constant/actionTypeLearn';
-import { toastAction } from '@/action/commonAction';
+import gAction from '@/g/action';
 import errorMsg from '@/util/errorMsg';
-import { Learn_Word_Correct_SleepTime, Learn_Word_Failed_SleepTime } from '@/constant/index';
+import {
+    Learn_Word_Correct_SleepTime,
+    Learn_Word_Failed_SleepTime,
+} from '@/constant/index';
 
 const Vocabulary = {
     n: ['n.'],
@@ -117,9 +120,12 @@ export const lWordQuizAction = {
      * 加载单词数组的方法（私有）
      * */
     _loadWords: (param, isInit) => async dispatch => {
-        let [error, result] = await fetchData(Api.APIURL_User_Learn_Word, param);
+        let [error, result] = await fetchData(
+            Api.APIURL_User_Learn_Word,
+            param
+        );
         if (error) {
-            dispatch(toastAction.showError(errorMsg(error)));
+            dispatch(gAction.showMessage({ error: errorMsg(error) }));
             return;
         }
         let content = lWordQuizAction._getContent(result.rows, 0);
@@ -138,15 +144,25 @@ export const lWordQuizAction = {
             randomCount = rows.length - 1;
         }
         // 获取指定数量的干扰项目
-        let interferenceRows = lWordQuizAction._getInterferenceRows(rows, index, randomCount);
+        let interferenceRows = lWordQuizAction._getInterferenceRows(
+            rows,
+            index,
+            randomCount
+        );
         // 随机生成正确下标的值
         let realIndex = lWordQuizAction.getRandomNumber(randomCount);
         // 生命翻译文字数组
         let zhArr = [];
         // 获取正确的翻译
-        let { zh } = lWordQuizAction._getChinessTransition(rows[index].type, rows[index].zh);
-        zhArr = interferenceRows.map((item) => {
-            let { zh } = lWordQuizAction._getChinessTransition(item.type, item.zh);
+        let { zh } = lWordQuizAction._getChinessTransition(
+            rows[index].type,
+            rows[index].zh
+        );
+        zhArr = interferenceRows.map(item => {
+            let { zh } = lWordQuizAction._getChinessTransition(
+                item.type,
+                item.zh
+            );
             return zh;
         });
         // 将正确的翻译元素插入到指定位置
@@ -186,14 +202,17 @@ export const lWordQuizAction = {
         // 如果数量超出，随机取出count个
         if (newRows.length > count) {
             let resultRows = [];
-            let randomIndexArr = lWordQuizAction.getRandomNumbers(newRows.length - 1, count);
+            let randomIndexArr = lWordQuizAction.getRandomNumbers(
+                newRows.length - 1,
+                count
+            );
             for (let i = 0; i < randomIndexArr.length; i++) {
                 resultRows.push(newRows[randomIndexArr[i]]);
             }
             return resultRows;
         }
         // 此时表示数量不足,需要补足
-        while (newRows.length < count && rows.length > (newRows.length + 1)) {
+        while (newRows.length < count && rows.length > newRows.length + 1) {
             let randomIndex = lWordQuizAction.getRandomNumber(rows.length - 1);
             if (index === randomIndex) {
                 continue;
@@ -216,7 +235,7 @@ export const lWordQuizAction = {
      * */
     _getChinessTransition: (wordType, originZH) => {
         if (wordType === null || originZH === null) {
-            toastAction.show('data error');
+            // toastAction.show('data error');
             return null;
         }
         let vocabularyList = Vocabulary[wordType];
@@ -256,11 +275,11 @@ export const lWordQuizAction = {
     /**
      * 加载单词数据（对外调用）
      * */
-    loadWords: (param) => async dispatch => {
+    loadWords: param => async dispatch => {
         dispatch(lWordQuizAction._saveParam(param));
         dispatch(lWordQuizAction._loadWords(param, true));
     },
-    updateTask: (status) => async (dispatch, getState) => {
+    updateTask: status => async (dispatch, getState) => {
         let reducer = getState().WordQuizRedu;
         let taskStatus = reducer.get('taskStatus');
         if (taskStatus === '2') {
@@ -268,7 +287,10 @@ export const lWordQuizAction = {
         }
         let param = reducer.get('param');
         param['task_status'] = status;
-        let [error, result] = await fetchData(Api.APIURL_User_Learn_UpdateTaskStatus, param);
+        let [error, result] = await fetchData(
+            Api.APIURL_User_Learn_UpdateTaskStatus,
+            param
+        );
         console.log(error, result);
     },
     /**
@@ -287,7 +309,9 @@ export const lWordQuizAction = {
         let reducer = getState().WordQuizRedu;
         let failureArr = reducer.get('failureArray');
         if (failureArr) {
-            let [result] = await fetchData(Api.APIURL_User_Learn_SaveFailure, { failure_words: failureArr });
+            let [result] = await fetchData(Api.APIURL_User_Learn_SaveFailure, {
+                failure_words: failureArr,
+            });
             console.log(result);
         }
         // 更新测试状态为已完成
@@ -298,12 +322,12 @@ export const lWordQuizAction = {
     /**
      * 开始下一个（对外调用）
      * */
-    startNext: (currentIndex) => async (dispatch, getState) => {
+    startNext: currentIndex => async (dispatch, getState) => {
         let reducer = getState().WordQuizRedu;
         let correctCount = reducer.get('correctCount');
         let wordCount = reducer.get('wordCount');
         if (correctCount === wordCount) {
-            dispatch(lWordQuizAction.testDone())
+            dispatch(lWordQuizAction.testDone());
             return;
         }
         let rows = reducer.get('rows');
@@ -317,7 +341,9 @@ export const lWordQuizAction = {
                 index = currentIndex + 1;
             } else {
                 // 将临时错误数组赋值给错误数组
-                dispatch(lWordQuizAction._changeFaileIndexArray(faileTempIndexArr));
+                dispatch(
+                    lWordQuizAction._changeFaileIndexArray(faileTempIndexArr)
+                );
                 // 将临时错误数组清空
                 dispatch(lWordQuizAction._changeFaileTempIndexArray([]));
                 // 当前错误下标置为 0
@@ -333,7 +359,9 @@ export const lWordQuizAction = {
                 index = faileIndexArr[faileIndex];
             } else {
                 // 将临时错误数组赋值给错误数组
-                dispatch(lWordQuizAction._changeFaileIndexArray(faileTempIndexArr));
+                dispatch(
+                    lWordQuizAction._changeFaileIndexArray(faileTempIndexArr)
+                );
                 // 将临时错误数组清空
                 dispatch(lWordQuizAction._changeFaileTempIndexArray([]));
                 // 当前错误下标置为 0
@@ -349,27 +377,27 @@ export const lWordQuizAction = {
         dispatch(lWordQuizAction._changeContent(content));
     },
     // 实现定时器，选择正确后的跳转（LEARN_TEST_CORRECT_SELLP）
-    selectCorrect: (index) => async (dispatch, getState) => {
+    selectCorrect: index => async (dispatch, getState) => {
         let reducer = getState().WordQuizRedu;
         let audioPlayer = reducer.get('audioTruePlayer');
         audioPlayer.play();
-        setTimeout(function () {
+        setTimeout(function() {
             dispatch(lWordQuizAction.startNext(index));
         }, Learn_Word_Correct_SleepTime * 1000);
     },
     // 实现定时器，选择错误后的跳转（LEARN_TEST_WRONG_SELLP）
-    selectWrong: (index) => async (dispatch, getState) => {
+    selectWrong: index => async (dispatch, getState) => {
         let reducer = getState().WordQuizRedu;
         let audioPlayer = reducer.get('audioFalsePlayer');
         audioPlayer.play();
-        setTimeout(function () {
+        setTimeout(function() {
             dispatch(lWordQuizAction.startNext(index));
         }, Learn_Word_Failed_SleepTime * 1000);
     },
     /**
      * 点击选中翻译项
      * */
-    selectItem: (selectIndex) => async (dispatch, getState) => {
+    selectItem: selectIndex => async (dispatch, getState) => {
         // 改变选择状态
         dispatch(lWordQuizAction._changeSelectIndex(selectIndex));
         // 获取内容信息
@@ -404,7 +432,9 @@ export const lWordQuizAction = {
             }
             dispatch(lWordQuizAction._changeFailureArray(failureArr));
             // 保存错误信息
-            dispatch(lWordQuizAction._changeFaileTempIndexArray(faileTempIndexArr));
+            dispatch(
+                lWordQuizAction._changeFaileTempIndexArray(faileTempIndexArr)
+            );
             dispatch(lWordQuizAction.selectWrong(index));
         }
     },
@@ -440,7 +470,7 @@ export const lWordQuizAction = {
      * @ max 最大范围
      * @return 生成数值
      * */
-    getRandomNumber: (max) => {
+    getRandomNumber: max => {
         return Math.round(Math.random() * max);
     },
 };

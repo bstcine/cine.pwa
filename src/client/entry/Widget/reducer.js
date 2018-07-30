@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import * as gReducer from '@/reducer';
+import gReducer from '@/g/reducer';
 
 const rootReducer = combineReducers({
     ...gReducer,

@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import GIcon from '@/component/GIcon';
-import '../../asset/style/widget.less';
+import { GIcon } from '@/g/component';
+import './asset/style/widget.less';
 import {
     CButton,
     CPanel,
@@ -12,18 +11,18 @@ import {
     CIconButton,
     CFloatingBox,
 } from '@/component/_base';
-import gAction from '@/action/gAction';
-import GLayout from '@/component/GLayout';
+import gAction from '@/g/action';
+import { GLayoutContainer } from '@/g/container';
 
 class Container extends Component {
     render() {
         const { gActions } = this.props;
         return (
-            <GLayout>
+            <GLayoutContainer>
                 <CPanel title="CButton @seeat : entry/content/component/Widget.js">
                     <div>
                         <CButton>
-                            <GIcon name="mi-home" /> DEFAULT
+                            <GIcon name="mi-home" />
                         </CButton>
                         <CButton color="primary">PRIMARY</CButton>
                         <CButton color="secondary">SECONDARY</CButton>
@@ -116,6 +115,7 @@ class Container extends Component {
                         </CButton>
                     </div>
                 </CPanel>
+
                 <CPanel title="Gird Card default112 gap=large">
                     <CCardContainer gap="large">
                         <CCard className="cbabsdf">1</CCard>
@@ -216,9 +216,12 @@ class Container extends Component {
                         onClick={() => {
                             gActions.showAlert({
                                 title: 'title',
-                                text: 'hello alert!',
+                                text: 'hello alert!with cancel',
                                 onConfirm: () => {
                                     console.log('confirm');
+                                },
+                                onCancel: () => {
+                                    console.log(111);
                                 },
                             });
                         }}>
@@ -259,7 +262,7 @@ class Container extends Component {
                         Message Error
                     </CButton>
                 </CPanel>
-            </GLayout>
+            </GLayoutContainer>
         );
     }
 }

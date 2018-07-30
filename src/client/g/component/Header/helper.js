@@ -1,6 +1,6 @@
 import menus from '@/constant/menu';
 
-const getNav = user => {
+const getNavs = user => {
     const filter = (menu, user) => {
         if (!menu.role_id) return true;
         if (user) {
@@ -45,23 +45,7 @@ const getNav = user => {
                             });
                 });
     });
-    // menu.forEach(menu => {
-    //     if (filter(menu, user)) {
-    //         if (menu.url !== '/' && path.indexOf(menu.url) === 0) {
-    //             menu.active = true;
-    //             if (menu.children && menu.children.length) {
-    //                 menu.children.forEach(child_menu => {
-    //                     if (filter(child_menu, user)) {
-    //                         if (path.indexOf(child_menu.url) === 0) child_menu.active = true;
-    //                         navs2.push(child_menu);
-    //                     }
-    //                 });
-    //             }
-    //         }
-    //         navs1.push(menu);
-    //     }
-    // });
     return { navs1, navs2, navs3 };
 };
 
-export { getNav };
+export { getNavs };

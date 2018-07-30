@@ -1,7 +1,67 @@
 import React, { PureComponent } from 'react';
 import classNames from 'classnames';
-import '../GLayout/style.less';
-import GIcon from '@/component/GIcon';
+import Icon from '../Icon';
+import { getNavs } from './helper';
+import { logoutV1 } from '@/service/base';
+
+/**
+ * navs1 顶部一级导航
+ * navs2 一级页面导航
+ * navs3 二级页面导航
+ */
+class Header extends PureComponent {
+    constructor(props) {
+        super(props);
+        this.onToggleUserBar = this.onToggleUserBar.bind(this);
+        this.state = {
+            isOpenUserBar: false,
+        };
+        this.onLogout = this.onLogout.bind(this);
+    }
+
+    componentDidMount() {
+        this.props.actions.preFetchUserInfo();
+    }
+
+    onLogout() {
+        logoutV1().then(() => {
+            location.href = '/';
+        });
+    }
+
+    onToggleUserBar() {
+        this.setState(prevState => ({ isOpenUserBar: !prevState.isOpenUserBar }));
+    }
+
+    render() {
+        const { user } = this.props;
+        const { isOpenUserBar } = this.state;
+        const { navs1, navs2, navs3 } = getNavs(user);
+
+        return (
+            <React.Fragment>
+                <header className="gheader">
+                    <div className="gcontainer">
+                        <Brand />
+                        <Nav1 navs={navs1} />
+
+                        <UserBar
+                            user={user}
+                            isOpen={isOpenUserBar}
+                            onToggle={this.onToggleUserBar}
+                            onLogout={this.onLogout}
+                        />
+                    </div>
+                </header>
+                {navs3 && navs3.length ? (
+                    <Nav3 navs={navs3} />
+                ) : (
+                    <Nav2 navs={navs2} />
+                )}
+            </React.Fragment>
+        );
+    }
+}
 
 const Brand = () => (
     <a href="/">
@@ -38,15 +98,15 @@ const Nav1 = ({ navs }) => (
     </nav>
 );
 
-const UserBar = ({ user, isOpenUserBar, onToggleUserBar, onLogout }) => (
+const UserBar = ({ user, isOpen, onToggle, onLogout }) => (
     <div
         className={classNames('user-bar', {
-            open: isOpenUserBar,
+            open: isOpen,
         })}>
-        <div className="nickname" onClick={onToggleUserBar}>
+        <div className="nickname" onClick={onToggle}>
             {Boolean(user) && <span>{user.nickname}</span>}
             <HeaderImg user={user} />
-            <GIcon name="mi-arrow_drop_up" />
+            <Icon name="mi-arrow_drop_up" />
         </div>
         <nav className="nav-user">
             {/* <a href="/user">个人资料</a> */}
@@ -71,7 +131,7 @@ const Nav2 = ({ navs }) => (
                                     active: menu.active,
                                 })}>
                                 {(!!menu.icon || !!menu.icon_path) && (
-                                    <GIcon
+                                    <Icon
                                         name={menu.icon}
                                         url={menu.icon_path}
                                     />
@@ -81,7 +141,7 @@ const Nav2 = ({ navs }) => (
                         ) : (
                             <a key={menu.url} className="disabled">
                                 {(!!menu.icon || !!menu.icon_path) && (
-                                    <GIcon
+                                    <Icon
                                         name={menu.icon}
                                         url={menu.icon_path}
                                     />
@@ -101,7 +161,7 @@ const Nav3 = ({ navs }) => {
             <div className="gcontainer">
                 <a className="nav-3nd__home" href={menu1st.url}>
                     {(!!menu1st.icon || !!menu1st.icon_path) && (
-                        <GIcon name={menu1st.icon} url={menu1st.icon_path} />
+                        <Icon name={menu1st.icon} url={menu1st.icon_path} />
                     )}
                     {menu1st.label}
                 </a>
@@ -112,50 +172,4 @@ const Nav3 = ({ navs }) => {
     );
 };
 
-/**
- * navs1 顶部一级导航
- * navs2 一级页面导航
- * navs3 二级页面导航
- */
-class GHeader extends PureComponent {
-    constructor(props) {
-        super(props);
-        this.onToggleUserBar = this.onToggleUserBar.bind(this);
-        this.state = {
-            isOpenUserBar: false,
-        };
-    }
-
-    onToggleUserBar() {
-        this.setState(prevState => ({ isOpenUserBar: !prevState.isOpenUserBar }));
-    }
-
-    render() {
-        const { user, navs1, navs2, navs3, onLogout } = this.props;
-        const { isOpenUserBar } = this.state;
-
-        return (
-            <React.Fragment>
-                <header className="gheader">
-                    <div className="gcontainer">
-                        <Brand />
-                        <Nav1 navs={navs1} />
-
-                        <UserBar
-                            user={user}
-                            isOpenUserBar={isOpenUserBar}
-                            onToggleUserBar={this.onToggleUserBar}
-                            onLogout={onLogout}
-                        />
-                    </div>
-                </header>
-                {navs3 && navs3.length ? (
-                    <Nav3 navs={navs3} />
-                ) : (
-                    <Nav2 navs={navs2} />
-                )}
-            </React.Fragment>
-        );
-    }
-}
-export default GHeader;
+export default Header;

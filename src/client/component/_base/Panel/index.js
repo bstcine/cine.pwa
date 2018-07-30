@@ -4,7 +4,7 @@ import './style.less';
 import { componentNames } from '@/component/_base/config';
 const cls = componentNames.Panel;
 
-const CPanel = ({ title, badge, children, className, ext_title, ext_href }) => {
+const Panel = ({ title, badge, children, className, ext_title, ext_href }) => {
     return (
         <div className={classNames(`${cls}`, className)}>
             {!!title && (
@@ -27,4 +27,4 @@ const CPanel = ({ title, badge, children, className, ext_title, ext_href }) => {
     );
 };
 
-export default CPanel;
+export default Panel;

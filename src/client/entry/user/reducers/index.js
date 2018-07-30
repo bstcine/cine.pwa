@@ -3,15 +3,16 @@ import couponRedu from './couponReducer';
 import orderRedu from './orderReducer';
 import points from './pointReducer';
 import stats from './quizReducer';
-import { toastRedu, userRedu } from '@/reducer';
+import gReducer from '@/g/reducer';
 
 const rootReducer = combineReducers({
-    userRedu,
+    // userRedu,
     couponRedu,
     orderRedu,
     points,
-    toastRedu,
+    // toastRedu,
     stats,
+    ...gReducer,
 });
 
 export default rootReducer;

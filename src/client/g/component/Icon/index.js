@@ -5,7 +5,7 @@ import './style.less';
  * mi-xxx --> material-icons
  * ci-xxx --> cine-icons
  */
-const GIcon = ({ name, className, url }) => {
+const Icon = ({ name, className, url }) => {
     if (url) {
         return (
             <i
@@ -33,4 +33,4 @@ const GIcon = ({ name, className, url }) => {
     }
 };
 
-export default GIcon;
+export default Icon;

@@ -3,14 +3,21 @@
  */
 import React from 'react';
 import "../../asset/style/Word.less";
+import WordHeader from './WordHeader';
+import WordBody from './WordBody';
+import WordFooter from './WordFooter';
 
 class Word extends React.PureComponent {
     render() {
+        let { result, backAction } = this.props;
         return (
             <div className="wordContent">
-                <div className="word-Header"></div>
-                <div className="word-Body"></div>
-                <div></div>
+                <WordHeader
+                    name={result.name}
+                    backAction={backAction}
+                />
+                <WordBody />
+                <WordFooter />
             </div>
         );
     }

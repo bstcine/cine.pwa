@@ -23,17 +23,25 @@ class WordContainer extends Component {
         actions.loadWordList(this.param);
     }
 
+    backLearnHome() {
+        location.href = '/learn/task';
+    }
+
     render() {
-        let { word } = this.props
+        let { result, action } = this.props;
         return (
-            <Word word={word} />
+            <Word
+                result={result}
+                action={action}
+                backAction={ () => { this.backLearnHome() }}
+            />
         );
     }
 }
 
 const mapStateToProps = state => {
     return {
-        word: state.WordRedu.get('word'),
+        result: state.WordRedu.get('result'),
     };
 };
 

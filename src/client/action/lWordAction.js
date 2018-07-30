@@ -11,7 +11,7 @@ export const lWordAction = {
 
     _receive: result => ({
         type: ACTION_LW.RECEIVE,
-        payload: result.rows,
+        payload: result,
     }),
     // 卡片式学习方法
     loadWordList: (param) => async dispatch => {

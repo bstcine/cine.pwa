@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Toast } from '@/component/Toast';
+// import { Toast } from '@/component/Toast';
 import * as mentorAction from '@/action/mentorAction';
 import StatsTable from '../component/Correct/StatsTable';
 
@@ -21,11 +21,11 @@ class stuCorrectContainer extends Component {
     };
 
     render() {
-        const { toastRedu, mentorStudentQuizWord } = this.props;
+        const { mentorStudentQuizWord } = this.props;
 
         return (
             <div className="mentor-container correct">
-                <Toast network={toastRedu} />
+                {/* <Toast network={toastRedu} /> */}
                 <StatsTable
                     list={
                         mentorStudentQuizWord
@@ -39,7 +39,7 @@ class stuCorrectContainer extends Component {
 }
 
 const mapStateToProps = state => ({
-    toastRedu: state.toastRedu,
+    // toastRedu: state.toastRedu,
     mentorStudentQuizWord: state.mentorStudentQuizWord,
 });
 

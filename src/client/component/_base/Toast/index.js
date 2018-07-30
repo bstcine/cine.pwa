@@ -2,7 +2,7 @@ import React from 'react';
 import { componentNames } from '@/component/_base/config';
 const cls = componentNames.Toast;
 import './style.less';
-import { TransparentMask } from '@/component/Mask';
+import { TransparentMask } from '../Mask';
 
 const Loading = ({ isOpen, text }) => {
     if (!isOpen) return null;

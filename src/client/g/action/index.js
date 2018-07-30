@@ -61,9 +61,18 @@ const action = {
             { dispatchActionType: null, showLoading: true, showError: true },
             _config
         );
-        if (config.showLoading) dispatch(action.showLoading());
+        let timer = null;
+        if (config.showLoading) {
+            // 不在第一时间出现 loading，延迟 1s 之后出现
+            timer = setTimeout(() => {
+                dispatch(action.showLoading());
+            }, 1000);
+        }
         let [error, result] = await fetchData(url, query);
-        if (config.showLoading) dispatch(action.hideLoading());
+        if (config.showLoading) {
+            timer && clearTimeout(timer);
+            dispatch(action.hideLoading());
+        }
 
         if (config.showError) dispatch(action.showMessage({ error }));
 

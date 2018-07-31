@@ -1,79 +1,6 @@
 // import * as actType from '@/constant/actionType';
-// import { fetchData } from '@/service/base';
+import { fetchData } from '@/service/base';
 // import { APIURL_User_Info } from '../../APIConfig';
-
-// export const closeAlert = () => ({
-//     type: actType.CLOSE_ALERT,
-// });
-
-// export const openAlert = ({ text }) => ({
-//     type: actType.OPEN_ALERT,
-//     payload: { text },
-// });
-
-// export const closeConfirm = () => ({
-//     type: actType.CLOSE_CONFIRM,
-// });
-
-// export const openConfirm = ({ text, onConfirm, onCancel }) => ({
-//     type: actType.OPEN_CONFIRM,
-//     payload: { text, onConfirm, onCancel },
-// });
-
-// export const networkError = err => dispatch => {
-//     let text = err instanceof Error ? err.message : err;
-//     dispatch({
-//         type: actType.OPEN_NETWORK_ERROR,
-//         payload: { text },
-//     });
-//     setTimeout(() => {
-//         dispatch({
-//             type: actType.CLOSE_NETWORK_ERROR,
-//             payload: { text },
-//         });
-//     }, 3000);
-// };
-
-// export const toastAction = {
-//     _hide: () => ({
-//         type: actType.TOAST_HIDE,
-//     }),
-//     _loading: () => ({
-//         type: actType.TOAST_LOADING,
-//     }),
-//     _show: msg => ({
-//         type: actType.TOAST_DISPLAY_SUCCESS,
-//         payload: msg,
-//     }),
-//     _showError: error => ({
-//         type: actType.TOAST_DISPLAY_ERROR,
-//         payload: error,
-//     }),
-
-//     hide: () => dispatch => {
-//         dispatch(toastAction._hide());
-//     },
-
-//     loading: () => dispatch => {
-//         dispatch(toastAction._loading());
-//     },
-
-//     show: msg => dispatch => {
-//         dispatch(toastAction._show(msg));
-
-//         setTimeout(() => {
-//             dispatch(toastAction._hide());
-//         }, 2000);
-//     },
-
-//     showError: error => dispatch => {
-//         dispatch(toastAction._showError(error));
-
-//         setTimeout(() => {
-//             dispatch(toastAction._hide());
-//         }, 2000);
-//     },
-// };
 
 // export const fetchUserInfo = () => async (dispatch, getState) => {
 //     if (getState().userRedu.loading) return;
@@ -81,3 +8,32 @@
 //     const [, user] = await fetchData(APIURL_User_Info, null, 'GET');
 //     if (user) dispatch({ type: actType.RECEIVE_USER_INFO, payload: user });
 // };
+
+// export const fetchDataWithLoading = (url, query, _config) => async dispatch => {
+//     return null;
+// };
+import gAction from '@/g/action';
+
+export const superFetchDataWithShowLogin = (
+    url,
+    query,
+    _config
+) => async dispatch => {
+    let config = Object.assign({ showLoading: true, showError: true }, _config);
+    let timer = null;
+    if (config.showLoading) {
+        // 不在第一时间出现 loading，延迟 1s 之后出现
+        timer = setTimeout(() => {
+            dispatch(gAction.showLoading());
+        }, 1000);
+    }
+    let [error, result] = await fetchData(url, query);
+    if (config.showLoading) {
+        timer && clearTimeout(timer);
+        dispatch(gAction.hideLoading());
+    }
+
+    if (config.showError && error) dispatch(gAction.showMessage({ error }));
+
+    return [error, result];
+};

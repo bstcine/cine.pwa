@@ -1,7 +1,8 @@
 import React from 'react';
 import TextFix from '@/component/TextFix';
 import { Task_Type } from '@/constant';
-import { Column112 } from '@/component/CGrid';
+// import { Column112 } from '@/component/CGrid';
+import { CCard } from '@/component/_base';
 import { GIcon } from '@/g/component';
 import './style.less';
 
@@ -59,14 +60,15 @@ const getHref = (task, isMentor) => {
 
 const TaskItem = ({ task, isMentor }) => {
     return (
-        <Column112
+        <CCard
             key={task.id}
+            hover="lighten"
             className="task-item"
             href={getHref(task, isMentor)}>
             <Label type={task.type} />
             <TextFix className="task-title">{task.title}</TextFix>
             <Status task={task} />
-        </Column112>
+        </CCard>
     );
 };
 

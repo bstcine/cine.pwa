@@ -33,7 +33,7 @@ import {
     QuestionFormat,
 } from '@/constant/quiz';
 import { RoleID } from '@/constant/index';
-// import { gAction.showAlert, gAction.showAlert, networkError } from '@/action/commonAction';
+import { superFetchDataWithShowLogin } from '@/action/commonAction';
 import gAction from '@/g/action';
 
 /**
@@ -51,7 +51,7 @@ export const fetchQuizData = ({
 }) => async dispatch => {
     // dispatch(requestQuizData());
     let [err, result] = await dispatch(
-        gAction.fetchData(
+        superFetchDataWithShowLogin(
             APIURL_Content_Quiz,
             {
                 user_id,
@@ -222,7 +222,7 @@ export const submitAnswer = () => async (dispatch, getState) => {
     });
     // dispatch({ type: REQUEST_STATS_QUIZ_SAVE });
     let [err] = await dispatch(
-        gAction.fetchData(
+        superFetchDataWithShowLogin(
             APIURL_Stats_Quiz_Save,
             {
                 quiz_id: quiz.id,
@@ -273,7 +273,7 @@ export const submitCheckAnswer = (complete = true) => async (
     });
     // dispatch({ type: REQUEST_STATS_QUIZ_UPDATE });
     let [err] = await dispatch(
-        gAction.fetchData(
+        superFetchDataWithShowLogin(
             APIURL_Stats_Quiz_Update,
             {
                 stats_content_quiz_id: statsContentQuiz.id,
@@ -302,7 +302,7 @@ export const resetQuiz = () => (dispatch, getState) => {
             onConfirm: async () => {
                 let { statsContentQuiz } = getState();
                 let [err] = await dispatch(
-                    gAction.fetchData(
+                    superFetchDataWithShowLogin(
                         APIURL_Stats_Quiz_Reset,
                         {
                             stats_content_quiz_id: statsContentQuiz.id,

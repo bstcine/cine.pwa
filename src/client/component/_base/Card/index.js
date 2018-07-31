@@ -5,11 +5,17 @@ import CardContainer from './CardContainer';
 const CCard = ({
     layout = '112',
     hover = 'darken',
+    href = null,
     className,
     onClick,
     children,
 }) => (
-    <Card layout={layout} className={className} hover={hover} onClick={onClick}>
+    <Card
+        layout={layout}
+        href={href}
+        className={className}
+        hover={hover}
+        onClick={onClick}>
         {children}
     </Card>
 );

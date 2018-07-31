@@ -33,7 +33,7 @@ export const superFetchDataWithShowLogin = (
         dispatch(gAction.hideLoading());
     }
 
-    if (config.showError) dispatch(gAction.showMessage({ error }));
+    if (config.showError && error) dispatch(gAction.showMessage({ error }));
 
     return [error, result];
 };

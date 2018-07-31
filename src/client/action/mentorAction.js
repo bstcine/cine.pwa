@@ -8,7 +8,7 @@ import {
     FETCH_MENTOR_STUDENT_TASK,
 } from '@/constant/actionTypeMentor';
 // import { fetchData } from '@/service/base';
-// import { openConfirm, toastAction } from '@/action/commonAction';
+import { superFetchDataWithShowLogin } from '@/action/commonAction';
 import gAction from '@/g/action';
 
 /**
@@ -17,7 +17,7 @@ import gAction from '@/g/action';
 export const fetchMentorStudentQuizWord = () => async dispatch => {
     // dispatch(toastAction._loading());
     let [err, result] = await dispatch(
-        gAction.fetchData(APIURL_Content_StuQuizWord_List)
+        superFetchDataWithShowLogin(APIURL_Content_StuQuizWord_List)
     );
     // dispatch(toastAction._hide());
     if (!err) {
@@ -33,7 +33,7 @@ export const fetchMentorStudentQuizWord = () => async dispatch => {
 export const fetchMentorStudentTask = () => async dispatch => {
     // dispatch(toastAction._loading());
     let [err, result] = await dispatch(
-        gAction.fetchData(APIURL_Mentor_Student_ListWithTask)
+        superFetchDataWithShowLogin(APIURL_Mentor_Student_ListWithTask)
     );
     // dispatch(toastAction._hide());
     if (!err) {
@@ -50,7 +50,7 @@ export const fetchMentorCorrectPdfTask = task => dispatch => {
     const text = '确认将该学生的PDF习题任务状态标志为已完成？';
     const onConfirm = async () => {
         let [error] = await dispatch(
-            gAction.fetchData(APIURL_Content_Task_Update_Status, {
+            superFetchDataWithShowLogin(APIURL_Content_Task_Update_Status, {
                 cid: task.id,
                 status: '2',
             })

@@ -1,4 +1,7 @@
 import React from 'react';
+import {
+    CButton,
+} from '@/component/_base';
 
 const svgStar = (
     <svg
@@ -129,9 +132,10 @@ export const CardItem111 = ({ value, actions }) => {
 
                     <div className="btm-right">
                         <div className="rate">
-                            <span className="number">
-                                20{value.favorite}· Superhost
-                            </span>
+        
+                            <CButton variant="outlined" color="secondary">Cancel</CButton>
+                            <CButton variant="outlined" >Cancel</CButton>
+                            <CButton variant="contained" color="secondary">Confirm</CButton>
                         </div>
                     </div>
                 </div>

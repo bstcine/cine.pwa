@@ -27,38 +27,10 @@ export default class Order extends React.PureComponent {
 
                 <OrderList
                     orders={orderlist}
-                    layout="234"
-                    className="bg234"
-                    itemClassName="cbg234"
-                />
-
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-
-                <OrderList
-                    orders={orderlist}
                     layout="112"
                     className="bg112"
                     itemClassName="cbg234"
                 />
-
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-
-                <CPanel title="Gird Card 234" className="bgdark">
-                    <OrderList
-                        orders={orderlist}
-                        layout="234"
-                        className="bgt"
-                        itemClassName="cbg234"
-                    />
-                </CPanel>
 
                 <br />
                 <br />
@@ -71,6 +43,19 @@ export default class Order extends React.PureComponent {
                     layout="123"
                     className="bgt"
                     itemClassName="cbg123"
+                />
+
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+
+                <OrderList
+                    orders={orderlist}
+                    layout="234"
+                    className="bg234"
+                    itemClassName="cbg234"
                 />
             </React.Fragment>
         );

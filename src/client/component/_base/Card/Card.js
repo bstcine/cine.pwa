@@ -9,15 +9,19 @@ const Card = ({
     layout = '112',
     // 'none' | 'shadow' | 'darken'| 'lighten' | 'outlined'
     hover = 'darken',
+    href = null,
     className,
     children,
     onClick,
 }) => {
+    const Comp = href ? 'a' : 'div';
+
     return (
-        <div
+        <Comp
             className={classNames(cls, {
                 [`${cls}--col${layout}`]: !!layout,
             })}
+            href={Comp === 'a' && href}
             onClick={onClick}>
             <div
                 className={classNames(
@@ -32,7 +36,7 @@ const Card = ({
                 )}>
                 {children}
             </div>
-        </div>
+        </Comp>
     );
 };
 

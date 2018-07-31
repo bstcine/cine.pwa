@@ -55,33 +55,6 @@ const action = {
         const [, user] = await fetchData(APIURL_User_Info, null, 'GET');
         if (user) dispatch({ type: actionType.RECEIVE_USER_INFO, payload: user });
     },
-
-    fetchData: (url, query, _config) => async dispatch => {
-        let config = Object.assign(
-            { dispatchActionType: null, showLoading: true, showError: true },
-            _config
-        );
-        let timer = null;
-        if (config.showLoading) {
-            // 不在第一时间出现 loading，延迟 1s 之后出现
-            timer = setTimeout(() => {
-                dispatch(action.showLoading());
-            }, 1000);
-        }
-        let [error, result] = await fetchData(url, query);
-        if (config.showLoading) {
-            timer && clearTimeout(timer);
-            dispatch(action.hideLoading());
-        }
-
-        if (config.showError) dispatch(action.showMessage({ error }));
-
-        if (config.dispatchActionType) {
-            dispatch({ type: config.dispatchActionType, payload: result });
-        } else {
-            return [error, result];
-        }
-    },
 };
 
 export default action;

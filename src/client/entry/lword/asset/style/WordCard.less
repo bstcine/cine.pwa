@@ -1,0 +1,221 @@
+@import '~asset/style/common';
+@import '~asset/style/_cine.less';
+@import './Switch.less';
+
+.wordCardContent {
+    background-color: #f4fcfe;
+    width: 100%;
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.wordCard-Header {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    margin-top: 0.5rem;
+    margin-bottom: 0.2rem;
+    justify-content: space-between;
+
+    .wordCard-Back {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        cursor: pointer;
+        font-size: 0.36rem;
+
+        .wordCard-backButton {
+            width: 0.4rem;
+            height: 0.4rem;
+            margin-left: 0.2rem;
+            margin-right: 0.2rem;
+        }
+        .wordCard-taskTitle {
+            color: #3a3b3c;
+        }
+    }
+
+    .wordCard-ToList {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        cursor: pointer;
+        font-size: 0.32rem;
+
+        .wordCard-ListButton {
+            width: 0.4rem;
+            height: 0.4rem;
+            margin-left: 0.2rem;
+            margin-right: 0.2rem;
+        }
+        .wordCard-ListTitle {
+            color: #3a3b3c;
+        }
+    }
+}
+
+.wordCard-Body {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    border-style: solid none solid none;
+    border-color: #ebf3fb;
+    border-width: 2px;
+    height: 12.8rem;
+    width: 100%;
+    .lastWord {
+        width: 1.2rem;
+        height: 40%;
+        cursor: pointer;
+    }
+    .lastWord:hover {
+        background: url("../image/lword_card_arrow_left.svg") no-repeat center;
+        background-size: contain;
+    }
+    .nextWord {
+        width: 1.2rem;
+        height: 40%;
+        cursor: pointer;
+    }
+    .nextWord:hover {
+        background: url("../image/lword_card_arrow_right.svg") no-repeat center;
+        background-size: contain;
+    }
+    .wordDetail {
+        width: 100%;
+        height: 100%;
+    }
+    .wordDetail.hover .wordDetail-flipper {
+        transform: rotateY(180deg);
+    }
+
+    .wordDetail, .front, .back {
+        width: 100%;
+        height: 100%;
+    }
+    .wordDetail-flipper {
+        width: 100%;
+        height: 100%;
+        transition: 0.6s;
+        transform-style: preserve-3d;
+        position: relative;
+    }
+    .front, .back {
+        backface-visibility: hidden;
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+    .front {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        z-index: 2;
+    }
+    .back {
+        background-color: yellowgreen;
+        transform: rotateY(180deg);
+    }
+    .wordInfo {
+        margin-top: 2.72rem;
+        width: 6rem;
+        padding-top: 0.6rem;
+        padding-bottom: 0.6rem;
+    }
+    .word {
+        font-family: PingFangSC-Medium;
+        font-size: 1.08rem;
+        color: #4d80de;
+        text-align: center;
+    }
+    .phonetic {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        margin-top: 0.76rem;
+        font-family: ArialMT;
+        font-size: 0.36rem;
+        color: #3a3b3c;
+
+        .voice {
+            margin-left: 0.24rem;
+        }
+    }
+    .hadGrasp {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        margin-top: 4.24rem;
+        height: 0.8rem;
+        cursor: pointer;
+        .graspIcon {
+            width: 0.32rem;
+            height: 0.32rem;
+            border: solid 2px #bcd3e5;
+        }
+        .grsaspPromote {
+            margin-left: 0.36rem;
+            font-family: PingFangSC-Regular;
+            font-size: 0.32rem;
+            color: #7a7b7c;
+        }
+    }
+}
+.wordCard-Footer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    height: 72px;
+
+    .autoChangeWord {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        .autoImage {
+            width: 14px;
+            height: 17px;
+            margin-right: 13px;
+        }
+        .autoText {
+            font-family: PingFangSC-Medium;
+            font-size: 0.24rem;
+            color: #b2b3b4;
+            margin-right: 17px;
+        }
+    }
+    .reviseChangeWord {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        margin-left: 38px;
+        .reviseImage {
+            width: 18px;
+            height: 17px;
+            margin-right: 13px;
+        }
+        .reviseText {
+            font-family: PingFangSC-Medium;
+            font-size: 0.24rem;
+            color: #b2b3b4;
+            margin-right: 17px;
+        }
+    }
+}
+
+@media @media-up-xs {
+    .wordCardContent {
+        padding: 0 0.8rem 0 0.8rem;
+    }
+    .wordCard-Header {
+        .wordCard-Back{
+            .wordCard-backButton {
+                margin-left: 0;
+            }
+        }
+    }
+}

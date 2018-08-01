@@ -7,15 +7,11 @@ class WordList extends React.PureComponent {
 
     render() {
 
-        let { vocabularyList, taskStatus, playAction, param } = this.props;
-        let testHref = addParam('/lword/quiz', param);
-        let historyHref = '/learn/task?type=4';
-        if (param.user_id) {
-            historyHref = historyHref + '&user_id=' + param.user_id;
+        let { vocabularyList, playAction, param } = this.props;
+        if (!vocabularyList) {
+            return null;
         }
-        if (param.task_id) {
-            historyHref = historyHref + '&task_id=' + param.task_id;
-        }
+        let cardHref = addParam('/lword/card', param);
         const vocabularyItems = vocabularyList.map((item, index) => {
             let backgroundColor = '';
             if (index % 2 === 0) {
@@ -28,22 +24,15 @@ class WordList extends React.PureComponent {
             }
             return <VocabularyItem style={style} key={item.id} vocabulary={item} playAction={playAction}/>;
         });
-        const test = taskStatus === '2' ? '再测一次' : '立即测试';
 
         return (
             <div className="vocabularyTask">
                 <div className="v_Task_VocabularyHeader">
                     <a className="v_Task_H_TaskName">词汇学习</a>
-                    <a className="v_Task_H_HistoryDoor" href={historyHref}>历史学习</a>
+                    <a className="v_Task_H_HistoryDoor" href={cardHref}>卡片式</a>
                 </div>
                 <div className="v_Task_VocabularyList">
                     {vocabularyItems}
-                </div>
-                <div className="v_Task_VocabularyFooter">
-                    <div className="v_Task_VF_Container">
-                        <a className="v_Task_F_Promote">别忘记了词汇测试，通过了测试才算完成当日测试任务哦！</a>
-                        <a className="v_Task_F_TestDoor" href={testHref}>{test}</a>
-                    </div>
                 </div>
             </div>
         );

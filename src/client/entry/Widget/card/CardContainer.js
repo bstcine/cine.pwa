@@ -25,8 +25,8 @@ class OrderContainer extends Component {
 
 const mapStateToProps = state => {
     return {
-        orders: state.orderRedu.get('orders'),
-        isOpenAdd: state.orderRedu.get('isOpenDetail'),
+        orders: state.cardRedu.get('orders'),
+        isOpenAdd: state.cardRedu.get('isOpenDetail'),
     };
 };
 

@@ -1,6 +1,7 @@
 import React from 'react';
 import Card from './Card';
 import CardContainer from './CardContainer';
+import CardDrawer from './CardDrawer';
 
 const CCard = ({
     layout = '112',
@@ -26,4 +27,10 @@ const CCardContainer = ({ className, gap, children }) => (
     </CardContainer>
 );
 
-export { CCardContainer, CCard };
+const CCardDrawer = ({ className, gap, isOpen, children }) => (
+    <CardDrawer className={className} gap={gap} isOpen={isOpen}>
+        {children}
+    </CardDrawer>
+);
+
+export { CCardContainer, CCardDrawer, CCard };

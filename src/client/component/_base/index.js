@@ -8,7 +8,7 @@ import TextField from 'material-ui/TextField';
 import CButton, { CIconButton } from './Button';
 import FloatingBox from './FloatingBox';
 import Panel from './Panel';
-import { CCardContainer, CCard } from './Card';
+import { CCardContainer, CCardDrawer, CCard } from './Card';
 
 const CFlatButton = props => {
     return <FlatButton {...props} />;
@@ -38,6 +38,7 @@ export {
     FloatingBox as CFloatingBox,
     Panel as CPanel,
     CCardContainer,
+    CCardDrawer,
     CCard,
     CSelectField as CSelect,
 };

@@ -21,7 +21,7 @@ const Card = ({
             className={classNames(cls, {
                 [`${cls}--col${layout}`]: !!layout,
             })}
-            href={Comp === 'a' && href}
+            href={Comp === 'a' ? href : null}
             onClick={onClick}>
             <div
                 className={classNames(

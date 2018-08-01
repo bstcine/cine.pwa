@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { Children } from 'react';
 import classNames from 'classnames';
+import { CCardDrawer } from '@/component/_base';
 import './style.less';
 import { baseprefix } from '@/component/_base/config';
 
@@ -11,6 +12,15 @@ const CardContainer = ({
     // 'none' | null | 'large'
     gap,
 }) => {
+    let cards = [];
+    let drawer = null;
+    Children.map(children, item => {
+        if (item.type === CCardDrawer) {
+            drawer = item;
+        } else {
+            cards.push(item);
+        }
+    });
     return (
         <div className={classNames(`${cls}__container`, className)}>
             <div
@@ -18,8 +28,9 @@ const CardContainer = ({
                     [`${cls}__gap--large`]: gap === 'large',
                     [`${cls}__gap--none`]: gap === 'none',
                 })}>
-                {children}
+                {cards}
             </div>
+            {drawer}
         </div>
     );
 };

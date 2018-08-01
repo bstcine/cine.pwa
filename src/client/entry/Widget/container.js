@@ -7,6 +7,7 @@ import {
     CButton,
     CPanel,
     CCardContainer,
+    CCardDrawer,
     CCard,
     CIconButton,
     CFloatingBox,
@@ -14,8 +15,14 @@ import {
 import gAction from '@/g/action';
 
 class Container extends Component {
+    constructor(props) {
+        super(props);
+        this.state = { isDrawerOpen: false };
+    }
+
     render() {
         const { gActions } = this.props;
+        const { isDrawerOpen } = this.state;
         return (
             <div className="cine-widget">
                 <CPanel title="CButton @seeat : entry/content/component/Widget.js">
@@ -123,7 +130,8 @@ class Container extends Component {
                         <CCard hover="lighten">4 hover=lighten</CCard>
                         <CCard>5</CCard>
                         <CCard>6</CCard>
-                        <CCard>7</CCard>
+                        <CCard>9</CCard>
+                        <CCardDrawer isOpen={isDrawerOpen}>1231232</CCardDrawer>
                     </CCardContainer>
                 </CPanel>
 
@@ -187,7 +195,13 @@ class Container extends Component {
                         <CCard layout="234">7</CCard>
                     </CCardContainer>
                     <CFloatingBox>
-                        <CButton variant="fab">
+                        <CButton
+                            variant="fab"
+                            onClick={() => {
+                                this.setState(prevState => ({
+                                    isDrawerOpen: !prevState.isDrawerOpen,
+                                }));
+                            }}>
                             <GIcon name="mi-lock" />
                         </CButton>
                         <CButton variant="fab" color="primary">

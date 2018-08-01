@@ -16,7 +16,7 @@ export default class ReceiveCoupon extends Component {
         this.state = {
             isLoginModalShow: false,
         }
-        this.endTime = '2018-07-31 23:59:59'
+        this.endTime = '2018/07/31 23:59:59';
         this.coupon = {
             value: 50,
             type: '1',

@@ -7,6 +7,7 @@ class WordCardBody extends React.PureComponent {
     constructor(props) {
         super(props)
         this.toggle = this.toggle.bind(this);
+        this.onc = this.onc.bind(this);
         this.state = {
             hover: false
         };
@@ -16,6 +17,12 @@ class WordCardBody extends React.PureComponent {
         this.setState((prevState) => ({
             hover: !prevState.hover
         }));
+    }
+
+    onc(event) {
+        // event.preventDefault();
+        event.stopPropagation();
+        alert('dagou');
     }
 
     render() {
@@ -39,7 +46,7 @@ class WordCardBody extends React.PureComponent {
                             </div>
                             <div className="hadGrasp">
                                 <div className="graspIcon"></div>
-                                <div className="grsaspPromote" onClick={ () => { console.log('dagou') }}>已认识（打勾后，不再显示）</div>
+                                <div className="grsaspPromote" onClick={this.onc}>已认识（打勾后，不再显示）</div>
                             </div>
                         </div>
                         <div className="back" ></div>

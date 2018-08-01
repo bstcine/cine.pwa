@@ -130,11 +130,8 @@ export const CardItem111 = ({ value, actions }) => {
 
                     <div className="btm-right">
                         <div className="rate">
-                            <CButton variant="outlined" color="secondary">
-                                Cancel
-                            </CButton>
-                            <CButton variant="outlined">Cancel</CButton>
-                            <CButton variant="contained" color="secondary">
+                            <CButton variant="outlined" className="button">Cancel</CButton>
+                            <CButton variant="contained" color="secondary" className="button">
                                 Confirm
                             </CButton>
                         </div>

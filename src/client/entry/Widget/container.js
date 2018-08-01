@@ -12,13 +12,12 @@ import {
     CFloatingBox,
 } from '@/component/_base';
 import gAction from '@/g/action';
-import { GLayoutContainer } from '@/g/container';
 
 class Container extends Component {
     render() {
         const { gActions } = this.props;
         return (
-            <GLayoutContainer>
+            <div className="cine-widget">
                 <CPanel title="CButton @seeat : entry/content/component/Widget.js">
                     <div>
                         <CButton>
@@ -262,7 +261,7 @@ class Container extends Component {
                         Message Error
                     </CButton>
                 </CPanel>
-            </GLayoutContainer>
+            </div>
         );
     }
 }

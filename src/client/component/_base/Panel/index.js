@@ -4,7 +4,15 @@ import './style.less';
 import { componentNames } from '@/component/_base/config';
 const cls = componentNames.Panel;
 
-const Panel = ({ title, badge, children, className, ext_title, ext_href }) => {
+const Panel = ({
+    title,
+    badge,
+    children,
+    className,
+    ext_title,
+    padding = '',
+    ext_href,
+}) => {
     return (
         <div className={classNames(`${cls}`, className)}>
             {!!title && (
@@ -22,7 +30,12 @@ const Panel = ({ title, badge, children, className, ext_title, ext_href }) => {
                     )}
                 </div>
             )}
-            <div className={`${cls}__body`}>{children}</div>
+            <div
+                className={classNames(`${cls}__body`, {
+                    [`${cls}__body--paddingnone`]: padding === 'none',
+                })}>
+                {children}
+            </div>
         </div>
     );
 };

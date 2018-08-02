@@ -131,7 +131,15 @@ class Container extends Component {
                         <CCard>5</CCard>
                         <CCard>6</CCard>
                         <CCard>9</CCard>
-                        <CCardDrawer isOpen={isDrawerOpen}>1231232</CCardDrawer>
+                        <CCardDrawer
+                            isOpen={isDrawerOpen}
+                            onClose={() => {
+                                this.setState({
+                                    isDrawerOpen: false,
+                                });
+                            }}>
+                            1231232
+                        </CCardDrawer>
                     </CCardContainer>
                 </CPanel>
 

@@ -27,8 +27,12 @@ const CCardContainer = ({ className, gap, children }) => (
     </CardContainer>
 );
 
-const CCardDrawer = ({ className, gap, isOpen, children }) => (
-    <CardDrawer className={className} gap={gap} isOpen={isOpen}>
+const CCardDrawer = ({ className, gap, onClose, isOpen, children }) => (
+    <CardDrawer
+        className={className}
+        gap={gap}
+        isOpen={isOpen}
+        onClose={onClose}>
         {children}
     </CardDrawer>
 );

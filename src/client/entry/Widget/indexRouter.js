@@ -1,9 +1,9 @@
 import React from 'react';
 
 import { CRouter } from '@/component/CRouter';
-import Root from '@/entry/Widget/containerRoot';
-import Container from '@/entry/Widget/container';
-import CardContainer from '@/entry/Widget/card/CardContainer';
+import Root from '@/entry/widget/containerRoot';
+import Container from '@/entry/widget/container';
+import CardContainer from '@/entry/widget/card/CardContainer';
 
 const widgetRoute = {
     path: '/widget',

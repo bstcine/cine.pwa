@@ -8,6 +8,7 @@ const cls = `${baseprefix}-card`;
 class CardDrawer extends Component {
     constructor(props) {
         super(props);
+        this.onClose = this.onClose.bind(this);
         this.state = {
             active: false,
             isOpen: this.props.isOpen,
@@ -35,6 +36,9 @@ class CardDrawer extends Component {
             });
         });
     }
+    onClose() {
+        this.props.onClose && this.props.onClose();
+    }
 
     render() {
         const { className, children, isOpen } = this.props;
@@ -45,6 +49,7 @@ class CardDrawer extends Component {
                     className={classNames(`${cls}__mask`, {
                         [`${cls}__mask--enter`]: this.state.active,
                     })}
+                    onClick={this.onClose}
                 />
                 <div
                     className={classNames(`${cls}__drawercontent`, {

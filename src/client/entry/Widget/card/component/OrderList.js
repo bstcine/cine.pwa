@@ -3,19 +3,21 @@ import { CCardContainer, CCard } from '@/component/_base';
 import { CardItem, CardItem112, CardItem111 } from './CardItem';
 
 const OrderItem = ({ order, layout, className, actions }) => {
-    let hover = layout === '123' ? 'outlined' : 'darken';
-    hover = layout === '112' ? 'lighten' : hover;
-
+    // 'none' | 'shadow' | 'darken'| 'lighten' | 'outlined'
+    let hover = 'outlined';
     let item = <CardItem value={order} actions={actions} />;
     switch (layout) {
         case '111':
             item = <CardItem111 value={order} actions={actions} />;
+            hover = 'lighten';
             break;
         case '112':
             item = <CardItem112 value={order} actions={actions} />;
+            hover = 'darken';
             break;
         case '123':
             item = <CardItem value={order} actions={actions} />;
+            hover = 'shadow';
             break;
     }
 
@@ -40,7 +42,9 @@ const OrderList = ({ orders, layout, className, itemClassName, actions }) => {
     });
 
     return (
-        <CCardContainer className={className} gap={layout === '111' ? 'lighten' : 'large'}>
+        <CCardContainer
+            className={className}
+            gap={layout === '111' ? 'lighten' : 'large'}>
             {orderList}
         </CCardContainer>
     );

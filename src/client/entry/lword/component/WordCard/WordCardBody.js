@@ -13,15 +13,14 @@ class WordCardBody extends React.PureComponent {
         this.playPhonetic = this.playPhonetic.bind(this);
         this.player = new Audio();
         this.state = {
-            hover: false,
             isKnow: false,
         };
     }
 
-    toggle() {
-        this.setState((prevState) => ({
-            hover: !prevState.hover
-        }));
+    toggle(event) {
+        event.stopPropagation();
+        let { actions } = this.props;
+        actions.changFrontOrBack();
     }
     startNext(event) {
         event.stopPropagation();
@@ -48,22 +47,22 @@ class WordCardBody extends React.PureComponent {
             voice_url = voice_url_a;
         }
         this.player.src = 'http://oss.bstcine.com/word/top10000/' + voice_url;
-        console.log(this.player.src);
         this.player.play();
     }
 
     render() {
-        let { rows, currentIndex } = this.props;
-        if (!rows) {
+        let { rows, currentIndex, isBack } = this.props;
+        if (!rows || rows.length <= currentIndex) {
             return null;
         }
+        console.log(rows[currentIndex]);
         let { word, phonetic_a, phonetic_b, zh } = rows[currentIndex];
         let phonetic = phonetic_b;
         if (!phonetic) {
             phonetic = phonetic_a;
         }
         let cls = 'wordDetail';
-        if (this.state.hover) {
+        if (isBack) {
             cls += ' hover';
         }
 

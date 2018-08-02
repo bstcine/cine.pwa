@@ -4,7 +4,7 @@
 import Api from '../../APIConfig';
 import { fetchData } from '@/service/base';
 import { ACTION_LW } from '@/constant/actionTypeLearn';
-export const lWordAction = {
+export const wordAction = {
     _request: () => ({
         type: ACTION_LW.REQUEST,
     }),
@@ -19,7 +19,7 @@ export const lWordAction = {
         let [error, result] = await fetchData(Api.APIURL_User_Learn_Word, param);
 
         if (!error) {
-            dispatch(lWordAction._receive(result));
+            dispatch(wordAction._receive(result));
         } else {
             console.log(error);
         }

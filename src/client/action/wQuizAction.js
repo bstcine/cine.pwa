@@ -22,7 +22,7 @@ const Vocabulary = {
     u: ['int.'],
 };
 
-export const lWordQuizAction = {
+export const wQuizAction = {
     /**
      * 保存访问参数
      * */
@@ -129,11 +129,11 @@ export const lWordQuizAction = {
             dispatch(gAction.showMessage({ error: errorMsg(error) }));
             return;
         }
-        let content = lWordQuizAction._getContent(result.rows, 0);
-        dispatch(lWordQuizAction._changeContent(content));
-        dispatch(lWordQuizAction._changeWordCount(result['rows'].length));
-        dispatch(lWordQuizAction._receive(result));
-        dispatch(lWordQuizAction._changeTaskStatus(result));
+        let content = wQuizAction._getContent(result.rows, 0);
+        dispatch(wQuizAction._changeContent(content));
+        dispatch(wQuizAction._changeWordCount(result['rows'].length));
+        dispatch(wQuizAction._receive(result));
+        dispatch(wQuizAction._changeTaskStatus(result));
     },
     /**
      * 获取当前内容的方法（私有）
@@ -145,22 +145,22 @@ export const lWordQuizAction = {
             randomCount = rows.length - 1;
         }
         // 获取指定数量的干扰项目
-        let interferenceRows = lWordQuizAction._getInterferenceRows(
+        let interferenceRows = wQuizAction._getInterferenceRows(
             rows,
             index,
             randomCount
         );
         // 随机生成正确下标的值
-        let realIndex = lWordQuizAction.getRandomNumber(randomCount);
+        let realIndex = wQuizAction.getRandomNumber(randomCount);
         // 生命翻译文字数组
         let zhArr = [];
         // 获取正确的翻译
-        let { zh } = lWordQuizAction._getChinessTransition(
+        let { zh } = wQuizAction._getChinessTransition(
             rows[index].type,
             rows[index].zh
         );
         zhArr = interferenceRows.map(item => {
-            let { zh } = lWordQuizAction._getChinessTransition(
+            let { zh } = wQuizAction._getChinessTransition(
                 item.type,
                 item.zh
             );
@@ -203,7 +203,7 @@ export const lWordQuizAction = {
         // 如果数量超出，随机取出count个
         if (newRows.length > count) {
             let resultRows = [];
-            let randomIndexArr = lWordQuizAction.getRandomNumbers(
+            let randomIndexArr = wQuizAction.getRandomNumbers(
                 newRows.length - 1,
                 count
             );
@@ -214,7 +214,7 @@ export const lWordQuizAction = {
         }
         // 此时表示数量不足,需要补足
         while (newRows.length < count && rows.length > newRows.length + 1) {
-            let randomIndex = lWordQuizAction.getRandomNumber(rows.length - 1);
+            let randomIndex = wQuizAction.getRandomNumber(rows.length - 1);
             if (index === randomIndex) {
                 continue;
             }
@@ -278,8 +278,8 @@ export const lWordQuizAction = {
      * */
     loadWords: param => async dispatch => {
         console.log('加载');
-        dispatch(lWordQuizAction._saveParam(param));
-        dispatch(lWordQuizAction._loadWords(param, true));
+        dispatch(wQuizAction._saveParam(param));
+        dispatch(wQuizAction._loadWords(param, true));
     },
     updateTask: status => async (dispatch, getState) => {
         let reducer = getState().WordQuizRedu;
@@ -300,8 +300,8 @@ export const lWordQuizAction = {
      * */
     startTest: () => async dispatch => {
         // 更新任务状态
-        dispatch(lWordQuizAction.updateTask('1'));
-        dispatch(lWordQuizAction._test(true));
+        dispatch(wQuizAction.updateTask('1'));
+        dispatch(wQuizAction._test(true));
     },
     /**
      * 测试结束
@@ -317,9 +317,9 @@ export const lWordQuizAction = {
             console.log(result);
         }
         // 更新测试状态为已完成
-        dispatch(lWordQuizAction.updateTask('2'));
+        dispatch(wQuizAction.updateTask('2'));
         // 提示用户已完成全部测试（掌握全部单词）
-        dispatch(lWordQuizAction._endTest(true));
+        dispatch(wQuizAction._endTest(true));
     },
     /**
      * 开始下一个（对外调用）
@@ -329,7 +329,7 @@ export const lWordQuizAction = {
         let correctCount = reducer.get('correctCount');
         let wordCount = reducer.get('wordCount');
         if (correctCount === wordCount) {
-            dispatch(lWordQuizAction.testDone());
+            dispatch(wQuizAction.testDone());
             return;
         }
         let rows = reducer.get('rows');
@@ -344,12 +344,12 @@ export const lWordQuizAction = {
             } else {
                 // 将临时错误数组赋值给错误数组
                 dispatch(
-                    lWordQuizAction._changeFaileIndexArray(faileTempIndexArr)
+                    wQuizAction._changeFaileIndexArray(faileTempIndexArr)
                 );
                 // 将临时错误数组清空
-                dispatch(lWordQuizAction._changeFaileTempIndexArray([]));
+                dispatch(wQuizAction._changeFaileTempIndexArray([]));
                 // 当前错误下标置为 0
-                dispatch(lWordQuizAction._changeFaileIndex(0));
+                dispatch(wQuizAction._changeFaileIndex(0));
                 // 取出错误数组中的第一个值作为下标
                 index = faileTempIndexArr[0];
             }
@@ -357,26 +357,26 @@ export const lWordQuizAction = {
             if (faileIndex < faileIndexArr.length - 1) {
                 // faileIndex + 1
                 faileIndex = faileIndex + 1;
-                dispatch(lWordQuizAction._changeFaileIndex(faileIndex));
+                dispatch(wQuizAction._changeFaileIndex(faileIndex));
                 index = faileIndexArr[faileIndex];
             } else {
                 // 将临时错误数组赋值给错误数组
                 dispatch(
-                    lWordQuizAction._changeFaileIndexArray(faileTempIndexArr)
+                    wQuizAction._changeFaileIndexArray(faileTempIndexArr)
                 );
                 // 将临时错误数组清空
-                dispatch(lWordQuizAction._changeFaileTempIndexArray([]));
+                dispatch(wQuizAction._changeFaileTempIndexArray([]));
                 // 当前错误下标置为 0
-                dispatch(lWordQuizAction._changeFaileIndex(0));
+                dispatch(wQuizAction._changeFaileIndex(0));
                 // 取出错误数组中的第一个值作为下标
                 index = faileTempIndexArr[0];
             }
         }
-        let content = lWordQuizAction._getContent(rows, index);
+        let content = wQuizAction._getContent(rows, index);
         // 选项清除
-        dispatch(lWordQuizAction._changeSelectIndex(-1));
+        dispatch(wQuizAction._changeSelectIndex(-1));
         // 切换内容
-        dispatch(lWordQuizAction._changeContent(content));
+        dispatch(wQuizAction._changeContent(content));
     },
     // 实现定时器，选择正确后的跳转（LEARN_TEST_CORRECT_SELLP）
     selectCorrect: index => async (dispatch, getState) => {
@@ -384,7 +384,7 @@ export const lWordQuizAction = {
         let audioPlayer = reducer.get('audioTruePlayer');
         audioPlayer.play();
         setTimeout(function() {
-            dispatch(lWordQuizAction.startNext(index));
+            dispatch(wQuizAction.startNext(index));
         }, Learn_Word_Correct_SleepTime * 1000);
     },
     // 实现定时器，选择错误后的跳转（LEARN_TEST_WRONG_SELLP）
@@ -393,7 +393,7 @@ export const lWordQuizAction = {
         let audioPlayer = reducer.get('audioFalsePlayer');
         audioPlayer.play();
         setTimeout(function() {
-            dispatch(lWordQuizAction.startNext(index));
+            dispatch(wQuizAction.startNext(index));
         }, Learn_Word_Failed_SleepTime * 1000);
     },
     /**
@@ -401,7 +401,7 @@ export const lWordQuizAction = {
      * */
     selectItem: selectIndex => async (dispatch, getState) => {
         // 改变选择状态
-        dispatch(lWordQuizAction._changeSelectIndex(selectIndex));
+        dispatch(wQuizAction._changeSelectIndex(selectIndex));
         // 获取内容信息
         let reducer = getState().WordQuizRedu;
         let content = reducer.get('content');
@@ -409,8 +409,8 @@ export const lWordQuizAction = {
         let index = content.index;
         if (selectIndex === content.real_zh) {
             let count = correctCount + 1;
-            dispatch(lWordQuizAction._changeCorrectCount(count));
-            dispatch(lWordQuizAction.selectCorrect(index));
+            dispatch(wQuizAction._changeCorrectCount(count));
+            dispatch(wQuizAction.selectCorrect(index));
         } else {
             // 将错误的下标录入到临时错误数组中
             let faileTempIndexArr = reducer.get('faileTempIndexArr');
@@ -432,12 +432,12 @@ export const lWordQuizAction = {
             } else {
                 failureArr = [failureWord];
             }
-            dispatch(lWordQuizAction._changeFailureArray(failureArr));
+            dispatch(wQuizAction._changeFailureArray(failureArr));
             // 保存错误信息
             dispatch(
-                lWordQuizAction._changeFaileTempIndexArray(faileTempIndexArr)
+                wQuizAction._changeFaileTempIndexArray(faileTempIndexArr)
             );
-            dispatch(lWordQuizAction.selectWrong(index));
+            dispatch(wQuizAction.selectWrong(index));
         }
     },
     /**
@@ -449,7 +449,7 @@ export const lWordQuizAction = {
     getRandomNumbers: (max, count) => {
         let numbers = [];
         while (numbers.length < count) {
-            let randomNumer = lWordQuizAction.getRandomNumber(max);
+            let randomNumer = wQuizAction.getRandomNumber(max);
             if (numbers.length === 0) {
                 numbers.push(randomNumer);
                 continue;

@@ -4,7 +4,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { lWordAction } from '@/action/lWordAction';
+import { wordAction } from '@/action/wordAction';
 import Word from '../component/Word';
 import { getParam, addParam } from '@/util/urlUtil';
 
@@ -56,7 +56,7 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => ({
-    actions: bindActionCreators(lWordAction, dispatch),
+    actions: bindActionCreators(wordAction, dispatch),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(

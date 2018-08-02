@@ -7,9 +7,14 @@ class WordCardBody extends React.PureComponent {
     constructor(props) {
         super(props)
         this.toggle = this.toggle.bind(this);
-        this.onc = this.onc.bind(this);
+        this.startPrevious = this.startPrevious.bind(this);
+        this.startNext = this.startNext.bind(this);
+        this.graspStatus = this.graspStatus.bind(this);
+        this.playPhonetic = this.playPhonetic.bind(this);
+        this.player = new Audio();
         this.state = {
-            hover: false
+            hover: false,
+            isKnow: false,
         };
     }
 
@@ -18,44 +23,95 @@ class WordCardBody extends React.PureComponent {
             hover: !prevState.hover
         }));
     }
-
-    onc(event) {
-        // event.preventDefault();
+    startNext(event) {
         event.stopPropagation();
-        alert('dagou');
+        let { actions } = this.props;
+        actions.startNext();
+    }
+    startPrevious(event) {
+        event.stopPropagation();
+        let { actions } = this.props;
+        actions.startPrevious();
+    }
+    graspStatus(event) {
+        event.stopPropagation();
+        this.setState((prevState) => ({
+            isKnow: !prevState.isKnow
+        }));
+    }
+    playPhonetic(event) {
+        event.stopPropagation();
+        let { rows, currentIndex } = this.props;
+        let { voice_url_a, voice_url_b } = rows[currentIndex];
+        let voice_url = voice_url_b;
+        if (!voice_url) {
+            voice_url = voice_url_a;
+        }
+        this.player.src = 'http://oss.bstcine.com/word/top10000/' + voice_url;
+        console.log(this.player.src);
+        this.player.play();
     }
 
     render() {
+        let { rows, currentIndex } = this.props;
+        if (!rows) {
+            return null;
+        }
+        let { word, phonetic_a, phonetic_b, zh } = rows[currentIndex];
+        let phonetic = phonetic_b;
+        if (!phonetic) {
+            phonetic = phonetic_a;
+        }
         let cls = 'wordDetail';
         if (this.state.hover) {
             cls += ' hover';
         }
 
         return (
-            <div className="wordCard-Body">
-                <div className="lastWord" />
-                <div className={cls} onClick={this.toggle}>
-                    <div className="wordDetail-flipper" >
-                        <div className="front" >
-                            <div className="wordInfo">
-                                <div className="word">Winter</div>
-                                <div className="phonetic">
-                                    <p>{"/'winter/"}</p>
-                                    <img className="voice" src={require('../../asset/image/voice.png')} />
+            <div className="wordCard-Body" onClick={this.toggle}>
+                <div className="lastWord" onClick={this.startPrevious} />
+                <div className="currentWord">
+                    <div className={cls}>
+                        <div className="wordDetail-flipper" >
+                            <div className="front" >
+                                <div className="wordInfo" onClick={this.playPhonetic}>
+                                    <div className="word">{word}</div>
+                                    <div className="phonetic">
+                                        <p>{phonetic}</p>
+                                        <img className="voice" src={require('../../asset/image/voice.png')} />
+                                    </div>
                                 </div>
                             </div>
-                            <div className="hadGrasp">
-                                <div className="graspIcon"></div>
-                                <div className="grsaspPromote" onClick={this.onc}>已认识（打勾后，不再显示）</div>
+                            <div className="back" >
+                                <p className="transition">
+                                    {zh}
+                                </p>
                             </div>
                         </div>
-                        <div className="back" ></div>
+                    </div>
+                    <div className="hadGrasp" onClick={this.graspStatus}>
+                        <input
+                            className="selected"
+                            type="checkbox"
+                            checked={this.state.isKnow}
+                        />
+                        <div className="grsaspPromote">
+                            已认识（打勾后，不再显示）
+                        </div>
                     </div>
                 </div>
-                <div className="nextWord" />
+                <div className="nextWord" onClick={this.startNext} />
             </div>
         );
     }
+}
+
+class WordCardDone extends React.PureComponent {
+
+}
+
+class WordCardRecite extends React.PureComponent {
+
 }
 
 export default WordCardBody;

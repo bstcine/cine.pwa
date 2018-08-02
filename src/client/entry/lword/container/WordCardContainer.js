@@ -4,7 +4,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { lWordCardAction } from '@/action/lWordCardAction';
+import { wCardAction } from '@/action/wCardAction';
 import { getParam, addParam } from '@/util/urlUtil';
 import WordCard from '../component/WordCard';
 
@@ -34,10 +34,11 @@ class WordCardContainer extends Component {
         location.href = listHref;
     }
     render() {
-        let { result, isAutoChangeWord, isReviseChangeWord, actions } = this.props;
+        let { result, currentIndex, isAutoChangeWord, isReviseChangeWord, actions } = this.props;
         return (
             <WordCard
                 result={result}
+                currentIndex={currentIndex}
                 isAutoChangeWord={isAutoChangeWord}
                 isReviseChangeWord={isReviseChangeWord}
                 actions={actions}
@@ -52,13 +53,14 @@ class WordCardContainer extends Component {
 const mapStateToProps = state => {
     return {
         result: state.WordCardRedu.get('result'),
+        currentIndex: state.WordCardRedu.get('currentIndex'),
         isAutoChangeWord: state.WordCardRedu.get('isAutoChangeWord'),
         isReviseChangeWord: state.WordCardRedu.get('isReviseChangeWord'),
     };
 };
 
 const mapDispatchToProps = dispatch => ({
-    actions: bindActionCreators(lWordCardAction, dispatch),
+    actions: bindActionCreators(wCardAction, dispatch),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(

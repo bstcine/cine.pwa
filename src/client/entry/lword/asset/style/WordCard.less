@@ -1,6 +1,7 @@
 @import '~asset/style/common';
 @import '~asset/style/_cine.less';
 @import './Switch.less';
+@import './Select.less';
 
 .wordCardContent {
     background-color: #f4fcfe;
@@ -83,17 +84,22 @@
         background: url("../image/lword_card_arrow_right.svg") no-repeat center;
         background-size: contain;
     }
-    .wordDetail {
+    .currentWord {
         width: 100%;
         height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .wordDetail {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        height: 10.32rem;
     }
     .wordDetail.hover .wordDetail-flipper {
         transform: rotateY(180deg);
-    }
-
-    .wordDetail, .front, .back {
-        width: 100%;
-        height: 100%;
     }
     .wordDetail-flipper {
         width: 100%;
@@ -102,27 +108,29 @@
         transform-style: preserve-3d;
         position: relative;
     }
+    .front {
+        z-index: 2;
+    }
+    .back {
+        transform: rotateY(180deg);
+    }
     .front, .back {
         backface-visibility: hidden;
         position: absolute;
         top: 0;
         left: 0;
-    }
-    .front {
+        width: 100%;
+        height: 100%;
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
         align-items: center;
-        z-index: 2;
-    }
-    .back {
-        background-color: yellowgreen;
-        transform: rotateY(180deg);
+        justify-content: center;
     }
     .wordInfo {
-        margin-top: 2.72rem;
         width: 6rem;
         padding-top: 0.6rem;
         padding-bottom: 0.6rem;
+        cursor: pointer;
     }
     .word {
         font-family: PingFangSC-Medium;
@@ -149,20 +157,22 @@
         flex-direction: row;
         align-items: center;
         justify-content: center;
-        margin-top: 4.24rem;
         height: 0.8rem;
         cursor: pointer;
-        .graspIcon {
-            width: 0.32rem;
-            height: 0.32rem;
-            border: solid 2px #bcd3e5;
-        }
         .grsaspPromote {
             margin-left: 0.36rem;
             font-family: PingFangSC-Regular;
             font-size: 0.32rem;
             color: #7a7b7c;
         }
+    }
+    .transition {
+        text-align: center;
+        font-family: PingFangSC-Medium;
+        font-size: 0.96rem;
+        line-height: 1.5rem;
+        color: #4d80de;
+        white-space: pre-wrap;
     }
 }
 .wordCard-Footer {

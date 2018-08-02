@@ -5,7 +5,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { getParam } from '@/util/urlUtil';
-import { lWordQuizAction } from '@/action/lWordQuizAction';
+import { wQuizAction } from '@/action/wQuizAction';
 import WordQuiz from '../component/WordQuiz';
 import CThemeProvider from '@/component/CThemeProvider';
 import { CFlatButton, CDialog } from '@/component/_base';
@@ -85,7 +85,7 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => ({
-    actions: bindActionCreators(lWordQuizAction, dispatch),
+    actions: bindActionCreators(wQuizAction, dispatch),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(WordQuizContainer);

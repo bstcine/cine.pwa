@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { lWordListAction } from '@/action/lWordListAction';
+import { wordAction } from '@/action/wordAction';
 import WordList from '../component/WordList';
 import { getParam } from '@/util/urlUtil';
 
@@ -25,16 +25,15 @@ class WordListContainer extends Component {
     componentDidMount() {
         // 准备访问
         let { actions } = this.props;
-        actions.loadVocabulary(this.param);
+        actions.loadWordList(this.param);
     }
 
     render() {
-        let { vocabularyList, taskStatus, actions } = this.props;
+        let { result, actions } = this.props;
 
         return (
             <WordList
-                vocabularyList={vocabularyList}
-                taskStatus={taskStatus}
+                vocabularyList={result.rows}
                 actions={actions}
                 playAction={this.playAudio}
                 param={this.param}
@@ -45,13 +44,12 @@ class WordListContainer extends Component {
 
 const mapStateToProps = state => {
     return {
-        vocabularyList: state.WordListRedu.get('vocabularyList'),
-        taskStatus: state.WordListRedu.get('taskStatus'),
+        result: state.WordRedu.get('result'),
     };
 };
 
 const mapDispatchToProps = dispatch => ({
-    actions: bindActionCreators(lWordListAction, dispatch),
+    actions: bindActionCreators(wordAction, dispatch),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(

@@ -9,6 +9,8 @@ const cls = `${baseprefix}-card`;
 const CardContainer = ({
     className,
     children,
+    // '112' | '122' | '123' | '234'
+    layout = '112',
     // 'none' | null | 'large'
     gap,
 }) => {
@@ -22,7 +24,14 @@ const CardContainer = ({
         }
     });
     return (
-        <div className={classNames(`${cls}__container`, className)}>
+        <div
+            className={classNames(
+                `${cls}__container${layout === '111' ? '111' : ''}`,
+                {
+                    [`${cls}--col${layout}`]: !!layout,
+                },
+                className
+            )}>
             <div
                 className={classNames(`${cls}__grid`, {
                     [`${cls}__gap--large`]: gap === 'large',

@@ -12,7 +12,7 @@ import WordCardFooter from './WordCardFooter';
 
 class WordCard extends React.PureComponent {
     render() {
-        let { result, currentIndex, isAutoChangeWord, isReviseChangeWord, actions, backAction, listAction } = this.props;
+        let { result, currentIndex, isAutoChangeWord, isReviseChangeWord, isBack, actions, backAction, listAction } = this.props;
         return (
             <div className="wordCardContent">
                 <WordCardHeader
@@ -23,6 +23,7 @@ class WordCard extends React.PureComponent {
                 <WordCardBody
                     currentIndex={currentIndex}
                     rows={result.rows}
+                    isBack={isBack}
                     actions={actions}
                 />
                 <WordCardFooter

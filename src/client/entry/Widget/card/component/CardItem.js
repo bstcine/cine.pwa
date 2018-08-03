@@ -125,12 +125,12 @@ export const CardItem111 = ({ value, actions }) => {
 
                 <div className="card1-btm">
                     <div className="btm-left">
-                        <div className="price">￥1,211 per night · Free</div>
+                        <div className="line2 price">￥1,211 per night · Free</div>
                     </div>
 
                     <div className="btm-right">
                         <div className="rate">
-                            <CButton variant="outlined" className="button">Cancel</CButton>
+                            <CButton variant="outlined">Cancel</CButton>
                             <CButton variant="contained" color="secondary" className="button">
                                 Confirm
                             </CButton>

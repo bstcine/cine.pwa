@@ -16,6 +16,7 @@ const initWordCard = fromJS({
     isReviseChangeWord: false,
     autoChangeTime: 3,
     timer: null,
+    isBack: false,
 });
 
 const WordCardRedu = (state = initWordCard, action) => {
@@ -35,6 +36,8 @@ const WordCardRedu = (state = initWordCard, action) => {
             return state.set('currentIndex', action.payload);
         case ACTION_WC.CHANGEAUTOTIMER:
             return state.set('timer', action.payload);
+        case ACTION_WC.TOGGLEBACK:
+            return state.set('isBack', action.payload);
         default:
             return state;
     }

@@ -1,6 +1,6 @@
 @baseprefix : 'cine';
 @font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
-@theme-palette-dark:#616161;
+@theme-palette-dark:#757575;
 @theme-palette-primary:#0D5FA1;
 @theme-palette-primary-light:#288FD7;
 @theme-palette-secondary:#ff6c00;
@@ -9,9 +9,9 @@
 // button
 @btn: ~'@{baseprefix}-btn';
 @color-white: #fff;
-@btn-color-default: rgba(0, 0, 0, 0.87);
-@btn-color-primary: #0D5FA1;
-@btn-color-secondary: #ff6c00;
+@btn-color-default: @theme-palette-dark;
+@btn-color-primary: @theme-palette-primary;
+@btn-color-secondary: @theme-palette-secondary;
 
 // panel
 @panel: ~'@{baseprefix}-panel';

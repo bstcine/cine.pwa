@@ -10,7 +10,7 @@ export default class CardDemo extends React.PureComponent {
         // alert(JSON.stringify(orders));
         return (
             <React.Fragment>
-                <CPanel title="Card 111" className="bgw">
+                <CPanel title="订单- 待付款" className="bgw" padding="none">
                     <OrderList
                         orders={orderlist}
                         layout="111"
@@ -27,36 +27,24 @@ export default class CardDemo extends React.PureComponent {
 
                 <OrderList
                     orders={orderlist}
-                    layout="234"
-                    className="bg234"
-                    itemClassName="cbg234"
-                />
-
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-
-                <OrderList
-                    orders={orderlist}
                     layout="112"
                     className="bg112"
                     itemClassName="cbg234"
                 />
 
+
                 <br />
                 <br />
                 <br />
                 <br />
                 <br />
 
-                <CPanel title="Gird Card 234" className="bgdark">
+                <CPanel title="Gird Card 123" className="bgw">
                     <OrderList
                         orders={orderlist}
-                        layout="234"
+                        layout="123"
                         className="bgt"
-                        itemClassName="cbg234"
+                        itemClassName="bgt"
                     />
                 </CPanel>
 
@@ -68,10 +56,11 @@ export default class CardDemo extends React.PureComponent {
 
                 <OrderList
                     orders={orderlist}
-                    layout="123"
-                    className="bgt"
-                    itemClassName="cbg123"
+                    layout="234"
+                    className="bg234"
+                    itemClassName="bgt"
                 />
+
             </React.Fragment>
         );
     }

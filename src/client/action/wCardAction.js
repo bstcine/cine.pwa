@@ -34,12 +34,17 @@ export const wCardAction = {
         type: ACTION_WC.CHANGEAUTOTIMER,
         payload: timer,
     }),
+    _toggleBack: isBack => ({
+        type: ACTION_WC.TOGGLEBACK,
+        payload: isBack,
+    }),
     // 卡片式学习方法
     loadWordList: (param) => async dispatch => {
 
         let [error, result] = await fetchData(Api.APIURL_User_Learn_Word, param);
 
         if (!error) {
+            console.log(result);
             dispatch(wCardAction._receive(result));
         } else {
             console.log(error);
@@ -74,11 +79,18 @@ export const wCardAction = {
         let isReviseChangeWord = !reducer.get('isReviseChangeWord');
         dispatch(wCardAction._reviseChangeWordStatus(isReviseChangeWord));
     },
+    // 切换正反面
+    changFrontOrBack: () => (dispatch, getState) => {
+        let reducer = getState().WordCardRedu;
+        let isBack = !reducer.get('isBack');
+        dispatch(wCardAction._toggleBack(isBack));
+    },
     // 背诵下一个单词
     startNext: () => async (dispatch, getState) => {
         let reducer = getState().WordCardRedu;
         let currentIndex = reducer.get('currentIndex');
         let result = reducer.get('result');
+        let isBack = reducer.get('isBack');
         let rows = result.rows;
         if (!rows) {
             return;
@@ -88,6 +100,10 @@ export const wCardAction = {
         } else {
             currentIndex += 1;
         }
+        if (isBack) {
+            isBack = false;
+            dispatch(wCardAction._toggleBack(isBack));
+        }
         dispatch(wCardAction._changeCurrentIndex(currentIndex));
     },
     // 背诵上一个单词
@@ -95,6 +111,7 @@ export const wCardAction = {
         let reducer = getState().WordCardRedu;
         let currentIndex = reducer.get('currentIndex');
         let result = reducer.get('result');
+        let isBack = reducer.get('isBack');
         let rows = result.rows;
         if (!rows) {
             return;
@@ -103,6 +120,10 @@ export const wCardAction = {
             currentIndex = rows.length - 1;
         } else {
             currentIndex -= 1;
+        }
+        if (isBack) {
+            isBack = false;
+            dispatch(wCardAction._toggleBack(isBack));
         }
         dispatch(wCardAction._changeCurrentIndex(currentIndex));
     },

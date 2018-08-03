@@ -75,3 +75,4 @@ exports.APIURL_User_Learn_Task = '/api/user/learn/task'; // 历史任务列表
 exports.APIURL_User_Learn_UpdateTaskStatus = '/api/user/learn/updatetask'; // 更新任务状态
 
 exports.APIURL_User_Learn_SaveFailure = '/api/user/learn/savefailure'; // 保存选择错误的信息
+exports.APIURL_User_Content_Word_UpdateKnow = '/api/user/content/word/updateknow'; // 保存已认识单词

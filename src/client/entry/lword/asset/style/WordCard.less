@@ -175,6 +175,79 @@
         white-space: pre-wrap;
     }
 }
+.wordCard-Body-Done {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-style: solid none none none;
+    border-color: #ebf3fb;
+    border-width: 2px;
+    height: 14.2rem;
+    width: 100%;
+
+    .congratulation-Image {
+        margin-top: 2.5rem;
+        width: 2.4rem;
+        height: 2.4rem;
+        background: url("../image/lword_card_congratulation.svg") no-repeat center;
+        background-size: contain;
+    }
+    .congratulation-Text {
+        margin-top: 1rem;
+        font-family: PingFangSC-Medium;
+        font-size: 0.6rem;
+        color: #3a3b3c;
+    }
+    .congratulation-SubText {
+        margin-top: 0.5rem;
+        font-family: PingFangSC-Regular;
+        font-size: 0.44rem;
+        color: #3a3b3c;
+    }
+    .functionCard {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        margin-top: 2.2rem;
+        height: auto;
+        width: auto;
+
+        .repeatCard {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            height: 1.2rem;
+            width: 4.2rem;
+            background-color: white;
+            color: #7a7b7c;
+            font-family: PingFangSC-Medium;
+            font-size: 0.4rem;
+            border: solid 1px #e0ebfb;
+            border-radius: 0.6rem;
+            cursor: pointer;
+        }
+        .testCard {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            margin-left: 1.2rem;
+            height: 1.2rem;
+            width: 4.2rem;
+            background-color: #72caef;
+            color: white;
+            font-family: PingFangSC-Medium;
+            font-size: 0.4rem;
+            border-radius: 0.6rem;
+            cursor: pointer;
+        }
+        .functionText {
+            width: 100%;
+            height: auto;
+            text-align: center;
+        }
+    }
+}
+
 .wordCard-Footer {
     display: flex;
     flex-direction: row;

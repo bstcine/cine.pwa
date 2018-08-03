@@ -30,6 +30,9 @@ class WordCardContainer extends Component {
     }
     // 移除快插
     componentWillUnmount() {
+        let { actions } = this.props;
+        actions.updateWordKnownStatus();
+        console.log('移除快插了');
         document.removeEventListener('touchstart', this.touchStart);
         document.removeEventListener('touchmove', this.touchMove);
         document.removeEventListener('touchend', this.touchEnd);
@@ -86,7 +89,7 @@ class WordCardContainer extends Component {
         location.href = listHref;
     }
     render() {
-        let { result, currentIndex, isAutoChangeWord, isReviseChangeWord, isBack, actions } = this.props;
+        let { result, currentIndex, isAutoChangeWord, isReviseChangeWord, isBack, isKnown, actions } = this.props;
         return (
             <WordCard
                 result={result}
@@ -94,6 +97,7 @@ class WordCardContainer extends Component {
                 isAutoChangeWord={isAutoChangeWord}
                 isReviseChangeWord={isReviseChangeWord}
                 isBack={isBack}
+                isKnown={isKnown}
                 actions={actions}
                 backAction={ () => { this.backLearnHome() }}
                 quizAction={ () => { this.gotoTest() }}
@@ -110,6 +114,7 @@ const mapStateToProps = state => {
         isAutoChangeWord: state.WordCardRedu.get('isAutoChangeWord'),
         isReviseChangeWord: state.WordCardRedu.get('isReviseChangeWord'),
         isBack: state.WordCardRedu.get('isBack'),
+        isKnown: state.WordCardRedu.get('isKnown'),
     };
 };
 

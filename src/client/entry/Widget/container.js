@@ -123,7 +123,7 @@ class Container extends Component {
                 </CPanel>
 
                 <CPanel title="Gird Card default112 gap=large">
-                    <CCardContainer gap="large">
+                    <CCardContainer gap="large" layout="112">
                         <CCard className="cbabsdf">1</CCard>
                         <CCard hover="darken">2 hover=darken</CCard>
                         <CCard hover="outlined">3 hover=outlined</CCard>
@@ -144,63 +144,49 @@ class Container extends Component {
                 </CPanel>
 
                 <CPanel title="Gird Card 122 gap=none hover=lighten">
-                    <CCardContainer gap="none">
-                        <CCard layout="122" hover="lighten">
-                            1
-                        </CCard>
-                        <CCard layout="122" hover="lighten">
-                            2
-                        </CCard>
-                        <CCard layout="122" hover="lighten">
-                            3
-                        </CCard>
-                        <CCard layout="122" hover="lighten">
-                            4
-                        </CCard>
-                        <CCard layout="122" hover="lighten">
-                            5
-                        </CCard>
-                        <CCard layout="122" hover="lighten">
-                            6
-                        </CCard>
-                        <CCard layout="122" hover="lighten">
-                            7
-                        </CCard>
+                    <CCardContainer gap="none" layout="122">
+                        <CCard hover="lighten">1</CCard>
+                        <CCard hover="lighten">2</CCard>
+                        <CCard hover="lighten">3</CCard>
+                        <CCard hover="lighten">4</CCard>
+                        <CCard hover="lighten">5</CCard>
+                        <CCard hover="lighten">6</CCard>
+                        <CCard hover="lighten">7</CCard>
                     </CCardContainer>
                 </CPanel>
 
                 <CPanel title="Gird Card 123">
-                    <CCardContainer>
-                        <CCard layout="123">1</CCard>
-                        <CCard layout="123">2</CCard>
-                        <CCard layout="123">3</CCard>
-                        <CCard layout="123">4</CCard>
-                        <CCard layout="123">5</CCard>
-                        <CCard layout="123">6</CCard>
+                    <CCardContainer layout="123">
+                        <CCard>1</CCard>
+                        <CCard>2</CCard>
+                        <CCard>3</CCard>
+                        <CCard>4</CCard>
+                        <CCard>5</CCard>
+                        <CCard>6</CCard>
                     </CCardContainer>
                 </CPanel>
                 <CPanel title="Gird Card 234">
-                    <CCardContainer>
-                        <CCard layout="234">1</CCard>
-                        <CCard layout="234">2</CCard>
-                        <CCard layout="234">3</CCard>
-                        <CCard layout="234">4</CCard>
-                        <CCard layout="234">5</CCard>
-                        <CCard layout="234">6</CCard>
-                        <CCard layout="234">7</CCard>
-                        <CCard layout="234">8</CCard>
-                        <CCard layout="234">9</CCard>
+                    <CCardContainer layout="234">
+                        <CCard>1</CCard>
+                        <CCard>2</CCard>
+                        <CCard>3</CCard>
+                        <CCard>4</CCard>
+                        <CCard>5</CCard>
+                        <CCard>6</CCard>
+                        <CCard>7</CCard>
+                        <CCard>8</CCard>
+                        <CCard>9</CCard>
                     </CCardContainer>
                 </CPanel>
                 <CPanel title="CFloatingBox">
-                    <CCardContainer>
-                        <CCard layout="234">1</CCard>
-                        <CCard layout="234">2</CCard>
-                        <CCard layout="234">3</CCard>
-                        <CCard layout="234">4</CCard>
-                        <CCard layout="234">5</CCard>
-                        <CCard layout="234">6</CCard>
-                        <CCard layout="234">7</CCard>
+                    <CCardContainer layout="234">
+                        <CCard>1</CCard>
+                        <CCard>2</CCard>
+                        <CCard>3</CCard>
+                        <CCard>4</CCard>
+                        <CCard>5</CCard>
+                        <CCard>6</CCard>
+                        <CCard>7</CCard>
                     </CCardContainer>
                     <CFloatingBox>
                         <CButton

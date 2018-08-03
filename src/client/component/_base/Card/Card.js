@@ -5,8 +5,6 @@ import { componentNames } from '@/component/_base/config';
 const cls = componentNames.Card;
 
 const Card = ({
-    // '112' | '122' | '123' | '234'
-    layout = '112',
     // 'none' | 'shadow' | 'darken'| 'lighten' | 'outlined'
     hover = 'darken',
     href = null,
@@ -18,9 +16,7 @@ const Card = ({
 
     return (
         <Comp
-            className={classNames(cls, {
-                [`${cls}--col${layout}`]: !!layout,
-            })}
+            className={cls}
             href={Comp === 'a' ? href : null}
             onClick={onClick}>
             <div

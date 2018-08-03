@@ -22,7 +22,7 @@ const OrderItem = ({ order, layout, className, actions }) => {
     }
 
     return (
-        <CCard layout={layout} className={className} hover={hover}>
+        <CCard className={className} hover={hover}>
             {item}
         </CCard>
     );
@@ -44,6 +44,7 @@ const OrderList = ({ orders, layout, className, itemClassName, actions }) => {
     return (
         <CCardContainer
             className={className}
+            layout={layout}
             gap={layout === '111' ? 'lighten' : 'large'}>
             {orderList}
         </CCardContainer>

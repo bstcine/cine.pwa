@@ -4,7 +4,7 @@ import { CardItem, CardItem112, CardItem111 } from './CardItem';
 
 const OrderItem = ({ order, layout, className, actions }) => {
     // 'none' | 'shadow' | 'darken'| 'lighten' | 'outlined'
-    let hover = 'outlined';
+    let hover = 'darken';
     let item = <CardItem value={order} actions={actions} />;
     switch (layout) {
         case '111':

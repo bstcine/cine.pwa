@@ -26,7 +26,7 @@ const CardContainer = ({
     return (
         <div
             className={classNames(
-                `${cls}__container`,
+                `${cls}__container${layout === '111' ? '111' : ''}`,
                 {
                     [`${cls}--col${layout}`]: !!layout,
                 },

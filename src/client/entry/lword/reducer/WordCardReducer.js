@@ -11,12 +11,14 @@ const initWordCard = fromJS({
         status: 0,
         rows: null,
     },
+    originRows: null,
     currentIndex: 0,
     isAutoChangeWord: false,
     isReviseChangeWord: false,
     autoChangeTime: 3,
     timer: null,
     isBack: false,
+    isKnown: false,
 });
 
 const WordCardRedu = (state = initWordCard, action) => {
@@ -38,6 +40,10 @@ const WordCardRedu = (state = initWordCard, action) => {
             return state.set('timer', action.payload);
         case ACTION_WC.TOGGLEBACK:
             return state.set('isBack', action.payload);
+        case ACTION_WC.CHANGEKNOWNSTATUS:
+            return state.set('isKnown', action.payload);
+        case ACTION_WC.ORIGINROWS:
+            return state.set('originRows', action.payload);
         default:
             return state;
     }

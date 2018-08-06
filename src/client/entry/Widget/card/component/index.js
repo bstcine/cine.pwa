@@ -10,6 +10,17 @@ export default class CardDemo extends React.PureComponent {
         // alert(JSON.stringify(orders));
         return (
             <React.Fragment>
+                <OrderList
+                    orders={orderlist}
+                    layout="234"
+                    className="bg234"
+                    itemClassName="bgt"
+                />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
                 <CPanel title="订单- 待付款" className="bgw" padding="none">
                     <OrderList
                         orders={orderlist}
@@ -32,7 +43,6 @@ export default class CardDemo extends React.PureComponent {
                     itemClassName="cbg234"
                 />
 
-
                 <br />
                 <br />
                 <br />
@@ -47,20 +57,6 @@ export default class CardDemo extends React.PureComponent {
                         itemClassName="bgt"
                     />
                 </CPanel>
-
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-
-                <OrderList
-                    orders={orderlist}
-                    layout="234"
-                    className="bg234"
-                    itemClassName="bgt"
-                />
-
             </React.Fragment>
         );
     }

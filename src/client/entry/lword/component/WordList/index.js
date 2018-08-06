@@ -1,39 +1,38 @@
 import React from 'react';
 import "../../asset/style/WordList.less";
-import VocabularyItem from './vocabularyItem';
+import WordListBody from './WordListBody';
+import WordListHeader from './WordListHeader';
 import { addParam } from '@/util/urlUtil';
 
 class WordList extends React.PureComponent {
 
+    constructor(props) {
+        super(props);
+        this.gotoCard = this.gotoCard.bind(this);
+    }
+    gotoCard() {
+        let { param } = this.props;
+        let cardHref = addParam('/lword/card', param);
+        location.href = cardHref;
+    }
     render() {
 
-        let { vocabularyList, playAction, param } = this.props;
+        let { vocabularyList, name, isShowAll, playAction, actions } = this.props;
         if (!vocabularyList) {
             return null;
         }
-        let cardHref = addParam('/lword/card', param);
-        const vocabularyItems = vocabularyList.map((item, index) => {
-            let backgroundColor = '';
-            if (index % 2 === 0) {
-                backgroundColor = '#fff';
-            } else {
-                backgroundColor = '#f6fcff';
-            }
-            let style = {
-                backgroundColor: backgroundColor,
-            }
-            return <VocabularyItem style={style} key={item.id} vocabulary={item} playAction={playAction}/>;
-        });
-
         return (
             <div className="vocabularyTask">
-                <div className="v_Task_VocabularyHeader">
-                    <a className="v_Task_H_TaskName">词汇学习</a>
-                    <a className="v_Task_H_HistoryDoor" href={cardHref}>卡片式</a>
-                </div>
-                <div className="v_Task_VocabularyList">
-                    {vocabularyItems}
-                </div>
+                <WordListHeader
+                    name={name}
+                    isShowAll={isShowAll}
+                    actions={actions}
+                />
+                <WordListBody
+                    vocabularyList={vocabularyList}
+                    playAction={playAction}
+                    actions={actions}
+                />
             </div>
         );
     }

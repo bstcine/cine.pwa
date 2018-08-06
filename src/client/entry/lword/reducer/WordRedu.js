@@ -10,15 +10,20 @@ const initWordCard = fromJS({
         status: 0,
         rows: null,
     },
+    currentRows: null,
+    isShowAll: true,
 });
 
 const WordRedu = (state = initWordCard, action) => {
-    // 卡片式学习池子
     switch (action.type) {
         case ACTION_LW.REQUEST:
             return state;
         case ACTION_LW.RECEIVE:
             return state.set('result', action.payload);
+        case ACTION_LW.CURRENTROWS:
+            return state.set('currentRows', action.payload);
+        case ACTION_LW.CHANGESHOWALLSTATUS:
+            return state.set('isShowAll', action.payload);
         default:
             return state;
     }

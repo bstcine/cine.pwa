@@ -29,11 +29,13 @@ class WordListContainer extends Component {
     }
 
     render() {
-        let { result, actions } = this.props;
+        let { result, currentRows, isShowAll, actions } = this.props;
 
         return (
             <WordList
-                vocabularyList={result.rows}
+                vocabularyList={currentRows}
+                name={result.name}
+                isShowAll={isShowAll}
                 actions={actions}
                 playAction={this.playAudio}
                 param={this.param}
@@ -45,6 +47,8 @@ class WordListContainer extends Component {
 const mapStateToProps = state => {
     return {
         result: state.WordRedu.get('result'),
+        isShowAll: state.WordRedu.get('isShowAll'),
+        currentRows: state.WordRedu.get('currentRows'),
     };
 };
 

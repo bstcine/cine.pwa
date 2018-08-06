@@ -36,11 +36,11 @@ class WordContainer extends Component {
     }
 
     render() {
-        let { result, action } = this.props;
+        let { result, actions } = this.props;
         return (
             <Word
                 result={result}
-                action={action}
+                actions={actions}
                 backAction={ () => { this.backLearnHome() }}
                 quizAction={ () => { this.gotoTest() }}
                 listAction={ () => { this.gotoList() }}

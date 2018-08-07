@@ -6,37 +6,46 @@
 .wordCardContent {
     background-color: #f4fcfe;
     width: 100%;
-    min-height: 100%;
+    height: 100%;
     display: flex;
     flex-direction: column;
+    align-items: flex-end;
 }
 
 .wordCard-Header {
     display: flex;
     flex-direction: row;
-    align-items: flex-end;
-    margin-top: 0.5rem;
-    margin-bottom: 0.2rem;
+    align-items: center;
+    padding-top: 0.5rem;
+    padding-bottom: 0.2rem;
+    width: 100%;
+    height: auto;
     justify-content: space-between;
-
+    .back-Image-Header {
+        display: inline-block;
+        width: 0.4rem;
+        height: 0.4rem;
+        margin-left: 0.2rem;
+        cursor: pointer;
+    }
     .wordCard-Back {
         display: flex;
         flex-direction: row;
         align-items: center;
-        cursor: pointer;
         font-size: 0.36rem;
 
         .wordCard-backButton {
+            display: none;
             width: 0.4rem;
             height: 0.4rem;
             margin-left: 0.2rem;
             margin-right: 0.2rem;
+            cursor: pointer;
         }
         .wordCard-taskTitle {
             color: #3a3b3c;
         }
     }
-
     .wordCard-ToList {
         display: flex;
         flex-direction: row;
@@ -51,6 +60,7 @@
             margin-right: 0.2rem;
         }
         .wordCard-ListTitle {
+            display: none;
             color: #3a3b3c;
         }
     }
@@ -61,12 +71,13 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    border-style: solid none solid none;
+    border-style: none none none none;
     border-color: #ebf3fb;
     border-width: 2px;
-    height: 12.8rem;
+    height: 100%;
     width: 100%;
     .lastWord {
+        display: none;
         width: 1.2rem;
         height: 40%;
         cursor: pointer;
@@ -76,6 +87,7 @@
         background-size: contain;
     }
     .nextWord {
+        display: none;
         width: 1.2rem;
         height: 40%;
         cursor: pointer;
@@ -96,7 +108,7 @@
         display: flex;
         flex-direction: row;
         align-items: center;
-        height: 10.32rem;
+        height: 8rem;
     }
     .wordDetail.hover .wordDetail-flipper {
         transform: rotateY(180deg);
@@ -127,14 +139,14 @@
         justify-content: center;
     }
     .wordInfo {
-        width: 6rem;
+        width: 80%;
         padding-top: 0.6rem;
         padding-bottom: 0.6rem;
         cursor: pointer;
     }
     .word {
         font-family: PingFangSC-Medium;
-        font-size: 1.08rem;
+        font-size: 0.96rem;
         color: #4d80de;
         text-align: center;
     }
@@ -143,13 +155,15 @@
         flex-direction: row;
         align-items: center;
         justify-content: center;
-        margin-top: 0.76rem;
+        margin-top: 0.65rem;
         font-family: ArialMT;
-        font-size: 0.36rem;
+        font-size: 0.3rem;
         color: #3a3b3c;
 
         .voice {
-            margin-left: 0.24rem;
+            margin-left: 0.32rem;
+            width: 0.32rem;
+            height: 0.32rem;
         }
     }
     .hadGrasp {
@@ -169,8 +183,8 @@
     .transition {
         text-align: center;
         font-family: PingFangSC-Medium;
-        font-size: 0.96rem;
-        line-height: 1.5rem;
+        font-size: 0.6rem;
+        line-height: 0.9rem;
         color: #4d80de;
         white-space: pre-wrap;
     }
@@ -186,58 +200,64 @@
     width: 100%;
 
     .congratulation-Image {
-        margin-top: 2.5rem;
-        width: 2.4rem;
-        height: 2.4rem;
+        margin-top: 1.74rem;
+        width: 1.68rem;
+        height: 1.68rem;
         background: url("../image/lword_card_congratulation.svg") no-repeat center;
         background-size: contain;
     }
     .congratulation-Text {
-        margin-top: 1rem;
+        margin-top: 0.95rem;
+        padding: 0 1rem 0 1rem;
         font-family: PingFangSC-Medium;
-        font-size: 0.6rem;
-        color: #3a3b3c;
+        font-size: 0.48rem;
+        color: #4d80de;
     }
     .congratulation-SubText {
-        margin-top: 0.5rem;
+        margin-top: 0.4rem;
+        padding: 0 1rem 0 1rem;
         font-family: PingFangSC-Regular;
-        font-size: 0.44rem;
+        font-size: 0.36rem;
+        line-height: 0.54rem;
         color: #3a3b3c;
+        text-align: center;
     }
     .functionCard {
         display: flex;
-        flex-direction: row;
+        flex-direction: column;
         align-items: center;
-        margin-top: 2.2rem;
+        margin-top: 1.37rem;
         height: auto;
-        width: auto;
+        width: 100%;
+        justify-content: center;
 
         .repeatCard {
             display: flex;
             flex-direction: row;
             align-items: center;
-            height: 1.2rem;
-            width: 4.2rem;
+            height: 0.97rem;
+            width: 64%;
             background-color: white;
             color: #7a7b7c;
             font-family: PingFangSC-Medium;
-            font-size: 0.4rem;
+            font-size: 0.36rem;
             border: solid 1px #e0ebfb;
-            border-radius: 0.6rem;
+            border-radius: 0.485rem;
             cursor: pointer;
         }
         .testCard {
             display: flex;
             flex-direction: row;
             align-items: center;
-            margin-left: 1.2rem;
-            height: 1.2rem;
-            width: 4.2rem;
+            margin-left: 0rem;
+            margin-top: 0.54rem;
+            height: 0.97rem;
+            width: 64%;
             background-color: #72caef;
             color: white;
             font-family: PingFangSC-Medium;
-            font-size: 0.4rem;
-            border-radius: 0.6rem;
+            font-size: 0.36rem;
+            border-radius: 0.485rem;
             cursor: pointer;
         }
         .functionText {
@@ -247,13 +267,21 @@
         }
     }
 }
+.wordCard-Set {
+    display: inline-block;
+    width: 1.02rem;
+    height: 1.02rem;
+    padding: 0.3rem;
+}
 
 .wordCard-Footer {
-    display: flex;
+    display: none;
     flex-direction: row;
     align-items: center;
-    justify-content: flex-end;
-    height: 72px;
+    justify-content: center;
+    height: 2.3rem;
+    background-color: white;
+    opacity: 0.18;
 
     .autoChangeWord {
         display: flex;
@@ -295,9 +323,133 @@
         padding: 0 0.8rem 0 0.8rem;
     }
     .wordCard-Header {
+        .back-Image-Header {
+            display: none;
+        }
         .wordCard-Back{
             .wordCard-backButton {
                 margin-left: 0;
+                display: inline-block;
+            }
+        }
+        .wordCard-ToList {
+            .wordCard-ListTitle {
+                display: inline-block;
+            }
+        }
+    }
+    .wordCard-Body {
+        height: 12.8rem;
+        border-style: solid none solid none;
+        .lastWord {
+            display: inline-block;
+        }
+        .nextWord {
+            display: inline-block;
+        }
+        .wordDetail {
+            height: 10.32rem;
+        }
+        .wordInfo {
+            width: 6rem;
+        }
+        .word {
+            font-size: 1.08rem;
+        }
+        .phonetic {
+            margin-top: 0.76rem;
+            font-size: 0.36rem;
+            color: #3a3b3c;
+            .voice {
+                margin-left: 0.24rem;
+            }
+        }
+        .transition {
+            font-size: 0.96rem;
+            line-height: 1.5rem;
+        }
+    }
+    .wordCard-Body-Done {
+        .congratulation-Image {
+            margin-top: 2.5rem;
+            width: 2.4rem;
+            height: 2.4rem;
+        }
+        .congratulation-Text {
+            margin-top: 1rem;
+            font-size: 0.6rem;
+        }
+        .congratulation-SubText {
+            margin-top: 0.5rem;
+            font-size: 0.44rem;
+            line-height: 0.66rem;
+        }
+        .functionCard {
+            flex-direction: row;
+            align-items: center;
+            margin-top: 2.2rem;
+
+            .repeatCard {
+                height: 1.2rem;
+                width: 4.2rem;
+                font-size: 0.4rem;
+                border-radius: 0.6rem;
+            }
+            .testCard {
+                margin-left: 1.2rem;
+                margin-top: 0;
+                height: 1.2rem;
+                width: 4.2rem;
+                font-size: 0.4rem;
+                border-radius: 0.6rem;
+            }
+            .functionText {
+                width: 100%;
+                height: auto;
+                text-align: center;
+            }
+        }
+    }
+    .wordCard-Set {
+        display: none;
+    }
+    .wordCard-Footer {
+        display: flex;
+        justify-content: flex-end;
+        height: 72px;
+        background-color: transparent;
+
+        .autoChangeWord {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            .autoImage {
+                width: 14px;
+                height: 17px;
+                margin-right: 13px;
+            }
+            .autoText {
+                font-family: PingFangSC-Medium;
+                font-size: 0.24rem;
+                color: #b2b3b4;
+                margin-right: 17px;
+            }
+        }
+        .reviseChangeWord {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            margin-left: 38px;
+            .reviseImage {
+                width: 18px;
+                height: 17px;
+                margin-right: 13px;
+            }
+            .reviseText {
+                font-family: PingFangSC-Medium;
+                font-size: 0.24rem;
+                color: #b2b3b4;
+                margin-right: 17px;
             }
         }
     }

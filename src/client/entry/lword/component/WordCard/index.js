@@ -13,7 +13,7 @@ import WordCardBodyDone from './WordCardBodyDone';
 
 class WordCard extends React.PureComponent {
     render() {
-        let { result, currentIndex, isAutoChangeWord, isReviseChangeWord, isBack, isKnown, actions, backAction, listAction, quizAction } = this.props;
+        let { result, currentIndex, isAutoChangeWord, isReviseChangeWord, isBack, isKnown, isSet, actions, backAction, listAction, quizAction, setAction } = this.props;
         let { name, rows } = result;
         let wordCard = null;
         if (!rows) {
@@ -43,6 +43,12 @@ class WordCard extends React.PureComponent {
                         isAutoChangeWord={isAutoChangeWord}
                         isReviseChangeWord={isReviseChangeWord}
                         actions={actions}
+                    />
+                    <img
+                        className="wordCard-Set"
+                        src={require('../../asset/image/lword_card_set.svg')}
+                        style={{}}
+                        onClick={setAction}
                     />
                 </React.Fragment>
             );

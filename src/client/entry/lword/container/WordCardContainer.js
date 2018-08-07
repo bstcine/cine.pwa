@@ -15,8 +15,15 @@ class WordCardContainer extends Component {
         this.touchMove = this.touchMove.bind(this);
         this.touchEnd = this.touchEnd.bind(this);
         this.keyEvent = this.keyEvent.bind(this);
+        this.setPlayerInfo = this.setPlayerInfo.bind(this);
+        this.backLearnHome = this.backLearnHome.bind(this);
+        this.gotoList = this.gotoList.bind(this);
+        this.gotoTest = this.gotoTest.bind(this);
         // 获取参数
         this.param = getParam();
+        this.state = {
+            isSet: null,
+        };
     }
     // 快插完成
     componentDidMount() {
@@ -75,6 +82,10 @@ class WordCardContainer extends Component {
             event.stopPropagation();
             actions.startPrevious();
         }
+        this.touchStartX = null;
+        this.touchStartY = null;
+        this.touchmoveX = null;
+        this.touchmoveY = null;
     }
 
     backLearnHome() {
@@ -88,6 +99,11 @@ class WordCardContainer extends Component {
         let listHref = addParam('/lword/list', this.param);
         location.href = listHref;
     }
+    setPlayerInfo() {
+        this.setState((preState) => {
+            alert(preState.isSet);
+        });
+    }
     render() {
         let { result, currentIndex, isAutoChangeWord, isReviseChangeWord, isBack, isKnown, actions } = this.props;
         return (
@@ -98,10 +114,12 @@ class WordCardContainer extends Component {
                 isReviseChangeWord={isReviseChangeWord}
                 isBack={isBack}
                 isKnown={isKnown}
+                isSet={this.state.isSet}
                 actions={actions}
-                backAction={ () => { this.backLearnHome() }}
-                quizAction={ () => { this.gotoTest() }}
-                listAction={ () => { this.gotoList() }}
+                backAction={this.backLearnHome}
+                quizAction={this.gotoTest}
+                listAction={this.gotoList}
+                setAction={this.setPlayerInfo}
             />
         );
     }

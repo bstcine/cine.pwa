@@ -12,35 +12,51 @@
     width: 100%;
     background-color: white;
 
-    .v_Task_VocabularyHeader{
+    .v_Task_VocabularyHeader {
 
         display: flex;
         flex-direction: row;
         align-items: flex-end;
         justify-content: space-between;
-        height: 1.25rem;
+        height: auto;
         border-bottom: solid;
         border-bottom-color: #f5f9fc;
         border-bottom-width: 1px;
-        padding-left: 0.4rem;
-        padding-right: 0.4rem;
-        padding-bottom: 0.2rem;
+        padding: 0.5rem 0.2rem 0.2rem 0.2rem;
+
+        .back-Image-Header {
+            display: inline-block;
+            width: 0.4rem;
+            height: 0.4rem;
+            cursor: pointer;
+        }
 
         .header-Left {
             display: flex;
             flex-direction: row;
             align-items: flex-end;
+            .back-Image-Left {
+                display: none;
+                width: 0.4rem;
+                height: 0.4rem;
+                margin-right: 0.2rem;
+                cursor: pointer;
+            }
             .v_Task_H_TaskName{
                 color: #3a3b3c;
                 font-family: PingFangSC-Medium;
-                font-size: 0.4rem;
+                font-size: 0.36rem;
                 margin-right: 0.2rem;
             }
-            .showAll {
+            .showAll-Title {
+                display: none;
                 margin-right: 0.2rem;
                 font-family: PingFangSC-Regular;
                 font-size: 0.32rem;
                 color: #7a7b7c;
+            }
+            .showAll-Select {
+                display: none;
             }
         }
         .wordList-ToCard {
@@ -56,6 +72,7 @@
                 margin-right: 0.2rem;
             }
             .wordList-CardTitle{
+                display: none;
                 font-family: PingFangSC-Regular;
                 font-size: 0.32rem;
                 color: #7a7b7c;
@@ -77,8 +94,8 @@
         width: 100%;
         padding-top: 0.24rem;
         padding-bottom: 0.24rem;
-        padding-left: 0.24rem;
-        padding-right: 0.24rem;
+        padding-left: 0.4rem;
+        padding-right: 0.4rem;
     }
     .v_Task_L_VocabularyItem{
         display: flex;
@@ -96,6 +113,7 @@
         font-size: 0.28rem;
 
         .v_status_Vocabulary_Status_promote {
+            display: none;
             margin-left: 0.36rem;
             color: #7a7b7c;
         }
@@ -106,7 +124,7 @@
         flex-direction: row;
         width: 100%;
         align-items: center;
-        justify-content: space-between;
+        //justify-content: flex-start;
 
         .v_Task_L_Item_ Seq{
             width: 0.66rem;
@@ -118,7 +136,6 @@
         }
         .v_Task_L_Item_Value{
             display: flex;
-            flex-grow: 1;
             flex-direction: row;
             align-items: center;
         }
@@ -157,17 +174,49 @@
         white-space: pre-wrap;
         color: #3a3b3c;
     }
+}
 
-    @media @media-up-xs{
+@media @media-up-xs{
+    .vocabularyTask {
+        .v_Task_VocabularyHeader {
+            padding: 0.5rem 0.4rem 0.2rem 0.4rem;
 
+            .back-Image-Header {
+                display: none;
+            }
+
+            .header-Left {
+                .back-Image-Left {
+                    display: inline-block;
+                }
+                .v_Task_H_TaskName{
+                    font-size: 0.4rem;
+                }
+                .showAll-Title {
+                    display: inline-block;
+                }
+                .showAll-Select {
+                    display: inline-block;
+                }
+            }
+            .wordList-ToCard {
+                .wordList-CardTitle{
+                    display: inline-block;
+                }
+            }
+        }
         .v_Task_L_Vocabulary_Content {
-            padding-left: 0.4rem;
-            padding-right: 0.4rem;
             align-items: center;
         }
         .v_Task_L_VocabularyItem{
             flex-direction: row;
             cursor: pointer;
+        }
+
+        .v_Task_L_Vocabulary_Status {
+            .v_status_Vocabulary_Status_promote {
+                display: inline-block;
+            }
         }
 
         .v_Task_L_Item_Info{
@@ -222,6 +271,5 @@
             white-space: pre-wrap;
             color: #3a3b3c;
         }
-
     }
 }

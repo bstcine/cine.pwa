@@ -9,11 +9,16 @@ class WordList extends React.PureComponent {
     constructor(props) {
         super(props);
         this.gotoCard = this.gotoCard.bind(this);
+        this.gotoWord = this.gotoWord.bind(this);
     }
     gotoCard() {
         let { param } = this.props;
         let cardHref = addParam('/lword/card', param);
         location.href = cardHref;
+    }
+    gotoWord() {
+        let { param } = this.props;
+        location.href = addParam('/lword', param);
     }
     render() {
 
@@ -27,6 +32,8 @@ class WordList extends React.PureComponent {
                     name={name}
                     isShowAll={isShowAll}
                     actions={actions}
+                    cardAction={this.gotoCard}
+                    wordAction={this.gotoWord}
                 />
                 <WordListBody
                     vocabularyList={vocabularyList}

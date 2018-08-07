@@ -26,7 +26,6 @@ class VocabularyItem extends React.PureComponent {
     render() {
 
         let { vocabulary, style, index, actions } = this.props;
-        console.log(index);
         let phonetic = '';
         if (vocabulary.phonetic_a) {
             phonetic = vocabulary.phonetic_a;

@@ -1,8 +1,12 @@
+@import '~asset/style/_cine.less';
+
 .selected {
-    width: 0.34rem;
-    height: 0.34rem;
+    width: 0.4rem;
+    height: 0.4rem;
     position: relative;
     border: 2px solid #bcd3e5;
+    border-radius: 0;
+    background-color: transparent;
     background-clip: content-box;
     display: inline-block;
     -webkit-appearance: none;
@@ -32,10 +36,21 @@
     transition: left 0.3s;
 }
 .selected.switch-anim:checked {
-    box-shadow: #64bd63 0 0 0 16px inset;
-    background-color: #64bd63;
-    transition: border ease 0.4s, box-shadow ease 0.4s, background-color ease 1.2s;
+    //box-shadow: #64bd63 0 0 0 16px inset;
+    //background-color: #64bd63;
+    //transition: border ease 0.4s, box-shadow ease 0.4s, background-color ease 1.2s;
 }
 .selected.switch-anim:checked:before {
     transition: left 0.3s;
+}
+
+@media @media-up-xs {
+    .selected {
+        width: 0.34rem;
+        height: 0.34rem;
+    }
+    .selected:before {
+        width: 0.46rem;
+        height: 0.38rem;
+    }
 }

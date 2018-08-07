@@ -38,7 +38,7 @@ export const wordAction = {
         dispatch(wordAction._currentRows(newRows));
         dispatch(wordAction._isShowAll(status));
     },
-    // 卡片式学习方法
+    // 加载数据列表
     loadWordList: (param) => async dispatch => {
 
         let [error, result] = await fetchData(Api.APIURL_User_Learn_Word, param);

@@ -112,7 +112,7 @@ class Container extends Component {
                         </CButton>
                     </div>
                     <div>
-                        <CIconButton>lock</CIconButton>
+                        <CIconButton className="w-my-lock">lock</CIconButton>
                         <CIconButton color="primary">alarm</CIconButton>
                         <CIconButton mini color="secondary">
                             pets

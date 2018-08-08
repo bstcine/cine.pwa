@@ -6,11 +6,12 @@ import React from 'react';
 class WordCardHeader extends React.PureComponent {
     render() {
         let { name, backAction, listAction } = this.props;
-        let backImage = require('@/asset/image/arrow_back.svg');
+        let backImage = require('../../asset/image/lword_back.svg');
         return (
             <div className="wordCard-Header">
-                <div className="wordCard-Back" onClick={backAction}>
-                    <img className="wordCard-backButton" src={backImage}></img>
+                <img className="back-Image-Header" src={backImage} onClick={backAction} />
+                <div className="wordCard-Back">
+                    <img className="wordCard-backButton" src={backImage} onClick={backAction} />
                     <p className="wordCard-taskTitle">{name}</p>
                 </div>
                 <div className="wordCard-ToList" onClick={listAction}>

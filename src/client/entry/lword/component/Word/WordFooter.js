@@ -7,9 +7,13 @@ class WordFooter extends React.PureComponent {
     render() {
         return (
             <div className="word-Footer">
-                It is not because things are diffcult that we do not care; it is because wo do not dare that they are diffcult.<br/><br/>
-                并不是因为事情难我们才不敢去做，二十因为我们不敢做事情才难。<br/>
-                —— Seneca
+                <p className="english">
+                    It is not because things are difficult that we do not care; it is because wo do not dare that they are difficult.
+                </p>
+                <p className="chinese">
+                    并不是因为事情难我们才不敢去做，而是因为我们不敢做事情才难。<br/>
+                    —— Seneca
+                </p>
             </div>
         );
     }

@@ -13,92 +13,104 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    margin-top: 0.5rem;
-    margin-bottom: 0.2rem;
+    justify-content: space-between;
+    padding-top: 0.5rem;
+    padding-bottom: 0.2rem;
     font-size: 0.36rem;
     text-align: left;
     cursor: pointer;
-}
+    border-bottom-style: solid;
+    border-bottom-color: #ebf3fb;
+    border-bottom-width: 2px;
 
-.backButton {
-    width: 0.4rem;
-    height: 0.4rem;
-    margin-left: 0.2rem;
-    margin-right: 0.2rem;
-}
-
-.taskTitle {
-    color: #3a3b3c;
+    .backButton {
+        width: 0.4rem;
+        height: 0.4rem;
+        margin-left: 0.2rem;
+        margin-right: 0.2rem;
+    }
+    .backButton path {
+        fill: #3a3b3c;
+    }
+    .taskTitle {
+        color: #3a3b3c;
+    }
+    .lastLocation {
+        width: 0.4rem;
+        height: 0.4rem;
+        background-color: transparent;
+    }
 }
 
 .word-Body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 1rem 0 1rem 0;
-    border-style: solid none solid none;
+    padding: 1.66rem 0 1.46rem 0;
+    margin: 0 0.5rem 0 0.5rem;
+    border-style: none none solid none;
     border-color: #ebf3fb;
     border-width: 2px;
 }
 
 .word-Count {
-    display: inline-block;
-    vertical-align: text-bottom;
-    width: 80%;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: space-between;
+    width: 85%;
 }
 .word-grasp {
     display: flex;
-    align-items: flex-end;
-    float: left;
-    position: relative;
+    flex-direction: row;
+    align-items: center;
 }
 .word-grasp-text {
-    height: auto;
     font-family: PingFangSC-Regular;
     font-size: 0.36rem;
     color: #3a3b3c;
-    margin-top: 0.3rem;
 }
 .word-grasp-count {
     height: auto;
     font-family: JustOldFashion-Condensed;
-    font-size: 0.8rem;
+    font-size: 0.84rem;
     color: #1b71db;
-    margin-left: 0.5rem;
+    margin-left: 0.4rem;
 }
 .word-ungrasp {
     display: flex;
-    align-items: flex-end;
-    float: right;
-    position: relative;
+    flex-direction: row;
+    align-items: center;
 }
 .word-ungrasp-text {
-    height: auto;
     font-family: PingFangSC-Regular;
     font-size: 0.36rem;
     color: #3a3b3c;
-    margin-top: 0.3rem;
 }
 .word-ungrasp-count {
     height: auto;
     font-family: JustOldFashion-Condensed;
     font-size: 0.8rem;
     color: #1b71db;
-    margin-left: 0.5rem;
+    margin-left: 0.4rem;
 }
 .word-Learn {
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    margin-top: 1rem;
+    margin-top: 2.1rem;
     width: 80%;
-    height: 1.2rem;
-    border-radius: 5px;
-    background-color: #55a7f4;
+    height: 1.16rem;
+    border-radius: 0.58rem;
+    background-color: #65b7f7;
     cursor: pointer;
+    .icon {
+        width: 0.73rem;
+        height: 0.73rem;
+    }
     .text {
-        margin-left: 48px;
+        margin-left: 0.62rem;
     }
 }
 .word-Test {
@@ -106,14 +118,18 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    margin-top: 0.5rem;
+    margin-top: 0.58rem;
     width: 80%;
-    height: 1.2rem;
-    border-radius: 5px;
-    background-color: #62bfeb;
+    height: 1.16rem;
+    border-radius: 0.58rem;
+    background-color: #72caef;
     cursor: pointer;
+    .icon {
+        width: 0.55rem;
+        height: 0.65rem;
+    }
     .text {
-        margin-left: 30px;
+        margin-left: 0.51rem;
     }
 }
 .text{
@@ -124,32 +140,45 @@
     font-family: PingFangSC-Medium;
 }
 .word-Footer {
-    margin-top: 0.7rem;
-    margin-bottom: 1rem;
+    padding-top: 0.42rem;
+    padding-bottom: 0.67rem;
     padding-left: 0.5rem;
     padding-right: 0.5rem;
-    font-family: AvenirNext-Regular;
-    font-size: 0.36rem;
-    line-height: 0.48rem;
     color: #8db9d8;
+    .english {
+        font-family: AvenirNext-Regular;
+        font-size: 0.28rem;
+        line-height: 0.42rem;
+    }
+    .chinese {
+        margin-top: 0.25rem;
+        font-family: PingFangSC-Light;
+        font-size: 0.24rem;
+        line-height: 0.36rem;
+    }
 }
 
 @media @media-up-xs {
+    .word-Header {
+        font-size: 0.32rem;
+        justify-content: flex-start;
+
+        .backButton {
+            margin-left: 0;
+        }
+    }
     .wordContent {
         padding: 0 0.8rem 0 0.8rem;
     }
-    .backButton {
-        margin-left: 0;
-    }
     .word-Body {
-        padding: 2rem 0 2rem 0;
+        padding: 2rem 0 1.6rem 0;
+        margin: 0;
     }
     .word-Count {
         width: 60%;
     }
     .word-Learn {
-        width: 6.4rem;
-        height: 1.6rem;
+
         font-size: 0.48rem;
         font-family: PingFangSC-Medium;
     }
@@ -159,10 +188,58 @@
         font-size: 0.48rem;
         font-family: PingFangSC-Medium;
     }
+    .word-Learn {
+        margin-top: 2.01rem;
+        width: 6.4rem;
+        height: 1.6rem;
+        border-radius: 8px;
+        background-color: #65b7f7;
+        cursor: pointer;
+        .icon {
+            width: 0.98rem;
+            height: 0.96rem;
+        }
+        .text {
+            margin-left: 0.72rem;
+        }
+    }
+    .word-Test {
+        margin-top: 0.8rem;
+        width: 6.4rem;
+        height: 1.6rem;
+        border-radius: 8px;
+        background-color: #72caef;
+        cursor: pointer;
+        .icon {
+            width: 0.74rem;
+            height: 0.86rem;
+        }
+        .text {
+            margin-left: 0.6rem;
+        }
+    }
     .word-grasp-count {
         margin-left: 1rem;
     }
     .word-ungrasp-count {
         margin-left: 1rem;
+    }
+    .word-Footer {
+        padding-top: 0.7rem;
+        padding-bottom: 0.6rem;
+        padding-left: 0.34rem;
+        padding-right: 0.34rem;
+        color: #8db9d8;
+        .english {
+            font-family: AvenirNext-Regular;
+            font-size: 0.36rem;
+            line-height: 0.54rem;
+        }
+        .chinese {
+            margin-top: 0.25rem;
+            font-family: PingFangSC-Light;
+            font-size: 0.32rem;
+            line-height: 0.48rem;
+        }
     }
 }

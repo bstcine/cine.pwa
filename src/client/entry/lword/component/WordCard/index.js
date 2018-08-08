@@ -15,6 +15,23 @@ class WordCard extends React.PureComponent {
     render() {
         let { result, currentIndex, isAutoChangeWord, isReviseChangeWord, isBack, isKnown, isSet, actions, backAction, listAction, quizAction, setAction } = this.props;
         let { name, rows } = result;
+        let setImageStyle = {}
+        let setFooterStyle = {}
+        if (isSet === true) {
+            setImageStyle = {
+                display: 'none'
+            };
+            setFooterStyle = {
+                display: 'flex'
+            };
+        } else if (isSet === false) {
+            setImageStyle = {
+                display: 'inline-block',
+            };
+            setFooterStyle = {
+                display: 'none'
+            };
+        }
         let wordCard = null;
         if (!rows) {
             wordCard = null;
@@ -40,6 +57,7 @@ class WordCard extends React.PureComponent {
                         actions={actions}
                     />
                     <WordCardFooter
+                        isSet={isSet}
                         isAutoChangeWord={isAutoChangeWord}
                         isReviseChangeWord={isReviseChangeWord}
                         actions={actions}
@@ -47,7 +65,7 @@ class WordCard extends React.PureComponent {
                     <img
                         className="wordCard-Set"
                         src={require('../../asset/image/lword_card_set.svg')}
-                        style={{}}
+                        style={setImageStyle}
                         onClick={setAction}
                     />
                 </React.Fragment>

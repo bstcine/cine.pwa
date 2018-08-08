@@ -8,6 +8,7 @@ class WordCardBody extends React.PureComponent {
 
     render() {
         let { rows, currentIndex, isBack, isKnown, actions } = this.props;
+
         return (
             <React.Fragment>
                 <WordCardBodyRecite

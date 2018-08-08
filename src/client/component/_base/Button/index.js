@@ -1,5 +1,6 @@
 import React from 'react';
 import Button from './Button';
+import Icon from '../Icon';
 
 const CButton = ({
     children,
@@ -30,9 +31,14 @@ const CButton = ({
     </Button>
 );
 
-const CIconButton = ({ color, mini, children, onClick }) => (
-    <Button mini={mini} variant="round" color={color} onClick={onClick}>
-        <i className="material-icons">{children}</i>
+const CIconButton = ({ color, className, mini, children, onClick }) => (
+    <Button
+        mini={mini}
+        className={className}
+        variant="round"
+        color={color}
+        onClick={onClick}>
+        <Icon>{children}</Icon>
     </Button>
 );
 

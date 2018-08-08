@@ -1,5 +1,4 @@
 import React from 'react';
-import { CFloatingButton } from './Floating';
 import { CSelectField } from './SelectField';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
@@ -8,7 +7,9 @@ import TextField from 'material-ui/TextField';
 import CButton, { CIconButton } from './Button';
 import FloatingBox from './FloatingBox';
 import Panel from './Panel';
-import { CCardContainer, CCardDrawer, CCard } from './Card';
+import Icon from './Icon';
+import Drawer from './Drawer';
+import { CCardContainer, CCard } from './Card';
 
 const CFlatButton = props => {
     return <FlatButton {...props} />;
@@ -34,11 +35,11 @@ export {
     CButton,
     CIconButton,
     CDatePicker,
-    CFloatingButton,
     FloatingBox as CFloatingBox,
     Panel as CPanel,
     CCardContainer,
-    CCardDrawer,
+    Drawer as CDrawer,
     CCard,
     CSelectField as CSelect,
+    Icon as CIcon,
 };

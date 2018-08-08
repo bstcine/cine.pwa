@@ -1,0 +1,45 @@
+@import '../style';
+
+.@{drawer}__container {
+    position: relative;
+    overflow: hidden;
+}
+
+.@{drawer} {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.@{drawer}__mask {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+    opacity: 0;
+    transition: opacity 100ms ease-in-out;
+}
+
+.@{drawer}__mask--enter {
+    opacity: 1;
+}
+
+.@{drawer}__content {
+    position: absolute;
+    top: 0;
+    left: 100px;
+    right: 0;
+    bottom: 0;
+    background-color: rgb(241, 241, 241);
+    border-left: 5px solid red;
+    transform: translate3d(100%, 0, 0);
+    transition: transform 300ms ease-in-out;
+}
+
+.@{drawer}__content--enter {
+    transform: translate3d(0, 0, 0);
+}

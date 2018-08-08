@@ -1,9 +1,7 @@
 import React from 'react';
 import TextFix from '@/component/TextFix';
 import { Task_Type } from '@/constant';
-// import { Column112 } from '@/component/CGrid';
-import { CCard } from '@/component/_base';
-import { GIcon } from '@/g/component';
+import { CCard, CIcon } from '@/component/_base';
 
 const Label = ({ type }) => {
     const map = {
@@ -25,7 +23,7 @@ const Status = ({ task }) => {
             <span className="task-opration">待完成</span>
         );
     } else {
-        return <GIcon name="ci-study_finish" className="task-opration" />;
+        return <CIcon className="task-opration">ci-study_finish</CIcon>;
     }
 };
 

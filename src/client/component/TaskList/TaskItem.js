@@ -2,8 +2,7 @@ import React from 'react';
 import TextFix from '@/component/TextFix';
 import { Task_Type } from '@/constant';
 // import { Column112 } from '@/component/CGrid';
-import { CCard } from '@/component/_base';
-import { GIcon } from '@/g/component';
+import { CCard, CIcon } from '@/component/_base';
 import './style.less';
 
 const Label = ({ type }) => {
@@ -26,7 +25,7 @@ const Status = ({ task }) => {
             <span className="task-opration">待完成</span>
         );
     } else {
-        return <GIcon name="ci-study_finish" className="task-opration" />;
+        return <CIcon className="task-opration">ci-study_finish</CIcon>;
     }
 };
 
@@ -51,9 +50,7 @@ const getHref = (task, isMentor) => {
                     task.word_start_index
                 }&end_index=${task.word_end_index}${urlMentorUser}`;
             } else {
-                return `/lword?task_id=${task.id}&word_type=${
-                    task.object_id
-                }`;
+                return `/lword?task_id=${task.id}&word_type=${task.object_id}`;
             }
     }
 };

@@ -66,45 +66,6 @@
     }
 }
 
-.@{card}__drawer {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-}
-
-.@{card}__mask {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.6);
-    opacity: 0;
-    transition: opacity 100ms ease-in-out;
-}
-
-.@{card}__mask--enter {
-    opacity: 1;
-}
-
-.@{card}__drawercontent {
-    position: absolute;
-    top: 0;
-    left: 100px;
-    right: 0;
-    bottom: 0;
-    background-color: rgb(241, 241, 241);
-    border-left: 5px solid red;
-    transform: translate3d(100%, 0, 0);
-    transition: transform 300ms ease-in-out;
-}
-
-.@{card}__drawercontent--enter {
-    transform: translate3d(0, 0, 0);
-}
-
 @media @media-up-sm {
     .@{card}--col112 .@{card} {
         flex: 0 0 percentage(1/2);

@@ -11,16 +11,16 @@ const devMode = process.env.NODE_ENV !== 'production';
 const SERVICE_URL = null;
 const publicPath = '/'; // for cdn
 const pages = [
-    'cquiz',
-    'address',
-    'temp',
-    'quizvocab',
+    //     'cquiz',
+    //     'address',
+    //     'temp',
+    //     'quizvocab',
     'content',
     'user',
     'learn',
-    'lword',
-    'quiz',
-    'mentor',
+    //     'lword',
+    //     'quiz',
+    //     'mentor',
     'widget',
 ];
 

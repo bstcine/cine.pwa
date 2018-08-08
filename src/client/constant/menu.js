@@ -2,16 +2,11 @@ import * as h5 from './menuItemUrl';
 import { RoleID } from '@/constant';
 /**
  * ===icon===
- * mi-xxx --> material-icons
+ * mi-xxx || xxx --> material-icons
  * ci-xxx --> cine-icons
- * 已有样式在 @component/GIcon/style.less
+ * 已有样式在 @component/_base/Icon
  * ===icon===
  *
- * ===icon_path===
- * icon_path: require('@/entry/user/asset/image/ico_integral.png')
- * icon_path: '//www.bstcine.com/asset/image/ico_headpic.d8668494.png'
- * remote url 建议以 `//` 开头，便于 http/https 切换
- * ===icon_path===
  */
 const cineMenu = [
     { label: '首页', url: '/' },
@@ -51,12 +46,12 @@ const cineMenu = [
             {
                 label: '我的优惠券',
                 url: h5.URL_User_Coupon,
-                icon: 'ci-coupon',
+                icon: 'ci-ico_coupon',
             },
             {
                 label: '我的积分',
                 url: h5.URL_User_Integral,
-                icon: 'ci-integral',
+                icon: 'ci-ico_integral',
             },
             {
                 label: '我的测试',

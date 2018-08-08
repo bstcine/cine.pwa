@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import classNames from 'classnames';
 import './style.less';
-import { baseprefix } from '@/component/_base/config';
+import { componentNames } from '@/component/_base/config';
+const cls = componentNames.Drawer;
 
-const cls = `${baseprefix}-card`;
-
-class CardDrawer extends Component {
+class Drawer extends Component {
     constructor(props) {
         super(props);
         this.onClose = this.onClose.bind(this);
@@ -13,6 +12,11 @@ class CardDrawer extends Component {
             active: false,
             isOpen: this.props.isOpen,
         };
+    }
+
+    static getDerivedStateFromProps(nextProps, prevState) {
+        prevState.isOpen = nextProps.isOpen;
+        return prevState;
     }
 
     componentDidMount() {
@@ -23,28 +27,24 @@ class CardDrawer extends Component {
         });
     }
 
-    UNSAFE_componentWillReceiveProps(nextProps) {
-        this.setState({
-            isOpen: nextProps.isOpen,
-        });
-    }
-
     componentDidUpdate(prevProps) {
-        setTimeout(() => {
+        requestAnimationFrame(() => {
             this.setState({
                 active: prevProps.isOpen,
             });
         });
     }
+
     onClose() {
         this.props.onClose && this.props.onClose();
     }
 
     render() {
-        const { className, children, isOpen } = this.props;
+        const { className, children, isOpen, offset } = this.props;
+        const style = offset ? { left: offset } : null;
         if (!isOpen) return null;
         return (
-            <div className={classNames(`${cls}__drawer`, className)}>
+            <div className={classNames(`${cls}`, className)}>
                 <div
                     className={classNames(`${cls}__mask`, {
                         [`${cls}__mask--enter`]: this.state.active,
@@ -52,9 +52,10 @@ class CardDrawer extends Component {
                     onClick={this.onClose}
                 />
                 <div
-                    className={classNames(`${cls}__drawercontent`, {
-                        [`${cls}__drawercontent--enter`]: this.state.active,
-                    })}>
+                    className={classNames(`${cls}__content`, {
+                        [`${cls}__content--enter`]: this.state.active,
+                    })}
+                    style={style}>
                     {children}
                 </div>
             </div>
@@ -62,4 +63,4 @@ class CardDrawer extends Component {
     }
 }
 
-export default CardDrawer;
+export default Drawer;

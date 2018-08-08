@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { Children } from 'react';
 import classNames from 'classnames';
 import './style.less';
+import { CDrawer } from '@/component/_base';
 import { componentNames } from '@/component/_base/config';
 const cls = componentNames.Panel;
+const drawerCls = componentNames.Drawer;
 
 const Panel = ({
     title,
@@ -13,6 +15,12 @@ const Panel = ({
     padding = '',
     ext_href,
 }) => {
+    let drawer = null;
+    Children.map(children, item => {
+        if (item.type === CDrawer) {
+            drawer = item;
+        }
+    });
     return (
         <div className={classNames(`${cls}`, className)}>
             {!!title && (
@@ -33,6 +41,7 @@ const Panel = ({
             <div
                 className={classNames(`${cls}__body`, {
                     [`${cls}__body--paddingnone`]: padding === 'none',
+                    [`${drawerCls}__container`]: !!drawer,
                 })}>
                 {children}
             </div>

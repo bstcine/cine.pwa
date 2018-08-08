@@ -1,10 +1,10 @@
 import React, { Children } from 'react';
 import classNames from 'classnames';
-import { CCardDrawer } from '@/component/_base';
+import { CDrawer } from '@/component/_base';
 import './style.less';
-import { baseprefix } from '@/component/_base/config';
-
-const cls = `${baseprefix}-card`;
+import { componentNames } from '@/component/_base/config';
+const cls = componentNames.Card;
+const drawerCls = componentNames.Drawer;
 
 const CardContainer = ({
     className,
@@ -17,7 +17,7 @@ const CardContainer = ({
     let cards = [];
     let drawer = null;
     Children.map(children, item => {
-        if (item.type === CCardDrawer) {
+        if (item.type === CDrawer) {
             drawer = item;
         } else {
             cards.push(item);
@@ -29,6 +29,7 @@ const CardContainer = ({
                 `${cls}__container${layout === '111' ? '111' : ''}`,
                 {
                     [`${cls}--col${layout}`]: !!layout,
+                    [`${drawerCls}__container`]: !!drawer,
                 },
                 className
             )}>

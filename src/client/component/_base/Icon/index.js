@@ -1,13 +1,25 @@
 import React from 'react';
 import classNames from 'classnames';
-import IconButton from 'material-ui/IconButton';
-
-export const CIcon = ({ name, className }) => {
-    return <i className={classNames('material-icons', className)}>{name}</i>;
+import './iconfont.css';
+import './style.less';
+import { componentNames } from '@/component/_base/config';
+const cls = componentNames.Icon;
+/**
+ * mi-xxx || xxx --> material-icons
+ * ci-xxx --> cine-icons
+ */
+const Icon = ({ className, children }) => {
+    if (children.indexOf('ci-') === 0) {
+        return (
+            <i className={classNames(cls, 'cine-icons', className, children)} />
+        );
+    } else {
+        return (
+            <i className={classNames(cls, 'material-icons', className)}>
+                {children.indexOf('mi-') === 0 ? children.substr(3) : children}
+            </i>
+        );
+    }
 };
 
-export const CIconButton = ({ iconName, selected, onClick }) => {
-    const color = selected === true ? 'secondary' : 'primary';
-    const icon = <CIcon name={iconName} color={color} />;
-    return <IconButton onClick={onClick}>{icon}</IconButton>;
-};
+export default Icon;

@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import classNames from 'classnames';
-import Icon from '../Icon';
+import { CIcon } from '@/component/_base';
 import { getNavs } from './helper';
 import { logoutV1 } from '@/service/base';
 
@@ -106,7 +106,7 @@ const UserBar = ({ user, isOpen, onToggle, onLogout }) => (
         <div className="nickname" onClick={onToggle}>
             {Boolean(user) && <span>{user.nickname}</span>}
             <HeaderImg user={user} />
-            <Icon name="mi-arrow_drop_up" />
+            <CIcon>arrow_drop_up</CIcon>
         </div>
         <nav className="nav-user">
             {/* <a href="/user">个人资料</a> */}
@@ -131,20 +131,14 @@ const Nav2 = ({ navs }) => (
                                     active: menu.active,
                                 })}>
                                 {(!!menu.icon || !!menu.icon_path) && (
-                                    <Icon
-                                        name={menu.icon}
-                                        url={menu.icon_path}
-                                    />
+                                    <CIcon>{menu.icon}</CIcon>
                                 )}
                                 {menu.label}
                             </a>
                         ) : (
                             <a key={menu.url} className="disabled">
                                 {(!!menu.icon || !!menu.icon_path) && (
-                                    <Icon
-                                        name={menu.icon}
-                                        url={menu.icon_path}
-                                    />
+                                    <CIcon>{menu.icon}</CIcon>
                                 )}
                                 {menu.label}
                             </a>
@@ -161,7 +155,7 @@ const Nav3 = ({ navs }) => {
             <div className="gcontainer">
                 <a className="nav-3nd__home" href={menu1st.url}>
                     {(!!menu1st.icon || !!menu1st.icon_path) && (
-                        <Icon name={menu1st.icon} url={menu1st.icon_path} />
+                        <CIcon>{menu1st.icon}</CIcon>
                     )}
                     {menu1st.label}
                 </a>

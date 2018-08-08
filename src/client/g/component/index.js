@@ -2,7 +2,6 @@ import Auth from './Auth';
 import Alert from './Alert';
 import Footer from './Footer';
 import Header from './Header';
-import Icon from './Icon';
 import Layout from './Layout';
 import Loading from './Loading';
 import Main from './Main';
@@ -13,7 +12,6 @@ export {
     Alert as GAlert,
     Footer as GFooter,
     Header as GHeader,
-    Icon as GIcon,
     Layout as GLayout,
     Loading as GLoading,
     Main as GMain,

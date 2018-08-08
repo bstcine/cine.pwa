@@ -4,10 +4,12 @@ export const componentNames = {
     Button: `${baseprefix}-btn`,
     Card: `${baseprefix}-card`,
     Dialog: `${baseprefix}-dialog`,
+    Drawer: `${baseprefix}-drawer`,
     FloatingBox: `${baseprefix}-floating-box`,
     Mask: `${baseprefix}-mask`,
     Panel: `${baseprefix}-panel`,
     Toast: `${baseprefix}-toast`,
+    Icon: `${baseprefix}-gicon`,
 };
 
 export const fontRatio = 5;

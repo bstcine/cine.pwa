@@ -1,7 +1,6 @@
 import React from 'react';
 import Card from './Card';
 import CardContainer from './CardContainer';
-import CardDrawer from './CardDrawer';
 
 const CCard = ({
     hover = 'darken',
@@ -21,14 +20,4 @@ const CCardContainer = ({ className, gap, layout = '112', children }) => (
     </CardContainer>
 );
 
-const CCardDrawer = ({ className, gap, onClose, isOpen, children }) => (
-    <CardDrawer
-        className={className}
-        gap={gap}
-        isOpen={isOpen}
-        onClose={onClose}>
-        {children}
-    </CardDrawer>
-);
-
-export { CCardContainer, CCardDrawer, CCard };
+export { CCardContainer, CCard };

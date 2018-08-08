@@ -8,9 +8,9 @@ class WordListHeader extends React.PureComponent {
         let { name, isShowAll, actions, cardAction, wordAction } = this.props;
         return (
             <div className="v_Task_VocabularyHeader">
-                <img className="back-Image-Header" src={require('@/asset/image/arrow_back.svg')} onClick={wordAction} />
+                <img className="back-Image-Header" src={require('../../asset/image/lword_back.svg')} onClick={wordAction} />
                 <div className="header-Left">
-                    <img className="back-Image-Left" src={require('@/asset/image/arrow_back.svg')} onClick={wordAction} />
+                    <img className="back-Image-Left" src={require('../../asset/image/lword_back.svg')} onClick={wordAction} />
                     <p className="v_Task_H_TaskName">{name}</p>
                     <p className="showAll-Title">显示全部</p>
                     <div className="showAll-Select">

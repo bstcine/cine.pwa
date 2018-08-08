@@ -91,10 +91,10 @@ class WordCardContainer extends Component {
         }
         let xInstance = this.touchmoveX - this.touchStartX;
 
-        if (xInstance < -120) {
+        if (xInstance < -50) {
             event.stopPropagation();
             actions.startNext();
-        } else if (xInstance > 120) {
+        } else if (xInstance > 50) {
             event.stopPropagation();
             actions.startPrevious();
         }

@@ -72,9 +72,11 @@ class WordCardBodyRecite extends React.PureComponent {
                                 </div>
                             </div>
                             <div className="back" >
-                                <p className="transition">
-                                    {zh}
-                                </p>
+                                <div className="transition">
+                                    <p className="zh-Test">
+                                        {zh}
+                                    </p>
+                                </div>
                             </div>
                         </div>
                     </div>

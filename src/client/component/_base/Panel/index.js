@@ -47,10 +47,10 @@ const Panel = ({
             <div
                 className={classNames(`${cls}__body`, {
                     [`${cls}__body--paddingnone`]: padding === 'none',
-                    [`${drawerCls}__container`]: !!drawer,
                 })}>
-                {children}
+                {childs}
             </div>
+            {drawer}
         </div>
     );
 };

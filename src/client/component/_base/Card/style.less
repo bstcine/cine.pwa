@@ -13,12 +13,12 @@
 .@{card}__grid {
     display: flex;
     flex-wrap: wrap;
-    margin: 0 -0.04rem -0.12rem;
+    margin: 0 -0.08rem -0.24rem;
 }
 
 .@{card} {
     width: 100%;
-    padding: 0 0.04rem 0.12rem;
+    padding: 0 0.08rem 0.24rem;
 }
 
 .@{card}__gap--none {
@@ -28,10 +28,17 @@
     }
 }
 
-.@{card}__gap--large {
-    margin: 0 -0.08rem -0.24rem;
+.@{card}__gap--small {
+    margin: 0 -0.04rem -0.12rem;
     .@{card} {
-        padding: 0 0.08rem 0.24rem;
+        padding: 0 0.04rem 0.12rem;
+    }
+}
+
+.@{card}__gap--large {
+    margin: 0 -0.16rem -0.24rem;
+    .@{card} {
+        padding: 0 0.16rem 0.24rem;
     }
 }
 

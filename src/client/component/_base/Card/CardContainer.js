@@ -11,7 +11,7 @@ const CardContainer = ({
     children,
     // '112' | '122' | '123' | '234'
     layout = '112',
-    // 'none' | null | 'large'
+    // none' | 'small' | null | 'large'
     gap,
 }) => {
     let cards = [];
@@ -35,6 +35,7 @@ const CardContainer = ({
             )}>
             <div
                 className={classNames(`${cls}__grid`, {
+                    [`${cls}__gap--small`]: gap === 'small',
                     [`${cls}__gap--large`]: gap === 'large',
                     [`${cls}__gap--none`]: gap === 'none',
                 })}>

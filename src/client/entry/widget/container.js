@@ -25,7 +25,7 @@ class Container extends Component {
         const { isDrawerOpen, isPDrawerOpen } = this.state;
         return (
             <div className="cine-widget">
-                <CPanel title="CButton @seeat : entry/content/component/Widget.js">
+                <CPanel title="CButton">
                     <div>
                         <CButton>
                             <CIcon>home</CIcon>
@@ -140,126 +140,6 @@ class Container extends Component {
                         }}>
                         1231adfadfadfafd232
                     </CDrawer>
-                    <details>
-                        <summary>查看代码</summary>
-                        <div style={{ whiteSpace: 'pre-wrap' }}>
-                            {`
-                                <CButton>
-                                    <CIcon>home</CIcon>
-                                </CButton>
-                                <CButton
-                                    color="primary"
-                                    onClick={() => {
-                                        this.setState(prevState => ({
-                                            isPDrawerOpen: !prevState.isPDrawerOpen,
-                                        }));
-                                    }}>
-                                    <CIcon>ci-ico_grammar</CIcon> PanelDrawer
-                                </CButton>
-                                <CButton color="secondary">
-                                    <CIcon>ci-ico_grammar</CIcon> SECONDARY
-                                </CButton>
-                                <CButton disabled>DISABLED</CButton>
-                                <CButton href="//baidu.com">Link</CButton>
-                            </div>
-                            <div>
-                                <CButton variant="outlined">
-                                    DEFAULT <CIcon>lock</CIcon>
-                                </CButton>
-                                <CButton variant="outlined" color="primary">
-                                    PRIMARY
-                                </CButton>
-                                <CButton variant="outlined" color="secondary">
-                                    SECONDARY
-                                </CButton>
-                                <CButton disabled variant="outlined">
-                                    DISABLED
-                                </CButton>
-                                <CButton variant="outlined" href="//baidu.com">
-                                    Link
-                                </CButton>
-                            </div>
-                            <div>
-                                <CButton variant="contained">DEFAULT</CButton>
-                                <CButton variant="contained" color="primary">
-                                    PRIMARY
-                                </CButton>
-                                <CButton variant="contained" color="secondary">
-                                    SECONDARY <CIcon>lock</CIcon>
-                                </CButton>
-                                <CButton disabled variant="contained">
-                                    DISABLED
-                                </CButton>
-                                <CButton variant="contained" href="//baidu.com">
-                                    Link
-                                </CButton>
-                            </div>
-                            <div>
-                                <CButton size="small" color="primary">
-                                    SMALL
-                                </CButton>
-                                <CButton
-                                    size="small"
-                                    variant="outlined"
-                                    color="primary">
-                                    SMALL
-                                </CButton>
-                                <CButton
-                                    size="small"
-                                    variant="contained"
-                                    color="primary">
-                                    SMALL
-                                </CButton>
-                            </div>
-                            <div>
-                                <CButton size="large" color="secondary">
-                                    LARGE
-                                </CButton>
-                                <CButton
-                                    size="large"
-                                    variant="outlined"
-                                    color="secondary">
-                                    LARGE <CIcon>play_circle_filled</CIcon>
-                                </CButton>
-                                <CButton
-                                    size="large"
-                                    variant="contained"
-                                    color="secondary">
-                                    LARGE2
-                                </CButton>
-                            </div>
-                            <div>
-                                <CIconButton>lock</CIconButton>
-                                <CIconButton color="primary">alarm</CIconButton>
-                                <CIconButton mini color="secondary">
-                                    pets
-                                </CIconButton>
-                            </div>
-                            <div>
-                                <CButton fullWidth variant="contained" color="primary">
-                                    FULLWIDTH NORMAL
-                                </CButton>
-                                <CButton
-                                    fullWidth
-                                    size="large"
-                                    variant="outlined"
-                                    color="secondary">
-                                    FULLWIDTH LARGE
-                                </CButton>
-                            </div>
-                            <CDrawer
-                                isOpen={isPDrawerOpen}
-                                offset="50%"
-                                onClose={() => {
-                                    this.setState({
-                                        isPDrawerOpen: false,
-                                    });
-                                }}>
-                                1231adfadfadfafd232
-                            </CDrawer>
-                                `}
-                        </div>
-                    </details>
                 </CPanel>
 
                 <CPanel title="Gird Card default112 gap=large">
@@ -283,8 +163,8 @@ class Container extends Component {
                     </CCardContainer>
                 </CPanel>
 
-                <CPanel title="Gird Card 122 gap=none hover=lighten">
-                    <CCardContainer gap="none" layout="122">
+                <CPanel title="Gird Card 122 gap=small hover=lighten">
+                    <CCardContainer gap="small" layout="122">
                         <CCard hover="lighten">1</CCard>
                         <CCard hover="lighten">2</CCard>
                         <CCard hover="lighten">3</CCard>
@@ -295,8 +175,8 @@ class Container extends Component {
                     </CCardContainer>
                 </CPanel>
 
-                <CPanel title="Gird Card 123">
-                    <CCardContainer layout="123">
+                <CPanel title="Gird Card 123 gap=none">
+                    <CCardContainer layout="123" gap="none">
                         <CCard>1</CCard>
                         <CCard>2</CCard>
                         <CCard>3</CCard>

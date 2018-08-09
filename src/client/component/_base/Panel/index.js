@@ -15,14 +15,20 @@ const Panel = ({
     padding = '',
     ext_href,
 }) => {
+    let childs = [];
     let drawer = null;
     Children.map(children, item => {
         if (item.type === CDrawer) {
             drawer = item;
+        } else {
+            childs.push(item);
         }
     });
     return (
-        <div className={classNames(`${cls}`, className)}>
+        <div
+            className={classNames(`${cls}`, className, {
+                [`${drawerCls}__container`]: !!drawer,
+            })}>
             {!!title && (
                 <div className={`${cls}__head`}>
                     <div className={`${cls}__title`}>

@@ -5,6 +5,7 @@ import { CDrawer } from '@/component/_base';
 import { componentNames } from '@/component/_base/config';
 const cls = componentNames.Panel;
 const drawerCls = componentNames.Drawer;
+import { Link } from 'react-router-dom';
 
 const Panel = ({
     title,
@@ -38,9 +39,9 @@ const Panel = ({
                         )}
                     </div>
                     {ext_title && (
-                        <a className={`${cls}__ext`} href={ext_href}>
-                            {ext_title}
-                        </a>
+                        <Link to={ext_href}>
+                            <span className={`${cls}__ext`}>{ext_title}</span>
+                        </Link>
                     )}
                 </div>
             )}

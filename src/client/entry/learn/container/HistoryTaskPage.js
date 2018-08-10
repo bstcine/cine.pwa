@@ -8,8 +8,10 @@ import { lTaskAction } from '@/action/lTaskAction';
 import HistoryTask from '../component/historyTask';
 import CThemeProvider from '@/component/CThemeProvider';
 import { getParam } from '@/util/urlUtil';
+import { withRouter } from 'react-router-dom';
+import { GLayoutContainer } from '@/g/container';
 
-class HistoryTaskContainer extends React.PureComponent {
+class HistoryTaskPage extends React.Component {
     constructor(props) {
         super(props);
 
@@ -34,7 +36,7 @@ class HistoryTaskContainer extends React.PureComponent {
         } = this.props;
         return (
             <CThemeProvider>
-                <div>
+                <GLayoutContainer>
                     <HistoryTask
                         isDialogShow={isDialogShow}
                         taskModels={taskModels}
@@ -45,7 +47,7 @@ class HistoryTaskContainer extends React.PureComponent {
                         param={this.param}
                         actions={actions}
                     />
-                </div>
+                </GLayoutContainer>
             </CThemeProvider>
         );
     }
@@ -67,6 +69,6 @@ const mapDispatchToProps = dispatch => ({
     actions: bindActionCreators(lTaskAction, dispatch),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-    HistoryTaskContainer
+export default withRouter(
+    connect(mapStateToProps, mapDispatchToProps)(HistoryTaskPage)
 );

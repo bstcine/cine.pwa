@@ -6,6 +6,7 @@ import Layout from './Layout';
 import Loading from './Loading';
 import Main from './Main';
 import Message from './Message';
+import Router from './Router';
 
 export {
     Auth as GAuth,
@@ -16,4 +17,5 @@ export {
     Loading as GLoading,
     Main as GMain,
     Message as GMessage,
+    Router as GRouter,
 };

@@ -312,7 +312,6 @@ export const wQuizAction = {
             let [result] = await fetchData(Api.APIURL_User_Learn_SaveFailure, {
                 failure_words: failureArr,
             });
-            console.log(result);
         }
         // 更新测试状态为已完成
         dispatch(wQuizAction.updateTask('2'));
@@ -323,7 +322,10 @@ export const wQuizAction = {
      * 测试未通过
      * */
     testWrong: () => async (dispatch, getState) => {
-        console.log('测试未通过');
+        // 更新测试状态为已完成
+        dispatch(wQuizAction.updateTask('1'));
+        // 提示用户已完成全部测试（掌握全部单词）
+        dispatch(wQuizAction._endTest(false));
     },
     /**
      * 开始下一个（对外调用）

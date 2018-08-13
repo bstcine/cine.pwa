@@ -1,8 +1,8 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import storeUtil from '@/util/storeUtil';
 import * as Service from '@/service/quizvocab';
-import {CSSTransition} from 'react-transition-group';
-import {initWechat} from '@/util/wechatUtil';
+import { CSSTransition } from 'react-transition-group';
+import { initWechat } from '@/util/wechatUtil';
 
 export default class Card extends Component {
     constructor(props) {
@@ -166,7 +166,7 @@ export default class Card extends Component {
 
     // 答题结束
     theEnd() {
-        console.log('theEnd');
+        console.log('theEnd',this.calcCurrVocab());
         this.disableClick = true;
         //答题结束时间
         this.end_at = new Date().getTime();

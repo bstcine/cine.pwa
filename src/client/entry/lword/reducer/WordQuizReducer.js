@@ -6,7 +6,7 @@ import { ACTION_LT } from '@/constant/actionTypeLearn';
 
 const initialState = fromJS({
     isTest: false,                   // 是否正在测试
-    isDone: false,                   // 测试是否结束
+    isDone: null,                   // 测试是否结束
     taskStatus: 0,                   // 任务状态
     rows: [],                        // 任务源数据
     wordCount: 0,                    // 单词总数

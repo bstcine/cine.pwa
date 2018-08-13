@@ -42,11 +42,13 @@ export const wordAction = {
     loadWordList: (param) => async dispatch => {
 
         let [error, result] = await fetchData(Api.APIURL_User_Learn_Word, param);
-
         if (!error) {
             dispatch(wordAction._receive(result));
             let currentRows = [];
             result.rows.forEach((ele) => {
+                if (ele.id.length > 5) {
+                    ele.id = ele.id.slice(-5);
+                }
                 currentRows.push(ele);
             });
             dispatch(wordAction._currentRows(currentRows));

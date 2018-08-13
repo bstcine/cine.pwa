@@ -7,7 +7,7 @@ export default class WordCourse extends React.PureComponent {
     render() {
         const { items } = this.props;
         const wordLessons = items.toJS();
-        // alert(JSON.stringify(orders));
+        // alert(JSON.stringify(wordLessons));
         return (
             <React.Fragment>
                 <CPanel title="Top1000词汇：1-3000" >

@@ -7,12 +7,17 @@ const WordLessonItem = ({ item, actions }) => {
         <React.Fragment>
             <div className={className}>
                 <a href="/experiences" target="_blank">
-                    <div className="img-c" />
+                    <div className="top">
+                        <div className="no">第{item.id}组</div>
+                        <div className="fromto">{item.value}</div>
+                    </div>
                 </a>
 
-                <div className="text-c">{item.id}</div>
-                <div className="text-c">{item.value}</div>
-                <div className="text-c">-</div>
+                <div className="middle" />
+                <div className="bottom">
+                    <div className="quizScore">{item.wQuizScore}</div>
+                    <div className="quiz">测试成绩</div>
+                </div>
             </div>
         </React.Fragment>
     );

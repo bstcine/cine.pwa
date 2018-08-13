@@ -69,12 +69,11 @@ export const wordAction = {
         }
         let newObject = { ...wordObject };
         newObject.is_known = is_known;
+        result.rows.splice(resultIndex, 1, newObject);
         if (isShowAll || !is_known) {
             currentRows.splice(index, 1, newObject);
-            result.rows.splice(resultIndex, 1, newObject);
         } else {
             currentRows.splice(index, 1);
-            result.rows.splice(resultIndex, 1);
         }
         let newRows = [...currentRows];
         dispatch(wordAction._currentRows(newRows));

@@ -5,11 +5,16 @@ import WordContainer from './container/WordContainer';
 import WordListContainer from './container/WordListContainer';
 import WordQuizContainer from './container/WordQuizContainer';
 import WordCardContainer from './container/WordCardContainer';
+import WordCourseContainer from './container/WordCourseContainer';
 
 const routes = {
     path: '/lword',
     component: WordRoot,
     routes: [
+        {
+            path: '/lword/course',
+            component: WordCourseContainer,
+        },
         {
             isExact: true,
             path: '/lword',

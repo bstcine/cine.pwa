@@ -10,11 +10,12 @@ class WordCourseContainer extends Component {
     }
 
     render() {
-        let { items, actions } = this.props;
+        let { lessons, lastVisitID, actions } = this.props;
         return (
             <React.Fragment>
                 <WordCourse
-                    items={items}
+                    items={lessons}
+                    lastVisitID={lastVisitID}
                     actions={actions}
                 />
             </React.Fragment>
@@ -24,8 +25,9 @@ class WordCourseContainer extends Component {
 
 const mapStateToProps = state => {
     return {
-        items: state.WordCourseRedu.get('rows'),
-        lastVisitID: state.WordCourseRedu.get('lastVisitID')
+        courseID: state.WordCourseRedu.get('courseID'),
+        lessons: state.WordCourseRedu.get('lessons'),
+        lastVisitID: state.WordCourseRedu.get('lastVisitID'),
     };
 };
 
@@ -33,4 +35,6 @@ const mapDispatchToProps = dispatch => ({
     actions: bindActionCreators(gAction, dispatch),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(WordCourseContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(
+    WordCourseContainer
+);

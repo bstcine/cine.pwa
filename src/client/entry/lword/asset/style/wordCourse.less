@@ -4,41 +4,80 @@
     background-color: transparent;
 }
 
+.quizLink {
+    display: flex;
+    justify-content: flex-end;
+    font-size: 14px;
+    padding: 0px 10px 6px 10px;
+}
+
 .lesson {
-    background-color: #fafafa;
-    min-height: 100px;
+    background-color: white;
+    color: #c2c3c5;
 
-
+    /*   font-size: 12px; */
+    font-size: 0.27rem;
+    border: 1px solid #eff4f8;
+    box-shadow: 0 0.1rem 0.06rem 0 rgba(219, 230, 240, 0.1);
+    margin: 5px 5px;
+    border-radius: 6px;
+    &.default {
+        background-color: white;
+        color: #c2c3c5;
+    }
+    &.quiz {
+        background-color: rgba(226, 241, 254, 1);
+        color: #757575;
+    }
+    &.quiz90 {
+        background-color: rgba(107, 181, 252, 1);
+        color: #eeeeee;
+    }
     &.lastVisit {
-        background-color: #90CAF9;
+        border: 2px solid #288fd7;
     }
 
-    .top{
+    .top {
         display: flex;
         flex-direction: row;
-        padding: 10px;
-        .no{
-            font-size: 12px;
-            width: 50%;
-
+        padding: 12px 10px 6px 10px;
+        .no {
+            width: 40%;
         }
-        .fromto{
-            font-size: 12px;
-            
+        .fromto {
+            width: 60%;
+            display: flex;
+            justify-content: flex-end;
         }
     }
-    .middle{
+
+    .middle {
         height: 1px;
-        background-color: #EEEEEE;
+        background-color: #f5f5f5;
     }
-    .bottom{
-        padding: 10px;
-        .quizScore{
-            font-size: 12px;
+    .middle90 {
+        height: 1px;
+        background-color: #bdbdbd;
+    }
 
+    .bottom {
+        padding: 15px;
+        .quizScore {
+            font-size: 22px;
+            font-weight: bold;
+            color: #0d5fa1;
+            display: flex;
+            justify-content: center;
+            margin: 10px 0 15px 0;
         }
-        .quiz{
-            font-size: 12px;            
+        .score90 {
+            color: #F5F5F5;
+        }
+        .quiz {
+            display: flex;
+            justify-content: center;
+            -webkit-font-smoothing: antialiased;
+            font-size: 12px;
         }
     }
 }

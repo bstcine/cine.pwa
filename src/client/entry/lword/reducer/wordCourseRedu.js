@@ -11,9 +11,15 @@ const getCourseItems = (courseID, indexLast, userQuizRows) => {
         const id = i + 1;
         const _from = indexStart + i * 50;
         const value = _from + '-' + (_from + 49);
-        const wQuizScore = -1;
+
         const wKnownCount = 0;
         const isLastVisit = id === lastVisitID;
+        let wQuizScore = id === lastVisitID ? 33 : -1;
+        if (i < 5) {
+            wQuizScore = 90 + i;
+        } else if (i < 11) {
+            wQuizScore = i * 10;
+        }
 
         const item = {
             id,
@@ -32,7 +38,7 @@ const initWordCourse = fromJS({
     userID: null,
     courseID: '3001-3000',
     lastVisitID: 502,
-    rows: getCourseItems('3001-3000', 3502),
+    lessons: getCourseItems('3001-3000', 3502),
 });
 
 const WordCourseRedu = (state = initWordCourse, action) => {

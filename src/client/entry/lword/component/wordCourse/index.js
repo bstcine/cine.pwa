@@ -10,7 +10,11 @@ export default class WordCourse extends React.PureComponent {
         // alert(JSON.stringify(wordLessons));
         return (
             <React.Fragment>
-                <CPanel title="Top1000词汇：1-3000" >
+                <CPanel title="Top1000词汇：1-3000">
+                    <a href="/quizvocab?estimate=1-3000" target="_blank">
+                        <div className="quizLink">测试你的背单词起点</div>
+                    </a>
+
                     <WordLessonList lessons={wordLessons} layout="234" />
                 </CPanel>
             </React.Fragment>

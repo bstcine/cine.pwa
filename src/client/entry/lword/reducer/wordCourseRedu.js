@@ -38,7 +38,7 @@ const initWordCourse = fromJS({
     userID: null,
     courseID: '3001-3000',
     lastVisitID: 502,
-    lessons: getCourseItems('3001-3000', 3502),
+    lessons: getCourseItems('3001-3000', 3552),
 });
 
 const WordCourseRedu = (state = initWordCourse, action) => {

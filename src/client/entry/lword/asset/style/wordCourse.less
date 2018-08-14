@@ -16,7 +16,7 @@
     color: #c2c3c5;
 
     /*   font-size: 12px; */
-    font-size: 0.27rem;
+    font-size: 0.25rem;
     border: 1px solid #eff4f8;
     box-shadow: 0 0.1rem 0.06rem 0 rgba(219, 230, 240, 0.1);
     margin: 5px 5px;
@@ -40,14 +40,19 @@
     .top {
         display: flex;
         flex-direction: row;
-        padding: 12px 10px 6px 10px;
+        padding: 15px 10px 6px 10px;
+        height: 35px;
         .no {
-            width: 40%;
+            width: 35%;
+            display: flex;
+            align-items: flex-end;
         }
         .fromto {
-            width: 60%;
+            width: 65%;
             display: flex;
             justify-content: flex-end;
+            align-items: flex-end;
+            font-size: 0.3rem;
         }
     }
 
@@ -57,27 +62,45 @@
     }
     .middle90 {
         height: 1px;
-        background-color: #bdbdbd;
+        background-color: rgba(255, 255, 255, 0.1);
     }
 
     .bottom {
-        padding: 15px;
+        padding: 10px;
+        padding-bottom: 15px;
         .quizScore {
             font-size: 22px;
             font-weight: bold;
             color: #0d5fa1;
             display: flex;
             justify-content: center;
-            margin: 10px 0 15px 0;
+            margin: 0px 0 15px 0;
         }
         .score90 {
-            color: #F5F5F5;
+            color: #f5f5f5;
         }
         .quiz {
             display: flex;
             justify-content: center;
             -webkit-font-smoothing: antialiased;
-            font-size: 12px;
+        }
+        .star {
+            display: flex;
+            justify-content: flex-end;
+            height: 18px;
+            .star5 {
+                display: inline-block !important;
+                color: rgb(253, 227, 63) !important;
+                font-size: 18px !important;
+                height: 18px !important;
+                width: 18px !important;
+                svg {
+                    height: 1em;
+                    width: 1em;
+                    display: block;
+                    fill: currentcolor;
+                }
+            }
         }
     }
 }

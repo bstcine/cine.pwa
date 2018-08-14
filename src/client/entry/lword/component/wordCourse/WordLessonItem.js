@@ -1,14 +1,26 @@
 import React from 'react';
+import { svgStar } from '@/constant/svg';
 
 const WordLessonItem = ({ item, actions }) => {
     let quizClassName = 'default';
     let quizScore = '-';
+    let star = '';
     if (item.wQuizScore !== -1) {
         quizScore = item.wQuizScore + '%';
         if (item.wQuizScore < 90) {
             quizClassName = 'quiz';
-        } else if (item.wQuizScore <= 100) {
+        } else if (item.wQuizScore < 100) {
             quizClassName = 'quiz90';
+            star = <span className="star5">{svgStar}</span>;
+        } else {
+            quizClassName = 'quiz90';
+            star = (
+                <div>
+                    {' '}
+                    <span className="star5">{svgStar}</span>
+                    <span className="star5">{svgStar}</span>
+                </div>
+            );
         }
     }
     const className =
@@ -26,6 +38,7 @@ const WordLessonItem = ({ item, actions }) => {
 
                     <div className={classNameMiddle} />
                     <div className="bottom">
+                        <div className="star">{star}</div>
                         <div className={'quizScore ' + classNameScore}>
                             {quizScore}
                         </div>

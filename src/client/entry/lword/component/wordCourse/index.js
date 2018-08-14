@@ -15,7 +15,7 @@ export default class WordCourse extends React.PureComponent {
                         <div className="quizLink">测试你的背单词起点</div>
                     </a>
 
-                    <WordLessonList lessons={wordLessons} layout="234" />
+                    <WordLessonList lessons={wordLessons} layout="245" />
                 </CPanel>
             </React.Fragment>
         );

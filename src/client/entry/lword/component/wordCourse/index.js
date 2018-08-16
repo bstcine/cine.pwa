@@ -6,7 +6,8 @@ import WordLessonList from './WordLessonList';
 export default class WordCourse extends React.PureComponent {
     render() {
         const { items } = this.props;
-        const wordLessons = items.toJS();
+        // alert(JSON.stringify(items));
+        const wordLessons = items;
         // alert(JSON.stringify(wordLessons));
         return (
             <React.Fragment>

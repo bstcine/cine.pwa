@@ -22,20 +22,12 @@ const UserMobile = ({ user, handleClick }) => {
                 </div>
             </div>
             <div className={'user-panel-c'}>
-                <a className={'tab'} style={{ color: 'gray' }}>
-                    <div style={{ display: 'flex' }}>
-                        <img
-                            src={require('../asset/image/ico_order@2x.png')}
-                            className={'gray'}
-                            style={{ width: '.42rem', height: '.45rem' }}
-                        />
-                        {Number(user.unpayOrdersCount) > 0 && (
-                            <span className="tab-indicator gray">
-                                {String(user.unpayOrdersCount)}
-                            </span>
-                        )}
-                    </div>
-                    我的订单
+                <a className={'tab'} href={'/user/quiz'} target={'_blank'}>
+                    <img
+                        src={require('../asset/image/ico_test_word@2x.png')}
+                        style={{ height: '.42rem', width: '.39rem' }}
+                    />
+                    我的测试
                 </a>
                 <a className={'tab'} href={'/learn'}>
                     <img
@@ -60,31 +52,21 @@ const UserMobile = ({ user, handleClick }) => {
                 </a>
             </div>
             <div className={'user-panel-c'}>
-                <a className={'tab'} href={'/quizvocab'} target={'_blank'}>
-                    <img
-                        src={require('../asset/image/ico_test_word@2x.png')}
-                        style={{ height: '.57rem', width: '.57rem' }}
-                    />
-                    词汇量测试
-                </a>
-                <a className={'tab'} href={'/quiz/grammar'} target={'_blank'}>
-                    <img
-                        src={require('../asset/image/ico_test_grammar@2x.png')}
-                        style={{ height: '.57rem', width: '.57rem' }}
-                    />
-                    核心语法测试
-                </a>
-                {user.role_id !== '3' && (
-                    <a className={'tab'} href={'/mentor'} target={'_blank'}>
+                <a className={'tab'} style={{ color: 'gray' }}>
+                    <div style={{ display: 'flex' }}>
                         <img
-                            src={require('../asset/image/ico_test_teacher@2x.png')}
-                            style={{ height: '.57rem', width: '.57rem' }}
+                            src={require('../asset/image/ico_order@2x.png')}
+                            className={'gray'}
+                            style={{ width: '.34rem', height: '.40rem' }}
                         />
-                        老师批改
-                    </a>
-                )}
-            </div>
-            <div className={'user-panel-c'}>
+                        {Number(user.unpayOrdersCount) > 0 && (
+                            <span className="tab-indicator gray">
+                                {String(user.unpayOrdersCount)}
+                            </span>
+                        )}
+                    </div>
+                    我的订单
+                </a>
                 <a className={'tab'} style={{ color: 'gray' }}>
                     <img
                         src={require('../asset/image/ico_address@2x.png')}
@@ -93,6 +75,8 @@ const UserMobile = ({ user, handleClick }) => {
                     />
                     我的地址
                 </a>
+            </div>
+            <div className={'user-panel-c'}>
                 <a className={'tab'} href={'/resetPassword'}>
                     <img
                         src={require('../asset/image/ico_edit1.png')}

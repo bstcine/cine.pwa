@@ -24,16 +24,28 @@ const cineMenu = [
                         url: h5.URL_Learn_Task,
                     },
                     {
+                        label: '练习',
+                        url: h5.URL_Quiz_Kj,
+                    },
+                    {
+                        label: '词汇课程',
+                        url: h5.URL_Learn_Word_Course,
+                    },
+                    {
                         label: '词汇学习',
                         url: h5.URL_Learn_Word,
                     },
                     {
-                        label: '词汇测试',
-                        url: h5.URL_Learn_Word_Quiz,
+                        label: '词汇学习',
+                        url: h5.URL_Learn_Word_List,
                     },
                     {
-                        label: '练习',
-                        url: h5.URL_Quiz_Kj,
+                        label: '词汇卡片式学习',
+                        url: h5.URL_Learn_Word_Card,
+                    },
+                    {
+                        label: '词汇测试',
+                        url: h5.URL_Learn_Word_Quiz,
                     },
                 ],
             },

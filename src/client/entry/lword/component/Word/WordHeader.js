@@ -8,8 +8,8 @@ class WordHeader extends React.PureComponent {
         let { name, backAction } = this.props;
         let backImage = require('../../asset/image/lword_back.svg');
         return (
-            <div className="word-Header" onClick={backAction}>
-                <img className="backButton" src={backImage} alt="Logo"></img>
+            <div className="word-Header">
+                <img className="backButton" src={backImage} alt="Logo" onClick={backAction}></img>
                 <p className="taskTitle">{name}</p>
                 <div className="lastLocation"></div>
             </div>

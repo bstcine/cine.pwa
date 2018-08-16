@@ -9,7 +9,8 @@
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    //align-items: flex-end;
+    justify-content: space-between;
+    align-items: flex-end;
 }
 
 .wordCard-Header {
@@ -21,6 +22,10 @@
     width: 100%;
     height: auto;
     justify-content: space-between;
+    border-style: none none none none;
+    border-color: #ebf3fb;
+    border-width: 2px;
+
     .back-Image-Header {
         display: inline-block;
         width: 0.4rem;
@@ -73,9 +78,6 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    border-style: none none none none;
-    border-color: #ebf3fb;
-    border-width: 2px;
     height: 100%;
     width: 100%;
     .lastWord {
@@ -287,6 +289,9 @@
     height: 2.3rem;
     width: 100%;
     background-color: rgba(0,0,0,0.18);
+    border-style: none none none none;
+    border-color: #ebf3fb;
+    border-width: 2px;
 }
 .autoChangeWord {
     display: flex;
@@ -328,6 +333,8 @@
         min-height: 80vh;
     }
     .wordCard-Header {
+        border-style: none none solid none;
+
         .back-Image-Header {
             display: none;
         }
@@ -349,7 +356,6 @@
     }
     .wordCard-Body {
         height: 10rem;
-        border-style: solid none solid none;
         .lastWord {
             display: inline-block;
         }
@@ -430,8 +436,9 @@
         display: flex;
         justify-content: flex-end;
         height: 1.44rem;
-        width: auto;
+        width: 100%;
         background-color: transparent;
+        border-style: solid none none none;
     }
     .autoChangeWord {
         display: flex;

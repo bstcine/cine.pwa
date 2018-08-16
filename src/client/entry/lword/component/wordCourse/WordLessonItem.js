@@ -11,26 +11,26 @@ const WordLessonItem = ({ item, actions }) => {
             quizClassName = 'quiz';
         } else if (item.wQuizScore < 100) {
             quizClassName = 'quiz90';
-            star = <span className="star5">{svgStar}</span>;
         } else {
             quizClassName = 'quiz90';
-            star = (
-                <div>
-                    {' '}
-                    <span className="star5">{svgStar}</span>
-                    <span className="star5">{svgStar}</span>
-                </div>
-            );
+            star = <span className="star5">{svgStar}</span>;
         }
     }
-    const className =
-        'lesson ' + quizClassName + (item.isLastVisit ? ' lastVisit' : '');
+    const className = quizClassName + (item.isLastVisit ? ' lastVisit' : '');
     const classNameMiddle = quizClassName === 'quiz90' ? 'middle90' : 'middle';
     const classNameScore = quizClassName === 'quiz90' ? 'score90' : '';
+    const indexs = item.value.split('-');
+    const herf =
+        '/lword?lesson_id=' +
+        item.value +
+        '&start_index=' +
+        indexs[0] +
+        '&end_index=' +
+        indexs[1];
     return (
         <React.Fragment>
-            <a href="/experiences" target="_blank">
-                <div className={className}>
+            <a href={herf} target="_blank">
+                <div className={'lesson ' + className}>
                     <div className="top">
                         <div className="no">第{item.id}组</div>
                         <div className="fromto">{item.value}</div>

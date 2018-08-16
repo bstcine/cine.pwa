@@ -1,34 +1,42 @@
+@import '~asset/style/_cine.less';
+
 .vocabularyTest{
 
     display: flex;
     flex-direction: column;
-    padding-left: 0.9rem;
-    padding-right: 0.9rem;
+    padding-left: 0.4rem;
+    padding-right: 0.4rem;
     height: 100%;
     width: 100%;
     background-color: white;
 
     .v_Test_VocabularyHeader{
-
-        padding-top: 0.7rem;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        padding-top: 0.5rem;
         padding-bottom: 0.2rem;
-        clear: both;
         border-bottom: solid;
         border-bottom-color: #f5f9fc;
         border-bottom-width: 1px;
 
+        .backButton {
+            width: 0.4rem;
+            height: 0.4rem;
+            background-size: contain;
+            margin-right: 0.2rem;
+            cursor: pointer;
+        }
         .v_Test_H_TaskName{
-            float: left;
             color: #3a3b3c;
-            font-family: PingFangSC-Medium;
-            font-size: 0.4rem;
+            font-size: 0.36rem;
         }
 
         .v_Test_H_HistoryDoor{
-            float: right;
-            font-family: PingFangSC-Regular;
-            font-size: 0.32rem;
-            color: #7a7b7c;
+            width: 0.4rem;
+            height: 0.4rem;
+            background-color: transparent;
         }
     }
 
@@ -134,5 +142,19 @@
             background: #cbe7ff;
         }
     }
+}
 
+@media @media-up-xs {
+    .vocabularyTest {
+        padding-left: 0.8rem;
+        padding-right: 0.8rem;
+
+        .v_Test_VocabularyHeader {
+            justify-content: flex-start;
+
+            .v_Test_H_TaskName{
+                font-size: 0.32rem;
+            }
+        }
+    }
 }

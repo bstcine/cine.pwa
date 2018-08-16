@@ -14,6 +14,7 @@ const initialState = fromJS({
     faileIndexArr: null,             // 选择错误的单词下标集合
     faileIndex: -1,                  // 正在使用的错误下标数组的下标
     correctCount: 0,                 // 已掌握单词数量
+    selectCount: 0,                  // 已选择的单词数量
     selectIndex: -1,                 // 选中下标 ,-1尚未选择
     content: {                       // 显示内容对象
         index: -1,                   // 当前单词下标
@@ -51,6 +52,8 @@ const WordQuizRedu = (state = initialState, action) => {
             return state.set('content', action.payload);
         case ACTION_LT.CORRECTCOUNT:
             return state.set('correctCount', action.payload);
+        case ACTION_LT.SELECTCOUNT:
+            return state.set('selectCount', action.payload);
         case ACTION_LT.CHANGEFAILUREARRAY:
             return state.set('failureArray', action.payload);
         case ACTION_LT.CHANGESELECTSTATUS:

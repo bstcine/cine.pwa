@@ -8,7 +8,7 @@
     display: flex;
     align-content: space-between;
     flex-direction: column;
-    min-height:100%;
+    min-height: 100vh;
     width: 100%;
     background-color: white;
 
@@ -19,6 +19,7 @@
         align-items: center;
         justify-content: space-between;
         height: auto;
+        width: 100%;
         border-bottom: solid;
         border-bottom-color: #f5f9fc;
         border-bottom-width: 1px;
@@ -28,6 +29,7 @@
             display: inline-block;
             width: 0.4rem;
             height: 0.4rem;
+            background-size: contain;
             cursor: pointer;
         }
 
@@ -39,6 +41,7 @@
                 display: none;
                 width: 0.4rem;
                 height: 0.4rem;
+                background-size: contain;
                 margin-right: 0.2rem;
                 cursor: pointer;
             }
@@ -67,6 +70,7 @@
             .cardImage {
                 width: 0.44rem;
                 height: 0.44rem;
+                background-size: contain;
                 margin-left: 0.2rem;
                 margin-right: 0.2rem;
             }
@@ -91,10 +95,7 @@
         align-items: flex-start;
         justify-content: space-between;
         width: 100%;
-        padding-top: 0.24rem;
-        padding-bottom: 0.24rem;
-        padding-left: 0.4rem;
-        padding-right: 0.4rem;
+        padding: 0.24rem 0.4rem 0.24rem 0.4rem;
     }
     .v_Task_L_VocabularyItem{
         display: flex;
@@ -109,12 +110,12 @@
         align-items: center;
         font-family: PingFangSC-Regular;
         justify-content: space-around;
-        font-size: 0.28rem;
+        font-size: 0.24rem;
 
         .v_status_Vocabulary_Status_promote {
             display: none;
             margin-left: 0.18rem;
-            color: #7a7b7c;
+            color: #9a9b9c;
         }
     }
 
@@ -178,7 +179,7 @@
 @media @media-up-xs{
     .vocabularyTask {
         .v_Task_VocabularyHeader {
-            padding: 0.5rem 0.4rem 0.2rem 0.4rem;
+            padding: 0.5rem 0.8rem 0.2rem 0.8rem;
 
             .back-Image-Header {
                 display: none;
@@ -189,9 +190,10 @@
                     display: inline-block;
                 }
                 .v_Task_H_TaskName{
-                    font-size: 0.4rem;
+                    font-size: 0.32rem;
                 }
                 .showAll-Title {
+                    font-size: 0.28rem;
                     display: inline-block;
                 }
                 .showAll-Select {
@@ -200,11 +202,13 @@
             }
             .wordList-ToCard {
                 .wordList-CardTitle{
+                    font-size: 0.28rem;
                     display: inline-block;
                 }
             }
         }
         .v_Task_L_Vocabulary_Content {
+            padding: 0.24rem 0.8rem 0.24rem 0.8rem;
             align-items: center;
         }
         .v_Task_L_VocabularyItem{

@@ -29,7 +29,7 @@ class WordQuizContainer extends Component {
             isDone,
             selectIndex,
             wordCount,
-            correctCount,
+            selectCount,
             content,
             actions,
         } = this.props;
@@ -62,7 +62,7 @@ class WordQuizContainer extends Component {
                         isTest={isTest}
                         selectIndex={selectIndex}
                         wordCount={wordCount}
-                        correctCount={correctCount}
+                        selectCount={selectCount}
                         content={content}
                         actions={actions}
                     />
@@ -76,7 +76,7 @@ class WordQuizContainer extends Component {
                         }}
                     />
                     <CDialog
-                        title="尚未掌握全部单词，立刻返回任务首页"
+                        title="尚未掌握全部单词，继续学习"
                         modal={false}
                         actions={wrongDialogAction}
                         open={isDone === false}
@@ -97,7 +97,7 @@ const mapStateToProps = state => {
         selectIndex: state.WordQuizRedu.get('selectIndex'),
         wordCount: state.WordQuizRedu.get('wordCount'),
         content: state.WordQuizRedu.get('content'),
-        correctCount: state.WordQuizRedu.get('correctCount'),
+        selectCount: state.WordQuizRedu.get('selectCount'),
         toastRedu: state.toastRedu,
     };
 };

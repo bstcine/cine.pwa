@@ -76,3 +76,5 @@ exports.APIURL_User_Learn_UpdateTaskStatus = '/api/user/learn/updatetask'; // �
 
 exports.APIURL_User_Learn_SaveFailure = '/api/user/learn/savefailure'; // 保存选择错误的信息
 exports.APIURL_User_Content_Word_UpdateKnow = '/api/user/content/word/updateknow'; // 保存已认识单词
+
+exports.APIURL_Content_Quiz_Word_List = '/api/content/quiz/word/list'; // 词汇量测试开始，获取top10000单词列表

@@ -11,9 +11,15 @@ export let getContentWordConfig = query => {
     });
 };
 
-export let getWordList = () => {
-    return post(Api.APIURL_Content_Word_List)
+export let getWordList = (param) => {
+    let apiValue = Api.APIURL_Content_Quiz_Word_List;
+    if (!param) {
+        param = {};
+        apiValue = Api.APIURL_Content_Word_List;
+    }
+    return post(apiValue, param)
         .then(result => {
+            console.log(result);
             if (result.code !== '1') {
                 return alert(result.code_desc);
             }

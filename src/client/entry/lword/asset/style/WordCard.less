@@ -9,7 +9,7 @@
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    align-items: flex-end;
+    //align-items: flex-end;
 }
 
 .wordCard-Header {
@@ -25,6 +25,7 @@
         display: inline-block;
         width: 0.4rem;
         height: 0.4rem;
+        background-size: contain;
         margin-left: 0.2rem;
         cursor: pointer;
     }
@@ -32,17 +33,18 @@
         display: flex;
         flex-direction: row;
         align-items: center;
-        font-size: 0.36rem;
 
         .wordCard-backButton {
             display: none;
             width: 0.4rem;
             height: 0.4rem;
+            background-size: contain;
             margin-left: 0.2rem;
             margin-right: 0.2rem;
             cursor: pointer;
         }
         .wordCard-taskTitle {
+            font-size: 0.36rem;
             color: #3a3b3c;
         }
     }
@@ -118,10 +120,6 @@
         height: 8.7rem;
         transition: 0.6s;
         transform-style: preserve-3d;
-        //position: relative;
-    }
-    .front {
-        //z-index: 2;
     }
     .back {
         transform: rotateY(180deg);
@@ -175,10 +173,10 @@
         height: 0.8rem;
         cursor: pointer;
         .grsaspPromote {
-            margin-left: 0.36rem;
+            margin-left: 0.2rem;
             font-family: PingFangSC-Regular;
-            font-size: 0.32rem;
-            color: #7a7b7c;
+            font-size: 0.28rem;
+            color: #9a9b9c;
         }
     }
     .transition {
@@ -338,10 +336,14 @@
                 margin-left: 0;
                 display: inline-block;
             }
+            .wordCard-taskTitle {
+                font-size: 0.32rem;
+            }
         }
         .wordCard-ToList {
             .wordCard-ListTitle {
                 display: inline-block;
+                font-size: 0.28rem;
             }
         }
     }

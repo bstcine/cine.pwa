@@ -11,7 +11,6 @@ class WordCardBodyRecite extends React.PureComponent {
         this.startNext = this.startNext.bind(this);
         this.graspStatus = this.graspStatus.bind(this);
         this.playPhonetic = this.playPhonetic.bind(this);
-        this.player = new Audio();
     }
 
     toggle(event) {
@@ -36,14 +35,8 @@ class WordCardBodyRecite extends React.PureComponent {
     }
     playPhonetic(event) {
         event.stopPropagation();
-        let { rows, currentIndex } = this.props;
-        let { voice_url_a, voice_url_b } = rows[currentIndex];
-        let voice_url = voice_url_b;
-        if (!voice_url) {
-            voice_url = voice_url_a;
-        }
-        this.player.src = 'http://oss.bstcine.com/word/top10000/' + voice_url;
-        this.player.play();
+        let { playAction } = this.props;
+        playAction();
     }
     render() {
         let { rows, currentIndex, isBack, isKnown, actions } = this.props;
@@ -92,7 +85,7 @@ class WordCardBodyRecite extends React.PureComponent {
                             }}
                         />
                         <div className="grsaspPromote">
-                            已认识（打勾后，不再显示）
+                            已认识(下次不再显示)
                         </div>
                     </div>
                 </div>

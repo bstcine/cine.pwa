@@ -79,6 +79,13 @@ export const wQuizAction = {
         payload: count,
     }),
     /**
+     * 改变显示过的单词数量
+     * */
+    _changeSelectCount: count => ({
+        type: ACTION_LT.SELECTCOUNT,
+        payload: count,
+    }),
+    /**
      * 保存错误信息
      * */
     _changeFailureArray: failureArr => ({
@@ -312,6 +319,7 @@ export const wQuizAction = {
             let [result] = await fetchData(Api.APIURL_User_Learn_SaveFailure, {
                 failure_words: failureArr,
             });
+            console.log(result)
         }
         // 更新测试状态为已完成
         dispatch(wQuizAction.updateTask('2'));
@@ -417,6 +425,9 @@ export const wQuizAction = {
         let reducer = getState().WordQuizRedu;
         let content = reducer.get('content');
         let correctCount = reducer.get('correctCount');
+        let selectCount = reducer.get('selectCount');
+        selectCount += 1;
+        dispatch(wQuizAction._changeSelectCount(selectCount));
         let index = content.index;
         if (selectIndex === content.real_zh) {
             let count = correctCount + 1;

@@ -59,7 +59,6 @@ export const wordAction = {
     // 更新单词状态
     updateWordStatus: (index, is_known) => async (dispatch, getState) => {
         let reducer = getState().WordRedu;
-        let isShowAll = reducer.get('isShowAll');
         let result = reducer.get('result');
         let currentRows = reducer.get('currentRows');
         let wordObject = currentRows[index];
@@ -72,11 +71,7 @@ export const wordAction = {
         let newObject = { ...wordObject };
         newObject.is_known = is_known;
         result.rows.splice(resultIndex, 1, newObject);
-        if (isShowAll || !is_known) {
-            currentRows.splice(index, 1, newObject);
-        } else {
-            currentRows.splice(index, 1);
-        }
+        currentRows.splice(index, 1, newObject);
         let newRows = [...currentRows];
         dispatch(wordAction._currentRows(newRows));
         let [error, _updateRes] = await fetchData(Api.APIURL_User_Content_Word_UpdateKnow, { 'word': newObject.word, 'is_known': is_known });

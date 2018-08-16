@@ -15,7 +15,7 @@ export const wCourseAction = {
     initCourseLessons: param => dispatch => {
         if (!param.start_index || param.start_index === 1) return;
 
-        const lastVisitID = param.last_id ? param.last_id : param.start_index;
+        const lastVisitID = param.last_index ? param.last_index : param.start_index;
         const payload = {
             wordStartID: param.start_index,
             wordCount: param.range,
@@ -29,7 +29,7 @@ export const wCourseAction = {
         const payload = {
             wordStartID: param.start_index ? param.start_index : 1,
             wordCount: param.range ? param.range : 3000,
-            lastVisitID: param.last_id ? param.last_id : wordQuiz.lastVisitID,
+            lastVisitID: param.last_index ? param.last_index : wordQuiz.lastVisitID,
             result: wordQuiz.result,
         };
         dispatch(wCourseAction._receive(payload));

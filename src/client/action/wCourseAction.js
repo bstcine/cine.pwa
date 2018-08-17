@@ -29,7 +29,7 @@ export const wCourseAction = {
         const payload = {
             wordStartID: param.start_index ? param.start_index : 1,
             wordCount: param.range ? param.range : 3000,
-            lastVisitID: param.last_index ? param.last_index : wordQuiz.lastVisitID,
+            lastVisitID: param.last_index ? parseInt(param.last_index, 10) : wordQuiz.lastVisitID,
             result: wordQuiz.result,
         };
         dispatch(wCourseAction._receive(payload));

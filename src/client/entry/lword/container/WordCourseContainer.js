@@ -15,6 +15,12 @@ class WordCourseContainer extends Component {
 
     componentDidMount() {
         this.props.actions.loadUserWordLearnAndQuiz(this.param);
+        const ele = document.querySelector(`l${this.props.lastVisitID}`);
+        if (ele) {
+            const rectY = ele.getBoundingClientRect().top;
+            scrollTo(0, rectY);
+            alert(rectY);
+        }
     }
 
     render() {
@@ -32,7 +38,6 @@ class WordCourseContainer extends Component {
 }
 
 const mapStateToProps = state => {
-    // alert(state.WordCourseRedu.get('wordStartID'));
     return {
         lessons: state.WordCourseRedu.get('lessons'),
         lastVisitID: state.WordCourseRedu.get('lastVisitID'),

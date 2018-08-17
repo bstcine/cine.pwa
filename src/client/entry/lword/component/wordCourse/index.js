@@ -5,8 +5,8 @@ import WordLessonList from './WordLessonList';
 
 export default class WordCourse extends React.PureComponent {
     render() {
-        const { items } = this.props;
-        // alert(JSON.stringify(items));
+        const { items, lastVisitID } = this.props;
+        alert(JSON.stringify(lastVisitID));
         const wordLessons = items;
         // alert(JSON.stringify(wordLessons));
         return (

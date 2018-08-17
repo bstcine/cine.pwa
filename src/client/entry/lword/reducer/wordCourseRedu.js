@@ -42,7 +42,7 @@ const initWordCourse = Map({
     lessons: getCourseItems(1, 3000, 3552),
 });
 
-const WordCourseRedu = (state = initWordCourse, action) => {
+const WordCourseRedu = (state = initWordCourse, action) => {  
     switch (action.type) {
         case actionType.WC_Init_Course: {
             const payload = action.payload;

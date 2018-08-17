@@ -15,12 +15,6 @@ class WordCourseContainer extends Component {
 
     componentDidMount() {
         this.props.actions.loadUserWordLearnAndQuiz(this.param);
-        const ele = document.querySelector(`l${this.props.lastVisitID}`);
-        if (ele) {
-            const rectY = ele.getBoundingClientRect().top;
-            scrollTo(0, rectY);
-            alert(rectY);
-        }
     }
 
     render() {
@@ -28,7 +22,7 @@ class WordCourseContainer extends Component {
         return (
             <React.Fragment>
                 <WordCourse
-                    items={lessons}
+                    lessons={lessons}
                     lastVisitID={lastVisitID}
                     actions={actions}
                 />

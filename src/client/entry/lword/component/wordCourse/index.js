@@ -5,10 +5,10 @@ import WordLessonList from './WordLessonList';
 
 export default class WordCourse extends React.PureComponent {
     render() {
-        const { items, lastVisitID } = this.props;
-        alert(JSON.stringify(lastVisitID));
-        const wordLessons = items;
-        // alert(JSON.stringify(wordLessons));
+        const { lessons, lastVisitID } = this.props;
+        const wordLessons = lessons;
+        // alert(JSON.stringify(lastVisitID));
+
         return (
             <React.Fragment>
                 <CPanel title="Top1000词汇：1-3000">

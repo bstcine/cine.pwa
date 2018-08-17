@@ -38,11 +38,11 @@ const getCourseItems = (startID, range, lastVisitIndex, userQuizRows) => {
 const initWordCourse = Map({
     userID: null,
     wordStartID: 1,
-    lastVisitID: 502,
+    lastVisitID: 1,
     lessons: getCourseItems(1, 3000, 3552),
 });
 
-const WordCourseRedu = (state = initWordCourse, action) => {  
+const WordCourseRedu = (state = initWordCourse, action) => {
     switch (action.type) {
         case actionType.WC_Init_Course: {
             const payload = action.payload;

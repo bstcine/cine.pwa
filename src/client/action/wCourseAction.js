@@ -15,23 +15,36 @@ export const wCourseAction = {
     initCourseLessons: param => dispatch => {
         if (!param.start_index || param.start_index === 1) return;
 
-        const lastVisitID = param.last_index ? param.last_index : param.start_index;
+        const lastVisitID = param.last_index
+            ? param.last_index
+            : param.start_index;
         const payload = {
             wordStartID: param.start_index,
             wordCount: param.range,
-            lastVisitID: lastVisitID ? lastVisitID : 1,
+            lastVisitID: lastVisitID ? lastVisitID : param.start_index,
         };
 
         dispatch(wCourseAction._init(payload));
     },
 
     loadUserWordLearnAndQuiz: param => async dispatch => {
+        const lastVisitID = param.last_index
+            ? parseInt(param.last_index, 10)
+            : wordQuiz.lastVisitID;
+
         const payload = {
             wordStartID: param.start_index ? param.start_index : 1,
             wordCount: param.range ? param.range : 3000,
-            lastVisitID: param.last_index ? parseInt(param.last_index, 10) : wordQuiz.lastVisitID,
+            lastVisitID: lastVisitID,
             result: wordQuiz.result,
         };
         dispatch(wCourseAction._receive(payload));
+
+        const ele = document.querySelector(`#l${lastVisitID}`);
+        if (ele) {
+            setTimeout(() => {
+                window.scrollTo(0, ele.getBoundingClientRect().top - 50);
+            }, 1000);
+        }
     },
 };

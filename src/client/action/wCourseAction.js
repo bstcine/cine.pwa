@@ -40,11 +40,11 @@ export const wCourseAction = {
         };
         dispatch(wCourseAction._receive(payload));
 
-        const ele = document.querySelector(`#l${lastVisitID}`);
-        if (ele) {
-            setTimeout(() => {
+        setTimeout(() => {
+            const ele = document.querySelector(`#l${lastVisitID}`);
+            if (ele) {
                 window.scrollTo(0, ele.getBoundingClientRect().top - 50);
-            }, 1000);
-        }
+            }
+        }, 1000);
     },
 };

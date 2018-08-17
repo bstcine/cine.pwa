@@ -19,11 +19,15 @@ class WordCourseContainer extends Component {
 
     render() {
         let { lessons, lastVisitID, actions } = this.props;
+        const course_id = this.param.start_index
+            ? `${this.param.start_index}-${this.param.range}`
+            : '1-3000';
         return (
             <React.Fragment>
                 <WordCourse
                     lessons={lessons}
                     lastVisitID={lastVisitID}
+                    courseID={course_id}
                     actions={actions}
                 />
             </React.Fragment>

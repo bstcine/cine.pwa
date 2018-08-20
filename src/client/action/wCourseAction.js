@@ -41,6 +41,7 @@ export const wCourseAction = {
         dispatch(wCourseAction._receive(payload));
 
         setTimeout(() => {
+            window.scrollTo(0, 0);
             const ele = document.querySelector(`#l${lastVisitID}`);
             if (ele) {
                 window.scrollTo(0, ele.getBoundingClientRect().top - 50);

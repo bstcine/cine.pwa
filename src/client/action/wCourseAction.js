@@ -17,11 +17,13 @@ export const wCourseAction = {
     initCourseLessons: param => dispatch => {
         if (!param.start_index || param.start_index === 1) return;
 
-        const lastVisitID = param.last_index ? param.last_index : param.start_index;
+        const lastVisitID = param.last_index
+            ? param.last_index
+            : param.start_index;
         const payload = {
             wordStartID: param.start_index,
             wordCount: param.range,
-            lastVisitID: lastVisitID ? lastVisitID : 1,
+            lastVisitID: lastVisitID ? lastVisitID : param.start_index,
         };
         dispatch(wCourseAction._init(payload));
     },
@@ -30,19 +32,36 @@ export const wCourseAction = {
         const payload = {
             wordStartID: param.start_index ? param.start_index : 1,
             wordCount: param.range ? param.range : 3000,
+            lastVisitID: param.last_index,
         };
         let wordParam = {
             location: payload.wordStartID,
             count: payload.wordCount,
         };
         let [err, result] = await fetchData(Api.APIURL_User_Word, wordParam);
-        if (result) {
-            payload.result = result.rows;
-            payload.lastVisitID = param.last_index ? param.last_index : result.lastVisitID;
-            console.log(result);
-        } else {
+        if (!result) {
             console.log(err);
+            return;
         }
-        dispatch(wCourseAction._receive(payload));
+        if (!payload.lastVisitID) {
+            payload.lastVisitID = result.lastVisitID;
+        }
+        if (result.rows && result.rows.length > 0) {
+            payload.result = result.rows;
+            dispatch(wCourseAction._receive(payload));
+        }
+        if (!payload.lastVisitID || payload.lastVisitID === param.start_index) {
+            return;
+        }
+        setTimeout(() => {
+            // window.scrollTo(0, 0);
+            const ele = document.querySelector(`#l${payload.lastVisitID}`);
+            if (ele) {
+                const scrollY =
+                    ele.getBoundingClientRect().top +
+                    document.documentElement.scrollTop;
+                window.scrollTo(0, scrollY - 100);
+            }
+        }, 1000);
     },
 };

@@ -20,17 +20,11 @@ const WordLessonItem = ({ item, actions }) => {
     const classNameMiddle = quizClassName === 'quiz90' ? 'middle90' : 'middle';
     const classNameScore = quizClassName === 'quiz90' ? 'score90' : '';
     const indexs = item.value.split('-');
-    const herf =
-        '/lword?lesson_id=' +
-        item.value +
-        '&start_index=' +
-        indexs[0] +
-        '&end_index=' +
-        indexs[1];
+    const herf = `lesson_id=${item.value}&start_index=${indexs[0]}&end_index=${indexs[1]}`;
     return (
         <React.Fragment>
-            <a href={herf} target="_blank">
-                <div className={'lesson ' + className}>
+            <a href={'/lword?' + herf} target="_blank">
+                <div className={'lesson ' + className} id={`l${indexs[0]}`}>
                     <div className="top">
                         <div className="no">第{item.id}组</div>
                         <div className="fromto">{item.value}</div>

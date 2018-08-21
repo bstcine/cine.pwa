@@ -24,12 +24,15 @@ class WordCourseContainer extends Component {
 
     render() {
         let { lessons, lastVisitID, actions } = this.props;
+        const course_id = this.param.start_index
+            ? `${this.param.start_index}-${this.param.range}`
+            : '1-3000';
         return (
             <React.Fragment>
                 <WordCourse
-                    estimate={this.estimate}
-                    items={lessons}
+                    lessons={lessons}
                     lastVisitID={lastVisitID}
+                    courseID={course_id}
                     actions={actions}
                 />
             </React.Fragment>
@@ -38,7 +41,6 @@ class WordCourseContainer extends Component {
 }
 
 const mapStateToProps = state => {
-    // alert(state.WordCourseRedu.get('wordStartID'));
     return {
         lessons: state.WordCourseRedu.get('lessons'),
         lastVisitID: state.WordCourseRedu.get('lastVisitID'),

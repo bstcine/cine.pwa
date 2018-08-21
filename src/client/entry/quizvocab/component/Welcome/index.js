@@ -5,6 +5,7 @@ import * as BaseService from '@/service/base';
 import storeUtil from '@/util/storeUtil';
 import {fetchData} from "@/service/base";
 import errorMsg from "@/util/errorMsg";
+import { getParam } from '@/util/urlUtil';
 
 const Api = require("../../../../../APIConfig");
 
@@ -15,6 +16,11 @@ export default class Welcome extends Component {
         this.startClick = this.startClick.bind(this);
         this.onLoginSuccess = this.onLoginSuccess.bind(this);
         this.toggleLoginModal = this.toggleLoginModal.bind(this);
+        this.param = getParam();
+        this.cardPath = '/card';
+        if (this.param.estimate) {
+            this.cardPath += '?estimate=' + this.param.estimate;
+        }
         this.state = {
             showLoginModal: false,
             logined: false,
@@ -29,7 +35,7 @@ export default class Welcome extends Component {
             this.toggleLoginModal();
         } else {
             if (user && user.area_code && user.grade !== null && user.born_at) {
-                this.props.history.push('/card');
+                this.props.history.push(this.cardPath);
             } else {
                 let url = '/userinfo';
                 if (user) {

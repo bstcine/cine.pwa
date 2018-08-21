@@ -11,11 +11,31 @@ export let getContentWordConfig = query => {
     });
 };
 
-export let getWordList = (param) => {
-    let apiValue = Api.APIURL_Content_Quiz_Word_List;
-    if (!param) {
-        param = {};
+export let updateLastIndex = (start_index, range, last_index) => {
+    // 更新lastIndex
+    let lastIndex = parseInt(last_index, 10);
+    let lesson_id = `${lastIndex}-${lastIndex + 49}`;
+    let estimate_range = `${start_index}-${start_index - 1 + range}`;
+    let param = {
+        lesson_id: lesson_id,
+        estimate_range: estimate_range,
+    };
+    return post(Api.APIURL_User_Word_Lesson_Learn_Update, param);
+};
+
+export let getWordList = (estimate) => {
+    let apiValue;
+    let param;
+    if (estimate) {
+        apiValue = Api.APIURL_Content_Quiz_Word_List;
+        let estimateComponent = estimate.split('-', 2);
+        param = {
+            location: estimateComponent[0],
+            count: estimateComponent[1],
+        };
+    } else {
         apiValue = Api.APIURL_Content_Word_List;
+        param = {};
     }
     return post(apiValue, param)
         .then(result => {

@@ -3,11 +3,16 @@ import storeUtil from '@/util/storeUtil';
 import * as Service from '@/service/quizvocab';
 import { CSSTransition } from 'react-transition-group';
 import { initWechat } from '@/util/wechatUtil';
+import { getParam } from '@/util/urlUtil';
+import CThemeProvider from '@/component/CThemeProvider';
+import { CFlatButton, CDialog } from '@/component/_base';
 
 export default class Card extends Component {
     constructor(props) {
         super(props);
-        console.log('Card constructor'); 
+        console.log('Card constructor');
+        this.gotoWordCourse = this.gotoWordCourse.bind(this);
+        this.param = getParam();
         this.state = {
             loading: true,
             uploading: false,
@@ -16,8 +21,10 @@ export default class Card extends Component {
             currMaxVocab: 0,
             isShowLevelTip: false,
             progressing: false,
-            pressing: false
+            pressing: false,
+            isWordEnd: false,
         };
+        this.last_index = 1;
         this.disableClick = false;
         this.sandGlassTimer = null;
         this.levelTipTimer = null;
@@ -29,8 +36,7 @@ export default class Card extends Component {
 
     componentWillMount() {
         console.log('componentWillMount');
-
-        Service.getWordList().then(result => {
+        Service.getWordList(this.param.estimate).then(result => {
             this.setState({
                 loading: false
             });
@@ -50,9 +56,9 @@ export default class Card extends Component {
         if (this.levelTipTimer) clearTimeout(this.levelTipTimer);
     }
 
-    //初始化
+    // 初始化
     init(wordLevelList) {
-        //答题开始时间
+        // 答题开始时间
         this.begin_at = new Date().getTime();
         this.wordLevelList = wordLevelList;
         this.level_index = 0;
@@ -69,7 +75,7 @@ export default class Card extends Component {
         );
     }
 
-    //下一个单词
+    // 下一个单词
     nextWord() {
         console.log(`nextWord --> level_index: ${this.level_index} -- word_index: ${this.word_index}`);
         let wordLevel = this.wordLevelList[this.level_index];
@@ -90,7 +96,7 @@ export default class Card extends Component {
         );
     }
 
-    //连续
+    // 连续
     isSkipLevel() {
         let wordLevel = this.wordLevelList[this.level_index];
         let rightCount = 0;
@@ -164,11 +170,26 @@ export default class Card extends Component {
         );
     }
 
+    // 前往top10000词汇阶段列表
+    gotoWordCourse() {
+        if (!this.param.estimate) {
+            return;
+        }
+        const estimateComponent = this.param.estimate.split('-');
+        const startIndex = parseInt(estimateComponent[0], 10);
+        const range = parseInt(estimateComponent[1], 10);
+        Service.updateLastIndex(startIndex, range, this.last_index).then(result => {
+            console.log(result);
+            location.href = `/lword/course?start_index=${startIndex}&range=${range}&last_index=${this.last_index}`;
+        });
+    }
     // 答题结束
     theEnd() {
-        console.log('theEnd',this.calcCurrVocab());
+        if (this.state.isWordEnd) {
+            return;
+        }
         this.disableClick = true;
-        //答题结束时间
+        // 答题结束时间
         this.end_at = new Date().getTime();
         let user = storeUtil.get('user');
         let query = {
@@ -191,18 +212,35 @@ export default class Card extends Component {
                 uploading: false
             });
             console.log(`result ${JSON.stringify(result)}`);
-            this.props.history.push(`/report?id=${result.result.statsContentWord.id}`);
+            if (this.param.estimate) {
+                const location = this.param.estimate.split('-')[0];
+                let score = parseInt(location, 10) + query.vocab;
+                console.log('实际显示得分: ' + score);
+                for (let i = 0; i < this.wordLevelList.length; i++) {
+                    const wordLevel = this.wordLevelList[i];
+                    if (wordLevel.min_vocab > score) {
+                        break;
+                    }
+                    this.last_index = wordLevel.min_vocab;
+                }
+
+                this.setState({
+                    isWordEnd: true,
+                });
+            } else {
+                this.props.history.push(`/report?id=${result.result.statsContentWord.id}`);
+            }
         });
     }
 
-    //保存单个单词的答题信息
+    // 保存单个单词的答题信息
     saveOneAnswer(select_value) {
         console.log(`select_value ${select_value}`);
         let word = this.wordLevelList[this.level_index].wordList[this.word_index];
         word.select_value = select_value;
     }
 
-    //收集全部答题信息
+    // 收集全部答题信息
     collectAnswers() {
         let answers = [];
         this.wordLevelList.forEach(function(wordLevel) {
@@ -218,14 +256,14 @@ export default class Card extends Component {
         return answers;
     }
 
-    //耗时(秒)
+    // 耗时(秒)
     getDuration() {
         let duration = parseInt((this.end_at - this.begin_at) / 1000);
         console.log(`getDuration ${duration}`);
         return duration;
     }
 
-    //计算当前词汇等级得分
+    // 计算当前词汇等级得分
     calcCurrLevelScore() {
         let wordLevel = this.wordLevelList[this.level_index];
         let curr_score = 0;
@@ -249,7 +287,7 @@ export default class Card extends Component {
         return curr_score;
     }
 
-    //计算当前词汇量
+    // 计算当前词汇量
     calcCurrVocab() {
         let curr_vocab = 0;
         this.wordLevelList.forEach(function(wordLevel) {
@@ -320,42 +358,61 @@ export default class Card extends Component {
                     <div className="uploading">正在计算排名...</div>
                 </div>
             );
+        const dialogActions = [
+            <CFlatButton
+                key="WordEnd"
+                label="确定"
+                primary={true}
+                onClick={this.gotoWordCourse}
+            />,
+        ];
         return (
-            <div className="card">
-                <CSSTransition
-                    in={this.state.isShowLevelTip}
-                    classNames="fade"
-                    appear={true}
-                    enter={true}
-                    exit={true}
-                    timeout={{enter: 2700, exit: 300}}
-                >
-                    <div className="friendly-tips">
-                        你已经完成了{this.state.currMinVocab}-{this.state.currMaxVocab}词汇量区间的测试
-                    </div>
-                </CSSTransition>
-                <div className="word" key={this.state.wordItem.id + 'word'}>
-                    {this.state.wordItem.word}
-                </div>
-                <div className="progress_control" key={this.state.wordItem.id + 'progress_control'}>
-                    <div className="sand-glass" />
-                    <div className="progress-line">
+            <CThemeProvider>
+                <React.Fragment>
+                    <div className="card">
                         <CSSTransition
-                            in={this.state.progressing}
-                            classNames="progressing"
+                            in={this.state.isShowLevelTip}
+                            classNames="fade"
                             appear={true}
                             enter={true}
-                            exit={false}
-                            timeout={this.duration}
+                            exit={true}
+                            timeout={{enter: 2700, exit: 300}}
                         >
-                            <div className="progress-line-left" />
+                            <div className="friendly-tips">
+                                你已经完成了{this.state.currMinVocab}-{this.state.currMaxVocab}词汇量区间的测试
+                            </div>
                         </CSSTransition>
+                        <div className="word" key={this.state.wordItem.id + 'word'}>
+                            {this.state.wordItem.word}
+                        </div>
+                        <div className="progress_control" key={this.state.wordItem.id + 'progress_control'}>
+                            <div className="sand-glass" />
+                            <div className="progress-line">
+                                <CSSTransition
+                                    in={this.state.progressing}
+                                    classNames="progressing"
+                                    appear={true}
+                                    enter={true}
+                                    exit={false}
+                                    timeout={this.duration}
+                                >
+                                    <div className="progress-line-left" />
+                                </CSSTransition>
+                            </div>
+                        </div>
+                        <div className="options" key={this.state.wordItem.id + 'options'}>
+                            {this.renderOptions()}
+                        </div>
                     </div>
-                </div>
-                <div className="options" key={this.state.wordItem.id + 'options'}>
-                    {this.renderOptions()}
-                </div>
-            </div>
+                    <CDialog
+                        title={`测试完成, 建议从第${this.last_index}个单词开始学习`}
+                        modal={false}
+                        actions={dialogActions}
+                        open={this.state.isWordEnd}
+                        onRequestClose={this.gotoWordCourse}
+                    />
+                </React.Fragment>
+            </CThemeProvider>
         );
     }
 }

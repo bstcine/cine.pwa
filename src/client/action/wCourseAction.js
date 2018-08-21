@@ -1,5 +1,7 @@
 import * as actionType from '@/constant/actionTypeLWord';
-import * as wordQuiz from '@/service/data/response_word.json';
+// import * as wordQuiz from '@/service/data/response_word.json';
+import Api from '../../APIConfig';
+import { fetchData } from '@/service/base';
 
 export const wCourseAction = {
     _init: result => ({
@@ -21,7 +23,6 @@ export const wCourseAction = {
             wordCount: param.range,
             lastVisitID: lastVisitID ? lastVisitID : 1,
         };
-
         dispatch(wCourseAction._init(payload));
     },
 
@@ -29,9 +30,19 @@ export const wCourseAction = {
         const payload = {
             wordStartID: param.start_index ? param.start_index : 1,
             wordCount: param.range ? param.range : 3000,
-            lastVisitID: param.last_index ? param.last_index : wordQuiz.lastVisitID,
-            result: wordQuiz.result,
         };
+        let wordParam = {
+            location: payload.wordStartID,
+            count: payload.wordCount,
+        };
+        let [err, result] = await fetchData(Api.APIURL_User_Word, wordParam);
+        if (result) {
+            payload.result = result.rows;
+            payload.lastVisitID = param.last_index ? param.last_index : result.lastVisitID;
+            console.log(result);
+        } else {
+            console.log(err);
+        }
         dispatch(wCourseAction._receive(payload));
     },
 };

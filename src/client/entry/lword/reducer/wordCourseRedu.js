@@ -17,7 +17,7 @@ const getCourseItems = (startID, range, lastVisitIndex, userQuizRows) => {
             userQuizRows.forEach(quizItem => {
                 const valueID = wordStartID + i * 50;
                 if (quizItem.id === valueID) {
-                    wQuizScore = quizItem.quiz_score;
+                    wQuizScore = quizItem.score;
                 }
             });
         }

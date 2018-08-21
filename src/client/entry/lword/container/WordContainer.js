@@ -18,8 +18,10 @@ class WordContainer extends Component {
     }
 
     componentDidMount() {
-        // 准备访问
         let { actions } = this.props;
+        // 更新top10000阶段效果
+        actions.updateCourseSelectIndex(this.param);
+        // 获取词汇列表
         actions.loadWordList(this.param);
     }
 

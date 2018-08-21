@@ -41,10 +41,13 @@ export const wCourseAction = {
         dispatch(wCourseAction._receive(payload));
 
         setTimeout(() => {
-            window.scrollTo(0, 0);
+            // window.scrollTo(0, 0);
             const ele = document.querySelector(`#l${lastVisitID}`);
             if (ele) {
-                window.scrollTo(0, ele.getBoundingClientRect().top - 50);
+                const scrollY =
+                    ele.getBoundingClientRect().top +
+                    document.documentElement.scrollTop;
+                window.scrollTo(0, scrollY - 100);
             }
         }, 1000);
     },

@@ -22,19 +22,19 @@ const UserMobile = ({ user, handleClick }) => {
                 </div>
             </div>
             <div className={'user-panel-c'}>
-                <a className={'tab'} href={'/user/quiz'} target={'_blank'}>
-                    <img
-                        src={require('../asset/image/ico_test_word@2x.png')}
-                        style={{ height: '.42rem', width: '.39rem' }}
-                    />
-                    我的测试
-                </a>
                 <a className={'tab'} href={'/learn'}>
                     <img
                         src={require('../asset/image/ico_my_study.png')}
                         style={{ width: '.42rem', height: '.39rem' }}
                     />
                     我的学习
+                </a>
+                <a className={'tab'} href={'/user/coupon'}>
+                    <img
+                        src={require('../asset/image/ico_coupon@2x.png')}
+                        style={{ width: '.42rem', height: '.40rem' }}
+                    />
+                    我的优惠
                 </a>
                 <a className={'tab'} href={'/user/integral'}>
                     <img
@@ -43,12 +43,13 @@ const UserMobile = ({ user, handleClick }) => {
                     />
                     我的积分
                 </a>
-                <a className={'tab'} href={'/user/coupon'}>
+          
+                <a className={'tab'} href={'/user/quiz'} target={'_blank'}>
                     <img
-                        src={require('../asset/image/ico_coupon@2x.png')}
-                        style={{ width: '.42rem', height: '.40rem' }}
+                        src={require('../asset/image/ico_test_word@2x.png')}
+                        style={{ height: '.42rem', width: '.39rem' }}
                     />
-                    我的优惠
+                    我的测试
                 </a>
             </div>
             <div className={'user-panel-c'}>

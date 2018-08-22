@@ -298,7 +298,7 @@ export const wQuizAction = {
             Api.APIURL_User_Learn_UpdateTaskStatus,
             param
         );
-        console.log(error, result);
+        console.log('测试状态更新完成: ', error, result);
     },
     /**
      * 开始测试（对外调用）
@@ -313,27 +313,36 @@ export const wQuizAction = {
      * */
     testDone: () => async (dispatch, getState) => {
         // 上传错误信息
-        let reducer = getState().WordQuizRedu;
-        let failureArr = reducer.get('failureArray');
-        if (failureArr) {
-            let [result] = await fetchData(Api.APIURL_User_Learn_SaveFailure, {
-                failure_words: failureArr,
-            });
-            console.log(result);
-        }
+        await dispatch(wQuizAction.updateFailureWords());
         // 更新测试状态为已完成
-        dispatch(wQuizAction.updateTask('2'));
+        await dispatch(wQuizAction.updateTask('2'));
         // 提示用户已完成全部测试（掌握全部单词）
-        dispatch(wQuizAction._endTest(true));
+        await dispatch(wQuizAction._endTest(true));
     },
     /**
      * 测试未通过
      * */
     testWrong: () => async (dispatch) => {
+        // 上传错误信息
+        await dispatch(wQuizAction.updateFailureWords());
         // 更新测试状态为已完成
-        dispatch(wQuizAction.updateTask('1'));
+        await dispatch(wQuizAction.updateTask('1'));
         // 提示用户已完成全部测试（掌握全部单词）
-        dispatch(wQuizAction._endTest(false));
+        await dispatch(wQuizAction._endTest(false));
+    },
+    /**
+     * 上传错误单词信息
+     * */
+    updateFailureWords: () => async (dispatch, getState) => {
+        let reducer = getState().WordQuizRedu;
+        let failureArr = reducer.get('failureArray');
+        console.log(failureArr);
+        if (failureArr && failureArr.length > 0) {
+            let [err, result] = await fetchData(Api.APIURL_User_Learn_SaveFailure, {
+                failure_words: failureArr,
+            });
+            console.log(err, result);
+        }
     },
     /**
      * 更新测试分数
@@ -364,10 +373,12 @@ export const wQuizAction = {
         if (currentIndex === wordCount - 1) {
             let correctRate = correctCount / wordCount;
             let score = parseInt(correctRate * 100, 10);
-            dispatch(wQuizAction.updateScore(score));
+            await dispatch(wQuizAction.updateScore(score));
             if (correctRate >= 0.9) {
+                console.log('测试完成了');
                 dispatch(wQuizAction.testDone());
             } else {
+                console.log('测试没完成');
                 dispatch(wQuizAction.testWrong());
             }
             return;

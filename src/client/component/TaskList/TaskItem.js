@@ -25,7 +25,7 @@ const Status = ({ task }) => {
             <span className="task-opration">待完成</span>
         );
     } else {
-        return <CIcon className="task-opration">ci-study_finish</CIcon>;
+        return <CIcon className="task-opration">ci-green_corret</CIcon>;
     }
 };
 

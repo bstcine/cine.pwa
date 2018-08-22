@@ -1,0 +1,59 @@
+.course__main {
+    display: flex;
+    justify-content: space-between;
+    height: 100%;
+}
+
+.course__content {
+    order: 1;
+    flex: 0 0 18rem;
+    margin-bottom: 0;
+}
+
+.course__nav {
+    flex: 1;
+    margin-right: 12px;
+}
+
+.nav__chapters {
+    font-size: 12px;
+    line-height: 24px;
+    color: #2c2d2f;
+}
+
+.nav__chapter {
+    cursor: pointer;
+    i {
+        vertical-align: middle;
+        font-size: 12px;
+    }
+    > span {
+        vertical-align: middle;
+        font-weight: bolder;
+    }
+}
+
+.nav__lessons {
+    border-top: 1px dashed transparent;
+    transition: height 150ms ease-out, border 150ms ease-out;
+    overflow: hidden;
+    height: 0;
+}
+
+.nav__lessons--active {
+    border-top: 1px dashed #c1c1c1;
+    height: auto;
+}
+
+.nav__lesson {
+    position: relative;
+    i {
+        position: absolute;
+        font-size: 18px;
+        bottom: 4px;
+        right: 0;
+    }
+    > span {
+        vertical-align: middle;
+    }
+}

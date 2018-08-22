@@ -28,11 +28,16 @@ exports.APIURL_Content_Course_Set = '/api/content/course/set'; // 课程详情
 exports.APIURL_Content_Lesson_Detail = '/api/content/lesson/detail'; // 课内容
 exports.APIURL_User_Content_Course_Mylist = '/api/user/content/course/list'; // 我的学习列表
 exports.APIURL_User_Content_Task_Current = '/api/user/content/task/current'; // 我的本周作业
+exports.APIURL_Content_Chapter_List = '/api/content/chapter/list'; // 课程目录
+exports.APIURL_Content_Chapter_ListWithMedia =
+    '/api/content/chapter/listWithMedia'; // 课程目录包含media
+exports.APIURL_User_Content_Course_UpdateStatus =
+    '/api/user/content/course/updateLearnStatus'; // 更新学习进度
 exports.APIURL_Content_Lesson_Quiz = '/api/web/quiz/'; // 小节测试
 exports.APIURL_Content_StuQuizWord_List = '/api/content/stuQuizWord/list'; // 获取学生、核心语法测试、词汇测试列表，根据管理员或老师
 
 exports.APIURL_Mentor_Student_ListWithTask = '/api/mentor/student/listWithTask'; // 老师/管理员获取所有学生的本周作业列表
-exports.APIURL_Content_Task_Update_Status = '/api/content/task/update/status';// 导师更新任务状态
+exports.APIURL_Content_Task_Update_Status = '/api/content/task/update/status'; // 导师更新任务状态
 
 exports.APIURL_Content_Quiz = '/api/content/quiz'; // 阅读理解题目数据 & 答题记录请求
 exports.APIURL_Stats_Quiz_Save = '/api/stats/quiz/save'; // 保存阅读理解测试答案

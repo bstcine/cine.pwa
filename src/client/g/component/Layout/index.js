@@ -1,4 +1,5 @@
 import React from 'react';
+import classNames from 'classnames';
 import Main from '@/g/component/Main';
 import Footer from '@/g/component/Footer';
 import Header from '@/g/component/Header';
@@ -8,16 +9,19 @@ import Loading from '@/g/component/Loading';
 import siteCodeUtil from '@/util/sitecodeUtil';
 import '@/g/component/Layout/style.less';
 
-const Layout = ({ actions, user, alert, message, loading, children }) => {
+const Layout = ({ actions, user, alert, message, loading, size, children }) => {
     return (
-        <React.Fragment>
+        <div
+            className={classNames('glayout', {
+                'glayout--large': size === 'large',
+            })}>
             <Alert {...alert} />
             <Message {...message} />
             <Loading {...loading} />
             {!siteCodeUtil.inAPP() && <Header user={user} actions={actions} />}
             <Main>{children}</Main>
             {!siteCodeUtil.inAPP() && <Footer />}
-        </React.Fragment>
+        </div>
     );
 };
 

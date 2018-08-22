@@ -6,6 +6,8 @@ export const URL_Learn_Word = '/lword';
 export const URL_Learn_Word_Card = '/lword/card';
 export const URL_Learn_Word_List = '/lword/list';
 export const URL_Learn_Word_Quiz = '/lword/quiz';
+export const URL_Learn_Course = '/learn/course2/:cid';
+
 
 export const URL_User_Index = '/user';
 export const URL_User_Order = '/user/order';

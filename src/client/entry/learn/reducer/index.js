@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux';
 import TaskRedu from './TaskReducer';
+import courseRedu from './courseReducer';
 import gReducer from '@/g/reducer';
 import {
     RECEIVE_CURRENT_TASK,
@@ -28,6 +29,7 @@ const rootReducer = combineReducers({
     currentTasks,
     courses,
     TaskRedu,
+    ...courseRedu,
     ...gReducer,
 });
 

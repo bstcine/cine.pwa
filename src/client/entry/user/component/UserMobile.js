@@ -1,4 +1,13 @@
 import React from 'react';
+import { CIcon } from '@/component/_base';
+import menu from '@/constant/menu';
+import * as h5 from '@/constant/menuItemUrl';
+let menus = [];
+menu.forEach(item => {
+    if ([h5.URL_User_Index, h5.URL_Learn_Index].includes(item.url)) {
+        menus = [...menus, ...item.children];
+    }
+});
 
 const UserMobile = ({ user, handleClick }) => {
     let headImg = user.head_image
@@ -6,89 +15,39 @@ const UserMobile = ({ user, handleClick }) => {
         : require('@/asset/image/ico_headpic.png');
 
     return (
-        <div className={'user-mobile'}>
-            <div className={'user-panel-a'}>
+        <div className="user-mobile">
+            <div className="user-panel-a">
                 <img src={headImg} />
                 <label>{user.login}</label>
             </div>
-            <div className={'user-panel-b'}>
-                <div className={'a'}>
+            <div className="user-panel-b">
+                <div className="a">
                     <div className="point-hint">可用积分</div>
                     <div className="point-val">{user.point}</div>
                 </div>
-                <div className={'b'}>
+                <div className="b">
                     <div className="coupon-hint">优惠券</div>
                     <div className="coupon-val">{user.unuseCouponsCount}</div>
                 </div>
             </div>
-            <div className={'user-panel-c'}>
-                <a className={'tab'} href={'/user/quiz'} target={'_blank'}>
-                    <img
-                        src={require('../asset/image/ico_test_word@2x.png')}
-                        style={{ height: '.42rem', width: '.39rem' }}
-                    />
-                    我的测试
-                </a>
-                <a className={'tab'} href={'/learn'}>
-                    <img
-                        src={require('../asset/image/ico_my_study.png')}
-                        style={{ width: '.42rem', height: '.39rem' }}
-                    />
-                    我的学习
-                </a>
-                <a className={'tab'} href={'/user/integral'}>
-                    <img
-                        src={require('../asset/image/ico_integral.png')}
-                        style={{ width: '.42rem', height: '.42rem' }}
-                    />
-                    我的积分
-                </a>
-                <a className={'tab'} href={'/user/coupon'}>
-                    <img
-                        src={require('../asset/image/ico_coupon@2x.png')}
-                        style={{ width: '.42rem', height: '.40rem' }}
-                    />
-                    我的优惠
-                </a>
+            <div className="user-panel-c">
+                {menus.map(item => {
+                    return (
+                        <a key={item.url} className="tab" href={item.url}>
+                            <CIcon>{item.icon}</CIcon>
+                            {item.label}
+                        </a>
+                    );
+                })}
             </div>
-            <div className={'user-panel-c'}>
-                <a className={'tab'} style={{ color: 'gray' }}>
-                    <div style={{ display: 'flex' }}>
-                        <img
-                            src={require('../asset/image/ico_order@2x.png')}
-                            className={'gray'}
-                            style={{ width: '.34rem', height: '.40rem' }}
-                        />
-                        {Number(user.unpayOrdersCount) > 0 && (
-                            <span className="tab-indicator gray">
-                                {String(user.unpayOrdersCount)}
-                            </span>
-                        )}
-                    </div>
-                    我的订单
-                </a>
-                <a className={'tab'} style={{ color: 'gray' }}>
-                    <img
-                        src={require('../asset/image/ico_address@2x.png')}
-                        className={'gray'}
-                        style={{ width: '.34rem', height: '.40rem' }}
-                    />
-                    我的地址
-                </a>
-            </div>
-            <div className={'user-panel-c'}>
-                <a className={'tab'} href={'/resetPassword'}>
-                    <img
-                        src={require('../asset/image/ico_edit1.png')}
-                        style={{ width: '.37rem', height: '.38rem' }}
-                    />
+
+            <div className="user-panel-c">
+                <a className="tab" href="/resetPassword">
+                    <CIcon>ci-edit</CIcon>
                     修改密码
                 </a>
-                <a className={'tab'} onClick={() => handleClick('quit')}>
-                    <img
-                        src={require('../asset/image/ico_quit@2x.png')}
-                        style={{ width: '.34rem', height: '.35rem' }}
-                    />
+                <a className="tab" onClick={() => handleClick('quit')}>
+                    <CIcon>ci-quit</CIcon>
                     退出
                 </a>
             </div>

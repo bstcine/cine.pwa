@@ -15,7 +15,7 @@ const cineMenu = [
         url: h5.URL_Learn_Index,
         children: [
             {
-                label: '学习首页',
+                label: '我的学习',
                 url: h5.URL_Learn_Index,
                 icon: 'ci-stu_work',
                 children: [
@@ -56,7 +56,7 @@ const cineMenu = [
         url: h5.URL_User_Index,
         children: [
             {
-                label: '我的优惠券',
+                label: '我的优惠',
                 url: h5.URL_User_Coupon,
                 icon: 'ci-coupon',
             },
@@ -76,18 +76,18 @@ const cineMenu = [
                     },
                 ],
             },
-            {
-                label: '我的订单',
-                url: h5.URL_User_Order,
-                icon: 'mi-payment',
-                disabled: true,
-            },
-            {
-                label: '地址管理',
-                url: h5.URL_User_Address,
-                icon: 'mi-add_location',
-                disabled: true,
-            },
+            // {
+            //     label: '我的订单',
+            //     url: h5.URL_User_Order,
+            //     icon: 'mi-payment',
+            //     disabled: true,
+            // },
+            // {
+            //     label: '地址管理',
+            //     url: h5.URL_User_Address,
+            //     icon: 'mi-add_location',
+            //     disabled: true,
+            // },
         ],
     },
     {

@@ -1,13 +1,26 @@
 import React, { Component } from 'react';
 import classNames from 'classnames';
 import { CPanel, CIcon } from '@/component/_base';
+import { Link } from 'react-router-dom';
 
-const Lesson = ({ lesson }) => {
+const CourseNav = ({ tree, active_id }) => {
+    console.log('CourseNav render');
+
     return (
-        <li className="nav__lesson">
-            <span>{lesson.name}</span>
-            <CIcon>done</CIcon>
-        </li>
+        <CPanel title="课程目录" className="course__nav">
+            {tree &&
+                tree.length && (
+                <ul className="nav__chapters">
+                    {tree.map(item => (
+                        <NavChapter
+                            key={item.id}
+                            chapter={item}
+                            active_id={active_id}
+                        />
+                    ))}
+                </ul>
+            )}
+        </CPanel>
     );
 };
 
@@ -23,7 +36,6 @@ class NavChapter extends Component {
         if (!ele) return;
 
         let height = ele.scrollHeight;
-        console.log(height);
 
         if (ele.classList.contains('nav__lessons--active')) {
             requestAnimationFrame(() => {
@@ -53,15 +65,20 @@ class NavChapter extends Component {
                 <span>{chapter.name}</span>
                 <ul
                     className={classNames('nav__lessons', {
-                        'nav__lessons--active': chapter.children.some(item => {
-                            console.log(item.id);
-
-                            return item.id === active_id;
-                        }),
+                        'nav__lessons--active': chapter.children.some(
+                            item => item.id === active_id
+                        ),
                     })}
+                    onClick={e => {
+                        e.stopPropagation();
+                    }}
                     ref={this.ref}>
                     {chapter.children.map(item => (
-                        <Lesson key={item.id} lesson={item} />
+                        <Lesson
+                            key={item.id}
+                            lesson={item}
+                            active={item.id === active_id}
+                        />
                     ))}
                 </ul>
             </li>
@@ -69,24 +86,33 @@ class NavChapter extends Component {
     }
 }
 
-const CourseNav = ({ tree, active_id }) => {
-    console.log(tree);
-
+const Lesson = ({ lesson, active }) => {
     return (
-        <CPanel title="课程目录" className="course__nav">
-            {tree &&
-                tree.length && (
-                <ul className="nav__chapters">
-                    {tree.map(item => (
-                        <NavChapter
-                            key={item.id}
-                            chapter={item}
-                            active_id={active_id}
-                        />
-                    ))}
-                </ul>
+        <li
+            className={classNames('nav__lesson', {
+                'nav__lesson--active': active,
+            })}>
+            {lesson.type !== '5' ? (
+                <Link
+                    to={`/learn/course2/${lesson.lesson_id}?lesson_id=${
+                        lesson.id
+                    }`}>
+                    <span>{lesson.name}</span>
+                    {lesson.learn_status === '1' && (
+                        <CIcon>query_builder</CIcon>
+                    )}
+                    {lesson.learn_status === '2' && <CIcon>done</CIcon>}
+                </Link>
+            ) : (
+                <a href={lesson.redirect} target="_blank">
+                    <span>{lesson.name}</span>
+                    {lesson.learn_status === '1' && (
+                        <CIcon>query_builder</CIcon>
+                    )}
+                    {lesson.learn_status === '2' && <CIcon>done</CIcon>}
+                </a>
             )}
-        </CPanel>
+        </li>
     );
 };
 

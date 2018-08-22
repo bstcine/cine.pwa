@@ -16,7 +16,9 @@ export default class CouponPanel extends React.PureComponent {
                 <CouponTabs coupons={coupons} actions={actions} />
 
                 <CFloatingBox>
-                    <CIconButton onClick={actions.toggleCouponDialog}>
+                    <CIconButton
+                        color="primary"
+                        onClick={actions.toggleCouponDialog}>
                         add
                     </CIconButton>
                 </CFloatingBox>

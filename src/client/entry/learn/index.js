@@ -3,12 +3,17 @@ import ReactDOM from 'react-dom';
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
+import {
+    URL_Learn_Index,
+    URL_Learn_Task,
+    URL_Learn_Course,
+} from '@/constant/menuItemUrl';
+import Entry from '@/component/Entry';
+import { GRouter } from '@/g/component';
 import rootReducer from './reducer';
 import HomePage from './container/HomePage';
 import HistoryTaskPage from './container/HistoryTaskPage';
-import { URL_Learn_Index, URL_Learn_Task } from '@/constant/menuItemUrl';
-import Entry from '@/component/Entry';
-import { GRouter } from '@/g/component';
+import CoursePage from './container/CoursePage';
 
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', function() {
@@ -34,6 +39,7 @@ const store = createStore(rootReducer, preloadedState, applyMiddleware(thunk));
 const routes = [
     { path: URL_Learn_Index, component: HomePage, exact: true, checkAuth: true },
     { path: URL_Learn_Task, component: HistoryTaskPage, checkAuth: true },
+    { path: URL_Learn_Course, component: CoursePage, checkAuth: true },
 ];
 
 class Learn extends Entry {

@@ -17,7 +17,7 @@ const cineMenu = [
             {
                 label: '学习首页',
                 url: h5.URL_Learn_Index,
-                icon: 'ci-my_study',
+                icon: 'ci-stu_work',
                 children: [
                     {
                         label: '历史作业',
@@ -46,12 +46,12 @@ const cineMenu = [
             {
                 label: '我的优惠券',
                 url: h5.URL_User_Coupon,
-                icon: 'ci-ico_coupon',
+                icon: 'ci-coupon',
             },
             {
                 label: '我的积分',
                 url: h5.URL_User_Integral,
-                icon: 'ci-ico_integral',
+                icon: 'ci-integral',
             },
             {
                 label: '我的测试',

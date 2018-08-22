@@ -6,7 +6,7 @@ body {
     overflow-x: hidden;
     background-color: #fff;
 }
-#root {
+.glayout {
     display: flex;
     flex-direction: column;
 
@@ -34,6 +34,10 @@ body {
 @media @media-up-sm {
     .gcontainer {
         margin: 0 auto;
-        width: 18.8rem;
+        width: 18.8rem; //940px
+    }
+
+    .glayout--large .gcontainer {
+        width: 24rem; //1200px
     }
 }

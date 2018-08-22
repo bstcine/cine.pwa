@@ -2,13 +2,16 @@ import { fetchData } from '@/service/base';
 import {
     APIURL_User_Content_Task_Current,
     APIURL_User_Content_Course_Mylist,
+    APIURL_Content_Chapter_List,
 } from '@/../APIConfig';
 import {
     REQUEST_CURRENT_TASK,
     RECEIVE_CURRENT_TASK,
     REQUEST_MY_COURSE_LIST,
     RECEIVE_MY_COURSE_LIST,
+    RECIVE_LESSON_TREE,
 } from '@/constant/actionTypeLearn';
+import { superFetchDataWithShowLogin } from '@/action/commonAction';
 
 export const fetchCurrentTask = () => async dispatch => {
     dispatch(requsetCurrentTask());
@@ -56,6 +59,25 @@ export const recieveMyCourseList = ({ courses }) => {
         type: RECEIVE_MY_COURSE_LIST,
         payload: {
             courses,
+        },
+    };
+};
+
+export const fetchLessonTree = ({ course_id }) => async dispatch => {
+    let [err, result] = await dispatch(
+        superFetchDataWithShowLogin(APIURL_Content_Chapter_List, {
+            cid: course_id,
+        })
+    );
+    if (err) return;
+    dispatch(reciveLessonTree({ tree: result.rows }));
+};
+
+export const reciveLessonTree = ({ tree }) => {
+    return {
+        type: RECIVE_LESSON_TREE,
+        payload: {
+            tree,
         },
     };
 };

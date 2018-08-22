@@ -345,7 +345,7 @@ export const wQuizAction = {
             };
             failureArr = [failureWord];
         }
-        console.log('选择错误的数组: ', failureArr);
+        console.log('选择错误的单词: ', failureArr);
         if (failureArr && failureArr.length > 0) {
             let [err, result] = await fetchData(Api.APIURL_User_Learn_SaveFailure, {
                 failure_words: failureArr,

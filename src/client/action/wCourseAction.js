@@ -47,13 +47,14 @@ export const wCourseAction = {
         ) return;
 
         const payload = {
+            lastVisitID: lvID,
             wordStartID: wordParam.location,
             wordCount: wordParam.count,
-            lastVisitID: lvID,
-            result: result.rows,
+            wordQuizResult: result.rows,
         };
         dispatch(wCourseAction._receive(payload));
 
+        // 最近查看的Lesson显示在当前窗口
         setTimeout(() => {
             // window.scrollTo(0, 0);
             const ele = document.querySelector(`#l${payload.lastVisitID}`);

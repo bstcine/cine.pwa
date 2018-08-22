@@ -62,7 +62,7 @@ const WordCourseRedu = (state = initWordCourse, action) => {
                 payload.wordStartID,
                 payload.wordCount,
                 payload.lastVisitID,
-                payload.result
+                payload.wordQuizResult
             );
 
             return state

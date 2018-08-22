@@ -43,7 +43,7 @@ const UserMobile = ({ user, handleClick }) => {
                     />
                     我的积分
                 </a>
-          
+
                 <a className={'tab'} href={'/user/quiz'} target={'_blank'}>
                     <img
                         src={require('../asset/image/ico_test_word@2x.png')}

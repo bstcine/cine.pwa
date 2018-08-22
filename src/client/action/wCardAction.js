@@ -4,6 +4,7 @@
 import Api from '../../APIConfig';
 import { fetchData } from '@/service/base';
 import { ACTION_WC } from '@/constant/actionTypeLearn';
+import CommonUtil from '@/util/common.js';
 
 export const wCardAction = {
     _request: () => ({
@@ -21,6 +22,14 @@ export const wCardAction = {
     _reviseChangeWordStatus: status => ({
         type: ACTION_WC.REVISECHANGEWORDSTATUS,
         payload: status,
+    }),
+    _reviseIndexArray: arr => ({
+        type: ACTION_WC.REVISEINDEXARRAY,
+        payload: arr,
+    }),
+    _reviseIndex: index => ({
+        type: ACTION_WC.REVISEINDEX,
+        payload: index,
     }),
     _changeAutoTime: time => ({
         type: ACTION_WC.AUTOCHANGETIME,
@@ -93,6 +102,25 @@ export const wCardAction = {
         let reducer = getState().WordCardRedu;
         let isReviseChangeWord = !reducer.get('isReviseChangeWord');
         dispatch(wCardAction._reviseChangeWordStatus(isReviseChangeWord));
+        dispatch(wCardAction.resetRevise());
+    },
+    // 重置随机下标数组和当前随机下标
+    resetRevise: () => async (dispatch, getState) => {
+        let reducer = getState().WordCardRedu;
+        let isReviseChangeWord = reducer.get('isReviseChangeWord');
+        if (!isReviseChangeWord) {
+            return;
+        }
+        // 生成新的一组随机下标值
+        let result = reducer.get('result');
+        if (!result || !result.rows || result.rows.length === 0) {
+            return;
+        }
+        let randomNums = CommonUtil.getRandomNumbers(result.rows.length - 1, result.rows.length);
+        console.log(randomNums, result.rows);
+        dispatch(wCardAction._reviseIndexArray(randomNums));
+        // 将当前随机下标置为零
+        dispatch(wCardAction._reviseIndex(0));
     },
     // 切换正反面
     changFrontOrBack: () => (dispatch, getState) => {
@@ -127,6 +155,7 @@ export const wCardAction = {
         // 更新成功，移除当前元素
         result.rows[currentIndex].is_known = true;
         result.rows.splice(currentIndex, 1);
+        dispatch(wCardAction.resetRevise());
         return true;
     },
     // 再背一次
@@ -149,9 +178,10 @@ export const wCardAction = {
                 name: result.name,
                 status: result.status,
                 rows: newRows,
-            }
+            };
             dispatch(wCardAction._changeCurrentIndex(0));
             dispatch(wCardAction._receive(newResult));
+            dispatch(wCardAction.resetRevise());
         }
     },
     // 背诵下一个单词
@@ -166,14 +196,31 @@ export const wCardAction = {
             return;
         }
         let updateStatus = await dispatch(wCardAction.updateWordKnownStatus());
-        if (updateStatus) {
-            currentIndex -= 1;
-        }
-        if (rows.length === currentIndex + 1) {
-            currentIndex = 0;
+        let reviseIndex = reducer.get('reviseCurrentIndex');
+        let reviseArray = reducer.get('reviseIndexArray');
+        let isRevise = reducer.get('isReviseChangeWord');
+        if (isRevise && rows.length > 3) {
+            if (reviseArray.length === reviseIndex + 1) {
+                if (!updateStatus) {
+                    await dispatch(wCardAction.resetRevise());
+                }
+                reviseIndex = 0;
+            } else {
+                reviseIndex += 1;
+                dispatch(wCardAction._reviseIndex(reviseIndex));
+            }
+            currentIndex = reviseArray[reviseIndex];
         } else {
-            currentIndex += 1;
+            if (updateStatus) {
+                currentIndex -= 1;
+            }
+            if (rows.length === currentIndex + 1) {
+                currentIndex = 0;
+            } else {
+                currentIndex += 1;
+            }
         }
+        console.log(reviseIndex, currentIndex);
         dispatch(wCardAction._changeCurrentIndex(currentIndex));
         // 反面切换到正面
         if (isBack) {
@@ -196,14 +243,28 @@ export const wCardAction = {
             return;
         }
         let updateStatus = await dispatch(wCardAction.updateWordKnownStatus());
-        if (updateStatus) {
-
-        }
-        if (currentIndex === 0) {
-            currentIndex = rows.length - 1;
+        let reviseIndex = reducer.get('reviseCurrentIndex');
+        let reviseArray = reducer.get('reviseIndexArray');
+        let isRevise = reducer.get('isReviseChangeWord');
+        if (isRevise && rows.length > 3) {
+            if (reviseIndex === 0) {
+                if (!updateStatus) {
+                    dispatch(wCardAction.resetRevise());
+                }
+                reviseIndex = reviseArray.length - 1;
+            } else {
+                reviseIndex -= 1;
+            }
+            dispatch(wCardAction._reviseIndex(reviseIndex));
+            currentIndex = reviseArray[reviseIndex];
         } else {
-            currentIndex -= 1;
+            if (currentIndex === 0) {
+                currentIndex = rows.length - 1;
+            } else {
+                currentIndex -= 1;
+            }
         }
+        console.log(reviseIndex, currentIndex);
         dispatch(wCardAction._changeCurrentIndex(currentIndex));
         if (isBack) {
             dispatch(wCardAction._toggleBack(false));

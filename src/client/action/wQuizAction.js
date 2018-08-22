@@ -6,6 +6,7 @@ import { fetchData } from '@/service/base';
 import { ACTION_LT } from '@/constant/actionTypeLearn';
 import gAction from '@/g/action';
 import errorMsg from '@/util/errorMsg';
+import CommonUtil from '@/util/common.js';
 import {
     Learn_Word_Correct_SleepTime,
     Learn_Word_Failed_SleepTime,
@@ -135,6 +136,7 @@ export const wQuizAction = {
             dispatch(gAction.showMessage({ error: errorMsg(error) }));
             return;
         }
+        console.log(result);
         let content = wQuizAction._getContent(result.rows, 0);
         dispatch(wQuizAction._changeContent(content));
         dispatch(wQuizAction._changeWordCount(result['rows'].length));
@@ -157,7 +159,7 @@ export const wQuizAction = {
             randomCount
         );
         // 随机生成正确下标的值
-        let realIndex = wQuizAction.getRandomNumber(randomCount);
+        let realIndex = CommonUtil.getRandomNumber(randomCount);
         // 生命翻译文字数组
         let zhArr = [];
         // 获取正确的翻译
@@ -209,7 +211,7 @@ export const wQuizAction = {
         // 如果数量超出，随机取出count个
         if (newRows.length > count) {
             let resultRows = [];
-            let randomIndexArr = wQuizAction.getRandomNumbers(
+            let randomIndexArr = CommonUtil.getRandomNumbers(
                 newRows.length - 1,
                 count
             );
@@ -220,7 +222,7 @@ export const wQuizAction = {
         }
         // 此时表示数量不足,需要补足
         while (newRows.length < count && rows.length > newRows.length + 1) {
-            let randomIndex = wQuizAction.getRandomNumber(rows.length - 1);
+            let randomIndex = CommonUtil.getRandomNumber(rows.length - 1);
             if (index === randomIndex) {
                 continue;
             }
@@ -382,12 +384,10 @@ export const wQuizAction = {
         if (currentIndex === wordCount - 1) {
             let correctRate = correctCount / wordCount;
             let score = parseInt(correctRate * 100, 10);
-            await dispatch(wQuizAction.updateScore(score));
+            dispatch(wQuizAction.updateScore(score));
             if (correctRate >= 0.9) {
-                console.log('测试完成了');
                 dispatch(wQuizAction.testDone());
             } else {
-                console.log('测试没完成');
                 dispatch(wQuizAction.testWrong());
             }
             return;
@@ -502,40 +502,5 @@ export const wQuizAction = {
             );
             dispatch(wQuizAction.selectWrong(index));
         }
-    },
-    /**
-     * @ 获取不重复的随机数（int）
-     * @param max 最大范围
-     * @param count 获取的数量
-     * @return 随机数组
-     */
-    getRandomNumbers: (max, count) => {
-        let numbers = [];
-        while (numbers.length < count) {
-            let randomNumer = wQuizAction.getRandomNumber(max);
-            if (numbers.length === 0) {
-                numbers.push(randomNumer);
-                continue;
-            }
-            let hadNumber = false;
-            for (let i = 0; i < numbers.length; i++) {
-                if (numbers[i] === randomNumer) {
-                    hadNumber = true;
-                    break;
-                }
-            }
-            if (!hadNumber) {
-                numbers.push(randomNumer);
-            }
-        }
-        return numbers;
-    },
-    /**
-     * @ 获取随机数
-     * @ max 最大范围
-     * @return 生成数值
-     * */
-    getRandomNumber: max => {
-        return Math.round(Math.random() * max);
     },
 };

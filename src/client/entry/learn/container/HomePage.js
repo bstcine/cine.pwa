@@ -5,6 +5,7 @@ import Courses from './Courses';
 import '@/entry/learn/asset/style/index.less';
 import { withRouter } from 'react-router-dom';
 import { GLayoutContainer } from '@/g/container';
+import WordCourses from './../component/home/WordCourses';
 
 const mapStateToProps = state => {
     const { userRedu } = state;
@@ -17,6 +18,7 @@ class HomePage extends Component {
         return (
             <GLayoutContainer>
                 {!!user && user.type === '2' && <Tasks />}
+                <WordCourses />
                 <Courses />
             </GLayoutContainer>
         );

@@ -17,6 +17,7 @@ const ExpandMore = ({ tasks, isLimitTasks, onShowAllTask }) => {
 const Tasks = ({ tasks, isLimitTasks, onShowAllTask }) => {
     return (
         <CPanel
+            className="tasks-container"
             title="本周作业"
             badge={tasks.filter(i => i.status !== '2').length}
             ext_title="历史作业"

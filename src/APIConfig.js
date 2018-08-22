@@ -80,5 +80,11 @@ exports.APIURL_User_Learn_Task = '/api/user/learn/task'; // 历史任务列表
 exports.APIURL_User_Learn_UpdateTaskStatus = '/api/user/learn/updatetask'; // 更新任务状态
 
 exports.APIURL_User_Learn_SaveFailure = '/api/user/learn/savefailure'; // 保存选择错误的信息
-exports.APIURL_User_Content_Word_UpdateKnow =
-    '/api/user/content/word/updateknow'; // 保存已认识单词
+exports.APIURL_User_Content_Word_UpdateKnow = '/api/user/content/word/updateknow'; // 保存已认识单词
+
+exports.APIURL_Content_Quiz_Word_List = '/api/content/quiz/word/list'; // 词汇量测试开始，获取top10000单词列表
+
+exports.APIURL_User_Word = '/api/user/word'; // 获取用户词汇测试得分
+exports.APIURL_User_Word_Update = '/api/user/word/update'; // 更新用户词汇测试得分
+
+exports.APIURL_User_Word_Lesson_Learn_Update = '/api/user/word/lesson/learn/update'; // 更新用户课程词汇测试最新点击选项

@@ -13,23 +13,16 @@ import WordCardBodyDone from './WordCardBodyDone';
 
 class WordCard extends React.PureComponent {
     render() {
-        let { result, currentIndex, isAutoChangeWord, isReviseChangeWord, isBack, isKnown, isSet, actions, backAction, listAction, quizAction, setAction } = this.props;
+        let { result, currentIndex, isAutoChangeWord, isReviseChangeWord, isBack, isKnown, isSet, actions, backAction, listAction, quizAction, setAction, playAction } = this.props;
         let { name, rows } = result;
         let setImageStyle = {}
-        let setFooterStyle = {}
         if (isSet === true) {
             setImageStyle = {
                 display: 'none'
             };
-            setFooterStyle = {
-                display: 'flex'
-            };
         } else if (isSet === false) {
             setImageStyle = {
                 display: 'inline-block',
-            };
-            setFooterStyle = {
-                display: 'none'
             };
         }
         let wordCard = null;
@@ -55,6 +48,7 @@ class WordCard extends React.PureComponent {
                         isBack={isBack}
                         isKnown={isKnown}
                         actions={actions}
+                        playAction={playAction}
                     />
                     <WordCardFooter
                         isSet={isSet}

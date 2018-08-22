@@ -12,12 +12,16 @@ class WordQuiz extends React.PureComponent {
         let index = content.index;
         actions.startNext(rows, index);
     };
+    // 返回以前的位置
+    backHome= () => {
+        let { param } = this.props
+        location.href = addParam('/lword', param);
+    }
 
     render() {
-        let { param, isTest, selectIndex, wordCount, correctCount, content, actions } = this.props;
-        const wordHref = addParam('/lword', param);
+        let { isTest, selectIndex, wordCount, selectCount, content, actions } = this.props;
         let wordCountPromot = '本次学习单词' + wordCount + '个，测试下掌握了多少？';
-        let correctWord = '已掌握' + correctCount + '个';
+        let correctWord = '已测试' + selectCount + '个';
         let wordAllPromot = '共' + wordCount + '个';
         const initContent = (
             <div className="v_Test_VocabularyContent">
@@ -47,7 +51,7 @@ class WordQuiz extends React.PureComponent {
                 </div>
             );
         });
-        let inProgressWidth = (correctCount * 100 / wordCount).toString() + '%';
+        let inProgressWidth = (selectCount * 100 / wordCount).toString() + '%';
         const testContent = (
             <div className="v_Test_VocabularyContent">
                 <div className="v_Test_VC_Progress">
@@ -65,8 +69,9 @@ class WordQuiz extends React.PureComponent {
         return (
             <div className="vocabularyTest">
                 <div className="v_Test_VocabularyHeader">
-                    <a className="v_Test_H_TaskName">词汇测试</a>
-                    <a className="v_Test_H_HistoryDoor" href={wordHref}>词汇学习</a>
+                    <img className="backButton" src={require('../../asset/image/lword_back.svg')} onClick={() => { this.backHome() }} />
+                    <p className="v_Test_H_TaskName">词汇测试</p>
+                    <a className="v_Test_H_HistoryDoor"></a>
                 </div>
                 {contentView}
             </div>

@@ -42,11 +42,13 @@ export const wordAction = {
     loadWordList: (param) => async dispatch => {
 
         let [error, result] = await fetchData(Api.APIURL_User_Learn_Word, param);
-
         if (!error) {
             dispatch(wordAction._receive(result));
             let currentRows = [];
             result.rows.forEach((ele) => {
+                if (ele.id.length > 5) {
+                    ele.id = ele.id.slice(-5);
+                }
                 currentRows.push(ele);
             });
             dispatch(wordAction._currentRows(currentRows));
@@ -57,7 +59,6 @@ export const wordAction = {
     // 更新单词状态
     updateWordStatus: (index, is_known) => async (dispatch, getState) => {
         let reducer = getState().WordRedu;
-        let isShowAll = reducer.get('isShowAll');
         let result = reducer.get('result');
         let currentRows = reducer.get('currentRows');
         let wordObject = currentRows[index];
@@ -69,13 +70,8 @@ export const wordAction = {
         }
         let newObject = { ...wordObject };
         newObject.is_known = is_known;
-        if (isShowAll || !is_known) {
-            currentRows.splice(index, 1, newObject);
-            result.rows.splice(resultIndex, 1, newObject);
-        } else {
-            currentRows.splice(index, 1);
-            result.rows.splice(resultIndex, 1);
-        }
+        result.rows.splice(resultIndex, 1, newObject);
+        currentRows.splice(index, 1, newObject);
         let newRows = [...currentRows];
         dispatch(wordAction._currentRows(newRows));
         let [error, _updateRes] = await fetchData(Api.APIURL_User_Content_Word_UpdateKnow, { 'word': newObject.word, 'is_known': is_known });
@@ -83,6 +79,44 @@ export const wordAction = {
             currentRows.splice(index, 1, wordObject);
             result.rows.splice(resultIndex, 1, wordObject);
             dispatch(wordAction._currentRows(currentRows));
+        }
+    },
+    // 更新course节点点击状态
+    updateCourseSelectIndex: param => async (dispatch) => {
+        if (!param.lesson_id) {
+            return;
+        }
+        const indexComponent = param.lesson_id.split('-');
+        let startIndex = indexComponent[0];
+        let endIndex = indexComponent[1];
+        startIndex = parseInt(startIndex, 10);
+        endIndex = parseInt(endIndex, 10);
+        if (startIndex % 50 !== 1) {
+            return;
+        }
+        if (endIndex % 50 !== 0) {
+            return;
+        }
+        if (endIndex - startIndex !== 49) {
+            return;
+        }
+        let estimate_range;
+        if (startIndex < 3001) {
+            estimate_range = '1-3000';
+        } else if (startIndex < 6001) {
+            estimate_range = '3001-6000';
+        } else {
+            estimate_range = '6001-10000';
+        }
+        let updateParam = {
+            'lesson_id': param.lesson_id,
+            'estimate_range': estimate_range,
+        };
+        let [err, result] = await fetchData(Api.APIURL_User_Word_Lesson_Learn_Update, updateParam);
+        if (result) {
+            console.log(result);
+        } else {
+            console.log(err);
         }
     },
 };

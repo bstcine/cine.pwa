@@ -1,9 +1,13 @@
 export const URL_Learn_Index = '/learn';
 export const URL_Learn_Course_KJ = '/learn/course';
 export const URL_Learn_Task = '/learn/task'; // 我的所有作业
-export const URL_Learn_Word = '/learn/word';
-export const URL_Learn_Word_Quiz = '/learn/wordquiz';
+export const URL_Learn_Word_Course = '/lword/course';
+export const URL_Learn_Word = '/lword';
+export const URL_Learn_Word_Card = '/lword/card';
+export const URL_Learn_Word_List = '/lword/list';
+export const URL_Learn_Word_Quiz = '/lword/quiz';
 export const URL_Learn_Course = '/learn/course2/:cid';
+
 
 export const URL_User_Index = '/user';
 export const URL_User_Order = '/user/order';

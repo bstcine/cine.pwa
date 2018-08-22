@@ -4,7 +4,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { getParam } from '@/util/urlUtil';
+import { getParam, addParam } from '@/util/urlUtil';
 import { wQuizAction } from '@/action/wQuizAction';
 import WordQuiz from '../component/WordQuiz';
 import CThemeProvider from '@/component/CThemeProvider';
@@ -16,7 +16,6 @@ class WordQuizContainer extends Component {
         super(props);
         // 获取参数
         this.param = getParam();
-        console.log(this.param);
     }
     componentDidMount() {
         // 准备访问
@@ -30,7 +29,7 @@ class WordQuizContainer extends Component {
             isDone,
             selectIndex,
             wordCount,
-            correctCount,
+            selectCount,
             content,
             actions,
         } = this.props;
@@ -45,6 +44,16 @@ class WordQuizContainer extends Component {
                 }}
             />,
         ];
+        const wrongDialogAction = [
+            <CFlatButton
+                key={2}
+                label="确定"
+                primary={true}
+                onClick={() => {
+                    location.href = addParam('/lword', this.param);
+                }}
+            />,
+        ];
         return (
             <CThemeProvider>
                 <React.Fragment>
@@ -53,7 +62,7 @@ class WordQuizContainer extends Component {
                         isTest={isTest}
                         selectIndex={selectIndex}
                         wordCount={wordCount}
-                        correctCount={correctCount}
+                        selectCount={selectCount}
                         content={content}
                         actions={actions}
                     />
@@ -61,9 +70,18 @@ class WordQuizContainer extends Component {
                         title="已掌握全部单词，立刻返回学习首页"
                         modal={false}
                         actions={dialogActions}
-                        open={isDone}
+                        open={isDone === true}
                         onRequestClose={() => {
                             location.href = '/learn';
+                        }}
+                    />
+                    <CDialog
+                        title="尚未掌握全部单词，继续学习"
+                        modal={false}
+                        actions={wrongDialogAction}
+                        open={isDone === false}
+                        onRequestClose={() => {
+                            location.href = addParam('/lword', this.param);
                         }}
                     />
                 </React.Fragment>
@@ -79,7 +97,7 @@ const mapStateToProps = state => {
         selectIndex: state.WordQuizRedu.get('selectIndex'),
         wordCount: state.WordQuizRedu.get('wordCount'),
         content: state.WordQuizRedu.get('content'),
-        correctCount: state.WordQuizRedu.get('correctCount'),
+        selectCount: state.WordQuizRedu.get('selectCount'),
         toastRedu: state.toastRedu,
     };
 };

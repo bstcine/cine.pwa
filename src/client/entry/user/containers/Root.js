@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import '../asset/style/index.less';
 import { GLayoutContainer } from '@/g/container';
-// import { fetchUserInfo } from '@/action/commonAction';
+import { bindActionCreators } from 'redux';
+import gAction from '@/g/action';
 import UserMobile from '@/entry/user/component/UserMobile';
 
 class Root extends Component {
@@ -14,8 +15,15 @@ class Root extends Component {
         if (this.isUserHome && !this.isLessUpSm) location.href = '/user/integral';
     }
 
+    componentDidMount() {
+        if (this.isUserHome && this.isLessUpSm) {
+            this.props.actions.preFetchUserInfo();
+        }
+    }
+
     render() {
         const { routes, user } = this.props;
+        console.log(123, this.isUserHome, this.isLessUpSm, user);
         if (this.isUserHome && this.isLessUpSm) return user && <UserMobile user={user} />;
         return <GLayoutContainer>{routes}</GLayoutContainer>;
     }
@@ -23,10 +31,14 @@ class Root extends Component {
 
 const mapStateToProps = state => ({ user: state.userRedu.data });
 
+const mapDispatchToProps = dispatch => ({
+    actions: bindActionCreators(gAction, dispatch),
+});
+
 // const mapDispatchToProps = dispatch => ({
 //     fetchUserInfo: () => {
 //         dispatch(fetchUserInfo());
 //     },
 // });
 
-export default connect(mapStateToProps)(Root);
+export default connect(mapStateToProps, mapDispatchToProps)(Root);

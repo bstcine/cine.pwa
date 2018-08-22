@@ -79,6 +79,13 @@ export const wQuizAction = {
         payload: count,
     }),
     /**
+     * 改变显示过的单词数量
+     * */
+    _changeSelectCount: count => ({
+        type: ACTION_LT.SELECTCOUNT,
+        payload: count,
+    }),
+    /**
      * 保存错误信息
      * */
     _changeFailureArray: failureArr => ({
@@ -120,7 +127,6 @@ export const wQuizAction = {
      * 加载单词数组的方法（私有）
      * */
     _loadWords: (param, isInit) => async dispatch => {
-        console.log('开始猪呢比架子')
         let [error, result] = await fetchData(
             Api.APIURL_User_Learn_Word,
             param
@@ -277,7 +283,6 @@ export const wQuizAction = {
      * 加载单词数据（对外调用）
      * */
     loadWords: param => async dispatch => {
-        console.log('加载');
         dispatch(wQuizAction._saveParam(param));
         dispatch(wQuizAction._loadWords(param, true));
     },
@@ -322,14 +327,49 @@ export const wQuizAction = {
         dispatch(wQuizAction._endTest(true));
     },
     /**
+     * 测试未通过
+     * */
+    testWrong: () => async (dispatch) => {
+        // 更新测试状态为已完成
+        dispatch(wQuizAction.updateTask('1'));
+        // 提示用户已完成全部测试（掌握全部单词）
+        dispatch(wQuizAction._endTest(false));
+    },
+    /**
+     * 更新测试分数
+     * */
+    updateScore: (score) => async (dispatch, getState) => {
+        let reducer = getState().WordQuizRedu;
+        let param = reducer.get('param');
+        let scoreParam = {
+            score: score,
+        };
+        if (param.lesson_id) {
+            scoreParam.lesson_id = param.lesson_id;
+        } else if (param.task_id) {
+            scoreParam.task_id = param.task_id;
+        } else if (param.start_index && param.end_index) {
+            scoreParam.lesson_id = `${param.start_index}-${param.end_index}`;
+        }
+        let result = await fetchData(Api.APIURL_User_Word_Update, scoreParam);
+        console.log('更新成绩', result);
+    },
+    /**
      * 开始下一个（对外调用）
      * */
     startNext: currentIndex => async (dispatch, getState) => {
         let reducer = getState().WordQuizRedu;
         let correctCount = reducer.get('correctCount');
         let wordCount = reducer.get('wordCount');
-        if (correctCount === wordCount) {
-            dispatch(wQuizAction.testDone());
+        if (currentIndex === wordCount - 1) {
+            let correctRate = correctCount / wordCount;
+            let score = parseInt(correctRate * 100, 10);
+            dispatch(wQuizAction.updateScore(score));
+            if (correctRate >= 0.9) {
+                dispatch(wQuizAction.testDone());
+            } else {
+                dispatch(wQuizAction.testWrong());
+            }
             return;
         }
         let rows = reducer.get('rows');
@@ -406,37 +446,15 @@ export const wQuizAction = {
         let reducer = getState().WordQuizRedu;
         let content = reducer.get('content');
         let correctCount = reducer.get('correctCount');
+        let selectCount = reducer.get('selectCount');
+        selectCount += 1;
+        dispatch(wQuizAction._changeSelectCount(selectCount));
         let index = content.index;
         if (selectIndex === content.real_zh) {
             let count = correctCount + 1;
             dispatch(wQuizAction._changeCorrectCount(count));
             dispatch(wQuizAction.selectCorrect(index));
         } else {
-            // 将错误的下标录入到临时错误数组中
-            let faileTempIndexArr = reducer.get('faileTempIndexArr');
-            if (faileTempIndexArr === null) {
-                faileTempIndexArr = [content['index']];
-            } else {
-                faileTempIndexArr.push(content['index']);
-            }
-            // 将选择错误的单词信息保存
-            let failureWord = {
-                word: content.value,
-                word_selected: content.zh[selectIndex],
-                is_correct: content.zh[content.real_zh],
-                task_param: reducer.get('param'),
-            };
-            let failureArr = reducer.get('failureArray');
-            if (failureArr) {
-                failureArr.push(failureWord);
-            } else {
-                failureArr = [failureWord];
-            }
-            dispatch(wQuizAction._changeFailureArray(failureArr));
-            // 保存错误信息
-            dispatch(
-                wQuizAction._changeFaileTempIndexArray(faileTempIndexArr)
-            );
             dispatch(wQuizAction.selectWrong(index));
         }
     },

@@ -31,7 +31,7 @@ class Word extends Entry {
                     <div className="map-bg" />
                     <Route exact path="/" component={Welcome} />
                     <Route path="/userinfo" component={UserInfo} />
-                    <Route path="/card" component={Card} />
+                    <Route path="/card" component={Card}/>
                     <Route path="/report" component={Report} />
                     <Route path="/reportlist" component={ReportList} />
                 </div>

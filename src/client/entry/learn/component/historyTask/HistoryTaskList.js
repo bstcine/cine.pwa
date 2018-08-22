@@ -1,6 +1,5 @@
 import React from 'react';
 import moment from 'moment';
-import { CPanel } from '@/component/_base';
 import TaskList from '@/component/TaskList';
 import '../../asset/style/historyTask.less';
 
@@ -35,7 +34,7 @@ class HistoryTaskList extends React.PureComponent {
             );
         });
 
-        return <CPanel>{children}</CPanel>;
+        return <React.Fragment>{children} </React.Fragment>;
     }
 }
 

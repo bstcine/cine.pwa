@@ -9,6 +9,7 @@
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     align-items: flex-end;
 }
 
@@ -21,10 +22,15 @@
     width: 100%;
     height: auto;
     justify-content: space-between;
+    border-style: none none none none;
+    border-color: #ebf3fb;
+    border-width: 2px;
+
     .back-Image-Header {
         display: inline-block;
         width: 0.4rem;
         height: 0.4rem;
+        background-size: contain;
         margin-left: 0.2rem;
         cursor: pointer;
     }
@@ -32,17 +38,18 @@
         display: flex;
         flex-direction: row;
         align-items: center;
-        font-size: 0.36rem;
 
         .wordCard-backButton {
             display: none;
             width: 0.4rem;
             height: 0.4rem;
+            background-size: contain;
             margin-left: 0.2rem;
             margin-right: 0.2rem;
             cursor: pointer;
         }
         .wordCard-taskTitle {
+            font-size: 0.36rem;
             color: #3a3b3c;
         }
     }
@@ -71,9 +78,6 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    border-style: none none none none;
-    border-color: #ebf3fb;
-    border-width: 2px;
     height: 100%;
     width: 100%;
     .lastWord {
@@ -118,10 +122,6 @@
         height: 8.7rem;
         transition: 0.6s;
         transform-style: preserve-3d;
-        //position: relative;
-    }
-    .front {
-        //z-index: 2;
     }
     .back {
         transform: rotateY(180deg);
@@ -175,10 +175,10 @@
         height: 0.8rem;
         cursor: pointer;
         .grsaspPromote {
-            margin-left: 0.36rem;
+            margin-left: 0.2rem;
             font-family: PingFangSC-Regular;
-            font-size: 0.32rem;
-            color: #7a7b7c;
+            font-size: 0.28rem;
+            color: #9a9b9c;
         }
     }
     .transition {
@@ -289,6 +289,9 @@
     height: 2.3rem;
     width: 100%;
     background-color: rgba(0,0,0,0.18);
+    border-style: none none none none;
+    border-color: #ebf3fb;
+    border-width: 2px;
 }
 .autoChangeWord {
     display: flex;
@@ -330,6 +333,8 @@
         min-height: 80vh;
     }
     .wordCard-Header {
+        border-style: none none solid none;
+
         .back-Image-Header {
             display: none;
         }
@@ -338,16 +343,19 @@
                 margin-left: 0;
                 display: inline-block;
             }
+            .wordCard-taskTitle {
+                font-size: 0.32rem;
+            }
         }
         .wordCard-ToList {
             .wordCard-ListTitle {
                 display: inline-block;
+                font-size: 0.28rem;
             }
         }
     }
     .wordCard-Body {
         height: 10rem;
-        border-style: solid none solid none;
         .lastWord {
             display: inline-block;
         }
@@ -428,8 +436,9 @@
         display: flex;
         justify-content: flex-end;
         height: 1.44rem;
-        width: auto;
+        width: 100%;
         background-color: transparent;
+        border-style: solid none none none;
     }
     .autoChangeWord {
         display: flex;

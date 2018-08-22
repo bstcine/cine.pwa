@@ -1,6 +1,6 @@
 import React from 'react';
 import { CButton } from '@/component/_base';
-import { svgStar, svgStarHalf } from './../svg';
+import { svgStar, svgStarHalf } from '@/constant/svg';
 
 export const CardItem = ({ value, actions }) => {
     return (

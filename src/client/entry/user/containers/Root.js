@@ -23,7 +23,6 @@ class Root extends Component {
 
     render() {
         const { routes, user } = this.props;
-        console.log(123, this.isUserHome, this.isLessUpSm, user);
         if (this.isUserHome && this.isLessUpSm) return user && <UserMobile user={user} />;
         return <GLayoutContainer>{routes}</GLayoutContainer>;
     }
@@ -34,11 +33,5 @@ const mapStateToProps = state => ({ user: state.userRedu.data });
 const mapDispatchToProps = dispatch => ({
     actions: bindActionCreators(gAction, dispatch),
 });
-
-// const mapDispatchToProps = dispatch => ({
-//     fetchUserInfo: () => {
-//         dispatch(fetchUserInfo());
-//     },
-// });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Root);

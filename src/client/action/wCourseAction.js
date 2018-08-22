@@ -29,30 +29,31 @@ export const wCourseAction = {
     },
 
     loadUserWordLearnAndQuiz: param => async dispatch => {
-        const payload = {
-            wordStartID: param.start_index ? param.start_index : 1,
-            wordCount: param.range ? param.range : 3000,
-            lastVisitID: param.last_index,
+        const wordParam = {
+            location: param.start_index ? param.start_index : 1,
+            count: param.range ? param.range : 3000,
         };
-        let wordParam = {
-            location: payload.wordStartID,
-            count: payload.wordCount,
-        };
-        let [err, result] = await fetchData(Api.APIURL_User_Word, wordParam);
+        const [err, result] = await fetchData(Api.APIURL_User_Word, wordParam);
         if (!result) {
             console.log(err);
             return;
         }
-        if (!payload.lastVisitID) {
-            payload.lastVisitID = result.lastVisitID;
-        }
-        if (result.rows && result.rows.length > 0) {
-            payload.result = result.rows;
-            dispatch(wCourseAction._receive(payload));
-        }
-        if (!payload.lastVisitID || payload.lastVisitID === param.start_index) {
-            return;
-        }
+
+        // 如果没有测试数据&没有查看记录就不需要dispatch（Re-render)
+        const lvID = param.last_index ? param.last_index : result.lastVisitID;
+        if (
+            result.rows.length === 0 &&
+            (lvID === 1 || lvID === 3001 || lvID === 6001)
+        ) return;
+
+        const payload = {
+            wordStartID: wordParam.location,
+            wordCount: wordParam.count,
+            lastVisitID: lvID,
+            result: result.rows,
+        };
+        dispatch(wCourseAction._receive(payload));
+
         setTimeout(() => {
             // window.scrollTo(0, 0);
             const ele = document.querySelector(`#l${payload.lastVisitID}`);

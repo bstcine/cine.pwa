@@ -336,6 +336,12 @@ export const wQuizAction = {
     updateFailureWords: () => async (dispatch, getState) => {
         let reducer = getState().WordQuizRedu;
         let failureArr = reducer.get('failureArray');
+        let failureWord = {
+            word: '100',
+            word_selected: '100',
+            is_correct: '100',
+            task_param: reducer.get('param'),
+        };
         console.log(failureArr);
         if (failureArr && failureArr.length > 0) {
             let [err, result] = await fetchData(Api.APIURL_User_Learn_SaveFailure, {
@@ -466,6 +472,31 @@ export const wQuizAction = {
             dispatch(wQuizAction._changeCorrectCount(count));
             dispatch(wQuizAction.selectCorrect(index));
         } else {
+            // 将错误的下标录入到临时错误数组中
+            let faileTempIndexArr = reducer.get('faileTempIndexArr');
+            if (faileTempIndexArr === null) {
+                faileTempIndexArr = [content['index']];
+            } else {
+                faileTempIndexArr.push(content['index']);
+            }
+            // 将选择错误的单词信息保存
+            let failureWord = {
+                word: content.value,
+                word_selected: content.zh[selectIndex],
+                is_correct: content.zh[content.real_zh],
+                task_param: reducer.get('param'),
+            };
+            let failureArr = reducer.get('failureArray');
+            if (failureArr) {
+                failureArr.push(failureWord);
+            } else {
+                failureArr = [failureWord];
+            }
+            dispatch(wQuizAction._changeFailureArray(failureArr));
+            // 保存错误信息
+            dispatch(
+                wQuizAction._changeFaileTempIndexArray(faileTempIndexArr)
+            );
             dispatch(wQuizAction.selectWrong(index));
         }
     },

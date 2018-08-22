@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
-import Courses from '../component/Courses';
+import Courses from '../component/home/Courses';
 import { fetchMyCourseList } from '@/action/learnAction';
 
 const mapStateToProps = state => {

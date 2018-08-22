@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
-import Tasks from '../component/Tasks';
+import Tasks from '../component/home/Tasks';
 import uaUtil from '@/util/uaUtil';
 import { fetchCurrentTask } from '@/action/learnAction';
 

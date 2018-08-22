@@ -23,7 +23,7 @@ const WordLessonItem = ({ item, actions }) => {
     const herf = `lesson_id=${item.value}&start_index=${indexs[0]}&end_index=${indexs[1]}`;
     return (
         <React.Fragment>
-            <a href={'/lword?' + herf} target="_blank">
+            <a href={'/lword?' + herf} >
                 <div className={'lesson ' + className} id={`l${indexs[0]}`}>
                     <div className="top">
                         <div className="no">第{item.id}组</div>

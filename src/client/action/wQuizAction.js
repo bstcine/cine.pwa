@@ -336,13 +336,16 @@ export const wQuizAction = {
     updateFailureWords: () => async (dispatch, getState) => {
         let reducer = getState().WordQuizRedu;
         let failureArr = reducer.get('failureArray');
-        let failureWord = {
-            word: '100',
-            word_selected: '100',
-            is_correct: '100',
-            task_param: reducer.get('param'),
-        };
-        console.log(failureArr);
+        if (!failureArr || failureArr.length === 0) {
+            let failureWord = {
+                word: '100',
+                word_selected: '100',
+                is_correct: '100',
+                task_param: reducer.get('param'),
+            };
+            failureArr = [failureWord];
+        }
+        console.log('选择错误的单词: ', failureArr);
         if (failureArr && failureArr.length > 0) {
             let [err, result] = await fetchData(Api.APIURL_User_Learn_SaveFailure, {
                 failure_words: failureArr,

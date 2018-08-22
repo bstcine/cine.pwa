@@ -11,7 +11,7 @@ class Root extends Component {
         super(props);
         this.isUserHome = location.pathname.split('/').join('') === 'user';
         this.isLessUpSm =
-            (window.innerWidth > 0 ? window.innerWidth : screen.width) < 1024;
+            (window.innerWidth > 0 ? window.innerWidth : screen.width) <= 568;
         if (this.isUserHome && !this.isLessUpSm) location.href = '/user/integral';
     }
 

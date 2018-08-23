@@ -47,6 +47,10 @@ const cineMenu = [
                         label: '词汇测试',
                         url: h5.URL_Learn_Word_Quiz,
                     },
+                    {
+                        label: '课程播放',
+                        url: h5.URL_Learn_Course,
+                    },
                 ],
             },
         ],

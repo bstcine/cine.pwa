@@ -3,7 +3,10 @@ import classNames from 'classnames';
 import { CPanel, CIcon } from '@/component/_base';
 import { Link } from 'react-router-dom';
 
-const CourseNav = ({ tree, active_id }) => {
+/**
+ * 左侧导航
+ */
+const CourseNav = ({ tree, activeId }) => {
     console.log('CourseNav render');
 
     return (
@@ -15,7 +18,7 @@ const CourseNav = ({ tree, active_id }) => {
                         <NavChapter
                             key={item.id}
                             chapter={item}
-                            active_id={active_id}
+                            activeId={activeId}
                         />
                     ))}
                 </ul>
@@ -57,7 +60,7 @@ class NavChapter extends Component {
     }
 
     render() {
-        const { chapter, active_id } = this.props;
+        const { chapter, activeId } = this.props;
 
         return (
             <li className="nav__chapter" onClick={this.onClick}>
@@ -66,7 +69,7 @@ class NavChapter extends Component {
                 <ul
                     className={classNames('nav__lessons', {
                         'nav__lessons--active': chapter.children.some(
-                            item => item.id === active_id
+                            item => item.id === activeId
                         ),
                     })}
                     onClick={e => {
@@ -77,7 +80,7 @@ class NavChapter extends Component {
                         <Lesson
                             key={item.id}
                             lesson={item}
-                            active={item.id === active_id}
+                            active={item.id === activeId}
                         />
                     ))}
                 </ul>

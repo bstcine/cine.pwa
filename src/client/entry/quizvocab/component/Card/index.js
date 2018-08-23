@@ -25,6 +25,7 @@ export default class Card extends Component {
             isWordEnd: false,
         };
         this.last_index = 1;
+        this.estimate_score = 0;
         this.disableClick = false;
         this.sandGlassTimer = null;
         this.levelTipTimer = null;
@@ -175,6 +176,10 @@ export default class Card extends Component {
         if (!this.param.estimate) {
             return;
         }
+        if (this.estimate_score >= 1) {
+            location.href = '/learn';
+            return;
+        }
         const estimateComponent = this.param.estimate.split('-');
         const startIndex = parseInt(estimateComponent[0], 10);
         const range = parseInt(estimateComponent[1], 10);
@@ -213,9 +218,12 @@ export default class Card extends Component {
             });
             console.log(`result ${JSON.stringify(result)}`);
             if (this.param.estimate) {
-                const location = this.param.estimate.split('-')[0];
-                let score = parseInt(location, 10) + query.vocab;
-                console.log('实际显示得分: ' + score);
+                const estimateCom = this.param.estimate.split('-');
+                const location = parseInt(estimateCom[0], 10);
+                const range = parseInt(estimateCom[1], 10);
+                let score = location + query.vocab;
+                this.estimate_score = score / (location - 1 + range);
+                console.log('本次评估得分: ' + this.estimate_score);
                 for (let i = 0; i < this.wordLevelList.length; i++) {
                     const wordLevel = this.wordLevelList[i];
                     if (wordLevel.min_vocab > score) {
@@ -366,6 +374,7 @@ export default class Card extends Component {
                 onClick={this.gotoWordCourse}
             />,
         ];
+        const estimateText = this.estimate_score >= 1 ? '恭喜你本次测试已通过' : `测试完成, 建议从第${this.last_index}个单词开始学习`;
         return (
             <CThemeProvider>
                 <React.Fragment>
@@ -405,7 +414,7 @@ export default class Card extends Component {
                         </div>
                     </div>
                     <CDialog
-                        title={`测试完成, 建议从第${this.last_index}个单词开始学习`}
+                        title={estimateText}
                         modal={false}
                         actions={dialogActions}
                         open={this.state.isWordEnd}

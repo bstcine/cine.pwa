@@ -26,7 +26,21 @@ class WordContainer extends Component {
     }
 
     backLearnHome() {
-        location.href = '/learn/task';
+        if (!this.param.lesson_id || this.param.lesson_id.indexOf('-') === -1) {
+            location.href = '/learn/task';
+            return;
+        }
+        const lessonCom = this.param.lesson_id.split('-');
+        const start_index = parseInt(lessonCom[0], 10);
+        let paramStr = '';
+        if (start_index < 3001) {
+            paramStr = 'start_index=1&range=3000';
+        } else if (start_index < 6001) {
+            paramStr = 'start_index=3001&range=3000';
+        } else {
+            paramStr = 'start_index=6001&range=4000';
+        }
+        location.href = `/lword/course?${paramStr}`;
     }
     gotoTest() {
         let testHref = addParam('/lword/quiz', this.param);

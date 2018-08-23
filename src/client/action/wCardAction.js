@@ -220,7 +220,6 @@ export const wCardAction = {
                 currentIndex += 1;
             }
         }
-        console.log(reviseIndex, currentIndex);
         dispatch(wCardAction._changeCurrentIndex(currentIndex));
         // 反面切换到正面
         if (isBack) {
@@ -264,7 +263,6 @@ export const wCardAction = {
                 currentIndex -= 1;
             }
         }
-        console.log(reviseIndex, currentIndex);
         dispatch(wCardAction._changeCurrentIndex(currentIndex));
         if (isBack) {
             dispatch(wCardAction._toggleBack(false));

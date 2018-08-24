@@ -180,16 +180,16 @@ export default class Card extends Component {
         if (!this.param.estimate) {
             return;
         }
-        if (this.estimate_score >= 0.9) {
-            location.href = '/learn';
-            return;
-        }
         const estimateComponent = this.param.estimate.split('-');
         const startIndex = parseInt(estimateComponent[0], 10);
         const range = parseInt(estimateComponent[1], 10);
         Service.updateLastIndex(startIndex, range, this.last_index).then(result => {
             console.log(result);
-            location.href = `/lword/course?start_index=${startIndex}&range=${range}&last_index=${this.last_index}`;
+            if (this.estimate_score >= 0.9) {
+                location.href = '/learn';
+            } else {
+                location.href = `/lword/course?start_index=${startIndex}&range=${range}&last_index=${this.last_index}`;
+            }
         });
     }
     // 答题结束
@@ -229,12 +229,16 @@ export default class Card extends Component {
                 let score = location + query.vocab;
                 this.estimate_score = score / (location - 1 + range);
                 console.log('本次评估得分: ' + this.estimate_score);
-                for (let i = 0; i < this.wordLevelList.length; i++) {
-                    const wordLevel = this.wordLevelList[i];
-                    if (wordLevel.min_vocab > score) {
-                        break;
+                if (this.estimate_score >= 0.9) {
+                    this.last_index = location + range - 50;
+                } else {
+                    for (let i = 0; i < this.wordLevelList.length; i++) {
+                        const wordLevel = this.wordLevelList[i];
+                        if (wordLevel.min_vocab > score) {
+                            break;
+                        }
+                        this.last_index = wordLevel.min_vocab;
                     }
-                    this.last_index = wordLevel.min_vocab;
                 }
 
                 this.setState({

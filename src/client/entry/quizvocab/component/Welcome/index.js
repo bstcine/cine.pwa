@@ -34,7 +34,7 @@ export default class Welcome extends Component {
         if (!user && !loginModalOpened) {
             this.toggleLoginModal();
         } else {
-            if (user && user.area_code && user.grade !== null && user.born_at) {
+            if (this.param.estimate || (user && user.area_code && user.grade !== null && user.born_at)) {
                 this.props.history.push(this.cardPath);
             } else {
                 let url = '/userinfo';

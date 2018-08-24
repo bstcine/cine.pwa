@@ -23,6 +23,7 @@
 
 .nav__chapter {
     cursor: pointer;
+
     i {
         vertical-align: middle;
         font-size: 12px;
@@ -30,23 +31,27 @@
     > span {
         vertical-align: middle;
         font-weight: bolder;
+        &:hover {
+            color: #0748a0;
+        }
+    }
+    a {
+        display: block;
     }
 }
 
 .nav__lessons {
-    border-top: 1px dashed transparent;
     transition: height 150ms ease-out, border 150ms ease-out;
     overflow: hidden;
     height: 0;
-    padding-left: 1em;
 }
 
 .nav__lessons--active {
-    border-top: 1px dashed #c1c1c1;
     height: auto;
 }
 
 .nav__lesson {
+    padding-left: 1em;
     position: relative;
     i {
         position: absolute;
@@ -60,9 +65,17 @@
     &:hover {
         color: #0748a0;
     }
+    &:first-child {
+        border-top: 1px dashed #c1c1c1;
+    }
 }
 
 .nav__lesson--active {
     color: #0748a0;
     font-weight: bold;
+}
+
+.lesson__html {
+    font-size: 14px !important;
+    line-height: 1.6 !important;
 }

@@ -3,6 +3,7 @@ import {
     APIURL_User_Content_Task_Current,
     APIURL_User_Content_Course_Mylist,
     APIURL_Content_Chapter_List,
+    APIURL_Content_Lesson_Detail,
 } from '@/../APIConfig';
 import {
     REQUEST_CURRENT_TASK,
@@ -10,6 +11,7 @@ import {
     REQUEST_MY_COURSE_LIST,
     RECEIVE_MY_COURSE_LIST,
     RECIVE_LESSON_TREE,
+    RECIVE_LESSON_DETAIL,
 } from '@/constant/actionTypeLearn';
 import { superFetchDataWithShowLogin } from '@/action/commonAction';
 
@@ -79,5 +81,22 @@ export const reciveLessonTree = ({ tree }) => {
         payload: {
             tree,
         },
+    };
+};
+
+export const fetchLessonDetail = ({ lessonId }) => async dispatch => {
+    let [err, result] = await dispatch(
+        superFetchDataWithShowLogin(APIURL_Content_Lesson_Detail, {
+            cid: lessonId,
+        })
+    );
+    if (err) return;
+    dispatch(reciveLessonDetail(result.detail));
+};
+
+export const reciveLessonDetail = detail => {
+    return {
+        type: RECIVE_LESSON_DETAIL,
+        payload: detail,
     };
 };

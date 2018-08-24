@@ -213,7 +213,7 @@ export default class Card extends Component {
         this.setState({
             uploading: true
         });
-        this.stopTimer()
+        this.stopTimer();
         Service.saveContentWordResult(query).then(result => {
             if (result.except_case_desc) {
                 return alert(result.except_case_desc);
@@ -234,10 +234,10 @@ export default class Card extends Component {
                 } else {
                     for (let i = 0; i < this.wordLevelList.length; i++) {
                         const wordLevel = this.wordLevelList[i];
-                        if (wordLevel.min_vocab > score) {
+                        if (wordLevel.min_vocab >= score) {
                             break;
                         }
-                        this.last_index = wordLevel.min_vocab;
+                        this.last_index = wordLevel.min_vocab + 1;
                     }
                 }
 

@@ -16,7 +16,7 @@ export default class Card extends Component {
         this.state = {
             loading: true,
             uploading: false,
-            wordItem: {id: '', word: '', options: []},
+            wordItem: { id: '', word: '', options: [] },
             currMinVocab: 0,
             currMaxVocab: 0,
             isShowLevelTip: false,
@@ -38,6 +38,7 @@ export default class Card extends Component {
     componentWillMount() {
         console.log('componentWillMount');
         Service.getWordList(this.param.estimate).then(result => {
+            console.log(result);
             this.setState({
                 loading: false
             });
@@ -53,8 +54,6 @@ export default class Card extends Component {
 
     componentWillUnmount() {
         console.log('componentWillUnmount');
-        if (this.sandGlassTimer) clearTimeout(this.sandGlassTimer);
-        if (this.levelTipTimer) clearTimeout(this.levelTipTimer);
     }
 
     // 初始化
@@ -74,6 +73,11 @@ export default class Card extends Component {
                 this.toggleSandGlass();
             }
         );
+    }
+
+    stopTimer() {
+        if (this.sandGlassTimer) clearTimeout(this.sandGlassTimer);
+        if (this.levelTipTimer) clearTimeout(this.levelTipTimer);
     }
 
     // 下一个单词
@@ -176,7 +180,7 @@ export default class Card extends Component {
         if (!this.param.estimate) {
             return;
         }
-        if (this.estimate_score >= 1) {
+        if (this.estimate_score >= 0.9) {
             location.href = '/learn';
             return;
         }
@@ -209,6 +213,7 @@ export default class Card extends Component {
         this.setState({
             uploading: true
         });
+        this.stopTimer()
         Service.saveContentWordResult(query).then(result => {
             if (result.except_case_desc) {
                 return alert(result.except_case_desc);
@@ -329,6 +334,11 @@ export default class Card extends Component {
 
     renderOptions() {
         let options = this.state.wordItem.options;
+        for (let i = 0; i < this.state.wordItem.options.length; i++) {
+            if (this.state.wordItem.options[i].isCorrect) {
+                console.log('正确答案: ', this.state.wordItem.options[i].zh);
+            }
+        }
         let Options = options.map((option, i) => {
             return (
                 <button
@@ -374,7 +384,7 @@ export default class Card extends Component {
                 onClick={this.gotoWordCourse}
             />,
         ];
-        const estimateText = this.estimate_score >= 1 ? '恭喜你本次测试已通过' : `测试完成, 建议从第${this.last_index}个单词开始学习`;
+        const estimateText = this.estimate_score >= 0.9 ? '恭喜你本次测试已通过' : `测试完成, 建议从第${this.last_index}个单词开始学习`;
         return (
             <CThemeProvider>
                 <React.Fragment>

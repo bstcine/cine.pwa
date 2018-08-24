@@ -30,7 +30,7 @@ export default class Welcome extends Component {
     }
 
     startClick() {
-        let {user, loginModalOpened} = this.state;
+        let { user, loginModalOpened } = this.state;
         if (!user && !loginModalOpened) {
             this.toggleLoginModal();
         } else {
@@ -51,7 +51,7 @@ export default class Welcome extends Component {
     }
 
     toggleLoginModal() {
-        console.log('toggleLoginModal')
+        console.log('toggleLoginModal');
         this.setState(prevState => ({
             showLoginModal: !prevState.showLoginModal,
             loginModalOpened: true
@@ -63,7 +63,7 @@ export default class Welcome extends Component {
         if (err) return alert(errorMsg(err));
         storeUtil.set('user', result);
         this.setState({
-            user:result,
+            user: result,
             showLoginModal: false
         });
         this.startClick();
@@ -71,16 +71,17 @@ export default class Welcome extends Component {
 
     async componentDidMount() {
         initWechat();
-        if(storeUtil.getToken()) {
+        if (storeUtil.getToken()) {
             let [err, result] = await fetchData(Api.APIURL_User_Info, {});
             if (err) return alert(errorMsg(err));
             storeUtil.set('user', result);
-            this.setState({user:result});
+            this.setState({ user: result });
         }
     }
 
     render() {
-        let {showLoginModal} = this.state;
+        let { showLoginModal } = this.state;
+        const promote = this.param.estimate ? '' : '本测试是严谨的学术型词汇量测试，耗时比一般的词汇量测试更长，大约需要5-10分钟。在本测试中，您将得不到任何“对错”的提示。在测试结束后，您将获得详细的词汇量报告';
         return (
             <div className="wrapper mini">
                 <LoginModal
@@ -91,7 +92,7 @@ export default class Welcome extends Component {
                 <div className="welcome">
                     <div className="start-bg" />
                     <div className="tips">
-                        本测试是严谨的学术型词汇量测试，耗时比一般的词汇量测试更长，大约需要5-10分钟。在本测试中，您将得不到任何“对错”的提示。在测试结束后，您将获得详细的词汇量报告
+                        {promote}
                     </div>
                     <button className="btn btn_blue" onClick={this.startClick}>
                         开始测试

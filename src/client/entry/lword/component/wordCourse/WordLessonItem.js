@@ -20,7 +20,7 @@ const WordLessonItem = ({ item, actions }) => {
     const classNameMiddle = quizClassName === 'quiz90' ? 'middle90' : 'middle';
     const classNameScore = quizClassName === 'quiz90' ? 'score90' : '';
     const indexs = item.value.split('-');
-    const herf = `lesson_id=${item.value}&start_index=${indexs[0]}&end_index=${indexs[1]}`;
+    const herf = `lesson_id=${item.value}`;
     return (
         <React.Fragment>
             <a href={'/lword?' + herf} >

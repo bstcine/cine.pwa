@@ -21,7 +21,7 @@ class WordCardBodyRecite extends React.PureComponent {
     startNext(event) {
         event.stopPropagation();
         let { actions } = this.props;
-        actions.startNext();
+        actions.startNext(false);
     }
     startPrevious(event) {
         event.stopPropagation();
@@ -35,8 +35,8 @@ class WordCardBodyRecite extends React.PureComponent {
     }
     playPhonetic(event) {
         event.stopPropagation();
-        let { playAction } = this.props;
-        playAction();
+        let { actions } = this.props;
+        actions.playPhonetic();
     }
     render() {
         let { rows, currentIndex, isBack, isKnown, actions } = this.props;

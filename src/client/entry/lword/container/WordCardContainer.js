@@ -19,8 +19,6 @@ class WordCardContainer extends Component {
         this.backLearnHome = this.backLearnHome.bind(this);
         this.gotoList = this.gotoList.bind(this);
         this.gotoTest = this.gotoTest.bind(this);
-        this.playPhonetic = this.playPhonetic.bind(this);
-        this.player = new Audio();
         // 获取参数
         this.param = getParam();
         this.state = {
@@ -129,19 +127,6 @@ class WordCardContainer extends Component {
             isSet: true,
         }));
     }
-    playPhonetic() {
-        let { result, currentIndex } = this.props;
-        if (!result || !result.rows || result.rows.length <= currentIndex) {
-            return;
-        }
-        let { voice_url_a, voice_url_b } = result.rows[currentIndex];
-        let voice_url = voice_url_b;
-        if (!voice_url) {
-            voice_url = voice_url_a;
-        }
-        this.player.src = 'http://oss.bstcine.com/word/top10000/' + voice_url;
-        this.player.play();
-    }
     render() {
         let { result, currentIndex, isAutoChangeWord, isReviseChangeWord, isBack, isKnown, actions } = this.props;
         return (
@@ -158,7 +143,6 @@ class WordCardContainer extends Component {
                 quizAction={this.gotoTest}
                 listAction={this.gotoList}
                 setAction={this.setPlayerInfo}
-                playAction={this.playPhonetic}
             />
         );
     }

@@ -21,6 +21,7 @@ const initWordCard = fromJS({
     timer: null,
     isBack: false,
     isKnown: false,
+    player: new Audio(),
 });
 
 const WordCardRedu = (state = initWordCard, action) => {

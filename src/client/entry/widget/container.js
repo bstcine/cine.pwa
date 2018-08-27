@@ -13,11 +13,13 @@ import {
     CIcon,
 } from '@/component/_base';
 import gAction from '@/g/action';
+import Player from '@/component/Player';
 
 class Container extends Component {
     constructor(props) {
         super(props);
         this.state = { isDrawerOpen: false, isPDrawerOpen: false };
+        // this.loadMedia = this.loadMedia.bind(this);
     }
 
     render() {
@@ -25,6 +27,9 @@ class Container extends Component {
         const { isDrawerOpen, isPDrawerOpen } = this.state;
         return (
             <div className="cine-widget">
+                <CPanel title="Player">
+                    <Player src={this.loadMedia} />
+                </CPanel>
                 <CPanel title="CButton">
                     <div>
                         <CButton>

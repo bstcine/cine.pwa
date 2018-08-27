@@ -1,0 +1,73 @@
+.mp_player__container {
+    position: relative;
+    color: #eee;
+    -webkit-font-smoothing: antialiased;
+    user-select: none;
+    &::before {
+        display: block;
+        content: '';
+        width: 100%;
+        padding-top: 9/16 * 100%;
+        background-color: black;
+    }
+}
+
+.mp_player {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+}
+
+.mp_bottom {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 45px;
+    background-color: rebeccapurple;
+}
+
+.mp_progress {
+    height: 3px;
+    background-color: green;
+}
+
+.mp_control {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 42px;
+}
+
+.mp_control__left,
+.mp_control__right {
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+
+.mp_control__item {
+    opacity: 0.9;
+    &:hover {
+        opacity: 1;
+    }
+}
+
+button.mp_control__item {
+    cursor: pointer;
+    height: 100%;
+    width: 50px;
+    font-size: 14px;
+    color: inherit;
+    background-color: transparent;
+    border: none;
+}
+
+button.mp_control__item i {
+    font-size: 30px;
+}
+
+.mp_time {
+    cursor: default;
+}

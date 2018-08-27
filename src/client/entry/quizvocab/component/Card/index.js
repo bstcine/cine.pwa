@@ -230,7 +230,12 @@ export default class Card extends Component {
                 this.estimate_score = score / (location - 1 + range);
                 console.log('本次评估得分: ' + this.estimate_score);
                 if (this.estimate_score >= 0.9) {
-                    this.last_index = location + range - 50;
+                    if (range >= 9000) {
+                        this.last_index = 9001;
+                        this.estimate_score = 0.89;
+                    } else {
+                        this.last_index = location + range - 50;
+                    }
                 } else {
                     for (let i = 0; i < this.wordLevelList.length; i++) {
                         const wordLevel = this.wordLevelList[i];

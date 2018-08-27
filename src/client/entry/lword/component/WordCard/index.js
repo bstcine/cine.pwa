@@ -13,9 +13,9 @@ import WordCardBodyDone from './WordCardBodyDone';
 
 class WordCard extends React.PureComponent {
     render() {
-        let { result, currentIndex, isAutoChangeWord, isReviseChangeWord, isBack, isKnown, isSet, actions, backAction, listAction, quizAction, setAction, playAction } = this.props;
+        let { result, currentIndex, isAutoChangeWord, isReviseChangeWord, isBack, isKnown, isSet, actions, backAction, listAction, quizAction, setAction } = this.props;
         let { name, rows } = result;
-        let setImageStyle = {}
+        let setImageStyle = {};
         if (isSet === true) {
             setImageStyle = {
                 display: 'none'
@@ -48,7 +48,6 @@ class WordCard extends React.PureComponent {
                         isBack={isBack}
                         isKnown={isKnown}
                         actions={actions}
-                        playAction={playAction}
                     />
                     <WordCardFooter
                         isSet={isSet}

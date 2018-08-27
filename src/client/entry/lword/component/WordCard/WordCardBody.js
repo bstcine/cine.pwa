@@ -7,7 +7,7 @@ import WordCardBodyRecite from './WordCardBodyRecite';
 class WordCardBody extends React.PureComponent {
 
     render() {
-        let { rows, currentIndex, isBack, isKnown, actions, playAction } = this.props;
+        let { rows, currentIndex, isBack, isKnown, actions } = this.props;
 
         return (
             <React.Fragment>
@@ -17,7 +17,6 @@ class WordCardBody extends React.PureComponent {
                     isBack={isBack}
                     isKnown={isKnown}
                     actions={actions}
-                    playAction={playAction}
                 />
             </React.Fragment>
         );

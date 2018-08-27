@@ -67,7 +67,7 @@ class WordQuizContainer extends Component {
                         actions={actions}
                     />
                     <CDialog
-                        title="已掌握全部单词，立刻返回学习首页"
+                        title="完成词汇作业任务，返回学习首页"
                         modal={false}
                         actions={dialogActions}
                         open={isDone === true}
@@ -76,7 +76,7 @@ class WordQuizContainer extends Component {
                         }}
                     />
                     <CDialog
-                        title="尚未掌握全部单词，继续学习"
+                        title="未掌握全部单词，继续学习"
                         modal={false}
                         actions={wrongDialogAction}
                         open={isDone === false}

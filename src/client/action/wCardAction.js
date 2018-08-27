@@ -86,7 +86,7 @@ export const wCardAction = {
         }
         if (isAutoChangeWord) {
             timer = setInterval(() => {
-                dispatch(wCardAction.startNext());
+                dispatch(wCardAction.startNext(true));
             }, autoChangeTime * 1000);
         } else {
             timer = null;
@@ -185,7 +185,7 @@ export const wCardAction = {
         }
     },
     // 背诵下一个单词
-    startNext: () => async (dispatch, getState) => {
+    startNext: (isAuto) => async (dispatch, getState) => {
         let reducer = getState().WordCardRedu;
         let currentIndex = reducer.get('currentIndex');
         let result = reducer.get('result');
@@ -228,6 +228,11 @@ export const wCardAction = {
         // 已认识切换到不认识
         if (isKnown) {
             dispatch(wCardAction._changeKnown(false));
+        }
+        // 尝试自动播放
+        let isAutoChangeWord = reducer.get('isAutoChangeWord');
+        if (isAutoChangeWord && isAuto) {
+            dispatch(wCardAction.playPhonetic());
         }
     },
     // 背诵上一个单词
@@ -272,4 +277,21 @@ export const wCardAction = {
             dispatch(wCardAction._changeKnown(false));
         }
     },
+    // 播放音频
+    playPhonetic: () => (dispatch, getState) => {
+        let reducer = getState().WordCardRedu;
+        let currentIndex = reducer.get('currentIndex');
+        let result = reducer.get('result');
+        if (!result || !result.rows || result.rows.length <= currentIndex) {
+            return;
+        }
+        let { voice_url_a, voice_url_b } = result.rows[currentIndex];
+        let voice_url = voice_url_b;
+        if (!voice_url) {
+            voice_url = voice_url_a;
+        }
+        let player = reducer.get('player');
+        player.src = 'http://oss.bstcine.com/word/top10000/' + voice_url;
+        player.play();
+    }
 };

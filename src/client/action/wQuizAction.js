@@ -253,16 +253,15 @@ export const wQuizAction = {
         if (vocabularyList && vocabularyList.length > 0) {
             let hadZh = false;
             for (let j = 0; j < zhs.length; j++) {
-                if (hadZh) {
-                    break;
-                }
-
                 for (let i = 0; i < vocabularyList.length; i++) {
-                    if (zhs[j].indexOf(vocabularyList[i]) > -1) {
+                    if (zhs[j].indexOf(vocabularyList[i]) !== -1) {
                         zh = zhs[j];
                         hadZh = true;
                         break;
                     }
+                }
+                if (hadZh) {
+                    break;
                 }
             }
         }
@@ -270,15 +269,17 @@ export const wQuizAction = {
         if (!zh) {
             zh = zhs[0];
         }
+        console.log('原始的翻译文字: ', zh)
         // 将zh中的词性移除
-        zh = zh.split('.');
-        let index = zh.length > 1 ? 1 : 0;
-        zh = zh[index];
+        const zhCom = zh.split('.');
+        let index = zhCom.length > 1 ? zhCom.length - 1 : 0;
+        zh = zhCom[index];
         // 将zh中的"；"选项保留到两个及以下
         let zh_component = zh.split('；');
         if (zh_component.length > 2) {
             zh = zh_component[0] + '；' + zh_component[1];
         }
+        console.log('处理后的翻译文字: ', zh);
         return { zh: zh };
     },
     /**

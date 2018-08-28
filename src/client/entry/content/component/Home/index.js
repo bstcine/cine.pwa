@@ -18,6 +18,7 @@ import { APIURL_Content_Home } from '@/../APIConfig';
 const bottomImg1 = require('../../asset/image/book.jpg');
 const bottomImg2 = require('../../asset/image/moon.jpg');
 let bottomImg = Math.round(Math.random() * 10) % 2 ? bottomImg2 : bottomImg1;
+import LazyLoad from 'react-lazyload';
 
 const getSelectedTags = () => {
     let tags = [];
@@ -226,14 +227,16 @@ export default class Home extends Component {
                 </div>
 
                 {!siteCodeUtil.inAPP() && !uaUtil.wechat() ? (
-                    <div className="container-fluid">
-                        <div
-                            className="cine-slogan"
-                            style={{
-                                background: `url(${bottomImg}) center center / cover no-repeat`,
-                            }}
-                        />
-                    </div>
+                    <LazyLoad offset={100}>
+                        <div className="container-fluid">
+                            <div
+                                className="cine-slogan"
+                                style={{
+                                    background: `url(${bottomImg}) center center / cover no-repeat`,
+                                }}
+                            />
+                        </div>
+                    </LazyLoad>
                 ) : null}
                 <Footer isShow={true} />
             </React.Fragment>

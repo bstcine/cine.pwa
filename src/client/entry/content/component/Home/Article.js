@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import LazyLoad from 'react-lazyload';
 
 export default class Article extends Component {
     static defaultProps = {
@@ -23,15 +24,17 @@ export default class Article extends Component {
                                         更多 &gt;
                                     </a>
                                 </div>
-                                <div
-                                    className="article-img"
-                                    style={{
-                                        background: `url(//www.bstcine.com/f/${
-                                            newsCategory.img
-                                        }) no-repeat center`,
-                                        backgroundSize: 'cover',
-                                    }}
-                                />
+                                <LazyLoad offset={100} height={200}>
+                                    <div
+                                        className="article-img"
+                                        style={{
+                                            background: `url(//www.bstcine.com/f/${
+                                                newsCategory.img
+                                            }) no-repeat center`,
+                                            backgroundSize: 'cover',
+                                        }}
+                                    />
+                                </LazyLoad>
                                 <ul className="article-list">
                                     {newsCategory.children.map((item, i) => {
                                         return (

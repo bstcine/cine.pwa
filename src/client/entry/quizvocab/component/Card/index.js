@@ -180,16 +180,21 @@ export default class Card extends Component {
         if (!this.param.estimate) {
             return;
         }
-        const estimateComponent = this.param.estimate.split('-');
-        const startIndex = parseInt(estimateComponent[0], 10);
-        const range = parseInt(estimateComponent[1], 10);
+        let startIndex = 1;
+        let range = 3000;
+        if (this.last_index < 3000) {
+            startIndex = 1;
+            range = 3000;
+        } else if (this.last_index < 6000) {
+            startIndex = 3001;
+            range = 3000;
+        } else {
+            startIndex = 6001;
+            range = 4000;
+        }
         Service.updateLastIndex(startIndex, range, this.last_index).then(result => {
             console.log(result);
-            if (this.estimate_score >= 0.9) {
-                location.href = '/learn';
-            } else {
-                location.href = `/lword/course?start_index=${startIndex}&range=${range}&last_index=${this.last_index}`;
-            }
+            location.href = `/lword/course?start_index=${startIndex}&range=${range}&last_index=${this.last_index}`;
         });
     }
     // 答题结束
@@ -393,7 +398,7 @@ export default class Card extends Component {
                 onClick={this.gotoWordCourse}
             />,
         ];
-        const estimateText = this.estimate_score >= 0.9 ? '恭喜你本次测试已通过' : `测试完成, 建议从第${this.last_index}个单词开始学习`;
+        const estimateText = `测试完成, 建议从第${this.last_index}个单词开始学习`;
         return (
             <CThemeProvider>
                 <React.Fragment>

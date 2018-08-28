@@ -7,13 +7,14 @@ export default class WordCourse extends React.PureComponent {
     render() {
         const { lessons, courseID } = this.props;
         const courseComponent = courseID.split('-');
-        let start_index = parseInt(courseComponent[0], 10);
-        let range = parseInt(courseComponent[1], 10);
-        let end_index = start_index - 1 + range;
+        const start_index = parseInt(courseComponent[0], 10);
+        const range = parseInt(courseComponent[1], 10);
+        const end_index = start_index - 1 + range;
+        const cine_word = range > 9000 ? '' : `：${start_index}-${end_index}`;
         return (
             <React.Fragment>
-                <CPanel title={`Top1000词汇：${start_index}-${end_index}`}>
-                    <a href={`/quizvocab?estimate=${courseID}`} target="_blank">
+                <CPanel title={`善恩核心10000词汇${cine_word}`}>
+                    <a href={`/quizvocab?estimate=1-10000`} target="_blank">
                         <div className="quizLink">测试你的背单词起点</div>
                     </a>
 

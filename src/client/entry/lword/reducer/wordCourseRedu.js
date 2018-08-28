@@ -2,7 +2,7 @@ import { fromJS, Map } from 'immutable';
 import * as actionType from '@/constant/actionTypeLWord';
 
 const getCourseItems = (startID, range, lastVisitIndex, userQuizRows) => {
-    const wordStartID = parseInt(startID, 10);
+    const wordStartID = 1 + parseInt(parseInt(startID, 10) / 50, 10);
     const wordCount = parseInt(range, 10);
     const lastVisitID = 1 + parseInt((lastVisitIndex - wordStartID) / 50, 10);
 

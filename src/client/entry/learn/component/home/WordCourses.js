@@ -27,10 +27,10 @@ const WordCourses = () => {
                     {getWordCourse(1, 3000)}
                 </CCard>
                 <CCard hover="lighten" href={getHref(3001, 3000)}>
-                    {getWordCourse(3001, 3000)}
+                    {getWordCourse(3001, 6000)}
                 </CCard>
                 <CCard hover="lighten" href={getHref(6001, 4000)}>
-                    {getWordCourse(6001, 3000)}
+                    {getWordCourse(6001, 10000)}
                 </CCard>
                 <CCard hover="lighten" href={getHref(1, 10000)}>
                     {getWordCourse(1, 10000)}

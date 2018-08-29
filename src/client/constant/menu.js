@@ -102,12 +102,12 @@ const cineMenu = [
             {
                 label: '学生作业',
                 url: h5.URL_Mentor_Student_Task,
-                icon: 'ci-integral',
+                icon: 'ci-edit1',
             },
             {
                 label: '学生测试',
                 url: h5.URL_Mentor_Student_Quiz,
-                icon: 'ci-integral',
+                icon: 'ci-test',
             },
             {
                 label: '待批改列表',

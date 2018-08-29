@@ -20,6 +20,9 @@ export default class AchievePage extends Component {
             this.setState({
                 img: canvas.toDataURL(),
             });
+            setTimeout(() => {
+                alert('长按保存图片，去朋友圈炫耀一下!');
+            }, 1000);
         });
     }
 

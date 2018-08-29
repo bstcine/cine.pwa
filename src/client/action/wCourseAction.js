@@ -15,7 +15,11 @@ export const wCourseAction = {
     }),
 
     initCourseLessons: param => dispatch => {
-        if (!param.start_index || param.start_index === 1) return;
+        if (
+            !param.start_index ||
+            (parseInt(param.start_index, 10) === 1 &&
+                parseInt(param.range, 10) === 3000)
+        ) return;
 
         const lastVisitID = param.last_index
             ? param.last_index
@@ -64,6 +68,6 @@ export const wCourseAction = {
                     document.documentElement.scrollTop;
                 window.scrollTo(0, scrollY - 100);
             }
-        }, 1000);
+        }, 500);
     },
 };

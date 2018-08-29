@@ -4,6 +4,8 @@ import './iconfont.css';
 import './style.less';
 import { componentNames } from '@/component/_base/config';
 const cls = componentNames.Icon;
+// import './iconfont.js';
+// import './style.less';
 /**
  * mi-xxx || xxx --> material-icons
  * ci-xxx --> cine-icons
@@ -12,6 +14,9 @@ const Icon = ({ className, children }) => {
     if (children.indexOf('ci-') === 0) {
         return (
             <i className={classNames(cls, 'cine-icons', className, children)} />
+            // <svg className="icon" aria-hidden="true">
+            //     <use xlinkHref={'#' + children} />
+            // </svg>
         );
     } else {
         return (

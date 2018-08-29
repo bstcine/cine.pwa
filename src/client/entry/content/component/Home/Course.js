@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
 import CourseLink from '@/component/CourseLink';
+import LazyLoad from 'react-lazyload';
 
 export default class Course extends Component {
-    constructor(props) {
-        super(props);
-    }
-
     displayPrice(course) {
         if (course.status === '1') {
             if (isNaN(course.price)) {
@@ -78,14 +75,16 @@ export default class Course extends Component {
         return (
             <div className="course-wrap">
                 <CourseLink course={course} className="course-item" {...props}>
-                    <div
-                        className="course-img"
-                        style={{
-                            background: `url(//www.bstcine.com/f/${
-                                course.img
-                            }) center center / cover no-repeat`,
-                        }}
-                    />
+                    <LazyLoad offset={100} height={200}>
+                        <div
+                            className="course-img"
+                            style={{
+                                background: `url(//www.bstcine.com/f/${
+                                    course.img
+                                }) center center / cover no-repeat`,
+                            }}
+                        />
+                    </LazyLoad>
 
                     <div className="course-desc">
                         <div className="course-title">{course.name}</div>

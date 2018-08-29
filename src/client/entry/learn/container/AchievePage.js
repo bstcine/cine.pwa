@@ -7,6 +7,9 @@ export default class AchievePage extends Component {
     constructor(props) {
         super(props);
         this.ref = React.createRef();
+        this.state = {
+            img: null,
+        };
     }
 
     componentDidMount() {
@@ -14,11 +17,14 @@ export default class AchievePage extends Component {
         html2canvas(ele, {
             useCORS: true,
         }).then(canvas => {
-            document.getElementById('root').replaceChild(canvas, ele);
+            this.setState({
+                img: canvas.toDataURL(),
+            });
         });
     }
 
     render() {
+        if (this.state.img) return <img src={this.state.img} alt="" className="achieve__cav" />;
         return (
             <div className="achieve" ref={this.ref}>
                 <div className="achieve__head">
@@ -45,7 +51,11 @@ export default class AchievePage extends Component {
                                     <span>35</span> 个
                                 </div>
                                 <div className="myach__item_name">
-                                    <CIcon>ci-test</CIcon> 生词
+                                    <img
+                                        src={require('../asset/image/wordtest.png')}
+                                        alt=""
+                                    />
+                                    <span> 生词</span>
                                 </div>
                             </div>
                             <div className="myach__item">
@@ -53,7 +63,11 @@ export default class AchievePage extends Component {
                                     <span>22</span> 个
                                 </div>
                                 <div className="myach__item_name">
-                                    <CIcon>ci-grammar</CIcon> 语法点
+                                    <img
+                                        src={require('../asset/image/grammar.png')}
+                                        alt=""
+                                    />
+                                    <span> 语法点</span>
                                 </div>
                             </div>
                             <div className="myach__item">
@@ -61,7 +75,11 @@ export default class AchievePage extends Component {
                                     <span>90</span> 分钟
                                 </div>
                                 <div className="myach__item_name">
-                                    <CIcon>ci-video</CIcon> 视频课件
+                                    <img
+                                        src={require('../asset/image/ico_video.png')}
+                                        alt=""
+                                    />
+                                    <span> 视频课件</span>
                                 </div>
                             </div>
                             <div className="myach__item">
@@ -69,7 +87,11 @@ export default class AchievePage extends Component {
                                     <span>3</span> 篇
                                 </div>
                                 <div className="myach__item_name">
-                                    <CIcon>ci-exercises</CIcon> 英文写作
+                                    <img
+                                        src={require('../asset/image/ico_exercises.png')}
+                                        alt=""
+                                    />
+                                    <span> 英文写作</span>
                                 </div>
                             </div>
                         </div>
@@ -90,18 +112,20 @@ export default class AchievePage extends Component {
                             src={require('../asset/image/txt_teacher.png')}
                             alt=""
                         />
-                        <div className="mymentor__avator">
-                            <img
-                                src="http://www.bstcine.com/f/2017/06/02/d0114963866104022gHFgcZ2H4.jpg"
-                                alt=""
-                            />
-                            赵晴
-                        </div>
-                        <div className="mymentor__desc">
-                            美国麻省大学教育学博士，西安外国语大学<br />
-                            英语专业本科<br />
-                            10年+英语教学经验<br />
-                            现居波士顿
+                        <div className="mymentor__content">
+                            <div className="mymentor__avator">
+                                <img
+                                    src="http://www.bstcine.com/f/2017/06/02/d0114963866104022gHFgcZ2H4.jpg"
+                                    alt=""
+                                />
+                                赵晴
+                            </div>
+                            <div className="mymentor__desc">
+                                <p>美国麻省大学教育学博士，西安外国语大学</p>
+                                <p>英语专业本科 </p>
+                                <p>10年+英语教学经验</p>
+                                <p>现居波士顿</p>
+                            </div>
                         </div>
                     </div>
                 </div>

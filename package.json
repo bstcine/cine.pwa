@@ -11,8 +11,8 @@
     "start": "NODE_ENV=development webpack-dev-server --config webpack.dev.js",
     "dev": "NODE_ENV=development webpack --config webpack.dev.js",
     "prod": "NODE_ENV=production webpack --progress --config webpack.prod.js",
-    "prod2web": "./build2web.sh prod",
-    "dev2web": "./build2web.sh dev"
+    "dev2web": "./build2web.sh dev",
+    "prod2web": "./build2web.sh prod"
   },
   "repository": {
     "type": "git",

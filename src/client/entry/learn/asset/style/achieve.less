@@ -1,5 +1,20 @@
+body {
+    background-color: #f8f9fa;
+    overflow: visible;
+}
+#root {
+    background-color: #fff;
+    // width: 7.5rem;
+    margin: 0 auto;
+    max-width: 450px;
+    // overflow: visible;
+}
+.achieve__cav {
+    // overflow: visible;
+    max-width: 100%;
+}
 .achieve {
-    height: 100vh;
+    // overflow: visible;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -53,13 +68,19 @@
         margin-bottom: 0.28rem;
         span {
             font-weight: bolder;
-            font-size: 0.54rem;
+            font-size: 0.56rem;
         }
     }
 
-    .myach__item_name i {
-        font-size: 0.24rem;
-        vertical-align: middle;
+    .myach__item_name {
+        img {
+            vertical-align: middle;
+            width: 0.24rem;
+            height: 0.24rem;
+        }
+        span {
+            vertical-align: middle;
+        }
     }
 
     .myach__comp {
@@ -75,8 +96,11 @@
         font-size: 0.3rem;
     }
 
+    .mymentor__content {
+        display: flex;
+    }
     .mymentor__avator {
-        float: left;
+        // float: left;
         text-align: center;
         font-size: 0.28rem;
         line-height: 0.64rem;
@@ -95,6 +119,7 @@
         font-size: 0.26rem;
         line-height: 0.48rem;
         color: #2a2b2c;
+        height: 1.94rem;
     }
 
     .achieve__footer {

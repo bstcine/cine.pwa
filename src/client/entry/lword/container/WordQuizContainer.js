@@ -16,6 +16,7 @@ class WordQuizContainer extends Component {
         super(props);
         // 获取参数
         this.param = getParam();
+        document.title = '词汇测试';
     }
     componentDidMount() {
         // 准备访问

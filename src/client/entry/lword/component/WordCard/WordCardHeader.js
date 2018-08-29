@@ -2,9 +2,13 @@
  * Created by lidangkun on 2018/7/27.
  */
 import React from 'react';
+import siteCodeUtil from '@/util/sitecodeUtil';
 
 class WordCardHeader extends React.PureComponent {
     render() {
+        if (siteCodeUtil.inAPP()) {
+            return null;
+        }
         let { name, backAction, listAction } = this.props;
         let backImage = require('../../asset/image/lword_back.svg');
         return (

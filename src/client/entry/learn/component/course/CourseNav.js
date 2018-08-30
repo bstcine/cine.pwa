@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import classNames from 'classnames';
 import { CPanel, CIcon } from '@/component/_base';
 import { Link } from 'react-router-dom';
+import { animation } from '@/util/cssUtil';
 
 /**
  * 左侧导航
@@ -41,20 +42,12 @@ class NavChapter extends Component {
         let height = ele.scrollHeight;
 
         if (ele.classList.contains('nav__lessons--active')) {
-            requestAnimationFrame(() => {
-                ele.style.height = height + 'px';
-                requestAnimationFrame(() => {
-                    ele.style.height = '0';
-                    ele.classList.remove('nav__lessons--active');
-                });
+            animation(ele, 'height', height + 'px', '0', () => {
+                ele.classList.remove('nav__lessons--active');
             });
         } else {
-            requestAnimationFrame(() => {
-                ele.style.height = '0px';
-                requestAnimationFrame(() => {
-                    ele.style.height = height + 'px';
-                    ele.classList.add('nav__lessons--active');
-                });
+            animation(ele, 'height', '0', height + 'px', () => {
+                ele.classList.add('nav__lessons--active');
             });
         }
     }

@@ -78,13 +78,12 @@ class WordCardBodyRecite extends React.PureComponent {
                             className="selected"
                             type="checkbox"
                             checked={isKnown}
-                            disabled={false}
                             onClick={e => { e.stopPropagation() }}
                             onChange={ e => {
                                 actions.changeKnownStatus();
                             }}
                         />
-                        <div className="grsaspPromote">
+                        <div className="graspPromote">
                             已认识(下次不再显示)
                         </div>
                     </div>

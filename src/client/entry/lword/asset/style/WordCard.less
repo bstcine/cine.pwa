@@ -78,7 +78,8 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    height: 100%;
+    //height: 100%;
+    flex:1 0;
     width: 100%;
     .lastWord {
         display: none;
@@ -109,10 +110,11 @@
     }
     .wordDetail {
         width: 100%;
-        height: auto;
+        //height: auto;
         display: flex;
         flex-direction: row;
         align-items: center;
+        flex:1 0;
     }
     .wordDetail.hover .wordDetail-flipper {
         transform: rotateY(180deg);
@@ -120,7 +122,7 @@
     .wordDetail-flipper {
         width: 100%;
         height: 8.7rem;
-        transition: 0.6s;
+        transition: transform 0.6s;
         transform-style: preserve-3d;
     }
     .back {
@@ -132,7 +134,7 @@
         top: 0;
         left: 0;
         width: 100%;
-        height: 8.7rem;
+        min-height: 8.7rem;
         display: flex;
         flex-direction: row;
         align-items: center;
@@ -172,13 +174,16 @@
         flex-direction: row;
         align-items: center;
         justify-content: center;
-        height: 0.8rem;
+        flex:0 0 0.8rem;
+        width: 4rem;
         cursor: pointer;
-        .grsaspPromote {
+        .graspPromote {
+            height: 0.3rem;
             margin-left: 0.2rem;
             font-family: PingFangSC-Regular;
             font-size: 0.28rem;
             color: #9a9b9c;
+            background-color: white;
         }
     }
     .transition {
@@ -363,7 +368,7 @@
             display: inline-block;
         }
         .wordDetail {
-            height: 8.32rem;
+            height: 8.7rem;
         }
         .wordInfo {
             width: 6rem;

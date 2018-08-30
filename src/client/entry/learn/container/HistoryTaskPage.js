@@ -18,6 +18,7 @@ class HistoryTaskPage extends React.Component {
         this.audioPlayer = new Audio();
         // 获取参数
         this.param = getParam();
+        document.title = '历史任务';
     }
     componentDidMount() {
         let { actions } = this.props;

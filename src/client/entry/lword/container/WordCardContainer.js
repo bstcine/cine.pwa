@@ -24,6 +24,7 @@ class WordCardContainer extends Component {
         this.state = {
             isSet: null,
         };
+        document.title = '卡片式学习';
     }
     // 快插完成
     componentDidMount() {

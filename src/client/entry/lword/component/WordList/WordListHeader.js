@@ -2,9 +2,13 @@
  * Created by lidangkun on 2018/8/6.
  */
 import React from 'react';
+import siteCodeUtil from '@/util/sitecodeUtil';
 
 class WordListHeader extends React.PureComponent {
     render() {
+        if (siteCodeUtil.inAPP()) {
+            return null;
+        }
         let { name, isShowAll, actions, cardAction, wordAction } = this.props;
         return (
             <div className="v_Task_VocabularyHeader">

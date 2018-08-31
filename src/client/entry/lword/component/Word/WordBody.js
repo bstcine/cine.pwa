@@ -6,16 +6,18 @@ import React from 'react';
 class WordBody extends React.PureComponent {
     render() {
         let { rows, quizAction, listAction } = this.props;
-        if (!rows) {
-            return null;
-        }
         let knownCount = 0;
-        rows.forEach((ele) => {
-            if (ele.is_known) {
-                knownCount += 1;
-            }
-        });
-        return (rows &&
+        let unKnowCount = 0;
+        if (rows && rows.length > 0) {
+            rows.forEach((ele) => {
+                if (ele.is_known) {
+                    knownCount += 1;
+                } else {
+                    unKnowCount += 1;
+                }
+            });
+        }
+        return (
             <div className="word-Body">
                 <div className="word-Count">
                     <div className="word-grasp">
@@ -24,7 +26,7 @@ class WordBody extends React.PureComponent {
                     </div>
                     <div className="word-ungrasp">
                         <p className="word-ungrasp-text">不认识</p>
-                        <p className="word-ungrasp-count">{rows.length - knownCount}</p>
+                        <p className="word-ungrasp-count">{unKnowCount}</p>
                     </div>
                 </div>
                 <div className="word-Learn" onClick={listAction}>

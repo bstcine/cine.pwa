@@ -6,6 +6,7 @@ import '@/entry/learn/asset/style/index.less';
 import { withRouter } from 'react-router-dom';
 import { GLayoutContainer } from '@/g/container';
 import WordCourses from './../component/home/WordCourses';
+import { CPanel } from '@/component/_base';
 
 const mapStateToProps = state => {
     const { userRedu } = state;
@@ -17,6 +18,9 @@ class HomePage extends Component {
         const { user } = this.props;
         return (
             <GLayoutContainer>
+                <CPanel>
+                    <a href="/learn/achieve">私塾分享静态DEMO页</a>
+                </CPanel>
                 {!!user && user.type === '2' && <Tasks />}
                 <WordCourses />
                 <Courses />

@@ -4,6 +4,7 @@
 import React from 'react';
 import '../../asset/style/WordQuiz.less';
 import { addParam } from '@/util/urlUtil';
+import WordQuizHeader from './WordQuizHeader';
 
 class WordQuiz extends React.PureComponent {
     // 跳转下一个项目
@@ -14,9 +15,9 @@ class WordQuiz extends React.PureComponent {
     };
     // 返回以前的位置
     backHome= () => {
-        let { param } = this.props
+        let { param } = this.props;
         location.href = addParam('/lword', param);
-    }
+    };
 
     render() {
         let { isTest, selectIndex, wordCount, selectCount, content, actions } = this.props;
@@ -68,11 +69,9 @@ class WordQuiz extends React.PureComponent {
         const contentView = isTest ? testContent : initContent;
         return (
             <div className="vocabularyTest">
-                <div className="v_Test_VocabularyHeader">
-                    <img className="backButton" src={require('../../asset/image/lword_back.svg')} onClick={() => { this.backHome() }} />
-                    <p className="v_Test_H_TaskName">词汇测试</p>
-                    <a className="v_Test_H_HistoryDoor"></a>
-                </div>
+                <WordQuizHeader
+                    backAction={() => { this.backHome() }}
+                />
                 {contentView}
             </div>
         );

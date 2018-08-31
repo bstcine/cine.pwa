@@ -20,6 +20,7 @@ class WordListContainer extends Component {
         this.audioPlayer = new Audio();
         // 获取参数
         this.param = getParam();
+        document.title = '列表式学习';
     }
 
     componentDidMount() {

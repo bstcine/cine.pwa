@@ -5,6 +5,7 @@ import gReducer from '@/g/reducer';
 import {
     RECEIVE_CURRENT_TASK,
     RECEIVE_MY_COURSE_LIST,
+    RECIVE_TASK_SHARE,
 } from '@/constant/actionTypeLearn';
 
 const currentTasks = (state = [], action) => {
@@ -25,10 +26,20 @@ const courses = (state = [], action) => {
     }
 };
 
+const taskShareRedu = (state = null, action) => {
+    switch (action.type) {
+        case RECIVE_TASK_SHARE:
+            return { ...action.payload };
+        default:
+            return state;
+    }
+};
+
 const rootReducer = combineReducers({
     currentTasks,
     courses,
     TaskRedu,
+    taskShareRedu,
     ...courseRedu,
     ...gReducer,
 });

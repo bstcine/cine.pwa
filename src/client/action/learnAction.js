@@ -4,6 +4,7 @@ import {
     APIURL_User_Content_Course_Mylist,
     APIURL_Content_Chapter_List,
     APIURL_Content_Lesson_Detail,
+    APIURL_Content_Task_Share,
 } from '@/../APIConfig';
 import {
     REQUEST_CURRENT_TASK,
@@ -12,6 +13,7 @@ import {
     RECEIVE_MY_COURSE_LIST,
     RECIVE_LESSON_TREE,
     RECIVE_LESSON_DETAIL,
+    RECIVE_TASK_SHARE,
 } from '@/constant/actionTypeLearn';
 import { superFetchDataWithShowLogin } from '@/action/commonAction';
 
@@ -97,6 +99,24 @@ export const fetchLessonDetail = ({ lessonId }) => async dispatch => {
 export const reciveLessonDetail = detail => {
     return {
         type: RECIVE_LESSON_DETAIL,
+        payload: detail,
+    };
+};
+
+export const fetchTaskShare = ({ user_id }) => async dispatch => {
+    let [err, result] = await dispatch(
+        superFetchDataWithShowLogin(APIURL_Content_Task_Share, {
+            user_id,
+        })
+    );
+    if (err) return;
+
+    dispatch(reciveTaskShare(result));
+};
+
+export const reciveTaskShare = detail => {
+    return {
+        type: RECIVE_TASK_SHARE,
         payload: detail,
     };
 };

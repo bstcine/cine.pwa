@@ -3,6 +3,7 @@
  */
 import React from 'react';
 import siteCodeUtil from '@/util/sitecodeUtil';
+import { CIcon } from '@/component/_base';
 
 class WordCardHeader extends React.PureComponent {
     render() {
@@ -10,16 +11,15 @@ class WordCardHeader extends React.PureComponent {
             return null;
         }
         let { name, backAction, listAction } = this.props;
-        let backImage = require('../../asset/image/lword_back.svg');
         return (
             <div className="wordCard-Header">
-                <img className="back-Image-Header" src={backImage} onClick={backAction} />
+                <CIcon className="back-Image-Header" onClick={backAction}>ci-card_back</CIcon>
                 <div className="wordCard-Back">
-                    <img className="wordCard-backButton" src={backImage} onClick={backAction} />
+                    <CIcon className="wordCard-backButton" onClick={backAction}>ci-card_back</CIcon>
                     <p className="wordCard-taskTitle">{name}</p>
                 </div>
                 <div className="wordCard-ToList" onClick={listAction}>
-                    <img className="wordCard-ListButton" src={require('../../asset/image/lword_list.svg')} />
+                    <CIcon className="wordCard-ListButton">ci-card_list</CIcon>
                     <p className="wordCard-ListTitle">列表式</p>
                 </div>
             </div>

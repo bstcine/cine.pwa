@@ -3,6 +3,7 @@
  */
 import React from 'react';
 import siteCodeUtil from '@/util/sitecodeUtil';
+import { CIcon } from '@/component/_base';
 
 class WordListHeader extends React.PureComponent {
     render() {
@@ -12,9 +13,9 @@ class WordListHeader extends React.PureComponent {
         let { name, isShowAll, actions, cardAction, wordAction } = this.props;
         return (
             <div className="v_Task_VocabularyHeader">
-                <img className="back-Image-Header" src={require('../../asset/image/lword_back.svg')} onClick={wordAction} />
+                <CIcon className="back-Image-Header" onClick={wordAction}>ci-card_back</CIcon>
                 <div className="header-Left">
-                    <img className="back-Image-Left" src={require('../../asset/image/lword_back.svg')} onClick={wordAction} />
+                    <CIcon className="back-Image-Left" onClick={wordAction}>ci-card_back</CIcon>
                     <p className="v_Task_H_TaskName">{name}</p>
                     <p className="showAll-Title">显示全部</p>
                     <div className="showAll-Select">
@@ -29,7 +30,7 @@ class WordListHeader extends React.PureComponent {
                     </div>
                 </div>
                 <div className="wordList-ToCard" onClick={cardAction}>
-                    <img className="cardImage" src={require('../../asset/image/lword_list_card.svg')}/>
+                    <CIcon className="cardImage">ci-card</CIcon>
                     <p className="wordList-CardTitle" >卡片式</p>
                 </div>
             </div>

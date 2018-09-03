@@ -41,7 +41,12 @@ class WordQuizContainer extends Component {
                 label="确定"
                 primary={true}
                 onClick={() => {
-                    location.href = '/learn';
+                    if(siteCodeUtil.inAPP()){
+                        Bridge
+                    }else{
+                        location.href = '/learn';
+                    }
+
                 }}
             />,
         ];

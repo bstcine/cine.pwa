@@ -3,6 +3,7 @@
  */
 import React from 'react';
 import siteCodeUtil from '@/util/sitecodeUtil';
+import { CIcon } from '@/component/_base';
 
 class WordQuizHeader extends React.PureComponent {
     render() {
@@ -12,7 +13,7 @@ class WordQuizHeader extends React.PureComponent {
         let { backAction } = this.props;
         return (
             <div className="v_Test_VocabularyHeader">
-                <img className="backButton" src={require('../../asset/image/lword_back.svg')} onClick={backAction} />
+                <CIcon className="backButton" onClick={backAction}>ci-card_back</CIcon>
                 <p className="v_Test_H_TaskName">词汇测试</p>
                 <a className="v_Test_H_HistoryDoor"></a>
             </div>

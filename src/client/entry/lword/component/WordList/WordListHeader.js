@@ -30,7 +30,7 @@ class WordListHeader extends React.PureComponent {
                     </div>
                 </div>
                 <div className="wordList-ToCard" onClick={cardAction}>
-                    <img className="cardImage" src={require('../../asset/image/lword_list_card.svg')}/>
+                    <CIcon className="cardImage">ci-card</CIcon>
                     <p className="wordList-CardTitle" >卡片式</p>
                 </div>
             </div>

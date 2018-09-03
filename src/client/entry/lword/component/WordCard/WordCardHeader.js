@@ -19,7 +19,7 @@ class WordCardHeader extends React.PureComponent {
                     <p className="wordCard-taskTitle">{name}</p>
                 </div>
                 <div className="wordCard-ToList" onClick={listAction}>
-                    <img className="wordCard-ListButton" src={require('../../asset/image/lword_list.svg')} />
+                    <CIcon className="wordCard-ListButton">ci-card_list</CIcon>
                     <p className="wordCard-ListTitle">列表式</p>
                 </div>
             </div>

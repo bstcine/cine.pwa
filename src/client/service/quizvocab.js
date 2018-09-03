@@ -37,6 +37,7 @@ export let getWordList = (estimate) => {
         apiValue = Api.APIURL_Content_Word_List;
         param = {};
     }
+    console.log('获取测试词汇列表: ', apiValue, param);
     return post(apiValue, param)
         .then(result => {
             console.log(result);

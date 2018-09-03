@@ -229,11 +229,8 @@ export const wCardAction = {
         if (isKnown) {
             dispatch(wCardAction._changeKnown(false));
         }
-        // 尝试自动播放
-        let isAutoChangeWord = reducer.get('isAutoChangeWord');
-        if (isAutoChangeWord && isAuto) {
-            dispatch(wCardAction.playPhonetic());
-        }
+        // 自动播放声音
+        dispatch(wCardAction.playPhonetic());
     },
     // 背诵上一个单词
     startPrevious: () => async (dispatch, getState) => {
@@ -276,6 +273,8 @@ export const wCardAction = {
         if (isKnown) {
             dispatch(wCardAction._changeKnown(false));
         }
+        // 自动播放声音
+        dispatch(wCardAction.playPhonetic());
     },
     // 播放音频
     playPhonetic: () => (dispatch, getState) => {

@@ -116,12 +116,12 @@ export default class Achieve extends Component {
                                 />
                                 {teacher && teacher.name}
                             </div>
-                            <div className="mymentor__desc">
-                                <p>美国麻省大学教育学博士，西安外国语大学</p>
-                                <p>英语专业本科 </p>
-                                <p>10年+英语教学经验</p>
-                                <p>现居波士顿</p>
-                            </div>
+                            <div
+                                className="mymentor__desc"
+                                dangerouslySetInnerHTML={{
+                                    __html: teacher && teacher.remark_share,
+                                }}
+                            />
                         </div>
                     </div>
                 </div>

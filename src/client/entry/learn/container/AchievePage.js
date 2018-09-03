@@ -32,8 +32,6 @@ class AchievePage extends Component {
     componentDidUpdate(prevProps, prevState) {
         const ele = this.ref.current.ref.current;
         if (!prevProps.taskShareRedu && this.props.taskShareRedu) {
-            console.log('iv');
-
             html2canvas(ele, {
                 useCORS: true,
             }).then(canvas => {

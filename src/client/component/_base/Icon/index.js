@@ -10,10 +10,13 @@ const cls = componentNames.Icon;
  * mi-xxx || xxx --> material-icons
  * ci-xxx --> cine-icons
  */
-const Icon = ({ className, children }) => {
+const Icon = ({ className, children, onClick }) => {
     if (children.indexOf('ci-') === 0) {
         return (
-            <i className={classNames(cls, 'cine-icons', className, children)} />
+            <i
+                className={classNames(cls, 'cine-icons', className, children)}
+                onClick={onClick}
+            />
             // <svg className="icon" aria-hidden="true">
             //     <use xlinkHref={'#' + children} />
             // </svg>

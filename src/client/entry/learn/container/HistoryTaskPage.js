@@ -10,6 +10,7 @@ import CThemeProvider from '@/component/CThemeProvider';
 import { getParam } from '@/util/urlUtil';
 import { withRouter } from 'react-router-dom';
 import { GLayoutContainer } from '@/g/container';
+import gAction from '@/g/action';
 
 class HistoryTaskPage extends React.Component {
     constructor(props) {
@@ -34,6 +35,7 @@ class HistoryTaskPage extends React.Component {
             defaultType,
             user,
             actions,
+            gActions,
         } = this.props;
         return (
             <CThemeProvider>
@@ -47,6 +49,7 @@ class HistoryTaskPage extends React.Component {
                         user={user}
                         param={this.param}
                         actions={actions}
+                        gActions={gActions}
                     />
                 </GLayoutContainer>
             </CThemeProvider>
@@ -68,6 +71,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => ({
     actions: bindActionCreators(lTaskAction, dispatch),
+    gActions: bindActionCreators(gAction, dispatch),
 });
 
 export default withRouter(

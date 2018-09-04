@@ -47,6 +47,10 @@ export const Task_Type = {
      * 5:习题pdf格式
      */
     Quiz_PDF: '5',
+    /**
+     * 6:作文
+     */
+    Writing: '6',
 };
 
 export const SITECODE = {

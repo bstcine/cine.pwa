@@ -24,12 +24,16 @@ const TaskWeek = ({ value, seq }) => {
 
 class HistoryTaskList extends React.PureComponent {
     render() {
-        const { taskModels, isMentor } = this.props;
+        const { taskModels, isMentor, gActions } = this.props;
         const children = taskModels.map((model, i) => {
             return (
                 <div key={i}>
                     <TaskWeek value={model.week} seq={i} />
-                    <TaskList tasks={model.taskList} isMentor={isMentor} />
+                    <TaskList
+                        tasks={model.taskList}
+                        isMentor={isMentor}
+                        gActions={gActions}
+                    />
                 </div>
             );
         });

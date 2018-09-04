@@ -2,18 +2,10 @@ import React from 'react';
 import TextFix from '@/component/TextFix';
 import { Task_Type } from '@/constant';
 import { CCard, CIcon } from '@/component/_base';
+import task from '@/constant/task';
+import gActions from '@/g/action';
 
-const Label = ({ type }) => {
-    const map = {
-        '1': '视频',
-        '2': '习题',
-        '3': '反馈',
-        '4': '单词',
-        '5': '习题',
-        '9': '其他',
-    };
-    return <span className="label">{map[type]}</span>;
-};
+const Label = ({ type }) => <span className="label">{task[type]}</span>;
 
 const Status = ({ task }) => {
     if (task.status === '0' || task.status === '1') {
@@ -27,7 +19,18 @@ const Status = ({ task }) => {
     }
 };
 
-const TasksList = ({ tasks, isLimitTasks }) => {
+const onClick = (task, gActions) => {
+    if (task.type === Task_Type.Writing) {
+        return () => {
+            gActions.showAlert({
+                title: task.title,
+                text: task.writing_desc,
+            });
+        };
+    }
+};
+
+const TasksList = ({ tasks, isLimitTasks, gActions }) => {
     if (!tasks || !tasks.length) return <div className="notask">暂无作业</div>;
     const getHref = task => {
         switch (task.type) {
@@ -55,6 +58,7 @@ const TasksList = ({ tasks, isLimitTasks }) => {
                 }
         }
     };
+
     return tasks.map((task, i) => {
         if (isLimitTasks && i >= 5) return null;
 
@@ -63,7 +67,8 @@ const TasksList = ({ tasks, isLimitTasks }) => {
                 key={task.id}
                 hover="lighten"
                 className="task-item"
-                href={getHref(task)}>
+                href={getHref(task)}
+                onClick={onClick(task, gActions)}>
                 <Label type={task.type} />
                 <TextFix className="task-title">{task.title}</TextFix>
                 <Status task={task} />

@@ -4,18 +4,10 @@ import { Task_Type } from '@/constant';
 // import { Column112 } from '@/component/CGrid';
 import { CCard, CIcon } from '@/component/_base';
 import './style.less';
+import task from '@/constant/task';
+import gActions from '@/g/action';
 
-const Label = ({ type }) => {
-    const map = {
-        '1': '视频',
-        '2': '习题',
-        '3': '反馈',
-        '4': '单词',
-        '5': '习题',
-        '9': '其他',
-    };
-    return <span className="label">{map[type]}</span>;
-};
+const Label = ({ type }) => <span className="label">{task[type]}</span>;
 
 const Status = ({ task }) => {
     if (task.status === '0' || task.status === '1') {
@@ -54,14 +46,24 @@ const getHref = (task, isMentor) => {
             }
     }
 };
-
-const TaskItem = ({ task, isMentor }) => {
+const onClick = (task, gActions) => {
+    if (task.type === Task_Type.Writing) {
+        return () => {
+            gActions.showAlert({
+                title: task.title,
+                text: task.writing_desc,
+            });
+        };
+    }
+};
+const TaskItem = ({ task, isMentor, gActions }) => {
     return (
         <CCard
             key={task.id}
             hover="lighten"
             className="task-item"
-            href={getHref(task, isMentor)}>
+            href={getHref(task, isMentor)}
+            onClick={onClick(task, gActions)}>
             <Label type={task.type} />
             <TextFix className="task-title">{task.title}</TextFix>
             <Status task={task} />

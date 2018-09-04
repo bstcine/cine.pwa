@@ -93,12 +93,16 @@ export default class Achieve extends Component {
                         </div>
 
                         <div className="myach__comp">
-                            <div className="myach__comp__title">
-                                上周作文题目：
-                            </div>
-                            <div className="myach__comp__name">
-                                {composition}
-                            </div>
+                            {composition && (
+                                <div className="myach__comp__title">
+                                    上周作文题目：
+                                </div>
+                            )}
+                            {composition && (
+                                <div className="myach__comp__name">
+                                    {composition}
+                                </div>
+                            )}
                         </div>
                     </div>
 
@@ -110,10 +114,7 @@ export default class Achieve extends Component {
                         />
                         <div className="mymentor__content">
                             <div className="mymentor__avator">
-                                <img
-                                    src="http://www.bstcine.com/f/2017/06/02/d0114963866104022gHFgcZ2H4.jpg"
-                                    alt=""
-                                />
+                                <img src={teacher && teacher.head_img} alt="" />
                                 {teacher && teacher.name}
                             </div>
                             <div
@@ -132,7 +133,7 @@ export default class Achieve extends Component {
                     />
                     <img
                         className="ach_qrcode"
-                        src={require('../../asset/image/qrcode_app.png')}
+                        src={require('../../asset/image/qrcode.png')}
                     />
                 </div>
             </div>

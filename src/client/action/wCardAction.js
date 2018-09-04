@@ -43,6 +43,10 @@ export const wCardAction = {
         type: ACTION_WC.CHANGEAUTOTIMER,
         payload: timer,
     }),
+    _changeToggleTimer: timer => ({
+        type: ACTION_WC.TOGGLETIMER,
+        payload: timer,
+    }),
     _toggleBack: isBack => ({
         type: ACTION_WC.TOGGLEBACK,
         payload: isBack,
@@ -231,6 +235,22 @@ export const wCardAction = {
         }
         // 自动播放声音
         dispatch(wCardAction.playPhonetic());
+        const isAutoChangeWord = reducer.get('isAutoChangeWord');
+        if (isAutoChangeWord && isAuto) {
+            // 开启翻转定时器
+            let toggleTimer = setTimeout(() => {
+                dispatch(wCardAction._toggleBack(true));
+                dispatch(wCardAction._changeToggleTimer(null));
+            }, 2000);
+            dispatch(wCardAction._changeToggleTimer(toggleTimer));
+        } else {
+            const toggleTimer = reducer.get('toggleTimer');
+            // 删除翻转定时器
+            if (toggleTimer) {
+                clearTimeout(toggleTimer);
+                dispatch(wCardAction._changeToggleTimer(null));
+            }
+        }
     },
     // 背诵上一个单词
     startPrevious: () => async (dispatch, getState) => {

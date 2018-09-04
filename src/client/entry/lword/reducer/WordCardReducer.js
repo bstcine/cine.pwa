@@ -14,11 +14,12 @@ const initWordCard = fromJS({
     originRows: null,
     currentIndex: 0,
     isAutoChangeWord: false,
-    autoChangeTime: 3,
+    autoChangeTime: 5,
     isReviseChangeWord: false,
     reviseIndexArray: null,
     reviseCurrentIndex: 0,
     timer: null,
+    toggleTimer: null,
     isBack: false,
     isKnown: false,
     player: new Audio(),
@@ -51,6 +52,8 @@ const WordCardRedu = (state = initWordCard, action) => {
             return state.set('isKnown', action.payload);
         case ACTION_WC.ORIGINROWS:
             return state.set('originRows', action.payload);
+        case ACTION_WC.TOGGLETIMER:
+            return state.set('toggleTimer', action.payload);
         default:
             return state;
     }

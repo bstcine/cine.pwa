@@ -1,11 +1,9 @@
 import React from 'react';
 import TextFix from '@/component/TextFix';
 import { Task_Type } from '@/constant';
-// import { Column112 } from '@/component/CGrid';
 import { CCard, CIcon } from '@/component/_base';
 import './style.less';
 import task from '@/constant/task';
-import gActions from '@/g/action';
 
 const Label = ({ type }) => <span className="label">{task[type]}</span>;
 

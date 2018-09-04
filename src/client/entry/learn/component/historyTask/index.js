@@ -21,6 +21,7 @@ class HistoryTask extends React.PureComponent {
             user,
             param,
             actions,
+            gActions,
         } = this.props;
         let isMentor = false;
         if (
@@ -36,6 +37,7 @@ class HistoryTask extends React.PureComponent {
                     <HistoryTaskList
                         taskModels={taskModels}
                         isMentor={isMentor}
+                        gActions={gActions}
                     />
                 </CPanel>
 

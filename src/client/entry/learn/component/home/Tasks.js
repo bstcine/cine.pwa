@@ -14,7 +14,7 @@ const ExpandMore = ({ tasks, isLimitTasks, onShowAllTask }) => {
     }
 };
 
-const Tasks = ({ tasks, isLimitTasks, onShowAllTask }) => {
+const Tasks = ({ tasks, isLimitTasks, onShowAllTask, gActions }) => {
     return (
         <CPanel
             className="tasks-container"
@@ -23,7 +23,11 @@ const Tasks = ({ tasks, isLimitTasks, onShowAllTask }) => {
             ext_title="历史作业"
             ext_href="/learn/task">
             <CCardContainer className="task-list" gap="none">
-                <TasksList tasks={tasks} isLimitTasks={isLimitTasks} />
+                <TasksList
+                    tasks={tasks}
+                    isLimitTasks={isLimitTasks}
+                    gActions={gActions}
+                />
                 <ExpandMore
                     tasks={tasks}
                     isLimitTasks={isLimitTasks}

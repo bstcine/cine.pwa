@@ -15,6 +15,7 @@ class WordQuizContainer extends Component {
     constructor(props) {
         super(props);
         // 获取参数
+        this.backLWord = this.backLWord.bind(this);
         this.param = getParam();
         document.title = '词汇测试';
     }
@@ -22,6 +23,9 @@ class WordQuizContainer extends Component {
         // 准备访问
         let { actions } = this.props;
         actions.loadWords(this.param);
+    }
+    backLWord() {
+        location.href = addParam('/lword', this.param);
     }
 
     render() {
@@ -40,14 +44,7 @@ class WordQuizContainer extends Component {
                 key={2}
                 label="确定"
                 primary={true}
-                onClick={() => {
-                    if(siteCodeUtil.inAPP()){
-                        Bridge
-                    }else{
-                        location.href = '/learn';
-                    }
-
-                }}
+                onClick={this.backLWord}
             />,
         ];
         const wrongDialogAction = [
@@ -55,9 +52,7 @@ class WordQuizContainer extends Component {
                 key={2}
                 label="确定"
                 primary={true}
-                onClick={() => {
-                    location.href = addParam('/lword', this.param);
-                }}
+                onClick={this.backLWord}
             />,
         ];
         return (
@@ -77,18 +72,14 @@ class WordQuizContainer extends Component {
                         modal={false}
                         actions={dialogActions}
                         open={isDone === true}
-                        onRequestClose={() => {
-                            location.href = '/learn';
-                        }}
+                        onRequestClose={this.backLWord}
                     />
                     <CDialog
                         title="未掌握全部单词，继续学习"
                         modal={false}
                         actions={wrongDialogAction}
                         open={isDone === false}
-                        onRequestClose={() => {
-                            location.href = addParam('/lword', this.param);
-                        }}
+                        onRequestClose={this.backLWord}
                     />
                 </React.Fragment>
             </CThemeProvider>

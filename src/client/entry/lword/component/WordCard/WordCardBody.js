@@ -3,14 +3,24 @@
  */
 import React from 'react';
 import WordCardBodyRecite from './WordCardBodyRecite';
+import WordCardBodyDone from './WordCardBodyDone';
 
 class WordCardBody extends React.PureComponent {
 
     render() {
-        let { rows, currentIndex, isBack, isKnown, actions } = this.props;
-
-        return (
-            <React.Fragment>
+        let { name, rows, currentIndex, isBack, isKnown, actions, quizAction } = this.props;
+        if (!rows) {
+            return (<div></div>);
+        } else if (rows.length === 0) {
+            return (
+                <WordCardBodyDone
+                    name={name}
+                    quizAction={quizAction}
+                    actions={actions}
+                />
+            );
+        } else {
+            return (
                 <WordCardBodyRecite
                     rows={rows}
                     currentIndex={currentIndex}
@@ -18,8 +28,8 @@ class WordCardBody extends React.PureComponent {
                     isKnown={isKnown}
                     actions={actions}
                 />
-            </React.Fragment>
-        );
+            );
+        }
     }
 }
 

@@ -9,7 +9,6 @@ import "../../asset/style/WordCard.less";
 import WordCardHeader from './WordCardHeader';
 import WordCardBody from './WordCardBody';
 import WordCardFooter from './WordCardFooter';
-import WordCardBodyDone from './WordCardBodyDone';
 
 class WordCard extends React.PureComponent {
     render() {
@@ -25,30 +24,24 @@ class WordCard extends React.PureComponent {
                 display: 'inline-block',
             };
         }
-        let wordCard = null;
-        if (!rows) {
-            wordCard = null;
-        } else if (rows.length === 0) {
-            wordCard = (
+        return (
+            <div className="wordCardContent">
+                <WordCardHeader
+                    name={name}
+                    backAction={backAction}
+                    listAction={listAction}
+                />
+                <WordCardBody
+                    name={name}
+                    rows={rows}
+                    currentIndex={currentIndex}
+                    isBack={isBack}
+                    isKnown={isKnown}
+                    quizAction={quizAction}
+                    actions={actions}
+                />
+                { rows && rows.length > 0 &&
                 <React.Fragment>
-                    <WordCardBodyDone
-                        name={name}
-                        quizAction={quizAction}
-                        actions={actions}
-                    />
-                </React.Fragment>
-            );
-        } else {
-            wordCard = (
-                <React.Fragment>
-                    <WordCardBody
-                        name={name}
-                        currentIndex={currentIndex}
-                        rows={rows}
-                        isBack={isBack}
-                        isKnown={isKnown}
-                        actions={actions}
-                    />
                     <WordCardFooter
                         isSet={isSet}
                         isAutoChangeWord={isAutoChangeWord}
@@ -62,16 +55,7 @@ class WordCard extends React.PureComponent {
                         onClick={setAction}
                     />
                 </React.Fragment>
-            );
-        }
-        return (
-            <div className="wordCardContent">
-                <WordCardHeader
-                    name={name}
-                    backAction={backAction}
-                    listAction={listAction}
-                />
-                {wordCard}
+                }
             </div>
         );
     }

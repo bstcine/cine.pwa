@@ -8,9 +8,11 @@ class WordCardBodyDone extends React.PureComponent {
         let { name, quizAction, actions } = this.props;
         return (
             <div className="wordCard-Body-Done">
-                <div className="congratulation-Image"></div>
-                <p className="congratulation-Text">恭喜你，小有所成！</p>
-                <p className="congratulation-SubText">{ '已学完' + name + '的单词！'}</p>
+                <div className="congratulation">
+                    <div className="congratulation-Image"></div>
+                    <p className="congratulation-Text">恭喜你，小有所成！</p>
+                    <p className="congratulation-SubText">{ '已学完' + name + '的单词！'}</p>
+                </div>
                 <div className="functionCard">
                     <div className="repeatCard">
                         <p className="functionText" onClick={actions.repeatCard}>再背一次</p>

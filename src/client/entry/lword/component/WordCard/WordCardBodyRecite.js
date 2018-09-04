@@ -56,9 +56,9 @@ class WordCardBodyRecite extends React.PureComponent {
                     <div className={cls}>
                         <div className="wordDetail-flipper" >
                             <div className="front" >
-                                <div className="wordInfo" onClick={this.playPhonetic}>
+                                <div className="wordInfo">
                                     <div className="word">{word}</div>
-                                    <div className="phonetic">
+                                    <div className="phonetic" onClick={this.playPhonetic}>
                                         <p>{phonetic}</p>
                                         <img className="voice" src={require('../../asset/image/voice.png')} />
                                     </div>

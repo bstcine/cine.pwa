@@ -350,7 +350,7 @@ export default class Card extends Component {
         let options = this.state.wordItem.options;
         for (let i = 0; i < this.state.wordItem.options.length; i++) {
             if (this.state.wordItem.options[i].isCorrect) {
-                console.log('正确答案: ', this.state.wordItem.options[i].zh);
+                console.log('正确答案: ', this.state.wordItem, this.state.wordItem.options[i].zh);
             }
         }
         let Options = options.map((option, i) => {
@@ -377,19 +377,21 @@ export default class Card extends Component {
     }
 
     render() {
-        let {loading, uploading} = this.state;
-        if (loading)
+        let { loading, uploading } = this.state;
+        if (loading) {
             return (
                 <div className="card">
                     <div className="loading">词汇加载中...</div>
                 </div>
             );
-        if (uploading)
+        }
+        if (uploading) {
             return (
                 <div className="card">
                     <div className="uploading">正在计算排名...</div>
                 </div>
             );
+        }
         const dialogActions = [
             <CFlatButton
                 key="WordEnd"

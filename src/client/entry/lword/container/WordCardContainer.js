@@ -60,7 +60,15 @@ class WordCardContainer extends Component {
                 break;
             case 13:
                 event.stopPropagation();
-                this.playPhonetic()
+                this.playPhonetic();
+                break;
+            case 16:
+                event.stopPropagation();
+                actions.changFrontOrBack();
+                break;
+            case 32:
+                event.stopPropagation();
+                actions.changeKnownStatus();
                 break;
         }
     }

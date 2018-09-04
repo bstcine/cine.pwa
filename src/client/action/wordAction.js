@@ -115,7 +115,7 @@ export const wordAction = {
         };
         let [err, result] = await fetchData(Api.APIURL_User_Word_Lesson_Learn_Update, updateParam);
         if (result) {
-            console.log(result);
+            console.log('更新点击状态: \n', result);
         } else {
             console.log(err);
         }

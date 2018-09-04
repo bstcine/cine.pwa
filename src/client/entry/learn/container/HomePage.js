@@ -7,26 +7,30 @@ import { withRouter } from 'react-router-dom';
 import { GLayoutContainer } from '@/g/container';
 import WordCourses from './../component/home/WordCourses';
 import { CPanel } from '@/component/_base';
+import * as wordCourse from '@/service/data/response_word_course.json';
 
 const mapStateToProps = state => {
     const { userRedu } = state;
-    return { user: userRedu.data };
+    return {
+        user: userRedu.data,
+        courses: wordCourse.result,
+    };
 };
 
 class HomePage extends Component {
     render() {
-        const { user } = this.props;
+        const { user, courses } = this.props;
         return (
             <GLayoutContainer>
                 {!!user && (
                     <CPanel>
                         <a href={'/learn/achieve?user_id=' + user.id}>
-                            私塾分享页
+                            打卡分享
                         </a>
                     </CPanel>
                 )}
                 {!!user && user.type === '2' && <Tasks />}
-                <WordCourses />
+                <WordCourses courses={courses}/>
                 <Courses />
             </GLayoutContainer>
         );

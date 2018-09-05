@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
 import './asset/style/widget.less';
 import {
     CButton,
@@ -11,21 +9,18 @@ import {
     CIconButton,
     CFloatingBox,
     CIcon,
+    CToast,
+    CModal,
 } from '@/component/_base';
-import gAction from '@/g/action';
 import Player from '@/component/Player';
-import Modal from '@/component/_base/Modal';
-import Toast from '@/component/_base/Toast';
 
 class Container extends Component {
     constructor(props) {
         super(props);
         this.state = { isDrawerOpen: false, isPDrawerOpen: false };
-        // this.loadMedia = this.loadMedia.bind(this);
     }
 
     render() {
-        const { gActions } = this.props;
         const { isDrawerOpen, isPDrawerOpen } = this.state;
         return (
             <div className="cine-widget">
@@ -239,7 +234,7 @@ class Container extends Component {
                         mini
                         color="secondary"
                         onClick={() => {
-                            Modal.alert({ text: 'hello alert!' });
+                            CModal.alert({ text: 'hello alert!' });
                         }}>
                         <CIcon>pets</CIcon>
                     </CButton>
@@ -248,7 +243,7 @@ class Container extends Component {
                         variant="outlined"
                         color="primary"
                         onClick={() => {
-                            Modal.alert({
+                            CModal.alert({
                                 title: 'title',
                                 text: 'hello alert!with cancel',
                                 onConfirm: () => {
@@ -265,10 +260,10 @@ class Container extends Component {
                         variant="outlined"
                         color="primary"
                         onClick={() => {
-                            const loading = Toast.loading();
+                            const loading = CToast.loading();
                             setTimeout(() => {
                                 loading.close();
-                            }, 3000);
+                            }, 2000);
                         }}>
                         Loading
                     </CButton>
@@ -276,7 +271,7 @@ class Container extends Component {
                         variant="outlined"
                         color="primary"
                         onClick={() => {
-                            Toast.info('完不成', () => {
+                            CToast.info('完不成', () => {
                                 console.log('完不成关闭了');
                             });
                         }}>
@@ -286,7 +281,7 @@ class Container extends Component {
                         variant="outlined"
                         color="primary"
                         onClick={() => {
-                            Toast.error('Err! duration:0', 0);
+                            CToast.error('Err! duration:0', 0);
                         }}>
                         Error
                     </CButton>
@@ -296,8 +291,4 @@ class Container extends Component {
     }
 }
 
-const mapDispatchToProps = dispatch => ({
-    gActions: bindActionCreators(gAction, dispatch),
-});
-
-export default connect(null, mapDispatchToProps)(Container);
+export default Container;

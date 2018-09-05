@@ -7,22 +7,17 @@ import {
     FETCH_MENTOR_STUDENT_QUIZ_WORD,
     FETCH_MENTOR_STUDENT_TASK,
 } from '@/constant/actionTypeMentor';
-// import { fetchData } from '@/service/base';
 import { superFetchDataWithShowLogin } from '@/action/commonAction';
-import gAction from '@/g/action';
+import { CModal } from '@/component/_base';
 
 /**
  * 获取学生、答题记录、词汇测试列表
  */
 export const fetchMentorStudentQuizWord = () => async dispatch => {
-    // dispatch(toastAction._loading());
     let [err, result] = await dispatch(
         superFetchDataWithShowLogin(APIURL_Content_StuQuizWord_List)
     );
-    // dispatch(toastAction._hide());
     if (!err) {
-        // dispatch(toastAction.showError(err));
-        // } else {
         dispatch({ type: FETCH_MENTOR_STUDENT_QUIZ_WORD, payload: result });
     }
 };
@@ -31,14 +26,10 @@ export const fetchMentorStudentQuizWord = () => async dispatch => {
  * 获取学生作业
  */
 export const fetchMentorStudentTask = () => async dispatch => {
-    // dispatch(toastAction._loading());
     let [err, result] = await dispatch(
         superFetchDataWithShowLogin(APIURL_Mentor_Student_ListWithTask)
     );
-    // dispatch(toastAction._hide());
     if (!err) {
-        // dispatch(toastAction.showError(err));
-        // } else {
         dispatch({ type: FETCH_MENTOR_STUDENT_TASK, payload: result });
     }
 };
@@ -55,8 +46,7 @@ export const fetchMentorCorrectPdfTask = task => dispatch => {
                 status: '2',
             })
         );
-
         if (!error) dispatch(fetchMentorStudentTask());
     };
-    dispatch(gAction.showAlert({ text, onConfirm }));
+    CModal.alert({ text, onConfirm });
 };

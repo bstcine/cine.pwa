@@ -2,6 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Modal from './ModalContainer';
 
+/**
+ * { title, text, onCancel, onConfirm }
+ */
 Modal.alert = function(props) {
     const div = document.createElement('div');
     document.body.appendChild(div);

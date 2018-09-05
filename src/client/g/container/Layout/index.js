@@ -6,9 +6,6 @@ import gAction from '@/g/action';
 
 const mapStateToProps = state => ({
     user: state.userRedu.data,
-    alert: state.alertRedu,
-    message: state.messageRedu,
-    loading: state.loadingRedu,
 });
 
 const mapDispatchToProps = dispatch => ({

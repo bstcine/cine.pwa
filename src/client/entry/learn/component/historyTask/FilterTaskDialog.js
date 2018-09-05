@@ -57,14 +57,10 @@ const FilterTaskDialog = ({
     if (startTime) {
         startDate = new Date(startTime);
         startDate.setHours(0, 0, 0, 0);
-    } else {
-        startDate = undefined;
     }
     if (endTime) {
         endDate = new Date(endTime);
         endDate.setHours(0, 0, 0, 0);
-    } else {
-        endDate = undefined;
     }
 
     return (
@@ -77,7 +73,6 @@ const FilterTaskDialog = ({
                 actions.dialogShow(false);
             }}>
             <div style={itemStyle}>时间范围</div>
-
             <CDatePicker
                 key={1000}
                 defaultValue={startDate}

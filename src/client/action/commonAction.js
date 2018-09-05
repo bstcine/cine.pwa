@@ -1,5 +1,5 @@
 import { fetchData } from '@/service/base';
-import gAction from '@/g/action';
+import { CToast } from '@/component/_base';
 
 export const superFetchDataWithShowLogin = (
     url,
@@ -8,19 +8,20 @@ export const superFetchDataWithShowLogin = (
 ) => async dispatch => {
     let config = Object.assign({ showLoading: true, showError: true }, _config);
     let timer = null;
+    let loading = null;
     if (config.showLoading) {
         // 不在第一时间出现 loading，延迟 1s 之后出现
         timer = setTimeout(() => {
-            dispatch(gAction.showLoading());
+            loading = CToast.loading();
         }, 1000);
     }
     let [error, result] = await fetchData(url, query);
     if (config.showLoading) {
         timer && clearTimeout(timer);
-        dispatch(gAction.hideLoading());
+        loading.close();
     }
 
-    if (config.showError && error) dispatch(gAction.showMessage({ error }));
+    if (config.showError && error) CToast.error(error);
 
     return [error, result];
 };

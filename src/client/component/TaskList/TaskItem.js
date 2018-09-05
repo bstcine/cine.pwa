@@ -1,7 +1,7 @@
 import React from 'react';
 import TextFix from '@/component/TextFix';
 import { Task_Type } from '@/constant';
-import { CCard, CIcon } from '@/component/_base';
+import { CCard, CIcon, CModal } from '@/component/_base';
 import './style.less';
 import task from '@/constant/task';
 
@@ -44,24 +44,24 @@ const getHref = (task, isMentor) => {
             }
     }
 };
-const onClick = (task, gActions) => {
+const onClick = task => {
     if (task.type === Task_Type.Writing) {
         return () => {
-            gActions.showAlert({
+            CModal.alert({
                 title: task.title,
                 text: task.writing_desc,
             });
         };
     }
 };
-const TaskItem = ({ task, isMentor, gActions }) => {
+const TaskItem = ({ task, isMentor }) => {
     return (
         <CCard
             key={task.id}
             hover="lighten"
             className="task-item"
             href={getHref(task, isMentor)}
-            onClick={onClick(task, gActions)}>
+            onClick={onClick(task)}>
             <Label type={task.type} />
             <TextFix className="task-title">{task.title}</TextFix>
             <Status task={task} />

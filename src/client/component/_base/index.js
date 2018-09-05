@@ -10,6 +10,7 @@ import Panel from './Panel';
 import Icon from './Icon';
 import Drawer from './Drawer';
 import Modal from './Modal';
+import Toast from './Toast';
 import { CCardContainer, CCard } from './Card';
 
 const CFlatButton = props => {
@@ -44,4 +45,5 @@ export {
     CSelectField as CSelect,
     Icon as CIcon,
     Modal as CModal,
+    Toast as CToast,
 };

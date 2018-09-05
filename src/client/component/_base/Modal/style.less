@@ -1,6 +1,6 @@
 @import '../style';
 
-.@{dialog}__main {
+.@{modal}__main {
     position: fixed;
     z-index: 5000;
     width: 80%;
@@ -14,14 +14,14 @@
     overflow: hidden;
 }
 
-.@{dialog}__header {
+.@{modal}__header {
     text-align: left;
     padding: 24px 24px 20px;
     font-weight: 400;
     font-size: 0.42rem;
 }
 
-.@{dialog}__content {
+.@{modal}__content {
     min-height: 0.8rem;
     line-height: 1.3;
     word-wrap: break-word;
@@ -33,20 +33,20 @@
     text-align: left;
 }
 
-.@{dialog}__content:first-child {
+.@{modal}__content:first-child {
     padding-top: 24px;
 }
 
-.@{dialog}__footer {
+.@{modal}__footer {
     display: flex;
     justify-content: flex-end;
     margin: 0.16rem 0.2rem;
 }
 
-.@{dialog}__footer button {
+.@{modal}__footer button {
     min-width: 1.4rem;
 }
 
-.@{dialog}__cancel {
+.@{modal}__cancel {
     color: #808080 !important;
 }

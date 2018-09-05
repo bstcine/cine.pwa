@@ -9,6 +9,7 @@ import FloatingBox from './FloatingBox';
 import Panel from './Panel';
 import Icon from './Icon';
 import Drawer from './Drawer';
+import Modal from './Modal';
 import { CCardContainer, CCard } from './Card';
 
 const CFlatButton = props => {
@@ -42,4 +43,5 @@ export {
     CCard,
     CSelectField as CSelect,
     Icon as CIcon,
+    Modal as CModal,
 };

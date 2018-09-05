@@ -11,6 +11,7 @@ const cls = componentNames.Icon;
  * ci-xxx --> cine-icons
  */
 const Icon = ({ className, children, onClick }) => {
+    if (!children) return null;
     if (children.indexOf('ci-') === 0) {
         return (
             <i

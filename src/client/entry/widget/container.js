@@ -14,6 +14,8 @@ import {
 } from '@/component/_base';
 import gAction from '@/g/action';
 import Player from '@/component/Player';
+import Modal from '@/component/_base/Modal';
+import Toast from '@/component/_base/Toast';
 
 class Container extends Component {
     constructor(props) {
@@ -237,7 +239,7 @@ class Container extends Component {
                         mini
                         color="secondary"
                         onClick={() => {
-                            gActions.showAlert({ text: 'hello alert!' });
+                            Modal.alert({ text: 'hello alert!' });
                         }}>
                         <CIcon>pets</CIcon>
                     </CButton>
@@ -246,14 +248,14 @@ class Container extends Component {
                         variant="outlined"
                         color="primary"
                         onClick={() => {
-                            gActions.showAlert({
+                            Modal.alert({
                                 title: 'title',
                                 text: 'hello alert!with cancel',
                                 onConfirm: () => {
                                     console.log('confirm');
                                 },
                                 onCancel: () => {
-                                    console.log(111);
+                                    console.log('onCancel');
                                 },
                             });
                         }}>
@@ -263,9 +265,9 @@ class Container extends Component {
                         variant="outlined"
                         color="primary"
                         onClick={() => {
-                            gActions.showLoading();
+                            const loading = Toast.loading();
                             setTimeout(() => {
-                                gActions.hideLoading();
+                                loading.close();
                             }, 3000);
                         }}>
                         Loading
@@ -274,24 +276,19 @@ class Container extends Component {
                         variant="outlined"
                         color="primary"
                         onClick={() => {
-                            gActions.showMessage({
-                                text: 'hello Message!',
+                            Toast.info('完不成', () => {
+                                console.log('完不成关闭了');
                             });
                         }}>
-                        Message
+                        Info
                     </CButton>
                     <CButton
                         variant="outlined"
                         color="primary"
                         onClick={() => {
-                            gActions.showMessage(
-                                {
-                                    error: 'Error! autohide:false',
-                                },
-                                false
-                            );
+                            Toast.error('Err! duration:0', 0);
                         }}>
-                        Message Error
+                        Error
                     </CButton>
                 </CPanel>
             </div>

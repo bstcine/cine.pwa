@@ -3,7 +3,7 @@ import TextFix from '@/component/TextFix';
 import { Task_Type } from '@/constant';
 import { CCard, CIcon } from '@/component/_base';
 import task from '@/constant/task';
-import gActions from '@/g/action';
+import CModal from '@/component/_base';
 
 const Label = ({ type }) => <span className="label">{task[type]}</span>;
 
@@ -22,9 +22,15 @@ const Status = ({ task }) => {
 const onClick = (task, gActions) => {
     if (task.type === Task_Type.Writing) {
         return () => {
-            gActions.showAlert({
+            Modal.alert({
                 title: task.title,
                 text: task.writing_desc,
+                onConfirm: () => {
+                    console.log('onConfirm');
+                },
+                onCancel: () => {
+                    console.log('onCancel');
+                },
             });
         };
     }

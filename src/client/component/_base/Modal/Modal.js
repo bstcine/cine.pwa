@@ -1,13 +1,12 @@
 import './style.less';
 import React from 'react';
-import { Mask } from '../Mask';
+import Mask from '../Mask';
 import CButton from '../Button';
 
 import { componentNames } from '@/component/_base/config';
-const cls = componentNames.Dialog;
+const cls = componentNames.Modal;
 
-const Dialog = ({ isOpen, title, text, isShowCancel, onCancel, onConfirm }) => {
-    if (!isOpen) return null;
+export default function({ title, text, onCancel, onConfirm, close }) {
     return (
         <div className={cls}>
             <Mask />
@@ -15,21 +14,27 @@ const Dialog = ({ isOpen, title, text, isShowCancel, onCancel, onConfirm }) => {
                 {title && <div className={`${cls}__header`}>{title}</div>}
                 <div className={`${cls}__content`}>{text}</div>
                 <div className={`${cls}__footer`}>
-                    {isShowCancel && (
+                    {onCancel && (
                         <CButton
                             className={`${cls}__cancel`}
-                            onClick={onCancel}>
+                            onClick={() => {
+                                close();
+                                onCancel();
+                            }}>
                             取消
                         </CButton>
                     )}
 
-                    <CButton color="primary" onClick={onConfirm}>
+                    <CButton
+                        color="primary"
+                        onClick={() => {
+                            close();
+                            onConfirm && onConfirm();
+                        }}>
                         确定
                     </CButton>
                 </div>
             </div>
         </div>
     );
-};
-
-export default Dialog;
+}

@@ -66,6 +66,7 @@ class WordQuizContainer extends Component {
                         selectCount={selectCount}
                         content={content}
                         actions={actions}
+                        backAction={this.backLWord}
                     />
                     <CDialog
                         title="完成词汇作业任务，返回学习首页"

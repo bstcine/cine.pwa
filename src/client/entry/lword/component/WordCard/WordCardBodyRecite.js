@@ -51,7 +51,9 @@ class WordCardBodyRecite extends React.PureComponent {
         }
         return (
             <div className="wordCard-Body" onClick={this.toggle}>
-                <div className="lastWord" onClick={this.startPrevious} />
+                <div className="lastContainer">
+                    <div className="lastWord" onClick={this.startPrevious} />
+                </div>
                 <div className="currentWord">
                     <div className={cls}>
                         <div className="wordDetail-flipper" >
@@ -88,7 +90,9 @@ class WordCardBodyRecite extends React.PureComponent {
                         </div>
                     </div>
                 </div>
-                <div className="nextWord" onClick={this.startNext} />
+                <div className="nextContainer">
+                    <div className="nextWord" onClick={this.startNext} />
+                </div>
             </div>
         );
     }

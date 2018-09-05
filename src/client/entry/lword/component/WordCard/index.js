@@ -31,15 +31,6 @@ class WordCard extends React.PureComponent {
                     backAction={backAction}
                     listAction={listAction}
                 />
-                <WordCardBody
-                    name={name}
-                    rows={rows}
-                    currentIndex={currentIndex}
-                    isBack={isBack}
-                    isKnown={isKnown}
-                    quizAction={quizAction}
-                    actions={actions}
-                />
                 { rows && rows.length > 0 &&
                 <React.Fragment>
                     <WordCardFooter
@@ -56,6 +47,15 @@ class WordCard extends React.PureComponent {
                     />
                 </React.Fragment>
                 }
+                <WordCardBody
+                    name={name}
+                    rows={rows}
+                    currentIndex={currentIndex}
+                    isBack={isBack}
+                    isKnown={isKnown}
+                    quizAction={quizAction}
+                    actions={actions}
+                />
             </div>
         );
     }

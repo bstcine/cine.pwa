@@ -16,7 +16,12 @@ class WordQuizContainer extends Component {
         super(props);
         // 获取参数
         this.backLWord = this.backLWord.bind(this);
+        this.dialogAction = this.dialogAction.bind(this);
         this.param = getParam();
+        // 判断测试来源（是否为top10000）
+        if (this.param.lesson_id && this.param.lesson_id.indexOf('-') > 0) {
+            this.sourceType = 1;
+        }
         document.title = '词汇测试';
     }
     componentDidMount() {
@@ -26,6 +31,16 @@ class WordQuizContainer extends Component {
     }
     backLWord() {
         location.href = addParam('/lword', this.param);
+    }
+    dialogAction() {
+        let { isDone } = this.props;
+        if (this.sourceType === 1) {
+            location.href = '/lword/course?start_index=1&range=10000';
+        } else if (isDone === true) {
+            location.href = addParam('/learn/task');
+        } else {
+            location.href = addParam('/lword', this.param);
+        }
     }
 
     render() {
@@ -44,17 +59,17 @@ class WordQuizContainer extends Component {
                 key={2}
                 label="确定"
                 primary={true}
-                onClick={this.backLWord}
+                onClick={this.dialogAction}
             />,
         ];
-        const wrongDialogAction = [
-            <CFlatButton
-                key={2}
-                label="确定"
-                primary={true}
-                onClick={this.backLWord}
-            />,
-        ];
+        let dialogTitle;
+        if (this.sourceType === 1) {
+            dialogTitle = '测试完成';
+        } else if (isDone === true) {
+            dialogTitle = '本次测试得分超过 90 分';
+        } else {
+            dialogTitle = '本次测试得分不足 90 分';
+        }
         return (
             <CThemeProvider>
                 <React.Fragment>
@@ -69,18 +84,11 @@ class WordQuizContainer extends Component {
                         backAction={this.backLWord}
                     />
                     <CDialog
-                        title="完成词汇作业任务，返回学习首页"
+                        title={dialogTitle}
                         modal={false}
                         actions={dialogActions}
-                        open={isDone === true}
-                        onRequestClose={this.backLWord}
-                    />
-                    <CDialog
-                        title="未掌握全部单词，继续学习"
-                        modal={false}
-                        actions={wrongDialogAction}
-                        open={isDone === false}
-                        onRequestClose={this.backLWord}
+                        open={isDone === true || isDone === false}
+                        onRequestClose={this.dialogAction}
                     />
                 </React.Fragment>
             </CThemeProvider>

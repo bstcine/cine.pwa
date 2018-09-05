@@ -39,7 +39,7 @@ class AchievePage extends Component {
                     img: canvas.toDataURL(),
                 });
                 setTimeout(() => {
-                    alert('长按保存图片，去朋友圈炫耀一下!');
+                    alert('长按保存图片，打卡记录学习的每一步!');
                 }, 1000);
             });
         }

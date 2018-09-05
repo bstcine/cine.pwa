@@ -22,15 +22,17 @@
     width: 100%;
     height: auto;
     justify-content: space-between;
-    border-style: none none none none;
+    border-style: none none solid none;
     border-color: #ebf3fb;
     border-width: 2px;
 
     .back-Image-Header {
         display: inline-block;
-        width: 0.4rem;
+        width: 0.6rem;
         height: 0.4rem;
+        padding-right: 0.2rem;
         margin-left: 0.2rem;
+        margin-right: 0.2rem;
         font-size: 0.36rem;
         padding-top: 0.02rem;
         cursor: pointer;
@@ -56,22 +58,11 @@
         }
     }
     .wordCard-ToList {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
         cursor: pointer;
         font-size: 0.32rem;
-
-        .wordCard-ListButton {
-            font-size: 0.32rem;
-            margin-left: 0.2rem;
-            margin-right: 0.2rem;
-            color: #9a9b9c;
-        }
-        .wordCard-ListTitle {
-            display: none;
-            color: #3a3b3c;
-        }
+        color: #7a7b7c;
+        background-color: transparent;
+        white-space: pre;
     }
 }
 
@@ -80,50 +71,67 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    flex:1 0;
     width: 100%;
     height: 100%;
-    .lastWord {
-        display: none;
-        width: 1.2rem;
-        height: 40%;
-        cursor: pointer;
-    }
-    .lastWord:hover {
-        background: url("../image/lword_card_arrow_left.svg") no-repeat center;
-        background-size: contain;
-    }
-    .nextWord {
-        display: none;
-        width: 1.2rem;
-        height: 40%;
-        cursor: pointer;
-    }
-    .nextWord:hover {
-        background: url("../image/lword_card_arrow_right.svg") no-repeat center;
-        background-size: contain;
-    }
-    .currentWord {
-        width: 100%;
-        min-height: 9.1rem;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-    .wordDetail {
-        width: 100%;
-        //height: auto;
+
+    .lastContainer {
         display: flex;
         flex-direction: row;
         align-items: center;
-        flex:1 0;
+        width: 1.2rem;
+        height: 100%;
+        cursor: pointer;
+        .lastWord {
+            display: none;
+            width: 100%;
+            height: 40%;
+        }
+    }
+    .lastContainer:hover {
+        .lastWord {
+            background: url("../image/lword_card_arrow_left.svg") no-repeat center;
+            background-size: contain;
+        }
+    }
+    .nextContainer {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        width: 1.2rem;
+        height: 100%;
+        cursor: pointer;
+        .nextWord {
+            display: none;
+            width: 100%;
+            height: 40%;
+        }
+    }
+    .nextContainer:hover {
+        .nextWord {
+            background: url("../image/lword_card_arrow_right.svg") no-repeat center;
+            background-size: contain;
+        }
+    }
+    .currentWord {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+    }
+    .wordDetail {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
     }
     .wordDetail.hover .wordDetail-flipper {
         transform: rotateY(180deg);
     }
     .wordDetail-flipper {
         width: 100%;
-        height: 8.7rem;
+        height: 100%;
         transition: transform 0.6s;
         transform-style: preserve-3d;
     }
@@ -136,14 +144,15 @@
         top: 0;
         left: 0;
         width: 100%;
-        min-height: 8.7rem;
+        height: 100%;
         display: flex;
         flex-direction: row;
         align-items: center;
         justify-content: center;
     }
     .wordInfo {
-        width: auto;
+        width: 100%;
+        height: auto;
         padding-top: 0.6rem;
         padding-bottom: 0.6rem;
         cursor: pointer;
@@ -295,10 +304,6 @@
     justify-content: center;
     height: 2.3rem;
     width: 100%;
-    background-color: rgba(0,0,0,0.18);
-    border-style: none none none none;
-    border-color: #ebf3fb;
-    border-width: 2px;
 }
 .autoChangeWord {
     display: flex;
@@ -337,11 +342,9 @@
 @media @media-up-xs {
     .wordCardContent {
         padding: 0 0.8rem 0 0.8rem;
-        min-height: 80vh;
+        min-height: 100%;
     }
     .wordCard-Header {
-        border-style: none none solid none;
-
         .back-Image-Header {
             display: none;
             font-size: 0.32rem;
@@ -359,28 +362,19 @@
             }
         }
         .wordCard-ToList {
-            .wordCard-ListTitle {
-                display: inline-block;
-                font-size: 0.28rem;
-                .wordCard-ListButton {
-                    font-size: 0.28rem;
-                }
-            }
+            font-size: 0.28rem;
         }
     }
     .wordCard-Body {
-        height: 10rem;
-        .lastWord {
-            display: inline-block;
+        .lastContainer {
+            .lastWord {
+                display: inline-block;
+            }
         }
-        .nextWord {
-            display: inline-block;
-        }
-        .wordDetail {
-            height: 8.7rem;
-        }
-        .wordInfo {
-            width: 6rem;
+        .nextContainer {
+            .nextWord {
+                display: inline-block;
+            }
         }
         .word {
             font-size: 1.02rem;
@@ -449,8 +443,6 @@
         justify-content: flex-end;
         height: 1.44rem;
         width: 100%;
-        background-color: transparent;
-        border-style: solid none none none;
     }
     .autoChangeWord {
         display: flex;

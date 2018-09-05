@@ -3,7 +3,7 @@
  */
 import React from 'react';
 import siteCodeUtil from '@/util/sitecodeUtil';
-import { CIcon } from '@/component/_base';
+import { CIcon, CButton } from '@/component/_base';
 
 class WordCardHeader extends React.PureComponent {
     render() {
@@ -18,10 +18,9 @@ class WordCardHeader extends React.PureComponent {
                     <CIcon className="wordCard-backButton" onClick={backAction}>ci-card_back</CIcon>
                     <p className="wordCard-taskTitle">{name}</p>
                 </div>
-                <div className="wordCard-ToList" onClick={listAction}>
-                    <CIcon className="wordCard-ListButton">ci-card_list</CIcon>
-                    <p className="wordCard-ListTitle">列表式</p>
-                </div>
+                <CButton className="wordCard-ToList" onClick={listAction}>
+                    <CIcon>ci-card_list</CIcon>  列表式
+                </CButton>
             </div>
         );
     }

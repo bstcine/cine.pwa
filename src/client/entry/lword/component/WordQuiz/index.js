@@ -13,14 +13,9 @@ class WordQuiz extends React.PureComponent {
         let index = content.index;
         actions.startNext(rows, index);
     };
-    // 返回以前的位置
-    backHome= () => {
-        let { param } = this.props;
-        location.href = addParam('/lword', param);
-    };
 
     render() {
-        let { isTest, selectIndex, wordCount, selectCount, content, actions } = this.props;
+        let { isTest, selectIndex, wordCount, selectCount, content, actions, backAction } = this.props;
         let wordCountPromot = '本次学习单词' + wordCount + '个，测试下掌握了多少？';
         let correctWord = '已测试' + selectCount + '个';
         let wordAllPromot = '共' + wordCount + '个';
@@ -70,7 +65,7 @@ class WordQuiz extends React.PureComponent {
         return (
             <div className="vocabularyTest">
                 <WordQuizHeader
-                    backAction={() => { this.backHome() }}
+                    backAction={backAction}
                 />
                 {contentView}
             </div>

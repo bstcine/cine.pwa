@@ -138,6 +138,7 @@ export const wQuizAction = {
         }
         console.log(result);
         let content = wQuizAction._getContent(result.rows, 0);
+        console.log('正确选项: ', content.real_zh+1);
         dispatch(wQuizAction._changeContent(content));
         dispatch(wQuizAction._changeWordCount(result['rows'].length));
         dispatch(wQuizAction._receive(result));
@@ -269,7 +270,6 @@ export const wQuizAction = {
         if (!zh) {
             zh = zhs[0];
         }
-        console.log('原始的翻译文字: ', zh)
         // 将zh中的词性移除
         const zhCom = zh.split('.');
         let index = zhCom.length > 1 ? zhCom.length - 1 : 0;
@@ -279,7 +279,6 @@ export const wQuizAction = {
         if (zh_component.length > 2) {
             zh = zh_component[0] + '；' + zh_component[1];
         }
-        console.log('处理后的翻译文字: ', zh);
         return { zh: zh };
     },
     /**
@@ -434,6 +433,7 @@ export const wQuizAction = {
             }
         }
         let content = wQuizAction._getContent(rows, index);
+        console.log('正确选项: ', content.real_zh + 1);
         // 选项清除
         dispatch(wQuizAction._changeSelectIndex(-1));
         // 切换内容

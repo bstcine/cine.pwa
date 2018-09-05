@@ -2,13 +2,8 @@ import React from 'react';
 import { CPanel, CCard, CCardContainer } from '@/component/_base';
 import '@/entry/learn/asset/style/homeWordCourse.less';
 
-const WordCourses = () => {
-    const getHref = (startIndex, range) => {
-        let url = `/lword/course?start_index=${startIndex}&range=${range}`;
-        return url;
-    };
-
-    const getWordCourse = (startIndex, range) => {
+const WordCourses = ({ courses }) => {
+    const getWordCourseH = (startIndex, range) => {
         return (
             <div className="course">
                 <div className="top">善恩核心10000词</div>
@@ -20,21 +15,36 @@ const WordCourses = () => {
         );
     };
 
+    const getWordCourse = course => {
+        // alert(JSON.stringify(course));
+        let url = `/lword/course?start_index=1&range=10000`;
+        return (
+            <CCard hover="lighten">
+                <div className="course">
+                    <a href={url} target="_blank">
+                        <div className="img-c">
+                            <div
+                                className="img"
+                                style={{
+                                    background: `url(${
+                                        course.cover
+                                    })center center / cover no-repeat `,
+                                }}
+                            />
+                        </div>
+                    </a>
+                </div>
+            </CCard>
+        );
+    };
+
+    let cards = courses.map((course, i) => {
+        return getWordCourse(course);
+    });
     return (
         <CPanel title="背单词">
             <CCardContainer gap="large" layout="234">
-                <CCard hover="lighten" gap="large" href={getHref(1, 3000)}>
-                    {getWordCourse(1, 3000)}
-                </CCard>
-                <CCard hover="lighten" href={getHref(3001, 3000)}>
-                    {getWordCourse(3001, 6000)}
-                </CCard>
-                <CCard hover="lighten" href={getHref(6001, 4000)}>
-                    {getWordCourse(6001, 10000)}
-                </CCard>
-                <CCard hover="lighten" href={getHref(1, 10000)}>
-                    {getWordCourse(1, 10000)}
-                </CCard>
+                {cards}
             </CCardContainer>
         </CPanel>
     );

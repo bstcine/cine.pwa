@@ -66,9 +66,9 @@ class WordQuizContainer extends Component {
         if (this.sourceType === 1) {
             dialogTitle = '测试完成';
         } else if (isDone === true) {
-            dialogTitle = '本次测试得分超过 90 分';
+            dialogTitle = '完成词汇作业任务，返回学习首页';
         } else {
-            dialogTitle = '本次测试得分不足 90 分';
+            dialogTitle = '未掌握全部单词，继续学习';
         }
         return (
             <CThemeProvider>

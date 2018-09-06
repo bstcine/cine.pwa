@@ -38,9 +38,9 @@ class AchievePage extends Component {
                 this.setState({
                     img: canvas.toDataURL(),
                 });
-                setTimeout(() => {
-                    alert('长按保存图片，打卡记录学习的每一步!');
-                }, 1000);
+                // setTimeout(() => {
+                //     alert('长按保存图片，打卡记录学习的每一步!');
+                // }, 1000);
             });
         }
     }

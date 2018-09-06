@@ -1,5 +1,5 @@
 import { fetchData } from '@/service/base';
-import { CToast } from '@/component/_base';
+import { CMessage } from '@/component/_base';
 
 export const superFetchDataWithShowLogin = (
     url,
@@ -12,7 +12,7 @@ export const superFetchDataWithShowLogin = (
     if (config.showLoading) {
         // 不在第一时间出现 loading，延迟 1s 之后出现
         timer = setTimeout(() => {
-            loading = CToast.loading();
+            loading = CMessage.loading();
         }, 1000);
     }
     let [error, result] = await fetchData(url, query);
@@ -21,7 +21,7 @@ export const superFetchDataWithShowLogin = (
         loading && loading.close();
     }
 
-    if (config.showError && error) CToast.error(error);
+    if (config.showError && error) CMessage.error(error);
 
     return [error, result];
 };

@@ -11,7 +11,7 @@ import {
     Learn_Word_Correct_SleepTime,
     Learn_Word_Failed_SleepTime,
 } from '@/constant/index';
-import { CToast } from '@/component/_base';
+import { CMessage } from '@/component/_base';
 
 const Vocabulary = {
     n: ['n.'],
@@ -134,7 +134,7 @@ export const wQuizAction = {
             param
         );
         if (error) {
-            CToast.error(errorMsg(error));
+            CMessage.error(errorMsg(error));
             return;
         }
         console.log(result);

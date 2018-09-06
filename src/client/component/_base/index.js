@@ -1,9 +1,9 @@
 import React from 'react';
-import { CSelectField } from './SelectField';
 import Dialog from 'material-ui/Dialog';
-import FlatButton from 'material-ui/FlatButton';
 import DatePicker from 'material-ui/DatePicker';
-import TextField from 'material-ui/TextField';
+import FlatButton from 'material-ui/FlatButton';
+import TextField  from 'material-ui/TextField';
+import { CSelectField } from './SelectField';
 import Button, { IconButton } from './Button';
 import FloatingBox from './FloatingBox';
 import Panel from './Panel';
@@ -31,12 +31,12 @@ const CDatePicker = ({ defaultValue, label, onChange }) => {
 };
 
 export {
-    CFlatButton,
     Dialog as CDialog,
+    CDatePicker,
+    CFlatButton,
     TextField as CTextField,
     Button as CButton,
     IconButton as CIconButton,
-    CDatePicker,
     FloatingBox as CFloatingBox,
     Panel as CPanel,
     CardContainer as CCardContainer,
@@ -45,5 +45,5 @@ export {
     CSelectField as CSelect,
     Icon as CIcon,
     Modal as CModal,
-    Toast as CToast,
+    Toast as CMessage,
 };

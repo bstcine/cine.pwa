@@ -29,10 +29,10 @@ export default class Achieve extends Component {
                     <div className="ach_tips">
                         <p>我已跟我的</p>
                         <p className="ach_tips__tea">
-                            英文私塾导师{teacher && teacher.name}
+                            英文私塾导师<span>{teacher && teacher.name}</span>
                         </p>
                         <p>
-                            学习了 <span>{week}</span> 周
+                            学习了 <span className="bb">{week}</span> 周
                         </p>
                     </div>
                 </div>

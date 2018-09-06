@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Modal from './ModalContainer';
+import QRCode from '../QRCode';
 
 /**
  * { title, text, onCancel, onConfirm }
@@ -25,6 +26,9 @@ Modal.alert = function(props) {
     };
 };
 
-export default Modal;
+/**
+ * url
+ */
+Modal.qrcode = QRCode.open;
 
-export { alert };
+export default Modal;

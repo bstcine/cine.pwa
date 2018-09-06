@@ -29,8 +29,8 @@ class HomePage extends Component {
                         </a>
                     </CPanel>
                 )}
-                {!!user && user.type === '2' && <Tasks />}
-                <WordCourses courses={courses}/>
+                {!!user && user.type === '2' && <Tasks user={user} />}
+                <WordCourses courses={courses} />
                 <Courses />
             </GLayoutContainer>
         );

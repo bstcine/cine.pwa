@@ -10,6 +10,7 @@ export const componentNames = {
     Panel: `${baseprefix}-panel`,
     Toast: `${baseprefix}-toast`,
     Icon: `${baseprefix}-gicon`,
+    QRCode: `${baseprefix}-qrcode`,
 };
 
 export const fontRatio = 5;

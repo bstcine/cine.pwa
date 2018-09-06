@@ -1,0 +1,28 @@
+@import '../style';
+
+.@{qrcode} {
+    position: fixed;
+    padding: 0.16rem;
+    width: 4.4rem;
+    height: 4.4rem;
+    background-color: #fff;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 0.06rem;
+    overflow: hidden;
+    z-index: 3000;
+}
+
+.@{qrcode}__close {
+    font-size: 0.4rem;
+    position: absolute;
+    right: 0.12rem;
+    top: 0.12rem;
+    cursor: pointer;
+}
+
+.@{qrcode}__img {
+    display: block;
+    width: 100%;
+}

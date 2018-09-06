@@ -1,8 +1,8 @@
 import React from 'react';
-import Button from './Button';
+import BaseButton from './Button';
 import Icon from '../Icon';
 
-const CButton = ({
+const Button = ({
     children,
     className,
     disabled,
@@ -17,7 +17,7 @@ const CButton = ({
     mini,
     onClick,
 }) => (
-    <Button
+    <BaseButton
         className={className}
         disabled={disabled}
         fullWidth={fullWidth}
@@ -28,20 +28,20 @@ const CButton = ({
         mini={mini}
         onClick={onClick}>
         {children}
-    </Button>
+    </BaseButton>
 );
 
-const CIconButton = ({ color, className, mini, children, onClick }) => (
-    <Button
+const IconButton = ({ color, className, mini, children, onClick }) => (
+    <BaseButton
         mini={mini}
         className={className}
         variant="round"
         color={color}
         onClick={onClick}>
         <Icon>{children}</Icon>
-    </Button>
+    </BaseButton>
 );
 
-export { CIconButton };
+export { IconButton };
 
-export default CButton;
+export default Button;

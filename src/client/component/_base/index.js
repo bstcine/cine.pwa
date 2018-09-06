@@ -4,14 +4,14 @@ import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 import DatePicker from 'material-ui/DatePicker';
 import TextField from 'material-ui/TextField';
-import CButton, { CIconButton } from './Button';
+import Button, { IconButton } from './Button';
 import FloatingBox from './FloatingBox';
 import Panel from './Panel';
 import Icon from './Icon';
 import Drawer from './Drawer';
 import Modal from './Modal';
 import Toast from './Toast';
-import { CCardContainer, CCard } from './Card';
+import Card, { CardContainer } from './Card';
 
 const CFlatButton = props => {
     return <FlatButton {...props} />;
@@ -34,14 +34,14 @@ export {
     CFlatButton,
     Dialog as CDialog,
     TextField as CTextField,
-    CButton,
-    CIconButton,
+    Button as CButton,
+    IconButton as CIconButton,
     CDatePicker,
     FloatingBox as CFloatingBox,
     Panel as CPanel,
-    CCardContainer,
+    CardContainer as CCardContainer,
+    Card as CCard,
     Drawer as CDrawer,
-    CCard,
     CSelectField as CSelect,
     Icon as CIcon,
     Modal as CModal,

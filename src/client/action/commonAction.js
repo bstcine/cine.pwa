@@ -18,7 +18,7 @@ export const superFetchDataWithShowLogin = (
     let [error, result] = await fetchData(url, query);
     if (config.showLoading) {
         timer && clearTimeout(timer);
-        loading.close();
+        loading && loading.close();
     }
 
     if (config.showError && error) CToast.error(error);

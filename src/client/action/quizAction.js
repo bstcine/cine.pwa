@@ -28,7 +28,7 @@ import {
 } from '@/constant/quiz';
 import { RoleID } from '@/constant/index';
 import { superFetchDataWithShowLogin } from '@/action/commonAction';
-import { CToast, CModal } from '@/component/_base';
+import { CMessage, CModal } from '@/component/_base';
 
 /**
  * 题目数据 & 答题记录请求
@@ -65,7 +65,7 @@ export const fetchQuizData = ({
         ) {
             location.href = '/quiz/grammar';
         } else {
-            CToast.error(err);
+            CMessage.error(err);
         }
         return;
     }
@@ -75,7 +75,7 @@ export const fetchQuizData = ({
         location.href.includes('/quiz/kj') &&
         (!quiz || (quiz && quiz.type === '2'))
     ) {
-        CToast.error('not_quiz_kj');
+        CMessage.error('not_quiz_kj');
         return;
     }
 
@@ -211,7 +211,7 @@ export const submitAnswer = () => async (dispatch, getState) => {
     );
     if (err) {
         if (err === 'no_login') return dispatch(openLoginModal());
-        CToast.error(err);
+        CMessage.error(err);
         return;
     }
     clearLocalAnswers(quiz, userRedu.data || {});
@@ -261,7 +261,7 @@ export const submitCheckAnswer = (complete = true) => async (
     );
     if (err) {
         if (err === 'no_login') return dispatch(openLoginModal());
-        CToast.error(err);
+        CMessage.error(err);
         return;
     }
     // dispatch({ type: RECEIVE_STATS_QUIZ_UPDATE });
@@ -287,7 +287,7 @@ export const resetQuiz = () => (dispatch, getState) => {
             );
             if (err) {
                 if (err === 'no_login') return dispatch(openLoginModal());
-                CToast.error(err);
+                CMessage.error(err);
                 return;
             }
             CModal.alert({ text: '该学生试卷已重置成功！' });

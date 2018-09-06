@@ -2,7 +2,7 @@ import Api from '../../APIConfig';
 import { fetchData } from '@/service/base';
 import { Action_UC } from '@/constant/actionTypeUser';
 import errorMsg from '@/util/errorMsg';
-import { CToast } from '@/component/_base';
+import { CMessage } from '@/component/_base';
 
 export const actionUserCoupon = {
     request: () => ({
@@ -89,7 +89,7 @@ export const actionUserCoupon = {
     toggleTransferCheckStatus: account => async (dispatch, getState) => {
         // 需要检查输入的值
         if (account === '') {
-            CToast.error('请输入对方账号');
+            CMessage.error('请输入对方账号');
             return;
         }
 
@@ -102,7 +102,7 @@ export const actionUserCoupon = {
 
         if (err) {
             err = errorMsg(err);
-            CToast.error(err);
+            CMessage.error(err);
             return;
         }
 
@@ -144,15 +144,15 @@ export const actionUserCoupon = {
 
             if (err) {
                 err = errorMsg(err);
-                CToast.error(err);
+                CMessage.error(err);
             } else {
-                CToast.info('添加成功');
+                CMessage.info('添加成功');
                 dispatch(actionUserCoupon._toggleCouponDialog(false));
 
                 dispatch(actionUserCoupon.loadUserCoupon());
             }
         } else {
-            CToast.error('请输入优惠码');
+            CMessage.error('请输入优惠码');
         }
     },
 
@@ -172,16 +172,16 @@ export const actionUserCoupon = {
 
         if (err) {
             err = errorMsg(err);
-            CToast.error(err);
+            CMessage.error(err);
             return;
         }
 
         if (result === '0') {
-            CToast.error('转赠失败');
+            CMessage.error('转赠失败');
             return;
         }
 
-        CToast.info('转赠成功', () => {
+        CMessage.info('转赠成功', () => {
             dispatch(actionUserCoupon.toggleTransferDialog());
             dispatch(actionUserCoupon.loadUserCoupon());
         });

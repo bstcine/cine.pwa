@@ -9,7 +9,7 @@ import {
     CIconButton,
     CFloatingBox,
     CIcon,
-    CToast,
+    CMessage,
     CModal,
 } from '@/component/_base';
 import Player from '@/component/Player';
@@ -260,7 +260,7 @@ class Container extends Component {
                         variant="outlined"
                         color="primary"
                         onClick={() => {
-                            const loading = CToast.loading();
+                            const loading = CMessage.loading();
                             setTimeout(() => {
                                 loading.close();
                             }, 2000);
@@ -271,7 +271,7 @@ class Container extends Component {
                         variant="outlined"
                         color="primary"
                         onClick={() => {
-                            CToast.info('完不成', () => {
+                            CMessage.info('完不成', () => {
                                 console.log('完不成关闭了');
                             });
                         }}>
@@ -281,7 +281,7 @@ class Container extends Component {
                         variant="outlined"
                         color="primary"
                         onClick={() => {
-                            CToast.error('Err! duration:0', 0);
+                            CMessage.error('Err! duration:0', 0);
                         }}>
                         Error
                     </CButton>

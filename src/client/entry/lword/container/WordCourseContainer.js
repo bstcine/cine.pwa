@@ -10,11 +10,6 @@ class WordCourseContainer extends Component {
         super(props);
 
         this.param = getParam();
-        let { start_index, range } = this.param;
-        start_index = parseInt(start_index, 10);
-        range = parseInt(range, 10);
-        let estimate = `${start_index}-${start_index - 1 + range}`;
-        this.estimate = estimate;
         this.props.actions.initCourseLessons(this.param);
     }
 
@@ -26,7 +21,7 @@ class WordCourseContainer extends Component {
         let { lessons, lastVisitID, actions } = this.props;
         const course_id = this.param.start_index
             ? `${this.param.start_index}-${this.param.range}`
-            : '1-3000';
+            : '1-10000';
         return (
             <React.Fragment>
                 <WordCourse

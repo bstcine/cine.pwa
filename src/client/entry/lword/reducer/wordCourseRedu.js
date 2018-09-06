@@ -39,7 +39,7 @@ const initWordCourse = Map({
     userID: null,
     wordStartID: 1,
     lastVisitID: 1,
-    lessons: getCourseItems(1, 3000, 3552),
+    lessons: getCourseItems(1, 10000, 1),
 });
 
 const WordCourseRedu = (state = initWordCourse, action) => {

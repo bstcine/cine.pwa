@@ -45,5 +45,5 @@ export {
     CSelectField as CSelect,
     Icon as CIcon,
     Modal as CModal,
-    Toast as CToast,
+    Toast as CMessage,
 };

@@ -3,14 +3,13 @@
     "version": "4.0.1",
     "description": "React-PWA",
     "private": true,
-    "sideEffects": [
-        "*.less",
-        "*.css"
-    ],
+    "sideEffects": ["*.less", "*.css"],
     "scripts": {
-        "start": "NODE_ENV=development webpack-dev-server --config webpack.dev.js",
+        "start":
+            "NODE_ENV=development webpack-dev-server --config webpack.dev.js",
         "dev": "NODE_ENV=development webpack --config webpack.dev.js",
-        "prod": "NODE_ENV=production webpack --progress --config webpack.prod.js",
+        "prod":
+            "NODE_ENV=production webpack --progress --config webpack.prod.js",
         "dev2web": "./build2web.sh dev",
         "prod2web": "./build2web.sh prod"
     },
@@ -90,17 +89,9 @@
         "webpack-dev-server": "^3.1.4",
         "webpack-merge": "^4.1.2"
     },
-    "browserslist": [
-        "Chrome >= 60",
-        "Safari >= 10.1",
-        "iOS >= 10.3",
-        "Firefox >= 54",
-        "Edge >= 15"
-    ],
+    "browserslist": [">1%", "last 4 versions", "Firefox ESR", "not ie < 9"],
     "babel": {
-        "plugins": [
-            "lodash"
-        ],
+        "plugins": ["lodash"],
         "presets": [
             [
                 "@babel/preset-env",

@@ -32,7 +32,7 @@ const Tasks = ({ tasks, user, isLimitTasks, onShowAllTask, gActions }) => {
                         <a
                             onClick={() => {
                                 CModal.qrcode(
-                                    `${location.protocol}://${
+                                    `${location.protocol}//${
                                         location.host
                                     }/learn/achieve?user_id=${user.id}`
                                 );

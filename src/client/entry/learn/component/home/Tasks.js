@@ -1,7 +1,6 @@
 import React from 'react';
 import TasksList from './TasksList';
-import { CCardContainer, CPanel, CIcon, CModal } from '@/component/_base';
-import siteCodeUtil from '@/util/sitecodeUtil';
+import { CCardContainer, CIcon, CModal } from '@/component/_base';
 import uaUtil from '@/util/uaUtil';
 
 const ExpandMore = ({ tasks, isLimitTasks, onShowAllTask }) => {
@@ -33,7 +32,9 @@ const Tasks = ({ tasks, user, isLimitTasks, onShowAllTask, gActions }) => {
                         <a
                             onClick={() => {
                                 CModal.qrcode(
-                                    `/learn/achieve?user_id=${user.id}`
+                                    `${location.protocol}://${
+                                        location.host
+                                    }/learn/achieve?user_id=${user.id}`
                                 );
                             }}>
                             打卡 <CIcon>ci-cup</CIcon>

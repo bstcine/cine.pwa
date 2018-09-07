@@ -1,35 +1,64 @@
 import React from 'react';
-import { componentNames } from '@/component/_base/config';
-const cls = componentNames.Toast;
-import './style.less';
-import { TransparentMask } from '../Mask';
+import ReactDOM from 'react-dom';
+import Toast from './Toast';
 
-const Loading = ({ isOpen, text }) => {
-    if (!isOpen) return null;
-    return (
-        <React.Fragment>
-            <TransparentMask />
-            <div className={cls}>
-                <i className={`${cls}__icon loading`} />
-                <p className={`${cls}__msg`}>{text || '加载中'}</p>
-            </div>
-        </React.Fragment>
-    );
+function toast(props) {
+    const div = document.createElement('div');
+    document.body.appendChild(div);
+    const currentProps = { ...props, close };
+
+    function render(currentProps) {
+        ReactDOM.render(<Toast {...currentProps} />, div);
+    }
+    function close() {
+        const unmountResult = ReactDOM.unmountComponentAtNode(div);
+        if (unmountResult && div.parentNode) {
+            div.parentNode.removeChild(div);
+        }
+    }
+    render(currentProps);
+    return {
+        close,
+    };
+}
+
+function show(props, defaultProps) {
+    let currentProps = getProps(props, defaultProps);
+    let myToast = toast(currentProps);
+    if (currentProps.duration) {
+        setTimeout(() => {
+            myToast.close();
+            currentProps.onClose && currentProps.onClose();
+        }, currentProps.duration);
+    }
+    return myToast;
+}
+
+function getProps(props, defaultProps) {
+    if (props.length) {
+        props.forEach(prop => {
+            if (typeof prop === 'string') {
+                defaultProps.text = prop;
+            } else if (typeof prop === 'number') {
+                defaultProps.duration = prop;
+            } else {
+                defaultProps.onClose = prop;
+            }
+        });
+    }
+    return defaultProps;
+}
+
+Toast.loading = (...props) => {
+    return show(props, { type: 'loading', text: '加载中', duration: 0 });
 };
 
-const Message = ({ isOpen, text, error }) => {
-    if (!isOpen) return null;
-    return (
-        <React.Fragment>
-            <TransparentMask />
-            <div className={cls}>
-                <i className={`${cls}__icon material-icons`}>
-                    {!error ? `done` : `error_outline`}
-                </i>
-                <p className={`${cls}__msg`}>{text || error || '已完成'}</p>
-            </div>
-        </React.Fragment>
-    );
+Toast.info = (...props) => {
+    return show(props, { type: 'info', text: '已完成', duration: 3000 });
 };
 
-export { Message as CMessage, Loading as CLoading };
+Toast.error = (...props) => {
+    return show(props, { type: 'error', text: '网络异常.', duration: 3000 });
+};
+
+export default Toast;

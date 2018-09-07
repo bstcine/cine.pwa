@@ -1,9 +1,11 @@
 import './style.less';
+import classNames from 'classnames';
 import React from 'react';
 import { componentNames } from '@/component/_base/config';
 const cls = componentNames.Mask;
 
-const TransparentMask = () => <div className={`${cls}--tranparent`} />;
-const Mask = () => <div className={cls} />;
+const Mask = ({ transparent }) => (
+    <div className={classNames(cls, { [`${cls}--transparent`]: transparent })} />
+);
 
-export { Mask, TransparentMask };
+export default Mask;

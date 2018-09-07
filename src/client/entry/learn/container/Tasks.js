@@ -38,14 +38,14 @@ class TaskContainer extends PureComponent {
     }
 
     render() {
-        const { currentTasks, gActions } = this.props;
+        const { currentTasks, user } = this.props;
         const { isLimitTasks } = this.state;
         return (
             <Tasks
                 tasks={currentTasks}
                 isLimitTasks={isLimitTasks}
                 onShowAllTask={this.onShowAllTask}
-                gActions={gActions}
+                user={user}
             />
         );
     }

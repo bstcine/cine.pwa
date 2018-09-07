@@ -1,23 +1,24 @@
 import React from 'react';
-import Card from './Card';
-import CardContainer from './CardContainer';
+import BaseCard from './Card';
+import BaseCardContainer from './CardContainer';
 
-const CCard = ({
-    hover = 'darken',
+const Card = ({
+    hover = 'lighten',
     href = null,
     className,
     onClick,
     children,
 }) => (
-    <Card href={href} className={className} hover={hover} onClick={onClick}>
+    <BaseCard href={href} className={className} hover={hover} onClick={onClick}>
         {children}
-    </Card>
+    </BaseCard>
 );
 
-const CCardContainer = ({ className, gap, layout = '112', children }) => (
-    <CardContainer className={className} gap={gap} layout={layout}>
+const CardContainer = ({ className, gap, layout = '112', children }) => (
+    <BaseCardContainer className={className} gap={gap} layout={layout}>
         {children}
-    </CardContainer>
+    </BaseCardContainer>
 );
+export default Card;
 
-export { CCardContainer, CCard };
+export { CardContainer };

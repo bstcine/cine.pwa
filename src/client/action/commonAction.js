@@ -1,18 +1,5 @@
-// import * as actType from '@/constant/actionType';
 import { fetchData } from '@/service/base';
-// import { APIURL_User_Info } from '../../APIConfig';
-
-// export const fetchUserInfo = () => async (dispatch, getState) => {
-//     if (getState().userRedu.loading) return;
-//     dispatch({ type: actType.REQUEST_USER_INFO });
-//     const [, user] = await fetchData(APIURL_User_Info, null, 'GET');
-//     if (user) dispatch({ type: actType.RECEIVE_USER_INFO, payload: user });
-// };
-
-// export const fetchDataWithLoading = (url, query, _config) => async dispatch => {
-//     return null;
-// };
-import gAction from '@/g/action';
+import { CMessage } from '@/component/_base';
 
 export const superFetchDataWithShowLogin = (
     url,
@@ -21,19 +8,20 @@ export const superFetchDataWithShowLogin = (
 ) => async dispatch => {
     let config = Object.assign({ showLoading: true, showError: true }, _config);
     let timer = null;
+    let loading = null;
     if (config.showLoading) {
         // 不在第一时间出现 loading，延迟 1s 之后出现
         timer = setTimeout(() => {
-            dispatch(gAction.showLoading());
+            loading = CMessage.loading();
         }, 1000);
     }
     let [error, result] = await fetchData(url, query);
     if (config.showLoading) {
         timer && clearTimeout(timer);
-        dispatch(gAction.hideLoading());
+        loading && loading.close();
     }
 
-    if (config.showError && error) dispatch(gAction.showMessage({ error }));
+    if (config.showError && error) CMessage.error(error);
 
     return [error, result];
 };

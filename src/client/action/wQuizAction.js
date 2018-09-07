@@ -4,13 +4,14 @@
 import Api from '../../APIConfig';
 import { fetchData } from '@/service/base';
 import { ACTION_LT } from '@/constant/actionTypeLearn';
-import gAction from '@/g/action';
+// import gAction from '@/g/action';
 import errorMsg from '@/util/errorMsg';
 import CommonUtil from '@/util/common.js';
 import {
     Learn_Word_Correct_SleepTime,
     Learn_Word_Failed_SleepTime,
 } from '@/constant/index';
+import { CMessage } from '@/component/_base';
 
 const Vocabulary = {
     n: ['n.'],
@@ -133,12 +134,12 @@ export const wQuizAction = {
             param
         );
         if (error) {
-            dispatch(gAction.showMessage({ error: errorMsg(error) }));
+            CMessage.error(errorMsg(error));
             return;
         }
         console.log(result);
         let content = wQuizAction._getContent(result.rows, 0);
-        console.log('正确选项: ', content.real_zh+1);
+        console.log('正确选项: ', content.real_zh + 1);
         dispatch(wQuizAction._changeContent(content));
         dispatch(wQuizAction._changeWordCount(result['rows'].length));
         dispatch(wQuizAction._receive(result));
@@ -169,10 +170,7 @@ export const wQuizAction = {
             rows[index].zh
         );
         zhArr = interferenceRows.map(item => {
-            let { zh } = wQuizAction._getChinessTransition(
-                item.type,
-                item.zh
-            );
+            let { zh } = wQuizAction._getChinessTransition(item.type, item.zh);
             return zh;
         });
         // 将正确的翻译元素插入到指定位置
@@ -324,7 +322,7 @@ export const wQuizAction = {
     /**
      * 测试未通过
      * */
-    testWrong: () => async (dispatch) => {
+    testWrong: () => async dispatch => {
         // 上传错误信息
         await dispatch(wQuizAction.updateFailureWords());
         // 更新测试状态为已完成
@@ -349,16 +347,19 @@ export const wQuizAction = {
         }
         console.log('选择错误的单词: ', failureArr);
         if (failureArr && failureArr.length > 0) {
-            let [err, result] = await fetchData(Api.APIURL_User_Learn_SaveFailure, {
-                failure_words: failureArr,
-            });
+            let [err, result] = await fetchData(
+                Api.APIURL_User_Learn_SaveFailure,
+                {
+                    failure_words: failureArr,
+                }
+            );
             console.log(err, result);
         }
     },
     /**
      * 更新测试分数
      * */
-    updateScore: (score) => async (dispatch, getState) => {
+    updateScore: score => async (dispatch, getState) => {
         let reducer = getState().WordQuizRedu;
         let param = reducer.get('param');
         let scoreParam = {
@@ -403,9 +404,7 @@ export const wQuizAction = {
                 index = currentIndex + 1;
             } else {
                 // 将临时错误数组赋值给错误数组
-                dispatch(
-                    wQuizAction._changeFaileIndexArray(faileTempIndexArr)
-                );
+                dispatch(wQuizAction._changeFaileIndexArray(faileTempIndexArr));
                 // 将临时错误数组清空
                 dispatch(wQuizAction._changeFaileTempIndexArray([]));
                 // 当前错误下标置为 0
@@ -421,9 +420,7 @@ export const wQuizAction = {
                 index = faileIndexArr[faileIndex];
             } else {
                 // 将临时错误数组赋值给错误数组
-                dispatch(
-                    wQuizAction._changeFaileIndexArray(faileTempIndexArr)
-                );
+                dispatch(wQuizAction._changeFaileIndexArray(faileTempIndexArr));
                 // 将临时错误数组清空
                 dispatch(wQuizAction._changeFaileTempIndexArray([]));
                 // 当前错误下标置为 0
@@ -498,9 +495,7 @@ export const wQuizAction = {
             }
             dispatch(wQuizAction._changeFailureArray(failureArr));
             // 保存错误信息
-            dispatch(
-                wQuizAction._changeFaileTempIndexArray(faileTempIndexArr)
-            );
+            dispatch(wQuizAction._changeFaileTempIndexArray(faileTempIndexArr));
             dispatch(wQuizAction.selectWrong(index));
         }
     },

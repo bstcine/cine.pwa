@@ -22,15 +22,8 @@ class HomePage extends Component {
         const { user, courses } = this.props;
         return (
             <GLayoutContainer>
-                {!!user && (
-                    <CPanel>
-                        <a href={'/learn/achieve?user_id=' + user.id}>
-                            打卡分享
-                        </a>
-                    </CPanel>
-                )}
-                {!!user && user.type === '2' && <Tasks />}
-                <WordCourses courses={courses}/>
+                {!!user && user.type === '2' && <Tasks user={user} />}
+                <WordCourses courses={courses} />
                 <Courses />
             </GLayoutContainer>
         );

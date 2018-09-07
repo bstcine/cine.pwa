@@ -4,8 +4,9 @@
 import Api from '../../APIConfig';
 import { fetchData } from '@/service/base';
 import { ACTION_LH } from '@/constant/actionTypeLearn';
-import gAction from '@/g/action';
+// import gAction from '@/g/action';
 import errorMsg from '@/util/errorMsg';
+import { CMessage } from '@/component/_base';
 
 export const lTaskAction = {
     _request: () => ({
@@ -40,7 +41,7 @@ export const lTaskAction = {
         );
 
         if (error) {
-            dispatch(gAction.showMessage({ error: errorMsg(error) }));
+            CMessage.error(errorMsg(error));
             return;
         }
 

@@ -1,9 +1,8 @@
 import React from 'react';
 import TextFix from '@/component/TextFix';
 import { Task_Type } from '@/constant';
-import { CCard, CIcon } from '@/component/_base';
+import { CCard, CIcon, CModal } from '@/component/_base';
 import task from '@/constant/task';
-import gActions from '@/g/action';
 
 const Label = ({ type }) => <span className="label">{task[type]}</span>;
 
@@ -19,10 +18,10 @@ const Status = ({ task }) => {
     }
 };
 
-const onClick = (task, gActions) => {
+const onClick = task => {
     if (task.type === Task_Type.Writing) {
         return () => {
-            gActions.showAlert({
+            CModal.alert({
                 title: task.title,
                 text: task.writing_desc,
             });
@@ -30,7 +29,7 @@ const onClick = (task, gActions) => {
     }
 };
 
-const TasksList = ({ tasks, isLimitTasks, gActions }) => {
+const TasksList = ({ tasks, isLimitTasks }) => {
     if (!tasks || !tasks.length) return <div className="notask">暂无作业</div>;
     const getHref = task => {
         switch (task.type) {
@@ -68,7 +67,7 @@ const TasksList = ({ tasks, isLimitTasks, gActions }) => {
                 hover="lighten"
                 className="task-item"
                 href={getHref(task)}
-                onClick={onClick(task, gActions)}>
+                onClick={onClick(task)}>
                 <Label type={task.type} />
                 <TextFix className="task-title">{task.title}</TextFix>
                 <Status task={task} />

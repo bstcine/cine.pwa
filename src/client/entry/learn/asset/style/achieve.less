@@ -4,45 +4,65 @@ body {
 }
 #root {
     background-color: #fff;
-    // width: 7.5rem;
     margin: 0 auto;
     max-width: 450px;
 }
 .achieve__cav {
     max-width: 100%;
+    display: block;
 }
 .achieve {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    height: 13.34rem;
+    overflow: hidden;
+    background-color: #fe574b;
 
     .achieve__head {
-        flex: 0 0 3rem;
-        background: url('../image/bg_top1.png') no-repeat center;
-        background-size: cover;
+        padding-top: 0.55rem;
+        height: 3.3rem;
+        background: url('../image/bg_sharetop.png') no-repeat top center;
+        background-size: contain;
     }
 
     .ach_slogan {
         display: block;
-        margin: 0.4rem;
-        height: 0.5rem;
+        margin-left: 0.43rem;
+        height: 0.61rem;
     }
 
     .ach_tips {
-        padding-left: 0.67rem;
         font-size: 0.28rem;
         line-height: 0.6rem;
-        color: #3e3e3e;
-        span {
-            font-weight: bolder;
-            font-size: 0.36rem;
+        color: #fff;
+        font-size: 0.32rem;
+        line-height: 0.62rem;
+        text-align: center;
+        .bb {
+            font-size: 0.48rem;
+            font-weight: 500;
         }
     }
 
+    .ach_tips__tea {
+        font-size: 0.6rem;
+        font-weight: 500;
+    }
+
+    .achieve__content__container {
+        padding: 0.1rem;
+        background: url('../image/border_teacher1.jpg');
+        background-size: 5px;
+        width: 7.2rem;
+        height: 8rem;
+        margin: 0 auto;
+        border-radius: 0.2rem;
+        margin-bottom: 0.48rem;
+    }
     .achieve__content {
-        flex: 1 0;
-        padding: 0 0.52rem;
+        height: 100%;
+        padding: 0.4rem 0.3rem;
+        background-color: #ffffff;
+        box-shadow: 0rem 0.12rem 0.166rem 0.014rem rgba(180, 54, 45, 0.18);
+        border-radius: 0.12rem;
     }
 
     .myach__img,
@@ -50,7 +70,14 @@ body {
         display: block;
         margin: 0 auto;
         height: 0.74rem;
-        margin-bottom: 0.56rem;
+        margin-bottom: 0.38rem;
+    }
+    .mymentor__img {
+        margin-bottom: 0.3rem;
+    }
+
+    .myach__item {
+        text-align: center;
     }
 
     .myach__list {
@@ -63,10 +90,10 @@ body {
 
     .myach__item_count {
         text-align: center;
-        margin-bottom: 0.28rem;
+        margin-bottom: 0.2rem;
         span {
             font-weight: bolder;
-            font-size: 0.56rem;
+            font-size: 0.54rem;
         }
     }
 
@@ -86,7 +113,7 @@ body {
         text-align: center;
         color: #2a2b2c;
         line-height: 0.5rem;
-        margin-bottom: 0.78rem;
+        margin-bottom: 0.61rem;
         height: 1rem;
     }
 
@@ -112,6 +139,7 @@ body {
             height: 1.2rem;
             width: 1.2rem;
             margin-top: 0.1rem;
+            box-shadow: 0rem 0.12rem 0.147rem 0.013rem rgba(180, 200, 221, 0.24);
         }
     }
 
@@ -119,25 +147,22 @@ body {
         font-size: 0.26rem;
         line-height: 0.48rem;
         color: #2a2b2c;
-        height: 1.94rem;
+        height: 1.69rem;
+        white-space: nowrap;
     }
 
     .achieve__footer {
-        flex: 0 0 2.43rem;
-        background: url('../image/bg_foot.png') no-repeat center;
-        background-size: cover;
+        height: 1.62rem;
         display: flex;
-        justify-content: flex-end;
+        justify-content: space-between;
     }
 
     .ach_qrcode__desc {
-        height: 0.8rem;
-        margin-right: 0.6rem;
-        margin-top: 0.96rem;
+        height: 1.62rem;
+        width: 5.73rem;
     }
     .ach_qrcode {
         height: 1.28rem;
-        margin-top: 0.67rem;
-        margin-right: 0.6rem;
+        margin-right: 0.3rem;
     }
 }

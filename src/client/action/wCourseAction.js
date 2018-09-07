@@ -18,7 +18,7 @@ export const wCourseAction = {
         if (
             !param.start_index ||
             (parseInt(param.start_index, 10) === 1 &&
-                parseInt(param.range, 10) === 3000)
+                parseInt(param.range, 10) === 10000)
         ) return;
 
         const lastVisitID = param.last_index

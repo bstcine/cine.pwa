@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
 import './asset/style/widget.less';
 import {
     CButton,
@@ -11,19 +9,18 @@ import {
     CIconButton,
     CFloatingBox,
     CIcon,
+    CMessage,
+    CModal,
 } from '@/component/_base';
-import gAction from '@/g/action';
 import Player from '@/component/Player';
 
 class Container extends Component {
     constructor(props) {
         super(props);
         this.state = { isDrawerOpen: false, isPDrawerOpen: false };
-        // this.loadMedia = this.loadMedia.bind(this);
     }
 
     render() {
-        const { gActions } = this.props;
         const { isDrawerOpen, isPDrawerOpen } = this.state;
         return (
             <div className="cine-widget">
@@ -237,7 +234,7 @@ class Container extends Component {
                         mini
                         color="secondary"
                         onClick={() => {
-                            gActions.showAlert({ text: 'hello alert!' });
+                            CModal.alert({ text: 'hello alert!' });
                         }}>
                         <CIcon>pets</CIcon>
                     </CButton>
@@ -246,14 +243,14 @@ class Container extends Component {
                         variant="outlined"
                         color="primary"
                         onClick={() => {
-                            gActions.showAlert({
+                            CModal.alert({
                                 title: 'title',
                                 text: 'hello alert!with cancel',
                                 onConfirm: () => {
                                     console.log('confirm');
                                 },
                                 onCancel: () => {
-                                    console.log(111);
+                                    console.log('onCancel');
                                 },
                             });
                         }}>
@@ -263,10 +260,10 @@ class Container extends Component {
                         variant="outlined"
                         color="primary"
                         onClick={() => {
-                            gActions.showLoading();
+                            const loading = CMessage.loading();
                             setTimeout(() => {
-                                gActions.hideLoading();
-                            }, 3000);
+                                loading.close();
+                            }, 2000);
                         }}>
                         Loading
                     </CButton>
@@ -274,24 +271,19 @@ class Container extends Component {
                         variant="outlined"
                         color="primary"
                         onClick={() => {
-                            gActions.showMessage({
-                                text: 'hello Message!',
+                            CMessage.info('完不成', () => {
+                                console.log('完不成关闭了');
                             });
                         }}>
-                        Message
+                        Info
                     </CButton>
                     <CButton
                         variant="outlined"
                         color="primary"
                         onClick={() => {
-                            gActions.showMessage(
-                                {
-                                    error: 'Error! autohide:false',
-                                },
-                                false
-                            );
+                            CMessage.error('Err! duration:0', 0);
                         }}>
-                        Message Error
+                        Error
                     </CButton>
                 </CPanel>
             </div>
@@ -299,8 +291,4 @@ class Container extends Component {
     }
 }
 
-const mapDispatchToProps = dispatch => ({
-    gActions: bindActionCreators(gAction, dispatch),
-});
-
-export default connect(null, mapDispatchToProps)(Container);
+export default Container;

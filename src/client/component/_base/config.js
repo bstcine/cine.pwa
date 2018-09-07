@@ -3,13 +3,14 @@ export const baseprefix = 'cine';
 export const componentNames = {
     Button: `${baseprefix}-btn`,
     Card: `${baseprefix}-card`,
-    Dialog: `${baseprefix}-dialog`,
+    Modal: `${baseprefix}-modal`,
     Drawer: `${baseprefix}-drawer`,
     FloatingBox: `${baseprefix}-floating-box`,
     Mask: `${baseprefix}-mask`,
     Panel: `${baseprefix}-panel`,
     Toast: `${baseprefix}-toast`,
     Icon: `${baseprefix}-gicon`,
+    QRCode: `${baseprefix}-qrcode`,
 };
 
 export const fontRatio = 5;

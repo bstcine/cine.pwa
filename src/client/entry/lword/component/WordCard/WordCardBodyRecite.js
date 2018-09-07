@@ -50,11 +50,11 @@ class WordCardBodyRecite extends React.PureComponent {
             cls += ' hover';
         }
         return (
-            <div className="wordCard-Body" onClick={this.toggle}>
+            <div className="wordCard-Body">
                 <div className="lastContainer">
                     <div className="lastWord" onClick={this.startPrevious} />
                 </div>
-                <div className="currentWord">
+                <div className="currentWord" onClick={this.toggle}>
                     <div className={cls}>
                         <div className="wordDetail-flipper" >
                             <div className="front" >

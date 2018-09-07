@@ -11,6 +11,7 @@
     flex-direction: column;
     justify-content: space-between;
     align-items: flex-end;
+    flex:1;
 }
 
 .wordCard-Header {
@@ -71,6 +72,7 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
+    flex: 1;
     width: 100%;
     height: 100%;
 
@@ -80,11 +82,11 @@
         align-items: center;
         width: 1.2rem;
         height: 100%;
-        cursor: pointer;
         .lastWord {
             display: none;
             width: 100%;
             height: 40%;
+            cursor: pointer;
         }
     }
     .lastContainer:hover {
@@ -99,11 +101,11 @@
         align-items: center;
         width: 1.2rem;
         height: 100%;
-        cursor: pointer;
         .nextWord {
             display: none;
             width: 100%;
             height: 40%;
+            cursor: pointer;
         }
     }
     .nextContainer:hover {
@@ -116,6 +118,7 @@
         display: flex;
         flex-direction: column;
         align-items: center;
+        padding: 4.6rem 0 2.3rem 0;
         width: 100%;
         height: 100%;
     }
@@ -152,10 +155,9 @@
     }
     .wordInfo {
         width: 100%;
-        height: auto;
-        padding-top: 0.6rem;
-        padding-bottom: 0.6rem;
-        cursor: pointer;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
     .word {
         font-family: PingFangSC-Medium;
@@ -169,10 +171,11 @@
         flex-direction: row;
         align-items: center;
         justify-content: center;
-        padding-top: 0.65rem;
         font-family: ArialMT;
+        margin-top: 0.1rem;
         font-size: 0.3rem;
         color: #757575;
+        cursor: pointer;
 
         .voice {
             margin-left: 0.32rem;
@@ -186,7 +189,7 @@
         align-items: center;
         justify-content: center;
         flex:0 0 0.8rem;
-        width: 4rem;
+        margin-top: 2.3rem;
         cursor: pointer;
         .graspPromote {
             height: 0.3rem;
@@ -194,7 +197,6 @@
             font-family: PingFangSC-Regular;
             font-size: 0.28rem;
             color: #9a9b9c;
-            background-color: white;
         }
     }
     .transition {
@@ -376,12 +378,14 @@
                 display: inline-block;
             }
         }
+        .currentWord {
+            padding: 2.88rem 0 1.44rem 0;
+        }
         .word {
             font-size: 1.02rem;
             line-height: 1.5rem;
         }
         .phonetic {
-            margin-top: 0.76rem;
             font-size: 0.36rem;
             color: #3a3b3c;
             .voice {
@@ -394,6 +398,9 @@
                 line-height: 0.8rem;
                 text-align: left;
             }
+        }
+        .hadGrasp {
+            margin-top: 2.3rem;
         }
     }
     .wordCard-Body-Done {

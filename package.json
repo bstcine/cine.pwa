@@ -91,11 +91,10 @@
         "webpack-merge": "^4.1.2"
     },
     "browserslist": [
-        "Chrome >= 60",
-        "Safari >= 10.1",
-        "iOS >= 10.3",
-        "Firefox >= 54",
-        "Edge >= 15"
+        ">1%",
+        "last 4 versions",
+        "Firefox ESR",
+        "not ie < 9"
     ],
     "babel": {
         "plugins": [

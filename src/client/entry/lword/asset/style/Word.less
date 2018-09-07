@@ -4,9 +4,10 @@
 .wordContent {
     background-color: #f4fcfe;
     width: 100%;
-    min-height: 100vh;
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
+    flex: 1;
 }
 
 .word-Header {
@@ -46,9 +47,6 @@
     align-items: center;
     padding: 1rem 0 0.7rem 0;
     margin: 0 0.5rem 0 0.5rem;
-    border-style: none none solid none;
-    border-color: #ebf3fb;
-    border-width: 2px;
 }
 
 .word-Count {
@@ -142,6 +140,9 @@
     padding-bottom: 0.67rem;
     padding-left: 0.5rem;
     padding-right: 0.5rem;
+    border-style: solid none none none;
+    border-color: #ebf3fb;
+    border-width: 2px;
     color: #8db9d8;
     .english {
         font-family: AvenirNext-Regular;

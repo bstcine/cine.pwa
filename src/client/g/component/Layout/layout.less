@@ -1,20 +1,32 @@
 @import '~asset/style/common';
 @import '~asset/style/_cine.less';
-
+html{
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+}
 body {
     font-size: 14px;
     overflow-x: hidden;
     background-color: #fff;
-}
-.glayout {
     display: flex;
     flex-direction: column;
-
-    height: 100vh;
-
+    flex:1;
+}
+#root{
+    display: flex;
+    flex-direction: column;
+    flex:1;
+}
+.glayout {
+    flex:1;
+    display: flex;
+    flex-direction: column;
     justify-content: space-between;
     .gmain {
         flex: 1;
+        display: flex;
+        flex-direction: column;
     }
 }
 
@@ -27,7 +39,7 @@ body {
     .gcontainer {
         display: flex;
         flex-direction: column;
-        height: 100%;
+        flex:1 0 100%;
     }
 }
 

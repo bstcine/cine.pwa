@@ -6,6 +6,7 @@ import { withRouter } from 'react-router-dom';
 import Achieve from '../component/achieve';
 import * as learnAction from '@/action/learnAction';
 import { getParam } from '@/util/urlUtil';
+import { CModal } from '@/component/_base';
 
 const mapStateToProps = state => {
     const { taskShareRedu } = state;
@@ -39,7 +40,11 @@ class AchievePage extends Component {
                     img: canvas.toDataURL(),
                 });
                 setTimeout(() => {
-                    alert('长按保存图片，打卡记录学习的每一步!');
+                    CModal.alert({
+                        title: '学习打卡',
+                        text:
+                            '第一步：“长按屏幕”保存图片\n第二步：分享图片到朋友圈',
+                    });
                 }, 1000);
             });
         }

@@ -271,8 +271,8 @@ class Container extends Component {
                         variant="outlined"
                         color="primary"
                         onClick={() => {
-                            CMessage.info('完不成', () => {
-                                console.log('完不成关闭了');
+                            CMessage.success('完不成', () => {
+                                console.success('完不成关闭了');
                             });
                         }}>
                         Info

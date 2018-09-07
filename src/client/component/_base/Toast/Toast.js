@@ -9,7 +9,7 @@ import { CIcon } from '@/component/_base';
 export default ({ type, text }) => {
     const iconMap = {
         loading: 'ci-loading',
-        info: 'ci-done',
+        success: 'ci-done',
         error: 'error',
     };
     return (

@@ -53,8 +53,8 @@ Toast.loading = (...props) => {
     return show(props, { type: 'loading', text: '加载中', duration: 0 });
 };
 
-Toast.info = (...props) => {
-    return show(props, { type: 'info', text: '已完成', duration: 3000 });
+Toast.success = (...props) => {
+    return show(props, { type: 'success', text: '已完成', duration: 3000 });
 };
 
 Toast.error = (...props) => {

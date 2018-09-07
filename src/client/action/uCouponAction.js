@@ -146,7 +146,7 @@ export const actionUserCoupon = {
                 err = errorMsg(err);
                 CMessage.error(err);
             } else {
-                CMessage.info('添加成功');
+                CMessage.success('添加成功');
                 dispatch(actionUserCoupon._toggleCouponDialog(false));
 
                 dispatch(actionUserCoupon.loadUserCoupon());
@@ -181,7 +181,7 @@ export const actionUserCoupon = {
             return;
         }
 
-        CMessage.info('转赠成功', () => {
+        CMessage.success('转赠成功', () => {
             dispatch(actionUserCoupon.toggleTransferDialog());
             dispatch(actionUserCoupon.loadUserCoupon());
         });

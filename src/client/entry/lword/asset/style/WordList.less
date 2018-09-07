@@ -1,133 +1,124 @@
 @import '~asset/style/common';
 @import '~asset/style/_cine.less';
-@import './Switch.less';
 @import './Select.less';
 
-.vocabularyTask{
-
+.listBody {
     display: flex;
-    flex: 1;
-    align-content: space-between;
     flex-direction: column;
+    align-items: center;
+    align-content: stretch;
+    padding-top: 0.2rem;
+    flex: 1;
+}
+.v_Task_L_Vocabulary_Content {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
     width: 100%;
-    background-color: white;
+    padding: 0.24rem 0.4rem 0.24rem 0.4rem;
+}
+.v_Task_L_VocabularyItem{
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    flex: 1;
+    cursor: pointer;
+    align-items: center;
+    height: 100%;
+}
+.v_Task_L_Vocabulary_Status {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    font-family: PingFangSC-Regular;
+    justify-content: space-around;
+    font-size: 0.24rem;
 
-    .v_Task_VocabularyHeader {
+    .v_status_Vocabulary_Status_promote {
+        display: none;
+        margin-left: 0.18rem;
+        color: #9a9b9c;
+    }
+}
 
+.v_Task_L_Item_Info{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    align-items: center;
+
+    .v_Task_L_Item_ Seq{
+        width: 0.66rem;
+        font-family: PingFangSC-Regular;
+        font-size: 0.24rem;
+        text-align: right;
+        color: #3a3b3c;
+    }
+    .v_Task_L_Item_Value{
         display: flex;
         flex-direction: row;
         align-items: center;
-        justify-content: space-between;
-        height: auto;
-        width: 100%;
-        border-bottom: solid;
-        border-bottom-color: #f5f9fc;
-        border-bottom-width: 1px;
-        padding: 0.5rem 0.2rem 0.2rem 0.2rem;
-
-        .back-Image-Header {
-            display: inline-block;
-            width: 0.4rem;
-            height: 0.4rem;
-            font-size: 0.36rem;
-            padding-top: 0.02rem;
-            cursor: pointer;
-        }
-
-        .header-Left {
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            .back-Image-Left {
-                display: none;
-                width: 0.4rem;
-                height: 0.4rem;
-                padding-top: 0.02rem;
-                font-size: 0.36rem;
-                margin-right: 0.2rem;
-                cursor: pointer;
-            }
-            .v_Task_H_TaskName{
-                color: #3a3b3c;
-                font-size: 0.36rem;
-                margin-right: 0.2rem;
-            }
-            .showAll-Title {
-                display: none;
-                margin-right: 0.2rem;
-                font-family: PingFangSC-Regular;
-                font-size: 0.32rem;
-                color: #7a7b7c;
-            }
-            .showAll-Select {
-                display: none;
-            }
-        }
-        .wordList-ToCard {
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            cursor: pointer;
-
-            .cardImage {
-                margin-left: 0.2rem;
-                margin-right: 0.2rem;
-                font-size: 0.36rem;
-                color: #3a3b3c;
-            }
-            .wordList-CardTitle{
-                display: none;
-                font-family: PingFangSC-Regular;
-                font-size: 0.32rem;
-                color: #7a7b7c;
-            }
-        }
     }
-
-    .v_Task_VocabularyList{
-        padding-top: 0.2rem;
-        flex-grow: 1;
-        clear: both;
-        width: 100%;
+    .v_Task_L_Item_Word{
+        margin-left: 0.5rem;
+        font-family: PingFangSC-Medium;
+        font-size: 0.4rem;
+        color: #1d70d6;
+        word-break: break-all;
     }
+    .v_Task_L_Item_Phonetic{
+        margin-left: 0.2rem;
+        font-family: ArialMT;
+        font-size: 0.28rem;
+        color: #7a7b7c;
+        word-break: break-all;
+    }
+    .v_Task_L_Item_Voice{
+        margin-left: 0.48rem;
+        width: 0.4rem;
+        height: 0.4rem;
+        background: url("../image/voice.png") no-repeat center;
+        background-size: contain;
+    }
+}
+
+.v_Task_L_Item_Transition{
+    display: inline-block;
+    width:100%;
+    padding-left: 1rem;
+    margin-top: 0.28rem;
+    font-family: PingFangSC-Regular;
+    font-size: 0.28rem;
+    text-align: left;
+    line-height: 0.5rem;
+    letter-spacing: 0;
+    white-space: pre-wrap;
+    color: #3a3b3c;
+}
+
+@media @media-up-xs{
     .v_Task_L_Vocabulary_Content {
-        display: flex;
-        flex-direction: row;
-        align-items: flex-start;
-        justify-content: space-between;
-        width: 100%;
-        padding: 0.24rem 0.4rem 0.24rem 0.4rem;
+        padding: 0.24rem 0.8rem 0.24rem 0.8rem;
+        align-items: center;
     }
     .v_Task_L_VocabularyItem{
-        display: flex;
-        flex-direction: column;
-        cursor: pointer;
-        align-items: center;
-        width: 85%;
-    }
-    .v_Task_L_Vocabulary_Status {
-        display: flex;
         flex-direction: row;
-        align-items: center;
-        font-family: PingFangSC-Regular;
-        justify-content: space-around;
-        font-size: 0.24rem;
+    }
 
+    .v_Task_L_Vocabulary_Status {
         .v_status_Vocabulary_Status_promote {
-            display: none;
-            margin-left: 0.18rem;
-            color: #9a9b9c;
+            display: inline-block;
         }
     }
 
     .v_Task_L_Item_Info{
         display: flex;
-        flex-direction: row;
-        width: 100%;
-        align-items: center;
-        //justify-content: flex-start;
+        width: 40%;
+        justify-content: flex-start;
 
         .v_Task_L_Item_ Seq{
+            display: inline-block;
             width: 0.66rem;
             font-family: PingFangSC-Regular;
             font-size: 0.24rem;
@@ -136,37 +127,26 @@
         }
         .v_Task_L_Item_Value{
             display: flex;
+            flex-grow: inherit;
             flex-direction: row;
             align-items: center;
         }
         .v_Task_L_Item_Word{
-            margin-left: 0.5rem;
-            font-family: PingFangSC-Medium;
-            font-size: 0.4rem;
-            color: #1d70d6;
-            word-break: break-all;
+            margin-left: 0.4rem;
         }
         .v_Task_L_Item_Phonetic{
             margin-left: 0.2rem;
             font-family: ArialMT;
             font-size: 0.28rem;
             color: #7a7b7c;
-            word-break: break-all;
-        }
-        .v_Task_L_Item_Voice{
-            margin-left: 0.48rem;
-            width: 0.4rem;
-            height: 0.4rem;
-            background: url("../image/voice.png") no-repeat center;
-            background-size: contain;
         }
     }
 
     .v_Task_L_Item_Transition{
         display: inline-block;
-        width:100%;
-        padding-left: 1rem;
-        margin-top: 0.28rem;
+        width:60%;
+        padding-left: 0.5rem;
+        margin-top: 0;
         font-family: PingFangSC-Regular;
         font-size: 0.28rem;
         text-align: left;
@@ -174,101 +154,5 @@
         letter-spacing: 0;
         white-space: pre-wrap;
         color: #3a3b3c;
-    }
-}
-
-@media @media-up-xs{
-    .vocabularyTask {
-        .v_Task_VocabularyHeader {
-            padding: 0.5rem 0.8rem 0.2rem 0.8rem;
-
-            .back-Image-Header {
-                display: none;
-                font-size: 0.32rem;
-                padding-top: 0.04rem;
-            }
-
-            .header-Left {
-                .back-Image-Left {
-                    display: inline-block;
-                    font-size: 0.32rem;
-                    padding-top: 0.04rem;
-                }
-                .v_Task_H_TaskName{
-                    font-size: 0.32rem;
-                }
-                .showAll-Title {
-                    font-size: 0.28rem;
-                    display: inline-block;
-                }
-                .showAll-Select {
-                    display: inline-block;
-                }
-            }
-            .wordList-ToCard {
-                .wordList-CardTitle{
-                    font-size: 0.28rem;
-                    display: inline-block;
-                }
-            }
-        }
-        .v_Task_L_Vocabulary_Content {
-            padding: 0.24rem 0.8rem 0.24rem 0.8rem;
-            align-items: center;
-        }
-        .v_Task_L_VocabularyItem{
-            flex-direction: row;
-            cursor: pointer;
-        }
-
-        .v_Task_L_Vocabulary_Status {
-            .v_status_Vocabulary_Status_promote {
-                display: inline-block;
-            }
-        }
-
-        .v_Task_L_Item_Info{
-            display: flex;
-            width: 40%;
-            justify-content: flex-start;
-
-            .v_Task_L_Item_ Seq{
-                display: inline-block;
-                width: 0.66rem;
-                font-family: PingFangSC-Regular;
-                font-size: 0.24rem;
-                text-align: right;
-                color: #3a3b3c;
-            }
-            .v_Task_L_Item_Value{
-                display: flex;
-                flex-grow: inherit;
-                flex-direction: row;
-                align-items: center;
-            }
-            .v_Task_L_Item_Word{
-                margin-left: 0.4rem;
-            }
-            .v_Task_L_Item_Phonetic{
-                margin-left: 0.2rem;
-                font-family: ArialMT;
-                font-size: 0.28rem;
-                color: #7a7b7c;
-            }
-        }
-
-        .v_Task_L_Item_Transition{
-            display: inline-block;
-            width:60%;
-            padding-left: 0.5rem;
-            margin-top: 0;
-            font-family: PingFangSC-Regular;
-            font-size: 0.28rem;
-            text-align: left;
-            line-height: 0.5rem;
-            letter-spacing: 0;
-            white-space: pre-wrap;
-            color: #3a3b3c;
-        }
     }
 }

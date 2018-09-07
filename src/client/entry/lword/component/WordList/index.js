@@ -1,39 +1,23 @@
 import React from 'react';
 import "../../asset/style/WordList.less";
 import WordListBody from './WordListBody';
-import WordListHeader from './WordListHeader';
-import { addParam } from '@/util/urlUtil';
+import WordHeader from '../WordHeader';
 
 class WordList extends React.PureComponent {
-
-    constructor(props) {
-        super(props);
-        this.gotoCard = this.gotoCard.bind(this);
-        this.gotoWord = this.gotoWord.bind(this);
-    }
-    gotoCard() {
-        let { param } = this.props;
-        let cardHref = addParam('/lword/card', param);
-        location.href = cardHref;
-    }
-    gotoWord() {
-        let { param } = this.props;
-        location.href = addParam('/lword', param);
-    }
     render() {
 
-        let { vocabularyList, name, isShowAll, playAction, actions } = this.props;
+        let { vocabularyList, name, isShowAll, playAction, actions, param } = this.props;
         if (!vocabularyList) {
             return null;
         }
         return (
-            <div className="vocabularyTask">
-                <WordListHeader
+            <div className="wordContent">
+                <WordHeader
+                    sourceType="2"
                     name={name}
+                    param={param}
                     isShowAll={isShowAll}
                     actions={actions}
-                    cardAction={this.gotoCard}
-                    wordAction={this.gotoWord}
                 />
                 <WordListBody
                     vocabularyList={vocabularyList}

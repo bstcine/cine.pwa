@@ -20,6 +20,7 @@ class QRCode extends Component {
                         close
                     </Icon>
                     <div className={`${cls}__content`}>
+                        <p>打开微信“扫一扫”</p>
                         <img src={url} alt="qrcode" className={`${cls}__img`} />
                     </div>
                 </div>

@@ -5,7 +5,6 @@ import FlatButton from 'material-ui/FlatButton';
 import TextField from 'material-ui/TextField';
 import { CSelectField } from './SelectField';
 import Button, { IconButton, FloatingButton } from './Button';
-import FloatingBox from './FloatingBox';
 import Panel from './Panel';
 import Icon from './Icon';
 import Drawer from './Drawer';

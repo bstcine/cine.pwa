@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import { componentNames } from '../config';
 const cls = componentNames.Toast;
 import Mask from '../Mask';
-import { CIcon } from '@/component/_base';
+import Icon from '../Icon';
 
 export default ({ type, text }) => {
     const iconMap = {
@@ -19,7 +19,7 @@ export default ({ type, text }) => {
                 {type === 'loading' ? (
                     <i className={`${cls}__icon ${cls}__loading`} />
                 ) : (
-                    <CIcon className={`${cls}__icon`}>{iconMap[type]}</CIcon>
+                    <Icon className={`${cls}__icon`}>{iconMap[type]}</Icon>
                 )}
                 <span className={`${cls}__msg`}>{text}</span>
             </div>

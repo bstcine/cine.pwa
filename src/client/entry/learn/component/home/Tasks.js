@@ -1,7 +1,8 @@
 import React from 'react';
 import TasksList from './TasksList';
-import { CCardContainer, CIcon, CModal } from '@/component/_base';
+import { CCardContainer, CIcon } from '@/component/_base';
 import uaUtil from '@/util/uaUtil';
+import QRCode from '@/component/QRCode';
 
 const ExpandMore = ({ tasks, isLimitTasks, onShowAllTask }) => {
     if (tasks && tasks.length > 5 && isLimitTasks) {
@@ -31,7 +32,7 @@ const Tasks = ({ tasks, user, isLimitTasks, onShowAllTask, gActions }) => {
                     {uaUtil.PC() ? (
                         <a
                             onClick={() => {
-                                CModal.qrcode(
+                                QRCode.open(
                                     `${location.protocol}//${
                                         location.host
                                     }/learn/achieve?user_id=${user.id}`

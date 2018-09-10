@@ -13,6 +13,7 @@ export default class Button extends PureComponent {
         transparent: false,
         block: false,
         shape: null,
+        floating: false,
     };
 
     render() {
@@ -24,6 +25,7 @@ export default class Button extends PureComponent {
             variant,
             size,
             shape,
+            floating,
 
             className,
             component,
@@ -43,6 +45,7 @@ export default class Button extends PureComponent {
                         [`${cls}--disabled`]: !!disabled,
                         [`${cls}--block`]: !!block,
                         [`${cls}--transparent`]: !!transparent,
+                        [`${cls}--floating`]: !!floating,
 
                         [`${cls}--${color}`]: !!color,
 
@@ -83,6 +86,10 @@ Button.propTypes = {
      * 禁用状态
      */
     disabled: PropTypes.bool,
+    /**
+     * 浮动状态
+     */
+    floating: PropTypes.bool,
     /**
      * 宽度调整为100%
      */

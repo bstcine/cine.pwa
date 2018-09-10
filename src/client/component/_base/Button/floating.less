@@ -1,0 +1,27 @@
+@import '../style';
+
+#floating-box {
+    position: fixed;
+    bottom: 0.5rem;
+    right: 0.5rem;
+}
+
+// floating
+.floating-box__item {
+    margin: 0 auto 0.2rem;
+    text-align: center;
+}
+
+@media @media-up-xs {
+    #floating-box {
+        bottom: 1rem;
+    }
+}
+
+@media @media-up-sm {
+    #floating-box {
+        bottom: 2rem;
+        right: 50%;
+        transform: translateX(18.8rem /2) translateX(50%);
+    }
+}

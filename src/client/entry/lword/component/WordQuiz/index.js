@@ -63,7 +63,7 @@ class WordQuiz extends React.PureComponent {
         );
         const contentView = isTest ? testContent : initContent;
         return (
-            <div className="vocabularyTest">
+            <div className="wordContent">
                 <WordQuizHeader
                     backAction={backAction}
                 />

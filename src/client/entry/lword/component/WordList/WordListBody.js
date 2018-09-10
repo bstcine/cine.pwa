@@ -24,7 +24,7 @@ class WordListBody extends React.PureComponent {
         });
 
         return (
-            <div className="v_Task_VocabularyList">
+            <div className="listBody">
                 {vocabularyItems}
             </div>
         );

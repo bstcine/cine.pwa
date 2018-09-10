@@ -25,14 +25,6 @@ class WordContainer extends Component {
         // 获取词汇列表
         actions.loadWordList(this.param);
     }
-
-    backLearnHome() {
-        if (!this.param.lesson_id || this.param.lesson_id.indexOf('-') === -1) {
-            location.href = '/learn/task';
-            return;
-        }
-        location.href = `/lword/course?start_index=1&range=10000`;
-    }
     gotoTest() {
         let testHref = addParam('/lword/quiz', this.param);
         location.href = testHref;
@@ -46,9 +38,9 @@ class WordContainer extends Component {
         let { result, actions } = this.props;
         return (
             <Word
+                param={this.param}
                 result={result}
                 actions={actions}
-                backAction={ () => { this.backLearnHome() }}
                 quizAction={ () => { this.gotoTest() }}
                 listAction={ () => { this.gotoList() }}
             />

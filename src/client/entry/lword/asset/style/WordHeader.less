@@ -1,0 +1,54 @@
+@import './Switch.less';
+
+.headerContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding-top: 0.2rem;
+    height: 1.34rem;
+    justify-content: space-between;
+    border-bottom-style: solid;
+    border-bottom-color: #ebf3fb;
+    border-bottom-width: 2px;
+
+    .leftActions {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        height: 100%;
+        width: auto;
+
+        .backButton {
+            margin-left: -0.2rem;
+            cursor: pointer;
+            font-family: PingFangSC-Medium;
+            font-size: 0.4rem;
+            color: #3a3b3c;
+            white-space: pre-wrap;
+        }
+        .subTitle {
+            font-family: PingFangSC-Regular;
+            padding-top: 0.06rem;
+            font-size: 0.36rem;
+        }
+    }
+    .rightActions {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        height: 100%;
+        width: auto;
+
+        .actionItem {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            margin: 0;
+            height: auto;
+            font-family: PingFangSC-Regular;
+            font-size: 0.28rem;
+            color: #7a7b7c;
+            white-space: pre-wrap;
+        }
+    }
+}

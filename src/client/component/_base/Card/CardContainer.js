@@ -13,6 +13,8 @@ const CardContainer = ({
     layout = '112',
     // none' | 'small' | null | 'large'
     gap,
+    // none | '1'
+    line,
 }) => {
     let cards = [];
     let drawer = null;

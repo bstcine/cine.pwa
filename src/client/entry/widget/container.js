@@ -4,9 +4,9 @@ import {
     CButton,
     CPanel,
     CCardContainer,
+    CFloatingButton,
     CDrawer,
     CCard,
-    CIconButton,
     CFloatingBox,
     CIcon,
     CMessage,
@@ -23,29 +23,31 @@ class Container extends Component {
     render() {
         const { isDrawerOpen, isPDrawerOpen } = this.state;
         return (
-            <div className="cine-widget">
+            <div className="cine-widget widget_btn">
                 <CPanel title="Player">
                     <Player src={this.loadMedia} />
                 </CPanel>
                 <CPanel title="CButton">
                     <div>
-                        <CButton>
-                            <CIcon>home</CIcon>
-                        </CButton>
+                        <CButton icon="home" />
                         <CButton
+                            icon="ci-video"
                             color="primary"
                             onClick={() => {
                                 this.setState(prevState => ({
                                     isPDrawerOpen: !prevState.isPDrawerOpen,
                                 }));
                             }}>
-                            <CIcon>ci-ico_grammar</CIcon> PanelDrawer
+                            PanelDrawer
                         </CButton>
                         <CButton color="secondary">
-                            <CIcon>ci-ico_grammar</CIcon> SECONDARY
+                            SECONDARY<CIcon>ci-video</CIcon>
                         </CButton>
                         <CButton disabled>DISABLED</CButton>
                         <CButton href="//baidu.com">Link</CButton>
+                        <CButton color="secondary" shape="capsule">
+                            SECONDARY<CIcon>ci-video</CIcon>
+                        </CButton>
                     </div>
                     <div>
                         <CButton variant="outlined">
@@ -63,6 +65,12 @@ class Container extends Component {
                         <CButton variant="outlined" href="//baidu.com">
                             Link
                         </CButton>
+                        <CButton
+                            variant="outlined"
+                            color="primary"
+                            shape="capsule">
+                            PRIMARY
+                        </CButton>
                     </div>
                     <div>
                         <CButton variant="contained">DEFAULT</CButton>
@@ -70,13 +78,16 @@ class Container extends Component {
                             PRIMARY
                         </CButton>
                         <CButton variant="contained" color="secondary">
-                            SECONDARY <CIcon>lock</CIcon>
+                            SECONDARY<CIcon>lock</CIcon>
                         </CButton>
                         <CButton disabled variant="contained">
                             DISABLED
                         </CButton>
                         <CButton variant="contained" href="//baidu.com">
                             Link
+                        </CButton>
+                        <CButton variant="contained" shape="capsule">
+                            DEFAULT
                         </CButton>
                     </div>
                     <div>
@@ -95,6 +106,13 @@ class Container extends Component {
                             color="primary">
                             SMALL
                         </CButton>
+                        <CButton
+                            size="small"
+                            variant="contained"
+                            color="primary"
+                            shape="capsule">
+                            SMALL
+                        </CButton>
                     </div>
                     <div>
                         <CButton size="large" color="secondary">
@@ -104,7 +122,7 @@ class Container extends Component {
                             size="large"
                             variant="outlined"
                             color="secondary">
-                            LARGE <CIcon>play_circle_filled</CIcon>
+                            LARGE<CIcon>play_circle_filled</CIcon>
                         </CButton>
                         <CButton
                             size="large"
@@ -112,25 +130,47 @@ class Container extends Component {
                             color="secondary">
                             LARGE2
                         </CButton>
+                        <CButton
+                            size="large"
+                            variant="contained"
+                            color="secondary"
+                            shape="capsule">
+                            LARGE2
+                        </CButton>
                     </div>
                     <div>
-                        <CIconButton className="w-my-lock">lock</CIconButton>
-                        <CIconButton color="primary">alarm</CIconButton>
-                        <CIconButton mini color="secondary">
-                            pets
-                        </CIconButton>
+                        <CButton icon="lock" size="small" shape="round" />
+                        <CButton icon="pets" shape="round" color="primary" />
+                        <CButton
+                            icon="alarm"
+                            size="large"
+                            shape="round"
+                            color="secondary"
+                        />
                     </div>
                     <div>
-                        <CButton fullWidth variant="contained" color="primary">
-                            FULLWIDTH NORMAL
+                        <CButton block variant="contained" color="primary">
+                            block NORMAL
                         </CButton>
                         <CButton
-                            fullWidth
+                            block
                             size="large"
                             variant="outlined"
                             color="secondary">
-                            FULLWIDTH LARGE
+                            block LARGE
                         </CButton>
+                    </div>
+
+                    <div
+                        style={{
+                            background: 'rgba(0,0,0,0.2)',
+                            padding: '10px',
+                        }}>
+                        <CButton transparent>TRANSPARENT</CButton>
+                        <CButton transparent size="large" color="primary">
+                            TRANSPARENT
+                        </CButton>
+                        <CButton icon="ci-video" transparent color="primary" />
                     </div>
                     <CDrawer
                         isOpen={isPDrawerOpen}
@@ -211,27 +251,20 @@ class Container extends Component {
                         <CCard>7</CCard>
                     </CCardContainer>
                     <CFloatingBox>
-                        <CButton
-                            variant="fab"
+                        <CFloatingButton
+                            icon="lock"
                             onClick={() => {
                                 this.setState(prevState => ({
                                     isDrawerOpen: !prevState.isDrawerOpen,
                                 }));
-                            }}>
-                            <CIcon>lock</CIcon>
-                        </CButton>
-                        <CButton variant="fab" color="primary">
-                            <CIcon>ci-ico_grammar</CIcon>
-                        </CButton>
-                        <CButton variant="fab" mini color="secondary">
-                            <CIcon>pets</CIcon>
-                        </CButton>
+                            }}
+                        />
+                        <CFloatingButton icon="pets" color="primary" />
+                        <CFloatingButton icon="pets" color="secondary" />
                     </CFloatingBox>
                 </CPanel>
                 <CPanel title="Alert">
                     <CButton
-                        variant="fab"
-                        mini
                         color="secondary"
                         onClick={() => {
                             CModal.alert({ text: 'hello alert!' });

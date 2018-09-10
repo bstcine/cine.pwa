@@ -37,6 +37,17 @@ const Button = ({
     </BaseButton>
 );
 
-export { FloatingButton };
+const IconButton = ({ color, size, className, icon, onClick }) => (
+    <Button
+        className={className}
+        shape="round"
+        icon={icon}
+        color={color}
+        size={size}
+        onClick={onClick}
+    />
+);
+
+export { FloatingButton, IconButton };
 
 export default Button;

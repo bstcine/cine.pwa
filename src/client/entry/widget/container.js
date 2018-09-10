@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './asset/style/widget.less';
 import {
     CButton,
+    CIconButton,
     CPanel,
     CCardContainer,
     CFloatingButton,
@@ -85,24 +86,6 @@ class Container extends Component {
                         </CButton>
                     </div>
                     <div>
-                        <CButton variant="contained">DEFAULT</CButton>
-                        <CButton variant="contained" color="primary">
-                            PRIMARY
-                        </CButton>
-                        <CButton variant="contained" color="secondary">
-                            SECONDARY<CIcon>lock</CIcon>
-                        </CButton>
-                        <CButton disabled variant="contained">
-                            DISABLED
-                        </CButton>
-                        <CButton variant="contained" href="//baidu.com">
-                            Link
-                        </CButton>
-                        <CButton variant="contained" shape="capsule">
-                            DEFAULT
-                        </CButton>
-                    </div>
-                    <div>
                         <CButton size="small" color="primary">
                             SMALL
                         </CButton>
@@ -127,6 +110,25 @@ class Container extends Component {
                         </CButton>
                     </div>
                     <div>
+                        <CButton variant="contained">DEFAULT</CButton>
+                        <CButton variant="contained" color="primary">
+                            PRIMARY
+                        </CButton>
+                        <CButton variant="contained" color="secondary">
+                            SECONDARY<CIcon>lock</CIcon>
+                        </CButton>
+                        <CButton disabled variant="contained">
+                            DISABLED
+                        </CButton>
+                        <CButton variant="contained" href="//baidu.com">
+                            Link
+                        </CButton>
+                        <CButton variant="contained" shape="capsule">
+                            DEFAULT
+                        </CButton>
+                    </div>
+
+                    <div>
                         <CButton size="large" color="secondary">
                             LARGE
                         </CButton>
@@ -140,25 +142,20 @@ class Container extends Component {
                             size="large"
                             variant="contained"
                             color="secondary">
-                            LARGE2
+                            LARGE
                         </CButton>
                         <CButton
                             size="large"
                             variant="contained"
                             color="secondary"
                             shape="capsule">
-                            LARGE2
+                            LARGE
                         </CButton>
                     </div>
                     <div>
-                        <CButton icon="lock" size="small" shape="round" />
-                        <CButton icon="pets" shape="round" color="primary" />
-                        <CButton
-                            icon="alarm"
-                            size="large"
-                            shape="round"
-                            color="secondary"
-                        />
+                        <CIconButton icon="lock" size="small" />
+                        <CIconButton icon="pets" color="primary" />
+                        <CIconButton icon="home" color="secondary" />
                     </div>
                     <div>
                         <CButton block variant="contained" color="primary">

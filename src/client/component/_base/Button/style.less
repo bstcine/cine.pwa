@@ -10,9 +10,10 @@
 
 .@{btn} {
     .btn-reset();
-    min-height: @btn-font-size;
+    padding: 0.18rem 0.2rem;
+    line-height: 1;
+    font-size: 0.28rem;
     min-width: 1.8rem;
-    padding: 0.6em 1.2em;
     background-color: #fff;
     transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
         box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
@@ -24,6 +25,7 @@
     .@{icon},
     span {
         vertical-align: middle;
+        line-height: 1;
     }
     .@{icon} + span,
     span + .@{icon} {
@@ -43,43 +45,33 @@
 
 // size,
 .@{btn}--small {
-    padding: 0.4em 0.9em;
+    padding: 0.08rem 0.1rem;
     font-size: 0.24rem;
-    min-height: 0.24rem;
     min-width: 0.6rem;
 }
 
 .@{btn}--large {
-    padding: 0.9em 3em;
-    font-size: 0.48rem;
-    min-height: 0.48rem;
+    padding: 0.28rem 0.4rem;
+    font-size: 0.4rem;
     min-width: 2.4rem;
 }
 
 // shape round
 .@{btn}--round {
-    font-size: 16px;
-    width: 40px;
-    height: 40px;
-    min-width: 40px;
-    min-height: 40px;
+    font-size: 24px;
+    width: 56px;
+    height: 56px;
+    min-width: 56px;
+    min-height: 56px;
     border-radius: 50%;
     padding: 0;
 
-    &.@{btn}--large {
-        font-size: 24px;
-        width: 56px;
-        height: 56px;
-        min-width: 56px;
-        min-height: 56px;
-    }
-
     &.@{btn}--small {
-        font-size: 12px;
-        width: 32px;
-        height: 32px;
-        min-width: 32px;
-        min-height: 32px;
+        font-size: 18px;
+        width: 40px;
+        height: 40px;
+        min-width: 40px;
+        min-height: 40px;
     }
 }
 
@@ -136,10 +128,16 @@
         color: @color-white;
         .btn-contained-pseudo(@btn-color-primary);
     }
+    &.@{btn}--floating.@{btn}--primary {
+        .btn-contained-pseudo(@theme-palette-primary-light);
+    }
 
     &.@{btn}--secondary {
         color: @color-white;
         .btn-contained-pseudo(@btn-color-secondary);
+    }
+    &.@{btn}--floating.@{btn}--secondary {
+        .btn-contained-pseudo(@theme-palette-secondary-light);
     }
 }
 
@@ -157,7 +155,7 @@
     cursor: pointer;
     outline: none;
     text-decoration: none;
-    border: 1px solid transparent;
+    border: 0.02rem solid transparent;
     border-radius: @btn-border-radius;
 }
 

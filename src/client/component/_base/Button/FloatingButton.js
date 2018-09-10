@@ -12,6 +12,10 @@ if (!FloatingBox) {
 }
 
 class FloatingButton extends Component {
+    static defaultProps = {
+        color: 'primary',
+    };
+
     constructor(props) {
         super(props);
         this.el = document.createElement('div');
@@ -32,7 +36,6 @@ class FloatingButton extends Component {
             <ButtonBase
                 floating
                 className={className}
-                // size="large"
                 shape={children ? 'capsule' : 'round'}
                 variant="contained"
                 color={color}

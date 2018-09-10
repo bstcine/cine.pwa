@@ -36,6 +36,7 @@ export {
     CFlatButton,
     TextField as CTextField,
     Button as CButton,
+    IconButton as CIconButton,
     FloatingButton as CFloatingButton,
     FloatingBox as CFloatingBox,
     Panel as CPanel,

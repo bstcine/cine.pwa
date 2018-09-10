@@ -7,7 +7,6 @@ import {
     CFloatingButton,
     CDrawer,
     CCard,
-    CFloatingBox,
     CIcon,
     CMessage,
     CModal,
@@ -24,7 +23,20 @@ class Container extends Component {
         const { isDrawerOpen, isPDrawerOpen } = this.state;
         return (
             <div className="cine-widget widget_btn">
+                <CFloatingButton
+                    onClick={() => {
+                        this.setState(prevState => ({
+                            isDrawerOpen: !prevState.isDrawerOpen,
+                        }));
+                    }}>
+                    查看
+                </CFloatingButton>
+
                 <CPanel title="Player">
+                    <CFloatingButton icon="pets" color="primary">
+                        开始
+                    </CFloatingButton>
+                    <CFloatingButton icon="pets" color="secondary" />
                     <Player src={this.loadMedia} />
                 </CPanel>
                 <CPanel title="CButton">
@@ -250,21 +262,10 @@ class Container extends Component {
                         <CCard>6</CCard>
                         <CCard>7</CCard>
                     </CCardContainer>
-                    <CFloatingBox>
-                        <CFloatingButton
-                            icon="lock"
-                            onClick={() => {
-                                this.setState(prevState => ({
-                                    isDrawerOpen: !prevState.isDrawerOpen,
-                                }));
-                            }}
-                        />
-                        <CFloatingButton icon="pets" color="primary" />
-                        <CFloatingButton icon="pets" color="secondary" />
-                    </CFloatingBox>
                 </CPanel>
                 <CPanel title="Alert">
                     <CButton
+                        shape="round"
                         color="secondary"
                         onClick={() => {
                             CModal.alert({ text: 'hello alert!' });
@@ -273,7 +274,7 @@ class Container extends Component {
                     </CButton>
 
                     <CButton
-                        variant="outlined"
+                        variant="contained"
                         color="primary"
                         onClick={() => {
                             CModal.alert({

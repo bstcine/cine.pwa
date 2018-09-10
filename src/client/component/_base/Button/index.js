@@ -1,5 +1,6 @@
 import React from 'react';
 import BaseButton from './Button';
+import FloatingButton from './FloatingButton';
 import Icon from '../Icon';
 
 const Button = ({
@@ -36,29 +37,6 @@ const Button = ({
     </BaseButton>
 );
 
-const IconButton = ({ color, className, children, onClick }) => (
-    <BaseButton
-        className={className}
-        shape="round"
-        color={color}
-        onClick={onClick}>
-        <Icon>{children}</Icon>
-    </BaseButton>
-);
-
-const FloatingButton = ({ icon, className, color, children, onClick }) => (
-    <BaseButton
-        className={className}
-        size="large"
-        shape="round"
-        variant="contained"
-        color={color}
-        onClick={onClick}>
-        {icon && <Icon>{icon}</Icon>}
-        {children}
-    </BaseButton>
-);
-
-export { IconButton, FloatingButton };
+export { FloatingButton };
 
 export default Button;

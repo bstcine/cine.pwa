@@ -59,7 +59,7 @@ class WordHeader extends React.PureComponent {
                     <CButton className="actionItem" size="small" onClick={this.gotoList}>
                         <CIcon>ci-card_list</CIcon> 列表式
                     </CButton>
-                    <CButton className="actionItem" size="small">
+                    <CButton className="actionItem" size="small" disabled={true}>
                         <CIcon>ci-ico_help</CIcon> 帮助
                     </CButton>
                 </div>

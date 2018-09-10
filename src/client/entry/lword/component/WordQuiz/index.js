@@ -3,8 +3,7 @@
  */
 import React from 'react';
 import '../../asset/style/WordQuiz.less';
-import { addParam } from '@/util/urlUtil';
-import WordQuizHeader from './WordQuizHeader';
+import WordHeader from '../WordHeader';
 
 class WordQuiz extends React.PureComponent {
     // 跳转下一个项目
@@ -15,7 +14,7 @@ class WordQuiz extends React.PureComponent {
     };
 
     render() {
-        let { isTest, selectIndex, wordCount, selectCount, content, actions, backAction } = this.props;
+        let { param, isTest, selectIndex, wordCount, selectCount, content, actions } = this.props;
         let wordCountPromot = '本次学习单词' + wordCount + '个，测试下掌握了多少？';
         let correctWord = '已测试' + selectCount + '个';
         let wordAllPromot = '共' + wordCount + '个';
@@ -64,8 +63,10 @@ class WordQuiz extends React.PureComponent {
         const contentView = isTest ? testContent : initContent;
         return (
             <div className="wordContent">
-                <WordQuizHeader
-                    backAction={backAction}
+                <WordHeader
+                    sourceType="3"
+                    param={param}
+                    name={name}
                 />
                 {contentView}
             </div>

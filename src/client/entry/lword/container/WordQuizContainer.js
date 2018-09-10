@@ -15,7 +15,6 @@ class WordQuizContainer extends Component {
     constructor(props) {
         super(props);
         // 获取参数
-        this.backLWord = this.backLWord.bind(this);
         this.dialogAction = this.dialogAction.bind(this);
         this.param = getParam();
         // 判断测试来源（是否为top10000）
@@ -28,9 +27,6 @@ class WordQuizContainer extends Component {
         // 准备访问
         let { actions } = this.props;
         actions.loadWords(this.param);
-    }
-    backLWord() {
-        location.href = addParam('/lword', this.param);
     }
     dialogAction() {
         let { isDone } = this.props;
@@ -81,7 +77,6 @@ class WordQuizContainer extends Component {
                         selectCount={selectCount}
                         content={content}
                         actions={actions}
-                        backAction={this.backLWord}
                     />
                     <CDialog
                         title={dialogTitle}

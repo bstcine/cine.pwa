@@ -1,46 +1,16 @@
 @import '~asset/style/_cine.less';
 @import './WordContent';
 
-.v_Test_VocabularyHeader{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    padding-top: 0.5rem;
-    padding-bottom: 0.2rem;
-    border-bottom: solid;
-    border-bottom-color: #f5f9fc;
-    border-bottom-width: 1px;
-
-    .backButton {
-        width: 0.4rem;
-        height: 0.4rem;
-        padding-top: 0.02rem;
-        font-size: 0.36rem;
-        margin-right: 0.2rem;
-        cursor: pointer;
-    }
-    .v_Test_H_TaskName{
-        color: #3a3b3c;
-        font-size: 0.36rem;
-    }
-
-    .v_Test_H_HistoryDoor{
-        width: 0.4rem;
-        height: 0.4rem;
-        background-color: transparent;
-    }
-}
-
 .v_Test_VocabularyContent {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
+    flex: 1;
     width: 100%;
-    padding-bottom: 2rem;
+    padding: 1.1rem 0 1.1rem 0;
 
     .v_Test_VC_Promot_Start {
-        margin-top: 2.4rem;
         font-family: PingFangSC-Regular;
         font-size: 0.32rem;
         color: #3a3b3c;
@@ -61,7 +31,6 @@
     }
 
     .v_Test_VC_Progress {
-        margin-top: 1.1rem;
         background-color: #eef7ff;
         height: 6px;
         width: 80%;
@@ -90,7 +59,6 @@
         }
     }
     .v_Test_VC_Word {
-        margin-top: 0.9rem;
         margin-bottom: 0.6rem;
         width: 50%;
         font-family: PingFangSC-Regular;
@@ -132,18 +100,5 @@
     }
     .v_Test_VC_SelectItem:hover {
         background: #cbe7ff;
-    }
-}
-
-@media @media-up-xs {
-    .v_Test_VocabularyHeader {
-        justify-content: flex-start;
-        .backButton {
-            font-size: 0.32rem;
-            padding-top: 0.04rem;
-        }
-        .v_Test_H_TaskName{
-            font-size: 0.32rem;
-        }
     }
 }

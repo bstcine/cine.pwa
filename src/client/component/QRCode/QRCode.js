@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import { componentNames } from '@/component/_base/config';
 import Mask from '@/component/_base/Mask';
 import Icon from '@/component/_base/Icon';
-const cls = componentNames.QRCode;
+const cls = `cine-qrcode`;
 
 class QRCode extends Component {
     render() {

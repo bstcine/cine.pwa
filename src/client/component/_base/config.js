@@ -9,7 +9,7 @@ export const componentNames = {
     Mask: `${baseprefix}-mask`,
     Panel: `${baseprefix}-panel`,
     Toast: `${baseprefix}-toast`,
-    Icon: `${baseprefix}-gicon`,
+    Icon: `${baseprefix}-icon`,
     QRCode: `${baseprefix}-qrcode`,
 };
 

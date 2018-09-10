@@ -3,30 +3,35 @@ import BaseButton from './Button';
 import Icon from '../Icon';
 
 const Button = ({
-    children,
-    className,
+    icon,
+
     disabled,
-    fullWidth,
-    href,
-    // null | 'primary' | 'secondary'
+    block,
+    transparent,
     color,
-    // null | 'contained' | 'outlined' | 'fab' || 'round'
     variant,
-    // 'small' | null | 'large'
     size,
-    mini,
+    shape,
+
+    className,
+    component,
+    href,
     onClick,
+    children,
 }) => (
     <BaseButton
         className={className}
+        component={component}
         disabled={disabled}
-        fullWidth={fullWidth}
+        block={block}
         href={href}
         color={color}
         variant={variant}
         size={size}
-        mini={mini}
+        shape={shape}
+        transparent={transparent}
         onClick={onClick}>
+        {icon && <Icon>{icon}</Icon>}
         {children}
     </BaseButton>
 );
@@ -35,7 +40,7 @@ const IconButton = ({ color, className, mini, children, onClick }) => (
     <BaseButton
         mini={mini}
         className={className}
-        variant="round"
+        shape="round"
         color={color}
         onClick={onClick}>
         <Icon>{children}</Icon>

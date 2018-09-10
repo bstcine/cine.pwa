@@ -36,9 +36,8 @@ const Button = ({
     </BaseButton>
 );
 
-const IconButton = ({ color, className, mini, children, onClick }) => (
+const IconButton = ({ color, className, children, onClick }) => (
     <BaseButton
-        mini={mini}
         className={className}
         shape="round"
         color={color}
@@ -47,6 +46,19 @@ const IconButton = ({ color, className, mini, children, onClick }) => (
     </BaseButton>
 );
 
-export { IconButton };
+const FloatingButton = ({ icon, className, color, children, onClick }) => (
+    <BaseButton
+        className={className}
+        size="large"
+        shape="round"
+        variant="contained"
+        color={color}
+        onClick={onClick}>
+        {icon && <Icon>{icon}</Icon>}
+        {children}
+    </BaseButton>
+);
+
+export { IconButton, FloatingButton };
 
 export default Button;

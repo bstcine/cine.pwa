@@ -2,9 +2,9 @@ import React from 'react';
 import Dialog from 'material-ui/Dialog';
 import DatePicker from 'material-ui/DatePicker';
 import FlatButton from 'material-ui/FlatButton';
-import TextField  from 'material-ui/TextField';
+import TextField from 'material-ui/TextField';
 import { CSelectField } from './SelectField';
-import Button, { IconButton } from './Button';
+import Button, { IconButton, FloatingButton } from './Button';
 import FloatingBox from './FloatingBox';
 import Panel from './Panel';
 import Icon from './Icon';
@@ -37,6 +37,7 @@ export {
     TextField as CTextField,
     Button as CButton,
     IconButton as CIconButton,
+    FloatingButton as CFloatingButton,
     FloatingBox as CFloatingBox,
     Panel as CPanel,
     CardContainer as CCardContainer,

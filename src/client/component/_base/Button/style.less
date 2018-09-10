@@ -112,7 +112,13 @@
 
 // button outlined
 .@{btn}--outlined {
-    border: 0.02rem solid rgba(0, 0, 0, 0.23);
+    border: 0.02rem solid fade(@btn-color-default, 50%);
+    &.@{btn}--primary {
+        border: 0.02rem solid fade(@btn-color-primary, 50%);
+    }
+    &.@{btn}--secondary {
+        border: 0.02rem solid fade(@btn-color-secondary, 50%);
+    }
 }
 
 // button contained
@@ -161,7 +167,6 @@
         background-color: fade(@color, 8%);
     }
 
-    &:focus,
     &:active,
     &.@{btn}--active {
         background-color: fade(@color, 16%);
@@ -183,7 +188,6 @@
         background-color: darken(@color, 8%);
     }
 
-    &:focus,
     &:active,
     &.@{btn}--active {
         background-color: darken(@color, 8%);

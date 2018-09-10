@@ -17,7 +17,7 @@ class Word extends React.PureComponent {
                     name={result.name}
                 />
                 <WordBody
-                    rows={result.rows}
+                    result={result}
                     quizAction={quizAction}
                     listAction={listAction}
                     actions={actions}

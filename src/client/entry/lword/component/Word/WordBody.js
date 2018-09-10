@@ -5,7 +5,10 @@ import React from 'react';
 
 class WordBody extends React.PureComponent {
     render() {
-        let { rows, quizAction, listAction } = this.props;
+        let { result, quizAction, listAction } = this.props;
+        const rows = result.rows;
+        const score = result.score ? result.score : '-';
+        const updateTime = result.update_at ? `（${result.update_at}）` : '';
         let unKnowCount = 0;
         if (rows && rows.length > 0) {
             rows.forEach((ele) => {
@@ -29,8 +32,8 @@ class WordBody extends React.PureComponent {
                 <div className="actionItem">
                     <div className="promoteContent">
                         <p className="subTitle">上次测试成绩：</p>
-                        <p className="title">75%</p>
-                        <p className="subTitle">（2018-01-03 15:35）</p>
+                        <p className="title">{score}</p>
+                        <p className="subTitle">{updateTime}</p>
                     </div>
                     <div className="actionButton" style={{ backgroundColor: '#ff9343' }} onClick={quizAction}>
                         <p className="actionTitle">立即测试</p>

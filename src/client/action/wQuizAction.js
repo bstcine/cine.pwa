@@ -53,6 +53,13 @@ export const wQuizAction = {
         payload: result.status,
     }),
     /**
+     * 改变任务名称
+     * */
+    _changeTaskName: result => ({
+        type: ACTION_LT.TASKNAME,
+        payload: result.name,
+    }),
+    /**
      * 修改单词总数
      * */
     _changeWordCount: count => ({
@@ -143,6 +150,7 @@ export const wQuizAction = {
         dispatch(wQuizAction._changeContent(content));
         dispatch(wQuizAction._changeWordCount(result['rows'].length));
         dispatch(wQuizAction._receive(result));
+        dispatch(wQuizAction._changeTaskName(result));
         dispatch(wQuizAction._changeTaskStatus(result));
     },
     /**

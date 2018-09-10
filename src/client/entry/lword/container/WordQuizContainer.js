@@ -41,6 +41,7 @@ class WordQuizContainer extends Component {
 
     render() {
         let {
+            name,
             isTest,
             isDone,
             selectIndex,
@@ -71,6 +72,7 @@ class WordQuizContainer extends Component {
                 <React.Fragment>
                     <WordQuiz
                         param={this.param}
+                        name={name}
                         isTest={isTest}
                         selectIndex={selectIndex}
                         wordCount={wordCount}
@@ -93,6 +95,7 @@ class WordQuizContainer extends Component {
 
 const mapStateToProps = state => {
     return {
+        name: state.WordQuizRedu.get('name'),
         isTest: state.WordQuizRedu.get('isTest'),
         isDone: state.WordQuizRedu.get('isDone'),
         selectIndex: state.WordQuizRedu.get('selectIndex'),

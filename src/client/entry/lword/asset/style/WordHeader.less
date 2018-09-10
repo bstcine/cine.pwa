@@ -1,9 +1,10 @@
+@import '~asset/style/_cine.less';
 @import './Switch.less';
 
 .headerContainer {
     display: flex;
-    flex-direction: row;
-    align-items: center;
+    flex-direction: column;
+    align-items: flex-end;
     padding-top: 0.2rem;
     height: 1.34rem;
     justify-content: space-between;
@@ -15,8 +16,10 @@
         display: flex;
         flex-direction: row;
         align-items: center;
+        justify-content: space-between;
         height: 100%;
         width: auto;
+        background-color: transparent;
 
         .backButton {
             margin-left: -0.2rem;
@@ -50,5 +53,11 @@
             color: #7a7b7c;
             white-space: pre-wrap;
         }
+    }
+}
+
+@media @media-up-xs {
+    .headerContainer {
+        flex-direction: row;
     }
 }

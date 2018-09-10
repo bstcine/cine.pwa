@@ -43,7 +43,7 @@ export const wordAction = {
 
         let [error, result] = await fetchData(Api.APIURL_User_Learn_Word, param);
         if (!error) {
-            console.log(result);
+            console.log('结果：', result);
             dispatch(wordAction._receive(result));
             let currentRows = [];
             result.rows.forEach((ele) => {

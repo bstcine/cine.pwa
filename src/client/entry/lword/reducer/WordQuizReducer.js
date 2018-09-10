@@ -9,6 +9,7 @@ const initialState = fromJS({
     isDone: null,                   // 测试是否结束
     taskStatus: 0,                   // 任务状态
     rows: [],                        // 任务源数据
+    name: '',                        // 任务名称
     wordCount: 0,                    // 单词总数
     faileTempIndexArr: null,         // 选择错误的单词临时下标
     faileIndexArr: null,             // 选择错误的单词下标集合
@@ -42,6 +43,8 @@ const WordQuizRedu = (state = initialState, action) => {
             return state.set('rows', action.payload);
         case ACTION_LT.TASKSTATUS:
             return state.set('taskStatus', action.payload);
+        case ACTION_LT.TASKNAME:
+            return state.set('name', action.payload);
         case ACTION_LT.CHANGEWORDCOUNT:
             return state.set('wordCount', action.payload);
         case ACTION_LT.STARTTEST:

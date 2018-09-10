@@ -50,25 +50,46 @@ class WordHeader extends React.PureComponent {
         if (sourceType === '1') {
             rightActions = (
                 <div className="rightActions">
-                    <CButton className="actionItem" size="small" onClick={actions.changeAutoChangeWordStatus}>
-                        <CIcon>{isAutoChangeWord ? 'ci-ico_pause' : 'ci-card_play'}</CIcon> {isAutoChangeWord ? '暂停' : '自动播放'}
+                    <CButton
+                        className="actionItem"
+                        icon={isAutoChangeWord ? 'ci-ico_pause' : 'ci-card_play'}
+                        size="small"
+                        onClick={actions.changeAutoChangeWordStatus}>
+                        {isAutoChangeWord ? '暂停' : '自动播放'}
                     </CButton>
-                    <CButton className="actionItem" size="small" onClick={actions.changeReviseChangeWordStatus}>
-                        <CIcon>{isReviseChangeWord ? 'ci-ico_circulation' : 'ci-radom_play'}</CIcon> {isReviseChangeWord ? '顺序' : '随机'}
+                    <CButton
+                        className="actionItem"
+                        icon={isReviseChangeWord ? 'ci-ico_circulation' : 'ci-radom_play'}
+                        size="small"
+                        onClick={actions.changeReviseChangeWordStatus}>
+                        {isReviseChangeWord ? '顺序' : '随机'}
                     </CButton>
-                    <CButton className="actionItem" size="small" onClick={this.gotoList}>
-                        <CIcon>ci-card_list</CIcon> 列表式
+                    <CButton
+                        className="actionItem"
+                        icon="ci-card_list"
+                        size="small"
+                        onClick={this.gotoList}>
+                        列表式
                     </CButton>
-                    <CButton className="actionItem" size="small" disabled={true}>
-                        <CIcon>ci-ico_help</CIcon> 帮助
+                    <CButton
+                        className="actionItem"
+                        icon="ci-ico_help"
+                        size="small"
+                        disabled={true}
+                        onClick={actions.changeAutoChangeWordStatus}>
+                        帮助
                     </CButton>
                 </div>
             );
         } else if (sourceType === '2') {
             rightActions = (
                 <div className="rightActions">
-                    <CButton className="actionItem" size="small" onClick={this.gotoCard}>
-                        <CIcon>ci-card</CIcon> 卡片式
+                    <CButton
+                        className="actionItem"
+                        icon="ci-card"
+                        size="small"
+                        onClick={this.gotoCard}>
+                        卡片式
                     </CButton>
                 </div>
             );
@@ -76,10 +97,15 @@ class WordHeader extends React.PureComponent {
         return (
             <div className="headerContainer">
                 <div className="leftActions">
-                    <CButton className="backButton" size="small" onClick={this.backAction}>
-                        <CIcon>ci-arr_word</CIcon>  {name}
-                        <p className="subTitle">{subName}</p>
+                    <CButton
+                        className="backButton"
+                        icon="ci-arr_word"
+                        color="primary"
+                        size="small"
+                        onClick={this.backAction}>
+                        {name}
                     </CButton>
+                    <p className="subTitle">{subName}</p>
                     {sourceType === '2' &&
                     <React.Fragment>
                         <p className="subTitle">显示全部</p>

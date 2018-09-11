@@ -43,7 +43,7 @@ class AchievePage extends Component {
                     CModal.alert({
                         title: '学习打卡',
                         text:
-                            '第一步：“长按屏幕”保存图片\n第二步：分享图片到朋友圈',
+                            '“长按屏幕”保存图片，分享图片到朋友圈',
                     });
                 }, 1000);
             });

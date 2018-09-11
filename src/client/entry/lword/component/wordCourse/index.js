@@ -5,7 +5,7 @@ import WordLessonList from './WordLessonList';
 
 export default class WordCourse extends React.PureComponent {
     render() {
-        const { lessons, courseID } = this.props;
+        const { lessons, courseID, lastVisitID } = this.props;
         const courseComponent = courseID.split('-');
         const start_index = parseInt(courseComponent[0], 10);
         const range = parseInt(courseComponent[1], 10);
@@ -18,7 +18,11 @@ export default class WordCourse extends React.PureComponent {
                         <div className="quizLink">测试你的背单词起点</div>
                     </a>
 
-                    <WordLessonList lessons={lessons} layout="245" />
+                    <WordLessonList
+                        lessons={lessons}
+                        layout="245"
+                        lastVisitID={lastVisitID}
+                    />
                 </CPanel>
             </React.Fragment>
         );

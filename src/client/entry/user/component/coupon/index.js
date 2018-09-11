@@ -5,7 +5,7 @@ import React from 'react';
 import CouponTabs from '../coupon/CouponTabs';
 import DialogCouponAdd from '../coupon/DialogCouponAdd';
 import DialogCouponTransfer from '../coupon/DialogCouponTransfer';
-import { CFloatingBox, CButton, CIcon } from '@/component/_base';
+import { CFloatingButton } from '@/component/_base';
 
 export default class CouponPanel extends React.PureComponent {
     render() {
@@ -15,14 +15,11 @@ export default class CouponPanel extends React.PureComponent {
             <React.Fragment>
                 <CouponTabs coupons={coupons} actions={actions} />
 
-                <CFloatingBox>
-                    <CButton
-                        variant="fab"
-                        color="primary"
-                        onClick={actions.toggleCouponDialog}>
-                        <CIcon>add</CIcon>
-                    </CButton>
-                </CFloatingBox>
+                <CFloatingButton
+                    icon="add"
+                    color="secondary"
+                    onClick={actions.toggleCouponDialog}
+                />
 
                 <DialogCouponAdd isOpen={isOpenAdd} actions={actions} />
 

@@ -3,7 +3,7 @@ import React from 'react';
 import Mask from '../Mask';
 import CButton from '../Button';
 
-import { componentNames } from '@/component/_base/config';
+import { componentNames } from '../config';
 const cls = componentNames.Modal;
 
 export default function({ title, text, onCancel, onConfirm, close }) {

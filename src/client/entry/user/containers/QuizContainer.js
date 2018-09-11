@@ -11,7 +11,7 @@ import {
 } from '@/component/Tabs/index';
 import GrammarStats from '../component/quiz/GrammarStats';
 import QuizVocabStats from '../component/quiz/QuizVocabStats';
-import { CFloatingBox, CButton } from '@/component/_base';
+import { CFloatingButton } from '@/component/_base';
 import {
     URL_User_Quiz_Vocab_New,
     URL_Quiz_Grammar,
@@ -63,27 +63,26 @@ class QuizContainer extends Component {
                         </TabPanel>
                     </TabPanels>
                 </Tabs>
-                <CFloatingBox>
-                    {user &&
-                        user.type === '2' && (
-                        <CButton
-                            variant="contained"
-                            color="primary"
-                            onClick={() => {
-                                location.href = URL_Quiz_Grammar;
-                            }}>
-                                测试语法
-                        </CButton>
-                    )}
-                    <CButton
+
+                {user &&
+                    user.type === '2' && (
+                    <CFloatingButton
                         variant="contained"
                         color="primary"
                         onClick={() => {
-                            location.href = URL_User_Quiz_Vocab_New;
+                            location.href = URL_Quiz_Grammar;
                         }}>
-                        测试词汇量
-                    </CButton>
-                </CFloatingBox>
+                            测试语法
+                    </CFloatingButton>
+                )}
+                <CFloatingButton
+                    variant="contained"
+                    color="primary"
+                    onClick={() => {
+                        location.href = URL_User_Quiz_Vocab_New;
+                    }}>
+                    测试词汇量
+                </CFloatingButton>
             </div>
         );
     }

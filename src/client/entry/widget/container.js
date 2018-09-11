@@ -249,7 +249,7 @@ class Container extends Component {
                         <CCard>9</CCard>
                     </CCardContainer>
                 </CPanel>
-                <CPanel title="CFloatingBox">
+                <CPanel>
                     <CCardContainer layout="234">
                         <CCard>1</CCard>
                         <CCard>2</CCard>

@@ -1,25 +1,34 @@
 @import '~asset/style/common';
 @import '~asset/style/_cine.less';
-html{
-    display: flex;
-    flex-direction: column;
-    min-height: 100%;
+html {
+    height: 100%;
+    // height: auto;
+    // min-height: 100%;
 }
 body {
+    // display: flex;
+    // flex-direction: column;
+    // min-height: 100vh;
+    height: 100%;
+    // height: auto;
+    // min-height: 100%;
+
     font-size: 14px;
     overflow-x: hidden;
     background-color: #fff;
-    display: flex;
-    flex-direction: column;
-    flex:1;
 }
-#root{
-    display: flex;
-    flex-direction: column;
-    flex:1;
+#root {
+    // flex: 1;
+    // display: flex;
+    // flex-direction: column;
+    height: 100%;
+    // height: auto;
+    // min-height: 100%;
 }
+
 .glayout {
-    flex:1;
+    flex: 1 0 auto;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -39,7 +48,7 @@ body {
     .gcontainer {
         display: flex;
         flex-direction: column;
-        flex:1 0 100%;
+        flex: 1 0 auto;
     }
 }
 
@@ -52,4 +61,8 @@ body {
     .glayout--large .gcontainer {
         width: 24rem; //1200px
     }
+}
+
+.h1 {
+    height: 400px;
 }

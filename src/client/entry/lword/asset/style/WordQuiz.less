@@ -31,43 +31,39 @@
         font-size: 0.42rem;
     }
 
-    .v_Test_VC_Progress {
-        background-color: #eef7ff;
-        height: 6px;
+    .v_Test_VC_progress_Container {
         width: 80%;
-        position: absolute;
-        top: 20px;
-        left: 50%;
-        transform: translateX(-50%);
-
-        .v_Test_VC_InProgress {
-            background: #2d76d9;
+        .v_Test_VC_Progress {
+            background-color: #eef7ff;
             height: 6px;
-            width: 0;
-        }
-    }
-    .v_Test_VC_Progress_Text {
-        position: absolute;
-        top: 20px;
-        left: 50%;
-        transform: translateX(-50%);
-        margin-top: 0.24rem;
-        width: 80%;
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-between;
-        font-family: PingFangSC-Regular;
-        font-size: 0.24rem;
+            margin-top: 0.4rem;
 
-        .v_Test_VC_Progress_Correct {
-            color: #659cdb;
+            .v_Test_VC_InProgress {
+                background: #2d76d9;
+                height: 6px;
+                width: 0;
+            }
         }
-        .v_Test_VC_Progress_WordCount {
-            color: #969ca3;
+        .v_Test_VC_Progress_Text {
+            margin-top: 0.24rem;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            font-family: PingFangSC-Regular;
+            font-size: 0.24rem;
+
+            .v_Test_VC_Progress_Correct {
+                color: #659cdb;
+            }
+            .v_Test_VC_Progress_WordCount {
+                color: #969ca3;
+            }
         }
     }
+
     .v_Test_VC_Word {
+        margin-top: 1rem;
         margin-bottom: 0.4rem;
         width: 50%;
         font-family: PingFangSC-Regular;

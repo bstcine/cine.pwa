@@ -75,7 +75,13 @@ export const wordAction = {
         currentRows.splice(index, 1, newObject);
         let newRows = [...currentRows];
         dispatch(wordAction._currentRows(newRows));
-        let [error, _updateRes] = await fetchData(Api.APIURL_User_Content_Word_UpdateKnow, { 'word': newObject.word, 'is_known': is_known });
+        let [error, _updateRes] = await fetchData(Api.APIURL_User_Content_Word_UpdateKnow, {
+            'word': {
+                'word': newObject.word,
+                'id': newObject.id,
+            },
+            'is_known': is_known
+        });
         if (error || !_updateRes.status) {
             currentRows.splice(index, 1, wordObject);
             result.rows.splice(resultIndex, 1, wordObject);

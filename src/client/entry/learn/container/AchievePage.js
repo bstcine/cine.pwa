@@ -7,6 +7,7 @@ import Achieve from '../component/achieve';
 import * as learnAction from '@/action/learnAction';
 import { getParam } from '@/util/urlUtil';
 import { CModal } from '@/component/_base';
+import QRCode from '@/component/QRCode';
 
 const mapStateToProps = state => {
     const { taskShareRedu } = state;
@@ -35,15 +36,19 @@ class AchievePage extends Component {
         if (!prevProps.taskShareRedu && this.props.taskShareRedu) {
             html2canvas(ele, {
                 useCORS: true,
-            }).then(canvas => {
-                this.setState({
-                    img: canvas.toDataURL(),
+            })
+                .then(canvas => {
+                    this.setState({
+                        img: canvas.toDataURL(),
+                    });
+                    CModal.alert({
+                        title: '学习打卡',
+                        text: '“长按屏幕”保存图片，分享图片到朋友圈',
+                    });
+                })
+                .catch(function(error) {
+                    QRCode.open(window.location.href);
                 });
-                CModal.alert({
-                    title: '学习打卡',
-                    text: '“长按屏幕”保存图片，分享图片到朋友圈',
-                });
-            });
         }
     }
 

@@ -2,6 +2,7 @@
  * Created by lidangkun on 2018/8/3.
  */
 import React from 'react';
+import { CIcon } from '@/component/_base';
 
 class WordCardBodyRecite extends React.PureComponent {
     constructor(props) {
@@ -62,7 +63,7 @@ class WordCardBodyRecite extends React.PureComponent {
                                     <div className="word">{word}</div>
                                     <div className="phonetic" onClick={this.playPhonetic}>
                                         <p>{phonetic}</p>
-                                        <img className="voice" src={require('../../asset/image/voice.png')} />
+                                        <CIcon className="voice">ci-voice</CIcon>
                                     </div>
                                 </div>
                             </div>

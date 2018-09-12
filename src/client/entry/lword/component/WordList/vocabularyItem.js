@@ -2,6 +2,7 @@
  * Created by lidangkun on 2018/6/14.
  */
 import React from 'react';
+import { CIcon } from '@/component/_base';
 
 class VocabularyItem extends React.PureComponent {
 
@@ -33,7 +34,7 @@ class VocabularyItem extends React.PureComponent {
             phonetic = vocabulary.phonetic_b;
         }
         const voiceSpan = (
-            this.voiceSrc && <p className="v_Task_L_Item_Voice"></p>
+            this.voiceSrc && <CIcon className="v_Task_L_Item_Voice">ci-voice</CIcon>
         );
         const wordColor = vocabulary.word_selected ? 'red' : '#1d70d6';
         return (

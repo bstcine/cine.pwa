@@ -2,7 +2,7 @@
  * Created by lidangkun on 2018/9/7.
  */
 import React from 'react';
-import { CIcon, CButton } from '@/component/_base';
+import { CButton } from '@/component/_base';
 import siteCodeUtil from '@/util/sitecodeUtil';
 import { addParam } from '@/util/urlUtil';
 import '../../asset/style/WordHeader.less';

@@ -24,7 +24,7 @@ export default class Achieve extends Component {
                 <div className="achieve__head">
                     <img
                         className="ach_slogan"
-                        src={require('../../asset/image/share_logo.png')}
+                        src={require('../../asset/image/share_logo_blue.png')}
                     />
                     <div className="ach_tips">
                         <p>我已跟我的</p>
@@ -132,7 +132,7 @@ export default class Achieve extends Component {
                 <div className="achieve__footer">
                     <img
                         className="ach_qrcode__desc"
-                        src={require('../../asset/image/bg_sharefoot.png')}
+                        src={require('../../asset/image/bg_sharefoot_1.png')}
                     />
                     <img
                         className="ach_qrcode"

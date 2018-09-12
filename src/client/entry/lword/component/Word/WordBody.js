@@ -7,7 +7,7 @@ class WordBody extends React.PureComponent {
     render() {
         let { result, quizAction, listAction } = this.props;
         const rows = result.rows;
-        const score = result.score ? result.score : '-';
+        const score = result.score ? `${result.score}%` : '-';
         const updateTime = result.update_at ? `（${result.update_at}）` : '';
         let unKnowCount = 0;
         if (rows && rows.length > 0) {

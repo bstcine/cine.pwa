@@ -3,23 +3,62 @@
 .@{toast} {
     position: fixed;
     z-index: 5000;
-    width: 2.4rem;
-    min-height: 2.4rem;
+    background: rgba(17, 17, 17, 0.7);
+    text-align: center;
+    color: #fff;
+}
+
+.@{toast}--info {
+    top: 30%;
+    left: 50%;
+    transform: translateX(-50%);
+    min-width: 3.18rem;
+    min-height: 1.15rem;
+    border-radius: 0.08rem;
+    font-size: 0.3rem;
+    font-weight: 600;
+    line-height: 0.42rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.36rem 0.4rem;
+}
+
+.@{toast}--loading,
+.@{toast}--error,
+.@{toast}--success {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background: rgba(17, 17, 17, 0.7);
-    text-align: center;
     border-radius: 0.1rem;
-    color: #ffffff;
+    width: 2.4rem;
+    min-height: 2.4rem;
     padding-top: 0.6rem;
     padding-bottom: 0.32rem;
+}
+
+.@{toast}__msg {
+    text-align: center;
+    font-size: 0.28rem;
+    line-height: 0.4rem;
 }
 
 .@{toast}__icon {
     display: block;
     margin: 0 auto 0.3rem;
     font-size: 0.76rem;
+}
+
+.@{toast}--loading .@{toast}__icon {
+    display: block;
+    margin: 0 auto 0.3rem;
+    font-size: 0.76rem;
+    width: 0.76rem;
+    height: 0.76rem;
+    font-size: 0.64rem;
+    background: url('./loading.svg') center no-repeat;
+    background-size: contain;
+    animation: whirl 1s steps(12, end) infinite;
 }
 
 .@{toast}--loading .@{toast}__icon {
@@ -39,10 +78,4 @@
     100% {
         transform: rotate3d(0, 0, 1, 360deg);
     }
-}
-
-.@{toast}__msg {
-    text-align: center;
-    font-size: 0.28rem;
-    line-height: 0.4rem;
 }

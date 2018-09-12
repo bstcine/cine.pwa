@@ -6,7 +6,7 @@ import { withRouter } from 'react-router-dom';
 import Achieve from '../component/achieve';
 import * as learnAction from '@/action/learnAction';
 import { getParam } from '@/util/urlUtil';
-import { CModal } from '@/component/_base';
+import { CModal, CMessage } from '@/component/_base';
 import QRCode from '@/component/QRCode';
 
 const mapStateToProps = state => {
@@ -41,10 +41,7 @@ class AchievePage extends Component {
                     this.setState({
                         img: canvas.toDataURL(),
                     });
-                    CModal.alert({
-                        title: '学习打卡',
-                        text: '“长按屏幕”保存图片，分享图片到朋友圈',
-                    });
+                    CMessage.info('“长按屏幕”保存图片，分享图片到朋友圈');
                 })
                 .catch(function(error) {
                     QRCode.open(window.location.href);

@@ -302,11 +302,11 @@ class Container extends Component {
                         variant="outlined"
                         color="primary"
                         onClick={() => {
-                            CMessage.success('完不成', () => {
-                                console.success('完不成关闭了');
+                            CMessage.success('完成', () => {
+                                console.success('完成关闭了');
                             });
                         }}>
-                        Info
+                        success
                     </CButton>
                     <CButton
                         variant="outlined"
@@ -315,6 +315,16 @@ class Container extends Component {
                             CMessage.error('Err! duration:0', 0);
                         }}>
                         Error
+                    </CButton>
+                    <CButton
+                        variant="outlined"
+                        color="primary"
+                        onClick={() => {
+                            CMessage.info(
+                                '“长按屏幕”保存图片，分享图片到朋友圈'
+                            );
+                        }}>
+                        Info
                     </CButton>
                 </CPanel>
             </div>

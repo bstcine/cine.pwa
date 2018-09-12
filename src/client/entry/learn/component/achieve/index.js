@@ -96,16 +96,12 @@ export default class Achieve extends Component {
                             </div>
 
                             <div className="myach__comp">
-                                {composition && (
-                                    <div className="myach__comp__title">
-                                        上周作文题目：
-                                    </div>
-                                )}
-                                {composition && (
-                                    <div className="myach__comp__name">
-                                        {composition}
-                                    </div>
-                                )}
+                                <div className="myach__comp__title">
+                                    上周作文题目：
+                                </div>
+                                <div className="myach__comp__name">
+                                    {composition || '-'}
+                                </div>
                             </div>
                         </div>
 

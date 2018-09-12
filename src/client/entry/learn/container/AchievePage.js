@@ -39,13 +39,10 @@ class AchievePage extends Component {
                 this.setState({
                     img: canvas.toDataURL(),
                 });
-                setTimeout(() => {
-                    CModal.alert({
-                        title: '学习打卡',
-                        text:
-                            '“长按屏幕”保存图片，分享图片到朋友圈',
-                    });
-                }, 1000);
+                CModal.alert({
+                    title: '学习打卡',
+                    text: '“长按屏幕”保存图片，分享图片到朋友圈',
+                });
             });
         }
     }

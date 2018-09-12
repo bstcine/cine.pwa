@@ -8,7 +8,7 @@ class WordBody extends React.PureComponent {
         let { result, quizAction, listAction } = this.props;
         const rows = result.rows;
         const score = result.score ? `${result.score}%` : '-';
-        const updateTime = result.update_at ? `（${result.update_at}）` : '';
+        const updateTime = result.update_at ? `（${result.update_at.substring(0, 16)}）` : '';
         let unKnowCount = 0;
         if (rows && rows.length > 0) {
             rows.forEach((ele) => {

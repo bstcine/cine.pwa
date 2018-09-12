@@ -15,6 +15,8 @@ import Footer from '@/component/Footer';
 import { fetchData } from '@/service/base';
 import errorMsg from '@/util/errorMsg';
 import { APIURL_Content_Home } from '@/../APIConfig';
+import { CFloatingButton } from '@/component/_base';
+import QRHelp from '@/component/QRHelp';
 const bottomImg1 = require('../../asset/image/book.jpg');
 const bottomImg2 = require('../../asset/image/moon.jpg');
 let bottomImg = Math.round(Math.random() * 10) % 2 ? bottomImg2 : bottomImg1;
@@ -150,7 +152,7 @@ export default class Home extends Component {
         });
     }
 
-    async componentWillReceiveProps(nextProps) {
+    async UNSAFE_componentWillReceiveProps(nextProps) {
         console.log('componentWillReceiveProps');
         const selectedTags = getSelectedTags();
         const selectedTagIds = selectedTags.map(item => item.id);
@@ -168,9 +170,11 @@ export default class Home extends Component {
     render() {
         console.log(`Home`);
         let { tabs, selectedTags } = this.state;
+        const willShowSlogan = !siteCodeUtil.inAPP() && !uaUtil.wechat();
         return (
             <React.Fragment>
                 <Header isShow={!siteCodeUtil.inAPP()} />
+
                 <div className="container-fluid courses-container-bg">
                     <Slider banners={this.state.banners} />
 
@@ -226,7 +230,16 @@ export default class Home extends Component {
                     </div>
                 </div>
 
-                {!siteCodeUtil.inAPP() && !uaUtil.wechat() ? (
+                <CFloatingButton
+                    icon="help"
+                    color="secondary"
+                    onClick={() => {
+                        QRHelp.open();
+                    }}>
+                    课程咨询
+                </CFloatingButton>
+
+                {willShowSlogan ? (
                     <LazyLoad offset={100}>
                         <div className="container-fluid">
                             <div
@@ -238,6 +251,7 @@ export default class Home extends Component {
                         </div>
                     </LazyLoad>
                 ) : null}
+
                 <Footer isShow={true} />
             </React.Fragment>
         );

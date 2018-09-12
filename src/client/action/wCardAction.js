@@ -89,11 +89,16 @@ export const wCardAction = {
             clearInterval(timer);
         }
         if (isAutoChangeWord) {
+            dispatch(wCardAction.startNext(true));
             timer = setInterval(() => {
                 dispatch(wCardAction.startNext(true));
             }, autoChangeTime * 1000);
         } else {
             timer = null;
+            let toggleTimer = reducer.get('toggleTimer');
+            if (toggleTimer) {
+                clearTimeout(toggleTimer);
+            }
         }
         dispatch(wCardAction._changeTimer(timer));
     },

@@ -29,7 +29,7 @@ const Tasks = ({ tasks, user, isLimitTasks, onShowAllTask, gActions }) => {
                     <a href="/learn/task">历史作业</a>
                 </div>
                 <div className="cine-panel__righthead">
-                    {uaUtil.PC() ? (
+                    {uaUtil.PC() || uaUtil.AndroidTablet() || uaUtil.iPad() ? (
                         <a
                             onClick={() => {
                                 QRCode.open(

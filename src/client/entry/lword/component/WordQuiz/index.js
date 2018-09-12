@@ -49,12 +49,14 @@ class WordQuiz extends React.PureComponent {
         let inProgressWidth = (selectCount * 100 / wordCount).toString() + '%';
         const testContent = (
             <div className="v_Test_VocabularyContent">
-                <div className="v_Test_VC_Progress">
-                    <div style={{ width: inProgressWidth }} className="v_Test_VC_InProgress"/>
-                </div>
-                <div className="v_Test_VC_Progress_Text">
-                    <p className="v_Test_VC_Progress_Correct">{correctWord}</p>
-                    <p className="v_Test_VC_Progress_WordCount">{wordAllPromot}</p>
+                <div className="v_Test_VC_progress_Container">
+                    <div className="v_Test_VC_Progress">
+                        <div style={{ width: inProgressWidth }} className="v_Test_VC_InProgress"/>
+                    </div>
+                    <div className="v_Test_VC_Progress_Text">
+                        <p className="v_Test_VC_Progress_Correct">{correctWord}</p>
+                        <p className="v_Test_VC_Progress_WordCount">{wordAllPromot}</p>
+                    </div>
                 </div>
                 <p className="v_Test_VC_Word">{content.value}</p>
                 {selectList}

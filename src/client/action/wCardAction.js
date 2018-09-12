@@ -148,7 +148,9 @@ export const wCardAction = {
         let currentIndex = reducer.get('currentIndex');
         let result = reducer.get('result');
         let word = result.rows[currentIndex].word;
-        let [error, _updateRes] = await fetchData(Api.APIURL_User_Content_Word_UpdateKnow, { 'word': word, 'is_known': true });
+        let id = result.rows[currentIndex].id;
+        let [error, _updateRes] = await fetchData(Api.
+            APIURL_User_Content_Word_UpdateKnow, { 'word': { 'word': word, 'id': id }, 'is_known': true });
         if (error) {
             return false;
         } else {
@@ -168,7 +170,11 @@ export const wCardAction = {
         let originRows = reducer.get('originRows');
         let wordList = [];
         originRows.forEach((ele) => {
-            wordList.push(ele.word);
+            let word = {
+                'word': ele.word,
+                'id': ele.id,
+            };
+            wordList.push(word);
         });
         let [error, _updateRes] = await fetchData(Api.APIURL_User_Content_Word_UpdateKnow, { 'word_list': wordList, 'is_known': false });
         if (!error && _updateRes && _updateRes.status) {

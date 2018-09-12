@@ -83,20 +83,6 @@ class WordCardContainer extends Component {
             this.resetTouchPoint();
             return;
         }
-        let isSet = this.state.isSet;
-        if (isSet === true) {
-            let target = document.getElementById('footer');
-            if (target === event.target) {
-                let yInstance = this.touchmoveY - this.touchStartY;
-                if (yInstance > 10) {
-                    this.setState({
-                        isSet: false,
-                    });
-                }
-                this.resetTouchPoint();
-                return;
-            }
-        }
         let xInstance = this.touchmoveX - this.touchStartX;
 
         if (xInstance < -50) {

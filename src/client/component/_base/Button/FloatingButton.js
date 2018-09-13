@@ -4,12 +4,15 @@ import ReactDOM from 'react-dom';
 import ButtonBase from './Button';
 import Icon from '../Icon';
 
-let FloatingBox = document.getElementById('floating-box');
-if (!FloatingBox) {
-    FloatingBox = document.createElement('div');
-    FloatingBox.setAttribute('id', 'floating-box');
-    document.body.append(FloatingBox);
-}
+const createFloatingBox = (className = 'floating-box') => {
+    let FloatingBox = document.getElementById(className);
+    if (!FloatingBox) {
+        FloatingBox = document.createElement('div');
+        FloatingBox.setAttribute('id', className);
+        document.body.append(FloatingBox);
+    }
+    return FloatingBox;
+};
 
 class FloatingButton extends Component {
     static defaultProps = {
@@ -20,14 +23,18 @@ class FloatingButton extends Component {
         super(props);
         this.el = document.createElement('div');
         this.el.classList.add('floating-box__item');
+
+        this.FloatingBox = createFloatingBox(
+            this.props.children ? 'floating-box-text' : 'floating-box'
+        );
     }
 
     componentDidMount() {
-        FloatingBox.appendChild(this.el);
+        this.FloatingBox.appendChild(this.el);
     }
 
     componentWillUnmount() {
-        FloatingBox.removeChild(this.el);
+        this.FloatingBox.removeChild(this.el);
     }
 
     render() {

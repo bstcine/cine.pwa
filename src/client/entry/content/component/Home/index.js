@@ -231,7 +231,7 @@ export default class Home extends Component {
                 </div>
 
                 <CFloatingButton
-                    icon="help"
+                    icon="ci-wechat"
                     color="secondary"
                     onClick={() => {
                         QRHelp.open();

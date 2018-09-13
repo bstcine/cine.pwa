@@ -52,7 +52,7 @@ class WordHeader extends React.PureComponent {
                 <div className="rightActions">
                     <CButton
                         className="actionItem"
-                        icon={isAutoChangeWord ? 'ci-ico_pause' : 'ci-card_play'}
+                        icon={isAutoChangeWord ? 'pause' : 'play_arrow'}
                         size="small"
                         onClick={actions.changeAutoChangeWordStatus}>
                         {isAutoChangeWord ? '暂停' : '自动播放'}
@@ -66,7 +66,7 @@ class WordHeader extends React.PureComponent {
                     </CButton>
                     <CButton
                         className="actionItem"
-                        icon="ci-card_list"
+                        icon="view_list"
                         size="small"
                         onClick={this.gotoList}>
                         列表式

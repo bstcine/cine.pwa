@@ -69,6 +69,11 @@ class WordCardContainer extends Component {
     }
     // 鼠标后手势开始触摸
     touchStart(event) {
+        let { player } = this.props;
+        if (!this.iAactivatePlayer) {
+            player.play();
+            this.iAactivatePlayer = true;
+        }
         this.touchStartX = event.targetTouches[0].pageX;
         this.touchStartY = event.targetTouches[0].pageY;
     }
@@ -135,6 +140,7 @@ const mapStateToProps = state => {
         isReviseChangeWord: state.WordCardRedu.get('isReviseChangeWord'),
         isBack: state.WordCardRedu.get('isBack'),
         isKnown: state.WordCardRedu.get('isKnown'),
+        player: state.WordCardRedu.get('player'),
     };
 };
 

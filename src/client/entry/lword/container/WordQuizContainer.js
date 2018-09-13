@@ -33,7 +33,7 @@ class WordQuizContainer extends Component {
         if (this.sourceType === 1) {
             location.href = '/lword/course?start_index=1&range=10000';
         } else if (isDone === true) {
-            location.href = addParam('/learn/task');
+            location.href = addParam('/learn');
         } else {
             location.href = addParam('/lword', this.param);
         }

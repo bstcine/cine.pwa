@@ -59,7 +59,7 @@ class WordHeader extends React.PureComponent {
                     </CButton>
                     <CButton
                         className="actionItem"
-                        icon={isReviseChangeWord ? 'ci-radom_play' : 'ci-ico_circulation'}
+                        icon={isReviseChangeWord ? 'ci-radom_play' : 'ci-circulation'}
                         size="small"
                         onClick={actions.changeReviseChangeWordStatus}>
                         {isReviseChangeWord ? '随机' : '顺序'}

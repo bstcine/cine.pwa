@@ -368,6 +368,18 @@ class Container extends Component {
                         }}>
                         Info
                     </CButton>
+
+                    <CButton
+                        variant="outlined"
+                        color="primary"
+                        onClick={() => {
+                            CMessage.info('我在上面', {
+                                mask: false,
+                                position: 'top',
+                            });
+                        }}>
+                        Top Info
+                    </CButton>
                 </CPanel>
             </div>
         );

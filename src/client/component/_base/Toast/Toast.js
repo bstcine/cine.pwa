@@ -6,7 +6,7 @@ const cls = componentNames.Toast;
 import Mask from '../Mask';
 import Icon from '../Icon';
 
-export default ({ type, text }) => {
+export default ({ type, text, position, mask = true }) => {
     const iconMap = {
         success: 'ci-done',
         error: 'error',
@@ -22,8 +22,12 @@ export default ({ type, text }) => {
     };
     return (
         <React.Fragment>
-            <Mask transparent />
-            <div className={classNames(cls, { [`${cls}--${type}`]: type })}>
+            {mask && <Mask transparent />}
+            <div
+                className={classNames(cls, {
+                    [`${cls}--${type}`]: type,
+                    [`${cls}--${position}`]: position,
+                })}>
                 {renderIcon(type)}
                 <span className={`${cls}__msg`}>{text}</span>
             </div>

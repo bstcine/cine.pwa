@@ -23,7 +23,7 @@ const WordCourses = ({ courses }) => {
     };
 
     const isCine = window.location.href.toLowerCase().indexOf('bstcine');
-    if (isCine > 0) return <div />;
+    // if (isCine > 0) return <div />;
 
     let cards = courses.map((course, i) => {
         return (

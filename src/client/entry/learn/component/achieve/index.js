@@ -100,11 +100,7 @@ export default class Achieve extends Component {
                                     上周作文题目：
                                 </div>
                                 <div className="myach__comp__name">
-                                    {composition || (
-                                        <span className="myach__comp__name__empty">
-                                            还没有写作文
-                                        </span>
-                                    )}
+                                    {composition || '-'}
                                 </div>
                             </div>
                         </div>

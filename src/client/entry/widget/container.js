@@ -260,6 +260,48 @@ class Container extends Component {
                         <CCard>7</CCard>
                     </CCardContainer>
                 </CPanel>
+
+                <CPanel title="line 1 step 2">
+                    <CCardContainer layout="234" line="1" step="1">
+                        <CCard>1</CCard>
+                        <CCard>2</CCard>
+                        <CCard>3</CCard>
+                        <CCard>4</CCard>
+                        <CCard>5</CCard>
+                        <CCard>6</CCard>
+                        <CCard>7</CCard>
+                        <CCard>8</CCard>
+                        <CCard>9</CCard>
+                        <CCard>10</CCard>
+                    </CCardContainer>
+                </CPanel>
+
+                <CPanel title="line 1 step 3">
+                    <CCardContainer layout="234" line="1" step="3">
+                        <CCard>1</CCard>
+                        <CCard>2</CCard>
+                        <CCard>3</CCard>
+                        <CCard>4</CCard>
+                        <CCard>5</CCard>
+                        <CCard>6</CCard>
+                        <CCard>7</CCard>
+                        <CCard>8</CCard>
+                        <CCard>9</CCard>
+                        <CCard>10</CCard>
+                        <CCard>11</CCard>
+                        <CCard>12</CCard>
+                        <CCard>13</CCard>
+                        <CCard>14</CCard>
+                        <CCard>15</CCard>
+                        <CCard>15</CCard>
+                        <CCard>16</CCard>
+                        <CCard>17</CCard>
+                        <CCard>18</CCard>
+                        <CCard>19</CCard>
+                        <CCard>20</CCard>
+                    </CCardContainer>
+                </CPanel>
+
                 <CPanel title="Alert">
                     <CButton
                         shape="round"

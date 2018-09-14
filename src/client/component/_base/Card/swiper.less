@@ -1,8 +1,76 @@
 @import '../style';
 
 .swiper {
-    overflow: auto;
+    position: relative;
+    .swiper__container {
+        overflow: auto;
+    }
+    .swiper__content {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .swiper_arrow__left,
+    .swiper_arrow__right {
+        display: none;
+        position: absolute;
+        top: 0;
+        width: 40px;
+        height: 100%;
+        background-color: transparent;
+        color: rgba(0, 0, 0, 0.5);
+        opacity: 0.7;
+        cursor: pointer;
+        transition: all 150ms ease-out;
+
+        &:hover {
+            opacity: 1;
+            background-color: rgba(0, 0, 0, 0.1);
+        }
+
+        .@{icon} {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+    }
+    .swiper_arrow--hide {
+        opacity: 0;
+    }
+    .swiper_arrow__left {
+        left: -40px;
+    }
+
+    .swiper_arrow__right {
+        right: -40px;
+    }
+
     .@{card} {
-        width: 2.8rem;
+        flex: 0 0 2.8rem;
+        padding: 0;
+        padding-right: 0.16rem;
+    }
+
+    @media @media-up-xs {
+        .@{card} {
+            flex: 0 0 4rem;
+        }
+    }
+
+    @media @media-up-sm {
+        .swiper__container {
+            overflow: hidden;
+        }
+        .swiper__content {
+            transition: transform 500ms ease;
+        }
+
+        .swiper_arrow__left,
+        .swiper_arrow__right {
+            display: block;
+        }
     }
 }

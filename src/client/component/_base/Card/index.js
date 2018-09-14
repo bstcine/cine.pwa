@@ -14,8 +14,20 @@ const Card = ({
     </BaseCard>
 );
 
-const CardContainer = ({ className, gap, layout = '112', children }) => (
-    <BaseCardContainer className={className} gap={gap} layout={layout}>
+const CardContainer = ({
+    className,
+    gap,
+    layout = '112',
+    line,
+    step,
+    children,
+}) => (
+    <BaseCardContainer
+        className={className}
+        gap={gap}
+        line={line}
+        step={step}
+        layout={layout}>
         {children}
     </BaseCardContainer>
 );

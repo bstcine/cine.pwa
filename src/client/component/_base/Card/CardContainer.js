@@ -3,6 +3,7 @@ import classNames from 'classnames';
 import { CDrawer } from '@/component/_base';
 import './style.less';
 import { componentNames } from '@/component/_base/config';
+import Swiper from '@/component/_base/Card/Swiper';
 const cls = componentNames.Card;
 const drawerCls = componentNames.Drawer;
 
@@ -15,6 +16,8 @@ const CardContainer = ({
     gap,
     // none | '1'
     line,
+    // 1
+    step,
 }) => {
     let cards = [];
     let drawer = null;
@@ -25,6 +28,7 @@ const CardContainer = ({
             cards.push(item);
         }
     });
+    if (line === '1') return <Swiper step={step}>{children}</Swiper>;
     return (
         <div
             className={classNames(

@@ -42,7 +42,7 @@ class AchievePage extends Component {
                     this.setState({
                         img: canvas.toDataURL(),
                     });
-                    CMessage.info('“长按屏幕”保存图标并分享至朋友圈', 5000, {
+                    CMessage.info('“长按屏幕”保存图片并分享至朋友圈', 5000, {
                         mask: false,
                         position: 'top',
                     });

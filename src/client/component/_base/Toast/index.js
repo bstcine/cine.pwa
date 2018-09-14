@@ -44,7 +44,7 @@ function getProps(props, defaultProps) {
             } else if (typeof prop === 'function') {
                 defaultProps.onClose = prop;
             } else if (typeof prop === 'object') {
-                defaultProps = { ...defaultProps, ...prop };
+                Object.assign(defaultProps, prop);
             }
         });
     }

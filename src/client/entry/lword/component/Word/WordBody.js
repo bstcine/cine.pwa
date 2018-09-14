@@ -31,7 +31,7 @@ class WordBody extends React.PureComponent {
                 </div>
                 <div className="actionItem">
                     <div className="promoteContent">
-                        <p className="subTitle">上次测试成绩：</p>
+                        <p className="subTitle">测试成绩：</p>
                         <p className="title">{score}</p>
                         <p className="subTitle">{updateTime}</p>
                     </div>

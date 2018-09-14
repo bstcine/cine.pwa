@@ -63,7 +63,7 @@ class WordCardBodyRecite extends React.PureComponent {
                                     <div className="word">{word}</div>
                                     <div className="phonetic" onClick={this.playPhonetic}>
                                         <p>{phonetic}</p>
-                                        <CIcon className="voice">ci-voice</CIcon>
+                                        <CIcon className="voice">ci-ico_voice</CIcon>
                                     </div>
                                 </div>
                             </div>

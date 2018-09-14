@@ -34,7 +34,7 @@ class VocabularyItem extends React.PureComponent {
             phonetic = vocabulary.phonetic_b;
         }
         const voiceSpan = (
-            this.voiceSrc && <CIcon className="v_Task_L_Item_Voice">ci-voice</CIcon>
+            this.voiceSrc && <CIcon className="v_Task_L_Item_Voice">ci-ico_voice</CIcon>
         );
         const wordColor = vocabulary.word_selected ? 'red' : '#1d70d6';
         return (

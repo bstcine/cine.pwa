@@ -8,7 +8,7 @@ import WordCardBodyDone from './WordCardBodyDone';
 class WordCardBody extends React.PureComponent {
 
     render() {
-        let { name, rows, currentIndex, isBack, isKnown, actions, quizAction } = this.props;
+        let { name, rows, currentIndex, lastZh, isBack, isKnown, actions, quizAction } = this.props;
         if (!rows) {
             return (<div></div>);
         } else if (rows.length === 0) {
@@ -24,6 +24,7 @@ class WordCardBody extends React.PureComponent {
                 <WordCardBodyRecite
                     rows={rows}
                     currentIndex={currentIndex}
+                    lastZh={lastZh}
                     isBack={isBack}
                     isKnown={isKnown}
                     actions={actions}

@@ -11,7 +11,7 @@ import WordCardBody from './WordCardBody';
 
 class WordCard extends React.PureComponent {
     render() {
-        let { param, result, currentIndex, isAutoChangeWord, isReviseChangeWord, isBack, isKnown, actions, quizAction } = this.props;
+        let { param, result, currentIndex, lastZh, isAutoChangeWord, isReviseChangeWord, isBack, isKnown, actions, quizAction } = this.props;
         let { name, rows } = result;
         return (
             <div className="wordContent">
@@ -27,6 +27,7 @@ class WordCard extends React.PureComponent {
                     name={name}
                     rows={rows}
                     currentIndex={currentIndex}
+                    lastZh={lastZh}
                     isBack={isBack}
                     isKnown={isKnown}
                     quizAction={quizAction}

@@ -11,6 +11,7 @@ const initWordCard = fromJS({
         status: 0,
         rows: null,
     },
+    lastZh: '',
     originRows: null,
     currentIndex: 0,
     isAutoChangeWord: false,
@@ -32,6 +33,8 @@ const WordCardRedu = (state = initWordCard, action) => {
             return state;
         case ACTION_WC.RECEIVE:
             return state.set('result', action.payload);
+        case ACTION_WC.CHANGELASTZH:
+            return state.set('lastZh', action.payload);
         case ACTION_WC.AUTOCHANGEWORDSTATUS:
             return state.set('isAutoChangeWord', action.payload);
         case ACTION_WC.REVISECHANGEWORDSTATUS:

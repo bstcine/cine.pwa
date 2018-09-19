@@ -44,7 +44,7 @@ function getProps(props, defaultProps) {
             } else if (typeof prop === 'function') {
                 defaultProps.onClose = prop;
             } else if (typeof prop === 'object') {
-                defaultProps = { ...defaultProps, ...prop };
+                Object.assign(defaultProps, prop);
             }
         });
     }
@@ -64,10 +64,6 @@ Toast.error = (...props) => {
 };
 
 Toast.info = (...props) => {
-    for (const prop of props) {
-        if (prop instanceof Object) {
-        }
-    }
     return show(props, { type: 'info', text: '缺少提示信息', duration: 3000 });
 };
 

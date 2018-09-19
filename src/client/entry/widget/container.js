@@ -378,7 +378,7 @@ class Container extends Component {
                                 position: 'top',
                             });
                         }}>
-                        Top Info
+                        TopInfo
                     </CButton>
                 </CPanel>
             </div>

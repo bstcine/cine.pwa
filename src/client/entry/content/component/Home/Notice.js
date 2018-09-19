@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import QRHelp from '@/component/QRHelp';
 
 export default class Notice extends Component {
     static defaultProps = {
@@ -26,6 +27,18 @@ export default class Notice extends Component {
                             </li>
                         );
                     })}
+                    <li className="notice-item">
+                        <a
+                            href="#"
+                            onClick={() => {
+                                QRHelp.open();
+                            }}>
+                            <span className="notice-tag">【课程咨询】</span>
+                            <span className="notice-title">
+                                找不到需要的课程？请联系善恩小助手
+                            </span>
+                        </a>
+                    </li>
                 </ul>
             </div>
         );

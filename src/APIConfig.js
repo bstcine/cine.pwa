@@ -20,6 +20,8 @@ exports.APIURL_Pay_Wechat_Mweb = '/pay/wechat/mweb'; // 微信mweb支付 页面�
 exports.APIURL_Pay_Ali_App = '/api/pay/ali'; // 支付宝app支付
 exports.APIURL_Pay_Ali_Pc = '/pay/ali/pc'; // 支付宝pc支付 页面路由。非标准2.0接口
 exports.APIURL_Pay_Ali_Mweb = '/pay/ali/mweb'; // 支付宝mweb支付 页面路由。非标准2.0接口
+exports.APIURL_Pay_Stripe_Info = '/api/pay/stripe/info'; // 查询 stripe 初始化参数
+exports.APIURL_Pay_Stripe = '/api/pay/stripe'; // stripe 支付
 
 exports.APIURL_Content_Home = '/api/content/home'; // app首页
 exports.APIURL_Content_Tag_Tree = '/api/content/tag/tree'; // 标签树

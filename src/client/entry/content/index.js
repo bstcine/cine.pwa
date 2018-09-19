@@ -20,6 +20,9 @@ const PayCenter = chunkComponent(() =>
 const PayStatus = chunkComponent(() =>
     import(/* webpackChunkName: "content/chunk/index.ps" */ './component/PayStatus')
 );
+const PayStripe = chunkComponent(() =>
+    import(/* webpackChunkName: "content/chunk/index.pss" */ './component/PayStripe')
+);
 
 const createComponent = (Component, userRequired, props) => {
     if (userRequired && !storeUtil.getToken()) {
@@ -80,6 +83,16 @@ class Content extends Entry {
                             component={props =>
                                 createComponent(
                                     PayStatus,
+                                    /* userRequired */ true,
+                                    props
+                                )
+                            }
+                        />
+                        <Route
+                            path="/pay/oversea"
+                            component={props =>
+                                createComponent(
+                                    PayStripe,
                                     /* userRequired */ true,
                                     props
                                 )

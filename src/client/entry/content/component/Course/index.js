@@ -21,6 +21,9 @@ import Brief from './Brief';
 import DetailDesc from './DetailDesc';
 import CouponModal from './CouponModal';
 import RecommendModal from './RecommendModal';
+import { fetchData } from '@/service/base';
+import { APIURL_Order_Create } from '../../../../../APIConfig';
+import { CMessage } from '@/component/_base';
 
 export default class Course extends Component {
     constructor(props) {
@@ -120,12 +123,22 @@ export default class Course extends Component {
         } else if (siteCodeUtil.inAndroidAPP()) {
             Bridge.android(BRIDGE_EVENT.PRE_CONFIRM, { course_id: cid });
         } else {
-            let url = `/pay/prepare?cid=${cid}`;
-            if (source_user_id) {
-                url += `&source_user_id=${source_user_id}`;
+            const { course } = this.state;
+            if (course && course.currency === 'USD') {
+                fetchData(APIURL_Order_Create, { cid, currency: 'USD' }).then(
+                    ([err, result]) => {
+                        if (err) return CMessage.error(err);
+                        let { order_id } = result;
+                        location.href = `/pay/oversea?cid=${order_id}`;
+                    }
+                );
+            } else {
+                let url = `/pay/prepare?cid=${cid}`;
+                if (source_user_id) {
+                    url += `&source_user_id=${source_user_id}`;
+                }
+                location.href = url;
             }
-            // this.props.history.push(url);
-            location.href = url;
         }
     }
 

@@ -274,7 +274,9 @@ export default class PayCenter extends Component {
                                     {order ? order.subject : ''}
                                 </div>
                                 <div className="order-price">
-                                    {order ? order.pay_price : ''}
+                                    实付金额：<span className="price">
+                                        {order ? order.pay_price : ''}
+                                    </span>
                                 </div>
                             </div>
                             <div className="pay-method">
@@ -312,7 +314,9 @@ export default class PayCenter extends Component {
                             </div>
                             <div className="pay-footer clearfix">
                                 <a
-                                    ref={ele => (this.gopayEle = ele)}
+                                    ref={ele => {
+                                        this.gopayEle = ele;
+                                    }}
                                     href=""
                                     style={{ display: 'none' }}
                                     target="payWindow"

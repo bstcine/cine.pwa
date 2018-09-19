@@ -6,7 +6,7 @@ import { CIcon } from '@/component/_base';
 
 class WordCardBodyRecite extends React.PureComponent {
     constructor(props) {
-        super(props)
+        super(props);
         this.toggle = this.toggle.bind(this);
         this.startPrevious = this.startPrevious.bind(this);
         this.startNext = this.startNext.bind(this);
@@ -40,8 +40,9 @@ class WordCardBodyRecite extends React.PureComponent {
         actions.playPhonetic();
     }
     render() {
-        let { rows, currentIndex, isBack, isKnown, actions } = this.props;
+        let { rows, currentIndex, lastZh, isBack, isKnown, actions } = this.props;
         let { word, phonetic_a, phonetic_b, zh } = rows[currentIndex];
+        zh = lastZh ? lastZh : zh;
         let phonetic = phonetic_b;
         if (!phonetic) {
             phonetic = phonetic_a;

@@ -114,12 +114,13 @@ class WordCardContainer extends Component {
         location.href = testHref;
     }
     render() {
-        let { result, currentIndex, isAutoChangeWord, isReviseChangeWord, isBack, isKnown, actions } = this.props;
+        let { result, currentIndex, lastZh, isAutoChangeWord, isReviseChangeWord, isBack, isKnown, actions } = this.props;
         return (
             <WordCard
                 param={this.param}
                 result={result}
                 currentIndex={currentIndex}
+                lastZh={lastZh}
                 isAutoChangeWord={isAutoChangeWord}
                 isReviseChangeWord={isReviseChangeWord}
                 isBack={isBack}
@@ -136,6 +137,7 @@ const mapStateToProps = state => {
     return {
         result: state.WordCardRedu.get('result'),
         currentIndex: state.WordCardRedu.get('currentIndex'),
+        lastZh: state.WordCardRedu.get('lastZh'),
         isAutoChangeWord: state.WordCardRedu.get('isAutoChangeWord'),
         isReviseChangeWord: state.WordCardRedu.get('isReviseChangeWord'),
         isBack: state.WordCardRedu.get('isBack'),

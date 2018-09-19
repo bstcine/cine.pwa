@@ -15,6 +15,10 @@ export const wCardAction = {
         type: ACTION_WC.RECEIVE,
         payload: result,
     }),
+    _changeLastZh: zh => ({
+        type: ACTION_WC.CHANGELASTZH,
+        payload: zh,
+    }),
     _autoChangeWordStatus: status => ({
         type: ACTION_WC.AUTOCHANGEWORDSTATUS,
         payload: status,
@@ -59,6 +63,12 @@ export const wCardAction = {
         type: ACTION_WC.ORIGINROWS,
         payload: rows,
     }),
+    toggleBack: isBack => async dispatch => {
+        if (isBack) {
+            dispatch(wCardAction._changeLastZh(''));
+        }
+        dispatch(wCardAction._toggleBack(isBack));
+    },
     // 卡片式学习方法
     loadWordList: (param) => async dispatch => {
 
@@ -135,7 +145,7 @@ export const wCardAction = {
     changFrontOrBack: () => (dispatch, getState) => {
         let reducer = getState().WordCardRedu;
         let isBack = !reducer.get('isBack');
-        dispatch(wCardAction._toggleBack(isBack));
+        dispatch(wCardAction.toggleBack(isBack));
     },
     // 切换已认识状态
     changeKnownStatus: () => async (dispatch, getState) => {
@@ -210,6 +220,9 @@ export const wCardAction = {
         if (!rows || rows.length === 0) {
             return;
         }
+        const currentZh = rows[currentIndex].zh;
+        console.log('当前的汉语翻译: ', currentZh);
+        dispatch(wCardAction._changeLastZh(currentZh));
         let updateStatus = await dispatch(wCardAction.updateWordKnownStatus());
         let reviseIndex = reducer.get('reviseCurrentIndex');
         let reviseArray = reducer.get('reviseIndexArray');
@@ -238,7 +251,7 @@ export const wCardAction = {
         dispatch(wCardAction._changeCurrentIndex(currentIndex));
         // 反面切换到正面
         if (isBack) {
-            dispatch(wCardAction._toggleBack(false));
+            dispatch(wCardAction.toggleBack(false));
         }
         // 已认识切换到不认识
         if (isKnown) {
@@ -250,7 +263,7 @@ export const wCardAction = {
         if (isAutoChangeWord && isAuto) {
             // 开启翻转定时器
             let toggleTimer = setTimeout(() => {
-                dispatch(wCardAction._toggleBack(true));
+                dispatch(wCardAction.toggleBack(true));
                 dispatch(wCardAction._changeToggleTimer(null));
             }, 2000);
             dispatch(wCardAction._changeToggleTimer(toggleTimer));
@@ -274,6 +287,9 @@ export const wCardAction = {
         if (!rows || rows.length === 0) {
             return;
         }
+        const currentZh = rows[currentIndex].zh;
+        console.log('当前的汉语翻译: ', currentZh);
+        dispatch(wCardAction._changeLastZh(currentZh));
         let updateStatus = await dispatch(wCardAction.updateWordKnownStatus());
         let reviseIndex = reducer.get('reviseCurrentIndex');
         let reviseArray = reducer.get('reviseIndexArray');
@@ -298,7 +314,7 @@ export const wCardAction = {
         }
         dispatch(wCardAction._changeCurrentIndex(currentIndex));
         if (isBack) {
-            dispatch(wCardAction._toggleBack(false));
+            dispatch(wCardAction.toggleBack(false));
         }
         // 已认识切换到不认识
         if (isKnown) {

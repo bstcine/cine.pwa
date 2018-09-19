@@ -15,7 +15,7 @@ class WordCardBodyDone extends React.PureComponent {
                 </div>
                 <div className="functionCard">
                     <div className="repeatCard">
-                        <p className="functionText" onClick={actions.repeatCard}>再背一次</p>
+                        <p className="functionText" onClick={actions.repeatCard}>再学一次</p>
                     </div>
                     <div className="testCard">
                         <p className="functionText" onClick={quizAction}>立即测试</p>

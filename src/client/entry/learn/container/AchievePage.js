@@ -8,6 +8,9 @@ import * as learnAction from '@/action/learnAction';
 import { getParam } from '@/util/urlUtil';
 import { CMessage } from '@/component/_base';
 import QRCode from '@/component/QRCode';
+import siteCodeUtil from '@/util/sitecodeUtil';
+import Bridge from '@/util/bridge';
+import BRIDGE_EVENT from '@/constant/bridgeEvent';
 
 const mapStateToProps = state => {
     const { taskShareRedu } = state;
@@ -39,13 +42,25 @@ class AchievePage extends Component {
                 useCORS: true,
             })
                 .then(canvas => {
-                    this.setState({
-                        img: canvas.toDataURL(),
-                    });
-                    CMessage.info('“长按屏幕”保存图片并分享至朋友圈', 5000, {
-                        mask: false,
-                        position: 'top',
-                    });
+                    const base64Url = canvas.toDataURL();
+                    if (siteCodeUtil.inIOSAPP()) {
+                        Bridge.ios(BRIDGE_EVENT.SEND_IMG, {
+                            encode: 'base64',
+                            data: base64Url,
+                        });
+                    } else {
+                        this.setState({
+                            img: base64Url,
+                        });
+                        CMessage.info(
+                            '“长按屏幕”保存图片并分享至朋友圈',
+                            5000,
+                            {
+                                mask: false,
+                                position: 'top',
+                            }
+                        );
+                    }
                 })
                 .catch(function(error) {
                     QRCode.open(window.location.href);

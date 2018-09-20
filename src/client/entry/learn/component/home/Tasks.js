@@ -3,6 +3,9 @@ import TasksList from './TasksList';
 import { CCardContainer, CIcon } from '@/component/_base';
 import uaUtil from '@/util/uaUtil';
 import QRCode from '@/component/QRCode';
+import Bridge from '@/util/bridge';
+import siteCodeUtil from '@/util/sitecodeUtil';
+import BRIDGE_EVENT from '@/constant/bridgeEvent';
 
 const ExpandMore = ({ tasks, isLimitTasks, onShowAllTask }) => {
     if (tasks && tasks.length > 5 && isLimitTasks) {
@@ -32,11 +35,17 @@ const Tasks = ({ tasks, user, isLimitTasks, onShowAllTask, gActions }) => {
                     {uaUtil.PC() || uaUtil.AndroidTablet() || uaUtil.iPad() ? (
                         <a
                             onClick={() => {
-                                QRCode.open(
-                                    `${location.protocol}//${
-                                        location.host
-                                    }/learn/achieve?user_id=${user.id}`
-                                );
+                                const url = `${location.protocol}//${
+                                    location.host
+                                }/learn/achieve?user_id=${user.id}`;
+                                if (siteCodeUtil.inIOSAPP()) {
+                                    Bridge.ios(BRIDGE_EVENT.OPEN_BROWSER, {
+                                        visible: false,
+                                        url,
+                                    });
+                                } else {
+                                    QRCode.open(url);
+                                }
                             }}>
                             打卡 <CIcon>ci-cup</CIcon>
                         </a>

@@ -1,152 +1,154 @@
 .category-list {
-  .category-not-found {
-    font-size: .30rem;
-    color: #c2c3c5;
-    text-align: center;
+    .category-not-found {
+        font-size: 0.3rem;
+        color: #c2c3c5;
+        text-align: center;
 
-    img{
-      display: block;
-      margin: 2rem auto .76rem;
-      width: 2rem;
-      height: 2rem;
-    }
-  }
-  .category {
-    .grey-line-bottom(16);
-    .category-text {
-      padding: .36rem .06rem .28rem;
-      font-size: .32rem;
-      color: #0f0f0f;
-    }
-    .course-list {
-      font-size: 0;
-
-      .course-wrap {
-        display: inline-block;
-        margin-bottom: .20rem;
-        width: 1/2 * 100%;
-
-        .course-item {
-          cursor: pointer;
-          margin: 0 .04rem;
-          transition: all 0.3s cubic-bezier(.25, .8, .25, 1);
-          border-radius: .06rem;
-         /*  box-shadow: 0 0 .04rem rgba(0, 0, 0, .2); */
-          &:hover {
-            box-shadow: 0 .08rem .16rem 0 rgba(0, 0, 0, 0.15)
-          }
-          .course-img {
-            padding-top: (9/16 )*100%;
-            border-top-left-radius: .06rem;
-            border-top-right-radius: .06rem;
-          }
-          .course-desc {
-            padding: 0 .10rem;
-            > * {
-              .text-one-line();
-            }
-            .course-title {
-              font-size: .28rem;
-              line-height: .50rem;
-              color: #222;
-            }
-            .course-author, .course-arrange {
-              font-size: .22rem;
-              height: .32rem;
-              line-height: .32rem;
-              color: #a0a4a7;
-            }
-
-            .course-price {
-              font-size: .30rem;
-              line-height: .60rem;
-              color: #f22010;
-              .old-price-text {
-                vertical-align: top;
-                padding-left: .22rem;
-                color: #c2c3c5;
-                font-size: .28rem;
-              }
-              .old-price {
-                vertical-align: top;
-                color: #c2c3c5;
-                text-decoration: line-through;
-                font-size: .28rem;
-              }
-            }
-            .coming-soon {
-              color: #8d8c8c;
-              font-size: .32rem;
-              line-height: .60rem;
-            }
-          }
+        img {
+            display: block;
+            margin: 2rem auto 0.76rem;
+            width: 2rem;
+            height: 2rem;
         }
-      }
     }
-  }
+    .category {
+        .grey-line-bottom(16);
+        .category-text {
+            padding: 0.36rem 0.06rem 0.28rem;
+            font-size: 0.32rem;
+            color: #0f0f0f;
+        }
+        .course-list {
+            font-size: 0;
+
+            .course-wrap {
+                vertical-align: top;
+                display: inline-block;
+                margin-bottom: 0.2rem;
+                width: 1/2 * 100%;
+
+                .course-item {
+                    cursor: pointer;
+                    margin: 0 0.04rem;
+                    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+                    border-radius: 0.06rem;
+                    /*  box-shadow: 0 0 .04rem rgba(0, 0, 0, .2); */
+                    &:hover {
+                        box-shadow: 0 0.08rem 0.16rem 0 rgba(0, 0, 0, 0.15);
+                    }
+                    .course-img {
+                        padding-top: (9/16) * 100%;
+                        border-top-left-radius: 0.06rem;
+                        border-top-right-radius: 0.06rem;
+                    }
+                    .course-desc {
+                        padding: 0 0.1rem;
+                        > * {
+                            .text-one-line();
+                        }
+                        .course-title {
+                            font-size: 0.28rem;
+                            line-height: 0.5rem;
+                            color: #222;
+                        }
+                        .course-author,
+                        .course-arrange {
+                            font-size: 0.22rem;
+                            height: 0.32rem;
+                            line-height: 0.32rem;
+                            color: #a0a4a7;
+                        }
+
+                        .course-price {
+                            font-size: 0.3rem;
+                            line-height: 0.6rem;
+                            color: #f22010;
+                            .old-price-text {
+                                vertical-align: top;
+                                padding-left: 0.22rem;
+                                color: #c2c3c5;
+                                font-size: 0.28rem;
+                            }
+                            .old-price {
+                                vertical-align: top;
+                                color: #c2c3c5;
+                                text-decoration: line-through;
+                                font-size: 0.28rem;
+                            }
+                        }
+                        .coming-soon {
+                            color: #8d8c8c;
+                            font-size: 0.32rem;
+                            line-height: 0.6rem;
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
 
 @media @media-up-xs {
-  .category-list {
-    .category-not-found {
-
-    }
-    .category {
-      padding: 0 .37rem;
-      .category-text {
-        font-size: .40rem;
-      }
-      .course-list {
-        margin: 0 -.10rem;
-        .course-wrap {
-          width: 1/3 * 100%;
-          .course-item {
-            margin: 0 .20rem;
-            .course-desc {
-              .course-title {
-                line-height: .60rem;
-              }
-              .course-author, .course-arrange {
-                font-size: .24rem;
-              }
-              .course-price {
-                font-size: .42rem;
-                line-height: .76rem;
-              }
-              .coming-soon {
-                line-height: .76rem;
-              }
-            }
-          }
+    .category-list {
+        .category-not-found {
         }
-      }
+        .category {
+            padding: 0 0.37rem;
+            .category-text {
+                font-size: 0.4rem;
+            }
+            .course-list {
+                margin: 0 -0.1rem;
+                .course-wrap {
+                    width: 1/3 * 100%;
+                    .course-item {
+                        margin: 0 0.2rem;
+                        .course-desc {
+                            .course-title {
+                                line-height: 0.6rem;
+                            }
+                            .course-author,
+                            .course-arrange {
+                                font-size: 0.24rem;
+                            }
+                            .course-price {
+                                font-size: 0.42rem;
+                                line-height: 0.76rem;
+                            }
+                            .coming-soon {
+                                line-height: 0.76rem;
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
-  }
 }
 
 @media @media-up-sm {
-  .category-list {
-    .category {
-      border-bottom: none;
+    .category-list {
+        .category {
+            border-bottom: none;
 
-      .category-text {
-        padding: .36rem .06rem .28rem;
-        font-size: .36rem;
-        color: #0f0f0f;
-      }
-      .course-list {
-        font-size: 0;
-        margin: 0 -.10rem;
-        .course-wrap {
-          width: 1/4 * 100%;
-          margin-bottom: .40rem;
+            .category-text {
+                padding: 0.36rem 0.06rem 0.28rem;
+                font-size: 0.36rem;
+                color: #0f0f0f;
+            }
+            .course-list {
+                font-size: 0;
+                margin: 0 -0.1rem;
+                .course-wrap {
+                    width: 1/4 * 100%;
+                    margin-bottom: 0.4rem;
+                }
+                .grey-line-bottom(12);
+            }
+
+            &:last-child .course-list {
+                border-bottom: none;
+            }
         }
-        .grey-line-bottom(12);
-      }
-
-      &:last-child .course-list {
-        border-bottom: none;
-      }
     }
-  }
 }

@@ -89,9 +89,7 @@ export default class Header extends Component {
                                 {!!user &&
                                     (user.role_id === '1' ||
                                         user.role_id === '2') && (
-                                    <a href="/mentor">
-                                            老师批改
-                                    </a>
+                                    <a href="/mentor">老师批改</a>
                                 )}
                             </li>
                             <li className="nav-item">
@@ -165,7 +163,7 @@ export default class Header extends Component {
                                 <a href="/appDownload">APP下载</a>
                             </li>
                             <li className="nav-item">
-                                <a href="/studyabroad">善恩留学</a>
+                                <a href="/libraryplan">善恩图书馆计划</a>
                             </li>
                         </ul>
                     </div>

@@ -21,25 +21,25 @@ class PayStripe extends Component {
 
     componentDidMount() {
         if (
-            location.hostname !== 'localhost' &&
-            location.protocol !== 'https'
+            location.protocol === 'https:' ||
+            location.hostname === 'localhost'
         ) {
-            location.href = location.href.replace('http://', 'https://');
-            return;
-        }
-        fetchData(APIURL_Pay_Stripe_Info, { order_id: getParam().cid }).then(
-            ([error, result]) => {
-                if (error) return CMessage.error(error);
-                const { keyPublic, order } = result;
-                if (order.pay_status === '1') {
-                    location.href = `/pay/status?cid=${order.id}`;
+            fetchData(APIURL_Pay_Stripe_Info, { order_id: getParam().cid }).then(
+                ([error, result]) => {
+                    if (error) return CMessage.error(error);
+                    const { keyPublic, order } = result;
+                    if (order.pay_status === '1') {
+                        location.href = `/pay/status?cid=${order.id}`;
+                    }
+                    this.setState({
+                        order,
+                    });
+                    this.initStripe(keyPublic);
                 }
-                this.setState({
-                    order,
-                });
-                this.initStripe(keyPublic);
-            }
-        );
+            );
+        } else {
+            location.href = location.href.replace('http://', 'https://');
+        }
     }
 
     initStripe(keyPublic) {

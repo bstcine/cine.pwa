@@ -10,11 +10,11 @@ export default class Achieve extends Component {
     render() {
         const {
             teacher,
-            week,
-            word,
-            summary,
-            video,
-            writing,
+            week_count,
+            word_count,
+            keypoint_count,
+            learn_duration,
+            writing_count,
             composition,
             img,
         } = this.props;
@@ -32,7 +32,7 @@ export default class Achieve extends Component {
                             英文私塾导师<span>{teacher && teacher.name}</span>
                         </p>
                         <p>
-                            学习了 <span className="bb">{week}</span> 周
+                            学习了 <span className="bb">{week_count}</span> 周
                         </p>
                     </div>
                 </div>
@@ -47,7 +47,7 @@ export default class Achieve extends Component {
                             <div className="myach__list">
                                 <div className="myach__item">
                                     <div className="myach__item_count">
-                                        <span>{word}</span> 个
+                                        <span>{word_count}</span> 个
                                     </div>
                                     <div className="myach__item_name">
                                         <img
@@ -59,7 +59,7 @@ export default class Achieve extends Component {
                                 </div>
                                 <div className="myach__item">
                                     <div className="myach__item_count">
-                                        <span>{summary}</span> 个
+                                        <span>{keypoint_count}</span> 个
                                     </div>
                                     <div className="myach__item_name">
                                         <img
@@ -71,7 +71,7 @@ export default class Achieve extends Component {
                                 </div>
                                 <div className="myach__item">
                                     <div className="myach__item_count">
-                                        <span>{video}</span> 分钟
+                                        <span>{learn_duration}</span> 分钟
                                     </div>
                                     <div className="myach__item_name">
                                         <img
@@ -83,7 +83,7 @@ export default class Achieve extends Component {
                                 </div>
                                 <div className="myach__item">
                                     <div className="myach__item_count">
-                                        <span>{writing}</span> 篇
+                                        <span>{writing_count}</span> 篇
                                     </div>
                                     <div className="myach__item_name">
                                         <img

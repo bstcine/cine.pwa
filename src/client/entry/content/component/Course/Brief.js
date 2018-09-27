@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { getParam } from '@/util/urlUtil';
 import siteCodeUtil from '@/util/sitecodeUtil';
 import TryPlayer from '@/component/TryPlayer';
+import CommonUtil from '@/util/common';
 
 export default class Brief extends Component {
     static defaultProps = {
@@ -171,11 +172,15 @@ export default class Brief extends Component {
                     return (
                         <div className="prices">
                             <span className="price">
-                                ￥{course.activity_price}
+                                {CommonUtil.getCurrencySymbol(course.currency)}
+                                {course.activity_price}
                             </span>
                             <span className="old-price">
                                 原价：<span className="del">
-                                    ￥{course.original_price}
+                                    {CommonUtil.getCurrencySymbol(
+                                        course.currency
+                                    )}
+                                    {course.original_price}
                                 </span>
                             </span>
                         </div>
@@ -184,7 +189,8 @@ export default class Brief extends Component {
                     return (
                         <div className="prices">
                             <span className="price">
-                                ￥{course.activity_price}
+                                {CommonUtil.getCurrencySymbol(course.currency)}
+                                {course.activity_price}
                             </span>
                         </div>
                     );

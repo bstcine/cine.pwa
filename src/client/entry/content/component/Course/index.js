@@ -70,7 +70,7 @@ export default class Course extends Component {
         }
     }
 
-    componentWillReceiveProps(nextProps) {
+    UNSAFE_componentWillReceiveProps(nextProps) {
         const locationChanged = nextProps.location !== this.props.location;
         if (locationChanged) {
             this.initCurrentPageWechat();
@@ -117,21 +117,21 @@ export default class Course extends Component {
             this.login();
             return;
         }
+        const { course } = this.state;
         let { cid, source_user_id } = getParam();
-        if (siteCodeUtil.inIOSAPP()) {
-            Bridge.ios(BRIDGE_EVENT.PRE_CONFIRM, { course_id: cid });
-        } else if (siteCodeUtil.inAndroidAPP()) {
-            Bridge.android(BRIDGE_EVENT.PRE_CONFIRM, { course_id: cid });
+        if (course && course.currency === 'USD') {
+            fetchData(APIURL_Order_Create, { cid, currency: 'USD' }).then(
+                ([err, result]) => {
+                    if (err) return CMessage.error(err);
+                    let { order_id } = result;
+                    location.href = `/pay/oversea?cid=${order_id}`;
+                }
+            );
         } else {
-            const { course } = this.state;
-            if (course && course.currency === 'USD') {
-                fetchData(APIURL_Order_Create, { cid, currency: 'USD' }).then(
-                    ([err, result]) => {
-                        if (err) return CMessage.error(err);
-                        let { order_id } = result;
-                        location.href = `/pay/oversea?cid=${order_id}`;
-                    }
-                );
+            if (siteCodeUtil.inIOSAPP()) {
+                Bridge.ios(BRIDGE_EVENT.PRE_CONFIRM, { course_id: cid });
+            } else if (siteCodeUtil.inAndroidAPP()) {
+                Bridge.android(BRIDGE_EVENT.PRE_CONFIRM, { course_id: cid });
             } else {
                 let url = `/pay/prepare?cid=${cid}`;
                 if (source_user_id) {

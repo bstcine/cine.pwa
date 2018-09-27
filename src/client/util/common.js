@@ -55,6 +55,9 @@ const CommonUtil = {
     getRandomNumber: max => {
         return Math.round(Math.random() * max);
     },
+    getCurrencySymbol: currency => {
+        return currency === 'USD' ? '$' : '￥';
+    },
 };
 
 export default CommonUtil;

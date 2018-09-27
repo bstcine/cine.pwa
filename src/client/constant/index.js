@@ -51,6 +51,10 @@ export const Task_Type = {
      * 6:作文
      */
     Writing: '6',
+    /**
+     * 7:线下单词
+     */
+    OfflineWord: '7',
 };
 
 export const SITECODE = {

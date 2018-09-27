@@ -120,13 +120,17 @@ export default class Course extends Component {
         const { course } = this.state;
         let { cid, source_user_id } = getParam();
         if (course && course.currency === 'USD') {
-            fetchData(APIURL_Order_Create, { cid, currency: 'USD' }).then(
-                ([err, result]) => {
-                    if (err) return CMessage.error(err);
-                    let { order_id } = result;
-                    location.href = `/pay/oversea?cid=${order_id}`;
-                }
-            );
+            if (siteCodeUtil.inAPP()) {
+                CMessage.info('请在PC端支付，APP暂不支持');
+            } else {
+                fetchData(APIURL_Order_Create, { cid, currency: 'USD' }).then(
+                    ([err, result]) => {
+                        if (err) return CMessage.error(err);
+                        let { order_id } = result;
+                        location.href = `/pay/oversea?cid=${order_id}`;
+                    }
+                );
+            }
         } else {
             if (siteCodeUtil.inIOSAPP()) {
                 Bridge.ios(BRIDGE_EVENT.PRE_CONFIRM, { course_id: cid });

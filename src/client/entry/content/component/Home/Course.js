@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import CourseLink from '@/component/CourseLink';
 import LazyLoad from 'react-lazyload';
+import CommonUtil from '@/util/common';
 
 export default class Course extends Component {
     displayPrice(course) {
@@ -11,15 +12,22 @@ export default class Course extends Component {
                 if (course.original_price) {
                     return (
                         <div className="course-price">
-                            ￥{course.price}
+                            {CommonUtil.getCurrencySymbol(course.currency)}
+                            {course.price}
                             <span className="old-price-text">原价</span>
                             <span className="old-price">
-                                ￥{course.original_price}
+                                {CommonUtil.getCurrencySymbol(course.currency)}
+                                {course.original_price}
                             </span>
                         </div>
                     );
                 } else {
-                    return <div className="course-price">￥{course.price}</div>;
+                    return (
+                        <div className="course-price">
+                            {CommonUtil.getCurrencySymbol(course.currency)}
+                            {course.price}
+                        </div>
+                    );
                 }
             }
         } else if (course.status === '2') {

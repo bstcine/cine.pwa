@@ -8,6 +8,7 @@ import task from '@/constant/task';
 const Label = ({ type }) => <span className="label">{task[type]}</span>;
 
 const Status = ({ task }) => {
+    if (task.type === Task_Type.Offline || task.type === Task_Type.Writing) return null;
     if (task.status === '0' || task.status === '1') {
         return task.type === '3' ? (
             <span className="task-opration">查看</span>

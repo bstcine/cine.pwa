@@ -55,6 +55,10 @@ export const Task_Type = {
      * 7:线下单词
      */
     OfflineWord: '7',
+    /**
+     * 8:线下
+     */
+    Offline: '8',
 };
 
 export const SITECODE = {

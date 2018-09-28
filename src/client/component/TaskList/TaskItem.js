@@ -45,7 +45,7 @@ const getHref = (task, isMentor) => {
     }
 };
 const onClick = task => {
-    if (task.type === Task_Type.Writing) {
+    if (task.type === Task_Type.Offline) {
         return () => {
             CModal.alert({
                 title: task.title,

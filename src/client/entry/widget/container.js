@@ -329,6 +329,26 @@ class Container extends Component {
                         }}>
                         ALERT
                     </CButton>
+
+                    <CButton
+                        variant="contained"
+                        color="primary"
+                        onClick={() => {
+                            CModal.alert({
+                                title: 'title',
+                                text: 'hello alert!with cancel',
+                                onConfirm: () => {
+                                    console.log('confirm');
+                                },
+                                onCancel: () => {
+                                    console.log('onCancel');
+                                },
+                                responsive: true,
+                            });
+                        }}>
+                        responsive ALERT
+                    </CButton>
+
                     <CButton
                         variant="outlined"
                         color="primary"

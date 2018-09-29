@@ -6,13 +6,13 @@ import classNames from 'classnames';
 import { componentNames } from '../config';
 const cls = componentNames.Modal;
 
-export default function({ title, text, reposive, onCancel, onConfirm, close }) {
+export default function({ title, text, responsive, onCancel, onConfirm, close }) {
     return (
         <div className={cls}>
             <Mask />
             <div
                 className={classNames(`${cls}__main`, {
-                    [`${cls}__main--reposive`]: reposive,
+                    [`${cls}__main--responsive`]: responsive,
                 })}>
                 {title && <div className={`${cls}__header`}>{title}</div>}
                 <div className={`${cls}__content`}>{text}</div>

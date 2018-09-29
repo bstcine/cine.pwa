@@ -25,6 +25,7 @@ const onClick = task => {
             CModal.alert({
                 title: task.title,
                 text: task.writing_desc,
+                reposive: true,
             });
         };
     }

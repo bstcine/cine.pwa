@@ -19,6 +19,8 @@ const FilterTaskDialog = ({
         { key: '2', value: '习题' },
         { key: '3', value: '习题反馈' },
         { key: '4', value: '词汇' },
+        { key: '6', value: '作文' },
+        { key: '8', value: '线下' },
     ];
 
     const dialogActions = [

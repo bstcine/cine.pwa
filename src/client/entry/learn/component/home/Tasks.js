@@ -29,7 +29,7 @@ const Tasks = ({ tasks, user, isLimitTasks, onShowAllTask, gActions }) => {
                             {tasks.filter(i => i.status !== '2').length}
                         </span>
                     </div>
-                    <a href="/learn/task">历史作业</a>
+                    <a href="/learn/task">全部作业</a>
                 </div>
                 <div className="cine-panel__righthead">
                     {uaUtil.PC() || uaUtil.AndroidTablet() || uaUtil.iPad() ? (

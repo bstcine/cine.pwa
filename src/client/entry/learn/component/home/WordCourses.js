@@ -16,7 +16,7 @@ const WordCourses = ({ courses }) => {
                 console.log(res);
             });
         } else {
-            // location.href = course.href;
+            location.href = course.href;
         }
     };
     const getWordCourse = course => {

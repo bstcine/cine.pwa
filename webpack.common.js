@@ -28,7 +28,7 @@ let entry = {};
 let htmlWebpackPlugins = [];
 
 pages.forEach(page => {
-    entry[page] = `./src/client/entry/${page}/index.js`;
+    entry[page] = ['@babel/polyfill', `./src/client/entry/${page}/index.js`];
     htmlWebpackPlugins.push(
         new HtmlWebpackPlugin({
             filename: `entry/${page}/index.html`,
@@ -53,7 +53,7 @@ module.exports = {
         new webpack.DefinePlugin({
             SERVICE_URL: JSON.stringify(SERVICE_URL),
         }),
-        new CleanWebpackPlugin(['build'], { verbose: devMode }),
+        new CleanWebpackPlugin(['build'], {verbose: devMode}),
         new MiniCssExtractPlugin({
             filename: 'entry/[name]/index.[contenthash:8].css',
         }),
@@ -70,7 +70,9 @@ module.exports = {
             {
                 test: /\.js$/,
                 loader: 'babel-loader',
-                exclude: /node_modules/,
+                options: {
+                    presets: ['@babel/preset-env'],
+                },
             },
             {
                 test: /\.less$/,

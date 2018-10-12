@@ -14,11 +14,11 @@ class WordLessonG extends React.Component {
             originalExpanded: this.props.expanded,
         };
     }
-    static getDerivedStateFromProps(props, state) {
-        if (props.expanded !== state.originalExpanded) {
+    static getDerivedStateFromProps(nextProps, prevState) {
+        if (nextProps.expanded !== prevState.originalExpanded) {
             return {
-                originalExpanded: props.expanded,
-                expandStatus: props.expanded ? 1 : 0,
+                originalExpanded: nextProps.expanded,
+                expandStatus: nextProps.expanded ? 1 : 0,
             };
         } else {
             return null;
@@ -43,7 +43,7 @@ class WordLessonG extends React.Component {
             <ExpansionPanel
                 expanded={this.state.expandStatus === 1}
                 onChange={this.onChange}>
-                <ExpansionPanelSummary expandIcon={<CIcon>play_arrow</CIcon>}>
+                <ExpansionPanelSummary expandIcon={<CIcon>expand_more</CIcon>}>
                     {title}
                 </ExpansionPanelSummary>
                 <ExpansionPanelDetails>

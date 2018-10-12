@@ -7,9 +7,8 @@ const WordLessonList = ({ lessons, layout, lastVisitID, groupCount }) => {
     let ls3 = [];
     let ls4 = [];
     let ls5 = [];
-
     const lessonGroupCount = lessons.length / 5;
-    const exL = 1 + parseInt(lastVisitID / lessonGroupCount, 10);
+    const exL = 1 + parseInt(parseInt(lastVisitID, 10) / 2000, 10);
     for (let i = 0; i < lessonGroupCount; i++) {
         const item1 = lessons[i];
         ls1.push(item1);

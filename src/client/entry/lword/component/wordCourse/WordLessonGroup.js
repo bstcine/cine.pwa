@@ -11,7 +11,18 @@ class WordLessonG extends React.Component {
         this.onChange = this.onChange.bind(this);
         this.state = {
             expandStatus: this.props.expanded ? 1 : 0,
+            originalExpanded: this.props.expanded,
         };
+    }
+    static getDerivedStateFromProps(props, state) {
+        if (props.expanded !== state.originalExpanded) {
+            return {
+                originalExpanded: props.expanded,
+                expandStatus: props.expanded ? 1 : 0,
+            };
+        } else {
+            return null;
+        }
     }
 
     onChange(course) {

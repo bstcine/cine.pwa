@@ -2,15 +2,30 @@ import React from 'react';
 // import { CCard } from '@/component/_base';
 import TextFix from '@/component/TextFix';
 import { CPanel, CCard, CCardContainer } from '@/component/_base';
+import siteCodeUtil from '@/util/sitecodeUtil';
+import BRIDGE_EVENT from '@/constant/bridgeEvent';
+import Bridge from '@/util/bridge';
 
 const Courses = ({ courses }) => {
-    const getHref = course => {
-        let url = '/learn/course/' + course.id;
-        if (course.last_content_id) {
-            url += '?lesson_id=' + course.last_content_id;
+    const goClick = course => {
+        console.log(course);
+        if (siteCodeUtil.inAndroidAPP()) {
+            Bridge.android(BRIDGE_EVENT.LEARN, {
+                course_id: course.id,
+                course_name: course.name,
+                last_lesson_id: course.last_content_id,
+            }).then(res => {
+                console.log(res);
+            });
+        } else {
+            let url = '/learn/course/' + course.id;
+            if (course.last_content_id) {
+                url += '?lesson_id=' + course.last_content_id;
+            }
+            location.href = url;
         }
-        return url;
     };
+
     return (
         <CPanel title="我的课程" className="courses-container">
             <CCardContainer className="courses-list" gap="none">
@@ -20,7 +35,7 @@ const Courses = ({ courses }) => {
                             hover="lighten"
                             key={course.id}
                             className="courses-item"
-                            href={getHref(course)}>
+                            onClick={() => goClick(course)}>
                             <div
                                 className="course-img"
                                 style={{

@@ -13,17 +13,19 @@ export default class WordCourse extends React.PureComponent {
         const cine_word = range > 9000 ? '' : `：${start_index}-${end_index}`;
         return (
             <React.Fragment>
-                <CPanel title={`善恩核心10000词汇${cine_word}`}>
+                {/*     <CPanel title={`善恩核心10000词汇${cine_word}`}>
                     <a href={`/quizvocab?estimate=1-10000`} target="_blank">
                         <div className="quizLink">测试你的背单词起点</div>
                     </a>
-
-                    <WordLessonList
-                        lessons={lessons}
-                        layout="245"
-                        lastVisitID={lastVisitID}
-                    />
-                </CPanel>
+                </CPanel> */}
+                <a href={`/quizvocab?estimate=1-10000`} target="_blank">
+                    <div className="quizLink">测试你的背单词起点</div>
+                </a>
+                <WordLessonList
+                    lessons={lessons}
+                    layout="245"
+                    lastVisitID={lastVisitID}
+                />
             </React.Fragment>
         );
     }

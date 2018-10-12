@@ -1,13 +1,29 @@
 import React from 'react';
 import { CPanel, CCard, CCardContainer } from '@/component/_base';
+import siteCodeUtil from '@/util/sitecodeUtil';
+import BRIDGE_EVENT from '@/constant/bridgeEvent';
+import Bridge from '@/util/bridge';
 import '@/entry/learn/asset/style/homeWordCourse.less';
 
 const WordCourses = ({ courses }) => {
+    const goWordClick = course => {
+        console.log(course);
+        if (siteCodeUtil.inAndroidAPP()) {
+            Bridge.android(BRIDGE_EVENT.OPEN_BROWSER, {
+                url: course.href,
+                title: course.title,
+            }).then(res => {
+                console.log(res);
+            });
+        } else {
+            // location.href = course.href;
+        }
+    };
     const getWordCourse = course => {
         const imgbg = `url(${course.cover}) center center / cover no-repeat`;
         if (course.status === 1) {
             return (
-                <a href={course.href} target="_blank">
+                <a onClick={() => goWordClick(course)} target="_blank">
                     <div className="img-c">
                         <div className="img" style={{ background: `${imgbg}` }} />
                     </div>

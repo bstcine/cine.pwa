@@ -3,6 +3,9 @@ import TextFix from '@/component/TextFix';
 import { Task_Type } from '@/constant';
 import { CCard, CIcon, CModal } from '@/component/_base';
 import task from '@/constant/task';
+import siteCodeUtil from '@/util/sitecodeUtil';
+import BRIDGE_EVENT from '@/constant/bridgeEvent';
+import Bridge from '@/util/bridge';
 
 const Label = ({ type }) => <span className="label">{task[type]}</span>;
 
@@ -19,6 +22,31 @@ const Status = ({ task }) => {
     }
 };
 
+const getHref = task => {
+    switch (task.type) {
+        case Task_Type.Video:
+        case Task_Type.Quiz_PDF:
+            return `/learn/course/${task.course_id}?task_id=${
+                task.id
+            }&lesson_id=${task.lesson_id}`;
+        case Task_Type.Quiz:
+            return `/quiz/kj?task_id=${task.id}`;
+        case Task_Type.Quiz_Feedback: {
+            return `/quiz/kj?task_id=${task.id}&stats_content_quiz_id=${
+                task.object_id
+            }`;
+        }
+        case Task_Type.Word:
+            if (task.word_start_index && task.word_end_index) {
+                return `/lword?task_id=${task.id}&start_index=${
+                    task.word_start_index
+                }&end_index=${task.word_end_index}`;
+            } else {
+                return `/lword?task_id=${task.id}&word_type=${task.object_id}`;
+            }
+    }
+};
+
 const onClick = task => {
     if (task.type === Task_Type.Offline) {
         return () => {
@@ -29,37 +57,34 @@ const onClick = task => {
             });
         };
     }
+
+    let tempHref = getHref(task);
+    if (tempHref) {
+        if (siteCodeUtil.inAndroidAPP()) {
+            if (task.type === Task_Type.Video) {
+                Bridge.android(BRIDGE_EVENT.PLAY, {
+                    course_id: task.course_id,
+                    lesson_id: task.object_id,
+                }).then(res => {
+                    console.log(res);
+                });
+            } else {
+                Bridge.android(BRIDGE_EVENT.OPEN_BROWSER, {
+                    url: tempHref,
+                    title: task.title,
+                }).then(res => {
+                    console.log(res);
+                });
+            }
+        } else {
+            location.href = tempHref;
+            // console.log(task);
+        }
+    }
 };
 
 const TasksList = ({ tasks, isLimitTasks }) => {
     if (!tasks || !tasks.length) return <div className="notask">暂无作业</div>;
-    const getHref = task => {
-        switch (task.type) {
-            case Task_Type.Video:
-            case Task_Type.Quiz_PDF:
-                return `/learn/course/${task.course_id}?task_id=${
-                    task.id
-                }&lesson_id=${task.lesson_id}`;
-            case Task_Type.Quiz:
-                return `/quiz/kj?task_id=${task.id}`;
-            case Task_Type.Quiz_Feedback: {
-                return `/quiz/kj?task_id=${task.id}&stats_content_quiz_id=${
-                    task.object_id
-                }`;
-            }
-            case Task_Type.Word:
-                if (task.word_start_index && task.word_end_index) {
-                    return `/lword?task_id=${task.id}&start_index=${
-                        task.word_start_index
-                    }&end_index=${task.word_end_index}`;
-                } else {
-                    return `/lword?task_id=${task.id}&word_type=${
-                        task.object_id
-                    }`;
-                }
-        }
-    };
-
     return tasks.map((task, i) => {
         if (isLimitTasks && i >= 5) return null;
 
@@ -68,8 +93,7 @@ const TasksList = ({ tasks, isLimitTasks }) => {
                 key={task.id}
                 hover="lighten"
                 className="task-item"
-                href={getHref(task)}
-                onClick={onClick(task)}>
+                onClick={() => onClick(task)}>
                 <Label type={task.type} />
                 <TextFix className="task-title">{task.title}</TextFix>
                 <Status task={task} />

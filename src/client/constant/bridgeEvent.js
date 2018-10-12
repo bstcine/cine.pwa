@@ -6,6 +6,7 @@ const BRIDGE_EVENT = {
     OUTER_SHARE: 'outer_share',
     PRE_CONFIRM: 'pre_confirm',
     LEARN: 'learn',
+    PLAY: 'play',
     INSTALLED_APP_LIST: 'installed_app_list',
     QUIZ_EXIT: 'quiz_exit',
     INIT_QUIZ_DATA: 'init_quiz_data',

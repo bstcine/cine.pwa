@@ -44,11 +44,7 @@ export const recieveCurrentTask = ({ tasks }) => {
 
 export const fetchMyCourseList = () => async dispatch => {
     dispatch(requsetMyCourseList());
-    let [, result] = await fetchData(
-        APIURL_User_Content_Course_Mylist,
-        null,
-        'GET'
-    );
+    let [, result] = await fetchData(APIURL_User_Content_Course_Mylist, 'GET');
     dispatch(recieveMyCourseList({ courses: result.rows }));
 };
 

@@ -1,5 +1,5 @@
 import './floating.less';
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import ButtonBase from './Button';
 import Icon from '../Icon';
@@ -38,7 +38,7 @@ class FloatingButton extends Component {
     }
 
     render() {
-        const {icon, className, color, children, onClick} = this.props;
+        const { icon, className, color, children, onClick } = this.props;
         return ReactDOM.createPortal(
             <ButtonBase
                 floating

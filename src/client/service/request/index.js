@@ -4,6 +4,7 @@ import axios from 'axios';
 if (window.API_Host_URL) {
     axios.defaults.baseURL = window.API_Host_URL;
 }
+axios.defaults.headers['Cache-Control'] = 'no-cache';
 
 axios.interceptors.request.use(
     function(config) {

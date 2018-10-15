@@ -48,6 +48,11 @@ class AchievePage extends Component {
                             encode: 'base64',
                             data: base64Url,
                         });
+                    } else if (siteCodeUtil.inAndroidAPP()) {
+                        Bridge.android(BRIDGE_EVENT.SEND_IMG, {
+                            encode: 'base64',
+                            data: base64Url,
+                        });
                     } else {
                         this.setState({
                             img: base64Url,

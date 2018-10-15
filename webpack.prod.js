@@ -41,7 +41,7 @@ module.exports = merge(common, {
                     compress: {
                         warnings: false,
                         comparisons: false,
-                        drop_console: false,
+                        drop_console: true,
                     },
                     mangle: {
                         safari10: true,

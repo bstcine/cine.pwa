@@ -32,19 +32,23 @@ class WordLessonG extends React.Component {
 
     render() {
         const { lessons, layout, title } = this.props;
-        let lessonList = lessons.map((wordLesson, i) => {
-            return (
-                <CCard key={i} hover="lighten">
-                    <WordLessonItem item={wordLesson} />
-                </CCard>
-            );
-        });
+        let lessonList = <div></div>;
+        const panelClass = this.state.originalExpanded ? 'PanelSelected' : '';
+        if (this.state.expandStatus === 1) {
+            lessonList = lessons.map((wordLesson, i) => {
+                return (
+                    <CCard key={i} hover="lighten">
+                        <WordLessonItem item={wordLesson} />
+                    </CCard>
+                );
+            });
+        }
         return (
             <ExpansionPanel
                 expanded={this.state.expandStatus === 1}
                 onChange={this.onChange}>
                 <ExpansionPanelSummary expandIcon={<CIcon>expand_more</CIcon>}>
-                    {title}
+                    <div className={panelClass}>{title}</div>
                 </ExpansionPanelSummary>
                 <ExpansionPanelDetails>
                     <CCardContainer layout={layout} gap="large">

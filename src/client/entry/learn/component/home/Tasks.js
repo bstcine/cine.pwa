@@ -64,7 +64,24 @@ const Tasks = ({ tasks, user, isLimitTasks, onShowAllTask, gActions }) => {
                             打卡 <CIcon>ci-cup</CIcon>
                         </a>
                     ) : (
-                        <a href={`/learn/achieve?user_id=${user.id}`}>
+                        <a
+                            onClick={() => {
+                                if (siteCodeUtil.inAndroidAPP()) {
+                                    Bridge.android(BRIDGE_EVENT.OPEN_BROWSER, {
+                                        url: `/learn/achieve?user_id=${
+                                            user.id
+                                        }`,
+                                        title: '打卡',
+                                        visible: false,
+                                    }).then(res => {
+                                        console.log(res);
+                                    });
+                                } else {
+                                    location.href = `/learn/achieve?user_id=${
+                                        user.id
+                                    }`;
+                                }
+                            }}>
                             打卡 <CIcon>ci-cup</CIcon>
                         </a>
                     )}

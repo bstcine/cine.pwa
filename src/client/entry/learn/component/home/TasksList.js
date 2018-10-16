@@ -68,6 +68,8 @@ const onClick = task => {
                 }).then(res => {
                     console.log(res);
                 });
+            } else if (task.type === Task_Type.Quiz_PDF) {
+                alert('请使用电脑下载PDF');
             } else {
                 Bridge.android(BRIDGE_EVENT.OPEN_BROWSER, {
                     url: tempHref,

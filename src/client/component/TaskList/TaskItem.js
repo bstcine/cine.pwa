@@ -70,7 +70,7 @@ const onClick = (task, isMentor) => {
                     console.log(res);
                 });
             } else if (task.type === Task_Type.Quiz_PDF) {
-                alert('请使用电脑下载PDF');
+                alert('请登入官网下载对应的习题PDF');
             } else {
                 Bridge.android(BRIDGE_EVENT.OPEN_BROWSER, {
                     url: tempHref,

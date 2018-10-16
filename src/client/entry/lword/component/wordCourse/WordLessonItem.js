@@ -24,23 +24,23 @@ const WordLessonItem = ({ item, actions }) => {
     const herf = `lesson_id=${item.value}`;
     return (
         <React.Fragment>
-            <a href={'/lword?' + herf} >
-                <div className={'lesson ' + className} id={`l${indexs[0]}`}>
-                    <div className="top">
-                        <div className={classNameNO}>第{item.id}组</div>
-                        <div className="fromto">{item.value}</div>
-                    </div>
-
-                    <div className={classNameMiddle} />
-                    <div className="bottom">
-                        <div className="star">{star}</div>
-                        <div className={'quizScore ' + classNameScore}>
-                            {quizScore}
-                        </div>
-                        <div className="quiz">测试成绩</div>
-                    </div>
+            {/*    <a href={'/lword?' + herf} > */}
+            <div className={'lesson ' + className} id={`l${indexs[0]}`}>
+                <div className="top">
+                    <div className={classNameNO}>第{item.id}组</div>
+                    <div className="fromto">{item.value}</div>
                 </div>
-            </a>
+
+                <div className={classNameMiddle} />
+                <div className="bottom">
+                    <div className="star">{star}</div>
+                    <div className={'quizScore ' + classNameScore}>
+                        {quizScore}
+                    </div>
+                    <div className="quiz">测试成绩</div>
+                </div>
+            </div>
+            {/*   </a> */}
         </React.Fragment>
     );
 };

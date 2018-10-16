@@ -38,7 +38,7 @@ const getCourseItems = (startID, range, lastVisitIndex, userQuizRows) => {
 const initWordCourse = Map({
     userID: null,
     wordStartID: 1,
-    lastVisitID: 1,
+    lastVisitID: -2001,
     lessons: getCourseItems(1, 10000, 1),
 });
 

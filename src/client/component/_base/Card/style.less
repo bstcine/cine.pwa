@@ -48,26 +48,30 @@
         opacity 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
-.@{card}__content--lighten {
+.@{card}--hoverable {
+    cursor: pointer;
+}
+
+.@{card}--hoverable .@{card}__content--lighten {
     &:hover {
         opacity: 0.8;
     }
 }
 
-.@{card}__content--shadow {
+.@{card}--hoverable .@{card}__content--shadow {
     &:hover {
         box-shadow: 0 0.08rem 0.16rem 0 rgba(0, 0, 0, 0.15);
     }
 }
 
-.@{card}__content--darken {
+.@{card}--hoverable .@{card}__content--darken {
     &:hover {
         box-shadow: rgba(0, 0, 0, 0.25) 0rem 0.28rem 0.9rem,
             rgba(0, 0, 0, 0.22) 0rem 0.2rem 0.36rem;
     }
 }
 
-.@{card}__content--outlined {
+.@{card}--hoverable .@{card}__content--outlined {
     &:hover {
         border: 0.02rem solid @btn-color-primary;
     }

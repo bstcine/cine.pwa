@@ -24,7 +24,7 @@ const WordCourses = ({ courses }) => {
         if (course.status === 1) {
             return (
                 <a onClick={() => goWordClick(course)} target="_blank">
-                    <div className="img-c">
+                    <div className="img-c pointer">
                         <div className="img" style={{ background: `${imgbg}` }} />
                     </div>
                 </a>

@@ -4,7 +4,7 @@
         {
             "id": 1,
             "cover": "https://static-cine-oss.oss-cn-shanghai.aliyuncs.com/f/word/wc_10000.png",
-            "title": "Stay in Britain's favourite Castle",
+            "title": "善恩核心10000词汇",
             "href": "/lword/course",
             "status": 1
 
@@ -12,14 +12,14 @@
         {
             "id": 2,
             "cover": "https://static-cine-oss.oss-cn-shanghai.aliyuncs.com/f/word/wc_sat.png",
-            "title": "Barcelona by bike: sightseeing & tapas",
+            "title": "SAT 核心词汇",
             "href": "/lword/course?id=sat",
             "status": 0
         },
         {
             "id": 3,
             "cover": "https://static-cine-oss.oss-cn-shanghai.aliyuncs.com/f/word/wc_toefl.png",
-            "title": "Barcelona by bike: sightseeing & tapas",
+            "title": "TOEFL 核心词汇",
             "href": "/lword/course?id=tf",
             "status": 0
         },

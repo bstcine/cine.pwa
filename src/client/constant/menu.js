@@ -20,7 +20,7 @@ const cineMenu = [
                 icon: 'ci-stu_work',
                 children: [
                     {
-                        label: '历史作业',
+                        label: '全部作业',
                         url: h5.URL_Learn_Task,
                     },
                     {

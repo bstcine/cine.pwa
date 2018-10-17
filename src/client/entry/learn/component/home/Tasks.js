@@ -19,6 +19,20 @@ const ExpandMore = ({ tasks, isLimitTasks, onShowAllTask }) => {
     }
 };
 
+const onClickAllTask = () => {
+    let href = '/learn/task';
+    if (siteCodeUtil.inAndroidAPP()) {
+        Bridge.android(BRIDGE_EVENT.OPEN_BROWSER, {
+            url: href,
+            title: '全部作业',
+        }).then(res => {
+            console.log(res);
+        });
+    } else {
+        location.href = href;
+    }
+};
+
 const Tasks = ({ tasks, user, isLimitTasks, onShowAllTask, gActions }) => {
     return (
         <div className="cine-panel tasks-container">
@@ -29,7 +43,7 @@ const Tasks = ({ tasks, user, isLimitTasks, onShowAllTask, gActions }) => {
                             {tasks.filter(i => i.status !== '2').length}
                         </span>
                     </div>
-                    <a href="/learn/task">历史作业</a>
+                    <a onClick={() => onClickAllTask()}>全部作业</a>
                 </div>
                 <div className="cine-panel__righthead">
                     {uaUtil.PC() || uaUtil.AndroidTablet() || uaUtil.iPad() ? (
@@ -50,7 +64,24 @@ const Tasks = ({ tasks, user, isLimitTasks, onShowAllTask, gActions }) => {
                             打卡 <CIcon>ci-cup</CIcon>
                         </a>
                     ) : (
-                        <a href={`/learn/achieve?user_id=${user.id}`}>
+                        <a
+                            onClick={() => {
+                                if (siteCodeUtil.inAndroidAPP()) {
+                                    Bridge.android(BRIDGE_EVENT.OPEN_BROWSER, {
+                                        url: `/learn/achieve?user_id=${
+                                            user.id
+                                        }`,
+                                        title: '打卡',
+                                        visible: false,
+                                    }).then(res => {
+                                        console.log(res);
+                                    });
+                                } else {
+                                    location.href = `/learn/achieve?user_id=${
+                                        user.id
+                                    }`;
+                                }
+                            }}>
                             打卡 <CIcon>ci-cup</CIcon>
                         </a>
                     )}

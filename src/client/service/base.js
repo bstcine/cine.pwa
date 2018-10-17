@@ -42,7 +42,7 @@ export let login = ({ username, password }) => {
 };
 
 export let logoutV1 = () => {
-    return get(Api.APIURL_LogoutV1, { type: 'json' });
+    return get(Api.APIURL_LogoutV1, { type: 'json', t: new Date().getTime() });
 };
 
 export let accessLog = () => {

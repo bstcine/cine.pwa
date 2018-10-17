@@ -35,7 +35,7 @@ export const wCourseAction = {
     loadUserWordLearnAndQuiz: param => async dispatch => {
         const wordParam = {
             location: param.start_index ? param.start_index : 1,
-            count: param.range ? param.range : 3000,
+            count: param.range ? param.range : 10000,
         };
         const [err, result] = await fetchData(Api.APIURL_User_Word, wordParam);
         if (!result) {
@@ -66,7 +66,7 @@ export const wCourseAction = {
                 const scrollY =
                     ele.getBoundingClientRect().top +
                     document.documentElement.scrollTop;
-                window.scrollTo(0, scrollY - 100);
+                window.scrollTo(0, scrollY - 200);
             }
         }, 500);
     },

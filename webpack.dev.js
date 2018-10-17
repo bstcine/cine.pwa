@@ -4,8 +4,8 @@ const merge = require('webpack-merge');
 const common = require('./webpack.common.js');
 
 const Dev_Host_URL = 'https://dev.bstcine.com';
+// const Dev_Host_URL = 'http://localhost:9000';
 console.log(`API connected ${Dev_Host_URL}`);
-// const Dev_Host_URL = 'http://local.bstcine.com:9000';
 
 let rewrites = [];
 for (let entry in common.entry) {

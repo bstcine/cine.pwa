@@ -13,10 +13,11 @@ const Card = ({
     onClick,
 }) => {
     const Comp = href ? 'a' : 'div';
+    const hoverable = href || onClick;
 
     return (
         <Comp
-            className={cls}
+            className={classNames(cls, { [`${cls}--hoverable`]: hoverable })}
             href={Comp === 'a' ? href : null}
             onClick={onClick}>
             <div

@@ -196,9 +196,15 @@ class Container extends Component {
                 <CPanel title="Gird Card default112 gap=large">
                     <CCardContainer gap="large" layout="112">
                         <CCard className="cbabsdf">1</CCard>
-                        <CCard hover="darken">2 hover=darken</CCard>
-                        <CCard hover="outlined">3 hover=outlined</CCard>
-                        <CCard hover="lighten">4 hover=lighten</CCard>
+                        <CCard hover="darken" onClick={() => {}}>
+                            2 hover=darken
+                        </CCard>
+                        <CCard hover="outlined" onClick={() => {}}>
+                            3 hover=outlined
+                        </CCard>
+                        <CCard hover="lighten" onClick={() => {}}>
+                            4 hover=lighten
+                        </CCard>
                         <CCard>5</CCard>
                         <CCard>6</CCard>
                         <CCard>9</CCard>
@@ -329,6 +335,26 @@ class Container extends Component {
                         }}>
                         ALERT
                     </CButton>
+
+                    <CButton
+                        variant="contained"
+                        color="primary"
+                        onClick={() => {
+                            CModal.alert({
+                                title: 'title',
+                                text: 'hello alert!with cancel',
+                                onConfirm: () => {
+                                    console.log('confirm');
+                                },
+                                onCancel: () => {
+                                    console.log('onCancel');
+                                },
+                                responsive: true,
+                            });
+                        }}>
+                        responsive ALERT
+                    </CButton>
+
                     <CButton
                         variant="outlined"
                         color="primary"

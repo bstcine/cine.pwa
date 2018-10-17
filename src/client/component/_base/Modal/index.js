@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import Modal from './ModalContainer';
 
 /**
- * { title, text, onCancel, onConfirm }
+ * { title, text, responsive, onCancel, onConfirm }
  */
 Modal.alert = function(props) {
     const div = document.createElement('div');

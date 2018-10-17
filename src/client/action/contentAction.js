@@ -1,6 +1,8 @@
 import Api from '@/../APIConfig';
 import * as BaseService from '@/service/base';
 import { actionUserInfo as userAction } from './userAction';
+import { CMessage } from '@/component/_base';
+import errorMsg from '@/util/errorMsg';
 
 let cCourseAction = {
     init: function() {
@@ -21,7 +23,10 @@ let cCourseAction = {
         return BaseService.fetchData(Api.APIURL_Content_Course_Detail, {
             cid: courseID,
         }).then(([err, result]) => {
-            if (err) return Promise.reject(err);
+            if (err) {
+                CMessage.info(errorMsg(err));
+                return Promise.reject(err);
+            }
             return Promise.resolve(result.detail);
         });
     },

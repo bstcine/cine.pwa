@@ -4,10 +4,14 @@ import { Task_Type } from '@/constant';
 import { CCard, CIcon, CModal } from '@/component/_base';
 import './style.less';
 import task from '@/constant/task';
+import siteCodeUtil from '@/util/sitecodeUtil';
+import BRIDGE_EVENT from '@/constant/bridgeEvent';
+import Bridge from '@/util/bridge';
 
 const Label = ({ type }) => <span className="label">{task[type]}</span>;
 
 const Status = ({ task }) => {
+    if (task.type === Task_Type.Offline || task.type === Task_Type.Writing) return null;
     if (task.status === '0' || task.status === '1') {
         return task.type === '3' ? (
             <span className="task-opration">查看</span>
@@ -44,14 +48,40 @@ const getHref = (task, isMentor) => {
             }
     }
 };
-const onClick = task => {
+const onClick = (task, isMentor) => {
     if (task.type === Task_Type.Offline) {
-        return () => {
-            CModal.alert({
-                title: task.title,
-                text: task.writing_desc,
-            });
-        };
+        CModal.alert({
+            title: task.title,
+            text: task.writing_desc,
+            responsive: true,
+        });
+        return;
+    }
+
+    let tempHref = getHref(task, isMentor);
+    if (tempHref) {
+        if (siteCodeUtil.inAndroidAPP()) {
+            if (task.type === Task_Type.Video) {
+                Bridge.android(BRIDGE_EVENT.PLAY, {
+                    course_id: task.course_id,
+                    lesson_id: task.object_id,
+                }).then(res => {
+                    console.log(res);
+                });
+            } else if (task.type === Task_Type.Quiz_PDF) {
+                alert('请登入官网下载对应的习题PDF');
+            } else {
+                Bridge.android(BRIDGE_EVENT.OPEN_BROWSER, {
+                    url: tempHref,
+                    title: task.title,
+                }).then(res => {
+                    console.log(res);
+                });
+            }
+        } else {
+            location.href = tempHref;
+            // console.log(task);
+        }
     }
 };
 const TaskItem = ({ task, isMentor }) => {
@@ -60,8 +90,7 @@ const TaskItem = ({ task, isMentor }) => {
             key={task.id}
             hover="lighten"
             className="task-item"
-            href={getHref(task, isMentor)}
-            onClick={onClick(task)}>
+            onClick={() => onClick(task)}>
             <Label type={task.type} />
             <TextFix className="task-title">{task.title}</TextFix>
             <Status task={task} />

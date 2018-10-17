@@ -27,7 +27,8 @@ const errorCode = {
     transfer_is_yourself: '不能转让给自己',
     order_already_paid: '订单已支付',
     related_lesson_required: '写作课程请先购买对应的视频课程',
-    point_too_large: '当前积分已超出应付金额'
+    point_too_large: '当前积分已超出应付金额',
+    'lessonId not found': '课程不存在',
 };
 
 export default errorCode;

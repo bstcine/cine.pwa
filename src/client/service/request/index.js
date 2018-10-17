@@ -1,17 +1,42 @@
 import storeUtil from '@/util/storeUtil';
 import axios from 'axios';
 
-function httpUrl(url) {
-    let baseURL = '';
-    if (url.indexOf('http') >= 0) {
-        baseURL = '';
-    } else {
-        if (window.API_Host_URL) {
-            baseURL = window.API_Host_URL;
-        }
-    }
-    return baseURL + url;
+if (window.API_Host_URL) {
+    axios.defaults.baseURL = window.API_Host_URL;
 }
+axios.defaults.headers['Cache-Control'] =
+    'private, no-cache, no-store, must-revalidate';
+axios.interceptors.request.use(
+    function(config) {
+        // Do something before request is sent
+        if (config.method === 'get') {
+            if (!config.params || !config.params.token) {
+                console.log(config);
+                if (!config.params) config.params = {};
+                config.params.token = storeUtil.getToken();
+            }
+        }
+
+        if (config.method === 'post') {
+            if (config.version === 2) {
+                const _data = config.data;
+                config.data = {
+                    channel: '',
+                    locale: 'zh_CN',
+                    appver: '2.3.1',
+                    data: _data,
+                    token: storeUtil.getToken(),
+                    sitecode: storeUtil.getSiteCode(),
+                };
+            }
+        }
+        return config;
+    },
+    function(error) {
+        // Do something with request error
+        return Promise.reject(error);
+    }
+);
 
 function httpBody(bodyData) {
     let _sitecode = storeUtil.getSiteCode();
@@ -28,20 +53,16 @@ function httpBody(bodyData) {
 }
 
 export let post = (url, data) => {
-    let _apiURL = httpUrl(url);
-    let _httpBody = httpBody(data);
+    // let _httpBody = httpBody(data);
     // alert(_apiURL)
-    console.log(_httpBody);
-    return axios.post(_apiURL, _httpBody).then(response => response.data);
+    // console.log(_httpBody);
+    return axios.post(url, data, { version: 2 }).then(res => res.data);
 };
 
 export let get = (url, params) => {
-    let _apiURL = httpUrl(url);
-    return axios.get(_apiURL, { params }).then(response => response.data);
+    return axios.get(url, { params }).then(res => res.data);
 };
 
 export let postv1 = (url, data) => {
-    let _apiURL = httpUrl(url);
-    // alert(_apiURL)
-    return axios.post(_apiURL, data).then(response => response.data);
+    return axios.post(url, data, { version: 1 }).then(res => res.data);
 };

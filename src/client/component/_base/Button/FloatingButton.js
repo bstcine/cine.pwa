@@ -9,7 +9,7 @@ const createFloatingBox = (className = 'floating-box') => {
     if (!FloatingBox) {
         FloatingBox = document.createElement('div');
         FloatingBox.setAttribute('id', className);
-        document.body.append(FloatingBox);
+        document.body.appendChild(FloatingBox);
     }
     return FloatingBox;
 };

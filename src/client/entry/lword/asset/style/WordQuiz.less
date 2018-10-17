@@ -94,12 +94,6 @@
         border: solid 1px #e9edf2;
         cursor: default;
     }
-    @media @media-up-sm {
-        .v_Test_VC_SelectItem,
-        .v_Test_VC_SelectItem_Result {
-            width: 8rem;
-        }
-    }
     .v_Test_VC_SelectItem_Text {
         width: 100%;
         font-family: PingFangSC-Regular;
@@ -110,5 +104,16 @@
     }
     .v_Test_VC_SelectItem:hover {
         background: #cbe7ff;
+    }
+    @media @media-up-sm {
+        .v_Test_VC_SelectItem,
+        .v_Test_VC_SelectItem_Result {
+            width: 8rem;
+        }
+    }
+    @media @media-up-xs {
+        .v_Test_VC_SelectItem:hover {
+            background: #cbe7ff;
+        }
     }
 }

@@ -50,13 +50,12 @@ const getHref = (task, isMentor) => {
 };
 const onClick = (task, isMentor) => {
     if (task.type === Task_Type.Offline) {
-        return () => {
-            CModal.alert({
-                title: task.title,
-                text: task.writing_desc,
-                responsive: true,
-            });
-        };
+        CModal.alert({
+            title: task.title,
+            text: task.writing_desc,
+            responsive: true,
+        });
+        return;
     }
 
     let tempHref = getHref(task, isMentor);

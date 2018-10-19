@@ -24,6 +24,10 @@ export default class Card extends Component {
             pressing: false,
             isWordEnd: false,
         };
+
+        this.isTop10000 = this.param.estimate ? true : false;
+        this.max_skip_right = 8;
+        this.max_wrong = 3;
         this.last_index = 1;
         this.estimate_score = 0;
         this.disableClick = false;
@@ -82,10 +86,25 @@ export default class Card extends Component {
 
     // 下一个单词
     nextWord() {
-        console.log(`nextWord --> level_index: ${this.level_index} -- word_index: ${this.word_index}`);
+        // 判断当前有没有跳出或结束
+        console.log('准备下一个单词: ');
         let wordLevel = this.wordLevelList[this.level_index];
-        if (this.isSkipLevel() || this.word_index === wordLevel.wordList.length - 1) {
+        if (this.word_index === wordLevel.wordList.length - 1) {
+            console.log('本等级单词已完成, 开始下一个等级');
             return this.nextLevel();
+        }
+        if (this.isTop10000) {
+            console.log('是从善恩核心词汇处过来的: ');
+            let skipStatus = this.isSkipTop10000();
+            if (skipStatus === -1) {
+                return this.theEnd();
+            } else if (skipStatus === 1) {
+                return this.nextLevel();
+            }
+        } else {
+            if (this.isSkipLevel()) {
+                return this.nextLevel();
+            }
         }
         this.disableClick = false;
         this.word_index++;
@@ -100,7 +119,32 @@ export default class Card extends Component {
             }
         );
     }
-
+    isSkipTop10000() {
+        let wordLevel = this.wordLevelList[this.level_index];
+        let skipRight = 0;
+        let wordWrong = 0;
+        for (let i = 0; i < wordLevel.wordList.length; i++) {
+            let item = wordLevel.wordList[i];
+            if (item.select_value === 0) {
+                skipRight++;
+            } else if (!item.select_value) {
+                console.log(`连续答对1: ${skipRight}, 答错: ${wordWrong}, selectValue:${item.select_value}`);
+                return 0;
+            } else {
+                skipRight = 0;
+                wordWrong++;
+            }
+            if (wordWrong >= this.max_wrong) {
+                console.log(`连续答对2: ${skipRight}, 答错: ${wordWrong}`);
+                return -1;
+            } else if (skipRight >= this.max_skip_right) {
+                console.log(`连续答对3: ${skipRight}, 答错: ${wordWrong}`);
+                return 1;
+            }
+        }
+        console.log(`连续答对4: ${skipRight}, 答错: ${wordWrong}`);
+        return 0;
+    }
     // 连续
     isSkipLevel() {
         let wordLevel = this.wordLevelList[this.level_index];
@@ -194,7 +238,7 @@ export default class Card extends Component {
         }
         Service.updateLastIndex(startIndex, range, this.last_index).then(result => {
             console.log(result);
-            location.href = `/lword/course?start_index=${startIndex}&range=${range}&last_index=${this.last_index}`;
+            location.href = `/lword/course?last_index=${this.last_index}`;
         });
     }
     // 答题结束
@@ -265,6 +309,7 @@ export default class Card extends Component {
         console.log(`select_value ${select_value}`);
         let word = this.wordLevelList[this.level_index].wordList[this.word_index];
         word.select_value = select_value;
+        console.log(word.id, word.word, select_value, word.select_value);
     }
 
     // 收集全部答题信息

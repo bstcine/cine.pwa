@@ -12,6 +12,9 @@ import { fetchData } from '@/service/base';
 import errorMsg from '@/util/errorMsg';
 import { initWechat } from '@/util/wechatUtil';
 import Api from '@/../APIConfig';
+import storeUtil from '@/util/storeUtil';
+import Bridge from "@/util/bridge";
+import BRIDGE_EVENT from "@/constant/bridgeEvent";
 
 export default class PayCenter extends Component {
     constructor(props) {
@@ -212,10 +215,19 @@ export default class PayCenter extends Component {
         );
     }
 
+    doPayApp(pay_type) {
+        const { order } = this.state;
+        this.openPayingModal();
+        this.checkingOrderStatus();
+        Bridge.ios(BRIDGE_EVENT.APP_PAY, { order_id: order.id, pay_type });
+    }
+
     submitPay() {
         let { pay_type } = this.state;
         if (pay_type === 1) {
-            if (uaUtil.wechat()) {
+            if (storeUtil.get('temp_h5') === '1' && siteCodeUtil.inIOSAPP()) {
+                this.doPayApp('1');
+            } else if (uaUtil.wechat()) {
                 this.openHelpModal();
             } else if (uaUtil.mobile()) {
                 // 支付宝mweb支付
@@ -225,7 +237,9 @@ export default class PayCenter extends Component {
                 this.doPayAliPc();
             }
         } else if (pay_type === 3) {
-            if (uaUtil.wechat()) {
+            if (storeUtil.get('temp_h5') === '1' && siteCodeUtil.inIOSAPP()) {
+                this.doPayApp('3');
+            } else if (uaUtil.wechat()) {
                 const { openid } = getParam();
                 if (openid) {
                     // 微信jsapi支付

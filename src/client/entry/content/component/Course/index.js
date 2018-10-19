@@ -109,6 +109,9 @@ export default class Course extends Component {
     async initData() {
         let { cid } = getParam();
         let { course, user } = await cCourseAction.initCourseDetail(cid);
+        if (course.temp_h5 === '1') {
+            storeUtil.set('temp_h5', '1', 600 * 1000);
+        }
         this.setState({ course, user });
     }
 
@@ -133,7 +136,15 @@ export default class Course extends Component {
             }
         } else {
             if (siteCodeUtil.inIOSAPP()) {
-                Bridge.ios(BRIDGE_EVENT.PRE_CONFIRM, { course_id: cid });
+                if (course.temp_h5 === '1') {
+                    let url = `/pay/prepare?cid=${cid}`;
+                    if (source_user_id) {
+                        url += `&source_user_id=${source_user_id}`;
+                    }
+                    location.href = url;
+                } else {
+                    Bridge.ios(BRIDGE_EVENT.PRE_CONFIRM, { course_id: cid });
+                }
             } else if (siteCodeUtil.inAndroidAPP()) {
                 Bridge.android(BRIDGE_EVENT.PRE_CONFIRM, { course_id: cid });
             } else {

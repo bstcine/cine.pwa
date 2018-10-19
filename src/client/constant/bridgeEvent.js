@@ -17,6 +17,7 @@ const BRIDGE_EVENT = {
     Pageshow: 'pageshow',
     OPEN_BROWSER: 'open_browser',
     SEND_IMG: 'send_img',
+    APP_PAY: 'app_pay',
 };
 
 export default BRIDGE_EVENT;

@@ -126,3 +126,29 @@ export const CardItem111 = ({ value, actions }) => {
         </React.Fragment>
     );
 };
+
+export const CardItem245 = ({ value, actions }) => {
+    return (
+        <React.Fragment>
+            <div className="card245">
+                <div className="img-c">
+                    <a href="/experiences" target="_blank">
+                        <div
+                            className="img"
+                            style={{
+                                background: `url(${
+                                    value.cover
+                                }) center center / cover no-repeat`,
+                            }}
+                        />
+                    </a>
+                </div>
+
+                <div className="text-c">
+                    <div className="line1 title">{value.price}</div>
+                    <div className="line3 sub-title">{value.title}</div>
+                </div>
+            </div>
+        </React.Fragment>
+    );
+};

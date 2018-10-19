@@ -35,7 +35,9 @@ class WordHeader extends React.PureComponent {
         location.href = cardHref;
     }
     render() {
-
+        if (siteCodeUtil.inIOSAPP()) {
+            return null;
+        }
         let { sourceType, param, name, isAutoChangeWord, isReviseChangeWord, isShowAll, actions } = this.props;
         let subName = '';
         if (param.lesson_id && param.lesson_id.indexOf('-') > -1) {
@@ -91,6 +93,8 @@ class WordHeader extends React.PureComponent {
                     </CButton>
                 </div>
             );
+        } else {
+            rightActions = null;
         }
         let leftActions;
         if (siteCodeUtil.inAPP()) {
@@ -120,6 +124,9 @@ class WordHeader extends React.PureComponent {
                     }
                 </div>
             );
+        }
+        if (leftActions === null && rightActions === null) {
+            return null;
         }
         return (
             <div className="headerContainer">

@@ -29,7 +29,8 @@ class Container extends Component {
                         this.setState(prevState => ({
                             isDrawerOpen: !prevState.isDrawerOpen,
                         }));
-                    }}>
+                    }}
+                >
                     查看
                 </CFloatingButton>
 
@@ -50,7 +51,8 @@ class Container extends Component {
                                 this.setState(prevState => ({
                                     isPDrawerOpen: !prevState.isPDrawerOpen,
                                 }));
-                            }}>
+                            }}
+                        >
                             PanelDrawer
                         </CButton>
                         <CButton color="secondary">
@@ -81,7 +83,8 @@ class Container extends Component {
                         <CButton
                             variant="outlined"
                             color="primary"
-                            shape="capsule">
+                            shape="capsule"
+                        >
                             PRIMARY
                         </CButton>
                     </div>
@@ -92,20 +95,23 @@ class Container extends Component {
                         <CButton
                             size="small"
                             variant="outlined"
-                            color="primary">
-                            SMALL
-                        </CButton>
-                        <CButton
-                            size="small"
-                            variant="contained"
-                            color="primary">
+                            color="primary"
+                        >
                             SMALL
                         </CButton>
                         <CButton
                             size="small"
                             variant="contained"
                             color="primary"
-                            shape="capsule">
+                        >
+                            SMALL
+                        </CButton>
+                        <CButton
+                            size="small"
+                            variant="contained"
+                            color="primary"
+                            shape="capsule"
+                        >
                             SMALL
                         </CButton>
                     </div>
@@ -135,20 +141,23 @@ class Container extends Component {
                         <CButton
                             size="large"
                             variant="outlined"
-                            color="secondary">
+                            color="secondary"
+                        >
                             LARGE<CIcon>play_circle_filled</CIcon>
                         </CButton>
                         <CButton
                             size="large"
                             variant="contained"
-                            color="secondary">
+                            color="secondary"
+                        >
                             LARGE
                         </CButton>
                         <CButton
                             size="large"
                             variant="contained"
                             color="secondary"
-                            shape="capsule">
+                            shape="capsule"
+                        >
                             LARGE
                         </CButton>
                     </div>
@@ -165,7 +174,8 @@ class Container extends Component {
                             block
                             size="large"
                             variant="outlined"
-                            color="secondary">
+                            color="secondary"
+                        >
                             block LARGE
                         </CButton>
                     </div>
@@ -174,7 +184,8 @@ class Container extends Component {
                         style={{
                             background: 'rgba(0,0,0,0.2)',
                             padding: '10px',
-                        }}>
+                        }}
+                    >
                         <CButton transparent>TRANSPARENT</CButton>
                         <CButton transparent size="large" color="primary">
                             TRANSPARENT
@@ -188,7 +199,8 @@ class Container extends Component {
                             this.setState({
                                 isPDrawerOpen: false,
                             });
-                        }}>
+                        }}
+                    >
                         1231adfadfadfafd232
                     </CDrawer>
                 </CPanel>
@@ -214,7 +226,8 @@ class Container extends Component {
                                 this.setState({
                                     isDrawerOpen: false,
                                 });
-                            }}>
+                            }}
+                        >
                             1231232
                         </CDrawer>
                     </CCardContainer>
@@ -314,7 +327,8 @@ class Container extends Component {
                         color="secondary"
                         onClick={() => {
                             CModal.alert({ text: 'hello alert!' });
-                        }}>
+                        }}
+                    >
                         <CIcon>pets</CIcon>
                     </CButton>
 
@@ -332,7 +346,8 @@ class Container extends Component {
                                     console.log('onCancel');
                                 },
                             });
-                        }}>
+                        }}
+                    >
                         ALERT
                     </CButton>
 
@@ -351,7 +366,8 @@ class Container extends Component {
                                 },
                                 responsive: true,
                             });
-                        }}>
+                        }}
+                    >
                         responsive ALERT
                     </CButton>
 
@@ -363,7 +379,8 @@ class Container extends Component {
                             setTimeout(() => {
                                 loading.close();
                             }, 2000);
-                        }}>
+                        }}
+                    >
                         Loading
                     </CButton>
                     <CButton
@@ -373,7 +390,8 @@ class Container extends Component {
                             CMessage.success('完成', () => {
                                 console.success('完成关闭了');
                             });
-                        }}>
+                        }}
+                    >
                         success
                     </CButton>
                     <CButton
@@ -381,7 +399,8 @@ class Container extends Component {
                         color="primary"
                         onClick={() => {
                             CMessage.error('Err! duration:0', 0);
-                        }}>
+                        }}
+                    >
                         Error
                     </CButton>
                     <CButton
@@ -391,7 +410,8 @@ class Container extends Component {
                             CMessage.info(
                                 '“长按屏幕”保存图片，分享图片到朋友圈'
                             );
-                        }}>
+                        }}
+                    >
                         Info
                     </CButton>
 
@@ -403,7 +423,8 @@ class Container extends Component {
                                 mask: false,
                                 position: 'top',
                             });
-                        }}>
+                        }}
+                    >
                         TopInfo
                     </CButton>
                 </CPanel>

@@ -1,10 +1,12 @@
 {
-    "path-intellisense.mappings": {
-        "/": "${workspaceRoot}",
-        "@": "${workspaceRoot}/src/client"
+    // "path-intellisense.mappings": {
+    //     "/": "${workspaceRoot}",
+    //     "@": "${workspaceRoot}/src/client"
+    // },
+    "[html]": {
+        "editor.formatOnSave": false
     },
-    "javascript.format.enable": false,
+    "prettier.eslintIntegration": true,
     "editor.formatOnSave": true,
-    "editor.formatOnSaveTimeout": 10000,
-    "prettier.eslintIntegration": true
+    "editor.formatOnSaveTimeout": 10000
 }

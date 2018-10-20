@@ -1,3 +1,3 @@
 module.exports = {
-  extends: ['prettier', 'eslint-config-alloy/react', 'prettier/react'],
+    extends: ['eslint-config-alloy/react', 'eslint-config-prettier'],
 };

@@ -26,7 +26,7 @@ export default class Card extends Component {
         };
 
         this.isTop10000 = this.param.estimate ? true : false;
-        this.max_skip_right = 8;
+        this.max_skip_right = 10;
         this.max_wrong = 3;
         this.last_index = 1;
         this.estimate_score = 0;

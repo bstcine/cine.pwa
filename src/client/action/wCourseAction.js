@@ -19,7 +19,8 @@ export const wCourseAction = {
             !param.start_index ||
             (parseInt(param.start_index, 10) === 1 &&
                 parseInt(param.range, 10) === 10000)
-        ) return;
+        )
+            return;
 
         const lastVisitID = param.last_index
             ? param.last_index
@@ -45,10 +46,7 @@ export const wCourseAction = {
 
         // 如果没有测试数据&没有查看记录就不需要dispatch（Re-render)
         const lvID = param.last_index ? param.last_index : result.lastVisitID;
-        if (
-            result.rows && result.rows.length === 0 &&
-            (lvID === 1 || lvID === 3001 || lvID === 6001)
-        ) return;
+        if (result.rows && result.rows.length === 0 && lvID === 0) return;
 
         const payload = {
             lastVisitID: lvID,

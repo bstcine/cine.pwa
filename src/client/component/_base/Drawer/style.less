@@ -2,15 +2,22 @@
 
 .@{drawer}__container {
     position: relative;
-    overflow: hidden;
 }
 
 .@{drawer} {
     position: absolute;
+}
+
+.@{drawer}--fullscreen {
+    position: fixed;
+}
+
+.@{drawer}--active {
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
+    overflow: hidden;
 }
 
 .@{drawer}__mask {
@@ -20,26 +27,53 @@
     right: 0;
     bottom: 0;
     background: rgba(0, 0, 0, 0.6);
+    will-chage: opacity;
     opacity: 0;
-    transition: opacity 100ms ease-in-out;
+    transition: opacity 225ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .@{drawer}__mask--enter {
+}
+
+.@{drawer}__mask--enter-active {
     opacity: 1;
 }
 
 .@{drawer}__content {
     position: absolute;
-    top: 0;
-    left: 100px;
-    right: 0;
-    bottom: 0;
-    background-color: rgb(241, 241, 241);
-    border-left: 5px solid red;
-    transform: translate3d(100%, 0, 0);
-    transition: transform 300ms ease-in-out;
+    background-color: #fff;
+    will-chage: transform;
+    transition: transform 225ms cubic-bezier(0, 0, 0.2, 1);
 }
 
-.@{drawer}__content--enter {
+.@{drawer}__anchor--left {
+    top: 0;
+    bottom: 0;
+    left: 0;
+    transform: translate3d(-100%, 0, 0);
+}
+
+.@{drawer}__anchor--right {
+    top: 0;
+    bottom: 0;
+    right: 0;
+    transform: translate3d(100%, 0, 0);
+}
+
+.@{drawer}__anchor--bottom {
+    bottom: 0;
+    left: 0;
+    right: 0;
+    transform: translate3d(0, 100%, 0);
+}
+
+.@{drawer}__anchor--top {
+    top: 0;
+    left: 0;
+    right: 0;
+    transform: translate3d(0, -100%, 0);
+}
+
+.@{drawer}__content--enter-active {
     transform: translate3d(0, 0, 0);
 }

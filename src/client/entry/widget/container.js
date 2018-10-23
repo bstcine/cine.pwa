@@ -17,22 +17,28 @@ import Player from '@/component/Player';
 class Container extends Component {
     constructor(props) {
         super(props);
-        this.state = { isDrawerOpen: false, isPDrawerOpen: false };
+        this.state = {
+            isLeftDrawerOpen: false,
+            isRightDrawerOpen: false,
+            isTopDrawerOpen: false,
+            isBottomDrawerOpen: false,
+            isLeftFixedDrawerOpen: false,
+            isBottomFixedDrawerOpen: false,
+        };
     }
 
     render() {
-        const { isDrawerOpen, isPDrawerOpen } = this.state;
+        const {
+            isLeftDrawerOpen,
+            isRightDrawerOpen,
+            isTopDrawerOpen,
+            isBottomDrawerOpen,
+            isLeftFixedDrawerOpen,
+            isBottomFixedDrawerOpen,
+        } = this.state;
         return (
             <div className="cine-widget widget_btn">
-                <CFloatingButton
-                    onClick={() => {
-                        this.setState(prevState => ({
-                            isDrawerOpen: !prevState.isDrawerOpen,
-                        }));
-                    }}
-                >
-                    查看
-                </CFloatingButton>
+                <CFloatingButton>查看</CFloatingButton>
 
                 <CPanel title="Player">
                     <CFloatingButton icon="pets" color="primary">
@@ -192,17 +198,6 @@ class Container extends Component {
                         </CButton>
                         <CButton icon="ci-video" transparent color="primary" />
                     </div>
-                    <CDrawer
-                        isOpen={isPDrawerOpen}
-                        offset="50%"
-                        onClose={() => {
-                            this.setState({
-                                isPDrawerOpen: false,
-                            });
-                        }}
-                    >
-                        1231adfadfadfafd232
-                    </CDrawer>
                 </CPanel>
 
                 <CPanel title="Gird Card default112 gap=large">
@@ -220,16 +215,6 @@ class Container extends Component {
                         <CCard>5</CCard>
                         <CCard>6</CCard>
                         <CCard>9</CCard>
-                        <CDrawer
-                            isOpen={isDrawerOpen}
-                            onClose={() => {
-                                this.setState({
-                                    isDrawerOpen: false,
-                                });
-                            }}
-                        >
-                            1231232
-                        </CDrawer>
                     </CCardContainer>
                 </CPanel>
 
@@ -427,6 +412,271 @@ class Container extends Component {
                     >
                         TopInfo
                     </CButton>
+                </CPanel>
+
+                <CPanel title="Drawer" className="drawer_panel">
+                    <div>
+                        <CButton
+                            onClick={() => {
+                                this.setState({
+                                    isLeftDrawerOpen: true,
+                                });
+                            }}
+                        >
+                            Open Left
+                        </CButton>
+                        <CButton
+                            onClick={() => {
+                                this.setState({
+                                    isRightDrawerOpen: true,
+                                });
+                            }}
+                        >
+                            Open Right
+                        </CButton>
+                        <CButton
+                            onClick={() => {
+                                this.setState({
+                                    isTopDrawerOpen: true,
+                                });
+                            }}
+                        >
+                            Open Top
+                        </CButton>
+                        <CButton
+                            onClick={() => {
+                                this.setState({
+                                    isBottomDrawerOpen: true,
+                                });
+                            }}
+                        >
+                            Open Bottom
+                        </CButton>
+                    </div>
+
+                    <div>
+                        <CButton
+                            onClick={() => {
+                                this.setState({
+                                    isLeftFixedDrawerOpen: true,
+                                });
+                            }}
+                        >
+                            Open Left Fullscreen
+                        </CButton>
+
+                        <CButton
+                            onClick={() => {
+                                this.setState({
+                                    isBottomFixedDrawerOpen: true,
+                                });
+                            }}
+                        >
+                            Open Bottom Fullscreen
+                        </CButton>
+                    </div>
+
+                    <CDrawer
+                        isOpen={isLeftDrawerOpen}
+                        onClose={() => {
+                            this.setState({
+                                isLeftDrawerOpen: false,
+                            });
+                        }}
+                    >
+                        <div className="vertical_content">
+                            <CButton block variant="contained">
+                                DEFAULT
+                            </CButton>
+                            <CButton block variant="contained" color="primary">
+                                PRIMARY
+                            </CButton>
+                            <CButton
+                                block
+                                variant="contained"
+                                color="secondary"
+                            >
+                                SECONDARY<CIcon>lock</CIcon>
+                            </CButton>
+                            <CButton block disabled variant="contained">
+                                DISABLED
+                            </CButton>
+                            <CButton
+                                block
+                                variant="contained"
+                                href="//baidu.com"
+                            >
+                                Link
+                            </CButton>
+                            <CButton block variant="contained" shape="capsule">
+                                DEFAULT
+                            </CButton>
+                        </div>
+                    </CDrawer>
+                    <CDrawer
+                        anchor="right"
+                        isOpen={isRightDrawerOpen}
+                        onClose={() => {
+                            this.setState({
+                                isRightDrawerOpen: false,
+                            });
+                        }}
+                    >
+                        <div className="vertical_content">
+                            <CButton block variant="contained">
+                                DEFAULT
+                            </CButton>
+                            <CButton block variant="contained" color="primary">
+                                PRIMARY
+                            </CButton>
+                            <CButton
+                                block
+                                variant="contained"
+                                color="secondary"
+                            >
+                                SECONDARY<CIcon>lock</CIcon>
+                            </CButton>
+                            <CButton block disabled variant="contained">
+                                DISABLED
+                            </CButton>
+                            <CButton
+                                block
+                                variant="contained"
+                                href="//baidu.com"
+                            >
+                                Link
+                            </CButton>
+                            <CButton block variant="contained" shape="capsule">
+                                DEFAULT
+                            </CButton>
+                        </div>
+                    </CDrawer>
+                    <CDrawer
+                        anchor="top"
+                        isOpen={isTopDrawerOpen}
+                        onClose={() => {
+                            this.setState({
+                                isTopDrawerOpen: false,
+                            });
+                        }}
+                    >
+                        <div className="horizontal_content">
+                            <CButton block variant="contained">
+                                DEFAULT
+                            </CButton>
+                            <CButton block variant="contained" color="primary">
+                                PRIMARY
+                            </CButton>
+
+                            <CButton block variant="contained" shape="capsule">
+                                DEFAULT
+                            </CButton>
+                        </div>
+                    </CDrawer>
+                    <CDrawer
+                        anchor="bottom"
+                        isOpen={isBottomDrawerOpen}
+                        onClose={() => {
+                            this.setState({
+                                isBottomDrawerOpen: false,
+                            });
+                        }}
+                    >
+                        <div className="horizontal_content">
+                            <CButton block variant="contained">
+                                DEFAULT
+                            </CButton>
+                            <CButton block variant="contained" color="primary">
+                                PRIMARY
+                            </CButton>
+                            <CButton
+                                block
+                                variant="contained"
+                                color="secondary"
+                            >
+                                SECONDARY<CIcon>lock</CIcon>
+                            </CButton>
+                        </div>
+                    </CDrawer>
+
+                    <CDrawer
+                        fullscreen
+                        isOpen={isLeftFixedDrawerOpen}
+                        onClose={() => {
+                            this.setState({
+                                isLeftFixedDrawerOpen: false,
+                            });
+                        }}
+                    >
+                        <div className="vertical_content">
+                            <CButton block variant="contained">
+                                DEFAULT
+                            </CButton>
+                            <CButton block variant="contained" color="primary">
+                                PRIMARY
+                            </CButton>
+                            <CButton
+                                block
+                                variant="contained"
+                                color="secondary"
+                            >
+                                SECONDARY<CIcon>lock</CIcon>
+                            </CButton>
+                            <CButton block disabled variant="contained">
+                                DISABLED
+                            </CButton>
+                            <CButton
+                                block
+                                variant="contained"
+                                href="//baidu.com"
+                            >
+                                Link
+                            </CButton>
+                            <CButton block variant="contained" shape="capsule">
+                                DEFAULT
+                            </CButton>
+                        </div>
+                    </CDrawer>
+
+                    <CDrawer
+                        fullscreen
+                        anchor="bottom"
+                        isOpen={isBottomFixedDrawerOpen}
+                        onClose={() => {
+                            this.setState({
+                                isBottomFixedDrawerOpen: false,
+                            });
+                        }}
+                    >
+                        <div className="vertical_content">
+                            <CButton block variant="contained">
+                                DEFAULT
+                            </CButton>
+                            <CButton block variant="contained" color="primary">
+                                PRIMARY
+                            </CButton>
+                            <CButton
+                                block
+                                variant="contained"
+                                color="secondary"
+                            >
+                                SECONDARY<CIcon>lock</CIcon>
+                            </CButton>
+                            <CButton block disabled variant="contained">
+                                DISABLED
+                            </CButton>
+                            <CButton
+                                block
+                                variant="contained"
+                                href="//baidu.com"
+                            >
+                                Link
+                            </CButton>
+                            <CButton block variant="contained" shape="capsule">
+                                DEFAULT
+                            </CButton>
+                        </div>
+                    </CDrawer>
                 </CPanel>
             </div>
         );

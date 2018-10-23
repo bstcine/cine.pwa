@@ -14,16 +14,16 @@ const CourseNav = ({ tree, activeId }) => {
         <CPanel title="课程目录" className="course__nav">
             {tree &&
                 tree.length && (
-                <ul className="nav__chapters">
-                    {tree.map(item => (
-                        <NavChapter
-                            key={item.id}
-                            chapter={item}
-                            activeId={activeId}
-                        />
-                    ))}
-                </ul>
-            )}
+                    <ul className="nav__chapters">
+                        {tree.map(item => (
+                            <NavChapter
+                                key={item.id}
+                                chapter={item}
+                                activeId={activeId}
+                            />
+                        ))}
+                    </ul>
+                )}
         </CPanel>
     );
 };
@@ -68,7 +68,8 @@ class NavChapter extends Component {
                     onClick={e => {
                         e.stopPropagation();
                     }}
-                    ref={this.ref}>
+                    ref={this.ref}
+                >
                     {chapter.children.map(item => (
                         <Lesson
                             key={item.id}
@@ -87,12 +88,14 @@ const Lesson = ({ lesson, active }) => {
         <li
             className={classNames('nav__lesson', {
                 'nav__lesson--active': active,
-            })}>
+            })}
+        >
             {lesson.type !== '5' ? (
                 <Link
                     to={`/learn/course2/${lesson.lesson_id}?lesson_id=${
                         lesson.id
-                    }`}>
+                    }`}
+                >
                     <span>{lesson.name}</span>
                     {lesson.learn_status === '1' && (
                         <CIcon>query_builder</CIcon>

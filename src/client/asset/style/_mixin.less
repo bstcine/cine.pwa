@@ -1,35 +1,58 @@
 // 16:9比例
 .aspect-ratio(@width, @height) {
-  position: relative;
-  &:before {
-    display: block;
-    content: "";
-    width: 100%;
-    padding-top: (@height / @width) * 100%;
-  }
-  > .content {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-  }
+    position: relative;
+    &:before {
+        display: block;
+        content: '';
+        width: 100%;
+        padding-top: (@height / @width) * 100%;
+    }
+    > .content {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+    }
 }
 
 // 单行省略号
-.text-one-line(){
-  overflow: hidden;
-  word-break: keep-all;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+.text-one-line() {
+    overflow: hidden;
+    word-break: keep-all;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.text-line-1 {
+    .text-one-line();
+}
+
+.text-line-2 {
+    overflow: hidden;
+    word-break: keep-all;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    /*! autoprefixer: off */
+}
+
+.text-line-3 {
+    overflow: hidden;
+    word-break: keep-all;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    /*! autoprefixer: off */
 }
 
 // 灰色线
-.grey-line-bottom(@height){
-  border-bottom: @height/100rem solid rgba(229, 229, 229, 0.51);
+.grey-line-bottom(@height) {
+    border-bottom: @height / 100rem solid rgba(229, 229, 229, 0.51);
 }
 // 灰色线
-.grey-line-top(@height){
-  border-top: @height/100rem solid rgba(229, 229, 229, 0.51);
+.grey-line-top(@height) {
+    border-top: @height / 100rem solid rgba(229, 229, 229, 0.51);
 }
-

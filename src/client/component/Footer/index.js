@@ -47,7 +47,7 @@ export default class Footer extends Component {
                             <div className="qrcode">
                                 <div className="qrcode-img">
                                     <img
-                                        src={require('@/asset/image/qrcode_bst01.jpg')}
+                                        src={require('@/asset/image/qrcode_bst02.jpg')}
                                         alt="善恩小助手"
                                     />
                                 </div>

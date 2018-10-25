@@ -14,28 +14,31 @@ export default class Brief extends Component {
     // 优惠列表
     renderActivityPromoteList(course) {
         if (course && course.activitys && course.activitys.length) {
-            let list = course.activitys.map((activity, i) => {
-                if (activity.filter === '1') {
-                    return course.is_shared ? (
-                        <div key={i} className="promote-title after-share">
-                            {activity.share_after_desc}
-                        </div>
-                    ) : (
-                        <div
-                            key={i}
-                            className="promote-title share pointer"
-                            onClick={this.props.onClickShare}>
-                            {activity.share_before_desc}
-                        </div>
-                    );
-                } else {
-                    return (
-                        <div key={i} className="promote-title">
-                            {activity.share_before_desc}
-                        </div>
-                    );
-                }
-            });
+            let list = course.activitys
+                .filter(item => ['1', '2', '3', '4', '5'].includes(item.type))
+                .map((activity, i) => {
+                    if (activity.filter === '1') {
+                        return course.is_shared ? (
+                            <div key={i} className="promote-title after-share">
+                                {activity.share_after_desc}
+                            </div>
+                        ) : (
+                            <div
+                                key={i}
+                                className="promote-title share pointer"
+                                onClick={this.props.onClickShare}
+                            >
+                                {activity.share_before_desc}
+                            </div>
+                        );
+                    } else {
+                        return (
+                            <div key={i} className="promote-title">
+                                {activity.share_before_desc}
+                            </div>
+                        );
+                    }
+                });
             return (
                 <div className="promote">
                     <div className="promote-label">
@@ -62,7 +65,8 @@ export default class Brief extends Component {
                         ) : (
                             <div
                                 className="promote-title pointer"
-                                onClick={this.props.login}>
+                                onClick={this.props.login}
+                            >
                                 1积分抵扣1元钱，<span className="blue">
                                     登录
                                 </span>
@@ -89,7 +93,8 @@ export default class Brief extends Component {
                         return (
                             <button
                                 className="btn-action btn-learn"
-                                onClick={onClickLearn}>
+                                onClick={onClickLearn}
+                            >
                                 立即学习
                             </button>
                         );
@@ -102,7 +107,8 @@ export default class Brief extends Component {
                         return (
                             <button
                                 className="btn-action btn-learn"
-                                onClick={onClickLearn}>
+                                onClick={onClickLearn}
+                            >
                                 立即学习
                             </button>
                         );
@@ -118,7 +124,8 @@ export default class Brief extends Component {
                     return (
                         <button
                             className="btn-action btn-buy"
-                            onClick={onClickBuy}>
+                            onClick={onClickBuy}
+                        >
                             立即购买
                         </button>
                     );
@@ -126,7 +133,8 @@ export default class Brief extends Component {
                     return (
                         <button
                             className="btn-action btn-share"
-                            onClick={e => onClickShare(true, 5)}>
+                            onClick={e => onClickShare(true, 5)}
+                        >
                             分享开通
                         </button>
                     );
@@ -279,7 +287,8 @@ export default class Brief extends Component {
                                             course.related_lesson_id,
                                             e
                                         )
-                                    }>
+                                    }
+                                >
                                     学习精读课程 >>
                                 </span>
                             </div>
@@ -291,11 +300,11 @@ export default class Brief extends Component {
                         {course &&
                         ((course.activitys && course.activitys.length) ||
                             course.is_allow_point === '1') ? (
-                                <div className="promotes">
-                                    {this.renderActivityPromoteList(course)}
-                                    {this.renderPointPromoteList(course, user)}
-                                </div>
-                            ) : null}
+                            <div className="promotes">
+                                {this.renderActivityPromoteList(course)}
+                                {this.renderPointPromoteList(course, user)}
+                            </div>
+                        ) : null}
 
                         {course && course.notice ? (
                             <div className="notice">
@@ -322,7 +331,8 @@ export default class Brief extends Component {
                             ) : (
                                 <div
                                     className="recommend"
-                                    onClick={onClickRecommend}>
+                                    onClick={onClickRecommend}
+                                >
                                     <div className="red-bag" />
                                     <div className="desc">推荐得积分</div>
                                 </div>

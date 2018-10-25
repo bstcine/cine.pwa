@@ -151,7 +151,18 @@ export const wCardAction = {
     changeKnownStatus: () => async (dispatch, getState) => {
         let reducer = getState().WordCardRedu;
         let isKnown = !reducer.get('isKnown');
+        // 更新界面显示状态
         dispatch(wCardAction._changeKnown(isKnown));
+        // 立即更新单词的已认识状态
+        let currentIndex = reducer.get('currentIndex');
+        let result = reducer.get('result');
+        let word = result.rows[currentIndex].word;
+        let id = result.rows[currentIndex].id;
+        let [error, _updateRes] = await fetchData(Api.
+            APIURL_User_Content_Word_UpdateKnow, { 'word': { 'word': word, 'id': id }, 'is_known': true });
+        if (error || _updateRes.status === false) {
+            dispatch(wCardAction._changeKnown(!isKnown))
+        }
     },
     // 更新已认识状态，并移除对应元素
     updateWordKnownStatus: () => async (dispatch, getState) => {
@@ -162,17 +173,6 @@ export const wCardAction = {
         }
         let currentIndex = reducer.get('currentIndex');
         let result = reducer.get('result');
-        let word = result.rows[currentIndex].word;
-        let id = result.rows[currentIndex].id;
-        let [error, _updateRes] = await fetchData(Api.
-            APIURL_User_Content_Word_UpdateKnow, { 'word': { 'word': word, 'id': id }, 'is_known': true });
-        if (error) {
-            return false;
-        } else {
-            if (_updateRes.status === false) {
-                return false;
-            }
-        }
         // 更新成功，移除当前元素
         result.rows[currentIndex].is_known = true;
         result.rows.splice(currentIndex, 1);

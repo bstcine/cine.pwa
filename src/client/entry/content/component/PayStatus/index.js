@@ -7,6 +7,9 @@ import Footer from '@/component/Footer';
 import siteCodeUtil from '@/util/sitecodeUtil';
 import Api from '@/../APIConfig';
 import { fetchData } from '@/service/base';
+import storeUtil from '@/util/storeUtil';
+import Bridge from '@/util/bridge';
+import BRIDGE_EVENT from '@/constant/bridgeEvent';
 
 export default class PayStatus extends Component {
     constructor(props) {
@@ -22,6 +25,15 @@ export default class PayStatus extends Component {
         fetchData(Api.APIURL_Order_Detail, { cid }).then(([err, result]) => {
             if (err) return alert(errorMsg(err));
             let { order } = result.detail;
+            if (
+                order.status === '1' &&
+                siteCodeUtil.inIOSAPP() &&
+                storeUtil.get('temp_h5')
+            ) {
+                Bridge.ios(BRIDGE_EVENT.ORDER_PAY_SUCCESS, {
+                    order_id: order.id,
+                });
+            }
             this.setState({ order });
         });
     }

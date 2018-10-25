@@ -38,7 +38,15 @@ class WordHeader extends React.PureComponent {
         if (siteCodeUtil.inIOSAPP()) {
             return null;
         }
-        let { sourceType, param, name, isAutoChangeWord, isReviseChangeWord, isShowAll, actions } = this.props;
+        let {
+            sourceType,
+            param,
+            name,
+            isAutoChangeWord,
+            isReviseChangeWord,
+            isShowAll,
+            actions,
+        } = this.props;
         let subName = '';
         if (param.lesson_id && param.lesson_id.indexOf('-') > -1) {
             const endIndex = parseInt(param.lesson_id.split('-')[1], 10);
@@ -54,21 +62,28 @@ class WordHeader extends React.PureComponent {
                         className="actionItem"
                         icon={isAutoChangeWord ? 'pause' : 'play_arrow'}
                         size="small"
-                        onClick={actions.changeAutoChangeWordStatus}>
+                        onClick={actions.changeAutoChangeWordStatus}
+                    >
                         {isAutoChangeWord ? '暂停' : '自动播放'}
                     </CButton>
                     <CButton
                         className="actionItem"
-                        icon={isReviseChangeWord ? 'ci-radom_play' : 'ci-circulation'}
+                        icon={
+                            isReviseChangeWord
+                                ? 'ci-radom_play'
+                                : 'ci-circulation'
+                        }
                         size="small"
-                        onClick={actions.changeReviseChangeWordStatus}>
+                        onClick={actions.changeReviseChangeWordStatus}
+                    >
                         {isReviseChangeWord ? '随机' : '顺序'}
                     </CButton>
                     <CButton
                         className="actionItem"
                         icon="view_list"
                         size="small"
-                        onClick={this.gotoList}>
+                        onClick={this.gotoList}
+                    >
                         列表式
                     </CButton>
                     <CButton
@@ -76,7 +91,8 @@ class WordHeader extends React.PureComponent {
                         icon="ci-ico_help"
                         size="small"
                         disabled={true}
-                        onClick={actions.changeAutoChangeWordStatus}>
+                        onClick={actions.changeAutoChangeWordStatus}
+                    >
                         帮助
                     </CButton>
                 </div>
@@ -88,7 +104,8 @@ class WordHeader extends React.PureComponent {
                         className="actionItem"
                         icon="ci-card"
                         size="small"
-                        onClick={this.gotoCard}>
+                        onClick={this.gotoCard}
+                    >
                         卡片式
                     </CButton>
                 </div>
@@ -107,21 +124,26 @@ class WordHeader extends React.PureComponent {
                         icon="ci-arr_word"
                         color="primary"
                         size="small"
-                        onClick={this.backAction}>
+                        onClick={this.backAction}
+                    >
                         {name}
                     </CButton>
                     <p className="subTitle">{subName}</p>
-                    {sourceType === '2' &&
-                    <React.Fragment>
-                        <p className="subTitle">显示全部</p>
-                        <input
-                            className="switch"
-                            type="checkbox"
-                            checked={isShowAll}
-                            onChange={(e) => {actions.changeShowAllStatus(e.target.checked);}}
-                        />
-                    </React.Fragment>
-                    }
+                    {sourceType === '2' && (
+                        <React.Fragment>
+                            <p className="subTitle">显示全部</p>
+                            <input
+                                className="switch"
+                                type="checkbox"
+                                checked={isShowAll}
+                                onChange={e => {
+                                    actions.changeShowAllStatus(
+                                        e.target.checked
+                                    );
+                                }}
+                            />
+                        </React.Fragment>
+                    )}
                 </div>
             );
         }

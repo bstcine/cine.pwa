@@ -1,194 +1,183 @@
 @import '~asset/style/_cine.less';
 
 .footer {
-  background-color: #021a52;
-  padding: 0.8rem 0;
-  width: 100%;
-  margin: 0 auto;
-  line-height: 1;
-  font-size: 0;
-  color: #fff;
-  text-align: center;
-
-  .contact{
-
-    .about-cine {
-      display: block;
-      margin-left: auto;
-      margin-right: auto;
-      padding-bottom: 0.48rem;
-      font-size: 0.36rem;
-      vertical-align: top;
-      border-bottom: 0.02rem solid #011238;
-
-      .title {
-        padding-bottom: 0.3rem;
-      }
-      a {
-        color: #fff;
-      }
-      a:hover {
-        color: #78acdc;
-      }
-
-      .about-list {
-        font-size: 0;
-        li {
-          display: inline-block;
-          padding-right: 0.5rem;
-
-          a {
-            font-size: 0.28rem;
-            color: #fff;
-            line-height: 0.56rem;
-          }
-          a:hover {
-            color: #78acdc;
-          }
-
-        }
-        li:last-child {
-          padding-right: 0;
-        }
-
-      }
-    }
-
-    .qrcodes{
-      font-size: 0;
-      width: 6rem;
-      margin-left: auto;
-      margin-right: auto;
-
-      .qrcode {
-        display: inline-block;
-        width: 50%;
-        margin-left: auto;
-        margin-right: auto;
-        padding-top: 0.48rem;
-
-        .qrcode-img {
-          width: 1.9rem;
-          height: 1.9rem;
-          margin: 0 auto 0.22rem;
-          img {
-            width: 100%;
-            height: 100%;
-          }
-        }
-
-        .qrcode-title {
-          font-size: 0.32rem;
-          text-align: center;
-          margin-bottom: 0.14rem;
-        }
-
-        .qrcode-name {
-          font-size: 0.28rem;
-          text-align: center;
-        }
-      }
-    }
-
-
-  }
-
-
-  .copyright {
+    background-color: #021a52;
+    padding: 0.8rem 0;
+    width: 100%;
     margin: 0 auto;
-    padding: 0.5rem 0 0;
-    text-align: center;
+    line-height: 1;
+    font-size: 0;
     color: #fff;
-    font-size: 0.24rem;
-    line-height: 0.48rem;
-    .co-desc {
-      font-size: 0;
-      word-break: keep-all;
-      .co-desc-year,
-      .co-desc-code {
-        display: inline;
-        font-size: 0.24rem;
-      }
+    text-align: center;
 
-      a {
-        color: #337ab7;
-      }
+    .contact {
+        .about-cine {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            padding-bottom: 0.48rem;
+            font-size: 0.36rem;
+            vertical-align: top;
+            border-bottom: 0.02rem solid #011238;
+
+            .title {
+                padding-bottom: 0.3rem;
+            }
+            a {
+                color: #fff;
+            }
+            a:hover {
+                color: #78acdc;
+            }
+
+            .about-list {
+                font-size: 0;
+                li {
+                    display: inline-block;
+                    padding-right: 0.5rem;
+
+                    a {
+                        font-size: 0.28rem;
+                        color: #fff;
+                        line-height: 0.56rem;
+                    }
+                    a:hover {
+                        color: #78acdc;
+                    }
+                }
+                li:last-child {
+                    padding-right: 0;
+                }
+            }
+        }
+
+        .qrcodes {
+            font-size: 0;
+            width: 6rem;
+            margin-left: auto;
+            margin-right: auto;
+
+            .qrcode {
+                display: inline-block;
+                width: 50%;
+                margin-left: auto;
+                margin-right: auto;
+                padding-top: 0.48rem;
+
+                .qrcode-img {
+                    width: 1.9rem;
+                    height: 1.9rem;
+                    margin: 0 auto 0.22rem;
+                    img {
+                        width: 100%;
+                        height: 100%;
+                    }
+                }
+
+                .qrcode-title {
+                    font-size: 0.32rem;
+                    text-align: center;
+                    margin-bottom: 0.14rem;
+                }
+
+                .qrcode-name {
+                    font-size: 0.28rem;
+                    text-align: center;
+                }
+            }
+        }
     }
-  }
 
+    .copyright {
+        margin: 0 auto;
+        padding: 0.5rem 0 0;
+        text-align: center;
+        color: #fff;
+        font-size: 0.24rem;
+        line-height: 0.48rem;
+        .co-desc {
+            font-size: 0;
+            word-break: keep-all;
+            .co-desc-year,
+            .co-desc-code {
+                display: inline;
+                font-size: 0.24rem;
+            }
+
+            a {
+                color: #337ab7;
+            }
+        }
+    }
 }
 
-
 @media @media-up-sm {
-  .footer {
-    padding: .60rem 0 1rem;
-    width: 18.8rem;
-    text-align: left;
-    .contact{
-      padding: 0 1rem .60rem;
-      overflow: hidden;
-      zoom: 1;
-      border-bottom: solid 2px #021b41;
+    .footer {
+        padding: 0.6rem 0 1rem;
+        width: 18.8rem;
+        text-align: left;
+        .contact {
+            padding: 0 1rem 0.6rem;
+            overflow: hidden;
+            zoom: 1;
+            border-bottom: solid 2px #021b41;
 
-      .about-cine {
-        display: inline-block;
-        padding-bottom: 0;
-        vertical-align: top;
-        border-bottom:none;
+            .about-cine {
+                display: inline-block;
+                padding-bottom: 0;
+                vertical-align: top;
+                border-bottom: none;
 
-        .about-list {
-          li {
-            display: block;
-          }
-        }
-      }
-
-      .qrcodes{
-        float: right;
-        display: inline-block;
-        vertical-align: top;
-        width: auto;
-        .qrcode {
-          display: inline-block;
-          vertical-align: top;
-          margin-right: 1.60rem;
-          padding-top: 0;
-          width: auto;
-
-          .qrcode-img {
-            width: 1.9rem;
-            height: 1.9rem;
-            margin: 0 auto 0.22rem;
-            img {
-              width: 100%;
-              height: 100%;
+                .about-list {
+                    li {
+                        display: block;
+                    }
+                }
             }
-          }
 
-          .qrcode-title {
-            font-size: 0.32rem;
-            text-align: center;
-            margin-bottom: 0.14rem;
-          }
+            .qrcodes {
+                float: right;
+                display: inline-block;
+                vertical-align: top;
+                width: auto;
+                .qrcode {
+                    display: inline-block;
+                    vertical-align: top;
+                    margin-right: 1.6rem;
+                    padding-top: 0;
+                    width: auto;
 
-          .qrcode-name {
-            font-size: 0.28rem;
-            text-align: center;
-          }
+                    .qrcode-img {
+                        width: 1.9rem;
+                        height: 1.9rem;
+                        margin: 0 auto 0.22rem;
+                        img {
+                            width: 100%;
+                            height: 100%;
+                        }
+                    }
 
-          &:last-child {
-            margin-right: 0;
-          }
+                    .qrcode-title {
+                        font-size: 0.32rem;
+                        text-align: center;
+                        margin-bottom: 0.14rem;
+                    }
+
+                    .qrcode-name {
+                        font-size: 0.28rem;
+                        text-align: center;
+                    }
+
+                    &:last-child {
+                        margin-right: 0;
+                    }
+                }
+            }
         }
-      }
+
+        .copyright {
+            font-size: 0.28rem;
+            line-height: 0.56rem;
+        }
     }
-
-    .copyright{
-      font-size: .28rem;
-      line-height: 0.56rem;
-    }
-
-  }
-
-
 }

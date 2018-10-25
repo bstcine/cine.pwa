@@ -8,7 +8,10 @@ export const CardCourse = ({ value, style, actions }) => {
             <div className="cardTeacher">
                 <div className="img-c">
                     <a href={href} target="_blank">
-                        <div className="img" style={{ background: { imgBG }}} />
+                        <div
+                            className="img"
+                            style={{ background: { imgBG } }}
+                        />
                     </a>
                 </div>
 

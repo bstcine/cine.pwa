@@ -45,6 +45,7 @@ export const wordAction = {
             param
         );
         if (!error) {
+            document.title = result.name;
             console.log('结果：', result);
             dispatch(wordAction._receive(result));
             let currentRows = [];

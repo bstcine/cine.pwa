@@ -14,7 +14,7 @@ class WordContainer extends Component {
 
         // 获取参数
         this.param = getParam();
-        document.title = '词汇任务';
+        document.title = '词汇学习';
     }
 
     componentDidMount() {

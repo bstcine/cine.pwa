@@ -79,7 +79,8 @@ export const CardItem111 = ({ value, actions }) => {
                             <CButton
                                 variant="contained"
                                 color="secondary"
-                                className="button">
+                                className="button"
+                            >
                                 Confirm
                             </CButton>
                         </div>

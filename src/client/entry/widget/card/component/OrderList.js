@@ -3,8 +3,6 @@ import { CCardContainer, CCard } from '@/component/_base';
 import { CardItem, CardTeacher } from '@/component/CardItem';
 import { CardItem112, CardItem111 } from './CardItem';
 
-
-
 const OrderItem = ({ order, layout, className, actions }) => {
     // 'none' | 'shadow' | 'darken'| 'lighten' | 'outlined'
     let hover = 'darken';
@@ -52,7 +50,8 @@ const OrderList = ({ orders, layout, className, itemClassName, actions }) => {
         <CCardContainer
             className={className}
             layout={layout}
-            gap={layout === '111' ? 'small' : null}>
+            gap={layout === '111' ? 'small' : null}
+        >
             {orderList}
         </CCardContainer>
     );

@@ -30,7 +30,8 @@ class Switch extends Component {
             <div
                 className={classNames(className, {
                     'cine-switch--checked': checked,
-                })}>
+                })}
+            >
                 <input
                     type="checkbox"
                     id={name}

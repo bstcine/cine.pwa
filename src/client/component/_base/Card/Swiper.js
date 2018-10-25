@@ -75,14 +75,16 @@ class Swiper extends Component {
                     className={classNames('swiper_arrow__left', {
                         'swiper_arrow--hide': !showLeft,
                     })}
-                    onClick={this.swipLeft}>
+                    onClick={this.swipLeft}
+                >
                     <Icon>ci-left_arr</Icon>
                 </div>
                 <div className="swiper__container" ref={this.containerRef}>
                     <div
                         className="swiper__content"
                         ref={this.contentRef}
-                        style={style}>
+                        style={style}
+                    >
                         {children}
                     </div>
                 </div>
@@ -90,7 +92,8 @@ class Swiper extends Component {
                     className={classNames('swiper_arrow__right', {
                         'swiper_arrow--hide': !showRight,
                     })}
-                    onClick={this.swipRight}>
+                    onClick={this.swipRight}
+                >
                     <Icon>ci-right_arr</Icon>
                 </div>
             </div>

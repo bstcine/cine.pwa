@@ -27,7 +27,8 @@ export default ({ type, text, position, mask = true }) => {
                 className={classNames(cls, {
                     [`${cls}--${type}`]: type,
                     [`${cls}--${position}`]: position,
-                })}>
+                })}
+            >
                 {renderIcon(type)}
                 <span className={`${cls}__msg`}>{text}</span>
             </div>

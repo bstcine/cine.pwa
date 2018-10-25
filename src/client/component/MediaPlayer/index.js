@@ -612,7 +612,8 @@ class MediaPlayer extends Component {
                 })}
                 ref={ele => {
                     this.playerElement = ele;
-                }}>
+                }}
+            >
                 <div className="mpj-overlay">
                     <div className="mpj-visual-container">
                         <div
@@ -627,10 +628,12 @@ class MediaPlayer extends Component {
                             <div className="progress">
                                 <div
                                     className="progress-list"
-                                    onClick={this.onProgressClick}>
+                                    onClick={this.onProgressClick}
+                                >
                                     <div
                                         className="play-progress"
-                                        style={{ width: `${playProgress}%` }}>
+                                        style={{ width: `${playProgress}%` }}
+                                    >
                                         <div
                                             className="seeker"
                                             onMouseDown={this.onSeekerMouseDown}

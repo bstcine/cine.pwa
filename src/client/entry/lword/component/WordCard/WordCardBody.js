@@ -6,11 +6,19 @@ import WordCardBodyRecite from './WordCardBodyRecite';
 import WordCardBodyDone from './WordCardBodyDone';
 
 class WordCardBody extends React.PureComponent {
-
     render() {
-        let { name, rows, currentIndex, lastZh, isBack, isKnown, actions, quizAction } = this.props;
+        let {
+            name,
+            rows,
+            currentIndex,
+            lastZh,
+            isBack,
+            isKnown,
+            actions,
+            quizAction,
+        } = this.props;
         if (!rows) {
-            return (<div></div>);
+            return <div />;
         } else if (rows.length === 0) {
             return (
                 <WordCardBodyDone

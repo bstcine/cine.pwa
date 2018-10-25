@@ -7,7 +7,6 @@ import WordList from '../component/WordList';
 import { getParam } from '@/util/urlUtil';
 
 class WordListContainer extends Component {
-
     playAudio = audioSrc => {
         this.audioPlayer.src =
             'http://oss.bstcine.com/word/top10000/' + audioSrc;
@@ -57,6 +56,4 @@ const mapDispatchToProps = dispatch => ({
     actions: bindActionCreators(wordAction, dispatch),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-    WordListContainer
-);
+export default connect(mapStateToProps, mapDispatchToProps)(WordListContainer);

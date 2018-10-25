@@ -46,7 +46,10 @@ export const quiz = (state = {}, { type, payload }) => {
  * byId : questionId 为 key 的 question 对象
  * allIds : questionId 组成的数组
  */
-export const questions = (state = { byId: {}, allIds: [] }, { type, payload }) => {
+export const questions = (
+    state = { byId: {}, allIds: [] },
+    { type, payload }
+) => {
     switch (type) {
         case RECEIVE_CONTENT_QUIZ: {
             const { quiz } = payload;
@@ -223,7 +226,10 @@ export const timer = (state = {}, { type, payload }) => {
     }
 };
 
-export const questionsFilter = (state = SHOW_ALL_QUESTION, { type, payload }) => {
+export const questionsFilter = (
+    state = SHOW_ALL_QUESTION,
+    { type, payload }
+) => {
     switch (type) {
         case SHOW_UNCOMPLETED_QUESTION:
             return SHOW_UNCOMPLETED_QUESTION;

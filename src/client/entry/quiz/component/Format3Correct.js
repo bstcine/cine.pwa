@@ -57,10 +57,12 @@ const Format3Correct = ({
             />
 
             {(currentQuizState === CurrentQuizState.CHECKING ||
-        currentQuizState === CurrentQuizState.REVIEWING) && (
+                currentQuizState === CurrentQuizState.REVIEWING) && (
                 <FeedbackSelectScore
                     id={id}
-                    is_show_tip={currentQuizState === CurrentQuizState.REVIEWING}
+                    is_show_tip={
+                        currentQuizState === CurrentQuizState.REVIEWING
+                    }
                     is_select_correct={is_select_correct}
                     select_score={select_score}
                 />
@@ -75,19 +77,21 @@ const Format3Correct = ({
             )}
 
             {text_value &&
-        (currentQuizState === CurrentQuizState.CHECKING ||
-          currentQuizState === CurrentQuizState.REVIEWING) && (
-                <FeedbackTextScore
-                    id={id}
-                    editable={currentQuizState === CurrentQuizState.CHECKING}
-                    is_text_correct={is_text_correct}
-                    text_score={text_score}
-                    onChange={saveQuestion3TextScore}
-                />
-            )}
+                (currentQuizState === CurrentQuizState.CHECKING ||
+                    currentQuizState === CurrentQuizState.REVIEWING) && (
+                    <FeedbackTextScore
+                        id={id}
+                        editable={
+                            currentQuizState === CurrentQuizState.CHECKING
+                        }
+                        is_text_correct={is_text_correct}
+                        text_score={text_score}
+                        onChange={saveQuestion3TextScore}
+                    />
+                )}
 
             {((currentQuizState === CurrentQuizState.REVIEWING && feedback) ||
-        currentQuizState === CurrentQuizState.CHECKING) && (
+                currentQuizState === CurrentQuizState.CHECKING) && (
                 <FeedbackText
                     editable={currentQuizState === CurrentQuizState.CHECKING}
                     feedback={feedback}

@@ -15,7 +15,8 @@ class QRCode extends Component {
                         onClick={() => {
                             console.log('Icon close');
                             close();
-                        }}>
+                        }}
+                    >
                         close
                     </Icon>
                     <div className={`${cls}__content`}>

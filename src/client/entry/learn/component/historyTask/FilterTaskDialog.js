@@ -73,7 +73,8 @@ const FilterTaskDialog = ({
             open={isOpen}
             onRequestClose={() => {
                 actions.dialogShow(false);
-            }}>
+            }}
+        >
             <div style={itemStyle}>时间范围</div>
             <CDatePicker
                 key={1000}

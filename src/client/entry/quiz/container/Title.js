@@ -28,10 +28,10 @@ const Title = ({ title, date, score, question_count, quiz_type }) => {
                 <div className="metas-right">
                     {quiz_type === '2' &&
                         typeof score === 'number' && (
-                        <span className="meta">
+                            <span className="meta">
                                 得分 <span>{score}</span> 分
-                        </span>
-                    )}
+                            </span>
+                        )}
                     <span className="meta">共 {question_count} 题</span>
                 </div>
             </div>

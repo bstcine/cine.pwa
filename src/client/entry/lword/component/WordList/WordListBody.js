@@ -19,17 +19,21 @@ class WordListBody extends React.PureComponent {
             }
             let style = {
                 backgroundColor: backgroundColor,
-            }
-            return <VocabularyItem style={style} key={item.id} index={index} vocabulary={item} playAction={playAction} actions={actions}/>;
+            };
+            return (
+                <VocabularyItem
+                    style={style}
+                    key={item.id}
+                    index={index}
+                    vocabulary={item}
+                    playAction={playAction}
+                    actions={actions}
+                />
+            );
         });
 
-        return (
-            <div className="listBody">
-                {vocabularyItems}
-            </div>
-        );
+        return <div className="listBody">{vocabularyItems}</div>;
     }
-
 }
 
 export default WordListBody;

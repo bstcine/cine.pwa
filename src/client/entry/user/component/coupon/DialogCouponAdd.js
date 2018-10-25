@@ -27,7 +27,8 @@ const DialogCouponAdd = ({ isOpen, coupons, actions }) => {
             modal={false}
             actions={dialogActions}
             open={isOpen}
-            onRequestClose={actions.toggleCouponDialog}>
+            onRequestClose={actions.toggleCouponDialog}
+        >
             <CTextField
                 fullWidth={true}
                 onChange={(e, val) => {

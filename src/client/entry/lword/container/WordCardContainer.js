@@ -114,7 +114,16 @@ class WordCardContainer extends Component {
         location.href = testHref;
     }
     render() {
-        let { result, currentIndex, lastZh, isAutoChangeWord, isReviseChangeWord, isBack, isKnown, actions } = this.props;
+        let {
+            result,
+            currentIndex,
+            lastZh,
+            isAutoChangeWord,
+            isReviseChangeWord,
+            isBack,
+            isKnown,
+            actions,
+        } = this.props;
         return (
             <WordCard
                 param={this.param}
@@ -150,6 +159,4 @@ const mapDispatchToProps = dispatch => ({
     actions: bindActionCreators(wCardAction, dispatch),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-    WordCardContainer
-);
+export default connect(mapStateToProps, mapDispatchToProps)(WordCardContainer);

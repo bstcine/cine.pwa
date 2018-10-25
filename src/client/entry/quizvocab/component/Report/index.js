@@ -115,7 +115,8 @@ export default class Report extends Component {
                 <CourseLink
                     className="recommend-item"
                     course={lesson}
-                    key={lesson.id}>
+                    key={lesson.id}
+                >
                     <div
                         className="item-img"
                         style={{
@@ -161,7 +162,8 @@ export default class Report extends Component {
                     </ul>
                     {stat ? (
                         <div className="rank">
-                            全国{Report.convGrade(report.grade)}词汇量均值：<span>
+                            全国{Report.convGrade(report.grade)}词汇量均值：<span
+                            >
                                 {stat.avg_vocab}
                             </span>
                             <br />
@@ -189,7 +191,8 @@ export default class Report extends Component {
                     <div className="footer mini fixed">
                         <button
                             onClick={this.retryClick}
-                            className="btn btn_sm btn_blue btn_try">
+                            className="btn btn_sm btn_blue btn_try"
+                        >
                             我也测一下
                         </button>
                     </div>
@@ -197,12 +200,14 @@ export default class Report extends Component {
                     <div className="footer mini fixed">
                         <button
                             onClick={this.retryClick}
-                            className="btn btn_sm btn_blue btn_try">
+                            className="btn btn_sm btn_blue btn_try"
+                        >
                             再测一次
                         </button>
                         <button
                             onClick={this.shareClick}
-                            className="btn btn_sm btn_orange btn_share">
+                            className="btn btn_sm btn_orange btn_share"
+                        >
                             分享
                         </button>
                     </div>

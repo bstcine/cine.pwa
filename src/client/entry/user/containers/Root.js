@@ -12,7 +12,8 @@ class Root extends Component {
         this.isUserHome = location.pathname.split('/').join('') === 'user';
         this.isLessUpSm =
             (window.innerWidth > 0 ? window.innerWidth : screen.width) <= 568;
-        if (this.isUserHome && !this.isLessUpSm) location.href = '/user/integral';
+        if (this.isUserHome && !this.isLessUpSm)
+            location.href = '/user/integral';
     }
 
     componentDidMount() {
@@ -23,7 +24,8 @@ class Root extends Component {
 
     render() {
         const { routes, user } = this.props;
-        if (this.isUserHome && this.isLessUpSm) return user && <UserMobile user={user} />;
+        if (this.isUserHome && this.isLessUpSm)
+            return user && <UserMobile user={user} />;
         return <GLayoutContainer>{routes}</GLayoutContainer>;
     }
 }

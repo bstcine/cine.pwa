@@ -19,7 +19,8 @@ const Card = ({
         <Comp
             className={classNames(cls, { [`${cls}--hoverable`]: hoverable })}
             href={Comp === 'a' ? href : null}
-            onClick={onClick}>
+            onClick={onClick}
+        >
             <div
                 className={classNames(
                     `${cls}__content`,
@@ -30,7 +31,8 @@ const Card = ({
                         [`${cls}__content--lighten`]: hover === 'lighten',
                     },
                     className
-                )}>
+                )}
+            >
                 {children}
             </div>
         </Comp>

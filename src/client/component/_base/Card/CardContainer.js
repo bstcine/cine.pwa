@@ -38,13 +38,15 @@ const CardContainer = ({
                     [`${drawerCls}__container`]: !!drawer,
                 },
                 className
-            )}>
+            )}
+        >
             <div
                 className={classNames(`${cls}__grid`, {
                     [`${cls}__gap--small`]: gap === 'small',
                     [`${cls}__gap--large`]: gap === 'large',
                     [`${cls}__gap--none`]: gap === 'none',
-                })}>
+                })}
+            >
                 {cards}
             </div>
             {drawer}

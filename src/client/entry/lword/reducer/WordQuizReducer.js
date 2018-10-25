@@ -5,25 +5,27 @@ import { fromJS } from 'immutable';
 import { ACTION_LT } from '@/constant/actionTypeLearn';
 
 const initialState = fromJS({
-    isTest: false,                   // 是否正在测试
-    isDone: null,                   // 测试是否结束
-    taskStatus: 0,                   // 任务状态
-    rows: [],                        // 任务源数据
-    name: '',                        // 任务名称
-    wordCount: 0,                    // 单词总数
-    faileTempIndexArr: null,         // 选择错误的单词临时下标
-    faileIndexArr: null,             // 选择错误的单词下标集合
-    faileIndex: -1,                  // 正在使用的错误下标数组的下标
-    correctCount: 0,                 // 已掌握单词数量
-    selectCount: 0,                  // 已选择的单词数量
-    selectIndex: -1,                 // 选中下标 ,-1尚未选择
-    content: {                       // 显示内容对象
-        index: -1,                   // 当前单词下标
-        value: 'wordTest',           // 当前单词
-        real_zh: -1,                 // 正确的翻译下标（0，1，2，3）
-        zh: [],                      // 所有翻译内容数组
+    isTest: false, // 是否正在测试
+    isDone: null, // 测试是否结束
+    taskStatus: 0, // 任务状态
+    rows: [], // 任务源数据
+    name: '', // 任务名称
+    wordCount: 0, // 单词总数
+    faileTempIndexArr: null, // 选择错误的单词临时下标
+    faileIndexArr: null, // 选择错误的单词下标集合
+    faileIndex: -1, // 正在使用的错误下标数组的下标
+    correctCount: 0, // 已掌握单词数量
+    selectCount: 0, // 已选择的单词数量
+    selectIndex: -1, // 选中下标 ,-1尚未选择
+    content: {
+        // 显示内容对象
+        index: -1, // 当前单词下标
+        value: 'wordTest', // 当前单词
+        real_zh: -1, // 正确的翻译下标（0，1，2，3）
+        zh: [], // 所有翻译内容数组
     },
-    param: {                         // api访问参数
+    param: {
+        // api访问参数
         start_index: null,
         end_index: null,
         word_type: null,

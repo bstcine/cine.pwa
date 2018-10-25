@@ -80,4 +80,3 @@ export const QuestionFormat = {
      */
     FORMAT11_READING_DESC: 11,
 };
-

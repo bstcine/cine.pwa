@@ -36,10 +36,12 @@ export default class TabItem extends Component {
         return (
             <div
                 className={classNames(className, { active: selected })}
-                role="tab-item">
+                role="tab-item"
+            >
                 <a
                     style={tabItemStyle}
-                    onClick={e => this.clickHandler(index, id, e)}>
+                    onClick={e => this.clickHandler(index, id, e)}
+                >
                     {children}
                 </a>
                 {Number(indicator) > 0 && (

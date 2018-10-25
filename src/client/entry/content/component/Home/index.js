@@ -199,7 +199,8 @@ export default class Home extends Component {
                                                 background: `url(${
                                                     tab.image_active
                                                 }) center center / contain no-repeat`,
-                                            }}>
+                                            }}
+                                        >
                                             {tab.name}
                                         </TabItem>
                                     );
@@ -235,7 +236,8 @@ export default class Home extends Component {
                     color="secondary"
                     onClick={() => {
                         QRHelp.open();
-                    }}>
+                    }}
+                >
                     课程咨询
                 </CFloatingButton>
 

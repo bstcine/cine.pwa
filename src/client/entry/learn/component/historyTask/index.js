@@ -39,10 +39,7 @@ class HistoryTask extends React.PureComponent {
                     />
                 </CPanel>
 
-                <CFloatingButton
-                    icon="search"
-                    onClick={this.handleFilter}
-                />
+                <CFloatingButton icon="search" onClick={this.handleFilter} />
 
                 <FilterTaskDialog
                     key="selectDialog"

@@ -9,7 +9,14 @@ const mapStateToProps = (state, ownProps) => {
     const { answersById, questions, currentQuizState } = state;
     const id = ownProps.id;
     const { no, title, feedback, need_feedback } = questions.byId[id];
-    let prop = { ...ownProps, no, title, feedback, need_feedback, currentQuizState };
+    let prop = {
+        ...ownProps,
+        no,
+        title,
+        feedback,
+        need_feedback,
+        currentQuizState,
+    };
     const answer = answersById[id];
     if (answer) {
         prop.text_value = answer.text_value;

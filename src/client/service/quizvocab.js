@@ -23,7 +23,7 @@ export let updateLastIndex = (start_index, range, last_index) => {
     return post(Api.APIURL_User_Word_Lesson_Learn_Update, param);
 };
 
-export let getWordList = (estimate) => {
+export let getWordList = estimate => {
     let apiValue;
     let param;
     if (estimate) {

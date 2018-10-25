@@ -1,4 +1,4 @@
-import {post} from '@/service/request';
+import { post } from '@/service/request';
 import Api from '@/../APIConfig';
 
 export let queryAddress = query => {

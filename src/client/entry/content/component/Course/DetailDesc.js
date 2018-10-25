@@ -44,7 +44,8 @@ export default class DetailDesc extends React.PureComponent {
             if (courseDetailOffset.top < 0) {
                 if (!tabs.classList.contains(clazz)) tabs.classList.add(clazz);
             } else {
-                if (tabs.classList.contains(clazz)) tabs.classList.remove(clazz);
+                if (tabs.classList.contains(clazz))
+                    tabs.classList.remove(clazz);
             }
         }
     }
@@ -110,7 +111,8 @@ export default class DetailDesc extends React.PureComponent {
                                                                             <li
                                                                                 key={
                                                                                     i
-                                                                                }>
+                                                                                }
+                                                                            >
                                                                                 {
                                                                                     chapter.name
                                                                                 }
@@ -128,7 +130,8 @@ export default class DetailDesc extends React.PureComponent {
                                                                                                     <li
                                                                                                         key={
                                                                                                             i
-                                                                                                        }>
+                                                                                                        }
+                                                                                                    >
                                                                                                         {
                                                                                                             lesson.name
                                                                                                         }

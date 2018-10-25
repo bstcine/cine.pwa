@@ -8,7 +8,7 @@ import WordCourse from './../component/wordCourse';
 class WordCourseContainer extends Component {
     constructor(props) {
         super(props);
-
+        document.title = '核心词汇';
         this.param = getParam();
         this.props.actions.initCourseLessons(this.param);
     }

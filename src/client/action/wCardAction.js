@@ -78,7 +78,7 @@ export const wCardAction = {
             // 备份原始数组
             dispatch(wCardAction._originRows(result.rows));
             // 移除所有已认识的单词
-            let newRows = []
+            let newRows = [];
             result.rows.forEach((ele) => {
                 if (!ele.is_known) {
                     newRows.push(ele);

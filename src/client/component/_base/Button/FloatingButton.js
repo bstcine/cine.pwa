@@ -46,7 +46,8 @@ class FloatingButton extends Component {
                 shape={children ? 'capsule' : 'round'}
                 variant="contained"
                 color={color}
-                onClick={onClick}>
+                onClick={onClick}
+            >
                 {icon && <Icon>{icon}</Icon>}
                 {children}
             </ButtonBase>,

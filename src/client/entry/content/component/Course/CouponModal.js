@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import ReactModal from 'react-modal';
 import '@/asset/style/modal.less';
 
@@ -15,7 +15,7 @@ export default class CouponModal extends Component {
     }
 
     render() {
-        let {isOpen, username, coupon} = this.props;
+        let { isOpen, username, coupon } = this.props;
         if (!coupon) return null;
         return (
             <ReactModal
@@ -37,19 +37,31 @@ export default class CouponModal extends Component {
                     </div>
                     <div className="coupon-ticket">
                         <div className="coupon-value">
-                            <span className="value">{100 - Number(coupon.value) * 100}</span>
+                            <span className="value">
+                                {100 - Number(coupon.value) * 100}
+                            </span>
                             <span className="unit">折</span>
                         </div>
                         <div className="coupon-desc">
                             <div className="coupon-name">{coupon.name}</div>
-                            <div className="coupon-no">优惠券码：{coupon.no}</div>
+                            <div className="coupon-no">
+                                优惠券码：{coupon.no}
+                            </div>
                         </div>
                         <div className="effective-date">
-                            有效期：{coupon.effective_at.substring(0, 10).replace(/-/g, '.')} -{' '}
-                            {coupon.expire_at.substring(0, 10).replace(/-/g, '.')}
+                            有效期：{coupon.effective_at
+                                .substring(0, 10)
+                                .replace(/-/g, '.')}{' '}
+                            -{' '}
+                            {coupon.expire_at
+                                .substring(0, 10)
+                                .replace(/-/g, '.')}
                         </div>
                     </div>
-                    <div className="visit-at">去官网 (www.bstcine.com) 或 下载"善恩英语APP"了解更多善恩课程</div>
+                    <div className="visit-at">
+                        去官网 (www.bstcine.com) 或
+                        下载"善恩英语APP"了解更多善恩课程
+                    </div>
                 </div>
             </ReactModal>
         );

@@ -15,7 +15,7 @@ export default class ReceiveCoupon extends Component {
         super(props);
         this.state = {
             isLoginModalShow: false,
-        }
+        };
         this.endTime = '2018/07/31 23:59:59';
         this.coupon = {
             value: 50,
@@ -32,7 +32,10 @@ export default class ReceiveCoupon extends Component {
         if (!storeUtil.getToken()) {
             this.setState({ isLoginModalShow: true });
         } else {
-            let [err, result] = await fetchData(Api.APIURL_Temp_User_Coupon_Receive, this.coupon);
+            let [err, result] = await fetchData(
+                Api.APIURL_Temp_User_Coupon_Receive,
+                this.coupon
+            );
             if (!err && result && result.status === true) {
                 location.href = '/user/coupon';
             }
@@ -57,7 +60,7 @@ export default class ReceiveCoupon extends Component {
         }
         return (
             <React.Fragment>
-                <Header isShow={true}/>
+                <Header isShow={true} />
                 <div className="receiveContent">
                     <div className="couponContent">
                         <div className="couponHeader">
@@ -65,19 +68,20 @@ export default class ReceiveCoupon extends Component {
                             <p className="couponType">{couponType}</p>
                             <p className="couponName">{name}</p>
                         </div>
-                        <div className="receiveButton" onClick={() => this.receiveHandle()}>
+                        <div
+                            className="receiveButton"
+                            onClick={() => this.receiveHandle()}
+                        >
                             <p className="receiveText">点击领取</p>
                         </div>
                     </div>
                     <div className="promoteContent">
-                        <p className="promoteHeader">
-                            优惠券使用说明
-                        </p>
+                        <p className="promoteHeader">优惠券使用说明</p>
                         <p className="promoteBody">
-                            1. 本券仅限729原版少儿童书展用户领取；<br/>
-                            2. 领取链接7月31日24点前有效；<br/>
-                            3. 本券可用于购买善恩官网上所有视频课程；<br/>
-                            4. 本券仅限购买一门课程，不设找零，不可合并；<br/>
+                            1. 本券仅限729原版少儿童书展用户领取；<br />
+                            2. 领取链接7月31日24点前有效；<br />
+                            3. 本券可用于购买善恩官网上所有视频课程；<br />
+                            4. 本券仅限购买一门课程，不设找零，不可合并；<br />
                             5. 本券自领取之日起生效，一个月内有效。
                         </p>
                     </div>
@@ -87,11 +91,11 @@ export default class ReceiveCoupon extends Component {
                     onLoginSuccess={() => {
                         this.setState({ isLoginModalShow: false });
                     }}
-                    toggleModal={ () => {
+                    toggleModal={() => {
                         this.setState({ isLoginModalShow: false });
                     }}
                 />
-                <Footer isShow={true}/>
+                <Footer isShow={true} />
             </React.Fragment>
         );
     }

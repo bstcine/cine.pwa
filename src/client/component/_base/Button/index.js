@@ -31,7 +31,8 @@ const Button = ({
         size={size}
         shape={shape}
         transparent={transparent}
-        onClick={onClick}>
+        onClick={onClick}
+    >
         {icon && <Icon>{icon}</Icon>}
         {children}
     </BaseButton>

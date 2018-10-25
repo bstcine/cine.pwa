@@ -30,7 +30,9 @@ class Header extends PureComponent {
     }
 
     onToggleUserBar() {
-        this.setState(prevState => ({ isOpenUserBar: !prevState.isOpenUserBar }));
+        this.setState(prevState => ({
+            isOpenUserBar: !prevState.isOpenUserBar,
+        }));
     }
 
     render() {
@@ -91,7 +93,8 @@ const Nav1 = ({ navs }) => (
                     href={menu.url}
                     className={classNames({
                         active: menu.active,
-                    })}>
+                    })}
+                >
                     {menu.label}
                 </a>
             ))}
@@ -102,7 +105,8 @@ const UserBar = ({ user, isOpen, onToggle, onLogout }) => (
     <div
         className={classNames('user-bar', {
             open: isOpen,
-        })}>
+        })}
+    >
         <div className="nickname" onClick={onToggle}>
             {Boolean(user) && <span>{user.nickname}</span>}
             <HeaderImg user={user} />
@@ -123,13 +127,14 @@ const Nav2 = ({ navs }) => (
                 navs.length > 0 &&
                 navs.map(
                     menu =>
-                        (!menu.disabled ? (
+                        !menu.disabled ? (
                             <a
                                 key={menu.url}
                                 href={menu.url}
                                 className={classNames({
                                     active: menu.active,
-                                })}>
+                                })}
+                            >
                                 {(!!menu.icon || !!menu.icon_path) && (
                                     <CIcon>{menu.icon}</CIcon>
                                 )}
@@ -142,7 +147,7 @@ const Nav2 = ({ navs }) => (
                                 )}
                                 {menu.label}
                             </a>
-                        ))
+                        )
                 )}
         </div>
     </nav>

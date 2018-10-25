@@ -21,7 +21,8 @@ const Icon = ({ className, children, onClick }) => {
         return (
             <i
                 className={classNames(cls, 'material-icons', className)}
-                onClick={onClick}>
+                onClick={onClick}
+            >
                 {children.indexOf('mi-') === 0 ? children.substr(3) : children}
             </i>
         );

@@ -1,134 +1,134 @@
-@import "~asset/style/common.less";
+@import '~asset/style/common.less';
 
-html, body, #root {
-  height: 100%;
-  margin: 0;
+html,
+body,
+#root {
+    height: 100%;
+    margin: 0;
 }
 
 body {
-  background-color: #e2f3fe;
+    background-color: #e2f3fe;
 }
 
-#root{
-  max-width: 575px;
-  margin: 0 auto;
+#root {
+    max-width: 575px;
+    margin: 0 auto;
 }
 
 .wrapper {
-  position: relative;
-  min-height: 100%;
-  padding-bottom: 2.22rem;
+    position: relative;
+    min-height: 100%;
+    padding-bottom: 2.22rem;
 }
 
 .wrapper.mini {
-  padding-bottom: 1.46rem;
+    padding-bottom: 1.46rem;
 }
 
 .footer {
-  position: absolute;
-  padding-top: .20rem;
-  bottom: 0;
-  width: 100%;
-  height: 2.22rem;
-  background-color: #fff;
-  font-size: 0;
-  text-align: center;
+    position: absolute;
+    padding-top: 0.2rem;
+    bottom: 0;
+    width: 100%;
+    height: 2.22rem;
+    background-color: #fff;
+    font-size: 0;
+    text-align: center;
 }
 
 .footer.fixed {
-  position: fixed;
-  left: 0;
+    position: fixed;
+    left: 0;
 }
 
 .footer.mini {
-  height: 1.46rem;
-  background-color: #fff;
+    height: 1.46rem;
+    background-color: #fff;
 }
 
 .word-main {
-  position: relative;
-  height: 100%;
-  .map-bg {
-    position: absolute;
-    z-index: -1;
-    top: 2.4rem;
-    padding: 0 .28rem;
-    width: 100%;
-    height: 3.50rem;
-    background: url(../image/bg_test_map@2x.png) no-repeat center;
-    background-size: contain;
-  }
-
-  @import "./welcome";
-  @import "./loginDetect";
-  @import "./card";
-  @import "./userInfo";
-  @import "./report";
-  @import "./reportList";
-
-  span.orange {
-    color: #e1a923;
-  }
-  span.blue {
-    color: #1a519b;
-  }
-  button.btn {
-    width: 5.2rem;
-    height: 1.10rem;
-    border-radius: .06rem;
-    font-size: .42rem;
-    text-align: center;
-    color: #fff;
-    box-shadow: .03px .052rem .077rem .030rem rgba(35, 65, 119, 0.14);
-    &:focus {
-      outline: none;
-    }
-    &.btn_orange {
-      background-color: #ff6d00;
-      border: 1px #ff6d00;
-    }
-    &.btn_blue {
-      background-color: #1A519B;
-      border: 1px #1A519B;
-    }
-    &.btn_option {
-      width: 5.60rem;
-      height: 1.00rem;
-      background-color: #fff;
-      border: 1px #fff;
-      color: #2f2f2f;
-      font-size: .32rem;
-      margin-bottom: .35rem;
-      //.btn_option-enter{
-      //  background-color: #fed57f;
-      //  border-color: #fed57f;
-      //}
-      //.btn_option-enter-active {
-      //  background-color: #fed57f;
-      //  border-color: #fed57f;
-      //}
-      &:active {
-        background-color: #fed57f;
-        border-color: #fed57f;
-      }
-      &:active {
-        transform: scale(.98, .95);
-      }
-    }
-    &.btn_no_remember {
-      color: #4c93db;
+    position: relative;
+    height: 100%;
+    .map-bg {
+        position: absolute;
+        z-index: -1;
+        top: 2.4rem;
+        padding: 0 0.28rem;
+        width: 100%;
+        height: 3.5rem;
+        background: url(../image/bg_test_map@2x.png) no-repeat center;
+        background-size: contain;
     }
 
-    &.btn_sm {
-      width: 3.00rem;
-      height: .96rem;
-    }
-    &.btn_try {
+    @import './welcome';
+    @import './loginDetect';
+    @import './card';
+    @import './userInfo';
+    @import './report';
+    @import './reportList';
 
+    span.orange {
+        color: #e1a923;
     }
-    &.btn_share {
+    span.blue {
+        color: #1a519b;
+    }
+    button.btn {
+        width: 5.2rem;
+        height: 1.1rem;
+        border-radius: 0.06rem;
+        font-size: 0.42rem;
+        text-align: center;
+        color: #fff;
+        box-shadow: 0.03px 0.052rem 0.077rem 0.03rem rgba(35, 65, 119, 0.14);
+        &:focus {
+            outline: none;
+        }
+        &.btn_orange {
+            background-color: #ff6d00;
+            border: 1px #ff6d00;
+        }
+        &.btn_blue {
+            background-color: #1a519b;
+            border: 1px #1a519b;
+        }
+        &.btn_option {
+            width: 5.6rem;
+            height: 1rem;
+            background-color: #fff;
+            border: 1px #fff;
+            color: #2f2f2f;
+            font-size: 0.32rem;
+            margin-bottom: 0.35rem;
+            //.btn_option-enter{
+            //  background-color: #fed57f;
+            //  border-color: #fed57f;
+            //}
+            //.btn_option-enter-active {
+            //  background-color: #fed57f;
+            //  border-color: #fed57f;
+            //}
+            &:active {
+                background-color: #fed57f;
+                border-color: #fed57f;
+            }
+            &:active {
+                transform: scale(0.98, 0.95);
+            }
+        }
+        &.btn_no_remember {
+            color: #4c93db;
+        }
 
-      margin-left: .45rem;
+        &.btn_sm {
+            width: 3rem;
+            height: 0.96rem;
+        }
+        &.btn_try {
+        }
+        &.btn_share {
+            margin-left: 0.45rem;
+        }
     }
-  }
 }

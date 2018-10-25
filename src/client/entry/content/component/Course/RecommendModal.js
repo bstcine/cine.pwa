@@ -29,7 +29,8 @@ export default class RecommendModal extends Component {
                 className="recommend-modal"
                 overlayClassName="modal-overlay"
                 shouldCloseOnOverlayClick={true}
-                shouldCloseOnEsc={true}>
+                shouldCloseOnEsc={true}
+            >
                 <div className="close" onClick={this.handleCloseModal}>
                     <i className="material-icons">&#xE5CD;</i>
                 </div>

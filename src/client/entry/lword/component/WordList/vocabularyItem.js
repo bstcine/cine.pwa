@@ -5,9 +5,8 @@ import React from 'react';
 import { CIcon } from '@/component/_base';
 
 class VocabularyItem extends React.PureComponent {
-
     constructor(props) {
-        super(props)
+        super(props);
 
         let { vocabulary, playAction } = props;
 
@@ -22,10 +21,9 @@ class VocabularyItem extends React.PureComponent {
 
     playVoice = () => {
         this.playAction(this.voiceSrc);
-    }
+    };
 
     render() {
-
         let { vocabulary, style, index, actions } = this.props;
         let phonetic = '';
         if (vocabulary.phonetic_a) {
@@ -33,17 +31,25 @@ class VocabularyItem extends React.PureComponent {
         } else if (vocabulary.phonetic_b) {
             phonetic = vocabulary.phonetic_b;
         }
-        const voiceSpan = (
-            this.voiceSrc && <CIcon className="v_Task_L_Item_Voice">ci-ico_voice</CIcon>
+        const voiceSpan = this.voiceSrc && (
+            <CIcon className="v_Task_L_Item_Voice">ci-ico_voice</CIcon>
         );
         const wordColor = vocabulary.word_selected ? 'red' : '#1d70d6';
         return (
             <div style={style} className="v_Task_L_Vocabulary_Content">
-                <div className="v_Task_L_VocabularyItem" onClick={this.playVoice}>
-                    <div className="v_Task_L_Item_Info" >
+                <div
+                    className="v_Task_L_VocabularyItem"
+                    onClick={this.playVoice}
+                >
+                    <div className="v_Task_L_Item_Info">
                         <p className="v_Task_L_Item_Seq">{vocabulary.id}</p>
                         <div className="v_Task_L_Item_Value">
-                            <p className="v_Task_L_Item_Word" style={{ color: wordColor }}>{vocabulary.word}</p>
+                            <p
+                                className="v_Task_L_Item_Word"
+                                style={{ color: wordColor }}
+                            >
+                                {vocabulary.word}
+                            </p>
                             <p className="v_Task_L_Item_Phonetic">{phonetic}</p>
                         </div>
                         {voiceSpan}
@@ -57,8 +63,10 @@ class VocabularyItem extends React.PureComponent {
                         className="selected"
                         type="checkbox"
                         checked={vocabulary.is_known}
-                        onClick={e => { e.stopPropagation() }}
-                        onChange={ e => {
+                        onClick={e => {
+                            e.stopPropagation();
+                        }}
+                        onChange={e => {
                             actions.updateWordStatus(index, e.target.checked);
                         }}
                     />
@@ -66,9 +74,7 @@ class VocabularyItem extends React.PureComponent {
                 </div>
             </div>
         );
-
     }
-
 }
 
 export default VocabularyItem;

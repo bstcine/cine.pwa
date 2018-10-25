@@ -117,7 +117,8 @@ const StudentTable = ({ list, actions }) => {
                                 window.open(
                                     `/learn/task?user_id=${student.student_id}`
                                 );
-                            }}>
+                            }}
+                        >
                             全部&gt;
                         </label>
                     </div>
@@ -173,7 +174,8 @@ const StudentTable = ({ list, actions }) => {
                                                     student.student_id
                                                 );
                                             }
-                                        }}>
+                                        }}
+                                    >
                                         <div className={'task-type'}>
                                             {taskType[task.type]}
                                         </div>
@@ -189,7 +191,8 @@ const StudentTable = ({ list, actions }) => {
                                                 ['red', 'red', 'green'][
                                                     task.status
                                                 ]
-                                            )}>
+                                            )}
+                                        >
                                             {taskStatus[task.status]}
                                         </div>
                                         <div
@@ -224,7 +227,8 @@ const StudentTable = ({ list, actions }) => {
                                                         task
                                                     );
                                                 }
-                                            }}>
+                                            }}
+                                        >
                                             {todoLint}
                                         </div>
                                     </div>

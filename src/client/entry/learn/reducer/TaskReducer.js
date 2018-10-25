@@ -14,7 +14,6 @@ const initTaskPageState = fromJS({
 });
 
 const TaskRedu = (state = initTaskPageState, action) => {
-
     switch (action.type) {
         case ACTION_LH.RECEIVE:
             return state.set('taskModels', action.payload);
@@ -29,6 +28,6 @@ const TaskRedu = (state = initTaskPageState, action) => {
         default:
             return state;
     }
-}
+};
 
 export default TaskRedu;

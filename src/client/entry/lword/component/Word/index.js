@@ -2,7 +2,7 @@
  * Created by lidangkun on 2018/7/26.
  */
 import React from 'react';
-import "../../asset/style/Word.less";
+import '../../asset/style/Word.less';
 import WordHeader from '../WordHeader';
 import WordBody from './WordBody';
 
@@ -11,11 +11,7 @@ class Word extends React.PureComponent {
         let { param, result, quizAction, listAction, actions } = this.props;
         return (
             <div className="wordContent">
-                <WordHeader
-                    sourceType="0"
-                    param={param}
-                    name={result.name}
-                />
+                <WordHeader sourceType="0" param={param} name={result.name} />
                 <WordBody
                     result={result}
                     quizAction={quizAction}

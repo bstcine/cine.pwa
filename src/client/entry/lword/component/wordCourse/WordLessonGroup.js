@@ -57,7 +57,8 @@ class WordLessonG extends React.Component {
                     <CCard
                         key={i}
                         hover="lighten"
-                        onClick={() => this.onClick(wordLesson)}>
+                        onClick={() => this.onClick(wordLesson)}
+                    >
                         <WordLessonItem item={wordLesson} />
                     </CCard>
                 );
@@ -66,7 +67,8 @@ class WordLessonG extends React.Component {
         return (
             <ExpansionPanel
                 expanded={this.state.expandStatus === 1}
-                onChange={this.onChange}>
+                onChange={this.onChange}
+            >
                 <ExpansionPanelSummary expandIcon={<CIcon>expand_more</CIcon>}>
                     <div className={panelClass}>{title}</div>
                 </ExpansionPanelSummary>

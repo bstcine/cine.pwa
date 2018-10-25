@@ -60,7 +60,8 @@ const Tasks = ({ tasks, user, isLimitTasks, onShowAllTask, gActions }) => {
                                 } else {
                                     QRCode.open(url);
                                 }
-                            }}>
+                            }}
+                        >
                             打卡 <CIcon>ci-cup</CIcon>
                         </a>
                     ) : (
@@ -81,7 +82,8 @@ const Tasks = ({ tasks, user, isLimitTasks, onShowAllTask, gActions }) => {
                                         user.id
                                     }`;
                                 }
-                            }}>
+                            }}
+                        >
                             打卡 <CIcon>ci-cup</CIcon>
                         </a>
                     )}

@@ -5,13 +5,24 @@
  * Created by lidangkun on 2018/7/26.
  */
 import React from 'react';
-import "../../asset/style/WordCard.less";
+import '../../asset/style/WordCard.less';
 import WordHeader from '../WordHeader';
 import WordCardBody from './WordCardBody';
 
 class WordCard extends React.PureComponent {
     render() {
-        let { param, result, currentIndex, lastZh, isAutoChangeWord, isReviseChangeWord, isBack, isKnown, actions, quizAction } = this.props;
+        let {
+            param,
+            result,
+            currentIndex,
+            lastZh,
+            isAutoChangeWord,
+            isReviseChangeWord,
+            isBack,
+            isKnown,
+            actions,
+            quizAction,
+        } = this.props;
         let { name, rows } = result;
         return (
             <div className="wordContent">

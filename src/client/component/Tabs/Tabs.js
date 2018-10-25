@@ -1,4 +1,4 @@
-import React, {Component, Children, cloneElement} from 'react';
+import React, { Component, Children, cloneElement } from 'react';
 import TabItem from './TabItem';
 import TabItems from './TabItems';
 import TabPanel from './TabPanel';
@@ -6,20 +6,20 @@ import TabPanels from './TabPanels';
 
 export default class Tabs extends Component {
     static defaultProps = {
-        className: 'tabs'
+        className: 'tabs',
     };
 
     constructor(props) {
         super(props);
         this.state = {
             selectedIndex: props.selectedIndex || 0,
-            selectedId: props.selectedId || null
+            selectedId: props.selectedId || null,
         };
         this.onTabItemClick = this.onTabItemClick.bind(this);
     }
 
     getChildren() {
-        let {selectedIndex, selectedId} = this.state;
+        let { selectedIndex, selectedId } = this.state;
         let children = this.props.children;
         return Children.map(children, child => {
             if (Tabs.isTabItems(child)) {
@@ -32,23 +32,24 @@ export default class Tabs extends Component {
                                 id: tabItem.props.id,
                             };
                             if (selectedId) {
-                                props.selected = props.id === selectedId
+                                props.selected = props.id === selectedId;
                             } else {
-                                props.selected = index === selectedIndex
+                                props.selected = index === selectedIndex;
                             }
 
-                            if(tabItem.props.onTabItemClick){
-                                props.onTabItemClick = tabItem.props.onTabItemClick
-                            }else {
-                                props.onTabItemClick = this.onTabItemClick
+                            if (tabItem.props.onTabItemClick) {
+                                props.onTabItemClick =
+                                    tabItem.props.onTabItemClick;
+                            } else {
+                                props.onTabItemClick = this.onTabItemClick;
                             }
 
-                            if(tabItem.props.onClick) {
-                                props.onClick = tabItem.props.onClick
+                            if (tabItem.props.onClick) {
+                                props.onClick = tabItem.props.onClick;
                             }
                             return cloneElement(tabItem, props);
                         }
-                    })
+                    }),
                 });
             } else if (Tabs.isTabPanels(child)) {
                 let tabPanels = child.props.children;
@@ -60,13 +61,13 @@ export default class Tabs extends Component {
                                 id: tabPanel.props.id,
                             };
                             if (selectedId) {
-                                props.selected = props.id === selectedId
+                                props.selected = props.id === selectedId;
                             } else {
-                                props.selected = index === selectedIndex
+                                props.selected = index === selectedIndex;
                             }
                             return cloneElement(tabPanel, props);
                         }
-                    })
+                    }),
                 });
             }
         });
@@ -90,22 +91,22 @@ export default class Tabs extends Component {
     }
 
     onTabItemClick(index, id) {
-        let {selectedId} = this.props;
-        if(selectedId) {
+        let { selectedId } = this.props;
+        if (selectedId) {
             if (id === this.state.selectedId) return;
             this.setState({
-                selectedId: id
+                selectedId: id,
             });
-        }else{
+        } else {
             if (index === this.state.selectedIndex) return;
             this.setState({
-                selectedIndex: index
+                selectedIndex: index,
             });
         }
     }
 
     render() {
-        const {className} = this.props;
+        const { className } = this.props;
         return (
             <div className={className} role="tabs">
                 {this.getChildren()}

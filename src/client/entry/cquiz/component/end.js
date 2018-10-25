@@ -20,17 +20,26 @@ export default class End extends React.Component {
             hintStyle = 'green';
         }
 
-        this.state = {score: score, hint: hint,hintStyle:hintStyle};
+        this.state = { score: score, hint: hint, hintStyle: hintStyle };
     }
 
     render() {
         return (
             <div className="card-end">
-                <div className="hint">本次测试得分：<span className={this.state.hintStyle}>{this.state.score}</span> 分，{this.state.hint}</div>
+                <div className="hint">
+                    本次测试得分：<span className={this.state.hintStyle}>
+                        {this.state.score}
+                    </span>{' '}
+                    分，{this.state.hint}
+                </div>
 
                 <div className="todo">
-                    <button className="again" onClick={this.props.again}>再测一次</button>
-                    <button className="exit" onClick={this.props.exit}>答题结束</button>
+                    <button className="again" onClick={this.props.again}>
+                        再测一次
+                    </button>
+                    <button className="exit" onClick={this.props.exit}>
+                        答题结束
+                    </button>
                 </div>
             </div>
         );

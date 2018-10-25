@@ -1,63 +1,76 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import classNames from 'classnames';
 import './style.less';
 import { componentNames } from '@/component/_base/config';
 const cls = componentNames.Drawer;
 
-class Drawer extends Component {
+class Drawer extends PureComponent {
     constructor(props) {
         super(props);
-        this.onClose = this.onClose.bind(this);
         this.state = {
             active: false,
-            isOpen: this.props.isOpen,
+            contentCls: '',
+            maskCls: '',
         };
+        this.ref = React.createRef();
     }
 
-    static getDerivedStateFromProps(nextProps, prevState) {
-        prevState.isOpen = nextProps.isOpen;
-        return prevState;
-    }
-
-    componentDidMount() {
-        requestAnimationFrame(() => {
-            this.setState({
-                active: true,
+    UNSAFE_componentWillReceiveProps(nextProps) {
+        if (!this.props.isOpen && nextProps.isOpen) {
+            console.log(1);
+            this.setState({ active: true });
+            setTimeout(() => {
+                this.setState({
+                    contentCls: `${cls}__content--enter-active`,
+                    maskCls: `${cls}__mask--enter-active`,
+                });
             });
-        });
-    }
-
-    componentDidUpdate(prevProps) {
-        requestAnimationFrame(() => {
+        } else if (this.props.isOpen && !nextProps.isOpen) {
+            console.log(2);
             this.setState({
-                active: prevProps.isOpen,
+                contentCls: '',
+                maskCls: '',
             });
-        });
-    }
-
-    onClose() {
-        this.props.onClose && this.props.onClose();
+            setTimeout(() => {
+                this.setState({ active: false });
+            }, 225);
+        }
     }
 
     render() {
-        const { className, children, isOpen, offset } = this.props;
-        const style = offset ? { left: offset } : null;
-        if (!isOpen) return null;
+        const {
+            className,
+            children,
+            onClose,
+            anchor = 'left',
+            fullscreen,
+        } = this.props;
+        const { active, contentCls, maskCls } = this.state;
         return (
-            <div className={classNames(`${cls}`, className)}>
-                <div
-                    className={classNames(`${cls}__mask`, {
-                        [`${cls}__mask--enter`]: this.state.active,
-                    })}
-                    onClick={this.onClose}
-                />
-                <div
-                    className={classNames(`${cls}__content`, {
-                        [`${cls}__content--enter`]: this.state.active,
-                    })}
-                    style={style}>
-                    {children}
-                </div>
+            <div
+                ref={this.ref}
+                className={classNames(cls, className, {
+                    [`${cls}--active`]: active,
+                    [`${cls}--fullscreen`]: fullscreen,
+                })}
+            >
+                {active && (
+                    <div
+                        className={classNames(`${cls}__mask`, maskCls)}
+                        onClick={onClose}
+                    />
+                )}
+                {active && (
+                    <div
+                        className={classNames(
+                            `${cls}__content`,
+                            `${cls}__anchor--${anchor}`,
+                            contentCls
+                        )}
+                    >
+                        {children}
+                    </div>
+                )}
             </div>
         );
     }

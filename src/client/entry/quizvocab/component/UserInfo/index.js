@@ -1,9 +1,9 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import storeUtil from '@/util/storeUtil';
-import {initWechat} from '@/util/wechatUtil';
+import { initWechat } from '@/util/wechatUtil';
 import * as area from '@/service/data/response_area.json';
 import * as account from '@/service/data/response_account.json';
-import {getParam} from "@/util/urlUtil";
+import { getParam } from '@/util/urlUtil';
 
 export default class UserInfo extends Component {
     constructor(props) {
@@ -16,7 +16,7 @@ export default class UserInfo extends Component {
         this.state = {
             born_at: 2004,
             grade: 7,
-            area_code: 310000
+            area_code: 310000,
         };
         this.startClick = this.startClick.bind(this);
         this.bornAtChange = this.bornAtChange.bind(this);
@@ -28,7 +28,7 @@ export default class UserInfo extends Component {
         let user = {
             born_at: this.state.born_at,
             grade: this.state.grade,
-            area_code: this.state.area_code
+            area_code: this.state.area_code,
         };
         if (!this.gradeConfirm()) return;
         storeUtil.set('user', user);
@@ -65,35 +65,38 @@ export default class UserInfo extends Component {
 
     componentDidMount() {
         console.log('componentDidMount');
-        let {born_at, area_code, grade} = getParam()
-        console.log({born_at, area_code, grade})
+        let { born_at, area_code, grade } = getParam();
+        console.log({ born_at, area_code, grade });
 
         if (born_at && this.born_ats.includes(born_at)) {
             console.log(`born_at ${born_at}`);
-            this.setState({born_at: born_at});
+            this.setState({ born_at: born_at });
         }
-        if (area_code && this.area_codes.some(item => item.value == area_code)) {
+        if (
+            area_code &&
+            this.area_codes.some(item => item.value == area_code)
+        ) {
             console.log(`area_code ${area_code}`);
-            this.setState({area_code: area_code});
+            this.setState({ area_code: area_code });
         }
         if (grade && this.grades.some(item => item.value == grade)) {
             console.log(`grade ${grade}`);
-            this.setState({grade: grade});
+            this.setState({ grade: grade });
         }
 
         initWechat();
     }
 
     bornAtChange(event) {
-        this.setState({born_at: event.target.value});
+        this.setState({ born_at: event.target.value });
     }
 
     gradeChange(event) {
-        this.setState({grade: event.target.value});
+        this.setState({ grade: event.target.value });
     }
 
     areaCodeChange(event) {
-        this.setState({area_code: event.target.value});
+        this.setState({ area_code: event.target.value });
     }
 
     render() {
@@ -101,13 +104,18 @@ export default class UserInfo extends Component {
             <div className="wrapper mini">
                 <div className="user-info">
                     <div className="title">测一下，看看你的词汇量有多少？</div>
-                    <div className="tips">为保证本测试的学术参考价值，请补充如下个人信息</div>
+                    <div className="tips">
+                        为保证本测试的学术参考价值，请补充如下个人信息
+                    </div>
                     <div className="form">
                         <div className="form-item">
                             <div className="form-label">你的出生年份</div>
                             <div className="form-control">
-                                <select value={this.state.born_at} onChange={this.bornAtChange}>
-                                    {this.born_ats.map(function (item) {
+                                <select
+                                    value={this.state.born_at}
+                                    onChange={this.bornAtChange}
+                                >
+                                    {this.born_ats.map(function(item) {
                                         return (
                                             <option key={item} value={item}>
                                                 {item + '年'}
@@ -120,10 +128,16 @@ export default class UserInfo extends Component {
                         <div className="form-item">
                             <div className="form-label">你的年级</div>
                             <div className="form-control">
-                                <select value={this.state.grade} onChange={this.gradeChange}>
-                                    {this.grades.map(function (item) {
+                                <select
+                                    value={this.state.grade}
+                                    onChange={this.gradeChange}
+                                >
+                                    {this.grades.map(function(item) {
                                         return (
-                                            <option key={item.value} value={item.value}>
+                                            <option
+                                                key={item.value}
+                                                value={item.value}
+                                            >
                                                 {item.label}
                                             </option>
                                         );
@@ -135,10 +149,16 @@ export default class UserInfo extends Component {
                         <div className="form-item">
                             <div className="form-label">你所在的地区</div>
                             <div className="form-control">
-                                <select value={this.state.area_code} onChange={this.areaCodeChange}>
-                                    {this.area_codes.map(function (item) {
+                                <select
+                                    value={this.state.area_code}
+                                    onChange={this.areaCodeChange}
+                                >
+                                    {this.area_codes.map(function(item) {
                                         return (
-                                            <option key={item.value} value={item.value}>
+                                            <option
+                                                key={item.value}
+                                                value={item.value}
+                                            >
                                                 {item.label}
                                             </option>
                                         );

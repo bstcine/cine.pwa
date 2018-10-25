@@ -23,7 +23,8 @@ const SelectOption = ({
         <li
             className={classNames(className, {
                 checked,
-            })}>
+            })}
+        >
             <label>
                 <input
                     type="radio"

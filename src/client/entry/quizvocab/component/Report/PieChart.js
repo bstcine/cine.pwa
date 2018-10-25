@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 
 var echarts = require('echarts/lib/echarts');
 require('echarts/lib/chart/pie');
@@ -6,8 +6,8 @@ require('echarts/lib/component/legend');
 
 export default class PieChart extends Component {
     static defaultProps = {
-        style: {width: '100%', height: '300px', margin: 'auto'},
-        data: null
+        style: { width: '100%', height: '300px', margin: 'auto' },
+        data: null,
     };
 
     constructor(props) {
@@ -23,13 +23,15 @@ export default class PieChart extends Component {
     }
 
     initPieChart() {
-        const {data} = this.props;
+        const { data } = this.props;
         if (!data && data.length) return;
         let chartData = data.map(item => {
-            let {percent, min_vocab, max_vocab} = item;
+            let { percent, min_vocab, max_vocab } = item;
             return {
                 value: percent,
-                name: `${percent}% 词汇量${min_vocab}${max_vocab ? '-' + max_vocab : '以上'}`
+                name: `${percent}% 词汇量${min_vocab}${
+                    max_vocab ? '-' + max_vocab : '以上'
+                }`,
             };
         });
 
@@ -49,10 +51,17 @@ export default class PieChart extends Component {
         return {
             animation: false,
             title: {
-                show: false
+                show: false,
             },
 
-            color: ['#ffd941', '#ffb138', '#fe7f41', '#34bcd9', '#2d7be6', '#65ce18'],
+            color: [
+                '#ffd941',
+                '#ffb138',
+                '#fe7f41',
+                '#34bcd9',
+                '#2d7be6',
+                '#65ce18',
+            ],
             legend: {
                 show: true,
                 left: 'center',
@@ -62,12 +71,12 @@ export default class PieChart extends Component {
                 icon: 'circle',
                 textStyle: {
                     color: '#9ba5ac',
-                    fontSize: '12px'
+                    fontSize: '12px',
                 },
                 shadowOffsetX: 0,
                 shadowOffsetY: 2,
                 shadowBlur: 5,
-                shadowColor: 'rgba(141, 117, 19, 0.2)'
+                shadowColor: 'rgba(141, 117, 19, 0.2)',
             },
             series: [
                 {
@@ -81,8 +90,8 @@ export default class PieChart extends Component {
                             position: 'inner',
                             formatter: '{d}%',
                             color: '#fefefe',
-                            fontSize: 12
-                        }
+                            fontSize: 12,
+                        },
                     },
                     itemStyle: {
                         normal: {
@@ -97,16 +106,16 @@ export default class PieChart extends Component {
 
                             // borderWidth: 2,
 
-                            borderColor: '#fff'
-                        }
-                    }
-                }
-            ]
+                            borderColor: '#fff',
+                        },
+                    },
+                },
+            ],
         };
     }
 
     render() {
-        let {style} = this.props;
+        let { style } = this.props;
         return (
             <div className="pie-react">
                 <div ref="pieChart" style={style} />

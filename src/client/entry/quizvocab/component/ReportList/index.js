@@ -54,7 +54,8 @@ export default class ReportList extends Component {
                         key={item.id}
                         onClick={e => {
                             this.itemClick(item.id, e);
-                        }}>
+                        }}
+                    >
                         <td>{i + 1}</td>
                         <td>
                             {item.create_at
@@ -87,7 +88,8 @@ export default class ReportList extends Component {
                     <div className="list-footer">
                         <button
                             onClick={this.goStart}
-                            className="btn btn_sm btn_blue btn_try">
+                            className="btn btn_sm btn_blue btn_try"
+                        >
                             测试
                         </button>
                     </div>

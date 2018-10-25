@@ -1,6 +1,7 @@
 import React from 'react';
 import { CCardContainer, CCard } from '@/component/_base';
-import { CardItem, CardItem112, CardItem111, CardItem245 } from './CardItem';
+import { CardItem, CardTeacher } from '@/component/CardItem';
+import { CardItem112, CardItem111 } from './CardItem';
 
 const OrderItem = ({ order, layout, className, actions }) => {
     // 'none' | 'shadow' | 'darken'| 'lighten' | 'outlined'
@@ -20,7 +21,7 @@ const OrderItem = ({ order, layout, className, actions }) => {
             hover = 'shadow';
             break;
         case '245':
-            item = <CardItem245 value={order} actions={actions} />;
+            item = <CardTeacher value={order} actions={actions} />;
             hover = 'darken';
             break;
     }
@@ -49,7 +50,8 @@ const OrderList = ({ orders, layout, className, itemClassName, actions }) => {
         <CCardContainer
             className={className}
             layout={layout}
-            gap={layout === '111' ? 'small' : null}>
+            gap={layout === '111' ? 'small' : null}
+        >
             {orderList}
         </CCardContainer>
     );

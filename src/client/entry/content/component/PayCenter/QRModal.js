@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import ReactModal from 'react-modal';
 import '@/asset/style/modal.less';
 
@@ -8,7 +8,7 @@ export default class QRModal extends Component {
     }
 
     render() {
-        let {isOpen, onRequestClose,code_url,pay_price} = this.props;
+        let { isOpen, onRequestClose, code_url, pay_price } = this.props;
         return (
             <ReactModal
                 isOpen={isOpen}
@@ -22,7 +22,12 @@ export default class QRModal extends Component {
             >
                 <div className="modal-header">
                     <span className="modal-title">微信扫码支付：</span>
-                    <i className="modal-close material-icons" onClick={onRequestClose}>&#xE5CD;</i>
+                    <i
+                        className="modal-close material-icons"
+                        onClick={onRequestClose}
+                    >
+                        &#xE5CD;
+                    </i>
                 </div>
                 <div className="modal-body">
                     <div className="qr-brief">

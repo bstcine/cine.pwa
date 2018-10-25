@@ -40,7 +40,10 @@ const OrderList = ({ orders, layout, className, itemClassName, actions }) => {
     });
 
     return (
-        <CCardContainer className={className} gap={layout === '111' ? 'lighten' : 'large'}>
+        <CCardContainer
+            className={className}
+            gap={layout === '111' ? 'lighten' : 'large'}
+        >
             {orderList}
         </CCardContainer>
     );

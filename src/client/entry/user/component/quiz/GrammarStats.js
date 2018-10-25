@@ -14,7 +14,8 @@ const GrammarStats = ({ list }) => {
             return (
                 <a
                     href={`/quiz/grammar?stats_content_quiz_id=${item.id}`}
-                    key={item.id}>
+                    key={item.id}
+                >
                     <li className="table-tr">
                         <span>{timeUtil.shortTime(item.create_at)}</span>
                         <span>

@@ -71,7 +71,8 @@ export default class Header extends Component {
                         onClick={this.toggleUserCenter}
                         className={className('nav-item user-center', {
                             open: isUserCenterOpen,
-                        })}>
+                        })}
+                    >
                         <a>
                             我的<i className="material-icons">&#xE5C5;</i>
                         </a>
@@ -89,8 +90,8 @@ export default class Header extends Component {
                                 {!!user &&
                                     (user.role_id === '1' ||
                                         user.role_id === '2') && (
-                                    <a href="/mentor">老师批改</a>
-                                )}
+                                        <a href="/mentor">老师批改</a>
+                                    )}
                             </li>
                             <li className="nav-item">
                                 <a onClick={this.logout}>退出</a>
@@ -124,7 +125,8 @@ export default class Header extends Component {
                     ref={ele => {
                         this.headerEle = ele;
                     }}
-                    onClick={this.closeNav}>
+                    onClick={this.closeNav}
+                >
                     <div className="nav-toggle-open" onClick={this.toggleNav} />
                     <div className="brand-logo">
                         <a href="/">
@@ -141,7 +143,8 @@ export default class Header extends Component {
                         className="nav-list"
                         onClick={e => {
                             e.stopPropagation();
-                        }}>
+                        }}
+                    >
                         <div
                             className="nav-toggle-close"
                             onClick={this.toggleNav}

@@ -7,7 +7,8 @@ const getNavs = user => {
             if (
                 Array.isArray(menu.role_id) &&
                 menu.role_id.includes(user.role_id)
-            ) return true;
+            )
+                return true;
             if (menu.role_id === user.role_id) return true;
         } else {
             return false;

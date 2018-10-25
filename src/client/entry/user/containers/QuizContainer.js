@@ -32,8 +32,8 @@ class QuizContainer extends Component {
                         <TabItem>词汇量测试</TabItem>
                         {user &&
                             user.type === '2' && (
-                            <TabItem>核心语法测试</TabItem>
-                        )}
+                                <TabItem>核心语法测试</TabItem>
+                            )}
                     </TabItems>
                     <TabPanels>
                         <TabPanel>
@@ -66,21 +66,23 @@ class QuizContainer extends Component {
 
                 {user &&
                     user.type === '2' && (
-                    <CFloatingButton
-                        variant="contained"
-                        color="primary"
-                        onClick={() => {
-                            location.href = URL_Quiz_Grammar;
-                        }}>
+                        <CFloatingButton
+                            variant="contained"
+                            color="primary"
+                            onClick={() => {
+                                location.href = URL_Quiz_Grammar;
+                            }}
+                        >
                             测试语法
-                    </CFloatingButton>
-                )}
+                        </CFloatingButton>
+                    )}
                 <CFloatingButton
                     variant="contained"
                     color="primary"
                     onClick={() => {
                         location.href = URL_User_Quiz_Vocab_New;
-                    }}>
+                    }}
+                >
                     测试词汇量
                 </CFloatingButton>
             </div>

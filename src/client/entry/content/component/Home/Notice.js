@@ -32,7 +32,8 @@ export default class Notice extends Component {
                             href="#"
                             onClick={() => {
                                 QRHelp.open();
-                            }}>
+                            }}
+                        >
                             <span className="notice-tag">【课程咨询】</span>
                             <span className="notice-title">
                                 找不到需要的课程？请联系善恩小助手

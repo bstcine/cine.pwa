@@ -1,12 +1,18 @@
 import React from 'react';
-import "../../asset/style/WordList.less";
+import '../../asset/style/WordList.less';
 import WordListBody from './WordListBody';
 import WordHeader from '../WordHeader';
 
 class WordList extends React.PureComponent {
     render() {
-
-        let { vocabularyList, name, isShowAll, playAction, actions, param } = this.props;
+        let {
+            vocabularyList,
+            name,
+            isShowAll,
+            playAction,
+            actions,
+            param,
+        } = this.props;
         if (!vocabularyList) {
             return null;
         }
@@ -27,7 +33,6 @@ class WordList extends React.PureComponent {
             </div>
         );
     }
-
 }
 
 export default WordList;

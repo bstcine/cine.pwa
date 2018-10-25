@@ -10,7 +10,7 @@ export default class CardDemo extends React.PureComponent {
         // alert(JSON.stringify(orders));
         return (
             <React.Fragment>
-                <CPanel title="核心课程" >
+                <CPanel title="核心课程">
                     <OrderList
                         orders={orderlist}
                         layout="234"

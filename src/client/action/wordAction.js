@@ -29,7 +29,7 @@ export const wordAction = {
         if (status) {
             newRows = [...result.rows];
         } else {
-            result.rows.forEach((ele) => {
+            result.rows.forEach(ele => {
                 if (!ele.is_known) {
                     newRows.push(ele);
                 }
@@ -39,15 +39,17 @@ export const wordAction = {
         dispatch(wordAction._isShowAll(status));
     },
     // 加载数据列表
-    loadWordList: (param) => async dispatch => {
-
-        let [error, result] = await fetchData(Api.APIURL_User_Learn_Word, param);
+    loadWordList: param => async dispatch => {
+        let [error, result] = await fetchData(
+            Api.APIURL_User_Learn_Word,
+            param
+        );
         if (!error) {
             document.title = result.name;
             console.log('结果：', result);
             dispatch(wordAction._receive(result));
             let currentRows = [];
-            result.rows.forEach((ele) => {
+            result.rows.forEach(ele => {
                 if (ele.id.length > 5) {
                     ele.id = ele.id.slice(-5);
                 }
@@ -76,13 +78,16 @@ export const wordAction = {
         currentRows.splice(index, 1, newObject);
         let newRows = [...currentRows];
         dispatch(wordAction._currentRows(newRows));
-        let [error, _updateRes] = await fetchData(Api.APIURL_User_Content_Word_UpdateKnow, {
-            'word': {
-                'word': newObject.word,
-                'id': newObject.id,
-            },
-            'is_known': is_known
-        });
+        let [error, _updateRes] = await fetchData(
+            Api.APIURL_User_Content_Word_UpdateKnow,
+            {
+                word: {
+                    word: newObject.word,
+                    id: newObject.id,
+                },
+                is_known: is_known,
+            }
+        );
         if (error || !_updateRes.status) {
             currentRows.splice(index, 1, wordObject);
             result.rows.splice(resultIndex, 1, wordObject);
@@ -90,7 +95,7 @@ export const wordAction = {
         }
     },
     // 更新course节点点击状态
-    updateCourseSelectIndex: param => async (dispatch) => {
+    updateCourseSelectIndex: param => async dispatch => {
         if (!param.lesson_id) {
             return;
         }
@@ -117,10 +122,13 @@ export const wordAction = {
             estimate_range = '6001-10000';
         }
         let updateParam = {
-            'lesson_id': param.lesson_id,
-            'estimate_range': estimate_range,
+            lesson_id: param.lesson_id,
+            estimate_range: estimate_range,
         };
-        let [err, result] = await fetchData(Api.APIURL_User_Word_Lesson_Learn_Update, updateParam);
+        let [err, result] = await fetchData(
+            Api.APIURL_User_Word_Lesson_Learn_Update,
+            updateParam
+        );
         if (result) {
             console.log('更新点击状态: \n', result);
         } else {

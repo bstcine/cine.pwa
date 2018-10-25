@@ -17,7 +17,8 @@ export default class HelpModal extends Component {
                 overlayClassName="modal-overlay"
                 bodyOpenClassName="body-modal-open"
                 shouldCloseOnOverlayClick={true}
-                shouldCloseOnEsc={true}>
+                shouldCloseOnEsc={true}
+            >
                 <img src={uaUtil.iOS() ? iosImg : androidImg} />
             </ReactModal>
         );

@@ -105,7 +105,8 @@ export default class OrderCoupon extends Component {
                                     className={'radio-label'}
                                     onClick={() => {
                                         this.onChangRadio('0');
-                                    }}>
+                                    }}
+                                >
                                     <input
                                         type="radio"
                                         name="radioName"
@@ -123,26 +124,38 @@ export default class OrderCoupon extends Component {
                                     />
                                     <div className="radio-content">
                                         <div className={'hint-c'}>
-                                            我同意将本账户下所有<a className={'hint-key'}>2018年5月28日</a>前购买视频课程的有效期
-                                            从“永久有效”调整为“<a className={'hint-key'} >5年有效</a>”，
-                                            调整后有效期为：即日起至<a className={'hint-key'} >{expireDate}</a>。
+                                            我同意将本账户下所有<a
+                                                className={'hint-key'}
+                                            >
+                                                2018年5月28日
+                                            </a>前购买视频课程的有效期
+                                            从“永久有效”调整为“<a
+                                                className={'hint-key'}
+                                            >
+                                                5年有效
+                                            </a>”， 调整后有效期为：即日起至<a
+                                                className={'hint-key'}
+                                            >
+                                                {expireDate}
+                                            </a>。
                                         </div>
                                         <div className={'hint-d'}>并获得：</div>
                                         {list.map((value, index) => (
                                             <div
                                                 className={'hint-e'}
-                                                key={index}>
+                                                key={index}
+                                            >
                                                 {value.hint}
                                             </div>
                                         ))}
-
                                     </div>
                                 </label>
                                 <label
                                     className={'radio-label'}
                                     onClick={() => {
                                         this.onChangRadio('1');
-                                    }}>
+                                    }}
+                                >
                                     <input
                                         type="radio"
                                         name="radioName"
@@ -158,27 +171,34 @@ export default class OrderCoupon extends Component {
                                         className="radio-beauty"
                                     />
                                     <div className="radio-content hint-g">
-                                        我暂不调整本账户下所有课程有效期，如需调整我会在<a className={'hint-key'} >2018年7月31日</a>前完成。
+                                        我暂不调整本账户下所有课程有效期，如需调整我会在<a
+                                            className={'hint-key'}
+                                        >
+                                            2018年7月31日
+                                        </a>前完成。
                                     </div>
-
                                 </label>
 
                                 <p className="hint-mark">
-                                    注：1. 可转换课程包括2018年5月28日前购买的所有课程；<br />
+                                    注：1.
+                                    可转换课程包括2018年5月28日前购买的所有课程；<br />
                                     2. 课程有效期转换截止日期：2018年7月31日；<br />
                                     3. 转换后课程有效期为：5年；<br />
-                                    4. 转换后获赠的优惠券仅可用于购买善恩视频课程；<br />
-                                    5. 课程有效期转换一旦完成，不可逆转，请谨慎选择；<br />
-                                    6. 转换过程中如遇任何问题请联系善恩小助手（微信号：BSTCINE01）。
+                                    4.
+                                    转换后获赠的优惠券仅可用于购买善恩视频课程；<br />
+                                    5.
+                                    课程有效期转换一旦完成，不可逆转，请谨慎选择；<br />
+                                    6.
+                                    转换过程中如遇任何问题请联系善恩小助手（微信号：BSTCINE01）。
                                 </p>
-
                             </div>
 
                             <div
                                 className={'btn'}
                                 onClick={() => {
                                     this.submit();
-                                }}>
+                                }}
+                            >
                                 确定
                             </div>
                         </div>
@@ -187,24 +207,36 @@ export default class OrderCoupon extends Component {
                 <Modal
                     isOpen={showModal}
                     style={customStyles}
-                    contentLabel="Example Modal">
+                    contentLabel="Example Modal"
+                >
                     <div className={'success-modal'}>
                         <img src={require('../asset/image/ico_success.png')} />
                         <div className={'font-a'}>操作已成功！</div>
 
                         <div className={`font-b ${curIndex !== '0' && 'none'}`}>
-                            本账户下<a className={'hint-key'} >2018年5月28日</a>前购买视频课程的有效期从“永久有效”调整为“<a className={'hint-key'} >5年有效</a>”。
+                            本账户下<a className={'hint-key'}>2018年5月28日</a>前购买视频课程的有效期从“永久有效”调整为“<a
+                                className={'hint-key'}
+                            >
+                                5年有效
+                            </a>”。
                         </div>
 
                         <div className={`font-b ${curIndex !== '1' && 'none'}`}>
-                            如需调整课程有效期至：<a className={'hint-key'} >5年</a>，请于<a className={'hint-key'} >2018年7月31日</a>前完成转换；<a className={'hint-key'} >逾期未转换者将默认课程有效期为“永久有效”</a>。
+                            如需调整课程有效期至：<a className={'hint-key'}>
+                                5年
+                            </a>，请于<a className={'hint-key'}>
+                                2018年7月31日
+                            </a>前完成转换；<a className={'hint-key'}>
+                                逾期未转换者将默认课程有效期为“永久有效”
+                            </a>。
                         </div>
                         <div className={`font-c ${curIndex !== '0' && 'none'}`}>
                             优惠券已存入您的账号，可下载“善恩英语”APP并登录查看。
                         </div>
                         <div
                             className={`btn ${curIndex !== '0' && 'none'}`}
-                            onClick={this.handleCloseModal}>
+                            onClick={this.handleCloseModal}
+                        >
                             返回官网首页
                         </div>
                     </div>

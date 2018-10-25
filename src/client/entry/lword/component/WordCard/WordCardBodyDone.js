@@ -9,16 +9,25 @@ class WordCardBodyDone extends React.PureComponent {
         return (
             <div className="wordCard-Body-Done">
                 <div className="congratulation">
-                    <div className="congratulation-Image"></div>
+                    <div className="congratulation-Image" />
                     <p className="congratulation-Text">恭喜你，小有所成！</p>
-                    <p className="congratulation-SubText">{ '已学完' + name + '的单词！'}</p>
+                    <p className="congratulation-SubText">
+                        {'已学完' + name + '的单词！'}
+                    </p>
                 </div>
                 <div className="functionCard">
                     <div className="repeatCard">
-                        <p className="functionText" onClick={actions.repeatCard}>再学一次</p>
+                        <p
+                            className="functionText"
+                            onClick={actions.repeatCard}
+                        >
+                            再学一次
+                        </p>
                     </div>
                     <div className="testCard">
-                        <p className="functionText" onClick={quizAction}>立即测试</p>
+                        <p className="functionText" onClick={quizAction}>
+                            立即测试
+                        </p>
                     </div>
                 </div>
             </div>

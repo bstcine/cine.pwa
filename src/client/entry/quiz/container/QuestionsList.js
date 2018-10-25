@@ -42,7 +42,8 @@ const filterQuestions = (
                 if (question.isCorrect) {
                     return false;
                 } else {
-                    if (!question.isCorrect && answer.select_value === 1) return false;
+                    if (!question.isCorrect && answer.select_value === 1)
+                        return false;
                     if (answer.select_value === null) return false;
                 }
                 return true;

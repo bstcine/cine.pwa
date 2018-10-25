@@ -1,8 +1,14 @@
 import cookieUtil from '@/util/cookieUtil';
 
 const engine = require('store/src/store-engine');
-const storages = [require('store/storages/localStorage'), require('store/storages/cookieStorage')];
-const plugins = [require('store/plugins/defaults'), require('store/plugins/expire')];
+const storages = [
+    require('store/storages/localStorage'),
+    require('store/storages/cookieStorage'),
+];
+const plugins = [
+    require('store/plugins/defaults'),
+    require('store/plugins/expire'),
+];
 const store = engine.createStore(storages, plugins);
 
 let storeUtil = {
@@ -33,7 +39,7 @@ let storeUtil = {
     },
     removeSiteCode: () => {
         return storeUtil.remove('sitecode');
-    }
+    },
 };
 
 export default storeUtil;

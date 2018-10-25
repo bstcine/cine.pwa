@@ -35,7 +35,8 @@ const OperationButton = ({ item }) => {
                         location.href = `/quiz/grammar?stats_content_quiz_id=${
                             item.id
                         }&cmd=check`;
-                    }}>
+                    }}
+                >
                     批改 <i className="material-icons">&#xE254;</i>
                 </button>
             );
@@ -47,7 +48,8 @@ const OperationButton = ({ item }) => {
                         location.href = `/quiz/grammar?stats_content_quiz_id=${
                             item.id
                         }&cmd=check`;
-                    }}>
+                    }}
+                >
                     批改中...
                 </button>
             );
@@ -59,7 +61,8 @@ const OperationButton = ({ item }) => {
                         location.href = `/quiz/grammar?stats_content_quiz_id=${
                             item.id
                         }&cmd=check`;
-                    }}>
+                    }}
+                >
                     已批改 <i className="material-icons">&#xE876;</i>
                 </button>
             );

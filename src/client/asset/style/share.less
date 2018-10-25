@@ -1,60 +1,60 @@
-@import "_cine";
+@import '_cine';
 
 .share-mask {
-  position: fixed;
-  z-index: @index_mask;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, .85);
-  background-size: cover;
-  .share-tip {
-    margin-top: 54px;
-    text-align: center;
-    font-size: 18px;
-    color: #fe6a18;
-    font-weight: bold;
-  }
-  .share-icon {
-    position: absolute;
-    top: 9px;
-    right: 44px;
-    width: 33px;
-    height: 37px;
-    img {
-      display: block;
-      width: 100%;
+    position: fixed;
+    z-index: @index_mask;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.85);
+    background-size: cover;
+    .share-tip {
+        margin-top: 54px;
+        text-align: center;
+        font-size: 18px;
+        color: #fe6a18;
+        font-weight: bold;
     }
-  }
-  .share-container {
-    position: relative;
-    margin: 0 auto;
-    padding: 30px;
-    top: 50%;
-    transform: translateY(-60%);
-    width: 220px;
-    height: 220px;
-    background-color: #fff;
-    border-radius: 6px;
+    .share-icon {
+        position: absolute;
+        top: 9px;
+        right: 44px;
+        width: 33px;
+        height: 37px;
+        img {
+            display: block;
+            width: 100%;
+        }
+    }
+    .share-container {
+        position: relative;
+        margin: 0 auto;
+        padding: 30px;
+        top: 50%;
+        transform: translateY(-60%);
+        width: 220px;
+        height: 220px;
+        background-color: #fff;
+        border-radius: 6px;
 
-    .share-close {
-      position: absolute;
-      cursor: pointer;
-      top: 5px;
-      right: 5px;
-      font-size: 22px;
-      color: #000;
-      &:hover{
-        color: #979797;
-      }
+        .share-close {
+            position: absolute;
+            cursor: pointer;
+            top: 5px;
+            right: 5px;
+            font-size: 22px;
+            color: #000;
+            &:hover {
+                color: #979797;
+            }
+        }
+        .share-qrcode {
+            margin: auto;
+            img {
+                display: block;
+                width: 100%;
+            }
+        }
     }
-    .share-qrcode {
-      margin: auto;
-      img {
-        display: block;
-        width: 100%;
-      }
-    }
-  }
 }

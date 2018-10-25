@@ -50,8 +50,8 @@ const Format4ShortQue = ({
             {/* 学生提交后且需要批 显示 老师批改中... */}
             {currentQuizState === CurrentQuizState.WAITING4CHECK &&
                 need_feedback === '1' && (
-                <div style={{ color: '#ff0000' }}>老师批改中...</div>
-            )}
+                    <div style={{ color: '#ff0000' }}>老师批改中...</div>
+                )}
         </div>
     );
 };

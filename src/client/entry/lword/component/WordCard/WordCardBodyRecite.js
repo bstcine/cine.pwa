@@ -40,7 +40,14 @@ class WordCardBodyRecite extends React.PureComponent {
         actions.playPhonetic();
     }
     render() {
-        let { rows, currentIndex, lastZh, isBack, isKnown, actions } = this.props;
+        let {
+            rows,
+            currentIndex,
+            lastZh,
+            isBack,
+            isKnown,
+            actions,
+        } = this.props;
         let { word, phonetic_a, phonetic_b, zh } = rows[currentIndex];
         zh = lastZh ? lastZh : zh;
         let phonetic = phonetic_b;
@@ -58,38 +65,41 @@ class WordCardBodyRecite extends React.PureComponent {
                 </div>
                 <div className="currentWord" onClick={this.toggle}>
                     <div className={cls}>
-                        <div className="wordDetail-flipper" >
-                            <div className="front" >
+                        <div className="wordDetail-flipper">
+                            <div className="front">
                                 <div className="wordInfo">
                                     <div className="word">{word}</div>
-                                    <div className="phonetic" onClick={this.playPhonetic}>
+                                    <div
+                                        className="phonetic"
+                                        onClick={this.playPhonetic}
+                                    >
                                         <p>{phonetic}</p>
-                                        <CIcon className="voice">ci-ico_voice</CIcon>
+                                        <CIcon className="voice">
+                                            ci-ico_voice
+                                        </CIcon>
                                     </div>
                                 </div>
                             </div>
-                            <div className="back" >
+                            <div className="back">
                                 <div className="transition">
-                                    <p className="zh-Test">
-                                        {zh}
-                                    </p>
+                                    <p className="zh-Test">{zh}</p>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div className="hadGrasp" onClick={this.graspStatus }>
+                    <div className="hadGrasp" onClick={this.graspStatus}>
                         <input
                             className="selected"
                             type="checkbox"
                             checked={isKnown}
-                            onClick={e => { e.stopPropagation() }}
-                            onChange={ e => {
+                            onClick={e => {
+                                e.stopPropagation();
+                            }}
+                            onChange={e => {
                                 actions.changeKnownStatus();
                             }}
                         />
-                        <div className="graspPromote">
-                            已认识(下次不再显示)
-                        </div>
+                        <div className="graspPromote">已认识(下次不再显示)</div>
                     </div>
                 </div>
                 <div className="nextContainer">

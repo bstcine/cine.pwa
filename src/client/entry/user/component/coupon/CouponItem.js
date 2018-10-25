@@ -67,13 +67,20 @@ const CouponItem = ({ coupon, actions }) => {
                     />
                 )}
                 {coupon.status === '0' && (
-                    <a className="verb" onClick={() => { actions.initTransferDialog(coupon) }}>转赠</a>
+                    <a
+                        className="verb"
+                        onClick={() => {
+                            actions.initTransferDialog(coupon);
+                        }}
+                    >
+                        转赠
+                    </a>
                 )}
             </div>
             {coupon.desc &&
                 coupon.expand && (
-                <div className={'coupon-remark'}>{coupon.desc}</div>
-            )}
+                    <div className={'coupon-remark'}>{coupon.desc}</div>
+                )}
         </div>
     );
 };

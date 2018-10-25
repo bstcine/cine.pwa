@@ -30,7 +30,7 @@ export default class TagFilter extends Component {
                     ids.push(item.id);
                 }
             });
-        items.unshift({ id: '', text: '全部', attributes: { parent_id }});
+        items.unshift({ id: '', text: '全部', attributes: { parent_id } });
 
         return items.map((item, i) => {
             const label =
@@ -53,7 +53,8 @@ export default class TagFilter extends Component {
                 <li
                     key={i}
                     className={className}
-                    onClick={e => this.tagClick(item, e)}>
+                    onClick={e => this.tagClick(item, e)}
+                >
                     {item.text} {label}
                 </li>
             );

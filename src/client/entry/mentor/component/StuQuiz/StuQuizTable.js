@@ -74,7 +74,8 @@ const renderQuizList = (list, quizItemClick) => {
                                 className={'quizBody'}
                                 onClick={() => {
                                     quizItemClick(item.id, 'check');
-                                }}>
+                                }}
+                            >
                                 <div className={'quizItem left create_at'}>
                                     {formatTime(item.create_at)}
                                 </div>
@@ -88,7 +89,8 @@ const renderQuizList = (list, quizItemClick) => {
                                 </div>
                                 <div
                                     className={'quizItem score'}
-                                    style={{ color: '#ee0d0d' }}>
+                                    style={{ color: '#ee0d0d' }}
+                                >
                                     {item.score || '-'}
                                 </div>
                                 <div className={'quizItem right'}>
@@ -102,7 +104,9 @@ const renderQuizList = (list, quizItemClick) => {
             </div>
         );
     } else {
-        return <div style={{ width: '100%', textAlign: 'center' }}>暂无数据</div>;
+        return (
+            <div style={{ width: '100%', textAlign: 'center' }}>暂无数据</div>
+        );
     }
 };
 
@@ -127,7 +131,8 @@ const renderWordList = (list, wordsItemClick) => {
                                 className={'wordBody'}
                                 onClick={() => {
                                     wordsItemClick(item.id);
-                                }}>
+                                }}
+                            >
                                 <div className={'wordItem left'}>
                                     {formatTime(item.create_at)}
                                 </div>

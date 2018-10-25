@@ -21,12 +21,15 @@ class QRHelp extends Component {
                         onClick={() => {
                             console.log('Icon close');
                             close();
-                        }}>
+                        }}
+                    >
                         close
                     </Icon>
                     <div className={`${cls}__content`}>
                         <p>微信“扫一扫”, 联系善恩小助手</p>
-                        <div className={`${cls}__wechat`}>(微信号：BSTCINE01)</div>
+                        <div className={`${cls}__wechat`}>
+                            (微信号：BSTCINE01)
+                        </div>
                         <img src={url} alt="qrcode" className={`${cls}__img`} />
                     </div>
                 </div>

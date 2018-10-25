@@ -8,10 +8,12 @@ class WordBody extends React.PureComponent {
         let { result, quizAction, listAction } = this.props;
         const rows = result.rows;
         const score = result.score ? `${result.score}%` : '-';
-        const updateTime = result.update_at ? `（${result.update_at.substring(0, 16)}）` : '';
+        const updateTime = result.update_at
+            ? `（${result.update_at.substring(0, 16)}）`
+            : '';
         let unKnowCount = 0;
         if (rows && rows.length > 0) {
-            rows.forEach((ele) => {
+            rows.forEach(ele => {
                 if (!ele.is_known) {
                     unKnowCount += 1;
                 }
@@ -35,7 +37,11 @@ class WordBody extends React.PureComponent {
                         <p className="title">{score}</p>
                         <p className="subTitle">{updateTime}</p>
                     </div>
-                    <div className="actionButton" style={{ backgroundColor: '#ff9343' }} onClick={quizAction}>
+                    <div
+                        className="actionButton"
+                        style={{ backgroundColor: '#ff9343' }}
+                        onClick={quizAction}
+                    >
                         <p className="actionTitle">立即测试</p>
                     </div>
                 </div>

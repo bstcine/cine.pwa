@@ -35,14 +35,16 @@ const Courses = ({ courses }) => {
                             hover="lighten"
                             key={course.id}
                             className="courses-item"
-                            onClick={() => goClick(course)}>
+                            onClick={() => goClick(course)}
+                        >
                             <div
                                 className="course-img"
                                 style={{
                                     background: `url("//www.bstcine.com/f/${
                                         course.img
                                     }") center center / cover no-repeat`,
-                                }}>
+                                }}
+                            >
                                 <i />
                             </div>
                             <div className="course-meta">

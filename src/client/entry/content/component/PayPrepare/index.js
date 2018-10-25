@@ -28,6 +28,7 @@ export default class PayPrepare extends Component {
             point_msg: '',
             remark: '',
             orderedLessonsOrders: [],
+            btnDisabled: false,
         };
     }
 
@@ -129,7 +130,9 @@ export default class PayPrepare extends Component {
             }
         }
 
+        this.setState({ btnDisabled: true });
         fetchData(Api.APIURL_Order_Create, orderBody).then(([err, result]) => {
+            this.setState({ btnDisabled: false });
             if (this.hasError(err)) return;
             let { order_id } = result;
             location.href = `/pay/center?cid=${order_id}`;
@@ -229,13 +232,13 @@ export default class PayPrepare extends Component {
                                     style={
                                         course && course.img
                                             ? {
-                                                background: `url(${
-                                                    course.img
-                                                        ? '//www.bstcine.com/f/' +
+                                                  background: `url(${
+                                                      course.img
+                                                          ? '//www.bstcine.com/f/' +
                                                             course.img
-                                                        : ''
-                                                }) center center / cover no-repeat`,
-                                            }
+                                                          : ''
+                                                  }) center center / cover no-repeat`,
+                                              }
                                             : null
                                     }
                                 />
@@ -329,7 +332,8 @@ export default class PayPrepare extends Component {
                                 <span className="label">收货地址</span>
                                 <button
                                     className="btn-outline"
-                                    onClick={this.goAddress}>
+                                    onClick={this.goAddress}
+                                >
                                     {addressInfo ? '修改地址' : '添加地址'}
                                 </button>
                                 {addressInfo ? (
@@ -366,7 +370,9 @@ export default class PayPrepare extends Component {
 
                         <button
                             className="btn-action btn-confirm"
-                            onClick={this.confirmOrder}>
+                            disabled={this.state.btnDisabled}
+                            onClick={this.confirmOrder}
+                        >
                             提交订单
                         </button>
                     </div>

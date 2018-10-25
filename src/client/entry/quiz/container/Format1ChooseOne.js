@@ -15,7 +15,17 @@ const mapStateToProps = (state, ownProps) => {
         if (option.isCorrect) correct_value = i;
     });
 
-    let prop = { ...ownProps, no, title, feedback, need_feedback, options, correct_value, currentQuizState, currentQuizType: quiz.type };
+    let prop = {
+        ...ownProps,
+        no,
+        title,
+        feedback,
+        need_feedback,
+        options,
+        correct_value,
+        currentQuizState,
+        currentQuizType: quiz.type,
+    };
     const answer = answersById[id];
     if (answer) {
         prop.select_value = answer.select_value;

@@ -70,14 +70,14 @@ const CouponTransfer = ({
     }
     const checkInfo = checkMessage !== '' &&
         checkMessage !== undefined && (
-        <div style={checkStyle}>
-            <p>
-                {checkMessage}
-                <br />
-                {checkPromote}
-            </p>
-        </div>
-    );
+            <div style={checkStyle}>
+                <p>
+                    {checkMessage}
+                    <br />
+                    {checkPromote}
+                </p>
+            </div>
+        );
 
     return (
         <React.Fragment>
@@ -86,7 +86,8 @@ const CouponTransfer = ({
                 modal={false}
                 actions={dialogActions}
                 open={isOpen}
-                onRequestClose={actions.toggleTransferDialog}>
+                onRequestClose={actions.toggleTransferDialog}
+            >
                 {couponInfo}
 
                 <CTextField

@@ -27,7 +27,8 @@ const CardContainer = ({
         gap={gap}
         line={line}
         step={step}
-        layout={layout}>
+        layout={layout}
+    >
         {children}
     </BaseCardContainer>
 );

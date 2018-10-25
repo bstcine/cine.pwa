@@ -1,9 +1,9 @@
-import React, {Component} from 'react';
-import {initWechat} from '@/util/wechatUtil';
+import React, { Component } from 'react';
+import { initWechat } from '@/util/wechatUtil';
 import Bridge from '@/util/bridge';
 import BRIDGE_EVENT from '@/constant/bridgeEvent';
 import siteCodeUtil from '@/util/sitecodeUtil';
-import LoginModal from "@/component/LoginModal";
+import LoginModal from '@/component/LoginModal';
 
 export default class LoginDetect extends Component {
     constructor(props) {
@@ -14,8 +14,8 @@ export default class LoginDetect extends Component {
         this.toggleLoginModal = this.toggleLoginModal.bind(this);
         this.onLoginSuccess = this.onLoginSuccess.bind(this);
         this.state = {
-            showLoginModal : false
-        }
+            showLoginModal: false,
+        };
     }
 
     componentWillMount() {
@@ -28,13 +28,13 @@ export default class LoginDetect extends Component {
 
     toggleLoginModal() {
         this.setState(prevState => ({
-            showLoginModal: !prevState.showLoginModal
+            showLoginModal: !prevState.showLoginModal,
         }));
     }
 
     async onLoginSuccess() {
         this.setState({
-            showLoginModal: false
+            showLoginModal: false,
         });
         this.props.history.replace('/');
     }
@@ -49,7 +49,7 @@ export default class LoginDetect extends Component {
                 this.props.history.replace(`/?token=${res.token}`);
             });
         } else {
-            this.toggleLoginModal()
+            this.toggleLoginModal();
         }
     }
 
@@ -58,7 +58,7 @@ export default class LoginDetect extends Component {
     }
 
     render() {
-        let {showLoginModal}  = this.state;
+        let { showLoginModal } = this.state;
         return (
             <div className="wrapper mini">
                 <LoginModal
@@ -73,7 +73,10 @@ export default class LoginDetect extends Component {
                         </span>系统后再进行测试
                     </div>
                     <div className="bg-welcome" />
-                    <button className="btn btn_orange margin-bottom-72" onClick={this.goLoginClick}>
+                    <button
+                        className="btn btn_orange margin-bottom-72"
+                        onClick={this.goLoginClick}
+                    >
                         登录系统
                     </button>
                     <button className="btn btn_blue" onClick={this.startClick}>

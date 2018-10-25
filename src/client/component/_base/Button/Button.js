@@ -62,11 +62,12 @@ export default class Button extends PureComponent {
                 )}
                 disabled={disabled}
                 onClick={onClick}
-                href={href}>
+                href={href}
+            >
                 {Children.map(
                     children,
                     child =>
-                        (typeof child === 'string' ? <span>{child}</span> : child)
+                        typeof child === 'string' ? <span>{child}</span> : child
                 )}
             </ComponentProp>
         );

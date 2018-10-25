@@ -56,7 +56,8 @@ export default class LoginModal extends Component {
                 overlayClassName="modal-overlay"
                 bodyOpenClassName="body-modal-open"
                 shouldCloseOnOverlayClick={true}
-                shouldCloseOnEsc={true}>
+                shouldCloseOnEsc={true}
+            >
                 <div className="login-top">
                     登录
                     <span className="register-tip">

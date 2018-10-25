@@ -24,19 +24,19 @@ class PayStripe extends Component {
             location.protocol === 'https:' ||
             location.hostname === 'localhost'
         ) {
-            fetchData(APIURL_Pay_Stripe_Info, { order_id: getParam().cid }).then(
-                ([error, result]) => {
-                    if (error) return CMessage.error(error);
-                    const { keyPublic, order } = result;
-                    if (order.pay_status === '1') {
-                        location.href = `/pay/status?cid=${order.id}`;
-                    }
-                    this.setState({
-                        order,
-                    });
-                    this.initStripe(keyPublic);
+            fetchData(APIURL_Pay_Stripe_Info, {
+                order_id: getParam().cid,
+            }).then(([error, result]) => {
+                if (error) return CMessage.error(error);
+                const { keyPublic, order } = result;
+                if (order.pay_status === '1') {
+                    location.href = `/pay/status?cid=${order.id}`;
                 }
-            );
+                this.setState({
+                    order,
+                });
+                this.initStripe(keyPublic);
+            });
         } else {
             location.href = location.href.replace('http://', 'https://');
         }
@@ -152,7 +152,8 @@ class PayStripe extends Component {
                             <form
                                 action="/api/pay/stripe"
                                 method="post"
-                                id="payment-form">
+                                id="payment-form"
+                            >
                                 <div className="pay-method">
                                     <div className="pay-method-safe">
                                         <span className="blue">
@@ -191,7 +192,8 @@ class PayStripe extends Component {
                                     <button
                                         id="payBtn"
                                         className="btn btn-danger btn-confirm"
-                                        onClick={this.submitPay}>
+                                        onClick={this.submitPay}
+                                    >
                                         立即支付
                                     </button>
                                 </div>

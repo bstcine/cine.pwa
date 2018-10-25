@@ -39,7 +39,8 @@ class CourseContent extends PureComponent {
         return (
             <CPanel
                 title={lessonDetail ? lessonDetail.name : ''}
-                className="course__content">
+                className="course__content"
+            >
                 {lessonDetail ? this.renderLesson(lessonDetail) : 'Loading'}
             </CPanel>
         );

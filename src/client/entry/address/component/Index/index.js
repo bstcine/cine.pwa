@@ -1,17 +1,16 @@
-import React, {Component} from 'react';
-import {getParam} from '@/util/urlUtil'
-import * as area from '@/service/data/response_pca_code.json'
-import * as Service from '@/service/user'
-import Bridge from "@/util/bridge";
-import siteCodeUtil from "@/util/sitecodeUtil";
-import BRIDGE_EVENT from "@/constant/bridgeEvent";
+import React, { Component } from 'react';
+import { getParam } from '@/util/urlUtil';
+import * as area from '@/service/data/response_pca_code.json';
+import * as Service from '@/service/user';
+import Bridge from '@/util/bridge';
+import siteCodeUtil from '@/util/sitecodeUtil';
+import BRIDGE_EVENT from '@/constant/bridgeEvent';
 
 import TextField from 'material-ui/TextField';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 
 export default class Index extends Component {
-
     constructor(props) {
         super(props);
 
@@ -28,7 +27,7 @@ export default class Index extends Component {
             address: '',
             provinceVal: '',
             cityVal: '',
-            countyVal: ''
+            countyVal: '',
         };
 
         //是否编辑
@@ -47,15 +46,14 @@ export default class Index extends Component {
 
     componentDidMount() {
         if (this.isEdit) {
-            Service.queryAddress(this.state)
-                .then(result => {
-                    if (!result.msg) {
-                        this.init(result.data);
-                    } else {
-                        console.log(result.msg);
-                        this.setState({id: ''});
-                    }
-                });
+            Service.queryAddress(this.state).then(result => {
+                if (!result.msg) {
+                    this.init(result.data);
+                } else {
+                    console.log(result.msg);
+                    this.setState({ id: '' });
+                }
+            });
         } else {
             if (siteCodeUtil.inIOSAPP()) {
                 Bridge.ios(BRIDGE_EVENT.ADDRESS_INIT_DATA).then(res => {
@@ -80,25 +78,25 @@ export default class Index extends Component {
         let province = item.province;
         let city = item.city;
         let county = item.county;
-        let provinceVal = "";
-        let cityVal = "";
-        let countyVal = "";
+        let provinceVal = '';
+        let cityVal = '';
+        let countyVal = '';
 
-        this.provinceArr.forEach((item) => {
+        this.provinceArr.forEach(item => {
             if (item.code == province) {
                 this.cityArr = item.childs;
                 provinceVal = item.name;
             }
         });
 
-        this.cityArr.forEach((item) => {
+        this.cityArr.forEach(item => {
             if (item.code == city) {
                 this.countyArr = item.childs;
                 cityVal = item.name;
             }
         });
 
-        this.countyArr.forEach((item) => {
+        this.countyArr.forEach(item => {
             if (item.code == county) {
                 countyVal = item.name;
             }
@@ -114,15 +112,15 @@ export default class Index extends Component {
             address: item.address,
             provinceVal: provinceVal,
             cityVal: cityVal,
-            countyVal: countyVal
+            countyVal: countyVal,
         });
     }
 
     selectProvince(event, index, value) {
         let province = value;
 
-        let provinceVal = "";
-        this.provinceArr.forEach((item) => {
+        let provinceVal = '';
+        this.provinceArr.forEach(item => {
             if (item.code == province) {
                 this.cityArr = item.childs;
                 provinceVal = item.name;
@@ -138,15 +136,15 @@ export default class Index extends Component {
 
         //如果只有一个二级选择，则默认选择
         if (this.cityArr.length == 1) {
-            this.selectCity(null, 0, this.cityArr[0].code)
+            this.selectCity(null, 0, this.cityArr[0].code);
         }
     }
 
     selectCity(event, index, value) {
         let city = value;
 
-        let cityVal = "";
-        this.cityArr.forEach((item) => {
+        let cityVal = '';
+        this.cityArr.forEach(item => {
             if (item.code == city) {
                 this.countyArr = item.childs;
                 cityVal = item.name;
@@ -163,8 +161,8 @@ export default class Index extends Component {
     selectCounty(event, index, value) {
         let county = value;
 
-        let countyVal = "";
-        this.countyArr.forEach((item) => {
+        let countyVal = '';
+        this.countyArr.forEach(item => {
             if (item.code == county) {
                 countyVal = item.name;
             }
@@ -172,7 +170,7 @@ export default class Index extends Component {
 
         this.setState({
             county: county,
-            countyVal: countyVal
+            countyVal: countyVal,
         });
     }
 
@@ -191,58 +189,62 @@ export default class Index extends Component {
         event.preventDefault();
 
         if (!this.state.name || this.state.name.length < 2) {
-            alert("收货人姓名至少2个字符");
-            return
-        }
-
-        if (!this.state.phone || this.state.phone.length <= 0) {
-            alert("请填写联系电话");
-            return
-        }
-
-        if (!(this.state.province && this.state.city && this.state.county)) {
-            alert("请选择所在地区");
-            return
-        }
-
-        if (!this.state.address || this.state.address.length <= 0) {
-            alert("请填写详细地址");
-            return
-        }
-
-        if (this.state.address.length < 5) {
-            alert("详细地址不得少于5个字符");
-            return
-        }
-
-        if (this.state.address.length > 60) {
-            alert("详细地址不能超过 60 个字符");
-            return
-        }
-
-        if (!/^1[0-9]{10}$/.test(this.state.phone)) {
-            alert("请输入有效的手机号码");
+            alert('收货人姓名至少2个字符');
             return;
         }
 
-        this.state.area = this.state.provinceVal + "-" + this.state.cityVal + "-" + this.state.countyVal;
+        if (!this.state.phone || this.state.phone.length <= 0) {
+            alert('请填写联系电话');
+            return;
+        }
+
+        if (!(this.state.province && this.state.city && this.state.county)) {
+            alert('请选择所在地区');
+            return;
+        }
+
+        if (!this.state.address || this.state.address.length <= 0) {
+            alert('请填写详细地址');
+            return;
+        }
+
+        if (this.state.address.length < 5) {
+            alert('详细地址不得少于5个字符');
+            return;
+        }
+
+        if (this.state.address.length > 60) {
+            alert('详细地址不能超过 60 个字符');
+            return;
+        }
+
+        if (!/^1[0-9]{10}$/.test(this.state.phone)) {
+            alert('请输入有效的手机号码');
+            return;
+        }
+
+        this.state.area =
+            this.state.provinceVal +
+            '-' +
+            this.state.cityVal +
+            '-' +
+            this.state.countyVal;
         console.log(1, this.state);
 
         if (this.isEdit) {
-            Service.addAddress(this.state)
-                .then(result => {
-                    if (!result.msg) {
-                        if (siteCodeUtil.inIOSAPP()) {
-                            Bridge.ios(BRIDGE_EVENT.ADDRESS_SAVE, this.state);
-                        } else if (siteCodeUtil.inAndroidAPP()) {
-                            Bridge.android(BRIDGE_EVENT.ADDRESS_SAVE, this.state);
-                        } else {
-                            location.href = decodeURIComponent(getParam().redirect)
-                        }
+            Service.addAddress(this.state).then(result => {
+                if (!result.msg) {
+                    if (siteCodeUtil.inIOSAPP()) {
+                        Bridge.ios(BRIDGE_EVENT.ADDRESS_SAVE, this.state);
+                    } else if (siteCodeUtil.inAndroidAPP()) {
+                        Bridge.android(BRIDGE_EVENT.ADDRESS_SAVE, this.state);
                     } else {
-                        alert('保存失败(' + result.msg + ')')
+                        location.href = decodeURIComponent(getParam().redirect);
                     }
-                });
+                } else {
+                    alert('保存失败(' + result.msg + ')');
+                }
+            });
         } else {
             if (siteCodeUtil.inIOSAPP()) {
                 Bridge.ios(BRIDGE_EVENT.ADDRESS_SAVE, this.state);
@@ -254,7 +256,10 @@ export default class Index extends Component {
 
     render() {
         return (
-            <form className="mui-form mui-container-fluid" onSubmit={this.handleSubmit}>
+            <form
+                className="mui-form mui-container-fluid"
+                onSubmit={this.handleSubmit}
+            >
                 <TextField
                     id="name"
                     name="name"
@@ -279,9 +284,16 @@ export default class Index extends Component {
                     floatingLabelText="省份："
                     fullWidth={true}
                     onChange={this.selectProvince}
-                    value={this.state.province}>
-                    {this.provinceArr.map(function (item) {
-                        return <MenuItem key={item.code} value={item.code} primaryText={item.name}/>
+                    value={this.state.province}
+                >
+                    {this.provinceArr.map(function(item) {
+                        return (
+                            <MenuItem
+                                key={item.code}
+                                value={item.code}
+                                primaryText={item.name}
+                            />
+                        );
                     })}
                 </SelectField>
                 <SelectField
@@ -290,9 +302,18 @@ export default class Index extends Component {
                     fullWidth={true}
                     onChange={this.selectCity}
                     value={this.state.city}
-                    disabled={!this.state.province || this.state.province.length <= 0}>
-                    {this.cityArr.map(function (item) {
-                        return <MenuItem key={item.code} value={item.code} primaryText={item.name}/>
+                    disabled={
+                        !this.state.province || this.state.province.length <= 0
+                    }
+                >
+                    {this.cityArr.map(function(item) {
+                        return (
+                            <MenuItem
+                                key={item.code}
+                                value={item.code}
+                                primaryText={item.name}
+                            />
+                        );
                     })}
                 </SelectField>
                 <SelectField
@@ -301,9 +322,16 @@ export default class Index extends Component {
                     fullWidth={true}
                     onChange={this.selectCounty}
                     value={this.state.county}
-                    disabled={!this.state.city || this.state.city.length <= 0}>
-                    {this.countyArr.map(function (item) {
-                        return <MenuItem key={item.code} value={item.code} primaryText={item.name}/>
+                    disabled={!this.state.city || this.state.city.length <= 0}
+                >
+                    {this.countyArr.map(function(item) {
+                        return (
+                            <MenuItem
+                                key={item.code}
+                                value={item.code}
+                                primaryText={item.name}
+                            />
+                        );
                     })}
                 </SelectField>
                 <TextField
@@ -318,16 +346,10 @@ export default class Index extends Component {
                     onChange={this.inputOnChange}
                     value={this.state.address}
                 />
-                <button type="submit" className="btn-action btn-save">保存</button>
+                <button type="submit" className="btn-action btn-save">
+                    保存
+                </button>
             </form>
-        )
+        );
     }
-
 }
-
-
-
-
-
-
-

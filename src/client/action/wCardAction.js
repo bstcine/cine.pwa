@@ -70,16 +70,18 @@ export const wCardAction = {
         dispatch(wCardAction._toggleBack(isBack));
     },
     // 卡片式学习方法
-    loadWordList: (param) => async dispatch => {
-
-        let [error, result] = await fetchData(Api.APIURL_User_Learn_Word, param);
+    loadWordList: param => async dispatch => {
+        let [error, result] = await fetchData(
+            Api.APIURL_User_Learn_Word,
+            param
+        );
 
         if (!error) {
             // 备份原始数组
             dispatch(wCardAction._originRows(result.rows));
             // 移除所有已认识的单词
             let newRows = [];
-            result.rows.forEach((ele) => {
+            result.rows.forEach(ele => {
                 if (!ele.is_known) {
                     newRows.push(ele);
                 }
@@ -113,7 +115,7 @@ export const wCardAction = {
         dispatch(wCardAction._changeTimer(timer));
     },
     // 改变自动播放时间间隔
-    changeAutoChangeTime: (time) => async dispatch => {
+    changeAutoChangeTime: time => async dispatch => {
         dispatch(wCardAction._changeAutoTime(time));
     },
     // 改变随机播放状态
@@ -135,7 +137,10 @@ export const wCardAction = {
         if (!result || !result.rows || result.rows.length === 0) {
             return;
         }
-        let randomNums = CommonUtil.getRandomNumbers(result.rows.length - 1, result.rows.length);
+        let randomNums = CommonUtil.getRandomNumbers(
+            result.rows.length - 1,
+            result.rows.length
+        );
         console.log(randomNums, result.rows);
         dispatch(wCardAction._reviseIndexArray(randomNums));
         // 将当前随机下标置为零
@@ -158,10 +163,12 @@ export const wCardAction = {
         let result = reducer.get('result');
         let word = result.rows[currentIndex].word;
         let id = result.rows[currentIndex].id;
-        let [error, _updateRes] = await fetchData(Api.
-            APIURL_User_Content_Word_UpdateKnow, { 'word': { 'word': word, 'id': id }, 'is_known': true });
+        let [error, _updateRes] = await fetchData(
+            Api.APIURL_User_Content_Word_UpdateKnow,
+            { word: { word: word, id: id }, is_known: true }
+        );
         if (error || _updateRes.status === false) {
-            dispatch(wCardAction._changeKnown(!isKnown))
+            dispatch(wCardAction._changeKnown(!isKnown));
         }
     },
     // 更新已认识状态，并移除对应元素
@@ -184,17 +191,20 @@ export const wCardAction = {
         let reducer = getState().WordCardRedu;
         let originRows = reducer.get('originRows');
         let wordList = [];
-        originRows.forEach((ele) => {
+        originRows.forEach(ele => {
             let word = {
-                'word': ele.word,
-                'id': ele.id,
+                word: ele.word,
+                id: ele.id,
             };
             wordList.push(word);
         });
-        let [error, _updateRes] = await fetchData(Api.APIURL_User_Content_Word_UpdateKnow, { 'word_list': wordList, 'is_known': false });
+        let [error, _updateRes] = await fetchData(
+            Api.APIURL_User_Content_Word_UpdateKnow,
+            { word_list: wordList, is_known: false }
+        );
         if (!error && _updateRes && _updateRes.status) {
             let newRows = [];
-            originRows.forEach((ele) => {
+            originRows.forEach(ele => {
                 ele.is_known = false;
                 newRows.push(ele);
             });
@@ -210,7 +220,7 @@ export const wCardAction = {
         }
     },
     // 背诵下一个单词
-    startNext: (isAuto) => async (dispatch, getState) => {
+    startNext: isAuto => async (dispatch, getState) => {
         let reducer = getState().WordCardRedu;
         let currentIndex = reducer.get('currentIndex');
         let result = reducer.get('result');
@@ -339,5 +349,5 @@ export const wCardAction = {
         let player = reducer.get('player');
         player.src = 'http://oss.bstcine.com/word/top10000/' + voice_url;
         player.play();
-    }
+    },
 };

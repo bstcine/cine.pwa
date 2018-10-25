@@ -9,7 +9,6 @@ import Word from '../component/Word';
 import { getParam, addParam } from '@/util/urlUtil';
 
 class WordContainer extends Component {
-
     constructor(props) {
         super(props);
 
@@ -41,8 +40,12 @@ class WordContainer extends Component {
                 param={this.param}
                 result={result}
                 actions={actions}
-                quizAction={ () => { this.gotoTest() }}
-                listAction={ () => { this.gotoList() }}
+                quizAction={() => {
+                    this.gotoTest();
+                }}
+                listAction={() => {
+                    this.gotoList();
+                }}
             />
         );
     }
@@ -58,6 +61,4 @@ const mapDispatchToProps = dispatch => ({
     actions: bindActionCreators(wordAction, dispatch),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-    WordContainer
-);
+export default connect(mapStateToProps, mapDispatchToProps)(WordContainer);

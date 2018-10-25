@@ -11,7 +11,8 @@ const Layout = ({ actions, user, size, children }) => {
         <div
             className={classNames('glayout', {
                 'glayout--large': size === 'large',
-            })}>
+            })}
+        >
             {!siteCodeUtil.inAPP() && <Header user={user} actions={actions} />}
             <Main>{children}</Main>
             {!siteCodeUtil.inAPP() && <Footer />}

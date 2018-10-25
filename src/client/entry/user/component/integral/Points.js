@@ -21,7 +21,8 @@ const Points = ({ points, ...props }) => {
                                     item.value < 0
                                         ? 'point-value use'
                                         : 'point-value'
-                                }>
+                                }
+                            >
                                 {item.value > 0 ? '+' + item.value : item.value}
                             </div>
                             <div className={'point-time'}>{item.create_at}</div>

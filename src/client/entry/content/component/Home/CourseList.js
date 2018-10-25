@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import Course from './Course';
 
 export default class CourseList extends Component {
@@ -7,10 +7,12 @@ export default class CourseList extends Component {
     }
 
     render() {
-        let {courses, ...props} = this.props;
+        let { courses, ...props } = this.props;
         return (
             <div className="course-list">
-                {courses.map((course, i) => <Course key={i} course={course} {...props} />)}
+                {courses.map((course, i) => (
+                    <Course key={i} course={course} {...props} />
+                ))}
             </div>
         );
     }

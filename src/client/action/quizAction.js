@@ -226,24 +226,30 @@ export const submitCheckAnswer = (complete = true) => async (
     getState
 ) => {
     let { statsContentQuiz, questions, answersById } = getState();
-    if (!_hasCompleteCheckQuiz(questions.byId, answersById)) return alert('请批改完全部试题后再提交');
+    if (!_hasCompleteCheckQuiz(questions.byId, answersById))
+        return alert('请批改完全部试题后再提交');
     let answers = [];
     let score = 0;
     questions.allIds.forEach(questionId => {
         let question = questions.byId[questionId];
         if (question.format === QuestionFormat.FORMAT1_CHOOSE_ONE) {
             let answer = answersById[questionId];
-            if (typeof answer.select_score === 'number') score += answer.select_score;
+            if (typeof answer.select_score === 'number')
+                score += answer.select_score;
             answers.push(answer);
         } else if (question.format === QuestionFormat.FORMAT3_CORRECT) {
             let answer = answersById[questionId];
-            if (typeof answer.select_score === 'number') score += answer.select_score;
-            if (typeof answer.text_score === 'number') score += answer.text_score;
+            if (typeof answer.select_score === 'number')
+                score += answer.select_score;
+            if (typeof answer.text_score === 'number')
+                score += answer.text_score;
             answers.push(answer);
         } else if (question.format === QuestionFormat.FORMAT4_SHORT_QUE) {
             let answer = answersById[questionId];
-            if (typeof answer.select_score === 'number') score += answer.select_score;
-            if (typeof answer.text_score === 'number') score += answer.text_score;
+            if (typeof answer.select_score === 'number')
+                score += answer.select_score;
+            if (typeof answer.text_score === 'number')
+                score += answer.text_score;
             answers.push(answer);
         }
     });
@@ -333,7 +339,8 @@ const showDefaultFeedback = () => (dispatch, getState) => {
     for (let question_id in answersById) {
         if (answersById.hasOwnProperty(question_id)) {
             let answer = answersById[question_id];
-            if (!answer.feedback) answer.feedback = questions.byId[question_id].feedback;
+            if (!answer.feedback)
+                answer.feedback = questions.byId[question_id].feedback;
         }
     }
     dispatch(updateAnswers(answersById));

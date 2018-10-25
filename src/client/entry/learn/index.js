@@ -42,7 +42,12 @@ const preloadedState = window.__PRELOADED_STATE__;
 const store = createStore(rootReducer, preloadedState, applyMiddleware(thunk));
 
 const routes = [
-    { path: URL_Learn_Index, component: HomePage, exact: true, checkAuth: true },
+    {
+        path: URL_Learn_Index,
+        component: HomePage,
+        exact: true,
+        checkAuth: true,
+    },
     { path: URL_Learn_Task, component: HistoryTaskPage, checkAuth: true },
     { path: URL_Learn_Course, component: CoursePage, checkAuth: true },
     { path: URL_Learn_Achieve, component: AchievePage, checkAuth: false },

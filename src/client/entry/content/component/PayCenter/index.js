@@ -13,8 +13,8 @@ import errorMsg from '@/util/errorMsg';
 import { initWechat } from '@/util/wechatUtil';
 import Api from '@/../APIConfig';
 import storeUtil from '@/util/storeUtil';
-import Bridge from "@/util/bridge";
-import BRIDGE_EVENT from "@/constant/bridgeEvent";
+import Bridge from '@/util/bridge';
+import BRIDGE_EVENT from '@/constant/bridgeEvent';
 
 export default class PayCenter extends Component {
     constructor(props) {
@@ -48,14 +48,16 @@ export default class PayCenter extends Component {
         } else {
             initWechat();
             let cid = getParam().cid;
-            fetchData(Api.APIURL_Order_Detail, { cid }).then(([err, result]) => {
-                if (err) return alert(errorMsg(err));
-                let { order } = result.detail;
-                if (order.pay_status === '1') {
-                    location.href = `/pay/status?cid=${order.id}`;
+            fetchData(Api.APIURL_Order_Detail, { cid }).then(
+                ([err, result]) => {
+                    if (err) return alert(errorMsg(err));
+                    let { order } = result.detail;
+                    if (order.pay_status === '1') {
+                        location.href = `/pay/status?cid=${order.id}`;
+                    }
+                    this.setState({ order });
                 }
-                this.setState({ order });
-            });
+            );
         }
     }
 
@@ -306,7 +308,8 @@ export default class PayCenter extends Component {
                                                 ? 'pay-method-item pay-method-alipay active'
                                                 : 'pay-method-item pay-method-alipay'
                                         }
-                                        onClick={() => this.choosePayType(1)}>
+                                        onClick={() => this.choosePayType(1)}
+                                    >
                                         <img
                                             src={require('../../asset/image/pic_alipay.png')}
                                             alt="支付宝支付"
@@ -318,7 +321,8 @@ export default class PayCenter extends Component {
                                                 ? 'pay-method-item pay-method-wechatpay active'
                                                 : 'pay-method-item pay-method-wechatpay'
                                         }
-                                        onClick={() => this.choosePayType(3)}>
+                                        onClick={() => this.choosePayType(3)}
+                                    >
                                         <img
                                             src={require('../../asset/image/pic_wechat.png')}
                                             alt="微信支付"
@@ -340,7 +344,8 @@ export default class PayCenter extends Component {
                                     id="payBtn"
                                     className="btn btn-danger btn-confirm"
                                     onClick={this.submitPay}
-                                    disabled={pay_btn.disabled}>
+                                    disabled={pay_btn.disabled}
+                                >
                                     {pay_btn.text}
                                 </button>
                             </div>

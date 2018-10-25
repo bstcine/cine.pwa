@@ -10,7 +10,8 @@ const TextFix = ({ children, className }) => (
         className={classNames({
             textfix: children.indexOf('《') === 0,
             [className]: !!className,
-        })}>
+        })}
+    >
         {children}
     </span>
 );

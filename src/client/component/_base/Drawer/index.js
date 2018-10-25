@@ -49,7 +49,7 @@ class Drawer extends PureComponent {
         return (
             <div
                 ref={this.ref}
-                className={classNames(cls, className, {
+                className={classNames(cls,  {
                     [`${cls}--active`]: active,
                     [`${cls}--fullscreen`]: fullscreen,
                 })}
@@ -65,7 +65,8 @@ class Drawer extends PureComponent {
                         className={classNames(
                             `${cls}__content`,
                             `${cls}__anchor--${anchor}`,
-                            contentCls
+                            contentCls,
+                            className
                         )}
                     >
                         {children}

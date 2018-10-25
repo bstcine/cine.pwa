@@ -354,7 +354,7 @@ export default class PayCenter extends Component {
                                     <span>支付遇到问题</span>
                                 </div>
                                 <div className="pay-qa-desc">
-                                    请立即联系我们的客服，微信号：BSTCINE01
+                                    请立即联系我们的客服，微信号：BSTCINE02
                                     进行咨询，我们将为您提供基于微信的技术支持服务。
                                 </div>
                             </div>

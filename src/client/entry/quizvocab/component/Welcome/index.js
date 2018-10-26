@@ -20,6 +20,7 @@ export default class Welcome extends Component {
         this.cardPath = '/card';
         if (this.param.estimate) {
             this.cardPath += '?estimate=' + this.param.estimate;
+            document.title = '起点评估测试';
         }
         this.state = {
             showLoginModal: false,

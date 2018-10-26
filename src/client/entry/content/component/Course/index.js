@@ -117,7 +117,7 @@ export default class Course extends Component {
         let { cid, source_user_id } = getParam();
         if (course && course.currency === 'USD') {
             if (siteCodeUtil.inAPP()) {
-                CMessage.info('请在PC端支付，APP暂不支持');
+                CMessage.info('APP暂不支持美元支付，请在官网购买');
             } else {
                 fetchData(APIURL_Order_Create, { cid, currency: 'USD' }).then(
                     ([err, result]) => {
@@ -289,7 +289,7 @@ export default class Course extends Component {
                             }}
                         >
                             <iframe
-                                src="/widget/card"
+                                src="/widget/card?allowopen=1"
                                 frameBorder="0"
                                 height="100%"
                                 scrolling="yes"

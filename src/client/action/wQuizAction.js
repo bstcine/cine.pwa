@@ -321,9 +321,9 @@ export const wQuizAction = {
      * */
     testDone: () => async (dispatch, getState) => {
         // 上传错误信息
-        await dispatch(wQuizAction.updateFailureWords());
         // 更新测试状态为已完成
         await dispatch(wQuizAction.updateTask('2'));
+        await dispatch(wQuizAction.updateFailureWords());
         // 提示用户已完成全部测试（掌握全部单词）
         await dispatch(wQuizAction._endTest(true));
     },
@@ -331,10 +331,10 @@ export const wQuizAction = {
      * 测试未通过
      * */
     testWrong: () => async dispatch => {
-        // 上传错误信息
-        await dispatch(wQuizAction.updateFailureWords());
         // 更新测试状态为已完成
         await dispatch(wQuizAction.updateTask('1'));
+        // 上传错误信息
+        await dispatch(wQuizAction.updateFailureWords());
         // 提示用户已完成全部测试（掌握全部单词）
         await dispatch(wQuizAction._endTest(false));
     },

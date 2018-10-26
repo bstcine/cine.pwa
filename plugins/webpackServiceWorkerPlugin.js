@@ -1,16 +1,5 @@
 const path = require('path');
 const fs = require('fs');
-const getTime = () => {
-    let date = new Date();
-    let str =
-        String(date.getFullYear()) +
-        prefixZero(date.getMonth() + 1) +
-        prefixZero(date.getDate()) +
-        prefixZero(date.getHours()) +
-        prefixZero(date.getMinutes()) +
-        prefixZero(date.getSeconds());
-    return str;
-};
 
 const prefixZero = num => (num > 10 ? num : '0' + num);
 
@@ -26,13 +15,33 @@ ServiceWorkerPlugin.prototype.apply = function(compiler) {
     compiler.hooks.done.tap('ServiceWorkerPlugin', () => {
         fs.writeFileSync(
             path.resolve(this.options.path, this.options.name),
-            this.generate(getTime()),
+            generate(),
             'utf-8'
         );
     });
+    // compiler.plugin('compilation', function(compilation) {
+    //     compilation.plugin('additional-assets', function(callback) {
+    //         compilation.assets[
+    //             path.resolve(this.options.path, this.options.name)
+    //         ] = generate();
+    //     });
+    // });
 };
 
-ServiceWorkerPlugin.prototype.generate = function(version) {
+const getTime = () => {
+    let date = new Date();
+    let str =
+        String(date.getFullYear()) +
+        prefixZero(date.getMonth() + 1) +
+        prefixZero(date.getDate()) +
+        prefixZero(date.getHours()) +
+        prefixZero(date.getMinutes()) +
+        prefixZero(date.getSeconds());
+    return str;
+};
+
+const generate = function() {
+    const version = getTime();
     return `const OFFLINE_CACHE_PREFIX = 'progressive_cache_';
 const CACHE_VERSION = '${version}';
 const OFFLINE_CACHE_NAME = OFFLINE_CACHE_PREFIX + CACHE_VERSION;

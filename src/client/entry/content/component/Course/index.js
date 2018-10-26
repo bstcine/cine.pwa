@@ -289,7 +289,7 @@ export default class Course extends Component {
                             }}
                         >
                             <iframe
-                                src="/content/course?cid=41"
+                                src="/widget/card"
                                 frameBorder="0"
                                 height="100%"
                                 scrolling="yes"

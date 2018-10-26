@@ -41,6 +41,7 @@ export default class Course extends Component {
         this.toggleLoginModal = this.toggleLoginModal.bind(this);
         this.getUserName = this.getUserName.bind(this);
         this.onClickLottery = this.onClickLottery.bind(this);
+        this.login = this.login.bind(this);
     }
 
     async componentDidMount() {
@@ -293,7 +294,6 @@ export default class Course extends Component {
                                 height="100%"
                                 scrolling="yes"
                                 width="100%"
-                                onLoad="this.width=screen.width;this.height=screen.height;"
                             />
 
                         </CDrawer>

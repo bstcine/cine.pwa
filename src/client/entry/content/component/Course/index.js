@@ -235,7 +235,6 @@ export default class Course extends Component {
     }
 
     onClickLottery() {
-        console.log('1111')
         this.setState({ isOpenLottery: true });
     }
 
@@ -280,15 +279,23 @@ export default class Course extends Component {
                         <CDrawer
                             fullscreen={uaUtil.phone()}
                             isOpen={isOpenLottery}
-                            anchor='bottom'
-                            className='lottery-drawer'
+                            anchor="bottom"
+                            className="lottery-drawer"
                             onClose={() => {
                                 this.setState({
                                     isOpenLottery: false,
                                 });
                             }}
                         >
-                            <iframe src="/widget" frameBorder="0" height='100%' width='100%'></iframe>
+                            <iframe
+                                src="/content/course?cid=41"
+                                frameBorder="0"
+                                height="100%"
+                                scrolling="yes"
+                                width="100%"
+                                onLoad="this.width=screen.width;this.height=screen.height;"
+                            />
+
                         </CDrawer>
                     </div>
                 </div>

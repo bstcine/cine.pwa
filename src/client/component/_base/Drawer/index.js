@@ -17,16 +17,15 @@ class Drawer extends PureComponent {
 
     UNSAFE_componentWillReceiveProps(nextProps) {
         if (!this.props.isOpen && nextProps.isOpen) {
-            console.log(1);
-            this.setState({ active: true });
-            setTimeout(() => {
-                this.setState({
-                    contentCls: `${cls}__content--enter-active`,
-                    maskCls: `${cls}__mask--enter-active`,
+            this.setState({ active: true }, () => {
+                setTimeout(() => {
+                    this.setState({
+                        contentCls: `${cls}__content--enter-active`,
+                        maskCls: `${cls}__mask--enter-active`,
+                    });
                 });
             });
         } else if (this.props.isOpen && !nextProps.isOpen) {
-            console.log(2);
             this.setState({
                 contentCls: '',
                 maskCls: '',
@@ -49,7 +48,7 @@ class Drawer extends PureComponent {
         return (
             <div
                 ref={this.ref}
-                className={classNames(cls,  {
+                className={classNames(cls, {
                     [`${cls}--active`]: active,
                     [`${cls}--fullscreen`]: fullscreen,
                 })}

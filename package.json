@@ -3,15 +3,15 @@
     "version": "4.0.1",
     "description": "React-PWA",
     "private": true,
-    "sideEffects": ["*.less", "*.css"],
+    "sideEffects": [
+        "*.less",
+        "*.css"
+    ],
     "scripts": {
-        "start":
-            "NODE_ENV=development webpack-dev-server --config webpack.dev.js",
-        "format":
-            "prettier --config .prettierrc.js --write \"src/**/*.{js,jsx,css,less}\"",
+        "start": "NODE_ENV=development webpack-dev-server --config webpack.dev.js",
+        "format": "prettier --config .prettierrc.js --write \"src/**/*.{js,jsx,css,less}\"",
         "dev": "NODE_ENV=development webpack --config webpack.dev.js",
-        "prod":
-            "NODE_ENV=production webpack --progress --config webpack.prod.js",
+        "prod": "NODE_ENV=production webpack --progress --config webpack.prod.js",
         "dev2web": "./build2web.sh dev",
         "prod2web": "./build2web.sh prod"
     },
@@ -98,9 +98,9 @@
         "style-loader": "^0.21.0",
         "uglifyjs-webpack-plugin": "^1.2.5",
         "url-loader": "^1.0.1",
-        "webpack": "4.9.0",
+        "webpack": "^4.23.1",
         "webpack-bundle-analyzer": "^2.12.0",
-        "webpack-cli": "^3.0.8",
+        "webpack-cli": "^3.1.2",
         "webpack-dev-server": "^3.1.4",
         "webpack-merge": "^4.1.2"
     },

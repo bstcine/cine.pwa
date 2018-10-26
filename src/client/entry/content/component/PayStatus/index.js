@@ -83,7 +83,7 @@ export default class PayStatus extends Component {
                     </p>
                     <p className="tips">
                         如需咨询，请加善恩小助手微信（<span className="wechat-name">
-                            BSTCINE01
+                            BSTCINE02
                         </span>）好友
                     </p>
                 </div>

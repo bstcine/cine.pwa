@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { getParam } from '@/util/urlUtil';
 import siteCodeUtil from '@/util/sitecodeUtil';
 import TryPlayer from '@/component/TryPlayer';
 import CommonUtil from '@/util/common';
@@ -8,37 +7,34 @@ export default class Brief extends Component {
     static defaultProps = {
         course: null,
         user: null,
-        isShowRecommend: false,
     };
 
     // 优惠列表
     renderActivityPromoteList(course) {
         if (course && course.activitys && course.activitys.length) {
-            let list = course.activitys
-                .filter(item => ['1', '2', '3', '4', '5'].includes(item.type))
-                .map((activity, i) => {
-                    if (activity.filter === '1') {
-                        return course.is_shared ? (
-                            <div key={i} className="promote-title after-share">
-                                {activity.share_after_desc}
-                            </div>
-                        ) : (
-                            <div
-                                key={i}
-                                className="promote-title share pointer"
-                                onClick={this.props.onClickShare}
-                            >
-                                {activity.share_before_desc}
-                            </div>
-                        );
-                    } else {
-                        return (
-                            <div key={i} className="promote-title">
-                                {activity.share_before_desc}
-                            </div>
-                        );
-                    }
-                });
+            let list = course.activitys.map((activity, i) => {
+                if (activity.filter === '1') {
+                    return course.is_shared ? (
+                        <div key={i} className="promote-title after-share">
+                            {activity.share_after_desc}
+                        </div>
+                    ) : (
+                        <div
+                            key={i}
+                            className="promote-title share pointer"
+                            onClick={this.props.onClickShare}
+                        >
+                            {activity.share_before_desc}
+                        </div>
+                    );
+                } else {
+                    return (
+                        <div key={i} className="promote-title">
+                            {activity.share_before_desc}
+                        </div>
+                    );
+                }
+            });
             return (
                 <div className="promote">
                     <div className="promote-label">
@@ -240,16 +236,8 @@ export default class Brief extends Component {
     }
 
     render() {
-        let {
-            course,
-            user,
-            relatedCourse,
-            onClickRecommend,
-            isShowRecommend,
-            onClickCoupon,
-        } = this.props;
+        let { course, user, relatedCourse, onClickLottery } = this.props;
         const { onClickShare } = this.props;
-        let source_user_id = getParam().source_user_id;
         return (
             <div className="brief-container">
                 <div className="left-container">
@@ -321,24 +309,15 @@ export default class Brief extends Component {
 
                     {course && this.renderBottomButton(course)}
 
-                    {isShowRecommend ? (
-                        <div className="right-desc">
-                            {source_user_id ? (
+                    {course &&
+                        course.activity_lottery && (
+                            <div className="right-desc">
                                 <div
                                     className="get-coupon"
-                                    onClick={onClickCoupon}
+                                    onClick={onClickLottery}
                                 />
-                            ) : (
-                                <div
-                                    className="recommend"
-                                    onClick={onClickRecommend}
-                                >
-                                    <div className="red-bag" />
-                                    <div className="desc">推荐得积分</div>
-                                </div>
-                            )}
-                        </div>
-                    ) : null}
+                            </div>
+                        )}
                 </div>
             </div>
         );

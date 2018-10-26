@@ -1,5 +1,4 @@
 import React from 'react';
-// import { CCard } from '@/component/_base';
 import TextFix from '@/component/TextFix';
 import { CPanel, CCard, CCardContainer } from '@/component/_base';
 import siteCodeUtil from '@/util/sitecodeUtil';

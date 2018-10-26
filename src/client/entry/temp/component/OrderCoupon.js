@@ -189,7 +189,7 @@ export default class OrderCoupon extends Component {
                                     5.
                                     课程有效期转换一旦完成，不可逆转，请谨慎选择；<br />
                                     6.
-                                    转换过程中如遇任何问题请联系善恩小助手（微信号：BSTCINE01）。
+                                    转换过程中如遇任何问题请联系善恩小助手（微信号：BSTCINE02）。
                                 </p>
                             </div>
 

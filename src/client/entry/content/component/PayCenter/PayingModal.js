@@ -44,7 +44,7 @@ export default class PayingModal extends Component {
                         </div>
                         <div className="tip">
                             <div className="failed-tip-title">支付失败</div>
-                            <a href="javascript:;">请联系微信 BSTCINE01</a>
+                            <a href="javascript:;">请联系微信 BSTCINE02</a>
                         </div>
                     </div>
                 </div>

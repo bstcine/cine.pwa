@@ -11,7 +11,6 @@ import routeUtil from '@/util/routeUtil';
 import errorMsg from '@/util/errorMsg';
 
 import storeUtil from '@/util/storeUtil';
-import * as Service from '@/service/content';
 import cCourseAction from '@/action/contentAction';
 
 import LoginModal from '@/component/LoginModal';
@@ -19,11 +18,9 @@ import Header from '@/component/Header';
 import Footer from '@/component/Footer';
 import Brief from './Brief';
 import DetailDesc from './DetailDesc';
-import CouponModal from './CouponModal';
-import RecommendModal from './RecommendModal';
 import { fetchData } from '@/service/base';
-import { APIURL_Order_Create } from '../../../../../APIConfig';
-import { CMessage } from '@/component/_base';
+import { APIURL_Order_Create } from '@/../APIConfig';
+import { CDrawer, CMessage } from '@/component/_base';
 
 export default class Course extends Component {
     constructor(props) {
@@ -31,7 +28,7 @@ export default class Course extends Component {
         this.state = {
             showLoginModal: false,
             showCouponModal: false,
-            showRecommendModal: false,
+            isOpenLottery: false,
             course: null,
             coupon: null,
             user: null,
@@ -39,16 +36,12 @@ export default class Course extends Component {
         this.handleBuy = this.handleBuy.bind(this);
         this.handleLearn = this.handleLearn.bind(this);
         this.handleShare = this.handleShare.bind(this);
-        this.handleGetCoupon = this.handleGetCoupon.bind(this);
-        this.handleOpenRecommend = this.handleOpenRecommend.bind(this);
         this.onLoginSuccess = this.onLoginSuccess.bind(this);
-        this.initData = this.initData.bind(this);
-        this.login = this.login.bind(this);
         this.relatedCourse = this.relatedCourse.bind(this);
         this.toggleLoginModal = this.toggleLoginModal.bind(this);
-        this.toggleRecommendModal = this.toggleRecommendModal.bind(this);
-        this.toggleCouponModal = this.toggleCouponModal.bind(this);
         this.getUserName = this.getUserName.bind(this);
+        this.onClickLottery = this.onClickLottery.bind(this);
+        this.login = this.login.bind(this);
     }
 
     async componentDidMount() {
@@ -232,40 +225,9 @@ export default class Course extends Component {
         }));
     }
 
-    handleOpenRecommend() {
-        this.toggleRecommendModal();
-    }
-
-    toggleRecommendModal() {
-        this.setState(prevState => ({
-            showRecommendModal: !prevState.showRecommendModal,
-        }));
-    }
-
-    toggleCouponModal() {
-        this.setState(prevState => ({
-            showCouponModal: !prevState.showCouponModal,
-        }));
-    }
-
     getUserName(user) {
         if (!user) return '';
         return user.phone || user.email || user.login;
-    }
-
-    async handleGetCoupon() {
-        if (!this.state.user) {
-            this.login();
-            return;
-        }
-        let { source_user_id } = getParam();
-        if (!source_user_id) return alert('source_user_id is null');
-        let [err, coupon] = await Service.createCoupon(source_user_id);
-        if (err) return alert(errorMsg(err));
-        this.setState({
-            coupon,
-            showCouponModal: true,
-        });
     }
 
     relatedCourse(related_lesson_id) {
@@ -273,14 +235,12 @@ export default class Course extends Component {
         routeUtil.goCourse({ id: related_lesson_id }, history);
     }
 
+    onClickLottery() {
+        this.setState({ isOpenLottery: true });
+    }
+
     render() {
-        let {
-            course,
-            user,
-            showLoginModal,
-            showRecommendModal,
-            showCouponModal,
-        } = this.state;
+        let { course, user, showLoginModal, isOpenLottery } = this.state;
 
         return (
             <React.Fragment>
@@ -295,9 +255,8 @@ export default class Course extends Component {
                             onClickLearn={this.handleLearn}
                             onClickBuy={this.handleBuy}
                             onClickShare={this.handleShare}
-                            onClickRecommend={this.handleOpenRecommend}
+                            onClickLottery={this.onClickLottery}
                             isShowRecommend={true}
-                            onClickCoupon={this.handleGetCoupon}
                         />
 
                         {course ? (
@@ -317,17 +276,27 @@ export default class Course extends Component {
                             toggleModal={this.toggleLoginModal}
                             onLoginSuccess={this.onLoginSuccess}
                         />
-                        <RecommendModal
-                            isOpen={showRecommendModal}
-                            toggleModal={this.toggleRecommendModal}
-                            onClickShare={this.handleShare}
-                        />
-                        <CouponModal
-                            isOpen={showCouponModal}
-                            toggleModal={this.toggleCouponModal}
-                            username={this.getUserName(user)}
-                            coupon={this.state.coupon}
-                        />
+
+                        <CDrawer
+                            fullscreen={uaUtil.phone()}
+                            isOpen={isOpenLottery}
+                            anchor="bottom"
+                            className="lottery-drawer"
+                            onClose={() => {
+                                this.setState({
+                                    isOpenLottery: false,
+                                });
+                            }}
+                        >
+                            <iframe
+                                src="/content/course?cid=41"
+                                frameBorder="0"
+                                height="100%"
+                                scrolling="yes"
+                                width="100%"
+                            />
+
+                        </CDrawer>
                     </div>
                 </div>
                 <Footer isShow={!uaUtil.mobile()} />

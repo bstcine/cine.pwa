@@ -60,9 +60,9 @@ const onClick = task => {
 
     let tempHref = getHref(task);
     if (tempHref) {
-        if (siteCodeUtil.inAndroidAPP()) {
+        if (siteCodeUtil.inAPP()) {
             if (task.type === Task_Type.Video) {
-                Bridge.android(BRIDGE_EVENT.PLAY, {
+                Bridge.common(BRIDGE_EVENT.PLAY, {
                     course_id: task.course_id,
                     lesson_id: task.object_id,
                 }).then(res => {
@@ -71,7 +71,7 @@ const onClick = task => {
             } else if (task.type === Task_Type.Quiz_PDF) {
                 alert('请登入官网下载对应的习题PDF');
             } else {
-                Bridge.android(BRIDGE_EVENT.OPEN_BROWSER, {
+                Bridge.common(BRIDGE_EVENT.OPEN_BROWSER, {
                     url: tempHref,
                     title: task.title,
                 }).then(res => {

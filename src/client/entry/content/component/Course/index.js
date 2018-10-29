@@ -102,8 +102,12 @@ export default class Course extends Component {
     async initData() {
         let { cid } = getParam();
         let { course, user } = await cCourseAction.initCourseDetail(cid);
-        if (course.temp_h5 === '1' && siteCodeUtil.inIOSAPP()) {
-            storeUtil.set('temp_h5', '1', 600 * 1000);
+        if (siteCodeUtil.inIOSAPP()) {
+            if (course.temp_h5 === '1') {
+                storeUtil.set('temp_h5', '1', 600 * 1000);
+            } else {
+                storeUtil.remove('temp_h5');
+            }
         }
         this.setState({ course, user });
     }
@@ -295,7 +299,6 @@ export default class Course extends Component {
                                 scrolling="yes"
                                 width="100%"
                             />
-
                         </CDrawer>
                     </div>
                 </div>

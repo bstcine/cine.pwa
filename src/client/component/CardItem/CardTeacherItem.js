@@ -1,4 +1,5 @@
 import React from 'react';
+import './styleTeacher.less';
 
 export const CardTeacher = ({ value, style, actions }) => {
     const imgBG = `url(${value.cover}) center center / cover no-repeat`;

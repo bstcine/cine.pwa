@@ -26,6 +26,9 @@ export default class Card extends Component {
         };
 
         this.isTop10000 = this.param.estimate ? true : false;
+        if (this.isTop10000) {
+            document.title = '起点评估测试';
+        }
         this.max_skip_right = 10;
         this.max_wrong = 3;
         this.last_index = 1;

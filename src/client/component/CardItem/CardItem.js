@@ -1,5 +1,6 @@
 import React from 'react';
 import { svgStar, svgStarHalf } from '@/constant/svg';
+import './style.less';
 
 export const CardItem = ({ value, style, actions }) => {
     const imgBG = `url(${value.cover}) center center / cover no-repeat`;

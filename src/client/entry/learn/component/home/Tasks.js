@@ -34,14 +34,17 @@ const onClickAllTask = () => {
 };
 
 const Tasks = ({ tasks, user, isLimitTasks, onShowAllTask, gActions }) => {
+    const badge = tasks
+        .filter(i => i.type !== '6' && i.type !== '8')
+        .filter(i => i.status !== '2').length;
     return (
         <div className="cine-panel tasks-container">
             <div className="cine-panel__head">
                 <div className="cine-panel__lefthead">
                     <div className="cine-panel__title">
-                        本周作业<span className="cine-panel__badge">
-                            {tasks.filter(i => i.status !== '2').length}
-                        </span>
+                        本周作业{badge > 0 && (
+                            <span className="cine-panel__badge">{badge}</span>
+                        )}
                     </div>
                     <a onClick={() => onClickAllTask()}>全部作业</a>
                 </div>

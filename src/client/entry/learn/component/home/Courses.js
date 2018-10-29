@@ -1,5 +1,4 @@
 import React from 'react';
-// import { CCard } from '@/component/_base';
 import TextFix from '@/component/TextFix';
 import { CPanel, CCard, CCardContainer } from '@/component/_base';
 import siteCodeUtil from '@/util/sitecodeUtil';
@@ -59,12 +58,12 @@ const Courses = ({ courses }) => {
                                 </div>
                                 {Boolean(course.last_content) && (
                                     <div className="status">
-                                        进度 {course.last_content}
+                                        进度：{course.last_content}
                                     </div>
                                 )}
                                 {course.expire_at && (
                                     <div className="expire_at">
-                                        有效期{' '}
+                                        有效期：
                                         {course.expire_at >
                                         '2100-01-01 00:00:00'
                                             ? '长期有效'

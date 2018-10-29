@@ -102,8 +102,12 @@ export default class Course extends Component {
     async initData() {
         let { cid } = getParam();
         let { course, user } = await cCourseAction.initCourseDetail(cid);
-        if (course.temp_h5 === '1' && siteCodeUtil.inIOSAPP()) {
-            storeUtil.set('temp_h5', '1', 600 * 1000);
+        if (siteCodeUtil.inIOSAPP()) {
+            if (course.temp_h5 === '1') {
+                storeUtil.set('temp_h5', '1', 600 * 1000);
+            } else {
+                storeUtil.remove('temp_h5');
+            }
         }
         this.setState({ course, user });
     }
@@ -117,7 +121,7 @@ export default class Course extends Component {
         let { cid, source_user_id } = getParam();
         if (course && course.currency === 'USD') {
             if (siteCodeUtil.inAPP()) {
-                CMessage.info('请在PC端支付，APP暂不支持');
+                CMessage.info('APP暂不支持美元支付，请在官网购买');
             } else {
                 fetchData(APIURL_Order_Create, { cid, currency: 'USD' }).then(
                     ([err, result]) => {
@@ -289,13 +293,12 @@ export default class Course extends Component {
                             }}
                         >
                             <iframe
-                                src="/content/course?cid=41"
+                                src="/widget/card?allowopen=1"
                                 frameBorder="0"
                                 height="100%"
                                 scrolling="yes"
                                 width="100%"
                             />
-
                         </CDrawer>
                     </div>
                 </div>

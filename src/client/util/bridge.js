@@ -1,4 +1,5 @@
 import { eventEmmiter } from './eventEmmiter';
+import siteCodeUtil from '@/util/sitecodeUtil';
 
 let Bridge = {
     ios: function(event, params, needCallback = true) {
@@ -55,6 +56,14 @@ let Bridge = {
             console.log(`send Android msg ${JSON.stringify(msg)}`);
             Android[event](msg);
         });
+    },
+
+    common: function(event, params, needCallback = true) {
+        if (siteCodeUtil.inIOSAPP()) {
+            return Bridge.ios(event, params, needCallback);
+        } else {
+            return Bridge.android(event, params, needCallback);
+        }
     },
 
     getCallbackEvent: function(event) {

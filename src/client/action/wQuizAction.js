@@ -296,17 +296,20 @@ export const wQuizAction = {
     },
     updateTask: status => async (dispatch, getState) => {
         let reducer = getState().WordQuizRedu;
-        // let taskStatus = reducer.get('taskStatus');
-        // if (taskStatus === '2') {
-        //     return [null , {}];
-        // }
         let param = reducer.get('param');
+        if (!this.param.task_id) {
+            return;
+        }
+        let taskStatus = reducer.get('taskStatus');
+        if (taskStatus === '2') {
+            return;
+        }
         param['task_status'] = status;
-        let res = await fetchData(
+        const resTaskStatus = await fetchData(
             Api.APIURL_User_Learn_UpdateTaskStatus,
             param
         );
-        return res;
+        return resTaskStatus;
     },
     /**
      * 开始测试（对外调用）
@@ -322,25 +325,21 @@ export const wQuizAction = {
     testDone: () => async (dispatch, getState) => {
         // 上传错误信息
         // 更新测试状态为已完成
-        let resTaskStatus = await dispatch(wQuizAction.updateTask('2'));
-        console.log('更新结果: ',resTaskStatus);
-        let resFailureWords = await dispatch(wQuizAction.updateFailureWords());
-        console.log(resFailureWords);
+        dispatch(wQuizAction.updateTask('2'));
+        dispatch(wQuizAction.updateFailureWords());
         // 提示用户已完成全部测试（掌握全部单词）
-        await dispatch(wQuizAction._endTest(true));
+        dispatch(wQuizAction._endTest(true));
     },
     /**
      * 测试未通过
      * */
     testWrong: () => async dispatch => {
         // 更新测试状态为已完成
-        let resTaskStatus = await dispatch(wQuizAction.updateTask('1'));
-        console('更新结果: ',resTaskStatus);
+        dispatch(wQuizAction.updateTask('1'));
         // 上传错误信息
-        let resFailureWords = await dispatch(wQuizAction.updateFailureWords());
-        console.log(resFailureWords);
+        dispatch(wQuizAction.updateFailureWords());
         // 提示用户已完成全部测试（掌握全部单词）
-        await dispatch(wQuizAction._endTest(false));
+        dispatch(wQuizAction._endTest(false));
     },
     /**
      * 上传错误单词信息

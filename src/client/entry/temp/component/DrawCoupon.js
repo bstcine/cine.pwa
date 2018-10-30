@@ -92,7 +92,8 @@ export default class DrawCoupon extends Component {
         );
 
         let msg = errMsg[err] || err;
-        if(!this.state.isSelf && err === 'repeat_draw') msg = '你已帮好友抽过啦';
+        if (!this.state.isSelf && err === 'repeat_draw')
+            msg = '你已帮好友抽过啦';
 
         this.setState({
             draw: {
@@ -150,6 +151,7 @@ export default class DrawCoupon extends Component {
             stats_activity_course,
             course,
             coupon,
+            user,
             draw,
         } = this.state;
 
@@ -168,20 +170,19 @@ export default class DrawCoupon extends Component {
         if (draw && draw.msg) {
             modalHint = draw.msg;
         } else {
-            if(isSelf){
+            if (isSelf) {
                 modalHint = (
                     <div>
                         恭喜你，已抽中 <span>{draw.price}</span> 元优惠券！
                     </div>
                 );
-            }else {
+            } else {
                 modalHint = (
                     <div>
                         恭喜您为好友抽中 <span>{draw.price}</span> 叠加优惠券！
                     </div>
                 );
             }
-
         }
 
         let content;
@@ -261,7 +262,9 @@ export default class DrawCoupon extends Component {
                         />
                     </div>
                     <div className={'row_b'}>
-                        您的好友想要购买善恩的在线视频精读课程
+                        您的好友 <span>
+                            {user && (user.nickname || user.login)}
+                        </span> 想要购买善恩的在线视频精读课程
                     </div>
                     <div
                         className={'row_c'}

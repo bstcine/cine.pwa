@@ -9,11 +9,11 @@ import siteCodeUtil from '@/util/sitecodeUtil';
 import Bridge from '@/util/bridge';
 import BRIDGE_EVENT from '@/constant/bridgeEvent';
 import storeUtil from '@/util/storeUtil';
-import {initWechat} from "@/util/wechatUtil";
+import { initWechat } from '@/util/wechatUtil';
 
 const customStyles = {
     content: {
-        top: '50%',
+        top: '3.5rem',
         left: '50%',
         right: 'auto',
         bottom: 'auto',
@@ -43,6 +43,7 @@ export default class DrawCoupon extends Component {
             stats_activity_course: {},
             course: {},
             coupon: {},
+            draw: { price: 0, msg: null },
         };
     }
 
@@ -67,7 +68,6 @@ export default class DrawCoupon extends Component {
 
     handleCloseModal = () => {
         this.setState({ showModal: false });
-        location.href = '/';
     };
 
     onSubmit = async () => {
@@ -89,9 +89,13 @@ export default class DrawCoupon extends Component {
             data
         );
 
-        if (err) return alert(errMsg[err] || err);
+        this.setState({
+            draw: {
+                price: result && result.draw_price ? result.draw_price : 0,
+                msg: errMsg[err] || err,
+            },
+        });
 
-        alert(result);
         this.handleOpenModal();
     };
 
@@ -135,7 +139,13 @@ export default class DrawCoupon extends Component {
     };
 
     render() {
-        const { showModal, stats_activity_course, course, coupon } = this.state;
+        const {
+            showModal,
+            stats_activity_course,
+            course,
+            coupon,
+            draw,
+        } = this.state;
 
         let max_price =
             course && course.price ? Math.floor(Number(course.price) * 0.1) : 0;
@@ -212,9 +222,13 @@ export default class DrawCoupon extends Component {
                 <Modal
                     isOpen={showModal}
                     style={customStyles}
-                    contentLabel="Example Modal"
                 >
-                    <div className={'success-modal'} />
+                    <div className={'success-modal'} hidden={draw.price <= 0}>
+                        恭喜你，已抽中 <span>{draw.price}</span> 元优惠券！
+                    </div>
+                    <div className={'error-modal'} hidden={!draw.msg}>
+                        {draw.msg}
+                    </div>
                 </Modal>
             </React.Fragment>
         );

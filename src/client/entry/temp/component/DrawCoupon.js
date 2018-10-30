@@ -8,7 +8,6 @@ import { share } from '@/util/shareUtil';
 import siteCodeUtil from '@/util/sitecodeUtil';
 import Bridge from '@/util/bridge';
 import BRIDGE_EVENT from '@/constant/bridgeEvent';
-import storeUtil from '@/util/storeUtil';
 import { initWechat } from '@/util/wechatUtil';
 
 const customStyles = {
@@ -19,6 +18,7 @@ const customStyles = {
         bottom: 'auto',
         padding: '0',
         marginRight: '-50%',
+        background:'#ffffff',
         transform: 'translate(-50%, -50%)',
     },
     overlay: {
@@ -30,7 +30,7 @@ Modal.setAppElement('#root');
 
 const errMsg = {
     activity_is_expire: '活动已经过期',
-    repeat_draw: '已经抽过奖啦',
+    repeat_draw: '已抽过,邀请更多好友一起抽',
     coupon_is_used: '优惠券已经被使用',
 };
 
@@ -57,9 +57,9 @@ export default class DrawCoupon extends Component {
 
         if (err) return alert(err);
 
-        await initWechat();
-
         this.setState(result);
+
+        await initWechat();
     }
 
     handleOpenModal = () => {
@@ -157,6 +157,18 @@ export default class DrawCoupon extends Component {
                 : 0;
         let friend_price = Number(coupon_price) - Number(draw_price);
 
+        let modalHint;
+
+        if (draw && draw.msg) {
+            modalHint = draw.msg;
+        } else {
+            modalHint = (
+                <div>
+                    恭喜你，已抽中 <span>{draw.price}</span> 元优惠券！
+                </div>
+            );
+        }
+
         return (
             <React.Fragment>
                 <div className={'content'}>
@@ -219,16 +231,8 @@ export default class DrawCoupon extends Component {
                         <div>3. 活动解释权归善恩英语所有</div>
                     </div>
                 </div>
-                <Modal
-                    isOpen={showModal}
-                    style={customStyles}
-                >
-                    <div className={'success-modal'} hidden={draw.price <= 0}>
-                        恭喜你，已抽中 <span>{draw.price}</span> 元优惠券！
-                    </div>
-                    <div className={'error-modal'} hidden={!draw.msg}>
-                        {draw.msg}
-                    </div>
+                <Modal isOpen={showModal} style={customStyles} onRequestClose={this.handleCloseModal}>
+                    <div className={'success-modal'}>{modalHint}</div>
                 </Modal>
             </React.Fragment>
         );

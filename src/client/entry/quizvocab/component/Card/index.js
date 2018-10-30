@@ -281,6 +281,37 @@ export default class Card extends Component {
             uploading: true,
         });
         this.stopTimer();
+        console.log('结束任务了');
+        if (this.param.estimate) {
+            const estimateCom = this.param.estimate.split('-');
+            const location = parseInt(estimateCom[0], 10);
+            const range = parseInt(estimateCom[1], 10);
+            let score = location + query.vocab;
+            this.estimate_score = score / (location - 1 + range);
+            console.log('本次评估得分: ' + this.estimate_score);
+            if (this.estimate_score >= 0.9) {
+                if (range >= 9000) {
+                    this.last_index = 9001;
+                    this.estimate_score = 0.89;
+                } else {
+                    this.last_index = location + range - 50;
+                }
+            } else {
+                for (let i = 0; i < this.wordLevelList.length; i++) {
+                    const wordLevel = this.wordLevelList[i];
+                    if (wordLevel.min_vocab >= score) {
+                        break;
+                    }
+                    this.last_index = wordLevel.min_vocab + 1;
+                }
+            }
+
+            this.setState({
+                uploading: false,
+                isWordEnd: true,
+            });
+            return;
+        }
         Service.saveContentWordResult(query).then(result => {
             if (result.except_case_desc) {
                 return alert(result.except_case_desc);
@@ -289,38 +320,9 @@ export default class Card extends Component {
                 uploading: false,
             });
             console.log(`result ${JSON.stringify(result)}`);
-            if (this.param.estimate) {
-                const estimateCom = this.param.estimate.split('-');
-                const location = parseInt(estimateCom[0], 10);
-                const range = parseInt(estimateCom[1], 10);
-                let score = location + query.vocab;
-                this.estimate_score = score / (location - 1 + range);
-                console.log('本次评估得分: ' + this.estimate_score);
-                if (this.estimate_score >= 0.9) {
-                    if (range >= 9000) {
-                        this.last_index = 9001;
-                        this.estimate_score = 0.89;
-                    } else {
-                        this.last_index = location + range - 50;
-                    }
-                } else {
-                    for (let i = 0; i < this.wordLevelList.length; i++) {
-                        const wordLevel = this.wordLevelList[i];
-                        if (wordLevel.min_vocab >= score) {
-                            break;
-                        }
-                        this.last_index = wordLevel.min_vocab + 1;
-                    }
-                }
-
-                this.setState({
-                    isWordEnd: true,
-                });
-            } else {
-                this.props.history.push(
-                    `/report?id=${result.result.statsContentWord.id}`
-                );
-            }
+            this.props.history.push(
+                `/report?id=${result.result.statsContentWord.id}`
+            );
         });
     }
 

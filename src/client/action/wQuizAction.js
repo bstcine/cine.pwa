@@ -297,12 +297,12 @@ export const wQuizAction = {
     updateTask: status => async (dispatch, getState) => {
         let reducer = getState().WordQuizRedu;
         let param = reducer.get('param');
-        if (!this.param.lesson_id) {
-            return [null, {}];
+        if (!this.param.task_id) {
+            return;
         }
         let taskStatus = reducer.get('taskStatus');
         if (taskStatus === '2') {
-            return [null , {}];
+            return;
         }
         param['task_status'] = status;
         const resTaskStatus = await fetchData(
@@ -325,10 +325,8 @@ export const wQuizAction = {
     testDone: () => async (dispatch, getState) => {
         // 上传错误信息
         // 更新测试状态为已完成
-        let [error,] = await dispatch(wQuizAction.updateTask('2'));
-        console.log(error);
-        let [wordError,] = await dispatch(wQuizAction.updateFailureWords());
-        console.log(wordError);
+        dispatch(wQuizAction.updateTask('2'));
+        dispatch(wQuizAction.updateFailureWords());
         // 提示用户已完成全部测试（掌握全部单词）
         dispatch(wQuizAction._endTest(true));
     },
@@ -337,15 +335,9 @@ export const wQuizAction = {
      * */
     testWrong: () => async dispatch => {
         // 更新测试状态为已完成
-        let [error, ] = await dispatch(wQuizAction.updateTask('1'));
-        if (error) {
-            console.log('更新结果: ',error);
-        }
+        dispatch(wQuizAction.updateTask('1'));
         // 上传错误信息
-        let [wordError, ] = await dispatch(wQuizAction.updateFailureWords());
-        if (wordError) {
-            console.log(wordError);
-        }
+        dispatch(wQuizAction.updateFailureWords());
         // 提示用户已完成全部测试（掌握全部单词）
         dispatch(wQuizAction._endTest(false));
     },

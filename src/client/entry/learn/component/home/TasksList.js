@@ -58,6 +58,15 @@ const onClick = task => {
         return;
     }
 
+    if (task.type === Task_Type.Writing && task.writing_desc) {
+        CModal.alert({
+            title: task.title,
+            text: task.writing_desc,
+            responsive: true,
+        });
+        return;
+    }
+
     let tempHref = getHref(task);
     if (tempHref) {
         if (siteCodeUtil.inAPP()) {

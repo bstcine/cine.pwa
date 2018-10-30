@@ -168,11 +168,20 @@ export default class DrawCoupon extends Component {
         if (draw && draw.msg) {
             modalHint = draw.msg;
         } else {
-            modalHint = (
-                <div>
-                    恭喜你，已抽中 <span>{draw.price}</span> 元优惠券！
-                </div>
-            );
+            if(isSelf){
+                modalHint = (
+                    <div>
+                        恭喜你，已抽中 <span>{draw.price}</span> 元优惠券！
+                    </div>
+                );
+            }else {
+                modalHint = (
+                    <div>
+                        恭喜您为好友抽中 <span>{draw.price}</span> 叠加优惠券！
+                    </div>
+                );
+            }
+
         }
 
         let content;

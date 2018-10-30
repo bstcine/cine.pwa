@@ -1,4 +1,4 @@
-.content {
+.content_self {
     background: #ff731e;
     max-width: 575px;
     margin: 0 auto;
@@ -161,6 +161,210 @@
     }
 }
 
+.content_other {
+    background: #ff731e;
+    max-width: 575px;
+    margin: 0 auto;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    .line {
+        margin: 0 0.5rem;
+        width: auto;
+        height: 0.02rem;
+        background-color: #ffffff;
+        opacity: 0.16;
+    }
+
+    .fixed_a {
+        top: 0.2rem;
+        left: 0.3rem;
+        position: absolute;
+
+        img {
+            width: 1rem;
+        }
+    }
+
+    .row_a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        img {
+            margin: 0.6rem 0 0.5rem;
+            width: 5rem;
+        }
+    }
+
+    .row_b {
+        text-align: center;
+
+        font-family: PingFang-SC-Medium;
+        font-size: 0.3rem;
+        font-weight: normal;
+        font-stretch: normal;
+        line-height: 0.5rem;
+        letter-spacing: 0rem;
+        color: #ffffff;
+    }
+
+    .row_c {
+        display: flex;
+        align-items: center;
+
+        width: 6.9rem;
+        height: 2.1rem;
+
+        margin: 0.2rem 0;
+        background-color: #ffffff;
+        border-radius: 0.1rem;
+
+        img {
+            width: 2.6rem;
+            margin: 0 0.2rem;
+        }
+
+        .row_c_col_a {
+            height: 100%;
+            width: 100%;
+
+            padding: 0.3rem 0.4rem 0.4rem 0;
+
+            display: flex;
+            flex-direction: column;
+
+            .course_name {
+                font-family: PingFang-SC-Medium;
+                font-size: 0.3rem;
+                font-weight: normal;
+                font-stretch: normal;
+                line-height: 0.4rem;
+                letter-spacing: 0rem;
+                color: #0a0b0c;
+
+                display: -webkit-box;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+            }
+
+            .course_teacher {
+                margin-top: 0.21rem;
+                font-family: PingFang-SC-Regular;
+                font-size: 0.2rem;
+                font-weight: normal;
+                font-stretch: normal;
+                line-height: 0.3rem;
+                letter-spacing: 0rem;
+                color: #0a0b0c;
+            }
+
+            .course_subtitle {
+                margin-top: 0.14rem;
+                font-family: PingFang-SC-Regular;
+                font-size: 0.2rem;
+                font-weight: normal;
+                font-stretch: normal;
+                line-height: 0.32rem;
+                letter-spacing: 0rem;
+                color: #0a0b0c;
+            }
+        }
+    }
+
+    .row_d {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        .row_d_val {
+            width: 6.5rem;
+            height: 6.5rem;
+            background: url('../image/bg_fudai.png') no-repeat;
+            background-size: 100% 100%;
+
+            text-align: center;
+
+            .title {
+                display: flex;
+                justify-content: center;
+
+                margin-top: 0.3rem;
+
+                font-family: FZLTCHJW--GB1-0;
+                font-size: 0.42rem;
+                font-weight: normal;
+                font-stretch: normal;
+                line-height: 0.54rem;
+                letter-spacing: 0.04rem;
+                color: #ffffff;
+            }
+
+            .fudai {
+                height: 3.4rem;
+                margin-top: 0.9rem;
+            }
+        }
+    }
+
+    .row_e {
+        background-image: linear-gradient(
+                0deg,
+                #ffffff 0%,
+                rgba(255, 255, 255, 0.38) 100%
+            ),
+            linear-gradient(#ffde44, #ffde44);
+        background-blend-mode: overlay, normal;
+        box-shadow: inset 0rem -0.06rem 0rem 0rem #ff9a0b;
+        border-radius: 0.42rem;
+
+        width: 5.6rem;
+        height: 0.9rem;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        span {
+            font-family: PingFang-SC-Bold;
+            font-size: 0.6rem;
+            font-weight: normal;
+            font-stretch: normal;
+            line-height: 0.24rem;
+            letter-spacing: 0rem;
+            color: #f4d81c;
+        }
+    }
+
+    .row_f {
+        width: 100%;
+        text-align: center;
+        margin: 0.5rem 0 0.3rem;
+        font-family: PingFang-SC-Bold;
+        font-size: 0.4rem;
+        font-weight: normal;
+        font-stretch: normal;
+        line-height: 0.5rem;
+        letter-spacing: 0rem;
+        color: #ffffff;
+    }
+
+    .row_g {
+        width: 100%;
+        padding: 0.2rem 0.5rem 2rem;
+        font-family: PingFang-SC-Regular;
+        font-size: 0.2rem;
+        font-weight: normal;
+        font-stretch: normal;
+        line-height: 0.4rem;
+        letter-spacing: 0rem;
+        color: #ffffff;
+    }
+}
+
 .success-modal {
     width: 5.6rem;
     height: 2.6rem;
@@ -176,11 +380,11 @@
     letter-spacing: 0rem;
     color: #0a0b0c;
 
-    span{
-      font-family: PingFang-SC-Bold;
-      font-size: 0.4rem;
-      font-weight: normal;
-      letter-spacing: 0rem;
-      color: #df3121;
+    span {
+        font-family: PingFang-SC-Bold;
+        font-size: 0.4rem;
+        font-weight: normal;
+        letter-spacing: 0rem;
+        color: #df3121;
     }
 }

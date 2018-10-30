@@ -1,166 +1,57 @@
+@import '~asset/style/_cine.less';
+
 .cardCourse {
-    background-color: transparent;
+    cursor: pointer;
     text-size-adjust: none;
-    padding: 3px;
+    padding: 0 0.04rem;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    border-radius: 0.06rem;
+/*     box-shadow: 0 0.1rem 0.06rem 0 rgba(219, 230, 240, 0.1); */
 
-    .img-c {
-        padding-bottom: 8px;
-        display: block;
-        .img {
-            padding-top: (9/16) * 100%;
-            border-top-left-radius: 4px;
-            border-top-right-radius: 4px;
-        }
+    .course-img {
+        padding-top: (9/16) * 100%;
+        border-top-left-radius: 0.06rem;
+        border-top-right-radius: 0.06rem;
     }
-
-    &.card112 {
-        display: flex;
-        flex-direction: row;
-        padding-right: 3px;
-    }
-    @media @media-up-xs {
-        &.card112 {
-            padding: 8px;
+    .course-desc {
+        padding: 0 0.1rem;
+        > * {
+            .text-one-line();
         }
-    }
-
-    .img-c112 {
-        display: block;
-        flex-shrink: 0;
-        flex-grow: 0;
-        width: 40%;
-        /* flex: 0 0 33%; */
-        padding-right: 6px;
-        .img {
-            padding-top: (9/16) * 100%;
-            border-top-left-radius: 4px;
+        .course-title {
+            font-size: 0.28rem;
+            line-height: 0.5rem;
+            color: #222;
         }
-    }
-
-    @media @media-up-xs {
-        .img-c112 {
-            width: 25%;
-        }
-    }
-
-    @media @media-up-sm {
-        .img-c112 {
-            width: 40%;
-        }
-    }
-
-    .text-c {
-        color: rgb(72, 72, 72);
-        padding-left: 2px;
-        display: flex;
-        flex-direction: column;
-        overflow: hidden;
-
-        .line1 {
-            text-overflow: ellipsis;
-            overflow: hidden;
+        .course-author,
+        .course-arrange {
+            font-size: 0.22rem;
+            height: 0.32rem;
+            line-height: 0.32rem;
+            color: #a0a4a7;
         }
 
-        .line2 {
-            text-overflow: ellipsis;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            /*! autoprefixer: off */
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-        }
-
-        .title {
-            font-weight: 700;
-            font-size: 14px;
-            line-height: 18px;
-            max-height: 40px;
-            margin-bottom: 4px;
-            // text-size-adjust: none;
-        }
-        @media @media-up-xs {
-            .title {
-                font-size: 16px;
-                line-height: 20px;
+        .course-price {
+            font-size: 0.3rem;
+            line-height: 0.6rem;
+            color: #f22010;
+            .old-price-text {
+                vertical-align: top;
+                padding-left: 0.22rem;
+                color: #c2c3c5;
+                font-size: 0.28rem;
+            }
+            .old-price {
+                vertical-align: top;
+                color: #c2c3c5;
+                text-decoration: line-through;
+                font-size: 0.28rem;
             }
         }
-
-        .sub-title {
-            color: rgb(115, 71, 41);
-            font-weight: 800;
-            font-size: 10px;
-            line-height: 14px;
-            letter-spacing: normal;
-            white-space: nowrap;
-            text-transform: uppercase;
-            margin-bottom: 2px;
-        }
-        @media @media-up-xs {
-            .sub-title {
-                font-size: 12px;
-                line-height: 16px;
-            }
-        }
-        .price {
-            font-weight: normal;
-            font-size: 12px;
-            line-height: 16px;
-            letter-spacing: normal;
-            -webkit-font-smoothing: antialiased;
-            font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto,
-                'Helvetica Neue', sans-serif;
-            flex: 1;
-        }
-        @media @media-up-xs {
-            .price {
-                font-size: 13px;
-                line-height: 17px;
-            }
-        }
-        .rate {
-            vertical-align: middle !important;
-            line-height: 21px !important;
-            margin-right: 2px !important;
-            -webkit-font-smoothing: antialiased;
-            .star5 {
-                display: inline-block !important;
-                color: rgb(0, 132, 137) !important;
-                font-size: 8px !important;
-                height: 8px !important;
-                width: 8px !important;
-                margin-right: 1px;
-                svg {
-                    height: 1em;
-                    width: 1em;
-                    display: block;
-                    fill: currentcolor;
-                }
-            }
-            @media @media-up-xs {
-                .star5 {
-                    font-size: 9px !important;
-                    height: 10px !important;
-                    width: 10px !important;
-                }
-            }
-            .number {
-                padding-left: 3px;
-                font-weight: 600 !important;
-                word-wrap: break-word !important;
-                font-size: 10px !important;
-                line-height: 14px !important;
-                letter-spacing: normal !important;
-                font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto,
-                    'Helvetica Neue', sans-serif !important;
-                display: inline !important;
-                margin: 0px !important;
-            }
-            @media @media-up-xs {
-                .number {
-                    font-size: 12px !important;
-                    line-height: 16px !important;
-                }
-            }
+        .coming-soon {
+            color: #8d8c8c;
+            font-size: 0.32rem;
+            line-height: 0.6rem;
         }
     }
 }

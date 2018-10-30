@@ -1,4 +1,4 @@
-import { CardCourse } from './CardCourseItem';
+import  CardCourse  from './CardCourseItem';
 import { CardTeacher } from './CardTeacherItem';
 import { CardItem } from './CardItem';
 import './style.less';

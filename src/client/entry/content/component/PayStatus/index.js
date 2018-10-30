@@ -27,7 +27,6 @@ export default class PayStatus extends Component {
             let { order } = result.detail;
             if (
                 order.status === '1' &&
-                parseInt(order.pay_price, 10) !== 0 &&
                 siteCodeUtil.inIOSAPP() &&
                 storeUtil.get('temp_h5')
             ) {

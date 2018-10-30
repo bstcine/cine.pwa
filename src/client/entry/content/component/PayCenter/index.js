@@ -54,6 +54,7 @@ export default class PayCenter extends Component {
                     let { order } = result.detail;
                     if (order.pay_status === '1') {
                         location.href = `/pay/status?cid=${order.id}`;
+                        return
                     }
                     this.setState({ order });
                 }

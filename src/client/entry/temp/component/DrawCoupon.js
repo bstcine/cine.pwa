@@ -62,9 +62,9 @@ export default class DrawCoupon extends Component {
         let param = getParam();
         if (param.user_id) {
             this.setState({ isSelf: true });
-            document.title = '双十一活动';
+            document.title = '善恩英语双11有奖戳戳戳';
         } else {
-            document.title = '双十一活动-好友助力';
+            document.title = '善恩英语双11有奖戳戳戳';
         }
 
         await this.onLoadInfo();
@@ -125,7 +125,7 @@ export default class DrawCoupon extends Component {
         await this.onLoadInfo();
     };
 
-    doShare = async () => {
+    doShare = course => {
         if (
             !(
                 this.state.stats_activity_course &&
@@ -141,14 +141,26 @@ export default class DrawCoupon extends Component {
             this.state.stats_activity_course.id;
 
         let share_params = {
-            title: '好友抽奖',
+            title: '我在参加善恩英语的双11优惠活动，快来帮我一起抽奖！',
             link: help_link,
-            imgUrl: '',
-            desc: '好友抽奖',
+            imgUrl: 'https://www.bstcine.com/f/' + course.img,
+            desc: '我在参加善恩英语的双11优惠活动，快来帮我一起抽奖！',
         };
 
-        console.log(share_params);
-        await share({ share_params });
+        if (siteCodeUtil.inAPP()) {
+            Bridge.common(BRIDGE_EVENT.SHARE, share_params).then(res => {
+                alert(JSON.stringify(res));
+                if (res && res.shareSuccess === 1) {
+                    console.log('分享成功');
+                } else {
+                    console.log('分享已取消');
+                }
+            });
+        } else {
+            share({ share_params }).then(res => {
+                console.log(JSON.stringify(res));
+            });
+        }
     };
 
     doToCourse = course_id => {
@@ -235,7 +247,7 @@ export default class DrawCoupon extends Component {
                         <img
                             src={require('../asset/image/btn_wechat.png')}
                             onClick={() => {
-                                this.doShare();
+                                this.doShare(course);
                             }}
                         />
                     </div>

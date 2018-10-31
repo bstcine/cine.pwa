@@ -152,15 +152,12 @@ export default class DrawCoupon extends Component {
     };
 
     doToCourse = course_id => {
-        let link = `/content/course?cid=${course_id}`;
-
         if (siteCodeUtil.inAPP()) {
-            Bridge.common(BRIDGE_EVENT.OPEN_BROWSER, {
-                url: link,
-                title: '课程详情',
+            Bridge.common(BRIDGE_EVENT.PRE_CONFIRM, {
+                course_id,
             });
         } else {
-            location.href = link;
+            location.href = `/pay/prepare?cid=${course_id}`;
         }
     };
 

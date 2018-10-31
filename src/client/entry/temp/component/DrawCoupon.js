@@ -173,13 +173,23 @@ export default class DrawCoupon extends Component {
             if (isSelf) {
                 modalHint = (
                     <div>
-                        恭喜你，已抽中 <span>{draw.price}</span> 元优惠券！
+                        恭喜你，已抽中{' '}
+                        <span className={'hint_draw'}>{draw.price}</span>{' '}
+                        元优惠券！
                     </div>
                 );
             } else {
                 modalHint = (
                     <div>
-                        恭喜您为好友抽中 <span>{draw.price}</span> 叠加优惠券！
+                        恭喜您为好友{' '}
+                        <span className={'hint_nickname'}>
+                            {user && (user.nickname || user.login)}
+                        </span>{' '}
+                        抽中
+                        <div>
+                            <span className={'hint_price'}>{draw.price} </span>{' '}
+                            <span style={{ color: '#e23f30' }}>元</span>叠加优惠券！
+                        </div>
                     </div>
                 );
             }
@@ -262,9 +272,9 @@ export default class DrawCoupon extends Component {
                         />
                     </div>
                     <div className={'row_b'}>
-                        您的好友 <span>
-                            {user && (user.nickname || user.login)}
-                        </span> 想要购买善恩的在线视频精读课程
+                        您的好友{' '}
+                        <span>{user && (user.nickname || user.login)}</span>{' '}
+                        想要购买善恩的在线视频精读课程
                     </div>
                     <div
                         className={'row_c'}
@@ -318,7 +328,7 @@ export default class DrawCoupon extends Component {
                     style={customStyles}
                     onRequestClose={this.handleCloseModal}
                 >
-                    <div className={'success-modal'}>{modalHint}</div>
+                    <div className={'draw-modal'}>{modalHint}</div>
                 </Modal>
             </React.Fragment>
         );

@@ -254,9 +254,11 @@
                 letter-spacing: 0rem;
                 color: #0a0b0c;
 
+                overflow: hidden;
+                text-overflow: ellipsis;
                 display: -webkit-box;
                 -webkit-box-orient: vertical;
-                overflow: hidden;
+                -webkit-line-clamp: 2;
             }
 
             .course_teacher {
@@ -378,6 +380,8 @@
 .draw-modal {
     width: 5.6rem;
     height: 2.6rem;
+    padding: 0 .2rem;
+
     display: flex;
     justify-content: center;
     align-items: center;

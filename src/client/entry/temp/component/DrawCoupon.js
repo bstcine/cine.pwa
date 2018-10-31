@@ -331,7 +331,16 @@ export default class DrawCoupon extends Component {
                     </div>
                     <div className={'row_d'}>
                         <div className={'row_d_val'}>
-                            <div className={'title'}>快来帮好友一起抽!</div>
+                            <div className={'row_d_col_a'}>
+                                <div className={'bg'}>
+                                    <div>
+                                        {coupon_price >= max_price
+                                            ? '优惠总金额已达上限：'
+                                            : '优惠总金额累计已达到 '}{' '}
+                                        <span>{coupon_price}</span> 元
+                                    </div>
+                                </div>
+                            </div>
                             <img
                                 className={'fudai'}
                                 src={require('../asset/image/btn_fudai.png')}
@@ -341,14 +350,7 @@ export default class DrawCoupon extends Component {
                             />
                         </div>
                     </div>
-                    <div className={'row_e'}>
-                        <div>
-                            {coupon_price >= max_price
-                                ? '优惠总金额已达上限：'
-                                : '优惠总金额累计已达到 '}{' '}
-                            <span>{coupon_price}</span> 元
-                        </div>
-                    </div>
+
                     <div className={'row_f'}>活动说明</div>
                     <div className={'row_g'}>
                         <div>

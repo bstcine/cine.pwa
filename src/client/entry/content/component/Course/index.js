@@ -304,7 +304,7 @@ export default class Course extends Component {
                                             user.id
                                         }&course_id=${course.id}&activity_id=${
                                             course.activity_lottery.id
-                                        }`}
+                                        }&sitecode=${storeUtil.getSiteCode()}`}
                                         frameBorder="0"
                                         height="100%"
                                         scrolling="yes"

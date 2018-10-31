@@ -229,9 +229,9 @@ export default class DrawCoupon extends Component {
                     <div className={'line'} />
                     <div className={'row_c'}>
                         <div>
-                            好友帮你抽中<span id="friend_price">
+                            好友帮你抽中 <span id="friend_price">
                                 {friend_price}
-                            </span>元
+                            </span> 元
                         </div>
                         <img
                             src={require('../asset/image/btn_wechat.png')}

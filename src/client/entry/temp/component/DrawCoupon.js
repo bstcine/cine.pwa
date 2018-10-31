@@ -141,6 +141,7 @@ export default class DrawCoupon extends Component {
             this.state.stats_activity_course.id;
 
         let share_params = {
+            sharelog_id: '0',
             title: '我在参加善恩英语的双11优惠活动，快来帮我一起抽奖！',
             link: help_link,
             imgUrl: 'https://www.bstcine.com/f/' + course.img,
@@ -164,6 +165,19 @@ export default class DrawCoupon extends Component {
     };
 
     doToCourse = course_id => {
+        let link = `/content/course?cid=${course_id}`;
+
+        if (siteCodeUtil.inAPP()) {
+            Bridge.common(BRIDGE_EVENT.OPEN_BROWSER, {
+                url: link,
+                title: '课程详情',
+            });
+        } else {
+            location.href = link;
+        }
+    };
+
+    doToBuy = course_id => {
         if (siteCodeUtil.inAPP()) {
             Bridge.common(BRIDGE_EVENT.PRE_CONFIRM, {
                 course_id,
@@ -259,7 +273,7 @@ export default class DrawCoupon extends Component {
                         <img
                             src={require('../asset/image/btn_use.png')}
                             onClick={() => {
-                                this.doToCourse(course.id);
+                                this.doToBuy(course.id);
                             }}
                         />
                     </div>

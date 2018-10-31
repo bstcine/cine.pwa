@@ -21,6 +21,7 @@ import DetailDesc from './DetailDesc';
 import { fetchData } from '@/service/base';
 import { APIURL_Order_Create } from '@/../APIConfig';
 import { CDrawer, CMessage } from '@/component/_base';
+import QRCode from '@/component/QRCode';
 
 export default class Course extends Component {
     constructor(props) {
@@ -244,7 +245,22 @@ export default class Course extends Component {
             this.login();
             return;
         }
-        this.setState({ isOpenLottery: true });
+        if (siteCodeUtil.inAPP() || uaUtil.wechat()) {
+            this.setState({ isOpenLottery: true });
+        } else {
+            QRCode.open(this.getActUrl(true));
+        }
+    }
+
+    getActUrl(withHost) {
+        let { course, user } = this.state;
+        let host = withHost ? location.protocol + '//' + location.host : '';
+        return (
+            host +
+            `/temp/draw/coupon?user_id=${user.id}&course_id=${
+                course.id
+            }&activity_id=${course.activity_lottery.id}`
+        );
     }
 
     render() {
@@ -300,11 +316,7 @@ export default class Course extends Component {
                                 course &&
                                 course.activity_lottery && (
                                     <iframe
-                                        src={`/temp/draw/coupon?user_id=${
-                                            user.id
-                                        }&course_id=${course.id}&activity_id=${
-                                            course.activity_lottery.id
-                                        }`}
+                                        src={this.getActUrl()}
                                         frameBorder="0"
                                         height="100%"
                                         scrolling="yes"

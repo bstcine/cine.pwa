@@ -29,11 +29,18 @@ const customStyles = {
     },
 };
 
-const errMsg = {
-    activity_is_expire: '活动已经过期',
-    repeat_draw: '已抽过,邀请更多好友一起抽',
-    coupon_is_used: '优惠券已经被使用',
-    draw_max_coupon: '好友抽奖已经到达上限啦',
+const errMsgSelf = {
+    activity_is_expire: '活动已结束，感谢参与！',
+    repeat_draw: '已抽过，立即邀请更多好友一起抽！',
+    coupon_is_used: '您已使用过该优惠券！',
+    draw_max_coupon: '感谢您的参与，优惠总金额已达上限！',
+};
+
+const errMsgOther = {
+    activity_is_expire: '活动已结束，感谢参与！',
+    repeat_draw: '已抽过，感谢您的助力！',
+    coupon_is_used: '感谢您的助力，好友已成功购买！',
+    draw_max_coupon: '感谢您的助力，优惠总金额已达上限！',
 };
 
 export default class DrawCoupon extends Component {
@@ -46,22 +53,21 @@ export default class DrawCoupon extends Component {
             stats_activity_course: {},
             course: {},
             coupon: {},
-            draw: { price: 0, msg: null },
+            errMsg: null,
+            drawPrice: 0,
         };
     }
 
     async componentDidMount() {
         let param = getParam();
-        if (param.user_id) this.setState({ isSelf: true });
+        if (param.user_id) {
+            this.setState({ isSelf: true });
+            document.title = '善恩英语双11有奖戳戳戳';
+        } else {
+            document.title = '善恩英语双11有奖戳戳戳';
+        }
 
-        let [err, result] = await fetchData(
-            Api.APIURL_STATS_ACTIVITY_COURSE_INFO,
-            param
-        );
-
-        if (err) return alert(err);
-
-        this.setState(result);
+        await this.onLoadInfo();
 
         await initWechat();
     }
@@ -72,6 +78,17 @@ export default class DrawCoupon extends Component {
 
     handleCloseModal = () => {
         this.setState({ showModal: false });
+    };
+
+    onLoadInfo = async () => {
+        let param = getParam();
+        let [err, result] = await fetchData(
+            Api.APIURL_STATS_ACTIVITY_COURSE_INFO,
+            param
+        );
+
+        if (err) return alert(err);
+        this.setState(result);
     };
 
     onSubmit = async () => {
@@ -93,21 +110,22 @@ export default class DrawCoupon extends Component {
             data
         );
 
-        let msg = errMsg[err] || err;
-        if (!this.state.isSelf && err === 'repeat_draw')
-            msg = '你已帮好友抽过啦';
+        let errMsg;
+        if (this.state.isSelf) {
+            errMsg = errMsgSelf[err] || err;
+        } else {
+            errMsg = errMsgOther[err] || err;
+        }
+        let drawPrice = result && result.draw_price ? result.draw_price : 0;
 
-        this.setState({
-            draw: {
-                price: result && result.draw_price ? result.draw_price : 0,
-                msg,
-            },
-        });
+        this.setState({ drawPrice, errMsg });
 
         this.handleOpenModal();
+
+        await this.onLoadInfo();
     };
 
-    doShare = async () => {
+    doShare = course => {
         if (
             !(
                 this.state.stats_activity_course &&
@@ -123,14 +141,27 @@ export default class DrawCoupon extends Component {
             this.state.stats_activity_course.id;
 
         let share_params = {
-            title: '好友抽奖',
+            sharelog_id: '0',
+            title: '我在参加善恩英语的双11优惠活动，快来帮我一起抽奖！',
             link: help_link,
-            imgUrl: '',
-            desc: '好友抽奖',
+            imgUrl: 'https://www.bstcine.com/f/' + course.img,
+            desc: '我在参加善恩英语的双11优惠活动，快来帮我一起抽奖！',
         };
 
-        console.log(share_params);
-        await share({ share_params });
+        if (siteCodeUtil.inAPP()) {
+            Bridge.common(BRIDGE_EVENT.SHARE, share_params).then(res => {
+                alert(JSON.stringify(res));
+                if (res && res.shareSuccess === 1) {
+                    console.log('分享成功');
+                } else {
+                    console.log('分享已取消');
+                }
+            });
+        } else {
+            share({ share_params }).then(res => {
+                console.log(JSON.stringify(res));
+            });
+        }
     };
 
     doToCourse = course_id => {
@@ -146,6 +177,16 @@ export default class DrawCoupon extends Component {
         }
     };
 
+    doToBuy = course_id => {
+        if (siteCodeUtil.inAPP()) {
+            Bridge.common(BRIDGE_EVENT.PRE_CONFIRM, {
+                course_id,
+            });
+        } else {
+            location.href = `/pay/prepare?cid=${course_id}`;
+        }
+    };
+
     render() {
         const {
             showModal,
@@ -155,7 +196,8 @@ export default class DrawCoupon extends Component {
             course,
             coupon,
             user,
-            draw,
+            errMsg,
+            drawPrice,
         } = this.state;
 
         let max_price =
@@ -168,35 +210,19 @@ export default class DrawCoupon extends Component {
                 : 0;
         let friend_price = Number(coupon_price) - Number(draw_price);
 
-        let modalHint;
-        if (draw && draw.msg) {
-            modalHint = draw.msg;
-        } else {
-            if (isSelf) {
-                modalHint = (
-                    <div>
-                        恭喜你，已抽中{' '}
-                        <span className={'hint_draw'}>{draw.price}</span>{' '}
-                        元优惠券！
-                    </div>
-                );
+        let nickname;
+        if (user) {
+            if (user.nickname) {
+                nickname = user.nickname;
+            } else if (user.phone && user.phone.length === 11) {
+                nickname =
+                    user.phone.slice(0, 3) + '****' + user.phone.slice(7, 11);
             } else {
-                modalHint = (
-                    <div>
-                        恭喜您为好友{' '}
-                        <span className={'hint_nickname'}>
-                            {user && (user.nickname || user.login)}
-                        </span>{' '}
-                        抽中
-                        <div>
-                            <span className={'hint_price'}>{draw.price} </span>{' '}
-                            <span style={{ color: '#e23f30' }}>元</span>叠加优惠券！
-                        </div>
-                    </div>
-                );
+                nickname = '';
             }
         }
 
+        //正文
         let content;
         if (isSelf) {
             content = (
@@ -229,14 +255,13 @@ export default class DrawCoupon extends Component {
                     <div className={'line'} />
                     <div className={'row_c'}>
                         <div>
-                            好友帮你抽中 <span id="friend_price">
-                                {friend_price}
-                            </span> 元
+                            好友帮你抽中{' '}
+                            <span id="friend_price">{friend_price}</span> 元
                         </div>
                         <img
                             src={require('../asset/image/btn_wechat.png')}
                             onClick={() => {
-                                this.doShare();
+                                this.doShare(course);
                             }}
                         />
                     </div>
@@ -248,7 +273,7 @@ export default class DrawCoupon extends Component {
                         <img
                             src={require('../asset/image/btn_use.png')}
                             onClick={() => {
-                                this.doToCourse(course.id);
+                                this.doToBuy(course.id);
                             }}
                         />
                     </div>
@@ -284,8 +309,7 @@ export default class DrawCoupon extends Component {
                         />
                     </div>
                     <div className={'row_b'}>
-                        您的好友{' '}
-                        <span>{user && (user.nickname || user.login)}</span>{' '}
+                        您的好友 <span>{nickname}</span>{' '}
                         想要购买善恩的在线视频精读课程
                     </div>
                     <div
@@ -307,7 +331,16 @@ export default class DrawCoupon extends Component {
                     </div>
                     <div className={'row_d'}>
                         <div className={'row_d_val'}>
-                            <div className={'title'}>快来帮好友一起抽!</div>
+                            <div className={'row_d_col_a'}>
+                                <div className={'bg'}>
+                                    <div>
+                                        {coupon_price >= max_price
+                                            ? '优惠总金额已达上限：'
+                                            : '优惠总金额累计已达到 '}{' '}
+                                        <span>{coupon_price}</span> 元
+                                    </div>
+                                </div>
+                            </div>
                             <img
                                 className={'fudai'}
                                 src={require('../asset/image/btn_fudai.png')}
@@ -317,11 +350,7 @@ export default class DrawCoupon extends Component {
                             />
                         </div>
                     </div>
-                    <div className={'row_e'}>
-                        <div>
-                            优惠总金额累积已达到 <span>{coupon_price}</span> 元
-                        </div>
-                    </div>
+
                     <div className={'row_f'}>活动说明</div>
                     <div className={'row_g'}>
                         <div>
@@ -340,6 +369,33 @@ export default class DrawCoupon extends Component {
                     </div>
                 </div>
             );
+        }
+
+        //提示语
+        let modalHint;
+        if (errMsg) {
+            modalHint = errMsg;
+        } else {
+            if (isSelf) {
+                modalHint = (
+                    <div>
+                        恭喜您抽中{' '}
+                        <span className={'hint_draw'}>{drawPrice}</span>{' '}
+                        元视频课程专用优惠券！
+                    </div>
+                );
+            } else {
+                modalHint = (
+                    <div>
+                        恭喜您为好友{' '}
+                        <span className={'hint_nickname'}>{nickname}</span> 抽中
+                        <div>
+                            <span className={'hint_price'}>{drawPrice} </span>{' '}
+                            <span style={{ color: '#e23f30' }}>元</span>叠加优惠券！
+                        </div>
+                    </div>
+                );
+            }
         }
 
         return (

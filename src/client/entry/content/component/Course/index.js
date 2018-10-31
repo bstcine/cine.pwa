@@ -259,7 +259,7 @@ export default class Course extends Component {
             host +
             `/temp/draw/coupon?user_id=${user.id}&course_id=${
                 course.id
-            }&activity_id=${course.activity_lottery.id}`
+            }&activity_id=${course.activity_lottery.id}&allowopen=1`
         );
     }
 

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Api from '../../../../APIConfig';
 import { fetchData } from '@/service/base';
 import Modal from 'react-modal';
+import moment from 'moment';
 import { getParam } from '@/util/urlUtil';
 import '../asset/style/DrawCoupon.less';
 import { share } from '@/util/shareUtil';
@@ -32,6 +33,7 @@ const errMsg = {
     activity_is_expire: '活动已经过期',
     repeat_draw: '已抽过,邀请更多好友一起抽',
     coupon_is_used: '优惠券已经被使用',
+    draw_max_coupon: '好友抽奖已经到达上限啦',
 };
 
 export default class DrawCoupon extends Component {
@@ -149,6 +151,7 @@ export default class DrawCoupon extends Component {
             showModal,
             isSelf,
             stats_activity_course,
+            activity,
             course,
             coupon,
             user,
@@ -166,7 +169,6 @@ export default class DrawCoupon extends Component {
         let friend_price = Number(coupon_price) - Number(draw_price);
 
         let modalHint;
-
         if (draw && draw.msg) {
             modalHint = draw.msg;
         } else {
@@ -253,7 +255,17 @@ export default class DrawCoupon extends Component {
                     <div className={'line'} />
                     <div className={'row_e'}>活动说明</div>
                     <div className={'row_f'}>
-                        <div>1. 活动时间</div>
+                        <div>
+                            1. 活动时间：
+                            {activity &&
+                                moment(activity.effective_at).format(
+                                    'YYYY年MM月DD日'
+                                ) +
+                                    '——' +
+                                    moment(activity.expire_at).format(
+                                        'YYYY年MM月DD日'
+                                    )}
+                        </div>
                         <div>2. 抽到的金额存储在优惠券中</div>
                         <div>3. 活动解释权归善恩英语所有</div>
                     </div>
@@ -307,12 +319,22 @@ export default class DrawCoupon extends Component {
                     </div>
                     <div className={'row_e'}>
                         <div>
-                            优惠总金额累积已达到<span>{coupon_price}</span>元
+                            优惠总金额累积已达到 <span>{coupon_price}</span> 元
                         </div>
                     </div>
                     <div className={'row_f'}>活动说明</div>
                     <div className={'row_g'}>
-                        <div>1. 活动时间</div>
+                        <div>
+                            1. 活动时间：
+                            {activity &&
+                                moment(activity.effective_at).format(
+                                    'YYYY年MM月DD日'
+                                ) +
+                                    '——' +
+                                    moment(activity.expire_at).format(
+                                        'YYYY年MM月DD日'
+                                    )}
+                        </div>
                         <div>2. 抽到的金额存储在优惠券中</div>
                         <div>3. 活动解释权归善恩英语所有</div>
                     </div>

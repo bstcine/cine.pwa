@@ -59,6 +59,14 @@ export default class DrawCoupon extends Component {
     }
 
     async componentDidMount() {
+        let param = getParam();
+        if (param.user_id) {
+            this.setState({ isSelf: true });
+            document.title = '双十一活动';
+        } else {
+            document.title = '双十一活动-好友助力';
+        }
+
         await this.onLoadInfo();
 
         await initWechat();
@@ -74,8 +82,6 @@ export default class DrawCoupon extends Component {
 
     onLoadInfo = async () => {
         let param = getParam();
-        if (param.user_id) this.setState({ isSelf: true });
-
         let [err, result] = await fetchData(
             Api.APIURL_STATS_ACTIVITY_COURSE_INFO,
             param
@@ -181,6 +187,18 @@ export default class DrawCoupon extends Component {
                 : 0;
         let friend_price = Number(coupon_price) - Number(draw_price);
 
+        let nickname;
+        if (user) {
+            if (user.nickname) {
+                nickname = user.nickname;
+            } else if (user.phone && user.phone.length === 11) {
+                nickname =
+                    user.phone.slice(0, 3) + '****' + user.phone.slice(7, 11);
+            } else {
+                nickname = '';
+            }
+        }
+
         //正文
         let content;
         if (isSelf) {
@@ -268,8 +286,7 @@ export default class DrawCoupon extends Component {
                         />
                     </div>
                     <div className={'row_b'}>
-                        您的好友{' '}
-                        <span>{user && (user.nickname || user.login)}</span>{' '}
+                        您的好友 <span>{nickname}</span>{' '}
                         想要购买善恩的在线视频精读课程
                     </div>
                     <div
@@ -346,10 +363,7 @@ export default class DrawCoupon extends Component {
                 modalHint = (
                     <div>
                         恭喜您为好友{' '}
-                        <span className={'hint_nickname'}>
-                            {user && (user.nickname || user.login)}
-                        </span>{' '}
-                        抽中
+                        <span className={'hint_nickname'}>{nickname}</span> 抽中
                         <div>
                             <span className={'hint_price'}>{drawPrice} </span>{' '}
                             <span style={{ color: '#e23f30' }}>元</span>叠加优惠券！

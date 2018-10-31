@@ -240,6 +240,10 @@ export default class Course extends Component {
     }
 
     onClickLottery() {
+        if (!this.state.user) {
+            this.login();
+            return;
+        }
         this.setState({ isOpenLottery: true });
     }
 
@@ -292,13 +296,21 @@ export default class Course extends Component {
                                 });
                             }}
                         >
-                            <iframe
-                                src="/widget/card?allowopen=1"
-                                frameBorder="0"
-                                height="100%"
-                                scrolling="yes"
-                                width="100%"
-                            />
+                            {user &&
+                                course &&
+                                course.activity_lottery && (
+                                    <iframe
+                                        src={`/temp/draw/coupon?user_id=${
+                                            user.id
+                                        }&course_id=${course.id}&activity_id=${
+                                            course.activity_lottery.id
+                                        }`}
+                                        frameBorder="0"
+                                        height="100%"
+                                        scrolling="yes"
+                                        width="100%"
+                                    />
+                                )}
                         </CDrawer>
                     </div>
                 </div>

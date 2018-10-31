@@ -313,9 +313,14 @@ export default class Brief extends Component {
                         course.activity_lottery && (
                             <div className="right-desc">
                                 <div
-                                    className="get-coupon"
+                                    className="recommend"
                                     onClick={onClickLottery}
-                                />
+                                >
+                                    <div className="red-bag" />
+                                    <div className="desc">
+                                        抽取11.11<br />优惠券
+                                    </div>
+                                </div>
                             </div>
                         )}
                 </div>

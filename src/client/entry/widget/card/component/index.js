@@ -1,7 +1,7 @@
 import React from 'react';
 import './../../asset/style/card.less';
 import { CPanel } from '@/component/_base';
-import OrderList from './OrderList';
+import CardList from './CardList';
 
 export default class CardDemo extends React.PureComponent {
     render() {
@@ -11,15 +11,15 @@ export default class CardDemo extends React.PureComponent {
         return (
             <React.Fragment>
                 <CPanel title="核心课程">
-                    <OrderList
+                    <CardList
                         orders={orderlist}
-                        layout="234"
+                        layout="234C"
                         className="bgt"
                         itemClassName="bgt"
                     />
                 </CPanel>
                 <CPanel title="录课老师" className="bgdark">
-                    <OrderList
+                    <CardList
                         orders={orderlist}
                         layout="245"
                         className="bgt"
@@ -27,33 +27,21 @@ export default class CardDemo extends React.PureComponent {
                     />
                 </CPanel>
 
-                <OrderList
-                    orders={orderlist}
-                    layout="234"
-                    className="bg234"
-                    itemClassName="bgt"
-                />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <CPanel title="订单- 待付款" className="bgw" padding="none">
-                    <OrderList
+                <CPanel title="核心课程">
+                    <CardList
                         orders={orderlist}
-                        layout="111"
-                        className="bglight"
-                        itemClassName="bgw"
+                        layout="234"
+                        className="bgt"
+                        itemClassName="bgt"
                     />
                 </CPanel>
-
                 <br />
                 <br />
                 <br />
                 <br />
                 <br />
 
-                <OrderList
+                <CardList
                     orders={orderlist}
                     layout="112"
                     className="bg112"
@@ -65,9 +53,25 @@ export default class CardDemo extends React.PureComponent {
                 <br />
                 <br />
                 <br />
+                <CPanel title="订单- 待付款" className="bgw" padding="none">
+                    <CardList
+                        orders={orderlist}
+                        layout="111"
+                        className="bglight"
+                        itemClassName="bgw"
+                    />
+                </CPanel>
+
+  
+
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
 
                 <CPanel title="Gird Card 123" className="bgw">
-                    <OrderList
+                    <CardList
                         orders={orderlist}
                         layout="123"
                         className="bgt"

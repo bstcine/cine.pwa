@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Api from '../../../../APIConfig';
 import { fetchData } from '@/service/base';
 import Modal from 'react-modal';
+import moment from 'moment';
 import { getParam } from '@/util/urlUtil';
 import '../asset/style/DrawCoupon.less';
 import { share } from '@/util/shareUtil';
@@ -9,6 +10,8 @@ import siteCodeUtil from '@/util/sitecodeUtil';
 import Bridge from '@/util/bridge';
 import BRIDGE_EVENT from '@/constant/bridgeEvent';
 import { initWechat } from '@/util/wechatUtil';
+
+Modal.setAppElement('#root');
 
 const customStyles = {
     content: {
@@ -18,7 +21,7 @@ const customStyles = {
         bottom: 'auto',
         padding: '0',
         marginRight: '-50%',
-        background:'#ffffff',
+        background: '#ffffff',
         transform: 'translate(-50%, -50%)',
     },
     overlay: {
@@ -26,12 +29,11 @@ const customStyles = {
     },
 };
 
-Modal.setAppElement('#root');
-
 const errMsg = {
     activity_is_expire: '活动已经过期',
     repeat_draw: '已抽过,邀请更多好友一起抽',
     coupon_is_used: '优惠券已经被使用',
+    draw_max_coupon: '好友抽奖已经到达上限啦',
 };
 
 export default class DrawCoupon extends Component {
@@ -40,6 +42,7 @@ export default class DrawCoupon extends Component {
 
         this.state = {
             showModal: false,
+            isSelf: false,
             stats_activity_course: {},
             course: {},
             coupon: {},
@@ -49,6 +52,7 @@ export default class DrawCoupon extends Component {
 
     async componentDidMount() {
         let param = getParam();
+        if (param.user_id) this.setState({ isSelf: true });
 
         let [err, result] = await fetchData(
             Api.APIURL_STATS_ACTIVITY_COURSE_INFO,
@@ -89,10 +93,14 @@ export default class DrawCoupon extends Component {
             data
         );
 
+        let msg = errMsg[err] || err;
+        if (!this.state.isSelf && err === 'repeat_draw')
+            msg = '你已帮好友抽过啦';
+
         this.setState({
             draw: {
                 price: result && result.draw_price ? result.draw_price : 0,
-                msg: errMsg[err] || err,
+                msg,
             },
         });
 
@@ -141,9 +149,12 @@ export default class DrawCoupon extends Component {
     render() {
         const {
             showModal,
+            isSelf,
             stats_activity_course,
+            activity,
             course,
             coupon,
+            user,
             draw,
         } = this.state;
 
@@ -158,20 +169,38 @@ export default class DrawCoupon extends Component {
         let friend_price = Number(coupon_price) - Number(draw_price);
 
         let modalHint;
-
         if (draw && draw.msg) {
             modalHint = draw.msg;
         } else {
-            modalHint = (
-                <div>
-                    恭喜你，已抽中 <span>{draw.price}</span> 元优惠券！
-                </div>
-            );
+            if (isSelf) {
+                modalHint = (
+                    <div>
+                        恭喜你，已抽中{' '}
+                        <span className={'hint_draw'}>{draw.price}</span>{' '}
+                        元优惠券！
+                    </div>
+                );
+            } else {
+                modalHint = (
+                    <div>
+                        恭喜您为好友{' '}
+                        <span className={'hint_nickname'}>
+                            {user && (user.nickname || user.login)}
+                        </span>{' '}
+                        抽中
+                        <div>
+                            <span className={'hint_price'}>{draw.price} </span>{' '}
+                            <span style={{ color: '#e23f30' }}>元</span>叠加优惠券！
+                        </div>
+                    </div>
+                );
+            }
         }
 
-        return (
-            <React.Fragment>
-                <div className={'content'}>
+        let content;
+        if (isSelf) {
+            content = (
+                <div className={'content_self'}>
                     <div className={'row_a'}>
                         <div className={'row_a_val'}>
                             <img
@@ -200,9 +229,9 @@ export default class DrawCoupon extends Component {
                     <div className={'line'} />
                     <div className={'row_c'}>
                         <div>
-                            好友帮你抽中<span id="friend_price">
+                            好友帮你抽中 <span id="friend_price">
                                 {friend_price}
-                            </span>元
+                            </span> 元
                         </div>
                         <img
                             src={require('../asset/image/btn_wechat.png')}
@@ -226,13 +255,102 @@ export default class DrawCoupon extends Component {
                     <div className={'line'} />
                     <div className={'row_e'}>活动说明</div>
                     <div className={'row_f'}>
-                        <div>1. 活动时间</div>
+                        <div>
+                            1. 活动时间：
+                            {activity &&
+                                moment(activity.effective_at).format(
+                                    'YYYY年MM月DD日'
+                                ) +
+                                    '——' +
+                                    moment(activity.expire_at).format(
+                                        'YYYY年MM月DD日'
+                                    )}
+                        </div>
                         <div>2. 抽到的金额存储在优惠券中</div>
                         <div>3. 活动解释权归善恩英语所有</div>
                     </div>
                 </div>
-                <Modal isOpen={showModal} style={customStyles} onRequestClose={this.handleCloseModal}>
-                    <div className={'success-modal'}>{modalHint}</div>
+            );
+        } else {
+            content = (
+                <div className={'content_other'}>
+                    <div className={'fixed_a'}>
+                        <img src={require('../asset/image/bst_logo.png')} />
+                    </div>
+                    <div className={'row_a'}>
+                        <img
+                            className={'title'}
+                            src={require('../asset/image/wx_title.png')}
+                        />
+                    </div>
+                    <div className={'row_b'}>
+                        您的好友{' '}
+                        <span>{user && (user.nickname || user.login)}</span>{' '}
+                        想要购买善恩的在线视频精读课程
+                    </div>
+                    <div
+                        className={'row_c'}
+                        onClick={() => {
+                            this.doToCourse(course.id);
+                        }}
+                    >
+                        <img src={'https://www.bstcine.com/f/' + course.img} />
+                        <div className={'row_c_col_a'}>
+                            <div className={'course_name'}>{course.name}</div>
+                            <div className={'course_teacher'}>
+                                授课老师：{course.author}
+                            </div>
+                            <div className={'course_subtitle'}>
+                                {course.subtitle}
+                            </div>
+                        </div>
+                    </div>
+                    <div className={'row_d'}>
+                        <div className={'row_d_val'}>
+                            <div className={'title'}>快来帮好友一起抽!</div>
+                            <img
+                                className={'fudai'}
+                                src={require('../asset/image/btn_fudai.png')}
+                                onClick={async () => {
+                                    await this.onSubmit();
+                                }}
+                            />
+                        </div>
+                    </div>
+                    <div className={'row_e'}>
+                        <div>
+                            优惠总金额累积已达到 <span>{coupon_price}</span> 元
+                        </div>
+                    </div>
+                    <div className={'row_f'}>活动说明</div>
+                    <div className={'row_g'}>
+                        <div>
+                            1. 活动时间：
+                            {activity &&
+                                moment(activity.effective_at).format(
+                                    'YYYY年MM月DD日'
+                                ) +
+                                    '——' +
+                                    moment(activity.expire_at).format(
+                                        'YYYY年MM月DD日'
+                                    )}
+                        </div>
+                        <div>2. 抽到的金额存储在优惠券中</div>
+                        <div>3. 活动解释权归善恩英语所有</div>
+                    </div>
+                </div>
+            );
+        }
+
+        return (
+            <React.Fragment>
+                {content}
+                <Modal
+                    isOpen={showModal}
+                    style={customStyles}
+                    onRequestClose={this.handleCloseModal}
+                >
+                    <div className={'draw-modal'}>{modalHint}</div>
                 </Modal>
             </React.Fragment>
         );

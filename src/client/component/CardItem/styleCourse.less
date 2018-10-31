@@ -6,7 +6,7 @@
     padding: 0 0.04rem;
     transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
     border-radius: 0.06rem;
-/*     box-shadow: 0 0.1rem 0.06rem 0 rgba(219, 230, 240, 0.1); */
+    /*     box-shadow: 0 0.1rem 0.06rem 0 rgba(219, 230, 240, 0.1); */
 
     .course-img {
         padding-top: (9/16) * 100%;
@@ -15,26 +15,32 @@
     }
     .course-desc {
         padding: 0 0.1rem;
-        > * {
-            .text-one-line();
-        }
+        padding-top: 5px;
         .course-title {
-            font-size: 0.28rem;
-            line-height: 0.5rem;
-            color: #222;
+            .text-title();
         }
+        @media @media-up-xs {
+            .course-title {
+                font-size: 16px;
+                line-height: 20px;
+            }
+        }
+        /*      > * {
+            .text-one-line();
+        } */
         .course-author,
         .course-arrange {
             font-size: 0.22rem;
             height: 0.32rem;
             line-height: 0.32rem;
             color: #a0a4a7;
+            .text-one-line();
         }
 
         .course-price {
             font-size: 0.3rem;
             line-height: 0.6rem;
-            color: #f22010;
+            color: #f50;
             .old-price-text {
                 vertical-align: top;
                 padding-left: 0.22rem;

@@ -122,11 +122,11 @@ export default class DrawCoupon extends Component {
 
         let data = {};
         data.cid = stats_activity_course.id;
-        if(isSharePage){
-            if(!param.openid) return alert('not_weixin_openid');
+        if (isSharePage) {
+            if (!param.openid) return alert('not_weixin_openid');
             data.draw_user_openid = param.openid;
-        }else {
-            if(!param.user_id) return alert('not_user_id');
+        } else {
+            if (!param.user_id) return alert('not_user_id');
             data.draw_user_id = param.user_id;
         }
 
@@ -151,14 +151,9 @@ export default class DrawCoupon extends Component {
     };
 
     doShare = course => {
-        let {stats_activity_course} = this.state;
+        let { stats_activity_course } = this.state;
 
-        if (
-            !(
-                stats_activity_course &&
-                stats_activity_course.id
-            )
-        )
+        if (!(stats_activity_course && stats_activity_course.id))
             return alert('no_stats_activity_id');
 
         let help_link =

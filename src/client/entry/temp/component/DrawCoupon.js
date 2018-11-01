@@ -94,8 +94,8 @@ export default class DrawCoupon extends Component {
                 }
             } else {
                 alert('请在微信端访问');
-                location.href = '/';
-                // await this.onLoadInfo();
+                // location.href = '/';
+                await this.onLoadInfo();
             }
         } else {
             await this.onLoadInfo();

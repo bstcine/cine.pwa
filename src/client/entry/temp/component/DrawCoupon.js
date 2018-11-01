@@ -48,9 +48,22 @@ export default class DrawCoupon extends Component {
     constructor(props) {
         super(props);
 
+        let isSharePage = true;
+
+        let param = {};
+        let { user_id, course_id, activity_id } = this.props;
+        if (user_id && course_id && activity_id) {
+            isSharePage = false;
+            param = { user_id, course_id, activity_id };
+        } else {
+            param = getParam();
+            if (param.user_id) isSharePage = false;
+        }
+
         this.state = {
             showModal: false,
-            isSelf: false,
+            isSharePage,
+            param,
             stats_activity_course: {},
             course: {},
             coupon: {},
@@ -60,31 +73,26 @@ export default class DrawCoupon extends Component {
     }
 
     async componentDidMount() {
-        let param = getParam();
-        if (param.user_id) {
-            this.setState({ isSelf: true });
-            document.title = '善恩英语双11优惠券大派送！';
-        } else {
-            document.title = '善恩英语双11优惠券大派送！';
+        let { isSharePage, param } = this.state;
 
-            //获取微信openid
+        if (isSharePage) {
             if (uaUtil.wechat()) {
-                if (getParam().redirected !== '1') {
+                if (param.redirected !== '1') {
                     let url = addParam(location.href, { redirected: 1 });
                     location.href =
                         '//www.bstcine.com/wechat/authorize?redirect=' +
                         encodeURIComponent(url);
-                    return;
+                } else {
+                    await this.onLoadInfo();
                 }
             } else {
                 alert('请在微信端访问');
-                // location.href = '/';
+                location.href = '/';
+                // await this.onLoadInfo();
             }
+        } else {
+            await this.onLoadInfo();
         }
-
-        await this.onLoadInfo();
-
-        await initWechat();
     }
 
     handleOpenModal = () => {
@@ -96,32 +104,30 @@ export default class DrawCoupon extends Component {
     };
 
     onLoadInfo = async () => {
-        let param = getParam();
         let [err, result] = await fetchData(
             Api.APIURL_STATS_ACTIVITY_COURSE_INFO,
-            param
+            this.state.param
         );
 
         if (err) return alert(err);
         this.setState(result);
+        await initWechat();
     };
 
     onSubmit = async () => {
-        let { stats_activity_course, isSelf } = this.state;
+        let { isSharePage, stats_activity_course, param } = this.state;
 
         if (!(stats_activity_course && stats_activity_course.id))
-            return alert('no_param');
+            return alert('not_stats_activity_id');
 
         let data = {};
         data.cid = stats_activity_course.id;
-        let param = getParam();
-        if (param.user_id) {
-            data.draw_user_id = param.user_id;
-        } else if (param.openid) {
+        if(isSharePage){
+            if(!param.openid) return alert('not_weixin_openid');
             data.draw_user_openid = param.openid;
-        } else {
-            alert('draw_user_error');
-            return;
+        }else {
+            if(!param.user_id) return alert('not_user_id');
+            data.draw_user_id = param.user_id;
         }
 
         let [err, result] = await fetchData(
@@ -130,10 +136,10 @@ export default class DrawCoupon extends Component {
         );
 
         let errMsg;
-        if (isSelf) {
-            errMsg = errMsgSelf[err] || err;
-        } else {
+        if (isSharePage) {
             errMsg = errMsgOther[err] || err;
+        } else {
+            errMsg = errMsgSelf[err] || err;
         }
         let drawPrice = result && result.draw_price ? result.draw_price : 0;
 
@@ -145,10 +151,12 @@ export default class DrawCoupon extends Component {
     };
 
     doShare = course => {
+        let {stats_activity_course} = this.state;
+
         if (
             !(
-                this.state.stats_activity_course &&
-                this.state.stats_activity_course.id
+                stats_activity_course &&
+                stats_activity_course.id
             )
         )
             return alert('no_stats_activity_id');
@@ -157,7 +165,7 @@ export default class DrawCoupon extends Component {
             location.origin +
             location.pathname +
             '?stats_activity_id=' +
-            this.state.stats_activity_course.id;
+            stats_activity_course.id;
 
         let share_params = {
             sharelog_id: '0',
@@ -209,7 +217,7 @@ export default class DrawCoupon extends Component {
     render() {
         const {
             showModal,
-            isSelf,
+            isSharePage,
             stats_activity_course,
             activity,
             course,
@@ -243,7 +251,7 @@ export default class DrawCoupon extends Component {
 
         //正文
         let content;
-        if (isSelf) {
+        if (!isSharePage) {
             content = (
                 <div className={'content_self'}>
                     <div className={'row_a'}>
@@ -315,13 +323,13 @@ export default class DrawCoupon extends Component {
                         <div>4. 详情请扫描下列二维码联系小助手</div>
                         <div
                             style={{
-                                'margin': '.4rem .2rem',
-                                'text-align':'center',
+                                margin: '.4rem .2rem',
+                                textAlign: 'center',
                             }}
                         >
                             <img
                                 src={require('@/asset/image/qrcode_bst02.jpg')}
-                                style={{width:'2rem',height:'2rem'}}
+                                style={{ width: '2rem', height: '2rem' }}
                             />
                         </div>
                     </div>
@@ -368,7 +376,8 @@ export default class DrawCoupon extends Component {
                         <div className={'row_c_col_a'}>
                             <div className={'course_name'}>{course.name}</div>
                             <div className={'course_teacher'}>
-                                授课老师：{course.author}
+                                授课老师：
+                                {course.author}
                             </div>
                             <div className={'course_subtitle'}>
                                 {course.subtitle}
@@ -416,13 +425,13 @@ export default class DrawCoupon extends Component {
                         <div>4. 详情请扫描下列二维码联系小助手</div>
                         <div
                             style={{
-                                'margin': '.4rem .2rem',
-                                'text-align':'center',
+                                margin: '.4rem .2rem',
+                                textAlign: 'center',
                             }}
                         >
                             <img
                                 src={require('@/asset/image/qrcode_bst02.jpg')}
-                                style={{width:'2rem',height:'2rem'}}
+                                style={{ width: '2rem', height: '2rem' }}
                             />
                         </div>
                     </div>
@@ -450,7 +459,7 @@ export default class DrawCoupon extends Component {
         if (errMsg) {
             modalHint = errMsg;
         } else {
-            if (isSelf) {
+            if (!isSharePage) {
                 modalHint = (
                     <div>
                         恭喜您抽中{' '}
@@ -465,7 +474,8 @@ export default class DrawCoupon extends Component {
                         <span className={'hint_nickname'}>{nickname}</span> 抽中
                         <div>
                             <span className={'hint_price'}>{drawPrice} </span>{' '}
-                            <span style={{ color: '#e23f30' }}>元</span>叠加优惠券！
+                            <span style={{ color: '#e23f30' }}>元</span>
+                            叠加优惠券！
                         </div>
                     </div>
                 );

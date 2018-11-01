@@ -164,7 +164,11 @@ export default class DrawCoupon extends Component {
             return alert('no_stats_activity_id');
 
         let help_link =
-            '/temp/draw/coupon?stats_activity_id=' + stats_activity_course.id;
+            location.protocol +
+            '//' +
+            location.host +
+            '/temp/draw/coupon?stats_activity_id=' +
+            stats_activity_course.id;
 
         let share_params = {
             sharelog_id: '0',

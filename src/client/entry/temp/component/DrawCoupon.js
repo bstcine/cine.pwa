@@ -77,6 +77,8 @@ export default class DrawCoupon extends Component {
         this.doShare = this.doShare.bind(this);
         this.doToCourse = this.doToCourse.bind(this);
         this.doToBuy = this.doToBuy.bind(this);
+
+        document.title = '善恩英语双11优惠券大派送！';
     }
 
     async componentDidMount() {
@@ -387,6 +389,8 @@ export default class DrawCoupon extends Component {
                             </div>
                         </div>
                     </div>
+
+
                     <div className={'row_d'}>
                         <div className={'row_d_val'}>
                             <img

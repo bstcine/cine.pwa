@@ -63,9 +63,9 @@ export default class DrawCoupon extends Component {
         let param = getParam();
         if (param.user_id) {
             this.setState({ isSelf: true });
-            document.title = '善恩英语双11有奖戳戳戳';
+            document.title = '善恩英语双11优惠券大派送！';
         } else {
-            document.title = '善恩英语双11有奖戳戳戳';
+            document.title = '善恩英语双11优惠券大派送！';
 
             //获取微信openid
             if (uaUtil.wechat()) {

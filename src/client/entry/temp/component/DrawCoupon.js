@@ -27,7 +27,7 @@ const customStyles = {
     },
     overlay: {
         backgroundColor: 'rgba(0, 0, 0, 0.5)',
-        zIndex:1001,
+        zIndex: 1001,
     },
 };
 
@@ -164,10 +164,7 @@ export default class DrawCoupon extends Component {
             return alert('no_stats_activity_id');
 
         let help_link =
-            location.origin +
-            location.pathname +
-            '?stats_activity_id=' +
-            stats_activity_course.id;
+            '/temp/draw/coupon?stats_activity_id=' + stats_activity_course.id;
 
         let share_params = {
             sharelog_id: '0',

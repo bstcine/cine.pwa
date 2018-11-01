@@ -71,6 +71,12 @@ export default class DrawCoupon extends Component {
             errMsg: null,
             drawPrice: 0,
         };
+
+        this.onLoadInfo = this.onLoadInfo.bind(this);
+        this.onSubmit = this.onSubmit.bind(this);
+        this.doShare = this.doShare.bind(this);
+        this.doToCourse = this.doToCourse.bind(this);
+        this.doToBuy = this.doToBuy.bind(this);
     }
 
     async componentDidMount() {

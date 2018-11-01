@@ -3,13 +3,14 @@ import Api from '../../../../APIConfig';
 import { fetchData } from '@/service/base';
 import Modal from 'react-modal';
 import moment from 'moment';
-import { getParam } from '@/util/urlUtil';
+import { addParam, getParam } from '@/util/urlUtil';
 import '../asset/style/DrawCoupon.less';
 import { share } from '@/util/shareUtil';
 import siteCodeUtil from '@/util/sitecodeUtil';
 import Bridge from '@/util/bridge';
 import BRIDGE_EVENT from '@/constant/bridgeEvent';
 import { initWechat } from '@/util/wechatUtil';
+import uaUtil from '@/util/uaUtil';
 
 Modal.setAppElement('#root');
 
@@ -65,6 +66,20 @@ export default class DrawCoupon extends Component {
             document.title = '善恩英语双11有奖戳戳戳';
         } else {
             document.title = '善恩英语双11有奖戳戳戳';
+
+            //获取微信openid
+            if (uaUtil.wechat()) {
+                if (getParam().redirected !== '1') {
+                    let url = addParam(location.href, { redirected: 1 });
+                    location.href =
+                        '//www.bstcine.com/wechat/authorize?redirect=' +
+                        encodeURIComponent(url);
+                    return;
+                }
+            } else {
+                alert('请在微信端访问');
+                location.href = '/';
+            }
         }
 
         await this.onLoadInfo();
@@ -92,18 +107,22 @@ export default class DrawCoupon extends Component {
     };
 
     onSubmit = async () => {
-        if (
-            !(
-                this.state.stats_activity_course &&
-                this.state.stats_activity_course.id
-            )
-        )
+        let { stats_activity_course, isSelf } = this.state;
+
+        if (!(stats_activity_course && stats_activity_course.id))
             return alert('no_param');
 
         let data = {};
-        data.cid = this.state.stats_activity_course.id;
+        data.cid = stats_activity_course.id;
         let param = getParam();
-        if (param.user_id) data.draw_user_id = param.user_id;
+        if (param.user_id) {
+            data.draw_user_id = param.user_id;
+        } else if (param.openid) {
+            data.draw_user_openid = param.openid;
+        } else {
+            alert('draw_user_error');
+            return;
+        }
 
         let [err, result] = await fetchData(
             Api.APIURL_STATS_ACTIVITY_COURSE_UPDATE,
@@ -111,7 +130,7 @@ export default class DrawCoupon extends Component {
         );
 
         let errMsg;
-        if (this.state.isSelf) {
+        if (isSelf) {
             errMsg = errMsgSelf[err] || err;
         } else {
             errMsg = errMsgOther[err] || err;

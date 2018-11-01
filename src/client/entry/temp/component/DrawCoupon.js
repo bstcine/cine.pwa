@@ -315,7 +315,8 @@ export default class DrawCoupon extends Component {
                         <div>4. 详情请扫描下列二维码联系小助手</div>
                         <div
                             style={{
-                                'margin': '.2rem .2rem',
+                                'margin': '.4rem .2rem',
+                                'text-align':'center',
                             }}
                         >
                             <img
@@ -415,7 +416,8 @@ export default class DrawCoupon extends Component {
                         <div>4. 详情请扫描下列二维码联系小助手</div>
                         <div
                             style={{
-                                'margin': '.2rem .2rem',
+                                'margin': '.4rem .2rem',
+                                'text-align':'center',
                             }}
                         >
                             <img

@@ -298,19 +298,24 @@ export const wQuizAction = {
         let reducer = getState().WordQuizRedu;
         let param = reducer.get('param');
         if (param.lesson_id && param.lesson_id.indexOf('-') > 0) {
-            return null;
+            return;
+        }
+        if (param.word_type) {
+            param.status = status;
+            let wordTypeRes = await fetchData(Api.APIURL_User_Content_Course_UpdateStatus, param);
+            console.log('更新本章单词任务: ', wordTypeRes);
+            return
         }
         let taskStatus = reducer.get('taskStatus');
         if (taskStatus === '2') {
-            return null;
+            return;
         }
         param['task_status'] = status;
-        console.log('更新任务状态,', param);
-        let [error, result] = await fetchData(
+        let taskRes = await fetchData(
             Api.APIURL_User_Learn_UpdateTaskStatus,
             param
         );
-        console.log(error,result);
+        console.log('更新词汇任务: ', taskRes);
     },
     /**
      * 开始测试（对外调用）
@@ -335,8 +340,6 @@ export const wQuizAction = {
      * 测试未通过
      * */
     testWrong: () => async dispatch => {
-        // 更新测试状态为已完成
-        await dispatch(wQuizAction.updateTask('1'));
         // 上传错误信息
         await dispatch(wQuizAction.updateFailureWords());
         // 提示用户已完成全部测试（掌握全部单词）

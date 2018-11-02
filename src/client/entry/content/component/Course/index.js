@@ -22,7 +22,7 @@ import { fetchData } from '@/service/base';
 import { APIURL_Order_Create } from '@/../APIConfig';
 import { CDrawer, CMessage } from '@/component/_base';
 import QRCode from '@/component/QRCode';
-import DrawCoupon from '@/entry/temp/component/DrawCoupon';
+import LotteryCoupon from '@/entry/temp/component/DrawCoupon';
 
 export default class Course extends Component {
     constructor(props) {
@@ -316,7 +316,7 @@ export default class Course extends Component {
                             {user &&
                                 course &&
                                 course.activity_lottery && (
-                                    <DrawCoupon
+                                    <LotteryCoupon
                                         user_id={user.id}
                                         course_id={course.id}
                                         activity_id={course.activity_lottery.id}

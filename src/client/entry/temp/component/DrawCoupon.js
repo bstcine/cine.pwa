@@ -9,7 +9,7 @@ import { share } from '@/util/shareUtil';
 import siteCodeUtil from '@/util/sitecodeUtil';
 import Bridge from '@/util/bridge';
 import BRIDGE_EVENT from '@/constant/bridgeEvent';
-import { initWechat } from '@/util/wechatUtil';
+import { initWechat, setShareParam } from '@/util/wechatUtil';
 import uaUtil from '@/util/uaUtil';
 
 Modal.setAppElement('#root');
@@ -33,7 +33,7 @@ const customStyles = {
 
 const errMsgSelf = {
     activity_is_expire: '活动已结束，感谢参与！',
-    repeat_draw: '已抽过，立即邀请更多好友一起抽！',
+    repeat_draw: '已抽过，立即点击下方按钮，邀请更多好友一起帮你抽奖！',
     coupon_is_used: '您已使用过该优惠券！',
     draw_max_coupon: '感谢您的参与，优惠总金额已达上限！',
 };
@@ -106,6 +106,10 @@ export default class DrawCoupon extends Component {
 
     handleOpenModal = () => {
         this.setState({ showModal: true });
+
+        setTimeout(() => {
+            this.setState({ showModal: false });
+        }, 3000);
     };
 
     handleCloseModal = () => {
@@ -121,6 +125,23 @@ export default class DrawCoupon extends Component {
         if (err) return alert(err);
         this.setState(result);
         await initWechat();
+
+        let { isSharePage, stats_activity_course, course } = this.state;
+        if (isSharePage) {
+            let share_link =
+                location.protocol +
+                '//' +
+                location.host +
+                '/temp/draw/coupon?stats_activity_id=' +
+                stats_activity_course.id;
+            setShareParam({
+                sharelog_id: '-1',
+                title: '我正在参加善恩英语双11优惠券大派送活动！',
+                link: share_link,
+                imgUrl: 'https://www.bstcine.com/f/' + course.img,
+                desc: '快来帮我抽优惠券！',
+            });
+        }
     };
 
     onSubmit = async () => {
@@ -165,7 +186,7 @@ export default class DrawCoupon extends Component {
         if (!(stats_activity_course && stats_activity_course.id))
             return alert('no_stats_activity_id');
 
-        let help_link =
+        let share_link =
             location.protocol +
             '//' +
             location.host +
@@ -173,9 +194,9 @@ export default class DrawCoupon extends Component {
             stats_activity_course.id;
 
         let share_params = {
-            sharelog_id: '0',
+            sharelog_id: '-1',
             title: '我正在参加善恩英语双11优惠券大派送活动！',
-            link: help_link,
+            link: share_link,
             imgUrl: 'https://www.bstcine.com/f/' + course.img,
             desc: '快来帮我抽优惠券！',
         };
@@ -379,7 +400,6 @@ export default class DrawCoupon extends Component {
                         </div>
                     </div>
 
-
                     <div className={'row_d'}>
                         <div className={'row_d_val'}>
                             <img
@@ -478,13 +498,14 @@ export default class DrawCoupon extends Component {
             }
         }
 
+        if (!isSharePage) customStyles.content.top = '5.8rem';
+        
         return (
             <React.Fragment>
                 {content}
                 <Modal
                     isOpen={showModal}
                     style={customStyles}
-                    onRequestClose={this.handleCloseModal}
                 >
                     <div className={'draw-modal'}>{modalHint}</div>
                 </Modal>

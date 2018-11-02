@@ -34,6 +34,7 @@ export let createShare = async ({ type, share_link, cid, source_user_id }) => {
 };
 
 export let updateShare = sharelog_id => {
+    if (sharelog_id === '-1') return;
     return get(Api.APIURL_Share_Update, { sharelog_id }).then(res => {
         console.log(`updateShare ${JSON.stringify(res)}`);
         if (!res.status) {

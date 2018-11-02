@@ -243,14 +243,9 @@ export default class LotteryCoupon extends Component {
             drawPrice,
         } = this.state;
 
-        let max_price =
-            course && course.price ? Math.floor(Number(course.price) * 0.1) : 0;
-        let coupon_price =
-            coupon && coupon.value ? Math.floor(coupon.value) : 0;
-        let draw_price =
-            stats_activity_course && stats_activity_course.draw_price
-                ? Math.floor(stats_activity_course.draw_price)
-                : 0;
+        let max_price = course && course.max_draw_price ? course.max_draw_price : '0';
+        let coupon_price = coupon && coupon.value ? Math.floor(coupon.value) : 0;
+        let draw_price = stats_activity_course && stats_activity_course.draw_price ? stats_activity_course.draw_price : 0;
         let friend_price = Number(coupon_price) - Number(draw_price);
 
         let nickname;
@@ -482,6 +477,7 @@ export default class LotteryCoupon extends Component {
                         恭喜您抽中{' '}
                         <span className={'hint_draw'}>{drawPrice}</span>{' '}
                         元视频课程专用优惠券！
+                        <div>立即点击下方按钮，邀请更多好友一起帮你抽奖！</div>
                     </div>
                 );
             } else {

@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import classNames from 'classnames';
 import './style.less';
 import { componentNames } from '@/component/_base/config';
+import Mask from '@/component/_base/Mask';
 const cls = componentNames.Drawer;
 
 class Drawer extends PureComponent {
@@ -18,6 +19,7 @@ class Drawer extends PureComponent {
     UNSAFE_componentWillReceiveProps(nextProps) {
         if (!this.props.isOpen && nextProps.isOpen) {
             this.setState({ active: true }, () => {
+                this.fixedBody();
                 setTimeout(() => {
                     this.setState({
                         contentCls: `${cls}__content--enter-active`,
@@ -31,8 +33,22 @@ class Drawer extends PureComponent {
                 maskCls: '',
             });
             setTimeout(() => {
+                this.fixedBody();
                 this.setState({ active: false });
             }, 225);
+        }
+    }
+
+    fixedBody() {
+        let _body = document.body;
+        if (_body.style.position !== 'fixed') {
+            this.bodyScrollTop = window.scrollY;
+            _body.style.position = 'fixed';
+            _body.style.top = -this.bodyScrollTop + 'px';
+        } else {
+            _body.style.position = '';
+            _body.style.top = '';
+            window.scrollTo(0, this.bodyScrollTop);
         }
     }
 
@@ -54,7 +70,7 @@ class Drawer extends PureComponent {
                 })}
             >
                 {active && (
-                    <div
+                    <Mask
                         className={classNames(`${cls}__mask`, maskCls)}
                         onClick={onClose}
                     />

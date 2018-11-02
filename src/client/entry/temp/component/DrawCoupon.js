@@ -174,10 +174,10 @@ export default class DrawCoupon extends Component {
 
         let share_params = {
             sharelog_id: '0',
-            title: '我在参加善恩英语的双11优惠活动，快来帮我一起抽奖！',
+            title: '我正在参加善恩英语双11优惠券大派送活动！',
             link: help_link,
             imgUrl: 'https://www.bstcine.com/f/' + course.img,
-            desc: '我在参加善恩英语的双11优惠活动，快来帮我一起抽奖！',
+            desc: '快来帮我抽优惠券！',
         };
 
         if (siteCodeUtil.inAPP()) {

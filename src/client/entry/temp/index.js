@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import OrderCoupon from './component/OrderCoupon';
 import ReceiveCoupon from './component/ReceiveCoupon';
-import DrawCoupon from './component/DrawCoupon';
+import LotteryCoupon from './component/DrawCoupon';
 import Entry from '@/component/Entry';
 import CommonUtil from '@/util/common';
 import './asset/style/index.less';
@@ -34,7 +34,7 @@ class Temp extends Entry {
                     <Route
                         path="/temp/draw/coupon"
                         component={props => {
-                            return <DrawCoupon {...props} />;
+                            return <LotteryCoupon {...props} />;
                         }}
                     />
                 </Router>

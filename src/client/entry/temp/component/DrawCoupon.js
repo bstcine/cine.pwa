@@ -45,7 +45,7 @@ const errMsgOther = {
     draw_max_coupon: '感谢您的助力，优惠总金额已达上限！',
 };
 
-export default class DrawCoupon extends Component {
+export default class LotteryCoupon extends Component {
     constructor(props) {
         super(props);
 

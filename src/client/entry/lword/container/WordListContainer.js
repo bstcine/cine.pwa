@@ -8,8 +8,9 @@ import { getParam } from '@/util/urlUtil';
 
 class WordListContainer extends Component {
     playAudio = audioSrc => {
+        let prefix = this.param.word_type ? '' : 'http://oss.bstcine.com/word/top10000/';
         this.audioPlayer.src =
-            'http://oss.bstcine.com/word/top10000/' + audioSrc;
+            prefix + audioSrc;
         this.audioPlayer.play();
     };
 

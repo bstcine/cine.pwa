@@ -243,9 +243,14 @@ export default class LotteryCoupon extends Component {
             drawPrice,
         } = this.state;
 
-        let max_price = course && course.max_draw_price ? course.max_draw_price : '0';
-        let coupon_price = coupon && coupon.value ? Math.floor(coupon.value) : 0;
-        let draw_price = stats_activity_course && stats_activity_course.draw_price ? stats_activity_course.draw_price : 0;
+        let max_price =
+            course && course.max_draw_price ? course.max_draw_price : '0';
+        let coupon_price =
+            coupon && coupon.value ? Math.floor(coupon.value) : 0;
+        let draw_price =
+            stats_activity_course && stats_activity_course.draw_price
+                ? stats_activity_course.draw_price
+                : 0;
         let friend_price = Number(coupon_price) - Number(draw_price);
 
         let nickname;
@@ -474,10 +479,14 @@ export default class LotteryCoupon extends Component {
             if (!isSharePage) {
                 modalHint = (
                     <div>
-                        恭喜您抽中{' '}
-                        <span className={'hint_draw'}>{drawPrice}</span>{' '}
-                        元视频课程专用优惠券！
-                        <div>立即点击下方按钮，邀请更多好友一起帮你抽奖！</div>
+                        恭喜您!
+                        <div>
+                            抽中{' '}
+                            <span className={'hint_draw'}>{drawPrice}</span>{' '}
+                            元视频课程专用优惠券！
+                        </div>
+                        <div>立即点击下方按钮</div>
+                        <div>邀请更多好友一起帮你抽奖！</div>
                     </div>
                 );
             } else {
@@ -496,7 +505,7 @@ export default class LotteryCoupon extends Component {
         }
 
         if (!isSharePage) customStyles.content.top = '5.8rem';
-        
+
         return (
             <React.Fragment>
                 {content}

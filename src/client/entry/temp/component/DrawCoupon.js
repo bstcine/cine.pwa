@@ -107,7 +107,8 @@ export default class DrawCoupon extends Component {
     handleOpenModal = () => {
         this.setState({ showModal: true });
 
-        setTimeout(() => {
+        this.activeTimer && clearTimeout(this.activeTimer);
+        this.activeTimer = setTimeout(() => {
             this.setState({ showModal: false });
         }, 3000);
     };
@@ -506,6 +507,7 @@ export default class DrawCoupon extends Component {
                 <Modal
                     isOpen={showModal}
                     style={customStyles}
+                    onRequestClose={this.handleCloseModal}
                 >
                     <div className={'draw-modal'}>{modalHint}</div>
                 </Modal>

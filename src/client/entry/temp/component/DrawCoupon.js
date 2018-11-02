@@ -33,7 +33,7 @@ const customStyles = {
 
 const errMsgSelf = {
     activity_is_expire: '活动已结束，感谢参与！',
-    repeat_draw: '已抽过，立即邀请更多好友一起抽！',
+    repeat_draw: '已抽过，立即点击下方按钮，邀请更多好友一起帮你抽奖！',
     coupon_is_used: '您已使用过该优惠券！',
     draw_max_coupon: '感谢您的参与，优惠总金额已达上限！',
 };

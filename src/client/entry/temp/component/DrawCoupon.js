@@ -345,7 +345,7 @@ export default class LotteryCoupon extends Component {
                         >
                             <img
                                 src={require('@/asset/image/qrcode_bst02.jpg')}
-                                style={{ width: '2rem', height: '2rem' }}
+                                className={'qrcode_img'}
                             />
                         </div>
                     </div>

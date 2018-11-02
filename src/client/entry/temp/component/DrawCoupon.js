@@ -180,20 +180,9 @@ export default class DrawCoupon extends Component {
             desc: '快来帮我抽优惠券！',
         };
 
-        if (siteCodeUtil.inAPP()) {
-            Bridge.common(BRIDGE_EVENT.SHARE, share_params).then(res => {
-                alert(JSON.stringify(res));
-                if (res && res.shareSuccess === 1) {
-                    console.log('分享成功');
-                } else {
-                    console.log('分享已取消');
-                }
-            });
-        } else {
-            share({ share_params }).then(res => {
-                console.log(JSON.stringify(res));
-            });
-        }
+        share({ share_params }).then(res => {
+            console.log(res);
+        });
     };
 
     doToCourse = course_id => {

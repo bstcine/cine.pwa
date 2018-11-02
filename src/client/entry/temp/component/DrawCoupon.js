@@ -3,13 +3,14 @@ import Api from '../../../../APIConfig';
 import { fetchData } from '@/service/base';
 import Modal from 'react-modal';
 import moment from 'moment';
-import { getParam } from '@/util/urlUtil';
+import { addParam, getParam } from '@/util/urlUtil';
 import '../asset/style/DrawCoupon.less';
 import { share } from '@/util/shareUtil';
 import siteCodeUtil from '@/util/sitecodeUtil';
 import Bridge from '@/util/bridge';
 import BRIDGE_EVENT from '@/constant/bridgeEvent';
-import { initWechat } from '@/util/wechatUtil';
+import { initWechat, setShareParam } from '@/util/wechatUtil';
+import uaUtil from '@/util/uaUtil';
 
 Modal.setAppElement('#root');
 
@@ -26,12 +27,13 @@ const customStyles = {
     },
     overlay: {
         backgroundColor: 'rgba(0, 0, 0, 0.5)',
+        zIndex: 1001,
     },
 };
 
 const errMsgSelf = {
     activity_is_expire: '活动已结束，感谢参与！',
-    repeat_draw: '已抽过，立即邀请更多好友一起抽！',
+    repeat_draw: '已抽过，立即点击下方按钮，邀请更多好友一起帮你抽奖！',
     coupon_is_used: '您已使用过该优惠券！',
     draw_max_coupon: '感谢您的参与，优惠总金额已达上限！',
 };
@@ -43,37 +45,72 @@ const errMsgOther = {
     draw_max_coupon: '感谢您的助力，优惠总金额已达上限！',
 };
 
-export default class DrawCoupon extends Component {
+export default class LotteryCoupon extends Component {
     constructor(props) {
         super(props);
 
+        let isSharePage = true;
+
+        let param = {};
+        let { user_id, course_id, activity_id } = this.props;
+        if (user_id && course_id && activity_id) {
+            isSharePage = false;
+            param = { user_id, course_id, activity_id };
+        } else {
+            param = getParam();
+            if (param.user_id) isSharePage = false;
+        }
+
         this.state = {
             showModal: false,
-            isSelf: false,
+            isSharePage,
+            param,
             stats_activity_course: {},
             course: {},
             coupon: {},
             errMsg: null,
             drawPrice: 0,
         };
+
+        this.onLoadInfo = this.onLoadInfo.bind(this);
+        this.onSubmit = this.onSubmit.bind(this);
+        this.doShare = this.doShare.bind(this);
+        this.doToCourse = this.doToCourse.bind(this);
+        this.doToBuy = this.doToBuy.bind(this);
+
+        document.title = '善恩英语双11优惠券大派送！';
     }
 
     async componentDidMount() {
-        let param = getParam();
-        if (param.user_id) {
-            this.setState({ isSelf: true });
-            document.title = '善恩英语双11有奖戳戳戳';
+        let { isSharePage, param } = this.state;
+
+        if (isSharePage) {
+            if (uaUtil.wechat()) {
+                if (param.redirected !== '1') {
+                    let url = addParam(location.href, { redirected: 1 });
+                    location.href =
+                        '//www.bstcine.com/wechat/authorize?redirect=' +
+                        encodeURIComponent(url);
+                } else {
+                    await this.onLoadInfo();
+                }
+            } else {
+                alert('请在微信端访问');
+                location.href = '/';
+                // await this.onLoadInfo();
+            }
         } else {
-            document.title = '善恩英语双11有奖戳戳戳';
+            await this.onLoadInfo();
         }
-
-        await this.onLoadInfo();
-
-        await initWechat();
     }
 
     handleOpenModal = () => {
         this.setState({ showModal: true });
+
+        this.activeTimer && clearTimeout(this.activeTimer);
+        this.activeTimer = setTimeout(() => {
+            this.setState({ showModal: false });
+        }, 3000);
     };
 
     handleCloseModal = () => {
@@ -81,29 +118,48 @@ export default class DrawCoupon extends Component {
     };
 
     onLoadInfo = async () => {
-        let param = getParam();
         let [err, result] = await fetchData(
             Api.APIURL_STATS_ACTIVITY_COURSE_INFO,
-            param
+            this.state.param
         );
 
         if (err) return alert(err);
         this.setState(result);
+        await initWechat();
+
+        let { isSharePage, stats_activity_course, course } = this.state;
+        if (isSharePage) {
+            let share_link =
+                location.protocol +
+                '//' +
+                location.host +
+                '/temp/draw/coupon?stats_activity_id=' +
+                stats_activity_course.id;
+            setShareParam({
+                sharelog_id: '-1',
+                title: '我正在参加善恩英语双11优惠券大派送活动！',
+                link: share_link,
+                imgUrl: 'https://www.bstcine.com/f/' + course.img,
+                desc: '快来帮我抽优惠券！',
+            });
+        }
     };
 
     onSubmit = async () => {
-        if (
-            !(
-                this.state.stats_activity_course &&
-                this.state.stats_activity_course.id
-            )
-        )
-            return alert('no_param');
+        let { isSharePage, stats_activity_course, param } = this.state;
+
+        if (!(stats_activity_course && stats_activity_course.id))
+            return alert('not_stats_activity_id');
 
         let data = {};
-        data.cid = this.state.stats_activity_course.id;
-        let param = getParam();
-        if (param.user_id) data.draw_user_id = param.user_id;
+        data.cid = stats_activity_course.id;
+        if (isSharePage) {
+            if (!param.openid) return alert('not_weixin_openid');
+            data.draw_user_openid = param.openid;
+        } else {
+            if (!param.user_id) return alert('not_user_id');
+            data.draw_user_id = param.user_id;
+        }
 
         let [err, result] = await fetchData(
             Api.APIURL_STATS_ACTIVITY_COURSE_UPDATE,
@@ -111,10 +167,10 @@ export default class DrawCoupon extends Component {
         );
 
         let errMsg;
-        if (this.state.isSelf) {
-            errMsg = errMsgSelf[err] || err;
-        } else {
+        if (isSharePage) {
             errMsg = errMsgOther[err] || err;
+        } else {
+            errMsg = errMsgSelf[err] || err;
         }
         let drawPrice = result && result.draw_price ? result.draw_price : 0;
 
@@ -126,42 +182,29 @@ export default class DrawCoupon extends Component {
     };
 
     doShare = course => {
-        if (
-            !(
-                this.state.stats_activity_course &&
-                this.state.stats_activity_course.id
-            )
-        )
+        let { stats_activity_course } = this.state;
+
+        if (!(stats_activity_course && stats_activity_course.id))
             return alert('no_stats_activity_id');
 
-        let help_link =
-            location.origin +
-            location.pathname +
-            '?stats_activity_id=' +
-            this.state.stats_activity_course.id;
+        let share_link =
+            location.protocol +
+            '//' +
+            location.host +
+            '/temp/draw/coupon?stats_activity_id=' +
+            stats_activity_course.id;
 
         let share_params = {
-            sharelog_id: '0',
-            title: '我在参加善恩英语的双11优惠活动，快来帮我一起抽奖！',
-            link: help_link,
+            sharelog_id: '-1',
+            title: '我正在参加善恩英语双11优惠券大派送活动！',
+            link: share_link,
             imgUrl: 'https://www.bstcine.com/f/' + course.img,
-            desc: '我在参加善恩英语的双11优惠活动，快来帮我一起抽奖！',
+            desc: '快来帮我抽优惠券！',
         };
 
-        if (siteCodeUtil.inAPP()) {
-            Bridge.common(BRIDGE_EVENT.SHARE, share_params).then(res => {
-                alert(JSON.stringify(res));
-                if (res && res.shareSuccess === 1) {
-                    console.log('分享成功');
-                } else {
-                    console.log('分享已取消');
-                }
-            });
-        } else {
-            share({ share_params }).then(res => {
-                console.log(JSON.stringify(res));
-            });
-        }
+        share({ share_params }).then(res => {
+            console.log(res);
+        });
     };
 
     doToCourse = course_id => {
@@ -190,7 +233,7 @@ export default class DrawCoupon extends Component {
     render() {
         const {
             showModal,
-            isSelf,
+            isSharePage,
             stats_activity_course,
             activity,
             course,
@@ -224,7 +267,7 @@ export default class DrawCoupon extends Component {
 
         //正文
         let content;
-        if (isSelf) {
+        if (!isSharePage) {
             content = (
                 <div className={'content_self'}>
                     <div className={'row_a'}>
@@ -293,6 +336,33 @@ export default class DrawCoupon extends Component {
                         </div>
                         <div>2. 抽到的金额存储在优惠券中</div>
                         <div>3. 活动解释权归善恩英语所有</div>
+                        <div>4. 详情请扫描下列二维码联系小助手</div>
+                        <div
+                            style={{
+                                margin: '.4rem .2rem',
+                                textAlign: 'center',
+                            }}
+                        >
+                            <img
+                                src={require('@/asset/image/qrcode_bst02.jpg')}
+                                style={{ width: '2rem', height: '2rem' }}
+                            />
+                        </div>
+                    </div>
+                    <div className="copyright">
+                        <div className="co-name">
+                            善严教育科技(上海)有限公司
+                        </div>
+                        <div className="co-desc">
+                            <div className="co-desc-year">
+                                Copyright © 2014 - 2018{' '}
+                                <a href="//www.bstcine.com">BSTCINE</a>. All
+                                Rights Reserved.{' '}
+                            </div>
+                            <div className="co-desc-code">
+                                沪ICP备14053596号-1
+                            </div>
+                        </div>
                     </div>
                 </div>
             );
@@ -322,25 +392,17 @@ export default class DrawCoupon extends Component {
                         <div className={'row_c_col_a'}>
                             <div className={'course_name'}>{course.name}</div>
                             <div className={'course_teacher'}>
-                                授课老师：{course.author}
+                                授课老师：
+                                {course.author}
                             </div>
                             <div className={'course_subtitle'}>
                                 {course.subtitle}
                             </div>
                         </div>
                     </div>
+
                     <div className={'row_d'}>
                         <div className={'row_d_val'}>
-                            <div className={'row_d_col_a'}>
-                                <div className={'bg'}>
-                                    <div>
-                                        {coupon_price >= max_price
-                                            ? '优惠总金额已达上限：'
-                                            : '优惠总金额累计已达到 '}{' '}
-                                        <span>{coupon_price}</span> 元
-                                    </div>
-                                </div>
-                            </div>
                             <img
                                 className={'fudai'}
                                 src={require('../asset/image/btn_fudai.png')}
@@ -350,7 +412,18 @@ export default class DrawCoupon extends Component {
                             />
                         </div>
                     </div>
-
+                    <div className={'row_e'}>
+                        <div className={'row_e_val'}>
+                            <div className={'bg'}>
+                                <div>
+                                    {coupon_price >= max_price
+                                        ? '优惠总金额已达上限：'
+                                        : '优惠总金额累计已达到 '}{' '}
+                                    <span>{coupon_price}</span> 元
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div className={'row_f'}>活动说明</div>
                     <div className={'row_g'}>
                         <div>
@@ -366,6 +439,33 @@ export default class DrawCoupon extends Component {
                         </div>
                         <div>2. 抽到的金额存储在优惠券中</div>
                         <div>3. 活动解释权归善恩英语所有</div>
+                        <div>4. 详情请扫描下列二维码联系小助手</div>
+                        <div
+                            style={{
+                                margin: '.4rem .2rem',
+                                textAlign: 'center',
+                            }}
+                        >
+                            <img
+                                src={require('@/asset/image/qrcode_bst02.jpg')}
+                                style={{ width: '2rem', height: '2rem' }}
+                            />
+                        </div>
+                    </div>
+                    <div className="copyright">
+                        <div className="co-name">
+                            善严教育科技(上海)有限公司
+                        </div>
+                        <div className="co-desc">
+                            <div className="co-desc-year">
+                                Copyright © 2014 - 2018{' '}
+                                <a href="//www.bstcine.com">BSTCINE</a>. All
+                                Rights Reserved.{' '}
+                            </div>
+                            <div className="co-desc-code">
+                                沪ICP备14053596号-1
+                            </div>
+                        </div>
                     </div>
                 </div>
             );
@@ -376,7 +476,7 @@ export default class DrawCoupon extends Component {
         if (errMsg) {
             modalHint = errMsg;
         } else {
-            if (isSelf) {
+            if (!isSharePage) {
                 modalHint = (
                     <div>
                         恭喜您抽中{' '}
@@ -391,13 +491,16 @@ export default class DrawCoupon extends Component {
                         <span className={'hint_nickname'}>{nickname}</span> 抽中
                         <div>
                             <span className={'hint_price'}>{drawPrice} </span>{' '}
-                            <span style={{ color: '#e23f30' }}>元</span>叠加优惠券！
+                            <span style={{ color: '#e23f30' }}>元</span>
+                            叠加优惠券！
                         </div>
                     </div>
                 );
             }
         }
 
+        if (!isSharePage) customStyles.content.top = '5.8rem';
+        
         return (
             <React.Fragment>
                 {content}

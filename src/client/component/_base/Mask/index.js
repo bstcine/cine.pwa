@@ -4,9 +4,14 @@ import React from 'react';
 import { componentNames } from '@/component/_base/config';
 const cls = componentNames.Mask;
 
-const Mask = ({ transparent }) => (
+const Mask = ({ transparent, className, onClick }) => (
     <div
-        className={classNames(cls, { [`${cls}--transparent`]: transparent })}
+        className={classNames(
+            cls,
+            { [`${cls}--transparent`]: transparent },
+            className
+        )}
+        onClick={onClick}
     />
 );
 

@@ -498,7 +498,7 @@ export default class DrawCoupon extends Component {
             }
         }
 
-        if (!isSharePage) customStyles.content.top = '5.2rem';
+        if (!isSharePage) customStyles.content.top = '5.8rem';
         
         return (
             <React.Fragment>

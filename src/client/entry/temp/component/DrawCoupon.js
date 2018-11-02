@@ -128,7 +128,7 @@ export default class LotteryCoupon extends Component {
         await initWechat();
 
         let { isSharePage, stats_activity_course, course } = this.state;
-        if (isSharePage) {
+        if (isSharePage || (!isSharePage && location.pathname === '/temp/draw/coupon')) {
             let share_link =
                 location.protocol +
                 '//' +
@@ -324,19 +324,31 @@ export default class LotteryCoupon extends Component {
                     <div className={'row_e'}>活动说明</div>
                     <div className={'row_f'}>
                         <div>
-                            1. 活动时间：
+                            1. 抽奖活动日期：
                             {activity &&
                                 moment(activity.effective_at).format(
-                                    'YYYY年MM月DD日'
+                                    'YYYY-MM-DD'
                                 ) +
-                                    '——' +
+                                    '至' +
                                     moment(activity.expire_at).format(
-                                        'YYYY年MM月DD日'
+                                        'YYYY-MM-DD'
                                     )}
                         </div>
-                        <div>2. 抽到的金额存储在优惠券中</div>
-                        <div>3. 活动解释权归善恩英语所有</div>
-                        <div>4. 详情请扫描下列二维码联系小助手</div>
+                        <div>2. 优惠券有效期：抽奖之日起至2018-11-13</div>
+                        <div>
+                            3.
+                            优惠券适用范围：本优惠券为单门视频课程专享优惠券，仅可用于购买善恩英语
+                            {course.name}
+                        </div>
+                        <div>
+                            4.
+                            优惠券查询：登录善恩官网或APP，找到“我的优惠券”可查看优惠券累计金额
+                        </div>
+                        <div>
+                            5.
+                            活动及课程咨询请扫描下方二维码联系善恩小助手（微信：BSTCINE02）
+                        </div>
+                        <div>6. 活动最终解释权归善恩英语所有</div>
                         <div
                             style={{
                                 margin: '.4rem .2rem',
@@ -427,19 +439,31 @@ export default class LotteryCoupon extends Component {
                     <div className={'row_f'}>活动说明</div>
                     <div className={'row_g'}>
                         <div>
-                            1. 活动时间：
+                            1. 抽奖活动日期：
                             {activity &&
-                                moment(activity.effective_at).format(
-                                    'YYYY年MM月DD日'
-                                ) +
-                                    '——' +
-                                    moment(activity.expire_at).format(
-                                        'YYYY年MM月DD日'
-                                    )}
+                            moment(activity.effective_at).format(
+                                'YYYY-MM-DD'
+                            ) +
+                            '至' +
+                            moment(activity.expire_at).format(
+                                'YYYY-MM-DD'
+                            )}
                         </div>
-                        <div>2. 抽到的金额存储在优惠券中</div>
-                        <div>3. 活动解释权归善恩英语所有</div>
-                        <div>4. 详情请扫描下列二维码联系小助手</div>
+                        <div>2. 优惠券有效期：抽奖之日起至2018-11-13</div>
+                        <div>
+                            3.
+                            优惠券适用范围：本优惠券为单门视频课程专享优惠券，仅可用于购买善恩英语
+                            {course.name}
+                        </div>
+                        <div>
+                            4.
+                            优惠券查询：登录善恩官网或APP，找到“我的优惠券”可查看优惠券累计金额
+                        </div>
+                        <div>
+                            5.
+                            活动及课程咨询请扫描下方二维码联系善恩小助手（微信：BSTCINE02）
+                        </div>
+                        <div>6. 活动最终解释权归善恩英语所有</div>
                         <div
                             style={{
                                 margin: '.4rem .2rem',

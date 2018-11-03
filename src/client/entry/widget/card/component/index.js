@@ -27,7 +27,7 @@ export default class CardDemo extends React.PureComponent {
                     />
                 </CPanel>
 
-                <CPanel title="核心课程">
+                <CPanel title="AIRBNB">
                     <CardList
                         orders={orderlist}
                         layout="234"

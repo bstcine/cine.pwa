@@ -32,6 +32,9 @@ const uaUtil = {
     wechat: function() {
         return /micromessenger/i.test(uaUtil.getUserAgent());
     },
+    wechatMobile: function() {
+        return /micromessenger/i.test(uaUtil.getUserAgent()) && uaUtil.mobile();
+    },
     PC: function() {
         return !/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
             navigator.userAgent

@@ -246,7 +246,7 @@ export default class Course extends Component {
             this.login();
             return;
         }
-        if (siteCodeUtil.inAPP() || uaUtil.wechat()) {
+        if (siteCodeUtil.inAPP() || uaUtil.wechatMobile()) {
             this.setState({ isOpenLottery: true });
         } else {
             QRCode.open(this.getActUrl(true));

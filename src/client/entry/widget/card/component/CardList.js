@@ -15,9 +15,13 @@ const CItem = ({ value, layout, className, actions }) => {
             item = <CardItem111 value={value} actions={actions} />;
             hover = 'lighten';
             break;
-        case '112':
+        case '122':
             item = <CardItem112 value={value} actions={actions} />;
             hover = 'darken';
+            break;
+        case '112':
+            item = <CardItem value={value} css="lnr" actions={actions} />;
+            hover = 'shadow';
             break;
         case '123':
             item = <CardItem value={value} actions={actions} />;

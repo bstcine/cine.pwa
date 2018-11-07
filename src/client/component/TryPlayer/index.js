@@ -31,9 +31,9 @@ class TryPlayer extends Component {
     }
 
     shouldComponentUpdate(nextProps, nextState) {
-        if (this.props.playList !== nextProps.playList) {
-            return true;
-        }
+        // if (this.props.playList !== nextProps.playList) {
+        //     return true;
+        // }
         if (this.props.poster !== nextProps.poster) {
             return true;
         }

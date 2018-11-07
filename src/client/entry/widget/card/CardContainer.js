@@ -10,12 +10,14 @@ class OrderContainer extends Component {
     }
 
     render() {
-        let { orders, isOpenDetail, actions } = this.props;
+        let { orders, courses, teachers, isOpenDetail, actions } = this.props;
         return (
             <React.Fragment>
                 <CardDemo
                     isOpenDetail={isOpenDetail}
                     orders={orders}
+                    courses={courses}
+                    teachers={teachers}
                     actions={actions}
                 />
             </React.Fragment>
@@ -25,7 +27,9 @@ class OrderContainer extends Component {
 
 const mapStateToProps = state => {
     return {
-        orders: state.cardRedu.get('orders'),
+        orders: state.cardRedu.get('order'),
+        courses: state.cardRedu.get('course'),
+        teachers: state.cardRedu.get('teacher'),
         isOpenAdd: state.cardRedu.get('isOpenDetail'),
     };
 };

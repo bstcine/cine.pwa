@@ -29,40 +29,40 @@ import './styleCourse.less';
 
 export default class CardCourse extends Component {
     displayPrice(course) {
-        if (course.status & course.status === '2') {
+        if (course.status & (course.status === '2')) {
             return <div className="course-title joy-soon">待推出</div>;
         } else {
-          /*   if (isNaN(course.price)) {
+            /*   if (isNaN(course.price)) {
                 return <div className="course-price">{course.price}</div>;
             } else { */
-                if (course.original_price) {
-                    return (
-                        <div className="course-price">
-                            {/*  {CommonUtil.getCurrencySymbol(course.currency)} */}
-                            {course.price}
-                            <span className="old-price-text">原价</span>
-                            <span className="old-price">
-                                {/*   {CommonUtil.getCurrencySymbol(course.currency)} */}
-                                {course.original_price}
-                            </span>
-                        </div>
-                    );
-                } else {
-                    return (
-                        <div className="course-price">
-                            {/*  {CommonUtil.getCurrencySymbol(course.currency)} */}
-                            {course.price}
-                        </div>
-                    );
-                }
-           /*  } */
+            if (course.original_price) {
+                return (
+                    <div className="course-price">
+                        {/*  {CommonUtil.getCurrencySymbol(course.currency)} */}
+                        {course.price}
+                        <span className="old-price-text">原价</span>
+                        <span className="old-price">
+                            {/*   {CommonUtil.getCurrencySymbol(course.currency)} */}
+                            {course.original_price}
+                        </span>
+                    </div>
+                );
+            } else {
+                return (
+                    <div className="course-price">
+                        {/*  {CommonUtil.getCurrencySymbol(course.currency)} */}
+                        {course.price}
+                    </div>
+                );
+            }
+            /*  } */
         }
     }
 
     renderAuthor(course) {
         return (
             <div className="course-author">
-                {course.sub_title ? `授课老师：${course.sub_title}` : ''}
+                {course.author ? `授课老师：${course.author}` : ''}
             </div>
         );
     }
@@ -70,29 +70,28 @@ export default class CardCourse extends Component {
     renderTimeArrange(course) {
         return (
             <div className="course-arrange">
-                {course.favorite ? `学习课时：${course.favorite}` : ''}
+                {course.time_arrange ? `学习课时：${course.time_arrange}` : ''}
             </div>
         );
     }
 
     render() {
         const { course, style, actions } = this.props;
-
+        // alert(JSON.stringify(course))
+        const url = `//www.bstcine.com/f/${course.img}`;
         return (
             <div className="cardCourse">
                 <LazyLoad offset={100} height={200}>
                     <div
                         className="course-img"
                         style={{
-                            background: `url(${
-                                course.cover
-                            }) center center / cover no-repeat`,
+                            background: `url(${url}) center center / cover no-repeat`,
                         }}
                     />
                 </LazyLoad>
 
                 <div className="course-desc">
-                    <div className="course-title">{course.title}</div>
+                    <div className="course-title">{course.name}</div>
                     {this.renderAuthor(course)}
                     {this.renderTimeArrange(course)}
                     {this.displayPrice(course)}

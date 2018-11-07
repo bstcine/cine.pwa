@@ -2,7 +2,7 @@ import React from 'react';
 import './styleTeacher.less';
 
 export const CardTeacher = ({ value, style, actions }) => {
-    const imgBG = `url(${value.cover}) center center / cover no-repeat`;
+    const imgBG = `url(${value.head_img}) center center / cover no-repeat`;
     const href = value.link ? value.link : '/experiences';
     return (
         <React.Fragment>
@@ -17,8 +17,8 @@ export const CardTeacher = ({ value, style, actions }) => {
                 </div>
 
                 <div className="text-c">
-                    <div className="title">{value.price}</div>
-                    <div className="desc">{value.title}</div>
+                    <div className="title">{value.name_en}</div>
+                    <div className="desc">{value.brief}</div>
                 </div>
             </div>
         </React.Fragment>

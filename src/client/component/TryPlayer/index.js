@@ -40,9 +40,9 @@ class TryPlayer extends Component {
         // if (this.props.pause) {
         //     return true;
         // }
-        // if (this.state.medias !== nextState.medias) {
-        //     return true;
-        // }
+        if (this.state.medias !== nextState.medias) {
+            return true;
+        }
         return false;
     }
 

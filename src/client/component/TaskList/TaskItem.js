@@ -79,7 +79,7 @@ const onClick = (task, isMentor) => {
                     console.log(res);
                 });
             } else if (task.type === Task_Type.Quiz_PDF) {
-                alert('请登录网址：www.bstcine.com下载');
+                alert('请登录网址：www.bstcine.com 下载对应习题');
             } else {
                 Bridge.common(BRIDGE_EVENT.OPEN_BROWSER, {
                     url: tempHref,

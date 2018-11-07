@@ -347,8 +347,7 @@ export const wCardAction = {
             voice_url = voice_url_a;
         }
         let player = reducer.get('player');
-        let prefix = this.param.word_type ? '' : 'http://oss.bstcine.com/word/top10000/';
-        player.src = prefix + voice_url;
+        player.src = 'http://oss.bstcine.com/word/top10000/' + voice_url;
         player.play();
     },
 };

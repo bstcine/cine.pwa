@@ -30,11 +30,11 @@ import './styleCourse.less';
 export default class CardCourse extends Component {
     displayPrice(course) {
         if (course.status & course.status === '2') {
-            return <div className="coming-soon">待推出</div>;
+            return <div className="course-title joy-soon">待推出</div>;
         } else {
-            if (isNaN(course.price)) {
+          /*   if (isNaN(course.price)) {
                 return <div className="course-price">{course.price}</div>;
-            } else {
+            } else { */
                 if (course.original_price) {
                     return (
                         <div className="course-price">
@@ -55,7 +55,7 @@ export default class CardCourse extends Component {
                         </div>
                     );
                 }
-            }
+           /*  } */
         }
     }
 

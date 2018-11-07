@@ -25,13 +25,16 @@
 
         .title {
             .text-title();
-            margin-bottom: 10px;
         }
         @media @media-up-xs {
             .title {
                 font-size: 16px;
                 line-height: 20px;
             }
+        }
+
+        .title-space {
+            margin-bottom:10px;
         }
 
         .subTitle {
@@ -112,6 +115,42 @@
                     line-height: 16px !important;
                 }
             }
+        }
+    }
+}
+
+.cardItemLNR {
+    display: flex;
+    flex-direction: row;
+    padding: 8px;
+
+    .item-left {
+        width: 40%;
+        padding-right: 6px;
+        padding-bottom: 0px;
+    }
+    @media @media-up-xs {
+        .item-left {
+            width: 25%;
+        }
+    }
+
+    @media @media-up-sm {
+        .item-left {
+            width: 40%;
+        }
+    }
+
+    .item-right {
+        padding-top: 0px;
+    }
+
+    .img-cl {
+        display: block;
+        flex-shrink: 0;
+        flex-grow: 0;
+        .img {
+            padding-top: (9/16) * 100%;
         }
     }
 }

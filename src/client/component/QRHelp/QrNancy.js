@@ -27,7 +27,7 @@ class QrNancy extends Component {
                     <div className={`${cls}__content`}>
                         <p>微信“扫一扫”, 联系Nancy老师</p>
                         <div className={`${cls}__wechat`}>
-                            (微信号：WEINANQIU)
+                            (微信号：WELNANQLU)
                         </div>
                         <img src={url} alt="qrcode" className={`${cls}__img`} />
                     </div>

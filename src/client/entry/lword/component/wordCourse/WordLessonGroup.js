@@ -56,7 +56,6 @@ class WordLessonG extends React.Component {
                 return (
                     <CCard
                         key={i}
-                        hover="lighten"
                         onClick={() => this.onClick(wordLesson)}
                     >
                         <WordLessonItem item={wordLesson} />

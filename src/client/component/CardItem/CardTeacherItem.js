@@ -5,8 +5,9 @@ import './styleTeacher.less';
 export const CardTeacher = ({ value, hover, actions }) => {
     const imgBG = `url(${value.head_img}) center center / cover no-repeat`;
     const href = value.link ? value.link : `//www.bstcine.com/teacher/${value.user_id}`;
+    // alert(hover)
     return (
-        <CCard hover={hover}>
+        <CCard>
             <div className="cardTeacher">
                 <div className="img-c">
                     <a href={href} target="_blank">

@@ -52,13 +52,13 @@
     cursor: pointer;
 }
 
-.@{card}--hoverable .@{card}__content--lighten {
+.@{card}--hoverable .@{card}__content--opacity {
     &:hover {
-        opacity: 0.8;
+        opacity: 0.7;
     }
 }
 
-.@{card}--hoverable .@{card}__content--shadow {
+.@{card}--hoverable .@{card}__content--lighten {
     &:hover {
         box-shadow: 0 0.08rem 0.16rem 0 rgba(0, 0, 0, 0.15);
     }
@@ -73,7 +73,7 @@
 
 .@{card}--hoverable .@{card}__content--outlined {
     &:hover {
-        border: 0.02rem solid @btn-color-primary;
+        border: 0.02rem solid @theme-palette-primary-light;
     }
 }
 

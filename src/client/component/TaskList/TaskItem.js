@@ -98,7 +98,6 @@ const TaskItem = ({ task, isMentor }) => {
     return (
         <CCard
             key={task.id}
-            hover="lighten"
             className="task-item"
             onClick={() => onClick(task)}
         >

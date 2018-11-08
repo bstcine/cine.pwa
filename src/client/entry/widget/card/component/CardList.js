@@ -4,36 +4,32 @@ import { CardItem, CardTeacher, CardCourse } from '@/component/CardItem';
 import { CardItem111 } from './CardItem';
 
 const CItem = ({ value, layout, className, actions }) => {
-    // 'none' | 'shadow' | 'darken'| 'lighten' | 'outlined'
+    // 'none' | 'darken'| 'lighten' | 'outlined'
     let item = <CardItem value={value} hover="darken" actions={actions} />;
     switch (layout) {
         case '234C':
             item = (
-                <CardCourse course={value} hover="darken" actions={actions} />
+                <CardCourse course={value} hover="lighten" actions={actions} />
             );
             break;
         case '111':
-            item = (
-                <CardItem111 value={value} hover="lighten" actions={actions} />
-            );
+            item = <CardItem111 value={value} actions={actions} />;
             break;
         case '112':
             item = (
                 <CardItem
                     value={value}
                     layout="112"
-                    hover="shadow"
+                    hover="darken"
                     actions={actions}
                 />
             );
             break;
         case '123':
-            item = <CardItem value={value} hover="shadow" actions={actions} />;
+            item = <CardItem value={value} actions={actions} />;
             break;
         case '245':
-            item = (
-                <CardTeacher value={value} hover="darken" actions={actions} />
-            );
+            item = <CardTeacher value={value} actions={actions} />;
             break;
     }
 
@@ -43,7 +39,6 @@ const CItem = ({ value, layout, className, actions }) => {
 const CardList = ({ orders, layout, className, itemClassName, actions }) => {
     let cardList = orders.map((item, i) => {
         return (
-            
             <CItem
                 key={i}
                 value={item}
@@ -58,7 +53,9 @@ const CardList = ({ orders, layout, className, itemClassName, actions }) => {
         <CCardContainer
             className={className}
             layout={layout === '234C' ? '234' : layout}
-            gap={layout === '111' ? 'small' : layout === '234C' ? 'normal' : null}
+            gap={
+                layout === '111' ? 'small' : layout === '234C' ? 'normal' : null
+            }
         >
             {cardList}
         </CCardContainer>

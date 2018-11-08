@@ -1,31 +1,8 @@
 import React, { Component } from 'react';
 import LazyLoad from 'react-lazyload';
+import { CCard } from '@/component/_base';
 import CommonUtil from '@/util/common';
 import './styleCourse.less';
-
-/* export const CardCourse = ({ value, style, actions }) => {
-    const imgBG = `url(${value.cover}) center center / cover no-repeat`;
-    const href = value.link ? value.link : '/content/course?cid=';
-    return (
-        <React.Fragment>
-            <div className="cardTeacher">
-                <div className="img-c">
-                    <a href={href} target="_blank">
-                        <div
-                            className="img"
-                            style={{ background: { imgBG } }}
-                        />
-                    </a>
-                </div>
-
-                <div className="text-c">
-                    <div className="title">{value.price}</div>
-                    <div className="desc">{value.title}</div>
-                </div>
-            </div>
-        </React.Fragment>
-    );
-}; */
 
 export default class CardCourse extends Component {
     displayPrice(course) {
@@ -38,11 +15,11 @@ export default class CardCourse extends Component {
             if (course.original_price) {
                 return (
                     <div className="course-price">
-                        {/*  {CommonUtil.getCurrencySymbol(course.currency)} */}
+                        {CommonUtil.getCurrencySymbol(course.currency)}
                         {course.price}
                         <span className="old-price-text">原价</span>
                         <span className="old-price">
-                            {/*   {CommonUtil.getCurrencySymbol(course.currency)} */}
+                            {CommonUtil.getCurrencySymbol(course.currency)}
                             {course.original_price}
                         </span>
                     </div>
@@ -50,7 +27,7 @@ export default class CardCourse extends Component {
             } else {
                 return (
                     <div className="course-price">
-                        {/*  {CommonUtil.getCurrencySymbol(course.currency)} */}
+                        {CommonUtil.getCurrencySymbol(course.currency)}
                         {course.price}
                     </div>
                 );
@@ -76,27 +53,30 @@ export default class CardCourse extends Component {
     }
 
     render() {
-        const { course, style, actions } = this.props;
+        const { course, hover, layout, actions } = this.props;
         // alert(JSON.stringify(course))
         const url = `//www.bstcine.com/f/${course.img}`;
+        const href = `/content/course?cid=${course.id}`;
         return (
-            <div className="cardCourse">
-                <LazyLoad offset={100} height={200}>
-                    <div
-                        className="course-img"
-                        style={{
-                            background: `url(${url}) center center / cover no-repeat`,
-                        }}
-                    />
-                </LazyLoad>
+            <CCard href={href} hover={hover}>
+                <div className="cardCourse">
+                    <LazyLoad offset={100} height={200}>
+                        <div
+                            className="course-img"
+                            style={{
+                                background: `url(${url}) center center / cover no-repeat`,
+                            }}
+                        />
+                    </LazyLoad>
 
-                <div className="course-desc">
-                    <div className="course-title">{course.name}</div>
-                    {this.renderAuthor(course)}
-                    {this.renderTimeArrange(course)}
-                    {this.displayPrice(course)}
+                    <div className="course-desc">
+                        <div className="text-title">{course.name}</div>
+                        {this.renderAuthor(course)}
+                        {this.renderTimeArrange(course)}
+                        {this.displayPrice(course)}
+                    </div>
                 </div>
-            </div>
+            </CCard>
         );
     }
 }

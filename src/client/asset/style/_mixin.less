@@ -28,24 +28,28 @@
     .text-one-line();
 }
 
-.text-line-2 {
+.text-line {
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
-    -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     /*  word-break: keep-all; */
     /*! autoprefixer: off */
 }
 
+.text-line-2 {
+    .text-line();
+    -webkit-line-clamp: 2;
+}
+
 .text-line-3 {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
+    .text-line();
     -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    /*  word-break: keep-all; */
-    /*! autoprefixer: off */
+}
+
+.text-line-4 {
+    .text-line();
+    -webkit-line-clamp: 4;
 }
 
 .text-title {
@@ -58,12 +62,16 @@
     .text-line-2();
 }
 
+.text-title-en {
+    .text-title();
+}
+
 .text-color-title {
-    -webkit-box-orient: vertical;
+    color: rgb(72, 72, 72);
 }
 
 .text-color-desc {
-    -webkit-box-orient: vertical;
+    color: #a0a4a7;
 }
 
 // 灰色线

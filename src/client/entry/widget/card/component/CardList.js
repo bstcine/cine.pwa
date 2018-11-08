@@ -1,50 +1,46 @@
 import React from 'react';
 import { CCardContainer, CCard } from '@/component/_base';
 import { CardItem, CardTeacher, CardCourse } from '@/component/CardItem';
-import { CardItem112, CardItem111 } from './CardItem';
+import { CardItem111 } from './CardItem';
 
 const CItem = ({ value, layout, className, actions }) => {
-    // 'none' | 'shadow' | 'darken'| 'lighten' | 'outlined'
-    let hover = 'darken';
-    let item = <CardItem value={value} actions={actions} />;
+    // 'none' | 'darken'| 'lighten' | 'outlined'
+    let item = <CardItem value={value} hover="darken" actions={actions} />;
     switch (layout) {
         case '234C':
-            item = <CardCourse course={value} actions={actions} />;
+            item = (
+                <CardCourse course={value} hover="lighten" actions={actions} />
+            );
             break;
         case '111':
             item = <CardItem111 value={value} actions={actions} />;
-            hover = 'lighten';
-            break;
-        case '122':
-            item = <CardItem112 value={value} actions={actions} />;
-            hover = 'darken';
             break;
         case '112':
-            item = <CardItem value={value} css="lnr" actions={actions} />;
-            hover = 'shadow';
+            item = (
+                <CardItem
+                    value={value}
+                    layout="112"
+                    hover="darken"
+                    actions={actions}
+                />
+            );
             break;
         case '123':
             item = <CardItem value={value} actions={actions} />;
-            hover = 'shadow';
             break;
         case '245':
             item = <CardTeacher value={value} actions={actions} />;
-            hover = 'darken';
             break;
     }
 
-    return (
-        <CCard className={className} hover={hover}>
-            {item}
-        </CCard>
-    );
+    return item;
 };
 
 const CardList = ({ orders, layout, className, itemClassName, actions }) => {
     let cardList = orders.map((item, i) => {
         return (
             <CItem
-                key={item.favorite}
+                key={i}
                 value={item}
                 layout={layout}
                 className={itemClassName}
@@ -57,7 +53,9 @@ const CardList = ({ orders, layout, className, itemClassName, actions }) => {
         <CCardContainer
             className={className}
             layout={layout === '234C' ? '234' : layout}
-            gap={layout === '111' ? 'small' : null}
+            gap={
+                layout === '111' ? 'small' : layout === '234C' ? 'normal' : null
+            }
         >
             {cardList}
         </CCardContainer>

@@ -221,13 +221,13 @@ class Container extends Component {
 
                 <CPanel title="Gird Card 122 gap=small hover=lighten">
                     <CCardContainer gap="small" layout="122">
-                        <CCard hover="lighten">1</CCard>
-                        <CCard hover="lighten">2</CCard>
-                        <CCard hover="lighten">3</CCard>
-                        <CCard hover="lighten">4</CCard>
-                        <CCard hover="lighten">5</CCard>
-                        <CCard hover="lighten">6</CCard>
-                        <CCard hover="lighten">7</CCard>
+                        <CCard hover="opacity">1</CCard>
+                        <CCard hover="opacity">2</CCard>
+                        <CCard hover="opacity">3</CCard>
+                        <CCard hover="opacity">4</CCard>
+                        <CCard hover="opacity">5</CCard>
+                        <CCard hover="opacity">6</CCard>
+                        <CCard hover="opacity">7</CCard>
                     </CCardContainer>
                 </CPanel>
 

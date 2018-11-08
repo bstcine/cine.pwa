@@ -1,11 +1,13 @@
 import React from 'react';
+import { CCard } from '@/component/_base';
 import './styleTeacher.less';
 
-export const CardTeacher = ({ value, style, actions }) => {
-    const imgBG = `url(${value.cover}) center center / cover no-repeat`;
-    const href = value.link ? value.link : '/experiences';
+export const CardTeacher = ({ value, hover, actions }) => {
+    const imgBG = `url(${value.head_img}) center center / cover no-repeat`;
+    const href = value.link ? value.link : `//www.bstcine.com/teacher/${value.user_id}`;
+    // alert(hover)
     return (
-        <React.Fragment>
+        <CCard>
             <div className="cardTeacher">
                 <div className="img-c">
                     <a href={href} target="_blank">
@@ -17,10 +19,12 @@ export const CardTeacher = ({ value, style, actions }) => {
                 </div>
 
                 <div className="text-c">
-                    <div className="title">{value.price}</div>
-                    <div className="desc">{value.title}</div>
+                    <div className="title">
+                        {value.name_en ? `${value.name_en}` : `${value.name}`}
+                    </div>
+                    <div className="desc">{value.brief}</div>
                 </div>
             </div>
-        </React.Fragment>
+        </CCard>
     );
 };

@@ -5,19 +5,18 @@ import { componentNames } from '@/component/_base/config';
 const cls = componentNames.Card;
 
 const Card = ({
-    // 'none' | 'shadow' | 'darken'| 'lighten' | 'outlined'
-    hover = 'darken',
+    // 'none' | 'opacity' | 'lighten'| 'darken' | 'outlined'
+    hover,
     href = null,
     className,
     children,
     onClick,
 }) => {
     const Comp = href ? 'a' : 'div';
-    const hoverable = href || onClick;
 
     return (
         <Comp
-            className={classNames(cls, { [`${cls}--hoverable`]: hoverable })}
+            className={classNames(cls, { [`${cls}--hoverable`]: true })}
             href={Comp === 'a' ? href : null}
             onClick={onClick}
         >
@@ -25,10 +24,10 @@ const Card = ({
                 className={classNames(
                     `${cls}__content`,
                     {
-                        [`${cls}__content--shadow`]: hover === 'shadow',
+                        [`${cls}__content--opacity`]: hover === 'opacity',
+                        [`${cls}__content--lighten`]: hover === 'lighten',
                         [`${cls}__content--darken`]: hover === 'darken',
                         [`${cls}__content--outlined`]: hover === 'outlined',
-                        [`${cls}__content--lighten`]: hover === 'lighten',
                     },
                     className
                 )}

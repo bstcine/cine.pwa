@@ -31,7 +31,6 @@ const Courses = ({ courses }) => {
                 {courses.map(course => {
                     return (
                         <CCard
-                            hover="lighten"
                             key={course.id}
                             className="courses-item"
                             onClick={() => goClick(course)}

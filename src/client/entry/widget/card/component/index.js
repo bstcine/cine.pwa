@@ -5,14 +5,16 @@ import CardList from './CardList';
 
 export default class CardDemo extends React.PureComponent {
     render() {
-        const { orders } = this.props;
+        const { orders, courses, teachers } = this.props;
         const orderlist = orders.toJS();
+        const courseList = courses.toJS();
+        const teacherList = teachers.toJS();
         // alert(JSON.stringify(orders));
         return (
             <React.Fragment>
                 <CPanel title="核心课程">
                     <CardList
-                        orders={orderlist}
+                        orders={courseList}
                         layout="234C"
                         className="bgt"
                         itemClassName="bgt"
@@ -20,7 +22,7 @@ export default class CardDemo extends React.PureComponent {
                 </CPanel>
                 <CPanel title="录课老师" className="bgdark">
                     <CardList
-                        orders={orderlist}
+                        orders={teacherList}
                         layout="245"
                         className="bgt"
                         itemClassName="bgt"

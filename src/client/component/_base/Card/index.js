@@ -3,7 +3,7 @@ import BaseCard from './Card';
 import BaseCardContainer from './CardContainer';
 
 const Card = ({
-    hover = 'lighten',
+    hover = 'opacity',
     href = null,
     className,
     onClick,

@@ -1,8 +1,11 @@
 import { fromJS } from 'immutable';
-import * as order from '@/service/data/response_card.json';
+import * as card from '@/service/data/response_card.json';
+import * as sub from '@/service/data/response_subpage.json';
 
 const initialState = fromJS({
-    orders: order.result,
+    order: card.result,
+    course: sub.result.course,
+    teacher: sub.result.teacher,
     isOpenDetail: false,
 });
 

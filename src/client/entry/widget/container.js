@@ -13,6 +13,7 @@ import {
     CModal,
 } from '@/component/_base';
 import Player from '@/component/Player';
+import CLoginModal from "@/component/CLoginModal";
 
 class Container extends Component {
     constructor(props) {
@@ -677,6 +678,13 @@ class Container extends Component {
                             </CButton>
                         </div>
                     </CDrawer>
+                </CPanel>
+
+                <CPanel>
+                    <CButton onClick={()=>{
+                        CLoginModal.open()
+                    }}>登录</CButton>
+
                 </CPanel>
             </div>
         );

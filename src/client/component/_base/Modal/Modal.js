@@ -9,6 +9,7 @@ const cls = componentNames.Modal;
 export default function({
     title,
     text,
+    children,
     responsive,
     onCancel,
     onConfirm,
@@ -23,7 +24,7 @@ export default function({
                 })}
             >
                 {title && <div className={`${cls}__header`}>{title}</div>}
-                <div className={`${cls}__content`}>{text}</div>
+                <div className={`${cls}__content`}>{children || text}</div>
                 <div className={`${cls}__footer`}>
                     {onCancel && (
                         <CButton

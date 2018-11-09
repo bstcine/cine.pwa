@@ -41,7 +41,13 @@ export const lTaskAction = {
         );
 
         if (error) {
-            CMessage.error(errorMsg(error));
+            if (error === "no_login") {
+                location.replace(
+                    '/login?go=' + encodeURIComponent(location.href)
+                );
+            }else {
+                CMessage.error(errorMsg(error));
+            }
             return;
         }
 

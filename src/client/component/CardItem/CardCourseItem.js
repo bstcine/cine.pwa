@@ -57,6 +57,9 @@ export default class CardCourse extends Component {
         // alert(JSON.stringify(course))
         const url = `//www.bstcine.com/f/${course.img}`;
         const href = `/content/course?cid=${course.id}`;
+        
+        if (typeof course.img === 'undefined' || !course.img) return <div />;
+
         return (
             <CCard href={href} hover={hover}>
                 <div className="cardCourse">

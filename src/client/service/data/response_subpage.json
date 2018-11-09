@@ -3,7 +3,7 @@
     "code_desc": "success",
     "except_case": "",
     "except_case_desc": "",
-    "ts": "20181103103805",
+    "ts": "20181109103506",
     "result": {
       "comment": [],
       "article": [],
@@ -209,11 +209,14 @@
       "teacher": [
         {
           "user_id": "A011476365542350rSgfMuuRJy",
-          "img": "2018/09/14/163828788SRF3jkh.jpg",
+          "img": "2018/11/03/110145745Sb7Avmx.jpg",
           "head_img": "https://www.bstcine.com/f/2018/09/11/182916555SgrYXyy.jpg",
           "name": "赵晴",
           "name_en": "Sunny",
-          "brief": "本科毕业于西安外国语大学，主修英文，本科期间通过英语专业八级考试。毕业后先后在西安高新文化辅导学校，西安外国语大学继续教育学院担任英文讲师。之后赴美深..."
+          "brief": "本科毕业于西安外国语大学，主修英文，本科期间通过英语专业八级考试。毕业后先后在西安高新文化辅导学校，西安外国语大学继续教育学院担任英文讲师。之后赴美深...",
+          "id": 34,
+          "remark_mentor": "美国麻省大学教育学博士，西安外国语大学英语专业本科，10年+英语教学经验",
+          "is_mentor": "1"
         },
         {
           "user_id": "d0115123623750479zjnE7MG2D",
@@ -221,7 +224,10 @@
           "head_img": "https://www.bstcine.com/f/2018/09/11/182940792ST5psyd.jpg",
           "name": "吴遥",
           "name_en": "",
-          "brief": null
+          "brief": null,
+          "id": 50,
+          "remark_mentor": "美国塔夫茨大学国际关系硕士，北京大学西语系本科。",
+          "is_mentor": "1"
         },
         {
           "user_id": "d011531515558509GVNzwkJfEm",
@@ -229,7 +235,10 @@
           "head_img": "https://www.bstcine.com/f/2018/09/11/183032991S8EBfkV.jpg",
           "name": "刘亭君",
           "name_en": "Tina",
-          "brief": null
+          "brief": null,
+          "id": 52,
+          "remark_mentor": "美国波士顿大学人类学博士后，哈佛大学人类学访问学者，四川大学本硕博",
+          "is_mentor": "1"
         },
         {
           "user_id": "d011531839339821vzV9DSxYNe",
@@ -237,7 +246,10 @@
           "head_img": "https://www.bstcine.com/f/2018/09/11/183057703SVswWdw.jpg",
           "name": "谭琪",
           "name_en": "Joanna",
-          "brief": null
+          "brief": null,
+          "id": 53,
+          "remark_mentor": "哈佛大学肯尼迪政府学院公共管理硕士，北京大学法学硕士，北京外国语大学翻译学硕士",
+          "is_mentor": "1"
         },
         {
           "user_id": "",
@@ -245,7 +257,10 @@
           "head_img": "http://www.bstcine.com/f/2018/09/21/181009238SzS8n3p.jpg",
           "name": "Hans Schwartz",
           "name_en": "-",
-          "brief": "Hans Schwartz是善恩教育波士顿总部的英语讲师。在加入善恩教育前，他在东北大学（Northeastern University）担任客座教授。Hans以前还曾在日本教授ESL（英语作为外语课程）。Hans博士毕业于Clark University，专业方向是大西洋和美洲早期历史。"
+          "brief": "Hans Schwartz是善恩教育波士顿总部的英语讲师。在加入善恩教育前，他在东北大学（Northeastern University）担任客座教授。Hans以前还曾在日本教授ESL（英语作为外语课程）。Hans博士毕业于Clark University，专业方向是大西洋和美洲早期历史。",
+          "id": 44,
+          "remark_mentor": "美国东北大学客座教授，Clark University博士，专业方向是大西洋和美洲早期历史。",
+          "is_mentor": "1"
         },
         {
           "user_id": "",
@@ -253,7 +268,10 @@
           "head_img": "http://www.bstcine.com/f/2018/09/21/180948376SksEw92.jpg",
           "name": "Christina Carlson",
           "name_en": "-",
-          "brief": "美国波士顿艾默生学院（Emerson College）的英语文学和写作系的教授。Christina M Carlson拥有20多年的大学写作教学经验，熟悉中国学生在读写方面的挑战，并对此积累了一些独具特色的教学手段..."
+          "brief": "美国波士顿艾默生学院（Emerson College）的英语文学和写作系的教授。Christina M Carlson拥有20多年的大学写作教学经验，熟悉中国学生在读写方面的挑战，并对此积累了一些独具特色的教学手段...",
+          "id": 1,
+          "remark_mentor": "美国艾默生学院英语文学和写作系的教授，哈佛大学本科，英国剑桥大学、美国斯坦福大学和耶鲁大学硕士，芝加哥大学英语文学博士学位，有20+年的大学写作教学经验",
+          "is_mentor": "1"
         },
         {
           "user_id": "37",
@@ -261,7 +279,10 @@
           "head_img": "https://www.bstcine.com/f/2018/09/11/182809833S19KMZ9.jpg",
           "name": "姚慧颖",
           "name_en": "Susan",
-          "brief": "作为执着的英语爱好者，姚老师为英语专业本身所着迷，不论是对英语文化起源的圣经和希腊罗马神话、还是英语世界的西方文明史况、或是英文经典的科学哲学著作，抑或是百年不衰的英语文学精粹（包括《简爱》、《傲慢与偏见》、《呼啸山庄》等），都进行过深入详尽的精读并有自己的见解。她曾为上海电影译制片厂翻译过电影并上映......"
+          "brief": "作为执着的英语爱好者，姚老师为英语专业本身所着迷，不论是对英语文化起源的圣经和希腊罗马神话、还是英语世界的西方文明史况、或是英文经典的科学哲学著作，抑或是百年不衰的英语文学精粹（包括《简爱》、《傲慢与偏见》、《呼啸山庄》等），都进行过深入详尽的精读并有自己的见解。她曾为上海电影译制片厂翻译过电影并上映......",
+          "id": 8,
+          "remark_mentor": "上海外国语大学英语语言文学专业本科，硕士，10年+英语教学经验",
+          "is_mentor": "1"
         },
         {
           "user_id": "d011535808042024bxMqgj5Vju",
@@ -269,7 +290,10 @@
           "head_img": "http://www.bstcine.com/f/2018/09/25/18065476SnRXDZY.jpeg",
           "name": "苏丽娟",
           "name_en": null,
-          "brief": null
+          "brief": null,
+          "id": 57,
+          "remark_mentor": "纽约州立大学布法罗分校博士，武汉大学本硕，4年+教学经验",
+          "is_mentor": "1"
         },
         {
           "user_id": "d011536111193552EgKEgbXK0e",
@@ -277,7 +301,10 @@
           "head_img": "http://www.bstcine.com/f/2018/09/21/173348585SVcYTeZ.jpg",
           "name": "向鑫",
           "name_en": null,
-          "brief": null
+          "brief": null,
+          "id": 60,
+          "remark_mentor": "伊利诺伊大学香槟分校英语教育硕士，武汉大学英语本科，8年+英语教学经验",
+          "is_mentor": "1"
         },
         {
           "user_id": "d011536116736671zrnvZc4sdY",
@@ -285,7 +312,10 @@
           "head_img": "http://www.bstcine.com/f/2018/09/21/165917424Snd85UE.png",
           "name": "刘冬凌子",
           "name_en": "Sabrina",
-          "brief": null
+          "brief": null,
+          "id": 61,
+          "remark_mentor": "美国印第安纳大学艺术管理硕士，上海外国语大学英语语言文学本科，5年+英语教学经验",
+          "is_mentor": "1"
         },
         {
           "user_id": "d011536113725387Dxtrg5c3Dh",
@@ -293,7 +323,10 @@
           "head_img": "http://www.bstcine.com/f/2018/09/21/173615777SbVEQHj.jpg",
           "name": "唐曼",
           "name_en": "Mandy",
-          "brief": null
+          "brief": null,
+          "id": 63,
+          "remark_mentor": "美国佛罗里达大学双语教育硕士，兰州大学本科，曾就职于语言与特殊教育行业，6年+英语教学经验",
+          "is_mentor": "1"
         },
         {
           "user_id": "d011535838656912A6hZ7cSPGh",
@@ -301,7 +334,10 @@
           "head_img": "http://www.bstcine.com/f/2018/09/21/173451114S4PJgr7.jpg",
           "name": "肖惠方",
           "name_en": "Lilian",
-          "brief": null
+          "brief": null,
+          "id": 59,
+          "remark_mentor": "上海外国语大学翻译学硕士，华中师范大学英语本科，现任职于上海某高校，7年+英语教学经验",
+          "is_mentor": "1"
         },
         {
           "user_id": "d0115163348839270KBWHe7CAB",
@@ -309,7 +345,10 @@
           "head_img": "http://www.bstcine.com/f/2018/09/21/173826679SGE6Fts.jpg",
           "name": "熊英豪",
           "name_en": "Iris",
-          "brief": null
+          "brief": null,
+          "id": 64,
+          "remark_mentor": "上海海事大学外国语言学及应用语言学本科、硕士，曾参与英国朴次茅斯大学学术交流项目，3年教学经验",
+          "is_mentor": "1"
         }
       ]
     }

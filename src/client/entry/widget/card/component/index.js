@@ -5,10 +5,11 @@ import CardList from './CardList';
 
 export default class CardDemo extends React.PureComponent {
     render() {
-        const { orders, courses, teachers } = this.props;
+        const { orders, courses, teachers, articles } = this.props;
         const orderlist = orders.toJS();
         const courseList = courses.toJS();
         const teacherList = teachers.toJS();
+        const articleList = articles.toJS();
         // alert(JSON.stringify(orders));
         return (
             <React.Fragment>
@@ -17,15 +18,19 @@ export default class CardDemo extends React.PureComponent {
                         orders={courseList}
                         layout="234C"
                         className="bgt"
-                        itemClassName="bgt"
                     />
                 </CPanel>
-                <CPanel title="录课老师" className="bgdark">
+                <CPanel title="私塾导师" className="bgblue">
                     <CardList
                         orders={teacherList}
                         layout="245"
                         className="bgt"
-                        itemClassName="bgt"
+                    />
+                </CPanel>
+                <CPanel title="精彩文章" className="bgt">
+                    <CardList
+                        orders={articleList}
+                        layout="112A"
                     />
                 </CPanel>
 
@@ -34,7 +39,6 @@ export default class CardDemo extends React.PureComponent {
                         orders={orderlist}
                         layout="234"
                         className="bgt"
-                        itemClassName="bgt"
                     />
                 </CPanel>
                 <br />
@@ -47,7 +51,6 @@ export default class CardDemo extends React.PureComponent {
                     orders={orderlist}
                     layout="112"
                     className="bg112"
-                    itemClassName="cbg234"
                 />
 
                 <br />
@@ -60,7 +63,6 @@ export default class CardDemo extends React.PureComponent {
                         orders={orderlist}
                         layout="111"
                         className="bglight"
-                        itemClassName="bgw"
                     />
                 </CPanel>
 
@@ -77,7 +79,6 @@ export default class CardDemo extends React.PureComponent {
                         orders={orderlist}
                         layout="123"
                         className="bgt"
-                        itemClassName="bgt"
                     />
                 </CPanel>
             </React.Fragment>

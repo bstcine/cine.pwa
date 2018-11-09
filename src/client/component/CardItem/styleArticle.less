@@ -1,66 +1,14 @@
 @import '~asset/style/_cine.less';
 
-.cardItem {
-    background-color: transparent;
-    text-size-adjust: none;
-    padding: 3px;
-
-    .img-c {
-        display: block;
-        flex-shrink: 0;
-        flex-grow: 0;
-        .img {
-            padding-top: (9/16) * 100%;
-            border-top-left-radius: 3px;
-            border-top-right-radius: 3px;
-        }
-    }
-
-    .text-c {
-        padding-top: 8px;
-        color: rgb(72, 72, 72);
-        display: flex;
-        flex-direction: column;
-        overflow: hidden;
-
-        .title {
-            .text-title-en();
-        }
-        @media @media-up-xs {
-            .title {
-                font-size: 16px;
-                line-height: 20px;
-            }
-        }
-
-        .title-space {
-            margin-bottom:10px;
-        }
-
-        .subTitle {
-            color: rgb(115, 71, 41);
-            font-size: 10px;
-            line-height: 14px;
-            letter-spacing: normal;
-            white-space: nowrap;
-            text-transform: uppercase;
-            margin-bottom: 2px;
-            .text-line-1();
-        }
-        @media @media-up-xs {
-            .subTitle {
-                font-size: 12px;
-                line-height: 16px;
-            }
-        }
-    }
-}
-
-.cardItem112 {
+.cardArticle {
     display: flex;
     flex-direction: row;
-    padding: 8px;
-    background-color: #fafafa;
+    /*  padding: 8px; */
+    padding-right: 5px;
+    background-color: white;
+    border: 1px solid #eaf1f6;
+    box-shadow: 0 0.1rem 0.06rem 0 rgba(219, 230, 240, 0.1);
+    border-radius: 5px;
 
     .item-left {
         width: 40%;
@@ -80,7 +28,8 @@
     }
 
     .item-right {
-        padding-top: 0px;
+        padding-top: 6px;
+        padding-bottom: 8px;
     }
 
     .img-cl {
@@ -89,7 +38,33 @@
         flex-grow: 0;
         .img {
             padding-top: (9/16) * 100%;
-            border-radius: 3px;
+            border-top-left-radius: 5px;
+            border-bottom-left-radius: 5px;
+        }
+    }
+
+    .text-c {
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        justify-content: space-between;
+
+        .title {
+            .text-line-3();
+        }
+
+        .subTitle {
+            .text-color-desc();
+            font-size: 10px;
+            line-height: 14px;
+            margin-bottom: 2px;
+            .text-line-2();
+        }
+        @media @media-up-xs {
+            .subTitle {
+                font-size: 12px;
+                line-height: 16px;
+            }
         }
     }
 }

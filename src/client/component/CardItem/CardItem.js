@@ -1,6 +1,11 @@
 import React from 'react';
 import { CCard } from '@/component/_base';
-import { svgStar, svgStarHalf } from '@/constant/svg';
+import {
+    svgStar,
+    svgStarHalf,
+    svgFavorite,
+    svgFavorited,
+} from '@/constant/svg';
 import './style.less';
 
 export const CardItem = ({ value, hover, layout, actions }) => {
@@ -15,6 +20,9 @@ export const CardItem = ({ value, hover, layout, actions }) => {
         <CCard hover={hover}>
             <div className={classCard}>
                 <div className={classIMG}>
+                    <div className="favorite">
+                        {value.favorite === 1 ? svgFavorited : svgFavorite}
+                    </div>
                     <a href={href} target="_blank">
                         <div
                             className="img"

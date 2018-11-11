@@ -40,16 +40,16 @@ class Drawer extends PureComponent {
     }
 
     fixedBody() {
-        let _body = document.body;
-        if (_body.style.position !== 'fixed') {
-            this.bodyScrollTop = window.scrollY;
-            _body.style.position = 'fixed';
-            _body.style.top = -this.bodyScrollTop + 'px';
-        } else {
-            _body.style.position = '';
-            _body.style.top = '';
-            window.scrollTo(0, this.bodyScrollTop);
-        }
+        // let _body = document.body;
+        // if (_body.style.position !== 'fixed') {
+        //     this.bodyScrollTop = window.scrollY;
+        //     _body.style.position = 'fixed';
+        //     _body.style.top = -this.bodyScrollTop + 'px';
+        // } else {
+        //     _body.style.position = '';
+        //     _body.style.top = '';
+        //     window.scrollTo(0, this.bodyScrollTop);
+        // }
     }
 
     render() {

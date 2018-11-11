@@ -8,8 +8,8 @@ import Bridge from '@/util/bridge';
 const Courses = ({ courses }) => {
     const goClick = course => {
         console.log(course);
-        if (siteCodeUtil.inAndroidAPP()) {
-            Bridge.android(BRIDGE_EVENT.LEARN, {
+        if (siteCodeUtil.inAPP()) {
+            Bridge.common(BRIDGE_EVENT.LEARN, {
                 course_id: course.id,
                 course_name: course.name,
                 last_lesson_id: course.last_content_id,

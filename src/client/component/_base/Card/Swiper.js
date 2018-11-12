@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import classNames from 'classnames';
 import './swiper.less';
 import Icon from '@/component/_base/Icon';
 
-class Swiper extends Component {
+class Swiper extends PureComponent {
     static defaultProps = {
         step: 1,
     };
@@ -60,6 +60,12 @@ class Swiper extends Component {
                 showRight: true,
             });
         }
+    }
+
+    UNSAFE_componentWillReceiveProps(props) {
+        console.log('this.props.children', this.props.children);
+        console.log('props.children', props.children);
+        console.log(this.props.children[0] === props.children[0]);
     }
 
     render() {

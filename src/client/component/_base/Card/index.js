@@ -1,37 +1,52 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
 import BaseCard from './Card';
 import BaseCardContainer from './CardContainer';
 
-const Card = ({
-    hover = 'opacity',
-    href = null,
-    className,
-    onClick,
-    children,
-}) => (
-    <BaseCard href={href} className={className} hover={hover} onClick={onClick}>
-        {children}
-    </BaseCard>
-);
+class Card extends PureComponent {
+    render() {
+        const {
+            hover = 'opacity',
+            href = null,
+            className,
+            onClick,
+            children,
+        } = this.props;
+        return (
+            <BaseCard
+                href={href}
+                className={className}
+                hover={hover}
+                onClick={onClick}
+            >
+                {children}
+            </BaseCard>
+        );
+    }
+}
 
-const CardContainer = ({
-    className,
-    gap,
-    layout = '112',
-    line,
-    step,
-    children,
-}) => (
-    <BaseCardContainer
-        className={className}
-        gap={gap}
-        line={line}
-        step={step}
-        layout={layout}
-    >
-        {children}
-    </BaseCardContainer>
-);
+class CardContainer extends PureComponent {
+    render() {
+        const {
+            className,
+            gap,
+            layout = '112',
+            line,
+            step,
+            children,
+        } = this.props;
+        return (
+            <BaseCardContainer
+                className={className}
+                gap={gap}
+                line={line}
+                step={step}
+                layout={layout}
+            >
+                {children}
+            </BaseCardContainer>
+        );
+    }
+}
 export default Card;
 
 export { CardContainer };

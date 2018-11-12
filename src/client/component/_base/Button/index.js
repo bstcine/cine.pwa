@@ -17,6 +17,7 @@ const Button = ({
     className,
     component,
     href,
+    target,
     onClick,
     children,
 }) => (
@@ -26,6 +27,7 @@ const Button = ({
         disabled={disabled}
         block={block}
         href={href}
+        target={target}
         color={color}
         variant={variant}
         size={size}

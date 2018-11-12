@@ -30,6 +30,7 @@ export default class Button extends PureComponent {
             className,
             component,
             href,
+            target,
             onClick,
             children,
         } = this.props;
@@ -60,6 +61,7 @@ export default class Button extends PureComponent {
                     },
                     className
                 )}
+                target={target}
                 disabled={disabled}
                 onClick={onClick}
                 href={href}

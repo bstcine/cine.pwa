@@ -5,6 +5,18 @@ import { componentNames } from '@/component/_base/config';
 import Mask from '@/component/_base/Mask';
 const cls = componentNames.Drawer;
 
+function getScrollbarWidth() {
+    if (window.$scrollbarWidth) return window.$scrollbarWidth;
+    let scrollDiv = document.createElement('div');
+    scrollDiv.style.cssText =
+        'width: 99px; height: 99px; overflow: scroll; position: absolute; top: -9999px;';
+    document.body.appendChild(scrollDiv);
+    let scrollbarWidth = scrollDiv.offsetWidth - scrollDiv.clientWidth;
+    document.body.removeChild(scrollDiv);
+    window.$scrollbarWidth = scrollbarWidth;
+    return scrollbarWidth;
+}
+
 class Drawer extends PureComponent {
     constructor(props) {
         super(props);
@@ -40,15 +52,15 @@ class Drawer extends PureComponent {
     }
 
     fixedBody() {
-        let _body = document.body;
-        if (_body.style.position !== 'fixed') {
-            this.bodyScrollTop = window.scrollY;
-            _body.style.position = 'fixed';
-            _body.style.top = -this.bodyScrollTop + 'px';
-        } else {
-            _body.style.position = '';
-            _body.style.top = '';
-            window.scrollTo(0, this.bodyScrollTop);
+        if (this.props.fullscreen) {
+            let body = document.body;
+            if (body.classList.contains(`${cls}--open`)) {
+                body.style.removeProperty('padding-right');
+                body.classList.remove(`${cls}--open`);
+            } else {
+                body.style.paddingRight = getScrollbarWidth() + 'px';
+                body.classList.add(`${cls}--open`);
+            }
         }
     }
 

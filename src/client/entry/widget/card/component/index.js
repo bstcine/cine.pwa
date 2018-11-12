@@ -1,7 +1,7 @@
 import React from 'react';
 import './../../asset/style/card.less';
 import { CPanel, CDrawer, CButton } from '@/component/_base';
-import CardList from './CardList';
+import CardExList from './CardList';
 
 export default class CardDemo extends React.PureComponent {
     constructor(props) {
@@ -12,7 +12,7 @@ export default class CardDemo extends React.PureComponent {
     }
 
     render() {
-        const { orders, courses, teachers, articles } = this.props;
+        const { orders, courses, teachers, articles, actions } = this.props;
         const orderlist = orders.toJS();
         const courseList = courses.toJS();
         const teacherList = teachers.toJS();
@@ -21,21 +21,25 @@ export default class CardDemo extends React.PureComponent {
         return (
             <React.Fragment>
                 <CPanel title="核心课程">
-                    <CardList
+                    <CardExList
+                        type="course"
                         orders={courseList}
-                        layout="234C"
-                        className="bgt"
+                        layout="234"
                     />
                 </CPanel>
                 <CPanel title="私塾导师" className="bgblue">
-                    <CardList
+                    <CardExList
+                        type="teacher"
                         orders={teacherList}
                         layout="245"
-                        className="bgt"
                     />
                 </CPanel>
-                <CPanel title="精彩文章" className="bgt">
-                    <CardList orders={articleList} layout="112A" />
+                <CPanel title="精彩文章" className="bgblue">
+                    <CardExList
+                        type="article"
+                        orders={articleList}
+                        layout="112"
+                    />
                 </CPanel>
 
                 <CPanel title="AIRBNB" className="showDrawer">
@@ -51,6 +55,14 @@ export default class CardDemo extends React.PureComponent {
                     >
                         <div className="" />
                     </CDrawer>
+                    <CardExList
+                        type="card"
+                        orders={orderlist}
+                        layout="234"
+                        actions={actions}
+                    />
+                    <br />
+                    <br />
                     <CButton
                         size="small"
                         color="primary"
@@ -62,7 +74,6 @@ export default class CardDemo extends React.PureComponent {
                     >
                         更多...
                     </CButton>
-                    <CardList orders={orderlist} layout="234" className="bgt" />
                 </CPanel>
                 <br />
                 <br />
@@ -70,7 +81,7 @@ export default class CardDemo extends React.PureComponent {
                 <br />
                 <br />
 
-                <CardList orders={orderlist} layout="112" className="bg112" />
+                <CardExList orders={orderlist} layout="112" />
 
                 <br />
                 <br />
@@ -78,7 +89,7 @@ export default class CardDemo extends React.PureComponent {
                 <br />
                 <br />
                 <CPanel title="订单- 待付款" className="bgw" padding="none">
-                    <CardList
+                    <CardExList
                         orders={orderlist}
                         layout="111"
                         className="bglight"
@@ -92,7 +103,7 @@ export default class CardDemo extends React.PureComponent {
                 <br />
 
                 <CPanel title="Gird Card 123" className="bgw">
-                    <CardList orders={orderlist} layout="123" className="bgt" />
+                    <CardExList orders={orderlist} layout="123" />
                 </CPanel>
             </React.Fragment>
         );

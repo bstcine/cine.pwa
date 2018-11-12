@@ -5,12 +5,13 @@ import {
     TeacherList,
     CourseList,
     ArticleList,
+    CardList,
 } from '@/component/CardItem';
 import { CardItem111 } from './CardItem';
 
 const CItem = ({ value, layout, actions }) => {
     // 'none' | 'darken'| 'lighten' | 'outlined'
-    let item = <CardItem value={value} hover="darken" actions={actions} />;
+    let item = <CardItem value={value} hover="none" actions={actions} />;
     switch (layout) {
         case '111':
             item = <CardItem111 value={value} actions={actions} />;
@@ -26,43 +27,46 @@ const CItem = ({ value, layout, actions }) => {
     return item;
 };
 
-const CardList = ({ orders, layout, className, actions }) => {
-    let cardList;
-    cardList = orders.map((item, i) => {
-        return (
-            <CItem
-                key={i}
-                value={item}
-                layout={layout}
-                actions={actions}
-            />
-        );
-    });
+const CardExList = ({ orders, layout, className, type, actions }) => {
+    let exList;
 
-    switch (layout) {
-        case '234C':
-            cardList = <CourseList list={orders} hover="lighten" />;
+    switch (type) {
+        case 'course':
+            exList = <CourseList list={orders} hover="lighten" />;
             break;
-        case '112A':
-            cardList = <ArticleList list={orders} hover="darken" />;
+        case 'article':
+            exList = <ArticleList list={orders} hover="darken" />;
             break;
-        case '245':
-            cardList = <TeacherList list={orders} />;
+        case 'teacher':
+            exList = <TeacherList list={orders} />;
             break;
+        case 'card':
+            exList = (
+                <CardList
+                    list={orders}
+                    layout={layout}
+                    hover = "none"
+                    limit={8}
+                    actions={actions}
+                />
+            );
+            break;
+        default:
+            exList = orders.map((item, i) => {
+                return <CItem key={i} value={item} layout={layout} />;
+            });
     }
 
     return (
         <CCardContainer
             className={className}
-            layout={
-                layout === '234C' ? '234' : layout === '112A' ? '112' : layout
-            }
+            layout={layout}
             gap={
-                layout === '111' ? 'small' : layout === '234C' ? 'normal' : null
+                layout === '111' ? 'small' : type === 'course' ? 'normal' : null
             }
         >
-            {cardList}
+            {exList}
         </CCardContainer>
     );
 };
-export default CardList;
+export default CardExList;

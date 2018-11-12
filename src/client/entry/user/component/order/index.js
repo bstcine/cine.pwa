@@ -28,8 +28,6 @@ export default class Order extends React.PureComponent {
                 <OrderList
                     orders={orderlist}
                     layout="112"
-                    className="bg112"
-                    itemClassName="cbg234"
                 />
 
                 <br />

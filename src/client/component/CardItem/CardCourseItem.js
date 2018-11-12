@@ -53,7 +53,7 @@ export class CardCourse extends Component {
     }
 
     render() {
-        const { value, hover, layout } = this.props;
+        const { value, hover } = this.props;
         // alert(JSON.stringify(course))
         const url = `//www.bstcine.com/f/${value.img}`;
         const href = `/content/course?cid=${value.id}`;

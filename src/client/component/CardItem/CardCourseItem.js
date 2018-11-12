@@ -4,7 +4,7 @@ import { CCard } from '@/component/_base';
 import CommonUtil from '@/util/common';
 import './styleCourse.less';
 
-export default class CardCourse extends Component {
+export class CardCourse extends Component {
     displayPrice(course) {
         if (course.status & (course.status === '2')) {
             return <div className="course-title joy-soon">待推出</div>;
@@ -53,10 +53,13 @@ export default class CardCourse extends Component {
     }
 
     render() {
-        const { course, hover, layout, actions } = this.props;
+        const { value, hover, layout } = this.props;
         // alert(JSON.stringify(course))
-        const url = `//www.bstcine.com/f/${course.img}`;
-        const href = `/content/course?cid=${course.id}`;
+        const url = `//www.bstcine.com/f/${value.img}`;
+        const href = `/content/course?cid=${value.id}`;
+
+        if (typeof value.img === 'undefined' || !value.img) return <div />;
+
         return (
             <CCard href={href} hover={hover}>
                 <div className="cardCourse">
@@ -70,10 +73,10 @@ export default class CardCourse extends Component {
                     </LazyLoad>
 
                     <div className="course-desc">
-                        <div className="text-title">{course.name}</div>
-                        {this.renderAuthor(course)}
-                        {this.renderTimeArrange(course)}
-                        {this.displayPrice(course)}
+                        <div className="text-title">{value.name}</div>
+                        {this.renderAuthor(value)}
+                        {this.renderTimeArrange(value)}
+                        {this.displayPrice(value)}
                     </div>
                 </div>
             </CCard>

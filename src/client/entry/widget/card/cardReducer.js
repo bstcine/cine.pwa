@@ -6,6 +6,7 @@ const initialState = fromJS({
     order: card.result,
     course: sub.result.course,
     teacher: sub.result.teacher,
+    article: sub.result.article,
     isOpenDetail: false,
 });
 

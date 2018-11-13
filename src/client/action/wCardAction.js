@@ -88,6 +88,7 @@ export const wCardAction = {
             });
             result.rows = newRows;
             dispatch(wCardAction._receive(result));
+            dispatch(wCardAction.playPhonetic());
         }
     },
     // 改变自动播放状态

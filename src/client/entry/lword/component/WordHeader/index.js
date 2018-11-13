@@ -4,6 +4,8 @@
 import React from 'react';
 import { CButton } from '@/component/_base';
 import siteCodeUtil from '@/util/sitecodeUtil';
+import { SITECODE } from '@/constant/index';
+import storeUtil from '@/util/storeUtil';
 import { addParam } from '@/util/urlUtil';
 import '../../asset/style/WordHeader.less';
 
@@ -35,7 +37,7 @@ class WordHeader extends React.PureComponent {
         location.href = cardHref;
     }
     render() {
-        if (siteCodeUtil.inIOSAPP()) {
+        if (storeUtil.getSiteCode() === SITECODE.IOS_IPHONE) {
             return null;
         }
         let {

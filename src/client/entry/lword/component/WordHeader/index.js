@@ -27,7 +27,10 @@ class WordHeader extends React.PureComponent {
         }
     }
     gotoList() {
-        let { param } = this.props;
+        let { param, isAutoChangeWord, actions } = this.props;
+        if (isAutoChangeWord) {
+            actions.changeAutoChangeWordStatus();
+        }
         let listHref = addParam('/lword/list', param);
         location.href = listHref;
     }

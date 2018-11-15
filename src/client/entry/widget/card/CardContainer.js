@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import gAction from '@/g/action';
+import cardAction from '@/action/cCardAction';
 import CardDemo from './component';
 
 class OrderContainer extends Component {
@@ -37,7 +37,7 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => ({
-    actions: bindActionCreators(gAction, dispatch),
+    actions: bindActionCreators(cardAction, dispatch),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(OrderContainer);

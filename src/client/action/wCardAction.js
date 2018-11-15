@@ -88,6 +88,7 @@ export const wCardAction = {
             });
             result.rows = newRows;
             dispatch(wCardAction._receive(result));
+            dispatch(wCardAction.playPhonetic());
         }
     },
     // 改变自动播放状态
@@ -338,6 +339,7 @@ export const wCardAction = {
         let reducer = getState().WordCardRedu;
         let currentIndex = reducer.get('currentIndex');
         let result = reducer.get('result');
+        console.log('播放执行: ', currentIndex, result);
         if (!result || !result.rows || result.rows.length <= currentIndex) {
             return;
         }
@@ -347,6 +349,7 @@ export const wCardAction = {
             voice_url = voice_url_a;
         }
         let player = reducer.get('player');
+        console.log('播放器: ', player);
         player.src = 'http://oss.bstcine.com/word/top10000/' + voice_url;
         player.play();
     },

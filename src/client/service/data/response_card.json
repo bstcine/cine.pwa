@@ -1,13 +1,16 @@
 {
     "result": [
         {
+            "id": 1,
             "cover": "https://z0.muscache.cn/im/pictures/66285187/1973c1a5_original.jpg?aki_policy=large",
             "sub_title": "Entire cabin.Armenica",
             "title": "Stay in Britain's favourite Castle",
             "price": "$1,410",
-            "favorite": 1
+            "favorite": 1,
+            "like_status": 1
         },
         {
+            "id": 2,
             "cover": "https://z0.muscache.cn/im/pictures/16938962/5b8df046_original.jpg?aki_policy=large",
             "sub_title": "Entire cabin.Armenica",
             "title": "Barcelona by bike: sightseeing & tapas",
@@ -15,6 +18,7 @@
             "favorite": 2
         },
         {
+            "id": 3,
             "cover": "http://www.bstcine.com/f/2018/07/10/14072138Sm6kngW.jpg",
             "sub_title": "Entire cabin.Armenica",
             "title": "Romantic Cabana with view",
@@ -22,6 +26,7 @@
             "favorite": 3
         },
         {
+            "id": 4,
             "cover": "https://z0.muscache.cn/im/pictures/a7e59c75-a34d-4964-81e4-894e9b6afa66.jpg?aki_policy=large",
             "sub_title": "Exquisito apartamento con espacios abiertos y luz",
             "title": "Romantic Cabana with view",
@@ -29,21 +34,26 @@
             "favorite": 4
         },
         {
+            "id": 5,
             "cover": "https://z0.muscache.cn/im/pictures/63925564/c99277b7_original.jpg?aki_policy=large",
             "sub_title": "Entire cabin.Armenica",
             "title": "Romantic Cabana with view",
             "price": "$1,710",
-            "favorite": 5
+            "favorite": 5,
+            "like_status": 0
         },
         {
+            "id": 6,
             "cover": "https://z0.muscache.cn/im/pictures/307a5575-c3a4-4b21-8127-a37875ec1239.jpg?aki_policy=large",
             "sub_title": "Entire cabin.Armenica",
             "title": "Magical CENOTEs experience from Cancun experience from Cancun",
             "price": "$1,210",
             "original_price": "$1,810",
-            "favorite": 6
+            "favorite": 6,
+            "like_status": 1
         },
         {
+            "id": 7,
             "cover": "https://z0.muscache.cn/im/pictures/45989d51-9f06-4015-9dd9-51842093f883.jpg?aki_policy=large",
             "sub_title": "Entire cabin.Armenica",
             "title": "Private East Zion Slot Canyon Tour",
@@ -51,6 +61,7 @@
             "favorite": 7
         },
         {
+            "id": 8,
             "cover": "https://z0.muscache.cn/im/pictures/70337aa1-4ca2-4cc8-a1e9-fa1e3311006b.jpg?aki_policy=large",
             "sub_title": "Entire cabin.Armenica",
             "title": "Magical CENOTEs experience from Cancun",
@@ -59,13 +70,16 @@
         },
     
         {
+            "id": 9,
             "cover": "https://z0.muscache.cn/im/pictures/26003118/06bf6fed_original.jpg?aki_policy=large",
             "sub_title": "Entire cabin.Armenica",
             "title": "Cozy apartment  perfect situation - metro & WIFI & Gym",
             "price": "$1,410",
-            "favorite": 9
+            "favorite": 9,
+            "like_status": 1
         },
         {
+            "id": 10,
             "cover": "https://z0.muscache.cn/im/pictures/4913397/d2084422_original.jpg?aki_policy=large",
             "sub_title": "Entire cabin.Armenica",
             "title": "Private East Zion Slot Canyon Tour",
@@ -73,6 +87,7 @@
             "favorite": 10
         },
         {
+            "id": 11,
             "cover": "http://www.bstcine.com/f/2018/07/10/14072138Sm6kngW.jpg",
             "sub_title": "Entire cabin.Armenica",
             "title": "Romantic Cabana with view",

@@ -4,6 +4,8 @@
 import React from 'react';
 import { CButton } from '@/component/_base';
 import siteCodeUtil from '@/util/sitecodeUtil';
+import { SITECODE } from '@/constant/index';
+import storeUtil from '@/util/storeUtil';
 import { addParam } from '@/util/urlUtil';
 import '../../asset/style/WordHeader.less';
 
@@ -25,7 +27,10 @@ class WordHeader extends React.PureComponent {
         }
     }
     gotoList() {
-        let { param } = this.props;
+        let { param, isAutoChangeWord, actions } = this.props;
+        if (isAutoChangeWord) {
+            actions.changeAutoChangeWordStatus();
+        }
         let listHref = addParam('/lword/list', param);
         location.href = listHref;
     }
@@ -35,7 +40,7 @@ class WordHeader extends React.PureComponent {
         location.href = cardHref;
     }
     render() {
-        if (siteCodeUtil.inIOSAPP()) {
+        if (storeUtil.getSiteCode() === SITECODE.IOS_IPHONE) {
             return null;
         }
         let {

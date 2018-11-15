@@ -14,6 +14,7 @@ import {
 } from '@/component/_base';
 import Player from '@/component/Player';
 import CLoginModal from "@/component/CLoginModal";
+import {CBind} from '@/component/Auth'
 
 class Container extends Component {
     constructor(props) {
@@ -38,7 +39,12 @@ class Container extends Component {
             isBottomFixedDrawerOpen,
         } = this.state;
         return (
-            <div className="cine-widget widget_btn">
+            <div className="cine-widget">
+                <CPanel className='ta'>
+                    <CBind></CBind>
+
+
+                </CPanel>
                 <CFloatingButton>查看</CFloatingButton>
 
                 <CPanel title="Player">
@@ -48,7 +54,7 @@ class Container extends Component {
                     <CFloatingButton icon="pets" color="secondary" />
                     <Player src={this.loadMedia} />
                 </CPanel>
-                <CPanel title="CButton">
+                <CPanel title="CButton" className='widget_btn'>
                     <div>
                         <CButton icon="home" />
                         <CButton

@@ -3,6 +3,7 @@ import ReactModal from 'react-modal';
 import '@/asset/style/modal.less';
 import * as Service from '@/service/base';
 import errorMsg from '@/util/errorMsg';
+import { CButton } from "@/component/_base";
 
 export default class LoginModal extends Component {
     constructor(props) {
@@ -43,7 +44,7 @@ export default class LoginModal extends Component {
         if (res.except_case_desc) {
             return alert(errorMsg(res.except_case_desc));
         }
-        this.props.onLoginSuccess();
+        this.props.onSuccess();
     }
 
     render() {
@@ -92,6 +93,8 @@ export default class LoginModal extends Component {
                 </form>
                 <div className="login-bottom">
                     <a href="/resetPassword">忘记密码？</a>
+
+                    <CButton href={CLoginModal.getWxHref()} target="_blank">微信PC登录</CButton>
                 </div>
             </ReactModal>
         );

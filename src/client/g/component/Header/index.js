@@ -76,10 +76,14 @@ const Brand = () => (
 );
 
 const HeaderImg = ({ user }) => {
-    let img =
-        user && user.head_image
-            ? `//www.bstcine.com/f/${user.head_image}`
-            : require('@/asset/image/ico_headpic.png');
+    let img = require('@/asset/image/ico_headpic.png');
+    if (user && user.head_image) {
+        if (user.head_image.startsWith('http')) {
+            img = user.head_image;
+        } else {
+            img = `//www.bstcine.com/f/${user.head_image}`;
+        }
+    }
     return <img src={img} alt="HeaderImg" />;
 };
 

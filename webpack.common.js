@@ -22,6 +22,7 @@ const pages = [
     'quiz',
     'mentor',
     'widget',
+    'auth',
 ];
 
 let entry = {};

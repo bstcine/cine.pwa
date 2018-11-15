@@ -1,9 +1,23 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import { CButton, CModal } from '@/component/_base';
-import uaUtil from '@/util/uaUtil';
+import LoginModal from '@/component/LoginModal';
 
 class CLoginModal extends Component {
+    static onClickWechatLogin() {
+        location.href =
+            '//www.bstcine.com/wechat/auth?redirect=' +
+            encodeURIComponent(location.href) +
+            '&scope=snsapi_userinfo';
+    }
+
+    static getWxHref() {
+        let url =
+            'http://www.bstcine.com/wechat/auth?redirect=' +
+            encodeURIComponent(location.href) +
+            '&scope=snsapi_login';
+        return url;
+    }
+
     constructor(props) {
         super(props);
         this.state = {
@@ -11,44 +25,13 @@ class CLoginModal extends Component {
         };
     }
 
-    static onClickWechatLogin() {
-        if (uaUtil.wechat()) {
-            location.href =
-                '//www.bstcine.com/wechat/auth?redirect=' +
-                encodeURIComponent(location.href);
-        } else {
-            let url = `http://${
-                location.host
-            }/wechat/authcallback?redirect=${encodeURIComponent(
-                encodeURIComponent(location.href)
-            )}&silent=0`;
-            new window.WxLogin({
-                self_redirect: true,
-                id: 'wxQrcode',
-                appid: 'wx795e91473044e6fd',
-                scope: 'snsapi_login',
-                redirect_uri: url,
-            });
-        }
-    }
-
     render() {
-        return (
-            <CModal {...this.props}>
-                <CButton onClick={CLoginModal.onClickWechatLogin}>
-                    微信登录
-                </CButton>
-                <div id="wxQrcode" />
-            </CModal>
-        );
+        const { isOpen, onSuccess } = this.props;
+        return <LoginModal isOpen={isOpen} onSuccess={onSuccess} />;
     }
 }
 
-CLoginModal.open = function(props) {
-    const div = document.createElement('div');
-    document.body.appendChild(div);
-    const currentProps = { ...props, close, isOpen: true };
-
+CLoginModal.open = function({ onSuccess }) {
     function render(currentProps) {
         ReactDOM.render(<CLoginModal {...currentProps} />, div);
     }
@@ -58,6 +41,11 @@ CLoginModal.open = function(props) {
             div.parentNode.removeChild(div);
         }
     }
+
+    const div = document.createElement('div');
+    document.body.appendChild(div);
+    const currentProps = { onSuccess, close, isOpen: true };
+
     render(currentProps);
     return {
         close,

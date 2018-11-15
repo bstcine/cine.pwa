@@ -1,0 +1,73 @@
+@import '~asset/style/_cine.less';
+
+.cine-auth__container {
+    width: 6rem;
+    padding: 0.72rem 0.48rem 0.48rem;
+    background-color: #fff;
+
+}
+
+.cine_auth__title {
+    font-size: 0.4rem;
+    color: #333;
+    margin-bottom: 0.3rem;
+
+    span a {
+        float: right;
+        font-size: 0.28rem;
+        color: #969696;
+    }
+}
+
+.cine_auth__form {
+    border: 1px solid #c8c8c8;
+    border-radius: 0.06rem;
+    margin-bottom: 0.4rem;
+    background-color: hsla(0, 0%, 71%, 0.1);
+}
+
+.cine_auth__form-control {
+    border-bottom: 1px solid #c8c8c8;
+    height: 1rem;
+    display: flex;
+    align-items: center;
+    padding-right: 0.2rem;
+
+    &:last-child {
+        border-bottom: none;
+    }
+
+    .cine-icon {
+        line-height: 1rem;
+        font-size: 0.4rem;
+        color: #969696;
+        width: 0.7rem;
+        text-align: center;
+    }
+
+    select {
+        height: 0.6rem;
+        width: 1.4rem;
+    }
+
+    input {
+        height: 1rem;
+        width: 100%;
+        flex: 1 0;
+        border: none;
+        background: transparent;
+        padding: 0 0.2rem;
+        font-size: 0.28rem;
+    }
+}
+.cine_auth__auth-code {
+    input {
+        padding: 0;
+    }
+}
+
+@media @media-up-xs {
+    .cine-auth__container {
+        width: 7.2rem;
+    }
+}

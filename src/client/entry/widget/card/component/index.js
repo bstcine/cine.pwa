@@ -1,7 +1,7 @@
 import React from 'react';
 import './../../asset/style/card.less';
 import { CPanel, CDrawer, CButton } from '@/component/_base';
-import { SideBarDemo } from '@/component/_base/navigation';
+import { SideBarSubPage } from '@/component/SideBar/SubPage';
 import CardExList from './CardList';
 
 export default class CardDemo extends React.PureComponent {
@@ -10,6 +10,25 @@ export default class CardDemo extends React.PureComponent {
         this.state = {
             isRightDrawerOpen: false,
         };
+        this.onChange = this.onChange.bind(this);
+        this.ref = React.createRef();
+    }
+
+    onChange(sb_value) {
+        let nav = this.ref.current;
+        let scrollY = 0;
+        switch (sb_value) {
+            case 'course':
+                break;
+            case 'article':
+                scrollY =
+                    nav.getBoundingClientRect().top +
+                    document.documentElement.scrollTop;
+                window.scrollTo(0, scrollY);
+                break;
+            case 'teacher':
+                break;
+        }
     }
 
     render() {
@@ -21,7 +40,7 @@ export default class CardDemo extends React.PureComponent {
         // alert(JSON.stringify(orders));
         return (
             <React.Fragment>
-                <SideBarDemo value="course"/>
+                <SideBarSubPage value="course" onChange={this.onChange} />
                 <CPanel title="核心课程">
                     <CardExList
                         type="course"
@@ -36,13 +55,15 @@ export default class CardDemo extends React.PureComponent {
                         layout="245"
                     />
                 </CPanel>
-                <CPanel title="精彩文章" className="bgblue">
-                    <CardExList
-                        type="article"
-                        orders={articleList}
-                        layout="112"
-                    />
-                </CPanel>
+                <div ref={this.ref}>
+                    <CPanel title="精彩文章" className="bgblue">
+                        <CardExList
+                            type="article"
+                            orders={articleList}
+                            layout="112"
+                        />
+                    </CPanel>
+                </div>
 
                 <CPanel title="AIRBNB" className="showDrawer">
                     <CDrawer

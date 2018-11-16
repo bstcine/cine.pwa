@@ -11,6 +11,7 @@ import Drawer from './Drawer';
 import Modal from './Modal';
 import Toast from './Toast';
 import Card, { CardContainer } from './Card';
+import { Navigation, NavItem } from './Navigation';
 
 const CFlatButton = props => {
     return <FlatButton {...props} />;
@@ -45,4 +46,6 @@ export {
     Icon as CIcon,
     Modal as CModal,
     Toast as CMessage,
+    Navigation as CNavigation,
+    NavItem as CNavItem,
 };

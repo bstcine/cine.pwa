@@ -23,6 +23,7 @@ import { APIURL_Order_Create } from '@/../APIConfig';
 import { CDrawer, CMessage } from '@/component/_base';
 import QRCode from '@/component/QRCode';
 import LotteryCoupon from '@/entry/temp/component/DrawCoupon';
+import authUtil from '@/util/authUtil';
 
 export default class Course extends Component {
     constructor(props) {
@@ -38,7 +39,6 @@ export default class Course extends Component {
         this.handleBuy = this.handleBuy.bind(this);
         this.handleLearn = this.handleLearn.bind(this);
         this.handleShare = this.handleShare.bind(this);
-        this.onLoginSuccess = this.onLoginSuccess.bind(this);
         this.relatedCourse = this.relatedCourse.bind(this);
         this.toggleLoginModal = this.toggleLoginModal.bind(this);
         this.getUserName = this.getUserName.bind(this);
@@ -175,25 +175,12 @@ export default class Course extends Component {
         }
     }
 
-    async login() {
-        if (siteCodeUtil.inIOSAPP()) {
-            let { token } = await Bridge.ios(BRIDGE_EVENT.LOGIN);
-            storeUtil.setToken(token);
-            this.onLoginSuccess(token);
-        } else if (siteCodeUtil.inAndroidAPP()) {
-            let { token } = await Bridge.android(BRIDGE_EVENT.LOGIN);
-            storeUtil.setToken(token);
-            this.onLoginSuccess(token);
-        } else {
-            this.toggleLoginModal();
-        }
+    login() {
+        authUtil.login(() => {
+            this.initData();
+        });
     }
 
-    async onLoginSuccess() {
-        // alert(`token ${token}`);
-        this.setState({ showLoginModal: false });
-        this.initData();
-    }
 
     async handleShare(need_login = true, type = 4) {
         if (need_login && !this.state.user) {
@@ -296,11 +283,7 @@ export default class Course extends Component {
                             <div className="course-detail" />
                         )}
 
-                        <LoginModal
-                            isOpen={showLoginModal}
-                            toggleModal={this.toggleLoginModal}
-                            onLoginSuccess={this.onLoginSuccess}
-                        />
+
 
                         <CDrawer
                             fullscreen={uaUtil.phone()}

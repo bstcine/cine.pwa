@@ -11,15 +11,30 @@ const authUtil = {
         if (siteCodeUtil.inIOSAPP()) {
             let { token } = await Bridge.ios(BRIDGE_EVENT.LOGIN);
             storeUtil.setToken(token);
-            onSuccess && onSuccess();
+            if (onSuccess) {
+                onSuccess();
+            } else {
+                location.reload();
+            }
         } else if (siteCodeUtil.inAndroidAPP()) {
             let { token } = await Bridge.android(BRIDGE_EVENT.LOGIN);
             storeUtil.setToken(token);
-            onSuccess && onSuccess();
+            if (onSuccess) {
+                onSuccess();
+            } else {
+                location.reload();
+            }
         } else if (uaUtil.wechat()) {
             authUtil.goWechatAuth();
         } else {
-            LoginModal.open(onSuccess);
+            let modal = LoginModal.open(() => {
+                modal.close();
+                if (onSuccess) {
+                    onSuccess();
+                } else {
+                    location.reload();
+                }
+            });
         }
     },
     goWechatAuth: () => {

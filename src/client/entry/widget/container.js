@@ -13,7 +13,6 @@ import {
     CModal,
 } from '@/component/_base';
 import Player from '@/component/Player';
-import CLoginModal from '@/component/CLoginModal';
 import { CBind } from '@/component/Auth';
 import authUtil from '@/util/authUtil';
 

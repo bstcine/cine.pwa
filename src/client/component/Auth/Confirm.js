@@ -14,9 +14,9 @@ class Confirm extends Component {
             <div className="cine-auth__container">
                 <div className="cine_auth__title">
                     登录善恩
-                    <span>
-                        <a href="/login">切换账号</a>
-                    </span>
+                    {/*<span>*/}
+                        {/*<a href="/login">切换账号</a>*/}
+                    {/*</span>*/}
                 </div>
 
                 <div className="cine_auth__profile">

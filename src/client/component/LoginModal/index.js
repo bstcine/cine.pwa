@@ -4,7 +4,8 @@ import '@/asset/style/modal.less';
 import * as Service from '@/service/base';
 import errorMsg from '@/util/errorMsg';
 import { CButton } from "@/component/_base";
-import CLoginModal from "@/component/CLoginModal";
+import ReactDOM from "react-dom";
+import authUtil from "@/util/authUtil";
 
 export default class LoginModal extends Component {
     constructor(props) {
@@ -21,7 +22,7 @@ export default class LoginModal extends Component {
     }
 
     handleCloseModal() {
-        this.props.toggleModal();
+        this.props.close();
     }
 
     handleUsername(e) {
@@ -95,9 +96,31 @@ export default class LoginModal extends Component {
                 <div className="login-bottom">
                     <a href="/resetPassword">忘记密码？</a>
 
-                    <CButton href={CLoginModal.getWxHref()} target="_blank">微信PC登录</CButton>
+                    <CButton block onClick={authUtil.goWechatQrAuth} target="_blank" icon='ci-wechat'>微信登录</CButton>
                 </div>
             </ReactModal>
         );
     }
 }
+
+
+LoginModal.open = function(onSuccess) {
+    function render(currentProps) {
+        ReactDOM.render(<LoginModal {...currentProps} />, div);
+    }
+    function close() {
+        const unmountResult = ReactDOM.unmountComponentAtNode(div);
+        if (unmountResult && div.parentNode) {
+            div.parentNode.removeChild(div);
+        }
+    }
+
+    const div = document.createElement('div');
+    document.body.appendChild(div);
+    const currentProps = { onSuccess, close, isOpen: true };
+
+    render(currentProps);
+    return {
+        close,
+    };
+};

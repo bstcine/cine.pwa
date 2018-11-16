@@ -81,8 +81,8 @@ class Bind extends Component {
                             }}
                         >
                             {phoneCode.map(({ code, name }) => (
-                                <option value={code} key={code}>
-                                    {`${name} +${code}`}
+                                <option value={code} key={code + name}>
+                                    {`+${code} ${name}`}
                                 </option>
                             ))}
                         </select>

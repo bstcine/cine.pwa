@@ -1,15 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { createStore, applyMiddleware } from 'redux';
-import thunk from 'redux-thunk';
-import { Provider } from 'react-redux';
-import { URL_Auth_Bind } from '@/constant/menuItemUrl';
+import { URL_Auth_Bind, URL_Auth_Confirm } from "@/constant/menuItemUrl";
 import Entry from '@/component/Entry';
 import { GRouter } from '@/g/component';
-import rootReducer from './reducer';
 import BindPage from '@/entry/auth/container/BindPage';
-const store = createStore(rootReducer, applyMiddleware(thunk));
 import '@/entry/auth/asset/style/index.less';
+import ConfirmPage from "@/entry/auth/container/ConfirmPage";
 
 const routes = [
     {
@@ -18,14 +14,18 @@ const routes = [
         exact: true,
         checkAuth: false,
     },
+    {
+        path: URL_Auth_Confirm,
+        component: ConfirmPage,
+        exact: true,
+        checkAuth: false,
+    },
 ];
 
 class Learn extends Entry {
     render() {
         return (
-            <Provider store={store}>
                 <GRouter routes={routes} />
-            </Provider>
         );
     }
 }

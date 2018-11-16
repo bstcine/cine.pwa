@@ -31,3 +31,4 @@ export const URL_Auth_Signin = '/auth/signin';
 export const URL_Auth_Signup = '/auth/signup';
 export const URL_Auth_ResetPwd = '/auth/resetpwd';
 export const URL_Auth_Bind = '/auth/bind';
+export const URL_Auth_Confirm = '/auth/confirm';

@@ -5,6 +5,7 @@ export const componentNames = {
     Card: `${baseprefix}-card`,
     Modal: `${baseprefix}-modal`,
     Drawer: `${baseprefix}-drawer`,
+    Navigation: `${baseprefix}-navigation`,
     FloatingBox: `${baseprefix}-floating-box`,
     Mask: `${baseprefix}-mask`,
     Panel: `${baseprefix}-panel`,

@@ -1,6 +1,7 @@
 import React from 'react';
 import './../../asset/style/card.less';
 import { CPanel, CDrawer, CButton } from '@/component/_base';
+import { SideBarDemo } from '@/component/_base/navigation';
 import CardExList from './CardList';
 
 export default class CardDemo extends React.PureComponent {
@@ -20,6 +21,7 @@ export default class CardDemo extends React.PureComponent {
         // alert(JSON.stringify(orders));
         return (
             <React.Fragment>
+                <SideBarDemo value="course"/>
                 <CPanel title="核心课程">
                     <CardExList
                         type="course"

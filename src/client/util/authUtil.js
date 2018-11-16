@@ -11,15 +11,15 @@ const authUtil = {
         if (siteCodeUtil.inIOSAPP()) {
             let { token } = await Bridge.ios(BRIDGE_EVENT.LOGIN);
             storeUtil.setToken(token);
-            onSuccess();
+            onSuccess && onSuccess();
         } else if (siteCodeUtil.inAndroidAPP()) {
             let { token } = await Bridge.android(BRIDGE_EVENT.LOGIN);
             storeUtil.setToken(token);
-            onSuccess();
+            onSuccess && onSuccess();
         } else if (uaUtil.wechat()) {
             authUtil.goWechatAuth();
         } else {
-            CLoginModal.open({onSuccess});
+            CLoginModal.open(onSuccess);
         }
     },
     goWechatAuth: () => {

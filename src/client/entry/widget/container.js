@@ -13,8 +13,9 @@ import {
     CModal,
 } from '@/component/_base';
 import Player from '@/component/Player';
-import CLoginModal from "@/component/CLoginModal";
-import {CBind} from '@/component/Auth'
+import CLoginModal from '@/component/CLoginModal';
+import { CBind } from '@/component/Auth';
+import authUtil from '@/util/authUtil';
 
 class Container extends Component {
     constructor(props) {
@@ -40,10 +41,17 @@ class Container extends Component {
         } = this.state;
         return (
             <div className="cine-widget">
-                <CPanel className='ta'>
-                    <CBind></CBind>
-
-
+                <CPanel>
+                    <CButton
+                        onClick={() => {
+                            authUtil.login();
+                        }}
+                    >
+                        登录
+                    </CButton>
+                </CPanel>
+                <CPanel className="ta">
+                    <CBind />
                 </CPanel>
                 <CFloatingButton>查看</CFloatingButton>
 
@@ -54,7 +62,7 @@ class Container extends Component {
                     <CFloatingButton icon="pets" color="secondary" />
                     <Player src={this.loadMedia} />
                 </CPanel>
-                <CPanel title="CButton" className='widget_btn'>
+                <CPanel title="CButton" className="widget_btn">
                     <div>
                         <CButton icon="home" />
                         <CButton
@@ -684,13 +692,6 @@ class Container extends Component {
                             </CButton>
                         </div>
                     </CDrawer>
-                </CPanel>
-
-                <CPanel>
-                    <CButton onClick={()=>{
-                        CLoginModal.open()
-                    }}>登录</CButton>
-
                 </CPanel>
             </div>
         );

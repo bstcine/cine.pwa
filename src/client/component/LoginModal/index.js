@@ -4,6 +4,7 @@ import '@/asset/style/modal.less';
 import * as Service from '@/service/base';
 import errorMsg from '@/util/errorMsg';
 import { CButton } from "@/component/_base";
+import CLoginModal from "@/component/CLoginModal";
 
 export default class LoginModal extends Component {
     constructor(props) {
@@ -44,7 +45,7 @@ export default class LoginModal extends Component {
         if (res.except_case_desc) {
             return alert(errorMsg(res.except_case_desc));
         }
-        this.props.onSuccess();
+        this.props.onSuccess && this.props.onSuccess();
     }
 
     render() {

@@ -31,7 +31,7 @@ class CLoginModal extends Component {
     }
 }
 
-CLoginModal.open = function({ onSuccess }) {
+CLoginModal.open = function(onSuccess) {
     function render(currentProps) {
         ReactDOM.render(<CLoginModal {...currentProps} />, div);
     }

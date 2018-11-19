@@ -2,16 +2,15 @@
 
 .cine-auth__container {
     width: 6rem;
-    padding: 0.72rem 0.48rem 0.48rem;
     background-color: #fff;
 }
 
 .cine_auth__title {
     font-size: 0.4rem;
-    color: #333;
+    color: #014292;
     margin-bottom: 0.6rem;
 
-    span a {
+    a {
         float: right;
         font-size: 0.28rem;
         color: #969696;
@@ -50,12 +49,12 @@
     }
 
     input {
-        height: 1rem;
+        height: .8rem;
         width: 100%;
         flex: 1 0;
         border: none;
         background: transparent;
-        padding: 0 0.2rem;
+        //padding: 0 0.2rem;
         font-size: 0.28rem;
     }
 }
@@ -87,8 +86,53 @@
     color: #333;
 }
 
+
+
+.cine_auth__social {
+    margin-top: 1rem;
+    color: #b5b5b5;
+
+    .line-through {
+        font-size: 0.24rem;
+        position: relative;
+        text-align: center;
+        margin-bottom: 0.3rem;
+
+        &:before {
+            right: 30px;
+        }
+        &:after {
+            left: 30px;
+        }
+        &:before,
+        &:after {
+            content: '';
+            border-top: 1px solid #b5b5b5;
+            display: block;
+            position: absolute;
+            width: 60px;
+            top: 5px;
+        }
+    }
+
+    .cine_auth__apps {
+        text-align: center;
+    }
+    .cine_auth__app {
+        cursor: pointer;
+        &:hover {
+            opacity: 0.9;
+        }
+    }
+    .cine_auth__app--wechat {
+        color: #00bb29;
+        font-size: 0.56rem;
+    }
+}
+
 @media @media-up-xs {
     .cine-auth__container {
         width: 7.2rem;
+        padding: 0.8rem 0.5rem 0.5rem;
     }
 }

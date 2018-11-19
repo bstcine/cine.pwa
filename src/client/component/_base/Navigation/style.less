@@ -1,0 +1,42 @@
+@import '../style';
+
+.@{navigation} {
+    // position: absolute !important;
+    // top: 0px;
+    right: 50%;
+    transform: translateX(18.8rem /2) translateX(105%);
+    background-color: #fff;
+    min-width: 186px;
+    padding: 0.3rem 0.24rem;
+    border: 1px solid #eaf1f6;
+    box-shadow: 0 0.1rem 0.06rem 0 rgba(219, 230, 240, 0.1);
+    border-radius: 3px;
+}
+
+.@{navigation}__Box {
+    display: block;
+    position: relative;
+
+    .navigation {
+        .cine-navigation();
+        position: absolute;
+        top: 0px;
+    }
+}
+
+.@{navigation}__Fixed {
+    display: block;
+
+    .navigation {
+        .cine-navigation();
+        position: fixed;
+        top: 5px;
+    }
+}
+
+.@{navigation}__item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 36px;
+}

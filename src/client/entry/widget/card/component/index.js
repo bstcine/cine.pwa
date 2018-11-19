@@ -1,6 +1,7 @@
 import React from 'react';
 import './../../asset/style/card.less';
 import { CPanel, CDrawer, CButton } from '@/component/_base';
+import { SideBarSubPage } from '@/component/SideBar/SubPage';
 import CardExList from './CardList';
 
 export default class CardDemo extends React.PureComponent {
@@ -9,40 +10,39 @@ export default class CardDemo extends React.PureComponent {
         this.state = {
             isRightDrawerOpen: false,
         };
+        this.onChange = this.onChange.bind(this);
+        this.ref = React.createRef();
+    }
+
+    onChange(sb_value) {
+        let nav = this.ref.current;
+        let scrollY = 0;
+        switch (sb_value) {
+            case 'course':
+                break;
+            case 'article':
+                if (nav) {
+                    scrollY =
+                        nav.getBoundingClientRect().top +
+                        document.documentElement.scrollTop;
+                    window.scrollTo(0, scrollY);
+                }
+
+                break;
+            case 'teacher':
+                break;
+        }
     }
 
     render() {
-        const { orders, courses, teachers, articles, actions } = this.props;
+        const { orders, actions } = this.props;
         const orderlist = orders.toJS();
-        const courseList = courses.toJS();
-        const teacherList = teachers.toJS();
-        const articleList = articles.toJS();
         // alert(JSON.stringify(orders));
         return (
             <React.Fragment>
-                <CPanel title="核心课程">
-                    <CardExList
-                        type="course"
-                        orders={courseList}
-                        layout="234"
-                    />
-                </CPanel>
-                <CPanel title="私塾导师" className="bgblue">
-                    <CardExList
-                        type="teacher"
-                        orders={teacherList}
-                        layout="245"
-                    />
-                </CPanel>
-                <CPanel title="精彩文章" className="bgblue">
-                    <CardExList
-                        type="article"
-                        orders={articleList}
-                        layout="112"
-                    />
-                </CPanel>
+                <SideBarSubPage value="course" onChange={this.onChange} />
 
-                <CPanel title="AIRBNB" className="showDrawer">
+                <CPanel title="AIRBNB" className="show-drawer">
                     <CDrawer
                         anchor="right"
                         className="vertical_content"

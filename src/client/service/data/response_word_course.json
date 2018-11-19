@@ -3,7 +3,7 @@
     "result": [
         {
             "id": 1,
-            "cover": "https://static-cine-oss.oss-cn-shanghai.aliyuncs.com/f/word/wc_10000.png",
+            "cover": "http://static.bstcine.com/m/lword/wc_10000.png",
             "title": "善恩核心10000词汇",
             "href": "/lword/course",
             "status": 1
@@ -11,14 +11,14 @@
         },
         {
             "id": 2,
-            "cover": "https://static-cine-oss.oss-cn-shanghai.aliyuncs.com/f/word/wc_sat.png",
+            "cover": "http://static.bstcine.com/m/lword/wc_sat.png",
             "title": "SAT 核心词汇",
             "href": "/lword/course?id=sat",
             "status": -1
         },
         {
             "id": 3,
-            "cover": "https://static-cine-oss.oss-cn-shanghai.aliyuncs.com/f/word/wc_toefl.png",
+            "cover": "http://static.bstcine.com/m/lword/wc_toefl.png",
             "title": "TOEFL 核心词汇",
             "href": "/lword/course?id=tf",
             "status": -1

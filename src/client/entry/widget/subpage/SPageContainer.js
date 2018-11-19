@@ -2,23 +2,22 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import cardAction from '@/action/cCardAction';
-import CardDemo from './component';
+import SubPage from './component';
 
-class CardContainer extends Component {
+class SPageContainer extends Component {
     componentDidMount() {
         // this.props.actions.loadUserCoupon();
     }
 
     render() {
-        let { orders, courses, teachers, articles, isOpenDetail, actions } = this.props;
+        let { courses, teachers, articles, comments, actions } = this.props;
         return (
             <React.Fragment>
-                <CardDemo
-                    isOpenDetail={isOpenDetail}
-                    orders={orders}
+                <SubPage        
                     courses={courses}
                     teachers={teachers}
                     articles={articles}
+                    comments={comments}
                     actions={actions}
                 />
             </React.Fragment>
@@ -28,11 +27,10 @@ class CardContainer extends Component {
 
 const mapStateToProps = state => {
     return {
-        orders: state.cardRedu.get('order'),
-        courses: state.cardRedu.get('course'),
-        teachers: state.cardRedu.get('teacher'),
-        articles: state.cardRedu.get('article'),
-        isOpenAdd: state.cardRedu.get('isOpenDetail'),
+        courses: state.spageRedu.get('course'),
+        teachers: state.spageRedu.get('teacher'),
+        articles: state.spageRedu.get('article'), 
+        comments: state.spageRedu.get('comment'), 
     };
 };
 
@@ -40,4 +38,4 @@ const mapDispatchToProps = dispatch => ({
     actions: bindActionCreators(cardAction, dispatch),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(CardContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(SPageContainer);

@@ -23,6 +23,7 @@ const pages = [
     'mentor',
     'widget',
     'auth',
+    'csub',
 ];
 
 let entry = {};

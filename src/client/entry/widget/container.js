@@ -42,9 +42,6 @@ class Container extends Component {
         return (
             <div className="cine-widget">
                 <CPanel>
-                    <CButton onClick={()=>{
-                        CAuthModal.open()
-                    }}>登录模态框</CButton>
                     <CButton
                         onClick={() => {
                             authUtil.login();
@@ -53,9 +50,7 @@ class Container extends Component {
                         登录
                     </CButton>
                 </CPanel>
-                <CPanel className="ta">
-                    <CBind />
-                </CPanel>
+
                 <CFloatingButton>查看</CFloatingButton>
 
                 <CPanel title="Player">

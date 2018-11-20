@@ -7,6 +7,8 @@ import Api from '../../../APIConfig';
 import errorMsg from '@/util/errorMsg';
 import { CMessage } from '@/component/_base';
 import { getParam } from '@/util/urlUtil';
+import QRHelp from '@/component/QRHelp';
+import { Link } from 'react-router-dom';
 
 class Bind extends Component {
     constructor(props) {
@@ -66,9 +68,6 @@ class Bind extends Component {
             <div className="cine-auth__container">
                 <div className="cine_auth__title">
                     绑定手机
-                    {/*<span>*/}
-                        {/*<a href="/login">返回登录</a>*/}
-                    {/*</span>*/}
                 </div>
 
                 <div className="cine_auth__form">
@@ -119,6 +118,7 @@ class Bind extends Component {
                         </CButton>
                     </div>
                 </div>
+
 
                 <CButton
                     block

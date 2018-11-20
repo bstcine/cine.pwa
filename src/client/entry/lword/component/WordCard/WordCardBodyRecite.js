@@ -35,7 +35,6 @@ class WordCardBodyRecite extends React.PureComponent {
         actions.changeKnownStatus();
     }
     playPhonetic(event) {
-        alert('手势及按键');
         event.stopPropagation();
         let { actions } = this.props;
         actions.playPhonetic();

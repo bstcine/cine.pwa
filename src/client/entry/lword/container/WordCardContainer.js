@@ -7,6 +7,7 @@ import { bindActionCreators } from 'redux';
 import { wCardAction } from '@/action/wCardAction';
 import { getParam, addParam } from '@/util/urlUtil';
 import WordCard from '../component/WordCard';
+import siteCodeUtil from '@/util/sitecodeUtil';
 
 class WordCardContainer extends Component {
     constructor(props) {
@@ -69,11 +70,14 @@ class WordCardContainer extends Component {
     }
     // 鼠标后手势开始触摸
     touchStart(event) {
-        // let { player } = this.props;
-        // if (!this.iAactivatePlayer) {
-        //     player.play();
-        //     this.iAactivatePlayer = true;
-        // }
+        if (!siteCodeUtil.inIOSAPP()) {
+            let { player } = this.props;
+            if (!this.iAactivatePlayer) {
+                player.play();
+                this.iAactivatePlayer = true;
+            }
+        }
+
         this.touchStartX = event.targetTouches[0].pageX;
         this.touchStartY = event.targetTouches[0].pageY;
     }

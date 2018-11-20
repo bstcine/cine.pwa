@@ -10,11 +10,12 @@ import {
     CCard,
     CIcon,
     CMessage,
-    CModal,
+    CAlert,
 } from '@/component/_base';
 import Player from '@/component/Player';
 import { CBind } from '@/component/Auth';
 import authUtil from '@/util/authUtil';
+import CAuthModal from "@/component/CAuthModal";
 
 class Container extends Component {
     constructor(props) {
@@ -41,6 +42,9 @@ class Container extends Component {
         return (
             <div className="cine-widget">
                 <CPanel>
+                    <CButton onClick={()=>{
+                        CAuthModal.open()
+                    }}>登录模态框</CButton>
                     <CButton
                         onClick={() => {
                             authUtil.login();
@@ -325,7 +329,7 @@ class Container extends Component {
                         shape="round"
                         color="secondary"
                         onClick={() => {
-                            CModal.alert({ text: 'hello alert!' });
+                            CAlert.open({ text: 'hello alert!' });
                         }}
                     >
                         <CIcon>pets</CIcon>
@@ -335,7 +339,7 @@ class Container extends Component {
                         variant="contained"
                         color="primary"
                         onClick={() => {
-                            CModal.alert({
+                            CAlert.open({
                                 title: 'title',
                                 text: 'hello alert!with cancel',
                                 onConfirm: () => {
@@ -354,7 +358,7 @@ class Container extends Component {
                         variant="contained"
                         color="primary"
                         onClick={() => {
-                            CModal.alert({
+                            CAlert.open({
                                 title: 'title',
                                 text: 'hello alert!with cancel',
                                 onConfirm: () => {

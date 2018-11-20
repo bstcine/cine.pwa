@@ -1,12 +1,18 @@
 import React, { Component } from 'react';
-import { CResetPwd } from '@/component/Auth';
-import QRHelp from "@/component/QRHelp";
+import QRHelp from '@/component/QRHelp';
+import CAuth from '@/component/Auth';
 
-class BindPage extends Component {
+class ResetPwdPage extends Component {
     render() {
+        console.log('ResetPwdPage');
         return (
             <div className="cine-auth__page">
-                <CResetPwd />
+                <CAuth
+                    type="resetpwd"
+                    onSuccess={() => {
+                        location.href = '/auth/signin';
+                    }}
+                />
 
                 <div className="cine_auth__help">
                     <span onClick={QRHelp.open}>遇到问题？</span>
@@ -16,4 +22,4 @@ class BindPage extends Component {
     }
 }
 
-export default BindPage;
+export default ResetPwdPage;

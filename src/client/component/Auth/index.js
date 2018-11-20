@@ -1,13 +1,37 @@
-import Bind from './Bind';
-import Confirm from './Confirm';
-import Signin from './Signin';
-import Signup from './Signup';
-import ResetPwd from './ResetPwd';
+import CBind from './Bind';
+import CConfirm from './Confirm';
+import CSignin from './Signin';
+import CSignup from './Signup';
+import CResetPwd from './ResetPwd';
+import React, { Component } from 'react';
 
-export {
-    Bind as CBind,
-    Confirm as CConfirm,
-    Signin as CSignin,
-    Signup as CSignup,
-    ResetPwd as CResetPwd,
-};
+class CAuth extends Component {
+    constructor(props) {
+        super(props);
+        this.state = { type: this.props.type || 'signin' };
+        this.toggle = this.toggle.bind(this);
+    }
+
+    toggle(type) {
+        this.setState({
+            type,
+        });
+    }
+
+    render() {
+        const { type } = this.state;
+        const { onSuccess } = this.props;
+        switch (type) {
+            case 'signin':
+                return <CSignin toggle={this.toggle} onSuccess={onSuccess} />;
+            case 'signup':
+                return <CSignup toggle={this.toggle} onSuccess={onSuccess} />;
+            case 'resetpwd':
+                return <CResetPwd toggle={this.toggle} onSuccess={onSuccess} />;
+        }
+    }
+}
+
+export default CAuth;
+
+export { CBind, CConfirm, CSignin, CSignup, CResetPwd };

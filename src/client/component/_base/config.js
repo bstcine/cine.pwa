@@ -4,6 +4,7 @@ export const componentNames = {
     Button: `${baseprefix}-btn`,
     Card: `${baseprefix}-card`,
     Modal: `${baseprefix}-modal`,
+    Alert: `${baseprefix}-alert`,
     Drawer: `${baseprefix}-drawer`,
     Navigation: `${baseprefix}-navigation`,
     FloatingBox: `${baseprefix}-floating-box`,

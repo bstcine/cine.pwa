@@ -1,14 +1,12 @@
 import React, { Component } from 'react';
 import './style.less';
-import { CButton, CIcon } from '@/component/_base';
+import { CButton, CIcon, CMessage } from '@/component/_base';
 import phoneCode from '@/constant/phoneCode';
 import { fetchData } from '@/service/base';
 import Api from '../../../APIConfig';
 import errorMsg from '@/util/errorMsg';
-import { CMessage } from '@/component/_base';
 import { getParam } from '@/util/urlUtil';
-import QRHelp from '@/component/QRHelp';
-import { Link } from 'react-router-dom';
+import CSelect, { COption } from '@/component/CSelect';
 
 class Bind extends Component {
     constructor(props) {
@@ -66,25 +64,26 @@ class Bind extends Component {
         } = this.state;
         return (
             <div className="cine-auth__container">
-                <div className="cine_auth__title">
-                    绑定手机
-                </div>
+                <div className="cine_auth__title">绑定手机</div>
 
                 <div className="cine_auth__form">
                     <div className="cine_auth__form-control">
                         <CIcon>phone_iphone</CIcon>
-                        <select
+                        <CSelect
+                            className="cine_auth__select"
                             value={phone_code}
-                            onChange={e => {
-                                this.setState({ phone_code: e.target.value });
+                            onChange={value => {
+                                this.setState({ phone_code: value });
                             }}
+                            renderLabel={option => `+${option.value}`}
                         >
                             {phoneCode.map(({ code, name }) => (
-                                <option value={code} key={code + name}>
+                                <COption value={code} key={code + name}>
                                     {`+${code} ${name}`}
-                                </option>
+                                </COption>
                             ))}
-                        </select>
+                        </CSelect>
+
                         <input
                             className="cine_input"
                             type="tel"
@@ -118,7 +117,6 @@ class Bind extends Component {
                         </CButton>
                     </div>
                 </div>
-
 
                 <CButton
                     block

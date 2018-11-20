@@ -4,7 +4,7 @@ import BRIDGE_EVENT from '@/constant/bridgeEvent';
 import storeUtil from '@/util/storeUtil';
 import uaUtil from '@/util/uaUtil';
 import { addParam } from '@/util/urlUtil';
-import LoginModal from '@/component/LoginModal';
+import CAuthModal from '@/component/CAuthModal';
 
 const authUtil = {
     login: async onSuccess => {
@@ -27,13 +27,16 @@ const authUtil = {
         } else if (uaUtil.wechat()) {
             authUtil.goWechatAuth();
         } else {
-            let modal = LoginModal.open(() => {
-                modal.close();
-                if (onSuccess) {
-                    onSuccess();
-                } else {
-                    location.reload();
-                }
+            let modal = CAuthModal.open({
+                type: 'signin' ,
+                onSuccess: () => {
+                    modal.close();
+                    if (onSuccess) {
+                        onSuccess();
+                    } else {
+                        location.reload();
+                    }
+                },
             });
         }
     },

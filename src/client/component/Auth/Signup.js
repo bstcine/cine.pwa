@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { CButton, CIcon } from '@/component/_base';
 import phoneCode from '@/constant/phoneCode';
-import { Link } from "react-router-dom";
-import QRHelp from "@/component/QRHelp";
+import { Link } from 'react-router-dom';
+import CSelect, { COption } from '@/component/CSelect';
 
 class Signup extends Component {
     constructor(props) {
@@ -29,28 +29,38 @@ class Signup extends Component {
             auth_code_btn_disabled,
             auth_code_btn,
         } = this.state;
+        const { toggle } = this.props;
         return (
             <div className="cine-auth__container">
                 <div className="cine_auth__title">
                     注册
-                    <Link to='/auth/signin'>登录</Link>
+                    <span
+                        className="cine_auth__opera"
+                        onClick={() => {
+                            toggle('signin');
+                        }}
+                    >
+                        登录
+                    </span>
                 </div>
 
                 <div className="cine_auth__form">
                     <div className="cine_auth__form-control">
                         <CIcon>phone_iphone</CIcon>
-                        <select
+                        <CSelect
+                            className="cine_auth__select"
                             value={phone_code}
-                            onChange={e => {
-                                this.setState({ phone_code: e.target.value });
+                            onChange={value => {
+                                this.setState({ phone_code: value });
                             }}
+                            renderLabel={option => `+${option.value}`}
                         >
                             {phoneCode.map(({ code, name }) => (
-                                <option value={code} key={code + name}>
+                                <COption value={code} key={code + name}>
                                     {`+${code} ${name}`}
-                                </option>
+                                </COption>
                             ))}
-                        </select>
+                        </CSelect>
                         <input
                             className="cine_input"
                             type="tel"
@@ -96,8 +106,6 @@ class Signup extends Component {
                         />
                     </div>
                 </div>
-
-
 
                 <CButton
                     block

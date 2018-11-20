@@ -1,29 +1,44 @@
 import React, { Component } from 'react';
-import { CButton, CIcon } from '@/component/_base';
-import { Link } from "react-router-dom";
+import { CButton, CIcon, CMessage } from "@/component/_base";
+import authUtil from '@/util/authUtil';
+import { fetchData } from '@/service/base';
+import Api from '../../../APIConfig';
+import errorMsg from "@/util/errorMsg";
 
 class Signin extends Component {
     constructor(props) {
         super(props);
-        this.state={
-            phone:'',
-            pwd:'',
-            go:'',
+        this.state = {
+            phone: '',
+            password: '',
+            go: '',
         };
         this.login = this.login.bind(this);
     }
 
-    login(){
-
+    async login() {
+        const { phone, password } = this.state;
+        const { onSuccess } = this.props;
+        let [err] = await fetchData(Api.APIURL_Auth_Signin, { phone, password });
+        if (err) return CMessage.info(errorMsg(err));
+        onSuccess && onSuccess()
     }
 
     render() {
-        const {phone,pwd} = this.state;
+        const { phone, password } = this.state;
+        const { toggle } = this.props;
         return (
             <div className="cine-auth__container">
                 <div className="cine_auth__title">
                     登录
-                    <Link to='/auth/signup'>注册</Link>
+                    <span
+                        className="cine_auth__opera"
+                        onClick={() => {
+                            toggle('signup');
+                        }}
+                    >
+                        注册
+                    </span>
                 </div>
 
                 <div className="cine_auth__form">
@@ -44,16 +59,22 @@ class Signin extends Component {
                         <input
                             type="password"
                             placeholder="密码"
-                            value={pwd}
+                            value={password}
                             onChange={e => {
-                                this.setState({ pwd: e.target.value });
+                                this.setState({ password: e.target.value });
                             }}
                         />
                     </div>
                 </div>
 
                 <div className="cine_auth__help">
-                    <Link to='/auth/resetpwd'>忘记密码？</Link>
+                    <span
+                        onClick={() => {
+                            toggle('resetpwd');
+                        }}
+                    >
+                        忘记密码？
+                    </span>
                 </div>
 
                 <CButton
@@ -65,11 +86,15 @@ class Signin extends Component {
                     登录
                 </CButton>
 
-
                 <div className="cine_auth__social">
                     <div className="line-through">社交账号登录</div>
                     <div className="cine_auth__apps">
-                        <CIcon className='cine_auth__app cine_auth__app--wechat'>ci-wechat</CIcon>
+                        <CIcon
+                            className="cine_auth__app cine_auth__app--wechat"
+                            onClick={authUtil.goWechatQrAuth}
+                        >
+                            ci-wechat
+                        </CIcon>
                     </div>
                 </div>
             </div>

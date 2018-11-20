@@ -1,7 +1,8 @@
 @import '~asset/style/_cine.less';
 
 .cine-auth__container {
-    width: 6rem;
+    width: 7rem;
+    padding: 0.8rem 0.5rem 0.5rem;
     background-color: #fff;
 }
 
@@ -10,10 +11,12 @@
     color: #014292;
     margin-bottom: 0.6rem;
 
+    .cine_auth__opera,
     a {
         float: right;
         font-size: 0.28rem;
         color: #969696;
+        cursor: pointer;
     }
 }
 
@@ -22,6 +25,18 @@
     border-radius: 0.06rem;
     margin-bottom: 0.6rem;
     background-color: hsla(0, 0%, 71%, 0.1);
+}
+
+.cine_auth__help {
+    text-align: right;
+    margin: -.2rem auto 0.4rem auto;
+    cursor: pointer;
+
+    span,
+    a {
+        color: #999;
+        font-size: 0.28rem;
+    }
 }
 
 .cine_auth__form-control {
@@ -35,7 +50,7 @@
         border-bottom: none;
     }
 
-    .cine-icon {
+    & > .cine-icon {
         line-height: 1rem;
         font-size: 0.4rem;
         color: #969696;
@@ -49,7 +64,7 @@
     }
 
     input {
-        height: .8rem;
+        height: 0.8rem;
         width: 100%;
         flex: 1 0;
         border: none;
@@ -57,7 +72,15 @@
         //padding: 0 0.2rem;
         font-size: 0.28rem;
     }
+
+    .cine_auth__select {
+        padding-left: 0;
+        padding-right: 5px;
+        margin-right: 10px;
+        border-right: 1px solid #c8c8c8;
+    }
 }
+
 .cine_auth__auth-code {
     input {
         padding: 0;
@@ -85,8 +108,6 @@
     font-size: 0.3rem;
     color: #333;
 }
-
-
 
 .cine_auth__social {
     margin-top: 1rem;

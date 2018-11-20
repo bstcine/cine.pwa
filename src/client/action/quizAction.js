@@ -28,7 +28,7 @@ import {
 } from '@/constant/quiz';
 import { RoleID } from '@/constant/index';
 import { superFetchDataWithShowLogin } from '@/action/commonAction';
-import { CMessage, CModal } from '@/component/_base';
+import { CMessage, CAlert } from '@/component/_base';
 
 /**
  * 题目数据 & 答题记录请求
@@ -97,7 +97,7 @@ export const fetchQuizData = ({
     if (currentQuizState === CurrentQuizState.ANSWERING) {
         let localAnswer = hasLocalAnswers(quiz, user);
         if (localAnswer) {
-            CModal.alert({
+            CAlert.open({
                 text: '检测到有未提交的答题记录，是否恢复？',
                 onConfirm: () => {
                     dispatch(restoreLocalAnswers(localAnswer));
@@ -109,7 +109,7 @@ export const fetchQuizData = ({
         }
         dispatch(recordTime());
     } else if (currentQuizState === CurrentQuizState.WAITING4CHECK) {
-        CModal.alert({
+        CAlert.open({
             text:
                 '试卷已提交，正在等待老师阅卷。批改完成后，老师会与直接您联系。',
         });
@@ -127,7 +127,7 @@ export const preSubmitAnswer = () => (dispatch, getState) => {
 
     if (['1', '3'].includes(quiz.type)) {
         if (unCompletedNos.length) {
-            CModal.alert({
+            CAlert.open({
                 text: `您共有${
                     unCompletedNos.length
                 }题尚未作答，请作答完后再提交。\n\n尚未作答的题目：第${unCompletedNos.join(
@@ -136,7 +136,7 @@ export const preSubmitAnswer = () => (dispatch, getState) => {
             });
             return;
         } else {
-            CModal.alert({
+            CAlert.open({
                 text: '您已作答完毕，是否确认提交？提交后不能再修改',
                 onConfirm: () => {
                     dispatch(submitAnswer());
@@ -146,7 +146,7 @@ export const preSubmitAnswer = () => (dispatch, getState) => {
         }
     } else {
         if (unCompletedNos.length) {
-            CModal.alert({
+            CAlert.open({
                 text: `您共有${
                     unCompletedNos.length
                 }题尚未作答，是否确认提交？提交后不能再修改。\n\n尚未作答的题目：第${unCompletedNos.join(
@@ -158,7 +158,7 @@ export const preSubmitAnswer = () => (dispatch, getState) => {
             });
             return;
         } else {
-            CModal.alert({
+            CAlert.open({
                 text: '您已作答完毕，是否确认提交？提交后不能再修改',
                 onConfirm: () => {
                     dispatch(submitAnswer());
@@ -278,7 +278,7 @@ export const submitCheckAnswer = (complete = true) => async (
  * 重置试卷
  */
 export const resetQuiz = () => (dispatch, getState) => {
-    CModal.alert({
+    CAlert.open({
         text: '是否确认重置？重置后将清空学生的所有作答记录。',
         onConfirm: async () => {
             let { statsContentQuiz } = getState();
@@ -296,7 +296,7 @@ export const resetQuiz = () => (dispatch, getState) => {
                 CMessage.error(err);
                 return;
             }
-            CModal.alert({ text: '该学生试卷已重置成功！' });
+            CAlert.open({ text: '该学生试卷已重置成功！' });
         },
     });
 };

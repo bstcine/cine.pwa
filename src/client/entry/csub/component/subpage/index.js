@@ -4,6 +4,7 @@ import { SideBarSubPage } from '@/component/SideBar/SubPage';
 import { TeacherList, ArticleList } from '@/component/CardItem';
 import CommentList from './CommentList';
 import CourseExList from './CourseList';
+import './../../asset/style/index.less';
 
 export default class SubPage extends React.PureComponent {
     constructor(props) {
@@ -14,6 +15,7 @@ export default class SubPage extends React.PureComponent {
         this.refTeacher = React.createRef();
         this.refComment = React.createRef();
         this.refArticle = React.createRef();
+        this.refResource = React.createRef();
     }
 
     onChange(sb_value) {
@@ -29,6 +31,9 @@ export default class SubPage extends React.PureComponent {
                 break;
             case 'article':
                 this.onScroll(this.refArticle);
+                break;
+            case 'resource':
+                this.onScroll(this.refResource);
                 break;
         }
     }
@@ -87,6 +92,10 @@ export default class SubPage extends React.PureComponent {
                             <ArticleList list={articleList} hover="darken" />
                         </CCardContainer>
                     </CPanel>
+                </div>
+
+                <div ref={this.refResource}>
+                    <CPanel title="资料下载" />
                 </div>
             </React.Fragment>
         );

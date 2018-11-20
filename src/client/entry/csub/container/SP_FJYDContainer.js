@@ -10,7 +10,7 @@ class SP_FJYDContainer extends Component {
     }
 
     render() {
-        let { courses, teachers, articles, comments } = this.props;
+        let { courses, teachers, articles, comments, resources } = this.props;
         return (
             <SubPage
                 isCourse={false}
@@ -19,6 +19,7 @@ class SP_FJYDContainer extends Component {
                 teachers={teachers}
                 comments={comments}
                 articles={articles}
+                resources = {resources}
             />
         );
     }
@@ -30,6 +31,7 @@ const mapStateToProps = state => {
         teachers: state.spageRedu.get('teacher'),
         articles: state.spageRedu.get('article'),
         comments: state.spageRedu.get('comment'),
+        resources: state.spageRedu.get('resource'),
     };
 };
 

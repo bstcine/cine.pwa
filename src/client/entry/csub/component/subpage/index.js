@@ -2,8 +2,9 @@ import React from 'react';
 import { CPanel, CCardContainer } from '@/component/_base';
 import { SideBarSubPage } from '@/component/SideBar/SubPage';
 import { TeacherList, ArticleList } from '@/component/CardItem';
-import CommentList from './CommentList';
 import CourseExList from './CourseList';
+import CommentList from './CommentList';
+import ResourceList from './ResourceList';
 import './../../asset/style/index.less';
 
 export default class SubPage extends React.PureComponent {
@@ -78,11 +79,13 @@ export default class SubPage extends React.PureComponent {
             teachers,
             articles,
             comments,
+            resources,
         } = this.props;
         const courseList = courses.toJS();
         const teacherList = teachers.toJS();
         const articleList = articles.toJS();
         const commentList = comments.toJS();
+        const resourceList = resources.toJS();
         // alert(JSON.stringify(orders));
         return (
             <React.Fragment>
@@ -123,7 +126,9 @@ export default class SubPage extends React.PureComponent {
                 </div>
 
                 <div ref={this.refResource}>
-                    <CPanel title="资料下载" />
+                    <CPanel title="资料下载">
+                        <ResourceList resources={resourceList} />
+                    </CPanel>
                 </div>
             </React.Fragment>
         );

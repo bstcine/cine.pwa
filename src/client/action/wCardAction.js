@@ -76,7 +76,6 @@ export const wCardAction = {
             param
         );
 
-        alert('加载数据');
         if (!error) {
             // 备份原始数组
             dispatch(wCardAction._originRows(result.rows));
@@ -94,7 +93,6 @@ export const wCardAction = {
     },
     // 改变自动播放状态
     changeAutoChangeWordStatus: () => async (dispatch, getState) => {
-        alert('改变自动播放状态');
         let reducer = getState().WordCardRedu;
         let isAutoChangeWord = !reducer.get('isAutoChangeWord');
         let autoChangeTime = reducer.get('autoChangeTime');
@@ -270,7 +268,6 @@ export const wCardAction = {
         if (isKnown) {
             dispatch(wCardAction._changeKnown(false));
         }
-        alert('下一个');
         // 自动播放声音
         dispatch(wCardAction.playPhonetic());
         const isAutoChangeWord = reducer.get('isAutoChangeWord');
@@ -334,7 +331,6 @@ export const wCardAction = {
         if (isKnown) {
             dispatch(wCardAction._changeKnown(false));
         }
-        alert('上一个');
         // 自动播放声音
         dispatch(wCardAction.playPhonetic());
     },

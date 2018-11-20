@@ -29,7 +29,7 @@ class SideBarSubPage extends Component {
                 <CNavItem label="录课老师" value="teacher" />
                 <CNavItem label="口碑好评" value="comment" />
                 <CNavItem label="精彩文章" value="article" />
-                <CNavItem label="资料下载" value="resourse" />
+                <CNavItem label="资料下载" value="resource" />
             </CNavigation>
         );
     }

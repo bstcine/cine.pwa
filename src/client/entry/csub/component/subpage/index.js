@@ -39,6 +39,8 @@ export default class SubPage extends React.PureComponent {
     }
 
     onScroll(ref) {
+        // this.handleScroll(ref);
+
         let nav = ref.current;
         if (nav) {
             let scrollY =
@@ -48,8 +50,35 @@ export default class SubPage extends React.PureComponent {
         }
     }
 
+    handleScroll(ref) {
+        let c_h = `panelHidden`;
+
+        let p1 = this.ref.current;
+        let p2 = this.refTeacher.current;
+        let p3 = this.refComment.current;
+        let p4 = this.refArticle.current;
+        let p5 = this.refResource.current;
+        if (!p1.classList.contains(c_h)) p1.classList.add(c_h);
+        if (!p2.classList.contains(c_h)) p2.classList.add(c_h);
+        if (!p3.classList.contains(c_h)) p3.classList.add(c_h);
+        if (!p4.classList.contains(c_h)) p4.classList.add(c_h);
+        if (!p5.classList.contains(c_h)) p5.classList.add(c_h);
+
+        let nav = ref.current;
+        if (nav) {
+            if (nav.classList.contains(c_h)) nav.classList.remove(c_h);
+        }
+    }
+
     render() {
-        const { isCourse, isMentor, courses, teachers, articles, comments } = this.props;
+        const {
+            isCourse,
+            isMentor,
+            courses,
+            teachers,
+            articles,
+            comments,
+        } = this.props;
         const courseList = courses.toJS();
         const teacherList = teachers.toJS();
         const articleList = articles.toJS();
@@ -86,7 +115,7 @@ export default class SubPage extends React.PureComponent {
                 </div>
 
                 <div ref={this.refArticle}>
-                    <CPanel title="精彩文章" className="bg-blue">
+                    <CPanel title="精彩文章" className="">
                         <CCardContainer layout="112">
                             <ArticleList list={articleList} hover="darken" />
                         </CCardContainer>

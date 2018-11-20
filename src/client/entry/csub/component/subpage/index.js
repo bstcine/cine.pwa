@@ -1,8 +1,9 @@
 import React from 'react';
-import { CPanel } from '@/component/_base';
+import { CPanel, CCardContainer } from '@/component/_base';
 import { SideBarSubPage } from '@/component/SideBar/SubPage';
-import CardExList from './CardList';
+import { TeacherList, ArticleList } from '@/component/CardItem';
 import CommentList from './CommentList';
+import CourseExList from './CourseList';
 
 export default class SubPage extends React.PureComponent {
     constructor(props) {
@@ -43,11 +44,12 @@ export default class SubPage extends React.PureComponent {
     }
 
     render() {
-        const { courses, teachers, articles, comments, actions } = this.props;
+        const { courses, teachers, articles, comments, isCourse } = this.props;
         const courseList = courses.toJS();
         const teacherList = teachers.toJS();
         const articleList = articles.toJS();
         const commentList = comments.toJS();
+        const isMentor = false;
         // alert(JSON.stringify(orders));
         return (
             <React.Fragment>
@@ -55,21 +57,21 @@ export default class SubPage extends React.PureComponent {
 
                 <div ref={this.ref}>
                     <CPanel title="核心课程">
-                        <CardExList
-                            type="course"
-                            orders={courseList}
-                            layout="234"
+                        <CourseExList
+                            isCourse={isCourse}
+                            courses={courseList}
                         />
                     </CPanel>
                 </div>
 
                 <div ref={this.refTeacher}>
                     <CPanel title="私塾导师" className="bg-blue">
-                        <CardExList
-                            type="teacher"
-                            orders={teacherList}
-                            layout="245"
-                        />
+                        <CCardContainer layout="245">
+                            <TeacherList
+                                list={teacherList}
+                                isMentor={isMentor}
+                            />
+                        </CCardContainer>
                     </CPanel>
                 </div>
 
@@ -81,11 +83,9 @@ export default class SubPage extends React.PureComponent {
 
                 <div ref={this.refArticle}>
                     <CPanel title="精彩文章" className="bg-blue">
-                        <CardExList
-                            type="article"
-                            orders={articleList}
-                            layout="112"
-                        />
+                        <CCardContainer layout="112">
+                            <ArticleList list={articleList} hover="darken" />
+                        </CCardContainer>
                     </CPanel>
                 </div>
             </React.Fragment>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta content='yes' name='apple-mobile-web-app-capable' />
+    <meta content='black' name='apple-mobile-web-app-status-bar-style' />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <title>二级页面</title>
+    <!--<script src="http://apptest.bstcine.com/lib/vconsole/vconsole.min.js"></script>-->
+    <!--<script> var vConsole = new VConsole()</script>-->
+    <script>
+        (function () {
+            var responsive = function () {
+                var clientWidth = document.documentElement.clientWidth;
+                if (clientWidth < 575) {
+                    document.documentElement.style.fontSize = clientWidth / 750 * 100 + 'px';
+                } else if (clientWidth < 1024) {
+                    document.documentElement.style.fontSize = clientWidth / 1536 * 100 + 'px';
+                } else {
+                    document.documentElement.style.fontSize = '50px'
+                }
+            };
+            responsive();
+            window.onresize = function () {
+                responsive()
+            };
+        }())
+
+        window.__PRELOADED_STATE__ = {}
+    </script>
+
+</head>
+
+<body>
+    <div id="root"></div>
+
+</body>
+<script src="https://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+
+</html>

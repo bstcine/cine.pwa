@@ -2,16 +2,15 @@ import React from 'react';
 import { CCard } from '@/component/_base';
 import './styleTeacher.less';
 
-export const CardTeacher = ({ value, hover, actions }) => {
+export const CardTeacher = ({ value, hover, isMentor }) => {
     const imgBG = `url(${value.head_img}) center center / cover no-repeat`;
-    const href = value.link
-        ? value.link
-        : `//www.bstcine.com/teacher/${value.id}`;
+    const href = `//www.bstcine.com/teacher/${value.id}`;
+    const desc = isMentor ? value.remark_mentor : value.brief;
     // alert(hover)
     return (
-        <CCard href={href}>
+        <CCard href={isMentor ? null : href} hover={!isMentor ? null : 'none'}>
             <div className="cardTeacher">
-                <div className="img-c">
+                <div className={isMentor ? 'img-11-circle img-c' : 'img-11'}>
                     <div className="img" style={{ background: `${imgBG}` }} />
                 </div>
 
@@ -20,7 +19,7 @@ export const CardTeacher = ({ value, hover, actions }) => {
                         {value.name}
                         {value.name_en ? `.${value.name_en}` : ``}
                     </div>
-                    <div className="desc">{value.remark_mentor}</div>
+                    <div className="desc">{desc}</div>
                 </div>
             </div>
         </CCard>

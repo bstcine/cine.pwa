@@ -49,12 +49,11 @@ export default class SubPage extends React.PureComponent {
     }
 
     render() {
-        const { courses, teachers, articles, comments, isCourse } = this.props;
+        const { isCourse, isMentor, courses, teachers, articles, comments } = this.props;
         const courseList = courses.toJS();
         const teacherList = teachers.toJS();
         const articleList = articles.toJS();
         const commentList = comments.toJS();
-        const isMentor = false;
         // alert(JSON.stringify(orders));
         return (
             <React.Fragment>

@@ -9,7 +9,7 @@ export const CardItem = ({ value, hover, layout, actions }) => {
         ? value.link
         : '//www.airbnb.com/experiences/256212?location=Barcelona&adults=1&source=p2&currentTab=experience_tab&searchId=2eee1c8d-e12d-4b64-ad42-25592c7bc6e0&federatedSearchId=9224d7fa-d3b9-436b-b635-6df21fca9f8e&sectionId=1d9c5719-04e1-4f52-85a1-3d9d4f62b21a';
     const classCard = layout === '112' ? 'cardItem cardItem112' : 'cardItem';
-    const classIMG = layout === '112' ? 'img-cl item-left' : 'img-c';
+    const classIMG = layout === '112' ? 'img-169-left item-left' : 'img-169';
     const classText = layout === '112' ? 'text-c item-right' : 'text-c';
     const classTitle = layout === '112' ? 'title' : 'title title-space';
 

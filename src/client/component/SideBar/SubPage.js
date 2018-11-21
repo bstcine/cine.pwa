@@ -11,6 +11,14 @@ class SideBarSubPage extends Component {
         this.onChange = this.onChange.bind(this);
     }
 
+    UNSAFE_componentWillReceiveProps(nextProps) {
+        if (this.state.value !== nextProps.value) {
+            this.setState({
+                value: nextProps.value,
+            });
+        }
+    }
+
     onChange(value) {
         this.setState({
             value: value,

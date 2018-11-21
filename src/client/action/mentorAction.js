@@ -8,7 +8,7 @@ import {
     FETCH_MENTOR_STUDENT_TASK,
 } from '@/constant/actionTypeMentor';
 import { superFetchDataWithShowLogin } from '@/action/commonAction';
-import { CModal } from '@/component/_base';
+import { CAlert } from '@/component/_base';
 
 /**
  * 获取学生、答题记录、词汇测试列表
@@ -48,5 +48,5 @@ export const fetchMentorCorrectPdfTask = task => dispatch => {
         );
         if (!error) dispatch(fetchMentorStudentTask());
     };
-    CModal.alert({ text, onConfirm });
+    CAlert.open({ text, onConfirm });
 };

@@ -29,6 +29,19 @@ const errorCode = {
     related_lesson_required: '写作课程请先购买对应的视频课程',
     point_too_large: '当前积分已超出应付金额',
     'lessonId not found': '课程不存在',
+    auth_code_wrong: '验证码有误',
+    email_already_registered: '邮箱重复',
+    login_already_registered: '用户名已存在，请重新填写',
+    email_wrong_format: '邮箱格式不正确',
+    query_user_error: '查询失败',
+    create_user_error: '注册失败',
+    auth_code_not_null: '验证码不能为空',
+    login_exist: '账户重复',
+    phone_already_registered: '手机号重复',
+    query_sms_log_failed: '短信验证信息查询失败',
+    send_sms_max_limit: '发送次数超出，请联系管理员',
+    save_sms_log_failed: '短信日志保存失败',
+    phone_exist: '手机号已注册',
 };
 
 export default errorCode;

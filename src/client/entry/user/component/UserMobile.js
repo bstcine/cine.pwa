@@ -42,7 +42,7 @@ const UserMobile = ({ user, handleClick }) => {
             </div>
 
             <div className="user-panel-c">
-                <a className="tab" href="/resetPassword">
+                <a className="tab" href="/auth/resetpwd">
                     <CIcon>ci-edit</CIcon>
                     修改密码
                 </a>

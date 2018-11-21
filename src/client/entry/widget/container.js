@@ -10,11 +10,12 @@ import {
     CCard,
     CIcon,
     CMessage,
-    CModal,
+    CAlert,
 } from '@/component/_base';
 import Player from '@/component/Player';
 import { CBind } from '@/component/Auth';
 import authUtil from '@/util/authUtil';
+import CAuthModal from "@/component/CAuthModal";
 
 class Container extends Component {
     constructor(props) {
@@ -49,9 +50,7 @@ class Container extends Component {
                         登录
                     </CButton>
                 </CPanel>
-                <CPanel className="ta">
-                    <CBind />
-                </CPanel>
+
                 <CFloatingButton>查看</CFloatingButton>
 
                 <CPanel title="Player">
@@ -325,7 +324,7 @@ class Container extends Component {
                         shape="round"
                         color="secondary"
                         onClick={() => {
-                            CModal.alert({ text: 'hello alert!' });
+                            CAlert.open({ text: 'hello alert!' });
                         }}
                     >
                         <CIcon>pets</CIcon>
@@ -335,7 +334,7 @@ class Container extends Component {
                         variant="contained"
                         color="primary"
                         onClick={() => {
-                            CModal.alert({
+                            CAlert.open({
                                 title: 'title',
                                 text: 'hello alert!with cancel',
                                 onConfirm: () => {
@@ -354,7 +353,7 @@ class Container extends Component {
                         variant="contained"
                         color="primary"
                         onClick={() => {
-                            CModal.alert({
+                            CAlert.open({
                                 title: 'title',
                                 text: 'hello alert!with cancel',
                                 onConfirm: () => {
@@ -407,7 +406,7 @@ class Container extends Component {
                         color="primary"
                         onClick={() => {
                             CMessage.info(
-                                '“长按屏幕”保存图片，分享图片到朋友圈'
+                                '“长按屏幕”保存图片，分享图片到朋友圈“长按屏幕”保存图片，分享图片到朋友圈“长按屏幕”保存图片，分享图片到朋友圈“长按屏幕”保存图片，分享图片到朋友圈'
                             );
                         }}
                     >

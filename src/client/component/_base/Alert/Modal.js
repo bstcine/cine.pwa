@@ -4,7 +4,7 @@ import Mask from '../Mask';
 import CButton from '../Button';
 import classNames from 'classnames';
 import { componentNames } from '../config';
-const cls = componentNames.Modal;
+const cls = componentNames.Alert;
 
 export default function({
     title,

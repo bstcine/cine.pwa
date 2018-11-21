@@ -3,8 +3,8 @@ import Bridge from '@/util/bridge';
 import BRIDGE_EVENT from '@/constant/bridgeEvent';
 import storeUtil from '@/util/storeUtil';
 import uaUtil from '@/util/uaUtil';
-import { addParam } from '@/util/urlUtil';
-import LoginModal from '@/component/LoginModal';
+import { addParam, getParam } from '@/util/urlUtil';
+import CAuthModal from '@/component/CAuthModal';
 
 const authUtil = {
     login: async onSuccess => {
@@ -25,31 +25,57 @@ const authUtil = {
                 location.reload();
             }
         } else if (uaUtil.wechat()) {
-            authUtil.goWechatAuth();
+            authUtil.goWechatInsideAuth();
         } else {
-            let modal = LoginModal.open(() => {
-                modal.close();
-                if (onSuccess) {
-                    onSuccess();
-                } else {
-                    location.reload();
-                }
+            let modal = CAuthModal.open({
+                type: 'signin',
+                onSignInSuccess: () => {
+                    modal.close();
+                    if (onSuccess) {
+                        onSuccess();
+                    } else {
+                        location.reload();
+                    }
+                },
             });
         }
     },
-    goWechatAuth: () => {
-        const url = addParam(location.href, { redirected: 1 });
+    goWechatInsideAuth: () => {
+        let url = authUtil.getRedirect();
         location.href =
             '//www.bstcine.com/wechat/auth?redirect=' +
             encodeURIComponent(url) +
             '&scope=snsapi_userinfo';
     },
     goWechatQrAuth: () => {
-        const url = addParam(location.href, { redirected: 1 });
+        let url = authUtil.getRedirect();
+
         location.href =
             'http://www.bstcine.com/wechat/auth?redirect=' +
             encodeURIComponent(url) +
             '&scope=snsapi_login';
+    },
+    goWechatAuth: () => {
+        if (uaUtil.wechat()) {
+            authUtil.goWechatInsideAuth();
+        } else {
+            authUtil.goWechatQrAuth();
+        }
+    },
+    getRedirect: function() {
+        let url;
+        let redirect = getParam().redirect;
+        if (redirect) {
+            url = redirect.startsWith('http')
+                ? redirect
+                : location.origin + redirect;
+        } else if (location.pathname.startsWith('/auth')) {
+            url = location.origin + '/';
+        } else {
+            url = location.href;
+        }
+        console.log('getRedirect', url);
+        return url;
     },
 };
 

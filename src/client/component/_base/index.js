@@ -8,6 +8,7 @@ import Button, { IconButton, FloatingButton } from './Button';
 import Panel from './Panel';
 import Icon from './Icon';
 import Drawer from './Drawer';
+import Alert from './Alert';
 import Modal from './Modal';
 import Toast from './Toast';
 import Card, { CardContainer } from './Card';
@@ -44,6 +45,7 @@ export {
     Drawer as CDrawer,
     CSelectField as CSelect,
     Icon as CIcon,
+    Alert as CAlert,
     Modal as CModal,
     Toast as CMessage,
     Navigation as CNavigation,

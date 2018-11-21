@@ -3,10 +3,6 @@
     "version": "4.0.1",
     "description": "React-PWA",
     "private": true,
-    "sideEffects": [
-        "*.less",
-        "*.css"
-    ],
     "scripts": {
         "start": "NODE_ENV=development webpack-dev-server --config webpack.dev.js",
         "format": "prettier --config .prettierrc.js --write \"src/**/*.{js,jsx,css,less}\"",

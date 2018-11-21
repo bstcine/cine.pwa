@@ -64,7 +64,7 @@ export default class LoginModal extends Component {
                 <div className="login-top">
                     登录
                     <span className="register-tip">
-                        没有账号？<a href="/register">立即注册</a>
+                        没有账号？<a href="/auth/signup">立即注册</a>
                     </span>
                 </div>
                 <form className="login-form" onSubmit={this.loginAction}>
@@ -94,7 +94,7 @@ export default class LoginModal extends Component {
                     </button>
                 </form>
                 <div className="login-bottom">
-                    <a href="/resetPassword">忘记密码？</a>
+                    <a href="/auth/resetpwd">忘记密码？</a>
 
                     <CButton block onClick={authUtil.goWechatQrAuth} target="_blank" icon='ci-wechat'>微信登录</CButton>
                 </div>

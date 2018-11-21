@@ -71,10 +71,13 @@ exports.APIURL_Global_Integral_Rule = '/api/global/integral/rule'; // 积分规�
 
 exports.APIURL_LogoutV1 = '/api/web/logout'; // 登出
 
-exports.APIURL_Auth_Signin = '/api/auth/signin'; // 登录
+exports.APIURL_Auth_SignIn = '/api/auth/signin'; // 登录
+exports.APIURL_Auth_SignUp = '/api/auth/signup'; // 注册
 exports.APIURL_Auth_Send_AuthCode = '/api/auth/send/authCode'; // 发送绑定手机验证码
 exports.APIURL_Auth_Bind_Phone = '/api/auth/bind/phone'; // 绑定手机（自动注册）
 exports.APIURL_Auth_Confirm = '/api/auth/confirm'; // 确认登录
+exports.APIURL_Auth_Send_VerificationCode = '/api/auth/send/verificationCode'; // 发送验证码(手机 邮箱)
+exports.APIURL_Auth_Reset_Password = '/api/auth/reset/password'; // 重置密码(手机 邮箱)
 
 exports.APIURL_System_AccessLog_Create = '/api/system/accesslog/create'; // 创建访问日志
 

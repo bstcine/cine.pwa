@@ -2,14 +2,13 @@ import React, { Component } from 'react';
 import QRHelp from '@/component/QRHelp';
 import CAuth from '@/component/Auth';
 
-class ResetPwdPage extends Component {
+class SignUpPage extends Component {
     render() {
-        console.log('ResetPwdPage');
         return (
             <div className="cine-auth__page">
                 <CAuth
-                    type="resetpwd"
-                    onRestPwdSuccess={() => {
+                    type="signup"
+                    onSignUpSuccess={() => {
                         location.href = '/auth/signin';
                     }}
                 />
@@ -22,4 +21,4 @@ class ResetPwdPage extends Component {
     }
 }
 
-export default ResetPwdPage;
+export default SignUpPage;

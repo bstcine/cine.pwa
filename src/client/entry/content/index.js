@@ -26,7 +26,7 @@ const PayStripe = chunkComponent(() =>
 
 const createComponent = (Component, userRequired, props) => {
     if (userRequired && !storeUtil.getToken()) {
-        location.href = '/login?go=' + encodeURIComponent(location.href);
+        location.href = '/auth/signin?redirect=' + encodeURIComponent(location.href);
         return;
     }
     return <Component {...props} />;

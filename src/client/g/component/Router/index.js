@@ -12,7 +12,7 @@ const Routes = ({ routes }) => {
             render={props => {
                 if (item.checkAuth && !storeUtil.getToken()) {
                     location.replace(
-                        '/login?go=' + encodeURIComponent(location.href)
+                        '/auth/signin?redirect=' + encodeURIComponent(location.href)
                     );
                     return <div key={item.path} />;
                 } else {

@@ -27,8 +27,8 @@ export const URL_Quiz_Index = '/quiz';
 export const URL_Quiz_Kj = '/quiz/kj';
 export const URL_Quiz_Grammar = '/quiz/grammar';
 
-export const URL_Auth_Signin = '/auth/signin';
-export const URL_Auth_Signup = '/auth/signup';
+export const URL_Auth_SignIn = '/auth/signin';
+export const URL_Auth_SignUp = '/auth/signup';
 export const URL_Auth_ResetPwd = '/auth/resetpwd';
 export const URL_Auth_Bind = '/auth/bind';
 export const URL_Auth_Confirm = '/auth/confirm';

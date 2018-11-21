@@ -30,7 +30,7 @@ export default ({ type, text, position, mask = true }) => {
                 })}
             >
                 {renderIcon(type)}
-                <span className={`${cls}__msg`}>{text}</span>
+                <div className={`${cls}__msg`}>{text}</div>
             </div>
         </React.Fragment>
     );

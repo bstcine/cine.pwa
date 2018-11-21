@@ -1,7 +1,7 @@
 import React from 'react';
 import TextFix from '@/component/TextFix';
 import { Task_Type } from '@/constant';
-import { CCard, CIcon, CModal } from '@/component/_base';
+import { CCard, CIcon, CAlert } from '@/component/_base';
 import './style.less';
 import task from '@/constant/task';
 import siteCodeUtil from '@/util/sitecodeUtil';
@@ -51,7 +51,7 @@ const getHref = (task, isMentor) => {
 };
 const onClick = (task, isMentor) => {
     if (task.type === Task_Type.Offline) {
-        CModal.alert({
+        CAlert.open({
             title: task.title,
             text: task.writing_desc,
             responsive: true,
@@ -60,7 +60,7 @@ const onClick = (task, isMentor) => {
     }
 
     if (task.type === Task_Type.Writing && task.writing_desc) {
-        CModal.alert({
+        CAlert.open({
             title: task.title,
             text: task.writing_desc,
             responsive: true,

@@ -406,7 +406,7 @@ class Container extends Component {
                         color="primary"
                         onClick={() => {
                             CMessage.info(
-                                '“长按屏幕”保存图片，分享图片到朋友圈'
+                                '“长按屏幕”保存图片，分享图片到朋友圈“长按屏幕”保存图片，分享图片到朋友圈“长按屏幕”保存图片，分享图片到朋友圈“长按屏幕”保存图片，分享图片到朋友圈'
                             );
                         }}
                     >

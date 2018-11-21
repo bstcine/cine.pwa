@@ -3,13 +3,13 @@ import CAuth from '@/component/Auth';
 import { getParam } from '@/util/urlUtil';
 import QRHelp from "@/component/QRHelp";
 
-class SigninPage extends Component {
+class SignInPage extends Component {
     render() {
         return (
             <div className="cine-auth__page">
                 <CAuth
                     type="signin"
-                    onSuccess={() => {
+                    onSignInSuccess={() => {
                         const { redirect } = getParam();
                         if (redirect) {
                             location.href = redirect;
@@ -27,4 +27,4 @@ class SigninPage extends Component {
     }
 }
 
-export default SigninPage;
+export default SignInPage;

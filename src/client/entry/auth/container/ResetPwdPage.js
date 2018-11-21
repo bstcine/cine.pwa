@@ -9,7 +9,7 @@ class ResetPwdPage extends Component {
             <div className="cine-auth__page">
                 <CAuth
                     type="resetpwd"
-                    onSuccess={() => {
+                    onRestPwdSuccess={() => {
                         location.href = '/auth/signin';
                     }}
                 />

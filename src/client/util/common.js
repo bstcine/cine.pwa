@@ -14,7 +14,7 @@ const CommonUtil = {
     },
     isAuth: () => {
         if (!storeUtil.getToken()) {
-            location.href = '/login?go=' + encodeURIComponent(location.href);
+            location.href = '/auth/signin?redirect=' + encodeURIComponent(location.href);
             return false;
         } else {
             return true;

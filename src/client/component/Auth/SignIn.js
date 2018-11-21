@@ -1,27 +1,31 @@
 import React, { Component } from 'react';
-import { CButton, CIcon, CMessage } from "@/component/_base";
+import { CButton, CIcon, CMessage } from '@/component/_base';
 import authUtil from '@/util/authUtil';
 import { fetchData } from '@/service/base';
 import Api from '../../../APIConfig';
-import errorMsg from "@/util/errorMsg";
+import errorMsg from '@/util/errorMsg';
 
-class Signin extends Component {
+class SignIn extends Component {
     constructor(props) {
         super(props);
         this.state = {
             phone: '',
             password: '',
-            go: '',
         };
-        this.login = this.login.bind(this);
+        this.submit = this.submit.bind(this);
     }
 
-    async login() {
+    async submit() {
         const { phone, password } = this.state;
         const { onSuccess } = this.props;
-        let [err] = await fetchData(Api.APIURL_Auth_Signin, { phone, password });
+        let [err] = await fetchData(Api.APIURL_Auth_SignIn, {
+            phone,
+            password,
+        });
         if (err) return CMessage.info(errorMsg(err));
-        onSuccess && onSuccess()
+        CMessage.success('登录成功', 1000, () => {
+            onSuccess && onSuccess();
+        });
     }
 
     render() {
@@ -81,7 +85,7 @@ class Signin extends Component {
                     block
                     variant="contained"
                     color="primary"
-                    onClick={this.login}
+                    onClick={this.submit}
                 >
                     登录
                 </CButton>
@@ -91,7 +95,7 @@ class Signin extends Component {
                     <div className="cine_auth__apps">
                         <CIcon
                             className="cine_auth__app cine_auth__app--wechat"
-                            onClick={authUtil.goWechatQrAuth}
+                            onClick={authUtil.goWechatAuth}
                         >
                             ci-wechat
                         </CIcon>
@@ -102,4 +106,4 @@ class Signin extends Component {
     }
 }
 
-export default Signin;
+export default SignIn;

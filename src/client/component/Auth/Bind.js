@@ -19,7 +19,7 @@ class Bind extends Component {
             auth_code_btn: '发送验证码',
         };
         this.sendAuthCode = this.sendAuthCode.bind(this);
-        this.bindAccount = this.bindAccount.bind(this);
+        this.submit = this.submit.bind(this);
     }
 
     sendAuthCode() {
@@ -34,7 +34,7 @@ class Bind extends Component {
         });
     }
 
-    bindAccount() {
+    submit() {
         const { phone_code, phone, auth_code } = this.state;
         const { openid, redirect } = getParam();
         fetchData(Api.APIURL_Auth_Bind_Phone, {
@@ -122,7 +122,7 @@ class Bind extends Component {
                     block
                     variant="contained"
                     color="primary"
-                    onClick={this.bindAccount}
+                    onClick={this.submit}
                 >
                     关联
                 </CButton>

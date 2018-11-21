@@ -38,7 +38,7 @@ export let getWechatJsSignature = () => {
 };
 
 export let login = ({ username, password }) => {
-    return post(Api.APIURL_Auth_Signin, { phone: username, password });
+    return post(Api.APIURL_Auth_SignIn, { phone: username, password });
 };
 
 export let logoutV1 = () => {

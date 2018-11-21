@@ -1,30 +1,62 @@
 import React, { Component } from 'react';
-import { CButton, CIcon } from '@/component/_base';
+import { CButton, CIcon, CMessage } from '@/component/_base';
 import phoneCode from '@/constant/phoneCode';
-import { Link } from 'react-router-dom';
 import CSelect, { COption } from '@/component/CSelect';
+import { fetchData } from '@/service/base';
+import {
+    APIURL_Auth_Send_VerificationCode,
+    APIURL_Auth_SignUp,
+} from '../../../APIConfig';
+import errorMsg from '@/util/errorMsg';
+import authUtil from '@/util/authUtil';
 
-class Signup extends Component {
+class SignUp extends Component {
     constructor(props) {
         super(props);
         this.state = {
             phone_code: '86',
             phone: '',
-            pwd: '',
+            password: '',
             auth_code: '',
             auth_code_btn_disabled: false,
             auth_code_btn: '发送验证码',
         };
-        this.login = this.login.bind(this);
+        this.submit = this.submit.bind(this);
+        this.sendAuthCode = this.sendAuthCode.bind(this);
     }
 
-    login() {}
+    async submit() {
+        const { onSuccess } = this.props;
+        const { phone_code, phone, password, auth_code } = this.state;
+        const [err, res] = await fetchData(APIURL_Auth_SignUp, {
+            phone,
+            phone_code,
+            auth_code,
+            password,
+            type: '1',
+        });
+        if (err) return CMessage.info(errorMsg(err));
+        CMessage.success('注册成功', () => {
+            onSuccess && onSuccess();
+        });
+    }
+
+    async sendAuthCode() {
+        const { phone_code, phone } = this.state;
+        const [err, res] = await fetchData(APIURL_Auth_Send_VerificationCode, {
+            phone,
+            phone_code,
+            type: '1',
+        });
+        if (err) return CMessage.info(errorMsg(err));
+        CMessage.success('发送成功');
+    }
 
     render() {
         const {
             phone_code,
             phone,
-            pwd,
+            password,
             auth_code,
             auth_code_btn_disabled,
             auth_code_btn,
@@ -99,9 +131,9 @@ class Signup extends Component {
                         <input
                             type="password"
                             placeholder="设置密码"
-                            value={pwd}
+                            value={password}
                             onChange={e => {
-                                this.setState({ pwd: e.target.value });
+                                this.setState({ password: e.target.value });
                             }}
                         />
                     </div>
@@ -111,7 +143,7 @@ class Signup extends Component {
                     block
                     variant="contained"
                     color="primary"
-                    onClick={this.login}
+                    onClick={this.submit}
                 >
                     注册
                 </CButton>
@@ -119,7 +151,11 @@ class Signup extends Component {
                 <div className="cine_auth__social">
                     <div className="line-through">社交账号直接注册</div>
                     <div className="cine_auth__apps">
-                        <CIcon className="cine_auth__app cine_auth__app--wechat">
+
+                        <CIcon
+                            className="cine_auth__app cine_auth__app--wechat"
+                            onClick={authUtil.goWechatAuth}
+                        >
                             ci-wechat
                         </CIcon>
                     </div>
@@ -129,4 +165,4 @@ class Signup extends Component {
     }
 }
 
-export default Signup;
+export default SignUp;

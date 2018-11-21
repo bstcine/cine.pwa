@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
-import { CButton, CIcon } from '@/component/_base';
+import { CButton, CIcon, CMessage } from "@/component/_base";
 import phoneCode from '@/constant/phoneCode';
 import { COption } from '@/component/CSelect';
 import CSelect from '@/component/CSelect';
+import { fetchData } from "@/service/base";
+import { APIURL_Auth_Reset_Password, APIURL_Auth_Send_VerificationCode, APIURL_Auth_SignUp } from "../../../APIConfig";
+import errorMsg from "@/util/errorMsg";
 
 class ResetPwd extends Component {
     constructor(props) {
@@ -10,21 +13,48 @@ class ResetPwd extends Component {
         this.state = {
             phone_code: '86',
             phone: '',
-            pwd: '',
+            password: '',
             auth_code: '',
             auth_code_btn_disabled: false,
             auth_code_btn: '发送验证码',
         };
-        this.login = this.login.bind(this);
+        this.submit = this.submit.bind(this);
+        this.sendAuthCode = this.sendAuthCode.bind(this);
     }
 
-    login() {}
+    async sendAuthCode() {
+        const { phone_code, phone } = this.state;
+        const [err, res] = await fetchData(APIURL_Auth_Send_VerificationCode, {
+            phone,
+            phone_code,
+            type: '1',
+            resetPassword: 'true'
+        });
+        if (err) return CMessage.info(errorMsg(err));
+        CMessage.success('发送成功');
+    }
+
+    async submit() {
+        const { onSuccess } = this.props;
+        const { phone_code, phone, password, auth_code } = this.state;
+        const [err, res] = await fetchData(APIURL_Auth_Reset_Password, {
+            phone,
+            phone_code,
+            auth_code,
+            password,
+            type: '1',
+        });
+        if (err) return CMessage.info(errorMsg(err));
+        CMessage.success('重置成功', () => {
+            onSuccess && onSuccess();
+        });
+    }
 
     render() {
         const {
             phone_code,
             phone,
-            pwd,
+            password,
             auth_code,
             auth_code_btn_disabled,
             auth_code_btn,
@@ -99,9 +129,9 @@ class ResetPwd extends Component {
                         <input
                             type="password"
                             placeholder="设置密码"
-                            value={pwd}
+                            value={password}
                             onChange={e => {
-                                this.setState({ pwd: e.target.value });
+                                this.setState({ password: e.target.value });
                             }}
                         />
                     </div>
@@ -111,7 +141,7 @@ class ResetPwd extends Component {
                     block
                     variant="contained"
                     color="primary"
-                    onClick={this.login}
+                    onClick={this.submit}
                 >
                     提交
                 </CButton>

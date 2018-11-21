@@ -25,11 +25,11 @@ const authUtil = {
                 location.reload();
             }
         } else if (uaUtil.wechat()) {
-            authUtil.goWechatAuth();
+            authUtil.goWechatInsideAuth();
         } else {
             let modal = CAuthModal.open({
-                type: 'signin' ,
-                onSuccess: () => {
+                type: 'signin',
+                onSignInSuccess: () => {
                     modal.close();
                     if (onSuccess) {
                         onSuccess();
@@ -40,7 +40,7 @@ const authUtil = {
             });
         }
     },
-    goWechatAuth: () => {
+    goWechatInsideAuth: () => {
         const url = addParam(location.href, { redirected: 1 });
         location.href =
             '//www.bstcine.com/wechat/auth?redirect=' +
@@ -53,6 +53,13 @@ const authUtil = {
             'http://www.bstcine.com/wechat/auth?redirect=' +
             encodeURIComponent(url) +
             '&scope=snsapi_login';
+    },
+    goWechatAuth: () => {
+        if (uaUtil.wechat()) {
+            authUtil.goWechatInsideAuth();
+        } else {
+            authUtil.goWechatQrAuth();
+        }
     },
 };
 

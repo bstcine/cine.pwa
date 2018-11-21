@@ -17,7 +17,7 @@ export default class PCourse extends React.PureComponent {
         let exList = <CourseList list={list} hover="lighten" />;
 
         return (
-            <CPanel title="私塾导师" className="bg-blue">
+            <CPanel title="核心课程">
                 <CCardContainer layout={layout}>{exList}</CCardContainer>
             </CPanel>
         );

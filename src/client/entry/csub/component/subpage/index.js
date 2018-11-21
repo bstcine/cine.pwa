@@ -89,7 +89,11 @@ export default class SubPage extends React.Component {
         // alert(JSON.stringify(orders));
         return (
             <React.Fragment>
-                <SideBarSubPage value="course" onChange={this.onChangeFromSB} />
+                <SideBarSubPage
+                    isMentor={isMentor}
+                    value="course"
+                    onChange={this.onChangeFromSB}
+                />
 
                 <div ref={this.ref}>
                     <PCourse list={courseList} isCourse={isCourse} />

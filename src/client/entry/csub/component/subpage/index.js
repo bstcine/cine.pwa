@@ -1,17 +1,17 @@
 import React from 'react';
-import { CPanel, CCardContainer } from '@/component/_base';
 import { SideBarSubPage } from '@/component/SideBar/SubPage';
-import { TeacherList, ArticleList } from '@/component/CardItem';
-import CourseExList from './CourseList';
-import CommentList from './CommentList';
-import ResourceList from './ResourceList';
 import './../../asset/style/index.less';
+import PCourse from './PCourse';
+import PComment from './PComment';
+import PResource from './PResource';
+import PArticle from './PArticle';
+import PTeacher from './PTeacher';
 
-export default class SubPage extends React.PureComponent {
+export default class SubPage extends React.Component {
     constructor(props) {
         super(props);
 
-        this.onChange = this.onChange.bind(this);
+        this.onChangeFromSB = this.onChangeFromSB.bind(this);
         this.ref = React.createRef();
         this.refTeacher = React.createRef();
         this.refComment = React.createRef();
@@ -19,27 +19,27 @@ export default class SubPage extends React.PureComponent {
         this.refResource = React.createRef();
     }
 
-    onChange(sb_value) {
+    onChangeFromSB(sb_value) {
         switch (sb_value) {
             case 'course':
-                this.onScroll(this.ref);
+                this.onScrollTo(this.ref);
                 break;
             case 'teacher':
-                this.onScroll(this.refTeacher);
+                this.onScrollTo(this.refTeacher);
                 break;
             case 'comment':
-                this.onScroll(this.refComment);
+                this.onScrollTo(this.refComment);
                 break;
             case 'article':
-                this.onScroll(this.refArticle);
+                this.onScrollTo(this.refArticle);
                 break;
             case 'resource':
-                this.onScroll(this.refResource);
+                this.onScrollTo(this.refResource);
                 break;
         }
     }
 
-    onScroll(ref) {
+    onScrollTo(ref) {
         // this.handleScroll(ref);
 
         let nav = ref.current;
@@ -89,46 +89,26 @@ export default class SubPage extends React.PureComponent {
         // alert(JSON.stringify(orders));
         return (
             <React.Fragment>
-                <SideBarSubPage value="course" onChange={this.onChange} />
+                <SideBarSubPage value="course" onChange={this.onChangeFromSB} />
 
                 <div ref={this.ref}>
-                    <CPanel title="核心课程">
-                        <CourseExList
-                            isCourse={isCourse}
-                            courses={courseList}
-                        />
-                    </CPanel>
+                    <PCourse list={courseList} isCourse={isCourse} />
                 </div>
 
                 <div ref={this.refTeacher}>
-                    <CPanel title="私塾导师" className="bg-blue">
-                        <CCardContainer layout="245">
-                            <TeacherList
-                                list={teacherList}
-                                isMentor={isMentor}
-                            />
-                        </CCardContainer>
-                    </CPanel>
+                    <PTeacher list={teacherList} isMentor={isMentor} />
                 </div>
 
                 <div ref={this.refComment}>
-                    <CPanel title="口碑好评">
-                        <CommentList comments={commentList} layout="123" />
-                    </CPanel>
+                    <PComment list={commentList} />
                 </div>
 
                 <div ref={this.refArticle}>
-                    <CPanel title="精彩文章" className="">
-                        <CCardContainer layout="112">
-                            <ArticleList list={articleList} hover="darken" />
-                        </CCardContainer>
-                    </CPanel>
+                    <PArticle list={articleList} />
                 </div>
 
                 <div ref={this.refResource}>
-                    <CPanel title="资料下载">
-                        <ResourceList resources={resourceList} />
-                    </CPanel>
+                    <PResource resources={resourceList} />
                 </div>
             </React.Fragment>
         );

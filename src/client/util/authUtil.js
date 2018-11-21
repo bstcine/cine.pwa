@@ -3,7 +3,7 @@ import Bridge from '@/util/bridge';
 import BRIDGE_EVENT from '@/constant/bridgeEvent';
 import storeUtil from '@/util/storeUtil';
 import uaUtil from '@/util/uaUtil';
-import { addParam } from '@/util/urlUtil';
+import { addParam, getParam } from '@/util/urlUtil';
 import CAuthModal from '@/component/CAuthModal';
 
 const authUtil = {
@@ -41,14 +41,15 @@ const authUtil = {
         }
     },
     goWechatInsideAuth: () => {
-        const url = addParam(location.href, { redirected: 1 });
+        let url = authUtil.getRedirect();
         location.href =
             '//www.bstcine.com/wechat/auth?redirect=' +
             encodeURIComponent(url) +
             '&scope=snsapi_userinfo';
     },
     goWechatQrAuth: () => {
-        const url = addParam(location.href, { redirected: 1 });
+        let url = authUtil.getRedirect();
+
         location.href =
             'http://www.bstcine.com/wechat/auth?redirect=' +
             encodeURIComponent(url) +
@@ -60,6 +61,21 @@ const authUtil = {
         } else {
             authUtil.goWechatQrAuth();
         }
+    },
+    getRedirect: function() {
+        let url;
+        let redirect = getParam().redirect;
+        if (redirect) {
+            url = redirect.startsWith('http')
+                ? redirect
+                : location.origin + redirect;
+        } else if (location.pathname.startsWith('/auth')) {
+            url = location.origin + '/';
+        } else {
+            url = location.href;
+        }
+        console.log('getRedirect', url);
+        return url;
     },
 };
 

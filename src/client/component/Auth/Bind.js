@@ -36,12 +36,12 @@ class Bind extends Component {
 
     submit() {
         const { phone_code, phone, auth_code } = this.state;
-        const { openid, redirect } = getParam();
+        const { unionid_code, redirect } = getParam();
         fetchData(Api.APIURL_Auth_Bind_Phone, {
             auth_code,
             phone_code,
             phone,
-            openid,
+            unionid_code,
         }).then(([err, result]) => {
             if (err) return CMessage.info(errorMsg(err));
             CMessage.success('绑定成功', () => {

@@ -118,7 +118,7 @@ const UserBar = ({ user, isOpen, onToggle, onLogout }) => (
         </div>
         <nav className="nav-user">
             {/* <a href="/user">个人资料</a> */}
-            <a href="/resetPassword">修改密码</a>
+            <a href="/auth/resetpwd">修改密码</a>
             <a onClick={onLogout}>退出</a>
         </nav>
     </div>

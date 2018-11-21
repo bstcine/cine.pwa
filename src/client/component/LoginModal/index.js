@@ -94,7 +94,7 @@ export default class LoginModal extends Component {
                     </button>
                 </form>
                 <div className="login-bottom">
-                    <a href="/resetPassword">忘记密码？</a>
+                    <a href="/auth/resetpwd">忘记密码？</a>
 
                     <CButton block onClick={authUtil.goWechatQrAuth} target="_blank" icon='ci-wechat'>微信登录</CButton>
                 </div>

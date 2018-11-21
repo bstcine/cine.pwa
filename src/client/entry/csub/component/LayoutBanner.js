@@ -1,7 +1,7 @@
 import React from 'react';
 
 const LayoutBanner = ({ isShow }) => {
-    const url = `//static.bstcine.com/m/subpage/mentor.jpg`;
+    const url = `http://static.bstcine.com/m/subpage/mentor.jpg`;
     return (
         <div
             className="layout-banner"

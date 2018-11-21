@@ -56,15 +56,30 @@ Toast.loading = (...props) => {
 };
 
 Toast.success = (...props) => {
-    return show(props, { type: 'success', text: '已完成', duration: 3000 });
+    return show(props, {
+        type: 'success',
+        text: '已完成',
+        duration: 3000,
+        mask: false,
+    });
 };
 
 Toast.error = (...props) => {
-    return show(props, { type: 'error', text: '网络异常.', duration: 3000 });
+    return show(props, {
+        type: 'error',
+        text: '网络异常.',
+        duration: 3000,
+        mask: false,
+    });
 };
 
 Toast.info = (...props) => {
-    return show(props, { type: 'info', text: '缺少提示信息', duration: 3000 });
+    return show(props, {
+        type: 'info',
+        text: '缺少提示信息',
+        duration: 3000,
+        mask: false,
+    });
 };
 
 export default Toast;

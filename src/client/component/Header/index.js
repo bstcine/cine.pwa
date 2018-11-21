@@ -107,7 +107,7 @@ export default class Header extends Component {
                     <a href="/learn">登入学习</a>
                 </li>
                 <li className="nav-item register-btn">
-                    <a href="/register">注册</a>
+                    <a href="/auth/signup">注册</a>
                 </li>
             </ul>
         );

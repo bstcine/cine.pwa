@@ -64,7 +64,7 @@ export default class LoginModal extends Component {
                 <div className="login-top">
                     登录
                     <span className="register-tip">
-                        没有账号？<a href="/register">立即注册</a>
+                        没有账号？<a href="/auth/signup">立即注册</a>
                     </span>
                 </div>
                 <form className="login-form" onSubmit={this.loginAction}>

@@ -2,7 +2,7 @@ import React from 'react';
 import { CardCourse } from './CardCourseItem';
 import { CardTeacher } from './CardTeacherItem';
 import { CardArticle } from './CardArticleItem';
-import { CardItem} from './CardItem';
+import { CardItem } from './CardItem';
 import './style.less';
 
 export const CourseList = ({ list, hover }) => {
@@ -11,9 +11,9 @@ export const CourseList = ({ list, hover }) => {
     });
     return cardList;
 };
-export const TeacherList = ({ list, hover, actions }) => {
+export const TeacherList = ({ list, hover, isMentor }) => {
     let cardList = list.map((item, i) => {
-        return <CardTeacher key={i} value={item} actions={actions} />;
+        return <CardTeacher key={i} value={item} isMentor={isMentor} />;
     });
     return cardList;
 };

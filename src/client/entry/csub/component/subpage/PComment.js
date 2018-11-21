@@ -1,12 +1,12 @@
 import React from 'react';
-import { CCardContainer, CCard } from '@/component/_base';
-import './../../asset/style/subpage.less';
+import { CPanel, CCardContainer, CCard } from '@/component/_base';
+// import './../../asset/style/subpage.less';
 
 const CardCommentItem = ({ value, hover }) => {
     return (
         <CCard hover={hover}>
             <div className="cardComment">
-                <div className="img-c">
+                <div className="img-916">
                     <div
                         className="img"
                         style={{
@@ -21,15 +21,17 @@ const CardCommentItem = ({ value, hover }) => {
     );
 };
 
-const CommentList = ({ comments, layout, className, actions }) => {
-    let list = comments.map((item, i) => {
+const PComment = ({ list, actions }) => {
+    let commentlist = list.map((item, i) => {
         return <CardCommentItem key={i} value={item} hover="none" />;
     });
 
     return (
-        <CCardContainer layout={layout} gap="large">
-            {list}
-        </CCardContainer>
+        <CPanel title="口碑好评">
+            <CCardContainer layout="123" gap="large">
+                {commentlist}
+            </CCardContainer>
+        </CPanel>
     );
 };
-export default CommentList;
+export default PComment;

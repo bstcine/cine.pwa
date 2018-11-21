@@ -5,8 +5,8 @@ import uaUtil from '@/util/uaUtil';
 import Header from '@/component/Header';
 import Footer from '@/component/Footer';
 import Main from '@/g/component/Main';
+import LayoutBanner from './LayoutBanner';
 // import '@/g/component/Layout/layout.less';
-
 
 const Layout = ({ actions, user, children }) => {
     const isShow =
@@ -14,11 +14,14 @@ const Layout = ({ actions, user, children }) => {
     return (
         <div>
             <Header isShow={isShow} />
+            <LayoutBanner isShow={isShow} />
+
             <div className="container-fluid course-container-bg">
                 <div className="layout-container">
                     <Main>{children}</Main>
                 </div>
             </div>
+
             <Footer isShow={isShow} />
         </div>
     );

@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 import gReducer from '@/g/reducer';
 import cardRedu from './card/cardReducer';
-import spageRedu from './subpage/spageReducer';
+import spageRedu from './csub/spageReducer';
 
 const rootReducer = combineReducers({
     cardRedu,

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import subPageAction from '@/action/subPageAction';
-import SubPage from './../component/subpage';
+import SubPage from '@/entry/csub/component/subpage';
 
 class SP_FJYDContainer extends Component {
     componentDidMount() {
@@ -10,16 +10,15 @@ class SP_FJYDContainer extends Component {
     }
 
     render() {
-        let { courses, teachers, articles, comments, resources } = this.props;
+        let { courses, teachers, articles, comments } = this.props;
         return (
             <SubPage
-                isCourse={false}
-                isMentor={false}
+                isCourse={true}
+                isMentor={true}
                 courses={courses}
                 teachers={teachers}
                 comments={comments}
                 articles={articles}
-                resources = {resources}
             />
         );
     }
@@ -31,7 +30,6 @@ const mapStateToProps = state => {
         teachers: state.spageRedu.get('teacher'),
         articles: state.spageRedu.get('article'),
         comments: state.spageRedu.get('comment'),
-        resources: state.spageRedu.get('resource'),
     };
 };
 

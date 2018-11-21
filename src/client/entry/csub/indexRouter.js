@@ -10,6 +10,11 @@ const routes = {
     component: CSubRoot,
     routes: [
         {
+            isExact: true,
+            path: '/csub',
+            component: SP_ZXSSContainer,
+        },
+        {
             path: '/csub/fjyd',
             component: SP_FJYDContainer,
         },

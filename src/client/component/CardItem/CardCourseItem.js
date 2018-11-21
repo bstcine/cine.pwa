@@ -55,8 +55,9 @@ export class CardCourse extends Component {
     render() {
         const { value, hover } = this.props;
         // alert(JSON.stringify(course))
-        const url = `//www.bstcine.com/f/${value.img}`;
         const href = `/content/course?cid=${value.id}`;
+        const url = `//www.bstcine.com/f/${value.img}`;
+        const bg_img = `url(${url}) center center / cover no-repeat`;
 
         if (typeof value.img === 'undefined' || !value.img) return <div />;
 
@@ -64,12 +65,12 @@ export class CardCourse extends Component {
             <CCard href={href} hover={hover}>
                 <div className="cardCourse">
                     <LazyLoad offset={100} height={200}>
-                        <div
-                            className="course-img"
-                            style={{
-                                background: `url(${url}) center center / cover no-repeat`,
-                            }}
-                        />
+                        <div className="img-169">
+                            <div
+                                className="img"
+                                style={{ background: `${bg_img}` }}
+                            />
+                        </div>
                     </LazyLoad>
 
                     <div className="course-desc">

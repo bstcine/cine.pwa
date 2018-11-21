@@ -4,7 +4,7 @@ import { CRouter } from '@/component/CRouter';
 import Root from '@/entry/widget/containerRoot';
 import Container from '@/entry/widget/container';
 import CardContainer from '@/entry/widget/card/CardContainer';
-import SPageContainer from '@/entry/widget/subpage/SPageContainer';
+import SPageContainer from '@/entry/widget/csub/SPageContainer';
 
 const widgetRoute = {
     path: '/widget',
@@ -20,7 +20,7 @@ const widgetRoute = {
             component: CardContainer,
         },
         {
-            path: '/widget/spage',
+            path: '/widget/csub',
             component: SPageContainer,
         },
     ],

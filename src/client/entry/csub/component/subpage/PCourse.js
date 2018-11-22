@@ -13,7 +13,7 @@ const CourseExList = ({ isCourse, courses, actions }) => {
 export default class PCourse extends React.PureComponent {
     render() {
         const { isCourse, list } = this.props;
-        const layout = isCourse ? '234' : '112';
+        const layout = isCourse ? '234' : '122';
         let exList = <CourseList list={list} hover="lighten" />;
 
         return (

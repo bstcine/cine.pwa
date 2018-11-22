@@ -6,6 +6,10 @@ const PResource = ({ resources, actions }) => {
         <CPanel title="资料下载">
             <CCardContainer layout="122" gap="large">
                 {resources.length}
+                <br/>
+                <br/>
+                {`待Aaron调整"资料下载"UI`}
+
             </CCardContainer>
         </CPanel>
     );

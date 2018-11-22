@@ -1,16 +1,28 @@
 @import '../style';
 
+.cine_navigation_border {
+    border: 1px solid #eaf1f6;
+    box-shadow: 0 0.1rem 0.06rem 0 rgba(219, 230, 240, 0.12);
+    border-radius: 3px;
+    background-color: #fff;
+}
+
 .@{navigation} {
+    z-index: 10000;
+    width: 86px !important;
+    bottom: 50px;
+    right: -5px;
+}
+.@{navigation}-up-sm {
     // position: absolute !important;
-    // top: 0px;
+    // top: 0px; rgba(0, 0, 0, 0.12);
+    z-index: 10000;
+    padding-top: 12px;
+    padding-bottom: 12px;
     right: 50%;
     transform: translateX(18.8rem /2) translateX(105%);
-    background-color: #fff;
     min-width: 186px;
-    padding: 0.3rem 0.24rem;
-    border: 1px solid #eaf1f6;
-    box-shadow: 0 0.1rem 0.06rem 0 rgba(219, 230, 240, 0.1);
-    border-radius: 3px;
+    .cine_navigation_border();
 }
 
 .@{navigation}__Box {
@@ -19,8 +31,15 @@
 
     .navigation {
         .cine-navigation();
-        position: absolute;
-        top: 0px;
+        position: fixed;
+    }
+    @media @media-up-md {
+        .navigation {
+            .cine-navigation-up-sm();
+            position: absolute !important;
+            top: 0px;
+            bottom: auto;
+        }
     }
 }
 
@@ -30,13 +49,58 @@
     .navigation {
         .cine-navigation();
         position: fixed;
-        top: 5px;
+    }
+
+    @media @media-up-md {
+        .navigation {
+            .cine-navigation-up-sm();
+            position: fixed !important;
+            top: 5px;
+            bottom: auto;
+        }
     }
 }
 
-.@{navigation}__item {
+.cine_navigation_item {
     display: flex;
     align-items: center;
     justify-content: center;
+    font-weight: 700;
+    margin-bottom: 6px;
+    margin-top: 6px;
+    font-size: 14px;
     min-height: 36px;
+}
+.cine_navigation_item_border {
+    border: 1px solid #dddfe2;
+    border-top-left-radius: 32px;
+    border-bottom-left-radius: 32px;
+    border-top-right-radius: 0px;
+}
+
+.cine_navigation_item_non_border {
+    border: 0px !important;
+    box-shadow: transparent!important;
+    border-radius: 0px;
+}
+
+.@{navigation}__item {
+    .cine_navigation_item();
+    .cine_navigation_item_border();
+    color: @theme-palette-dark;
+    background-color: white;
+    @media @media-up-md {
+        .cine_navigation_item_non_border();
+    }
+}
+
+.@{navigation}__item__selected {
+    .cine_navigation_item();
+    .cine_navigation_item_border();
+    color: #eaf1f6;
+    background-color: @theme-palette-primary-light;
+
+    @media @media-up-md {
+        .cine_navigation_item_non_border();
+    }
 }

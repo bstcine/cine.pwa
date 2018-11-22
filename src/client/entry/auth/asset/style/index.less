@@ -1,35 +1,69 @@
 @import '~asset/style/_cine.less';
 
-.cine-auth__page{
-    padding-top: 1rem;
+.cine-auth__page {
 }
 .cine-auth__container {
     margin: 0 auto;
     width: 7rem;
+    padding-top: 1rem;
 }
 
-.cine_auth__help {
+.cine_auth__tips {
     text-align: right;
     width: 6rem;
-    margin: 1rem auto 0.4rem auto;
-    cursor: pointer;
+    margin: 0.5rem auto 0.4rem auto;
 
     span,
     a {
+        cursor: pointer;
         color: #999;
         font-size: 0.28rem;
+        &:hover {
+            color: #333;
+        }
     }
 }
 
+.cine-auth__logo {
+    display: none;
+}
+.cine_auth__title {
+    margin-bottom: 1rem;
+}
 @media @media-up-sm {
     body {
         background-color: #f1f1f1;
     }
     .cine-auth__page {
-        padding-top: 4rem;
+        height: 100%;
+        min-height: 750px;
+        position: relative;
     }
+    .cine-auth__main {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
     .cine-auth__container {
+        padding: 1rem 1rem 0.8rem;
         border-radius: 0.06rem;
         box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+        width: 8rem;
+    }
+
+    .cine_auth__tips {
+        width: 8rem;
+    }
+    .cine-auth__logo {
+        display: block;
+        position: fixed;
+        top: 40px;
+        left: 40px;
+        width: 2.4rem;
+        img {
+            width: 100%;
+        }
     }
 }

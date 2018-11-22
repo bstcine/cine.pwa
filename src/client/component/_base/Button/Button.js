@@ -104,7 +104,7 @@ Button.propTypes = {
     /**
      * 颜色
      */
-    color: PropTypes.oneOf(['default', 'primary', 'secondary']),
+    color: PropTypes.oneOf(['default', 'primary', 'secondary', 'primary-light', 'secondary-light']),
     /**
      * 样式
      */

@@ -120,8 +120,10 @@ class Bind extends Component {
 
                 <CButton
                     block
+                    size="large"
                     variant="contained"
-                    color="primary"
+                    color="primary-light"
+                    shape="capsule"
                     onClick={this.submit}
                 >
                     关联

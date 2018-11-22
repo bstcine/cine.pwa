@@ -7,15 +7,17 @@ class ResetPwdPage extends Component {
         console.log('ResetPwdPage');
         return (
             <div className="cine-auth__page">
-                <CAuth
-                    type="resetpwd"
-                    onRestPwdSuccess={() => {
-                        location.href = '/auth/signin';
-                    }}
-                />
+                <div className="cine-auth__main">
+                    <CAuth
+                        type="resetpwd"
+                        onRestPwdSuccess={() => {
+                            location.href = '/auth/signin';
+                        }}
+                    />
 
-                <div className="cine_auth__help">
-                    <span onClick={QRHelp.open}>遇到问题？</span>
+                    <div className="cine_auth__tips">
+                        <span onClick={QRHelp.open}>遇到问题？</span>
+                    </div>
                 </div>
             </div>
         );

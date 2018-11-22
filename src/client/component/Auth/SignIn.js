@@ -83,8 +83,10 @@ class SignIn extends Component {
 
                 <CButton
                     block
+                    size="large"
                     variant="contained"
-                    color="primary"
+                    color="primary-light"
+                    shape="capsule"
                     onClick={this.submit}
                 >
                     登录

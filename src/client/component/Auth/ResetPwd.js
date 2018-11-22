@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
-import { CButton, CIcon, CMessage } from "@/component/_base";
+import { CButton, CIcon, CMessage } from '@/component/_base';
 import phoneCode from '@/constant/phoneCode';
 import { COption } from '@/component/CSelect';
 import CSelect from '@/component/CSelect';
-import { fetchData } from "@/service/base";
-import { APIURL_Auth_Reset_Password, APIURL_Auth_Send_VerificationCode, APIURL_Auth_SignUp } from "../../../APIConfig";
-import errorMsg from "@/util/errorMsg";
+import { fetchData } from '@/service/base';
+import {
+    APIURL_Auth_Reset_Password,
+    APIURL_Auth_Send_VerificationCode,
+    APIURL_Auth_SignUp,
+} from '../../../APIConfig';
+import errorMsg from '@/util/errorMsg';
 
 class ResetPwd extends Component {
     constructor(props) {
@@ -28,7 +32,7 @@ class ResetPwd extends Component {
             phone,
             phone_code,
             type: '1',
-            resetPassword: 'true'
+            resetPassword: 'true',
         });
         if (err) return CMessage.info(errorMsg(err));
         CMessage.success('发送成功');
@@ -139,8 +143,10 @@ class ResetPwd extends Component {
 
                 <CButton
                     block
+                    size="large"
                     variant="contained"
-                    color="primary"
+                    color="primary-light"
+                    shape="capsule"
                     onClick={this.submit}
                 >
                     提交

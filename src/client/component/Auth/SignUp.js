@@ -141,8 +141,10 @@ class SignUp extends Component {
 
                 <CButton
                     block
+                    size="large"
                     variant="contained"
-                    color="primary"
+                    color="primary-light"
+                    shape="capsule"
                     onClick={this.submit}
                 >
                     注册
@@ -151,7 +153,6 @@ class SignUp extends Component {
                 <div className="cine_auth__social">
                     <div className="line-through">社交账号直接注册</div>
                     <div className="cine_auth__apps">
-
                         <CIcon
                             className="cine_auth__app cine_auth__app--wechat"
                             onClick={authUtil.goWechatAuth}

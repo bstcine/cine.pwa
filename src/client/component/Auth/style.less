@@ -4,11 +4,12 @@
     width: 6.4rem;
     padding: 0.8rem 0.5rem 0.5rem;
     background-color: #fff;
+    border-radius: 0.06rem;
 }
 
 .cine_auth__title {
     font-size: 0.4rem;
-    color: #014292;
+    color: #333;
     margin-bottom: 0.6rem;
 
     .cine_auth__opera,
@@ -23,19 +24,25 @@
 .cine_auth__form {
     border: 1px solid #c8c8c8;
     border-radius: 0.06rem;
-    margin-bottom: 0.6rem;
     background-color: hsla(0, 0%, 71%, 0.1);
+}
+
+.cine_auth__form + button{
+    margin-top: .4rem;
 }
 
 .cine_auth__help {
     text-align: right;
-    margin: -.2rem auto 0.4rem auto;
-    cursor: pointer;
+    margin: 0.3rem auto;
 
     span,
     a {
+        cursor: pointer;
         color: #999;
         font-size: 0.28rem;
+        &:hover{
+            color: #333;
+        }
     }
 }
 

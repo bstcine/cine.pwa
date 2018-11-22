@@ -51,8 +51,8 @@
 }
 
 .@{btn}--large {
-    padding: 0.28rem 0.4rem;
-    font-size: 0.4rem;
+    padding: 0.2rem 0.4rem;
+    font-size: 0.36rem;
     min-width: 2.4rem;
 }
 
@@ -96,10 +96,18 @@
     color: @btn-color-primary;
     .btn-pseudo(@btn-color-primary);
 }
+.@{btn}--primary-light {
+    color: @btn-color-primary-light;
+    .btn-pseudo(@btn-color-primary-light);
+}
 
 .@{btn}--secondary {
     color: @btn-color-secondary;
     .btn-pseudo(@btn-color-secondary);
+}
+.@{btn}--secondary-light {
+    color: @btn-color-secondary-light;
+    .btn-pseudo(@btn-color-secondary-light);
 }
 
 // button outlined
@@ -108,8 +116,14 @@
     &.@{btn}--primary {
         border: 0.02rem solid fade(@btn-color-primary, 50%);
     }
+    &.@{btn}--primary-light {
+        border: 0.02rem solid fade(@btn-color-primary-light, 50%);
+    }
     &.@{btn}--secondary {
         border: 0.02rem solid fade(@btn-color-secondary, 50%);
+    }
+    &.@{btn}--secondary-light {
+        border: 0.02rem solid fade(@btn-color-secondary-light, 50%);
     }
 }
 
@@ -128,6 +142,10 @@
         color: @color-white;
         .btn-contained-pseudo(@btn-color-primary);
     }
+    &.@{btn}--primary-light {
+        color: @color-white;
+        .btn-contained-pseudo(@btn-color-primary-light);
+    }
     &.@{btn}--floating.@{btn}--primary {
         .btn-contained-pseudo(@theme-palette-primary-light);
     }
@@ -135,6 +153,10 @@
     &.@{btn}--secondary {
         color: @color-white;
         .btn-contained-pseudo(@btn-color-secondary);
+    }
+    &.@{btn}--secondary-light {
+        color: @color-white;
+        .btn-contained-pseudo(@btn-color-secondary-light);
     }
     &.@{btn}--floating.@{btn}--secondary {
         .btn-contained-pseudo(@theme-palette-secondary-light);

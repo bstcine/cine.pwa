@@ -26,11 +26,13 @@ class ConfirmPage extends Component {
         const { head_image, phone } = this.state;
         return (
             <div className="cine-auth__page">
-                <CConfirm
-                    onConfirm={this.onConfirm}
-                    head_image={head_image}
-                    phone={phone}
-                />
+                <div className="cine-auth__main">
+                    <CConfirm
+                        onConfirm={this.onConfirm}
+                        head_image={head_image}
+                        phone={phone}
+                    />
+                </div>
             </div>
         );
     }

@@ -4,8 +4,9 @@ import * as sub from '@/service/data/response_subpage.json';
 const initialState = fromJS({
     course: sub.result.course,
     teacher: sub.result.teacher,
-    article: sub.result.article,
     comment: sub.result.comment,
+    article: sub.result.article,
+    resource: sub.result.resource    
 });
 
 const spageRedu = (state = initialState, action) => {

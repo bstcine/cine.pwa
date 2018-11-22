@@ -8,7 +8,7 @@ export default class PTeacher extends React.PureComponent {
         const title = isMentor ? "私塾导师" : "录课老师";
         return (
             <CPanel title={title} className="bg-blue">
-                <CCardContainer layout="245">
+                <CCardContainer layout={isMentor ? "245" : "234"}>
                     <TeacherList list={list} isMentor={isMentor} />
                 </CCardContainer>
             </CPanel>

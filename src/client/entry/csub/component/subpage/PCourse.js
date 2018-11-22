@@ -2,19 +2,11 @@ import React from 'react';
 import { CPanel, CCardContainer } from '@/component/_base';
 import { CourseList } from '@/component/CardItem';
 
-const CourseExList = ({ isCourse, courses, actions }) => {
-    const layout = isCourse ? '234' : '112';
-    let exList = <CourseList list={courses} hover="lighten" />;
-
-    return <CCardContainer layout={layout}>{exList}</CCardContainer>;
-};
-// export default CourseExList;
-
 export default class PCourse extends React.PureComponent {
     render() {
         const { isCourse, list } = this.props;
-        const layout = isCourse ? '234' : '112';
-        let exList = <CourseList list={list} hover="lighten" />;
+        const layout = isCourse ? '234' : '122';
+        let exList = isCourse ? <CourseList list={list} hover="lighten" /> : `待Aaron调整"分级阅读"UI`;
 
         return (
             <CPanel title="核心课程">

@@ -203,7 +203,8 @@ export const wCardAction = {
             Api.APIURL_User_Content_Word_UpdateKnow,
             { word_list: wordList, is_known: false }
         );
-        if (!error && _updateRes && _updateRes.status) {
+        console.log(_updateRes,error);
+        if (!error) {
             let newRows = [];
             originRows.forEach(ele => {
                 ele.is_known = false;
@@ -215,6 +216,7 @@ export const wCardAction = {
                 status: result.status,
                 rows: newRows,
             };
+            console.log('gengxinwancheng', newResult);
             dispatch(wCardAction._changeCurrentIndex(0));
             dispatch(wCardAction._receive(newResult));
             dispatch(wCardAction.resetRevise());

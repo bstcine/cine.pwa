@@ -17,6 +17,8 @@ class CardContainer extends PureComponent {
             // 'none' | 'small' | 'large' | 'line'
             gap,
 
+            slice,
+
             // none | '1'
             line,
 
@@ -30,6 +32,7 @@ class CardContainer extends PureComponent {
                     `${cls}__container${layout === '111' ? '111' : ''}`,
                     {
                         [`${cls}--col${layout}`]: !!layout,
+                        [`${cls}__slice`]: slice,
                     },
                     className
                 )}
@@ -39,7 +42,6 @@ class CardContainer extends PureComponent {
                         [`${cls}__gap--small`]: gap === 'small',
                         [`${cls}__gap--large`]: gap === 'large',
                         [`${cls}__gap--none`]: gap === 'none',
-                        [`${cls}__gap--line`]: gap === 'line',
                     })}
                 >
                     {children}

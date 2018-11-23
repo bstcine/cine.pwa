@@ -15,7 +15,7 @@ import {
 import Player from '@/component/Player';
 import { CBind } from '@/component/Auth';
 import authUtil from '@/util/authUtil';
-import CAuthModal from "@/component/CAuthModal";
+import CAuthModal from '@/component/CAuthModal';
 
 class Container extends Component {
     constructor(props) {
@@ -244,7 +244,7 @@ class Container extends Component {
                 </CPanel>
 
                 <CPanel title="Gird Card 123 gap=none">
-                    <CCardContainer layout="123" gap="line">
+                    <CCardContainer layout="123" gap="none" slice={true}>
                         <CCard>1</CCard>
                         <CCard>2</CCard>
                         <CCard>3</CCard>
@@ -253,8 +253,8 @@ class Container extends Component {
                         <CCard>6</CCard>
                     </CCardContainer>
                 </CPanel>
-                <CPanel title="Gird Card 234">
-                    <CCardContainer layout="234" gap="line">
+                <CPanel title="Gird Card 234 gap=small">
+                    <CCardContainer layout="234" gap="small" slice={true}>
                         <CCard>1</CCard>
                         <CCard>2</CCard>
                         <CCard>3</CCard>
@@ -266,8 +266,8 @@ class Container extends Component {
                         <CCard>9</CCard>
                     </CCardContainer>
                 </CPanel>
-                <CPanel>
-                    <CCardContainer layout="245" gap="line">
+                <CPanel title="Gird Card 234 gap=large">
+                    <CCardContainer layout="245" gap="large" slice={true}>
                         <CCard>1</CCard>
                         <CCard>2</CCard>
                         <CCard>3</CCard>
@@ -279,7 +279,7 @@ class Container extends Component {
                 </CPanel>
 
                 <CPanel>
-                    <CCardContainer layout="345" gap="line">
+                    <CCardContainer layout="345" slice={true}>
                         <CCard>1</CCard>
                         <CCard>2</CCard>
                         <CCard>3</CCard>

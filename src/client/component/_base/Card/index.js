@@ -30,6 +30,7 @@ class CardContainer extends PureComponent {
             className,
             gap,
             layout = '112',
+            slice,
             line,
             step,
             children,
@@ -38,6 +39,7 @@ class CardContainer extends PureComponent {
             <BaseCardContainer
                 className={className}
                 gap={gap}
+                slice={slice}
                 line={line}
                 step={step}
                 layout={layout}

@@ -3,7 +3,7 @@ import Bridge from '@/util/bridge';
 import BRIDGE_EVENT from '@/constant/bridgeEvent';
 import storeUtil from '@/util/storeUtil';
 import uaUtil from '@/util/uaUtil';
-import { addParam, getParam } from '@/util/urlUtil';
+import {  getParam } from '@/util/urlUtil';
 import CAuthModal from '@/component/CAuthModal';
 
 const authUtil = {

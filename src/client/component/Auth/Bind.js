@@ -9,6 +9,12 @@ import { getParam } from '@/util/urlUtil';
 import CSelect, { COption } from '@/component/CSelect';
 import commonUtil from '@/util/common';
 
+const listener = event => {
+    let str =
+        "KeyboardEvent: key='" + event.key + "' | code='" + event.code + "'";
+    console.info(str);
+};
+
 class Bind extends Component {
     constructor(props) {
         super(props);
@@ -23,6 +29,18 @@ class Bind extends Component {
         };
         this.sendAuthCode = this.sendAuthCode.bind(this);
         this.submit = this.submit.bind(this);
+        this.listener = this.listener.bind(this);
+    }
+    componentDidMount() {
+        window.addEventListener('keydown', this.listener, true);
+    }
+    componentWillUnmount() {
+        window.removeEventListener('keydown', this.listener, true);
+    }
+    listener(event) {
+        if (event.code === 'Enter') {
+            this.submit();
+        }
     }
 
     sendAuthCode() {

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { initWechat } from '@/util/wechatUtil';
-import LoginModal from '@/component/LoginModal';
 import storeUtil from '@/util/storeUtil';
 import { fetchData } from '@/service/base';
 import errorMsg from '@/util/errorMsg';

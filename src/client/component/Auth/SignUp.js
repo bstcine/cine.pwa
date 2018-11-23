@@ -26,6 +26,18 @@ class SignUp extends Component {
         };
         this.submit = this.submit.bind(this);
         this.sendAuthCode = this.sendAuthCode.bind(this);
+        this.listener = this.listener.bind(this);
+    }
+    componentDidMount() {
+        window.addEventListener('keydown', this.listener, true);
+    }
+    componentWillUnmount() {
+        window.removeEventListener('keydown', this.listener, true);
+    }
+    listener(event) {
+        if (event.code === 'Enter') {
+            this.submit();
+        }
     }
 
     async sendAuthCode() {
@@ -54,7 +66,7 @@ class SignUp extends Component {
     async submit() {
         const { onSuccess } = this.props;
         const { phone_code, phone, password, auth_code } = this.state;
-         this.setState({ submit_btn_disabled: true, submit_btn: '提交中' });
+        this.setState({ submit_btn_disabled: true, submit_btn: '提交中' });
         const [err, res] = await fetchData(APIURL_Auth_SignUp, {
             phone,
             phone_code,
@@ -62,7 +74,7 @@ class SignUp extends Component {
             password,
             type: '1',
         });
-         this.setState({ submit_btn_disabled: false, submit_btn: '注册' });
+        this.setState({ submit_btn_disabled: false, submit_btn: '注册' });
         if (err) return CMessage.info(errorMsg(err));
         CMessage.success('注册成功', () => {
             onSuccess && onSuccess();

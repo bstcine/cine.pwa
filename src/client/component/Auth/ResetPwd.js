@@ -26,6 +26,18 @@ class ResetPwd extends Component {
         };
         this.submit = this.submit.bind(this);
         this.sendAuthCode = this.sendAuthCode.bind(this);
+        this.listener = this.listener.bind(this);
+    }
+    componentDidMount() {
+        window.addEventListener('keydown', this.listener, true);
+    }
+    componentWillUnmount() {
+        window.removeEventListener('keydown', this.listener, true);
+    }
+    listener(event) {
+        if (event.code === 'Enter') {
+            this.submit();
+        }
     }
 
     async sendAuthCode() {

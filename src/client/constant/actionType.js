@@ -9,4 +9,8 @@ export const List_Item_Delete = 'Action_List_Item_Delete';
 export const List_Item_Author = 'Action_List_Item_Author';
 export const List_Item_Tag = 'Action_List_Item_Tag';
 
+export const Http_Request = 'Http_Request';
+export const Http_Receive = 'Http_Receive';
+
+
 

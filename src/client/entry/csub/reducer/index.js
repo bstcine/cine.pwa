@@ -1,19 +1,21 @@
 import { combineReducers } from 'redux';
 import { fromJS } from 'immutable';
-import * as sub from '@/service/data/response_subpage.json';
+import * as actionType from '@/constant/actionType';
 
 const initialState = fromJS({
-    course: sub.result.course,
-    teacher: sub.result.teacher,
-    comment: sub.result.comment,
-    article: sub.result.article,
-    resource: sub.result.resource    
+    course: [],
+    teacher: [],
+    comment: [],
+    article: [],
+    resource: [],
 });
 
 const spageRedu = (state = initialState, action) => {
     switch (action.type) {
-        /*         case Action_UC.RECEIVE:
-            return state.set('orders', action.payload); */
+        case actionType.Http_Receive: {
+            return fromJS(action.payload);
+        }
+
         default:
             return state;
     }

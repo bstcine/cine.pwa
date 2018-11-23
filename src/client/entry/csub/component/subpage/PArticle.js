@@ -8,7 +8,7 @@ export default class PArticle extends React.PureComponent {
 
         return (
             <CPanel title="精彩文章" className="">
-                <CCardContainer layout="112">
+                <CCardContainer layout="112" gap="large" slice={true}>
                     <ArticleList list={list} hover="darken" />
                 </CCardContainer>
             </CPanel>

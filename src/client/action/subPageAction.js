@@ -1,5 +1,6 @@
+import { APIURL_Content_SubPage } from '../../APIConfig';
 import * as actionType from '../constant/actionType';
-import * as sub from '@/service/data/response_subpage.json';
+import { superFetchDataWithShowLogin } from '@/action/commonAction';
 
 const subPageAction = {
     _receive: data => ({
@@ -8,8 +9,10 @@ const subPageAction = {
     }),
 
     initData: type => async (dispatch, getState) => {
-        alert("subPageAction - initData -" + JSON.stringify(type));
-        dispatch(subPageAction._receive(sub.result));
+        let [err, result] = await dispatch(
+            superFetchDataWithShowLogin(APIURL_Content_SubPage, { page: type })
+        );
+        if (!err) dispatch(subPageAction._receive(result));
     },
 };
 

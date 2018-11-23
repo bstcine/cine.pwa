@@ -75,10 +75,14 @@
         border: 0.02rem solid @theme-palette-primary-light;
     }
 }
-.@{card}__slice{
+.@{card}__slice {
     position: relative;
     overflow: hidden;
-    &:after{
+    .@{card}__grid {
+        margin: -0.24rem -0.24rem -0.24rem;
+    }
+
+    &:after {
         bottom: 0;
         left: 0;
         right: 0;
@@ -90,6 +94,7 @@
 }
 .@{card}__slice .@{card} {
     border-bottom: 1px solid #eeeff0;
+    padding: 0.24rem 0.24rem 0.24rem;
 }
 
 @media @media-up-sm {

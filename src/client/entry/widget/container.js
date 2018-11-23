@@ -244,7 +244,7 @@ class Container extends Component {
                 </CPanel>
 
                 <CPanel title="Gird Card 123 gap=none">
-                    <CCardContainer layout="123" gap="none" slice={true}>
+                    <CCardContainer layout="123" slice={true}>
                         <CCard>1</CCard>
                         <CCard>2</CCard>
                         <CCard>3</CCard>
@@ -254,7 +254,7 @@ class Container extends Component {
                     </CCardContainer>
                 </CPanel>
                 <CPanel title="Gird Card 234 gap=small">
-                    <CCardContainer layout="234" gap="small" slice={true}>
+                    <CCardContainer layout="234" slice={true}>
                         <CCard>1</CCard>
                         <CCard>2</CCard>
                         <CCard>3</CCard>
@@ -267,7 +267,7 @@ class Container extends Component {
                     </CCardContainer>
                 </CPanel>
                 <CPanel title="Gird Card 234 gap=large">
-                    <CCardContainer layout="245" gap="large" slice={true}>
+                    <CCardContainer layout="245" slice={true}>
                         <CCard>1</CCard>
                         <CCard>2</CCard>
                         <CCard>3</CCard>

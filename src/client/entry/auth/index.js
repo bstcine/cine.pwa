@@ -12,9 +12,7 @@ import { GRouter } from '@/g/component';
 import BindPage from '@/entry/auth/container/BindPage';
 import '@/entry/auth/asset/style/index.less';
 import ConfirmPage from "@/entry/auth/container/ConfirmPage";
-import SignInPage from "@/entry/auth/container/SignInPage";
-import SignUpPage from "@/entry/auth/container/SignUpPage";
-import ResetPwdPage from "@/entry/auth/container/ResetPwdPage";
+import AuthPage from "@/entry/auth/container/AuthPage";
 
 const routes = [
     {
@@ -29,17 +27,17 @@ const routes = [
     },
     {
         path: URL_Auth_SignIn,
-        component: SignInPage,
+        component: AuthPage,
         exact: true,
     },
     {
         path: URL_Auth_SignUp,
-        component: SignUpPage,
+        component: AuthPage,
         exact: true,
     },
     {
         path: URL_Auth_ResetPwd,
-        component: ResetPwdPage,
+        component: AuthPage,
         exact: true,
     },
 ];

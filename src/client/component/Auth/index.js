@@ -28,15 +28,21 @@ class CAuth extends Component {
         switch (type) {
             case 'signin':
                 return (
-                    <CSignIn toggle={this.toggle} onSuccess={onSignInSuccess} />
+                    <CSignIn
+                        toggle={this.toggle}
+                        onSuccess={() => {
+                            // this.toggle('signin');
+                            onSignInSuccess && onSignInSuccess(this);
+                        }}
+                    />
                 );
             case 'signup':
                 return (
                     <CSignUp
                         toggle={this.toggle}
                         onSuccess={() => {
-                            this.toggle('signin');
-                            onSignUpSuccess && onSignUpSuccess();
+                            // this.toggle('signin');
+                            onSignUpSuccess && onSignUpSuccess(this);
                         }}
                     />
                 );
@@ -45,8 +51,8 @@ class CAuth extends Component {
                     <CResetPwd
                         toggle={this.toggle}
                         onSuccess={() => {
-                            this.toggle('signin');
-                            onResetPwdSuccess && onResetPwdSuccess();
+                            // this.toggle('signin');
+                            onResetPwdSuccess && onResetPwdSuccess(this);
                         }}
                     />
                 );

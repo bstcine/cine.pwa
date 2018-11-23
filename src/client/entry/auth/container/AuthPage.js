@@ -22,8 +22,11 @@ class AuthPage extends Component {
                 <div className="cine-auth__main">
                     <CAuth
                         type={this.type}
-                        onSignUpSuccess={() => {
-                            location.href = '/auth/signin';
+                        onSignUpSuccess={_this => {
+                            _this.toggle('signin');
+                        }}
+                        onResetPwdSuccess={_this => {
+                            _this.toggle('signin');
                         }}
                         onSignInSuccess={() => {
                             const { redirect } = getParam();
@@ -32,9 +35,6 @@ class AuthPage extends Component {
                             } else {
                                 location.href = '/';
                             }
-                        }}
-                        onRestPwdSuccess={() => {
-                            location.href = '/auth/signin';
                         }}
                     />
 

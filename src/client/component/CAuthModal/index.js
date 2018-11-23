@@ -7,7 +7,17 @@ let _open = CAuthModal.open;
 CAuthModal.open = (props = { type: 'signin' }) =>
     _open({
         maskCloseable: true,
-        children: <CAuth {...props} />,
+        children: (
+            <CAuth
+                {...props}
+                onSignUpSuccess={_this => {
+                    _this.toggle('signin');
+                }}
+                onResetPwdSuccess={_this => {
+                    _this.toggle('signin');
+                }}
+            />
+        ),
     });
 
 export default CAuthModal;

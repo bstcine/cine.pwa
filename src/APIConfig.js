@@ -28,6 +28,7 @@ exports.APIURL_Content_Tag_Tree = '/api/content/tag/tree'; // 标签树
 exports.APIURL_Content_Course_Detail = '/api/content/course/detail'; // 课程详情
 exports.APIURL_Content_Course_Set = '/api/content/course/set'; // 课程详情
 exports.APIURL_Content_Lesson_Detail = '/api/content/lesson/detail'; // 课内容
+exports.APIURL_Content_SubPage = '/api/content/subpage';// 二级页面
 exports.APIURL_User_Content_Course_Mylist = '/api/user/content/course/list'; // 我的学习列表
 exports.APIURL_User_Content_Task_Current = '/api/user/content/task/current'; // 我的本周作业
 exports.APIURL_Content_Task_Share = '/api/content/task/share'; // 私塾分享

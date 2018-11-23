@@ -7,6 +7,7 @@ import Api from '../../../APIConfig';
 import errorMsg from '@/util/errorMsg';
 import { getParam } from '@/util/urlUtil';
 import CSelect, { COption } from '@/component/CSelect';
+import commonUtil from '@/util/common';
 
 class Bind extends Component {
     constructor(props) {
@@ -17,6 +18,8 @@ class Bind extends Component {
             auth_code: '',
             auth_code_btn_disabled: false,
             auth_code_btn: '发送验证码',
+            submit_btn_disabled: false,
+            submit_btn: '关联',
         };
         this.sendAuthCode = this.sendAuthCode.bind(this);
         this.submit = this.submit.bind(this);
@@ -24,33 +27,45 @@ class Bind extends Component {
 
     sendAuthCode() {
         const { phone_code, phone } = this.state;
+        this.setState({ auth_code_btn_disabled: true });
         fetchData(Api.APIURL_Auth_Send_AuthCode, {
             type: 3,
             phone_code,
             phone,
-        }).then(([err, result]) => {
-            if (err) return CMessage.info(errorMsg(err));
-            CMessage.success('发送成功');
+        }).then(([err, res]) => {
+            if (!err) {
+                commonUtil.smsCountDown((text, disabled) => {
+                    this.setState({
+                        auth_code_btn: text,
+                        auth_code_btn_disabled: disabled,
+                    });
+                });
+                CMessage.success('发送成功');
+            } else {
+                this.setState({ auth_code_btn_disabled: false });
+                if (err) return CMessage.info(errorMsg(err));
+            }
         });
     }
 
-    submit() {
+    async submit() {
         const { phone_code, phone, auth_code } = this.state;
         const { unionid_code, redirect } = getParam();
-        fetchData(Api.APIURL_Auth_Bind_Phone, {
+        this.setState({ submit_btn_disabled: true, submit_btn: '提交中' });
+        let [err, res] = await fetchData(Api.APIURL_Auth_Bind_Phone, {
             auth_code,
             phone_code,
             phone,
             unionid_code,
-        }).then(([err, result]) => {
-            if (err) return CMessage.info(errorMsg(err));
-            CMessage.success('绑定成功', () => {
-                if (redirect) {
-                    location.href = decodeURIComponent(redirect);
-                } else {
-                    location.href = '/';
-                }
-            });
+        });
+        this.setState({ submit_btn_disabled: false, submit_btn: '关联' });
+        if (err) return CMessage.info(errorMsg(err));
+        CMessage.success('绑定成功', () => {
+            if (redirect) {
+                location.href = decodeURIComponent(redirect);
+            } else {
+                location.href = '/';
+            }
         });
     }
 
@@ -61,6 +76,8 @@ class Bind extends Component {
             auth_code,
             auth_code_btn_disabled,
             auth_code_btn,
+            submit_btn_disabled,
+            submit_btn,
         } = this.state;
         return (
             <div className="cine-auth__container">
@@ -124,9 +141,10 @@ class Bind extends Component {
                     variant="contained"
                     color="primary-light"
                     shape="capsule"
+                    disabled={submit_btn_disabled}
                     onClick={this.submit}
                 >
-                    关联
+                    {submit_btn}
                 </CButton>
             </div>
         );

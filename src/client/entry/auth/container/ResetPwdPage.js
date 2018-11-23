@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import QRHelp from '@/component/QRHelp';
 import CAuth from '@/component/Auth';
+import AuthLogo from "@/entry/auth/component/AuthLogo";
 
 class ResetPwdPage extends Component {
     render() {
         console.log('ResetPwdPage');
         return (
             <div className="cine-auth__page">
+                <AuthLogo />
                 <div className="cine-auth__main">
                     <CAuth
                         type="resetpwd"

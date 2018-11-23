@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { CConfirm } from '@/component/Auth';
 import { getParam } from '@/util/urlUtil';
+import AuthLogo from "@/entry/auth/component/AuthLogo";
 
 class ConfirmPage extends Component {
     constructor(props) {
@@ -17,6 +18,7 @@ class ConfirmPage extends Component {
         const { head_image, phone } = this.state;
         return (
             <div className="cine-auth__page">
+                <AuthLogo />
                 <div className="cine-auth__main">
                     <CConfirm
                         head_image={head_image}

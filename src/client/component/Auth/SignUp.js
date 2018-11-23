@@ -9,6 +9,7 @@ import {
 } from '../../../APIConfig';
 import errorMsg from '@/util/errorMsg';
 import authUtil from '@/util/authUtil';
+import commonUtil from '@/util/common';
 
 class SignUp extends Component {
     constructor(props) {
@@ -20,14 +21,40 @@ class SignUp extends Component {
             auth_code: '',
             auth_code_btn_disabled: false,
             auth_code_btn: '发送验证码',
+            submit_btn_disabled: false,
+            submit_btn: '注册',
         };
         this.submit = this.submit.bind(this);
         this.sendAuthCode = this.sendAuthCode.bind(this);
     }
 
+    async sendAuthCode() {
+        const { phone_code, phone } = this.state;
+        this.setState({ auth_code_btn_disabled: true });
+        fetchData(APIURL_Auth_Send_VerificationCode, {
+            phone,
+            phone_code,
+            type: '1',
+        }).then(([err, res]) => {
+            if (!err) {
+                commonUtil.smsCountDown((text, disabled) => {
+                    this.setState({
+                        auth_code_btn: text,
+                        auth_code_btn_disabled: disabled,
+                    });
+                });
+                CMessage.success('发送成功');
+            } else {
+                this.setState({ auth_code_btn_disabled: false });
+                if (err) return CMessage.info(errorMsg(err));
+            }
+        });
+    }
+
     async submit() {
         const { onSuccess } = this.props;
         const { phone_code, phone, password, auth_code } = this.state;
+         this.setState({ submit_btn_disabled: true, submit_btn: '提交中' });
         const [err, res] = await fetchData(APIURL_Auth_SignUp, {
             phone,
             phone_code,
@@ -35,21 +62,11 @@ class SignUp extends Component {
             password,
             type: '1',
         });
+         this.setState({ submit_btn_disabled: false, submit_btn: '注册' });
         if (err) return CMessage.info(errorMsg(err));
         CMessage.success('注册成功', () => {
             onSuccess && onSuccess();
         });
-    }
-
-    async sendAuthCode() {
-        const { phone_code, phone } = this.state;
-        const [err, res] = await fetchData(APIURL_Auth_Send_VerificationCode, {
-            phone,
-            phone_code,
-            type: '1',
-        });
-        if (err) return CMessage.info(errorMsg(err));
-        CMessage.success('发送成功');
     }
 
     render() {
@@ -60,6 +77,8 @@ class SignUp extends Component {
             auth_code,
             auth_code_btn_disabled,
             auth_code_btn,
+            submit_btn_disabled,
+            submit_btn,
         } = this.state;
         const { toggle } = this.props;
         return (
@@ -145,9 +164,10 @@ class SignUp extends Component {
                     variant="contained"
                     color="primary-light"
                     shape="capsule"
+                    disabled={submit_btn_disabled}
                     onClick={this.submit}
                 >
-                    注册
+                    {submit_btn}
                 </CButton>
 
                 <div className="cine_auth__social">

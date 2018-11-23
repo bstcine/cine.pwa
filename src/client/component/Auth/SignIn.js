@@ -11,6 +11,8 @@ class SignIn extends Component {
         this.state = {
             phone: '',
             password: '',
+            submit_btn_disabled: false,
+            submit_btn: '登录',
         };
         this.submit = this.submit.bind(this);
     }
@@ -18,10 +20,12 @@ class SignIn extends Component {
     async submit() {
         const { phone, password } = this.state;
         const { onSuccess } = this.props;
+        this.setState({ submit_btn_disabled: true, submit_btn: '登录中' });
         let [err] = await fetchData(Api.APIURL_Auth_SignIn, {
             phone,
             password,
         });
+        this.setState({ submit_btn_disabled: false, submit_btn: '登录' });
         if (err) return CMessage.info(errorMsg(err));
         CMessage.success('登录成功', 1000, () => {
             onSuccess && onSuccess();
@@ -29,7 +33,7 @@ class SignIn extends Component {
     }
 
     render() {
-        const { phone, password } = this.state;
+        const { phone, password, submit_btn_disabled, submit_btn } = this.state;
         const { toggle } = this.props;
         return (
             <div className="cine-auth__container">
@@ -87,9 +91,10 @@ class SignIn extends Component {
                     variant="contained"
                     color="primary-light"
                     shape="capsule"
+                    disabled={submit_btn_disabled}
                     onClick={this.submit}
                 >
-                    登录
+                    {submit_btn}
                 </CButton>
 
                 <div className="cine_auth__social">

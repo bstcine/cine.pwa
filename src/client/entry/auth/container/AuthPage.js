@@ -1,17 +1,33 @@
 import React, { Component } from 'react';
-import CAuth from '@/component/Auth';
-import { getParam } from '@/util/urlUtil';
 import QRHelp from '@/component/QRHelp';
+import CAuth from '@/component/Auth';
 import AuthLogo from '@/entry/auth/component/AuthLogo';
+import { getParam } from '@/util/urlUtil';
 
-class SignInPage extends Component {
+class AuthPage extends Component {
+    constructor(props) {
+        super(props);
+        this.type = 'signup';
+        if (location.pathname.includes('signin')) {
+            this.type = 'signin';
+        } else if (location.pathname.includes('resetpwd')) {
+            this.type = 'resetpwd';
+        }
+    }
+
     render() {
         return (
             <div className="cine-auth__page">
                 <AuthLogo />
                 <div className="cine-auth__main">
                     <CAuth
-                        type="signin"
+                        type={this.type}
+                        onSignUpSuccess={_this => {
+                            _this.toggle('signin');
+                        }}
+                        onResetPwdSuccess={_this => {
+                            _this.toggle('signin');
+                        }}
                         onSignInSuccess={() => {
                             const { redirect } = getParam();
                             if (redirect) {
@@ -31,4 +47,4 @@ class SignInPage extends Component {
     }
 }
 
-export default SignInPage;
+export default AuthPage;

@@ -14,7 +14,8 @@ const CommonUtil = {
     },
     isAuth: () => {
         if (!storeUtil.getToken()) {
-            location.href = '/auth/signin?redirect=' + encodeURIComponent(location.href);
+            location.href =
+                '/auth/signin?redirect=' + encodeURIComponent(location.href);
             return false;
         } else {
             return true;
@@ -57,6 +58,19 @@ const CommonUtil = {
     },
     getCurrencySymbol: currency => {
         return currency === 'USD' ? '$' : '￥';
+    },
+
+    smsCountDown: callback => {
+        let count = 60;
+        let timmer = setInterval(() => {
+            count--;
+            if (count === 0) {
+                callback('发送验证码', false);
+                clearInterval(timmer);
+            } else {
+                callback(`已发送(${count}s)`, true);
+            }
+        }, 1000);
     },
 };
 

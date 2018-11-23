@@ -7,9 +7,9 @@ import { fetchData } from '@/service/base';
 import {
     APIURL_Auth_Reset_Password,
     APIURL_Auth_Send_VerificationCode,
-    APIURL_Auth_SignUp,
 } from '../../../APIConfig';
 import errorMsg from '@/util/errorMsg';
+import commonUtil from '@/util/common';
 
 class ResetPwd extends Component {
     constructor(props) {
@@ -21,6 +21,8 @@ class ResetPwd extends Component {
             auth_code: '',
             auth_code_btn_disabled: false,
             auth_code_btn: '发送验证码',
+            submit_btn_disabled: false,
+            submit_btn: '重置',
         };
         this.submit = this.submit.bind(this);
         this.sendAuthCode = this.sendAuthCode.bind(this);
@@ -28,19 +30,32 @@ class ResetPwd extends Component {
 
     async sendAuthCode() {
         const { phone_code, phone } = this.state;
-        const [err, res] = await fetchData(APIURL_Auth_Send_VerificationCode, {
+        this.setState({ auth_code_btn_disabled: true });
+        fetchData(APIURL_Auth_Send_VerificationCode, {
             phone,
             phone_code,
             type: '1',
             resetPassword: 'true',
+        }).then(([err, res]) => {
+            if (!err) {
+                commonUtil.smsCountDown((text, disabled) => {
+                    this.setState({
+                        auth_code_btn: text,
+                        auth_code_btn_disabled: disabled,
+                    });
+                });
+                CMessage.success('发送成功');
+            } else {
+                this.setState({ auth_code_btn_disabled: false });
+                if (err) return CMessage.info(errorMsg(err));
+            }
         });
-        if (err) return CMessage.info(errorMsg(err));
-        CMessage.success('发送成功');
     }
 
     async submit() {
         const { onSuccess } = this.props;
         const { phone_code, phone, password, auth_code } = this.state;
+        this.setState({ submit_btn_disabled: true, submit_btn: '提交中' });
         const [err, res] = await fetchData(APIURL_Auth_Reset_Password, {
             phone,
             phone_code,
@@ -48,6 +63,7 @@ class ResetPwd extends Component {
             password,
             type: '1',
         });
+        this.setState({ submit_btn_disabled: false, submit_btn: '重置' });
         if (err) return CMessage.info(errorMsg(err));
         CMessage.success('重置成功', () => {
             onSuccess && onSuccess();
@@ -62,6 +78,8 @@ class ResetPwd extends Component {
             auth_code,
             auth_code_btn_disabled,
             auth_code_btn,
+            submit_btn_disabled,
+            submit_btn,
         } = this.state;
         const { toggle } = this.props;
         return (
@@ -147,9 +165,10 @@ class ResetPwd extends Component {
                     variant="contained"
                     color="primary-light"
                     shape="capsule"
+                    disabled={submit_btn_disabled}
                     onClick={this.submit}
                 >
-                    提交
+                    {submit_btn}
                 </CButton>
             </div>
         );

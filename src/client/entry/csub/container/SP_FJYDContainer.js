@@ -6,7 +6,7 @@ import SubPage from './../component/subpage';
 
 class SP_FJYDContainer extends Component {
     componentDidMount() {
-        // this.props.actions.initData("fjyd");
+        this.props.actions.initData("fjyd");
     }
 
     render() {

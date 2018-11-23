@@ -66,7 +66,7 @@ class SignIn extends Component {
                         <CIcon>person</CIcon>
                         <input
                             type="text"
-                            placeholder="手机号或邮箱"
+                            placeholder="手机号或用户名"
                             value={phone}
                             onChange={e => {
                                 this.setState({ phone: e.target.value });

@@ -74,7 +74,7 @@ export default class LoginModal extends Component {
                             type="text"
                             className="username"
                             value={this.state.username}
-                            placeholder="用户名或手机号或邮箱"
+                            placeholder="手机号或用户名"
                             onChange={this.handleUsername}
                         />
                     </div>

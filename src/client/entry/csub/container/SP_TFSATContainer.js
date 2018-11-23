@@ -6,7 +6,7 @@ import SubPage from './../component/subpage';
 
 class SP_TFSATContainer extends Component {
     componentDidMount() {
-        // this.props.actions.initData("tfsat");
+        this.props.actions.initData('tfsat');
     }
 
     render() {
@@ -19,7 +19,7 @@ class SP_TFSATContainer extends Component {
                 teachers={teachers}
                 comments={comments}
                 articles={articles}
-                resources = {resources}
+                resources={resources}
             />
         );
     }

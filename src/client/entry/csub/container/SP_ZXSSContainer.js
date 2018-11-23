@@ -6,7 +6,7 @@ import SubPage from './../component/subpage';
 
 class SP_ZXSSContainer extends Component {
     componentDidMount() {
-        // this.props.actions.initData("zxss");
+        this.props.actions.initData('zxss');
     }
 
     render() {
@@ -19,7 +19,7 @@ class SP_ZXSSContainer extends Component {
                 teachers={teachers}
                 comments={comments}
                 articles={articles}
-                resources = {resources}
+                resources={resources}
             />
         );
     }

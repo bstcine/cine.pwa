@@ -10,6 +10,7 @@ import {
 } from '../../../APIConfig';
 import errorMsg from '@/util/errorMsg';
 import commonUtil from '@/util/common';
+import storeUtil from '@/util/storeUtil';
 
 class ResetPwd extends Component {
     constructor(props) {
@@ -98,14 +99,16 @@ class ResetPwd extends Component {
             <div className="cine-auth__container">
                 <div className="cine_auth__title">
                     重置密码
-                    <span
-                        className="cine_auth__opera"
-                        onClick={() => {
-                            toggle('signin');
-                        }}
-                    >
-                        登录
-                    </span>
+                    {!storeUtil.getToken() && (
+                        <span
+                            className="cine_auth__opera"
+                            onClick={() => {
+                                toggle('signin');
+                            }}
+                        >
+                            登录
+                        </span>
+                    )}
                 </div>
 
                 <div className="cine_auth__form">

@@ -19,8 +19,9 @@
         height: auto;
         .lastWord {
             width: 100%;
-            height: 40%;
+            height: 3rem;
             cursor: pointer;
+            background: none;
         }
     }
     .lastContainer:hover {
@@ -38,8 +39,9 @@
         height: auto;
         .nextWord {
             width: 100%;
-            height: 40%;
+            height: 3rem;
             cursor: pointer;
+            background: none;
         }
     }
     .nextContainer:hover {
@@ -288,9 +290,25 @@
 
 @media @media-up-xs {
     .wordCard-Body {
+        .lastContainer {
+            width: 1.2rem;
+            .lastWord {
+                margin-top: -1.8rem;
+                background: url('../image/lword_card_arrow_left.svg') no-repeat center;
+                background-size: contain;
+            }
+        }
+        .nextContainer {
+            width: 1.2rem;
+            .nextWord {
+                margin-top: -1.8rem;
+                background: url('../image/lword_card_arrow_right.svg') no-repeat center;
+                background-size: contain;
+            }
+        }
         .word {
-            font-size: 1.8rem;
-            line-height: 2.5rem;
+            font-size: 1.4rem;
+            line-height: 2.1rem;
         }
         .transition {
             .zh-Test {
@@ -300,14 +318,22 @@
         }
     }
 }
-@media @media-up-sm {
+@media @media-up-md {
     .wordCard-Body {
         .lastContainer {
-            width: 1.2rem;
+            .lastWord {
+                background: none;
+            }
         }
         .nextContainer {
-            width: 1.2rem;
+            .nextWord {
+                background: none;
+            }
         }
+    }
+}
+@media @media-up-sm {
+    .wordCard-Body {
         .currentWord {
             padding: 2.88rem 0 1.2rem 0;
         }

@@ -15,7 +15,7 @@ import {
 import Player from '@/component/Player';
 import { CBind } from '@/component/Auth';
 import authUtil from '@/util/authUtil';
-import CAuthModal from "@/component/CAuthModal";
+import CAuthModal from '@/component/CAuthModal';
 
 class Container extends Component {
     constructor(props) {
@@ -244,7 +244,7 @@ class Container extends Component {
                 </CPanel>
 
                 <CPanel title="Gird Card 123 gap=none">
-                    <CCardContainer layout="123" gap="none">
+                    <CCardContainer layout="123" slice={true}>
                         <CCard>1</CCard>
                         <CCard>2</CCard>
                         <CCard>3</CCard>
@@ -253,8 +253,8 @@ class Container extends Component {
                         <CCard>6</CCard>
                     </CCardContainer>
                 </CPanel>
-                <CPanel title="Gird Card 234">
-                    <CCardContainer layout="234">
+                <CPanel title="Gird Card 234 gap=small">
+                    <CCardContainer layout="234" slice={true}>
                         <CCard>1</CCard>
                         <CCard>2</CCard>
                         <CCard>3</CCard>
@@ -266,8 +266,8 @@ class Container extends Component {
                         <CCard>9</CCard>
                     </CCardContainer>
                 </CPanel>
-                <CPanel>
-                    <CCardContainer layout="234">
+                <CPanel title="Gird Card 234 gap=large">
+                    <CCardContainer layout="245" slice={true}>
                         <CCard>1</CCard>
                         <CCard>2</CCard>
                         <CCard>3</CCard>
@@ -275,6 +275,25 @@ class Container extends Component {
                         <CCard>5</CCard>
                         <CCard>6</CCard>
                         <CCard>7</CCard>
+                    </CCardContainer>
+                </CPanel>
+
+                <CPanel>
+                    <CCardContainer layout="345" slice={true}>
+                        <CCard>1</CCard>
+                        <CCard>2</CCard>
+                        <CCard>3</CCard>
+                        <CCard>4</CCard>
+                        <CCard>5</CCard>
+                        <CCard>6</CCard>
+                        <CCard>7</CCard>
+                        <CCard>8</CCard>
+                        <CCard>9</CCard>
+                        <CCard>10</CCard>
+                        <CCard>11</CCard>
+                        <CCard>12</CCard>
+                        <CCard>13</CCard>
+                        <CCard>14</CCard>
                     </CCardContainer>
                 </CPanel>
 

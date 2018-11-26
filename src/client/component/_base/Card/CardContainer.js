@@ -10,12 +10,18 @@ class CardContainer extends PureComponent {
         const {
             className,
             children,
+
             // '112' | '122' | '123' | '234'
             layout = '112',
-            // none' | 'small' | null | 'large'
+
+            // 'none' | 'small' | 'large' | 'line'
             gap,
+
+            slice,
+
             // none | '1'
             line,
+
             // 1
             step,
         } = this.props;
@@ -26,15 +32,16 @@ class CardContainer extends PureComponent {
                     `${cls}__container${layout === '111' ? '111' : ''}`,
                     {
                         [`${cls}--col${layout}`]: !!layout,
+                        [`${cls}__slice`]: slice,
                     },
                     className
                 )}
             >
                 <div
                     className={classNames(`${cls}__grid`, {
-                        [`${cls}__gap--small`]: gap === 'small',
-                        [`${cls}__gap--large`]: gap === 'large',
-                        [`${cls}__gap--none`]: gap === 'none',
+                        [`${cls}__gap--small`]: gap === 'small' && !slice,
+                        [`${cls}__gap--large`]: gap === 'large' && !slice,
+                        [`${cls}__gap--none`]: gap === 'none' && !slice,
                     })}
                 >
                     {children}

@@ -42,6 +42,8 @@ const errorCode = {
     send_sms_max_limit: '发送次数超出，请联系管理员',
     save_sms_log_failed: '短信日志保存失败',
     phone_exist: '手机号已注册',
+    phone_registered:'手机号码已被绑定',
+    update_user_error:'用户更新错误',
 };
 
 export default errorCode;

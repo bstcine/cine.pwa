@@ -46,6 +46,14 @@ const UserMobile = ({ user, onLogout }) => {
                     <CIcon>ci-edit</CIcon>
                     修改密码
                 </a>
+                <a className="tab" href="/auth/bind">
+                    <CIcon>phone_iphone</CIcon>
+                    绑定手机
+                </a>
+                <a className="tab" href="/auth/social">
+                    <CIcon>ci-wechat</CIcon>
+                    社交账号
+                </a>
                 <a className="tab" onClick={() => onLogout()}>
                     <CIcon>ci-quit</CIcon>
                     退出

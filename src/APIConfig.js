@@ -68,6 +68,7 @@ exports.APIURL_User_Info = '/api/user/info'; // 用户信息
 exports.APIURL_User_Quiz_Stats = '/api/user/quiz/stats'; // 用户测试历史
 exports.APIURL_User_Address_Add = '/api/user/address/add'; // 新增收货地址
 exports.APIURL_User_Address = '/api/user/address'; // 查询收货地址
+exports.APIURL_User_Social_List = '/api/user/social/list'; // 社交账号列表
 exports.APIURL_Global_Integral_Rule = '/api/global/integral/rule'; // 积分规则
 
 exports.APIURL_LogoutV1 = '/api/web/logout'; // 登出
@@ -79,6 +80,8 @@ exports.APIURL_Auth_Bind_Phone = '/api/auth/bind/phone'; // 绑定手机（自�
 exports.APIURL_Auth_Confirm = '/api/auth/confirm'; // 确认登录
 exports.APIURL_Auth_Send_VerificationCode = '/api/auth/send/verificationCode'; // 发送验证码(手机 邮箱)
 exports.APIURL_Auth_Reset_Password = '/api/auth/reset/password'; // 重置密码(手机 邮箱)
+exports.APIURL_Auth_Reset_Phone = '/api/auth/reset/phone'; // 老用户绑定手机
+exports.APIURL_Auth_Unbind_Social = '/api/auth/unbind/social'; // 解绑社交账号
 
 exports.APIURL_System_AccessLog_Create = '/api/system/accesslog/create'; // 创建访问日志
 

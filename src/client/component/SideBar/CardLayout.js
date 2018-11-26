@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { CNavigation, CNavItem } from '@/component/_base';
 
-class SideBarSubPage extends Component {
+class SideBarCard extends Component {
     constructor(props) {
         super(props);
 
@@ -27,21 +27,20 @@ class SideBarSubPage extends Component {
     }
 
     render() {
-        const teacher = this.props.isMentor ? '私塾导师' : '录课老师';
+        // alert(this.state.value)
         return (
             <CNavigation
                 value={this.state.value}
                 onChange={this.onChange}
                 layout={this.props.layout}
             >
-                <CNavItem label="核心课程" value="course" />
-                <CNavItem label={teacher} value="teacher" />
-                <CNavItem label="口碑好评" value="comment" />
-                <CNavItem label="精彩文章" value="article" />
-                <CNavItem label="资料下载" value="resource" />
+                <CNavItem label="Layout234" value="234" />
+                <CNavItem label="Layout123" value="123" />
+                <CNavItem label="Layout112" value="112" />
+                <CNavItem label="订单LO-111" value="111" />
             </CNavigation>
         );
     }
 }
 
-export { SideBarSubPage };
+export { SideBarCard };

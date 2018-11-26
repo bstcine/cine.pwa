@@ -8,13 +8,13 @@ import Main from '@/g/component/Main';
 import LayoutBanner from './LayoutBanner';
 // import '@/g/component/Layout/layout.less';
 
-const Layout = ({ actions, user, children }) => {
+const Layout = ({ actions, user, children, imageUrl, link }) => {
     const isShow =
         !siteCodeUtil.inAPP() && !uaUtil.wechat() && !uaUtil.mobile();
     return (
         <div>
             <Header isShow={isShow} />
-            <LayoutBanner isShow={isShow} />
+            <LayoutBanner isShow={isShow} imageUrl={imageUrl} link={link} />
 
             <div className="container-fluid course-container-bg">
                 <div className="layout-container">

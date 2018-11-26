@@ -9,15 +9,23 @@ menu.forEach(item => {
     }
 });
 
-const UserMobile = ({ user, onLogout }) => {
-    let headImg = user.head_image
-        ? '//www.bstcine.com/f/' + user.head_image
-        : require('@/asset/image/ico_headpic.png');
+const HeaderImg = ({ user }) => {
+    let img = require('@/asset/image/ico_headpic.png');
+    if (user && user.head_image) {
+        if (user.head_image.startsWith('http')) {
+            img = user.head_image;
+        } else {
+            img = `//www.bstcine.com/f/${user.head_image}`;
+        }
+    }
+    return < img src={img} alt="HeaderImg" />;
+};
 
+const UserMobile = ({ user, onLogout }) => {
     return (
         <div className="user-mobile">
             <div className="user-panel-a">
-                <img src={headImg} />
+                {HeaderImg({user})}
                 <label>{user.login}</label>
             </div>
             <div className="user-panel-b">

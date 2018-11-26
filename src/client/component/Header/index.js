@@ -87,6 +87,12 @@ export default class Header extends Component {
                                 <a href="/addFeedback">用户反馈</a>
                             </li>
                             <li className="nav-item">
+                                <a href="/auth/bind">绑定手机</a>
+                            </li>
+                            <li className="nav-item">
+                                <a href="/auth/social">社交账号</a>
+                            </li>
+                            <li className="nav-item">
                                 {!!user &&
                                     (user.role_id === '1' ||
                                         user.role_id === '2') && (

@@ -28,8 +28,8 @@
     background-color: hsla(0, 0%, 71%, 0.1);
 }
 
-.cine_auth__form + button{
-    margin-top: .4rem;
+.cine_auth__form + button {
+    margin-top: 0.4rem;
 }
 
 .cine_auth__help {
@@ -41,7 +41,7 @@
         cursor: pointer;
         color: #999;
         font-size: 0.28rem;
-        &:hover{
+        &:hover {
             color: #333;
         }
     }
@@ -156,6 +156,63 @@
     .cine_auth__app--wechat {
         color: #00bb29;
         font-size: 0.56rem;
+    }
+}
+
+.cine_auth__social_list {
+    min-height: 6rem;
+
+    .cine_auth__social_type {
+        display: flex;
+
+        &:last-child {
+            border-bottom: none;
+        }
+    }
+    .cine_auth__social_icon {
+        flex: none;
+        width: 1rem;
+        display: flex;
+
+        i {
+            font-size: 0.56rem;
+            line-height: 1rem;
+        }
+        .cine_auth__social--wechat {
+            color: #00bb29;
+        }
+    }
+    .cine_auth__social_sub_list {
+        flex: 1;
+        border-bottom: 1px solid #f0f0f0;
+
+        &:last-child {
+            border-bottom: none;
+        }
+    }
+
+    .cine_auth__social_item {
+        display: flex;
+        align-items: center;
+        color: #333;
+        font-size: 0.28rem;
+        height:1rem;
+        border-bottom: 1px solid #f0f0f0;
+
+        &:last-child{
+            border-bottom: none;
+        }
+
+        img {
+            width: 0.8rem;
+            height: 0.8rem;
+            border-radius: 50%;
+            margin-right: 0.1rem;
+        }
+
+        & > span {
+            flex: 1;
+        }
     }
 }
 

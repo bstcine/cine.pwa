@@ -2,9 +2,6 @@ import React from 'react';
 import { CCardContainer } from '@/component/_base';
 import {
     CardItem,
-    TeacherList,
-    CourseList,
-    ArticleList,
     CardList,
 } from '@/component/CardItem';
 import { CardItem111 } from './CardItem';
@@ -30,17 +27,8 @@ const CItem = ({ value, layout, actions }) => {
 const CardExList = ({ orders, layout, className, type, actions }) => {
     let exList;
 
-    switch (type) {
-        case 'course':
-            exList = <CourseList list={orders} hover="lighten" />;
-            break;
-        case 'article':
-            exList = <ArticleList list={orders} hover="darken" />;
-            break;
-        case 'teacher':
-            exList = <TeacherList list={orders} />;
-            break;
-        case 'card':
+    switch (layout) {
+        case '234':
             exList = (
                 <CardList
                     list={orders}

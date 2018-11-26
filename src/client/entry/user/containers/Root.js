@@ -5,6 +5,7 @@ import { GLayoutContainer } from '@/g/container';
 import { bindActionCreators } from 'redux';
 import gAction from '@/g/action';
 import UserMobile from '@/entry/user/component/UserMobile';
+import {logoutV1} from "@/service/base";
 
 class Root extends Component {
     constructor(props) {
@@ -14,6 +15,7 @@ class Root extends Component {
             (window.innerWidth > 0 ? window.innerWidth : screen.width) <= 568;
         if (this.isUserHome && !this.isLessUpSm)
             location.href = '/user/integral';
+        this.onLogout = this.onLogout.bind(this);
     }
 
     componentDidMount() {
@@ -22,10 +24,16 @@ class Root extends Component {
         }
     }
 
+    onLogout() {
+        logoutV1().then(() => {
+            location.href = '/';
+        });
+    }
+
     render() {
         const { routes, user } = this.props;
         if (this.isUserHome && this.isLessUpSm)
-            return user && <UserMobile user={user} />;
+            return user && <UserMobile user={user} onLogout={this.onLogout} />;
         return <GLayoutContainer>{routes}</GLayoutContainer>;
     }
 }

@@ -9,7 +9,7 @@ menu.forEach(item => {
     }
 });
 
-const UserMobile = ({ user, handleClick }) => {
+const UserMobile = ({ user, onLogout }) => {
     let headImg = user.head_image
         ? '//www.bstcine.com/f/' + user.head_image
         : require('@/asset/image/ico_headpic.png');
@@ -46,7 +46,7 @@ const UserMobile = ({ user, handleClick }) => {
                     <CIcon>ci-edit</CIcon>
                     修改密码
                 </a>
-                <a className="tab" onClick={() => handleClick('quit')}>
+                <a className="tab" onClick={() => onLogout()}>
                     <CIcon>ci-quit</CIcon>
                     退出
                 </a>

@@ -5,8 +5,10 @@ const cls = componentNames.Navigation;
 import './style.less';
 import Button from '@/component/_base/Button';
 
-const NavItem = ({ selected, value, label, onChange }) => {
-    let clsName = selected ? `${cls}__item__selected` : `${cls}__item`
+const NavItem = ({ selected, value, label, layout, onChange }) => {
+    let clsSelected = layout === 'sec' ? `selected_sec` : `selected`;
+    // alert(clsSelected)
+    let clsName = selected ? `${cls}__item__${clsSelected}` : `${cls}__item`;
     return (
         <div
             className={`${clsName}`}
@@ -52,14 +54,12 @@ class Navigation extends PureComponent {
     }
 
     render() {
-        const { value, onChange, children, className } = this.props;
-
+        const { value, onChange, children, className, layout } = this.props;
         let items = Children.map(children, (item, i) => {
             if (item && item.type === NavItem) {
-                const color = value === item.props.value ? 'primary' : '';
                 return (
                     <NavItem
-                        color={color}
+                        layout={layout}
                         selected={value === item.props.value}
                         value={item.props.value}
                         label={item.props.label}

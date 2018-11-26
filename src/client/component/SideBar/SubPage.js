@@ -32,7 +32,7 @@ class SideBarSubPage extends Component {
             <CNavigation
                 value={this.state.value}
                 onChange={this.onChange}
-                layout="right"
+                layout={this.props.layout}
             >
                 <CNavItem label="核心课程" value="course" />
                 <CNavItem label={teacher} value="teacher" />

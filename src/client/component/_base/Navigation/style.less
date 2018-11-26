@@ -81,7 +81,7 @@
 
 .cine_navigation_item_non_border {
     border: 0px !important;
-    box-shadow: transparent!important;
+    box-shadow: transparent !important;
     border-radius: 0px;
 }
 
@@ -98,10 +98,27 @@
 .@{navigation}__item__selected {
     .cine_navigation_item();
     .cine_navigation_item_border();
+
     color: #eaf1f6;
     background-color: @theme-palette-primary-light;
 
     @media @media-up-md {
         .cine_navigation_item_non_border();
+    }
+}
+
+.@{navigation}__item__selected_sec {
+    .cine_navigation_item();
+    .cine_navigation_item_border();
+
+    color: white;
+    background-color: @theme-palette-secondary;
+    font-size: 14px !important;
+
+    @media @media-up-md {
+        .cine_navigation_item_non_border();
+        color: @theme-palette-secondary;
+        background-color: white;
+        font-size: 16px !important;
     }
 }

@@ -46,7 +46,7 @@ class Social extends Component {
                 <div className="cine_auth__social_list">
                     <div className="cine_auth__social_type">
                         <div className="cine_auth__social_icon">
-                            <CIcon className="cine_auth__social cine_auth__social--wechat">
+                            <CIcon className="cine_auth__social--wechat">
                                 ci-wechat
                             </CIcon>
                         </div>

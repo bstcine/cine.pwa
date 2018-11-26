@@ -164,14 +164,19 @@
 
     .cine_auth__social_type {
         display: flex;
-        align-items: center;
+
+        &:last-child {
+            border-bottom: none;
+        }
     }
     .cine_auth__social_icon {
         flex: none;
-        line-height: 1rem;
         width: 1rem;
-        .cine_auth__social {
+        display: flex;
+
+        i {
             font-size: 0.56rem;
+            line-height: 1rem;
         }
         .cine_auth__social--wechat {
             color: #00bb29;
@@ -191,7 +196,12 @@
         align-items: center;
         color: #333;
         font-size: 0.28rem;
-        height: 0.8rem;
+        height:1rem;
+        border-bottom: 1px solid #f0f0f0;
+
+        &:last-child{
+            border-bottom: none;
+        }
 
         img {
             width: 0.8rem;

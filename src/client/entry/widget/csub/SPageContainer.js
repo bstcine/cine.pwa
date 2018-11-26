@@ -20,6 +20,7 @@ class SP_FJYDContainer extends Component {
                 comments={comments}
                 articles={articles}
                 resources={resources}
+                layout="sec"
             />
         );
     }

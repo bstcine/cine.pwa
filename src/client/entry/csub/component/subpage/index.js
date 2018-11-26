@@ -132,6 +132,7 @@ export default class SubPage extends React.Component {
         return (
             <React.Fragment>
                 <SideBarSubPage
+                    layout={this.props.layout}
                     isMentor={isMentor}
                     value={this.state.sbValue}
                     onChange={this.onChangeFromSB}

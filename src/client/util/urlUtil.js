@@ -48,3 +48,16 @@ export let removeParam = (url = location.href, params_arr) => {
     URLObj.set('query', URLObj.query);
     return URLObj.toString();
 };
+
+export let getLastPath = path => {
+    let pathName = path || location.pathname;
+    if (!pathName) {
+        return null;
+    }
+    if (pathName.charAt(pathName.length - 1) === '/') {
+        pathName = pathName.slice(0, pathName.length - 1)
+    }
+    let pathComponent = pathName.split('/');
+    let lastPath = pathComponent[pathComponent.length - 1];
+    return lastPath;
+};

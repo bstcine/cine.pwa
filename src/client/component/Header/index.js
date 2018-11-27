@@ -160,19 +160,19 @@ export default class Header extends Component {
                                 <a href="/">首页</a>
                             </li>
                             <li className="nav-item">
-                                <a href="/about">关于善恩</a>
+                                <a href="/csub/zxss">在线私塾</a>
                             </li>
                             <li className="nav-item">
-                                <a href="/comments">用户口碑</a>
+                                <a href="/csub/tfsat">托福/SAT</a>
                             </li>
                             <li className="nav-item">
-                                <a href="/cooperation">合作与招商</a>
-                            </li>
-                            <li className="nav-item">
-                                <a href="/appDownload">APP下载</a>
+                                <a href="/csub/fjyd">分级阅读</a>
                             </li>
                             <li className="nav-item">
                                 <a href="/libraryplan">善恩图书馆计划</a>
+                            </li>
+                            <li className="nav-item">
+                                <a href="/about">关于善恩</a>
                             </li>
                         </ul>
                     </div>

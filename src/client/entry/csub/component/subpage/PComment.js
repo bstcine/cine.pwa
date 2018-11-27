@@ -21,13 +21,16 @@ const CardCommentItem = ({ value, hover }) => {
     );
 };
 
-const PComment = ({ list, actions }) => {
+const PComment = ({ list, limit, actions }) => {
+    let href = '/comments';
     let commentlist = list.map((item, i) => {
+        if (limit && i >= limit) return '';
+
         return <CardCommentItem key={i} value={item} hover="none" />;
     });
 
     return (
-        <CPanel title="口碑好评">
+        <CPanel title="口碑好评" ext_title="更多" ext_href={href}>
             <CCardContainer layout="123" gap="large">
                 {commentlist}
             </CCardContainer>

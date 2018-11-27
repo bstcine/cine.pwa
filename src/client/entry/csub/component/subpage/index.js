@@ -147,7 +147,7 @@ export default class SubPage extends React.Component {
                 </div>
 
                 <div ref={this.refComment}>
-                    <PComment list={commentList} />
+                    <PComment list={commentList} limit={6}/>
                 </div>
 
                 <div ref={this.refArticle}>

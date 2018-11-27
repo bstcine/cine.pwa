@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './style.less';
-import { CButton } from '@/component/_base';
+import { CButton, CMessage } from '@/component/_base';
 import { getParam } from '@/util/urlUtil';
 import { fetchData } from '@/service/base';
 import { APIURL_Auth_Confirm } from '../../../APIConfig';
@@ -32,7 +32,8 @@ class Confirm extends Component {
         this.setState({ submit_btn_disabled: true, submit_btn: '登录中' });
         let [err] = await fetchData(APIURL_Auth_Confirm, { code });
         this.setState({ submit_btn_disabled: false, submit_btn: '登录' });
-        if (!err) location.href = decodeURIComponent(redirect);
+        if (err) return CMessage.info(err);
+        location.href = decodeURIComponent(redirect);
     }
 
     render() {

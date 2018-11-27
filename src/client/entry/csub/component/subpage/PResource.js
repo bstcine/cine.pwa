@@ -5,7 +5,7 @@ import QRHelp from '@/component/QRHelp';
 const ResourceItem = ({ name, link }) => {
     return (
         <React.Fragment>
-            <div className="resourceComponent">
+            <div className="cardResource">
                 <div className="resourceTitle">{name}</div>
                 <CIcon
                     className="resourceIcon"

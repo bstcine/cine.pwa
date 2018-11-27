@@ -1,10 +1,10 @@
 import React from 'react';
-import { CPanel, CCardContainer } from '@/component/_base';
+import { CPanel, CCardContainer, CCard } from '@/component/_base';
 import { CourseList } from '@/component/CardItem';
 
-const FJCourseItem = ({course}) => {
+const FJCourseItem = ({ course }) => {
     if (!course) {
-        return <React.Fragment></React.Fragment>;
+        return <React.Fragment />;
     }
     let { id, name, img, categorys } = course;
     let remark = null;
@@ -14,45 +14,54 @@ const FJCourseItem = ({course}) => {
         }
         if (!remark) {
             remark = categorys[i].name + (categorys[i].remark || '');
-        }else {
-            remark = remark + '\n' + categorys[i].name + (categorys[i].remark || '');
+        } else {
+            remark =
+                remark + '\n' + categorys[i].name + (categorys[i].remark || '');
         }
     }
-    return <div className="FJCourseComponent">
-        <div className="courseImageContain" onClick={()=>{location.href='/?tab='+id}}>
-            <img className="courseImage" src={img}/>
-        </div>
-        <br/>
-        <p className="courseName">{name}</p>
-        <br/>
-        <p className="courseRemark">{remark}</p>
-        <br/>
-    </div>;
+    return (
+        <CCard hover="none" >
+            <div className="cardFJCourse">
+                <div
+                    className="courseImageContain"
+                    onClick={() => {
+                        location.href = '/?tab=' + id;
+                    }}
+                >
+                    <img className="courseImage" src={img} />
+                </div>
+                <br />
+                <p className="courseName">{name}</p>
+                <div className="courseRemark">{remark}</div>
+            </div>
+        </CCard>
+    );
 };
 
-const FJCourseList = ({list}) => {
+const FJCourseList = ({ list }) => {
     let fjList = list.map((item, index) => {
-        return <FJCourseItem key={index} course={item} />
+        return <FJCourseItem key={index} course={item} />;
     });
-    return (
-        <React.Fragment>
-            {fjList}
-        </React.Fragment>
-    );
+    return fjList;
 };
 
 class PCourse extends React.PureComponent {
     render() {
         const { isCourse, list } = this.props;
         const layout = isCourse ? '234' : '122';
-        let exList = isCourse ? <CourseList list={list} hover="lighten" /> : <FJCourseList list={list} />;
+        let exList = isCourse ? (
+            <CourseList list={list} hover="lighten" />
+        ) : (
+            <FJCourseList list={list} />
+        );
         return (
             <CPanel title="核心课程">
-                <CCardContainer layout={layout}>{exList}</CCardContainer>
+                <CCardContainer layout={layout} gap={isCourse ? null : 'large'}>
+                    {exList}
+                </CCardContainer>
             </CPanel>
         );
     }
-};
+}
 
 export default PCourse;
-

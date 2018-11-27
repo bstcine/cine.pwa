@@ -6,7 +6,7 @@ const FJCourseItem = ({course}) => {
     if (!course) {
         return <React.Fragment></React.Fragment>;
     }
-    let { name, img, categorys } = course;
+    let { id, name, img, categorys } = course;
     let remark = null;
     for (let i = 0; i < categorys.length; i++) {
         if (!categorys[i].remark) {
@@ -19,7 +19,7 @@ const FJCourseItem = ({course}) => {
         }
     }
     return <div className="FJCourseComponent">
-        <div className="courseImageContain">
+        <div className="courseImageContain" onClick={()=>{location.href='/?tab='+id}}>
             <img className="courseImage" src={img}/>
         </div>
         <br/>

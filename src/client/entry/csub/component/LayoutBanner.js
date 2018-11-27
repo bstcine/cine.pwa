@@ -6,7 +6,6 @@ const LayoutBanner = ({ isShow, imageUrl, link }) => {
     return (
         <div
             className="layout-banner"
-            onClick={() => {location.href = addParam(link)}}
             style={{
                 outline: 'none',
                 background: `url(${url}) center center / cover no-repeat`,

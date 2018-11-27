@@ -22,6 +22,7 @@
         "axios": "^0.18.0",
         "classnames": "^2.2.6",
         "echarts": "^3.8.5",
+        "history": "^4.7.2",
         "html2canvas": "^1.0.0-alpha.12",
         "immutable": "^3.8.2",
         "lodash": "^4.17.10",

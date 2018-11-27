@@ -3,8 +3,11 @@ import Bridge from '@/util/bridge';
 import BRIDGE_EVENT from '@/constant/bridgeEvent';
 import storeUtil from '@/util/storeUtil';
 import uaUtil from '@/util/uaUtil';
-import {  getParam } from '@/util/urlUtil';
+import { getParam } from '@/util/urlUtil';
 import CAuthModal from '@/component/CAuthModal';
+import { fetchData } from '@/service/base';
+import { APIURL_User_Info } from '../../APIConfig';
+import { CMessage } from '@/component/_base';
 
 const authUtil = {
     login: async onSuccess => {
@@ -76,6 +79,10 @@ const authUtil = {
         }
         console.log('getRedirect', url);
         return url;
+    },
+    getUserInfo: async function() {
+        const [err, res] = await fetchData(APIURL_User_Info);
+        return res;
     },
 };
 

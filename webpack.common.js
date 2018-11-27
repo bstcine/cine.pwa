@@ -11,7 +11,7 @@ const devMode = process.env.NODE_ENV !== 'production';
 const SERVICE_URL = null;
 const publicPath = '/'; // for cdn
 const pages = [
-    'cquiz',
+/*     'cquiz',
     'address',
     'temp',
     'quizvocab',
@@ -20,7 +20,7 @@ const pages = [
     'learn',
     'lword',
     'quiz',
-    'mentor',
+    'mentor', */
     'widget',
     'auth',
     'csub',

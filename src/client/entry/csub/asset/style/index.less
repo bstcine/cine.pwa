@@ -44,10 +44,6 @@
 }
 
 .FJCourseComponent {
-    width: 50%;
-    height: auto;
-    background-color: white;
-    padding-right: 0.4rem;
 
     .courseImageContain {
         position: relative;
@@ -55,27 +51,43 @@
         height: 0;
         overflow: hidden;
         padding-bottom: 31%;
+        cursor: pointer;
 
         .courseImage {
             position: absolute;
             width: 100%;
-            height: 100%;
+            height: auto;
             top: 0;
             left: 0;
         }
     }
 
     .courseName {
-        font-family: PingFangSC-Medium;
-        font-size: 0.4rem;
-        color: #2f2f2f;
+        font-weight: 700;
+        font-size: 14px;
+        line-height: 18px;
+        margin-left: 6px;
+    }
+
+    @media @media-up-xs {
+        .courseName {
+            font-size: 16px;
+            line-height: 20px;
+        }
     }
 
     .courseRemark {
-        font-family: PingFangSC-Regular;
-        font-size: 0.34rem;
-        line-height: 0.6rem;
+        font-size: 12px;
+        line-height: 20px;
         color: #7a7b7c;
         white-space: pre-wrap;
+        margin-left: 6px;
+    }
+
+    @media @media-up-xs {
+        .courseRemark {
+            font-size: 14px;
+            line-height: 24px;
+        }
     }
 }

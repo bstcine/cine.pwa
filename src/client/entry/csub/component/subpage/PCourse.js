@@ -9,13 +9,13 @@ const FJCourseItem = ({course}) => {
     let { id, name, img, categorys } = course;
     let remark = null;
     for (let i = 0; i < categorys.length; i++) {
-        if (!categorys[i].remark) {
+        if (!categorys[i].name) {
             continue;
         }
         if (!remark) {
-            remark = name + categorys[i].remark;
+            remark = categorys[i].name + (categorys[i].remark || '');
         }else {
-            remark = remark + '\n' + name + categorys[i].remark;
+            remark = remark + '\n' + categorys[i].name + (categorys[i].remark || '');
         }
     }
     return <div className="FJCourseComponent">

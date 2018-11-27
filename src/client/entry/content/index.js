@@ -9,6 +9,12 @@ import { chunkComponent } from '@/util/chunkComponent';
 import storeUtil from '@/util/storeUtil';
 import Home from './component/Home';
 import Course from './component/Course';
+// import createBrowserHistory from "history/createBrowserHistory";
+// const history = createBrowserHistory()
+// history.listen((location, action) => {
+//   // location is an object like window.location
+//   console.log('history => ',action, location.pathname, location.state);
+// });
 // import * as OfflinePluginRuntime from 'offline-plugin/runtime';
 // OfflinePluginRuntime.install();
 const PayPrepare = chunkComponent(() =>
@@ -54,6 +60,7 @@ class Content extends Entry {
     render() {
         return (
             <React.Fragment>
+                {/*<Router history={history}>*/}
                 <Router>
                     <React.Fragment>
                         <Route exact path="/" component={Home} />

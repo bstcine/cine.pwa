@@ -9,12 +9,6 @@ import { getParam } from '@/util/urlUtil';
 import CSelect, { COption } from '@/component/CSelect';
 import commonUtil from '@/util/common';
 
-const listener = event => {
-    let str =
-        "KeyboardEvent: key='" + event.key + "' | code='" + event.code + "'";
-    console.info(str);
-};
-
 class Bind extends Component {
     constructor(props) {
         super(props);
@@ -45,12 +39,25 @@ class Bind extends Component {
 
     sendAuthCode() {
         const { phone_code, phone } = this.state;
+        const { bind_with } = getParam();
         this.setState({ auth_code_btn_disabled: true });
-        fetchData(Api.APIURL_Auth_Send_AuthCode, {
-            type: 3,
-            phone_code,
-            phone,
-        }).then(([err, res]) => {
+        let url =
+            bind_with === 'wechat'
+                ? Api.APIURL_Auth_Send_AuthCode
+                : Api.APIURL_Auth_Send_VerificationCode;
+        let data =
+            bind_with === 'wechat'
+                ? {
+                      type: 3,
+                      phone_code,
+                      phone,
+                  }
+                : {
+                      type: '1',
+                      phone,
+                      phone_code,
+                  };
+        fetchData(url, data).then(([err, res]) => {
             if (!err) {
                 commonUtil.smsCountDown((text, disabled) => {
                     this.setState({
@@ -68,14 +75,27 @@ class Bind extends Component {
 
     async submit() {
         const { phone_code, phone, auth_code } = this.state;
-        const { unionid_code, redirect } = getParam();
+        const { unionid_code, redirect, bind_with } = getParam();
         this.setState({ submit_btn_disabled: true, submit_btn: '提交中' });
-        let [err, res] = await fetchData(Api.APIURL_Auth_Bind_Phone, {
-            auth_code,
-            phone_code,
-            phone,
-            unionid_code,
-        });
+        let url =
+            bind_with === 'wechat'
+                ? Api.APIURL_Auth_Bind_Phone
+                : Api.APIURL_Auth_Reset_Phone;
+        let data =
+            bind_with === 'wechat'
+                ? {
+                      auth_code,
+                      phone_code,
+                      phone,
+                      unionid_code,
+                  }
+                : {
+                      type: '1',
+                      auth_code,
+                      phone_code,
+                      phone,
+                  };
+        let [err, res] = await fetchData(url, data);
         this.setState({ submit_btn_disabled: false, submit_btn: '关联' });
         if (err) return CMessage.info(errorMsg(err));
         CMessage.success('绑定成功', () => {

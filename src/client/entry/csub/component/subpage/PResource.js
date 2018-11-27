@@ -1,21 +1,20 @@
 import React from 'react';
-import { CPanel, CIcon } from '@/component/_base';
+import { CPanel, CCardContainer, CCard, CIcon } from '@/component/_base';
 import QRHelp from '@/component/QRHelp';
 
 const ResourceItem = ({ name, link }) => {
     return (
-        <React.Fragment>
-            <div className="cardResource">
+        <CCard hover="none">
+            <div
+                className="cardResource"
+                 onClick={()=>{
+                QRHelp.open();
+            }}>
                 <div className="resourceTitle">{name}</div>
-                <CIcon
-                    className="resourceIcon"
-                    onClick={()=>{
-                        QRHelp.open();
-                    }}
-                >ci-download</CIcon>
+                <CIcon className="resourceIcon">ci-download</CIcon>
             </div>
             <br/>
-        </React.Fragment>
+        </CCard>
     );
 };
 
@@ -34,7 +33,9 @@ const PResource = ({ resources, actions }) => {
 
     return (
         <CPanel title="资料下载">
-            {cardList}
+            <CCardContainer layout='111'>
+                {cardList}
+            </CCardContainer>
         </CPanel>
     );
 };

@@ -44,7 +44,14 @@ class Confirm extends Component {
 
                 <div className="cine_auth__profile">
                     <div className="cine_auth__headimg">
-                        <img src={head_image} alt="" />
+                        <img
+                            src={
+                                head_image.startsWith('http')
+                                    ? head_image
+                                    : `//www.bstcine.com/f/${head_image}`
+                            }
+                            alt="img"
+                        />
                     </div>
                     <div className="cine_auth__phone">{phone}</div>
                 </div>

@@ -4,12 +4,10 @@ import QRHelp from '@/component/QRHelp';
 
 const ResourceItem = ({ name, link }) => {
     return (
-        <CCard hover="none">
-            <div
-                className="cardResource"
-                 onClick={()=>{
-                QRHelp.open();
-            }}>
+        <CCard hover="none" onClick={()=>{
+            QRHelp.open();
+        }} >
+            <div className="cardResource">
                 <div className="resourceTitle">{name}</div>
                 <CIcon className="resourceIcon">ci-download</CIcon>
             </div>

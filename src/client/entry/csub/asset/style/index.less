@@ -24,3 +24,70 @@
     padding: 10px;
     padding-top: 0px;
 }
+
+.resourceComponent {
+    background-color: white;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    .resourceTitle {
+        font-family: PingFangSC-Medium;
+        font-size: 0.32rem;
+        color: #233d80;
+    }
+    .resourceIcon {
+        font-size: 0.32rem;
+        color: #233d80;
+    }
+}
+
+.FJCourseComponent {
+
+    .courseImageContain {
+        position: relative;
+        width: 100%;
+        height: 0;
+        overflow: hidden;
+        padding-bottom: 31%;
+        cursor: pointer;
+
+        .courseImage {
+            position: absolute;
+            width: 100%;
+            height: auto;
+            top: 0;
+            left: 0;
+        }
+    }
+
+    .courseName {
+        font-weight: 700;
+        font-size: 14px;
+        line-height: 18px;
+        margin-left: 6px;
+    }
+
+    @media @media-up-xs {
+        .courseName {
+            font-size: 16px;
+            line-height: 20px;
+        }
+    }
+
+    .courseRemark {
+        font-size: 12px;
+        line-height: 20px;
+        color: #7a7b7c;
+        white-space: pre-wrap;
+        margin-left: 6px;
+    }
+
+    @media @media-up-xs {
+        .courseRemark {
+            font-size: 14px;
+            line-height: 24px;
+        }
+    }
+}

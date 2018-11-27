@@ -1,16 +1,40 @@
 import React from 'react';
-import { CPanel, CCardContainer, CCard } from '@/component/_base';
+import { CPanel, CIcon } from '@/component/_base';
+import QRHelp from '@/component/QRHelp';
+
+const ResourceItem = ({ name, link }) => {
+    return (
+        <React.Fragment>
+            <div className="resourceComponent">
+                <div className="resourceTitle">{name}</div>
+                <CIcon
+                    className="resourceIcon"
+                    onClick={()=>{
+                        QRHelp.open();
+                    }}
+                >ci-download</CIcon>
+            </div>
+            <br/>
+        </React.Fragment>
+    );
+};
 
 const PResource = ({ resources, actions }) => {
+    let cardList = null;
+    if (resources && resources.length > 0) {
+        cardList = resources.map((item, index) => {
+            if (item.visible === '0') {
+                return null;
+            }
+            return (
+                <ResourceItem key={index} name={item.title} link={item.link}/>
+            );
+        });
+    }
+
     return (
         <CPanel title="资料下载">
-            <CCardContainer layout="122" gap="large">
-                {resources.length}
-                <br/>
-                <br/>
-                {`待Aaron调整"资料下载"UI`}
-
-            </CCardContainer>
+            {cardList}
         </CPanel>
     );
 };

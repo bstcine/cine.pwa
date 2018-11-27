@@ -20,8 +20,8 @@ class CardContainer extends PureComponent {
             slice,
 
             // none | '1'
-            line,
 
+            line,
             // 1
             step,
         } = this.props;

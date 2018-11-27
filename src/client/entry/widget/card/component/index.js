@@ -1,7 +1,7 @@
 import React from 'react';
 import './../../asset/style/card.less';
 import { CPanel, CDrawer, CButton } from '@/component/_base';
-import { SideBarSubPage } from '@/component/SideBar/SubPage';
+import { SideBarCard } from '@/component/SideBar/CardLayout';
 import CardExList from './CardList';
 
 export default class CardDemo extends React.PureComponent {
@@ -9,29 +9,15 @@ export default class CardDemo extends React.PureComponent {
         super(props);
         this.state = {
             isRightDrawerOpen: false,
+            layout: '234',
         };
         this.onChange = this.onChange.bind(this);
-        this.ref = React.createRef();
     }
 
     onChange(sb_value) {
-        let nav = this.ref.current;
-        let scrollY = 0;
-        switch (sb_value) {
-            case 'course':
-                break;
-            case 'article':
-                if (nav) {
-                    scrollY =
-                        nav.getBoundingClientRect().top +
-                        document.documentElement.scrollTop;
-                    window.scrollTo(0, scrollY);
-                }
-
-                break;
-            case 'teacher':
-                break;
-        }
+        this.setState({
+            layout: sb_value,
+        });
     }
 
     render() {
@@ -40,7 +26,10 @@ export default class CardDemo extends React.PureComponent {
         // alert(JSON.stringify(orders));
         return (
             <React.Fragment>
-                <SideBarSubPage value="course" onChange={this.onChange} />
+                <SideBarCard
+                    value={this.state.layout}
+                    onChange={this.onChange}
+                />
 
                 <CPanel title="AIRBNB" className="show-drawer">
                     <CDrawer
@@ -52,14 +41,15 @@ export default class CardDemo extends React.PureComponent {
                                 isRightDrawerOpen: false,
                             });
                         }}
-                    >
-                        <div className="" />
-                    </CDrawer>
+                    />
                     <CardExList
                         type="card"
                         orders={orderlist}
-                        layout="234"
+                        layout={this.state.layout}
                         actions={actions}
+                        className={
+                            this.state.layout === '111' ? 'bglight' : null
+                        }
                     />
                     <br />
                     <br />
@@ -75,26 +65,6 @@ export default class CardDemo extends React.PureComponent {
                         更多...
                     </CButton>
                 </CPanel>
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-
-                <CardExList orders={orderlist} layout="112" />
-
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <CPanel title="订单- 待付款" className="bgw" padding="none">
-                    <CardExList
-                        orders={orderlist}
-                        layout="111"
-                        className="bglight"
-                    />
-                </CPanel>
 
                 <br />
                 <br />
@@ -102,9 +72,12 @@ export default class CardDemo extends React.PureComponent {
                 <br />
                 <br />
 
-                <CPanel title="Gird Card 123" className="bgw">
-                    <CardExList orders={orderlist} layout="123" />
-                </CPanel>
+                <CardExList
+                    orders={orderlist}
+                    layout={
+                        this.state.layout === '123' ? '123' : "112"
+                    }
+                />
             </React.Fragment>
         );
     }

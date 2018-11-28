@@ -21,16 +21,22 @@ const CardCommentItem = ({ value, hover }) => {
     );
 };
 
-const PComment = ({ list, limit, actions }) => {
-    let href = '/comments';
+const PComment = ({ list, limit, actions }) => {    
     let commentlist = list.map((item, i) => {
         if (limit && i >= limit) return '';
 
         return <CardCommentItem key={i} value={item} hover="none" />;
     });
 
+    let href = 'http://www.bstcine.com/comments';
+    let link = (
+        <a href={href} target="_blank">
+            <div className="cLink">更多</div>
+        </a>
+    );
+
     return (
-        <CPanel title="口碑好评" ext_title="更多" ext_href={href}>
+        <CPanel title="口碑好评" ext={link}>
             <CCardContainer layout="123" gap="large">
                 {commentlist}
             </CCardContainer>

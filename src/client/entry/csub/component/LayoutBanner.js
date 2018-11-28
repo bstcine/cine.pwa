@@ -2,6 +2,8 @@ import React from 'react';
 import { addParam } from '@/util/urlUtil';
 
 const LayoutBanner = ({ isShow, imageUrl, link }) => {
+    if (!isShow) return <div />;
+
     const url = imageUrl || `http://static.bstcine.com/m/subpage/mentor.jpg`;
     return (
         <div

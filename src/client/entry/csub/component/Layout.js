@@ -10,7 +10,7 @@ import LayoutBanner from './LayoutBanner';
 
 const Layout = ({ actions, user, children, imageUrl, link }) => {
     const isShow =
-        !siteCodeUtil.inAPP() && !uaUtil.wechat() && !uaUtil.mobile();
+        !siteCodeUtil.inAPP() && !uaUtil.wechat() && !uaUtil.phone();
     return (
         <div>
             <Header isShow={isShow} />

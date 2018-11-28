@@ -53,7 +53,14 @@ class Container extends Component {
 
                 <CFloatingButton>查看</CFloatingButton>
 
-                <CPanel title="Player">
+                <CPanel
+                    title="Player"
+                    ext={
+                        <CButton variant="outlined">
+                            DEFAULT <CIcon>lock</CIcon>
+                        </CButton>
+                    }
+                >
                     <CFloatingButton icon="pets" color="primary">
                         开始
                     </CFloatingButton>

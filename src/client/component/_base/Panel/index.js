@@ -13,6 +13,7 @@ const Panel = ({
     ext_title,
     padding = '',
     ext_href,
+    ext,
 }) => {
     return (
         <div className={classNames(`${cls}`, className)}>
@@ -24,11 +25,15 @@ const Panel = ({
                             <span className={`${cls}__badge`}>{badge}</span>
                         )}
                     </div>
-                    {ext_title && (
-                        <Link to={ext_href}>
-                            <span className={`${cls}__ext`}>{ext_title}</span>
-                        </Link>
-                    )}
+                    {!ext &&
+                        ext_title && (
+                            <Link to={ext_href}>
+                                <span className={`${cls}__ext`}>
+                                    {ext_title}
+                                </span>
+                            </Link>
+                        )}
+                    {ext && <div className={`${cls}__righthead`}>{ext}</div>}
                 </div>
             )}
             <div

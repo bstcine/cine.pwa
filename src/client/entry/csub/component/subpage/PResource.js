@@ -4,14 +4,16 @@ import QRHelp from '@/component/QRHelp';
 
 const ResourceItem = ({ name, link }) => {
     return (
-        <CCard hover="none" onClick={()=>{
-            QRHelp.open();
-        }} >
+        <CCard
+            onClick={() => {
+                QRHelp.open();
+            }}
+        >
             <div className="cardResource">
-                <div className="resourceTitle">{name}</div>
+                <div className="title">{name}</div>
                 <CIcon className="resourceIcon">ci-download</CIcon>
             </div>
-            <br/>
+            <br />
         </CCard>
     );
 };
@@ -24,16 +26,14 @@ const PResource = ({ resources, actions }) => {
                 return null;
             }
             return (
-                <ResourceItem key={index} name={item.title} link={item.link}/>
+                <ResourceItem key={index} name={item.title} link={item.link} />
             );
         });
     }
 
     return (
         <CPanel title="资料下载">
-            <CCardContainer layout='111'>
-                {cardList}
-            </CCardContainer>
+            <CCardContainer layout="111" gap="none">{cardList}</CCardContainer>
         </CPanel>
     );
 };

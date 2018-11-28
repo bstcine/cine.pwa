@@ -123,11 +123,11 @@ export default class SubPage extends React.Component {
             resources,
         } = this.props;
 
-        const courseList = courses.toJS();
+        const courseList = courses ? courses.toJS() : [];
         const teacherList = teachers.toJS();
         const articleList = articles.toJS();
         const commentList = comments.toJS();
-        const resourceList = resources.toJS();
+        const resourceList = resources ? resources.toJS() : [];
         // alert(JSON.stringify(orders));
         return (
             <React.Fragment>
@@ -147,7 +147,7 @@ export default class SubPage extends React.Component {
                 </div>
 
                 <div ref={this.refComment}>
-                    <PComment list={commentList} />
+                    <PComment list={commentList} limit={6} />
                 </div>
 
                 <div ref={this.refArticle}>

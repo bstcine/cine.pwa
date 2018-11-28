@@ -3,12 +3,13 @@
 .cardArticle {
     display: flex;
     flex-direction: row;
+    text-size-adjust: none;
     padding: 0px;
     padding-left: 0px;
     padding-right: 0px;
     padding-top: 0px;
     background-color: white;
- /*    border: 1px solid #eaf1f6;
+    /*    border: 1px solid #eaf1f6;
     box-shadow: 0 0.1rem 0.06rem 0 rgba(219, 230, 240, 0.1);
     border-radius: 3px; */
 
@@ -29,27 +30,19 @@
         }
     }
 
-    .item-right {
-    /*     padding-top: 6px;
-        padding-bottom: 8px; */
-    }
-
     .text-c {
         display: flex;
         flex-direction: column;
         overflow: hidden;
         justify-content: space-between;
 
-        .title {
-            .text-line-3();
-        }
-
         .subTitle {
             .text-color-desc();
-            font-size: 10px;
-            line-height: 14px;
-            margin-bottom: 2px;
             .text-line-2();
+            font-size: 0.24rem;
+            line-height: 0.3rem;
+            margin-bottom: 2px;
+            margin-top: -2px;
         }
         @media @media-up-xs {
             .subTitle {

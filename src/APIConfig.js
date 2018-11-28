@@ -39,6 +39,8 @@ exports.APIURL_User_Content_Course_UpdateStatus =
     '/api/user/content/course/updateLearnStatus'; // 更新学习进度
 exports.APIURL_Content_Lesson_Quiz = '/api/web/quiz/'; // 小节测试
 exports.APIURL_Content_StuQuizWord_List = '/api/content/stuQuizWord/list'; // 获取学生、核心语法测试、词汇测试列表，根据管理员或老师
+exports.APIURL_Content_School_Detail = '/api/content/school/detail'; // 学校详情
+
 
 exports.APIURL_STATS_ACTIVITY_COURSE_INFO = '/api/stats/activity/course/info'; // 课程活动参与用户纪录信息
 exports.APIURL_STATS_ACTIVITY_COURSE_UPDATE = '/api/stats/activity/course/update'; // 更新课程活动参与用户纪录

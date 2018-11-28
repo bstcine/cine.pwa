@@ -4,6 +4,7 @@ import authUtil from '@/util/authUtil';
 import { fetchData } from '@/service/base';
 import Api from '../../../APIConfig';
 import errorMsg from '@/util/errorMsg';
+import { getParam } from '@/util/urlUtil';
 
 class SignIn extends Component {
     constructor(props) {
@@ -14,6 +15,7 @@ class SignIn extends Component {
             submit_btn_disabled: false,
             submit_btn: '登录',
         };
+        this.school = getParam().school;
         this.submit = this.submit.bind(this);
         this.listener = this.listener.bind(this);
     }
@@ -36,6 +38,7 @@ class SignIn extends Component {
         let [err] = await fetchData(Api.APIURL_Auth_SignIn, {
             phone,
             password,
+            school: this.school,
         });
         this.setState({ submit_btn_disabled: false, submit_btn: '登录' });
         if (err) return CMessage.info(errorMsg(err));
@@ -51,14 +54,16 @@ class SignIn extends Component {
             <div className="cine-auth__container">
                 <div className="cine_auth__title">
                     登录
-                    <span
-                        className="cine_auth__opera"
-                        onClick={() => {
-                            toggle('signup');
-                        }}
-                    >
-                        注册
-                    </span>
+                    {!getParam().school && (
+                        <span
+                            className="cine_auth__opera"
+                            onClick={() => {
+                                toggle('signup');
+                            }}
+                        >
+                            注册
+                        </span>
+                    )}
                 </div>
 
                 <div className="cine_auth__form">
@@ -109,17 +114,19 @@ class SignIn extends Component {
                     {submit_btn}
                 </CButton>
 
-                <div className="cine_auth__social">
-                    <div className="line-through">社交账号登录</div>
-                    <div className="cine_auth__apps">
-                        <CIcon
-                            className="cine_auth__app cine_auth__app--wechat"
-                            onClick={authUtil.goWechatAuth}
-                        >
-                            ci-wechat
-                        </CIcon>
+                {!this.school && (
+                    <div className="cine_auth__social">
+                        <div className="line-through">社交账号登录</div>
+                        <div className="cine_auth__apps">
+                            <CIcon
+                                className="cine_auth__app cine_auth__app--wechat"
+                                onClick={authUtil.goWechatAuth}
+                            >
+                                ci-wechat
+                            </CIcon>
+                        </div>
                     </div>
-                </div>
+                )}
             </div>
         );
     }

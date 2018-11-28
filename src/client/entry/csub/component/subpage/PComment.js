@@ -28,7 +28,7 @@ const PComment = ({ list, limit, actions }) => {
         return <CardCommentItem key={i} value={item} hover="none" />;
     });
 
-    let href = 'http://www.bstcine.com/comments';
+    let href = '/comments';
     let link = (
         <a href={href} target="_blank">
             <div className="cLink">更多</div>

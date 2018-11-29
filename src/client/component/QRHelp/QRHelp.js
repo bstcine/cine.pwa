@@ -24,7 +24,7 @@ class QRHelp extends Component {
                         close
                     </Icon>
                     <div className={`${cls}__content`}>
-                        <p>{h1}}</p>
+                        <p>{h1}</p>
                         <div className={`${cls}__wechat`}>{h2}</div>
                         <img src={img} alt="qrcode" className={`${cls}__img`} />
                     </div>
@@ -33,6 +33,5 @@ class QRHelp extends Component {
         );
     }
 }
-
 
 export default QRHelp;

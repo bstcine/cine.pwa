@@ -11,8 +11,10 @@ export const CourseList = ({ list, hover }) => {
     });
     return cardList;
 };
-export const TeacherList = ({ list, hover, isMentor }) => {
+export const TeacherList = ({ list, hover, isMentor, limit }) => {
     let cardList = list.map((item, i) => {
+        if (limit && i >= limit) return '';
+
         return <CardTeacher key={i} value={item} isMentor={isMentor} />;
     });
     return cardList;

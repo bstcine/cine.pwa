@@ -8,10 +8,10 @@ class CSubRoot extends Entry {
     constructor(props) {
         super(props);
         let lastPath = getLastPath();
-        let bannerRes = banner['result'][lastPath];
-        if (!bannerRes) {
-            bannerRes = banner['result']['zxss']
+        if (lastPath !== 'zxss' && lastPath !== 'tfsat' && lastPath !== 'fjyd') {
+            lastPath = 'zxss';
         }
+        let bannerRes = banner['result'][lastPath];
         this.bannerImage = bannerRes[0]['img'];
         this.bannerLink = bannerRes[0]['link'];
     }

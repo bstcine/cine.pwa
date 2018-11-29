@@ -5,6 +5,9 @@ import { getLastPath } from '@/util/urlUtil';
 
 const ResourceItem = ({ name, link }) => {
     let lastPath = getLastPath();
+    if (lastPath !== 'zxss' && lastPath !== 'tfsat' && lastPath !== 'fjyd') {
+        lastPath = 'zxss';
+    }
     let helpMan = lastPath === 'zxss' ? 'alice' : 'xzs';
     return (
         <CCard

@@ -155,7 +155,7 @@ export default class SubPage extends React.Component {
                 </div>
 
                 <div ref={this.refResource}>
-                    <PResource resources={resourceList} />
+                    <PResource resources={resourceList} isMentor={isMentor} />
                 </div>
             </React.Fragment>
         );

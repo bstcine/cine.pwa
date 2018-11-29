@@ -1,14 +1,9 @@
 import React from 'react';
 import { CPanel, CCardContainer, CCard, CIcon } from '@/component/_base';
 import QRHelp from '@/component/QRHelp';
-import { getLastPath } from '@/util/urlUtil';
 
-const ResourceItem = ({ name, link }) => {
-    let lastPath = getLastPath();
-    if (lastPath !== 'zxss' && lastPath !== 'tfsat' && lastPath !== 'fjyd') {
-        lastPath = 'zxss';
-    }
-    let helpMan = lastPath === 'zxss' ? 'alice' : 'xzs';
+const ResourceItem = ({ name, link, isMentor }) => {
+    let helpMan = isMentor ? 'alice' : 'xzs';
     return (
         <CCard
             onClick={() => {
@@ -24,7 +19,7 @@ const ResourceItem = ({ name, link }) => {
     );
 };
 
-const PResource = ({ resources, actions }) => {
+const PResource = ({ resources, actions, isMentor }) => {
     let cardList = null;
     if (resources && resources.length > 0) {
         cardList = resources.map((item, index) => {
@@ -32,7 +27,7 @@ const PResource = ({ resources, actions }) => {
                 return null;
             }
             return (
-                <ResourceItem key={index} name={item.title} link={item.link} />
+                <ResourceItem key={index} name={item.title} link={item.link} isMentor={isMentor} />
             );
         });
     }

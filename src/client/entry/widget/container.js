@@ -13,9 +13,8 @@ import {
     CAlert,
 } from '@/component/_base';
 import Player from '@/component/Player';
-import { CBind } from '@/component/Auth';
 import authUtil from '@/util/authUtil';
-import CAuthModal from '@/component/CAuthModal';
+import QRHelp from '@/component/QRHelp';
 
 class Container extends Component {
     constructor(props) {
@@ -48,6 +47,30 @@ class Container extends Component {
                         }}
                     >
                         登录
+                    </CButton>
+
+                    <CButton
+                        onClick={() => {
+                            QRHelp.open();
+                        }}
+                    >
+                        QRHelp xzs
+                    </CButton>
+
+                    <CButton
+                        onClick={() => {
+                            QRHelp.open('nancy');
+                        }}
+                    >
+                        QRHelp nancy
+                    </CButton>
+
+                    <CButton
+                        onClick={() => {
+                            QRHelp.open('alice');
+                        }}
+                    >
+                        QRHelp alice
                     </CButton>
                 </CPanel>
 

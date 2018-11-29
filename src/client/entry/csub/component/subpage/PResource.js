@@ -1,8 +1,11 @@
 import React from 'react';
 import { CPanel, CCardContainer, CCard, CIcon } from '@/component/_base';
 import QRHelp from '@/component/QRHelp';
+// import { getLastPath } from '@/util/urlUtil';
 
 const ResourceItem = ({ name, link }) => {
+    // let lastPath = getLastPath();
+    // let helpClass = lastPath === 'zxss' ? QrAlice : QRHelp;
     return (
         <CCard
             onClick={() => {

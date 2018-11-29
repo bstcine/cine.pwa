@@ -34,10 +34,10 @@ class SideBarCard extends Component {
                 onChange={this.onChange}
                 layout={this.props.layout}
             >
-                <CNavItem label="Layout234" value="234" />
-                <CNavItem label="Layout123" value="123" />
-                <CNavItem label="Layout112" value="112" />
-                <CNavItem label="订单LO-111" value="111" />
+                <CNavItem label="L234" value="234" />
+                <CNavItem label="L123" value="123" />
+                <CNavItem label="L112" value="112" />
+                <CNavItem label="订单L111" value="111" />
             </CNavigation>
         );
     }

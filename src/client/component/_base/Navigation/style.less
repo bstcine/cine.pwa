@@ -7,22 +7,34 @@
     background-color: #fff;
 }
 
-.@{navigation} {
+.@{navigation}-phone {
+    z-index: 1000;
+    width: 50px !important;
+    bottom: 88px;
+    right: 10px;
+    .cine_navigation_border();
+    border-radius: 20px !important;
+    padding: 8px 0;
+    box-shadow: rgba(0, 0, 0, 0.25) 0rem 0.28rem 0.9rem,
+            rgba(0, 0, 0, 0.22) 0rem 0.2rem 0.36rem;
+}
+
+.@{navigation}-pad {
     z-index: 1000;
     width: 86px !important;
-  /*   bottom: 50px; */
-    right: -5px;
+    /*   bottom: 50px; */
+    /* right: -5px; */
 }
-.@{navigation}-up-sm {
+.@{navigation}-pc {
     // position: absolute !important;
     // top: 0px; rgba(0, 0, 0, 0.12);
     z-index: 1000;
-    padding-top: 12px;
-    padding-bottom: 12px;
+    padding: 12px 0;
     right: 50%;
     transform: translateX(18.8rem /2) translateX(105%);
     min-width: 186px;
     .cine_navigation_border();
+    border-radius: 3px!important;
 }
 
 .@{navigation}__Box {
@@ -30,12 +42,20 @@
     position: relative;
 
     .navigation {
-        .cine-navigation();
+        .cine-navigation-phone();
         position: fixed;
     }
+
+    @media @media-up-xs {
+        .navigation {
+            .cine-navigation-pad();
+            position: fixed;
+        }
+    }
+
     @media @media-up-md {
         .navigation {
-            .cine-navigation-up-sm();
+            .cine-navigation-pc();
             position: absolute !important;
             top: 0px;
             bottom: auto;
@@ -47,13 +67,20 @@
     display: block;
 
     .navigation {
-        .cine-navigation();
+        .cine-navigation-phone();
         position: fixed;
+    }
+
+    @media @media-up-xs {
+        .navigation {
+            .cine-navigation-pad();
+            position: fixed;
+        }
     }
 
     @media @media-up-md {
         .navigation {
-            .cine-navigation-up-sm();
+            .cine-navigation-pc();
             position: fixed !important;
             top: 5px;
             bottom: auto;
@@ -62,15 +89,23 @@
 }
 
 .cine_navigation_item {
-    cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
+    margin: 3px 0;
     font-weight: 700;
-    margin-bottom: 6px;
-    margin-top: 6px;
-    font-size: 14px;
+    font-size: 12px;
     min-height: 36px;
+    width: 26px;
+    @media @media-up-xs {
+        margin-bottom: 6px;
+        margin-top: 6px;
+        font-size: 12px!important;
+    }
+    @media @media-up-md {
+        width: 100%;
+        font-size: 14px!important;
+    }
 }
 .cine_navigation_item_border {
     border: 1px solid #dddfe2;
@@ -84,12 +119,25 @@
     box-shadow: transparent !important;
     border-radius: 0px;
 }
-
+.@{navigation}__item__box {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 .@{navigation}__item {
     .cine_navigation_item();
-    .cine_navigation_item_border();
+    .cine_navigation_item_non_border();
     color: @theme-palette-dark;
-    background-color: white;
+    background-color: transparent;
+   
+
+    @media @media-up-xs {
+        .cine_navigation_item();
+        .cine_navigation_item_border();
+        background-color: white;
+    }
+
     @media @media-up-md {
         .cine_navigation_item_non_border();
     }
@@ -97,28 +145,38 @@
 
 .@{navigation}__item__selected {
     .cine_navigation_item();
-    .cine_navigation_item_border();
+    .cine_navigation_item_non_border();
 
-    color: #eaf1f6;
-    background-color: @theme-palette-primary-light;
+    color: @theme-palette-secondary;
+    background-color: transparent;
+
+    @media @media-up-xs {
+        color: @theme-palette-secondary; 
+    }
 
     @media @media-up-md {
-        .cine_navigation_item_non_border();
+        color: #eaf1f6;
+        background-color: @theme-palette-primary-light;
     }
 }
 
 .@{navigation}__item__selected_sec {
     .cine_navigation_item();
-    .cine_navigation_item_border();
+    .cine_navigation_item_non_border();
 
-    color: white;
-    background-color: @theme-palette-secondary;
-    font-size: 14px !important;
+    color: @theme-palette-secondary;
+    background-color: white;
+
+    @media @media-up-xs {
+        .cine_navigation_item_border();
+        color: @theme-palette-secondary; 
+        font-size: 13px!important;
+    }
 
     @media @media-up-md {
         .cine_navigation_item_non_border();
         color: @theme-palette-secondary;
         background-color: white;
-        font-size: 16px !important;
+        font-size: 15px!important;
     }
 }

@@ -196,6 +196,12 @@ class Bind extends Component {
                     </div>
                 )}
 
+                {this.bind_with === 'wechat' && (
+                    <div className="cine_auth__help cine_auth__help--left">
+                        <span className="small">若您输入的手机号未注册，将为您直接注册。</span>
+                    </div>
+                )}
+
                 {!isBinded && (
                     <CButton
                         block

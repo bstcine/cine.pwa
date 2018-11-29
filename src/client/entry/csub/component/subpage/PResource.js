@@ -1,15 +1,15 @@
 import React from 'react';
 import { CPanel, CCardContainer, CCard, CIcon } from '@/component/_base';
 import QRHelp from '@/component/QRHelp';
-// import { getLastPath } from '@/util/urlUtil';
+import { getLastPath } from '@/util/urlUtil';
 
 const ResourceItem = ({ name, link }) => {
-    // let lastPath = getLastPath();
-    // let helpClass = lastPath === 'zxss' ? QrAlice : QRHelp;
+    let lastPath = getLastPath();
+    let helpMan = lastPath === 'zxss' ? 'alice' : 'xzs';
     return (
         <CCard
             onClick={() => {
-                QRHelp.open();
+                QRHelp.open(helpMan);
             }}
         >
             <div className="cardResource">

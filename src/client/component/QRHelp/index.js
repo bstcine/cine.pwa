@@ -12,7 +12,7 @@ const map = {
         h2: '(微信号：BSTCINE02)',
     },
     alice: {
-        img: require('@/asset/image/qrcode_bst02.jpg'),
+        img: require('@/asset/image/qrcode_Alice.jpg'),
         h1: '微信“扫一扫”, 联系Alice老师',
         h2: '(微信号：iYuan1023)',
     },

@@ -54,6 +54,8 @@ const errorCode = {
     send_sms_max_limit: '24小时内发送短信超过限制',
     phone_not_registered: '该手机未在善恩注册，试试用邮箱找回？',
     email_not_registered: '该邮箱未在善恩注册，试试用手机找回？',
+    school_id_not_match: '仅允许对应学校登录',
+    school_id_not_found: '学校信息不存在',
 };
 
 export default errorCode;

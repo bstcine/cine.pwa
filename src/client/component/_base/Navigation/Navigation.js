@@ -11,12 +11,12 @@ const NavItem = ({ selected, value, label, layout, onChange }) => {
     let clsName = selected ? `${cls}__item__${clsSelected}` : `${cls}__item`;
     return (
         <div
-            className={`${clsName}`}
+            className={`${cls}__item__box`}
             onClick={() => {
                 onChange(value);
             }}
         >
-            {label}
+            <div className={`${clsName}`}>{label}</div>
         </div>
     );
 };

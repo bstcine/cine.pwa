@@ -24,7 +24,7 @@ const map = {
 };
 
 QRHelp.open = function(who = 'xzs') {
-    const props = map[who];
+    const props = map[who] || map['xzs'];
     function render(close) {
         console.log('render', close);
         ReactDOM.render(<QRHelp {...props} close={close} />, div);

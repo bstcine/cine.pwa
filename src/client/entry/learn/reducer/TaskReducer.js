@@ -7,7 +7,7 @@ import { ACTION_LH } from '@/constant/actionTypeLearn';
 const initTaskPageState = fromJS({
     selectType: 0,
     isDialogShow: false,
-    taskModels: [],
+    taskModels: null,
     startTime: '',
     endTime: '',
     defaultType: '',

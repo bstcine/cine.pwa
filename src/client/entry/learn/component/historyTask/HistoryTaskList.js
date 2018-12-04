@@ -25,6 +25,12 @@ const TaskWeek = ({ value, seq }) => {
 class HistoryTaskList extends React.PureComponent {
     render() {
         const { taskModels, isMentor } = this.props;
+        if (!taskModels) {
+            return null;
+        }
+        if (taskModels.length === 0) {
+            return <div>暂无作业</div>
+        }
         const children = taskModels.map((model, i) => {
             return (
                 <div key={i}>

@@ -166,7 +166,7 @@ class SignUp extends Component {
                         <CIcon>lock</CIcon>
                         <input
                             type="password"
-                            placeholder="设置密码"
+                            placeholder="设置密码（不少于6位数的字母和数字）"
                             value={password}
                             onChange={e => {
                                 this.setState({ password: e.target.value });

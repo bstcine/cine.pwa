@@ -9,6 +9,7 @@ import { getParam } from '@/util/urlUtil';
 import CSelect, { COption } from '@/component/CSelect';
 import commonUtil from '@/util/common';
 import authUtil from '@/util/authUtil';
+import { URL_Auth_SetPwd } from '@/constant/menuItemUrl';
 
 class Bind extends Component {
     constructor(props) {
@@ -107,15 +108,24 @@ class Bind extends Component {
                       phone_code,
                       phone,
                   };
-        let [err] = await fetchData(url, data);
+        let [err, res] = await fetchData(url, data);
         this.setState({ submit_btn_disabled: false, submit_btn: '关联' });
         if (err) return CMessage.info(errorMsg(err));
         CMessage.success('绑定成功', () => {
-            if (redirect) {
-                location.href = decodeURIComponent(redirect);
+            if (bind_with === 'wechat') {
+                if (res.user.is_need_reset === '1') {
+                    location.href =
+                        URL_Auth_SetPwd +
+                        '?redirect=' +
+                        encodeURIComponent(redirect);
+                } else {
+                    location.href = redirect
+                        ? decodeURIComponent(redirect)
+                        : '/';
+                }
             } else {
-                if (bind_with === 'wechat') {
-                    location.href = '/';
+                if (redirect) {
+                    location.href = decodeURIComponent(redirect);
                 } else {
                     location.reload();
                 }
@@ -198,7 +208,9 @@ class Bind extends Component {
 
                 {this.bind_with === 'wechat' && (
                     <div className="cine_auth__help cine_auth__help--left">
-                        <span className="small">若您输入的手机号未注册，将为您直接注册。</span>
+                        <span className="small">
+                            若您输入的手机号未注册，将为您直接注册。
+                        </span>
                     </div>
                 )}
 

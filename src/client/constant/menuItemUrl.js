@@ -30,6 +30,7 @@ export const URL_Quiz_Grammar = '/quiz/grammar';
 export const URL_Auth_SignIn = '/auth/signin';
 export const URL_Auth_SignUp = '/auth/signup';
 export const URL_Auth_ResetPwd = '/auth/resetpwd';
+export const URL_Auth_SetPwd = '/auth/setpwd';
 export const URL_Auth_Bind = '/auth/bind';
 export const URL_Auth_Social = '/auth/social';
 export const URL_Auth_Confirm = '/auth/confirm';

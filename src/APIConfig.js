@@ -82,8 +82,10 @@ exports.APIURL_Auth_Bind_Phone = '/api/auth/bind/phone'; // 绑定手机（自�
 exports.APIURL_Auth_Confirm = '/api/auth/confirm'; // 确认登录
 exports.APIURL_Auth_Send_VerificationCode = '/api/auth/send/verificationCode'; // 发送验证码(手机 邮箱)
 exports.APIURL_Auth_Reset_Password = '/api/auth/reset/password'; // 重置密码(手机 邮箱)
+exports.APIURL_Auth_Set_Password = '/api/auth/set/password'; // 设置密码
 exports.APIURL_Auth_Reset_Phone = '/api/auth/reset/phone'; // 老用户绑定手机
-exports.APIURL_Auth_Unbind_Social = '/api/auth/unbind/social'; // 解绑社交账号
+exports.APIURL_Auth_Social_Unbind = '/api/auth/social/unbind'; // 解绑社交账号
+exports.APIURL_Auth_Social_Bind = '/api/auth/social/bind'; // 绑定社交账号
 
 exports.APIURL_System_AccessLog_Create = '/api/system/accesslog/create'; // 创建访问日志
 

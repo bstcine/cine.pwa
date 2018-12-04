@@ -4,6 +4,7 @@ import CSignIn from './SignIn';
 import CSignUp from './SignUp';
 import CResetPwd from './ResetPwd';
 import CSocial from './Social';
+import CSetPwd from './SetPwd';
 import React, { Component } from 'react';
 
 class CAuth extends Component {
@@ -63,4 +64,4 @@ class CAuth extends Component {
 
 export default CAuth;
 
-export { CBind, CConfirm, CSignIn, CSignUp, CResetPwd, CSocial };
+export { CBind, CConfirm, CSignIn, CSignUp, CResetPwd, CSocial, CSetPwd };

@@ -3,10 +3,14 @@ import './style.less';
 import { CButton, CIcon, CMessage } from '@/component/_base';
 import { fetchData } from '@/service/base';
 import {
-    APIURL_Auth_Unbind_Social,
+    APIURL_Auth_Social_Unbind,
+    APIURL_Auth_Social_Bind,
     APIURL_User_Social_List,
 } from '../../../APIConfig';
 import errorMsg from '@/util/errorMsg';
+import { getParam } from '@/util/urlUtil';
+import authUtil from '@/util/authUtil';
+import { URL_Auth_Social } from '@/constant/menuItemUrl';
 
 class Social extends Component {
     constructor(props) {
@@ -15,9 +19,15 @@ class Social extends Component {
             list: null,
         };
         this.unbindAccount = this.unbindAccount.bind(this);
+        this.bindAccount = this.bindAccount.bind(this);
+        this.goWechatAuth = this.goWechatAuth.bind(this);
     }
-    componentDidMount() {
-        this.querySocialList();
+    async componentDidMount() {
+        const { unionid_code } = getParam();
+        if (unionid_code) {
+            await this.bindAccount(unionid_code);
+        }
+        await this.querySocialList();
     }
 
     async querySocialList() {
@@ -29,12 +39,26 @@ class Social extends Component {
     }
 
     async unbindAccount(id) {
-        const [err, res] = await fetchData(APIURL_Auth_Unbind_Social, {
+        const [err, res] = await fetchData(APIURL_Auth_Social_Unbind, {
             social_id: id,
         });
         if (err) return CMessage.info(errorMsg(err));
         CMessage.success('操作成功');
         this.querySocialList();
+    }
+
+    async bindAccount(unionid_code) {
+        const [err, res] = await fetchData(APIURL_Auth_Social_Bind, {
+            unionid_code,
+        });
+        if (err) return CMessage.info(errorMsg(err));
+        CMessage.success('绑定成功', () => {
+            location.href = URL_Auth_Social;
+        });
+    }
+
+    goWechatAuth() {
+        authUtil.goWechatAuth(null, 'account_bind_wechat');
     }
 
     render() {
@@ -80,7 +104,9 @@ class Social extends Component {
                             {list &&
                                 list.length === 0 && (
                                     <div className="cine_auth__social_item">
-                                        <span>暂未绑定微信</span>
+                                        <CButton onClick={this.goWechatAuth}>
+                                            绑定微信 &gt;
+                                        </CButton>
                                     </div>
                                 )}
                         </div>

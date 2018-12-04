@@ -187,7 +187,9 @@ class SignUp extends Component {
                     <div className="cine_auth__apps">
                         <CIcon
                             className="cine_auth__app cine_auth__app--wechat"
-                            onClick={authUtil.goWechatAuth}
+                            onClick={() => {
+                                authUtil.goWechatAuth();
+                            }}
                         >
                             ci-wechat
                         </CIcon>

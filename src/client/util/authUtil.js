@@ -7,7 +7,6 @@ import { getParam } from '@/util/urlUtil';
 import CAuthModal from '@/component/CAuthModal';
 import { fetchData } from '@/service/base';
 import { APIURL_User_Info } from '../../APIConfig';
-import { CMessage } from '@/component/_base';
 
 const authUtil = {
     login: async onSuccess => {
@@ -43,27 +42,30 @@ const authUtil = {
             });
         }
     },
-    goWechatInsideAuth: () => {
-        let url = authUtil.getRedirect();
-        location.href =
-            '//www.bstcine.com/wechat/auth?redirect=' +
-            encodeURIComponent(url) +
-            '&scope=snsapi_userinfo';
+    goWechatInsideAuth: (redirect, action) => {
+        authUtil.redirectWx(redirect, 'snsapi_userinfo', action);
     },
-    goWechatQrAuth: () => {
-        let url = authUtil.getRedirect();
-
-        location.href =
+    goWechatQrAuth: (redirect, action) => {
+        authUtil.redirectWx(redirect, 'snsapi_login', action);
+    },
+    goWechatAuth: (redirect, action) => {
+        if (uaUtil.wechat()) {
+            authUtil.goWechatInsideAuth(redirect, action);
+        } else {
+            authUtil.goWechatQrAuth(redirect, action);
+        }
+    },
+    redirectWx: function(redirect, scope, action = '') {
+        let url = redirect || authUtil.getRedirect();
+        const wxUrl =
             'http://www.bstcine.com/wechat/auth?redirect=' +
             encodeURIComponent(url) +
-            '&scope=snsapi_login';
-    },
-    goWechatAuth: () => {
-        if (uaUtil.wechat()) {
-            authUtil.goWechatInsideAuth();
-        } else {
-            authUtil.goWechatQrAuth();
-        }
+            '&scope=' +
+            scope +
+            '&action=' +
+            action;
+        console.log('wxUrl', wxUrl);
+        location.href = wxUrl;
     },
     getRedirect: function() {
         let url;
@@ -72,7 +74,12 @@ const authUtil = {
             url = redirect.startsWith('http')
                 ? redirect
                 : location.origin + redirect;
-        } else if (location.pathname.startsWith('/auth')) {
+        } else if (
+            location.pathname.startsWith('/auth/bind') ||
+            location.pathname.startsWith('/auth/signin') ||
+            location.pathname.startsWith('/auth/signup')||
+            location.pathname.startsWith('/auth/resetpwd')
+        ) {
             url = location.origin + '/';
         } else {
             url = location.href;

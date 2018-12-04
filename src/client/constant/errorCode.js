@@ -56,6 +56,7 @@ const errorCode = {
     email_not_registered: '该邮箱未在善恩注册，试试用手机找回？',
     school_id_not_match: '仅允许对应学校登录',
     school_id_not_found: '学校信息不存在',
+    unionid_already_bind: '该微信已经绑定过其他善恩账号，请解绑后重试',
 };
 
 export default errorCode;

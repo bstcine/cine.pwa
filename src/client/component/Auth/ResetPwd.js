@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { CButton, CIcon, CMessage } from '@/component/_base';
 import phoneCode from '@/constant/phoneCode';
-import { COption } from '@/component/CSelect';
-import CSelect from '@/component/CSelect';
+import CSelect,{ COption } from '@/component/CSelect';
 import { fetchData } from '@/service/base';
 import {
     APIURL_Auth_Reset_Password,
@@ -11,6 +10,7 @@ import {
 import errorMsg from '@/util/errorMsg';
 import commonUtil from '@/util/common';
 import storeUtil from '@/util/storeUtil';
+import checkUtil from '@/util/checkUtil';
 
 class ResetPwd extends Component {
     constructor(props) {
@@ -43,6 +43,8 @@ class ResetPwd extends Component {
 
     async sendAuthCode() {
         const { phone_code, phone } = this.state;
+        if (!checkUtil.isPhone(phone_code, phone))
+            return CMessage.info('手机格式不正确');
         this.setState({ auth_code_btn_disabled: true });
         fetchData(APIURL_Auth_Send_VerificationCode, {
             phone,

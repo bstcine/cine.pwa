@@ -79,6 +79,7 @@ export default class Course extends Component {
 
     render() {
         const { course, ...props } = this.props;
+        const imgBG = CommonUtil.getImageBackground(course.img);
 
         return (
             <div className="course-wrap">
@@ -87,9 +88,7 @@ export default class Course extends Component {
                         <div
                             className="course-img"
                             style={{
-                                background: `url(//www.bstcine.com/f/${
-                                    course.img
-                                }) center center / cover no-repeat`,
+                                background: `${imgBG}`,
                             }}
                         />
                     </LazyLoad>

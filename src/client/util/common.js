@@ -12,15 +12,7 @@ const CommonUtil = {
             return updateItemCallback(item);
         });
     },
-    isAuth: () => {
-        if (!storeUtil.getToken()) {
-            location.href =
-                '/auth/signin?redirect=' + encodeURIComponent(location.href);
-            return false;
-        } else {
-            return true;
-        }
-    },
+
     /**
      * @ 获取不重复的随机数（int）
      * @param max 最大范围
@@ -56,9 +48,6 @@ const CommonUtil = {
     getRandomNumber: max => {
         return Math.round(Math.random() * max);
     },
-    getCurrencySymbol: currency => {
-        return currency === 'USD' ? '$' : '￥';
-    },
 
     smsCountDown: callback => {
         let count = 60;
@@ -71,6 +60,33 @@ const CommonUtil = {
                 callback(`已发送(${count}s)`, true);
             }
         }, 1000);
+    },
+
+    isAuth: () => {
+        if (!storeUtil.getToken()) {
+            location.href =
+                '/auth/signin?redirect=' + encodeURIComponent(location.href);
+            return false;
+        } else {
+            return true;
+        }
+    },
+    getCurrencySymbol: currency => {
+        return currency === 'USD' ? '$' : '￥';
+    },
+    getImageHref: imgUrl => {
+        if (imgUrl.indexOf('static.bstcine.com') !== -1) {
+            return imgUrl;
+        } else if (imgUrl.startsWith('http')) {
+            return imgUrl;
+        } else {
+            return `//www.bstcine.com/f/${imgUrl}`;
+        }
+    },
+    getImageBackground: imgUrl => {
+        return `url(${
+            imgUrl ? CommonUtil.getImageHref(imgUrl) : ''
+        }) center center / cover no-repeat`;
     },
 };
 

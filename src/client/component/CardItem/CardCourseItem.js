@@ -4,19 +4,6 @@ import { CCard } from '@/component/_base';
 import CommonUtil from '@/util/common';
 import './styleCourse.less';
 
-const getImageHref = imgUrl => {
-    if (imgUrl.indexOf('static.bstcine.com') !== -1) {
-        return imgUrl;
-    } else if (imgUrl.startsWith('http')) {
-        return imgUrl;
-    } else {
-        return `//www.bstcine.com/f/${imgUrl}`;
-    }
-};
-const getImageBackground = imgUrl => {
-    return `url(${getImageHref(imgUrl)}) center center / cover no-repeat`;
-};
-
 export class CardCourse extends Component {
     displayPrice(course) {
         if (course.status & (course.status === '2')) {
@@ -69,7 +56,7 @@ export class CardCourse extends Component {
         const { value, hover } = this.props;
         // alert(JSON.stringify(course))
         const href = `/content/course?cid=${value.id}`;
-        const bg_img = getImageBackground(value.img);
+        const bg_img = CommonUtil.getImageBackground(value.img);
 
         if (typeof value.img === 'undefined' || !value.img) return <div />;
 

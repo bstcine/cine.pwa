@@ -171,7 +171,6 @@ export default class Home extends Component {
     render() {
         console.log(`Home`);
         let { tabs, selectedTags } = this.state;
-        const willShowSlogan = !siteCodeUtil.inAPP() && !uaUtil.wechat();
         return (
             <React.Fragment>
                 <Header isShow={!siteCodeUtil.inAPP()} />
@@ -242,7 +241,7 @@ export default class Home extends Component {
                     课程咨询
                 </CFloatingButton>
 
-                {willShowSlogan ? (
+                {!siteCodeUtil.inAPP() && (
                     <LazyLoad offset={100}>
                         <div className="container-fluid">
                             <div
@@ -253,9 +252,9 @@ export default class Home extends Component {
                             />
                         </div>
                     </LazyLoad>
-                ) : null}
+                )}
 
-                <Footer isShow={true} />
+                {!siteCodeUtil.inAPP() && <Footer isShow={true} />}
                 {!siteCodeUtil.inAPP() && <TabBar />}
             </React.Fragment>
         );

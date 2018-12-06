@@ -1,6 +1,7 @@
 @import '~asset/style/_cine.less';
 
 .header {
+    display: none;
     background-color: #021a52;
     height: 1.1rem;
     position: relative;
@@ -226,7 +227,11 @@
         }
     }
 }
-
+@media @media-up-xs {
+    .header {
+        display: block;
+    }
+}
 @media @media-up-sm {
     .header {
         width: 18.8rem;

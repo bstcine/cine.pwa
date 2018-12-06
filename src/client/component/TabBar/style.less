@@ -1,16 +1,19 @@
 @import '~asset/style/_cine.less';
 
+.with-cine-tab-bar {
+    margin-bottom: 1rem;
+}
 .cine-tab-bar {
     position: fixed;
     bottom: 0;
     left: 0;
     right: 0;
-    height: 1.14rem;
+    height: 1rem;
     box-shadow: 0 -0.04rem 0.078rem 0.002rem rgba(163, 163, 164, 0.12);
     display: flex;
     justify-content: space-around;
     align-items: flex-start;
-    padding-top: 0.24rem;
+    padding-top: 0.18rem;
     background-color: #fff;
     z-index: 1;
 
@@ -22,10 +25,10 @@
 
         img {
             height: 0.4rem;
-            margin-bottom: 0.14rem;
+            margin-bottom: 0.08rem;
         }
         span {
-            font-size: 0.22rem;
+            font-size: 0.2rem;
             color: #777;
         }
     }
@@ -37,24 +40,6 @@
 }
 
 @media @media-up-xs {
-    .cine-tab-bar {
-        height: 1.2rem;
-        padding-top: 0.26rem;
-
-        a {
-            img {
-                height: 0.5rem;
-                margin-bottom: 0.08rem;
-            }
-
-            span {
-                font-size: 0.24rem;
-            }
-        }
-    }
-}
-
-@media @media-up-sm {
     .cine-tab-bar {
         display: none;
     }

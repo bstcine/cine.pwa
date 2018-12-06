@@ -8,6 +8,7 @@ const createContainer = () => {
     if (!container) {
         container = document.createElement('div');
         container.setAttribute('id', 'cine-tab-bar__container');
+        document.getElementById('root').classList.add('with-cine-tab-bar');
         document.body.appendChild(container);
     }
     return container;

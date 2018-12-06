@@ -1,14 +1,15 @@
 import React from 'react';
 import { CCard } from '@/component/_base';
+import CommonUtil from '@/util/common';
 import './styleTeacher.less';
 
 export const CardTeacher = ({ value, hover, isMentor }) => {
-  
     const href = `//www.bstcine.com/teacher/${value.id}`;
     const desc = isMentor ? value.remark_mentor : value.brief;
-    const clsDesc = isMentor ? "desc" : "desc desc6";
-    const img = isMentor ? value.head_img : `//www.bstcine.com/f/${value.img}`;
-    const imgBG = `url(${img}) center center / cover no-repeat`;
+    const clsDesc = isMentor ? 'desc' : 'desc desc6';
+    const imgBG = CommonUtil.getImageBackground(
+        isMentor ? value.head_img : value.img
+    );
     // alert(hover)
     return (
         <CCard href={isMentor ? null : href} hover={!isMentor ? null : 'none'}>

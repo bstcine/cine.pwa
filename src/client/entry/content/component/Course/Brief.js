@@ -206,28 +206,22 @@ export default class Brief extends Component {
     }
     renderVideoContainer(course) {
         if (!course) return <div className="video-container" />;
+        const imgHref = CommonUtil.getImageHref(course.img);
+        const imgBackground = CommonUtil.getImageBackground(course.img);
         return (
             <div className="video-container">
                 {course.try_contents && course.try_contents.length ? (
                     <div className="content">
                         <TryPlayer
                             playList={course.try_contents}
-                            poster={
-                                course.img
-                                    ? `//www.bstcine.com/f/${course.img}`
-                                    : null
-                            }
+                            poster={course.img ? `${imgHref}` : null}
                         />
                     </div>
                 ) : (
                     <div
                         className="content"
                         style={{
-                            background: `url(${
-                                course.img
-                                    ? `//www.bstcine.com/f/${course.img}`
-                                    : ''
-                            }) center center / cover no-repeat`,
+                            background: `${imgBackground}`,
                         }}
                     />
                 )}

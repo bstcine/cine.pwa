@@ -15,6 +15,7 @@ import {
 import Player from '@/component/Player';
 import authUtil from '@/util/authUtil';
 import QRHelp from '@/component/QRHelp';
+import TabBar from "@/component/TabBar";
 
 class Container extends Component {
     constructor(props) {
@@ -40,6 +41,9 @@ class Container extends Component {
         } = this.state;
         return (
             <div className="cine-widget">
+                <CPanel>
+                    <TabBar/>
+                </CPanel>
                 <CPanel>
                     <CButton
                         onClick={() => {

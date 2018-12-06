@@ -21,6 +21,7 @@ const bottomImg1 = require('../../asset/image/book.jpg');
 const bottomImg2 = require('../../asset/image/moon.jpg');
 let bottomImg = Math.round(Math.random() * 10) % 2 ? bottomImg2 : bottomImg1;
 import LazyLoad from 'react-lazyload';
+import TabBar from '@/component/TabBar';
 
 const getSelectedTags = () => {
     let tags = [];
@@ -255,6 +256,7 @@ export default class Home extends Component {
                 ) : null}
 
                 <Footer isShow={true} />
+                {!siteCodeUtil.inAPP() && <TabBar />}
             </React.Fragment>
         );
     }

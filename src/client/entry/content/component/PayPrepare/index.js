@@ -5,6 +5,7 @@ import uaUtil from '@/util/uaUtil';
 import Header from '@/component/Header';
 import Footer from '@/component/Footer';
 import siteCodeUtil from '@/util/sitecodeUtil';
+import CommonUtil from '@/util/common';
 import Api from '@/../APIConfig';
 import { fetchData } from '@/service/base';
 
@@ -220,6 +221,8 @@ export default class PayPrepare extends Component {
             point,
             point_msg,
         } = this.state;
+        const imgBG = course ? CommonUtil.getImageBackground(course.img) : '';
+
         return (
             <React.Fragment>
                 <Header isShow={!siteCodeUtil.inAPP() && !uaUtil.wechat()} />
@@ -230,15 +233,8 @@ export default class PayPrepare extends Component {
                                 <div
                                     className="content"
                                     style={
-                                        course && course.img
-                                            ? {
-                                                  background: `url(${
-                                                      course.img
-                                                          ? '//www.bstcine.com/f/' +
-                                                            course.img
-                                                          : ''
-                                                  }) center center / cover no-repeat`,
-                                              }
+                                        course
+                                            ? { background: `${imgBG}` }
                                             : null
                                     }
                                 />

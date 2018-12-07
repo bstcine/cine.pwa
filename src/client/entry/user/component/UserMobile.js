@@ -2,6 +2,8 @@ import React from 'react';
 import { CIcon } from '@/component/_base';
 import menu from '@/constant/menu';
 import * as h5 from '@/constant/menuItemUrl';
+import siteCodeUtil from '@/util/sitecodeUtil';
+import TabBar from '@/component/TabBar';
 let menus = [];
 menu.forEach(item => {
     if ([h5.URL_User_Index, h5.URL_Learn_Index].includes(item.url)) {
@@ -18,14 +20,14 @@ const HeaderImg = ({ user }) => {
             img = `//www.bstcine.com/f/${user.head_image}`;
         }
     }
-    return < img src={img} alt="HeaderImg" />;
+    return <img src={img} alt="HeaderImg" />;
 };
 
 const UserMobile = ({ user, onLogout }) => {
     return (
         <div className="user-mobile">
             <div className="user-panel-a">
-                {HeaderImg({user})}
+                {HeaderImg({ user })}
                 <label>{user.login}</label>
             </div>
             <div className="user-panel-b">
@@ -67,6 +69,7 @@ const UserMobile = ({ user, onLogout }) => {
                     退出
                 </a>
             </div>
+            {!siteCodeUtil.inAPP() && <TabBar />}
         </div>
     );
 };

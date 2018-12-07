@@ -21,6 +21,7 @@ const bottomImg1 = require('../../asset/image/book.jpg');
 const bottomImg2 = require('../../asset/image/moon.jpg');
 let bottomImg = Math.round(Math.random() * 10) % 2 ? bottomImg2 : bottomImg1;
 import LazyLoad from 'react-lazyload';
+import TabBar from '@/component/TabBar';
 
 const getSelectedTags = () => {
     let tags = [];
@@ -170,7 +171,6 @@ export default class Home extends Component {
     render() {
         console.log(`Home`);
         let { tabs, selectedTags } = this.state;
-        const willShowSlogan = !siteCodeUtil.inAPP() && !uaUtil.wechat();
         return (
             <React.Fragment>
                 <Header isShow={!siteCodeUtil.inAPP()} />
@@ -241,7 +241,7 @@ export default class Home extends Component {
                     课程咨询
                 </CFloatingButton>
 
-                {willShowSlogan ? (
+                {!siteCodeUtil.inAPP() && (
                     <LazyLoad offset={100}>
                         <div className="container-fluid">
                             <div
@@ -252,9 +252,10 @@ export default class Home extends Component {
                             />
                         </div>
                     </LazyLoad>
-                ) : null}
+                )}
 
-                <Footer isShow={true} />
+                {!siteCodeUtil.inAPP() && <Footer isShow={true} />}
+                {!siteCodeUtil.inAPP() && <TabBar />}
             </React.Fragment>
         );
     }

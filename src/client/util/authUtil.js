@@ -9,7 +9,7 @@ import { fetchData } from '@/service/base';
 import { APIURL_User_Info } from '../../APIConfig';
 
 const authUtil = {
-    login: async onSuccess => {
+    login: async ({ redirect, onSuccess }) => {
         if (siteCodeUtil.inIOSAPP()) {
             let { token } = await Bridge.ios(BRIDGE_EVENT.LOGIN);
             storeUtil.setToken(token);
@@ -27,7 +27,7 @@ const authUtil = {
                 location.reload();
             }
         } else if (uaUtil.wechat()) {
-            authUtil.goWechatInsideAuth();
+            authUtil.goWechatInsideAuth(redirect);
         } else {
             let modal = CAuthModal.open({
                 type: 'signin',
@@ -35,6 +35,8 @@ const authUtil = {
                     modal.close();
                     if (onSuccess) {
                         onSuccess();
+                    } else if (redirect) {
+                        location.href = redirect;
                     } else {
                         location.reload();
                     }
@@ -57,6 +59,7 @@ const authUtil = {
     },
     redirectWx: function(redirect, scope, action = '') {
         let url = redirect || authUtil.getRedirect();
+        if (!url.startsWith('http')) url = location.origin + url;
         const wxUrl =
             'http://www.bstcine.com/wechat/auth?redirect=' +
             encodeURIComponent(url) +
@@ -77,7 +80,7 @@ const authUtil = {
         } else if (
             location.pathname.startsWith('/auth/bind') ||
             location.pathname.startsWith('/auth/signin') ||
-            location.pathname.startsWith('/auth/signup')||
+            location.pathname.startsWith('/auth/signup') ||
             location.pathname.startsWith('/auth/resetpwd')
         ) {
             url = location.origin + '/';

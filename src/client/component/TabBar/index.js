@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import classNames from 'classnames';
 import './style.less';
+import storeUtil from '@/util/storeUtil';
+import authUtil from '@/util/authUtil';
 
 const createContainer = () => {
     let container = document.getElementById('cine-tab-bar__container');
@@ -37,7 +39,7 @@ class TabBar extends Component {
             },
             {
                 href: '/user',
-                name: '学习',
+                name: '我的',
                 icon: require('./image/wode@2x.png'),
                 icon_active: require('./image/wode_blue@2x.png'),
             },
@@ -48,9 +50,15 @@ class TabBar extends Component {
         return ReactDOM.createPortal(
             <div className="cine-tab-bar">
                 {this.bars.map(item => (
-                    <a
+                    <div
                         key={item.href}
-                        href={item.href}
+                        onClick={() => {
+                            if (item.href !== '/' && !storeUtil.getToken()) {
+                                authUtil.login({ redirect: item.href });
+                            } else {
+                                location.href = item.href;
+                            }
+                        }}
                         className={classNames(
                             'cine-tab-bar__item',
                             item.active && 'cine-tab-bar__item--active'
@@ -61,7 +69,7 @@ class TabBar extends Component {
                             alt={item.name}
                         />
                         <span>{item.name}</span>
-                    </a>
+                    </div>
                 ))}
             </div>,
             this.container

@@ -176,11 +176,12 @@ export default class Course extends Component {
     }
 
     login() {
-        authUtil.login(() => {
-            this.initData();
+        authUtil.login({
+            onSuccess: () => {
+                this.initData();
+            },
         });
     }
-
 
     async handleShare(need_login = true, type = 4) {
         if (need_login && !this.state.user) {
@@ -282,8 +283,6 @@ export default class Course extends Component {
                         ) : (
                             <div className="course-detail" />
                         )}
-
-
 
                         <CDrawer
                             fullscreen={uaUtil.phone()}

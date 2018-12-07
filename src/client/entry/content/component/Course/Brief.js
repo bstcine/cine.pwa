@@ -3,7 +3,7 @@ import siteCodeUtil from '@/util/sitecodeUtil';
 import TryPlayer from '@/component/TryPlayer';
 import CommonUtil from '@/util/common';
 import { CIcon } from '@/component/_base';
-import QRHelp from "@/component/QRHelp";
+import QRHelp from '@/component/QRHelp';
 
 export default class Brief extends Component {
     static defaultProps = {
@@ -125,9 +125,12 @@ export default class Brief extends Component {
                 ) {
                     return (
                         <div className="btn-groups">
-                            <div className="btn-feedback" onClick={()=>{
-                                QRHelp.open()
-                            }}>
+                            <div
+                                className="btn-feedback"
+                                onClick={() => {
+                                    QRHelp.open();
+                                }}
+                            >
                                 <CIcon>ci-message</CIcon>
                                 <span>咨询</span>
                             </div>
@@ -142,7 +145,12 @@ export default class Brief extends Component {
                 } else if (course.object_type === '4') {
                     return (
                         <div className="btn-groups">
-                            <div className="btn-feedback">
+                            <div
+                                className="btn-feedback"
+                                onClick={() => {
+                                    QRHelp.open();
+                                }}
+                            >
                                 <CIcon>ci-message</CIcon>
                                 <span>咨询</span>
                             </div>

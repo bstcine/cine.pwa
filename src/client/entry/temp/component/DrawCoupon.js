@@ -46,7 +46,7 @@ const errMsgOther = {
 };
 
 const getImgUrl = img => {
-    return img.indexOf('//') >= 0 ? '' : 'https://www.bstcine.com/f/' + img.img;
+    return (img && img.indexOf('//') >= 0 ? '' : 'https://www.bstcine.com/f/') + img;
 };
 
 export default class LotteryCoupon extends Component {

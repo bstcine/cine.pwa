@@ -7,24 +7,24 @@
     "result": {
         "zxss": [
             {
-                "img": "http://static.bstcine.com/m/subpage/mentor.jpg",
-                "img-m": "http://static.bstcine.com/m/subpage/toefl_sat.jpg",
+                "img": "https://static.bstcine.com/m/subpage/mentor.jpg",
+                "img-m": "https://static.bstcine.com/m/subpage/toefl_sat.jpg",
                 "link": "/content/course?cid=d0115246233481413BmQb3rHwG",
                 "type": "link"
             }
         ],
         "tfsat": [
             {
-                "img": "http://static.bstcine.com/m/subpage/toefl_sat.jpg",
-                "img-m": "http://static.bstcine.com/m/subpage/toefl_sat.jpg",
+                "img": "https://static.bstcine.com/m/subpage/toefl_sat.jpg",
+                "img-m": "https://static.bstcine.com/m/subpage/toefl_sat.jpg",
                 "link": "/content/course?cid=d0115246233481413BmQb3rHwG",
                 "type": "link"
             }
         ],
         "fjyd": [
             {
-                "img": "http://static.bstcine.com/m/subpage/subread.jpg",
-                "img-m": "http://static.bstcine.com/m/subpage/toefl_sat.jpg",
+                "img": "https://static.bstcine.com/m/subpage/subread.jpg",
+                "img-m": "https://static.bstcine.com/m/subpage/toefl_sat.jpg",
                 "link": "/content/course?cid=d0115246233481413BmQb3rHwG",
                 "type": "link"
             }

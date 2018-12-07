@@ -45,6 +45,10 @@ const errMsgOther = {
     draw_max_coupon: '感谢您的助力，优惠总金额已达上限！',
 };
 
+const getImgUrl = img => {
+    return img.indexOf('//') >= 0 ? '' : 'https://www.bstcine.com/f/' + img.img;
+};
+
 export default class LotteryCoupon extends Component {
     constructor(props) {
         super(props);
@@ -139,7 +143,7 @@ export default class LotteryCoupon extends Component {
                 sharelog_id: '-1',
                 title: '我正在参加善恩英语双12优惠券大派送活动！',
                 link: share_link,
-                imgUrl: 'https://www.bstcine.com/f/' + course.img,
+                imgUrl: getImgUrl(course.img),
                 desc: '快来帮我抽优惠券！',
             });
         }
@@ -198,7 +202,7 @@ export default class LotteryCoupon extends Component {
             sharelog_id: '-1',
             title: '我正在参加善恩英语双12优惠券大派送活动！',
             link: share_link,
-            imgUrl: 'https://www.bstcine.com/f/' + course.img,
+            imgUrl: getImgUrl(course.img),
             desc: '快来帮我抽优惠券！',
         };
 
@@ -400,7 +404,7 @@ export default class LotteryCoupon extends Component {
                             this.doToCourse(course.id);
                         }}
                     >
-                        <img src={'https://www.bstcine.com/f/' + course.img} />
+                        <img src={getImgUrl(course.img)} />
                         <div className={'row_c_col_a'}>
                             <div className={'course_name'}>{course.name}</div>
                             <div className={'course_teacher'}>

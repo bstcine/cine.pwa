@@ -78,7 +78,7 @@ export default class LotteryCoupon extends Component {
         this.doToCourse = this.doToCourse.bind(this);
         this.doToBuy = this.doToBuy.bind(this);
 
-        document.title = '善恩英语双11优惠券大派送！';
+        document.title = '善恩英语双12优惠券大派送！';
     }
 
     async componentDidMount() {
@@ -137,7 +137,7 @@ export default class LotteryCoupon extends Component {
                 stats_activity_course.id;
             setShareParam({
                 sharelog_id: '-1',
-                title: '我正在参加善恩英语双11优惠券大派送活动！',
+                title: '我正在参加善恩英语双12优惠券大派送活动！',
                 link: share_link,
                 imgUrl: 'https://www.bstcine.com/f/' + course.img,
                 desc: '快来帮我抽优惠券！',
@@ -196,7 +196,7 @@ export default class LotteryCoupon extends Component {
 
         let share_params = {
             sharelog_id: '-1',
-            title: '我正在参加善恩英语双11优惠券大派送活动！',
+            title: '我正在参加善恩英语双12优惠券大派送活动！',
             link: share_link,
             imgUrl: 'https://www.bstcine.com/f/' + course.img,
             desc: '快来帮我抽优惠券！',
@@ -334,7 +334,7 @@ export default class LotteryCoupon extends Component {
                                         'YYYY-MM-DD'
                                     )}
                         </div>
-                        <div>2. 优惠券有效期：抽奖之日起至2018-11-13</div>
+                        <div>2. 优惠券有效期：抽奖之日起至2018-12-18</div>
                         <div>
                             3.
                             优惠券适用范围：本优惠券为单门视频课程专享优惠券，仅可用于购买善恩英语
@@ -449,7 +449,7 @@ export default class LotteryCoupon extends Component {
                                 'YYYY-MM-DD'
                             )}
                         </div>
-                        <div>2. 优惠券有效期：抽奖之日起至2018-11-13</div>
+                        <div>2. 优惠券有效期：抽奖之日起至2018-12-18</div>
                         <div>
                             3.
                             优惠券适用范围：本优惠券为单门视频课程专享优惠券，仅可用于购买善恩英语

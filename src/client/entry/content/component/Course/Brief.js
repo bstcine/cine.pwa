@@ -312,7 +312,7 @@ export default class Brief extends Component {
                                 >
                                     <div className="red-bag" />
                                     <div className="desc">
-                                        抽取11.11<br />优惠券
+                                        抽取12.12<br />优惠券
                                     </div>
                                 </div>
                             </div>

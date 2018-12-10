@@ -9,7 +9,8 @@ import { fetchData } from '@/service/base';
 import { APIURL_User_Info } from '../../APIConfig';
 
 const authUtil = {
-    login: async ({ redirect, onSuccess }) => {
+    login: async (prop = {}) => {
+        let { redirect, onSuccess } = prop;
         if (siteCodeUtil.inIOSAPP()) {
             let { token } = await Bridge.ios(BRIDGE_EVENT.LOGIN);
             storeUtil.setToken(token);

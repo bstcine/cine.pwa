@@ -47,6 +47,16 @@ class Container extends Component {
                     <CButton
                         onClick={() => {
                             CWindow.open({
+                                children:'CWindow.open();'
+                            });
+                        }}
+                    >
+                        window default
+                    </CButton>
+
+                    <CButton
+                        onClick={() => {
+                            CWindow.open({
                                 offset: {
                                     top: '100px',
                                     bottom: '5%',

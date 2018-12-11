@@ -2,6 +2,7 @@ import React from 'react';
 import TextFix from '@/component/TextFix';
 import { CPanel, CCard, CCardContainer } from '@/component/_base';
 import siteCodeUtil from '@/util/sitecodeUtil';
+import CommonUtil from '@/util/common';
 import BRIDGE_EVENT from '@/constant/bridgeEvent';
 import Bridge from '@/util/bridge';
 
@@ -29,6 +30,7 @@ const Courses = ({ courses }) => {
         <CPanel title="我的课程" className="courses-container">
             <CCardContainer className="courses-list" gap="none">
                 {courses.map(course => {
+                    const imgBG = CommonUtil.getImageBackground(course.img);
                     return (
                         <CCard
                             key={course.id}
@@ -38,9 +40,7 @@ const Courses = ({ courses }) => {
                             <div
                                 className="course-img"
                                 style={{
-                                    background: `url("//www.bstcine.com/f/${
-                                        course.img
-                                    }") center center / cover no-repeat`,
+                                    background: `${imgBG}`,
                                 }}
                             >
                                 <i />

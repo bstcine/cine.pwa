@@ -37,14 +37,19 @@ export default class Welcome extends Component {
     startClick() {
         let { user } = this.state;
         if (!user) {
-            authUtil.login(async () => {
-                let [err, result] = await fetchData(Api.APIURL_User_Info, {});
-                if (err) return alert(errorMsg(err));
-                storeUtil.set('user', result);
-                this.setState({
-                    user: result,
-                });
-                this.startClick();
+            authUtil.login({
+                onSuccess: async () => {
+                    let [err, result] = await fetchData(
+                        Api.APIURL_User_Info,
+                        {}
+                    );
+                    if (err) return alert(errorMsg(err));
+                    storeUtil.set('user', result);
+                    this.setState({
+                        user: result,
+                    });
+                    this.startClick();
+                },
             });
         } else {
             if (

@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import siteCodeUtil from '@/util/sitecodeUtil';
 import TryPlayer from '@/component/TryPlayer';
 import CommonUtil from '@/util/common';
+import { CIcon } from '@/component/_base';
+import QRHelp from '@/component/QRHelp';
 
 export default class Brief extends Component {
     static defaultProps = {
@@ -87,12 +89,14 @@ export default class Brief extends Component {
                             course.object_type === '4')
                     ) {
                         return (
-                            <button
-                                className="btn-action btn-learn"
-                                onClick={onClickLearn}
-                            >
-                                立即学习
-                            </button>
+                            <div className="btn-groups">
+                                <button
+                                    className="btn-action btn-learn"
+                                    onClick={onClickLearn}
+                                >
+                                    立即学习
+                                </button>
+                            </div>
                         );
                     }
                 } else {
@@ -101,12 +105,14 @@ export default class Brief extends Component {
                         course.object_type === '4'
                     ) {
                         return (
-                            <button
-                                className="btn-action btn-learn"
-                                onClick={onClickLearn}
-                            >
-                                立即学习
-                            </button>
+                            <div className="btn-groups">
+                                <button
+                                    className="btn-action btn-learn"
+                                    onClick={onClickLearn}
+                                >
+                                    立即学习
+                                </button>
+                            </div>
                         );
                     }
                 }
@@ -118,21 +124,43 @@ export default class Brief extends Component {
                     course.object_type === '5'
                 ) {
                     return (
-                        <button
-                            className="btn-action btn-buy"
-                            onClick={onClickBuy}
-                        >
-                            立即购买
-                        </button>
+                        <div className="btn-groups">
+                            <div
+                                className="btn-feedback"
+                                onClick={() => {
+                                    QRHelp.open();
+                                }}
+                            >
+                                <CIcon>ci-message</CIcon>
+                                <span>咨询</span>
+                            </div>
+                            <button
+                                className="btn-action btn-buy"
+                                onClick={onClickBuy}
+                            >
+                                立即购买
+                            </button>
+                        </div>
                     );
                 } else if (course.object_type === '4') {
                     return (
-                        <button
-                            className="btn-action btn-share"
-                            onClick={e => onClickShare(true, 5)}
-                        >
-                            分享开通
-                        </button>
+                        <div className="btn-groups">
+                            <div
+                                className="btn-feedback"
+                                onClick={() => {
+                                    QRHelp.open();
+                                }}
+                            >
+                                <CIcon>ci-message</CIcon>
+                                <span>咨询</span>
+                            </div>
+                            <button
+                                className="btn-action btn-share"
+                                onClick={e => onClickShare(true, 5)}
+                            >
+                                分享开通
+                            </button>
+                        </div>
                     );
                 }
             }
@@ -206,28 +234,22 @@ export default class Brief extends Component {
     }
     renderVideoContainer(course) {
         if (!course) return <div className="video-container" />;
+        const imgHref = CommonUtil.getImageHref(course.img);
+        const imgBackground = CommonUtil.getImageBackground(course.img);
         return (
             <div className="video-container">
                 {course.try_contents && course.try_contents.length ? (
                     <div className="content">
                         <TryPlayer
                             playList={course.try_contents}
-                            poster={
-                                course.img
-                                    ? `//www.bstcine.com/f/${course.img}`
-                                    : null
-                            }
+                            poster={course.img ? `${imgHref}` : null}
                         />
                     </div>
                 ) : (
                     <div
                         className="content"
                         style={{
-                            background: `url(${
-                                course.img
-                                    ? `//www.bstcine.com/f/${course.img}`
-                                    : ''
-                            }) center center / cover no-repeat`,
+                            background: `${imgBackground}`,
                         }}
                     />
                 )}
@@ -318,7 +340,7 @@ export default class Brief extends Component {
                                 >
                                     <div className="red-bag" />
                                     <div className="desc">
-                                        抽取11.11<br />优惠券
+                                        抽取12.12<br />优惠券
                                     </div>
                                 </div>
                             </div>

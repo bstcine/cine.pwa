@@ -11,18 +11,22 @@ const devMode = process.env.NODE_ENV !== 'production';
 const SERVICE_URL = null;
 const publicPath = '/'; // for cdn
 const pages = [
+    // core
+    'content',
+    'user',
+    'learn',
+    'auth',
+
+    // widget
+    'widget',
+
     'cquiz',
     'address',
     'temp',
     'quizvocab',
-    'content',
-    'user',
-    'learn',
     'lword',
     'quiz',
     'mentor',
-    'widget',
-    'auth',
     'csub',
 ];
 
@@ -55,7 +59,7 @@ module.exports = {
         new webpack.DefinePlugin({
             SERVICE_URL: JSON.stringify(SERVICE_URL),
         }),
-        new CleanWebpackPlugin(['build'], {verbose: devMode}),
+        new CleanWebpackPlugin(['build'], { verbose: devMode }),
         new MiniCssExtractPlugin({
             filename: 'entry/[name]/index.[contenthash:8].css',
         }),

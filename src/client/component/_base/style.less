@@ -1,3 +1,10 @@
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box; // 1
+}
+
 @baseprefix : 'cine';
 @font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
 @theme-palette-dark: #757575;
@@ -36,6 +43,9 @@
 
 // alert
 @alert: ~'@{baseprefix}-alert';
+
+// window
+@window: ~'@{baseprefix}-window';
 
 // mask
 @mask: ~'@{baseprefix}-mask';

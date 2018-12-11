@@ -11,10 +11,12 @@ import {
     CIcon,
     CMessage,
     CAlert,
+    CWindow,
 } from '@/component/_base';
 import Player from '@/component/Player';
 import authUtil from '@/util/authUtil';
 import QRHelp from '@/component/QRHelp';
+import TabBar from '@/component/TabBar';
 
 class Container extends Component {
     constructor(props) {
@@ -40,6 +42,40 @@ class Container extends Component {
         } = this.state;
         return (
             <div className="cine-widget">
+                <CPanel>
+
+                    <CButton
+                        onClick={() => {
+                            CWindow.open({
+                                children:'CWindow.open();'
+                            });
+                        }}
+                    >
+                        window default
+                    </CButton>
+
+                    <CButton
+                        onClick={() => {
+                            CWindow.open({
+                                offset: {
+                                    top: '100px',
+                                    bottom: '5%',
+                                    left: '150px',
+                                },
+                                children:'CWindow.open({\n' +
+                                    '                                offset: {\n' +
+                                    '                                    top: \'100px\',\n' +
+                                    '                                    bottom: \'5%\',\n' +
+                                    '                                    left: \'150px\',\n' +
+                                    '                                },\n' +
+                                    '                            });'
+                            });
+                        }}
+                    >
+                        window
+                    </CButton>
+                </CPanel>
+
                 <CPanel>
                     <CButton
                         onClick={() => {

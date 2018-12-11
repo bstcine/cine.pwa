@@ -50,7 +50,10 @@ body {
         flex-direction: column;
         flex: 1 0 auto;
         .cine-panel {
-            flex: 1 0 100%;
+            flex: none;
+            &:last-child {
+                flex: 1 0 100%;
+            }
         }
     }
 }

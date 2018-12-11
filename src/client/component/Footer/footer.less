@@ -1,6 +1,7 @@
 @import '~asset/style/_cine.less';
 
 .footer {
+    display: none;
     background-color: #021a52;
     padding: 0.8rem 0;
     width: 100%;
@@ -111,6 +112,11 @@
     }
 }
 
+@media @media-up-xs {
+    .footer {
+        display: block;
+    }
+}
 @media @media-up-sm {
     .footer {
         padding: 0.6rem 0 1rem;

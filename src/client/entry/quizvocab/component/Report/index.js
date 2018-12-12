@@ -93,7 +93,7 @@ export default class Report extends Component {
             imgUrl: share_imgUrl,
             desc: share_desc,
         };
-        share(share_params);
+        shareUtil.share(share_params);
     }
 
     retryClick() {

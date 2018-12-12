@@ -299,7 +299,7 @@ export default class Brief extends Component {
                                         )
                                     }
                                 >
-                                    学习精读课程 >>
+                                    学习精读课程 &gt;&gt;
                                 </span>
                             </div>
                         ) : null}

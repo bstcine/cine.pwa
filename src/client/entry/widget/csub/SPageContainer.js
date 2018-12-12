@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import subPageAction from '@/action/subPageAction';
-import SubPage from '@/entry/csub/component/subpage';
+import SubPage from '@/entry/widget/csub/component';
 
 class SP_FJYDContainer extends Component {
     componentDidMount() {

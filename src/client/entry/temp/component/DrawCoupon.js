@@ -5,12 +5,11 @@ import Modal from 'react-modal';
 import moment from 'moment';
 import { addParam, getParam } from '@/util/urlUtil';
 import '../asset/style/DrawCoupon.less';
-import { share } from '@/util/shareUtil';
 import siteCodeUtil from '@/util/sitecodeUtil';
 import Bridge from '@/util/bridge';
 import BRIDGE_EVENT from '@/constant/bridgeEvent';
-import { initWechat, setShareParam } from '@/util/wechatUtil';
 import uaUtil from '@/util/uaUtil';
+import shareUtil from '@/util/shareUtil';
 
 Modal.setAppElement('#root');
 
@@ -46,7 +45,10 @@ const errMsgOther = {
 };
 
 const getImgUrl = img => {
-    return (img && img.indexOf('//') >= 0 ? '' : 'https://www.bstcine.com/f/') + img;
+    return (
+        (img && img.indexOf('//') >= 0 ? '' : 'https://www.bstcine.com/f/') +
+        img
+    );
 };
 
 export default class LotteryCoupon extends Component {
@@ -129,24 +131,27 @@ export default class LotteryCoupon extends Component {
 
         if (err) return alert(err);
         this.setState(result);
-        await initWechat();
-
-        let { isSharePage, stats_activity_course, course } = this.state;
-        if (isSharePage || (!isSharePage && location.pathname === '/temp/draw/coupon')) {
-            let share_link =
-                location.protocol +
-                '//' +
-                location.host +
-                '/temp/draw/coupon?stats_activity_id=' +
-                stats_activity_course.id;
-            setShareParam({
-                sharelog_id: '-1',
-                title: '我正在参加善恩英语双12优惠券大派送活动！',
-                link: share_link,
-                imgUrl: getImgUrl(course.img),
-                desc: '快来帮我抽优惠券！',
-            });
-        }
+        try {
+            await shareUtil.init();
+            let { isSharePage, stats_activity_course, course } = this.state;
+            if (
+                isSharePage ||
+                (!isSharePage && location.pathname === '/temp/draw/coupon')
+            ) {
+                let share_link =
+                    location.protocol +
+                    '//' +
+                    location.host +
+                    '/temp/draw/coupon?stats_activity_id=' +
+                    stats_activity_course.id;
+                shareUtil.setShareParam({
+                    title: '我正在参加善恩英语双12优惠券大派送活动！',
+                    link: share_link,
+                    imgUrl: getImgUrl(course.img),
+                    desc: '快来帮我抽优惠券！',
+                });
+            }
+        } catch (e) {}
     };
 
     onSubmit = async () => {
@@ -185,30 +190,25 @@ export default class LotteryCoupon extends Component {
         await this.onLoadInfo();
     };
 
-    doShare = course => {
+    doShare = async course => {
         let { stats_activity_course } = this.state;
 
         if (!(stats_activity_course && stats_activity_course.id))
             return alert('no_stats_activity_id');
 
         let share_link =
-            location.protocol +
-            '//' +
-            location.host +
+            location.origin +
             '/temp/draw/coupon?stats_activity_id=' +
             stats_activity_course.id;
 
         let share_params = {
-            sharelog_id: '-1',
             title: '我正在参加善恩英语双12优惠券大派送活动！',
             link: share_link,
             imgUrl: getImgUrl(course.img),
             desc: '快来帮我抽优惠券！',
         };
 
-        share({ share_params }).then(res => {
-            console.log(res);
-        });
+        await shareUtil.share(share_params);
     };
 
     doToCourse = course_id => {
@@ -445,13 +445,13 @@ export default class LotteryCoupon extends Component {
                         <div>
                             1. 抽奖活动日期：
                             {activity &&
-                            moment(activity.effective_at).format(
-                                'YYYY-MM-DD'
-                            ) +
-                            '至' +
-                            moment(activity.expire_at).format(
-                                'YYYY-MM-DD'
-                            )}
+                                moment(activity.effective_at).format(
+                                    'YYYY-MM-DD'
+                                ) +
+                                    '至' +
+                                    moment(activity.expire_at).format(
+                                        'YYYY-MM-DD'
+                                    )}
                         </div>
                         <div>2. 优惠券有效期：抽奖之日起至2018-12-18</div>
                         <div>
@@ -499,7 +499,7 @@ export default class LotteryCoupon extends Component {
             );
         }
 
-        //提示语
+        // 提示语
         let modalHint;
         if (errMsg) {
             modalHint = errMsg;

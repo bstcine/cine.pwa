@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { getParam, addParam, removeParam } from '@/util/urlUtil';
 import * as Service from '@/service/quizvocab';
-import { initWechat, setShareParam } from '@/util/wechatUtil';
-import { createShare, share } from '@/util/shareUtil';
+import shareUtil from '@/util/shareUtil';
 import Bridge from '@/util/bridge';
 import BRIDGE_EVENT from '@/constant/bridgeEvent';
 import siteCodeUtil from '@/util/sitecodeUtil';
@@ -45,33 +44,35 @@ export default class Report extends Component {
                 stat: stat,
             });
         });
-        await initWechat();
-        let [err, result] = await createShare({
-            type: 7,
-            share_link: addParam(removeParam(undefined, 'token'), {
-                from_share: 1,
-            }),
-        });
-        if (err) return alert(errorMsg(err));
-        let {
-            sharelog_id,
-            share_title,
-            share_link,
-            share_imgUrl,
-            share_desc,
-        } = result;
-        let share_params = {
-            sharelog_id,
-            title: share_title,
-            link: share_link,
-            imgUrl: share_imgUrl,
-            desc: share_desc,
-        };
-        await setShareParam(share_params);
+        try {
+            await shareUtil.init();
+            let [err, result] = await shareUtil.createShareLog({
+                type: 7,
+                share_link: addParam(removeParam(undefined, 'token'), {
+                    from_share: 1,
+                }),
+            });
+            if (err) return alert(errorMsg(err));
+            let {
+                sharelog_id,
+                share_title,
+                share_link,
+                share_imgUrl,
+                share_desc,
+            } = result;
+            let share_params = {
+                sharelog_id,
+                title: share_title,
+                link: share_link,
+                imgUrl: share_imgUrl,
+                desc: share_desc,
+            };
+            await shareUtil.setShareParam(share_params);
+        } catch (e) {}
     }
 
     async shareClick() {
-        let [err, result] = await createShare({
+        let [err, result] = await shareUtil.createShareLog({
             type: 7,
             share_link: addParam(removeParam(undefined, 'token'), {
                 from_share: 1,
@@ -92,7 +93,7 @@ export default class Report extends Component {
             imgUrl: share_imgUrl,
             desc: share_desc,
         };
-        share({ share_params });
+        share(share_params);
     }
 
     retryClick() {

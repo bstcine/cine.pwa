@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import storeUtil from '@/util/storeUtil';
 import * as Service from '@/service/quizvocab';
 import { CSSTransition } from 'react-transition-group';
-import { initWechat } from '@/util/wechatUtil';
 import { getParam } from '@/util/urlUtil';
 import CThemeProvider from '@/component/CThemeProvider';
 import { CFlatButton, CDialog } from '@/component/_base';
@@ -52,15 +51,6 @@ export default class Card extends Component {
             this.init(result.wordLevelList);
             this.config = result.config;
         });
-    }
-
-    componentDidMount() {
-        console.log('componentDidMount');
-        initWechat();
-    }
-
-    componentWillUnmount() {
-        console.log('componentWillUnmount');
     }
 
     // 初始化

@@ -3,17 +3,12 @@ import BRIDGE_EVENT from '@/constant/bridgeEvent';
 import Bridge from '@/util/bridge';
 import { eventEmmiter } from '@/util/eventEmmiter';
 import { getParam, removeParam } from '@/util/urlUtil';
-import { initWechat, setShareParam } from '@/util/wechatUtil';
-import { createShare, share } from '@/util/shareUtil';
 import siteCodeUtil from '@/util/sitecodeUtil';
 import uaUtil from '@/util/uaUtil';
 import routeUtil from '@/util/routeUtil';
 import errorMsg from '@/util/errorMsg';
-
 import storeUtil from '@/util/storeUtil';
 import cCourseAction from '@/action/contentAction';
-
-import LoginModal from '@/component/LoginModal';
 import Header from '@/component/Header';
 import Footer from '@/component/Footer';
 import Brief from './Brief';
@@ -24,6 +19,7 @@ import { CDrawer, CMessage } from '@/component/_base';
 import QRCode from '@/component/QRCode';
 import LotteryCoupon from '@/entry/temp/component/DrawCoupon';
 import authUtil from '@/util/authUtil';
+import shareUtil from '@/util/shareUtil';
 
 export default class Course extends Component {
     constructor(props) {
@@ -57,7 +53,7 @@ export default class Course extends Component {
             this.handleShare(false);
         });
 
-        this.initCurrentPageWechat();
+        await this.initCurrentPageWechat();
         await this.initData();
 
         if (siteCodeUtil.inIOSAPP()) {
@@ -65,40 +61,34 @@ export default class Course extends Component {
         }
     }
 
-    UNSAFE_componentWillReceiveProps(nextProps) {
+    async UNSAFE_componentWillReceiveProps(nextProps) {
         const locationChanged = nextProps.location !== this.props.location;
         if (locationChanged) {
-            this.initCurrentPageWechat();
-            this.initData();
+            await this.initCurrentPageWechat();
+            await this.initData();
         }
     }
 
-    initCurrentPageWechat() {
-        initWechat().then(async status => {
-            if (status) {
-                let { cid, source_user_id, sharelog_id } = getParam();
-                if (sharelog_id) return;
-                let [err, result] = await createShare({
-                    type: 4,
-                    cid,
-                    source_user_id,
-                });
-                if (err) return alert(errorMsg(err));
-                console.log('initWechat', result);
-                let {
-                    share_title,
-                    share_link,
-                    share_imgUrl,
-                    share_desc,
-                } = result;
-                setShareParam({
-                    title: share_title,
-                    link: removeParam(share_link, ['token', 'share_mask']),
-                    imgUrl: share_imgUrl,
-                    desc: share_desc,
-                });
-            }
-        });
+    async initCurrentPageWechat() {
+        try {
+            await shareUtil.init();
+            let { cid, source_user_id, sharelog_id } = getParam();
+            if (sharelog_id) return;
+            let [err, result] = await shareUtil.createShareLog({
+                type: 4,
+                cid,
+                source_user_id,
+            });
+            if (err) return alert(errorMsg(err));
+            console.log('initWechat', result);
+            let { share_title, share_link, share_imgUrl, share_desc } = result;
+            shareUtil.setShareParam({
+                title: share_title,
+                link: removeParam(share_link, ['token', 'share_mask']),
+                imgUrl: share_imgUrl,
+                desc: share_desc,
+            });
+        } catch (e) {}
     }
 
     async initData() {
@@ -189,7 +179,11 @@ export default class Course extends Component {
             return;
         }
         let { cid, source_user_id } = getParam();
-        let [err, result] = await createShare({ type, cid, source_user_id });
+        let [err, result] = await shareUtil.createShareLog({
+            type,
+            cid,
+            source_user_id,
+        });
         if (err) return alert(errorMsg(err));
         let {
             sharelog_id,
@@ -205,12 +199,8 @@ export default class Course extends Component {
             imgUrl: share_imgUrl,
             desc: share_desc,
         };
-        share({ share_params }).then(res => {
-            console.log(JSON.stringify(res));
-            if (res.status) {
-                this.initData();
-            }
-        });
+        await shareUtil.share(share_params);
+        await this.initData();
     }
 
     toggleLoginModal() {
@@ -253,7 +243,7 @@ export default class Course extends Component {
     }
 
     render() {
-        let { course, user, showLoginModal, isOpenLottery } = this.state;
+        let { course, user, isOpenLottery } = this.state;
 
         return (
             <React.Fragment>
@@ -285,7 +275,7 @@ export default class Course extends Component {
                         )}
 
                         <CDrawer
-                            fullscreen={uaUtil.phone()}
+                            fullscreen={uaUtil.mobile()}
                             isOpen={isOpenLottery}
                             anchor="bottom"
                             className="lottery-drawer"

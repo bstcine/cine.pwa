@@ -64,20 +64,35 @@
 //     });
 //     await Promise.all(promises);
 // }
-let arr = [1, 2, 3, 4, 5, 6];
-function exec() {
-    arr.forEach(async num => {
-        await process(num);
-    });
-}
-exec();
-
-function process(num) {
-    return new Promise((resolve, reject) => {
+// let arr = [1, 2, 3, 4, 5, 6];
+// function exec() {
+//     arr.forEach(async num => {
+//         await process(num);
+//     });
+// }
+// exec();
+//
+// function process(num) {
+//     return new Promise((resolve, reject) => {
+//         setTimeout(() => {
+//             if (num === 4) return reject(new Error('4_error'));
+//             console.log(num + 'done');
+//             resolve();
+//         }, num * 1000);
+//     });
+// }
+const exec = async () =>
+    new Promise((resolve, reject) => {
         setTimeout(() => {
-            if (num === 4) return reject(new Error('4_error'));
-            console.log(num + 'done');
             resolve();
-        }, num * 1000);
+        }, 1000);
+
+        setTimeout(() => {
+            resolve();
+        }, 2000);
     });
-}
+
+(async () => {
+    await exec();
+    console.log(111);
+})();

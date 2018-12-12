@@ -10,7 +10,7 @@ import { addParam, getParam } from '@/util/urlUtil';
 import HelpModal from '@/entry/content/component/PayCenter/HelpModal';
 import { fetchData } from '@/service/base';
 import errorMsg from '@/util/errorMsg';
-import { initWechat } from '@/util/wechatUtil';
+import wechatUtil from '@/util/wechatUtil';
 import Api from '@/../APIConfig';
 import storeUtil from '@/util/storeUtil';
 import Bridge from '@/util/bridge';
@@ -38,7 +38,7 @@ export default class PayCenter extends Component {
         this.submitPay = this.submitPay.bind(this);
     }
 
-    componentDidMount() {
+    async componentDidMount() {
         document.title = '善恩英语 - 收银台';
         if (uaUtil.wechat() && getParam().redirected !== '1') {
             let url = addParam(location.href, { redirected: 1 });
@@ -46,7 +46,7 @@ export default class PayCenter extends Component {
                 '//www.bstcine.com/wechat/authorize?redirect=' +
                 encodeURIComponent(url);
         } else {
-            initWechat();
+            await wechatUtil.init();
             let cid = getParam().cid;
             fetchData(Api.APIURL_Order_Detail, { cid }).then(
                 ([err, result]) => {

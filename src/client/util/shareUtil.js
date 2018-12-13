@@ -79,8 +79,6 @@ const share = async share_params => {
             let res = await Bridge.ios(BRIDGE_EVENT.SHARE, share_params);
             if (res && res.shareSuccess === 1) {
                 await updateShareLog(share_params.sharelog_id);
-            } else {
-                return Promise.reject(new Error('分享已取消'));
             }
         } else {
             await qrShare(share_params);
@@ -91,8 +89,6 @@ const share = async share_params => {
             let res = await Bridge.android(BRIDGE_EVENT.SHARE, share_params);
             if (res && res.shareSuccess === 1) {
                 await updateShareLog(share_params.sharelog_id);
-            } else {
-                return Promise.reject(new Error('分享已取消'));
             }
         } else {
             await qrShare(share_params);

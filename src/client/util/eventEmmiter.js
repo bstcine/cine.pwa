@@ -14,7 +14,8 @@ class EventEmmiter {
         // alert(`emit event[${event}]`)
         let listenerObjs = this._events[event];
         if (!listenerObjs || listenerObjs.length === 0) {
-            throw new Error(`no event[${event}] listener found`);
+            console.log(`no event[${event}] listener found`);
+            return;
         }
         listenerObjs.forEach(listenerObj => {
             const { listener, once } = listenerObj;

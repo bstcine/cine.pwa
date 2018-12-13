@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import LazyLoad from 'react-lazyload';
+import CommonUtil from '@/util/common';
 
 export default class Article extends Component {
     static defaultProps = {
@@ -28,9 +29,7 @@ export default class Article extends Component {
                                     <div
                                         className="article-img"
                                         style={{
-                                            background: `url(//www.bstcine.com/f/${
-                                                newsCategory.img
-                                            }) no-repeat center`,
+                                            background: CommonUtil.getImageBackground(newsCategory.img),
                                             backgroundSize: 'cover',
                                         }}
                                     />

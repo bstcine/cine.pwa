@@ -3,8 +3,9 @@ import { CModal } from '@/component/_base';
 import './style.less';
 
 const ShareMask = {
-    open: () => {
+    open: () =>
         CModal.open({
+            maskCloseable: true,
             className: 'cine-share__container',
             children: (
                 <>
@@ -16,8 +17,7 @@ const ShareMask = {
                     </div>
                 </>
             ),
-        });
-    },
+        }),
 };
 
 export default ShareMask;

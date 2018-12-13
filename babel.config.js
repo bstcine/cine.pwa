@@ -15,7 +15,6 @@ module.exports = function(api) {
         ],
         plugins: [
             'lodash',
-            // '@babel/plugin-transform-runtime',
             '@babel/plugin-syntax-dynamic-import',
             '@babel/plugin-syntax-import-meta',
             '@babel/plugin-proposal-class-properties',
@@ -42,6 +41,7 @@ module.exports = function(api) {
             '@babel/plugin-proposal-nullish-coalescing-operator',
             '@babel/plugin-proposal-do-expressions',
             '@babel/plugin-proposal-function-bind',
+
         ],
     };
 };

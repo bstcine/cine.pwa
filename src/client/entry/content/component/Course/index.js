@@ -88,7 +88,9 @@ export default class Course extends Component {
                 imgUrl: share_imgUrl,
                 desc: share_desc,
             });
-        } catch (e) {}
+        } catch (e) {
+            alert(JSON.stringify(e));
+        }
     }
 
     async initData() {

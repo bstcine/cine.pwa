@@ -11,7 +11,6 @@ axios.interceptors.request.use(
         // Do something before request is sent
         if (config.method === 'get') {
             if (!config.params || !config.params.token) {
-                console.log(config);
                 if (!config.params) config.params = {};
                 config.params.token = storeUtil.getToken();
             }

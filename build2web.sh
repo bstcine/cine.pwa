@@ -1,6 +1,6 @@
-if [ ${PWD##*/} != "cine.pwa" ];
+if [ ${PWD##*/} != "cine.pwa2" ];
   then
-  echo "please run at cine.pwa."
+  echo "please run at cine.pwa2."
   exit 2
 fi
 echo "npm install start..."
@@ -24,7 +24,7 @@ git pull origin master
 echo "update cine.web git code done."
 rm -rf webapp
 mkdir webapp
-cp -R ../cine.pwa/build/* ./webapp
+cp -R ../cine.pwa2/build/* ./webapp
 git add webapp
 git commit -m 'webapp'
 git push origin master:master

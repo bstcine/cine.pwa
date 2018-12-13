@@ -10,7 +10,6 @@ import siteCodeUtil from '@/util/sitecodeUtil';
 import { fetchData } from '@/service/base';
 import ShareMask from '@/component/ShareMask';
 import QRCode from '@/component/QRCode';
-import { CMessage } from '@/component/_base';
 
 let inter = null;
 let qrcode = null;
@@ -111,19 +110,6 @@ const share = async share_params => {
     }
 };
 
-const init = async () => {
-    console.log('init share');
-    if (!uaUtil.wechat())
-        return Promise.reject(new Error('not in wechat skip init'));
-
-    try {
-        await wechatUtil.init();
-        await detectShare();
-    } catch (err) {
-        return Promise.reject(err);
-    }
-};
-
 const detectShare = async () => {
     const { sharelog_id, share_mask } = getParam();
     if (share_mask === '1') {
@@ -131,7 +117,6 @@ const detectShare = async () => {
     }
 
     if (sharelog_id) {
-        let toast = CMessage.loading();
         let res = await queryShareLog(sharelog_id);
         if (res.status) {
             let data = res.data;
@@ -144,9 +129,7 @@ const detectShare = async () => {
             await updateShareLog(sharelog_id);
             hideShareMask();
         }
-        toast && toast.close();
     }
-
 };
 
 const createShareLog = async ({ type, share_link, cid, source_user_id }) => {
@@ -184,8 +167,15 @@ export const queryShareLog = sharelog_id => {
 };
 
 const shareUtil = {
-    share,
-    init,
+    share: share,
+    init: async () => {
+        console.log('init share');
+        if (!uaUtil.wechat())
+            return Promise.reject(new Error('not in wechat skip init'));
+
+        await wechatUtil.init();
+        detectShare();
+    },
     setShareParam: wechatUtil.setShareParam,
     asyncSetShareParam: share_params =>
         new Promise(resolve => {

@@ -20,7 +20,7 @@ rewrites.push({ from: /.*/, to: `/entry/content/index.html` });
 
 module.exports = merge(common, {
     mode: 'development',
-    devtool: 'cheap-module-source-map',
+    devtool: 'eval-source-map',
     devServer: {
         contentBase: path.join(__dirname, 'build'),
         compress: true,

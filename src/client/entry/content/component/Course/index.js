@@ -89,7 +89,7 @@ export default class Course extends Component {
                 desc: share_desc,
             });
         } catch (e) {
-            alert(JSON.stringify(e));
+            console.warn(e);
         }
     }
 

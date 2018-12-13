@@ -33,6 +33,14 @@ let siteCodeUtil = {
     inAPP: () => {
         return siteCodeUtil.inIOSAPP() || siteCodeUtil.inAndroidAPP();
     },
+
+    /**
+     * 确保入口文件的 constructor 函数中 set 过 sitecode
+     *  storeUtil.setSiteCode(sitecode);
+     */
+    inAndroidH5: () => {
+        return storeUtil.getSiteCode() === SITECODE.ANDROID_H5;
+    },
 };
 
 export default siteCodeUtil;

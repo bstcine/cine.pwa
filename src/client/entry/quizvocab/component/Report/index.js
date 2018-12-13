@@ -5,6 +5,7 @@ import shareUtil from '@/util/shareUtil';
 import Bridge from '@/util/bridge';
 import BRIDGE_EVENT from '@/constant/bridgeEvent';
 import siteCodeUtil from '@/util/sitecodeUtil';
+import CommonUtil from '@/util/common';
 import PieChart from './PieChart';
 import CourseLink from '@/component/CourseLink';
 import errorMsg from '@/util/errorMsg';
@@ -112,6 +113,7 @@ export default class Report extends Component {
 
     renderRecommendList() {
         return this.state.lessons.map(lesson => {
+            const bg_img = CommonUtil.getImageBackground(lesson.img);
             return (
                 <CourseLink
                     className="recommend-item"
@@ -121,10 +123,7 @@ export default class Report extends Component {
                     <div
                         className="item-img"
                         style={{
-                            background:
-                                'url(//www.bstcine.com/f/' +
-                                lesson.img +
-                                ') no-repeat top center',
+                            background: bg_img,
                             backgroundSize: 'cover',
                         }}
                     />

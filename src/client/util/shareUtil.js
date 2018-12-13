@@ -1,4 +1,3 @@
-import '../asset/style/share.less';
 import uaUtil from './uaUtil';
 import wechatUtil from './wechatUtil';
 import { getParam, addParam, removeParam } from './urlUtil';

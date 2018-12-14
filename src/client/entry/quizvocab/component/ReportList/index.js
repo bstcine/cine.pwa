@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import * as Service from '@/service/quizvocab';
-import storeUtil from '@/util/storeUtil';
+import storeUtil from '@/util/_base/storeUtil';
 import timeUtil from '@/util/timeUtil';
 
 export default class ReportList extends Component {

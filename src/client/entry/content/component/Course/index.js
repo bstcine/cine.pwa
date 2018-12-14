@@ -7,7 +7,7 @@ import siteCodeUtil from '@/util/sitecodeUtil';
 import uaUtil from '@/util/uaUtil';
 import routeUtil from '@/util/routeUtil';
 import errorMsg from '@/util/errorMsg';
-import storeUtil from '@/util/storeUtil';
+import storeUtil from '@/util/_base/storeUtil';
 import cCourseAction from '@/action/contentAction';
 import Header from '@/component/Header';
 import Footer from '@/component/Footer';
@@ -53,7 +53,7 @@ export default class Course extends Component {
             this.handleShare(false);
         });
 
-        await this.initCurrentPageWechat();
+        this.initCurrentPageWechat();
         await this.initData();
 
         if (siteCodeUtil.inIOSAPP()) {
@@ -64,7 +64,7 @@ export default class Course extends Component {
     async UNSAFE_componentWillReceiveProps(nextProps) {
         const locationChanged = nextProps.location !== this.props.location;
         if (locationChanged) {
-            await this.initCurrentPageWechat();
+            this.initCurrentPageWechat();
             await this.initData();
         }
     }
@@ -98,9 +98,9 @@ export default class Course extends Component {
         let { course, user } = await cCourseAction.initCourseDetail(cid);
         if (siteCodeUtil.inIOSAPP()) {
             if (course.temp_h5 === '1') {
-                storeUtil.set('temp_h5', '1', 600 * 1000);
+                storeUtil.set('temp_h5', '1','session');
             } else {
-                storeUtil.remove('temp_h5');
+                storeUtil.remove('temp_h5','session');
             }
         }
         this.setState({ course, user });

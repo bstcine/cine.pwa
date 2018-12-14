@@ -7,7 +7,7 @@ import { fetchData } from '@/service/base';
 import Header from '../../../component/Header';
 import Footer from '../../../component/Footer';
 import '../asset/style/ReceiveCoupon.less';
-import storeUtil from '@/util/storeUtil';
+import storeUtil from '@/util/_base/storeUtil';
 import LoginModal from '@/component/LoginModal';
 
 export default class ReceiveCoupon extends Component {

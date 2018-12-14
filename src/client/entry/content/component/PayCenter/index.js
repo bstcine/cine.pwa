@@ -12,7 +12,7 @@ import { fetchData } from '@/service/base';
 import errorMsg from '@/util/errorMsg';
 import wechatUtil from '@/util/wechatUtil';
 import Api from '@/../APIConfig';
-import storeUtil from '@/util/storeUtil';
+import storeUtil from '@/util/_base/storeUtil';
 import Bridge from '@/util/bridge';
 import BRIDGE_EVENT from '@/constant/bridgeEvent';
 
@@ -228,7 +228,7 @@ export default class PayCenter extends Component {
     submitPay() {
         let { pay_type } = this.state;
         if (pay_type === 1) {
-            if (storeUtil.get('temp_h5') === '1' && siteCodeUtil.inIOSAPP()) {
+            if (storeUtil.get('temp_h5','session') === '1' && siteCodeUtil.inIOSAPP()) {
                 this.doPayApp('1');
             } else if (uaUtil.wechat()) {
                 this.openHelpModal();
@@ -240,7 +240,7 @@ export default class PayCenter extends Component {
                 this.doPayAliPc();
             }
         } else if (pay_type === 3) {
-            if (storeUtil.get('temp_h5') === '1' && siteCodeUtil.inIOSAPP()) {
+            if (storeUtil.get('temp_h5','session') === '1' && siteCodeUtil.inIOSAPP()) {
                 this.doPayApp('3');
             } else if (uaUtil.wechat()) {
                 const { openid } = getParam();

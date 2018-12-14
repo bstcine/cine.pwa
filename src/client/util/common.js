@@ -1,4 +1,4 @@
-import storeUtil from '@/util/storeUtil';
+import storeUtil from '@/util/_base/storeUtil';
 
 const CommonUtil = {
     updateObject: (oldObject, newValues) => {

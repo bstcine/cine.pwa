@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import storeUtil from '@/util/storeUtil';
+import storeUtil from '@/util/_base/storeUtil';
 import * as Service from '@/service/quizvocab';
 import { CSSTransition } from 'react-transition-group';
 import { getParam } from '@/util/urlUtil';

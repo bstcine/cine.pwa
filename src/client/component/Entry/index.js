@@ -1,7 +1,7 @@
 import { Component } from 'react';
 import { getParam } from '@/util/urlUtil';
 import siteCodeUtil from '@/util/sitecodeUtil';
-import storeUtil from '@/util/storeUtil';
+import storeUtil from '@/util/_base/storeUtil';
 import { SITECODE } from '@/constant/index';
 import uaUtil from '@/util/uaUtil';
 

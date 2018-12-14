@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import storeUtil from '@/util/storeUtil';
+import storeUtil from '@/util/_base/storeUtil';
 import { fetchData } from '@/service/base';
 import errorMsg from '@/util/errorMsg';
 import { getParam } from '@/util/urlUtil';

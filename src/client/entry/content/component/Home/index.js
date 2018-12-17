@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { Tabs, TabItems, TabItem, TabPanels, TabPanel } from '@/component/Tabs';
-import { getParam } from '@/util/urlUtil';
+import { getParam } from '@/util/_base/urlUtil';
 import _ from 'lodash';
 import Slider from './Slider';
 import Notice from './Notice';
 import TagFilter from './TagFilter';
 import CategoryList from './CategoryList';
-import siteCodeUtil from '@/util/sitecodeUtil';
-import uaUtil from '@/util/uaUtil';
+import interSiteCodeUtil from '@/util/_base/interSiteCodeUtil';
+import uaUtil from '@/util/_base/uaUtil';
 import Article from '@/entry/content/component/Home/Article';
 import Header from '@/component/Header';
 import Footer from '@/component/Footer';
@@ -173,7 +173,7 @@ export default class Home extends Component {
         let { tabs, selectedTags } = this.state;
         return (
             <React.Fragment>
-                <Header isShow={!siteCodeUtil.inAPP()} />
+                <Header isShow={!interSiteCodeUtil.inAPP()} />
 
                 <div className="container-fluid courses-container-bg">
                     <Slider banners={this.state.banners} />
@@ -241,7 +241,7 @@ export default class Home extends Component {
                     课程咨询
                 </CFloatingButton>
 
-                {!siteCodeUtil.inAPP() && (
+                {!interSiteCodeUtil.inAPP() && (
                     <LazyLoad offset={100}>
                         <div className="container-fluid">
                             <div
@@ -254,8 +254,8 @@ export default class Home extends Component {
                     </LazyLoad>
                 )}
 
-                {!siteCodeUtil.inAPP() && <Footer isShow={true} />}
-                {!siteCodeUtil.inAPP() && <TabBar />}
+                {!interSiteCodeUtil.inAPP() && <Footer isShow={true} />}
+                {!interSiteCodeUtil.inAPP() && <TabBar />}
             </React.Fragment>
         );
     }

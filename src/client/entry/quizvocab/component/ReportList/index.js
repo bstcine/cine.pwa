@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import * as Service from '@/service/quizvocab';
 import storeUtil from '@/util/_base/storeUtil';
-import timeUtil from '@/util/timeUtil';
+import commonUtil from '@/util/_base/commonUtil';
 
 export default class ReportList extends Component {
     constructor(props) {
@@ -62,7 +62,7 @@ export default class ReportList extends Component {
                                 ? item.create_at.substring(0, 10)
                                 : '-'}
                         </td>
-                        <td>{timeUtil.durationFormat(item.duration, 2)}</td>
+                        <td>{commonUtil.durationFormat(item.duration, 2)}</td>
                         <td>{item.vocab}</td>
                     </tr>
                 );

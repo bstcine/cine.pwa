@@ -7,7 +7,7 @@ import Card from './component/card.js';
 import './asset/style/index.less';
 import storeUtil from '@/util/_base/storeUtil';
 import Entry from '@/component/Entry/index';
-import { getParam } from '@/util/urlUtil';
+import { getParam } from '@/util/_base/urlUtil';
 
 class Quiz extends Entry {
     constructor(props) {

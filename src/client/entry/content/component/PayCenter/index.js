@@ -1,19 +1,19 @@
 import React, { Component } from 'react';
 import QRCode from 'qrcode';
-import uaUtil from '@/util/uaUtil';
-import siteCodeUtil from '@/util/sitecodeUtil';
+import uaUtil from '@/util/_base/uaUtil';
+import interSiteCodeUtil from '@/util/_base/interSiteCodeUtil';
 import Header from '@/component/Header';
 import Footer from '@/component/Footer';
 import PayingModal from '@/entry/content/component/PayCenter/PayingModal';
 import QRModal from '@/entry/content/component/PayCenter/QRModal';
-import { addParam, getParam } from '@/util/urlUtil';
+import { addParam, getParam } from '@/util/_base/urlUtil';
 import HelpModal from '@/entry/content/component/PayCenter/HelpModal';
 import { fetchData } from '@/service/base';
 import errorMsg from '@/util/errorMsg';
-import wechatUtil from '@/util/wechatUtil';
+import wechatUtil from '@/util/_base/wechatUtil';
 import Api from '@/../APIConfig';
 import storeUtil from '@/util/_base/storeUtil';
-import Bridge from '@/util/bridge';
+import Bridge from '@/util/_base/interBridge';
 import BRIDGE_EVENT from '@/constant/bridgeEvent';
 
 export default class PayCenter extends Component {
@@ -235,7 +235,7 @@ export default class PayCenter extends Component {
         if (pay_type === 1) {
             if (
                 storeUtil.get('temp_h5', 'session') === '1' &&
-                siteCodeUtil.inIOSAPP()
+                interSiteCodeUtil.inIOSAPP()
             ) {
                 this.doPayApp('1');
             } else if (uaUtil.wechat()) {
@@ -250,7 +250,7 @@ export default class PayCenter extends Component {
         } else if (pay_type === 3) {
             if (
                 storeUtil.get('temp_h5', 'session') === '1' &&
-                siteCodeUtil.inIOSAPP()
+                interSiteCodeUtil.inIOSAPP()
             ) {
                 this.doPayApp('3');
             } else if (uaUtil.wechat()) {
@@ -284,7 +284,7 @@ export default class PayCenter extends Component {
         } = this.state;
         return (
             <React.Fragment>
-                <Header isShow={!siteCodeUtil.inAPP() && !uaUtil.wechat()} />
+                <Header isShow={!interSiteCodeUtil.inAPP() && !uaUtil.wechat()} />
                 <div className="container-fluid course-container-bg">
                     <div className="paycenter-container">
                         <div className="pay-header">

@@ -5,12 +5,11 @@ import phoneCode from '@/constant/phoneCode';
 import { fetchData } from '@/service/base';
 import Api from '../../../APIConfig';
 import errorMsg from '@/util/errorMsg';
-import { getParam } from '@/util/urlUtil';
+import { getParam } from '@/util/_base/urlUtil';
 import CSelect, { COption } from '@/component/CSelect';
-import commonUtil from '@/util/common';
 import authUtil from '@/util/authUtil';
 import { URL_Auth_SetPwd } from '@/constant/menuItemUrl';
-import checkUtil from "@/util/checkUtil";
+import commonUtil from "@/util/_base/commonUtil";
 
 class Bind extends Component {
     constructor(props) {
@@ -88,7 +87,7 @@ class Bind extends Component {
 
     async submit() {
         const { phone_code, phone, auth_code } = this.state;
-        if (!checkUtil.isPhone(phone_code, phone))
+        if (!commonUtil.isPhone(phone_code, phone))
             return CMessage.info('手机格式不正确');
         const { unionid_code, redirect } = getParam();
         const bind_with = this.bind_with;

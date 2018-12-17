@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import Tasks from '../component/home/Tasks';
-import uaUtil from '@/util/uaUtil';
+import uaUtil from '@/util/_base/uaUtil';
 import { fetchCurrentTask } from '@/action/learnAction';
 import gAction from '@/g/action';
 import { bindActionCreators } from 'redux';

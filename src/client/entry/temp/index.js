@@ -5,7 +5,7 @@ import OrderCoupon from './component/OrderCoupon';
 import ReceiveCoupon from './component/ReceiveCoupon';
 import LotteryCoupon from './component/DrawCoupon';
 import Entry from '@/component/Entry';
-import CommonUtil from '@/util/common';
+import CommonUtil from '@/util/_base/commonUtil';
 import './asset/style/index.less';
 // import '@/util/test';
 

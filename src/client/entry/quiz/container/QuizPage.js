@@ -6,7 +6,7 @@ import { fetchQuizData } from '@/action/quizAction';
 import Title from '../container/Title';
 import QuestionsList from '../container/QuestionsList';
 import Submit from '../container/Submit';
-import { getParam } from '@/util/urlUtil';
+import { getParam } from '@/util/_base/urlUtil';
 import LoginModal from './LoginModal';
 
 const mapStateToProps = state => {

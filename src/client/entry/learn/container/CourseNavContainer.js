@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import CourseNav from '../component/course/CourseNav';
 import * as learnAction from '@/action/learnAction';
-import { getParam } from '@/util/urlUtil';
+import { getParam } from '@/util/_base/urlUtil';
 
 const mapStateToProps = state => {
     const { lessonTree } = state;

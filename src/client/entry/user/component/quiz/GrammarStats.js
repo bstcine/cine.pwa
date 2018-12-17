@@ -1,5 +1,5 @@
 import React from 'react';
-import timeUtil from '@/util/timeUtil';
+import commonUtil from '@/util/_base/commonUtil';
 
 const statusMap = {
     '0': '答题中',
@@ -17,9 +17,9 @@ const GrammarStats = ({ list }) => {
                     key={item.id}
                 >
                     <li className="table-tr">
-                        <span>{timeUtil.shortTime(item.create_at)}</span>
+                        <span>{commonUtil.shortTime(item.create_at)}</span>
                         <span>
-                            {timeUtil.durationShortFormat(item.duration)}
+                            {commonUtil.durationShortFormat(item.duration)}
                         </span>
                         <span className="score">{item.score}</span>
                         <span className={`status__${item.status}`}>

@@ -6,7 +6,7 @@ import { fetchData } from '@/service/base';
 import { ACTION_LT } from '@/constant/actionTypeLearn';
 // import gAction from '@/g/action';
 import errorMsg from '@/util/errorMsg';
-import CommonUtil from '@/util/common.js';
+import CommonUtil from '@/util/_base/commonUtil';
 import {
     Learn_Word_Correct_SleepTime,
     Learn_Word_Failed_SleepTime,

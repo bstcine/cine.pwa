@@ -1,4 +1,4 @@
-class EventEmmiter {
+class EventEmitter {
     _events = {};
 
     on(event, listener) {
@@ -57,7 +57,7 @@ class EventEmmiter {
 }
 
 if (typeof _cine_listener === 'undefined' || !window._cine_listener) {
-    window._cine_listener = new EventEmmiter();
+    window._cine_listener = new EventEmitter();
 }
 
-export const eventEmmiter = window._cine_listener;
+export const interEventEmitter = window._cine_listener;

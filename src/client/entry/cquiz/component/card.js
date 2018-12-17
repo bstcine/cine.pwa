@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import storeUtil from '@/util/_base/storeUtil';
-import Bridge from '@/util/bridge';
+import Bridge from '@/util/_base/interBridge';
 import End from './end.js';
-import siteCodeUtil from '@/util/sitecodeUtil';
+import interSiteCodeUtil from '@/util/_base/interSiteCodeUtil';
 import BRIDGE_EVENT from '@/constant/bridgeEvent';
 import * as Service from '@/service/quiz';
 
@@ -43,7 +43,7 @@ export default class Card extends Component {
                 }
             );
         } else {
-            if (siteCodeUtil.inIOSAPP()) {
+            if (interSiteCodeUtil.inIOSAPP()) {
                 Bridge.ios(BRIDGE_EVENT.INIT_QUIZ_DATA).then(res => {
                     if (res && res.data) {
                         console.log(res.data);
@@ -51,7 +51,7 @@ export default class Card extends Component {
                         this.init();
                     }
                 });
-            } else if (siteCodeUtil.inAndroidAPP()) {
+            } else if (interSiteCodeUtil.inAndroidAPP()) {
                 Bridge.android(BRIDGE_EVENT.INIT_QUIZ_DATA).then(res => {
                     if (res && res.data) {
                         console.log(res.data);
@@ -130,9 +130,9 @@ export default class Card extends Component {
 
     // 退出答题
     exitQuiz() {
-        if (siteCodeUtil.inIOSAPP()) {
+        if (interSiteCodeUtil.inIOSAPP()) {
             Bridge.ios(BRIDGE_EVENT.QUIZ_EXIT);
-        } else if (siteCodeUtil.inAndroidAPP()) {
+        } else if (interSiteCodeUtil.inAndroidAPP()) {
             Bridge.android(BRIDGE_EVENT.QUIZ_EXIT);
         } else {
             console.log(window.parent);

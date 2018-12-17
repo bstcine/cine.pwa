@@ -1,5 +1,5 @@
 import React from 'react';
-import timeUtil from '@/util/timeUtil';
+import commonUtil from '@/util/_base/commonUtil';
 const formatGrade = grade => {
     if (grade === 0) {
         return '学龄前';
@@ -99,7 +99,7 @@ const StatsTable = ({ list = [] }) => {
                                 <td>{item.nickname || '-'}</td>
                                 <td>{formatGrade(item.grade)}</td>
                                 <td>
-                                    {timeUtil.durationShortFormat(
+                                    {commonUtil.durationShortFormat(
                                         item.duration
                                     )}
                                 </td>

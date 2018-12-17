@@ -3,9 +3,9 @@ import TextFix from '@/component/TextFix';
 import { Task_Type } from '@/constant';
 import { CCard, CIcon, CAlert } from '@/component/_base';
 import task from '@/constant/task';
-import siteCodeUtil from '@/util/sitecodeUtil';
+import interSiteCodeUtil from '@/util/_base/interSiteCodeUtil';
 import BRIDGE_EVENT from '@/constant/bridgeEvent';
-import Bridge from '@/util/bridge';
+import Bridge from '@/util/_base/interBridge';
 
 const Label = ({ type }) => <span className="label">{task[type]}</span>;
 
@@ -69,7 +69,7 @@ const onClick = task => {
 
     let tempHref = getHref(task);
     if (tempHref) {
-        if (siteCodeUtil.inAPP()) {
+        if (interSiteCodeUtil.inAPP()) {
             if (task.type === Task_Type.Video) {
                 Bridge.common(BRIDGE_EVENT.PLAY, {
                     course_id: task.course_id,

@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import './style.less';
 import * as helper from './helper';
-import Bridge from '@/util/bridge';
+import Bridge from '@/util/_base/interBridge';
 import BRIDGE_EVENT from '@/constant/bridgeEvent';
-import siteCodeUtil from '@/util/sitecodeUtil';
+import interSiteCodeUtil from '@/util/_base/interSiteCodeUtil';
 import classNames from 'classnames';
-import { eventEmmiter } from '@/util/eventEmmiter';
+import { interEventEmitter } from '@/util/_base/interEventEmitter';
 
 class MediaPlayer extends Component {
     static defaultProps = {
@@ -222,7 +222,7 @@ class MediaPlayer extends Component {
         document.addEventListener('mousemove', this.onPlayerMouseMove);
         document.addEventListener('touchmove', this.onPlayerMouseMove);
         document.addEventListener('touchend', this.onPlayerMouseMove);
-        eventEmmiter.on(BRIDGE_EVENT.Pagehide, this.handelPageHide);
+        interEventEmitter.on(BRIDGE_EVENT.Pagehide, this.handelPageHide);
         this.playerElement.addEventListener(
             'webkitfullscreenchange',
             this.onFullscreenChangeEvent
@@ -250,7 +250,7 @@ class MediaPlayer extends Component {
             'fullscreenchange',
             this.onFullscreenChangeEvent
         );
-        eventEmmiter.removeListener(BRIDGE_EVENT.Pagehide, this.handelPageHide);
+        interEventEmitter.removeListener(BRIDGE_EVENT.Pagehide, this.handelPageHide);
         document.removeEventListener('mousemove', this.onPlayerMouseMove);
         document.removeEventListener('touchmove', this.onPlayerMouseMove);
         document.removeEventListener('touchend', this.onPlayerMouseMove);
@@ -517,21 +517,21 @@ class MediaPlayer extends Component {
         } else {
             this.setState(prevState => {
                 if (prevState.fullsize) {
-                    if (siteCodeUtil.inIOSAPP()) {
+                    if (interSiteCodeUtil.inIOSAPP()) {
                         Bridge.ios(BRIDGE_EVENT.Window, {
                             event: 'exitFullscreen',
                         });
-                    } else if (siteCodeUtil.inAndroidAPP()) {
+                    } else if (interSiteCodeUtil.inAndroidAPP()) {
                         Bridge.android(BRIDGE_EVENT.Window, {
                             event: 'exitFullscreen',
                         });
                     }
                 } else {
-                    if (siteCodeUtil.inIOSAPP()) {
+                    if (interSiteCodeUtil.inIOSAPP()) {
                         Bridge.ios(BRIDGE_EVENT.Window, {
                             event: 'requestFullscreen',
                         });
-                    } else if (siteCodeUtil.inAndroidAPP()) {
+                    } else if (interSiteCodeUtil.inAndroidAPP()) {
                         Bridge.android(BRIDGE_EVENT.Window, {
                             event: 'requestFullscreen',
                         });
@@ -553,11 +553,11 @@ class MediaPlayer extends Component {
         } else {
             this.setState(prevState => {
                 if (prevState.fullsize) {
-                    if (siteCodeUtil.inIOSAPP()) {
+                    if (interSiteCodeUtil.inIOSAPP()) {
                         Bridge.ios(BRIDGE_EVENT.Window, {
                             event: 'exitFullscreen',
                         });
-                    } else if (siteCodeUtil.inAndroidAPP()) {
+                    } else if (interSiteCodeUtil.inAndroidAPP()) {
                         Bridge.android(BRIDGE_EVENT.Window, {
                             event: 'exitFullscreen',
                         });

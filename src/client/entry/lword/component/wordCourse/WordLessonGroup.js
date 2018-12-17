@@ -4,9 +4,9 @@ import WordLessonItem from './WordLessonItem';
 import ExpansionPanel from '@material-ui/core/ExpansionPanel';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
-import siteCodeUtil from '@/util/sitecodeUtil';
+import interSiteCodeUtil from '@/util/_base/interSiteCodeUtil';
 import BRIDGE_EVENT from '@/constant/bridgeEvent';
-import Bridge from '@/util/bridge';
+import Bridge from '@/util/_base/interBridge';
 
 class WordLessonG extends React.Component {
     constructor(props) {
@@ -35,7 +35,7 @@ class WordLessonG extends React.Component {
     }
     onClick(item) {
         const wlHerf = `/lword?lesson_id=${item.value}`;
-        if (siteCodeUtil.inAndroidAPP()) {
+        if (interSiteCodeUtil.inAndroidAPP()) {
             Bridge.android(BRIDGE_EVENT.OPEN_BROWSER, {
                 url: wlHerf,
                 title: `善恩核心10000词汇 （${item.value})`,

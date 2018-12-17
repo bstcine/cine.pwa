@@ -2,7 +2,7 @@
  * Created by joe on 4/19/18.
  */
 import React from 'react';
-import timeUtil from '@/util/timeUtil';
+import commonUtil from '@/util/_base/commonUtil';
 
 const gradeArr = {
     '0': '学龄前',
@@ -80,7 +80,7 @@ const renderQuizList = (list, quizItemClick) => {
                                     {formatTime(item.create_at)}
                                 </div>
                                 <div className={'quizItem'}>
-                                    {timeUtil.durationShortFormat(
+                                    {commonUtil.durationShortFormat(
                                         item.duration
                                     )}
                                 </div>
@@ -137,7 +137,7 @@ const renderWordList = (list, wordsItemClick) => {
                                     {formatTime(item.create_at)}
                                 </div>
                                 <div className={'wordItem'}>
-                                    {timeUtil.durationShortFormat(
+                                    {commonUtil.durationShortFormat(
                                         item.duration
                                     )}
                                 </div>

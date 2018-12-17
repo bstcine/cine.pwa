@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { wordAction } from '@/action/wordAction';
 import Word from '../component/Word';
-import { getParam, addParam } from '@/util/urlUtil';
+import { getParam, addParam } from '@/util/_base/urlUtil';
 
 class WordContainer extends Component {
     constructor(props) {

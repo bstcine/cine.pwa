@@ -3,10 +3,10 @@
  */
 import React from 'react';
 import { CButton } from '@/component/_base';
-import siteCodeUtil from '@/util/sitecodeUtil';
+import interSiteCodeUtil from '@/util/_base/interSiteCodeUtil';
 import { SITECODE } from '@/constant/index';
 import storeUtil from '@/util/_base/storeUtil';
-import { addParam } from '@/util/urlUtil';
+import { addParam } from '@/util/_base/urlUtil';
 import '../../asset/style/WordHeader.less';
 
 class WordHeader extends React.PureComponent {
@@ -119,7 +119,7 @@ class WordHeader extends React.PureComponent {
             rightActions = null;
         }
         let leftActions;
-        if (siteCodeUtil.inAPP()) {
+        if (interSiteCodeUtil.inAPP()) {
             leftActions = null;
         } else {
             leftActions = (

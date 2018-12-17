@@ -1,7 +1,7 @@
-import { SITECODE } from '@/constant/index';
-import storeUtil from '@/util/_base/storeUtil';
+import { SITECODE } from '../../constant';
+import storeUtil from './storeUtil';
 
-let siteCodeUtil = {
+let interSiteCodeUtil = {
     /**
      * 确保入口文件的 constructor 函数中 set 过 sitecode
      *  storeUtil.setSiteCode(sitecode);
@@ -31,7 +31,7 @@ let siteCodeUtil = {
      *  storeUtil.setSiteCode(sitecode);
      */
     inAPP: () => {
-        return siteCodeUtil.inIOSAPP() || siteCodeUtil.inAndroidAPP();
+        return interSiteCodeUtil.inIOSAPP() || interSiteCodeUtil.inAndroidAPP();
     },
 
     /**
@@ -43,4 +43,4 @@ let siteCodeUtil = {
     },
 };
 
-export default siteCodeUtil;
+export default interSiteCodeUtil;

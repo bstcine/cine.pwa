@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { wordAction } from '@/action/wordAction';
 import WordList from '../component/WordList';
-import { getParam } from '@/util/urlUtil';
+import { getParam } from '@/util/_base/urlUtil';
 
 class WordListContainer extends Component {
     playAudio = audioSrc => {

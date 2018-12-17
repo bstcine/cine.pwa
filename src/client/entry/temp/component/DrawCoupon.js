@@ -3,13 +3,13 @@ import Api from '../../../../APIConfig';
 import { fetchData } from '@/service/base';
 import Modal from 'react-modal';
 import moment from 'moment';
-import { addParam, getParam } from '@/util/urlUtil';
+import { addParam, getParam } from '@/util/_base/urlUtil';
 import '../asset/style/DrawCoupon.less';
-import siteCodeUtil from '@/util/sitecodeUtil';
-import Bridge from '@/util/bridge';
+import interSiteCodeUtil from '@/util/_base/interSiteCodeUtil';
+import Bridge from '@/util/_base/interBridge';
 import BRIDGE_EVENT from '@/constant/bridgeEvent';
-import uaUtil from '@/util/uaUtil';
-import shareUtil from '@/util/shareUtil';
+import uaUtil from '@/util/_base/uaUtil';
+import shareUtil from '@/util/_base/shareUtil';
 
 Modal.setAppElement('#root');
 
@@ -214,7 +214,7 @@ export default class LotteryCoupon extends Component {
     doToCourse = course_id => {
         let link = `/content/course?cid=${course_id}`;
 
-        if (siteCodeUtil.inAPP()) {
+        if (interSiteCodeUtil.inAPP()) {
             Bridge.common(BRIDGE_EVENT.OPEN_BROWSER, {
                 url: link,
                 title: '课程详情',
@@ -225,7 +225,7 @@ export default class LotteryCoupon extends Component {
     };
 
     doToBuy = course_id => {
-        if (siteCodeUtil.inAPP()) {
+        if (interSiteCodeUtil.inAPP()) {
             Bridge.common(BRIDGE_EVENT.PRE_CONFIRM, {
                 course_id,
             });

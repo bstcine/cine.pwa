@@ -1,12 +1,7 @@
 import URLParse from 'url-parse';
 
 export let getPureUrl = () => {
-    let url = location.href;
-    // let index = url.indexOf('#');
-    // if (index !== -1) {
-    //     url = url.substring(0, index);
-    // }
-    return url;
+    return location.href.split('#')[0];
 };
 
 export let getParam = href => {

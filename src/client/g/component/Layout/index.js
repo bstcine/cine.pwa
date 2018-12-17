@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import Main from '@/g/component/Main';
 import Footer from '@/g/component/Footer';
 import Header from '@/g/component/Header';
-import siteCodeUtil from '@/util/sitecodeUtil';
+import interSiteCodeUtil from '@/util/_base/interSiteCodeUtil';
 import '@/g/component/Layout/style.less';
 
 const Layout = ({ actions, user, size, children }) => {
@@ -13,9 +13,9 @@ const Layout = ({ actions, user, size, children }) => {
                 'glayout--large': size === 'large',
             })}
         >
-            {!siteCodeUtil.inAPP() && <Header user={user} actions={actions} />}
+            {!interSiteCodeUtil.inAPP() && <Header user={user} actions={actions} />}
             <Main>{children}</Main>
-            {!siteCodeUtil.inAPP() && <Footer />}
+            {!interSiteCodeUtil.inAPP() && <Footer />}
         </div>
     );
 };

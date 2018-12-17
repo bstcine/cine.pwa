@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import siteCodeUtil from '@/util/sitecodeUtil';
+import interSiteCodeUtil from '@/util/_base/interSiteCodeUtil';
 import TryPlayer from '@/component/TryPlayer';
-import CommonUtil from '@/util/common';
+import CommonUtil from '@/util/_base/commonUtil';
 import { CIcon } from '@/component/_base';
 import QRHelp from '@/component/QRHelp';
-import { getParam } from '@/util/urlUtil';
+import { getParam } from '@/util/_base/urlUtil';
 
 export default class Brief extends Component {
     static defaultProps = {
@@ -90,8 +90,8 @@ export default class Brief extends Component {
         const { onClickLearn, onClickBuy, onClickShare } = this.props;
         if (course.status === '1') {
             if (course.is_paid) {
-                if (siteCodeUtil.inIOSAPP()) return;
-                if (siteCodeUtil.inAndroidAPP()) {
+                if (interSiteCodeUtil.inIOSAPP()) return;
+                if (interSiteCodeUtil.inAndroidAPP()) {
                     if (
                         course.product_type === '1' &&
                         (course.object_type === '1' ||
@@ -269,7 +269,7 @@ export default class Brief extends Component {
             <div className="brief-container">
                 <div className="left-container">
                     {this.renderVideoContainer(course)}
-                    {!siteCodeUtil.inAPP() ? (
+                    {!interSiteCodeUtil.inAPP() ? (
                         <div className="share-tool">
                             分享
                             <ul className="share-icons">

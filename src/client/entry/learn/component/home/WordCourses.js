@@ -1,14 +1,14 @@
 import React from 'react';
 import { CPanel, CCard, CCardContainer } from '@/component/_base';
-import siteCodeUtil from '@/util/sitecodeUtil';
+import interSiteCodeUtil from '@/util/_base/interSiteCodeUtil';
 import BRIDGE_EVENT from '@/constant/bridgeEvent';
-import Bridge from '@/util/bridge';
+import Bridge from '@/util/_base/interBridge';
 import '@/entry/learn/asset/style/homeWordCourse.less';
 
 const WordCourses = ({ courses }) => {
     const goWordClick = course => {
         console.log(course);
-        if (siteCodeUtil.inAndroidAPP()) {
+        if (interSiteCodeUtil.inAndroidAPP()) {
             Bridge.android(BRIDGE_EVENT.OPEN_BROWSER, {
                 url: course.href,
                 title: course.title,

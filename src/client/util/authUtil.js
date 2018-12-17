@@ -1,9 +1,9 @@
-import siteCodeUtil from '@/util/sitecodeUtil';
-import Bridge from '@/util/bridge';
+import interSiteCodeUtil from '@/util/_base/interSiteCodeUtil';
+import Bridge from '@/util/_base/interBridge';
 import BRIDGE_EVENT from '@/constant/bridgeEvent';
 import storeUtil from '@/util/_base/storeUtil';
-import uaUtil from '@/util/uaUtil';
-import { getParam } from '@/util/urlUtil';
+import uaUtil from '@/util/_base/uaUtil';
+import { getParam } from '@/util/_base/urlUtil';
 import CAuthModal from '@/component/CAuthModal';
 import { fetchData } from '@/service/base';
 import { APIURL_User_Info } from '../../APIConfig';
@@ -11,7 +11,7 @@ import { APIURL_User_Info } from '../../APIConfig';
 const authUtil = {
     login: async (prop = {}) => {
         let { redirect, onSuccess } = prop;
-        if (siteCodeUtil.inIOSAPP()) {
+        if (interSiteCodeUtil.inIOSAPP()) {
             let { token } = await Bridge.ios(BRIDGE_EVENT.LOGIN);
             storeUtil.setToken(token);
             if (onSuccess) {
@@ -19,7 +19,7 @@ const authUtil = {
             } else {
                 location.reload();
             }
-        } else if (siteCodeUtil.inAndroidAPP()) {
+        } else if (interSiteCodeUtil.inAndroidAPP()) {
             let { token } = await Bridge.android(BRIDGE_EVENT.LOGIN);
             storeUtil.setToken(token);
             if (onSuccess) {

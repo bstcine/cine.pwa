@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import classNames from 'classnames';
 import { CPanel, CIcon } from '@/component/_base';
 import { Link } from 'react-router-dom';
-import { animation } from '@/util/cssUtil';
+import { animation } from '@/util/_base/cssUtil';
 
 /**
  * 左侧导航

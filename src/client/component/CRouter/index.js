@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import CommonUtil from '@/util/common';
+import CommonUtil from '@/util/_base/commonUtil';
 
 const routes = routes =>
     routes.map((route, i) => {

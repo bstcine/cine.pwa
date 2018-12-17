@@ -7,9 +7,9 @@ import Card from './component/Card';
 import Report from './component/Report';
 import ReportList from './component/ReportList';
 import './asset/style/index.less';
-import Bridge from '@/util/bridge';
+import Bridge from '@/util/_base/interBridge';
 import BRIDGE_EVENT from '@/constant/bridgeEvent';
-import siteCodeUtil from '@/util/sitecodeUtil';
+import interSiteCodeUtil from '@/util/_base/interSiteCodeUtil';
 import Entry from '@/component/Entry';
 
 class Word extends Entry {
@@ -19,7 +19,7 @@ class Word extends Entry {
     }
 
     componentDidMount() {
-        if (siteCodeUtil.inIOSAPP()) {
+        if (interSiteCodeUtil.inIOSAPP()) {
             Bridge.ios(BRIDGE_EVENT.TIMELINE, { type: 'loaded' });
         }
     }

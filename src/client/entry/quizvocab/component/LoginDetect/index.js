@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import Bridge from '@/util/bridge';
+import Bridge from '@/util/_base/interBridge';
 import BRIDGE_EVENT from '@/constant/bridgeEvent';
-import siteCodeUtil from '@/util/sitecodeUtil';
+import interSiteCodeUtil from '@/util/_base/interSiteCodeUtil';
 import LoginModal from '@/component/LoginModal';
 
 export default class LoginDetect extends Component {
@@ -31,11 +31,11 @@ export default class LoginDetect extends Component {
     }
 
     goLoginClick() {
-        if (siteCodeUtil.inIOSAPP()) {
+        if (interSiteCodeUtil.inIOSAPP()) {
             Bridge.ios(BRIDGE_EVENT.LOGIN).then(res => {
                 this.props.history.replace(`/?token=${res.token}`);
             });
-        } else if (siteCodeUtil.inAndroidAPP()) {
+        } else if (interSiteCodeUtil.inAndroidAPP()) {
             Bridge.android(BRIDGE_EVENT.LOGIN).then(res => {
                 this.props.history.replace(`/?token=${res.token}`);
             });

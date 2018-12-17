@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import ReactSlider from 'react-slick';
-import uaUtil from '@/util/uaUtil';
-import siteCodeUtil from '@/util/sitecodeUtil';
-import { addParam } from '@/util/urlUtil';
+import uaUtil from '@/util/_base/uaUtil';
+import interSiteCodeUtil from '@/util/_base/interSiteCodeUtil';
+import { addParam } from '@/util/_base/urlUtil';
 import storeUtil from '@/util/_base/storeUtil';
 import routeUtil from '@/util/routeUtil';
 
@@ -56,19 +56,19 @@ export default class Slider extends Component {
             routeUtil.goCourse({ id: course_id }, history);
         } else if (type === '2') {
             let url = href;
-            if (siteCodeUtil.inAPP()) {
+            if (interSiteCodeUtil.inAPP()) {
                 url = addParam(url, { token: storeUtil.getToken() });
             }
             location.href = url;
         } else if (type === '3') {
             let url = href;
-            if (siteCodeUtil.inAPP()) {
+            if (interSiteCodeUtil.inAPP()) {
                 url = addParam(url, { token: storeUtil.getToken() });
             }
             location.href = url;
         } else if (type === '4') {
             let url = addParam(location.href, { tab: tab_id });
-            if (siteCodeUtil.inAPP()) {
+            if (interSiteCodeUtil.inAPP()) {
                 url = addParam(url, { token: storeUtil.getToken() });
             }
             location.href = url;

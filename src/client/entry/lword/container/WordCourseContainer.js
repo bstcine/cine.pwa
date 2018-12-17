@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { wCourseAction } from '@/action/wCourseAction';
-import { getParam } from '@/util/urlUtil';
+import { getParam } from '@/util/_base/urlUtil';
 import WordCourse from './../component/wordCourse';
 
 class WordCourseContainer extends Component {

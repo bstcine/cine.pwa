@@ -1,7 +1,7 @@
 import React from 'react';
 import Entry from '@/component/Entry';
 import Layout  from './../component/Layout';
-import { getLastPath } from '@/util/urlUtil';
+import { getLastPath } from '@/util/_base/urlUtil';
 import * as banner from '@/service/data/response_sp_banner.json';
 
 class CSubRoot extends Entry {

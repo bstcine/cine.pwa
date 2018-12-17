@@ -1,7 +1,7 @@
 import storeUtil from '@/util/_base/storeUtil';
-import uaUtil from '@/util/uaUtil';
-import siteCodeUtil from '@/util/sitecodeUtil';
-import { getParam } from '@/util/urlUtil';
+import uaUtil from '@/util/_base/uaUtil';
+import interSiteCodeUtil from '@/util/_base/interSiteCodeUtil';
+import { getParam } from '@/util/_base/urlUtil';
 
 const bstcineImg = require('@/asset/image/pic_bstcine.png');
 const btnImg = require('@/asset/image/btn_download.png');
@@ -13,7 +13,7 @@ let appBanner = {
         const current = new Date().getTime();
         const isHide = closeAt && current - closeAt < 2 * 24 * 3600 * 1000;
         if (
-            !siteCodeUtil.inAPP() &&
+            !interSiteCodeUtil.inAPP() &&
             uaUtil.mobile() &&
             getParam().hidetopbar !== '1' &&
             !isHide

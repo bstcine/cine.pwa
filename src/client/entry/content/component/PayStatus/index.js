@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
-import { getParam } from '@/util/urlUtil';
+import { getParam } from '@/util/_base/urlUtil';
 import errorMsg from '@/util/errorMsg';
-import uaUtil from '@/util/uaUtil';
+import uaUtil from '@/util/_base/uaUtil';
 import Header from '@/component/Header';
 import Footer from '@/component/Footer';
-import siteCodeUtil from '@/util/sitecodeUtil';
+import interSiteCodeUtil from '@/util/_base/interSiteCodeUtil';
 import Api from '@/../APIConfig';
 import { fetchData } from '@/service/base';
 import storeUtil from '@/util/_base/storeUtil';
-import Bridge from '@/util/bridge';
+import Bridge from '@/util/_base/interBridge';
 import BRIDGE_EVENT from '@/constant/bridgeEvent';
 
 export default class PayStatus extends Component {
@@ -27,7 +27,7 @@ export default class PayStatus extends Component {
             let { order } = result.detail;
             if (
                 order.status === '1' &&
-                siteCodeUtil.inIOSAPP() &&
+                interSiteCodeUtil.inIOSAPP() &&
                 storeUtil.get('temp_h5', 'session')
             ) {
                 Bridge.ios(BRIDGE_EVENT.ORDER_PAY_SUCCESS, {
@@ -126,7 +126,7 @@ export default class PayStatus extends Component {
     render() {
         return (
             <React.Fragment>
-                <Header isShow={!siteCodeUtil.inAPP() && !uaUtil.wechat()} />
+                <Header isShow={!interSiteCodeUtil.inAPP() && !uaUtil.wechat()} />
                 <div className="container-fluid course-container-bg">
                     <div className="paystatus-container">
                         <div className="pay-header">

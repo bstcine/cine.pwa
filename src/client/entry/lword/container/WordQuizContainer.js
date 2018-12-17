@@ -4,7 +4,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { getParam, addParam } from '@/util/urlUtil';
+import { getParam, addParam } from '@/util/_base/urlUtil';
 import { wQuizAction } from '@/action/wQuizAction';
 import WordQuiz from '../component/WordQuiz';
 import CThemeProvider from '@/component/CThemeProvider';

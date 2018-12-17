@@ -4,7 +4,7 @@ import {
     APIURL_Stats_Quiz_Save,
     APIURL_Stats_Quiz_Update,
 } from '@/../APIConfig';
-import storeUtil from '@/util/storeUtil';
+import storeUtil from '@/util/_base/storeUtil';
 import {
     RECEIVE_CONTENT_QUIZ,
     SAVE_QUESTION1_SELECT_VALUE,

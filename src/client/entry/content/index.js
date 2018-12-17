@@ -6,7 +6,7 @@ import appBanner from '@/util/appBanner';
 import Router from '@/component/Router';
 import Entry from '@/component/Entry';
 import { chunkComponent } from '@/util/chunkComponent';
-import storeUtil from '@/util/storeUtil';
+import storeUtil from '@/util/_base/storeUtil';
 import Home from './component/Home';
 import Course from './component/Course';
 // import createBrowserHistory from "history/createBrowserHistory";

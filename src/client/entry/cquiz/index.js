@@ -5,7 +5,7 @@ import Index from './component/index.js';
 import Card from './component/card.js';
 
 import './asset/style/index.less';
-import storeUtil from '@/util/storeUtil';
+import storeUtil from '@/util/_base/storeUtil';
 import Entry from '@/component/Entry/index';
 import { getParam } from '@/util/urlUtil';
 

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import className from 'classnames';
-import storeUtil from '@/util/storeUtil';
+import storeUtil from '@/util/_base/storeUtil';
 import { logoutV1, fetchData } from '@/service/base';
 import Api from '@/../APIConfig';
 import './header.less';

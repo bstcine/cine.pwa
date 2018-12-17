@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import storeUtil from '@/util/storeUtil';
+import storeUtil from '@/util/_base/storeUtil';
 import * as area from '@/service/data/response_area.json';
 import * as account from '@/service/data/response_account.json';
 import { getParam } from '@/util/urlUtil';

@@ -1,5 +1,5 @@
 import { SITECODE } from '@/constant/index';
-import storeUtil from '@/util/storeUtil';
+import storeUtil from '@/util/_base/storeUtil';
 
 let siteCodeUtil = {
     /**

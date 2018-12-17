@@ -9,7 +9,7 @@ import {
 } from '../../../APIConfig';
 import errorMsg from '@/util/errorMsg';
 import commonUtil from '@/util/common';
-import storeUtil from '@/util/storeUtil';
+import storeUtil from '@/util/_base/storeUtil';
 import checkUtil from '@/util/checkUtil';
 
 class ResetPwd extends Component {

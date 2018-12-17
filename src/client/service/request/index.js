@@ -1,4 +1,4 @@
-import storeUtil from '@/util/storeUtil';
+import storeUtil from '@/util/_base/storeUtil';
 import axios from 'axios';
 
 if (window.API_Host_URL) {

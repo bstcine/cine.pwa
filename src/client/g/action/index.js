@@ -1,7 +1,7 @@
 import * as actionType from '../constant';
 import { APIURL_User_Info } from '@/../APIConfig';
 import { fetchData } from '@/service/base';
-import storeUtil from '@/util/storeUtil';
+import storeUtil from '@/util/_base/storeUtil';
 
 const action = {
     preFetchUserInfo: () => dispatch => {

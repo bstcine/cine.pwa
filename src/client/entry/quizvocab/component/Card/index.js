@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import storeUtil from '@/util/_base/storeUtil';
 import * as Service from '@/service/quizvocab';
-import { CSSTransition } from 'react-transition-group';
-import { getParam } from '@/util/urlUtil';
+import {CSSTransition} from 'react-transition-group';
+import {getParam} from '@/util/urlUtil';
 import CThemeProvider from '@/component/CThemeProvider';
-import { CFlatButton, CDialog } from '@/component/_base';
+import {CFlatButton, CDialog} from '@/component/_base';
 
 export default class Card extends Component {
     constructor(props) {
@@ -15,7 +15,7 @@ export default class Card extends Component {
         this.state = {
             loading: true,
             uploading: false,
-            wordItem: { id: '', word: '', options: [] },
+            wordItem: {id: '', word: '', options: []},
             currMinVocab: 0,
             currMaxVocab: 0,
             isShowLevelTip: false,
@@ -28,7 +28,7 @@ export default class Card extends Component {
         if (this.isTop10000) {
             document.title = '起点评估测试';
         }
-        this.max_skip_right = 10;
+        this.max_skip_right = 15;
         this.max_wrong = 3;
         this.last_index = 1;
         this.estimate_score = 0;
@@ -115,6 +115,7 @@ export default class Card extends Component {
             }
         );
     }
+
     isSkipTop10000() {
         let wordLevel = this.wordLevelList[this.level_index];
         let skipRight = 0;
@@ -124,10 +125,13 @@ export default class Card extends Component {
             if (item.select_value === 0) {
                 skipRight++;
             } else if (!item.select_value) {
+                skipRight = 0;
+                wordWrong++;
+
                 console.log(
                     `连续答对1: ${skipRight}, 答错: ${wordWrong}, selectValue:${
                         item.select_value
-                    }`
+                        }`
                 );
                 return 0;
             } else {
@@ -145,6 +149,7 @@ export default class Card extends Component {
         console.log(`连续答对4: ${skipRight}, 答错: ${wordWrong}`);
         return 0;
     }
+
     // 连续
     isSkipLevel() {
         let wordLevel = this.wordLevelList[this.level_index];
@@ -163,7 +168,7 @@ export default class Card extends Component {
         return rightCount >= this.config.min_right_count;
     }
 
-    //沙漏倒计时
+    // 沙漏倒计时
     toggleSandGlass() {
         if (this.sandGlassTimer) clearTimeout(this.sandGlassTimer);
         this.sandGlassTimer = setTimeout(() => {
@@ -179,20 +184,20 @@ export default class Card extends Component {
                     }, 300);
                 }
             );
-        }, this.duration); //15秒自动跳转下一题
+        }, this.duration); // 15秒自动跳转下一题
     }
 
-    //下个词汇等级
+    // 下个词汇等级
     nextLevel() {
         console.log(`nextLevel --> level_index: ${this.level_index}`);
-        //当 curr_level_score < 3 时，测试不进入下一等级，测试终止
+        // 当 curr_level_score < 3 时，测试不进入下一等级，测试终止
         if (this.calcCurrLevelScore() < this.config.min_per_score)
             return this.theEnd();
         if (this.level_index === this.wordLevelList.length - 1)
             return this.theEnd();
         this.disableClick = false;
         this.showLevelTip();
-        //下一级
+        // 下一级
         this.level_index++;
         this.word_index = 0;
         let wordLevel = this.wordLevelList[this.level_index];
@@ -216,7 +221,7 @@ export default class Card extends Component {
         });
         console.log(`isShowLevelTip ${this.state.isShowLevelTip}`);
         this.levelTipTimer = setTimeout(
-            function() {
+            function () {
                 this.setState({
                     isShowLevelTip: false,
                 });
@@ -249,6 +254,7 @@ export default class Card extends Component {
             }
         );
     }
+
     // 答题结束
     theEnd() {
         if (this.state.isWordEnd) {
@@ -289,7 +295,10 @@ export default class Card extends Component {
             } else {
                 for (let i = 0; i < this.wordLevelList.length; i++) {
                     const wordLevel = this.wordLevelList[i];
-                    if (wordLevel.min_vocab >= score) {
+                    /*                  if (wordLevel.min_vocab >= score) {
+                     break;
+                     } */
+                    if (this.level_index < i) {
                         break;
                     }
                     this.last_index = wordLevel.min_vocab + 1;
@@ -321,7 +330,7 @@ export default class Card extends Component {
         console.log(`select_value ${select_value}`);
         let word = this.wordLevelList[this.level_index].wordList[
             this.word_index
-        ];
+            ];
         word.select_value = select_value;
         console.log(word.id, word.word, select_value, word.select_value);
     }
@@ -329,8 +338,8 @@ export default class Card extends Component {
     // 收集全部答题信息
     collectAnswers() {
         let answers = [];
-        this.wordLevelList.forEach(function(wordLevel) {
-            wordLevel.wordList.forEach(function(item) {
+        this.wordLevelList.forEach(function (wordLevel) {
+            wordLevel.wordList.forEach(function (item) {
                 if (!isNaN(item.select_value)) {
                     answers.push({
                         id: item.id,
@@ -344,7 +353,7 @@ export default class Card extends Component {
 
     // 耗时(秒)
     getDuration() {
-        let duration = parseInt((this.end_at - this.begin_at) / 1000);
+        let duration = parseInt((this.end_at - this.begin_at) / 1000, 10);
         console.log(`getDuration ${duration}`);
         return duration;
     }
@@ -358,7 +367,7 @@ export default class Card extends Component {
         } else {
             let right_count = 0;
             let wrong_count = 0;
-            wordLevel.wordList.forEach(function(item) {
+            wordLevel.wordList.forEach(function (item) {
                 if (item.select_value === 0) {
                     right_count++;
                 } else {
@@ -376,13 +385,13 @@ export default class Card extends Component {
     // 计算当前词汇量
     calcCurrVocab() {
         let curr_vocab = 0;
-        this.wordLevelList.forEach(function(wordLevel) {
+        this.wordLevelList.forEach(function (wordLevel) {
             if (wordLevel.curr_score) {
                 curr_vocab += parseInt(
                     wordLevel.curr_score *
-                        (wordLevel.max_vocab - wordLevel.min_vocab) /
-                        wordLevel.wordList.length
-                );
+                    (wordLevel.max_vocab - wordLevel.min_vocab) /
+                    wordLevel.wordList.length
+                    , 10);
             }
         });
         console.log(`calcCurrVocab ${curr_vocab}`);
@@ -442,7 +451,7 @@ export default class Card extends Component {
     }
 
     render() {
-        let { loading, uploading } = this.state;
+        let {loading, uploading} = this.state;
         if (loading) {
             return (
                 <div className="card">
@@ -467,7 +476,7 @@ export default class Card extends Component {
         ];
         const estimateText = `测试完成, 建议从第${
             this.last_index
-        }个单词开始学习`;
+            }个单词开始学习`;
         return (
             <CThemeProvider>
                 <React.Fragment>
@@ -478,12 +487,12 @@ export default class Card extends Component {
                             appear={true}
                             enter={true}
                             exit={true}
-                            timeout={{ enter: 2700, exit: 300 }}
+                            timeout={{enter: 2700, exit: 300}}
                         >
                             <div className="friendly-tips">
                                 你已经完成了{this.state.currMinVocab}-{
-                                    this.state.currMaxVocab
-                                }词汇量区间的测试
+                                this.state.currMaxVocab
+                            }词汇量区间的测试
                             </div>
                         </CSSTransition>
                         <div
@@ -496,7 +505,7 @@ export default class Card extends Component {
                             className="progress_control"
                             key={this.state.wordItem.id + 'progress_control'}
                         >
-                            <div className="sand-glass" />
+                            <div className="sand-glass"/>
                             <div className="progress-line">
                                 <CSSTransition
                                     in={this.state.progressing}
@@ -506,7 +515,7 @@ export default class Card extends Component {
                                     exit={false}
                                     timeout={this.duration}
                                 >
-                                    <div className="progress-line-left" />
+                                    <div className="progress-line-left"/>
                                 </CSSTransition>
                             </div>
                         </div>

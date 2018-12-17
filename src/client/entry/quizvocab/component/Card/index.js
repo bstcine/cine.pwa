@@ -28,8 +28,10 @@ export default class Card extends Component {
         this.isTop10000 = this.param.estimate ? true : false;
         if (this.isTop10000) {
             document.title = '起点评估测试';
+            this.max_skip_right = 15;
+        }else {
+            this.max_skip_right = 10;
         }
-        this.max_skip_right = 10;
         this.max_wrong = 3;
         this.last_index = 1;
         this.estimate_score = 0;
@@ -134,6 +136,8 @@ export default class Card extends Component {
             if (item.select_value === 0) {
                 skipRight++;
             } else if (!item.select_value) {
+                skipRight = 0;
+                wordWrong++;
                 console.log(
                     `连续答对1: ${skipRight}, 答错: ${wordWrong}, selectValue:${
                         item.select_value
@@ -299,7 +303,10 @@ export default class Card extends Component {
             } else {
                 for (let i = 0; i < this.wordLevelList.length; i++) {
                     const wordLevel = this.wordLevelList[i];
-                    if (wordLevel.min_vocab >= score) {
+                    // if (wordLevel.min_vocab >= score) {
+                    //     break;
+                    // }
+                    if (this.level_index < i) {
                         break;
                     }
                     this.last_index = wordLevel.min_vocab + 1;

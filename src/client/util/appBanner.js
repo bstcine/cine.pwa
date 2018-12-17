@@ -1,4 +1,4 @@
-import storeUtil from '@/util/storeUtil';
+import storeUtil from '@/util/_base/storeUtil';
 import uaUtil from '@/util/uaUtil';
 import siteCodeUtil from '@/util/sitecodeUtil';
 import { getParam } from '@/util/urlUtil';
@@ -9,11 +9,14 @@ const closeImg = require('@/asset/image/ico_appdow_close.png');
 
 let appBanner = {
     init: function() {
+        const closeAt = storeUtil.get('appBannerHide');
+        const current = new Date().getTime();
+        const isHide = closeAt && current - closeAt < 2 * 24 * 3600 * 1000;
         if (
             !siteCodeUtil.inAPP() &&
             uaUtil.mobile() &&
-            storeUtil.get('appBannerHide') !== 1 &&
-            getParam().hidetopbar !== '1'
+            getParam().hidetopbar !== '1' &&
+            !isHide
         ) {
             window.addEventListener('scroll', appBanner.handlerScroll);
             let $body = document.querySelector('body');
@@ -32,7 +35,7 @@ let appBanner = {
         document.querySelector('.appBanner').style.display = 'none';
     },
     remove: function() {
-        storeUtil.set('appBannerHide', 1, 2 * 3600 * 1000);
+        storeUtil.set('appBannerHide', new Date().getTime());
         window.removeEventListener('scroll', appBanner.handlerScroll);
         this.hide();
     },

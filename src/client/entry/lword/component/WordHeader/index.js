@@ -5,7 +5,7 @@ import React from 'react';
 import { CButton } from '@/component/_base';
 import siteCodeUtil from '@/util/sitecodeUtil';
 import { SITECODE } from '@/constant/index';
-import storeUtil from '@/util/storeUtil';
+import storeUtil from '@/util/_base/storeUtil';
 import { addParam } from '@/util/urlUtil';
 import '../../asset/style/WordHeader.less';
 

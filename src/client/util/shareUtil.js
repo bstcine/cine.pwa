@@ -1,18 +1,133 @@
-import '../asset/style/share.less';
 import uaUtil from './uaUtil';
-import { setShareParam } from './wechatUtil';
-import { getParam, addParam } from './urlUtil';
+import wechatUtil from './wechatUtil';
+import { getParam, addParam, removeParam } from './urlUtil';
 import Bridge from './bridge';
 import { get } from '../service/request';
 import Api from '../../APIConfig';
 import BRIDGE_EVENT from '@/constant/bridgeEvent';
 import siteCodeUtil from '@/util/sitecodeUtil';
 import { fetchData } from '@/service/base';
+import ShareMask from '@/component/ShareMask';
+import QRCode from '@/component/QRCode';
 
-const imgUrl = require('../asset/image/pic_share_arr@2x.png');
 let inter = null;
+let qrcode = null;
+let sharemask = null;
 
-export let createShare = async ({ type, share_link, cid, source_user_id }) => {
+const showShareMask = () => {
+    if (sharemask) return;
+    sharemask = ShareMask.open();
+};
+
+const hideShareMask = () => {
+    if (sharemask) {
+        sharemask.close();
+        sharemask = null;
+    }
+};
+
+const showShareQRCode = ({ url, sharelog_id }) => {
+    console.log(`sharelog_id ${sharelog_id}`);
+    let updatedUrl = addParam(url, { share_mask: 1, sharelog_id });
+    if (qrcode) {
+        qrcode.close();
+        qrcode = null;
+    }
+    qrcode = QRCode.open(updatedUrl);
+};
+
+const hideShareQRCode = () => {
+    inter && clearInterval(inter);
+    if (qrcode) {
+        qrcode.close();
+        qrcode = null;
+    }
+};
+
+const checkShareStatus = sharelog_id =>
+    new Promise(resolve => {
+        inter = setInterval(() => {
+            queryShareLog(sharelog_id).then(res => {
+                if (res.status && res.data.status === '1') {
+                    inter && clearInterval(inter);
+                    hideShareQRCode();
+                    resolve();
+                }
+            });
+        }, 3000);
+    });
+
+const qrShare = async share_params => {
+    showShareQRCode({
+        url: share_params.link,
+        sharelog_id: share_params.sharelog_id,
+    });
+    await checkShareStatus(share_params.sharelog_id);
+};
+
+const jsShare = async function jsShare(share_params) {
+    showShareMask();
+    await shareUtil.asyncSetShareParam(share_params);
+    await updateShareLog(share_params.sharelog_id);
+};
+
+const share = async share_params => {
+    if (siteCodeUtil.inIOSAPP()) {
+        let list = await Bridge.ios(BRIDGE_EVENT.INSTALLED_APP_LIST);
+        if (list && list.wechat === 1) {
+            let res = await Bridge.ios(BRIDGE_EVENT.SHARE, share_params);
+            if (res && res.shareSuccess === 1) {
+                await updateShareLog(share_params.sharelog_id);
+            }
+        } else {
+            await qrShare(share_params);
+        }
+    } else if (siteCodeUtil.inAndroidAPP()) {
+        let list = await Bridge.android(BRIDGE_EVENT.INSTALLED_APP_LIST);
+        if (list && list.wechat === 1) {
+            let res = await Bridge.android(BRIDGE_EVENT.SHARE, share_params);
+            if (res && res.shareSuccess === 1) {
+                await updateShareLog(share_params.sharelog_id);
+            }
+        } else {
+            await qrShare(share_params);
+        }
+    } else {
+        if (uaUtil.mobile()) {
+            if (uaUtil.wechat()) {
+                await jsShare(share_params);
+            } else {
+                await qrShare(share_params);
+            }
+        } else {
+            await qrShare(share_params);
+        }
+    }
+};
+
+const detectShare = async () => {
+    const { sharelog_id, share_mask } = getParam();
+    if (share_mask === '1') {
+        showShareMask();
+    }
+
+    if (sharelog_id) {
+        let res = await queryShareLog(sharelog_id);
+        if (res.status) {
+            let data = res.data;
+            await shareUtil.asyncSetShareParam({
+                title: data.share_title,
+                link: removeParam(data.share_link, ['token', 'share_mask']),
+                imgUrl: data.share_imgUrl,
+                desc: data.share_desc,
+            });
+            await updateShareLog(sharelog_id);
+            hideShareMask();
+        }
+    }
+};
+
+const createShareLog = async ({ type, share_link, cid, source_user_id }) => {
     let err = null;
     let result = null;
     if (type === 7) {
@@ -33,138 +148,35 @@ export let createShare = async ({ type, share_link, cid, source_user_id }) => {
     return [err, result];
 };
 
-export let updateShare = sharelog_id => {
-    if (sharelog_id === '-1') return;
-    return get(Api.APIURL_Share_Update, { sharelog_id }).then(res => {
-        console.log(`updateShare ${JSON.stringify(res)}`);
-        if (!res.status) {
-            return alert(res.msg);
-        }
-        hideShareMask();
-        return res;
-    });
+const updateShareLog = async sharelog_id => {
+    if (!sharelog_id || sharelog_id === '-1') return;
+    let res = await get(Api.APIURL_Share_Update, { sharelog_id });
+    console.log(`updateShareLog ${JSON.stringify(res)}`);
+    if (!res.status) return Promise.reject(res.msg);
+    hideShareMask();
+    return res;
 };
 
-export let queryShare = sharelog_id => {
+export const queryShareLog = sharelog_id => {
     return get(Api.APIURL_Web_Share_Log, { sharelog_id });
 };
 
-export let showShareMask = () => {
-    let maskNode = document.querySelector('.share-mask');
-    if (!maskNode) {
-        maskNode = document.createElement('div');
-        maskNode.className = 'share-mask';
-    }
-    maskNode.innerHTML = `
-        <div class="share-tip">请点击右上角 ...，选择分享到朋友圈</div>
-        <div class="share-icon"><img src=${imgUrl} alt=""></div>
-    `;
-    document.body.appendChild(maskNode);
+const shareUtil = {
+    share: share,
+    init: async () => {
+        console.log('init share');
+        if (!uaUtil.wechat())
+            return Promise.reject(new Error('not in wechat skip init'));
+
+        await wechatUtil.init();
+        detectShare();
+    },
+    setShareParam: wechatUtil.setShareParam,
+    asyncSetShareParam: share_params =>
+        new Promise(resolve => {
+            wechatUtil.setShareParam(share_params, resolve);
+        }),
+    createShareLog,
 };
 
-export let hideShareMask = () => {
-    document.querySelector('.share-mask') &&
-        document.querySelector('.share-mask').remove();
-};
-
-export let checkShareMask = () => {
-    if (getParam().share_mask === '1') {
-        showShareMask();
-    }
-};
-
-export let showShareQRCode = ({ url, sharelog_id }) => {
-    console.log(`sharelog_id ${sharelog_id}`);
-    let updatedUrl = addParam(url, { share_mask: 1, sharelog_id });
-    let qrcode = `//www.bstcine.com/qrcode?text=${encodeURIComponent(
-        updatedUrl
-    )}`;
-    hideShareMask();
-    let maskNode = document.createElement('div');
-    maskNode.className = 'share-mask';
-    maskNode.innerHTML = `
-        <div class="share-container">
-            <div class="share-close"><i class="material-icons">close</i></div>
-            <div class="share-qrcode"><img src=${qrcode} alt=""></div>
-        </div>
-    `;
-    document.body.appendChild(maskNode);
-    let closeNode = document.querySelector('.share-close');
-    closeNode.addEventListener('click', function() {
-        hideShareQRCode();
-    });
-};
-
-export let hideShareQRCode = () => {
-    let closeNode = document.querySelector('.share-close');
-    let maskNode = document.querySelector('.share-mask');
-    closeNode.removeEventListener('click', hideShareQRCode);
-    inter && clearInterval(inter);
-    maskNode.remove();
-};
-
-let checkShareStatus = sharelog_id => {
-    return new Promise(resolve => {
-        inter = setInterval(() => {
-            queryShare(sharelog_id).then(res => {
-                if (res.status && res.data.status === '1') {
-                    inter && clearInterval(inter);
-                    hideShareQRCode();
-                    resolve({ status: true });
-                }
-            });
-        }, 3000);
-    });
-};
-
-export let share = async ({ share_params }) => {
-    if (siteCodeUtil.inIOSAPP()) {
-        let list = await Bridge.ios(BRIDGE_EVENT.INSTALLED_APP_LIST);
-        if (list && list.wechat === 1) {
-            let res = await Bridge.ios(BRIDGE_EVENT.SHARE, share_params);
-            if (res && res.shareSuccess === 1) {
-                return updateShare(share_params.sharelog_id);
-            } else {
-                console.log('分享已取消');
-            }
-        } else {
-            return qrShare(share_params);
-        }
-    } else if (siteCodeUtil.inAndroidAPP()) {
-        let list = await Bridge.android(BRIDGE_EVENT.INSTALLED_APP_LIST);
-        if (list && list.wechat === 1) {
-            let res = await Bridge.android(BRIDGE_EVENT.SHARE, share_params);
-            if (res && res.shareSuccess === 1) {
-                return updateShare(share_params.sharelog_id);
-            } else {
-                console.log('分享已取消');
-            }
-        } else {
-            return qrShare(share_params);
-        }
-    } else {
-        if (uaUtil.mobile()) {
-            if (uaUtil.wechat()) {
-                return jsShare(share_params);
-            } else {
-                return qrShare(share_params);
-            }
-        } else {
-            return qrShare(share_params);
-        }
-    }
-};
-
-function qrShare(share_params) {
-    showShareQRCode({
-        url: share_params.link,
-        sharelog_id: share_params.sharelog_id,
-    });
-    return checkShareStatus(share_params.sharelog_id);
-}
-
-async function jsShare(share_params) {
-    showShareMask();
-    await setShareParam(share_params);
-    return updateShare(share_params.sharelog_id);
-}
+export default shareUtil;

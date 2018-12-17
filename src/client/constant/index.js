@@ -68,6 +68,7 @@ export const SITECODE = {
     ANDROID: 'cine.android',
     ANDROID_PHONE: 'cine.android.phone',
     ANDROID_PAD: 'cine.android.pad',
+    ANDROID_H5: 'cine.web.android.kotlin',
     WEB_WECHAT: 'cine.web.wechat',
     WEB_PC: 'cine.web.pc',
     WEB_IPHONE: 'cine.web.iphone',

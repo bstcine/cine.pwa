@@ -1,7 +1,7 @@
 import siteCodeUtil from '@/util/sitecodeUtil';
 import Bridge from '@/util/bridge';
 import BRIDGE_EVENT from '@/constant/bridgeEvent';
-import storeUtil from '@/util/storeUtil';
+import storeUtil from '@/util/_base/storeUtil';
 import uaUtil from '@/util/uaUtil';
 import { getParam } from '@/util/urlUtil';
 import CAuthModal from '@/component/CAuthModal';

@@ -3,43 +3,64 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <title></title>
-    <!-- <script src="http://apptest.bstcine.com/lib/vconsole/vconsole.min.js"></script> -->
-    <!-- <script> var vConsole = new VConsole()</script> -->
+    <!--<script src="https://dev.bstcine.com/lib/vconsole/vconsole.min.js"></script>-->
+    <!--<script> var vConsole = new VConsole();</script>-->
     <script>
-        (function () {
-            var responsive = function () {
+        (function() {
+            var responsive = function() {
                 var clientWidth = document.documentElement.clientWidth;
                 if (clientWidth < 576) {
-                    document.documentElement.style.fontSize = clientWidth / 750 * 100 + 'px';
+                    document.documentElement.style.fontSize = clientWidth / 750 * 100 + "px";
                 } else if (clientWidth < 1024) {
-                    document.documentElement.style.fontSize = clientWidth / 1536 * 100 + 'px';
+                    document.documentElement.style.fontSize = clientWidth / 1536 * 100 + "px";
                 } else {
-                    document.documentElement.style.fontSize = '50px'
+                    document.documentElement.style.fontSize = "50px";
                 }
             };
             responsive();
-            window.onresize = function () {
-                responsive()
+            window.onresize = function() {
+                responsive();
             };
-        }())
+        }());
+
+        // window.onerror = function(msg, url, lineNo, columnNo, error) {
+        //     var string = msg.toLowerCase();
+        //     var substring = "script error";
+        //     if (string.indexOf(substring) > -1) {
+        //         alert("Script Error: See Browser Console for Detail");
+        //     } else {
+        //         var message = [
+        //             "Message: " + msg,
+        //             "URL: " + url,
+        //             "Line: " + lineNo,
+        //             "Column: " + columnNo,
+        //             "Error object: " + JSON.stringify(error)
+        //         ].join(" - ");
+        //
+        //         alert(message);
+        //     }
+        //
+        //     return false;
+        // };
     </script>
 
     <!--<script>-->
-        <!--var _czc = _czc || [];-->
-        <!--_czc.push(["_setAutoPageview",false]);-->
+    <!--var _czc = _czc || [];-->
+    <!--_czc.push(["_setAutoPageview",false]);-->
     <!--</script>-->
 
 </head>
 
 <body>
-    <div id="root"></div>
+<div id="root"></div>
 <script src="https://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
 <div style="display: none">
-  <script src="https://s13.cnzz.com/z_stat.php?id=1261976258&web_id=1261976258" language="JavaScript"></script>
+    <script src="https://s13.cnzz.com/z_stat.php?id=1261976258&web_id=1261976258" language="JavaScript"></script>
 </div>
 </body>
 

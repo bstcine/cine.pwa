@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { initWechat } from '@/util/wechatUtil';
-import storeUtil from '@/util/storeUtil';
+import storeUtil from '@/util/_base/storeUtil';
 import { fetchData } from '@/service/base';
 import errorMsg from '@/util/errorMsg';
 import { getParam } from '@/util/urlUtil';
@@ -25,7 +24,6 @@ export default class Welcome extends Component {
     }
 
     async componentDidMount() {
-        initWechat();
         if (storeUtil.getToken()) {
             let [err, result] = await fetchData(Api.APIURL_User_Info, {});
             if (err) return alert(errorMsg(err));

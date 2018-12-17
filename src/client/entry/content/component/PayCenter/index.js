@@ -10,9 +10,9 @@ import { addParam, getParam } from '@/util/urlUtil';
 import HelpModal from '@/entry/content/component/PayCenter/HelpModal';
 import { fetchData } from '@/service/base';
 import errorMsg from '@/util/errorMsg';
-import { initWechat } from '@/util/wechatUtil';
+import wechatUtil from '@/util/wechatUtil';
 import Api from '@/../APIConfig';
-import storeUtil from '@/util/storeUtil';
+import storeUtil from '@/util/_base/storeUtil';
 import Bridge from '@/util/bridge';
 import BRIDGE_EVENT from '@/constant/bridgeEvent';
 
@@ -38,7 +38,7 @@ export default class PayCenter extends Component {
         this.submitPay = this.submitPay.bind(this);
     }
 
-    componentDidMount() {
+    async componentDidMount() {
         document.title = '善恩英语 - 收银台';
         if (uaUtil.wechat() && getParam().redirected !== '1') {
             let url = addParam(location.href, { redirected: 1 });
@@ -46,7 +46,12 @@ export default class PayCenter extends Component {
                 '//www.bstcine.com/wechat/authorize?redirect=' +
                 encodeURIComponent(url);
         } else {
-            initWechat();
+            try {
+                wechatUtil.init();
+            } catch (e) {
+                console.log(e);
+            }
+
             let cid = getParam().cid;
             fetchData(Api.APIURL_Order_Detail, { cid }).then(
                 ([err, result]) => {
@@ -54,7 +59,7 @@ export default class PayCenter extends Component {
                     let { order } = result.detail;
                     if (order.pay_status === '1') {
                         location.href = `/pay/status?cid=${order.id}`;
-                        return
+                        return;
                     }
                     this.setState({ order });
                 }
@@ -228,7 +233,10 @@ export default class PayCenter extends Component {
     submitPay() {
         let { pay_type } = this.state;
         if (pay_type === 1) {
-            if (storeUtil.get('temp_h5') === '1' && siteCodeUtil.inIOSAPP()) {
+            if (
+                storeUtil.get('temp_h5', 'session') === '1' &&
+                siteCodeUtil.inIOSAPP()
+            ) {
                 this.doPayApp('1');
             } else if (uaUtil.wechat()) {
                 this.openHelpModal();
@@ -240,7 +248,10 @@ export default class PayCenter extends Component {
                 this.doPayAliPc();
             }
         } else if (pay_type === 3) {
-            if (storeUtil.get('temp_h5') === '1' && siteCodeUtil.inIOSAPP()) {
+            if (
+                storeUtil.get('temp_h5', 'session') === '1' &&
+                siteCodeUtil.inIOSAPP()
+            ) {
                 this.doPayApp('3');
             } else if (uaUtil.wechat()) {
                 const { openid } = getParam();

@@ -6,7 +6,6 @@ import Slider from './Slider';
 import Notice from './Notice';
 import TagFilter from './TagFilter';
 import CategoryList from './CategoryList';
-import { initWechat } from '@/util/wechatUtil';
 import siteCodeUtil from '@/util/sitecodeUtil';
 import uaUtil from '@/util/uaUtil';
 import Article from '@/entry/content/component/Home/Article';
@@ -17,11 +16,13 @@ import errorMsg from '@/util/errorMsg';
 import { APIURL_Content_Home } from '@/../APIConfig';
 import { CFloatingButton } from '@/component/_base';
 import QRHelp from '@/component/QRHelp';
+import LazyLoad from 'react-lazyload';
+import TabBar from '@/component/TabBar';
+
 const bottomImg1 = require('../../asset/image/book.jpg');
 const bottomImg2 = require('../../asset/image/moon.jpg');
 let bottomImg = Math.round(Math.random() * 10) % 2 ? bottomImg2 : bottomImg1;
-import LazyLoad from 'react-lazyload';
-import TabBar from '@/component/TabBar';
+
 
 const getSelectedTags = () => {
     let tags = [];
@@ -128,7 +129,6 @@ export default class Home extends Component {
         document.title = uaUtil.wechat()
             ? '善恩英语'
             : '善恩英语 - 卓越的在线英语课程、英文原版‎阅读、托福SAT备考';
-        initWechat();
 
         let [err, res] = await fetchData(APIURL_Content_Home);
         if (err) return alert(errorMsg(err));

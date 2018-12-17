@@ -7,7 +7,7 @@ import Footer from '@/component/Footer';
 import siteCodeUtil from '@/util/sitecodeUtil';
 import Api from '@/../APIConfig';
 import { fetchData } from '@/service/base';
-import storeUtil from '@/util/storeUtil';
+import storeUtil from '@/util/_base/storeUtil';
 import Bridge from '@/util/bridge';
 import BRIDGE_EVENT from '@/constant/bridgeEvent';
 
@@ -28,7 +28,7 @@ export default class PayStatus extends Component {
             if (
                 order.status === '1' &&
                 siteCodeUtil.inIOSAPP() &&
-                storeUtil.get('temp_h5')
+                storeUtil.get('temp_h5', 'session')
             ) {
                 Bridge.ios(BRIDGE_EVENT.ORDER_PAY_SUCCESS, {
                     order_id: order.id,

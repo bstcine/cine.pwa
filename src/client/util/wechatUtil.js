@@ -1,31 +1,16 @@
 import { getWechatJsSignature } from '@/service/base';
-import {
-    checkShareMask,
-    queryShare,
-    updateShare,
-    hideShareMask,
-} from './shareUtil';
-import { getParam, removeParam } from './urlUtil';
-import uaUtil from '@/util/uaUtil';
 
-export let setShareParam = params => {
-    if (typeof window.wx === 'undefined' || !window.wx) {
-        return console.log(
-            'window.wx not found, ensure include jweixin in your html'
-        );
-    }
-    return setShareTimeline(params);
-};
-
-export let setShareTimeline = ({ title, link, imgUrl, desc }) => {
-    return new Promise(resolve => {
+const wechatUtil = {
+    ready: false,
+    _fetchSign: () => getWechatJsSignature(),
+    setShareParam: ({ title, link, imgUrl, desc }, success) => {
         window.wx.onMenuShareTimeline({
             title: title,
             link: link,
             imgUrl: imgUrl,
             success: function() {
                 console.log('onMenuShareTimeline shared');
-                resolve();
+                success && success();
             },
             cancel: function() {},
         });
@@ -40,72 +25,47 @@ export let setShareTimeline = ({ title, link, imgUrl, desc }) => {
             },
             cancel: function() {},
         });
-    });
-};
+    },
 
-export let initWechat = async () => {
-    console.log('initWechat');
-    if (!uaUtil.wechat()) {
-        console.log('not in wechat skip init');
-        return;
-    }
-    try {
-        let wechatConfig = await getWechatJsSignature();
-        await configWechat(wechatConfig);
-        checkShareMask();
-        let param = getParam();
-        let sharelog_id = param.sharelog_id;
-        if (sharelog_id) {
-            let res = await queryShare(sharelog_id);
-            if (res.status) {
-                let data = res.data;
-                await setShareParam({
-                    title: data.share_title,
-                    link: removeParam(data.share_link, ['token', 'share_mask']),
-                    imgUrl: data.share_imgUrl,
-                    desc: data.share_desc,
-                });
-                await updateShare(sharelog_id);
-                hideShareMask();
-            } else {
-                console.log(res);
-            }
+    init: async () => {
+        if (wechatUtil.ready) {
+            return;
         }
-        return true;
-    } catch (err) {
-        console.error(err);
-    }
-};
 
-export let configWechat = config => {
-    return new Promise((resolve, reject) => {
-        if (typeof window.wx === 'undefined' || !window.wx) {
-            return reject(
-                new Error(
-                    'window.wx not found, ensure include jweixin in your html'
-                )
-            );
-        }
+        let res = await wechatUtil._fetchSign();
         window.wx.config({
-            debug: false,
-            appId: config.appId,
-            timestamp: config.timestamp,
-            nonceStr: config.nonceStr,
-            signature: config.signature,
+            debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+            appId: res.appId, // 必填，公众号的唯一标识
+            timestamp: res.timestamp, // 必填，生成签名的时间戳
+            nonceStr: res.nonceStr, // 必填，生成签名的随机串
+            signature: res.signature, // 必填，签名
             jsApiList: [
                 'chooseWXPay',
                 'onMenuShareTimeline',
                 'onMenuShareAppMessage',
-            ],
+            ], // 必填，需要使用的JS接口列表
         });
-        window.wx.ready(() => {
-            console.log('wechat config ready');
-            resolve(null, 'ready');
+        return new Promise((resolve, reject) => {
+            window.wx.ready(function() {
+                // config信息验证后会执行ready方法，
+                // 所有接口调用都必须在config接口获得结果之后，
+                // config是一个客户端的异步操作，
+                // 所以如果需要在页面加载时就调用相关接口，
+                // 则须把相关接口放在ready函数中调用来确保正确执行。
+                // 对于用户触发时才调用的接口，则可以直接调用，不需要放在ready函数中。
+                wechatUtil.ready = true;
+
+                resolve();
+            });
+
+            window.wx.error(function(err) {
+                // config信息验证失败会执行error函数，
+                // 如签名过期导致验证失败，具体错误信息可以打开config的debug模式查看，
+                // 也可以在返回的res参数中查看，对于SPA可以在这里更新签名。
+                reject(err);
+            });
         });
-        window.wx.error(err => {
-            // alert(`err ${err}`)
-            console.log('wechat config err', err);
-            resolve(err);
-        });
-    });
+    },
 };
+
+export default wechatUtil;

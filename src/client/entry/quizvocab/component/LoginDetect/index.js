@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { initWechat } from '@/util/wechatUtil';
 import Bridge from '@/util/bridge';
 import BRIDGE_EVENT from '@/constant/bridgeEvent';
 import siteCodeUtil from '@/util/sitecodeUtil';
@@ -16,14 +15,6 @@ export default class LoginDetect extends Component {
         this.state = {
             showLoginModal: false,
         };
-    }
-
-    componentWillMount() {
-        console.log('componentWillMount');
-    }
-
-    componentDidMount() {
-        initWechat();
     }
 
     toggleLoginModal() {

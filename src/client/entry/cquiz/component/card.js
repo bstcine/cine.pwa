@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import storeUtil from '@/util/storeUtil';
+import storeUtil from '@/util/_base/storeUtil';
 import Bridge from '@/util/bridge';
 import End from './end.js';
 import siteCodeUtil from '@/util/sitecodeUtil';

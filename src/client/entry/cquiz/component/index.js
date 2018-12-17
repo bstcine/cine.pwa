@@ -1,9 +1,5 @@
 import React, { Component } from 'react';
-import * as Service from '@/service/quiz';
-import storeUtil from '@/util/storeUtil';
-import siteCodeUtil from '@/util/sitecodeUtil';
-import Bridge from '@/util/bridge';
-import BRIDGE_EVENT from '@/constant/bridgeEvent';
+import storeUtil from '@/util/_base/storeUtil';
 
 export default class Index extends Component {
     constructor(props) {

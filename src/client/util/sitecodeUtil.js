@@ -1,5 +1,5 @@
 import { SITECODE } from '@/constant/index';
-import storeUtil from '@/util/storeUtil';
+import storeUtil from '@/util/_base/storeUtil';
 
 let siteCodeUtil = {
     /**
@@ -32,6 +32,14 @@ let siteCodeUtil = {
      */
     inAPP: () => {
         return siteCodeUtil.inIOSAPP() || siteCodeUtil.inAndroidAPP();
+    },
+
+    /**
+     * 确保入口文件的 constructor 函数中 set 过 sitecode
+     *  storeUtil.setSiteCode(sitecode);
+     */
+    inAndroidH5: () => {
+        return storeUtil.getSiteCode() === SITECODE.ANDROID_H5;
     },
 };
 

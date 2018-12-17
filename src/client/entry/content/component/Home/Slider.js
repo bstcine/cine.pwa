@@ -3,7 +3,7 @@ import ReactSlider from 'react-slick';
 import uaUtil from '@/util/uaUtil';
 import siteCodeUtil from '@/util/sitecodeUtil';
 import { addParam } from '@/util/urlUtil';
-import storeUtil from '@/util/storeUtil';
+import storeUtil from '@/util/_base/storeUtil';
 import routeUtil from '@/util/routeUtil';
 
 export default class Slider extends Component {

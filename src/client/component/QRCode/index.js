@@ -12,7 +12,6 @@ QRCode.open = function(url) {
     document.body.appendChild(div);
 
     function render(url, close) {
-        console.log('render', close);
 
         ReactDOM.render(<QRCode url={url} close={close} />, div);
     }

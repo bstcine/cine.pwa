@@ -28,7 +28,7 @@ export default class PayStatus extends Component {
             if (
                 order.status === '1' &&
                 interSiteCodeUtil.inIOSAPP() &&
-                storeUtil.get('temp_h5', 'session')
+                storeUtil.get('temp_h5')
             ) {
                 Bridge.ios(BRIDGE_EVENT.ORDER_PAY_SUCCESS, {
                     order_id: order.id,

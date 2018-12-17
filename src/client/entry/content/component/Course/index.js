@@ -98,9 +98,9 @@ export default class Course extends Component {
         let { course, user } = await cCourseAction.initCourseDetail(cid);
         if (interSiteCodeUtil.inIOSAPP()) {
             if (course.temp_h5 === '1') {
-                storeUtil.set('temp_h5', '1','session');
+                storeUtil.set('temp_h5', '1');
             } else {
-                storeUtil.remove('temp_h5','session');
+                storeUtil.remove('temp_h5');
             }
         }
         this.setState({ course, user });

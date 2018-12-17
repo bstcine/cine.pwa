@@ -234,7 +234,7 @@ export default class PayCenter extends Component {
         let { pay_type } = this.state;
         if (pay_type === 1) {
             if (
-                storeUtil.get('temp_h5', 'session') === '1' &&
+                storeUtil.get('temp_h5') === '1' &&
                 interSiteCodeUtil.inIOSAPP()
             ) {
                 this.doPayApp('1');
@@ -249,7 +249,7 @@ export default class PayCenter extends Component {
             }
         } else if (pay_type === 3) {
             if (
-                storeUtil.get('temp_h5', 'session') === '1' &&
+                storeUtil.get('temp_h5') === '1' &&
                 interSiteCodeUtil.inIOSAPP()
             ) {
                 this.doPayApp('3');

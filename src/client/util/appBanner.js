@@ -35,7 +35,7 @@ let appBanner = {
         document.querySelector('.appBanner').style.display = 'none';
     },
     remove: function() {
-        storeUtil.set('appBannerHide', new Date().getTime());
+        storeUtil.set('appBannerHide', new Date().getTime(), 'local');
         window.removeEventListener('scroll', appBanner.handlerScroll);
         this.hide();
     },

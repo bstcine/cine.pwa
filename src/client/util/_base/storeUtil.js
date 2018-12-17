@@ -91,11 +91,11 @@ function _which(type) {
     switch (type.toLowerCase()) {
         case 'cookie':
             return cookie;
-        case 'session':
-            return session;
         case 'local':
-        default:
             return local;
+        default:
+            case 'session':
+            return session;
     }
 }
 
@@ -129,10 +129,10 @@ const storeUtil = {
     },
     // 保存在sessionStorage
     setSiteCode: sitecode => {
-        return storeUtil.set('sitecode', sitecode, 'session');
+        return storeUtil.set('sitecode', sitecode);
     },
     getSiteCode: () => {
-        return storeUtil.get('sitecode', 'session');
+        return storeUtil.get('sitecode');
     },
     removeSiteCode: () => {
         storeUtil.remove('sitecode', 'session');

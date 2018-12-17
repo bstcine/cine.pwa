@@ -102,6 +102,10 @@ function _which(type) {
 const storeUtil = {
     set: (key, value, type) => {
         const store = _which(type);
+        if (typeof value === 'undefined') {
+            store.remove(key);
+            return;
+        }
         return store.set(key, value);
     },
     get: (key, type) => {
@@ -115,23 +119,23 @@ const storeUtil = {
 
     // cookie 保存 token 与服务端保持同步
     setToken: token => {
-        return cookie.set('token', token);
+        return storeUtil.set('token', token, 'cookie');
     },
     getToken: () => {
-        return cookie.get('token');
+        return storeUtil.get('token', 'cookie');
     },
     removeToken: () => {
-        cookie.remove('token');
+        storeUtil.remove('token', 'cookie');
     },
     // 保存在sessionStorage
     setSiteCode: sitecode => {
-        return session.set('sitecode', sitecode);
+        return storeUtil.set('sitecode', sitecode, 'session');
     },
     getSiteCode: () => {
-        return session.get('sitecode');
+        return storeUtil.get('sitecode', 'session');
     },
     removeSiteCode: () => {
-        session.remove('sitecode');
+        storeUtil.remove('sitecode', 'session');
     },
 };
 

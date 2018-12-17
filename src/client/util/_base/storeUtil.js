@@ -87,7 +87,7 @@ function _deserialize(value) {
 }
 
 function _which(type) {
-    if (!type) return local;
+    if (!type) return session;
     switch (type.toLowerCase()) {
         case 'cookie':
             return cookie;

@@ -4,12 +4,21 @@ import TryPlayer from '@/component/TryPlayer';
 import CommonUtil from '@/util/common';
 import { CIcon } from '@/component/_base';
 import QRHelp from '@/component/QRHelp';
+import { getParam } from '@/util/urlUtil';
 
 export default class Brief extends Component {
     static defaultProps = {
         course: null,
         user: null,
     };
+
+    static openHelp() {
+        if (getParam().cid === 'd0115246233481413BmQb3rHwG') {
+            QRHelp.open('alice');
+        } else {
+            QRHelp.open();
+        }
+    }
 
     // 优惠列表
     renderActivityPromoteList(course) {
@@ -127,9 +136,7 @@ export default class Brief extends Component {
                         <div className="btn-groups">
                             <div
                                 className="btn-feedback"
-                                onClick={() => {
-                                    QRHelp.open();
-                                }}
+                                onClick={Brief.openHelp}
                             >
                                 <CIcon>ci-message</CIcon>
                                 <span>咨询</span>
@@ -147,9 +154,7 @@ export default class Brief extends Component {
                         <div className="btn-groups">
                             <div
                                 className="btn-feedback"
-                                onClick={() => {
-                                    QRHelp.open();
-                                }}
+                                onClick={Brief.openHelp}
                             >
                                 <CIcon>ci-message</CIcon>
                                 <span>咨询</span>

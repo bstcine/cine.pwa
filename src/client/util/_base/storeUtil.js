@@ -129,10 +129,10 @@ const storeUtil = {
     },
     // 保存在sessionStorage
     setSiteCode: sitecode => {
-        return storeUtil.set('sitecode', sitecode);
+        return storeUtil.set('sitecode', sitecode, 'session');
     },
     getSiteCode: () => {
-        return storeUtil.get('sitecode');
+        return storeUtil.get('sitecode', 'session');
     },
     removeSiteCode: () => {
         storeUtil.remove('sitecode', 'session');

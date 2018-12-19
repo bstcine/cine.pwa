@@ -118,8 +118,9 @@ module.exports = {
                     },
                 ],
             },
+
             {
-                test: /\.(png|jpg|jpeg|gif|svg|mp3)$/i,
+                test: /\.(png|jpg|jpeg|gif|mp3)$/i,
                 loader: 'url-loader',
                 options: {
                     limit: 8192,
@@ -128,12 +129,16 @@ module.exports = {
                 },
             },
             {
-                test: /\.(woff|woff2|eot|otf|webp|ttf)$/i,
+                test: /\.(woff|woff2|eot|otf|webp|ttf)$|^(?!.*svg\/).*\.svg$/i,
                 loader: 'file-loader',
                 options: {
                     name: 'asset/font/[name].[hash:8].[ext]',
                     publicPath,
                 },
+            },
+            {
+                test: /svg\/.+\.svg$/,
+                loader: 'svg-inline-loader'
             },
         ],
     },

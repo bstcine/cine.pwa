@@ -17,6 +17,7 @@ import Player from '@/component/Player';
 import authUtil from '@/util/authUtil';
 import QRHelp from '@/component/QRHelp';
 import ShareMask from '@/component/ShareMask';
+import Switch from '@/component/_base/Switch';
 
 class Container extends Component {
     constructor(props) {
@@ -28,6 +29,7 @@ class Container extends Component {
             isBottomDrawerOpen: false,
             isLeftFixedDrawerOpen: false,
             isBottomFixedDrawerOpen: false,
+            switchChecked: false,
         };
     }
 
@@ -39,9 +41,22 @@ class Container extends Component {
             isBottomDrawerOpen,
             isLeftFixedDrawerOpen,
             isBottomFixedDrawerOpen,
+            switchChecked,
         } = this.state;
         return (
             <div className="cine-widget">
+                <CPanel>
+                    <Switch
+                        checked={switchChecked}
+                        onChange={checked => {
+                            this.setState({ switchChecked: checked });
+                        }}
+                    />
+
+                    <span>
+                        switch status : {switchChecked ? 'checked' : 'uncheck'}
+                    </span>
+                </CPanel>
                 <CPanel>
                     <CButton
                         onClick={() => {
@@ -152,7 +167,10 @@ class Container extends Component {
                         <CButton color="secondary">
                             SECONDARY<CIcon>ci-video</CIcon>
                         </CButton>
-                        <CButton disabled>DISABLED</CButton>
+                        <CButton color="secondary">
+                            SECONDARY svg<CIcon>svg-arrow_back</CIcon>
+                        </CButton>
+                        <CButton color="secondary" disabled>DISABLED</CButton>
                         <CButton href="//baidu.com">Link</CButton>
                         <CButton color="secondary" shape="capsule">
                             SECONDARY<CIcon>ci-video</CIcon>
@@ -168,7 +186,7 @@ class Container extends Component {
                         <CButton variant="outlined" color="secondary">
                             SECONDARY
                         </CButton>
-                        <CButton disabled variant="outlined">
+                        <CButton disabled variant="outlined" color="secondary">
                             DISABLED
                         </CButton>
                         <CButton variant="outlined" href="//baidu.com">
@@ -213,6 +231,7 @@ class Container extends Component {
                         <CButton variant="contained">DEFAULT</CButton>
                         <CButton variant="contained" color="primary">
                             PRIMARY
+                            <CIcon>svg-loading</CIcon>
                         </CButton>
                         <CButton variant="contained" color="secondary">
                             SECONDARY<CIcon>lock</CIcon>

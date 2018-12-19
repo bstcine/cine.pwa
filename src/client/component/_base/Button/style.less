@@ -10,8 +10,9 @@
 
 .@{btn} {
     .btn-reset();
-    padding: 0.18rem 0.25rem;
+    padding: 0 0.25rem;
     line-height: 1;
+    height: 0.72rem;
     font-size: 0.28rem;
     min-width: 1.8rem;
     background-color: #fff;
@@ -45,15 +46,27 @@
 
 // size,
 .@{btn}--small {
-    padding: 0.08rem 0.1rem;
+    padding: 0 0.1rem;
     font-size: 0.24rem;
+    height: 0.44rem;
     min-width: 0.6rem;
 }
 
 .@{btn}--large {
-    padding: 0.2rem 0.4rem;
+    padding: 0 0.4rem;
     font-size: 0.36rem;
+    height: 0.88rem;
     min-width: 2.4rem;
+}
+
+a.@{btn} {
+    line-height: 0.72rem - 0.04rem;
+    &.@{btn}--small {
+        line-height: 0.44rem - 0.04rem;
+    }
+    .@{btn}--large {
+        line-height: 0.88rem - 0.04rem;
+    }
 }
 
 // shape round
@@ -207,7 +220,7 @@
             content: '';
             border-radius: inherit;
             background-color: #fff;
-            transition: opacity .2s;
+            transition: opacity 0.2s;
         }
     }
 }
@@ -216,9 +229,9 @@
 .btn-contained-pseudo(@color) {
     background-color: @color;
 
-   
-    
-    
+    &:hover {
+        background-color: darken(@color, 8%);
+    }
 
     &:active,
     &.@{btn}--active {
@@ -228,10 +241,4 @@
             0rem 0.06rem 0.28rem 0.04rem rgba(0, 0, 0, 0.12);
     }
 
-    //&:disabled,
-    //&.@{btn}--disabled {
-    //    color: rgba(0, 0, 0, 0.26) !important;
-    //    box-shadow: none !important;
-    //    background-color: rgba(0, 0, 0, 0.12) !important;
-    //}
 }

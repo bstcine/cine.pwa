@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import loadScript from '@/util/_base/loadScript';
+import loadScript from '@/util/_base/exLoadScript';
 import { fetchData } from '@/service/base';
 import { APIURL_Pay_Stripe_Info } from '../../../../../APIConfig';
 import { CMessage } from '@/component/_base';

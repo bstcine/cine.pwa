@@ -340,7 +340,11 @@ export default class Brief extends Component {
                         <div className="right-desc">
                             <div className="recommend" onClick={onClickLottery}>
                                 <div className="red-bag" />
-                                <div className="desc">抽取优惠券</div>
+                                <div className="desc">
+                                    抽取
+                                    <br />
+                                    优惠券
+                                </div>
                             </div>
                         </div>
                     )}

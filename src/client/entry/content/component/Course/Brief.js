@@ -74,9 +74,8 @@ export default class Brief extends Component {
                                 className="promote-title pointer"
                                 onClick={this.props.login}
                             >
-                                1积分抵扣1元钱，<span className="blue">
-                                    登录
-                                </span>
+                                1积分抵扣1元钱，
+                                <span className="blue">登录</span>
                                 <span className="grey">查看可抵扣金额</span>
                             </div>
                         )}
@@ -213,7 +212,8 @@ export default class Brief extends Component {
                                 {course.activity_price}
                             </span>
                             <span className="old-price">
-                                原价：<span className="del">
+                                原价：
+                                <span className="del">
                                     {CommonUtil.getCurrencySymbol(
                                         course.currency
                                     )}
@@ -336,20 +336,18 @@ export default class Brief extends Component {
 
                     {course && this.renderBottomButton(course)}
 
-                    {course &&
-                        course.activity_lottery && (
-                            <div className="right-desc">
-                                <div
-                                    className="recommend"
-                                    onClick={onClickLottery}
-                                >
-                                    <div className="red-bag" />
-                                    <div className="desc">
-                                        抽取12.12<br />优惠券
-                                    </div>
+                    {course && course.activity_lottery && (
+                        <div className="right-desc">
+                            <div className="recommend" onClick={onClickLottery}>
+                                <div className="red-bag" />
+                                <div className="desc">
+                                    抽取
+                                    <br />
+                                    优惠券
                                 </div>
                             </div>
-                        )}
+                        </div>
+                    )}
                 </div>
             </div>
         );

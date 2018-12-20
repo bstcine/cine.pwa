@@ -13,7 +13,7 @@ let appBanner = {
         const current = new Date().getTime();
         const isHide = closeAt && current - closeAt < 2 * 24 * 3600 * 1000;
         if (
-            !interSiteCodeUtil.inAPP() &&
+            !(interSiteCodeUtil.inAPP() || interSiteCodeUtil.inAndroidH5()) &&
             uaUtil.mobile() &&
             getParam().hidetopbar !== '1' &&
             !isHide

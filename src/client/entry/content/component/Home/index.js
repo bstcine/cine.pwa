@@ -255,7 +255,7 @@ export default class Home extends Component {
                 )}
 
                 {!interSiteCodeUtil.inAPP() && <Footer isShow={true} />}
-                {!interSiteCodeUtil.inAPP() && <TabBar />}
+                {!(interSiteCodeUtil.inAPP() || interSiteCodeUtil.inAndroidH5()) && <TabBar />}
             </React.Fragment>
         );
     }

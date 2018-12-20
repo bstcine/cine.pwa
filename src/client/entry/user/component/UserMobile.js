@@ -69,7 +69,7 @@ const UserMobile = ({ user, onLogout }) => {
                     退出
                 </a>
             </div>
-            {!interSiteCodeUtil.inAPP() && <TabBar />}
+            {!(interSiteCodeUtil.inAPP() || interSiteCodeUtil.inAndroidH5()) && <TabBar />}
         </div>
     );
 };

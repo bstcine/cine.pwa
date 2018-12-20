@@ -1,8 +1,7 @@
 import { Component } from 'react';
 import { getParam } from '@/util/_base/urlUtil';
-import interSiteCodeUtil from '@/util/_base/interSiteCodeUtil';
+import interSiteCodeUtil, { SITECODE } from '@/util/_base/interSiteCodeUtil';
 import storeUtil from '@/util/_base/storeUtil';
-import { SITECODE } from '@/constant/index';
 import uaUtil from '@/util/_base/uaUtil';
 
 class Entry extends Component {

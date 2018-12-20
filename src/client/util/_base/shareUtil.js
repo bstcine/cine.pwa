@@ -1,14 +1,15 @@
+import interSiteCodeUtil from './interSiteCodeUtil';
+import Bridge from './interBridge';
 import uaUtil from './uaUtil';
 import wechatUtil from './wechatUtil';
 import { getParam, addParam, removeParam } from './urlUtil';
-import Bridge from './interBridge';
-import { get } from '@/service/request';
-import Api from '../../../APIConfig';
-import BRIDGE_EVENT from '@/constant/bridgeEvent';
-import interSiteCodeUtil from './interSiteCodeUtil';
-import { fetchData } from '../../service/base';
+
 import ShareMask from '@/component/ShareMask';
 import QRCode from '@/component/QRCode';
+import BRIDGE_EVENT from '@/constant/bridgeEvent';
+import { fetchData } from '@/service/base';
+import { get } from '@/service/request';
+import Api from '../../../APIConfig';
 
 let inter = null;
 let qrcode = null;

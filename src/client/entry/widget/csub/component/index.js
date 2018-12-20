@@ -2,6 +2,9 @@ import React from 'react';
 import { CPanel, CCardContainer } from '@/component/_base';
 import { CourseList, TeacherList } from '@/component/CardItem';
 import { SideBarSubPage } from '@/component/SideBar/SubPage';
+import shareUtil from '@/util/_base/shareUtil';
+import wechatUtil from '@/util/_base/wechatUtil';
+import { removeParam } from '@/util/_base/urlUtil';
 
 export default class SubPage extends React.Component {
     constructor(props) {
@@ -17,7 +20,7 @@ export default class SubPage extends React.Component {
     onChangeFromSB(sb_value) {
         switch (sb_value) {
             case 'course':
-                alert('WechatShare');
+                this.wechatShare();
                 break;
             case 'teacher':
                 alert('与Android交互');
@@ -31,6 +34,21 @@ export default class SubPage extends React.Component {
             case 'resource':
                 alert('Show CWindow');
                 break;
+        }
+    }
+
+    async wechatShare() {
+        try {
+            await wechatUtil.init();
+            wechatUtil.setShareParam({
+                title: '这是标题',
+                link: location.href,
+                imgUrl:
+                    'http://www.bstcine.com/f/2018/09/21/165917424Snd85UE.png',
+                desc: '我是描述',
+            });
+        } catch (e) {
+            console.log(e);
         }
     }
 

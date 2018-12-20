@@ -1,10 +1,12 @@
 import React from 'react';
-import { CPanel, CCardContainer } from '@/component/_base';
+import { CPanel, CCardContainer, CWindow } from "@/component/_base";
 import { CourseList, TeacherList } from '@/component/CardItem';
 import { SideBarSubPage } from '@/component/SideBar/SubPage';
-import shareUtil from '@/util/_base/shareUtil';
 import wechatUtil from '@/util/_base/wechatUtil';
-import { removeParam } from '@/util/_base/urlUtil';
+import interSiteCodeUtil from '@/util/_base/interSiteCodeUtil';
+import Bridge from '@/util/_base/interBridge';
+import BRIDGE_EVENT from '@/constant/bridgeEvent';
+import uaUtil from '@/util/_base/uaUtil';
 
 export default class SubPage extends React.Component {
     constructor(props) {
@@ -23,16 +25,16 @@ export default class SubPage extends React.Component {
                 this.wechatShare();
                 break;
             case 'teacher':
-                alert('与Android交互');
+                this.interArd();
                 break;
             case 'comment':
-                alert('与iOS交互');
+                this.interIOS();
                 break;
             case 'article':
                 alert(sb_value);
                 break;
             case 'resource':
-                alert('Show CWindow');
+                this.openCWindow(sb_value)
                 break;
         }
     }
@@ -50,6 +52,58 @@ export default class SubPage extends React.Component {
         } catch (e) {
             console.log(e);
         }
+    }
+
+    async interArd() {
+        if (interSiteCodeUtil.inIOSAPP()) {
+            let list = await Bridge.ios(BRIDGE_EVENT.INSTALLED_APP_LIST);
+            if (list && list.wechat === 1) {
+                let res = await Bridge.ios(BRIDGE_EVENT.SHARE, {
+                    title: '这是标题',
+                    link: location.href,
+                    imgUrl:
+                        'http://www.bstcine.com/f/2018/09/21/165917424Snd85UE.png',
+                    desc: '我是描述',
+                });
+                if (res && res.shareSuccess === 1) {
+                    alert('已分享[from browser]');
+                }
+            } else {
+                alert('未安装微信[from browser]');
+            }
+        }
+    }
+
+    async interIOS() {
+        if (interSiteCodeUtil.inAndroidAPP()) {
+            let list = await Bridge.android(BRIDGE_EVENT.INSTALLED_APP_LIST);
+            if (list && list.wechat === 1) {
+                let res = await Bridge.android(BRIDGE_EVENT.SHARE, {
+                    title: '这是标题',
+                    link: location.href,
+                    imgUrl:
+                        'http://www.bstcine.com/f/2018/09/21/165917424Snd85UE.png',
+                    desc: '我是描述',
+                });
+                if (res && res.shareSuccess === 1) {
+                    alert('已分享[from browser]');
+                }
+            } else {
+                alert('未安装微信[from browser]');
+            }
+        }
+    }
+
+    openCWindow(sb_value) {
+        const {courses }= this.props
+        const courseList = courses ? courses.toJS() : [];
+        const item =courseList[1]
+        CWindow.open({
+            children:(<div className="www">
+                <p>标题：{item.name}</p>
+                <p>金额：{item.price}</p>
+            </div>)
+        })
     }
 
     render() {

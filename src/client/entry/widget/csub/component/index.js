@@ -1,7 +1,7 @@
 import React from 'react';
 import { CPanel, CCardContainer, CWindow } from "@/component/_base";
 import { CourseList, TeacherList } from '@/component/CardItem';
-import { SideBarSubPage } from '@/component/SideBar/SubPage';
+import { SideBarPWAH5 } from '@/component/SideBar/PWAH5';
 import wechatUtil from '@/util/_base/wechatUtil';
 import interSiteCodeUtil from '@/util/_base/interSiteCodeUtil';
 import Bridge from '@/util/_base/interBridge';
@@ -113,9 +113,8 @@ export default class SubPage extends React.Component {
 
         return (
             <React.Fragment>
-                <SideBarSubPage
+                <SideBarPWAH5
                     layout={this.props.layout}
-                    isMentor={isMentor}
                     value={this.state.sbValue}
                     onChange={this.onChangeFromSB}
                 />

@@ -255,6 +255,7 @@ export default class LotteryCoupon extends Component {
 
         let config = activity.config;
         let share_params = {
+            sharelog_id: '-1',
             title: config.share.title,
             link: share_link,
             imgUrl: getImgUrl(course.img),

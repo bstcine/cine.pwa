@@ -6,8 +6,7 @@ import wechatUtil from '@/util/_base/wechatUtil';
 import interSiteCodeUtil from '@/util/_base/interSiteCodeUtil';
 import Bridge from '@/util/_base/interBridge';
 import BRIDGE_EVENT from '@/constant/bridgeEvent';
-import uaUtil from '@/util/_base/uaUtil';
-import storeUtil from '@/util/_base/storeUtil';
+import authUtil from "@/util/authUtil";
 
 export default class SubPage extends React.Component {
     constructor(props) {
@@ -32,7 +31,7 @@ export default class SubPage extends React.Component {
                 this.interIOS();
                 break;
             case 'article':
-                alert(sb_value);
+                authUtil.login();
                 break;
             case 'resource':
                 this.openCWindow(sb_value);

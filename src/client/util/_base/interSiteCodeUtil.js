@@ -51,11 +51,7 @@ let interSiteCodeUtil = {
      *  storeUtil.setSiteCode(sitecode);
      */
     inAPP: () => {
-        return (
-            interSiteCodeUtil.inIOSAPP() ||
-            interSiteCodeUtil.inAndroidAPP() ||
-            interSiteCodeUtil.inAndroidH5()
-        );
+        return interSiteCodeUtil.inIOSAPP() || interSiteCodeUtil.inAndroidAPP();
     },
 
     /**

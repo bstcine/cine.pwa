@@ -31,7 +31,7 @@ class HomePage extends Component {
                 {!!user && user.type === '2' && <Tasks user={user} />}
                 <WordCourses courses={courses} />
                 <Courses />
-                {!interSiteCodeUtil.inAPP() && <TabBar />}
+                {!(interSiteCodeUtil.inAPP() || interSiteCodeUtil.inAndroidH5()) && <TabBar />}
             </GLayoutContainer>
         );
     }

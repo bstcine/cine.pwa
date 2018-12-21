@@ -61,7 +61,7 @@ export default class SubPage extends React.Component {
         if (uaUtil.wechat()) {
             this.wxInit('换个标题试试');
         } else {
-            QRCode.open(addParam(null, { share_mask: 1 }));
+            QRCode.open(location.href);
         }
     }
 

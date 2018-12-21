@@ -9,7 +9,7 @@ const closeImg = require('@/asset/image/ico_appdow_close.png');
 
 let appBanner = {
     init: function() {
-        const closeAt = storeUtil.get('appBannerHide');
+        const closeAt = storeUtil.get('appBannerHide', 'local');
         const current = new Date().getTime();
         const isHide = closeAt && current - closeAt < 2 * 24 * 3600 * 1000;
         if (

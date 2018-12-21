@@ -25,13 +25,15 @@ export let getParam = href => {
     return obj;
 };
 
-export let addParam = (url = location.href, params) => {
+export let addParam = (_url, params) => {
+    let url = _url || location.href;
     let URLObj = URLParse(url, true);
     URLObj.set('query', Object.assign(URLObj.query, params));
     return URLObj.toString();
 };
 
-export let removeParam = (url = location.href, params_arr) => {
+export let removeParam = (_url, params_arr) => {
+    let url = _url || location.href;
     let URLObj = URLParse(url, true);
     if (typeof params_arr === 'string') {
         if (URLObj.query[params_arr]) delete URLObj.query[params_arr];
@@ -50,7 +52,7 @@ export let getLastPath = path => {
         return null;
     }
     if (pathName.charAt(pathName.length - 1) === '/') {
-        pathName = pathName.slice(0, pathName.length - 1)
+        pathName = pathName.slice(0, pathName.length - 1);
     }
     let pathComponent = pathName.split('/');
     let lastPath = pathComponent[pathComponent.length - 1];

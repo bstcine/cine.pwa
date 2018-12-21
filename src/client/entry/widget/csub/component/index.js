@@ -6,7 +6,10 @@ import wechatUtil from '@/util/_base/wechatUtil';
 import interSiteCodeUtil from '@/util/_base/interSiteCodeUtil';
 import Bridge from '@/util/_base/interBridge';
 import BRIDGE_EVENT from '@/constant/bridgeEvent';
-import authUtil from "@/util/authUtil";
+import authUtil from '@/util/authUtil';
+import QRCode from '@/component/QRCode';
+import uaUtil from '@/util/_base/uaUtil';
+import { addParam } from '@/util/_base/urlUtil';
 
 export default class SubPage extends React.Component {
     constructor(props) {
@@ -17,6 +20,10 @@ export default class SubPage extends React.Component {
         };
 
         this.onChangeFromSB = this.onChangeFromSB.bind(this);
+    }
+
+    componentDidMount() {
+        this.wxInit();
     }
 
     onChangeFromSB(sb_value) {
@@ -39,19 +46,22 @@ export default class SubPage extends React.Component {
         }
     }
 
+    async wxInit(title) {
+        await wechatUtil.init();
+        wechatUtil.setShareParam({
+            title: title || '这是标题',
+            link: location.href,
+            imgUrl: 'http://www.bstcine.com/f/2018/09/21/165917424Snd85UE.png',
+            desc: '我是描述',
+        });
+    }
+
     async wechatShare() {
         alert('微信浏览器 分享');
-        try {
-            await wechatUtil.init();
-            wechatUtil.setShareParam({
-                title: '这是标题',
-                link: location.href,
-                imgUrl:
-                    'http://www.bstcine.com/f/2018/09/21/165917424Snd85UE.png',
-                desc: '我是描述',
-            });
-        } catch (e) {
-            console.log(e);
+        if (uaUtil.wechat()) {
+            this.wxInit('换个标题试试');
+        } else {
+            QRCode.open(addParam(null, { share_mask: 1 }));
         }
     }
 
@@ -80,11 +90,11 @@ export default class SubPage extends React.Component {
     async interArd() {
         alert('android interaction');
         if (interSiteCodeUtil.inAndroidAPP()) {
-            alert('send')
+            alert('send');
             await Bridge.android(BRIDGE_EVENT.OPEN_LESSON_PLAY_WINDOW, {
                 cid: '42',
             });
-            alert('done')
+            alert('done');
         }
     }
 

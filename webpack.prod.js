@@ -59,6 +59,10 @@ module.exports = merge(common, {
             name: 'sw-learn.js',
             path: path.join(__dirname, 'build'),
         }),
+        new WebpackServiceWorkerPlugin({
+            name: 'sw-widget.js',
+            path: path.join(__dirname, 'build'),
+        }),
         // new BundleAnalyzerPlugin({ analyzerMode: 'static' }),
     ],
 });

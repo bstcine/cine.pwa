@@ -1,6 +1,12 @@
 import React from 'react';
 import './../../asset/style/card.less';
-import { CPanel, CDrawer, CButton } from '@/component/_base';
+import {
+    CPanel,
+    CDrawer,
+    CButton,
+    CIconButton,
+    CIcon,
+} from '@/component/_base';
 import { SideBarCard } from '@/component/SideBar/CardLayout';
 import CardExList from './CardList';
 
@@ -31,7 +37,26 @@ export default class CardDemo extends React.PureComponent {
                     onChange={this.onChange}
                 />
 
-                <CPanel title="AIRBNB" className="show-drawer">
+                {/* <CIcon>svg-arrow_back</CIcon> */}
+                <CPanel
+                    title="AIRBNB"
+                    className="show-drawer"
+                    ext={
+                        <div>
+                            <CIconButton icon="svg-m-home" />
+                            <CIconButton icon="svg-m-dashboard" />
+                            <CIconButton
+                                icon="svg-m-share"
+                                color="secondary"
+                            />
+                            <CIconButton icon="svg-m-android" />
+                            <CIconButton
+                                icon="svg-m-playlist_add"
+                                color="primary"
+                            />
+                        </div>
+                    }
+                >
                     <CDrawer
                         anchor="right"
                         className="vertical_content"
@@ -74,9 +99,7 @@ export default class CardDemo extends React.PureComponent {
 
                 <CardExList
                     orders={orderlist}
-                    layout={
-                        this.state.layout === '123' ? '123' : "112"
-                    }
+                    layout={this.state.layout === '123' ? '123' : '112'}
                 />
             </React.Fragment>
         );

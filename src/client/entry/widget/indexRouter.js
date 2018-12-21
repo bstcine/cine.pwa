@@ -23,6 +23,10 @@ const widgetRoute = {
             path: '/widget/csub',
             component: SPageContainer,
         },
+        {
+            path: '/widget/pwa',
+            component: SPageContainer,
+        },
     ],
     checkAuth: false,
 };

@@ -238,7 +238,7 @@ export default class Brief extends Component {
         }
     }
     renderVideoContainer(course) {
-        if (!course) return <div className="video-container" />;
+        if (!course || !course.img) return <div className="video-container" />;
         const imgHref = CommonUtil.getImageHref(course.img);
         const imgBackground = CommonUtil.getImageBackground(course.img);
         return (

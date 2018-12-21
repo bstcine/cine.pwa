@@ -57,8 +57,8 @@ export default class SubPage extends React.Component {
     }
 
     async wechatShare() {
-        alert('微信浏览器 分享');
         if (uaUtil.wechat()) {
+            alert('标题换了分享');
             this.wxInit('换个标题试试');
         } else {
             QRCode.open(location.href);

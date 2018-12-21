@@ -2,14 +2,13 @@ import React from 'react';
 import { CPanel, CCardContainer, CWindow } from '@/component/_base';
 import { CourseList, TeacherList } from '@/component/CardItem';
 import { SideBarPWAH5 } from '@/component/SideBar/PWAH5';
-import wechatUtil from '@/util/_base/wechatUtil';
 import interSiteCodeUtil from '@/util/_base/interSiteCodeUtil';
 import Bridge from '@/util/_base/interBridge';
 import BRIDGE_EVENT from '@/constant/bridgeEvent';
 import authUtil from '@/util/authUtil';
-import QRCode from '@/component/QRCode';
-import uaUtil from '@/util/_base/uaUtil';
-import { addParam } from '@/util/_base/urlUtil';
+import { getParam, removeParam } from "@/util/_base/urlUtil";
+import shareUtil from "@/util/_base/shareUtil";
+import errorMsg from "@/util/errorMsg";
 
 export default class SubPage extends React.Component {
     constructor(props) {
@@ -46,22 +45,49 @@ export default class SubPage extends React.Component {
         }
     }
 
-    async wxInit(title) {
-        await wechatUtil.init();
-        wechatUtil.setShareParam({
-            title: title || '这是标题',
-            link: location.href,
-            imgUrl: 'http://www.bstcine.com/f/2018/09/21/165917424Snd85UE.png',
-            desc: '我是描述',
+    async wechatShare() {
+        let [err, result] = await shareUtil.createShareLog({
+            type:4,
+            cid:42,
         });
+        if (err) return alert(errorMsg(err));
+        let {
+            sharelog_id,
+            share_title,
+            share_link,
+            share_imgUrl,
+            share_desc,
+        } = result;
+        let share_params = {
+            sharelog_id: sharelog_id,
+            title: share_title,
+            link: share_link,
+            imgUrl: share_imgUrl,
+            desc: share_desc,
+        };
+        await shareUtil.share(share_params);
     }
 
-    async wechatShare() {
-        if (uaUtil.wechat()) {
-            alert('标题换了分享');
-            this.wxInit('换个标题试试');
-        } else {
-            QRCode.open(location.href);
+    async wxInit() {
+        try {
+            await shareUtil.init();
+            let { sharelog_id } = getParam();
+            if (sharelog_id) return;
+            let [err, result] = await shareUtil.createShareLog({
+                type: 4,
+                cid: 42,
+            });
+            if (err) return alert(errorMsg(err));
+            console.log('initWechat', result);
+            let { share_title, share_link, share_imgUrl, share_desc } = result;
+            shareUtil.setShareParam({
+                title: share_title,
+                link: removeParam(share_link, ['token', 'share_mask']),
+                imgUrl: share_imgUrl,
+                desc: share_desc,
+            });
+        } catch (e) {
+            console.warn(e);
         }
     }
 

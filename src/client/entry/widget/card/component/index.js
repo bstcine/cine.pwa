@@ -5,7 +5,7 @@ import {
     CDrawer,
     CButton,
     CIconButton,
-    CIcon,
+    CWindow,
 } from '@/component/_base';
 import { SideBarCard } from '@/component/SideBar/CardLayout';
 import CardExList from './CardList';
@@ -18,11 +18,36 @@ export default class CardDemo extends React.PureComponent {
             layout: '234',
         };
         this.onChange = this.onChange.bind(this);
+        this.onOpenWindow = this.onOpenWindow.bind(this);
     }
 
     onChange(sb_value) {
         this.setState({
             layout: sb_value,
+        });
+    }
+    onOpenWindow(key) {
+        CWindow.open({
+            offset: {
+                top: '10%',
+                bottom: '10px',
+                left: '100px',
+            },
+            children: (
+                <div>
+                    <div className="www">
+                        <p>标题：{key}</p>
+                        <p>
+                            金额：1234567890-=qwertyuiop[]\asdfghjkl;’zxcvbnm,./1234567890-=qwertyuiop[]\asdfghjkl;’zxcvbnm,./1234567890-=qwertyuiop[]\asdfghjkl;’zxcvbnm,./1234567890qwertyuiop[]\asdfghjkl;’zxcvbnm,./
+                        </p>
+                        <div className="w1" />
+                        <div className="w2" />
+                        <div className="w3" />
+                        <div className="w4" />
+                    </div>
+                    <div className="w1" />
+                </div>
+            ),
         });
     }
 
@@ -43,15 +68,17 @@ export default class CardDemo extends React.PureComponent {
                     className="show-drawer"
                     ext={
                         <div>
-                            <CIconButton icon="svg-m-home" />
-                            <CIconButton icon="svg-m-dashboard" />
                             <CIconButton
-                                icon="svg-m-share"
-                                color="secondary"
+                                icon="svg-m-home"
+                                onClick={() => {
+                                    this.onOpenWindow('1233');
+                                }}
                             />
+                            <CIconButton icon="svg-m-dashboard" />
+                            <CIconButton icon="svg-m-share" color="secondary" />
                             <CIconButton icon="svg-m-android" />
                             <CIconButton
-                                icon="svg-m-playlist_add"
+                                icon="svg-m-favorite_border"
                                 color="primary"
                             />
                         </div>

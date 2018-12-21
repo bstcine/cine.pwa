@@ -18,8 +18,7 @@ const Icon = ({ className, children, onClick }) => {
                 onClick={onClick}
             />
         );
-    }
-    if (children.indexOf('svg-') === 0) {
+    } else if (children.indexOf('svg-') === 0) {
         let svgTag = require('./svg/' + children.substr(4) + '.svg');
         return (
             <i

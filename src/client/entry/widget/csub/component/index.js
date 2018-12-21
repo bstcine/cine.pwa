@@ -89,7 +89,7 @@ export default class SubPage extends React.Component {
 
     async interArd() {
         alert('android interaction');
-        if (interSiteCodeUtil.inAndroidAPP()) {
+        if (interSiteCodeUtil.inAndroidH5()) {
             alert('send');
             await Bridge.android(BRIDGE_EVENT.OPEN_LESSON_PLAY_WINDOW, {
                 cid: '42',

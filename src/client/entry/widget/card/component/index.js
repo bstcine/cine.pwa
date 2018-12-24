@@ -9,6 +9,7 @@ import {
 } from '@/component/_base';
 import { SideBarCard } from '@/component/SideBar/CardLayout';
 import CardExList from './CardList';
+import uaUtil from '@/util/_base/uaUtil';
 
 export default class CardDemo extends React.PureComponent {
     constructor(props) {
@@ -27,12 +28,19 @@ export default class CardDemo extends React.PureComponent {
         });
     }
     onOpenWindow(key) {
+        const offset = uaUtil.mobile()
+            ? {
+                  top: '10%',
+                  bottom: '0px',
+              }
+            : {
+                  top: '10%',
+                  bottom: '10px',
+                  left: '100px',
+              };
+        console.log('offset',offset);
         CWindow.open({
-            offset: {
-                top: '10%',
-                bottom: '10px',
-                left: '100px',
-            },
+            offset,
             children: (
                 <div>
                     <div className="www">

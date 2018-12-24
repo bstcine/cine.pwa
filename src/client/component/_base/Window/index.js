@@ -27,11 +27,13 @@ class Window extends Component {
             offset = {},
         } = this.props;
         if (!isOpen) return null;
-        const style = {
-            transform: 'translateX(-50%) translateX(150px)',
-        };
-        if (offset.left)
+        const style = {};
+        if (offset.left) {
             style.transform = `translateX(-50%) translateX(${offset.left})`;
+            style.width = `calc(18.8rem - ${offset.left} * 2)`;
+            style.left = '50%';
+        }
+
         if (offset.top) style.top = offset.top;
         if (offset.bottom) style.bottom = offset.bottom;
         return (

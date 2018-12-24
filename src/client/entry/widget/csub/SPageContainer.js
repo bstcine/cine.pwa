@@ -3,10 +3,14 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import subPageAction from '@/action/subPageAction';
 import SubPage from '@/entry/widget/csub/component';
+import { interEventEmitter } from '@/util/_base/interEventEmitter';
+import { CMessage } from '@/component/_base';
 
 class SP_FJYDContainer extends Component {
     componentDidMount() {
-        // this.props.actions.initData("fjyd");
+        interEventEmitter.on('android_call_h5_test', data => {
+            CMessage.info(JSON.stringify(data));
+        });
     }
 
     render() {

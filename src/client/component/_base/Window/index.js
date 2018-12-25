@@ -36,11 +36,11 @@ class Window extends Component {
         this.fixedBody();
     }
 
-    onClick(e){
+    onClick(e) {
         const currentEle = e.target;
-        const mainEle = this.mainRef.current
-        if(currentEle === mainEle || mainEle.contains(currentEle)) return;
-        this.props.close()
+        const mainEle = this.mainRef.current;
+        if (currentEle === mainEle || mainEle.contains(currentEle)) return;
+        this.props.close();
     }
 
     fixedBody() {
@@ -63,6 +63,7 @@ class Window extends Component {
             isOpen,
             maskCloseable = true,
             close,
+            href,
             offset = {},
         } = this.props;
         if (!isOpen) return null;
@@ -91,7 +92,11 @@ class Window extends Component {
                         style={style}
                         ref={this.mainRef}
                     >
-                        {children}
+                        {href ? (
+                            <iframe src={href} frameBorder="0" />
+                        ) : (
+                            children
+                        )}
                     </div>
                 </div>
             </>

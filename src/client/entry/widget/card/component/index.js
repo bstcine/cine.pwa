@@ -41,6 +41,7 @@ export default class CardDemo extends React.PureComponent {
         console.log('offset',offset);
         CWindow.open({
             offset,
+            href:'/content/course?cid=42',
             children: (
                 <div>
                     <div className="www">

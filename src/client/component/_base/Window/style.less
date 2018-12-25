@@ -1,17 +1,36 @@
 @import '../style';
-
-.@{window}__main {
+.@{window} {
     position: fixed;
-    //width: 18.8rem;
     top: 0;
     bottom: 0;
     left: 0;
     right: 0;
+    -webkit-overflow-scrolling: touch;
+    overflow-x: hidden;
+    overflow-y: auto;
+    z-index: 2001;
+}
+.@{window}__main {
+    //position: fixed;
+    ////width: 18.8rem;
+    //top: 0;
+    //bottom: 0;
+    //left: 0;
+    //right: 0;
     //width: 100%;
     //left: 50%;
     //transform: translateX(-50%) translateX(50px);
     background-color: #fff;
-    z-index: 2001;
-    overflow: auto;
-    -webkit-overflow-scrolling: touch;
+    //z-index: 2001;
+    //overflow: auto;
+    //-webkit-overflow-scrolling: touch;
+    //position: absolute;
+    position: absolute;
+    margin: 0 auto;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.@{window}--open {
+    overflow: hidden;
 }

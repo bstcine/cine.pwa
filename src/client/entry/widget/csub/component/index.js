@@ -6,9 +6,9 @@ import interSiteCodeUtil from '@/util/_base/interSiteCodeUtil';
 import Bridge from '@/util/_base/interBridge';
 import BRIDGE_EVENT from '@/constant/bridgeEvent';
 import authUtil from '@/util/authUtil';
-import { getParam, removeParam } from "@/util/_base/urlUtil";
-import shareUtil from "@/util/_base/shareUtil";
-import errorMsg from "@/util/errorMsg";
+import { getParam, removeParam } from '@/util/_base/urlUtil';
+import shareUtil from '@/util/_base/shareUtil';
+import errorMsg from '@/util/errorMsg';
 
 export default class SubPage extends React.Component {
     constructor(props) {
@@ -22,24 +22,24 @@ export default class SubPage extends React.Component {
     }
 
     componentDidMount() {
-        this.wxInit();
+        this.wechatInit();
     }
 
     onChangeFromSB(sb_value) {
         switch (sb_value) {
-            case 'course':
+            case 'wechat':
                 this.wechatShare();
                 break;
-            case 'teacher':
-                this.interArd();
+            case 'android':
+                this.interAndroid();
                 break;
-            case 'comment':
+            case 'ios':
                 this.interIOS();
                 break;
-            case 'article':
+            case 'login':
                 authUtil.login();
                 break;
-            case 'resource':
+            case 'window':
                 this.openCWindow(sb_value);
                 break;
         }
@@ -47,8 +47,8 @@ export default class SubPage extends React.Component {
 
     async wechatShare() {
         let [err, result] = await shareUtil.createShareLog({
-            type:4,
-            cid:42,
+            type: 4,
+            cid: 42,
         });
         if (err) return alert(errorMsg(err));
         let {
@@ -68,7 +68,7 @@ export default class SubPage extends React.Component {
         await shareUtil.share(share_params);
     }
 
-    async wxInit() {
+    async wechatInit() {
         try {
             await shareUtil.init();
             let { sharelog_id } = getParam();
@@ -113,13 +113,19 @@ export default class SubPage extends React.Component {
         }
     }
 
-    async interArd() {
+    async interAndroid() {
         if (interSiteCodeUtil.inAndroidH5()) {
             alert('H5 Show: Interaction Kotlin From H5');
-            await Bridge.android(BRIDGE_EVENT.OPEN_LESSON_PLAY_WINDOW, {
-                cid: '42',
-            });
-            alert('H5 Show: Done');
+
+            let res = await Bridge.android(
+                BRIDGE_EVENT.OPEN_LESSON_PLAY_WINDOW,
+                {
+                    cid: '42',
+                    title: 20181225102,
+                }
+            );
+
+            alert('H5 Invoke Android Result:' + JSON.stringify(res));
         }
     }
 

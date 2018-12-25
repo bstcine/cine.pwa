@@ -34,30 +34,37 @@ export default class CardDemo extends React.PureComponent {
                   bottom: '0px',
               }
             : {
-                  top: '10%',
+                  top: '5%',
                   bottom: '10px',
                   left: '100px',
               };
-        console.log('offset',offset);
-        CWindow.open({
-            offset,
-            href:'/content/course?cid=42',
-            children: (
-                <div>
-                    <div className="www">
-                        <p>标题：{key}</p>
-                        <p>
-                            金额：1234567890-=qwertyuiop[]\asdfghjkl;’zxcvbnm,./1234567890-=qwertyuiop[]\asdfghjkl;’zxcvbnm,./1234567890-=qwertyuiop[]\asdfghjkl;’zxcvbnm,./1234567890qwertyuiop[]\asdfghjkl;’zxcvbnm,./
-                        </p>
+        console.log('offset', offset);
+
+        if (key === '0') {
+            CWindow.open({
+                offset,
+                href: '/content/course?cid=42',
+            });
+        } else {
+            CWindow.open({
+                offset,
+                children: (
+                    <div>
+                        <div className="www">
+                            <p>标题：{key}</p>
+                            <p>
+                                金额：1234567890-=qwertyuiop[]\asdfghjkl;’zxcvbnm,./1234567890-=qwertyuiop[]\asdfghjkl;’zxcvbnm,./1234567890-=qwertyuiop[]\asdfghjkl;’zxcvbnm,./1234567890qwertyuiop[]\asdfghjkl;’zxcvbnm,./
+                            </p>
+                            <div className="w1" />
+                            <div className="w2" />
+                            <div className="w3" />
+                            <div className="w4" />
+                        </div>
                         <div className="w1" />
-                        <div className="w2" />
-                        <div className="w3" />
-                        <div className="w4" />
                     </div>
-                    <div className="w1" />
-                </div>
-            ),
-        });
+                ),
+            });
+        }
     }
 
     render() {
@@ -80,15 +87,20 @@ export default class CardDemo extends React.PureComponent {
                             <CIconButton
                                 icon="svg-m-home"
                                 onClick={() => {
-                                    this.onOpenWindow('1233');
+                                    this.onOpenWindow('0');
                                 }}
                             />
-                            <CIconButton icon="svg-m-dashboard" />
-                            <CIconButton icon="svg-m-share" color="secondary" />
-                            <CIconButton icon="svg-m-android" />
                             <CIconButton
-                                icon="svg-m-favorite_border"
-                                color="primary"
+                                icon="svg-m-dashboard"
+                                onClick={() => {
+                                    this.onOpenWindow('1');
+                                }}
+                            />
+                            <CIconButton icon="svg-m-share" />
+                            <CIconButton icon="svg-m-android" color="primary" />
+                            <CIconButton
+                                icon="svg-m-favorite"
+                                color="secondary"
                             />
                         </div>
                     }

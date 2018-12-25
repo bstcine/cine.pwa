@@ -33,11 +33,11 @@ class SideBarPWAH5 extends Component {
                 onChange={this.onChange}
                 layout={this.props.layout}
             >
-                <CNavItem label="微信分享" value="course" />
-                <CNavItem label="安卓交互" value="teacher" />
-                <CNavItem label="苹果交互" value="comment" />
-                <CNavItem label="用户登入" value="article" />
-                <CNavItem label="显示Wind" value="resource" />
+                <CNavItem label="微信分享" value="wechat" />
+                <CNavItem label="安卓交互" value="android" />
+                <CNavItem label="苹果交互" value="ios" />
+                <CNavItem label="用户登入" value="login" />
+                <CNavItem label="显示Wind" value="window" />
             </CNavigation>
         );
     }

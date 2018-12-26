@@ -60,7 +60,7 @@ export default class CardDemo extends React.PureComponent {
                             <div className="w3" />
                             <div className="w4" />
                         </div>
-                        <div className="w1" />
+                        <div className="w5" />
                     </div>
                 ),
             });

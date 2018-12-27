@@ -49,7 +49,7 @@ module.exports = {
             SERVICE_URL: JSON.stringify(SERVICE_URL),
             MODE: JSON.stringify(mode),
         }),
-        new CleanWebpackPlugin(['build']),
+        new CleanWebpackPlugin(['build'], { verbose: false }),
         new MiniCssExtractPlugin({
             filename: 'entry/[name]/index.[contenthash:8].css',
         }),

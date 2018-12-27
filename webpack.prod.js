@@ -2,7 +2,6 @@ const path = require('path');
 const merge = require('webpack-merge');
 const common = require('./webpack.common.js');
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
-const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
     .BundleAnalyzerPlugin;
 const WebpackServiceWorkerPlugin = require('./plugins/webpackServiceWorkerPlugin');
@@ -54,7 +53,6 @@ module.exports = merge(common, {
         ],
     },
     plugins: [
-        new LodashModuleReplacementPlugin(),
         new WebpackServiceWorkerPlugin({
             name: 'sw-learn.js',
             path: path.join(__dirname, 'build'),
@@ -63,6 +61,6 @@ module.exports = merge(common, {
             name: 'sw-widget.js',
             path: path.join(__dirname, 'build'),
         }),
-        // new BundleAnalyzerPlugin({ analyzerMode: 'static' }),
+        new BundleAnalyzerPlugin({ analyzerMode: 'static' }),
     ],
 });

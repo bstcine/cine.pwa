@@ -13,7 +13,6 @@ import {
     CAlert,
     CWindow,
 } from '@/component/_base';
-import Player from '@/component/Player';
 import authUtil from '@/util/authUtil';
 import QRHelp from '@/component/QRHelp';
 import ShareMask from '@/component/ShareMask';

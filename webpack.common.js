@@ -12,29 +12,16 @@ const SERVICE_URL = null;
 const publicPath = '/'; // for cdn
 const pages = [
     // ----core----
-    'content',
-    'user',
-    'learn',
-    'auth',
 
     // ----widget----
     'widget',
-
-    'cquiz',
-    'address',
-    'temp',
-    'quizvocab',
-    'lword',
-    'quiz',
-    'mentor',
-    'csub',
 ];
 
 let entry = {};
 let htmlWebpackPlugins = [];
 
 pages.forEach(page => {
-    entry[page] = ['@babel/polyfill', `./src/client/entry/${page}/index.js`];
+    entry[page] = `./src/client/entry/${page}/index.js`;
     htmlWebpackPlugins.push(
         new HtmlWebpackPlugin({
             filename: `entry/${page}/index.html`,
@@ -76,9 +63,8 @@ module.exports = {
             {
                 test: /\.js$/,
                 loader: 'babel-loader',
-                options: {
-                    presets: ['@babel/preset-env'],
-                },
+                exclude: /node_modules/,
+                sideEffects: false,
             },
             {
                 test: /\.less$/,
@@ -138,7 +124,7 @@ module.exports = {
             },
             {
                 test: /svg\/.+\.svg$/,
-                loader: 'svg-inline-loader'
+                loader: 'svg-inline-loader',
             },
         ],
     },

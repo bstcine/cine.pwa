@@ -147,7 +147,6 @@ class Container extends Component {
                         开始
                     </CFloatingButton>
                     <CFloatingButton icon="pets" color="secondary" />
-                    <Player src={this.loadMedia} />
                 </CPanel>
                 <CPanel title="CButton" className="widget_btn">
                     <div>
@@ -498,7 +497,7 @@ class Container extends Component {
                         color="primary"
                         onClick={() => {
                             CMessage.success('完成', () => {
-                                console.success('完成关闭了');
+                                console.info('完成关闭了');
                             });
                         }}
                     >

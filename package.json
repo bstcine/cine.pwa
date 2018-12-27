@@ -11,6 +11,8 @@
         "dev": "NODE_ENV=development webpack --config webpack.dev.js",
         "prod":
             "NODE_ENV=production webpack --progress --config webpack.prod.js",
+        "static":
+            "NODE_ENV=development NODE_MODE=static webpack --progress --config webpack.dev.js",
         "dev2web": "./build2web.sh dev",
         "prod2web": "./build2web.sh prod"
     },

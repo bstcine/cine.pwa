@@ -3,7 +3,6 @@ import Dialog from 'material-ui/Dialog';
 import DatePicker from 'material-ui/DatePicker';
 import FlatButton from 'material-ui/FlatButton';
 import TextField from 'material-ui/TextField';
-import { CSelectField } from './SelectField';
 import Button, { IconButton, FloatingButton } from './Button';
 import Panel from './Panel';
 import Icon from './Icon';
@@ -44,7 +43,6 @@ export {
     CardContainer as CCardContainer,
     Card as CCard,
     Drawer as CDrawer,
-    CSelectField as CSelect,
     Icon as CIcon,
     Alert as CAlert,
     Modal as CModal,

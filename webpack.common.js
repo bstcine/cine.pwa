@@ -3,7 +3,6 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-
 const devMode = process.env.NODE_ENV !== 'production';
 const mode = process.env.NODE_MODE;
 console.log('process.env.NODE_MODE',process.env.NODE_MODE);
@@ -75,9 +74,6 @@ module.exports = {
                     devMode ? 'style-loader' : MiniCssExtractPlugin.loader,
                     {
                         loader: 'css-loader',
-                        options: {
-                            minimize: !devMode,
-                        },
                     },
                     {
                         loader: 'postcss-loader',

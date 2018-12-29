@@ -1,9 +1,10 @@
 const path = require('path');
 const merge = require('webpack-merge');
 const common = require('./webpack.common.js');
-const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
     .BundleAnalyzerPlugin;
+const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const WebpackServiceWorkerPlugin = require('./plugins/webpackServiceWorkerPlugin');
 
 const entrys = Object.keys(common.entry);
@@ -32,17 +33,14 @@ module.exports = merge(common, {
             },
         },
         minimizer: [
-            new UglifyJSPlugin({
+            new TerserPlugin({
                 parallel: true,
                 sourceMap: true,
-                uglifyOptions: {
+                terserOptions: {
                     compress: {
                         warnings: false,
                         comparisons: false,
                         drop_console: true,
-                    },
-                    mangle: {
-                        safari10: true,
                     },
                     output: {
                         comments: false,
@@ -50,13 +48,10 @@ module.exports = merge(common, {
                     },
                 },
             }),
+            new OptimizeCSSAssetsPlugin({})
         ],
     },
     plugins: [
-        new WebpackServiceWorkerPlugin({
-            name: 'sw-learn.js',
-            path: path.join(__dirname, 'build'),
-        }),
         new WebpackServiceWorkerPlugin({
             name: 'sw-widget.js',
             path: path.join(__dirname, 'build'),

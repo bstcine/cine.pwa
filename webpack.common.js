@@ -86,9 +86,6 @@ module.exports = {
                     devMode ? 'style-loader' : MiniCssExtractPlugin.loader,
                     {
                         loader: 'css-loader',
-                        options: {
-                            minimize: !devMode,
-                        },
                     },
                     {
                         loader: 'postcss-loader',

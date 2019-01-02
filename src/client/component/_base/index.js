@@ -1,8 +1,3 @@
-import React from 'react';
-import Dialog from 'material-ui/Dialog';
-import DatePicker from 'material-ui/DatePicker';
-import FlatButton from 'material-ui/FlatButton';
-import TextField from 'material-ui/TextField';
 import Button, { IconButton, FloatingButton } from './Button';
 import Panel from './Panel';
 import Icon from './Icon';
@@ -14,28 +9,8 @@ import Window from './Window';
 import Card, { CardContainer } from './Card';
 import { Navigation, NavItem } from './Navigation';
 
-const CFlatButton = props => {
-    return <FlatButton {...props} />;
-};
-
-const CDatePicker = ({ defaultValue, label, onChange }) => {
-    return (
-        <DatePicker
-            defaultDate={defaultValue}
-            hintText={label}
-            locale="en-US"
-            autoOk={true}
-            firstDayOfWeek={0}
-            onChange={onChange}
-        />
-    );
-};
 
 export {
-    Dialog as CDialog,
-    CDatePicker,
-    CFlatButton,
-    TextField as CTextField,
     Button as CButton,
     IconButton as CIconButton,
     FloatingButton as CFloatingButton,

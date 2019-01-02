@@ -43,7 +43,7 @@ export default class CardDemo extends React.PureComponent {
         if (key === '0') {
             CWindow.open({
                 offset,
-                href: '/content/course?cid=42',
+                href: '//dev.bstcine.com/content/course?cid=42&sitecode=cine.ios',
             });
         } else {
             CWindow.open({

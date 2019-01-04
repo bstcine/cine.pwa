@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux';
 import { wordAction } from '@/action/wordAction';
 import WordList from '../component/WordList';
 import { getParam } from '@/util/_base/urlUtil';
+import { GLayoutContainer } from '@/g/container';
 
 class WordListContainer extends Component {
     playAudio = audioSrc => {
@@ -32,14 +33,16 @@ class WordListContainer extends Component {
         let { result, currentRows, isShowAll, actions } = this.props;
 
         return (
-            <WordList
-                vocabularyList={currentRows}
-                name={result.name}
-                isShowAll={isShowAll}
-                actions={actions}
-                playAction={this.playAudio}
-                param={this.param}
-            />
+            <GLayoutContainer>
+                <WordList
+                    vocabularyList={currentRows}
+                    name={result.name}
+                    isShowAll={isShowAll}
+                    actions={actions}
+                    playAction={this.playAudio}
+                    param={this.param}
+                />
+            </GLayoutContainer>
         );
     }
 }

@@ -1,16 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { getParam } from '@/util/_base/urlUtil';
 
 import Entry from '@/component/Entry';
-import Index from './component/Index';
-
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { grey400, indigo500, indigo700 } from 'material-ui/styles/colors';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 
 import './asset/style/index.less';
+import { GRouter } from '@/g/component';
+import routes from './routes';
 
 class Address extends Entry {
     constructor(props) {
@@ -31,13 +30,11 @@ class Address extends Entry {
         });
 
         return (
-            <Router basename="/address">
-                <MuiThemeProvider muiTheme={muiTheme}>
-                    <div className="address-main">
-                        <Route exact path="/" component={Index} />
-                    </div>
-                </MuiThemeProvider>
-            </Router>
+            <MuiThemeProvider muiTheme={muiTheme}>
+                <div className="address-main">
+                    <GRouter routes={routes} />;
+                </div>
+            </MuiThemeProvider>
         );
     }
 }

@@ -7,6 +7,7 @@ import { bindActionCreators } from 'redux';
 import { wordAction } from '@/action/wordAction';
 import Word from '../component/Word';
 import { getParam, addParam } from '@/util/_base/urlUtil';
+import { GLayoutContainer } from '@/g/container';
 
 class WordContainer extends Component {
     constructor(props) {
@@ -35,18 +36,22 @@ class WordContainer extends Component {
 
     render() {
         let { result, actions } = this.props;
+        console.log(1111);
+
         return (
-            <Word
-                param={this.param}
-                result={result}
-                actions={actions}
-                quizAction={() => {
-                    this.gotoTest();
-                }}
-                listAction={() => {
-                    this.gotoList();
-                }}
-            />
+            <GLayoutContainer>
+                <Word
+                    param={this.param}
+                    result={result}
+                    actions={actions}
+                    quizAction={() => {
+                        this.gotoTest();
+                    }}
+                    listAction={() => {
+                        this.gotoList();
+                    }}
+                />
+            </GLayoutContainer>
         );
     }
 }

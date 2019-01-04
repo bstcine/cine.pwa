@@ -1,6 +1,6 @@
 import React from 'react';
 import Entry from '@/component/Entry';
-import Layout  from './../component/Layout';
+import Layout from './../component/Layout';
 import { getLastPath } from '@/util/_base/urlUtil';
 import * as banner from '@/service/data/response_sp_banner.json';
 
@@ -8,7 +8,11 @@ class CSubRoot extends Entry {
     constructor(props) {
         super(props);
         let lastPath = getLastPath();
-        if (lastPath !== 'zxss' && lastPath !== 'tfsat' && lastPath !== 'fjyd') {
+        if (
+            lastPath !== 'zxss' &&
+            lastPath !== 'tfsat' &&
+            lastPath !== 'fjyd'
+        ) {
             lastPath = 'zxss';
         }
         let bannerRes = banner['result'][lastPath];
@@ -16,11 +20,12 @@ class CSubRoot extends Entry {
         this.bannerLink = bannerRes[0]['link'];
     }
     render() {
-        const { routes } = this.props;
-        return <Layout
-                   imageUrl={this.bannerImage}
-                   link={this.bannerLink}
-               >{routes}</Layout>;
+        const { children } = this.props;
+        return (
+            <Layout imageUrl={this.bannerImage} link={this.bannerLink}>
+                {children}
+            </Layout>
+        );
     }
 }
 

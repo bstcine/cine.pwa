@@ -6,7 +6,8 @@ import thunk from 'redux-thunk';
 import { reduxLogger } from '@/util/loggerUtil';
 
 import rootReducer from './reducer';
-import { MentorRouter } from './mentorRouter';
+import routes from "./routes";
+import { GRouter } from "@/g/component";
 
 const preloadedState = window.__PRELOADED_STATE__;
 const store = createStore(
@@ -19,7 +20,7 @@ class Mentor extends Component {
     render() {
         return (
             <Provider store={store}>
-                <MentorRouter />
+                <GRouter routes={routes} />
             </Provider>
         );
     }

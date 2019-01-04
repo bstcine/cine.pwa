@@ -1,5 +1,4 @@
 import React from 'react';
-import { addParam } from '@/util/_base/urlUtil';
 
 const LayoutBanner = ({ isShow, imageUrl, link }) => {
     if (!isShow) return <div />;

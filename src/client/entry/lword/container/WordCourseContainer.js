@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux';
 import { wCourseAction } from '@/action/wCourseAction';
 import { getParam } from '@/util/_base/urlUtil';
 import WordCourse from './../component/wordCourse';
+import { GLayoutContainer } from "@/g/container";
 
 class WordCourseContainer extends Component {
     constructor(props) {
@@ -22,15 +23,16 @@ class WordCourseContainer extends Component {
         const course_id = this.param.start_index
             ? `${this.param.start_index}-${this.param.range}`
             : '1-10000';
+        console.log('1111');
         return (
-            <React.Fragment>
+            <GLayoutContainer>
                 <WordCourse
                     lessons={lessons}
                     lastVisitID={lastVisitID}
                     courseID={course_id}
                     actions={actions}
                 />
-            </React.Fragment>
+            </GLayoutContainer>
         );
     }
 }

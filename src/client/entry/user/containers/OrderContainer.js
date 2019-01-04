@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { actionUserOrder } from '@/action/uOrderAction';
 import Order from '@/entry/user/component/order';
+import { GLayoutContainer } from "@/g/container";
 
 class OrderContainer extends Component {
     componentDidMount() {
@@ -12,13 +13,13 @@ class OrderContainer extends Component {
     render() {
         let { orders, isOpenDetail, actions } = this.props;
         return (
-            <React.Fragment>
+            <GLayoutContainer>
                 <Order
                     isOpenDetail={isOpenDetail}
                     orders={orders}
                     actions={actions}
                 />
-            </React.Fragment>
+            </GLayoutContainer>
         );
     }
 }

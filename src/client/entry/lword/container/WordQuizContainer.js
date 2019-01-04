@@ -9,6 +9,7 @@ import { wQuizAction } from '@/action/wQuizAction';
 import WordQuiz from '../component/WordQuiz';
 import CThemeProvider from '@/component/CThemeProvider';
 import { CFlatButton, CDialog } from '@/component/_base';
+import { GLayoutContainer } from "@/g/container";
 // import { Toast } from '@/component/Toast';
 
 class WordQuizContainer extends Component {
@@ -69,7 +70,7 @@ class WordQuizContainer extends Component {
         }
         return (
             <CThemeProvider>
-                <React.Fragment>
+                 <GLayoutContainer>
                     <WordQuiz
                         param={this.param}
                         name={name}
@@ -87,7 +88,7 @@ class WordQuizContainer extends Component {
                         open={isDone === true || isDone === false}
                         onRequestClose={this.dialogAction}
                     />
-                </React.Fragment>
+                </GLayoutContainer>
             </CThemeProvider>
         );
     }

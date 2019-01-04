@@ -5,14 +5,15 @@ import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import reducer from './reducers';
 import CThemeProvider from '@/component/CThemeProvider';
-import { UserRouter } from './userRouter';
+import routes from './routes';
+import { GRouter } from '@/g/component';
 
 const store = createStore(reducer, applyMiddleware(thunk));
 
 render(
     <CThemeProvider>
         <Provider store={store}>
-            <UserRouter />
+            <GRouter routes={routes} />
         </Provider>
     </CThemeProvider>,
     document.getElementById('root')

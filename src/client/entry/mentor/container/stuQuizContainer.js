@@ -3,9 +3,9 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-// import { Toast } from '@/component/Toast';
 import * as mentorAction from '@/action/mentorAction';
 import StuQuizTable from '../component/StuQuiz/StuQuizTable';
+import { GLayoutContainer } from '@/g/container';
 
 class StuQuizContainer extends Component {
     componentDidMount() {
@@ -24,20 +24,20 @@ class StuQuizContainer extends Component {
         const { mentorStudentQuizWord } = this.props;
 
         return (
-            <div className="mentor-container quiz">
-                {/* <Toast network={toastRedu} /> */}
-                <StuQuizTable
-                    list={mentorStudentQuizWord}
-                    wordsItemClick={this.wordsItemClick}
-                    quizItemClick={this.quizItemClick}
-                />
-            </div>
+            <GLayoutContainer>
+                <div className="mentor-container quiz">
+                    <StuQuizTable
+                        list={mentorStudentQuizWord}
+                        wordsItemClick={this.wordsItemClick}
+                        quizItemClick={this.quizItemClick}
+                    />
+                </div>
+            </GLayoutContainer>
         );
     }
 }
 
 const mapStateToProps = state => ({
-    // toastRedu: state.toastRedu,
     mentorStudentQuizWord: state.mentorStudentQuizWord,
 });
 

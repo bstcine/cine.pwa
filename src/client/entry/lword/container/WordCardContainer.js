@@ -8,6 +8,7 @@ import { wCardAction } from '@/action/wCardAction';
 import { getParam, addParam } from '@/util/_base/urlUtil';
 import WordCard from '../component/WordCard';
 import interSiteCodeUtil from '@/util/_base/interSiteCodeUtil';
+import { GLayoutContainer } from '@/g/container';
 
 class WordCardContainer extends Component {
     constructor(props) {
@@ -129,19 +130,21 @@ class WordCardContainer extends Component {
             actions,
         } = this.props;
         return (
-            <WordCard
-                param={this.param}
-                result={result}
-                currentIndex={currentIndex}
-                lastZh={lastZh}
-                isAutoChangeWord={isAutoChangeWord}
-                isReviseChangeWord={isReviseChangeWord}
-                isBack={isBack}
-                isKnown={isKnown}
-                actions={actions}
-                backAction={this.backLearnHome}
-                quizAction={this.gotoTest}
-            />
+            <GLayoutContainer>
+                <WordCard
+                    param={this.param}
+                    result={result}
+                    currentIndex={currentIndex}
+                    lastZh={lastZh}
+                    isAutoChangeWord={isAutoChangeWord}
+                    isReviseChangeWord={isReviseChangeWord}
+                    isBack={isBack}
+                    isKnown={isKnown}
+                    actions={actions}
+                    backAction={this.backLearnHome}
+                    quizAction={this.gotoTest}
+                />
+            </GLayoutContainer>
         );
     }
 }

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import './style.less';
 import { CButton, CMessage } from '@/component/_base';
 import { getParam } from '@/util/_base/urlUtil';
 import { fetchData } from '@/service/base';

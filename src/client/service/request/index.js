@@ -25,7 +25,7 @@ axios.interceptors.request.use(
             }
         }
         if (window.API_Host_URL) {
-            config.url = window.API_Host_URL + '/' + config.url;
+            config.url = window.API_Host_URL + config.url;
         }
         return config;
     },

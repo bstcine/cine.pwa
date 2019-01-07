@@ -1,9 +1,16 @@
 import React from 'react';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { BrowserRouter, HashRouter, Route } from 'react-router-dom';
 import storeUtil from '@/util/_base/storeUtil';
 
+const RRDRouter = ({ children }) => {
+    return MODE === 'static' ? (
+        <HashRouter>{children}</HashRouter>
+    ) : (
+        <BrowserRouter>{children}</BrowserRouter>
+    );
+};
+
 const Routes = ({ routes }) => {
-    console.log('render');
     return routes.map(item => (
         <Route
             exact={!!item.exact}
@@ -12,7 +19,8 @@ const Routes = ({ routes }) => {
             render={props => {
                 if (item.checkAuth && !storeUtil.getToken()) {
                     location.replace(
-                        '/auth/signin?redirect=' + encodeURIComponent(location.href)
+                        '/auth/signin?redirect=' +
+                            encodeURIComponent(location.href)
                     );
                     return <div key={item.path} />;
                 } else {
@@ -26,11 +34,11 @@ const Routes = ({ routes }) => {
 
 const Router = ({ routes }) => {
     return (
-        <BrowserRouter>
+        <RRDRouter>
             <React.Fragment>
                 <Routes routes={routes} />
             </React.Fragment>
-        </BrowserRouter>
+        </RRDRouter>
     );
 };
 

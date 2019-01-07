@@ -5,6 +5,7 @@ import subPageAction from '@/action/subPageAction';
 import SubPage from '@/entry/widget/csub/component';
 import { interEventEmitter } from '@/util/_base/interEventEmitter';
 import { CMessage } from '@/component/_base';
+import { GLayoutContainer } from '@/g/container';
 
 class SP_FJYDContainer extends Component {
     componentDidMount() {
@@ -16,16 +17,18 @@ class SP_FJYDContainer extends Component {
     render() {
         let { courses, teachers, articles, comments, resources } = this.props;
         return (
-            <SubPage
-                isCourse={true}
-                isMentor={true}
-                courses={courses}
-                teachers={teachers}
-                comments={comments}
-                articles={articles}
-                resources={resources}
-                layout="sec"
-            />
+            <GLayoutContainer>
+                <SubPage
+                    isCourse={true}
+                    isMentor={true}
+                    courses={courses}
+                    teachers={teachers}
+                    comments={comments}
+                    articles={articles}
+                    resources={resources}
+                    layout="sec"
+                />
+            </GLayoutContainer>
         );
     }
 }

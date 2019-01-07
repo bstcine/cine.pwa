@@ -3,7 +3,7 @@ import { BrowserRouter, HashRouter, Route } from 'react-router-dom';
 import storeUtil from '@/util/_base/storeUtil';
 
 const RRDRouter = ({ children }) => {
-    return MODE === 'static' ? (
+    return window.MODE === 'static' ? (
         <HashRouter>{children}</HashRouter>
     ) : (
         <BrowserRouter>{children}</BrowserRouter>

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
@@ -8,6 +8,7 @@ import { reduxLogger } from '@/util/loggerUtil';
 const store = createStore(rootReducer, applyMiddleware(thunk, reduxLogger));
 import routes from './routes';
 import { GRouter } from '@/g/component';
+import Entry from "@/component/Entry";
 
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', function() {
@@ -27,7 +28,7 @@ if ('serviceWorker' in navigator) {
     });
 }
 
-class Widget extends Component {
+class Widget extends Entry {
     render() {
         return (
             <Provider store={store}>

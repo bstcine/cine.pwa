@@ -8,6 +8,7 @@ import { reduxLogger } from '@/util/loggerUtil';
 import rootReducer from './reducer';
 import routes from "./routes";
 import { GRouter } from "@/g/component";
+import Entry from "@/component/Entry";
 
 const preloadedState = window.__PRELOADED_STATE__;
 const store = createStore(
@@ -16,7 +17,7 @@ const store = createStore(
     applyMiddleware(thunk, reduxLogger)
 );
 
-class Mentor extends Component {
+class Mentor extends Entry {
     render() {
         return (
             <Provider store={store}>

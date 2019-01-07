@@ -10,7 +10,7 @@ console.log('process.env.NODE_MODE',process.env.NODE_MODE);
 
 // *请统一使用 cnpm 下载安装依赖*，cnpm 和 npm 打出来的包 hash 不一致，造成缓存失效
 // 默认无需配置，需要指定 a.bstcine.com 下访问 b.bstcine.com 的时候才需要指定
-const SERVICE_URL = null;
+const SERVICE_URL = process.env.NODE_SERVICE_URL;
 const publicPath = mode === 'static' ? '.' : '/'; // for cdn
 const pages = [
     // ----core----

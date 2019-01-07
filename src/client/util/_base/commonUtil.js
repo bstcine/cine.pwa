@@ -77,6 +77,8 @@ const commonUtil = {
             return imgUrl;
         } else if (imgUrl.startsWith('http')) {
             return imgUrl;
+        } else if (location.protocol === 'file:') {
+            return `http://www.bstcine.com/f/${imgUrl}`;
         } else {
             return `//www.bstcine.com/f/${imgUrl}`;
         }

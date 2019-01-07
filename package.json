@@ -8,7 +8,7 @@
         "format": "prettier --config .prettierrc.js --write \"src/**/*.{js,jsx,css,less}\"",
         "dev": "NODE_ENV=development webpack --config webpack.dev.js",
         "prod": "NODE_ENV=production webpack --progress --config webpack.prod.js",
-        "static": "NODE_ENV=production NODE_MODE=static webpack --progress --config webpack.prod.js",
+        "static": "NODE_ENV=production NODE_MODE=static NODE_SERVICE_URL=\"http://dev.bstcine.com\" webpack --progress --config webpack.prod.js",
         "dev2web": "./build2web.sh dev",
         "prod2web": "./build2web.sh prod"
     },

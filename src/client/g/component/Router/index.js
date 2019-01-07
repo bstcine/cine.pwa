@@ -2,11 +2,11 @@ import React from 'react';
 import { BrowserRouter, HashRouter, Route } from 'react-router-dom';
 import storeUtil from '@/util/_base/storeUtil';
 
-const RRDRouter = ({ basename, children }) => {
-    return process.env.MODE === 'static' ? (
+const RRDRouter = ({ children }) => {
+    return MODE === 'static' ? (
         <HashRouter>{children}</HashRouter>
     ) : (
-        <BrowserRouter basename={basename}>{children}</BrowserRouter>
+        <BrowserRouter>{children}</BrowserRouter>
     );
 };
 

@@ -7,6 +7,7 @@ import rootReducer from './reducer';
 const store = createStore(rootReducer, applyMiddleware(thunk));
 import routes from './routes';
 import { GRouter } from '@/g/component';
+import Entry from "@/component/Entry";
 
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', function() {
@@ -26,7 +27,7 @@ if ('serviceWorker' in navigator) {
     });
 }
 
-class Widget extends Component {
+class Widget extends Entry {
     render() {
         return (
             <Provider store={store}>

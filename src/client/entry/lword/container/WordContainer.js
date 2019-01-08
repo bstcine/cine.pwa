@@ -8,6 +8,9 @@ import { wordAction } from '@/action/wordAction';
 import Word from '../component/Word';
 import { getParam, addParam } from '@/util/_base/urlUtil';
 import { GLayoutContainer } from '@/g/container';
+import interSiteCodeUtil from '@/util/_base/interSiteCodeUtil';
+import BRIDGE_EVENT from '@/constant/bridgeEvent';
+import Bridge from '@/util/_base/interBridge';
 
 class WordContainer extends Component {
     constructor(props) {
@@ -27,11 +30,29 @@ class WordContainer extends Component {
     }
     gotoTest() {
         let testHref = addParam('/lword/quiz', this.param);
-        location.href = testHref;
+        if (interSiteCodeUtil.inAndroidAPP()) {
+            Bridge.android(BRIDGE_EVENT.OPEN_BROWSER, {
+                url: testHref,
+                title: document.title,
+            }).then(res => {
+                console.log(res);
+            });
+        } else {
+            location.href = testHref;
+        }
     }
     gotoList() {
         let listHref = addParam('/lword/card', this.param);
-        location.href = listHref;
+        if (interSiteCodeUtil.inAndroidAPP()) {
+            Bridge.android(BRIDGE_EVENT.OPEN_BROWSER, {
+                url: listHref,
+                title: document.title,
+            }).then(res => {
+                console.log(res);
+            });
+        } else {
+            location.href = listHref;
+        }
     }
 
     render() {

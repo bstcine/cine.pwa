@@ -27,7 +27,7 @@ class WordBody extends React.PureComponent {
                         <p className="title">{unKnowCount}</p>
                         <p className="subTitle"> 个单词不认识</p>
                     </div>
-                    <div className="actionButton" onClick={listAction} target="_blank">
+                    <div className="actionButton" onClick={listAction}>
                         <p className="actionTitle">立即学习</p>
                     </div>
                 </div>
@@ -41,7 +41,6 @@ class WordBody extends React.PureComponent {
                         className="actionButton"
                         style={{ backgroundColor: '#ff9343' }}
                         onClick={quizAction}
-                        target="_blank"
                     >
                         <p className="actionTitle">立即测试</p>
                     </div>

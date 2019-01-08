@@ -19,7 +19,8 @@ class WordCourseContainer extends Component {
     componentDidMount() {
         this.props.actions.loadUserWordLearnAndQuiz(this.param);
         interEventEmitter.on(BRIDGE_EVENT.Pageshow, ()=>{
-            this.props.actions.initCourseLessons(this.param);
+            this.param = getParam();
+            this.props.actions.loadUserWordLearnAndQuiz(this.param);
         });
     }
 

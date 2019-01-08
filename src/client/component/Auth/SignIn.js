@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { CButton, CIcon, CMessage } from '@/component/_base';
 import authUtil from '@/util/authUtil';
-import { fetchData } from '@/service/base';
-import Api from '../../../APIConfig';
 import errorMsg from '@/util/errorMsg';
 import { getParam } from '@/util/_base/urlUtil';
 

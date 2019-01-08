@@ -27,12 +27,14 @@ class CAuth extends Component {
             onSignInSuccess,
             onSignUpSuccess,
             onResetPwdSuccess,
+            signInAction
         } = this.props;
         switch (type) {
             case 'signin':
                 return (
                     <CSignIn
                         toggle={this.toggle}
+                        action={signInAction}
                         onSuccess={() => {
                             // this.toggle('signin');
                             onSignInSuccess && onSignInSuccess(this);

@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { CButton, CIcon, CMessage } from '@/component/_base';
 import authUtil from '@/util/authUtil';
-import { fetchData } from '@/service/base';
-import Api from '../../../APIConfig';
 import errorMsg from '@/util/errorMsg';
 import { getParam } from '@/util/_base/urlUtil';
 
@@ -33,9 +31,9 @@ class SignIn extends Component {
 
     async submit() {
         const { phone, password } = this.state;
-        const { onSuccess } = this.props;
+        const { onSuccess, action } = this.props;
         this.setState({ submit_btn_disabled: true, submit_btn: '登录中' });
-        let [err] = await fetchData(Api.APIURL_Auth_SignIn, {
+        let [err] = await action({
             phone,
             password,
             school: this.school,

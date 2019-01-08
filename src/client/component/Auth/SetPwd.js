@@ -3,8 +3,8 @@ import { CButton, CIcon, CMessage } from '@/component/_base';
 import { fetchData } from '@/service/base';
 import { APIURL_Auth_Set_Password } from '../../../APIConfig';
 import errorMsg from '@/util/errorMsg';
-import { getParam } from '@/util/urlUtil';
-import checkUtil from '@/util/checkUtil';
+import { getParam } from '@/util/_base/urlUtil';
+import commonUtil from '@/util/_base/commonUtil';
 
 class SetPwd extends Component {
     constructor(props) {
@@ -31,7 +31,7 @@ class SetPwd extends Component {
 
     async submit() {
         const { password } = this.state;
-        if (!checkUtil.isPassword(password))
+        if (!commonUtil.isPassword(password))
             return CMessage.info('密码格式不正确');
         this.setState({ submit_btn_disabled: true, submit_btn: '提交中' });
         const [err, res] = await fetchData(APIURL_Auth_Set_Password, {

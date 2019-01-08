@@ -1,7 +1,7 @@
 import React from 'react';
 import '@/entry/content/asset/style/index.less';
-import siteCodeUtil from '@/util/sitecodeUtil';
-import uaUtil from '@/util/uaUtil';
+import interSiteCodeUtil from '@/util/_base/interSiteCodeUtil';
+import uaUtil from '@/util/_base/uaUtil';
 import Header from '@/component/Header';
 import Footer from '@/component/Footer';
 import Main from '@/g/component/Main';
@@ -10,7 +10,7 @@ import LayoutBanner from './LayoutBanner';
 
 const Layout = ({ actions, user, children, imageUrl, link }) => {
     const isShow =
-        !siteCodeUtil.inAPP() && !uaUtil.wechat() && !uaUtil.phone();
+        !interSiteCodeUtil.inAPP() && !uaUtil.wechat() && !uaUtil.phone();
     return (
         <div>
             <Header isShow={isShow} />

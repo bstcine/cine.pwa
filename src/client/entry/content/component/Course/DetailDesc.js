@@ -1,7 +1,7 @@
 /* eslint-disable prettier */
 import React from 'react';
 import ReactDOM from 'react-dom';
-import timeUtil from '@/util/timeUtil';
+import commonUtil from '@/util/_base/commonUtil';
 import { Tabs, TabItems, TabItem, TabPanels, TabPanel } from '@/component/Tabs';
 import Comments from './Comments';
 import CourseSet from './CourseSet';
@@ -137,7 +137,7 @@ export default class DetailDesc extends React.PureComponent {
                                                                                                         }
                                                                                                         {lesson.duration ? (
                                                                                                             <span className="meta">
-                                                                                                                {timeUtil.durationFormat(
+                                                                                                                {commonUtil.durationFormat(
                                                                                                                     lesson.duration
                                                                                                                 )}
                                                                                                             </span>

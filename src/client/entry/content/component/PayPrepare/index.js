@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import { getParam } from '@/util/urlUtil';
+import { getParam } from '@/util/_base/urlUtil';
 import errorMsg from '@/util/errorMsg';
-import uaUtil from '@/util/uaUtil';
+import uaUtil from '@/util/_base/uaUtil';
 import Header from '@/component/Header';
 import Footer from '@/component/Footer';
-import siteCodeUtil from '@/util/sitecodeUtil';
-import CommonUtil from '@/util/common';
+import interSiteCodeUtil from '@/util/_base/interSiteCodeUtil';
+import CommonUtil from '@/util/_base/commonUtil';
 import Api from '@/../APIConfig';
 import { fetchData } from '@/service/base';
 
@@ -225,7 +225,7 @@ export default class PayPrepare extends Component {
 
         return (
             <React.Fragment>
-                <Header isShow={!siteCodeUtil.inAPP() && !uaUtil.wechat()} />
+                <Header isShow={!interSiteCodeUtil.inAPP() && !uaUtil.wechat()} />
                 <div className="container-fluid course-container-bg">
                     <div className="prepare-container">
                         <div className="brief">

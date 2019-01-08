@@ -5,9 +5,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { wCardAction } from '@/action/wCardAction';
-import { getParam, addParam } from '@/util/urlUtil';
+import { getParam, addParam } from '@/util/_base/urlUtil';
 import WordCard from '../component/WordCard';
-import siteCodeUtil from '@/util/sitecodeUtil';
+import interSiteCodeUtil from '@/util/_base/interSiteCodeUtil';
+import { GLayoutContainer } from '@/g/container';
 
 class WordCardContainer extends Component {
     constructor(props) {
@@ -70,7 +71,7 @@ class WordCardContainer extends Component {
     }
     // 鼠标后手势开始触摸
     touchStart(event) {
-        if (!siteCodeUtil.inIOSAPP()) {
+        if (!interSiteCodeUtil.inIOSAPP()) {
             let { player } = this.props;
             if (!this.iAactivatePlayer) {
                 player.play();
@@ -129,19 +130,21 @@ class WordCardContainer extends Component {
             actions,
         } = this.props;
         return (
-            <WordCard
-                param={this.param}
-                result={result}
-                currentIndex={currentIndex}
-                lastZh={lastZh}
-                isAutoChangeWord={isAutoChangeWord}
-                isReviseChangeWord={isReviseChangeWord}
-                isBack={isBack}
-                isKnown={isKnown}
-                actions={actions}
-                backAction={this.backLearnHome}
-                quizAction={this.gotoTest}
-            />
+            <GLayoutContainer>
+                <WordCard
+                    param={this.param}
+                    result={result}
+                    currentIndex={currentIndex}
+                    lastZh={lastZh}
+                    isAutoChangeWord={isAutoChangeWord}
+                    isReviseChangeWord={isReviseChangeWord}
+                    isBack={isBack}
+                    isKnown={isKnown}
+                    actions={actions}
+                    backAction={this.backLearnHome}
+                    quizAction={this.gotoTest}
+                />
+            </GLayoutContainer>
         );
     }
 }

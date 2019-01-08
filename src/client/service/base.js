@@ -2,7 +2,7 @@
  * Created by david on 2017/12/6.
  */
 import { get, post } from './request/index';
-import { getPureUrl } from '@/util/urlUtil';
+import { getPureUrl } from '@/util/_base/urlUtil';
 import Api from '@/../APIConfig';
 
 /**

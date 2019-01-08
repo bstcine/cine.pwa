@@ -7,7 +7,7 @@ import { bindActionCreators } from 'redux';
 import { lTaskAction } from '@/action/lTaskAction';
 import HistoryTask from '../component/historyTask';
 import CThemeProvider from '@/component/CThemeProvider';
-import { getParam } from '@/util/urlUtil';
+import { getParam } from '@/util/_base/urlUtil';
 import { withRouter } from 'react-router-dom';
 import { GLayoutContainer } from '@/g/container';
 import gAction from '@/g/action';

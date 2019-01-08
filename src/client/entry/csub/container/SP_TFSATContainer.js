@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import subPageAction from '@/action/subPageAction';
 import SubPage from './../component/subpage';
+import CSubRoot from '@/entry/csub/container/Root';
 
 class SP_TFSATContainer extends Component {
     componentDidMount() {
@@ -12,15 +13,17 @@ class SP_TFSATContainer extends Component {
     render() {
         let { courses, teachers, articles, comments, resources } = this.props;
         return (
-            <SubPage
-                isCourse={true}
-                isMentor={false}
-                courses={courses}
-                teachers={teachers}
-                comments={comments}
-                articles={articles}
-                resources={resources}
-            />
+            <CSubRoot>
+                <SubPage
+                    isCourse={true}
+                    isMentor={false}
+                    courses={courses}
+                    teachers={teachers}
+                    comments={comments}
+                    articles={articles}
+                    resources={resources}
+                />
+            </CSubRoot>
         );
     }
 }
@@ -39,4 +42,7 @@ const mapDispatchToProps = dispatch => ({
     actions: bindActionCreators(subPageAction, dispatch),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(SP_TFSATContainer);
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(SP_TFSATContainer);

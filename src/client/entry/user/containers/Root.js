@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import '../asset/style/index.less';
-import { GLayoutContainer } from '@/g/container';
 import { bindActionCreators } from 'redux';
 import gAction from '@/g/action';
 import UserMobile from '@/entry/user/component/UserMobile';
-import {logoutV1} from "@/service/base";
+import { logoutV1 } from '@/service/base';
 
 class Root extends Component {
     constructor(props) {
@@ -31,10 +30,10 @@ class Root extends Component {
     }
 
     render() {
-        const { routes, user } = this.props;
+        const { user } = this.props;
         if (this.isUserHome && this.isLessUpSm)
             return user && <UserMobile user={user} onLogout={this.onLogout} />;
-        return <GLayoutContainer>{routes}</GLayoutContainer>;
+        return null;
     }
 }
 

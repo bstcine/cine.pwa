@@ -1,5 +1,5 @@
 import React from 'react';
-import timeUtil from '@/util/timeUtil';
+import commonUtil from '@/util/_base/commonUtil';
 
 const QuizVocabStats = ({ list }) => {
     if (list && list.length > 0) {
@@ -7,9 +7,9 @@ const QuizVocabStats = ({ list }) => {
             return (
                 <a href={`/quizvocab/report?id=${item.id}`} key={item.id}>
                     <li className="table-tr">
-                        <span>{timeUtil.shortTime(item.create_at)}</span>
+                        <span>{commonUtil.shortTime(item.create_at)}</span>
                         <span>
-                            {timeUtil.durationShortFormat(item.duration)}
+                            {commonUtil.durationShortFormat(item.duration)}
                         </span>
                         <span className="score">{item.vocab}</span>
                     </li>

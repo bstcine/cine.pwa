@@ -4,7 +4,7 @@
 import Api from '../../APIConfig';
 import { fetchData } from '@/service/base';
 import { ACTION_WC } from '@/constant/actionTypeLearn';
-import CommonUtil from '@/util/common.js';
+import CommonUtil from '@/util/_base/commonUtil';
 
 export const wCardAction = {
     _request: () => ({

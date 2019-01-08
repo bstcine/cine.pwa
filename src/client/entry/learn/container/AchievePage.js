@@ -5,11 +5,11 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import Achieve from '../component/achieve';
 import * as learnAction from '@/action/learnAction';
-import { getParam } from '@/util/urlUtil';
+import { getParam } from '@/util/_base/urlUtil';
 import { CMessage } from '@/component/_base';
 import QRCode from '@/component/QRCode';
-import siteCodeUtil from '@/util/sitecodeUtil';
-import Bridge from '@/util/bridge';
+import interSiteCodeUtil from '@/util/_base/interSiteCodeUtil';
+import Bridge from '@/util/_base/interBridge';
 import BRIDGE_EVENT from '@/constant/bridgeEvent';
 
 const mapStateToProps = state => {
@@ -43,12 +43,12 @@ class AchievePage extends Component {
             })
                 .then(canvas => {
                     const base64Url = canvas.toDataURL();
-                    if (siteCodeUtil.inIOSAPP()) {
+                    if (interSiteCodeUtil.inIOSAPP()) {
                         Bridge.ios(BRIDGE_EVENT.SEND_IMG, {
                             encode: 'base64',
                             data: base64Url,
                         });
-                    } else if (siteCodeUtil.inAndroidAPP()) {
+                    } else if (interSiteCodeUtil.inAndroidAPP()) {
                         Bridge.android(BRIDGE_EVENT.SEND_IMG, {
                             encode: 'base64',
                             data: base64Url,

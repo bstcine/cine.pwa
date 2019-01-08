@@ -8,9 +8,8 @@ import {
     APIURL_Auth_Send_VerificationCode,
 } from '../../../APIConfig';
 import errorMsg from '@/util/errorMsg';
-import commonUtil from '@/util/common';
+import commonUtil from '@/util/_base/commonUtil';
 import storeUtil from '@/util/_base/storeUtil';
-import checkUtil from '@/util/checkUtil';
 
 class ResetPwd extends Component {
     constructor(props) {
@@ -43,7 +42,7 @@ class ResetPwd extends Component {
 
     async sendAuthCode() {
         const { phone_code, phone } = this.state;
-        if (!checkUtil.isPhone(phone_code, phone))
+        if (!commonUtil.isPhone(phone_code, phone))
             return CMessage.info('手机格式不正确');
         this.setState({ auth_code_btn_disabled: true });
         fetchData(APIURL_Auth_Send_VerificationCode, {

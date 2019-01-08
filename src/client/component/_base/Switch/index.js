@@ -19,7 +19,7 @@ class Switch extends Component {
         console.log('checked', checked);
         this.setState({ checked }, () => {
             const { onChange } = this.props;
-            typeof onChange === 'function' && onChange({ checked });
+            typeof onChange === 'function' && onChange(checked);
         });
     }
 

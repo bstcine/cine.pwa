@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import './style.less';
 import { CButton, CIcon, CMessage } from '@/component/_base';
 import { fetchData } from '@/service/base';
 import {
@@ -8,7 +7,7 @@ import {
     APIURL_User_Social_List,
 } from '../../../APIConfig';
 import errorMsg from '@/util/errorMsg';
-import { getParam } from '@/util/urlUtil';
+import { getParam } from '@/util/_base/urlUtil';
 import authUtil from '@/util/authUtil';
 import { URL_Auth_Social } from '@/constant/menuItemUrl';
 

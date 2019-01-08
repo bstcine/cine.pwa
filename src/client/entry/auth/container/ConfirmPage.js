@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { CConfirm } from '@/component/Auth';
-import { getParam } from '@/util/urlUtil';
+import { getParam } from '@/util/_base/urlUtil';
 import AuthLogo from "@/entry/auth/component/AuthLogo";
 
 class ConfirmPage extends Component {

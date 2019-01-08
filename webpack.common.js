@@ -5,11 +5,14 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const devMode = process.env.NODE_ENV !== 'production';
+const mode = process.env.NODE_MODE;
+console.log('process.env.NODE_MODE',process.env.NODE_MODE);
+
 
 // *请统一使用 cnpm 下载安装依赖*，cnpm 和 npm 打出来的包 hash 不一致，造成缓存失效
 // 默认无需配置，需要指定 a.bstcine.com 下访问 b.bstcine.com 的时候才需要指定
-const SERVICE_URL = null;
-const publicPath = '/'; // for cdn
+const SERVICE_URL = process.env.NODE_SERVICE_URL;
+const publicPath = mode === 'static' ? '.' : '/'; // for cdn
 const pages = [
     // ----core----
     'content',
@@ -58,8 +61,9 @@ module.exports = {
         // new OfflinePlugin(),
         new webpack.DefinePlugin({
             SERVICE_URL: JSON.stringify(SERVICE_URL),
+            MODE: JSON.stringify(mode),
         }),
-        new CleanWebpackPlugin(['build'], { verbose: devMode }),
+        new CleanWebpackPlugin(['build'], { verbose: false }),
         new MiniCssExtractPlugin({
             filename: 'entry/[name]/index.[contenthash:8].css',
         }),
@@ -86,9 +90,6 @@ module.exports = {
                     devMode ? 'style-loader' : MiniCssExtractPlugin.loader,
                     {
                         loader: 'css-loader',
-                        options: {
-                            minimize: !devMode,
-                        },
                     },
                     {
                         loader: 'postcss-loader',
@@ -118,22 +119,33 @@ module.exports = {
                     },
                 ],
             },
+
             {
-                test: /\.(png|jpg|jpeg|gif|svg|mp3)$/i,
+                test: /\.(png|jpg|jpeg|gif|mp3)$/i,
                 loader: 'url-loader',
                 options: {
                     limit: 8192,
                     name: 'asset/image/[name].[hash:8].[ext]',
-                    publicPath,
+                    publicPath:
+                        mode === 'static'
+                            ? path.join(publicPath, '../../')
+                            : publicPath,
                 },
             },
             {
-                test: /\.(woff|woff2|eot|otf|webp|ttf)$/i,
+                test: /\.(woff|woff2|eot|otf|webp|ttf)$|^(?!.*svg\/).*\.svg$/i,
                 loader: 'file-loader',
                 options: {
                     name: 'asset/font/[name].[hash:8].[ext]',
-                    publicPath,
+                    publicPath:
+                        mode === 'static'
+                            ? path.join(publicPath, '../../')
+                            : publicPath,
                 },
+            },
+            {
+                test: /svg\/.+\.svg$/,
+                loader: 'svg-inline-loader'
             },
         ],
     },

@@ -1,9 +1,8 @@
 import { Component } from 'react';
-import { getParam } from '@/util/urlUtil';
-import siteCodeUtil from '@/util/sitecodeUtil';
+import { getParam } from '@/util/_base/urlUtil';
+import interSiteCodeUtil, { SITECODE } from '@/util/_base/interSiteCodeUtil';
 import storeUtil from '@/util/_base/storeUtil';
-import { SITECODE } from '@/constant/index';
-import uaUtil from '@/util/uaUtil';
+import uaUtil from '@/util/_base/uaUtil';
 
 class Entry extends Component {
     constructor(props) {
@@ -39,7 +38,7 @@ class Entry extends Component {
 
         // H5 在 app 内的时候，直接拿 URL 上的 token，不传则直接视为登出，清除缓存 token
         // 备注警告: 请检查安卓app是否正常
-        if (siteCodeUtil.inAPP() && token === '') {
+        if (interSiteCodeUtil.inAPP() && token === '') {
             storeUtil.removeToken();
         }
 

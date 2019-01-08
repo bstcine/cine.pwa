@@ -3,22 +3,10 @@ import ReactDOM from 'react-dom';
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
-import {
-    URL_Learn_Index,
-    URL_Learn_Task,
-    URL_Learn_Course,
-    URL_Learn_Achieve,
-} from '@/constant/menuItemUrl';
 import Entry from '@/component/Entry';
-import { GRouter } from '@/g/component';
 import rootReducer from './reducer';
-import HomePage from './container/HomePage';
-import HistoryTaskPage from './container/HistoryTaskPage';
-import CoursePage from './container/CoursePage';
-import { chunkComponent } from '@/util/chunkComponent';
-const AchievePage = chunkComponent(() =>
-    import(/* webpackChunkName: "learn/chunk/index.ap" */ './container/AchievePage')
-);
+import { GRouter } from '@/g/component';
+import routes from './routes';
 
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', function() {
@@ -40,18 +28,6 @@ if ('serviceWorker' in navigator) {
 
 const preloadedState = window.__PRELOADED_STATE__;
 const store = createStore(rootReducer, preloadedState, applyMiddleware(thunk));
-
-const routes = [
-    {
-        path: URL_Learn_Index,
-        component: HomePage,
-        exact: true,
-        checkAuth: true,
-    },
-    { path: URL_Learn_Task, component: HistoryTaskPage, checkAuth: true },
-    { path: URL_Learn_Course, component: CoursePage, checkAuth: true },
-    { path: URL_Learn_Achieve, component: AchievePage, checkAuth: false },
-];
 
 class Learn extends Entry {
     render() {

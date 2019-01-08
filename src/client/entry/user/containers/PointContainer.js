@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { actionUserPoint } from '@/action/userAction';
 import PointPanel from '@/entry/user/component/integral';
+import { GLayoutContainer } from '@/g/container';
 
 class PointContainer extends Component {
     componentDidMount() {
@@ -11,7 +12,11 @@ class PointContainer extends Component {
 
     render() {
         let { points } = this.props;
-        return <PointPanel points={points} />;
+        return (
+            <GLayoutContainer>
+                <PointPanel points={points} />
+            </GLayoutContainer>
+        );
     }
 }
 

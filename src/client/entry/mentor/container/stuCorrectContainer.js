@@ -3,9 +3,9 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-// import { Toast } from '@/component/Toast';
 import * as mentorAction from '@/action/mentorAction';
 import StatsTable from '../component/Correct/StatsTable';
+import { GLayoutContainer } from '@/g/container';
 
 class stuCorrectContainer extends Component {
     componentDidMount() {
@@ -24,22 +24,22 @@ class stuCorrectContainer extends Component {
         const { mentorStudentQuizWord } = this.props;
 
         return (
-            <div className="mentor-container correct">
-                {/* <Toast network={toastRedu} /> */}
-                <StatsTable
-                    list={
-                        mentorStudentQuizWord
-                            ? mentorStudentQuizWord.quiz || []
-                            : []
-                    }
-                />
-            </div>
+            <GLayoutContainer>
+                <div className="mentor-container correct">
+                    <StatsTable
+                        list={
+                            mentorStudentQuizWord
+                                ? mentorStudentQuizWord.quiz || []
+                                : []
+                        }
+                    />
+                </div>
+            </GLayoutContainer>
         );
     }
 }
 
 const mapStateToProps = state => ({
-    // toastRedu: state.toastRedu,
     mentorStudentQuizWord: state.mentorStudentQuizWord,
 });
 

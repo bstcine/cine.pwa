@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import BRIDGE_EVENT from '@/constant/bridgeEvent';
-import Bridge from '@/util/bridge';
-import { eventEmmiter } from '@/util/eventEmmiter';
-import { getParam, removeParam } from '@/util/urlUtil';
-import siteCodeUtil from '@/util/sitecodeUtil';
-import uaUtil from '@/util/uaUtil';
+import Bridge from '@/util/_base/interBridge';
+import { interEventEmitter } from '@/util/_base/interEventEmitter';
+import { getParam, removeParam } from '@/util/_base/urlUtil';
+import interSiteCodeUtil from '@/util/_base/interSiteCodeUtil';
+import uaUtil from '@/util/_base/uaUtil';
 import routeUtil from '@/util/routeUtil';
 import errorMsg from '@/util/errorMsg';
 import storeUtil from '@/util/_base/storeUtil';
@@ -19,7 +19,7 @@ import { CDrawer, CMessage } from '@/component/_base';
 import QRCode from '@/component/QRCode';
 import LotteryCoupon from '@/entry/temp/component/DrawCoupon';
 import authUtil from '@/util/authUtil';
-import shareUtil from '@/util/shareUtil';
+import shareUtil from '@/util/_base/shareUtil';
 
 export default class Course extends Component {
     constructor(props) {
@@ -43,20 +43,20 @@ export default class Course extends Component {
     }
 
     async componentDidMount() {
-        if (siteCodeUtil.inIOSAPP()) {
+        if (interSiteCodeUtil.inIOSAPP()) {
             Bridge.ios(BRIDGE_EVENT.TIMELINE, { type: 'loaded' });
         }
         window.scroll(0, 0);
         document.title = '课程详情';
 
-        eventEmmiter.on(BRIDGE_EVENT.OUTER_SHARE, () => {
+        interEventEmitter.on(BRIDGE_EVENT.OUTER_SHARE, () => {
             this.handleShare(false);
         });
 
         this.initCurrentPageWechat();
         await this.initData();
 
-        if (siteCodeUtil.inIOSAPP()) {
+        if (interSiteCodeUtil.inIOSAPP()) {
             Bridge.ios(BRIDGE_EVENT.TIMELINE, { type: 'visible' });
         }
     }
@@ -96,11 +96,11 @@ export default class Course extends Component {
     async initData() {
         let { cid } = getParam();
         let { course, user } = await cCourseAction.initCourseDetail(cid);
-        if (siteCodeUtil.inIOSAPP()) {
+        if (interSiteCodeUtil.inIOSAPP()) {
             if (course.temp_h5 === '1') {
-                storeUtil.set('temp_h5', '1','session');
+                storeUtil.set('temp_h5', '1');
             } else {
-                storeUtil.remove('temp_h5','session');
+                storeUtil.remove('temp_h5');
             }
         }
         this.setState({ course, user });
@@ -114,7 +114,7 @@ export default class Course extends Component {
         const { course } = this.state;
         let { cid, source_user_id } = getParam();
         if (course && course.currency === 'USD') {
-            if (siteCodeUtil.inAPP()) {
+            if (interSiteCodeUtil.inAPP()) {
                 CMessage.info('APP暂不支持美元支付，请在官网购买');
             } else {
                 fetchData(APIURL_Order_Create, { cid, currency: 'USD' }).then(
@@ -126,7 +126,7 @@ export default class Course extends Component {
                 );
             }
         } else {
-            if (siteCodeUtil.inIOSAPP()) {
+            if (interSiteCodeUtil.inIOSAPP()) {
                 if (course.temp_h5 === '1') {
                     let url = `/pay/prepare?cid=${cid}`;
                     if (source_user_id) {
@@ -136,7 +136,7 @@ export default class Course extends Component {
                 } else {
                     Bridge.ios(BRIDGE_EVENT.PRE_CONFIRM, { course_id: cid });
                 }
-            } else if (siteCodeUtil.inAndroidAPP()) {
+            } else if (interSiteCodeUtil.inAndroidAPP()) {
                 Bridge.android(BRIDGE_EVENT.PRE_CONFIRM, { course_id: cid });
             } else {
                 let url = `/pay/prepare?cid=${cid}`;
@@ -150,13 +150,13 @@ export default class Course extends Component {
 
     handleLearn() {
         let { course } = this.state;
-        if (siteCodeUtil.inIOSAPP()) {
+        if (interSiteCodeUtil.inIOSAPP()) {
             Bridge.ios(BRIDGE_EVENT.LEARN, {
                 course_id: course.id,
                 last_lesson_id: course.last_content_id,
                 course_name: course.name,
             });
-        } else if (siteCodeUtil.inAndroidAPP()) {
+        } else if (interSiteCodeUtil.inAndroidAPP()) {
             Bridge.android(BRIDGE_EVENT.LEARN, {
                 course_id: course.id,
                 last_lesson_id: course.last_content_id,
@@ -226,7 +226,7 @@ export default class Course extends Component {
             this.login();
             return;
         }
-        if (siteCodeUtil.inAPP() || uaUtil.wechatMobile()) {
+        if (interSiteCodeUtil.inAPP() || uaUtil.wechatMobile()) {
             this.setState({ isOpenLottery: true });
         } else {
             QRCode.open(this.getActUrl(true));
@@ -249,7 +249,7 @@ export default class Course extends Component {
 
         return (
             <React.Fragment>
-                <Header isShow={!siteCodeUtil.inAPP() && !uaUtil.wechat()} />
+                <Header isShow={!interSiteCodeUtil.inAPP() && !uaUtil.wechat()} />
                 <div className="container-fluid course-container-bg">
                     <div className="course-container">
                         <Brief
@@ -267,7 +267,7 @@ export default class Course extends Component {
                         {course ? (
                             <DetailDesc
                                 course={course}
-                                isIOSAPP={siteCodeUtil.inIOSAPP()}
+                                isIOSAPP={interSiteCodeUtil.inIOSAPP()}
                                 onLoadSetAndComments={
                                     cCourseAction.loadSetAndComments
                                 }

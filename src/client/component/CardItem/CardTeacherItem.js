@@ -1,6 +1,6 @@
 import React from 'react';
 import { CCard } from '@/component/_base';
-import CommonUtil from '@/util/common';
+import CommonUtil from '@/util/_base/commonUtil';
 import './styleTeacher.less';
 
 export const CardTeacher = ({ value, hover, isMentor }) => {

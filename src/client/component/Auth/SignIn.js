@@ -4,7 +4,7 @@ import authUtil from '@/util/authUtil';
 import { fetchData } from '@/service/base';
 import Api from '../../../APIConfig';
 import errorMsg from '@/util/errorMsg';
-import { getParam } from '@/util/urlUtil';
+import { getParam } from '@/util/_base/urlUtil';
 
 class SignIn extends Component {
     constructor(props) {

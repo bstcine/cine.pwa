@@ -2,7 +2,7 @@ import React from 'react';
 import { CIcon } from '@/component/_base';
 import menu from '@/constant/menu';
 import * as h5 from '@/constant/menuItemUrl';
-import siteCodeUtil from '@/util/sitecodeUtil';
+import interSiteCodeUtil from '@/util/_base/interSiteCodeUtil';
 import TabBar from '@/component/TabBar';
 let menus = [];
 menu.forEach(item => {
@@ -69,7 +69,7 @@ const UserMobile = ({ user, onLogout }) => {
                     退出
                 </a>
             </div>
-            {!siteCodeUtil.inAPP() && <TabBar />}
+            {!(interSiteCodeUtil.inAPP() || interSiteCodeUtil.inAndroidH5()) && <TabBar />}
         </div>
     );
 };

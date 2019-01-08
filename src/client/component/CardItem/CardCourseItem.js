@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import LazyLoad from 'react-lazyload';
 import { CCard } from '@/component/_base';
-import CommonUtil from '@/util/common';
+import CommonUtil from '@/util/_base/commonUtil';
 import './styleCourse.less';
 
 export class CardCourse extends Component {

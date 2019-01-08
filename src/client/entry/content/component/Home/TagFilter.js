@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { getParam } from '@/util/urlUtil';
+import { getParam } from '@/util/_base/urlUtil';
 
 export default class TagFilter extends Component {
     constructor(props) {

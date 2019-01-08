@@ -1,22 +1,25 @@
-import { eventEmmiter } from './eventEmmiter';
-import siteCodeUtil from '@/util/sitecodeUtil';
+import { interEventEmitter } from './interEventEmitter';
+import interSiteCodeUtil from './interSiteCodeUtil';
 
 let Bridge = {
-    ios: function(event, params, needCallback = true) {
+    ios: function(event, _params, needCallback = true) {
         return new Promise(resolve => {
             console.log(
                 `invoke iOS.event[${event}] with params: ${JSON.stringify(
-                    params
+                    _params
                 )}`
             );
-            if (!params) params = {};
+            let params = _params || {};
             const callbackEvent = this.getCallbackEvent(event);
             if (needCallback) {
-                eventEmmiter.once(callbackEvent, res => {
+                interEventEmitter.once(callbackEvent, _res => {
                     console.log(
-                        `callback iOS.event[${callbackEvent}] with data: ${res}`
+                        `callback iOS.event[${callbackEvent}] with data: ${_res}`
                     );
-                    if (res && typeof res === 'string') res = JSON.parse(res);
+                    let res =
+                        _res && typeof _res === 'string'
+                            ? JSON.parse(_res)
+                            : _res;
                     resolve(res);
                 });
             }
@@ -26,25 +29,32 @@ let Bridge = {
                 callback: callbackEvent,
             });
             console.log(`send iOS msg ${JSON.stringify(msg)}`);
-            webkit.messageHandlers.native.postMessage(msg);
+            if ('webkit' in window) {
+                window.webkit.messageHandlers.native.postMessage(msg);
+            } else {
+                console.log('window.webkit is undefined');
+            }
         });
     },
 
-    android: function(event, params, needCallback = true) {
+    android: function(event, _params, needCallback = true) {
         return new Promise(resolve => {
             console.log(
                 `invoke Android.event[${event}] with params: ${JSON.stringify(
-                    params
+                    _params
                 )}`
             );
-            if (!params) params = {};
+            let params = _params || {};
             const callbackEvent = this.getCallbackEvent(event);
             if (needCallback) {
-                eventEmmiter.once(callbackEvent, res => {
+                interEventEmitter.once(callbackEvent, _res => {
                     console.log(
-                        `callback Android.event[${callbackEvent}] with data: ${res}`
+                        `callback Android.event[${callbackEvent}] with data: ${_res}`
                     );
-                    if (res && typeof res === 'string') res = JSON.parse(res);
+                    let res =
+                        _res && typeof _res === 'string'
+                            ? JSON.parse(_res)
+                            : _res;
                     resolve(res);
                 });
             }
@@ -54,12 +64,16 @@ let Bridge = {
                 callback: callbackEvent,
             });
             console.log(`send Android msg ${JSON.stringify(msg)}`);
-            Android[event](msg);
+            if ('Android' in window) {
+                window.Android[event](msg);
+            } else {
+                console.log('window.Android is undefined');
+            }
         });
     },
 
     common: function(event, params, needCallback = true) {
-        if (siteCodeUtil.inIOSAPP()) {
+        if (interSiteCodeUtil.inIOSAPP()) {
             return Bridge.ios(event, params, needCallback);
         } else {
             return Bridge.android(event, params, needCallback);

@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
-import loadScript from '@/util/loadScript';
+import loadScript from '@/util/_base/exLoadScript';
 import { fetchData } from '@/service/base';
 import { APIURL_Pay_Stripe_Info } from '../../../../../APIConfig';
 import { CMessage } from '@/component/_base';
 import Header from '@/component/Header';
-import siteCodeUtil from '@/util/sitecodeUtil';
-import uaUtil from '@/util/uaUtil';
+import interSiteCodeUtil from '@/util/_base/interSiteCodeUtil';
+import uaUtil from '@/util/_base/uaUtil';
 import Footer from '@/component/Footer';
-import { getParam } from '@/util/urlUtil';
+import { getParam } from '@/util/_base/urlUtil';
 import Icon from '@/component/_base/Icon';
 
 class PayStripe extends Component {
@@ -126,7 +126,7 @@ class PayStripe extends Component {
         const { order } = this.state;
         return (
             <React.Fragment>
-                <Header isShow={!siteCodeUtil.inAPP() && !uaUtil.wechat()} />
+                <Header isShow={!interSiteCodeUtil.inAPP() && !uaUtil.wechat()} />
                 <div className="container-fluid course-container-bg">
                     <div className="paycenter-container">
                         <div className="pay-header">

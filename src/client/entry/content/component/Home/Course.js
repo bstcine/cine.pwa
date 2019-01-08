@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import CourseLink from '@/component/CourseLink';
 import LazyLoad from 'react-lazyload';
-import CommonUtil from '@/util/common';
+import CommonUtil from '@/util/_base/commonUtil';
 
 export default class Course extends Component {
     displayPrice(course) {

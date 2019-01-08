@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ReactModal from 'react-modal';
-import uaUtil from '@/util/uaUtil';
+import uaUtil from '@/util/_base/uaUtil';
 
 const androidImg = require('../../asset/image/wechat-android.png');
 const iosImg = require('../../asset/image/wechat-ios.png');

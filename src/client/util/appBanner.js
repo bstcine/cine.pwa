@@ -1,7 +1,7 @@
 import storeUtil from '@/util/_base/storeUtil';
-import uaUtil from '@/util/uaUtil';
-import siteCodeUtil from '@/util/sitecodeUtil';
-import { getParam } from '@/util/urlUtil';
+import uaUtil from '@/util/_base/uaUtil';
+import interSiteCodeUtil from '@/util/_base/interSiteCodeUtil';
+import { getParam } from '@/util/_base/urlUtil';
 
 const bstcineImg = require('@/asset/image/pic_bstcine.png');
 const btnImg = require('@/asset/image/btn_download.png');
@@ -9,11 +9,11 @@ const closeImg = require('@/asset/image/ico_appdow_close.png');
 
 let appBanner = {
     init: function() {
-        const closeAt = storeUtil.get('appBannerHide');
+        const closeAt = storeUtil.get('appBannerHide', 'local');
         const current = new Date().getTime();
         const isHide = closeAt && current - closeAt < 2 * 24 * 3600 * 1000;
         if (
-            !siteCodeUtil.inAPP() &&
+            !(interSiteCodeUtil.inAPP() || interSiteCodeUtil.inAndroidH5()) &&
             uaUtil.mobile() &&
             getParam().hidetopbar !== '1' &&
             !isHide
@@ -35,7 +35,7 @@ let appBanner = {
         document.querySelector('.appBanner').style.display = 'none';
     },
     remove: function() {
-        storeUtil.set('appBannerHide', new Date().getTime());
+        storeUtil.set('appBannerHide', new Date().getTime(), 'local');
         window.removeEventListener('scroll', appBanner.handlerScroll);
         this.hide();
     },

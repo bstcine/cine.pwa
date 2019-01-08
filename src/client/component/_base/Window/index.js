@@ -6,17 +6,56 @@ import Mask from '@/component/_base/Mask';
 import ReactDOM from 'react-dom';
 const cls = componentNames.Window;
 
-const initOffset = offset => {
-    if (!offset)
-        return {
-            left: 0,
-            top: 0,
-            bottom: 0,
-        };
-    if (typeof offset.left === 'undefined') offset.left = 0;
-};
+function getScrollbarWidth() {
+    if (window.$scrollbarWidth) return window.$scrollbarWidth;
+    let scrollDiv = document.createElement('div');
+    scrollDiv.style.cssText =
+        'width: 99px; height: 99px; overflow: scroll; position: absolute; top: -9999px;';
+    document.body.appendChild(scrollDiv);
+    let scrollbarWidth = scrollDiv.offsetWidth - scrollDiv.clientWidth;
+    document.body.removeChild(scrollDiv);
+    window.$scrollbarWidth = scrollbarWidth;
+    return scrollbarWidth;
+}
 
 class Window extends Component {
+    constructor(props) {
+        super(props);
+        this.fixedBody = this.fixedBody.bind(this);
+        this.onClick = this.onClick.bind(this);
+        this.mainRef = React.createRef();
+    }
+
+    componentDidMount() {
+        this.fixedBody();
+    }
+    componentDidUpdate(prevProps, prevState) {
+        this.fixedBody();
+    }
+    componentWillUnmount() {
+        this.fixedBody();
+    }
+
+    onClick(e) {
+        const currentEle = e.target;
+        const mainEle = this.mainRef.current;
+        if (currentEle === mainEle || mainEle.contains(currentEle)) return;
+        this.props.close();
+    }
+
+    fixedBody() {
+        if (this.props.isOpen) {
+            let body = document.body;
+            if (body.classList.contains(`${cls}--open`)) {
+                body.style.removeProperty('padding-right');
+                body.classList.remove(`${cls}--open`);
+            } else {
+                body.style.paddingRight = getScrollbarWidth() + 'px';
+                body.classList.add(`${cls}--open`);
+            }
+        }
+    }
+
     render() {
         const {
             className,
@@ -24,18 +63,21 @@ class Window extends Component {
             isOpen,
             maskCloseable = true,
             close,
+            href,
             offset = {},
         } = this.props;
         if (!isOpen) return null;
-        const style = {
-            transform: 'translateX(-50%) translateX(150px)',
-        };
-        if (offset.left)
+        const style = {};
+        if (offset.left) {
             style.transform = `translateX(-50%) translateX(${offset.left})`;
+            style.width = `calc(18.8rem - ${offset.left} * 2)`;
+            style.left = '50%';
+        }
+
         if (offset.top) style.top = offset.top;
         if (offset.bottom) style.bottom = offset.bottom;
         return (
-            <div className={cls}>
+            <>
                 <Mask
                     onClick={() => {
                         if (maskCloseable) {
@@ -43,13 +85,21 @@ class Window extends Component {
                         }
                     }}
                 />
-                <div
-                    className={classNames(`${cls}__main`, className)}
-                    style={style}
-                >
-                    {children}
+
+                <div className={cls} onClick={this.onClick}>
+                    <div
+                        className={classNames(`${cls}__main`, className)}
+                        style={style}
+                        ref={this.mainRef}
+                    >
+                        {href ? (
+                            <iframe src={href} frameBorder="0" />
+                        ) : (
+                            children
+                        )}
+                    </div>
                 </div>
-            </div>
+            </>
         );
     }
 }

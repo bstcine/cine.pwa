@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import Bridge from '@/util/bridge';
+import Bridge from '@/util/_base/interBridge';
 import BRIDGE_EVENT from '@/constant/bridgeEvent';
-import siteCodeUtil from '@/util/sitecodeUtil';
+import interSiteCodeUtil from '@/util/_base/interSiteCodeUtil';
 import routeUtil from '@/util/routeUtil';
 
 export default class CourseLink extends Component {
@@ -23,7 +23,7 @@ export default class CourseLink extends Component {
 
     render() {
         let { className, course, children } = this.props;
-        if (!siteCodeUtil.inAPP()) {
+        if (!interSiteCodeUtil.inAPP()) {
             return (
                 <div className={className}>
                     <a href={`${this.baseURL}content/course?cid=${course.id}`}>

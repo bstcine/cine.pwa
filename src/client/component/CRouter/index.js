@@ -1,39 +1,40 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import CommonUtil from '@/util/common';
+import { BrowserRouter, HashRouter, Route } from 'react-router-dom';
 
-const routes = routes =>
-    routes.map((route, i) => {
-        if (route.isExact) {
-            return (
-                <Route
-                    key={i}
-                    exact
-                    path={route.path}
-                    render={props => <route.component {...props} />}
-                />
-            );
-        } else {
-            return (
-                <Route
-                    key={i}
-                    path={route.path}
-                    render={props => <route.component {...props} />}
-                />
-            );
-        }
-    });
+const RRDRouter = ({ children }) => {
+    return window.MODE === 'static' ? (
+        <HashRouter>{children}</HashRouter>
+    ) : (
+        <BrowserRouter>{children}</BrowserRouter>
+    );
+};
 
-export const CRouter = ({ route }) => (
-    <Router>
+const Routes = ({ routes, render }) => {
+    return routes.map(item => (
         <Route
-            path={route.path}
+            exact={!!item.exact}
+            key={item.path}
+            path={item.path}
             render={props => {
-                if (route.checkAuth && !CommonUtil.isAuth()) return <div />;
-                return (
-                    <route.component {...props} routes={routes(route.routes)} />
-                );
+                if (render) {
+                    return render(props, item);
+                } else {
+                    const Comp = item.component;
+                    return <Comp {...props} />;
+                }
             }}
         />
-    </Router>
-);
+    ));
+};
+
+const CRouter = ({ routes, render }) => {
+    return (
+        <RRDRouter>
+            <React.Fragment>
+                <Routes routes={routes} render={render} />
+            </React.Fragment>
+        </RRDRouter>
+    );
+};
+
+export default CRouter;

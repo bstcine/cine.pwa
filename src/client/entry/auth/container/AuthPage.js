@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import QRHelp from '@/component/QRHelp';
 import CAuth from '@/component/Auth';
 import AuthLogo from '@/entry/auth/component/AuthLogo';
-import { getParam } from '@/util/urlUtil';
+import { getParam } from '@/util/_base/urlUtil';
 import { fetchData } from '@/service/base';
 import { APIURL_Content_School_Detail } from '../../../../APIConfig';
 import errorMsg from '@/util/errorMsg';

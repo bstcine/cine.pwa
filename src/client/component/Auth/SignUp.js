@@ -9,8 +9,7 @@ import {
 } from '../../../APIConfig';
 import errorMsg from '@/util/errorMsg';
 import authUtil from '@/util/authUtil';
-import commonUtil from '@/util/common';
-import checkUtil from "@/util/checkUtil";
+import commonUtil from "@/util/_base/commonUtil";
 
 class SignUp extends Component {
     constructor(props) {
@@ -43,7 +42,7 @@ class SignUp extends Component {
 
     async sendAuthCode() {
         const { phone_code, phone } = this.state;
-        if (!checkUtil.isPhone(phone_code, phone))
+        if (!commonUtil.isPhone(phone_code, phone))
             return CMessage.info('手机格式不正确');
         this.setState({ auth_code_btn_disabled: true });
         fetchData(APIURL_Auth_Send_VerificationCode, {
@@ -69,7 +68,7 @@ class SignUp extends Component {
     async submit() {
         const { onSuccess } = this.props;
         const { phone_code, phone, password, auth_code } = this.state;
-        if (!checkUtil.isPhone(phone_code, phone))
+        if (!commonUtil.isPhone(phone_code, phone))
             return CMessage.info('手机格式不正确');
         this.setState({ submit_btn_disabled: true, submit_btn: '提交中' });
         const [err, res] = await fetchData(APIURL_Auth_SignUp, {

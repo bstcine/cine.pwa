@@ -6,6 +6,7 @@ import CResetPwd from './ResetPwd';
 import CSocial from './Social';
 import CSetPwd from './SetPwd';
 import React, { Component } from 'react';
+import './style.less';
 
 class CAuth extends Component {
     constructor(props) {

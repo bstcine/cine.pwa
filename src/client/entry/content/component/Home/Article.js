@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import LazyLoad from 'react-lazyload';
-import CommonUtil from '@/util/common';
+import CommonUtil from '@/util/_base/commonUtil';
 
 export default class Article extends Component {
     static defaultProps = {

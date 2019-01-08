@@ -1,14 +1,14 @@
-import Bridge from '@/util/bridge';
-import siteCodeUtil from '@/util/sitecodeUtil';
+import Bridge from '@/util/_base/interBridge';
+import interSiteCodeUtil from '@/util/_base/interSiteCodeUtil';
 import BRIDGE_EVENT from '@/constant/bridgeEvent';
 
 let routeUtil = {
     goCourse: ({ id, status }, history) => {
         if (status && status !== '1') return;
         const course_id = id;
-        if (siteCodeUtil.inIOSAPP()) {
+        if (interSiteCodeUtil.inIOSAPP()) {
             Bridge.ios(BRIDGE_EVENT.COURSE, { course_id });
-        } else if (siteCodeUtil.inAndroidAPP()) {
+        } else if (interSiteCodeUtil.inAndroidAPP()) {
             Bridge.android(BRIDGE_EVENT.COURSE, { course_id });
         } else {
             if (/^\/content/i.test(location.pathname) && history) {

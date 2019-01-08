@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { getParam } from '@/util/urlUtil';
+import { getParam } from '@/util/_base/urlUtil';
 import * as area from '@/service/data/response_pca_code.json';
 import * as Service from '@/service/user';
-import Bridge from '@/util/bridge';
-import siteCodeUtil from '@/util/sitecodeUtil';
+import Bridge from '@/util/_base/interBridge';
+import interSiteCodeUtil from '@/util/_base/interSiteCodeUtil';
 import BRIDGE_EVENT from '@/constant/bridgeEvent';
 
 import TextField from 'material-ui/TextField';
@@ -55,13 +55,13 @@ export default class Index extends Component {
                 }
             });
         } else {
-            if (siteCodeUtil.inIOSAPP()) {
+            if (interSiteCodeUtil.inIOSAPP()) {
                 Bridge.ios(BRIDGE_EVENT.ADDRESS_INIT_DATA).then(res => {
                     if (res && res.data) {
                         this.init(res.data);
                     }
                 });
-            } else if (siteCodeUtil.inAndroidAPP()) {
+            } else if (interSiteCodeUtil.inAndroidAPP()) {
                 Bridge.android(BRIDGE_EVENT.ADDRESS_INIT_DATA).then(res => {
                     if (res && res.data) {
                         this.init(res.data);
@@ -234,9 +234,9 @@ export default class Index extends Component {
         if (this.isEdit) {
             Service.addAddress(this.state).then(result => {
                 if (!result.msg) {
-                    if (siteCodeUtil.inIOSAPP()) {
+                    if (interSiteCodeUtil.inIOSAPP()) {
                         Bridge.ios(BRIDGE_EVENT.ADDRESS_SAVE, this.state);
-                    } else if (siteCodeUtil.inAndroidAPP()) {
+                    } else if (interSiteCodeUtil.inAndroidAPP()) {
                         Bridge.android(BRIDGE_EVENT.ADDRESS_SAVE, this.state);
                     } else {
                         location.href = decodeURIComponent(getParam().redirect);
@@ -246,9 +246,9 @@ export default class Index extends Component {
                 }
             });
         } else {
-            if (siteCodeUtil.inIOSAPP()) {
+            if (interSiteCodeUtil.inIOSAPP()) {
                 Bridge.ios(BRIDGE_EVENT.ADDRESS_SAVE, this.state);
-            } else if (siteCodeUtil.inAndroidAPP()) {
+            } else if (interSiteCodeUtil.inAndroidAPP()) {
                 Bridge.android(BRIDGE_EVENT.ADDRESS_SAVE, this.state);
             }
         }

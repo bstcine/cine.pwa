@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import storeUtil from '@/util/_base/storeUtil';
 import { fetchData } from '@/service/base';
 import errorMsg from '@/util/errorMsg';
-import { getParam } from '@/util/urlUtil';
+import { getParam } from '@/util/_base/urlUtil';
 import authUtil from '@/util/authUtil';
 
 const Api = require('../../../../../APIConfig');

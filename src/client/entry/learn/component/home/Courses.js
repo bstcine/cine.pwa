@@ -1,15 +1,15 @@
 import React from 'react';
 import TextFix from '@/component/TextFix';
 import { CPanel, CCard, CCardContainer } from '@/component/_base';
-import siteCodeUtil from '@/util/sitecodeUtil';
-import CommonUtil from '@/util/common';
+import interSiteCodeUtil from '@/util/_base/interSiteCodeUtil';
+import CommonUtil from '@/util/_base/commonUtil';
 import BRIDGE_EVENT from '@/constant/bridgeEvent';
-import Bridge from '@/util/bridge';
+import Bridge from '@/util/_base/interBridge';
 
 const Courses = ({ courses }) => {
     const goClick = course => {
         console.log(course);
-        if (siteCodeUtil.inAPP()) {
+        if (interSiteCodeUtil.inAPP()) {
             Bridge.common(BRIDGE_EVENT.LEARN, {
                 course_id: course.id,
                 course_name: course.name,

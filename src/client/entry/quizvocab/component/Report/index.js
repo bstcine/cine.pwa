@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import { getParam, addParam, removeParam } from '@/util/urlUtil';
+import { getParam, addParam, removeParam } from '@/util/_base/urlUtil';
 import * as Service from '@/service/quizvocab';
-import shareUtil from '@/util/shareUtil';
-import Bridge from '@/util/bridge';
+import shareUtil from '@/util/_base/shareUtil';
+import Bridge from '@/util/_base/interBridge';
 import BRIDGE_EVENT from '@/constant/bridgeEvent';
-import siteCodeUtil from '@/util/sitecodeUtil';
-import CommonUtil from '@/util/common';
+import interSiteCodeUtil from '@/util/_base/interSiteCodeUtil';
+import CommonUtil from '@/util/_base/commonUtil';
 import PieChart from './PieChart';
 import CourseLink from '@/component/CourseLink';
 import errorMsg from '@/util/errorMsg';
@@ -102,9 +102,9 @@ export default class Report extends Component {
     }
 
     courseClick(course_id) {
-        if (siteCodeUtil.inIOSAPP()) {
+        if (interSiteCodeUtil.inIOSAPP()) {
             Bridge.ios(BRIDGE_EVENT.COURSE, { course_id });
-        } else if (siteCodeUtil.inAndroidAPP()) {
+        } else if (interSiteCodeUtil.inAndroidAPP()) {
             Bridge.android(BRIDGE_EVENT.COURSE, { course_id });
         } else {
             location.href = '/lesson/' + course_id;

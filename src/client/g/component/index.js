@@ -1,15 +1,6 @@
-import Auth from './Auth';
-import Footer from './Footer';
-import Header from './Header';
-import Layout from './Layout';
-import Main from './Main';
-import Router from './Router';
-
-export {
-    Auth as GAuth,
-    Footer as GFooter,
-    Header as GHeader,
-    Layout as GLayout,
-    Main as GMain,
-    Router as GRouter,
-};
+export { default as GAuth } from './Auth';
+export { default as GFooter } from './Footer';
+export { default as GHeader } from './Header';
+export { default as GLayout } from './Layout';
+export { default as GMain } from './Main';
+export { default as GRouter } from './Router';

@@ -3,13 +3,13 @@ import Api from '../../../../APIConfig';
 import { fetchData } from '@/service/base';
 import Modal from 'react-modal';
 import moment from 'moment';
-import { addParam, getParam } from '@/util/urlUtil';
+import { addParam, getParam } from '@/util/_base/urlUtil';
 import '../asset/style/DrawCoupon.less';
-import siteCodeUtil from '@/util/sitecodeUtil';
-import Bridge from '@/util/bridge';
+import interSiteCodeUtil from '@/util/_base/interSiteCodeUtil';
+import Bridge from '@/util/_base/interBridge';
 import BRIDGE_EVENT from '@/constant/bridgeEvent';
-import uaUtil from '@/util/uaUtil';
-import shareUtil from '@/util/shareUtil';
+import uaUtil from '@/util/_base/uaUtil';
+import shareUtil from '@/util/_base/shareUtil';
 
 Modal.setAppElement('#root');
 
@@ -30,26 +30,67 @@ const customStyles = {
     },
 };
 
-const errMsgSelf = {
-    activity_is_expire: '活动已结束，感谢参与！',
-    repeat_draw: '已抽过，立即点击下方按钮，邀请更多好友一起帮你抽奖！',
-    coupon_is_used: '您已使用过该优惠券！',
-    draw_max_coupon: '感谢您的参与，优惠总金额已达上限！',
-};
-
-const errMsgOther = {
-    activity_is_expire: '活动已结束，感谢参与！',
-    repeat_draw: '已抽过，感谢您的助力！',
-    coupon_is_used: '感谢您的助力，好友已成功购买！',
-    draw_max_coupon: '感谢您的助力，优惠总金额已达上限！',
-};
-
 const getImgUrl = img => {
     return (
         (img && img.indexOf('//') >= 0 ? '' : 'https://www.bstcine.com/f/') +
         img
     );
 };
+
+//活动说明
+const getInstructions = (activity, course, coupon) => (
+    <React.Fragment>
+        <div>
+            1. 抽奖活动日期：
+            {activity &&
+                moment(activity.effective_at).format('YYYY-MM-DD') +
+                    '至' +
+                    moment(activity.expire_at).format('YYYY-MM-DD')}
+        </div>
+        <div>
+            2. 优惠券有效期：抽奖之日起至
+            {coupon && moment(coupon.expire_at).format('YYYY-MM-DD')}
+        </div>
+        <div>
+            3.
+            优惠券适用范围：本优惠券为单门视频课程专享优惠券，仅可用于购买善恩英语
+            {course.name}
+        </div>
+        <div>
+            4.
+            优惠券查询：登录善恩官网或APP，找到“我的优惠券”可查看优惠券累计金额
+        </div>
+        <div>
+            5. 活动及课程咨询请扫描下方二维码联系善恩小助手（微信：BSTCINE02）
+        </div>
+        <div>6. 活动最终解释权归善恩英语所有</div>
+        <div
+            style={{
+                margin: '.4rem .2rem',
+                textAlign: 'center',
+            }}
+        >
+            <img
+                src={require('@/asset/image/qrcode_bst02.jpg')}
+                style={{ width: '2rem', height: '2rem' }}
+            />
+        </div>
+    </React.Fragment>
+);
+
+//版权信息
+const copyright = (
+    <React.Fragment>
+        <div className="co-name">善严教育科技(上海)有限公司</div>
+        <div className="co-desc">
+            <div className="co-desc-year">
+                Copyright © 2014 - 2018 <a href="//www.bstcine.com">BSTCINE</a>.
+                All Rights Reserved.{' '}
+            </div>
+            <div className="co-desc-code">沪ICP备14053596号-1</div>
+        </div>
+    </React.Fragment>
+);
 
 export default class LotteryCoupon extends Component {
     constructor(props) {
@@ -78,13 +119,11 @@ export default class LotteryCoupon extends Component {
             drawPrice: 0,
         };
 
-        this.onLoadInfo = this.onLoadInfo.bind(this);
+        this.onLoad = this.onLoad.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
         this.doShare = this.doShare.bind(this);
         this.doToCourse = this.doToCourse.bind(this);
         this.doToBuy = this.doToBuy.bind(this);
-
-        document.title = '善恩英语双12优惠券大派送！';
     }
 
     async componentDidMount() {
@@ -98,15 +137,15 @@ export default class LotteryCoupon extends Component {
                         '//www.bstcine.com/wechat/authorize?redirect=' +
                         encodeURIComponent(url);
                 } else {
-                    await this.onLoadInfo();
+                    await this.onLoad();
                 }
             } else {
                 alert('请在微信端访问');
                 location.href = '/';
-                // await this.onLoadInfo();
+                // await this.onLoad();
             }
         } else {
-            await this.onLoadInfo();
+            await this.onLoad();
         }
     }
 
@@ -123,7 +162,7 @@ export default class LotteryCoupon extends Component {
         this.setState({ showModal: false });
     };
 
-    onLoadInfo = async () => {
+    onLoad = async () => {
         let [err, result] = await fetchData(
             Api.APIURL_STATS_ACTIVITY_COURSE_INFO,
             this.state.param
@@ -131,9 +170,20 @@ export default class LotteryCoupon extends Component {
 
         if (err) return alert(err);
         this.setState(result);
+
+        let {
+            activity,
+            isSharePage,
+            stats_activity_course,
+            course,
+        } = this.state;
+        let config = activity.config;
+
+        document.title = config.title;
+
         try {
             await shareUtil.init();
-            let { isSharePage, stats_activity_course, course } = this.state;
+
             if (
                 isSharePage ||
                 (!isSharePage && location.pathname === '/temp/draw/coupon')
@@ -145,17 +195,22 @@ export default class LotteryCoupon extends Component {
                     '/temp/draw/coupon?stats_activity_id=' +
                     stats_activity_course.id;
                 shareUtil.setShareParam({
-                    title: '我正在参加善恩英语双12优惠券大派送活动！',
+                    title: config.share.title,
                     link: share_link,
                     imgUrl: getImgUrl(course.img),
-                    desc: '快来帮我抽优惠券！',
+                    desc: config.share.desc,
                 });
             }
         } catch (e) {}
     };
 
     onSubmit = async () => {
-        let { isSharePage, stats_activity_course, param } = this.state;
+        let {
+            isSharePage,
+            activity,
+            stats_activity_course,
+            param,
+        } = this.state;
 
         if (!(stats_activity_course && stats_activity_course.id))
             return alert('not_stats_activity_id');
@@ -175,23 +230,20 @@ export default class LotteryCoupon extends Component {
             data
         );
 
-        let errMsg;
-        if (isSharePage) {
-            errMsg = errMsgOther[err] || err;
-        } else {
-            errMsg = errMsgSelf[err] || err;
-        }
+        let config = activity.config;
+        let errMsg =
+            config.errMessage[isSharePage ? 'share' : 'self'][err] || err;
         let drawPrice = result && result.draw_price ? result.draw_price : 0;
 
         this.setState({ drawPrice, errMsg });
 
         this.handleOpenModal();
 
-        await this.onLoadInfo();
+        await this.onLoad();
     };
 
     doShare = async course => {
-        let { stats_activity_course } = this.state;
+        let { activity, stats_activity_course } = this.state;
 
         if (!(stats_activity_course && stats_activity_course.id))
             return alert('no_stats_activity_id');
@@ -201,11 +253,13 @@ export default class LotteryCoupon extends Component {
             '/temp/draw/coupon?stats_activity_id=' +
             stats_activity_course.id;
 
+        let config = activity.config;
         let share_params = {
-            title: '我正在参加善恩英语双12优惠券大派送活动！',
+            sharelog_id: '-1',
+            title: config.share.title,
             link: share_link,
             imgUrl: getImgUrl(course.img),
-            desc: '快来帮我抽优惠券！',
+            desc: config.share.desc,
         };
 
         await shareUtil.share(share_params);
@@ -214,7 +268,7 @@ export default class LotteryCoupon extends Component {
     doToCourse = course_id => {
         let link = `/content/course?cid=${course_id}`;
 
-        if (siteCodeUtil.inAPP()) {
+        if (interSiteCodeUtil.inAPP()) {
             Bridge.common(BRIDGE_EVENT.OPEN_BROWSER, {
                 url: link,
                 title: '课程详情',
@@ -225,7 +279,7 @@ export default class LotteryCoupon extends Component {
     };
 
     doToBuy = course_id => {
-        if (siteCodeUtil.inAPP()) {
+        if (interSiteCodeUtil.inAPP()) {
             Bridge.common(BRIDGE_EVENT.PRE_CONFIRM, {
                 course_id,
             });
@@ -327,59 +381,9 @@ export default class LotteryCoupon extends Component {
                     <div className={'line'} />
                     <div className={'row_e'}>活动说明</div>
                     <div className={'row_f'}>
-                        <div>
-                            1. 抽奖活动日期：
-                            {activity &&
-                                moment(activity.effective_at).format(
-                                    'YYYY-MM-DD'
-                                ) +
-                                    '至' +
-                                    moment(activity.expire_at).format(
-                                        'YYYY-MM-DD'
-                                    )}
-                        </div>
-                        <div>2. 优惠券有效期：抽奖之日起至2018-12-18</div>
-                        <div>
-                            3.
-                            优惠券适用范围：本优惠券为单门视频课程专享优惠券，仅可用于购买善恩英语
-                            {course.name}
-                        </div>
-                        <div>
-                            4.
-                            优惠券查询：登录善恩官网或APP，找到“我的优惠券”可查看优惠券累计金额
-                        </div>
-                        <div>
-                            5.
-                            活动及课程咨询请扫描下方二维码联系善恩小助手（微信：BSTCINE02）
-                        </div>
-                        <div>6. 活动最终解释权归善恩英语所有</div>
-                        <div
-                            style={{
-                                margin: '.4rem .2rem',
-                                textAlign: 'center',
-                            }}
-                        >
-                            <img
-                                src={require('@/asset/image/qrcode_bst02.jpg')}
-                                className={'qrcode_img'}
-                            />
-                        </div>
+                        {getInstructions(activity, course, coupon)}
                     </div>
-                    <div className="copyright">
-                        <div className="co-name">
-                            善严教育科技(上海)有限公司
-                        </div>
-                        <div className="co-desc">
-                            <div className="co-desc-year">
-                                Copyright © 2014 - 2018{' '}
-                                <a href="//www.bstcine.com">BSTCINE</a>. All
-                                Rights Reserved.{' '}
-                            </div>
-                            <div className="co-desc-code">
-                                沪ICP备14053596号-1
-                            </div>
-                        </div>
-                    </div>
+                    <div className="copyright">{copyright}</div>
                 </div>
             );
         } else {
@@ -442,59 +446,9 @@ export default class LotteryCoupon extends Component {
                     </div>
                     <div className={'row_f'}>活动说明</div>
                     <div className={'row_g'}>
-                        <div>
-                            1. 抽奖活动日期：
-                            {activity &&
-                                moment(activity.effective_at).format(
-                                    'YYYY-MM-DD'
-                                ) +
-                                    '至' +
-                                    moment(activity.expire_at).format(
-                                        'YYYY-MM-DD'
-                                    )}
-                        </div>
-                        <div>2. 优惠券有效期：抽奖之日起至2018-12-18</div>
-                        <div>
-                            3.
-                            优惠券适用范围：本优惠券为单门视频课程专享优惠券，仅可用于购买善恩英语
-                            {course.name}
-                        </div>
-                        <div>
-                            4.
-                            优惠券查询：登录善恩官网或APP，找到“我的优惠券”可查看优惠券累计金额
-                        </div>
-                        <div>
-                            5.
-                            活动及课程咨询请扫描下方二维码联系善恩小助手（微信：BSTCINE02）
-                        </div>
-                        <div>6. 活动最终解释权归善恩英语所有</div>
-                        <div
-                            style={{
-                                margin: '.4rem .2rem',
-                                textAlign: 'center',
-                            }}
-                        >
-                            <img
-                                src={require('@/asset/image/qrcode_bst02.jpg')}
-                                style={{ width: '2rem', height: '2rem' }}
-                            />
-                        </div>
+                        {getInstructions(activity, course, coupon)}
                     </div>
-                    <div className="copyright">
-                        <div className="co-name">
-                            善严教育科技(上海)有限公司
-                        </div>
-                        <div className="co-desc">
-                            <div className="co-desc-year">
-                                Copyright © 2014 - 2018{' '}
-                                <a href="//www.bstcine.com">BSTCINE</a>. All
-                                Rights Reserved.{' '}
-                            </div>
-                            <div className="co-desc-code">
-                                沪ICP备14053596号-1
-                            </div>
-                        </div>
-                    </div>
+                    <div className="copyright">{copyright}</div>
                 </div>
             );
         }

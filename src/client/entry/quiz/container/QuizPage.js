@@ -6,8 +6,9 @@ import { fetchQuizData } from '@/action/quizAction';
 import Title from '../container/Title';
 import QuestionsList from '../container/QuestionsList';
 import Submit from '../container/Submit';
-import { getParam } from '@/util/urlUtil';
+import { getParam } from '@/util/_base/urlUtil';
 import LoginModal from './LoginModal';
+import { GLayoutContainer } from '@/g/container';
 
 const mapStateToProps = state => {
     const { userRedu } = state;
@@ -45,22 +46,19 @@ class QuizPage extends Component {
         });
     }
 
-    // componentWillReceiveProps(nextProps){
-    //     let {stats_content_quiz_id} = getParam();
-    //     if()
-    // }
-
     render() {
         console.log('QuizPage render');
         let { user_id } = getParam();
         const { user } = this.props;
         return (
-            <div className="tgrammar">
-                <Title />
-                <QuestionsList />
-                <Submit user_id={user_id} user={user} />
-                <LoginModal />
-            </div>
+            <GLayoutContainer>
+                <div className="tgrammar">
+                    <Title />
+                    <QuestionsList />
+                    <Submit user_id={user_id} user={user} />
+                    <LoginModal />
+                </div>
+            </GLayoutContainer>
         );
     }
 }

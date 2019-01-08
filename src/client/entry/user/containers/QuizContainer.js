@@ -16,6 +16,7 @@ import {
     URL_User_Quiz_Vocab_New,
     URL_Quiz_Grammar,
 } from '@/constant/menuItemUrl';
+import { GLayoutContainer } from '@/g/container';
 
 class QuizContainer extends Component {
     componentDidMount() {
@@ -26,66 +27,68 @@ class QuizContainer extends Component {
         const { vocabStats, grammarStats, user } = this.props;
 
         return (
-            <div className="quiz-stats-tabs">
-                <Tabs className="coupon-tabs">
-                    <TabItems>
-                        <TabItem>词汇量测试</TabItem>
-                        {user &&
-                            user.type === '2' && (
-                                <TabItem>核心语法测试</TabItem>
-                            )}
-                    </TabItems>
-                    <TabPanels>
-                        <TabPanel>
-                            <div className="vocabtest-table">
-                                <div className="table-head">
-                                    <span>提交时间</span>
-                                    <span>用时</span>
-                                    <span>词汇量</span>
+            <GLayoutContainer>
+                <div className="quiz-stats-tabs">
+                    <Tabs className="coupon-tabs">
+                        <TabItems>
+                            <TabItem>词汇量测试</TabItem>
+                            {user &&
+                                user.type === '2' && (
+                                    <TabItem>核心语法测试</TabItem>
+                                )}
+                        </TabItems>
+                        <TabPanels>
+                            <TabPanel>
+                                <div className="vocabtest-table">
+                                    <div className="table-head">
+                                        <span>提交时间</span>
+                                        <span>用时</span>
+                                        <span>词汇量</span>
+                                    </div>
+                                    <ul className="table-body">
+                                        <QuizVocabStats list={vocabStats} />
+                                    </ul>
                                 </div>
-                                <ul className="table-body">
-                                    <QuizVocabStats list={vocabStats} />
-                                </ul>
-                            </div>
-                        </TabPanel>
-                        <TabPanel>
-                            <div className="grammar-table">
-                                <div className="table-head">
-                                    <span>提交时间</span>
-                                    <span>用时</span>
-                                    <span>得分</span>
-                                    <span>状态</span>
+                            </TabPanel>
+                            <TabPanel>
+                                <div className="grammar-table">
+                                    <div className="table-head">
+                                        <span>提交时间</span>
+                                        <span>用时</span>
+                                        <span>得分</span>
+                                        <span>状态</span>
+                                    </div>
+                                    <ul className="table-body">
+                                        <GrammarStats list={grammarStats} />
+                                    </ul>
                                 </div>
-                                <ul className="table-body">
-                                    <GrammarStats list={grammarStats} />
-                                </ul>
-                            </div>
-                        </TabPanel>
-                    </TabPanels>
-                </Tabs>
+                            </TabPanel>
+                        </TabPanels>
+                    </Tabs>
 
-                {user &&
-                    user.type === '2' && (
-                        <CFloatingButton
-                            variant="contained"
-                            color="primary"
-                            onClick={() => {
-                                location.href = URL_Quiz_Grammar;
-                            }}
-                        >
-                            测试语法
-                        </CFloatingButton>
-                    )}
-                <CFloatingButton
-                    variant="contained"
-                    color="primary"
-                    onClick={() => {
-                        location.href = URL_User_Quiz_Vocab_New;
-                    }}
-                >
-                    测试词汇量
-                </CFloatingButton>
-            </div>
+                    {user &&
+                        user.type === '2' && (
+                            <CFloatingButton
+                                variant="contained"
+                                color="primary"
+                                onClick={() => {
+                                    location.href = URL_Quiz_Grammar;
+                                }}
+                            >
+                                测试语法
+                            </CFloatingButton>
+                        )}
+                    <CFloatingButton
+                        variant="contained"
+                        color="primary"
+                        onClick={() => {
+                            location.href = URL_User_Quiz_Vocab_New;
+                        }}
+                    >
+                        测试词汇量
+                    </CFloatingButton>
+                </div>
+            </GLayoutContainer>
         );
     }
 }

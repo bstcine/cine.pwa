@@ -1,10 +1,10 @@
 import React from 'react';
 import TasksList from './TasksList';
 import { CCardContainer, CIcon } from '@/component/_base';
-import uaUtil from '@/util/uaUtil';
+import uaUtil from '@/util/_base/uaUtil';
 import QRCode from '@/component/QRCode';
-import Bridge from '@/util/bridge';
-import siteCodeUtil from '@/util/sitecodeUtil';
+import Bridge from '@/util/_base/interBridge';
+import interSiteCodeUtil from '@/util/_base/interSiteCodeUtil';
 import BRIDGE_EVENT from '@/constant/bridgeEvent';
 
 const ExpandMore = ({ tasks, isLimitTasks, onShowAllTask }) => {
@@ -21,7 +21,7 @@ const ExpandMore = ({ tasks, isLimitTasks, onShowAllTask }) => {
 
 const onClickAllTask = () => {
     let href = '/learn/task';
-    if (siteCodeUtil.inAndroidAPP()) {
+    if (interSiteCodeUtil.inAndroidAPP()) {
         Bridge.android(BRIDGE_EVENT.OPEN_BROWSER, {
             url: href,
             title: '全部作业',
@@ -55,7 +55,7 @@ const Tasks = ({ tasks, user, isLimitTasks, onShowAllTask, gActions }) => {
                                 const url = `${location.protocol}//${
                                     location.host
                                 }/learn/achieve?user_id=${user.id}`;
-                                if (siteCodeUtil.inIOSAPP()) {
+                                if (interSiteCodeUtil.inIOSAPP()) {
                                     Bridge.ios(BRIDGE_EVENT.OPEN_BROWSER, {
                                         visible: false,
                                         url,
@@ -70,7 +70,7 @@ const Tasks = ({ tasks, user, isLimitTasks, onShowAllTask, gActions }) => {
                     ) : (
                         <a
                             onClick={() => {
-                                if (siteCodeUtil.inAndroidAPP()) {
+                                if (interSiteCodeUtil.inAndroidAPP()) {
                                     Bridge.android(BRIDGE_EVENT.OPEN_BROWSER, {
                                         url: `/learn/achieve?user_id=${
                                             user.id

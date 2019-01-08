@@ -1,14 +1,15 @@
+import interSiteCodeUtil from './interSiteCodeUtil';
+import Bridge from './interBridge';
 import uaUtil from './uaUtil';
 import wechatUtil from './wechatUtil';
 import { getParam, addParam, removeParam } from './urlUtil';
-import Bridge from './bridge';
-import { get } from '../service/request';
-import Api from '../../APIConfig';
-import BRIDGE_EVENT from '@/constant/bridgeEvent';
-import siteCodeUtil from '@/util/sitecodeUtil';
-import { fetchData } from '@/service/base';
+
 import ShareMask from '@/component/ShareMask';
 import QRCode from '@/component/QRCode';
+import BRIDGE_EVENT from '@/constant/bridgeEvent';
+import { fetchData } from '@/service/base';
+import { get } from '@/service/request';
+import Api from '../../../APIConfig';
 
 let inter = null;
 let qrcode = null;
@@ -72,7 +73,7 @@ const jsShare = async function jsShare(share_params) {
 };
 
 const share = async share_params => {
-    if (siteCodeUtil.inIOSAPP()) {
+    if (interSiteCodeUtil.inIOSAPP()) {
         let list = await Bridge.ios(BRIDGE_EVENT.INSTALLED_APP_LIST);
         if (list && list.wechat === 1) {
             let res = await Bridge.ios(BRIDGE_EVENT.SHARE, share_params);
@@ -82,7 +83,7 @@ const share = async share_params => {
         } else {
             await qrShare(share_params);
         }
-    } else if (siteCodeUtil.inAndroidAPP()) {
+    } else if (interSiteCodeUtil.inAndroidAPP()) {
         let list = await Bridge.android(BRIDGE_EVENT.INSTALLED_APP_LIST);
         if (list && list.wechat === 1) {
             let res = await Bridge.android(BRIDGE_EVENT.SHARE, share_params);

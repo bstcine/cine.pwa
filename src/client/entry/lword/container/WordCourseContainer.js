@@ -5,6 +5,8 @@ import { wCourseAction } from '@/action/wCourseAction';
 import { getParam } from '@/util/_base/urlUtil';
 import WordCourse from './../component/wordCourse';
 import { GLayoutContainer } from "@/g/container";
+import {interEventEmitter} from "@/util/_base/interEventEmitter";
+import BRIDGE_EVENT from "@/constant/bridgeEvent";
 
 class WordCourseContainer extends Component {
     constructor(props) {
@@ -16,6 +18,10 @@ class WordCourseContainer extends Component {
 
     componentDidMount() {
         this.props.actions.loadUserWordLearnAndQuiz(this.param);
+        interEventEmitter.on(BRIDGE_EVENT.Pageshow, ()=>{
+            this.param = getParam();
+            this.props.actions.loadUserWordLearnAndQuiz(this.param);
+        });
     }
 
     render() {

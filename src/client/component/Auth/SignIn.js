@@ -33,9 +33,9 @@ class SignIn extends Component {
 
     async submit() {
         const { phone, password } = this.state;
-        const { onSuccess } = this.props;
+        const { onSuccess, action } = this.props;
         this.setState({ submit_btn_disabled: true, submit_btn: '登录中' });
-        let [err] = await fetchData(Api.APIURL_Auth_SignIn, {
+        let [err] = await action({
             phone,
             password,
             school: this.school,

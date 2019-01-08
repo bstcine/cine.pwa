@@ -4,7 +4,7 @@ import CAuth from '@/component/Auth';
 import AuthLogo from '@/entry/auth/component/AuthLogo';
 import { getParam } from '@/util/_base/urlUtil';
 import { fetchData } from '@/service/base';
-import { APIURL_Content_School_Detail } from '../../../../APIConfig';
+import { APIURL_Auth_SignIn, APIURL_Content_School_Detail } from "../../../../APIConfig";
 import errorMsg from '@/util/errorMsg';
 import { CMessage } from '@/component/_base';
 import SchoolLogo from '@/entry/auth/component/SchoolLogo';
@@ -65,6 +65,13 @@ class AuthPage extends Component {
                                 location.href = '/';
                             }
                         }}
+                        signInAction={({ phone, password, school }) =>
+                            fetchData(APIURL_Auth_SignIn, {
+                                phone,
+                                password,
+                                school,
+                            })
+                        }
                     />
 
                     <div className="cine_auth__tips">

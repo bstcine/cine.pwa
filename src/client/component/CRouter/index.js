@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter, HashRouter, Route } from 'react-router-dom';
 
 const RRDRouter = ({ children }) => {
-    return window.MODE === 'static' ? (
+    return MODE === 'static' ? (
         <HashRouter>{children}</HashRouter>
     ) : (
         <BrowserRouter>{children}</BrowserRouter>

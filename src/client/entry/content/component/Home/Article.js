@@ -25,7 +25,7 @@ export default class Article extends Component {
                                         更多 &gt;
                                     </a>
                                 </div>
-                                <LazyLoad offset={100} height={200}>
+                                <LazyLoad offset={100} height={200} overflow={true}>
                                     <div
                                         className="article-img"
                                         style={{

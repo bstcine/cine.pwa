@@ -63,7 +63,7 @@ export class CardCourse extends Component {
         return (
             <CCard href={href} hover={hover}>
                 <div className="cardCourse">
-                    <LazyLoad offset={100} height={200}>
+                    <LazyLoad offset={100} height={200} overflow={true}>
                         <div className="img-169">
                             <div
                                 className="img"

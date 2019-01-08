@@ -242,7 +242,7 @@ export default class Home extends Component {
                 </CFloatingButton>
 
                 {!interSiteCodeUtil.inAPP() && (
-                    <LazyLoad offset={100}>
+                    <LazyLoad offset={100} overflow={true}>
                         <div className="container-fluid">
                             <div
                                 className="cine-slogan"

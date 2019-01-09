@@ -5,6 +5,7 @@ import End from './end.js';
 import interSiteCodeUtil from '@/util/_base/interSiteCodeUtil';
 import BRIDGE_EVENT from '@/constant/bridgeEvent';
 import * as Service from '@/service/quiz';
+import commonUtil from '@/util/_base/commonUtil';
 
 export default class Card extends Component {
     constructor(props) {
@@ -125,7 +126,7 @@ export default class Card extends Component {
     // 重新加载
     onAgainLoad() {
         this.loadCardByIndex(0);
-        this.props.history.push('/card');
+        this.props.history.push('/cquiz/card');
     }
 
     // 退出答题
@@ -189,7 +190,7 @@ export default class Card extends Component {
                 option.type == '2' ? (
                     <img
                         className="content"
-                        src={'//www.bstcine.com' + option.content}
+                        src={commonUtil.getImageHref(option.content)}
                     />
                 ) : (
                     option.content

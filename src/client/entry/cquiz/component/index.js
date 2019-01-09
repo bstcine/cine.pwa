@@ -14,7 +14,7 @@ export default class Index extends Component {
     }
 
     toCard() {
-        this.props.history.push('/card');
+        this.props.history.push('/cquiz/card');
     }
 
     render() {

@@ -4,6 +4,7 @@ const common = require('./webpack.common.js');
 const WPTerserPlugin = require('terser-webpack-plugin');
 const WPOptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const WebpackServiceWorkerPlugin = require('./plugins/webpackServiceWorkerPlugin');
+const WPLodashModuleReplacementPlugin = require('lodash-webpack-plugin');
 const WPBundleAnalyzerPlugin = require('webpack-bundle-analyzer')
     .BundleAnalyzerPlugin;
 
@@ -52,6 +53,7 @@ module.exports = merge(common, {
         ],
     },
     plugins: [
+        new WPLodashModuleReplacementPlugin(),
         new WebpackServiceWorkerPlugin({
             name: 'sw-learn.js',
             path: path.join(__dirname, 'build'),
@@ -60,6 +62,6 @@ module.exports = merge(common, {
             name: 'sw-widget.js',
             path: path.join(__dirname, 'build'),
         }),
-        // new WPBundleAnalyzerPlugin({ analyzerMode: 'static' }),
+        new WPBundleAnalyzerPlugin({ analyzerMode: 'static' }),
     ],
 });

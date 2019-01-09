@@ -67,6 +67,7 @@ module.exports = {
         new MiniCssExtractPlugin({
             filename: 'entry/[name]/index.[contenthash:8].css',
         }),
+        new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
         ...htmlWebpackPlugins,
     ],
     resolve: {

@@ -84,7 +84,7 @@ export default class Course extends Component {
         return (
             <div className="course-wrap">
                 <CourseLink course={course} className="course-item" {...props}>
-                    <LazyLoad offset={100} height={200} overflow={true}>
+                    <LazyLoad offset={100} height={200}>
                         <div
                             className="course-img"
                             style={{

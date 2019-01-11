@@ -20,6 +20,7 @@ const BRIDGE_EVENT = {
     APP_PAY: 'app_pay',
     ORDER_PAY_SUCCESS: 'order_pay_success',
     OPEN_LESSON_PLAY_WINDOW: 'openLessonPlayWindow',
+    SHOW_PAYMENT: 'showPayment',
 };
 
 export default BRIDGE_EVENT;

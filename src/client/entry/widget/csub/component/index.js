@@ -1,5 +1,10 @@
 import React from 'react';
-import { CPanel, CCardContainer, CWindow } from '@/component/_base';
+import {
+    CPanel,
+    CCardContainer,
+    CWindow,
+    CIconButton,
+} from '@/component/_base';
 import { CourseList, TeacherList } from '@/component/CardItem';
 import { SideBarPWAH5 } from '@/component/SideBar/PWAH5';
 import interSiteCodeUtil from '@/util/_base/interSiteCodeUtil';
@@ -113,6 +118,19 @@ export default class SubPage extends React.Component {
         }
     }
 
+    async interIOSPay(payType) {
+        alert('交互iOS支付:' + payType);
+        if (interSiteCodeUtil.inIOSAPP()) {
+            let payOrder = 'erwerewrwer';
+            let list = await Bridge.ios(BRIDGE_EVENT.SHOW_PAYMENT, {
+                price: 0.01,
+                payType,
+                payOrder,
+            });
+            alert(JSON.stringify(list));
+        }
+    }
+
     async interAndroid() {
         if (interSiteCodeUtil.inAndroidH5()) {
             alert('H5 Show: Interaction Kotlin From H5');
@@ -156,7 +174,32 @@ export default class SubPage extends React.Component {
                     onChange={this.onChangeFromSB}
                 />
 
-                <CPanel title="核心课程">
+                <CPanel
+                    title="核心课程"
+                    ext={
+                        <div>
+                            <CIconButton
+                                icon="svg-m-share"
+                                onClick={() => {
+                                    this.interIOS();
+                                }}
+                            />
+                            <CIconButton
+                                icon="svg-m-payment"
+                                onClick={() => {
+                                    this.interIOSPay('ali');
+                                }}
+                            />
+                            <CIconButton
+                                icon="svg-m-payment"
+                                color="primary"
+                                onClick={() => {
+                                    this.interIOSPay('wechat');
+                                }}
+                            />
+                        </div>
+                    }
+                >
                     <CCardContainer layout="234">
                         <CourseList list={courseList} hover="lighten" />
                     </CCardContainer>

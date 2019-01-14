@@ -14,6 +14,8 @@ import authUtil from '@/util/authUtil';
 import { getParam, removeParam } from '@/util/_base/urlUtil';
 import shareUtil from '@/util/_base/shareUtil';
 import errorMsg from '@/util/errorMsg';
+import { fetchData } from '@/service/base';
+import Api from '../../../../../APIConfig';
 
 export default class SubPage extends React.Component {
     constructor(props) {
@@ -121,11 +123,24 @@ export default class SubPage extends React.Component {
     async interIOSPay(payType) {
         alert('交互iOS支付:' + payType);
         if (interSiteCodeUtil.inIOSAPP()) {
-            let payOrder = 'erwerewrwer';
+            // create 0.01 rmb order
+            let [err, res] = await fetchData(Api.APIURL_Order_Create, {
+                cid: 't011547435948304gqhYu859Qu',
+            });
+            if (err) return alert(err);
+            let { order_id } = res;
+            // create ali/wechat pay url
+            let url = '/api/pay/' + payType;
+            let [err2, res2] = await fetchData(url, {
+                cid: order_id,
+            });
+            if (err) return alert(err2);
+            console.log(res2);
+            let { pay_url, payObj } = res2;
             let list = await Bridge.ios(BRIDGE_EVENT.SHOW_PAYMENT, {
-                price: 0.01,
                 payType,
-                payOrder,
+                payUrl: pay_url,
+                payObj,
             });
             alert(JSON.stringify(list));
         }

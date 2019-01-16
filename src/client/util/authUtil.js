@@ -10,8 +10,8 @@ import { APIURL_User_Info } from '../../APIConfig';
 
 const authUtil = {
     login: async (prop = {}) => {
-        let { redirect, onSuccess } = prop;
-        if (interSiteCodeUtil.inIOSAPP()) {
+        let { redirect, onSuccess, callNativeLogin = true } = prop;
+        if (interSiteCodeUtil.inIOSAPP() && callNativeLogin) {
             let { token } = await Bridge.ios(BRIDGE_EVENT.LOGIN);
             storeUtil.setToken(token);
             if (onSuccess) {
@@ -32,8 +32,13 @@ const authUtil = {
         } else {
             let modal = CAuthModal.open({
                 type: 'signin',
-                onSignInSuccess: () => {
+                onSignInSuccess: async res => {
                     modal.close();
+                    console.log(res);
+                    if (interSiteCodeUtil.inIOSAPP()) {
+                        await Bridge.ios(BRIDGE_EVENT.UPDATE_AUTH, res);
+                    }
+
                     if (onSuccess) {
                         onSuccess();
                     } else if (redirect) {

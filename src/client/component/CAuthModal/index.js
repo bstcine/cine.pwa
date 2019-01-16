@@ -18,11 +18,11 @@ const CAuthModal = {
                             school,
                         })
                     }
-                    onSignUpSuccess={_this => {
-                        _this.toggle('signin');
+                    onSignUpSuccess={function() {
+                        this.toggle('signin');
                     }}
-                    onResetPwdSuccess={_this => {
-                        _this.toggle('signin');
+                    onResetPwdSuccess={function() {
+                        this.toggle('signin');
                     }}
                 />
             ),

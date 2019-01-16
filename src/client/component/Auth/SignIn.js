@@ -33,7 +33,7 @@ class SignIn extends Component {
         const { phone, password } = this.state;
         const { onSuccess, action } = this.props;
         this.setState({ submit_btn_disabled: true, submit_btn: '登录中' });
-        let [err] = await action({
+        let [err, res] = await action({
             phone,
             password,
             school: this.school,
@@ -41,7 +41,7 @@ class SignIn extends Component {
         this.setState({ submit_btn_disabled: false, submit_btn: '登录' });
         if (err) return CMessage.info(errorMsg(err));
         CMessage.success('登录成功', 1000, () => {
-            onSuccess && onSuccess();
+            onSuccess && onSuccess(res);
         });
     }
 

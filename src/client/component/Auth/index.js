@@ -35,9 +35,9 @@ class CAuth extends Component {
                     <CSignIn
                         toggle={this.toggle}
                         action={signInAction}
-                        onSuccess={() => {
+                        onSuccess={(res) => {
                             // this.toggle('signin');
-                            onSignInSuccess && onSignInSuccess(this);
+                            onSignInSuccess && onSignInSuccess.call(this, res);
                         }}
                     />
                 );
@@ -47,7 +47,7 @@ class CAuth extends Component {
                         toggle={this.toggle}
                         onSuccess={() => {
                             // this.toggle('signin');
-                            onSignUpSuccess && onSignUpSuccess(this);
+                            onSignUpSuccess && onSignUpSuccess.call(this);
                         }}
                     />
                 );
@@ -57,7 +57,7 @@ class CAuth extends Component {
                         toggle={this.toggle}
                         onSuccess={() => {
                             // this.toggle('signin');
-                            onResetPwdSuccess && onResetPwdSuccess(this);
+                            onResetPwdSuccess && onResetPwdSuccess.call(this);
                         }}
                     />
                 );

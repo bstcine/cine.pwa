@@ -81,6 +81,7 @@ module.exports = {
             {
                 test: /\.js$/,
                 loader: 'babel-loader',
+                exclude: devMode ? /node_modules/ : undefined,
                 options: {
                     presets: ['@babel/preset-env'],
                 },

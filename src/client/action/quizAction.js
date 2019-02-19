@@ -110,8 +110,7 @@ export const fetchQuizData = ({
         dispatch(recordTime());
     } else if (currentQuizState === CurrentQuizState.WAITING4CHECK) {
         CAlert.open({
-            text:
-                '试卷已提交，正在等待老师阅卷。批改完成后，老师会与直接您联系。',
+            text: '试卷已提交，正在等待老师阅卷。',
         });
     } else if (currentQuizState === CurrentQuizState.CHECKING) {
         dispatch(showDefaultFeedback());
@@ -183,13 +182,27 @@ export const submitAnswer = () => async (dispatch, getState) => {
     } = getState();
     let duration = Math.round((new Date().getTime() - timer.startTime) / 1000);
     let answers = [];
+    let score = 0;
     questions.allIds.forEach(questionId => {
         let question = questions.byId[questionId];
         if (question.format === QuestionFormat.FORMAT1_CHOOSE_ONE) {
             let answer = parseFormat1Answer(question, answersById);
+            if (quiz.type === '2') {
+                if (typeof answer.select_score === 'number') {
+                    score += answer.select_score;
+                    answer.feedback = questions.byId[questionId].feedback;
+                }
+            }
             answers.push(answer);
         } else if (question.format === QuestionFormat.FORMAT3_CORRECT) {
             let answer = parseFormat3Answer(question, answersById);
+            if (quiz.type === '2') {
+                if (typeof answer.select_score === 'number')
+                    score += answer.select_score;
+                if (typeof answer.text_score === 'number')
+                    score += answer.text_score;
+                answer.feedback = questions.byId[questionId].feedback;
+            }
             answers.push(answer);
         } else if (question.format === QuestionFormat.FORMAT4_SHORT_QUE) {
             let answer = parseFormat4Answer(question, answersById);
@@ -204,6 +217,7 @@ export const submitAnswer = () => async (dispatch, getState) => {
                 quiz_id: quiz.id,
                 answers,
                 duration,
+                score,
                 task_schedule_id: taskScheduleId,
             },
             { showError: false }

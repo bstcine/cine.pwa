@@ -66,18 +66,15 @@ class QuizContainer extends Component {
                         </TabPanels>
                     </Tabs>
 
-                    {user &&
-                        user.type === '2' && (
-                            <CFloatingButton
-                                variant="contained"
-                                color="primary"
-                                onClick={() => {
-                                    location.href = URL_Quiz_Grammar;
-                                }}
-                            >
-                                测试语法
-                            </CFloatingButton>
-                        )}
+                    <CFloatingButton
+                        variant="contained"
+                        color="primary"
+                        onClick={() => {
+                            location.href = URL_Quiz_Grammar;
+                        }}
+                    >
+                        测试语法
+                    </CFloatingButton>
                     <CFloatingButton
                         variant="contained"
                         color="primary"

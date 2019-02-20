@@ -32,10 +32,7 @@ class QuizContainer extends Component {
                     <Tabs className="coupon-tabs">
                         <TabItems>
                             <TabItem>词汇量测试</TabItem>
-                            {user &&
-                                user.type === '2' && (
-                                    <TabItem>核心语法测试</TabItem>
-                                )}
+                            <TabItem>核心语法测试</TabItem>
                         </TabItems>
                         <TabPanels>
                             <TabPanel>

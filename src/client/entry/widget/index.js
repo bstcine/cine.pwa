@@ -7,7 +7,7 @@ import rootReducer from './reducer';
 const store = createStore(rootReducer, applyMiddleware(thunk));
 import routes from './routes';
 import { GRouter } from '@/g/component';
-import Entry from "@/component/Entry";
+import Entry from '@/component/Entry';
 
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', function() {

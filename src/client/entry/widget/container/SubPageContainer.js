@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import subPageAction from '@/action/subPageAction';
-import SubPage from '@/entry/widget/csub/component';
+import SubPage from '@/entry/widget/component/subPage';
 import { interEventEmitter } from '@/util/_base/interEventEmitter';
 import { CMessage } from '@/component/_base';
 import { GLayoutContainer } from '@/g/container';

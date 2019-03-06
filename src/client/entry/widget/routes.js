@@ -1,12 +1,12 @@
-import Container from '@/entry/widget/container';
-import CardContainer from '@/entry/widget/card/CardContainer';
-import SPageContainer from '@/entry/widget/csub/SPageContainer';
+import WidgetExampleContainer from '@/entry/widget/container/WidgetExampleContainer';
+import CardContainer from '@/entry/widget/container/CardContainer';
+import SPageContainer from '@/entry/widget/container/SubPageContainer';
 
 const routes = [
     {
         exact: true,
         path: '/widget',
-        component: Container,
+        component: WidgetExampleContainer,
     },
     {
         path: '/widget/card',

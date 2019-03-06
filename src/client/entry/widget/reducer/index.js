@@ -1,11 +1,11 @@
 import { combineReducers } from 'redux';
 import gReducer from '@/g/reducer';
-import cardRedu from './card/cardReducer';
-import spageRedu from './csub/spageReducer';
+import cardRedu from './cardReducer';
+import subPageRedu from './subPageReducer';
 
 const rootReducer = combineReducers({
     cardRedu,
-    spageRedu,
+    subPageRedu,
     ...gReducer,
 });
 

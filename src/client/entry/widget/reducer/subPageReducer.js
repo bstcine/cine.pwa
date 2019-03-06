@@ -9,7 +9,7 @@ const initialState = fromJS({
     resource: sub.result.resource    
 });
 
-const spageRedu = (state = initialState, action) => {
+const subPageRedu = (state = initialState, action) => {
     switch (action.type) {
         /*         case Action_UC.RECEIVE:
             return state.set('orders', action.payload); */
@@ -18,4 +18,4 @@ const spageRedu = (state = initialState, action) => {
     }
 };
 
-export default spageRedu;
+export default subPageRedu;

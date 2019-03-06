@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import cardAction from '@/action/cCardAction';
-import CardDemo from './component';
+import CardDemo from '../component/card';
 import { GLayoutContainer } from "@/g/container";
 
 class CardContainer extends Component {

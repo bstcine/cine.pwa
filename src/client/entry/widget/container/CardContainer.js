@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import cardAction from '@/action/cCardAction';
 import CardDemo from '../component/card';
-import { GLayoutContainer } from "@/g/container";
+import RootContainer from "./_rootContainter";
 
 class CardContainer extends Component {
     componentDidMount() {
@@ -13,7 +13,7 @@ class CardContainer extends Component {
     render() {
         let { orders, courses, teachers, articles, isOpenDetail, actions } = this.props;
         return (
-            <GLayoutContainer>
+            <RootContainer>
                 <CardDemo
                     isOpenDetail={isOpenDetail}
                     orders={orders}
@@ -22,7 +22,7 @@ class CardContainer extends Component {
                     articles={articles}
                     actions={actions}
                 />
-            </GLayoutContainer>
+            </RootContainer>
         );
     }
 }

@@ -5,9 +5,7 @@ import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 import rootReducer from './reducer';
 const store = createStore(rootReducer, applyMiddleware(thunk));
-import routes from './routes';
-import { GRouter } from '@/g/component';
-import Entry from '@/component/Entry';
+import IRouter from './iRouter';
 
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', function() {
@@ -27,11 +25,11 @@ if ('serviceWorker' in navigator) {
     });
 }
 
-class Widget extends Entry {
+class Widget extends React.Component {
     render() {
         return (
             <Provider store={store}>
-                <GRouter routes={routes} />
+                <IRouter />
             </Provider>
         );
     }

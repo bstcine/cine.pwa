@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import WidgetDemo from '../component/demo';
-import { GLayoutContainer } from '@/g/container';
+import RootContainer from "./_rootContainter";
 
 class WidgetExampleContainer extends Component {
     render() {
         return (
-            <GLayoutContainer>
+            <RootContainer>
                 <WidgetDemo />
-            </GLayoutContainer>
+            </RootContainer>
         );
     }
 }

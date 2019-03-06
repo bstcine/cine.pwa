@@ -1,6 +1,8 @@
+import { GRouter } from '@/g/component';
+import React from 'react';
 import WidgetExampleContainer from '@/entry/widget/container/WidgetExampleContainer';
 import CardContainer from '@/entry/widget/container/CardContainer';
-import SPageContainer from '@/entry/widget/container/SubPageContainer';
+import SubPageContainer from '@/entry/widget/container/SubPageContainer';
 
 const routes = [
     {
@@ -14,12 +16,13 @@ const routes = [
     },
     {
         path: '/widget/csub',
-        component: SPageContainer,
+        component: SubPageContainer,
     },
     {
         path: '/widget/pwa',
-        component: SPageContainer,
+        component: SubPageContainer,
     },
 ];
 
-export default routes;
+const IRouter = () => <GRouter routes={routes} />;
+export default IRouter;

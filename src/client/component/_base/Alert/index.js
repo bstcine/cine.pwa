@@ -18,10 +18,12 @@ class Alert extends Component {
             onCancel,
             onConfirm,
             close,
+            afterClose,
         } = this.props;
         return (
             <Modal
                 isOpen={isOpen}
+                afterClose={afterClose}
                 className={classNames(`${cls}__main`, {
                     [`${cls}__main--responsive`]: responsive,
                 })}
@@ -62,18 +64,21 @@ class Alert extends Component {
 Alert.open = function(props) {
     const div = document.createElement('div');
     document.body.appendChild(div);
-    const currentProps = { ...props, close, isOpen: true };
+    const curProps = { ...props, afterClose: destroy, close, isOpen: true };
 
-    function render(currentProps) {
-        ReactDOM.render(<Alert {...currentProps} />, div);
+    function render(_props) {
+        ReactDOM.render(<Alert {..._props} />, div);
     }
-    function close() {
+    function destroy() {
         const unmountResult = ReactDOM.unmountComponentAtNode(div);
         if (unmountResult && div.parentNode) {
             div.parentNode.removeChild(div);
         }
     }
-    render(currentProps);
+    function close() {
+        render({ ...curProps, isOpen: false });
+    }
+    render(curProps);
     return {
         close,
     };

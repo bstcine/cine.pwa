@@ -5,7 +5,7 @@ import './style.less';
 const ShareMask = {
     open: () =>
         CModal.open({
-            maskCloseable: true,
+            maskClosable: true,
             className: 'cine-share__container',
             children: (
                 <>

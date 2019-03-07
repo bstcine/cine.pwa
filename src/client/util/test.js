@@ -81,18 +81,25 @@
 //         }, num * 1000);
 //     });
 // }
-const exec = async () =>
-    new Promise((resolve, reject) => {
-        setTimeout(() => {
-            resolve();
-        }, 1000);
+// const exec = async () =>
+//     new Promise((resolve, reject) => {
+//         setTimeout(() => {
+//             resolve();
+//         }, 1000);
+//
+//         setTimeout(() => {
+//             resolve();
+//         }, 2000);
+//     });
+//
+// (async () => {
+//     await exec();
+//     console.log(111);
+// })();
 
-        setTimeout(() => {
-            resolve();
-        }, 2000);
-    });
 
-(async () => {
-    await exec();
-    console.log(111);
-})();
+function subName(str) {
+    return str.slice(0,1) + '**' + str.slice(-1);
+}
+
+console.log(subName('123456'));

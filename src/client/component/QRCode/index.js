@@ -1,35 +1,20 @@
 import './style.less';
 import React from 'react';
-import qrcode from 'qrcode';
+import { CModal } from '@/component/_base';
 import QRCode from './QRCode';
-import ReactDOM from 'react-dom';
 
 /**
  * { title, text, onCancel, onConfirm }
  */
 QRCode.open = function(url) {
-    const div = document.createElement('div');
-    document.body.appendChild(div);
+    const { close } = CModal.open({
+        children: <QRCode url={url} close={xxClose} />,
+        maskClosable: true,
+    });
 
-    function render(url, close) {
-
-        ReactDOM.render(<QRCode url={url} close={close} />, div);
+    function xxClose() {
+        close();
     }
-    function close() {
-        console.log('close');
-        const unmountResult = ReactDOM.unmountComponentAtNode(div);
-        if (unmountResult && div.parentNode) {
-            div.parentNode.removeChild(div);
-        }
-    }
-    qrcode
-        .toDataURL(url, { width: 200 })
-        .then(img_url => {
-            render(img_url, close);
-        })
-        .catch(err => {
-            alert(err);
-        });
     return {
         close,
     };

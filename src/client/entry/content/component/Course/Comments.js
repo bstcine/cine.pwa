@@ -1,21 +1,23 @@
 import React, { Component } from 'react';
 
-export default class Comments extends Component {
-    constructor(props) {
-        super(props);
-        this.renderComments = this.renderComments.bind(this);
-    }
+function subName(str) {
+    return str.slice(0, 1) + '**' + str.slice(-1);
+}
 
+export default class Comments extends Component {
     renderComments() {
+        let imgUrl = require('@/asset/image/ico_headpic.png');
         let { comments } = this.props;
         if (comments && comments.length) {
             let comentsArr = comments.map((item, index) => {
                 return (
                     <div key={index} className="comment-item">
                         <div className="comment-meta">
+                            <img src={imgUrl} alt="" />
                             <span className="nickname">
-                                {item.user_nickname}
+                                {subName(item.user_nickname)}
                             </span>
+                            {/*<span className="date">2019-10-11</span>*/}
                         </div>
                         <div className="comment-detail">
                             {item.comment_desc}

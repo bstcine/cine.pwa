@@ -238,12 +238,13 @@
         }
     }
 
+    .tab-panels{
+        overflow: hidden;
+    }
     .course-detail {
         min-height: 13rem;
-        .course-feature,
-        .course-category,
-        .course-comments {
-            padding: 0.4rem 0.3rem;
+        .course-feature {
+            margin: 20px 10px;
         }
 
         .course-category {
@@ -253,21 +254,19 @@
                 list-style: none;
             }
             .course-list {
-                font-size: 0.36rem;
-                line-height: 0.84rem;
+                margin: 20px 10px;
+                line-height: 2;
+                font-size: 16px;
                 color: #004593;
                 .chapter-list {
-                    font-size: 0.32rem;
-                    line-height: 1rem;
+                    font-size: 14px;
                     color: #0d0e0e;
                     padding-left: 0.12rem;
                     .grey-line-top(2);
                     .lesson-list {
                         padding-left: 0.36rem;
-                        font-size: 0.3rem;
-                        line-height: 0.8rem;
+                        font-size: 13px;
                         color: #0c0c0c;
-                        .grey-line-top(2);
                         .grey-line-bottom(2);
                         .meta {
                             padding-right: 0.34rem;
@@ -300,25 +299,36 @@
 
 .course-comments {
     .comment-item {
-        padding: 0.44rem 0.3rem 0.3rem 0.34rem;
+        padding: 20px 0;
+        margin: 0 10px;
         border-bottom: 0.02rem solid #e9eaec;
+        line-height: 1.5;
         .comment-meta {
-            margin-bottom: 0.24rem;
-            color: #a2a4a8;
-            font-size: 0;
+            margin-bottom: 10px;
+            color: #999;
+            font-size: 12px;
+            line-height: 1.5;
+            overflow: hidden;
+
+            img {
+                width: 27px;
+                height: 27px;
+                border-radius: 50%;
+                float: left;
+            }
             .nickname {
-                font-size: 0.28rem;
+                float: left;
+                line-height: 27px;
+                padding-left: 4px;
             }
             .date {
                 float: right;
-                font-size: 0.24rem;
-                line-height: 0.28rem;
+                line-height: 27px;
             }
         }
         .comment-detail {
-            font-size: 0.3rem;
-            line-height: 0.44rem;
-            color: #545454;
+            font-size: 14px;
+            color: #051b28;
         }
     }
     .comment-none {
@@ -470,7 +480,7 @@ span.grey {
             .course-feature,
             .course-category,
             .course-comments {
-                padding: 0.6rem 0.5rem;
+                margin: 0.6rem 0.5rem;
             }
             //.course-category {
             //  padding: 1.00-.24rem .58rem 1.00rem;
@@ -612,7 +622,7 @@ span.grey {
             .course-feature,
             .course-category,
             .course-comments {
-                padding: 0.8rem 1.8rem;
+                margin: 0.8rem 1.8rem;
             }
             //.course-category {
             //  padding: .88-.24rem 1.80rem .88rem;

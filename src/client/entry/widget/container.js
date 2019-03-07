@@ -12,6 +12,7 @@ import {
     CMessage,
     CAlert,
     CWindow,
+    CModal,
 } from '@/component/_base';
 import Player from '@/component/Player';
 import authUtil from '@/util/authUtil';
@@ -31,6 +32,7 @@ class Container extends Component {
             isLeftFixedDrawerOpen: false,
             isBottomFixedDrawerOpen: false,
             switchChecked: false,
+            isOpenModal: false,
         };
     }
 
@@ -43,6 +45,8 @@ class Container extends Component {
             isLeftFixedDrawerOpen,
             isBottomFixedDrawerOpen,
             switchChecked,
+
+            isOpenModal,
         } = this.state;
         return (
             <GLayoutContainer>
@@ -445,12 +449,36 @@ class Container extends Component {
                         </CCardContainer>
                     </CPanel>
 
+                    <CPanel title="modal">
+                        <CButton
+                            onClick={() => {
+                                this.setState({ isOpenModal: true });
+                            }}
+                        >
+                            Modal
+                        </CButton>
+                        <CModal
+                            maskClosable
+                            isOpen={isOpenModal}
+                            close={() => {
+                                console.log(111);
+                                this.setState({ isOpenModal: false });
+                            }}
+                        >
+
+                            <CPanel title="Alert">asdfdfad</CPanel>
+                        </CModal>
+                    </CPanel>
+
                     <CPanel title="Alert">
                         <CButton
                             shape="round"
                             color="secondary"
                             onClick={() => {
-                                CAlert.open({ text: 'hello alert!' });
+                                CAlert.open({
+                                    text: 'hello alert!',
+                                    maskClosable: true,
+                                });
                             }}
                         >
                             <CIcon>pets</CIcon>
@@ -512,7 +540,7 @@ class Container extends Component {
                             color="primary"
                             onClick={() => {
                                 CMessage.success('完成', () => {
-                                    console.success('完成关闭了');
+                                    console.info('完成关闭了');
                                 });
                             }}
                         >

@@ -7,7 +7,7 @@ import { APIURL_Auth_SignIn } from '../../../APIConfig';
 const CAuthModal = {
     open: (props = { type: 'signin' }) =>
         CModal.open({
-            maskCloseable: true,
+            maskClosable: true,
             children: (
                 <CAuth
                     {...props}

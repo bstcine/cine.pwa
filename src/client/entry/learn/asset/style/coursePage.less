@@ -1,18 +1,20 @@
 .course__main {
     display: flex;
-    justify-content: space-between;
     height: 100%;
+    flex: auto;
 }
 
 .course__main .cine-panel.course__content {
     order: 1;
-    flex: 0 0 18rem;
+    flex: auto;
     margin-bottom: 0;
+    align-self: stretch;
 }
 
 .course__main .cine-panel.course__nav {
-    flex: 1;
-    margin-right: 12px;
+    flex: none!important;
+    width: 310px;
+    margin-right: 10px;
 }
 
 .nav__chapters {

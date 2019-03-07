@@ -1,7 +1,7 @@
 import QRHelp from './QRHelp';
 import './style.less';
-import ReactDOM from 'react-dom';
 import React from 'react';
+import { CModal } from "@/component/_base";
 
 export default QRHelp;
 
@@ -25,19 +25,15 @@ const map = {
 
 QRHelp.open = function(who = 'xzs') {
     const props = map[who] || map['xzs'];
-    function render(close) {
-        console.log('render', close);
-        ReactDOM.render(<QRHelp {...props} close={close} />, div);
-    }
-    function close() {
-        console.log('close');
-        const unmountResult = ReactDOM.unmountComponentAtNode(div);
-        if (unmountResult && div.parentNode) {
-            div.parentNode.removeChild(div);
-        }
-    }
+    const { close } = CModal.open({
+        children: <QRHelp {...props} close={_close} />,
+        maskClosable: true,
+    });
 
-    const div = document.createElement('div');
-    document.body.appendChild(div);
-    render(close);
+    function _close() {
+        close();
+    }
+    return {
+        close,
+    };
 };

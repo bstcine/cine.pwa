@@ -1,15 +1,31 @@
 @import '../style';
 
-.@{mask},
-.@{mask}--transparent {
-    position: fixed;
-    z-index: 2000;
-    top: 0;
-    right: 0;
-    left: 0;
-    bottom: 0;
-}
-
 .@{mask} {
-    background: rgba(0, 0, 0, 0.6);
+    &,
+    &--transparent {
+        position: fixed;
+        z-index: 2000;
+        top: 0;
+        right: 0;
+        left: 0;
+        bottom: 0;
+    }
+    & {
+        background: rgba(0, 0, 0, 0.6);
+    }
+
+    &-fade-appear {
+        opacity: 0;
+    }
+    &-fade-appear-active {
+        opacity: 1;
+        transition: opacity 300ms;
+    }
+    &-fade-exit {
+        opacity: 1;
+    }
+    &-fade-exit-active {
+        opacity: 0;
+        transition: all 300ms;
+    }
 }

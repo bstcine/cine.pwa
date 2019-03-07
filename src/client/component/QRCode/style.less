@@ -2,15 +2,11 @@
 @qrcode: ~'cine-qrcode';
 
 .@{qrcode} {
-    position: fixed;
+    position: relative;
     padding: 0.6rem 0.2rem 0.2rem;
     background-color: #fff;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
     border-radius: 0.06rem;
     overflow: hidden;
-    z-index: 3000;
 }
 
 .@{qrcode}__close {
@@ -34,6 +30,11 @@
 }
 
 .@{qrcode}__img {
-    display: block;
     width: 4rem;
+    height: 4rem;
+    img {
+        display: block;
+        margin: 0 auto;
+        max-width: 100%;
+    }
 }

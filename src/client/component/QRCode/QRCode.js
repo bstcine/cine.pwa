@@ -1,30 +1,48 @@
 import React, { Component } from 'react';
-import Mask from '@/component/_base/Mask';
 import Icon from '@/component/_base/Icon';
+import qrcode from 'qrcode';
 const cls = `cine-qrcode`;
 
 class QRCode extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            img_url: null,
+        };
+    }
+
+    componentDidMount() {
+        const { url } = this.props;
+        qrcode
+            .toDataURL(url, { width: 200 })
+            .then(img_url => {
+                this.setState({ img_url });
+            })
+            .catch(err => {
+                alert(err);
+            });
+    }
+
     render() {
-        const { close, url } = this.props;
+        const { close } = this.props;
+        const { img_url } = this.state;
         return (
-            <React.Fragment>
-                <Mask />
-                <div className={cls}>
-                    <Icon
-                        className={`${cls}__close`}
-                        onClick={() => {
-                            console.log('Icon close');
-                            close();
-                        }}
-                    >
-                        close
-                    </Icon>
-                    <div className={`${cls}__content`}>
-                        <p>打开微信“扫一扫”</p>
-                        <img src={url} alt="qrcode" className={`${cls}__img`} />
+            <div className={cls}>
+                <Icon
+                    className={`${cls}__close`}
+                    onClick={() => {
+                        close();
+                    }}
+                >
+                    close
+                </Icon>
+                <div className={`${cls}__content`}>
+                    <div className={`${cls}__title`}>打开微信“扫一扫”</div>
+                    <div className={`${cls}__img`}>
+                        <img src={img_url} alt="qrcode" />
                     </div>
                 </div>
-            </React.Fragment>
+            </div>
         );
     }
 }

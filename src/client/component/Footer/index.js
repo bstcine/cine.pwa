@@ -41,7 +41,7 @@ export default class Footer extends Component {
                                 </div>
                                 <div className="qrcode-title">微信公众号</div>
                                 <div className="qrcode-name">
-                                    善恩英文名著精读
+                                    善恩英语在线私塾
                                 </div>
                             </div>
                             <div className="qrcode">
@@ -51,7 +51,7 @@ export default class Footer extends Component {
                                         alt="善恩小助手"
                                     />
                                 </div>
-                                <div className="qrcode-title">客服咨询</div>
+                                <div className="qrcode-title">课程购买、客服咨询</div>
                                 <div className="qrcode-name">善恩小助手</div>
                             </div>
                             <div className="qrcode">
@@ -61,7 +61,7 @@ export default class Footer extends Component {
                                         alt="周老师"
                                     />
                                 </div>
-                                <div className="qrcode-title">课程咨询</div>
+                                <div className="qrcode-title">美高/美本升学顾问</div>
                                 <div className="qrcode-name">周老师</div>
                             </div>
                             <div className="qrcode">
@@ -71,7 +71,7 @@ export default class Footer extends Component {
                                         alt="Nancy老师"
                                     />
                                 </div>
-                                <div className="qrcode-title">课程咨询</div>
+                                <div className="qrcode-title">托福/SAT培训</div>
                                 <div className="qrcode-name">Nancy老师</div>
                             </div>
                         </div>
@@ -83,7 +83,7 @@ export default class Footer extends Component {
                         </div>
                         <div className="co-desc">
                             <div className="co-desc-year">
-                                Copyright © 2014 - 2018{' '}
+                                Copyright © 2014 - {new Date().getFullYear()}{' '}
                                 <a href="//www.bstcine.com">BSTCINE</a>. All
                                 Rights Reserved.{' '}
                             </div>

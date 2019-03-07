@@ -61,7 +61,7 @@ class Window extends Component {
             className,
             children,
             isOpen,
-            maskCloseable = true,
+            maskClosable = true,
             close,
             href,
             offset = {},
@@ -80,7 +80,7 @@ class Window extends Component {
             <>
                 <Mask
                     onClick={() => {
-                        if (maskCloseable) {
+                        if (maskClosable) {
                             close();
                         }
                     }}

@@ -17,7 +17,7 @@ export default class Comments extends Component {
                             <span className="nickname">
                                 {subName(item.user_nickname)}
                             </span>
-                            {/*<span className="date">2019-10-11</span>*/}
+                            <span className="date">{item.publish_at}</span>
                         </div>
                         <div className="comment-detail">
                             {item.comment_desc}

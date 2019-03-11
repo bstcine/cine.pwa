@@ -99,6 +99,10 @@ module.exports = {
                             plugins: [
                                 require('postcss-import'),
                                 require('autoprefixer'),
+                                require('postcss-pxtorem')({
+                                    rootValue: 50,
+                                    propList: ['*'],
+                                }),
                             ],
                         },
                     },

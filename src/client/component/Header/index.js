@@ -169,9 +169,6 @@ export default class Header extends Component {
                                 <a href="/csub/fjyd">分级阅读</a>
                             </li>
                             <li className="nav-item">
-                                <a href="/libraryplan">善恩图书馆计划</a>
-                            </li>
-                            <li className="nav-item">
                                 <a href="/about">关于善恩</a>
                             </li>
                         </ul>

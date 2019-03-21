@@ -64,7 +64,7 @@ export default class DetailDesc extends React.PureComponent {
                     <TabItems>
                         <TabItem>{tabItem_desc}</TabItem>
                         {will_show_lessons ? <TabItem>课程目录</TabItem> : null}
-                        <TabItem>{tabItem_evaluate} {comments && comments.length >0 && <span className="text-blue">{comments.length}</span>}</TabItem>
+                        <TabItem>{tabItem_evaluate}{comments && comments.length >0 && <span className="text-blue text-xs">（{comments.length}）</span>}</TabItem>
                     </TabItems>
                     <TabPanels>
                         <TabPanel>

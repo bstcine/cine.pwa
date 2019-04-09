@@ -47,6 +47,26 @@ const commonUtil = {
         return Math.round(Math.random() * max);
     },
 
+    shuffle: array => {
+        var currentIndex = array.length,
+            temporaryValue,
+            randomIndex;
+
+        // While there remain elements to shuffle...
+        while (0 !== currentIndex) {
+            // Pick a remaining element...
+            randomIndex = Math.floor(Math.random() * currentIndex);
+            currentIndex -= 1;
+
+            // And swap it with the current element.
+            temporaryValue = array[currentIndex];
+            array[currentIndex] = array[randomIndex];
+            array[randomIndex] = temporaryValue;
+        }
+
+        return array;
+    },
+
     smsCountDown: callback => {
         let count = 60;
         let timmer = setInterval(() => {
@@ -77,7 +97,7 @@ const commonUtil = {
             return imgUrl;
         } else if (imgUrl.startsWith('http')) {
             return imgUrl;
-        } else if(imgUrl.startsWith('/f/')) {
+        } else if (imgUrl.startsWith('/f/')) {
             return `//www.bstcine.com${imgUrl}`;
         } else {
             return `//www.bstcine.com/f/${imgUrl}`;

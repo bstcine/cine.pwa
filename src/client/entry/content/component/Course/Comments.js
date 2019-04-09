@@ -1,9 +1,5 @@
 import React, { Component } from 'react';
 
-function subName(str) {
-    return str.slice(0, 1) + '**' + str.slice(-1);
-}
-
 export default class Comments extends Component {
     renderComments() {
         let imgUrl = require('@/asset/image/ico_headpic.png');
@@ -15,7 +11,7 @@ export default class Comments extends Component {
                         <div className="comment-meta">
                             <img src={imgUrl} alt="" />
                             <span className="nickname">
-                                {subName(item.user_nickname)}
+                                {item.user_nickname}
                             </span>
                             <span className="date">{item.publish_at}</span>
                         </div>

@@ -145,6 +145,7 @@ export const wQuizAction = {
             return;
         }
         console.log(result);
+        result.rows = CommonUtil.shuffle(result.rows);
         let content = wQuizAction._getContent(result.rows, 0);
         console.log('正确选项: ', content.real_zh + 1);
         dispatch(wQuizAction._changeContent(content));

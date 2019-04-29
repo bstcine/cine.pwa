@@ -21,7 +21,7 @@ export default class Article extends Component {
                             <div className="article-category" key={i}>
                                 <div className="article-category-title">
                                     {newsCategory.name}
-                                    <a className="more" href="/news-17">
+                                    <a className="more" href={`/news-${newsCategory.id}`}>
                                         更多 &gt;
                                     </a>
                                 </div>

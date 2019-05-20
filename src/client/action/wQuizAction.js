@@ -174,12 +174,9 @@ export const wQuizAction = {
         // 生命翻译文字数组
         let zhArr = [];
         // 获取正确的翻译
-        let { zh } = wQuizAction._getChinessTransition(
-            rows[index].type,
-            rows[index].zh
-        );
+        let { zh } = wQuizAction._getShortZh(rows[index]);
         zhArr = interferenceRows.map(item => {
-            let { zh } = wQuizAction._getChinessTransition(item.type, item.zh);
+            let { zh } = wQuizAction._getShortZh(item);
             return zh;
         });
         // 将正确的翻译元素插入到指定位置
@@ -250,29 +247,39 @@ export const wQuizAction = {
     /**
      * 根据翻译文字和词性列表获取准确的翻译文字
      * */
-    _getChinessTransition: (wordType, originZH) => {
-        if (wordType === null || originZH === null) {
+    _getShortZh: ({ zh : originZH, type, type_cine }) => {
+        if ((type === null && type_cine === null) || originZH === null) {
             // toastAction.show('data error');
             return null;
         }
-        let vocabularyList = Vocabulary[wordType];
-        let zhs = originZH.split('\n');
         let zh;
-        if (vocabularyList && vocabularyList.length > 0) {
-            let hadZh = false;
-            for (let j = 0; j < zhs.length; j++) {
-                for (let i = 0; i < vocabularyList.length; i++) {
-                    if (zhs[j].indexOf(vocabularyList[i]) !== -1) {
-                        zh = zhs[j];
-                        hadZh = true;
-                        break;
-                    }
-                }
-                if (hadZh) {
+        let zhs = originZH.split('\n');
+        if (type_cine) {
+            for (let i = 0; i < zhs.length; i++) {
+                if (zhs[i].indexOf(type_cine) !== -1) {
+                    zh = zhs[i];
                     break;
                 }
             }
+        } else {
+            let vocabularyList = Vocabulary[type];
+            if (vocabularyList && vocabularyList.length > 0) {
+                let hadZh = false;
+                for (let j = 0; j < zhs.length; j++) {
+                    for (let i = 0; i < vocabularyList.length; i++) {
+                        if (zhs[j].indexOf(vocabularyList[i]) !== -1) {
+                            zh = zhs[j];
+                            hadZh = true;
+                            break;
+                        }
+                    }
+                    if (hadZh) {
+                        break;
+                    }
+                }
+            }
         }
+
         // 表示没有词性和翻译相同的部分，抽取翻译，词性为空
         if (!zh) {
             zh = zhs[0];
@@ -298,14 +305,20 @@ export const wQuizAction = {
     updateTask: status => async (dispatch, getState) => {
         let reducer = getState().WordQuizRedu;
         let param = reducer.get('param');
-        if (param.lesson_id && param.lesson_id.indexOf('-') > 0) {
+        if (
+            (param.lesson_id && param.lesson_id.indexOf('-') > 0) ||
+            param.dict_category_id
+        ) {
             return;
         }
         if (param.word_type) {
             param.status = status;
-            let wordTypeRes = await fetchData(Api.APIURL_User_Content_Course_UpdateStatus, param);
+            let wordTypeRes = await fetchData(
+                Api.APIURL_User_Content_Course_UpdateStatus,
+                param
+            );
             console.log('更新本章单词任务: ', wordTypeRes);
-            return
+            return;
         }
         let taskStatus = reducer.get('taskStatus');
         if (taskStatus === '2') {
@@ -363,15 +376,12 @@ export const wQuizAction = {
         }
         console.log('选择错误的单词: ', failureArr);
         if (failureArr && failureArr.length > 0) {
-            let res = await fetchData(
-                Api.APIURL_User_Learn_SaveFailure,
-                {
-                    failure_words: failureArr,
-                }
-            );
+            let res = await fetchData(Api.APIURL_User_Learn_SaveFailure, {
+                failure_words: failureArr,
+            });
             return res;
         }
-        return [ null, {}];
+        return [null, {}];
     },
     /**
      * 更新测试分数
@@ -388,6 +398,8 @@ export const wQuizAction = {
             scoreParam.task_id = param.task_id;
         } else if (param.start_index && param.end_index) {
             scoreParam.lesson_id = `${param.start_index}-${param.end_index}`;
+        } else if (param.dict_category_id) {
+            scoreParam.dict_category_id = param.dict_category_id;
         }
         let result = await fetchData(Api.APIURL_User_Word_Update, scoreParam);
         return result;

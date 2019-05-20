@@ -51,9 +51,9 @@ export const wordAction = {
             dispatch(wordAction._receive(result));
             let currentRows = [];
             result.rows.forEach(ele => {
-                if (ele.id.length > 5) {
-                    ele.id = ele.id.slice(-5);
-                }
+                // if (ele.id.length > 5) {
+                //     ele.id = ele.id.slice(-5);
+                // }
                 currentRows.push(ele);
             });
             dispatch(wordAction._currentRows(currentRows));
@@ -97,38 +97,44 @@ export const wordAction = {
     },
     // 更新course节点点击状态
     updateCourseSelectIndex: param => async dispatch => {
-        if (!param.lesson_id) {
-            return;
-        }
-        const indexComponent = param.lesson_id.split('-');
-        let startIndex = indexComponent[0];
-        let endIndex = indexComponent[1];
-        startIndex = parseInt(startIndex, 10);
-        endIndex = parseInt(endIndex, 10);
-        if (startIndex % 50 !== 1) {
-            return;
-        }
-        if (endIndex % 50 !== 0) {
-            return;
-        }
-        if (endIndex - startIndex !== 49) {
+        if (!param.lesson_id && !param.dict_category_id) {
             return;
         }
         let estimate_range;
-        if (startIndex < 3001) {
-            estimate_range = '1-3000';
-        } else if (startIndex < 6001) {
-            estimate_range = '3001-6000';
-        } else {
-            estimate_range = '6001-10000';
+        if (param.lesson_id) {
+            const indexComponent = param.lesson_id.split('-');
+            let startIndex = indexComponent[0];
+            let endIndex = indexComponent[1];
+            startIndex = parseInt(startIndex, 10);
+            endIndex = parseInt(endIndex, 10);
+            if (startIndex % 50 !== 1) {
+                return;
+            }
+            if (endIndex % 50 !== 0) {
+                return;
+            }
+            if (endIndex - startIndex !== 49) {
+                return;
+            }
+
+            if (startIndex < 3001) {
+                estimate_range = '1-3000';
+            } else if (startIndex < 6001) {
+                estimate_range = '3001-6000';
+            } else {
+                estimate_range = '6001-10000';
+            }
         }
-        let updateParam = {
-            lesson_id: param.lesson_id,
-            estimate_range: estimate_range,
-        };
+
+        let query = param.dict_category_id
+            ? { courseType: '2', dict_category_id: param.dict_category_id }
+            : {
+                  lesson_id: param.lesson_id,
+                  estimate_range: estimate_range,
+              };
         let [err, result] = await fetchData(
             Api.APIURL_User_Word_Lesson_Learn_Update,
-            updateParam
+            query
         );
         if (result) {
             console.log('更新点击状态: \n', result);

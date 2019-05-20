@@ -15,9 +15,11 @@ class WordHeader extends React.PureComponent {
         this.backAction = this.backAction.bind(this);
     }
     backAction() {
-        let { param, sourceType } = this.props;
+        let { param, sourceType, parentDictCategoryId } = this.props;
         if (sourceType === '1' || sourceType === '2' || sourceType === '3') {
             location.href = addParam('/lword', param);
+        } else if (parentDictCategoryId) {
+            location.href = `/lword/course?dict_category_id=${parentDictCategoryId}`;
         } else if (!param.lesson_id || param.lesson_id.indexOf('-') === -1) {
             location.href = '/learn/task';
         } else {
@@ -88,15 +90,6 @@ class WordHeader extends React.PureComponent {
                         onClick={this.gotoList}
                     >
                         列表式
-                    </CButton>
-                    <CButton
-                        className="actionItem"
-                        icon="ci-ico_help"
-                        size="small"
-                        disabled={true}
-                        onClick={actions.changeAutoChangeWordStatus}
-                    >
-                        帮助
                     </CButton>
                 </div>
             );

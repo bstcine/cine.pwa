@@ -9,7 +9,7 @@ import { wQuizAction } from '@/action/wQuizAction';
 import WordQuiz from '../component/WordQuiz';
 import CThemeProvider from '@/component/CThemeProvider';
 import { CFlatButton, CDialog } from '@/component/_base';
-import { GLayoutContainer } from "@/g/container";
+import { GLayoutContainer } from '@/g/container';
 // import { Toast } from '@/component/Toast';
 
 class WordQuizContainer extends Component {
@@ -31,7 +31,9 @@ class WordQuizContainer extends Component {
     }
     dialogAction() {
         let { isDone } = this.props;
-        if (this.sourceType === 1) {
+        if (this.param.dict_category_id) {
+            location.href = addParam('/lword', this.param);
+        } else if (this.sourceType === 1) {
             location.href = '/lword/course?start_index=1&range=10000';
         } else if (isDone === true) {
             location.href = addParam('/learn');
@@ -61,7 +63,7 @@ class WordQuizContainer extends Component {
             />,
         ];
         let dialogTitle;
-        if (this.sourceType === 1) {
+        if (this.sourceType === 1 || this.param.dict_category_id) {
             dialogTitle = '测试完成';
         } else if (isDone === true) {
             dialogTitle = '完成词汇作业任务，返回学习首页';
@@ -70,7 +72,7 @@ class WordQuizContainer extends Component {
         }
         return (
             <CThemeProvider>
-                 <GLayoutContainer>
+                <GLayoutContainer>
                     <WordQuiz
                         param={this.param}
                         name={name}

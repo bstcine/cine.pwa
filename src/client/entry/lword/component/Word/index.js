@@ -11,7 +11,7 @@ class Word extends React.PureComponent {
         let { param, result, quizAction, listAction, actions } = this.props;
         return (
             <div className="wordContent">
-                <WordHeader sourceType="0" param={param} name={result.name} />
+                <WordHeader sourceType="0" param={param} name={result.name} parentDictCategoryId={result.parent_dict_category_id}/>
                 <WordBody
                     result={result}
                     quizAction={quizAction}

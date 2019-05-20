@@ -5,9 +5,6 @@ module.exports = function(api) {
             [
                 '@babel/preset-env',
                 {
-                    // debug: true,
-                    // for uglifyjs...
-                    // useBuiltIns: 'usage',
                     forceAllTransforms: true,
                 },
             ],

@@ -203,7 +203,7 @@ export const wCardAction = {
             Api.APIURL_User_Content_Word_UpdateKnow,
             { word_list: wordList, is_known: false }
         );
-        console.log(_updateRes,error);
+        console.log(_updateRes, error);
         if (!error) {
             let newRows = [];
             originRows.forEach(ele => {
@@ -346,6 +346,7 @@ export const wCardAction = {
             return;
         }
         let { voice_url_a, voice_url_b } = result.rows[currentIndex];
+        if (!voice_url_a && !voice_url_b) return;
         let voice_url = voice_url_b;
         if (!voice_url) {
             voice_url = voice_url_a;

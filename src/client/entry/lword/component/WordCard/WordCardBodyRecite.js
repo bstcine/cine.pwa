@@ -48,7 +48,14 @@ class WordCardBodyRecite extends React.PureComponent {
             isKnown,
             actions,
         } = this.props;
-        let { word, phonetic_a, phonetic_b, zh } = rows[currentIndex];
+        let {
+            word,
+            phonetic_a,
+            phonetic_b,
+            zh,
+            voice_url_a,
+            voice_url_b,
+        } = rows[currentIndex];
         zh = lastZh ? lastZh : zh;
         let phonetic = phonetic_b;
         if (!phonetic) {
@@ -58,6 +65,7 @@ class WordCardBodyRecite extends React.PureComponent {
         if (isBack) {
             cls += ' hover';
         }
+        const hasVoice = voice_url_a || voice_url_b;
         return (
             <div className="wordCard-Body">
                 <div className="lastContainer">
@@ -69,15 +77,17 @@ class WordCardBodyRecite extends React.PureComponent {
                             <div className="front">
                                 <div className="wordInfo">
                                     <div className="word">{word}</div>
-                                    <div
-                                        className="phonetic"
-                                        onClick={this.playPhonetic}
-                                    >
-                                        <p>{phonetic}</p>
-                                        <CIcon className="voice">
-                                            ci-ico_voice
-                                        </CIcon>
-                                    </div>
+                                    {hasVoice && (
+                                        <div
+                                            className="phonetic"
+                                            onClick={this.playPhonetic}
+                                        >
+                                            <p>{phonetic}</p>
+                                            <CIcon className="voice">
+                                                ci-ico_voice
+                                            </CIcon>
+                                        </div>
+                                    )}
                                 </div>
                             </div>
                             <div className="back">

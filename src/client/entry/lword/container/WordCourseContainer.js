@@ -4,9 +4,9 @@ import { bindActionCreators } from 'redux';
 import { wCourseAction } from '@/action/wCourseAction';
 import { getParam } from '@/util/_base/urlUtil';
 import WordCourse from './../component/wordCourse';
-import { GLayoutContainer } from "@/g/container";
-import {interEventEmitter} from "@/util/_base/interEventEmitter";
-import BRIDGE_EVENT from "@/constant/bridgeEvent";
+import { GLayoutContainer } from '@/g/container';
+import { interEventEmitter } from '@/util/_base/interEventEmitter';
+import BRIDGE_EVENT from '@/constant/bridgeEvent';
 
 class WordCourseContainer extends Component {
     constructor(props) {
@@ -18,25 +18,25 @@ class WordCourseContainer extends Component {
 
     componentDidMount() {
         this.props.actions.loadUserWordLearnAndQuiz(this.param);
-        interEventEmitter.on(BRIDGE_EVENT.Pageshow, ()=>{
+        interEventEmitter.on(BRIDGE_EVENT.Pageshow, () => {
             this.param = getParam();
             this.props.actions.loadUserWordLearnAndQuiz(this.param);
         });
     }
 
     render() {
-        let { lessons, lastVisitID, actions } = this.props;
+        let { lessons, lastVisitID, name, mode } = this.props;
         const course_id = this.param.start_index
             ? `${this.param.start_index}-${this.param.range}`
             : '1-10000';
-        console.log('1111');
         return (
             <GLayoutContainer>
                 <WordCourse
+                    mode={mode}
+                    name={name}
                     lessons={lessons}
                     lastVisitID={lastVisitID}
                     courseID={course_id}
-                    actions={actions}
                 />
             </GLayoutContainer>
         );
@@ -45,6 +45,8 @@ class WordCourseContainer extends Component {
 
 const mapStateToProps = state => {
     return {
+        name: state.WordCourseRedu.get('name'),
+        mode: state.WordCourseRedu.get('mode'),
         lessons: state.WordCourseRedu.get('lessons'),
         lastVisitID: state.WordCourseRedu.get('lastVisitID'),
     };

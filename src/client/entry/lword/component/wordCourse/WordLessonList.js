@@ -1,41 +1,47 @@
 import React from 'react';
-import WordLessonG from './WordLessonGroup';
+import { CCard, CCardContainer } from '@/component/_base';
+import WordLessonItem from './WordLessonItem';
+import interSiteCodeUtil from '@/util/_base/interSiteCodeUtil';
+import BRIDGE_EVENT from '@/constant/bridgeEvent';
+import Bridge from '@/util/_base/interBridge';
 
-const WordLessonList = ({ lessons, layout, lastVisitID }) => {
-    const groupCount = 10;
-    const groupLessonCount = lessons.length / groupCount;
-    const groupWordCount = groupLessonCount * 50;
-    const exL = 1 + parseInt(parseInt(lastVisitID, 10) / groupWordCount, 10);
+class WordLessonList extends React.Component {
+    constructor(props) {
+        super(props);
+        this.onClick = this.onClick.bind(this);
+    }
 
-    let lss = [];
-    for (let g = 0; g < groupCount; g++) {
-        let ls = [];
-        lss.push(ls);
-
-        for (
-            let i = groupLessonCount * g;
-            i < groupLessonCount * (1 + g);
-            i++
-        ) {
-            const item1 = lessons[i];
-            lss[g].push(item1);
+    onClick(item) {
+        const { mode } = this.props;
+        if (mode === 'dict') {
+            location.href = `/lword?dict_category_id=${item.id}`;
+        } else {
+            const wlHerf = `/lword?lesson_id=${item.value}`;
+            if (interSiteCodeUtil.inAndroidAPP()) {
+                Bridge.android(BRIDGE_EVENT.OPEN_BROWSER, {
+                    url: wlHerf,
+                    title: `善恩核心10000词汇 （${item.value})`,
+                }).then(res => {
+                    console.log(res);
+                });
+            } else {
+                location.href = wlHerf;
+            }
         }
     }
 
-    let wordLessonGs = lss.map((ls, i) => {
-        const title = ` ${i * groupWordCount + 1}-${(i + 1) * groupWordCount}`;
+    render() {
+        const { lessons, mode } = this.props;
         return (
-            <WordLessonG
-                key={i}
-                lessons={ls}
-                layout={layout}
-                title={`善恩核心10000词汇: ${title}`}
-                expanded={exL === i + 1}
-            />
+            <CCardContainer layout="245" gap="large">
+                {lessons.map((wordLesson, i) => (
+                    <CCard key={i} onClick={() => this.onClick(wordLesson)}>
+                        <WordLessonItem item={wordLesson} index={i}/>
+                    </CCard>
+                ))}
+            </CCardContainer>
         );
-    });
-
-    return <React.Fragment>{wordLessonGs}</React.Fragment>;
-};
+    }
+}
 
 export default WordLessonList;

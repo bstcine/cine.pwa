@@ -11,7 +11,7 @@ import { GLayoutContainer } from '@/g/container';
 import interSiteCodeUtil from '@/util/_base/interSiteCodeUtil';
 import BRIDGE_EVENT from '@/constant/bridgeEvent';
 import Bridge from '@/util/_base/interBridge';
-import {interEventEmitter} from "@/util/_base/interEventEmitter";
+import { interEventEmitter } from '@/util/_base/interEventEmitter';
 
 class WordContainer extends Component {
     constructor(props) {
@@ -29,7 +29,7 @@ class WordContainer extends Component {
         // 获取词汇列表
         actions.loadWordList(this.param);
 
-        interEventEmitter.on(BRIDGE_EVENT.Pageshow, ()=>{
+        interEventEmitter.on(BRIDGE_EVENT.Pageshow, () => {
             let { actions } = this.props;
             actions.updateCourseSelectIndex(this.param);
             actions.loadWordList(this.param);
@@ -64,7 +64,6 @@ class WordContainer extends Component {
 
     render() {
         let { result, actions } = this.props;
-        console.log(1111);
 
         return (
             <GLayoutContainer>

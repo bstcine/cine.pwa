@@ -1,7 +1,7 @@
 import React from 'react';
 import { svgStar } from '@/constant/svg';
 
-const WordLessonItem = ({ item, actions }) => {
+const WordLessonItem = ({ item, index }) => {
     let quizClassName = 'default';
     let quizScore = '-';
     let star = '';
@@ -23,23 +23,19 @@ const WordLessonItem = ({ item, actions }) => {
     const indexs = item.value.split('-');
 
     return (
-        <React.Fragment>
-            <div className={'lesson ' + className} id={`l${indexs[0]}`}>
-                <div className="top">
-                    <div className={classNameNO}>第{item.id}组</div>
-                    <div className="fromto">{item.value}</div>
-                </div>
-
-                <div className={classNameMiddle} />
-                <div className="bottom">
-                    <div className="star">{star}</div>
-                    <div className={'quizScore ' + classNameScore}>
-                        {quizScore}
-                    </div>
-                    <div className="quiz">测试成绩</div>
-                </div>
+        <div className={'lesson ' + className} id={`l${indexs[0]}`}>
+            <div className="top">
+                <div className={classNameNO}>第{index + 1}组</div>
+                <div className="fromto">{item.value}</div>
             </div>
-        </React.Fragment>
+
+            <div className={classNameMiddle} />
+            <div className="bottom">
+                <div className="star">{star}</div>
+                <div className={'quizScore ' + classNameScore}>{quizScore}</div>
+                <div className="quiz">测试成绩</div>
+            </div>
+        </div>
     );
 };
 

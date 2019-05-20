@@ -22,6 +22,8 @@ export const wCourseAction = {
         )
             return;
 
+        if (param.dict_category_id) return;
+
         const lastVisitID = param.last_index
             ? param.last_index
             : param.start_index;
@@ -34,11 +36,13 @@ export const wCourseAction = {
     },
 
     loadUserWordLearnAndQuiz: param => async dispatch => {
-        const wordParam = {
-            location: param.start_index ? param.start_index : 1,
-            count: param.range ? param.range : 10000,
-        };
-        const [err, result] = await fetchData(Api.APIURL_User_Word, wordParam);
+        const query = param.dict_category_id
+            ? { dict_category_id: param.dict_category_id, courseType: '2' }
+            : {
+                  location: param.start_index ? param.start_index : 1,
+                  count: param.range ? param.range : 10000,
+              };
+        const [err, result] = await fetchData(Api.APIURL_User_Word, query);
         if (!result) {
             console.log(err);
             return;
@@ -46,13 +50,21 @@ export const wCourseAction = {
 
         // 如果没有测试数据&没有查看记录就不需要dispatch（Re-render)
         const lvID = param.last_index ? param.last_index : result.lastVisitID;
-        if (result.rows && result.rows.length === 0 && lvID === 0) return;
+        if (
+            result.rows &&
+            result.rows.length === 0 &&
+            lvID === 0 &&
+            !param.dict_category_id
+        )
+            return;
 
         const payload = {
             lastVisitID: lvID,
-            wordStartID: wordParam.location,
-            wordCount: wordParam.count,
+            wordStartID: query.location,
+            wordCount: query.count,
             wordQuizResult: result.rows,
+            dictCategoryList: result.dictCategoryList,
+            name: result.name || '善恩核心10000词汇',
         };
         dispatch(wCourseAction._receive(payload));
 

@@ -9,22 +9,27 @@ const routes = [
         exact: true,
         path: '/lword',
         component: WordContainer,
+        checkAuth: true,
     },
     {
         path: '/lword/course',
         component: WordCourseContainer,
+        checkAuth: true,
     },
     {
         path: '/lword/list',
         component: WordListContainer,
+        checkAuth: true,
     },
     {
         path: '/lword/quiz',
         component: WordQuizContainer,
+        checkAuth: true,
     },
     {
         path: '/lword/card',
         component: WordCardContainer,
+        checkAuth: true,
     },
 ];
 

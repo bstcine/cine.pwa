@@ -50,13 +50,13 @@ export const wCourseAction = {
 
         // 如果没有测试数据&没有查看记录就不需要dispatch（Re-render)
         const lvID = param.last_index ? param.last_index : result.lastVisitID;
-        if (
-            result.rows &&
-            result.rows.length === 0 &&
-            lvID === 0 &&
-            !param.dict_category_id
-        )
-            return;
+        // if (
+        //     result.rows &&
+        //     result.rows.length === 0 &&
+        //     lvID === 0 &&
+        //     !param.dict_category_id
+        // )
+        //     return;
 
         const payload = {
             lastVisitID: lvID,

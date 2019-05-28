@@ -13,7 +13,7 @@ class WordCourseContainer extends Component {
         super(props);
         document.title = '核心词汇';
         this.param = getParam();
-        this.props.actions.initCourseLessons(this.param);
+        // this.props.actions.initCourseLessons(this.param);
     }
 
     componentDidMount() {

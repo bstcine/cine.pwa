@@ -198,14 +198,14 @@ export const wQuizAction = {
      * */
     _getInterferenceRows: (rows, index, count) => {
         // 获取禁止下标的词性
-        let wordType = rows[index]['type'];
+        let wordType = rows[index]['type_cine'];
         // 获取所有该词性的元素
         let newRows = [];
         for (let i = 0; i < rows.length; i++) {
             if (index === i) {
                 continue;
             }
-            if (rows[i]['type'] === wordType) {
+            if (rows[i]['type_cine'] === wordType) {
                 newRows.push(rows[i]);
             }
         }
@@ -247,36 +247,15 @@ export const wQuizAction = {
     /**
      * 根据翻译文字和词性列表获取准确的翻译文字
      * */
-    _getShortZh: ({ zh : originZH, type, type_cine }) => {
-        if ((type === null && type_cine === null) || originZH === null) {
-            // toastAction.show('data error');
-            return null;
-        }
+    _getShortZh: (word) => {
+        let rawZh = word.zh;
+        let type_cine = word.type_cine;
         let zh;
-        let zhs = originZH.split('\n');
-        if (type_cine) {
-            for (let i = 0; i < zhs.length; i++) {
-                if (zhs[i].indexOf(type_cine) !== -1) {
-                    zh = zhs[i];
-                    break;
-                }
-            }
-        } else {
-            let vocabularyList = Vocabulary[type];
-            if (vocabularyList && vocabularyList.length > 0) {
-                let hadZh = false;
-                for (let j = 0; j < zhs.length; j++) {
-                    for (let i = 0; i < vocabularyList.length; i++) {
-                        if (zhs[j].indexOf(vocabularyList[i]) !== -1) {
-                            zh = zhs[j];
-                            hadZh = true;
-                            break;
-                        }
-                    }
-                    if (hadZh) {
-                        break;
-                    }
-                }
+        let zhs = rawZh.split('\n');
+        for (let i = 0; i < zhs.length; i++) {
+            if (zhs[i].indexOf(type_cine) !== -1) {
+                zh = zhs[i];
+                break;
             }
         }
 
@@ -285,9 +264,23 @@ export const wQuizAction = {
             zh = zhs[0];
         }
         // 将zh中的词性移除
-        const zhCom = zh.split('.');
-        let index = zhCom.length > 1 ? zhCom.length - 1 : 0;
-        zh = zhCom[index];
+        // const zhCom = zh.split('.');
+        // let index = zhCom.length > 1 ? zhCom.length - 1 : 0;
+        // zh = zhCom[index];
+        function getType(str) {
+            let reg = /^[a-z ]{1,8}\./i;
+            let f = str.match(reg);
+            if (f) {
+                return f[0];
+            } else {
+                return null;
+            }
+        }
+
+        const wordType = getType(zh);
+        if (wordType) {
+            zh = zh.slice(wordType.length).trim();
+        }
         // 将zh中的"；"选项保留到两个及以下
         let zh_component = zh.split('；');
         if (zh_component.length > 2) {

@@ -7,7 +7,7 @@ const routes = [
     {
         path: h5.URL_Mentor_Index,
         component: () => {
-            location.href = h5.URL_Mentor_Student_Task;
+            location.href = h5.URL_Mentor_Student_Quiz;
         },
         checkAuth: true,
         exact: true,

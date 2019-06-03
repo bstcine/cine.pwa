@@ -42,7 +42,7 @@ class VocabularyItem extends React.PureComponent {
                     onClick={this.playVoice}
                 >
                     <div className="v_Task_L_Item_Info">
-                        <p className="v_Task_L_Item_Seq">{vocabulary.id}</p>
+                        {/*<p className="v_Task_L_Item_Seq">{vocabulary.id}</p>*/}
                         <div className="v_Task_L_Item_Value">
                             <p
                                 className="v_Task_L_Item_Word"

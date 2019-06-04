@@ -12,6 +12,7 @@ import {
     Learn_Word_Failed_SleepTime,
 } from '@/constant/index';
 import { CMessage } from '@/component/_base';
+import { uniq } from 'lodash';
 
 const Vocabulary = {
     n: ['n.'],
@@ -23,6 +24,36 @@ const Vocabulary = {
     c: ['conj'],
     u: ['int.'],
 };
+
+function isSimilarRow(newItem, currItems) {
+    let reg = /[的|地|得|“|”|；|？|。|，|\ |\~|\`|\!|\@|\#|\$|\%|\^|\&|\*|\(|\)|\-|\_|\+|\=|\||\\|\[|\]|\{|\}|\;|\:|\"|\'|\,|\<|\.|\>|\/|\?]/g;
+    let newZh = newItem.zh.slice(getType(newItem.zh).length).trim();
+
+    let newZhArr = uniq(newZh.replace(reg, ''));
+    for (let k = 0; k < currItems.length; k++) {
+        let similarCount = 0;
+        let currItem = currItems[k];
+        let currZh = currItem.zh.slice(getType(currItem.zh).length).trim();
+        let currZhArr = uniq(currZh.replace(reg, ''));
+        for (let i = 0; i < newZhArr.length; i++) {
+            for (let j = 0; j < currZhArr.length; j++) {
+                if (newZhArr[i] === currZhArr[j]) similarCount++;
+                if (similarCount >= 2) return true;
+            }
+        }
+    }
+    return false;
+}
+
+function getType(str) {
+    let reg = /^[a-z ]{1,8}\./i;
+    let f = str.match(reg);
+    if (f) {
+        return f[0];
+    } else {
+        return null;
+    }
+}
 
 export const wQuizAction = {
     /**
@@ -145,7 +176,7 @@ export const wQuizAction = {
             return;
         }
         console.log(result);
-        result.rows = CommonUtil.shuffle(result.rows).slice(0,50);
+        result.rows = CommonUtil.shuffle(result.rows).slice(0, 50);
         let content = wQuizAction._getContent(result.rows, 0);
         console.log('正确选项: ', content.real_zh + 1);
         dispatch(wQuizAction._changeContent(content));
@@ -205,7 +236,10 @@ export const wQuizAction = {
             if (index === i) {
                 continue;
             }
-            if (rows[i]['type_cine'] === wordType) {
+            if (
+                rows[i]['type_cine'] === wordType &&
+                !isSimilarRow(rows[i], [...newRows, rows[index]])
+            ) {
                 newRows.push(rows[i]);
             }
         }
@@ -247,7 +281,7 @@ export const wQuizAction = {
     /**
      * 根据翻译文字和词性列表获取准确的翻译文字
      * */
-    _getShortZh: (word) => {
+    _getShortZh: word => {
         let rawZh = word.zh;
         let type_cine = word.type_cine;
         let zh;
@@ -267,15 +301,6 @@ export const wQuizAction = {
         // const zhCom = zh.split('.');
         // let index = zhCom.length > 1 ? zhCom.length - 1 : 0;
         // zh = zhCom[index];
-        function getType(str) {
-            let reg = /^[a-z ]{1,8}\./i;
-            let f = str.match(reg);
-            if (f) {
-                return f[0];
-            } else {
-                return null;
-            }
-        }
 
         const wordType = getType(zh);
         if (wordType) {

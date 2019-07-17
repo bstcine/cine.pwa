@@ -98,8 +98,39 @@
 // })();
 
 
-function subName(str) {
-    return str.slice(0,1) + '**' + str.slice(-1);
-}
+// function subName(str) {
+//     return str.slice(0,1) + '**' + str.slice(-1);
+// }
+//
+// console.log(subName('123456'));
+// const _ = require('lodash')
+//
+// var a = '1234123';
+// var b = _.uniq(a);
+// console.log(b);
 
-console.log(subName('123456'));
+//
+// var str="j的fkl“”地得得dsjalk,.23@#!$$k~!  @#$%^&*()(_+-=|\{}[]';:,./<>??gg  g~```gf";
+// let reg = /[的|地|得|“|”|；|？|。|，|\ |\~|\`|\!|\@|\#|\$|\%|\^|\&|\*|\(|\)|\-|\_|\+|\=|\||\\|\[|\]|\{|\}|\;|\:|\"|\'|\,|\<|\.|\>|\/|\?]/g
+//   str=str.replace(reg,"");
+//   console.log(str);
+//
+//
+//
+
+  const _ = require("lodash");
+
+function isSimilarRow(p, q) {
+    let reg = /[的|地|得|“|”|；|？|。|，|\ |\~|\`|\!|\@|\#|\$|\%|\^|\&|\*|\(|\)|\-|\_|\+|\=|\||\\|\[|\]|\{|\}|\;|\:|\"|\'|\,|\<|\.|\>|\/|\?]/g
+    let pArr = _.uniq(p.replace(reg,''));
+    let qArr =  _.uniq(q.replace(reg,''));
+    let similarCount = 0;
+    for (let i = 0; i < pArr.length; i++) {
+        for (let j = 0; j < qArr.length; j++) {
+            if (pArr[i] === qArr[j]) similarCount++;
+            if (similarCount >= 2) return true;
+        }
+    }
+    return false;
+}
+  console.log(isSimilarRow('很多','许许多多'));

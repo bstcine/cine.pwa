@@ -80,6 +80,7 @@ exports.APIURL_Auth_SignUp = '/api/auth/signup'; // 注册
 exports.APIURL_Auth_Send_AuthCode = '/api/auth/send/authCode'; // 发送绑定手机验证码
 exports.APIURL_Auth_Bind_Phone = '/api/auth/bind/phone'; // 绑定手机（自动注册）
 exports.APIURL_Auth_Confirm = '/api/auth/confirm'; // 确认登录
+exports.APIURL_Auth_Auto_Signin = '/api/auth/auto/signin'; // 自动登录
 exports.APIURL_Auth_Send_VerificationCode = '/api/auth/send/verificationCode'; // 发送验证码(手机 邮箱)
 exports.APIURL_Auth_Reset_Password = '/api/auth/reset/password'; // 重置密码(手机 邮箱)
 exports.APIURL_Auth_Set_Password = '/api/auth/set/password'; // 设置密码
@@ -93,6 +94,7 @@ exports.APIURL_Temp_User_Course_Coupon = '/api/temp/user/course/coupon'; // 获�
 exports.APIURL_Temp_User_Course_Coupon_Check =
     '/api/temp/user/course/coupon/check'; // 将永久课程转为限时课程，并赠送优惠券
 exports.APIURL_Temp_User_Coupon_Receive = '/api/temp/user/coupon/receive'; // 用户领取活动优惠券
+exports.APIURL_Temp_User_Exp_Course = '/api/temp/user/exp/course'; // 根据手机号注册开通体验课程
 exports.APIURL_Admin_Coupon_Synthesizer = '/api/admin/user/coupon/synthesizer'; // 管理员将某用户的通用、直减、未使用的优惠券执行合并
 exports.APIURL_Admin_User_Coupon_List = '/api/admin/user/coupon/list'; // 管理员获取某用户的未使用优惠券列表
 

@@ -48,9 +48,23 @@ class Container extends Component {
 
             isOpenModal,
         } = this.state;
+        let player = new Audio();
         return (
             <GLayoutContainer>
                 <div className="cine-widget">
+
+                    <CPanel>
+                        <CButton
+                            onClick={() => {
+                                player.src = 'http://oss.bstcine.com/word/top10000/one_b.mp3'
+                                player.play()
+                            }}
+                        >
+                            播放MP3
+                        </CButton>
+
+                    </CPanel>
+
                     <CPanel>
                         <Switch
                             checked={switchChecked}

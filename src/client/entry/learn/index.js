@@ -7,23 +7,34 @@ import Entry from '@/component/Entry';
 import rootReducer from './reducer';
 import { GRouter } from '@/g/component';
 import routes from './routes';
+import interSiteCodeUtil from '@/util/_base/interSiteCodeUtil';
 
 if ('serviceWorker' in navigator) {
-    window.addEventListener('load', function() {
+    if (interSiteCodeUtil.inAndroidAPP()) {
+        window.addEventListener('load', function() {
+            navigator.serviceWorker
+                .register('/sw-learn.js', { scope: '/learn' })
+                .then(function(registration) {
+                    // 注册成功
+                    console.log(
+                        'ServiceWorker registration successful with scope: ',
+                        registration.scope
+                    );
+                })
+                .catch(function(err) {
+                    // 注册失败:(
+                    console.log('ServiceWorker registration failed: ', err);
+                });
+        });
+    } else {
         navigator.serviceWorker
-            .register('/sw-learn.js', { scope: '/learn' })
-            .then(function(registration) {
-                // 注册成功
-                console.log(
-                    'ServiceWorker registration successful with scope: ',
-                    registration.scope
-                );
-            })
-            .catch(function(err) {
-                // 注册失败:(
-                console.log('ServiceWorker registration failed: ', err);
+            .getRegistrations()
+            .then(function(registrations) {
+                for (let registration of registrations) {
+                    registration.unregister();
+                }
             });
-    });
+    }
 }
 
 const preloadedState = window.__PRELOADED_STATE__;

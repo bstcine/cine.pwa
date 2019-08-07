@@ -78,9 +78,7 @@ export default class Footer extends Component {
                     </div>
 
                     <div className="copyright">
-                        <div className="co-name">
-                            善严教育科技(上海)有限公司
-                        </div>
+
                         <div className="co-desc">
                             <div className="co-desc-year">
                                 Copyright © 2014 - {new Date().getFullYear()}{' '}

@@ -176,8 +176,8 @@ export const wQuizAction = {
             return;
         }
         console.log(result);
-        // 抽取30个
-        result.rows = CommonUtil.shuffle(result.rows).slice(0, 30);
+        // 抽取50个
+        result.rows = CommonUtil.shuffle(result.rows).slice(0, 50);
         let content = wQuizAction._getContent(result.rows, 0);
         console.log('正确选项: ', content.real_zh + 1);
         dispatch(wQuizAction._changeContent(content));

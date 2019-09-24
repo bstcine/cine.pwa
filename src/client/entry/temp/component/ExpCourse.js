@@ -98,17 +98,31 @@ class ExpCourse extends Component {
         return (
             <div className="exp-course">
                 <div className="exp-course__banner">
+                    <img className="exp-mylogo" src={require('@/asset/image/bule-bstcine-logo.png')}/>
+                    <span className="divide"></span>
                     <img
                         className="exp-course__logo"
                         src={require('../asset/image/logo_yd@2x.png')}
                     />
-                    <div className="exp-course__city">深圳</div>
+                    {/*<div className="exp-course__city">深圳</div>*/}
                     <div className="exp-course__name">尊敬的深圳移动用户，</div>
                     <div className="exp-course__detail">
-                        恭喜您获得善恩英语在线视频课程超值体验大礼包一份！
+                        恭喜您获得善恩英语“英文原版精读课程精选体验合辑”大礼包
                     </div>
                 </div>
                 <div className="exp-course__form">
+
+                    <div className="ec-form-control ec-form-control--promote_code">
+                        <CIcon>new_releases</CIcon>
+                        <input
+                            placeholder="请输入兑换码"
+                            value={promote_code}
+                            onChange={e => {
+                                this.setState({ promote_code: e.target.value });
+                            }}
+                        />
+                    </div>
+
                     <div className="ec-form-control ec-form-control--phone">
                         <CIcon>smartphone</CIcon>
                         <input
@@ -145,16 +159,7 @@ class ExpCourse extends Component {
                         </CButton>
                     </div>
 
-                    <div className="ec-form-control ec-form-control--promote_code">
-                        <CIcon>new_releases</CIcon>
-                        <input
-                            placeholder="请输入兑换码"
-                            value={promote_code}
-                            onChange={e => {
-                                this.setState({ promote_code: e.target.value });
-                            }}
-                        />
-                    </div>
+
 
                     <CButton
                         className="ec-submit"
@@ -170,9 +175,17 @@ class ExpCourse extends Component {
                 <div className="exp-course__ext">
                     <div className="exp-course__explain">活动说明</div>
                     <div className="exp-course__explain-detail">
-                        <p>1. 大礼包内所有课程自领取之日起2个月内有效</p>
-                        <p>2. 限10000份，领完为止</p>
-                        <p>3. 活动最终解释权归善恩所有</p>
+                        <p className="bold">领取时间：</p>
+                        <p>即日起至11月30日止</p>
+                        <p className="bold">领取数量：</p>
+                        <p>限领10000份，领完即止</p>
+                        <p className="bold">适用范围：</p>
+                        <p>本活动仅限深圳移动用户专享，非深圳移动用户无法享用。</p>
+                        <p>1、  每个手机号限领一次，不可重复领取；</p>
+                        <p>2、  用户输入兑换码、手机号码及接收到的手机短信验证码，即可成功领取大礼包；</p>
+                        <p>3、  大礼包内课程有效期为2个月（自领取之日起），过期即止；</p>
+                        <p>4、  课程相关咨询，请添加善恩客服微信号：BSTCINE02；</p>
+                        <p>5、  本次活动最终解释权归属善恩英语。</p>
                     </div>
                 </div>
             </div>

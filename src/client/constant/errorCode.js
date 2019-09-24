@@ -57,6 +57,8 @@ const errorCode = {
     school_id_not_match: '仅允许对应学校登录',
     school_id_not_found: '学校信息不存在',
     unionid_already_bind: '该微信已经绑定过其他善恩账号，请解绑后重试',
+    promote_code_invalid: '兑换码有误或已被使用',
+    promote_code_update_invalid: '兑换码更新异常',
 };
 
 export default errorCode;

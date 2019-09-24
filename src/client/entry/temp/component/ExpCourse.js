@@ -16,6 +16,7 @@ class ExpCourse extends Component {
         this.state = {
             phone: '',
             auth_code: '',
+            promote_code: '',
             auth_code_btn_disabled: false,
             auth_code_btn: '发送验证码',
             submit_btn_disabled: false,
@@ -63,13 +64,15 @@ class ExpCourse extends Component {
     }
 
     async submit() {
-        const { phone, auth_code } = this.state;
+        const { phone, auth_code, promote_code } = this.state;
         if (!commonUtil.isPhone(86, phone))
             return CMessage.info('手机格式不正确');
+        if (!promote_code) return CMessage.info('请输入优惠券码');
         this.setState({ submit_btn_disabled: true, submit_btn: '提交中' });
         const [err, res] = await fetchData(APIURL_Temp_User_Exp_Course, {
             phone,
             auth_code,
+            promote_code,
         });
         this.setState({ submit_btn_disabled: false, submit_btn: '立即领取' });
         if (err) return CMessage.info(errorMsg(err));
@@ -85,6 +88,7 @@ class ExpCourse extends Component {
     render() {
         const {
             phone,
+            promote_code,
             auth_code,
             auth_code_btn_disabled,
             auth_code_btn,
@@ -123,6 +127,7 @@ class ExpCourse extends Component {
                             className="auth_code_input"
                             type="number"
                             placeholder="请输入验证码"
+                            maxLength="4"
                             value={auth_code}
                             onChange={e => {
                                 this.setState({ auth_code: e.target.value });
@@ -140,6 +145,17 @@ class ExpCourse extends Component {
                         </CButton>
                     </div>
 
+                    <div className="ec-form-control ec-form-control--promote_code">
+                        <CIcon>new_releases</CIcon>
+                        <input
+                            placeholder="请输入兑换码"
+                            value={promote_code}
+                            onChange={e => {
+                                this.setState({ promote_code: e.target.value });
+                            }}
+                        />
+                    </div>
+
                     <CButton
                         className="ec-submit"
                         shape="capsule"
@@ -154,8 +170,8 @@ class ExpCourse extends Component {
                 <div className="exp-course__ext">
                     <div className="exp-course__explain">活动说明</div>
                     <div className="exp-course__explain-detail">
-                        <p>1. 领取日期：即日起至8月30日</p>
-                        <p>2. 限1000份，领完为止</p>
+                        <p>1. 大礼包内所有课程自领取之日起2个月内有效</p>
+                        <p>2. 限10000份，领完为止</p>
                         <p>3. 活动最终解释权归善恩所有</p>
                     </div>
                 </div>

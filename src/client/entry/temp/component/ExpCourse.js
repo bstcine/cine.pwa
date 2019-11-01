@@ -104,7 +104,6 @@ class ExpCourse extends Component {
                         className="exp-course__logo"
                         src={require('../asset/image/logo_yd@2x.png')}
                     />
-                    {/*<div className="exp-course__city">深圳</div>*/}
                     <div className="exp-course__name">尊敬的深圳移动用户，</div>
                     <div className="exp-course__detail">
                         恭喜您获得善恩英语“英文原版精读课程精选体验合辑”大礼包
@@ -180,7 +179,7 @@ class ExpCourse extends Component {
                         <p className="bold">领取数量：</p>
                         <p>限领10000份，领完即止</p>
                         <p className="bold">适用范围：</p>
-                        <p>本次活动为深圳移动用户专享，非深圳移动用户无法参与。</p>
+                        <p>本活动为移动用户专享。</p>
                         <p>1、  每个手机号限领一次，不可重复领取；</p>
                         <p>2、  用户输入兑换码、手机号码及接收到的手机短信验证码，即可成功领取大礼包；</p>
                         <p>3、  大礼包内课程有效期为2个月（自领取之日起），过期即止；</p>

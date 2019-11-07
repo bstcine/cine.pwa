@@ -2,6 +2,7 @@ import OrderCoupon from './component/OrderCoupon';
 import ReceiveCoupon from './component/ReceiveCoupon';
 import LotteryCoupon from './component/DrawCoupon';
 import ExpCourse from './component/ExpCourse';
+import CouponCourse from './component/CouponCourse';
 
 const routes = [
     {
@@ -18,9 +19,13 @@ const routes = [
         component: LotteryCoupon,
     },
     {
-        path:'/temp/exp',
-        component:ExpCourse
-    }
+        path: '/temp/exp',
+        component: ExpCourse,
+    },
+    {
+        path: '/temp/coupon',
+        component: CouponCourse,
+    },
 ];
 
 export default routes;

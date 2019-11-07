@@ -314,10 +314,12 @@ export default class Brief extends Component {
 
                         {course &&
                         ((course.activitys && course.activitys.length) ||
-                            course.is_allow_point === '1') ? (
+                            course.is_allow_point === '1' ||
+                            course.id === 'd011573098156314eKfDXK5703') ? (
                             <div className="promotes">
                                 {this.renderActivityPromoteList(course)}
                                 {this.renderPointPromoteList(course, user)}
+                                {course.id === 'd011573098156314eKfDXK5703' && <TempFromZXTag />}
                             </div>
                         ) : null}
 
@@ -336,20 +338,37 @@ export default class Brief extends Component {
 
                     {course && this.renderBottomButton(course)}
 
-                    {course && course.activity_lottery && (
-                        <div className="right-desc">
-                            <div className="recommend" onClick={onClickLottery}>
-                                <div className="red-bag" />
-                                <div className="desc">
-                                    抽取
-                                    <br />
-                                    优惠券
+                    {course &&
+                        course.activity_lottery && (
+                            <div className="right-desc">
+                                <div
+                                    className="recommend"
+                                    onClick={onClickLottery}
+                                >
+                                    <div className="red-bag" />
+                                    <div className="desc">
+                                        抽取
+                                        <br />
+                                        优惠券
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    )}
+                        )}
                 </div>
             </div>
         );
     }
 }
+
+const TempFromZXTag = () => {
+    return (
+        <div className="promote">
+            <div className="promote-label">
+                <span className="bord-label">移动用户专享</span>
+            </div>
+            <div className="promote-list">
+                <div className="promote-title">用券后仅需支付￥992.00</div>
+            </div>
+        </div>
+    );
+};

@@ -29,7 +29,7 @@ export default class PayCenter extends Component {
                 text: '立即支付',
                 disabled: false,
             },
-            pay_type: 1,
+            pay_type: 3,
         };
         this.closePayingModal = this.closePayingModal.bind(this);
         this.closeQRModal = this.closeQRModal.bind(this);
@@ -316,19 +316,6 @@ export default class PayCenter extends Component {
                                 <div className="pay-method-choose clearfix">
                                     <div
                                         className={
-                                            pay_type === 1
-                                                ? 'pay-method-item pay-method-alipay active'
-                                                : 'pay-method-item pay-method-alipay'
-                                        }
-                                        onClick={() => this.choosePayType(1)}
-                                    >
-                                        <img
-                                            src={require('../../asset/image/pic_alipay.png')}
-                                            alt="支付宝支付"
-                                        />
-                                    </div>
-                                    <div
-                                        className={
                                             pay_type === 3
                                                 ? 'pay-method-item pay-method-wechatpay active'
                                                 : 'pay-method-item pay-method-wechatpay'
@@ -340,6 +327,21 @@ export default class PayCenter extends Component {
                                             alt="微信支付"
                                         />
                                     </div>
+
+                                    <div
+                                        className={
+                                            pay_type === 1
+                                                ? 'pay-method-item pay-method-alipay active'
+                                                : 'pay-method-item pay-method-alipay'
+                                        }
+                                        onClick={() => this.choosePayType(1)}
+                                    >
+                                        <img
+                                            src={require('../../asset/image/pic_alipay.png')}
+                                            alt="支付宝支付"
+                                        />
+                                    </div>
+
                                 </div>
                             </div>
                             <div className="pay-footer clearfix">

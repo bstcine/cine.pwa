@@ -367,7 +367,7 @@ const TempFromZXTag = () => {
                 <span className="bord-label">移动用户专享</span>
             </div>
             <div className="promote-list">
-                <div className="promote-title">用券后仅需支付￥992.00</div>
+                <div className="promote-title">用券后 1792-800 = 992 元</div>
             </div>
         </div>
     );

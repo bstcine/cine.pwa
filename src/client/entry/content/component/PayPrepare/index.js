@@ -24,6 +24,7 @@ export default class PayPrepare extends Component {
             user: null,
             calPrice: null,
             coupon_no: '',
+            coupon_name: null,
             coupon_msg: '',
             point: '',
             point_msg: '',
@@ -61,6 +62,9 @@ export default class PayPrepare extends Component {
             }
             if (calPrice.coupon_no) {
                 updateStater.coupon_no = calPrice.coupon_no;
+            }
+            if (calPrice.coupon_name) {
+                updateStater.coupon_name = calPrice.coupon_name;
             }
             if (addressInfo) {
                 updateStater.addressInfo = {
@@ -109,6 +113,7 @@ export default class PayPrepare extends Component {
             if (this.hasError(err)) return;
             this.setState(prevState => ({
                 calPrice: Object.assign(prevState.calPrice, result),
+                coupon_name:result.coupon_name
             }));
         });
     }
@@ -154,6 +159,7 @@ export default class PayPrepare extends Component {
             if (msg.indexOf('coupon') !== -1) {
                 this.setState({
                     coupon_msg: errorMsg(msg),
+                    coupon_name:''
                 });
             } else {
                 this.setState({
@@ -217,6 +223,7 @@ export default class PayPrepare extends Component {
             user,
             calPrice,
             coupon_no,
+            coupon_name,
             coupon_msg,
             point,
             point_msg,
@@ -283,7 +290,7 @@ export default class PayPrepare extends Component {
                                         onChange={this.inputChange}
                                     />
                                     <span className="error-tips">
-                                        {coupon_msg}
+                                        {coupon_name} {coupon_msg}
                                     </span>
                                     <span className="red">
                                         抵扣：-￥{calPrice.coupon_discount}

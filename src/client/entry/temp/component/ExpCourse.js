@@ -104,7 +104,7 @@ class ExpCourse extends Component {
                         className="exp-course__logo"
                         src={require('../asset/image/logo_yd@2x.png')}
                     />
-                    <div className="exp-course__name">尊敬的深圳移动用户，</div>
+                    <div className="exp-course__name">尊敬的中国移动用户，</div>
                     <div className="exp-course__detail">
                         恭喜您获得善恩英语“英文原版精读课程精选体验合辑”大礼包
                     </div>

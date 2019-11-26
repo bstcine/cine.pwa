@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { CButton, CIcon, CMessage } from '@/component/_base';
+import { CButton, CIcon, CMessage, CModal } from '@/component/_base';
 import '../asset/style/exp-course.less';
 import commonUtil from '@/util/_base/commonUtil';
 import { fetchData } from '@/service/base';
@@ -76,13 +76,26 @@ class CouponCourse extends Component {
         });
         this.setState({ submit_btn_disabled: false, submit_btn: '立即使用' });
         if (err) return CMessage.info(errorMsg(err));
-        CMessage.success('成功领取！', () => {
+        const close = CModal.open({
+            children: (
+                <div className="redbag">
+                    <img src={require('../asset/image/redbag.png')} alt="" />
+                </div>
+            ),
+        });
+        setTimeout(function() {
             let h =
                 APIURL_Auth_Auto_Signin +
-                `?code=${res.code}&redirect=${encodeURIComponent('/content/course?cid=d011573098156314eKfDXK5703')}`;
+                `?code=${res.code}&redirect=${encodeURIComponent(
+                    '/content/course?cid=d011573098156314eKfDXK5703'
+                )}`;
             console.log(h);
             location.href = h;
-        });
+        }, 3000);
+
+        // CMessage.success('成功领取！', () => {
+
+        // });
     }
 
     render() {
@@ -98,19 +111,21 @@ class CouponCourse extends Component {
         return (
             <div className="exp-course">
                 <div className="exp-course__banner">
-                    <img className="exp-mylogo" src={require('@/asset/image/bule-bstcine-logo.png')}/>
+                    <img
+                        className="exp-mylogo"
+                        src={require('@/asset/image/bule-bstcine-logo.png')}
+                    />
                     <span className="divide"></span>
                     <img
                         className="exp-course__logo"
                         src={require('../asset/image/logo_yd@2x.png')}
                     />
-                    <div className="exp-course__name">尊敬的深圳移动用户，</div>
+                    <div className="exp-course__name">尊敬的中国移动用户，</div>
                     <div className="exp-course__detail">
                         恭喜您获得善恩英语“新概念2套餐”优惠大礼包
                     </div>
                 </div>
                 <div className="exp-course__form">
-
                     <div className="ec-form-control ec-form-control--promote_code">
                         <CIcon>new_releases</CIcon>
                         <input
@@ -158,8 +173,6 @@ class CouponCourse extends Component {
                         </CButton>
                     </div>
 
-
-
                     <CButton
                         className="ec-submit"
                         shape="capsule"
@@ -180,11 +193,14 @@ class CouponCourse extends Component {
                         <p>限领10000份，领完即止</p>
                         <p className="bold">适用范围：</p>
                         <p>本活动为移动用户专享。</p>
-                        <p>1、  每个手机号限领一次，不可重复领取；</p>
-                        <p>2、  用户输入兑换码、手机号码及接收到的手机短信验证码，即可跳转至课程界面进行购买；</p>
-                        <p>3、  兑换码有效期为2个月（自领取之日起），过期即止；</p>
-                        <p>4、  课程相关咨询，请添加善恩客服微信：BSTCINE02；</p>
-                        <p>5、  本次活动最终解释权归属善恩英语。</p>
+                        <p>1、 每个手机号限领一次，不可重复领取；</p>
+                        <p>
+                            2、
+                            用户输入兑换码、手机号码及接收到的手机短信验证码，即可跳转至课程界面进行购买；
+                        </p>
+                        <p>3、 兑换码有效期至2019年12月31日，过期即止；</p>
+                        <p>4、 课程相关咨询，请添加善恩客服微信：BSTCINE02；</p>
+                        <p>5、 本次活动最终解释权归属善恩英语。</p>
                     </div>
                 </div>
             </div>

@@ -6,7 +6,7 @@ const Footer = () => {
             <div className="gcontainer">
                 <div className="copyright">
                     Copyright © 2014 - {new Date().getFullYear()} BSTCINE. All
-                    Rights Reserved. 沪ICP备14053596号-1
+                    Rights Reserved. <a href="http://www.beian.miit.gov.cn/">沪ICP备14053596号-1</a>
                 </div>
             </div>
         </footer>

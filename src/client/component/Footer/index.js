@@ -86,7 +86,7 @@ export default class Footer extends Component {
                                 Rights Reserved.{' '}
                             </div>
                             <div className="co-desc-code">
-                                沪ICP备14053596号-1
+                                <a href="http://www.beian.miit.gov.cn/">沪ICP备14053596号-1</a>
                             </div>
                         </div>
                     </div>

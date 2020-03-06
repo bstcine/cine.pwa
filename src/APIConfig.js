@@ -96,6 +96,7 @@ exports.APIURL_Temp_User_Course_Coupon_Check =
     '/api/temp/user/course/coupon/check'; // 将永久课程转为限时课程，并赠送优惠券
 exports.APIURL_Temp_User_Coupon_Receive = '/api/temp/user/coupon/receive'; // 用户领取活动优惠券
 exports.APIURL_Temp_User_Exp_Course = '/api/temp/user/exp/course'; // 根据手机号注册开通体验课程
+exports.APIURL_Temp_User_Exp_X1u1_Course = '/api/temp/user/exp/x1u1course'; // 根据手机号注册开通新1u1体验课程
 exports.APIURL_Temp_User_XZ_Coupon = '/api/temp/user/xz/coupon'; // 根据手机号注册并领取优惠券
 exports.APIURL_Admin_Coupon_Synthesizer = '/api/admin/user/coupon/synthesizer'; // 管理员将某用户的通用、直减、未使用的优惠券执行合并
 exports.APIURL_Admin_User_Coupon_List = '/api/admin/user/coupon/list'; // 管理员获取某用户的未使用优惠券列表

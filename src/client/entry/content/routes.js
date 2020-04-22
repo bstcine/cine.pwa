@@ -2,7 +2,7 @@ import { chunkComponent } from '@/util/chunkComponent';
 import Home from "@/entry/content/component/Home";
 import Course from "@/entry/content/component/Course";
 const Listening = chunkComponent(() =>
-    import(/* webpackChunkName: "content/chunk/index.pp" */ './component/Listening')
+    import(/* webpackChunkName: "content/chunk/index.l" */ './component/Listening')
 );
 const PayPrepare = chunkComponent(() =>
     import(/* webpackChunkName: "content/chunk/index.pp" */ './component/PayPrepare')

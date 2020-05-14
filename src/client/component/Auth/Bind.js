@@ -149,7 +149,7 @@ class Bind extends Component {
         const isBinded = this.bind_with !== 'wechat' && user && user.phone;
         return (
             <div className="cine-auth__container">
-                <div className="cine_auth__title">绑定手机</div>
+                <div className="cine_auth__title">{this.bind_with === 'wechat' && "登录并"}绑定手机</div>
 
                 {!isBinded && (
                     <div className="cine_auth__form">

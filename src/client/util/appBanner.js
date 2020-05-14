@@ -11,7 +11,7 @@ let appBanner = {
     init: function() {
         const closeAt = storeUtil.get('appBannerHide', 'local');
         const current = new Date().getTime();
-        const isHide = closeAt && current - closeAt < 2 * 24 * 3600 * 1000;
+        const isHide = closeAt && current - closeAt < 1 * 24 * 3600 * 1000;
         if (
             !(interSiteCodeUtil.inAPP() || interSiteCodeUtil.inAndroidH5()) &&
             uaUtil.mobile() &&

@@ -164,10 +164,13 @@ export const wCardAction = {
         let result = reducer.get('result');
         let word = result.rows[currentIndex].word;
         let id = result.rows[currentIndex].id;
-        let [error, _updateRes] = await fetchData(
-            Api.APIURL_User_Content_Word_UpdateKnow,
-            { word: { word: word, id: id }, is_known: true }
-        );
+        let [
+            error,
+            _updateRes,
+        ] = await fetchData(Api.APIURL_User_Content_Word_UpdateKnow, {
+            word: { word: word, id: id },
+            is_known: true,
+        });
         if (error || _updateRes.status === false) {
             dispatch(wCardAction._changeKnown(!isKnown));
         }
@@ -199,10 +202,13 @@ export const wCardAction = {
             };
             wordList.push(word);
         });
-        let [error, _updateRes] = await fetchData(
-            Api.APIURL_User_Content_Word_UpdateKnow,
-            { word_list: wordList, is_known: false }
-        );
+        let [
+            error,
+            _updateRes,
+        ] = await fetchData(Api.APIURL_User_Content_Word_UpdateKnow, {
+            word_list: wordList,
+            is_known: false,
+        });
         console.log(_updateRes, error);
         if (!error) {
             let newRows = [];

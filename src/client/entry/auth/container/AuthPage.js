@@ -4,7 +4,10 @@ import CAuth from '@/component/Auth';
 import AuthLogo from '@/entry/auth/component/AuthLogo';
 import { getParam } from '@/util/_base/urlUtil';
 import { fetchData } from '@/service/base';
-import { APIURL_Auth_SignIn, APIURL_Content_School_Detail } from "../../../../APIConfig";
+import {
+    APIURL_Auth_SignIn,
+    APIURL_Content_School_Detail,
+} from '../../../../APIConfig';
 import errorMsg from '@/util/errorMsg';
 import { CMessage } from '@/component/_base';
 import SchoolLogo from '@/entry/auth/component/SchoolLogo';
@@ -41,10 +44,9 @@ class AuthPage extends Component {
             <div className="cine-auth__page">
                 {this.school && (
                     <div className="school_bg">
-                        {schoolData &&
-                            schoolData.bg_img && (
-                                <img src={schoolData.bg_img} alt="bg_img" />
-                            )}
+                        {schoolData && schoolData.bg_img && (
+                            <img src={schoolData.bg_img} alt="bg_img" />
+                        )}
                     </div>
                 )}
                 {this.school ? <SchoolLogo data={schoolData} /> : <AuthLogo />}

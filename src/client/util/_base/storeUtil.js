@@ -94,7 +94,7 @@ function _which(type) {
         case 'local':
             return local;
         default:
-            case 'session':
+        case 'session':
             return session;
     }
 }

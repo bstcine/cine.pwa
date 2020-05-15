@@ -8,8 +8,8 @@ import { GLayoutContainer } from '@/g/container';
 import WordCourses from './../component/home/WordCourses';
 import * as wordCourse from '@/service/data/response_word_course.json';
 import gAction from '@/g/action';
-import interSiteCodeUtil from "@/util/_base/interSiteCodeUtil";
-import TabBar from "@/component/TabBar";
+import interSiteCodeUtil from '@/util/_base/interSiteCodeUtil';
+import TabBar from '@/component/TabBar';
 
 const mapStateToProps = state => {
     const { userRedu } = state;
@@ -31,7 +31,9 @@ class HomePage extends Component {
                 {!!user && user.type === '2' && <Tasks user={user} />}
                 <WordCourses courses={courses} />
                 <Courses />
-                {!(interSiteCodeUtil.inAPP() || interSiteCodeUtil.inAndroidH5()) && <TabBar />}
+                {!(
+                    interSiteCodeUtil.inAPP() || interSiteCodeUtil.inAndroidH5()
+                ) && <TabBar />}
             </GLayoutContainer>
         );
     }

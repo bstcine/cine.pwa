@@ -52,17 +52,16 @@ class Container extends Component {
         return (
             <GLayoutContainer>
                 <div className="cine-widget">
-
                     <CPanel>
                         <CButton
                             onClick={() => {
-                                player.src = 'http://oss.bstcine.com/word/top10000/one_b.mp3'
-                                player.play()
+                                player.src =
+                                    'http://oss.bstcine.com/word/top10000/one_b.mp3';
+                                player.play();
                             }}
                         >
                             播放MP3
                         </CButton>
-
                     </CPanel>
 
                     <CPanel>
@@ -479,7 +478,6 @@ class Container extends Component {
                                 this.setState({ isOpenModal: false });
                             }}
                         >
-
                             <CPanel title="Alert">asdfdfad</CPanel>
                         </CModal>
                     </CPanel>

@@ -56,7 +56,7 @@ const WordCourses = ({ courses }) => {
         }
     });
     return (
-        <CPanel title="核心词汇" className='words-container'>
+        <CPanel title="核心词汇" className="words-container">
             <CCardContainer gap="" layout="345">
                 {cards}
             </CCardContainer>

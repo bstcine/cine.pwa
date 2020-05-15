@@ -25,10 +25,7 @@ export default class Order extends React.PureComponent {
                 <br />
                 <br />
 
-                <OrderList
-                    orders={orderlist}
-                    layout="112"
-                />
+                <OrderList orders={orderlist} layout="112" />
 
                 <br />
                 <br />

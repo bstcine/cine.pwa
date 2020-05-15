@@ -27,7 +27,8 @@ export default class End extends React.Component {
         return (
             <div className="card-end">
                 <div className="hint">
-                    本次测试得分：<span className={this.state.hintStyle}>
+                    本次测试得分：
+                    <span className={this.state.hintStyle}>
                         {this.state.score}
                     </span>{' '}
                     分，{this.state.hint}

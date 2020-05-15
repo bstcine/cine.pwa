@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { CBind } from '@/component/Auth';
 import QRHelp from '@/component/QRHelp';
-import AuthLogo from "@/entry/auth/component/AuthLogo";
+import AuthLogo from '@/entry/auth/component/AuthLogo';
 
 class BindPage extends Component {
     render() {

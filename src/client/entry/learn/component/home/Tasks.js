@@ -42,7 +42,8 @@ const Tasks = ({ tasks, user, isLimitTasks, onShowAllTask, gActions }) => {
             <div className="cine-panel__head">
                 <div className="cine-panel__lefthead">
                     <div className="cine-panel__title">
-                        本周作业{badge > 0 && (
+                        本周作业
+                        {badge > 0 && (
                             <span className="cine-panel__badge">{badge}</span>
                         )}
                     </div>
@@ -52,9 +53,7 @@ const Tasks = ({ tasks, user, isLimitTasks, onShowAllTask, gActions }) => {
                     {uaUtil.PC() || uaUtil.AndroidTablet() || uaUtil.iPad() ? (
                         <a
                             onClick={() => {
-                                const url = `${location.protocol}//${
-                                    location.host
-                                }/learn/achieve?user_id=${user.id}`;
+                                const url = `${location.protocol}//${location.host}/learn/achieve?user_id=${user.id}`;
                                 if (interSiteCodeUtil.inIOSAPP()) {
                                     Bridge.ios(BRIDGE_EVENT.OPEN_BROWSER, {
                                         visible: false,
@@ -72,18 +71,14 @@ const Tasks = ({ tasks, user, isLimitTasks, onShowAllTask, gActions }) => {
                             onClick={() => {
                                 if (interSiteCodeUtil.inAndroidAPP()) {
                                     Bridge.android(BRIDGE_EVENT.OPEN_BROWSER, {
-                                        url: `/learn/achieve?user_id=${
-                                            user.id
-                                        }`,
+                                        url: `/learn/achieve?user_id=${user.id}`,
                                         title: '打卡',
                                         visible: false,
                                     }).then(res => {
                                         console.log(res);
                                     });
                                 } else {
-                                    location.href = `/learn/achieve?user_id=${
-                                        user.id
-                                    }`;
+                                    location.href = `/learn/achieve?user_id=${user.id}`;
                                 }
                             }}
                         >

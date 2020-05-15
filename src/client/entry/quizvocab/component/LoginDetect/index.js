@@ -59,9 +59,9 @@ export default class LoginDetect extends Component {
                 />
                 <div className="login-detect">
                     <div className="title">
-                        系统检测到你<span className="orange">没有登录</span>，为了记录你的学习成长过程，强烈建议你<span className="blue">
-                            登录
-                        </span>系统后再进行测试
+                        系统检测到你<span className="orange">没有登录</span>
+                        ，为了记录你的学习成长过程，强烈建议你
+                        <span className="blue">登录</span>系统后再进行测试
                     </div>
                     <div className="bg-welcome" />
                     <button

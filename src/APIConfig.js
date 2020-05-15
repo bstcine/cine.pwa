@@ -29,7 +29,7 @@ exports.APIURL_Content_Tag_Tree = '/api/content/tag/tree'; // 标签树
 exports.APIURL_Content_Course_Detail = '/api/content/course/detail'; // 课程详情
 exports.APIURL_Content_Course_Set = '/api/content/course/set'; // 课程详情
 exports.APIURL_Content_Lesson_Detail = '/api/content/lesson/detail'; // 课内容
-exports.APIURL_Content_SubPage = '/api/content/subpage';// 二级页面
+exports.APIURL_Content_SubPage = '/api/content/subpage'; // 二级页面
 exports.APIURL_User_Content_Course_Mylist = '/api/user/content/course/list'; // 我的学习列表
 exports.APIURL_User_Content_Task_Current = '/api/user/content/task/current'; // 我的本周作业
 exports.APIURL_Content_Task_Share = '/api/content/task/share'; // 私塾分享
@@ -42,9 +42,9 @@ exports.APIURL_Content_Lesson_Quiz = '/api/web/quiz/'; // 小节测试
 exports.APIURL_Content_StuQuizWord_List = '/api/content/stuQuizWord/list'; // 获取学生、核心语法测试、词汇测试列表，根据管理员或老师
 exports.APIURL_Content_School_Detail = '/api/content/school/detail'; // 学校详情
 
-
 exports.APIURL_STATS_ACTIVITY_COURSE_INFO = '/api/stats/activity/course/info'; // 课程活动参与用户纪录信息
-exports.APIURL_STATS_ACTIVITY_COURSE_UPDATE = '/api/stats/activity/course/update'; // 更新课程活动参与用户纪录
+exports.APIURL_STATS_ACTIVITY_COURSE_UPDATE =
+    '/api/stats/activity/course/update'; // 更新课程活动参与用户纪录
 
 exports.APIURL_Mentor_Student_ListWithTask = '/api/mentor/student/listWithTask'; // 老师/管理员获取所有学生的本周作业列表
 exports.APIURL_Content_Task_Update_Status = '/api/content/task/update/status'; // 导师更新任务状态

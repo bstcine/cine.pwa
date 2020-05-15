@@ -10,7 +10,7 @@ export const CardArticle = ({ value, hover, layout, actions }) => {
     return (
         <CCard hover={hover} href={value.link}>
             <div className="cardArticle">
-                <div className={classIMG} >
+                <div className={classIMG}>
                     <div className="img" style={{ background: `${imgBG}` }} />
                 </div>
 

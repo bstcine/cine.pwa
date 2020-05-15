@@ -21,7 +21,10 @@ export default class Article extends Component {
                             <div className="article-category" key={i}>
                                 <div className="article-category-title">
                                     {newsCategory.name}
-                                    <a className="more" href={`/news-${newsCategory.id}`}>
+                                    <a
+                                        className="more"
+                                        href={`/news-${newsCategory.id}`}
+                                    >
                                         更多 &gt;
                                     </a>
                                 </div>
@@ -29,7 +32,9 @@ export default class Article extends Component {
                                     <div
                                         className="article-img"
                                         style={{
-                                            background: CommonUtil.getImageBackground(newsCategory.img),
+                                            background: CommonUtil.getImageBackground(
+                                                newsCategory.img
+                                            ),
                                             backgroundSize: 'cover',
                                         }}
                                     />

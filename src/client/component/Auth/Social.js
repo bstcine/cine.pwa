@@ -100,14 +100,13 @@ class Social extends Component {
                                     </div>
                                 ))}
 
-                            {list &&
-                                list.length === 0 && (
-                                    <div className="cine_auth__social_item">
-                                        <CButton onClick={this.goWechatAuth}>
-                                            绑定微信 &gt;
-                                        </CButton>
-                                    </div>
-                                )}
+                            {list && list.length === 0 && (
+                                <div className="cine_auth__social_item">
+                                    <CButton onClick={this.goWechatAuth}>
+                                        绑定微信 &gt;
+                                    </CButton>
+                                </div>
+                            )}
                         </div>
                     </div>
                 </div>

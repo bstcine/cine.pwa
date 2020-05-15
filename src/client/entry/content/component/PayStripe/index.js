@@ -126,7 +126,9 @@ class PayStripe extends Component {
         const { order } = this.state;
         return (
             <React.Fragment>
-                <Header isShow={!interSiteCodeUtil.inAPP() && !uaUtil.wechat()} />
+                <Header
+                    isShow={!interSiteCodeUtil.inAPP() && !uaUtil.wechat()}
+                />
                 <div className="container-fluid course-container-bg">
                     <div className="paycenter-container">
                         <div className="pay-header">
@@ -144,7 +146,8 @@ class PayStripe extends Component {
                                     {order ? order.subject : ''}
                                 </div>
                                 <div className="order-price">
-                                    实付金额：<span className="price">
+                                    实付金额：
+                                    <span className="price">
                                         ${order ? order.pay_price : ''}
                                     </span>
                                 </div>

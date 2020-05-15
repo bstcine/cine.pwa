@@ -284,7 +284,9 @@ export default class PayCenter extends Component {
         } = this.state;
         return (
             <React.Fragment>
-                <Header isShow={!interSiteCodeUtil.inAPP() && !uaUtil.wechat()} />
+                <Header
+                    isShow={!interSiteCodeUtil.inAPP() && !uaUtil.wechat()}
+                />
                 <div className="container-fluid course-container-bg">
                     <div className="paycenter-container">
                         <div className="pay-header">
@@ -302,14 +304,16 @@ export default class PayCenter extends Component {
                                     {order ? order.subject : ''}
                                 </div>
                                 <div className="order-price">
-                                    实付金额：<span className="price">
+                                    实付金额：
+                                    <span className="price">
                                         {order ? order.pay_price : ''}
                                     </span>
                                 </div>
                             </div>
                             <div className="pay-method">
                                 <div className="pay-method-title">
-                                    选择支付方式<span className="pay-method-tip">
+                                    选择支付方式
+                                    <span className="pay-method-tip">
                                         （支付宝、微信）
                                     </span>
                                 </div>
@@ -341,7 +345,6 @@ export default class PayCenter extends Component {
                                             alt="支付宝支付"
                                         />
                                     </div>
-
                                 </div>
                             </div>
                             <div className="pay-footer clearfix">

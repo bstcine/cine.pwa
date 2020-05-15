@@ -36,7 +36,7 @@ class WordLessonList extends React.Component {
             <CCardContainer layout="245" gap="large">
                 {lessons.map((wordLesson, i) => (
                     <CCard key={i} onClick={() => this.onClick(wordLesson)}>
-                        <WordLessonItem item={wordLesson} index={i}/>
+                        <WordLessonItem item={wordLesson} index={i} />
                     </CCard>
                 ))}
             </CCardContainer>

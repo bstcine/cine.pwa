@@ -56,7 +56,7 @@ export default class DetailDesc extends React.PureComponent {
         let tabItem_desc = course.object_type === '1' ? '课程概要' : '详情';
         let tabItem_evaluate = course.object_type === '1' ? '学员评价' : '评价';
         let will_show_lessons = course.object_type === '1' && !isIOSAPP;
-        const {comments} = this.state;
+        const { comments } = this.state;
 
         return (
             <div className="course-detail" ref="courseDetail">
@@ -64,7 +64,14 @@ export default class DetailDesc extends React.PureComponent {
                     <TabItems>
                         <TabItem>{tabItem_desc}</TabItem>
                         {will_show_lessons ? <TabItem>课程目录</TabItem> : null}
-                        <TabItem>{tabItem_evaluate}{comments && comments.length >0 && <span className="text-blue text-xs">（{comments.length}）</span>}</TabItem>
+                        <TabItem>
+                            {tabItem_evaluate}
+                            {comments && comments.length > 0 && (
+                                <span className="text-blue text-xs">
+                                    （{comments.length}）
+                                </span>
+                            )}
+                        </TabItem>
                     </TabItems>
                     <TabPanels>
                         <TabPanel>

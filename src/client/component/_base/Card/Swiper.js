@@ -24,7 +24,7 @@ class Swiper extends PureComponent {
         let content = this.contentRef.current;
         const { children, step } = this.props;
         let maxOffsetLeft = content.scrollWidth - content.clientWidth;
-        let offsetX = step / children.length * content.scrollWidth;
+        let offsetX = (step / children.length) * content.scrollWidth;
         this.setState(
             prevState => ({
                 offsetX: Math.min(maxOffsetLeft, prevState.offsetX + offsetX),
@@ -36,7 +36,7 @@ class Swiper extends PureComponent {
     swipLeft() {
         let content = this.contentRef.current;
         const { children, step } = this.props;
-        let offsetX = step / children.length * content.scrollWidth;
+        let offsetX = (step / children.length) * content.scrollWidth;
         this.setState(
             prevState => ({
                 offsetX: Math.max(0, prevState.offsetX - offsetX),

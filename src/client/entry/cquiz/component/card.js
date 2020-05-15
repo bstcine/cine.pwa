@@ -157,7 +157,7 @@ export default class Card extends Component {
             score =
                 allCount <= 0
                     ? '0'
-                    : Math.round(correctCount / allCount * 10000) / 100;
+                    : Math.round((correctCount / allCount) * 10000) / 100;
         }
 
         this.setState({
@@ -246,7 +246,9 @@ export default class Card extends Component {
                             className={
                                 selectOption == -1
                                     ? ''
-                                    : isCorrect ? 'green' : 'red'
+                                    : isCorrect
+                                    ? 'green'
+                                    : 'red'
                             }
                         >
                             {isCorrect

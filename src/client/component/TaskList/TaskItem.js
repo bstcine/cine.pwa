@@ -29,21 +29,15 @@ const getHref = (task, isMentor) => {
     switch (task.type) {
         case Task_Type.Video:
         case Task_Type.Quiz_PDF:
-            return `/learn/course/${task.course_id}?task_id=${
-                task.id
-            }&lesson_id=${task.lesson_id}`;
+            return `/learn/course/${task.course_id}?task_id=${task.id}&lesson_id=${task.lesson_id}`;
         case Task_Type.Quiz:
             return `/quiz/kj?task_id=${task.id}${urlMentorUser}`;
         case Task_Type.Quiz_Feedback: {
-            return `/quiz/kj?task_id=${
-                task.id
-            }${urlMentorUser}&stats_content_quiz_id=${task.object_id}`;
+            return `/quiz/kj?task_id=${task.id}${urlMentorUser}&stats_content_quiz_id=${task.object_id}`;
         }
         case Task_Type.Word:
             if (task.word_start_index && task.word_end_index) {
-                return `/lword?task_id=${task.id}&start_index=${
-                    task.word_start_index
-                }&end_index=${task.word_end_index}${urlMentorUser}`;
+                return `/lword?task_id=${task.id}&start_index=${task.word_start_index}&end_index=${task.word_end_index}${urlMentorUser}`;
             } else {
                 return `/lword?task_id=${task.id}&word_type=${task.object_id}`;
             }

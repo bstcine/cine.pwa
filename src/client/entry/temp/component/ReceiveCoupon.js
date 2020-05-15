@@ -78,10 +78,14 @@ export default class ReceiveCoupon extends Component {
                     <div className="promoteContent">
                         <p className="promoteHeader">优惠券使用说明</p>
                         <p className="promoteBody">
-                            1. 本券仅限729原版少儿童书展用户领取；<br />
-                            2. 领取链接7月31日24点前有效；<br />
-                            3. 本券可用于购买善恩官网上所有视频课程；<br />
-                            4. 本券仅限购买一门课程，不设找零，不可合并；<br />
+                            1. 本券仅限729原版少儿童书展用户领取；
+                            <br />
+                            2. 领取链接7月31日24点前有效；
+                            <br />
+                            3. 本券可用于购买善恩官网上所有视频课程；
+                            <br />
+                            4. 本券仅限购买一门课程，不设找零，不可合并；
+                            <br />
                             5. 本券自领取之日起生效，一个月内有效。
                         </p>
                     </div>

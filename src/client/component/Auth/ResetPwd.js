@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { CButton, CIcon, CMessage } from '@/component/_base';
 import phoneCode from '@/constant/phoneCode';
-import CSelect,{ COption } from '@/component/CSelect';
+import CSelect, { COption } from '@/component/CSelect';
 import { fetchData } from '@/service/base';
 import {
     APIURL_Auth_Reset_Password,

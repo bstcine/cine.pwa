@@ -1,9 +1,6 @@
 import React from 'react';
 import { CCardContainer } from '@/component/_base';
-import {
-    CardItem,
-    CardList,
-} from '@/component/CardItem';
+import { CardItem, CardList } from '@/component/CardItem';
 import { CardItem111 } from './CardItem';
 
 const CItem = ({ value, layout, actions }) => {
@@ -33,7 +30,7 @@ const CardExList = ({ orders, layout, className, type, actions }) => {
                 <CardList
                     list={orders}
                     layout={layout}
-                    hover = "none"
+                    hover="none"
                     limit={8}
                     actions={actions}
                 />

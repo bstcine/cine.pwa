@@ -23,7 +23,6 @@ const bottomImg1 = require('../../asset/image/book.jpg');
 const bottomImg2 = require('../../asset/image/moon.jpg');
 let bottomImg = Math.round(Math.random() * 10) % 2 ? bottomImg2 : bottomImg1;
 
-
 const getSelectedTags = () => {
     let tags = [];
     let params = getParam();
@@ -191,14 +190,10 @@ export default class Home extends Component {
                                             key={tab.id}
                                             id={tab.id}
                                             style={{
-                                                background: `url(${
-                                                    tab.image
-                                                }) center center / contain no-repeat`,
+                                                background: `url(${tab.image}) center center / contain no-repeat`,
                                             }}
                                             activeStyle={{
-                                                background: `url(${
-                                                    tab.image_active
-                                                }) center center / contain no-repeat`,
+                                                background: `url(${tab.image_active}) center center / contain no-repeat`,
                                             }}
                                         >
                                             {tab.name}
@@ -255,7 +250,9 @@ export default class Home extends Component {
                 )}
 
                 {!interSiteCodeUtil.inAPP() && <Footer isShow={true} />}
-                {!(interSiteCodeUtil.inAPP() || interSiteCodeUtil.inAndroidH5()) && <TabBar />}
+                {!(
+                    interSiteCodeUtil.inAPP() || interSiteCodeUtil.inAndroidH5()
+                ) && <TabBar />}
             </React.Fragment>
         );
     }

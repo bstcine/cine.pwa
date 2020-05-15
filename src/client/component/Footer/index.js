@@ -51,7 +51,9 @@ export default class Footer extends Component {
                                         alt="善恩小助手"
                                     />
                                 </div>
-                                <div className="qrcode-title">课程购买、客服咨询</div>
+                                <div className="qrcode-title">
+                                    课程购买、客服咨询
+                                </div>
                                 <div className="qrcode-name">善恩小助手</div>
                             </div>
                             <div className="qrcode">
@@ -61,7 +63,9 @@ export default class Footer extends Component {
                                         alt="周老师"
                                     />
                                 </div>
-                                <div className="qrcode-title">美高/美本升学顾问</div>
+                                <div className="qrcode-title">
+                                    美高/美本升学顾问
+                                </div>
                                 <div className="qrcode-name">周老师</div>
                             </div>
                             <div className="qrcode">
@@ -78,7 +82,6 @@ export default class Footer extends Component {
                     </div>
 
                     <div className="copyright">
-
                         <div className="co-desc">
                             <div className="co-desc-year">
                                 Copyright © 2014 - {new Date().getFullYear()}{' '}
@@ -86,7 +89,9 @@ export default class Footer extends Component {
                                 Rights Reserved.{' '}
                             </div>
                             <div className="co-desc-code">
-                                <a href="http://www.beian.miit.gov.cn/">沪ICP备14053596号-1</a>
+                                <a href="http://www.beian.miit.gov.cn/">
+                                    沪ICP备14053596号-1
+                                </a>
                             </div>
                         </div>
                     </div>

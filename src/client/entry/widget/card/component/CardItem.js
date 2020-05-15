@@ -11,9 +11,7 @@ export const CardItem111 = ({ value, actions }) => {
                             <div
                                 className="img"
                                 style={{
-                                    background: `url(${
-                                        value.cover
-                                    }) center center / cover no-repeat`,
+                                    background: `url(${value.cover}) center center / cover no-repeat`,
                                 }}
                             />
                         </a>

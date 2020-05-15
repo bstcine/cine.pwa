@@ -319,7 +319,9 @@ export default class Brief extends Component {
                             <div className="promotes">
                                 {this.renderActivityPromoteList(course)}
                                 {this.renderPointPromoteList(course, user)}
-                                {course.id === 'd011573098156314eKfDXK5703' && <TempFromZXTag />}
+                                {course.id === 'd011573098156314eKfDXK5703' && (
+                                    <TempFromZXTag />
+                                )}
                             </div>
                         ) : null}
 
@@ -338,22 +340,18 @@ export default class Brief extends Component {
 
                     {course && this.renderBottomButton(course)}
 
-                    {course &&
-                        course.activity_lottery && (
-                            <div className="right-desc">
-                                <div
-                                    className="recommend"
-                                    onClick={onClickLottery}
-                                >
-                                    <div className="red-bag" />
-                                    <div className="desc">
-                                        抽取
-                                        <br />
-                                        优惠券
-                                    </div>
+                    {course && course.activity_lottery && (
+                        <div className="right-desc">
+                            <div className="recommend" onClick={onClickLottery}>
+                                <div className="red-bag" />
+                                <div className="desc">
+                                    抽取
+                                    <br />
+                                    优惠券
                                 </div>
                             </div>
-                        )}
+                        </div>
+                    )}
                 </div>
             </div>
         );

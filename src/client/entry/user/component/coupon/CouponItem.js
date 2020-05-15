@@ -47,10 +47,9 @@ const CouponItem = ({ coupon, actions }) => {
                     <div className="coupon-no">优惠券码：{coupon.no}</div>
                 </div>
                 <div className="effective-date">
-                    有效期：{coupon.effective_at
-                        .substring(0, 10)
-                        .replace(/-/g, '.')}{' '}
-                    - {coupon.expire_at.substring(0, 10).replace(/-/g, '.')}
+                    有效期：
+                    {coupon.effective_at.substring(0, 10).replace(/-/g, '.')} -{' '}
+                    {coupon.expire_at.substring(0, 10).replace(/-/g, '.')}
                 </div>
                 {coupon.desc && (
                     <img
@@ -77,10 +76,9 @@ const CouponItem = ({ coupon, actions }) => {
                     </a>
                 )}
             </div>
-            {coupon.desc &&
-                coupon.expand && (
-                    <div className={'coupon-remark'}>{coupon.desc}</div>
-                )}
+            {coupon.desc && coupon.expand && (
+                <div className={'coupon-remark'}>{coupon.desc}</div>
+            )}
         </div>
     );
 };

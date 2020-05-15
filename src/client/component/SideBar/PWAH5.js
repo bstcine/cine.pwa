@@ -27,7 +27,7 @@ class SideBarPWAH5 extends Component {
     }
 
     render() {
-       return (
+        return (
             <CNavigation
                 value={this.state.value}
                 onChange={this.onChange}

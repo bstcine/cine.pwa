@@ -78,7 +78,6 @@ export default class UserInfo extends Component {
             console.log(`grade ${grade}`);
             this.setState({ grade: grade });
         }
-
     }
 
     bornAtChange(event) {

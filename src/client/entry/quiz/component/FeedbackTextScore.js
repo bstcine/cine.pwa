@@ -42,18 +42,16 @@ const FeedbackTextScore = ({
                     })}
                 </ul>
             )}
-            {!editable &&
-                is_text_correct === 1 && (
-                    <span className="correct">
-                        <i className="material-icons">&#xE876;</i>正确
-                    </span>
-                )}
-            {!editable &&
-                is_text_correct === 0 && (
-                    <span className="wrong">
-                        <i className="material-icons">&#xE14C;</i>错误
-                    </span>
-                )}
+            {!editable && is_text_correct === 1 && (
+                <span className="correct">
+                    <i className="material-icons">&#xE876;</i>正确
+                </span>
+            )}
+            {!editable && is_text_correct === 0 && (
+                <span className="wrong">
+                    <i className="material-icons">&#xE14C;</i>错误
+                </span>
+            )}
 
             <div className="score">
                 得 <span>{text_score}</span> 分

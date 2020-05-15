@@ -6,7 +6,7 @@ const initialState = fromJS({
     teacher: sub.result.teacher,
     comment: sub.result.comment,
     article: sub.result.article,
-    resource: sub.result.resource    
+    resource: sub.result.resource,
 });
 
 const spageRedu = (state = initialState, action) => {

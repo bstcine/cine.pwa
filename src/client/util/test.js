@@ -97,7 +97,6 @@
 //     console.log(111);
 // })();
 
-
 // function subName(str) {
 //     return str.slice(0,1) + '**' + str.slice(-1);
 // }
@@ -118,12 +117,12 @@
 //
 //
 
-  const _ = require("lodash");
+const _ = require('lodash');
 
 function isSimilarRow(p, q) {
-    let reg = /[的|地|得|“|”|；|？|。|，|\ |\~|\`|\!|\@|\#|\$|\%|\^|\&|\*|\(|\)|\-|\_|\+|\=|\||\\|\[|\]|\{|\}|\;|\:|\"|\'|\,|\<|\.|\>|\/|\?]/g
-    let pArr = _.uniq(p.replace(reg,''));
-    let qArr =  _.uniq(q.replace(reg,''));
+    let reg = /[的|地|得|“|”|；|？|。|，|\ |\~|\`|\!|\@|\#|\$|\%|\^|\&|\*|\(|\)|\-|\_|\+|\=|\||\\|\[|\]|\{|\}|\;|\:|\"|\'|\,|\<|\.|\>|\/|\?]/g;
+    let pArr = _.uniq(p.replace(reg, ''));
+    let qArr = _.uniq(q.replace(reg, ''));
     let similarCount = 0;
     for (let i = 0; i < pArr.length; i++) {
         for (let j = 0; j < qArr.length; j++) {
@@ -133,4 +132,4 @@ function isSimilarRow(p, q) {
     }
     return false;
 }
-  console.log(isSimilarRow('很多','许许多多'));
+console.log(isSimilarRow('很多', '许许多多'));

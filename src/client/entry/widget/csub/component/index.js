@@ -44,7 +44,7 @@ export default class SubPage extends React.Component {
                 this.interIOS();
                 break;
             case 'login':
-                authUtil.login({callNativeLogin:false});
+                authUtil.login({ callNativeLogin: false });
                 break;
             case 'window':
                 this.openCWindow(sb_value);

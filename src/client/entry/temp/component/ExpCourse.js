@@ -98,7 +98,10 @@ class ExpCourse extends Component {
         return (
             <div className="exp-course">
                 <div className="exp-course__banner">
-                    <img className="exp-mylogo" src={require('@/asset/image/bule-bstcine-logo.png')}/>
+                    <img
+                        className="exp-mylogo"
+                        src={require('@/asset/image/bule-bstcine-logo.png')}
+                    />
                     <span className="divide"></span>
                     <img
                         className="exp-course__logo"
@@ -110,7 +113,6 @@ class ExpCourse extends Component {
                     </div>
                 </div>
                 <div className="exp-course__form">
-
                     <div className="ec-form-control ec-form-control--promote_code">
                         <CIcon>new_releases</CIcon>
                         <input
@@ -158,8 +160,6 @@ class ExpCourse extends Component {
                         </CButton>
                     </div>
 
-
-
                     <CButton
                         className="ec-submit"
                         shape="capsule"
@@ -180,11 +180,17 @@ class ExpCourse extends Component {
                         <p>限领10000份，领完即止</p>
                         <p className="bold">适用范围：</p>
                         <p>本活动为移动用户专享。</p>
-                        <p>1、  每个手机号限领一次，不可重复领取；</p>
-                        <p>2、  用户输入兑换码、手机号码及接收到的手机短信验证码，即可成功领取大礼包；</p>
-                        <p>3、  大礼包内课程有效期为2个月（自领取之日起），过期即止；</p>
-                        <p>4、  课程相关咨询，请添加善恩客服微信：BSTCINE02；</p>
-                        <p>5、  本次活动最终解释权归属善恩英语。</p>
+                        <p>1、 每个手机号限领一次，不可重复领取；</p>
+                        <p>
+                            2、
+                            用户输入兑换码、手机号码及接收到的手机短信验证码，即可成功领取大礼包；
+                        </p>
+                        <p>
+                            3、
+                            大礼包内课程有效期为2个月（自领取之日起），过期即止；
+                        </p>
+                        <p>4、 课程相关咨询，请添加善恩客服微信：BSTCINE02；</p>
+                        <p>5、 本次活动最终解释权归属善恩英语。</p>
                     </div>
                 </div>
             </div>

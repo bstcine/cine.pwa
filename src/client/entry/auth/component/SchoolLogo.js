@@ -5,7 +5,7 @@ class SchoolLogo extends Component {
         const { data } = this.props;
         return (
             <div className="cine-auth__logo cine-auth__logo--school">
-                <Logo data={data}/>
+                <Logo data={data} />
             </div>
         );
     }

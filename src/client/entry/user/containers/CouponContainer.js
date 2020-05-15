@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { actionUserCoupon } from '@/action/uCouponAction';
 import CouponPanel from '@/entry/user/component/coupon';
-import { GLayoutContainer } from "@/g/container";
+import { GLayoutContainer } from '@/g/container';
 
 class CouponContainer extends Component {
     componentDidMount() {

@@ -115,7 +115,7 @@ class MediaPlayer extends Component {
                 Math.max(seekerLeft + e.clientX - dragStartX, 0),
                 width
             );
-            playProgress = dragOffset / width * 100;
+            playProgress = (dragOffset / width) * 100;
             this.onProgressChanging(playProgress);
         };
 
@@ -149,7 +149,7 @@ class MediaPlayer extends Component {
                 Math.max(seekerLeft + e.touches[0].clientX - dragStartX, 0),
                 width
             );
-            playProgress = dragOffset / width * 100;
+            playProgress = (dragOffset / width) * 100;
             this.onProgressChanging(playProgress);
         };
 
@@ -166,7 +166,7 @@ class MediaPlayer extends Component {
     }
 
     onProgressChanging(playProgress) {
-        let seekTime = playProgress / 100 * this.totalDuration;
+        let seekTime = (playProgress / 100) * this.totalDuration;
         let totalCurrentTimeFormated = helper.timeFormat(seekTime);
         this.setState({ totalCurrentTimeFormated, playProgress });
     }
@@ -175,7 +175,7 @@ class MediaPlayer extends Component {
         this.audio.pause();
         this.audio.src = '';
         this.audio.load();
-        let seekTime = playProgress / 100 * this.totalDuration;
+        let seekTime = (playProgress / 100) * this.totalDuration;
         let seekIndex = 0;
         let mediaTime = 0;
         let seekCurrentTime = 0;
@@ -214,7 +214,7 @@ class MediaPlayer extends Component {
             ''
         );
         let dragOffset = e.clientX - left;
-        let playProgress = dragOffset / width * 100;
+        let playProgress = (dragOffset / width) * 100;
         this.onProgressChanged(playProgress);
     }
 
@@ -250,7 +250,10 @@ class MediaPlayer extends Component {
             'fullscreenchange',
             this.onFullscreenChangeEvent
         );
-        interEventEmitter.removeListener(BRIDGE_EVENT.Pagehide, this.handelPageHide);
+        interEventEmitter.removeListener(
+            BRIDGE_EVENT.Pagehide,
+            this.handelPageHide
+        );
         document.removeEventListener('mousemove', this.onPlayerMouseMove);
         document.removeEventListener('touchmove', this.onPlayerMouseMove);
         document.removeEventListener('touchend', this.onPlayerMouseMove);
@@ -375,7 +378,7 @@ class MediaPlayer extends Component {
             }
         }
         let totalCurrentTimeFormated = helper.timeFormat(totalCurrentTime);
-        const playProgress = totalCurrentTime / this.totalDuration * 100;
+        const playProgress = (totalCurrentTime / this.totalDuration) * 100;
         this.setState({ totalCurrentTimeFormated, playProgress });
         let imageUrl = this.currentImage(media.images, currentTime);
         if (this.state.imageUrl !== imageUrl) {
@@ -400,7 +403,7 @@ class MediaPlayer extends Component {
                     }
                 }
                 let loadProgress =
-                    totalBufferedDuration / this.totalDuration * 100;
+                    (totalBufferedDuration / this.totalDuration) * 100;
                 this.setState({ loadProgress });
             }
         }
@@ -678,7 +681,9 @@ class MediaPlayer extends Component {
                                     <div className="control-item time">
                                         <span className="current">
                                             {totalCurrentTimeFormated}
-                                        </span>/<span className="total">
+                                        </span>
+                                        /
+                                        <span className="total">
                                             {totalDurationFormated}
                                         </span>
                                     </div>

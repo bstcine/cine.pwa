@@ -9,7 +9,9 @@ import HistoryTaskPage from '@/entry/learn/container/HistoryTaskPage';
 import CoursePage from '@/entry/learn/container/CoursePage';
 import { chunkComponent } from '@/util/chunkComponent';
 const AchievePage = chunkComponent(() =>
-    import(/* webpackChunkName: "learn/chunk/index.ap" */ './container/AchievePage')
+    import(
+        /* webpackChunkName: "learn/chunk/index.ap" */ './container/AchievePage'
+    )
 );
 
 const routes = [

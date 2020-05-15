@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { actionUserOrder } from '@/action/uOrderAction';
 import Order from '@/entry/user/component/order';
-import { GLayoutContainer } from "@/g/container";
+import { GLayoutContainer } from '@/g/container';
 
 class OrderContainer extends Component {
     componentDidMount() {

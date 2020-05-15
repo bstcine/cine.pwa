@@ -1,7 +1,7 @@
 import QRHelp from './QRHelp';
 import './style.less';
 import React from 'react';
-import { CModal } from "@/component/_base";
+import { CModal } from '@/component/_base';
 
 export default QRHelp;
 

@@ -18,7 +18,9 @@ class Card extends PureComponent {
 
         return (
             <Comp
-                className={classNames(cls, { [`${cls}--hoverable`]: hover !== 'none' })}
+                className={classNames(cls, {
+                    [`${cls}--hoverable`]: hover !== 'none',
+                })}
                 href={Comp === 'a' ? href : null}
                 onClick={onClick}
             >

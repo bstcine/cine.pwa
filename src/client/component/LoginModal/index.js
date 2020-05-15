@@ -3,9 +3,9 @@ import ReactModal from 'react-modal';
 import '@/asset/style/modal.less';
 import * as Service from '@/service/base';
 import errorMsg from '@/util/errorMsg';
-import { CButton } from "@/component/_base";
-import ReactDOM from "react-dom";
-import authUtil from "@/util/authUtil";
+import { CButton } from '@/component/_base';
+import ReactDOM from 'react-dom';
+import authUtil from '@/util/authUtil';
 
 export default class LoginModal extends Component {
     constructor(props) {
@@ -96,13 +96,19 @@ export default class LoginModal extends Component {
                 <div className="login-bottom">
                     <a href="/auth/resetpwd">忘记密码？</a>
 
-                    <CButton block onClick={authUtil.goWechatQrAuth} target="_blank" icon='ci-wechat'>微信登录</CButton>
+                    <CButton
+                        block
+                        onClick={authUtil.goWechatQrAuth}
+                        target="_blank"
+                        icon="ci-wechat"
+                    >
+                        微信登录
+                    </CButton>
                 </div>
             </ReactModal>
         );
     }
 }
-
 
 LoginModal.open = function(onSuccess) {
     function render(currentProps) {

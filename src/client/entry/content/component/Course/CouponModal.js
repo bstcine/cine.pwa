@@ -49,7 +49,8 @@ export default class CouponModal extends Component {
                             </div>
                         </div>
                         <div className="effective-date">
-                            有效期：{coupon.effective_at
+                            有效期：
+                            {coupon.effective_at
                                 .substring(0, 10)
                                 .replace(/-/g, '.')}{' '}
                             -{' '}

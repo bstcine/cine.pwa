@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { CSocial } from '@/component/Auth';
-import AuthLogo from "@/entry/auth/component/AuthLogo";
+import AuthLogo from '@/entry/auth/component/AuthLogo';
 
 class SocialPage extends Component {
     render() {

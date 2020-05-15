@@ -37,11 +37,14 @@ export default class RecommendModal extends Component {
 
                 <div className="h2">推荐课程得积分</div>
                 <div className="desc">
-                    快将善恩的课程通过微信朋友圈推荐给好友！好友可获得：<br />
+                    快将善恩的课程通过微信朋友圈推荐给好友！好友可获得：
+                    <br />
                     <span>新人95折优惠券</span>
                     <br />
-                    好友下单后，您还可以获得：<br />
-                    <span>10%</span>的积分奖励<br />
+                    好友下单后，您还可以获得：
+                    <br />
+                    <span>10%</span>的积分奖励
+                    <br />
                     传播知识，让优惠翻倍！
                 </div>
                 <button className="btn" onClick={this.handleStartShare}>

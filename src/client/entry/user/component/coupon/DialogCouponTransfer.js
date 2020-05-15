@@ -68,16 +68,15 @@ const CouponTransfer = ({
     if (!isCheck) {
         checkPromote = '如确认无误，请点击"确定"按钮';
     }
-    const checkInfo = checkMessage !== '' &&
-        checkMessage !== undefined && (
-            <div style={checkStyle}>
-                <p>
-                    {checkMessage}
-                    <br />
-                    {checkPromote}
-                </p>
-            </div>
-        );
+    const checkInfo = checkMessage !== '' && checkMessage !== undefined && (
+        <div style={checkStyle}>
+            <p>
+                {checkMessage}
+                <br />
+                {checkPromote}
+            </p>
+        </div>
+    );
 
     return (
         <React.Fragment>

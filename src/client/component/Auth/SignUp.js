@@ -9,7 +9,7 @@ import {
 } from '../../../APIConfig';
 import errorMsg from '@/util/errorMsg';
 import authUtil from '@/util/authUtil';
-import commonUtil from "@/util/_base/commonUtil";
+import commonUtil from '@/util/_base/commonUtil';
 
 class SignUp extends Component {
     constructor(props) {

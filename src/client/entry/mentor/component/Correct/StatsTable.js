@@ -32,9 +32,7 @@ const OperationButton = ({ item }) => {
                 <button
                     className="btn btn-round"
                     onClick={e => {
-                        location.href = `/quiz/grammar?stats_content_quiz_id=${
-                            item.id
-                        }&cmd=check`;
+                        location.href = `/quiz/grammar?stats_content_quiz_id=${item.id}&cmd=check`;
                     }}
                 >
                     批改 <i className="material-icons">&#xE254;</i>
@@ -45,9 +43,7 @@ const OperationButton = ({ item }) => {
                 <button
                     className="btn btn-round btn-checking"
                     onClick={e => {
-                        location.href = `/quiz/grammar?stats_content_quiz_id=${
-                            item.id
-                        }&cmd=check`;
+                        location.href = `/quiz/grammar?stats_content_quiz_id=${item.id}&cmd=check`;
                     }}
                 >
                     批改中...
@@ -58,9 +54,7 @@ const OperationButton = ({ item }) => {
                 <button
                     className="btn btn-round btn-done"
                     onClick={e => {
-                        location.href = `/quiz/grammar?stats_content_quiz_id=${
-                            item.id
-                        }&cmd=check`;
+                        location.href = `/quiz/grammar?stats_content_quiz_id=${item.id}&cmd=check`;
                     }}
                 >
                     已批改 <i className="material-icons">&#xE876;</i>

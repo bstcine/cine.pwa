@@ -10,9 +10,7 @@ const CardCommentItem = ({ value, hover }) => {
                     <div
                         className="img"
                         style={{
-                            background: `url(${
-                                value.img
-                            }) center center / cover no-repeat`,
+                            background: `url(${value.img}) center center / cover no-repeat`,
                         }}
                     />
                 </div>

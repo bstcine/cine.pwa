@@ -113,7 +113,7 @@ export default class PayPrepare extends Component {
             if (this.hasError(err)) return;
             this.setState(prevState => ({
                 calPrice: Object.assign(prevState.calPrice, result),
-                coupon_name:result.coupon_name
+                coupon_name: result.coupon_name,
             }));
         });
     }
@@ -159,7 +159,7 @@ export default class PayPrepare extends Component {
             if (msg.indexOf('coupon') !== -1) {
                 this.setState({
                     coupon_msg: errorMsg(msg),
-                    coupon_name:''
+                    coupon_name: '',
                 });
             } else {
                 this.setState({
@@ -232,7 +232,9 @@ export default class PayPrepare extends Component {
 
         return (
             <React.Fragment>
-                <Header isShow={!interSiteCodeUtil.inAPP() && !uaUtil.wechat()} />
+                <Header
+                    isShow={!interSiteCodeUtil.inAPP() && !uaUtil.wechat()}
+                />
                 <div className="container-fluid course-container-bg">
                     <div className="prepare-container">
                         <div className="brief">
@@ -258,7 +260,8 @@ export default class PayPrepare extends Component {
                                     ) : null}
                                     {course && course.original_price ? (
                                         <span className="old-price">
-                                            原价：<span className="del">
+                                            原价：
+                                            <span className="del">
                                                 ￥{course.original_price}
                                             </span>
                                         </span>

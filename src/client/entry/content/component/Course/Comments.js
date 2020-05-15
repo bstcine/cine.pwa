@@ -25,12 +25,11 @@ export default class Comments extends Component {
                 <div className="comment-none">
                     {comentsArr}
                     <div className="comment-none-text">
-                        更多课程评价，请点击“<a
-                            className="blue"
-                            href="/comments"
-                        >
+                        更多课程评价，请点击“
+                        <a className="blue" href="/comments">
                             用户口碑
-                        </a>”。
+                        </a>
+                        ”。
                     </div>
                 </div>
             );
@@ -43,12 +42,11 @@ export default class Comments extends Component {
                         alt=""
                     />
                     <div className="comment-none-text">
-                        暂无用户评价~ 想看其它课程评价，请点击“<a
-                            className="blue"
-                            href="/comments"
-                        >
+                        暂无用户评价~ 想看其它课程评价，请点击“
+                        <a className="blue" href="/comments">
                             用户口碑
-                        </a>”。
+                        </a>
+                        ”。
                     </div>
                 </div>
             );

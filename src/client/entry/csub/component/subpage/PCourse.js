@@ -20,7 +20,7 @@ const FJCourseItem = ({ course }) => {
         }
     }
     return (
-        <CCard hover="none" >
+        <CCard hover="none">
             <div className="cardFJCourse">
                 <div
                     className="courseImageContain"

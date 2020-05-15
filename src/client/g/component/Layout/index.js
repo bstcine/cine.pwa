@@ -13,7 +13,9 @@ const Layout = ({ actions, user, size, children }) => {
                 'glayout--large': size === 'large',
             })}
         >
-            {!interSiteCodeUtil.inAPP() && <Header user={user} actions={actions} />}
+            {!interSiteCodeUtil.inAPP() && (
+                <Header user={user} actions={actions} />
+            )}
             <Main>{children}</Main>
             {!interSiteCodeUtil.inAPP() && <Footer />}
         </div>

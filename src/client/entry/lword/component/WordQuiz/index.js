@@ -24,8 +24,7 @@ class WordQuiz extends React.PureComponent {
             content,
             actions,
         } = this.props;
-        let wordCountPromot =
-            '测试下掌握了多少？';
+        let wordCountPromot = '测试下掌握了多少？';
         let correctWord = '已测试' + selectCount + '个';
         let wordAllPromot = '共' + wordCount + '个';
         const initContent = (
@@ -68,7 +67,8 @@ class WordQuiz extends React.PureComponent {
                     </div>
                 );
             });
-        let inProgressWidth = (selectCount * 100 / wordCount).toString() + '%';
+        let inProgressWidth =
+            ((selectCount * 100) / wordCount).toString() + '%';
         const testContent = (
             <div className="v_Test_VocabularyContent">
                 <div className="v_Test_VC_progress_Container">

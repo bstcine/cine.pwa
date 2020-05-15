@@ -29,7 +29,7 @@ class HistoryTaskList extends React.PureComponent {
             return null;
         }
         if (taskModels.length === 0) {
-            return <div>暂无作业</div>
+            return <div>暂无作业</div>;
         }
         const children = taskModels.map((model, i) => {
             return (

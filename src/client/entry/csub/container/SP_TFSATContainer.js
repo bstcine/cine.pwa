@@ -42,7 +42,4 @@ const mapDispatchToProps = dispatch => ({
     actions: bindActionCreators(subPageAction, dispatch),
 });
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(SP_TFSATContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(SP_TFSATContainer);

@@ -27,14 +27,21 @@ const PResource = ({ resources, actions, isMentor }) => {
                 return null;
             }
             return (
-                <ResourceItem key={index} name={item.title} link={item.link} isMentor={isMentor} />
+                <ResourceItem
+                    key={index}
+                    name={item.title}
+                    link={item.link}
+                    isMentor={isMentor}
+                />
             );
         });
     }
 
     return (
         <CPanel title="资料下载">
-            <CCardContainer layout="111" gap="none">{cardList}</CCardContainer>
+            <CCardContainer layout="111" gap="none">
+                {cardList}
+            </CCardContainer>
         </CPanel>
     );
 };

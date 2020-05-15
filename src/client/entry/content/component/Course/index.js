@@ -238,9 +238,7 @@ export default class Course extends Component {
         let host = withHost ? location.protocol + '//' + location.host : '';
         return (
             host +
-            `/temp/draw/coupon?user_id=${user.id}&course_id=${
-                course.id
-            }&activity_id=${course.activity_lottery.id}&allowopen=1`
+            `/temp/draw/coupon?user_id=${user.id}&course_id=${course.id}&activity_id=${course.activity_lottery.id}&allowopen=1`
         );
     }
 
@@ -249,7 +247,9 @@ export default class Course extends Component {
 
         return (
             <React.Fragment>
-                <Header isShow={!interSiteCodeUtil.inAPP() && !uaUtil.wechat()} />
+                <Header
+                    isShow={!interSiteCodeUtil.inAPP() && !uaUtil.wechat()}
+                />
                 <div className="container-fluid course-container-bg">
                     <div className="course-container">
                         <Brief
@@ -287,15 +287,13 @@ export default class Course extends Component {
                                 });
                             }}
                         >
-                            {user &&
-                                course &&
-                                course.activity_lottery && (
-                                    <LotteryCoupon
-                                        user_id={user.id}
-                                        course_id={course.id}
-                                        activity_id={course.activity_lottery.id}
-                                    />
-                                )}
+                            {user && course && course.activity_lottery && (
+                                <LotteryCoupon
+                                    user_id={user.id}
+                                    course_id={course.id}
+                                    activity_id={course.activity_lottery.id}
+                                />
+                            )}
                         </CDrawer>
                     </div>
                 </div>

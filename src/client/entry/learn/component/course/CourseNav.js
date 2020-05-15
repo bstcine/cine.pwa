@@ -12,18 +12,17 @@ const CourseNav = ({ tree, activeId }) => {
 
     return (
         <CPanel title="课程目录" className="course__nav">
-            {tree &&
-                tree.length && (
-                    <ul className="nav__chapters">
-                        {tree.map(item => (
-                            <NavChapter
-                                key={item.id}
-                                chapter={item}
-                                activeId={activeId}
-                            />
-                        ))}
-                    </ul>
-                )}
+            {tree && tree.length && (
+                <ul className="nav__chapters">
+                    {tree.map(item => (
+                        <NavChapter
+                            key={item.id}
+                            chapter={item}
+                            activeId={activeId}
+                        />
+                    ))}
+                </ul>
+            )}
         </CPanel>
     );
 };
@@ -92,9 +91,7 @@ const Lesson = ({ lesson, active }) => {
         >
             {lesson.type !== '5' ? (
                 <Link
-                    to={`/learn/course2/${lesson.lesson_id}?lesson_id=${
-                        lesson.id
-                    }`}
+                    to={`/learn/course2/${lesson.lesson_id}?lesson_id=${lesson.id}`}
                 >
                     <span>{lesson.name}</span>
                     {lesson.learn_status === '1' && (

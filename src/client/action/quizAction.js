@@ -398,8 +398,8 @@ const quizDataFix = data => {
                 question.type === '1'
                     ? QuestionFormat.FORMAT1_CHOOSE_ONE
                     : question.type === '3'
-                        ? QuestionFormat.FORMAT4_SHORT_QUE
-                        : '';
+                    ? QuestionFormat.FORMAT4_SHORT_QUE
+                    : '';
         }
         if (question.steam) question.title = question.steam;
         if (question.analysis) question.feedback = question.analysis;

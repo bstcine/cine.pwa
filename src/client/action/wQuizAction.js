@@ -51,7 +51,7 @@ function getType(str) {
     if (f) {
         return f[0];
     } else {
-        return "";
+        return '';
     }
 }
 

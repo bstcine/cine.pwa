@@ -47,11 +47,13 @@ export default class PayStatus extends Component {
                         src={require('../../asset/image/ico_waiting.png')}
                         alt="等待支付"
                         className="order-icon"
-                    />等待支付
+                    />
+                    等待支付
                 </div>
                 <div className="order-panel-desc">
                     <p>
-                        您所订购的{order.subject}还未支付，如您已经支付成功，请稍候刷新本页面重试
+                        您所订购的{order.subject}
+                        还未支付，如您已经支付成功，请稍候刷新本页面重试
                     </p>
                     <p>
                         订单号：<span className="red">{order.id}</span>
@@ -70,7 +72,8 @@ export default class PayStatus extends Component {
                         src={require('../../asset/image/ico_success.png')}
                         alt="支付成功"
                         className="order-icon"
-                    />支付成功！
+                    />
+                    支付成功！
                 </div>
                 <div className="order-panel-desc">
                     <p>课程名称：{order.subject}</p>
@@ -82,9 +85,8 @@ export default class PayStatus extends Component {
                         <a href="/learn">www.bstcine.com/learn</a> 进行学习
                     </p>
                     <p className="tips">
-                        如需咨询，请加善恩小助手微信（<span className="wechat-name">
-                            BSTCINE02
-                        </span>）好友
+                        如需咨询，请加善恩小助手微信（
+                        <span className="wechat-name">BSTCINE02</span>）好友
                     </p>
                 </div>
             </div>
@@ -100,7 +102,8 @@ export default class PayStatus extends Component {
                         src={require('../../asset/image/ico_cancel.png')}
                         alt="已取消支付"
                         className="order-icon"
-                    />已取消支付
+                    />
+                    已取消支付
                 </div>
                 <div className="order-panel-desc">
                     <p>
@@ -126,7 +129,9 @@ export default class PayStatus extends Component {
     render() {
         return (
             <React.Fragment>
-                <Header isShow={!interSiteCodeUtil.inAPP() && !uaUtil.wechat()} />
+                <Header
+                    isShow={!interSiteCodeUtil.inAPP() && !uaUtil.wechat()}
+                />
                 <div className="container-fluid course-container-bg">
                     <div className="paystatus-container">
                         <div className="pay-header">

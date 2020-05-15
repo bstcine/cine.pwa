@@ -8,7 +8,7 @@ import { getParam } from '@/util/_base/urlUtil';
 import CSelect, { COption } from '@/component/CSelect';
 import authUtil from '@/util/authUtil';
 import { URL_Auth_SetPwd } from '@/constant/menuItemUrl';
-import commonUtil from "@/util/_base/commonUtil";
+import commonUtil from '@/util/_base/commonUtil';
 
 class Bind extends Component {
     constructor(props) {
@@ -149,7 +149,9 @@ class Bind extends Component {
         const isBinded = this.bind_with !== 'wechat' && user && user.phone;
         return (
             <div className="cine-auth__container">
-                <div className="cine_auth__title">{this.bind_with === 'wechat' && "登录并"}绑定手机</div>
+                <div className="cine_auth__title">
+                    {this.bind_with === 'wechat' && '登录并'}绑定手机
+                </div>
 
                 {!isBinded && (
                     <div className="cine_auth__form">

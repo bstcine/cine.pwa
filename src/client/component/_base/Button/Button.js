@@ -66,10 +66,8 @@ export default class Button extends PureComponent {
                 onClick={onClick}
                 href={href}
             >
-                {Children.map(
-                    children,
-                    child =>
-                        typeof child === 'string' ? <span>{child}</span> : child
+                {Children.map(children, child =>
+                    typeof child === 'string' ? <span>{child}</span> : child
                 )}
             </ComponentProp>
         );
@@ -104,7 +102,13 @@ Button.propTypes = {
     /**
      * 颜色
      */
-    color: PropTypes.oneOf(['default', 'primary', 'secondary', 'primary-light', 'secondary-light']),
+    color: PropTypes.oneOf([
+        'default',
+        'primary',
+        'secondary',
+        'primary-light',
+        'secondary-light',
+    ]),
     /**
      * 样式
      */

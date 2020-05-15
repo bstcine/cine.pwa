@@ -4,15 +4,15 @@ import { fetchData } from '@/service/base';
 import { CAlert } from '@/component/_base';
 
 const cardAction = {
-    showDetail: (item) => dispatch => {
+    showDetail: item => dispatch => {
         // alert(JSON.stringify(item))
-        CAlert.open({text:JSON.stringify(item) });
-  /*       if (!storeUtil.getToken()) return;
+        CAlert.open({ text: JSON.stringify(item) });
+        /*       if (!storeUtil.getToken()) return;
         dispatch(cardAction.fetchUserInfo()); */
     },
 
-    changeFavoriteStatus: (item) => async (dispatch, getState) => {
-        alert(JSON.stringify(item))
+    changeFavoriteStatus: item => async (dispatch, getState) => {
+        alert(JSON.stringify(item));
         // CAlert.open({text:JSON.stringify(item) });
         /* if (getState().userRedu.loading) return;
         dispatch({ type: actionType.REQUEST_USER_INFO });

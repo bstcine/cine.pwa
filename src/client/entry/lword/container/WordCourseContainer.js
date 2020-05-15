@@ -56,6 +56,7 @@ const mapDispatchToProps = dispatch => ({
     actions: bindActionCreators(wCourseAction, dispatch),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-    WordCourseContainer
-);
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(WordCourseContainer);

@@ -31,7 +31,8 @@ export default class QRModal extends Component {
                 </div>
                 <div className="modal-body">
                     <div className="qr-brief">
-                        当前支付<span className="qr-price"> {pay_price} </span>元
+                        当前支付<span className="qr-price"> {pay_price} </span>
+                        元
                     </div>
                     <div className="wechatqr">
                         <img src={code_url} alt="qrcode" />

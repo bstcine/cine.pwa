@@ -1,10 +1,10 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import storeUtil from '@/util/_base/storeUtil';
 import * as Service from '@/service/quizvocab';
-import {CSSTransition} from 'react-transition-group';
-import {getParam} from '@/util/_base/urlUtil';
+import { CSSTransition } from 'react-transition-group';
+import { getParam } from '@/util/_base/urlUtil';
 import CThemeProvider from '@/component/CThemeProvider';
-import {CFlatButton, CDialog} from '@/component/_base';
+import { CFlatButton, CDialog } from '@/component/_base';
 
 export default class Card extends Component {
     constructor(props) {
@@ -15,7 +15,7 @@ export default class Card extends Component {
         this.state = {
             loading: true,
             uploading: false,
-            wordItem: {id: '', word: '', options: []},
+            wordItem: { id: '', word: '', options: [] },
             currMinVocab: 0,
             currMaxVocab: 0,
             isShowLevelTip: false,
@@ -129,9 +129,7 @@ export default class Card extends Component {
                 wordWrong++;
 
                 console.log(
-                    `连续答对1: ${skipRight}, 答错: ${wordWrong}, selectValue:${
-                        item.select_value
-                        }`
+                    `连续答对1: ${skipRight}, 答错: ${wordWrong}, selectValue:${item.select_value}`
                 );
                 return 0;
             } else {
@@ -221,7 +219,7 @@ export default class Card extends Component {
         });
         console.log(`isShowLevelTip ${this.state.isShowLevelTip}`);
         this.levelTipTimer = setTimeout(
-            function () {
+            function() {
                 this.setState({
                     isShowLevelTip: false,
                 });
@@ -330,7 +328,7 @@ export default class Card extends Component {
         console.log(`select_value ${select_value}`);
         let word = this.wordLevelList[this.level_index].wordList[
             this.word_index
-            ];
+        ];
         word.select_value = select_value;
         console.log(word.id, word.word, select_value, word.select_value);
     }
@@ -338,8 +336,8 @@ export default class Card extends Component {
     // 收集全部答题信息
     collectAnswers() {
         let answers = [];
-        this.wordLevelList.forEach(function (wordLevel) {
-            wordLevel.wordList.forEach(function (item) {
+        this.wordLevelList.forEach(function(wordLevel) {
+            wordLevel.wordList.forEach(function(item) {
                 if (!isNaN(item.select_value)) {
                     answers.push({
                         id: item.id,
@@ -367,7 +365,7 @@ export default class Card extends Component {
         } else {
             let right_count = 0;
             let wrong_count = 0;
-            wordLevel.wordList.forEach(function (item) {
+            wordLevel.wordList.forEach(function(item) {
                 if (item.select_value === 0) {
                     right_count++;
                 } else {
@@ -385,13 +383,14 @@ export default class Card extends Component {
     // 计算当前词汇量
     calcCurrVocab() {
         let curr_vocab = 0;
-        this.wordLevelList.forEach(function (wordLevel) {
+        this.wordLevelList.forEach(function(wordLevel) {
             if (wordLevel.curr_score) {
                 curr_vocab += parseInt(
-                    wordLevel.curr_score *
-                    (wordLevel.max_vocab - wordLevel.min_vocab) /
-                    wordLevel.wordList.length
-                    , 10);
+                    (wordLevel.curr_score *
+                        (wordLevel.max_vocab - wordLevel.min_vocab)) /
+                        wordLevel.wordList.length,
+                    10
+                );
             }
         });
         console.log(`calcCurrVocab ${curr_vocab}`);
@@ -451,7 +450,7 @@ export default class Card extends Component {
     }
 
     render() {
-        let {loading, uploading} = this.state;
+        let { loading, uploading } = this.state;
         if (loading) {
             return (
                 <div className="card">
@@ -474,9 +473,7 @@ export default class Card extends Component {
                 onClick={this.gotoWordCourse}
             />,
         ];
-        const estimateText = `测试完成, 建议从第${
-            this.last_index
-            }个单词开始学习`;
+        const estimateText = `测试完成, 建议从第${this.last_index}个单词开始学习`;
         return (
             <CThemeProvider>
                 <React.Fragment>
@@ -487,12 +484,11 @@ export default class Card extends Component {
                             appear={true}
                             enter={true}
                             exit={true}
-                            timeout={{enter: 2700, exit: 300}}
+                            timeout={{ enter: 2700, exit: 300 }}
                         >
                             <div className="friendly-tips">
-                                你已经完成了{this.state.currMinVocab}-{
-                                this.state.currMaxVocab
-                            }词汇量区间的测试
+                                你已经完成了{this.state.currMinVocab}-
+                                {this.state.currMaxVocab}词汇量区间的测试
                             </div>
                         </CSSTransition>
                         <div
@@ -505,7 +501,7 @@ export default class Card extends Component {
                             className="progress_control"
                             key={this.state.wordItem.id + 'progress_control'}
                         >
-                            <div className="sand-glass"/>
+                            <div className="sand-glass" />
                             <div className="progress-line">
                                 <CSSTransition
                                     in={this.state.progressing}
@@ -515,7 +511,7 @@ export default class Card extends Component {
                                     exit={false}
                                     timeout={this.duration}
                                 >
-                                    <div className="progress-line-left"/>
+                                    <div className="progress-line-left" />
                                 </CSSTransition>
                             </div>
                         </div>

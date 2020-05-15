@@ -3,7 +3,7 @@ import ReceiveCoupon from './component/ReceiveCoupon';
 import LotteryCoupon from './component/DrawCoupon';
 import ExpCourse from './component/ExpCourse';
 import CouponCourse from './component/CouponCourse';
-import ExpX1u1Course from "@/entry/temp/component/ExpX1u1Course";
+import ExpX1u1Course from '@/entry/temp/component/ExpX1u1Course';
 
 const routes = [
     {

@@ -162,16 +162,12 @@ export default class Report extends Component {
                     </ul>
                     {stat ? (
                         <div className="rank">
-                            全国{Report.convGrade(report.grade)}词汇量均值：<span
-                            >
-                                {stat.avg_vocab}
-                            </span>
+                            全国{Report.convGrade(report.grade)}词汇量均值：
+                            <span>{stat.avg_vocab}</span>
                             <br />
-                            在全国{Report.convGrade(
-                                report.grade
-                            )}中的词汇量排位：<span>
-                                超过了{stat.my_rank}%的小伙伴
-                            </span>
+                            在全国{Report.convGrade(report.grade)}
+                            中的词汇量排位：
+                            <span>超过了{stat.my_rank}%的小伙伴</span>
                         </div>
                     ) : null}
 

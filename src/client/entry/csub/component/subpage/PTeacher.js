@@ -14,7 +14,11 @@ export default class PTeacher extends React.PureComponent {
         return (
             <CPanel title={title} className="bg-blue" ext={link}>
                 <CCardContainer layout={isMentor ? '245' : '234'}>
-                    <TeacherList list={list} isMentor={isMentor} limit={limit} />
+                    <TeacherList
+                        list={list}
+                        isMentor={isMentor}
+                        limit={limit}
+                    />
                 </CCardContainer>
             </CPanel>
         );

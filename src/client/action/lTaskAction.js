@@ -41,11 +41,11 @@ export const lTaskAction = {
         );
 
         if (error) {
-            if (error === "no_login") {
+            if (error === 'no_login') {
                 location.replace(
                     '/auth/signin?redirect=' + encodeURIComponent(location.href)
                 );
-            }else {
+            } else {
                 CMessage.error(errorMsg(error));
             }
             return;

@@ -131,29 +131,28 @@ const Nav2 = ({ navs }) => (
         <div className="gcontainer">
             {navs &&
                 navs.length > 0 &&
-                navs.map(
-                    menu =>
-                        !menu.disabled ? (
-                            <a
-                                key={menu.url}
-                                href={menu.url}
-                                className={classNames({
-                                    active: menu.active,
-                                })}
-                            >
-                                {(!!menu.icon || !!menu.icon_path) && (
-                                    <CIcon>{menu.icon}</CIcon>
-                                )}
-                                {menu.label}
-                            </a>
-                        ) : (
-                            <a key={menu.url} className="disabled">
-                                {(!!menu.icon || !!menu.icon_path) && (
-                                    <CIcon>{menu.icon}</CIcon>
-                                )}
-                                {menu.label}
-                            </a>
-                        )
+                navs.map(menu =>
+                    !menu.disabled ? (
+                        <a
+                            key={menu.url}
+                            href={menu.url}
+                            className={classNames({
+                                active: menu.active,
+                            })}
+                        >
+                            {(!!menu.icon || !!menu.icon_path) && (
+                                <CIcon>{menu.icon}</CIcon>
+                            )}
+                            {menu.label}
+                        </a>
+                    ) : (
+                        <a key={menu.url} className="disabled">
+                            {(!!menu.icon || !!menu.icon_path) && (
+                                <CIcon>{menu.icon}</CIcon>
+                            )}
+                            {menu.label}
+                        </a>
+                    )
                 )}
         </div>
     </nav>

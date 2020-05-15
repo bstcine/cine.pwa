@@ -1,20 +1,31 @@
 import { chunkComponent } from '@/util/chunkComponent';
-import Home from "@/entry/content/component/Home";
-import Course from "@/entry/content/component/Course";
+import Home from '@/entry/content/component/Home';
+import Course from '@/entry/content/component/Course';
+
 const Listening = chunkComponent(() =>
-    import(/* webpackChunkName: "content/chunk/index.l" */ './component/Listening')
+    import(
+        /* webpackChunkName: "content/chunk/index.l" */ './component/Listening'
+    )
 );
 const PayPrepare = chunkComponent(() =>
-    import(/* webpackChunkName: "content/chunk/index.pp" */ './component/PayPrepare')
+    import(
+        /* webpackChunkName: "content/chunk/index.pp" */ './component/PayPrepare'
+    )
 );
 const PayCenter = chunkComponent(() =>
-    import(/* webpackChunkName: "content/chunk/index.pc" */ './component/PayCenter')
+    import(
+        /* webpackChunkName: "content/chunk/index.pc" */ './component/PayCenter'
+    )
 );
 const PayStatus = chunkComponent(() =>
-    import(/* webpackChunkName: "content/chunk/index.ps" */ './component/PayStatus')
+    import(
+        /* webpackChunkName: "content/chunk/index.ps" */ './component/PayStatus'
+    )
 );
 const PayStripe = chunkComponent(() =>
-    import(/* webpackChunkName: "content/chunk/index.pss" */ './component/PayStripe')
+    import(
+        /* webpackChunkName: "content/chunk/index.pss" */ './component/PayStripe'
+    )
 );
 
 const routes = [

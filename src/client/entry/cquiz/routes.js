@@ -1,5 +1,5 @@
 import Index from './component/index.js';
-import Card from "./component/card";
+import Card from './component/card';
 
 const routes = [
     {

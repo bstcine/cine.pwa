@@ -132,6 +132,14 @@ export default class Home extends Component {
         let [err, res] = await fetchData(APIURL_Content_Home);
         if (err) return alert(errorMsg(err));
         let { tabs, banners, notices, newsCategorys } = res;
+        // hide object_type=4 course
+        tabs.forEach(tab => {
+            tab.categorys.forEach(category => {
+                category.courses = category.courses.filter(
+                    o => o.object_type !== '4'
+                );
+            });
+        });
         const selectedTags = getSelectedTags();
         const selectedTagIds = selectedTags.map(item => item.id);
         let { subTagsByTabId, tabs: formatedTabs } = formatData(tabs);

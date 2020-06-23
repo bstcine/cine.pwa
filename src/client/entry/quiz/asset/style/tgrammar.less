@@ -314,21 +314,32 @@
                     display: flex;
                     align-items: center;
                     cursor: pointer;
+                    position: relative;
+                    padding-left: .5rem;
                 }
                 input[type='radio'] {
                     display: none;
                 }
                 input[type='radio'] + span {
-                    display: inline-block;
-                    width: 0.32rem;
-                    height: 0.32rem;
-                    margin-right: 0.28rem;
-                    border: solid 0.02rem #dadcdd;
-                    border-radius: 50%;
-                    box-sizing: border-box;
-                    background-color: #fff;
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+
+                    &:after{
+                        content: ' ';
+                        display: block;
+                        position: absolute;
+                        top: .16rem;
+                        left: 0;
+                        width: 0.32rem;
+                        height: 0.32rem;
+                        border: solid 0.02rem #dadcdd;
+                        border-radius: 50%;
+                        box-sizing: border-box;
+                        background-color: #fff;
+                    }
                 }
-                input[type='radio']:checked + span {
+                input[type='radio']:checked + span:after {
                     background: url(../image/ico_choose.png) center no-repeat;
                     background-size: contain;
                     border: none;

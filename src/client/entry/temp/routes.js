@@ -3,6 +3,7 @@ import ReceiveCoupon from './component/ReceiveCoupon';
 import LotteryCoupon from './component/DrawCoupon';
 import ExpCourse from './component/ExpCourse';
 import CouponCourse from './component/CouponCourse';
+import Double11 from './component/Double11';
 import ExpX1u1Course from '@/entry/temp/component/ExpX1u1Course';
 
 const routes = [
@@ -30,6 +31,10 @@ const routes = [
     {
         path: '/temp/coupon',
         component: CouponCourse,
+    },
+    {
+        path: '/temp/d11',
+        component: Double11,
     },
 ];
 

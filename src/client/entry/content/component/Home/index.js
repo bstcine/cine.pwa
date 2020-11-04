@@ -18,6 +18,7 @@ import { CFloatingButton } from '@/component/_base';
 import QRHelp from '@/component/QRHelp';
 import LazyLoad from 'react-lazyload';
 import TabBar from '@/component/TabBar';
+import * as D11Act from '@/component/D11Act';
 
 const bottomImg1 = require('../../asset/image/book.jpg');
 const bottomImg2 = require('../../asset/image/moon.jpg');
@@ -158,6 +159,7 @@ export default class Home extends Component {
             tabs: filteredTabs,
             selectedTags,
         });
+        D11Act.open();
     }
 
     async UNSAFE_componentWillReceiveProps(nextProps) {

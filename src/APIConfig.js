@@ -82,6 +82,7 @@ exports.APIURL_Auth_Send_AuthCode = '/api/auth/send/authCode'; // 发送绑定�
 exports.APIURL_Auth_Bind_Phone = '/api/auth/bind/phone'; // 绑定手机（自动注册）
 exports.APIURL_Auth_Confirm = '/api/auth/confirm'; // 确认登录
 exports.APIURL_Auth_Auto_Signin = '/api/auth/auto/signin'; // 自动登录
+exports.APIURL_Auth_Signup_By_Phone_And_Signin = '/api/auth/signup/phone/signin'; // 手机号&验证码自动注册（如果已注册则自动登录）
 exports.APIURL_Auth_Send_VerificationCode = '/api/auth/send/verificationCode'; // 发送验证码(手机 邮箱)
 exports.APIURL_Auth_Reset_Password = '/api/auth/reset/password'; // 重置密码(手机 邮箱)
 exports.APIURL_Auth_Set_Password = '/api/auth/set/password'; // 设置密码
@@ -98,6 +99,8 @@ exports.APIURL_Temp_User_Coupon_Receive = '/api/temp/user/coupon/receive'; // �
 exports.APIURL_Temp_User_Exp_Course = '/api/temp/user/exp/course'; // 根据手机号注册开通体验课程
 exports.APIURL_Temp_User_Exp_X1u1_Course = '/api/temp/user/exp/x1u1course'; // 根据手机号注册开通新1u1体验课程
 exports.APIURL_Temp_User_XZ_Coupon = '/api/temp/user/xz/coupon'; // 根据手机号注册并领取优惠券
+exports.APIURL_Temp_Double11_Coupon = '/api/temp/double11/coupon'; // 领取双11优惠券
+
 exports.APIURL_Admin_Coupon_Synthesizer = '/api/admin/user/coupon/synthesizer'; // 管理员将某用户的通用、直减、未使用的优惠券执行合并
 exports.APIURL_Admin_User_Coupon_List = '/api/admin/user/coupon/list'; // 管理员获取某用户的未使用优惠券列表
 

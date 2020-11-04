@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import moment from 'moment';
 import '../asset/style/double11.less';
 import commonUtil from '@/util/_base/commonUtil';
-import { CMessage } from '@/component/_base';
+import { CButton, CMessage } from '@/component/_base';
 import { fetchData } from '@/service/base';
 import {
     APIURL_Auth_Signup_By_Phone_And_Signin,
@@ -36,6 +36,7 @@ export default class Double11 extends Component {
             is_new_register: false,
             user: null,
             today_coupon_limit: false,
+            today_times: 0,
         };
         this.submit_btn_disabled = false;
         this.submit = this.submit.bind(this);
@@ -106,6 +107,7 @@ export default class Double11 extends Component {
         console.log(result);
         this.setState({
             coupon: result.coupon,
+            today_times: result.todayTimes,
             page_state: PageState.ResultPage,
         });
         this.submit_btn_disabled = false;
@@ -122,6 +124,7 @@ export default class Double11 extends Component {
             auth_code_btn,
             coupon,
             today_coupon_limit,
+            today_times,
         } = this.state;
 
         return (
@@ -239,6 +242,15 @@ export default class Double11 extends Component {
                                         window.location.reload();
                                     }}
                                 />
+                            )}
+                            {today_coupon_limit && (
+                                <CButton
+                                    color="secondary"
+                                    href="/"
+                                    variant="contained"
+                                >
+                                    去首页
+                                </CButton>
                             )}
                             {moment().isSameOrAfter(COUPON_ABLE) && (
                                 <img

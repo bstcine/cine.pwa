@@ -233,7 +233,7 @@ export default class Double11 extends Component {
                             )}
 
                         <div className="center">
-                            {!today_coupon_limit && (
+                            {!today_coupon_limit && today_times < 3 && (
                                 <img
                                     src={require('../asset/image/btn_again.png')}
                                     alt="再来一次"
@@ -243,15 +243,16 @@ export default class Double11 extends Component {
                                     }}
                                 />
                             )}
-                            {today_coupon_limit && (
-                                <CButton
-                                    color="secondary"
-                                    href="/"
-                                    variant="contained"
-                                >
-                                    去首页
-                                </CButton>
-                            )}
+                            {(today_coupon_limit || today_times >= 3) &&
+                                moment().isBefore(COUPON_ABLE) && (
+                                    <CButton
+                                        color="secondary"
+                                        href="/"
+                                        variant="contained"
+                                    >
+                                        去首页
+                                    </CButton>
+                                )}
                             {moment().isSameOrAfter(COUPON_ABLE) && (
                                 <img
                                     src={require('../asset/image/btn_use_now.png')}
@@ -261,6 +262,11 @@ export default class Double11 extends Component {
                                         window.location.href = '/';
                                     }}
                                 />
+                            )}
+                            {(today_coupon_limit || today_times >= 3) && (
+                                <div className="coupon-limit-tips">
+                                    今日领取次数已到上限
+                                </div>
                             )}
                         </div>
                     </div>

@@ -284,8 +284,11 @@ export default class PayPrepare extends Component {
                         {is_show_coupon ? (
                             <div className="order-control coupon">
                                 <span className="label">优惠券</span>
+                                <a href="/user/coupon" className="my_coupon">
+                                    优惠券中心 »
+                                </a>
                                 <div className="input">
-                                    <span className="normal">输入优惠券</span>
+                                    <span className="normal">输入优惠券码</span>
                                     <input
                                         name="coupon_no"
                                         value={coupon_no}

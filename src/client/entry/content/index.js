@@ -14,7 +14,6 @@ class Content extends Entry {
     }
 
     componentDidMount() {
-        this.handleLoad();
         window.addEventListener('load', this.handleLoad);
     }
 

@@ -10,7 +10,7 @@ const open = function() {
         children: (
             <div className="cine-d11-modal">
                 <img
-                    src={require('./fudai.png')}
+                    src={require('./fudai.jpg')}
                     alt=""
                     onClick={() => {
                         window.location.href = '/temp/d11';

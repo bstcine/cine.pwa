@@ -61,6 +61,7 @@ const errorCode = {
     unionid_already_bind: '该微信已经绑定过其他善恩账号，请解绑后重试',
     promote_code_invalid: '兑换码有误或已被使用',
     promote_code_update_invalid: '兑换码更新异常',
+    not_in_active_time: '活动暂未开始',
 };
 
 export default errorCode;

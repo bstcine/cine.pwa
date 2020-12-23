@@ -1,9 +1,18 @@
 import React from 'react';
 
+function formatCouponName(value) {
+    const v = ((100 - Number(value * 100)) / 10).toFixed(1);
+    if (v.split('.')[1] === '0') {
+        return v[0];
+    } else {
+        return v;
+    }
+}
+
 const CouponItem = ({ coupon, actions }) => {
     console.log(coupon);
     let value =
-        coupon.type === '1' ? coupon.value : 100 - Number(coupon.value) * 100;
+        coupon.type === '1' ? coupon.value : formatCouponName(coupon.value);
     let unit = coupon.type === '1' ? '元' : '折';
 
     let couponStyle;
@@ -48,7 +57,9 @@ const CouponItem = ({ coupon, actions }) => {
                 </div>
                 <div className="effective-date">
                     有效期：
-                    {coupon.effective_at.substring(0, 10).replace(/-/g, '.')} -{' '}
+                    {coupon.effective_at
+                        .substring(0, 10)
+                        .replace(/-/g, '.')} -{' '}
                     {coupon.expire_at.substring(0, 10).replace(/-/g, '.')}
                 </div>
                 {coupon.desc && (

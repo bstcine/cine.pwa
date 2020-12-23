@@ -159,7 +159,7 @@ export default class Home extends Component {
             tabs: filteredTabs,
             selectedTags,
         });
-        D11Act.open();
+        // D11Act.open();
     }
 
     async UNSAFE_componentWillReceiveProps(nextProps) {

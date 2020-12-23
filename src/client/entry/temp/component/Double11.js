@@ -26,9 +26,7 @@ export default class Double11 extends Component {
         super(props);
         this.state = {
             logined: !!storeUtil.getToken(),
-            page_state: moment().isSameOrBefore(COUPON_END)
-                ? PageState.SubmitPage
-                : PageState.EndPage,
+            page_state: PageState.EndPage,
             phone: '',
             auth_code: '',
             auth_code_btn_disabled: false,
@@ -41,6 +39,7 @@ export default class Double11 extends Component {
         this.submit_btn_disabled = false;
         this.submit = this.submit.bind(this);
         this.sendAuthCode = this.sendAuthCode.bind(this);
+        document.title = '双11领券';
     }
 
     async sendAuthCode() {
@@ -239,7 +238,12 @@ export default class Double11 extends Component {
                                     alt="再来一次"
                                     className="btn btn-again"
                                     onClick={() => {
-                                        window.location.reload();
+                                        // window.location.reload();
+                                        if (storeUtil.getToken()) {
+                                            window.location.href = `/temp/d11?token=${storeUtil.getToken()}&sitecode=cine.web.wechat`;
+                                        } else {
+                                            window.location.reload();
+                                        }
                                     }}
                                 />
                             )}

@@ -231,9 +231,9 @@ export default class Home extends Component {
                         </Tabs>
                     </div>
 
-                    <div className="container">
-                        <Article newsCategorys={this.state.newsCategorys} />
-                    </div>
+                    {/*<div className="container">*/}
+                    {/*    <Article newsCategorys={this.state.newsCategorys} />*/}
+                    {/*</div>*/}
                 </div>
 
                 <CFloatingButton

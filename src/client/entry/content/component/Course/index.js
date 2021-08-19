@@ -20,6 +20,9 @@ import QRCode from '@/component/QRCode';
 import LotteryCoupon from '@/entry/temp/component/DrawCoupon';
 import authUtil from '@/util/authUtil';
 import shareUtil from '@/util/_base/shareUtil';
+import * as Service from '@/service/content';
+import RecommendModal from '@/entry/content/component/Course/RecommendModal';
+import CouponModal from '@/entry/content/component/Course/CouponModal';
 
 export default class Course extends Component {
     constructor(props) {
@@ -27,6 +30,7 @@ export default class Course extends Component {
         this.state = {
             showLoginModal: false,
             showCouponModal: false,
+            showRecommendModal: false,
             isOpenLottery: false,
             course: null,
             coupon: null,
@@ -40,6 +44,11 @@ export default class Course extends Component {
         this.getUserName = this.getUserName.bind(this);
         this.onClickLottery = this.onClickLottery.bind(this);
         this.login = this.login.bind(this);
+        this.openRecommend = this.openRecommend.bind(this);
+        this.toggleRecommendModal = this.toggleRecommendModal.bind(this);
+        this.toggleCouponModal = this.toggleCouponModal.bind(this);
+        this.clickShare = this.clickShare.bind(this);
+        this.getCoupon = this.getCoupon.bind(this);
     }
 
     async componentDidMount() {
@@ -242,8 +251,77 @@ export default class Course extends Component {
         );
     }
 
+    async getCoupon() {
+        if (!this.state.user) {
+            this.login();
+            return;
+        }
+        let source_user_id = getParam().source_user_id;
+        if (!source_user_id) return alert('source_user_id is null');
+        let coupon = await Service.createCoupon(source_user_id);
+        this.setState({
+            coupon,
+            showCouponModal: true,
+        });
+    }
+
+    openRecommend() {
+        this.toggleRecommendModal();
+    }
+
+    toggleRecommendModal() {
+        this.setState(prevState => ({
+            showRecommendModal: !prevState.showRecommendModal,
+        }));
+    }
+
+    toggleCouponModal() {
+        this.setState(prevState => ({
+            showCouponModal: !prevState.showCouponModal,
+        }));
+    }
+
+    async clickShare(need_login = true, type = 4) {
+        if (need_login && !this.state.user) {
+            this.login();
+            return;
+        }
+        let [err, result] = await shareUtil.createShareLog({
+            type,
+            cid: getParam().cid,
+            source_user_id: getParam().source_user_id,
+        });
+        if (err) return alert(errorMsg(err));
+        let {
+            share_title,
+            share_link,
+            share_imgUrl,
+            share_desc,
+            sharelog_id,
+        } = result;
+        let share_params = {
+            sharelog_id,
+            title: share_title,
+            link: share_link,
+            imgUrl: share_imgUrl,
+            desc: share_desc,
+        };
+        shareUtil.share(share_params).then(res => {
+            console.log(JSON.stringify(res));
+            if (res.status) {
+                this.initData();
+            }
+        });
+    }
+
     render() {
-        let { course, user, isOpenLottery } = this.state;
+        let {
+            course,
+            user,
+            isOpenLottery,
+            showCouponModal,
+            showRecommendModal,
+        } = this.state;
 
         return (
             <React.Fragment>
@@ -261,7 +339,8 @@ export default class Course extends Component {
                             onClickBuy={this.handleBuy}
                             onClickShare={this.handleShare}
                             onClickLottery={this.onClickLottery}
-                            isShowRecommend={true}
+                            getCoupon={this.getCoupon}
+                            openRecommend={this.openRecommend}
                         />
 
                         {course ? (
@@ -295,6 +374,18 @@ export default class Course extends Component {
                                 />
                             )}
                         </CDrawer>
+
+                        <RecommendModal
+                            isOpen={showRecommendModal}
+                            toggleModal={this.toggleRecommendModal}
+                            onClickShare={this.clickShare}
+                        />
+                        <CouponModal
+                            isOpen={showCouponModal}
+                            toggleModal={this.toggleCouponModal}
+                            username={this.getUserName(user)}
+                            coupon={this.state.coupon}
+                        />
                     </div>
                 </div>
                 <Footer isShow={!uaUtil.mobile()} />

@@ -160,9 +160,6 @@ export default class Header extends Component {
                                 <a href="/">首页</a>
                             </li>
                             <li className="nav-item">
-                                <a href="/csub/zxss">在线私塾</a>
-                            </li>
-                            <li className="nav-item">
                                 <a href="/csub/tfsat">托福/SAT</a>
                             </li>
                             <li className="nav-item">

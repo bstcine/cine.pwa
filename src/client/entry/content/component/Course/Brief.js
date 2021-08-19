@@ -263,8 +263,16 @@ export default class Brief extends Component {
     }
 
     render() {
-        let { course, user, relatedCourse, onClickLottery } = this.props;
+        let {
+            course,
+            user,
+            relatedCourse,
+            onClickLottery,
+            openRecommend,
+            getCoupon,
+        } = this.props;
         const { onClickShare } = this.props;
+        let source_user_id = getParam().source_user_id;
         return (
             <div className="brief-container">
                 <div className="left-container">
@@ -352,6 +360,16 @@ export default class Brief extends Component {
                             </div>
                         </div>
                     )}
+                    <div className="right-desc">
+                        {source_user_id ? (
+                            <div className="get-coupon" onClick={getCoupon} />
+                        ) : (
+                            <div className="recommend" onClick={openRecommend}>
+                                <div className="red-bag" />
+                                <div className="desc">推荐得积分</div>
+                            </div>
+                        )}
+                    </div>
                 </div>
             </div>
         );

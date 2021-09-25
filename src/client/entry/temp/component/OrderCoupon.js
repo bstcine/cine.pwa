@@ -95,7 +95,7 @@ export default class OrderCoupon extends Component {
                 <div className={'main'}>
                     {list && (
                         <div className={'panel'}>
-                            <h1>善恩视频课程有效期转换</h1>
+                            <h1>善恩视频使用有效期转换</h1>
                             <div className={'hint-a'}>亲爱的用户：</div>
                             <p className={'hint-b'}>
                                 您好！您账户下所有2018年5月28日前购买的视频课程可选择做有效期调整变更，并获赠额外优惠券，具体信息如下：
@@ -171,7 +171,7 @@ export default class OrderCoupon extends Component {
                                         className="radio-beauty"
                                     />
                                     <div className="radio-content hint-g">
-                                        我暂不调整本账户下所有课程有效期，如需调整我会在
+                                        我暂不调整本账户下所有使用有效期，如需调整我会在
                                         <a className={'hint-key'}>
                                             2018年7月31日
                                         </a>
@@ -183,15 +183,15 @@ export default class OrderCoupon extends Component {
                                     注：1.
                                     可转换课程包括2018年5月28日前购买的所有课程；
                                     <br />
-                                    2. 课程有效期转换截止日期：2018年7月31日；
+                                    2. 使用有效期转换截止日期：2018年7月31日；
                                     <br />
-                                    3. 转换后课程有效期为：5年；
+                                    3. 转换后使用有效期为：5年；
                                     <br />
                                     4.
                                     转换后获赠的优惠券仅可用于购买善恩视频课程；
                                     <br />
                                     5.
-                                    课程有效期转换一旦完成，不可逆转，请谨慎选择；
+                                    使用有效期转换一旦完成，不可逆转，请谨慎选择；
                                     <br />
                                     6.
                                     转换过程中如遇任何问题请联系善恩小助手（微信号：BSTCINE02）。
@@ -225,12 +225,12 @@ export default class OrderCoupon extends Component {
                         </div>
 
                         <div className={`font-b ${curIndex !== '1' && 'none'}`}>
-                            如需调整课程有效期至：
+                            如需调整使用有效期至：
                             <a className={'hint-key'}>5年</a>，请于
                             <a className={'hint-key'}>2018年7月31日</a>
                             前完成转换；
                             <a className={'hint-key'}>
-                                逾期未转换者将默认课程有效期为“永久有效”
+                                逾期未转换者将默认使用有效期为“永久有效”
                             </a>
                             。
                         </div>

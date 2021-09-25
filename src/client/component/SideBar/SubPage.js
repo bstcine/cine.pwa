@@ -27,16 +27,16 @@ class SideBarSubPage extends Component {
     }
 
     render() {
-        const teacher = this.props.isMentor ? '私塾导师' : '录课老师';
+        const teacher = this.props.isMentor ? '私塾导师' : '录制老师';
         return (
             <CNavigation
                 value={this.state.value}
                 onChange={this.onChange}
                 layout={this.props.layout}
             >
-                <CNavItem label="核心课程" value="course" />
+                <CNavItem label="核心产品" value="course" />
                 <CNavItem label={teacher} value="teacher" />
-                <CNavItem label="口碑好评" value="comment" />
+                {/*<CNavItem label="口碑好评" value="comment" />*/}
                 <CNavItem label="精彩文章" value="article" />
                 <CNavItem label="资料下载" value="resource" />
             </CNavigation>

@@ -65,7 +65,7 @@ export default class Header extends Component {
             return (
                 <ul className="nav-list-right">
                     <li className="nav-item login-btn">
-                        <a href="/learn">学习系统</a>
+                        <a href="/learn">观看视频</a>
                     </li>
                     <li
                         onClick={this.toggleUserCenter}

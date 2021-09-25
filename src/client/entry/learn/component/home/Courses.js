@@ -27,7 +27,7 @@ const Courses = ({ courses }) => {
     };
 
     return (
-        <CPanel title="我的课程" className="courses-container">
+        <CPanel title="我的视频" className="courses-container">
             <CCardContainer className="courses-list" gap="none">
                 {courses.map(course => {
                     const imgBG = CommonUtil.getImageBackground(course.img);

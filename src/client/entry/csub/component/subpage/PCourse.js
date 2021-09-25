@@ -55,7 +55,7 @@ class PCourse extends React.PureComponent {
             <FJCourseList list={list} />
         );
         return (
-            <CPanel title="核心课程">
+            <CPanel title="核心产品">
                 <CCardContainer layout={layout} gap={isCourse ? null : 'large'}>
                     {exList}
                 </CCardContainer>

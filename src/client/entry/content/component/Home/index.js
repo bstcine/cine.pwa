@@ -187,9 +187,9 @@ export default class Home extends Component {
                 <div className="container-fluid courses-container-bg">
                     <Slider banners={this.state.banners} />
 
-                    <div className="container">
-                        <Notice notices={this.state.notices} />
-                    </div>
+                    {/*<div className="container">*/}
+                    {/*    <Notice notices={this.state.notices} />*/}
+                    {/*</div>*/}
 
                     <div className="container courses-container">
                         <Tabs className="home-tabs" selectedId={getParam().tab}>
@@ -243,7 +243,7 @@ export default class Home extends Component {
                         QRHelp.open();
                     }}
                 >
-                    课程咨询
+                    客服咨询
                 </CFloatingButton>
 
                 {!interSiteCodeUtil.inAPP() && (

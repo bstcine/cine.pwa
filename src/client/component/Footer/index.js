@@ -20,7 +20,7 @@ export default class Footer extends Component {
                             </div>
                             <ul className="about-list">
                                 <li>
-                                    <a href="/">视频课程</a>
+                                    <a href="/">英语视频</a>
                                 </li>
                                 <li>
                                     <a href="/cooperation">合作与招商</a>
@@ -41,7 +41,7 @@ export default class Footer extends Component {
                                 </div>
                                 <div className="qrcode-title">微信公众号</div>
                                 <div className="qrcode-name">
-                                    善恩英语在线私塾
+                                    善恩英语
                                 </div>
                             </div>
                             <div className="qrcode">
@@ -52,7 +52,7 @@ export default class Footer extends Component {
                                     />
                                 </div>
                                 <div className="qrcode-title">
-                                    课程购买、客服咨询
+                                    客服咨询
                                 </div>
                                 <div className="qrcode-name">善恩小助手</div>
                             </div>
@@ -75,7 +75,7 @@ export default class Footer extends Component {
                                         alt="Nancy老师"
                                     />
                                 </div>
-                                <div className="qrcode-title">托福/SAT培训</div>
+                                <div className="qrcode-title">托福/SAT老师</div>
                                 <div className="qrcode-name">Nancy老师</div>
                             </div>
                         </div>

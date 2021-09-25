@@ -190,7 +190,7 @@ export default class SubPage extends React.Component {
                 />
 
                 <CPanel
-                    title="核心课程"
+                    title="核心产品"
                     ext={
                         <div>
                             <CIconButton

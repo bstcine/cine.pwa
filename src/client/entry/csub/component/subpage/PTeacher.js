@@ -6,7 +6,7 @@ import Clink from './Clink';
 export default class PTeacher extends React.PureComponent {
     render() {
         const { isMentor, list } = this.props;
-        const title = isMentor ? '私塾导师' : '录课老师';
+        const title = isMentor ? '私塾导师' : '录制老师';
         const href = isMentor ? '/tutor' : '/teacher';
         const limit = isMentor ? 10 : 12;
         const link = <Clink text="更多" href={href} target="_blank" />;

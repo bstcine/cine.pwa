@@ -179,14 +179,14 @@ export default class Brief extends Component {
             if (course.author) {
                 metas.push(
                     <span key={course.author} className="meta">
-                        授课老师：{course.author}
+                        录制老师：{course.author}
                     </span>
                 );
             }
             if (course.time_arrange) {
                 metas.push(
                     <span key={course.time_arrange} className="meta">
-                        授课时长：{course.time_arrange}
+                        视频时长：{course.time_arrange}
                     </span>
                 );
             }
@@ -320,19 +320,6 @@ export default class Brief extends Component {
                         {this.renderMeta(course)}
                         {this.renderPrices(course)}
 
-                        {course &&
-                        ((course.activitys && course.activitys.length) ||
-                            course.is_allow_point === '1' ||
-                            course.id === 'd011573098156314eKfDXK5703') ? (
-                            <div className="promotes">
-                                {this.renderActivityPromoteList(course)}
-                                {this.renderPointPromoteList(course, user)}
-                                {course.id === 'd011573098156314eKfDXK5703' && (
-                                    <TempFromZXTag />
-                                )}
-                            </div>
-                        ) : null}
-
                         {course && course.notice ? (
                             <div className="notice">
                                 <div className="label">公告</div>
@@ -361,14 +348,7 @@ export default class Brief extends Component {
                         </div>
                     )}
                     <div className="right-desc">
-                        {source_user_id ? (
-                            <div className="get-coupon" onClick={getCoupon} />
-                        ) : (
-                            <div className="recommend" onClick={openRecommend}>
-                                <div className="red-bag" />
-                                <div className="desc">推荐得积分</div>
-                            </div>
-                        )}
+
                     </div>
                 </div>
             </div>

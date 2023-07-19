@@ -31,7 +31,9 @@ const PayStripe = chunkComponent(() =>
 const routes = [
     {
         path: '/',
-        component: Home,
+        component: ()=> {
+            location.href='/learn'
+        },
         exact: true,
     },
     { path: '/content/course', component: Course },

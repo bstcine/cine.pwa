@@ -4,7 +4,7 @@ if [ ${PWD##*/} != "cine.pwa" ];
   exit 2
 fi
 echo "npm install start..."
-cnpm install
+npm install
 echo "npm install done"
 npm run-script ${1:-'dev'}
 echo "npm prod done"

@@ -3,8 +3,8 @@ const webpack = require('webpack');
 const merge = require('webpack-merge');
 const common = require('./webpack.common.js');
 
-// const Dev_Host_URL = 'https://dev.bstcine.com';
-const Dev_Host_URL = 'http://localhost:9000';
+const Dev_Host_URL = 'https://www.bstcine.com';
+// const Dev_Host_URL = 'http://localhost:9000';
 console.log(`API connected ${Dev_Host_URL}`);
 
 let rewrites = [];
@@ -29,7 +29,7 @@ module.exports = merge(common, {
             disableDotRule: true,
             rewrites,
         },
-        port: 5000,
+        port: 5001,
         disableHostCheck: true,
         host: '0.0.0.0',
         useLocalIp: true,
